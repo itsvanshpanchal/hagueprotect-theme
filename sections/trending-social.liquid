@@ -155,8 +155,7 @@
 
   /* Navigation Arrows */
   .trending-social__nav {
-    display: flex;
-    gap: 12px;
+    display: none;
   }
 
   .trending-social__arrow {
@@ -272,19 +271,30 @@
 
   function initSocialSliderVideos() {
     const slider = document.getElementById('trending-social-slider-{{ section.id }}');
-    const nextBtn = document.querySelector('.trending-social__arrow--next');
-    const prevBtn = document.querySelector('.trending-social__arrow--prev');
 
-    if (slider && nextBtn && prevBtn) {
-      nextBtn.addEventListener('click', () => {
-        const slideWidth = slider.querySelector('.trending-social__slide').clientWidth + {{ section.settings.card_spacing | default: '24' }};
-        slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-      });
+    if (slider) {
+      const firstSlide = slider.querySelector('.trending-social__slide');
+      if (firstSlide) {
+        const slideWidth = firstSlide.clientWidth + {{ section.settings.card_spacing | default: '24' }};
+        let autoScroll = setInterval(() => {
+          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+            slider.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+          }
+        }, 3000);
 
-      prevBtn.addEventListener('click', () => {
-        const slideWidth = slider.querySelector('.trending-social__slide').clientWidth + {{ section.settings.card_spacing | default: '24' }};
-        slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
-      });
+        slider.addEventListener('mouseenter', () => clearInterval(autoScroll));
+        slider.addEventListener('mouseleave', () => {
+          autoScroll = setInterval(() => {
+            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+              slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+              slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
+            }
+          }, 3000);
+        });
+      }
     }
 
     const allVideos = document.querySelectorAll('.trending-social__media video');
