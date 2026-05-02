@@ -1,0 +1,223 @@
+{%- style -%}
+  .dtc-product-card-section {
+    background-color: #ffffff;
+    padding: 60px 0;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .dtc-product-card-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .dtc-product-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 0;
+  }
+
+  .dtc-product-card__rating {
+    background-color: #2ECC71;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .dtc-product-card__title {
+    font-size: clamp(20px, 3vw, 22px);
+    font-weight: 800;
+    color: #000000;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .dtc-product-card__subtitle {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #999999;
+    margin: -10px 0 0 0;
+    line-height: 1.35;
+  }
+
+  .dtc-product-card__desc {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .dtc-product-card__swatches {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: -4px;
+  }
+
+  .dtc-product-card__swatch-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dtc-product-card__swatch-box.is-black { background-color: #000000; }
+  .dtc-product-card__swatch-box.is-white { background-color: #ffffff; }
+
+  .dtc-product-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .dtc-product-card__price-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+  }
+
+  .dtc-product-card__price-old {
+    font-size: 13px;
+    text-decoration: line-through;
+    color: #aaaaaa;
+    line-height: 1.1;
+  }
+
+  .dtc-product-card__price-new {
+    font-size: 19px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.1;
+  }
+
+  .dtc-product-card__atc-btn {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .dtc-product-card__atc-btn:hover {
+    background-color: #FF2D2D;
+    transform: translateY(-2px);
+  }
+{%- endstyle -%}
+
+<section class="dtc-product-card-section" aria-label="Featured product card">
+  <div class="dtc-product-card-container">
+    <div class="dtc-product-card">
+      
+      <!-- Top rating badge -->
+      <div class="dtc-product-card__rating">★ 4.9 (260)</div>
+
+      <!-- Title -->
+      <h2 class="dtc-product-card__title">{{ section.settings.title | default: 'HĀLO v2' }}</h2>
+
+      <!-- Subtitle -->
+      <p class="dtc-product-card__subtitle">{{ section.settings.subtitle | default: 'HĀLO v2 | 3D Air Circulation Fan with Mood Lamp' }}</p>
+
+      <!-- Short selling line description -->
+      <p class="dtc-product-card__desc">{{ section.settings.desc | default: "India's most silent air circulator" }}</p>
+
+      <!-- Swatches -->
+      <div class="dtc-product-card__swatches">
+        <div class="dtc-product-card__swatch-box is-black" title="Black"></div>
+        <div class="dtc-product-card__swatch-box is-white" title="White"></div>
+      </div>
+
+      <!-- Footer containing price and Add button -->
+      <div class="dtc-product-card__footer">
+        <div class="dtc-product-card__price-box">
+          <span class="dtc-product-card__price-old">{{ section.settings.old_price | default: 'Rs. 15,999' }}</span>
+          <span class="dtc-product-card__price-new">{{ section.settings.new_price | default: 'Rs. 10,999' }}</span>
+        </div>
+
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        {%- form 'product', product, id: 'AddToCartForm-dtc-card' -%}
+          <input type="hidden" name="id" value="{{ current_variant.id | default: 12345678 }}">
+          <button type="submit" name="add" class="dtc-product-card__atc-btn">Add to Cart</button>
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Product Card",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Product Title",
+      "default": "HĀLO v2"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "HĀLO v2 | 3D Air Circulation Fan with Mood Lamp"
+    },
+    {
+      "type": "text",
+      "id": "desc",
+      "label": "Description",
+      "default": "India's most silent air circulator"
+    },
+    {
+      "type": "text",
+      "id": "old_price",
+      "label": "Old Price",
+      "default": "Rs. 15,999"
+    },
+    {
+      "type": "text",
+      "id": "new_price",
+      "label": "New Price",
+      "default": "Rs. 10,999"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product Card"
+    }
+  ]
+}
+{% endschema %}
