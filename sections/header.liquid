@@ -185,7 +185,7 @@
   .header__cart-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     font-family: 'Inter', sans-serif !important;
     font-size: 13px;
     font-weight: 700;
@@ -193,11 +193,13 @@
     letter-spacing: 0.05em;
     background-color: #fafafa;
     border: 1px solid #e5e5e5;
-    padding: 10px 18px;
-    border-radius: 30px;
+    padding: 11px;
+    border-radius: 50%;
     color: #111111;
     text-decoration: none;
     transition: all 0.2s;
+    width: 42px;
+    height: 42px;
   }
 
   .header__cart-link:hover {
@@ -377,7 +379,6 @@
           <circle cx="12" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M4 20C4 16.13 7.58 13 12 13C16.42 13 20 16.13 20 20" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span id="HeaderLoginText">Login</span>
       </a>
 
       <!-- Cart Button -->
@@ -387,7 +388,6 @@
           <circle cx="8" cy="19" r="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="16" cy="19" r="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Cart</span>
       </a>
     </div>
   </div>
