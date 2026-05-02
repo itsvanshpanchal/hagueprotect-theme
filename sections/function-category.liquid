@@ -316,6 +316,7 @@
     if (!track || !prevBtn || !nextBtn || !fill) return;
 
     let currentIndex = 0;
+    let autoplayInterval = null;
 
     function getVisibleCardsCount() {
       if (window.innerWidth <= 480) return 1;
@@ -351,18 +352,43 @@
       fill.style.transform = `translateX(${currentIndex * 100}%)`;
     }
 
+    function startAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(() => {
+        const slides = track.querySelectorAll('.fc-slide');
+        const visible = getVisibleCardsCount();
+        const maxSteps = Math.max(0, slides.length - visible);
+        if (currentIndex >= maxSteps) {
+          currentIndex = 0;
+        } else {
+          currentIndex++;
+        }
+        updateSlider();
+      }, 4000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+    }
+
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', startAutoplay);
+
     prevBtn.addEventListener('click', () => {
       currentIndex--;
       updateSlider();
+      startAutoplay();
     });
 
     nextBtn.addEventListener('click', () => {
       currentIndex++;
       updateSlider();
+      startAutoplay();
     });
 
     window.addEventListener('resize', updateSlider);
     updateSlider();
+    startAutoplay();
   }
 
   // Execute immediately
