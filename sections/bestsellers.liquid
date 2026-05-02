@@ -388,7 +388,21 @@
         {% endfor %}
       {% else %}
         {% for i in (1..4) %}
-          <div class="prod-card-dtc" onclick="window.location.href='/products/elite-footwear-care-kit?view=detail'" style="cursor: pointer;">
+          {%- if i == 1 -%}
+            {%- assign mock_handle = 'essential-indepth-shoe-sneaker-cleaning-kit' -%}
+            {%- assign mock_title = 'Essential In-Depth Shoe Sneaker Cleaning Kit' -%}
+          {%- elsif i == 2 -%}
+            {%- assign mock_handle = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits' -%}
+            {%- assign mock_title = 'Quick Shoe Sneaker Cleaning Kit' -%}
+          {%- elsif i == 3 -%}
+            {%- assign mock_handle = 'signature-shoe-sneaker-cleaning-kit' -%}
+            {%- assign mock_title = 'Signature Shoe Sneaker Cleaning Kit' -%}
+          {%- else -%}
+            {%- assign mock_handle = 'sneaker-shoe-cleaner-refill-pack' -%}
+            {%- assign mock_title = 'Sneaker Shoe Cleaner Refill Pack' -%}
+          {%- endif -%}
+
+          <div class="prod-card-dtc" onclick="window.location.href='/products/{{ mock_handle }}?view=detail'" style="cursor: pointer;">
             <!-- Badge -->
             <span class="prod-card-dtc__badge">BESTSELLER</span>
 
@@ -418,7 +432,7 @@
                 <span class="prod-card-dtc__rating-count">(260)</span>
               </div>
 
-              <h3 class="prod-card-dtc__title">Elite Footwear Care Kit</h3>
+              <h3 class="prod-card-dtc__title">{{ mock_title }}</h3>
               
               <p class="prod-card-dtc__subtitle">Premium | Maximum Care</p>
               <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
@@ -437,7 +451,7 @@
 
               <!-- Form -->
               <div style="margin: 0; padding: 0; width: 100%;">
-                <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/elite-footwear-care-kit?view=detail';">View Details</button>
+                <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/{{ mock_handle }}?view=detail';">View Details</button>
               </div>
             </div>
           </div>
