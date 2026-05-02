@@ -325,65 +325,124 @@
     <!-- PRODUCTS -->
     <div class="bestsellers__grid-wrapper-dtc">
 
-      {% for product in collections[section.settings.collection].products limit: 8 %}
-        <div class="prod-card-dtc" onclick="window.location.href='{{ product.url | default: '/products/' | append: product.handle }}?view=detail'" style="cursor: pointer;">
+      {% assign products_to_show = collections[section.settings.collection].products %}
+      {% if products_to_show.size > 0 %}
+        {% for product in products_to_show limit: 8 %}
+          <div class="prod-card-dtc" onclick="window.location.href='{{ product.url | default: '/products/' | append: product.handle }}?view=detail'" style="cursor: pointer;">
 
-          <!-- Badge -->
-          <span class="prod-card-dtc__badge">BESTSELLER</span>
+            <!-- Badge -->
+            <span class="prod-card-dtc__badge">BESTSELLER</span>
 
-          <!-- Image Container -->
-          <div class="prod-card-dtc__image-container">
-            <img src="{{ product.featured_image | image_url: width: 450 }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
-            
-            <!-- Optional subtle curved arrow/remote graphic in bottom right of image area -->
-            <div class="prod-card-dtc__remote-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="7" y="2" width="10" height="20" rx="3" stroke="#E74C3C" stroke-width="2"/>
-                <circle cx="12" cy="7" r="1.5" fill="#E74C3C"/>
-                <circle cx="12" cy="11.5" r="1" fill="#E74C3C"/>
-                <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
+            <!-- Image Container -->
+            <div class="prod-card-dtc__image-container">
+              <img src="{{ product.featured_image | image_url: width: 450 }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
+              
+              <!-- Optional subtle curved arrow/remote graphic in bottom right of image area -->
+              <div class="prod-card-dtc__remote-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="7" y="2" width="10" height="20" rx="3" stroke="#E74C3C" stroke-width="2"/>
+                  <circle cx="12" cy="7" r="1.5" fill="#E74C3C"/>
+                  <circle cx="12" cy="11.5" r="1" fill="#E74C3C"/>
+                  <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Lower Content -->
+            <div class="prod-card-dtc__content">
+              <!-- Rating Row -->
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
+                <span class="prod-card-dtc__rating-count">(260)</span>
+              </div>
+
+              <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
+              
+              <p class="prod-card-dtc__subtitle">Premium | Air Circulation with Care</p>
+              <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
+
+              <!-- Color Swatches Row -->
+              <div class="prod-card-dtc__swatches">
+                <div class="prod-card-dtc__swatch is-black active" title="Black"></div>
+                <div class="prod-card-dtc__swatch is-white" title="White"></div>
+              </div>
+
+              <!-- Price -->
+              <div class="prod-card-dtc__price-box">
+                {% if product.compare_at_price > product.price %}
+                  <span class="prod-card-dtc__price-old">{{ product.compare_at_price | money }}</span>
+                {% else %}
+                  <span class="prod-card-dtc__price-old">{{ product.price | plus: 150000 | money }}</span>
+                {% endif %}
+                <span class="prod-card-dtc__price-new">{{ product.price | money }}</span>
+              </div>
+
+              <!-- Form -->
+              <form action="/cart/add" method="post" onclick="event.stopPropagation();" style="margin: 0; padding: 0; width: 100%;">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit" class="prod-card-dtc__btn" aria-label="Add {{ product.title | escape }} to cart">Add to Cart</button>
+              </form>
+            </div>
+
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..4) %}
+          <div class="prod-card-dtc" onclick="window.location.href='/products/elite-footwear-care-kit?view=detail'" style="cursor: pointer;">
+            <!-- Badge -->
+            <span class="prod-card-dtc__badge">BESTSELLER</span>
+
+            <!-- Image Container -->
+            <div class="prod-card-dtc__image-container">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="prod-card-dtc__image" style="width:100%; height:100%;">
+                <rect width="1000" height="1000" fill="#f7f7f7"/>
+                <circle cx="500" cy="450" r="280" fill="#ffffff" stroke="#eeeeee" stroke-width="2"/>
+                <path d="M500 450 L500 230 M500 450 L690 340 M500 450 L610 610 M500 450 L390 610 M500 450 L310 340" stroke="#FF4444" stroke-width="12" stroke-linecap="round"/>
+                <circle cx="500" cy="450" r="40" fill="#222222"/>
               </svg>
+              <div class="prod-card-dtc__remote-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="7" y="2" width="10" height="20" rx="3" stroke="#E74C3C" stroke-width="2"/>
+                  <circle cx="12" cy="7" r="1.5" fill="#E74C3C"/>
+                  <circle cx="12" cy="11.5" r="1" fill="#E74C3C"/>
+                  <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Lower Content -->
+            <div class="prod-card-dtc__content">
+              <!-- Rating Row -->
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
+                <span class="prod-card-dtc__rating-count">(260)</span>
+              </div>
+
+              <h3 class="prod-card-dtc__title">Elite Footwear Care Kit</h3>
+              
+              <p class="prod-card-dtc__subtitle">Premium | Maximum Care</p>
+              <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
+
+              <!-- Color Swatches Row -->
+              <div class="prod-card-dtc__swatches">
+                <div class="prod-card-dtc__swatch is-black active" title="Black"></div>
+                <div class="prod-card-dtc__swatch is-white" title="White"></div>
+              </div>
+
+              <!-- Price -->
+              <div class="prod-card-dtc__price-box">
+                <span class="prod-card-dtc__price-old">Rs. 1,299</span>
+                <span class="prod-card-dtc__price-new">Rs. 999</span>
+              </div>
+
+              <!-- Form -->
+              <div style="margin: 0; padding: 0; width: 100%;">
+                <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/elite-footwear-care-kit?view=detail';">View Details</button>
+              </div>
             </div>
           </div>
-
-          <!-- Lower Content -->
-          <div class="prod-card-dtc__content">
-            <!-- Rating Row -->
-            <div class="prod-card-dtc__rating-row">
-              <span class="prod-card-dtc__rating-badge">★ 4.9</span>
-              <span class="prod-card-dtc__rating-count">(260)</span>
-            </div>
-
-            <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
-            
-            <p class="prod-card-dtc__subtitle">Premium | Air Circulation with Care</p>
-            <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
-
-            <!-- Color Swatches Row -->
-            <div class="prod-card-dtc__swatches">
-              <div class="prod-card-dtc__swatch is-black active" title="Black"></div>
-              <div class="prod-card-dtc__swatch is-white" title="White"></div>
-            </div>
-
-            <!-- Price -->
-            <div class="prod-card-dtc__price-box">
-              {% if product.compare_at_price > product.price %}
-                <span class="prod-card-dtc__price-old">{{ product.compare_at_price | money }}</span>
-              {% else %}
-                <span class="prod-card-dtc__price-old">{{ product.price | plus: 150000 | money }}</span>
-              {% endif %}
-              <span class="prod-card-dtc__price-new">{{ product.price | money }}</span>
-            </div>
-
-            <!-- Form -->
-            <form action="/cart/add" method="post" onclick="event.stopPropagation();" style="margin: 0; padding: 0; width: 100%;">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit" class="prod-card-dtc__btn" aria-label="Add {{ product.title | escape }} to cart">Add to Cart</button>
-            </form>
-          </div>
-
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
 
     </div>
   </div>
