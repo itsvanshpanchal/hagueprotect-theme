@@ -77,6 +77,49 @@
   }
 }
 
+.d2c-gallery-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid var(--d2c-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--d2c-primary);
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.d2c-media-main:hover .d2c-gallery-nav-btn {
+  opacity: 1;
+}
+
+.d2c-gallery-nav-btn:hover {
+  background: var(--d2c-primary);
+  color: #FFFFFF;
+  border-color: var(--d2c-primary);
+}
+
+.d2c-gallery-prev {
+  left: 16px;
+}
+
+.d2c-gallery-next {
+  right: 16px;
+}
+
+.d2c-gallery-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
 .d2c-badge-overlay {
   position: absolute;
   top: 16px;
@@ -594,10 +637,22 @@
     <!-- LEFT COLUMN: Product media gallery -->
     <div class="d2c-media-gallery">
       <div class="d2c-media-main">
+        {%- if product.images.size > 1 -%}
+          <button type="button" class="d2c-gallery-nav-btn d2c-gallery-prev" id="PrevGalleryBtn" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+        {%- endif -%}
+
         {%- if product.featured_image != blank -%}
           <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" id="MainProductImage" class="d2c-media-main-img" loading="eager">
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'd2c-media-main-img' }}
+        {%- endif -%}
+
+        {%- if product.images.size > 1 -%}
+          <button type="button" class="d2c-gallery-nav-btn d2c-gallery-next" id="NextGalleryBtn" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         {%- endif -%}
 
         {%- if product.compare_at_price > product.price -%}
@@ -879,15 +934,44 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Thumbnail Clicking
-  document.querySelectorAll('.d2c-thumb-item').forEach(thumb => {
+  const thumbs = document.querySelectorAll('.d2c-thumb-item');
+  const prevBtn = document.querySelector('#PrevGalleryBtn');
+  const nextBtn = document.querySelector('#NextGalleryBtn');
+
+  thumbs.forEach((thumb, idx) => {
     thumb.addEventListener('click', function() {
-      document.querySelectorAll('.d2c-thumb-item').forEach(t => t.classList.remove('active'));
+      thumbs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
       if (mainImg) {
         mainImg.src = this.getAttribute('data-src');
       }
     });
   });
+
+  // Next and Previous Gallery Buttons
+  if (thumbs.length > 1 && prevBtn && nextBtn) {
+    let activeIndex = 0;
+
+    thumbs.forEach((thumb, idx) => {
+      thumb.addEventListener('click', function() {
+        activeIndex = idx;
+      });
+    });
+
+    prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      activeIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
+      thumbs[activeIndex].click();
+      thumbs[activeIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+
+    nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      activeIndex = (activeIndex + 1) % thumbs.length;
+      thumbs[activeIndex].click();
+      thumbs[activeIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  }
 
   // Quantity Stepper UI
   let quantity = 1;
