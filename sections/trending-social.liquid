@@ -282,9 +282,9 @@
           <div class="trending-social__slide" {{ block.shopify_attributes }}>
             <div class="trending-social__media">
               {%- if block.settings.video != blank -%}
-                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true }}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
               {%- elsif block.settings.mp4_url != blank -%}
-                <video autoplay muted loop playsinline controls poster="{{ block.settings.image | image_url: width: 600 }}">
+                <video autoplay muted loop playsinline poster="{{ block.settings.image | image_url: width: 600 }}">
                   <source src="{{ block.settings.mp4_url }}" type="video/mp4">
                 </video>
               {%- elsif block.settings.video_url != blank -%}
