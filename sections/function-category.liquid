@@ -123,12 +123,12 @@
 
   .fc-illustration {
     position: absolute;
-    bottom: -30px;
-    right: -30px;
-    width: 330px;
-    height: 330px;
+    top: 12px;
+    bottom: 12px;
+    right: 12px;
+    width: 60%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     pointer-events: none;
     transition: transform 0.3s ease;
@@ -138,7 +138,7 @@
 
   .fc-illustration img,
   .fc-illustration svg {
-    width: 100% !important;
+    width: auto !important;
     height: 100% !important;
     max-width: 100%;
     max-height: 100%;
@@ -147,29 +147,6 @@
 
   .fc-slide:hover .fc-illustration {
     transform: scale(1.08) rotate(-2deg);
-  }
-
-  @media (max-width: 1200px) {
-    .fc-illustration {
-      width: 210px;
-      height: 210px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .fc-illustration {
-      width: 160px;
-      height: 160px;
-      bottom: -3px;
-      right: -3px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .fc-illustration {
-      width: 220px;
-      height: 220px;
-    }
   }
 
   /* Navigation arrows */
