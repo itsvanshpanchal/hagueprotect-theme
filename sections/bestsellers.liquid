@@ -59,10 +59,10 @@
 /* SCROLL ROW */
 .bestsellers__scroll-wrapper-dtc {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-left: 24px;
+  padding: 8px 0;
 }
 
 .bestsellers__scroll-wrapper-dtc::-webkit-scrollbar {
@@ -71,15 +71,13 @@
 
 /* PRODUCT CARD */
 .prod-card-dtc {
-  flex: 0 0 220px;
+  flex: 0 0 280px;
   background: #fff;
-  border-radius: 14px;
-  padding: 14px;
-  border: 1px solid #eee;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   position: relative;
+  box-sizing: border-box;
 }
 
 /* BADGE */
@@ -92,20 +90,31 @@
   font-size: 10px;
   padding: 4px 10px;
   border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  z-index: 2;
 }
 
 /* IMAGE */
 .prod-card-dtc__image-container {
-  height: 180px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .prod-card-dtc__image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prod-card-dtc:hover .prod-card-dtc__image {
+  transform: scale(1.05);
 }
 
 /* BRAND */
@@ -113,13 +122,18 @@
   font-size: 11px;
   color: #888;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 /* TITLE */
 .prod-card-dtc__title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: #000;
+  margin: 0;
+  line-height: 1.3;
 }
 
 /* DESCRIPTION */
@@ -127,12 +141,28 @@
   font-size: 12px;
   color: #777;
   line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 33.6px;
+}
+
+/* FOOTER */
+.prod-card-dtc__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 /* PRICE */
 .prod-card-dtc__price {
   font-size: 16px;
   font-weight: 700;
+  color: #000000;
 }
 
 .prod-card-dtc__compare-price {
@@ -141,22 +171,22 @@
   text-decoration: line-through;
 }
 
-/* FOOTER */
-.prod-card-dtc__footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* BUTTON */
 .prod-card-dtc__btn {
   background: #000;
   color: #fff;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 20px;
   font-size: 12px;
+  font-weight: 700;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.prod-card-dtc__btn:hover {
+  background: #FF2D2D;
+  transform: translateY(-2px);
 }
 
 /* MOBILE */
