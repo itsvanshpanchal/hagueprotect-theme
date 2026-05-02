@@ -277,22 +277,22 @@
 }
 
 .d2c-pdp-badge-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .d2c-pdp-badge-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
   background: #F1F3F5;
   color: #1A1A1A;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  padding: 10px 16px;
+  padding: 12px 14px;
   border-radius: 10px;
   border: 1px solid transparent;
   transition: all 0.2s ease;
@@ -309,7 +309,7 @@
 }
 
 .d2c-pdp-badge-text {
-  line-height: 1;
+  line-height: 1.2;
 }
 
 /* KEY FEATURES LIST */
