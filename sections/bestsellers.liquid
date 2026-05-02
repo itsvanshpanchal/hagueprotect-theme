@@ -328,7 +328,8 @@
       {% assign products_to_show = collections[section.settings.collection].products %}
       {% if products_to_show.size > 0 %}
         {% for product in products_to_show limit: 8 %}
-          <div class="prod-card-dtc" onclick="window.location.href='{{ product.url | default: '/products/' | append: product.handle }}?view=detail';" style="cursor: pointer;">
+          <div class="prod-card-dtc" onclick="window.location.href='{{ product.url | default: '/pages/product-detail' }}';" style="cursor: pointer;">
+
 
             <!-- Badge -->
             <span class="prod-card-dtc__badge">BESTSELLER</span>
@@ -402,7 +403,7 @@
             {%- assign mock_title = 'Sneaker Shoe Cleaner Refill Pack' -%}
           {%- endif -%}
 
-          <div class="prod-card-dtc" onclick="window.location.href='/products/{{ mock_handle }}?view=detail';" style="cursor: pointer;">
+          <div class="prod-card-dtc" onclick="window.location.href='/pages/product-detail';" style="cursor: pointer;">
             <!-- Badge -->
             <span class="prod-card-dtc__badge">BESTSELLER</span>
 
@@ -451,7 +452,7 @@
 
               <!-- Form -->
               <div style="margin: 0; padding: 0; width: 100%;">
-                <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/{{ mock_handle }}?view=detail';">View Details</button>
+                <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/pages/product-detail';">View Details</button>
               </div>
             </div>
           </div>
