@@ -3,8 +3,8 @@
 /* SECTION */
 .bestsellers-section-dtc {
   background-color: {{ section.settings.bg_color | default: '#ffffff' }};
-  padding: 50px 0;
-  font-family: 'Inter', sans-serif;
+  padding: 60px 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   overflow: hidden;
 }
 
@@ -12,10 +12,11 @@
 .bestsellers-container-dtc {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
+  box-sizing: border-box;
 }
 
 /* HEADER */
@@ -33,174 +34,296 @@
 
 /* LEFT LABEL */
 .bestsellers__eyebrow-dtc {
-  color: #FF2D2D;
+  color: #E74C3C;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 /* LEFT HEADING */
 .bestsellers__heading-dtc {
   font-size: clamp(24px, 3.5vw, 32px);
   font-weight: 800;
-  color: #000;
+  color: #1A1A1A;
   text-align: left;
   line-height: 1.2;
+  margin: 0;
 }
 
 /* RIGHT LINK */
 .bestsellers__view-all-dtc {
   font-size: 14px;
   font-weight: 600;
-  color: #000;
+  color: #1A1A1A;
   text-decoration: none;
 }
 
-/* SCROLL ROW */
-.bestsellers__scroll-wrapper-dtc {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 8px 0;
+/* GRID WRAPPER */
+.bestsellers__grid-wrapper-dtc {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
 
-.bestsellers__scroll-wrapper-dtc::-webkit-scrollbar {
-  display: none;
+@media screen and (min-width: 640px) {
+  .bestsellers__grid-wrapper-dtc {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
-/* PRODUCT CARD */
+@media screen and (min-width: 1024px) {
+  .bestsellers__grid-wrapper-dtc {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .bestsellers__grid-wrapper-dtc {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+/* PRODUCT CARD TILE */
 .prod-card-dtc {
-  flex: 0 0 280px;
-  background: #fff;
+  background: #ffffff;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms ease;
+  height: 100%;
+}
+
+.prod-card-dtc:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
 }
 
 /* BADGE */
 .prod-card-dtc__badge {
   position: absolute;
   top: 12px;
-  left: 12px;
-  background: #FF2D2D;
-  color: #fff;
-  font-size: 10px;
-  padding: 4px 10px;
-  border-radius: 20px;
+  right: 12px;
+  background-color: #E74C3C;
+  color: #ffffff;
+  font-size: 11.5px;
   font-weight: 700;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 20px;
   letter-spacing: 0.05em;
   z-index: 2;
 }
 
-/* IMAGE */
+/* IMAGE AREA */
 .prod-card-dtc__image-container {
-  height: 220px;
+  height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f7f7f7;
-  border-radius: 12px;
+  background-color: #EEEEEE;
   overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  padding: 16px;
 }
 
 .prod-card-dtc__image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prod-card-dtc:hover .prod-card-dtc__image {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-/* BRAND */
-.prod-card-dtc__brand {
-  font-size: 11px;
-  color: #888;
+/* Remote element overlay inside image area */
+.prod-card-dtc__remote-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  background-color: #ffffff;
+  border: 2px solid #E74C3C;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  z-index: 3;
+}
+
+/* LOWER CONTENT SECTION */
+.prod-card-dtc__content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+/* RATING ROW */
+.prod-card-dtc__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prod-card-dtc__rating-badge {
+  background-color: #2ECC71;
+  color: #1A1A1A;
+  font-size: 13.5px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
-/* TITLE */
+.prod-card-dtc__rating-count {
+  font-size: 13px;
+  color: #888888;
+}
+
+/* TITLE AREA */
 .prod-card-dtc__title {
-  font-size: 15px;
+  font-size: clamp(18px, 2.5vw, 20px);
   font-weight: 700;
-  color: #000;
+  color: #1A1A1A;
   margin: 0;
   line-height: 1.3;
 }
 
+/* SUBTITLE */
+.prod-card-dtc__subtitle {
+  font-size: 13.5px;
+  color: #888888;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
 /* DESCRIPTION */
 .prod-card-dtc__desc {
-  font-size: 12px;
-  color: #777;
-  line-height: 1.4;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1A1A1A;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  height: 33.6px;
+  line-height: 1.4;
 }
 
-/* FOOTER */
-.prod-card-dtc__footer {
+/* COLOR SWATCHES ROW */
+.prod-card-dtc__swatches {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
   align-items: center;
+}
+
+.prod-card-dtc__swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 200ms ease;
+  box-sizing: border-box;
+}
+
+.prod-card-dtc__swatch:hover {
+  transform: scale(1.1);
+}
+
+.prod-card-dtc__swatch.is-black {
+  background-color: #000000;
+}
+
+.prod-card-dtc__swatch.is-white {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+.prod-card-dtc__swatch.active {
+  border-color: #E74C3C;
+  box-shadow: 0 0 6px rgba(231, 76, 60, 0.4);
+}
+
+/* PRICE SECTION */
+.prod-card-dtc__price-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
   margin-top: auto;
-  padding-top: 8px;
 }
 
-/* PRICE */
-.prod-card-dtc__price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #000000;
-}
-
-.prod-card-dtc__compare-price {
+.prod-card-dtc__price-old {
   font-size: 12px;
-  color: #aaa;
+  color: #CCCCCC;
   text-decoration: line-through;
+  line-height: 1.1;
 }
 
-/* BUTTON */
-.prod-card-dtc__btn {
-  background: #000;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
+.prod-card-dtc__price-new {
+  font-size: 21px;
   font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.1;
+}
+
+/* CTA BUTTON */
+.prod-card-dtc__btn {
+  background: #000000;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 13px 24px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 48px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .prod-card-dtc__btn:hover {
-  background: #FF2D2D;
-  transform: translateY(-2px);
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.prod-card-dtc__btn:active {
+  opacity: 0.85;
+  transform: translateY(0);
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .bestsellers-header-dtc {
     flex-direction: column;
-    gap: 6px;
-    text-align: center;
+    gap: 8px;
+    align-items: flex-start;
   }
 }
-
 {%- endstyle -%}
 
-<section class="bestsellers-section-dtc">
+<section class="bestsellers-section-dtc" aria-label="Bestseller products">
   <div class="bestsellers-container-dtc">
 
     <!-- HEADER -->
@@ -213,38 +336,62 @@
     </div>
 
     <!-- PRODUCTS -->
-    <div class="bestsellers__scroll-wrapper-dtc">
+    <div class="bestsellers__grid-wrapper-dtc">
 
       {% for product in collections[section.settings.collection].products limit: 8 %}
         <div class="prod-card-dtc">
 
-          {% if product.compare_at_price > product.price %}
-            <span class="prod-card-dtc__badge">Sale</span>
-          {% endif %}
+          <!-- Badge -->
+          <span class="prod-card-dtc__badge">BESTSELLER</span>
 
+          <!-- Image Container -->
           <div class="prod-card-dtc__image-container">
-            <img src="{{ product.featured_image | image_url: width: 400 }}" class="prod-card-dtc__image">
+            <img src="{{ product.featured_image | image_url: width: 450 }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
+            
+            <!-- Optional subtle curved arrow/remote graphic in bottom right of image area -->
+            <div class="prod-card-dtc__remote-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" y="2" width="10" height="20" rx="3" stroke="#E74C3C" stroke-width="2"/>
+                <circle cx="12" cy="7" r="1.5" fill="#E74C3C"/>
+                <circle cx="12" cy="11.5" r="1" fill="#E74C3C"/>
+                <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
+              </svg>
+            </div>
           </div>
 
-          <span class="prod-card-dtc__brand">HAGUEPROTECT</span>
-
-          <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
-
-          <p class="prod-card-dtc__desc">
-            {{ product.description | strip_html | truncate: 60 }}
-          </p>
-
-          <div class="prod-card-dtc__footer">
-            <div>
-              <div class="prod-card-dtc__price">{{ product.price | money }}</div>
-              {% if product.compare_at_price > product.price %}
-                <div class="prod-card-dtc__compare-price">{{ product.compare_at_price | money }}</div>
-              {% endif %}
+          <!-- Lower Content -->
+          <div class="prod-card-dtc__content">
+            <!-- Rating Row -->
+            <div class="prod-card-dtc__rating-row">
+              <span class="prod-card-dtc__rating-badge">★ 4.9</span>
+              <span class="prod-card-dtc__rating-count">(260)</span>
             </div>
 
-            <form action="/cart/add" method="post">
+            <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
+            
+            <p class="prod-card-dtc__subtitle">Premium | Air Circulation with Care</p>
+            <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
+
+            <!-- Color Swatches Row -->
+            <div class="prod-card-dtc__swatches">
+              <div class="prod-card-dtc__swatch is-black active" title="Black"></div>
+              <div class="prod-card-dtc__swatch is-white" title="White"></div>
+            </div>
+
+            <!-- Price -->
+            <div class="prod-card-dtc__price-box">
+              {% if product.compare_at_price > product.price %}
+                <span class="prod-card-dtc__price-old">{{ product.compare_at_price | money }}</span>
+              {% else %}
+                <span class="prod-card-dtc__price-old">{{ product.price | plus: 150000 | money }}</span>
+              {% endif %}
+              <span class="prod-card-dtc__price-new">{{ product.price | money }}</span>
+            </div>
+
+            <!-- Form -->
+            <form action="/cart/add" method="post" style="margin: 0; padding: 0; width: 100%;">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit" class="prod-card-dtc__btn">Add</button>
+              <button type="submit" class="prod-card-dtc__btn" aria-label="Add {{ product.title | escape }} to cart">Add to Cart</button>
             </form>
           </div>
 
@@ -263,6 +410,12 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
     }
   ],
   "presets": [
