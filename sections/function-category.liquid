@@ -123,10 +123,10 @@
 
   .fc-illustration {
     position: absolute;
-    bottom: -15px;
-    right: -10px;
-    width: 90px;
-    height: 110px;
+    bottom: -5px;
+    right: -5px;
+    width: 135px;
+    height: 135px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -264,7 +264,9 @@
                 <p class="fc-product-count">{{ block.settings.product_count | default: '0 products' }}</p>
               </div>
               <div class="fc-illustration">
-                {%- if block.settings.svg_code != blank -%}
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 250 }}" alt="{{ block.settings.title }}" loading="lazy" style="width:100%; height:100%; object-fit:contain;">
+                {%- elsif block.settings.svg_code != blank -%}
                   {{ block.settings.svg_code }}
                 {%- else -%}
                   <!-- fallback graphic icon -->
@@ -411,6 +413,12 @@
           "id": "svg_code",
           "label": "SVG Illustration Code",
           "info": "Paste custom product SVG code here."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image",
+          "info": "Optionally upload a transparent PNG image instead of using SVG code."
         }
       ]
     }
