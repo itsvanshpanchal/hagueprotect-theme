@@ -226,7 +226,7 @@
   font-size: 42px;
   font-weight: 700;
   font-family: var(--d2c-heading-font);
-  color: {{ section.settings.title_color | default: '#B8B8B8' }};
+  color: #000000;
   line-height: 1.15;
   margin: 0;
   letter-spacing: -0.5px;
@@ -757,14 +757,25 @@
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
       <div class="d2c-brand-award-row">
-        <span class="d2c-brand-text">{{ section.settings.brand_text | default: "BFF" }}</span>
         {%- if section.settings.award_text != blank -%}
           <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}
       </div>
 
       <!-- Title -->
-      <h1 class="d2c-product-title">{{ product.title }}</h1>
+      {%- if product.title contains "Cleaning Kit" -%}
+        {%- assign parts = product.title | split: "Cleaning Kit" -%}
+        <h1 class="d2c-product-title">
+          <span style="color: #000000; font-weight: 700;">{{ parts[0] }}</span><span style="color: #888888; font-weight: 400;">Cleaning Kit</span>{%- if parts[1] != blank -%}<span style="color: #000000; font-weight: 700;">{{ parts[1] }}</span>{%- endif -%}
+        </h1>
+      {%- elsif product.title contains "cleaning kit" -%}
+        {%- assign parts = product.title | split: "cleaning kit" -%}
+        <h1 class="d2c-product-title">
+          <span style="color: #000000; font-weight: 700;">{{ parts[0] }}</span><span style="color: #888888; font-weight: 400;">cleaning kit</span>{%- if parts[1] != blank -%}<span style="color: #000000; font-weight: 700;">{{ parts[1] }}</span>{%- endif -%}
+        </h1>
+      {%- else -%}
+        <h1 class="d2c-product-title" style="color: #000000; font-weight: 700;">{{ product.title }}</h1>
+      {%- endif -%}
 
       <!-- Rating / Review Pill Row -->
       <div class="d2c-rating-badge-row">
