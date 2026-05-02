@@ -27,71 +27,6 @@
         "bg_color": "#ffffff"
       }
     },
-    "function-category": {
-      "type": "function-category",
-      "blocks": {
-        "fans": {
-          "type": "category_card",
-          "settings": {
-            "title": "Fans",
-            "product_count": "6 products",
-            "svg_code": "<svg viewBox='0 0 120 160' width='80' height='110' fill='none' stroke='currentColor' stroke-width='2'><circle cx='60' cy='45' r='30' stroke='#111111' stroke-width='2' /><circle cx='60' cy='45' r='3' fill='#111111' /><line x1='60' y1='45' x2='60' y2='25' stroke='#111111' stroke-width='2' /><path d='M60 45 Q 40 20 40 45' stroke='#111111' /><path d='M60 45 Q 80 70 80 45' stroke='#111111' /><path d='M60 45 Q 35 60 60 60' stroke='#111111' /><path d='M60 45 Q 85 30 60 30' stroke='#111111' /><line x1='60' y1='75' x2='60' y2='140' stroke='#111111' stroke-width='3' /><ellipse cx='60' cy='140' rx='30' ry='8' stroke='#111111' stroke-width='2' fill='#f5f5f7' /></svg>"
-          }
-        },
-        "kitchen": {
-          "type": "category_card",
-          "settings": {
-            "title": "Kitchen Essentials",
-            "product_count": "4 products",
-            "svg_code": "<svg viewBox='0 0 120 120' width='90' height='90' fill='none' stroke='currentColor' stroke-width='2'><rect x='25' y='25' width='70' height='80' rx='20' fill='#fcfcfc' stroke='#E62C2C' stroke-width='3' /><rect x='35' y='65' width='50' height='30' rx='8' stroke='#E62C2C' stroke-width='2' /><line x1='60' y1='75' x2='60' y2='85' stroke='#E62C2C' stroke-width='3' /><circle cx='60' cy='45' r='8' stroke='#E62C2C' stroke-width='2' /></svg>"
-          }
-        },
-        "vacuums": {
-          "type": "category_card",
-          "settings": {
-            "title": "Vacuum Cleaners",
-            "product_count": "3 products",
-            "svg_code": "<svg viewBox='0 0 120 160' width='80' height='110' fill='none' stroke='currentColor' stroke-width='2'><rect x='50' y='20' width='20' height='30' rx='6' stroke='#111111' stroke-width='2' fill='#f5f5f7' /><line x1='60' y1='50' x2='60' y2='135' stroke='#111111' stroke-width='3' /><path d='M40 135 L80 135 L70 145 L50 145 Z' fill='#111111' /><rect x='45' y='25' width='6' height='15' rx='3' fill='#FF2B2B' /></svg>"
-          }
-        },
-        "garment": {
-          "type": "category_card",
-          "settings": {
-            "title": "Garment Care",
-            "product_count": "3 products",
-            "svg_code": "<svg viewBox='0 0 120 160' width='80' height='110' fill='none' stroke='currentColor' stroke-width='2'><rect x='45' y='110' width='30' height='35' rx='10' stroke='#111111' stroke-width='2' fill='#f5f5f7' /><line x1='60' y1='35' x2='60' y2='110' stroke='#111111' stroke-width='2' /><path d='M40 35 L80 35 L60 25 Z' fill='#111111' /><path d='M60 70 C 80 70 80 115 60 115' stroke='#111111' stroke-width='2' fill='none' /></svg>"
-          }
-        },
-        "purifiers": {
-          "type": "category_card",
-          "settings": {
-            "title": "Air Purifiers",
-            "product_count": "5 products",
-            "svg_code": "<svg viewBox='0 0 120 160' width='80' height='110' fill='none' stroke='currentColor' stroke-width='2'><rect x='35' y='25' width='50' height='110' rx='12' fill='#fcfcfc' stroke='#111111' stroke-width='2' /><line x1='45' y1='45' x2='75' y2='45' stroke='#111111' stroke-width='1.5' /><line x1='45' y1='55' x2='75' y2='55' stroke='#111111' stroke-width='1.5' /><line x1='45' y1='65' x2='75' y2='65' stroke='#111111' stroke-width='1.5' /><line x1='45' y1='75' x2='75' y2='75' stroke='#111111' stroke-width='1.5' /><line x1='45' y1='85' x2='75' y2='85' stroke='#111111' stroke-width='1.5' /><circle cx='60' cy='115' r='10' stroke='#111111' stroke-width='1.5' /></svg>"
-          }
-        },
-        "heaters": {
-          "type": "category_card",
-          "settings": {
-            "title": "Heaters",
-            "product_count": "2 products",
-            "svg_code": "<svg viewBox='0 0 120 120' width='90' height='90' fill='none' stroke='currentColor' stroke-width='2'><rect x='25' y='35' width='70' height='55' rx='8' fill='#fcfcfc' stroke='#FF8A00' stroke-width='2' /><line x1='40' y1='45' x2='80' y2='45' stroke='#FF8A00' stroke-width='2' /><line x1='40' y1='55' x2='80' y2='55' stroke='#FF8A00' stroke-width='2' /><line x1='40' y1='65' x2='80' y2='65' stroke='#FF8A00' stroke-width='2' /><circle cx='45' cy='78' r='3' fill='#FF8A00' /><line x1='40' y1='90' x2='50' y2='100' stroke='#FF8A00' stroke-width='2' /><line x1='80' y1='90' x2='70' y2='100' stroke='#FF8A00' stroke-width='2' /></svg>"
-          }
-        }
-      },
-      "block_order": [
-        "fans",
-        "kitchen",
-        "vacuums",
-        "garment",
-        "purifiers",
-        "heaters"
-      ],
-      "settings": {
-        "heading": "Shop by Function and Category",
-        "subtitle": "Explore our top product categories"
-      }
-    },
     "trending-social": {
       "type": "trending-social",
       "blocks": {
@@ -180,6 +115,82 @@
         "card_spacing": 20,
         "bg_color": "#ffffff",
         "primary_color": "#ff2b2b"
+      }
+    },
+    "function-category": {
+      "type": "function-category",
+      "blocks": {
+        "fans": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAGUEPROTECT SNEAKER CLEANER KIT",
+            "product_count": "6 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"60\" cy=\"45\" r=\"30\" stroke=\"#111111\" stroke-width=\"2\"></circle><circle cx=\"60\" cy=\"45\" r=\"3\" fill=\"#111111\"></circle><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"25\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M60 45 Q 40 20 40 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 80 70 80 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 35 60 60 60\" stroke=\"#111111\"></path><path d=\"M60 45 Q 85 30 60 30\" stroke=\"#111111\"></path><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"140\" stroke=\"#111111\" stroke-width=\"3\"></line><ellipse cx=\"60\" cy=\"140\" rx=\"30\" ry=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></ellipse></svg>",
+            "image": "shopify://shop_images/ChatGPT_Image_Apr_30__2026__11_05_15_PM-removebg-preview.png"
+          }
+        },
+        "kitchen": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAGUEPROTECT MARKER",
+            "product_count": "4 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"25\" width=\"70\" height=\"80\" rx=\"20\" fill=\"#fcfcfc\" stroke=\"#E62C2C\" stroke-width=\"3\"></rect><rect x=\"35\" y=\"65\" width=\"50\" height=\"30\" rx=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></rect><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"85\" stroke=\"#E62C2C\" stroke-width=\"3\"></line><circle cx=\"60\" cy=\"45\" r=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></circle></svg>",
+            "image": "shopify://shop_images/1080-19Marker_4-removebg-preview.png"
+          }
+        },
+        "vacuums": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAGUEPROTECT SHOES PADDING",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"50\" y=\"20\" width=\"20\" height=\"30\" rx=\"6\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"50\" x2=\"60\" y2=\"135\" stroke=\"#111111\" stroke-width=\"3\"></line><path d=\"M40 135 L80 135 L70 145 L50 145 Z\" fill=\"#111111\"></path><rect x=\"45\" y=\"25\" width=\"6\" height=\"15\" rx=\"3\" fill=\"#FF2B2B\"></rect></svg>",
+            "image": "shopify://shop_images/2400-16_8ca27a55-1727-41a8-a657-d6e6d0f2f753-removebg-preview.png"
+          }
+        },
+        "garment": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAGUEPROTECT NANO PROTECTION",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"45\" y=\"110\" width=\"30\" height=\"35\" rx=\"10\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"35\" x2=\"60\" y2=\"110\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M40 35 L80 35 L60 25 Z\" fill=\"#111111\"></path><path d=\"M60 70 C 80 70 80 115 60 115\" stroke=\"#111111\" stroke-width=\"2\" fill=\"none\"></path></svg>",
+            "image": "shopify://shop_images/1080-REPEL25_4-removebg-preview.png"
+          }
+        },
+        "purifiers": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAGGUEPROTECT CLEANER KIT",
+            "product_count": "5 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"35\" y=\"25\" width=\"50\" height=\"110\" rx=\"12\" fill=\"#fcfcfc\" stroke=\"#111111\" stroke-width=\"2\"></rect><line x1=\"45\" y1=\"45\" x2=\"75\" y2=\"45\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"55\" x2=\"75\" y2=\"55\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"65\" x2=\"75\" y2=\"65\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"75\" x2=\"75\" y2=\"75\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"85\" x2=\"75\" y2=\"85\" stroke=\"#111111\" stroke-width=\"1.5\"></line><circle cx=\"60\" cy=\"115\" r=\"10\" stroke=\"#111111\" stroke-width=\"1.5\"></circle></svg>",
+            "image": "shopify://shop_images/1080_POWERSOLE_d6f9d2ec-7171-46a0-af15-8517b7e108e0-removebg-preview.png"
+          }
+        },
+        "heaters": {
+          "type": "category_card",
+          "settings": {
+            "title": "Heaters",
+            "product_count": "2 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"35\" width=\"70\" height=\"55\" rx=\"8\" fill=\"#fcfcfc\" stroke=\"#FF8A00\" stroke-width=\"2\"></rect><line x1=\"40\" y1=\"45\" x2=\"80\" y2=\"45\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"55\" x2=\"80\" y2=\"55\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"65\" x2=\"80\" y2=\"65\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><circle cx=\"45\" cy=\"78\" r=\"3\" fill=\"#FF8A00\"></circle><line x1=\"40\" y1=\"90\" x2=\"50\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"80\" y1=\"90\" x2=\"70\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "fans",
+        "kitchen",
+        "vacuums",
+        "garment",
+        "purifiers",
+        "heaters"
+      ],
+      "settings": {
+        "heading": "Shop by Function and Category",
+        "subtitle": "Explore our top product categories"
       }
     },
     "17776122420bbcf27b": {
