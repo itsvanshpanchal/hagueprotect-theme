@@ -326,7 +326,7 @@
     <div class="bestsellers__grid-wrapper-dtc">
 
       {% for product in collections[section.settings.collection].products limit: 8 %}
-        <div class="prod-card-dtc">
+        <div class="prod-card-dtc" onclick="window.location.href='{{ product.url }}?view=detail'" style="cursor: pointer;">
 
           <!-- Badge -->
           <span class="prod-card-dtc__badge">BESTSELLER</span>
@@ -376,7 +376,7 @@
             </div>
 
             <!-- Form -->
-            <form action="/cart/add" method="post" style="margin: 0; padding: 0; width: 100%;">
+            <form action="/cart/add" method="post" onclick="event.stopPropagation();" style="margin: 0; padding: 0; width: 100%;">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}">
               <button type="submit" class="prod-card-dtc__btn" aria-label="Add {{ product.title | escape }} to cart">Add to Cart</button>
             </form>
