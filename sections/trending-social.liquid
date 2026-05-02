@@ -231,12 +231,6 @@
               {%- endif -%}
             </div>
 
-            <div class="trending-social__info">
-              <p class="trending-social__caption">{{ block.settings.caption | default: 'Elite care that brings out the finest character in all sneakers.' }}</p>
-              {%- if block.settings.handle != blank -%}
-                <span class="trending-social__handle">{{ block.settings.handle }}</span>
-              {%- endif -%}
-            </div>
           </div>
         {%- else -%}
           <!-- Elite Static Fallbacks for the customizer -->
@@ -250,20 +244,6 @@
                   <text x="200" y="340" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#111111" opacity="0.3" text-anchor="middle" letter-spacing="2">@HAGUEPROTECT</text>
                   <text x="200" y="365" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#FF2B2B" text-anchor="middle">Elite Sneaker Care</text>
                 </svg>
-              </div>
-              <div class="trending-social__info">
-                <p class="trending-social__caption">
-                  {%- if i == 1 -%}
-                    Before and after results using our Elite Sneaker Cleaning Kit. Unbelievable glow!
-                  {%- elsif i == 2 -%}
-                    Shielded against liquid spills and bad weather with Shield Guard.
-                  {%- elsif i == 3 -%}
-                    Cleaned suede and delicate mesh flawlessly. Super easy!
-                  {%- else -%}
-                    Can't imagine styling without maintaining my sneakers with Hague Protect.
-                  {%- endif -%}
-                </p>
-                <span class="trending-social__handle">@hague_protect{{ i }}</span>
               </div>
             </div>
           {%- endfor -%}
