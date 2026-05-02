@@ -582,7 +582,7 @@
     <!-- Right: Detailed Information -->
     <section class="product-info-column" aria-label="Product Information">
       <span class="brand-badge" role="status">BFF</span>
-      <h1 class="product-title">Elite Footwear Care Kit</h1>
+      <h1 class="product-title">{{ product.title | default: 'Elite Footwear Care Kit' }}</h1>
       
       <div class="rating-section" aria-label="Product Rating">
         <div class="stars-wrapper" aria-label="5 out of 5 stars">
@@ -601,10 +601,20 @@
       </ul>
 
       <div class="price-section">
-        <div class="original-price">Rs. 1299</div>
+        <div class="original-price">
+          {% if product.compare_at_price > product.price %}
+            {{ product.compare_at_price | money }}
+          {% else %}
+            {{ product.price | plus: 30000 | money | default: 'Rs. 1,299' }}
+          {% endif %}
+        </div>
         <div class="sale-price-row">
-          <span class="sale-price">Rs. 999</span>
-          <span class="discount-label">23% OFF</span>
+          <span class="sale-price">{{ product.price | money | default: 'Rs. 999' }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="discount-label">SAVE {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+          {% else %}
+            <span class="discount-label">23% OFF</span>
+          {% endif %}
         </div>
       </div>
 
