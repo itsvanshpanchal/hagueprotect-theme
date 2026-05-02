@@ -1,10 +1,10 @@
 {%- style -%}
   .footer-wrapper {
-    background-color: {{ section.settings.bg_color | default: '#fafafa' }};
-    color: var(--color-text-main);
+    background-color: #000000 !important;
+    color: #ffffff !important;
     padding-top: clamp(48px, 6vw, 96px);
     padding-bottom: clamp(32px, 4vw, 64px);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid #1a1a1a;
   }
 
   .footer-grid {
@@ -29,7 +29,7 @@
   .footer__logo-link {
     font-size: 24px;
     font-weight: 800;
-    color: var(--color-text-main);
+    color: #ffffff !important;
     letter-spacing: -0.04em;
     text-transform: uppercase;
     display: inline-flex;
@@ -44,7 +44,7 @@
 
   .footer__description {
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: #e0e0e0 !important;
     line-height: 1.6;
     margin-bottom: 24px;
     max-width: 280px;
@@ -56,7 +56,7 @@
     letter-spacing: 0.1em;
     font-weight: 700;
     margin-bottom: 24px;
-    color: var(--color-text-main);
+    color: #ffffff !important;
   }
 
   .footer__menu {
@@ -67,12 +67,12 @@
 
   .footer__link {
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: #cccccc !important;
     transition: var(--transition-fast);
   }
 
   .footer__link:hover {
-    color: var(--color-primary);
+    color: #ffffff !important;
     transform: translateX(4px);
   }
 
@@ -84,7 +84,7 @@
 
   .footer__newsletter-desc {
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: #cccccc !important;
   }
 
   .footer__form {
@@ -97,8 +97,9 @@
     flex: 1;
     font-family: var(--font-family-sans);
     font-size: 14px;
-    border: 1px solid var(--color-border);
-    background-color: #ffffff;
+    border: 1px solid #333333;
+    background-color: #1a1a1a;
+    color: #ffffff !important;
     border-radius: var(--border-radius-xl);
     padding: 14px 20px;
     outline: none;
@@ -130,10 +131,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid #1a1a1a;
     padding-top: 32px;
     font-size: 13px;
-    color: var(--color-text-light);
+    color: #888888 !important;
   }
 
   @media screen and (max-width: 768px) {
@@ -155,10 +156,10 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    background-color: #ffffff;
+    background-color: #1a1a1a;
     border-radius: 50%;
-    border: 1px solid var(--color-border);
-    color: var(--color-text-main);
+    border: 1px solid #333333;
+    color: #ffffff;
     transition: var(--transition-fast);
   }
 
@@ -175,8 +176,8 @@
     <div class="footer-grid">
       <div class="footer-col-info">
         <a href="/" class="footer__logo-link">
-          <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #000000; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
-            HAGUE<span style="color: #FF2B2B;">PR</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" style="color: #000000; margin: 0 -1px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+          <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
+            HAGUE<span style="color: #FF2B2B;">PR</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" style="color: #ffffff; margin: 0 -1px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
           </span>
         </a>
         <p class="footer__description">
