@@ -326,7 +326,7 @@
     <div class="bestsellers__grid-wrapper-dtc">
 
       {% for product in collections[section.settings.collection].products limit: 8 %}
-        <div class="prod-card-dtc" onclick="window.location.href='{{ product.url }}?view=detail'" style="cursor: pointer;">
+        <div class="prod-card-dtc" onclick="window.location.href='{{ product.url | default: '/products/' | append: product.handle }}?view=detail'" style="cursor: pointer;">
 
           <!-- Badge -->
           <span class="prod-card-dtc__badge">BESTSELLER</span>
