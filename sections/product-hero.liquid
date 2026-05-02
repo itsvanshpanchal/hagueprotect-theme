@@ -1,300 +1,329 @@
 {%- style -%}
-  .dtc-pdp-hero {
-    width: 100%;
-    min-height: 90vh;
+  /* DESIGN SYSTEM & TOKENS */
+  :root {
+    --hp-accent: {{ section.settings.accent_color | default: '#FF2B2B' }};
+    --hp-bg: {{ section.settings.bg_color | default: '#ffffff' }};
+    --hp-text: #111111;
+    --hp-text-muted: #666666;
+    --hp-border: #eeeeee;
+    --hp-shadow: rgba(0, 0, 0, 0.05);
+  }
+
+  .hp-pdp-section {
+    background-color: var(--hp-bg);
+    color: var(--hp-text);
+    font-family: 'Outfit', 'Inter', sans-serif !important;
+    padding: 60px 0;
+    box-sizing: border-box;
+  }
+
+  .hp-pdp-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    background-color: #ffffff;
-    font-family: 'Inter', sans-serif !important;
-    overflow: hidden;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
   }
 
   @media screen and (max-width: 991px) {
-    .dtc-pdp-hero {
+    .hp-pdp-container {
       grid-template-columns: 1fr;
-      min-height: auto;
+      gap: 40px;
+      padding: 0 16px;
     }
   }
 
-  /* Left column: media and overlay */
-  .dtc-pdp-hero__left {
+  /* LEFT SIDE: PRODUCT IMAGES / VISUALS */
+  .hp-pdp-media-gallery {
     position: relative;
-    background-color: #f7f7f7;
-    display: flex;
-    align-items: center;
-    padding: 60px;
-    box-sizing: border-box;
-    min-height: 80vh;
-  }
-
-  @media screen and (max-width: 768px) {
-    .dtc-pdp-hero__left {
-      padding: 30px 20px;
-      min-height: 400px;
-    }
-  }
-
-  .dtc-pdp-hero__bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
-
-  .dtc-pdp-hero__overlay-content {
-    position: relative;
-    z-index: 2;
-    max-width: 480px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    text-align: left;
+    gap: 20px;
   }
 
-  .dtc-pdp-hero__left-badge {
+  .hp-pdp-media-main {
+    position: relative;
+    background-color: #f7f7f7;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 520px;
+    border: 1px solid var(--hp-border);
+    box-shadow: 0 4px 20px var(--hp-shadow);
+    transition: transform 0.3s ease;
+  }
+
+  .hp-pdp-media-main:hover {
+    transform: translateY(-2px);
+  }
+
+  .hp-pdp-media-image {
+    max-width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hp-pdp-media-main:hover .hp-pdp-media-image {
+    transform: scale(1.03);
+  }
+
+  .hp-pdp-badge {
     position: absolute;
-    top: 30px;
-    right: 30px;
-    z-index: 2;
-    background-color: #FF2D2D;
+    top: 24px;
+    left: 24px;
+    background-color: var(--hp-accent);
     color: #ffffff;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
     padding: 6px 14px;
     border-radius: 30px;
-    letter-spacing: 0.05em;
+    z-index: 10;
   }
 
-  .dtc-pdp-hero__left-heading {
-    color: #000000;
-    font-size: clamp(32px, 4.5vw, 44px);
-    font-weight: 800;
-    line-height: 1.15;
-    margin: 0;
-    letter-spacing: -0.02em;
-  }
-
-  .dtc-pdp-hero__left-subtext {
-    color: #666666;
-    font-size: clamp(14px, 1.8vw, 16px);
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  /* Right column: details */
-  .dtc-pdp-hero__right {
+  /* RIGHT SIDE: CONTENT & BUYING INTERACTION */
+  .hp-pdp-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 60px;
-    box-sizing: border-box;
-    gap: 28px;
-    text-align: left;
+    gap: 24px;
+    justify-content: flex-start;
   }
 
-  @media screen and (max-width: 768px) {
-    .dtc-pdp-hero__right {
-      padding: 40px 20px;
-    }
+  .hp-pdp-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  .dtc-pdp-hero__rating-badge {
+  .hp-pdp-rating {
     background-color: #2ECC71;
     color: #ffffff;
     font-size: 13px;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 6px;
-    width: max-content;
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    letter-spacing: 0.02em;
   }
 
-  .dtc-pdp-hero__title {
-    font-size: clamp(28px, 3.5vw, 34px);
+  .hp-pdp-eyebrow {
+    color: var(--hp-accent);
+    font-size: 12px;
     font-weight: 800;
-    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .hp-pdp-title {
+    font-size: clamp(32px, 4vw, 42px);
+    font-weight: 900;
+    color: #111111;
+    line-height: 1.15;
     margin: 0;
-    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .hp-pdp-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--hp-text-muted);
+    margin: -8px 0 0 0;
+  }
+
+  .hp-pdp-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444444;
+    margin: 0;
+  }
+
+  .hp-pdp-divider {
+    height: 1px;
+    background-color: var(--hp-border);
+    width: 100%;
+  }
+
+  /* PRICES & QUANTITY */
+  .hp-pdp-price-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .hp-pdp-price-old {
+    font-size: 18px;
+    text-decoration: line-through;
+    color: var(--hp-text-muted);
+    font-weight: 500;
+  }
+
+  .hp-pdp-price-new {
+    font-size: 32px;
+    font-weight: 900;
+    color: #111111;
     letter-spacing: -0.01em;
   }
 
-  .dtc-pdp-hero__subtitle {
-    font-size: 16px;
-    font-weight: 500;
-    color: #888888;
-    margin: -16px 0 0 0;
-  }
-
-  .dtc-pdp-hero__desc {
-    font-size: 18px;
-    font-weight: 500;
-    color: #000000;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  /* Swatches */
-  .dtc-pdp-hero__swatches {
+  /* PURCHASE ACTIONS */
+  .hp-pdp-actions-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+    margin-top: 12px;
   }
 
-  .dtc-pdp-hero__swatch-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #888888;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .dtc-pdp-hero__swatch-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .dtc-pdp-hero__swatch-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    border: 1px solid #e5e5e5;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .dtc-pdp-hero__swatch-box:hover {
-    transform: scale(1.1);
-  }
-
-  .dtc-pdp-hero__swatch-box.is-pink { background-color: #FFC0CB; }
-  .dtc-pdp-hero__swatch-box.is-green { background-color: #2ECC71; }
-  .dtc-pdp-hero__swatch-box.is-grey { background-color: #888888; }
-  
-  .dtc-pdp-hero__swatch-plus {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    border: 1px solid #e5e5e5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: #888888;
-    cursor: pointer;
-    background-color: #f7f7f7;
-  }
-
-  /* Pricing */
-  .dtc-pdp-hero__price-box {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-  }
-
-  .dtc-pdp-hero__price-old {
-    font-size: 16px;
-    text-decoration: line-through;
-    color: #888888;
-  }
-
-  .dtc-pdp-hero__price-new {
-    font-size: 24px;
-    font-weight: 800;
-    color: #000000;
-  }
-
-  /* ATC Button */
-  .dtc-pdp-hero__atc-btn {
-    background-color: #000000;
+  .hp-pdp-atc-btn {
+    background-color: #111111;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 16px 36px;
+    padding: 18px 40px;
     border-radius: 40px;
     border: none;
     cursor: pointer;
     width: 100%;
     text-align: center;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    display: inline-block;
-    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-sizing: border-box;
+    display: inline-block;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
   }
 
-  .dtc-pdp-hero__atc-btn:hover {
-    background-color: #FF2D2D;
+  .hp-pdp-atc-btn:hover {
+    background-color: var(--hp-accent);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231,76,60,0.25);
+  }
+
+  /* TRUST BADGES */
+  .hp-pdp-trust-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .hp-pdp-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    padding: 14px 8px;
+    background-color: #fcfcfc;
+    border: 1px solid var(--hp-border);
+    border-radius: 12px;
+  }
+
+  .hp-pdp-trust-icon {
+    color: var(--hp-accent);
+  }
+
+  .hp-pdp-trust-text {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--hp-text);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
   }
 {%- endstyle -%}
 
-<div class="dtc-pdp-hero" aria-label="Premium Product Detail Hero">
-  <!-- Left Side Media + Overlay Content -->
-  <div class="dtc-pdp-hero__left">
-    {%- if product.featured_image != blank -%}
-      <img src="{{ product.featured_image | image_url: width: 1400 }}" alt="{{ product.title | escape }}" class="dtc-pdp-hero__bg-img" loading="eager">
-    {%- else -%}
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="dtc-pdp-hero__bg-img">
-        <rect width="1000" height="1000" fill="#f7f7f7"/>
-        <circle cx="500" cy="450" r="280" fill="#ffffff" stroke="#eeeeee" stroke-width="2"/>
-        <!-- Clean minimalist fan graphic for BFF -->
-        <path d="M500 450 L500 230 M500 450 L690 340 M500 450 L610 610 M500 450 L390 610 M500 450 L310 340" stroke="#FF2D2D" stroke-width="12" stroke-linecap="round"/>
-        <circle cx="500" cy="450" r="40" fill="#000000"/>
-        <rect x="475" y="490" width="50" height="180" rx="16" fill="#ffffff" stroke="#e5e5e5" stroke-width="4"/>
-        <circle cx="500" cy="530" r="8" fill="#FF2D2D"/>
-        <text x="500" y="740" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#000000" letter-spacing="2" text-anchor="middle">BFF | ICETOUCH™</text>
-      </svg>
-    {%- endif -%}
+<div class="hp-pdp-section">
+  <div class="hp-pdp-container" aria-label="Premium Product Details Page">
+    <!-- Media Gallery: Left Column -->
+    <div class="hp-pdp-media-gallery">
+      <div class="hp-pdp-media-main">
+        {%- if product.featured_image != blank -%}
+          <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" class="hp-pdp-media-image" loading="eager">
+        {%- else -%}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="hp-pdp-media-image">
+            <rect width="1000" height="1000" fill="#fcfcfc"/>
+            <circle cx="500" cy="450" r="280" fill="#ffffff" stroke="#eeeeee" stroke-width="2"/>
+            <path d="M500 450 L500 230 M500 450 L690 340 M500 450 L610 610 M500 450 L390 610 M500 450 L310 340" stroke="#FF2B2B" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="500" cy="450" r="40" fill="#111111"/>
+          </svg>
+        {%- endif -%}
 
-    <span class="dtc-pdp-hero__left-badge">AWARD WINNER</span>
-
-    <div class="dtc-pdp-hero__overlay-content">
-      <h2 class="dtc-pdp-hero__left-heading">Make it yours.<br>Personalize your BFF</h2>
-      <p class="dtc-pdp-hero__left-subtext">Lyrics, affirmations, memes, whatever screams you</p>
-    </div>
-  </div>
-
-  <!-- Right Side Product Details Content -->
-  <div class="dtc-pdp-hero__right">
-    <div class="dtc-pdp-hero__rating-badge">★ 4.9 (201)</div>
-    
-    <h1 class="dtc-pdp-hero__title">BFF</h1>
-    <p class="dtc-pdp-hero__subtitle">BFF | Personal Hand Fan with IceTouch™</p>
-
-    <p class="dtc-pdp-hero__desc">Instant cooling. Pocket-sized. Always with you.</p>
-
-    <!-- Color swatches -->
-    <div class="dtc-pdp-hero__swatches">
-      <span class="dtc-pdp-hero__swatch-label">Color</span>
-      <div class="dtc-pdp-hero__swatch-row">
-        <div class="dtc-pdp-hero__swatch-box is-pink" title="Pink"></div>
-        <div class="dtc-pdp-hero__swatch-box is-green" title="Green"></div>
-        <div class="dtc-pdp-hero__swatch-box is-grey" title="Grey"></div>
-        <div class="dtc-pdp-hero__swatch-plus" title="More Colors">+</div>
+        <span class="hp-pdp-badge">{{ section.settings.badge_text | default: 'PREMIUM CARE' }}</span>
       </div>
     </div>
 
-    <!-- Pricing -->
-    <div class="dtc-pdp-hero__price-box">
-      <span class="dtc-pdp-hero__price-old">Rs. 2700</span>
-      <span class="dtc-pdp-hero__price-new">Rs. 2,299</span>
-    </div>
+    <!-- Details Content: Right Column -->
+    <div class="hp-pdp-info">
+      <div class="hp-pdp-meta-top">
+        <span class="hp-pdp-rating">★ 4.9</span>
+        <span class="hp-pdp-eyebrow">{{ section.settings.eyebrow_text | default: 'ENGINEERED EXCELLENCE' }}</span>
+      </div>
 
-    <!-- ATC -->
-    {%- form 'product', product, id: 'AddToCartForm-pdp-hero' -%}
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id | default: 12345678 }}">
-      <button type="submit" name="add" class="dtc-pdp-hero__atc-btn">Add to Cart</button>
-    {%- endform -%}
+      <h1 class="hp-pdp-title">{{ product.title | default: 'Elite Sneaker Care Kit' }}</h1>
+      <p class="hp-pdp-subtitle">Original Edition & Ultimate Protection</p>
+
+      <div class="hp-pdp-price-wrapper">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="hp-pdp-price-old">{{ product.compare_at_price | money }}</span>
+        {%- elsif product.price != blank -%}
+          <span class="hp-pdp-price-old">{{ product.price | plus: 60000 | money }}</span>
+        {%- else -%}
+          <span class="hp-pdp-price-old">Rs. 1,499</span>
+        {%- endif -%}
+
+        <span class="hp-pdp-price-new">{{ product.price | default: 'Rs. 999' | money }}</span>
+      </div>
+
+      <p class="hp-pdp-desc">
+        {%- if product.description != blank -%}
+          {{ product.description | strip_html | truncate: 250 }}
+        {%- else -%}
+          Restore and maintain the original character of your premium footwear. Our specialized, eco-friendly formula penetrates deep into fabrics, leather, and suede to safely lift grime and erase scuffs for durable protective results.
+        {%- endif -%}
+      </p>
+
+      <div class="hp-pdp-divider"></div>
+
+      <!-- Add to Cart Form -->
+      {%- form 'product', product, id: 'AddToCartForm-hp-pdp' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <div class="hp-pdp-actions-form">
+          <button type="submit" name="add" class="hp-pdp-atc-btn">Add to Cart</button>
+        </div>
+      {%- endform -%}
+
+      <!-- Trust Badges -->
+      <div class="hp-pdp-trust-row">
+        <div class="hp-pdp-trust-item">
+          <svg class="hp-pdp-trust-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="hp-pdp-trust-text">Eco-Friendly Formula</span>
+        </div>
+        <div class="hp-pdp-trust-item">
+          <svg class="hp-pdp-trust-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <span class="hp-pdp-trust-text">Original & Certified</span>
+        </div>
+        <div class="hp-pdp-trust-item">
+          <svg class="hp-pdp-trust-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m15 9-6 6"/>
+            <path d="m9 9 6 6"/>
+          </svg>
+          <span class="hp-pdp-trust-text">All Fabric Safe</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -303,10 +332,28 @@
   "name": "Product Hero",
   "settings": [
     {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow Label",
+      "default": "ENGINEERED EXCELLENCE"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "PREMIUM CARE"
+    },
+    {
       "type": "color",
       "id": "bg_color",
       "label": "Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Accent Color",
+      "default": "#FF2B2B"
     }
   ],
   "presets": [
