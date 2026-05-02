@@ -10,24 +10,27 @@
     max-width: 1320px;
     margin: 0 auto;
     padding: 0 24px;
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-
-  @media screen and (max-width: 1024px) {
-    .bestsellers-container {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
 
   .bestsellers-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
     gap: 16px;
     text-align: left;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bestsellers-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
   }
 
   .bestsellers__eyebrow {
