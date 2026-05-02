@@ -193,44 +193,123 @@
   gap: 16px;
 }
 
-.d2c-tag-label {
-  font-size: 12px;
-  color: var(--d2c-secondary);
+.d2c-brand-award-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: -4px;
+}
+
+.d2c-brand-text {
+  font-family: var(--d2c-heading-font);
+  font-size: 32px;
+  font-weight: 800;
+  color: {{ section.settings.brand_color | default: '#000000' }};
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.d2c-award-badge {
+  background-color: {{ section.settings.award_bg | default: '#FF1E43' }};
+  color: {{ section.settings.award_color | default: '#FFFFFF' }};
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .d2c-product-title {
-  font-size: 26px;
+  font-size: 42px;
   font-weight: 700;
   font-family: var(--d2c-heading-font);
-  color: var(--d2c-primary);
-  line-height: 1.2;
+  color: {{ section.settings.title_color | default: '#B8B8B8' }};
+  line-height: 1.15;
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
 @media screen and (max-width: 767px) {
   .d2c-product-title {
-    font-size: 22px;
+    font-size: 32px;
+  }
+  .d2c-brand-text {
+    font-size: 26px;
   }
 }
 
-.d2c-rating-row {
+.d2c-rating-badge-row {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 14px;
+  margin-top: -4px;
+  margin-bottom: -4px;
+}
+
+.d2c-rating-pill {
+  background-color: {{ section.settings.rating_pill_bg | default: '#2ECC71' }};
+  color: #111111;
+  font-weight: 700;
   font-size: 13px;
-  color: #666666;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.d2c-stars {
-  color: #FFB400;
-  font-size: 15px;
+.d2c-rating-reviews {
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
 }
 
-.d2c-trust-msg {
-  font-weight: 400;
+.d2c-subtitle-text {
+  font-size: 17px;
+  color: #1A1A1A;
+  line-height: 1.45;
+  font-weight: 500;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.d2c-pdp-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.d2c-pdp-badge-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F1F3F5;
+  color: #1A1A1A;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.d2c-pdp-badge-item:hover {
+  background: #E9ECEF;
+  transform: translateY(-1px);
+}
+
+.d2c-pdp-badge-emoji {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.d2c-pdp-badge-text {
+  line-height: 1;
 }
 
 /* KEY FEATURES LIST */
@@ -677,21 +756,64 @@
     <!-- RIGHT COLUMN: Product information -->
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
-      <div class="d2c-tag-label">
-        {%- if product.tags.size > 0 -%}
-          {{ product.tags | first }}
-        {%- else -%}
-          PREMIUM ITEM
+      <div class="d2c-brand-award-row">
+        <span class="d2c-brand-text">{{ section.settings.brand_text | default: "BFF" }}</span>
+        {%- if section.settings.award_text != blank -%}
+          <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}
       </div>
 
       <!-- Title -->
       <h1 class="d2c-product-title">{{ product.title }}</h1>
 
-      <!-- Rating / Trust Row -->
-      <div class="d2c-rating-row">
-        <span class="d2c-stars">★★★★★</span>
-        <span class="d2c-trust-msg">Highly rated dynamic choice</span>
+      <!-- Rating / Review Pill Row -->
+      <div class="d2c-rating-badge-row">
+        <span class="d2c-rating-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px; margin-top: -2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          {{ section.settings.rating_value | default: "4.9" }}
+        </span>
+        <span class="d2c-rating-reviews">({{ section.settings.rating_reviews | default: "201" }})</span>
+      </div>
+
+      <!-- Short Description / Subtitle -->
+      {%- if section.settings.subtitle_text != blank -%}
+        <div class="d2c-subtitle-text">{{ section.settings.subtitle_text }}</div>
+      {%- elsif product.description != blank -%}
+        <div class="d2c-subtitle-text">{{ product.description | strip_html | truncatewords: 25 }}</div>
+      {%- endif -%}
+
+      <!-- Feature Highlight Badges -->
+      <div class="d2c-pdp-badge-list">
+        {%- if section.settings.pill_1_text != blank -%}
+          <div class="d2c-pdp-badge-item">
+            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_1_emoji | default: "🔋" }}</span>
+            <span class="d2c-pdp-badge-text">{{ section.settings.pill_1_text }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.pill_2_text != blank -%}
+          <div class="d2c-pdp-badge-item">
+            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_2_emoji | default: "❄️" }}</span>
+            <span class="d2c-pdp-badge-text">{{ section.settings.pill_2_text }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.pill_3_text != blank -%}
+          <div class="d2c-pdp-badge-item">
+            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_3_emoji | default: "⌨️" }}</span>
+            <span class="d2c-pdp-badge-text">{{ section.settings.pill_3_text }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.pill_4_text != blank -%}
+          <div class="d2c-pdp-badge-item">
+            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_4_emoji | default: "✥" }}</span>
+            <span class="d2c-pdp-badge-text">{{ section.settings.pill_4_text }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.pill_5_text != blank -%}
+          <div class="d2c-pdp-badge-item">
+            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_5_emoji | default: "🛡️" }}</span>
+            <span class="d2c-pdp-badge-text">{{ section.settings.pill_5_text }}</span>
+          </div>
+        {%- endif -%}
       </div>
 
       <!-- Pricing -->
@@ -707,31 +829,6 @@
         {%- else -%}
           <span class="d2c-price-compare" id="D2CPriceCompare" style="display: none;"></span>
           <span class="d2c-discount-badge" id="D2CDiscountBadge" style="display: none;"></span>
-        {%- endif -%}
-      </div>
-
-      <!-- Key Features List -->
-      <div class="d2c-features-list">
-        {%- if product.metafields.custom.highlights.value != blank -%}
-          {%- for highlight in product.metafields.custom.highlights.value -%}
-            <div class="d2c-feature-item">
-              <svg class="d2c-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span class="d2c-feature-text">{{ highlight }}</span>
-            </div>
-          {%- endfor -%}
-        {%- else -%}
-          <div class="d2c-feature-item">
-            <svg class="d2c-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span class="d2c-feature-text">Superior material care formula</span>
-          </div>
-          <div class="d2c-feature-item">
-            <svg class="d2c-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span class="d2c-feature-text">Engineered for ultimate sneaker maintenance</span>
-          </div>
-          <div class="d2c-feature-item">
-            <svg class="d2c-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span class="d2c-feature-text">Certified & trusted by shoe lovers worldwide</span>
-          </div>
         {%- endif -%}
       </div>
 
@@ -1106,6 +1203,134 @@ function togglePersonalizationInput() {
       "type": "product",
       "id": "product",
       "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Product Badges & Header"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Text",
+      "default": "BFF"
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "award_text",
+      "label": "Award/Tag Text",
+      "default": "AWARD WINNER"
+    },
+    {
+      "type": "color",
+      "id": "award_bg",
+      "label": "Award/Tag Background Color",
+      "default": "#FF1E43"
+    },
+    {
+      "type": "color",
+      "id": "award_color",
+      "label": "Award/Tag Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#B8B8B8"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating Value",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_reviews",
+      "label": "Number of Reviews",
+      "default": "201"
+    },
+    {
+      "type": "color",
+      "id": "rating_pill_bg",
+      "label": "Rating Pill Background Color",
+      "default": "#2ECC71"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_text",
+      "label": "Short Description / Subtitle",
+      "default": "Your go-to, on-the-go fan—cool, bold and always by your side."
+    },
+    {
+      "type": "header",
+      "content": "Highlight Pills"
+    },
+    {
+      "type": "text",
+      "id": "pill_1_emoji",
+      "label": "Pill 1 Emoji",
+      "default": "🔋"
+    },
+    {
+      "type": "text",
+      "id": "pill_1_text",
+      "label": "Pill 1 Text",
+      "default": "10 hour Battery Life"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_emoji",
+      "label": "Pill 2 Emoji",
+      "default": "❄️"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_text",
+      "label": "Pill 2 Text",
+      "default": "IceTouch™ for Instant Cooling"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_emoji",
+      "label": "Pill 3 Emoji",
+      "default": "⌨️"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_text",
+      "label": "Pill 3 Text",
+      "default": "180° Folding Head"
+    },
+    {
+      "type": "text",
+      "id": "pill_4_emoji",
+      "label": "Pill 4 Emoji",
+      "default": "✥"
+    },
+    {
+      "type": "text",
+      "id": "pill_4_text",
+      "label": "Pill 4 Text",
+      "default": "13000 RPM, BLDC Motor"
+    },
+    {
+      "type": "text",
+      "id": "pill_5_emoji",
+      "label": "Pill 5 Emoji",
+      "default": "🛡️"
+    },
+    {
+      "type": "text",
+      "id": "pill_5_text",
+      "label": "Pill 5 Text",
+      "default": "1 Year Warranty"
     }
   ],
   "presets": [
