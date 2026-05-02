@@ -1,0 +1,197 @@
+{%- style -%}
+  .faq {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #ffffff;
+    padding: clamp(100px, 12vw, 160px) 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .faq {
+      padding: clamp(50px, 8vw, 60px) 0;
+    }
+  }
+
+  .faq__container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .faq__header {
+    text-align: center;
+  }
+
+  .faq__heading {
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 800;
+    color: #000;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .faq__items {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+  }
+
+  .faq__trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    color: #000;
+    transition: color 0.2s;
+  }
+
+  .faq__trigger:hover {
+    color: #FF2B2B;
+  }
+
+  .faq__question {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .faq__icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq__item.active .faq__icon {
+    transform: rotate(45deg);
+    color: #FF2B2B;
+  }
+
+  .faq__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq__item.active .faq__panel {
+    max-height: 600px; /* larger arbitrary height to support larger text */
+  }
+
+  .faq__answer {
+    padding-bottom: 28px;
+    font-size: clamp(14px, 1.6vw, 16px);
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+  }
+{%- endstyle -%}
+
+<div class="faq">
+  <div class="faq__container">
+    <div class="faq__header">
+      <h2 class="faq__heading">{{ section.settings.heading | default: 'Things people often wonder' }}</h2>
+    </div>
+
+    <div class="faq__items">
+      {%- for block in section.blocks -%}
+        <div class="faq__item" {{ block.shopify_attributes }}>
+          <button type="button" class="faq__trigger" onclick="toggleFaqItem(this)">
+            <h3 class="faq__question">{{ block.settings.question | default: 'Does this work on all fabrics?' }}</h3>
+            <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq__panel">
+            <p class="faq__answer">{{ block.settings.answer | default: 'Yes! Our advanced pH-balanced foam formulation works on all fabrics including leather, premium suede, nubuck, canvas, and knit without altering the texture.' }}</p>
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Fallbacks -->
+        {%- for i in (1..4) -%}
+          <div class="faq__item">
+            <button type="button" class="faq__trigger" onclick="toggleFaqItem(this)">
+              <h3 class="faq__question">
+                {%- if i == 1 -%}Does it cause color bleeding on white mesh?{%- elsif i == 2 -%}Is it safe for delicate suede materials?{%- elsif i == 3 -%}How many shoes can one kit clean?{%- else -%}What makes Hague Protect unique?{%- endif -%}
+              </h3>
+              <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq__panel">
+              <p class="faq__answer">
+                {%- if i == 1 -%}Absolutely not. Our special chemical formulation lifts grease and stains out of mesh directly without bleeding color.{%- elsif i == 2 -%}Yes, but use the restore brush gently to maintain texture.{%- elsif i == 3 -%}One complete bottle allows over 65 full cleaning applications.{%- else -%}It brings cinematic high-contrast brightness to sneakers using our elite, premium ingredients.{%- endif -%}
+              </p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleFaqItem(btn) {
+    const item = btn.parentElement;
+    const isActive = item.classList.contains('active');
+    
+    // Close other items optionally
+    const items = item.parentElement.querySelectorAll('.faq__item');
+    items.forEach(i => i.classList.remove('active'));
+    
+    if (!isActive) {
+      item.classList.add('active');
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Things people often wonder"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Does this work on all fabrics?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Yes! Our advanced pH-balanced foam formulation works on all fabrics including leather, premium suede, nubuck, canvas, and knit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        { "type": "faq_item" },
+        { "type": "faq_item" },
+        { "type": "faq_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

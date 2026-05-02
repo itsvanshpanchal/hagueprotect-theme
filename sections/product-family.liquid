@@ -1,0 +1,310 @@
+{%- style -%}
+  .product-family-section {
+    background-color: {{ section.settings.bg_color | default: '#fafafa' }};
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .product-family-header {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .product-family__eyebrow {
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .product-family__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .product-family__grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .family-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: var(--transition-smooth);
+  }
+
+  .family-card:hover {
+    border-color: transparent;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+  }
+
+  .family-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .family-card__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .family-card__desc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .family-card__specs {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .family-card__spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+
+  .family-card__spec-label {
+    color: var(--color-text-light);
+  }
+
+  .family-card__spec-val {
+    color: var(--color-text-main);
+    font-weight: 600;
+  }
+
+  .family-card__actions {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .family-card__price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-main);
+  }
+{%- endstyle -%}
+
+<section class="product-family-section section-spacing" aria-label="Our Product Variations">
+  <div class="container">
+    <div class="product-family-header animate-fade-in">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="product-family__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | default: 'Elite Care Variations' }}</h2>
+    </div>
+
+    <div class="product-family__grid">
+      {%- for block in section.blocks -%}
+        <div class="family-card animate-fade-in" {{ block.shopify_attributes }}>
+          <div class="family-card__content">
+            <h3 class="family-card__title">
+              {%- if block.settings.title contains '|' -%}
+                {%- assign parts = block.settings.title | split: '|' -%}
+                <div class="product-title-premium">
+                  <span class="product-title-main">{{ parts[0] | strip }}</span>
+                  <span class="product-title-sub">{{ parts[1] | strip }}</span>
+                </div>
+              {%- else -%}
+                <div class="product-title-premium">
+                  <span class="product-title-main">{{ block.settings.title | default: 'Essential Pack' }}</span>
+                </div>
+              {%- endif -%}
+            </h3>
+            <p class="family-card__desc">{{ block.settings.desc | default: 'Perfect starter kit for everyday cleaning of canvas and standard sneakers.' }}</p>
+          </div>
+
+          <div class="family-card__specs">
+            <div class="family-card__spec-item">
+              <span class="family-card__spec-label">Formula Volume:</span>
+              <span class="family-card__spec-val">{{ block.settings.spec_vol | default: '120ml' }}</span>
+            </div>
+            <div class="family-card__spec-item">
+              <span class="family-card__spec-label">Ideal For:</span>
+              <span class="family-card__spec-val">{{ block.settings.spec_use | default: 'Standard Shoes' }}</span>
+            </div>
+            <div class="family-card__spec-item">
+              <span class="family-card__spec-label">Lifespan:</span>
+              <span class="family-card__spec-val">{{ block.settings.spec_life | default: 'Up to 50 cleans' }}</span>
+            </div>
+          </div>
+
+          <div class="family-card__actions">
+            <span class="family-card__price">{{ block.settings.price | default: '$25.00' }}</span>
+            <a href="{{ block.settings.btn_link | default: '/collections/all' }}" class="btn btn-primary">
+              {{ block.settings.btn_text | default: 'View Kit' }}
+            </a>
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Fallbacks for the customizer -->
+        {%- for i in (1..3) -%}
+          <div class="family-card animate-fade-in">
+            <div class="family-card__content">
+              <h3 class="family-card__title">
+                {%- if i == 1 -%}Starter Protection Kit{%- elsif i == 2 -%}Advanced Deep Kit{%- else -%}Master Care Bundle{%- endif -%}
+              </h3>
+              <p class="family-card__desc">
+                {%- if i == 1 -%}
+                  Perfect introduction to professional sneaker care and cleaning.
+                {%- elsif i == 2 -%}
+                  Optimized for premium leathers, suedes, and restoration needs.
+                {%- else -%}
+                  Complete preservation system for elite collectors.
+                {%- endif -%}
+              </p>
+            </div>
+
+            <div class="family-card__specs">
+              <div class="family-card__spec-item">
+                <span class="family-card__spec-label">Formula Volume:</span>
+                <span class="family-card__spec-val">
+                  {%- if i == 1 -%}120ml{%- elsif i == 2 -%}250ml{%- else -%}500ml{%- endif -%}
+                </span>
+              </div>
+              <div class="family-card__spec-item">
+                <span class="family-card__spec-label">Ideal For:</span>
+                <span class="family-card__spec-val">
+                  {%- if i == 1 -%}All Materials{%- elsif i == 2 -%}Suede & Nubuck{%- else -%}Complete Collections{%- endif -%}
+                </span>
+              </div>
+              <div class="family-card__spec-item">
+                <span class="family-card__spec-label">Lifespan:</span>
+                <span class="family-card__spec-val">
+                  {%- if i == 1 -%}Up to 40 cleans{%- elsif i == 2 -%}Up to 100 cleans{%- else -%}Over 250 cleans{%- endif -%}
+                </span>
+              </div>
+            </div>
+
+            <div class="family-card__actions">
+              <span class="family-card__price">
+                {%- if i == 1 -%}$29.00{%- elsif i == 2 -%}$45.00{%- else -%}$85.00{%- endif -%}
+              </span>
+              <a href="/products/elite-kit" class="btn btn-primary" style="text-decoration: none;">View Details</a>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Family",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Elite Custom Options"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elite Care Variations"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fafafa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "variant_showcase",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Variation Title",
+          "default": "Essential Pack"
+        },
+        {
+          "type": "textarea",
+          "id": "desc",
+          "label": "Description",
+          "default": "Perfect starter kit for everyday cleaning of canvas and standard sneakers."
+        },
+        {
+          "type": "text",
+          "id": "spec_vol",
+          "label": "Specification Vol",
+          "default": "120ml"
+        },
+        {
+          "type": "text",
+          "id": "spec_use",
+          "label": "Specification Use",
+          "default": "Standard Shoes"
+        },
+        {
+          "type": "text",
+          "id": "spec_life",
+          "label": "Specification Life",
+          "default": "Up to 50 cleans"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Text",
+          "default": "$25.00"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "View Kit"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Family",
+      "blocks": [
+        { "type": "variant_showcase", "settings": { "title": "Starter Kit", "price": "$29.00" } },
+        { "type": "variant_showcase", "settings": { "title": "Advanced Kit", "price": "$45.00" } },
+        { "type": "variant_showcase", "settings": { "title": "Master Bundle", "price": "$85.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

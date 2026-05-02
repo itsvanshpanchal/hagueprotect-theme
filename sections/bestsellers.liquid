@@ -1,0 +1,560 @@
+{%- style -%}
+  .bestsellers-section {
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: clamp(100px, 12vw, 160px) 0;
+  }
+
+  .bestsellers-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    gap: 32px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bestsellers-section {
+      padding: clamp(50px, 8vw, 60px) 0;
+    }
+    .bestsellers-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+  }
+
+  .bestsellers__heading-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bestsellers__eyebrow {
+    color: var(--color-primary);
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .bestsellers__heading {
+    margin: 0;
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .bestsellers__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .bestsellers__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .bestsellers__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .bestsellers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Product Card Aesthetic */
+  .prod-card {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transition: var(--transition-smooth);
+    overflow: hidden;
+  }
+
+  .prod-card:hover {
+    border-color: transparent;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+  }
+
+  .prod-card__badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-xl);
+    z-index: 2;
+    letter-spacing: 0.05em;
+  }
+
+  .prod-card__image-container {
+    background-color: #fcfcfc;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .prod-card__image-wrapper {
+    width: 100%;
+    height: 100%;
+    transition: var(--transition-smooth);
+  }
+
+  .prod-card:hover .prod-card__image-wrapper {
+    transform: scale(1.05);
+  }
+
+  .prod-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .prod-card__video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .prod-card__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .prod-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+  }
+
+  .prod-card__title {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .prod-card__price-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .prod-card__price {
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .prod-card__compare-price {
+    font-size: clamp(12px, 1.5vw, 14px);
+    text-decoration: line-through;
+    color: var(--color-text-light);
+  }
+
+  .prod-card__btn {
+    margin-top: auto;
+    font-size: clamp(13px, 1.5vw, 15px);
+    padding: 14px 24px;
+    border-radius: var(--border-radius-xl);
+    border: none;
+    font-weight: 600;
+    background-color: var(--color-text-main);
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    text-align: center;
+  }
+
+  .prod-card__btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+{%- endstyle -%}
+
+<section class="bestsellers-section section-spacing" aria-label="Bestselling products">
+  <div class="container">
+    <div class="bestsellers-header">
+      <div class="bestsellers__heading-group">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="bestsellers__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="h2 bestsellers__heading">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
+      </div>
+      {%- assign collection_url = section.settings.view_all_link -%}
+      {%- if collection_url == blank and section.settings.collection != blank -%}
+        {%- assign collection_url = collections[section.settings.collection].url -%}
+      {%- endif -%}
+      {%- if collection_url == blank -%}
+        {%- assign collection_url = '/collections/all' -%}
+      {%- endif -%}
+      <a href="{{ collection_url }}" class="btn btn-secondary">
+        {{ section.settings.view_all_text | default: 'View All' }}
+      </a>
+    </div>
+
+    <div class="bestsellers__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'product_block' -%}
+              {%- assign product = all_products[block.settings.product] -%}
+              {%- if product != blank -%}
+                <div class="prod-card" {{ block.shopify_attributes }}>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="prod-card__badge">Sale</span>
+                  {%- endif -%}
+
+                  <div class="prod-card__image-container">
+                    {%- if block.settings.video != blank -%}
+                      <div class="prod-card__video-wrapper">
+                        {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true, class: 'prod-card__video' }}
+                      </div>
+                    {%- else -%}
+                      <a href="{{ product.url }}" class="prod-card__image-wrapper">
+                        {%- if block.settings.image != blank -%}
+                          <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="prod-card__image" loading="lazy">
+                        {%- elsif product.featured_image != blank -%}
+                          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="prod-card__image" loading="lazy">
+                        {%- else -%}
+                          {{ 'product-1' | placeholder_svg_tag: 'prod-card__image' }}
+                        {%- endif -%}
+                      </a>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="prod-card__info">
+                    <a href="{{ product.url }}">
+                      <h3 class="prod-card__title">
+                        {%- if product.title contains '|' -%}
+                          {%- assign parts = product.title | split: '|' -%}
+                          <div class="product-title-premium">
+                            <span class="product-title-main">{{ parts[0] | strip }}</span>
+                            <span class="product-title-sub">{{ parts[1] | strip }}</span>
+                          </div>
+                        {%- else -%}
+                          <div class="product-title-premium">
+                            <span class="product-title-main">{{ product.title }}</span>
+                          </div>
+                        {%- endif -%}
+                      </h3>
+                    </a>
+                    <div class="prod-card__price-wrapper">
+                      <span class="prod-card__price">{{ product.price | money }}</span>
+                      {%- if product.compare_at_price > product.price -%}
+                        <span class="prod-card__compare-price">{{ product.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                    <form action="/cart/add" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <button type="submit" class="prod-card__btn btn-block">Add to Cart</button>
+                    </form>
+                  </div>
+                </div>
+              {%- endif -%}
+
+            {%- when 'custom_card' -%}
+              <div class="prod-card" {{ block.shopify_attributes }}>
+                {%- if block.settings.compare_at_price != blank -%}
+                  <span class="prod-card__badge">Best Seller</span>
+                {%- endif -%}
+
+                <div class="prod-card__image-container">
+                  {%- if block.settings.video != blank -%}
+                    <div class="prod-card__video-wrapper">
+                      {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true, class: 'prod-card__video' }}
+                    </div>
+                  {%- elsif block.settings.image != blank -%}
+                    <a href="{{ block.settings.url | default: '#' }}" class="prod-card__image-wrapper">
+                      <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" class="prod-card__image" loading="lazy">
+                    </a>
+                  {%- else -%}
+                    {{ 'product-2' | placeholder_svg_tag: 'prod-card__image' }}
+                  {%- endif -%}
+                </div>
+
+                <div class="prod-card__info">
+                  <a href="{{ block.settings.url | default: '#' }}">
+                    <h3 class="prod-card__title">
+                      <div class="product-title-premium">
+                        <span class="product-title-main">{{ block.settings.title | default: 'Custom Product' }}</span>
+                        {%- if block.settings.sub_title != blank -%}
+                          <span class="product-title-sub">{{ block.settings.sub_title }}</span>
+                        {%- endif -%}
+                      </div>
+                    </h3>
+                  </a>
+                  <div class="prod-card__price-wrapper">
+                    <span class="prod-card__price">{{ block.settings.price | default: '$0.00' }}</span>
+                    {%- if block.settings.compare_at_price != blank -%}
+                      <span class="prod-card__compare-price">{{ block.settings.compare_at_price }}</span>
+                    {%- endif -%}
+                  </div>
+                  <a href="{{ block.settings.url | default: '#' }}" class="prod-card__btn btn-block" style="text-decoration: none;">
+                    {{ block.settings.button_text | default: 'Add to Cart' }}
+                  </a>
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            <div class="prod-card">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="prod-card__badge">Sale</span>
+              {%- endif -%}
+
+              <div class="prod-card__image-container">
+                <a href="{{ product.url }}" class="prod-card__image-wrapper">
+                  {%- if product.featured_image != blank -%}
+                    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="prod-card__image" loading="lazy">
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'prod-card__image' }}
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="prod-card__info">
+                <a href="{{ product.url }}">
+                  <h3 class="prod-card__title">
+                    {%- if product.title contains '|' -%}
+                      {%- assign parts = product.title | split: '|' -%}
+                      <div class="product-title-premium">
+                        <span class="product-title-main">{{ parts[0] | strip }}</span>
+                        <span class="product-title-sub">{{ parts[1] | strip }}</span>
+                      </div>
+                    {%- else -%}
+                      <div class="product-title-premium">
+                        <span class="product-title-main">{{ product.title }}</span>
+                      </div>
+                    {%- endif -%}
+                  </h3>
+                </a>
+                <div class="prod-card__price-wrapper">
+                  <span class="prod-card__price">{{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="prod-card__compare-price">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+                <form action="/cart/add" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                  <button type="submit" class="prod-card__btn btn-block">Add to Cart</button>
+                </form>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Fallback -->
+          {%- for i in (1..4) -%}
+            <div class="prod-card animate-fade-in">
+              {%- if i == 1 or i == 3 -%}
+                <span class="prod-card__badge">Best Seller</span>
+              {%- else -%}
+                <span class="prod-card__badge">New</span>
+              {%- endif -%}
+
+              <a href="/products/elite-kit" class="prod-card__image-container" style="display: flex; text-decoration: none; width: 100%; height: 100%;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" class="prod-card__image">
+                  <rect width="300" height="300" fill="#fcfcfc"/>
+                  <circle cx="150" cy="150" r="100" fill="#ffffff" filter="drop-shadow(0 12px 32px rgba(0,0,0,0.02))"/>
+                  <rect x="120" y="80" width="60" height="130" rx="12" fill="#ffffff" stroke="#eeeeee" stroke-width="2"/>
+                  <rect x="135" y="60" width="30" height="20" fill="#111111" rx="4"/>
+                  <rect x="130" y="110" width="40" height="4" fill="#FF2B2B"/>
+                  <text x="150" y="240" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#111111" opacity="0.3" text-anchor="middle" letter-spacing="1">HAGUEPROTECT</text>
+                </svg>
+              </a>
+
+              <div class="prod-card__info">
+                <a href="/products/elite-kit" style="text-decoration: none;">
+                  <h3 class="prod-card__title">
+                    <div class="product-title-premium">
+                      {%- if i == 1 -%}
+                        <span class="product-title-main">Elite Kit</span>
+                        <span class="product-title-sub">The Premium Cleaner</span>
+                      {%- elsif i == 2 -%}
+                        <span class="product-title-main">Shield Guard</span>
+                        <span class="product-title-sub">Hydrophobic Spray</span>
+                      {%- elsif i == 3 -%}
+                        <span class="product-title-main">Restore Brush</span>
+                        <span class="product-title-sub">Genuine Suede Care</span>
+                      {%- else -%}
+                        <span class="product-title-main">Master Bundle</span>
+                        <span class="product-title-sub">Complete Collection</span>
+                      {%- endif -%}
+                    </div>
+                  </h3>
+                </a>
+                <div class="prod-card__price-wrapper">
+                  <span class="prod-card__price">
+                    {%- if i == 1 -%}$45.00{%- elsif i == 2 -%}$28.00{%- elsif i == 3 -%}$18.00{%- else -%}$65.00{%- endif -%}
+                  </span>
+                  {%- if i == 1 -%}
+                    <span class="prod-card__compare-price">$55.00</span>
+                  {%- endif -%}
+                </div>
+                <a href="/products/elite-kit" class="prod-card__btn btn-block" style="text-decoration: none;">Add to Cart</a>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestsellers Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestselling Sneaker Care"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (Used if no custom blocks)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Text",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Store Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Product Image (Optional)"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Custom Product Video (Optional)"
+        }
+      ]
+    },
+    {
+      "type": "custom_card",
+      "name": "Custom Product Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Photo"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload Video"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Elite Sneaker Shield"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Subtitle",
+          "default": "Advanced Formula"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$35.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare Price",
+          "default": "$45.00"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Add to Cart"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestsellers Section"
+    }
+  ]
+}
+{% endschema %}

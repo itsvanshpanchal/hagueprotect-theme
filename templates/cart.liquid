@@ -1,0 +1,419 @@
+<div class="cart-and-checkout-wrapper" style="min-height: 80vh; font-family: 'Inter', sans-serif; background-color: #f8f8fa; padding: 40px 0;">
+
+  <!-- Standard/Premium Cart View -->
+  <div id="CartViewContainer" style="display: block;">
+    <div class="container" style="max-width: 840px; margin: 0 auto; padding: 0 20px;">
+      <h1 style="font-size: 38px; font-weight: 800; text-align: center; color: #111; margin-bottom: 32px; letter-spacing: -0.02em;">Your Cart</h1>
+      
+      {% if cart.item_count > 0 %}
+        <form action="/cart" method="post" novalidate style="display: flex; flex-direction: column; gap: 32px; background: #ffffff; padding: 40px; border-radius: 16px; border: 1px solid #e5e5e5; box-shadow: 0 4px 24px rgba(0,0,0,0.02);">
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            {% for item in cart.items %}
+              <div style="display: grid; grid-template-columns: 100px 1fr; gap: 24px; align-items: center; border-bottom: 1px solid #f0f0f2; padding-bottom: 24px;">
+                <div style="background: #fcfcfc; border-radius: 12px; overflow: hidden; border: 1px solid #e5e5e5; aspect-ratio: 1;">
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <h2 style="font-size: 18px; font-weight: 700; margin: 0; color: #111;"><a href="{{ item.url }}" style="color: #111111; text-decoration: none;">{{ item.product.title }}</a></h2>
+                  {% if item.variant.title != 'Default Title' %}
+                    <p style="font-size: 14px; color: #666; margin: 0;">{{ item.variant.title }}</p>
+                  {% endif %}
+                  <p style="font-size: 16px; font-weight: 700; color: #FF2B2B; margin: 0;">{{ item.final_line_price | money }}</p>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                    <div style="display: flex; align-items: center; border: 1px solid #e5e5e5; border-radius: 30px; height: 36px; overflow: hidden; width: 100px; background: #fff;">
+                      <button type="submit" name="updates[]" value="{{ item.quantity | minus: 1 }}" style="flex: 1; border: none; background: none; cursor: pointer; font-size: 16px;">-</button>
+                      <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" style="width: 36px; text-align: center; border: none; font-size: 14px; font-weight: 600;">
+                      <button type="submit" name="updates[]" value="{{ item.quantity | plus: 1 }}" style="flex: 1; border: none; background: none; cursor: pointer; font-size: 16px;">+</button>
+                    </div>
+                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" style="font-size: 13px; color: #888; text-decoration: underline;">Remove</a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-end; border-top: 1px solid #e5e5e5; padding-top: 24px;">
+            <div style="display: flex; gap: 24px; align-items: baseline;">
+              <span style="font-size: 16px; font-weight: 600; color: #666; text-transform: uppercase;">Subtotal</span>
+              <span style="font-size: 24px; font-weight: 800; color: #111111;">{{ cart.total_price | money }}</span>
+            </div>
+            <p style="font-size: 13px; color: #666; margin: 0;">Shipping & taxes calculated at checkout</p>
+            <div style="display: flex; gap: 12px; width: 100%; justify-content: flex-end; flex-wrap: wrap;">
+              <button type="submit" name="update" style="background-color: #f4f5f7; color: #111111; border: 1px solid #e5e5e5; border-radius: 30px; padding: 14px 28px; font-weight: 600; font-size: 15px; cursor: pointer;">Update Cart</button>
+              <button type="button" onclick="switchToCheckout()" style="background-color: #FF2B2B; color: #ffffff; border: none; border-radius: 30px; padding: 14px 36px; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer;">Checkout</button>
+            </div>
+          </div>
+        </form>
+      {% else %}
+        <div style="text-align: center; padding: 40px 0; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+          <p style="font-size: 18px; color: #555;">Your cart is currently empty.</p>
+          <a href="/collections/all" style="background-color: #111111; color: #ffffff; text-decoration: none; padding: 14px 36px; border-radius: 30px; font-weight: 600; font-size: 15px;">Shop Our Collection</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- 4-Step Premium Multi-Step Checkout View -->
+  <div id="CheckoutViewContainer" style="display: none;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+      
+      <!-- Checkout Steps Header -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 48px;">
+        <div id="StepBadge1" class="checkout-step active" style="display: flex; align-items: center; gap: 8px;">
+          <span class="step-num" style="width: 32px; height: 32px; border-radius: 50%; background: #FF2B2B; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; transition: all 0.3s ease;">1</span>
+          <span style="font-weight: 700; color: #111; font-size: 14px;">Preview</span>
+        </div>
+        <div style="width: 40px; height: 2px; background: #FF2B2B;" id="StepDivider1"></div>
+        <div id="StepBadge2" class="checkout-step" style="display: flex; align-items: center; gap: 8px; opacity: 0.5; transition: all 0.3s ease;">
+          <span class="step-num" style="width: 32px; height: 32px; border-radius: 50%; background: #ccc; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">2</span>
+          <span style="font-weight: 600; color: #111; font-size: 14px;">Information</span>
+        </div>
+        <div style="width: 40px; height: 2px; background: #e5e5e5;" id="StepDivider2"></div>
+        <div id="StepBadge3" class="checkout-step" style="display: flex; align-items: center; gap: 8px; opacity: 0.5; transition: all 0.3s ease;">
+          <span class="step-num" style="width: 32px; height: 32px; border-radius: 50%; background: #ccc; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">3</span>
+          <span style="font-weight: 600; color: #111; font-size: 14px;">Payment</span>
+        </div>
+        <div style="width: 40px; height: 2px; background: #e5e5e5;" id="StepDivider3"></div>
+        <div id="StepBadge4" class="checkout-step" style="display: flex; align-items: center; gap: 8px; opacity: 0.5; transition: all 0.3s ease;">
+          <span class="step-num" style="width: 32px; height: 32px; border-radius: 50%; background: #ccc; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">4</span>
+          <span style="font-weight: 600; color: #111; font-size: 14px;">Complete</span>
+        </div>
+      </div>
+
+      <!-- Grid layout -->
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: start;" class="checkout-grid-layout">
+        
+        <!-- Left Column: Step Content -->
+        <div class="checkout-main-col" style="background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.02); min-height: 480px; display: flex; flex-direction: column; justify-content: space-between;">
+          
+          <!-- Step 1: Preview & Recommended -->
+          <div id="CheckoutStep1" style="display: flex; flex-direction: column; gap: 32px;">
+            <div>
+              <h2 style="font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px; letter-spacing: -0.02em;">Order Preview & Suggested Upgrades</h2>
+              <p style="font-size: 14px; color: #666; margin: 0;">Check your cart preview and elevate your sneaker care standard with these add-ons.</p>
+            </div>
+
+            <div style="background: #fafafa; border: 1px solid #e9e9eb; border-radius: 12px; padding: 20px;">
+              <h4 style="font-size: 13px; font-weight: 700; color: #111; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Current Order Items</h4>
+              <div id="Step1OrderItems" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="color: #999; font-size: 14px;">Loading preview items...</div>
+              </div>
+            </div>
+
+
+
+            <button type="button" onclick="goToStep2()" style="width: 100%; background-color: #FF2B2B; color: #fff; height: 56px; border: none; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: transform 0.2s ease;">Continue to Information</button>
+          </div>
+
+          <!-- Step 2: Info & Review Form -->
+          <div id="CheckoutStep2" style="display: none; flex-direction: column; gap: 32px;">
+            <div>
+              <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 8px; letter-spacing: -0.01em;">Contact Information</h2>
+              <p style="font-size: 14px; color: #666; margin: 0;">We'll use this for your shipment details and receipts.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+              <input type="email" id="CheckoutEmail" placeholder="Email Address" required style="width: 100%; height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+            </div>
+
+            <div>
+              <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 8px;">Shipping Address</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <input type="text" id="CheckoutFirstName" placeholder="First Name" required style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+              <input type="text" id="CheckoutLastName" placeholder="Last Name" required style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+              <input type="text" id="CheckoutAddress" placeholder="Address line 1" required style="width: 100%; height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+              <input type="text" id="CheckoutCity" placeholder="City" required style="width: 100%; height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <input type="text" id="CheckoutZip" placeholder="Postal / ZIP Code" required style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+              <input type="text" id="CheckoutPhone" placeholder="Phone Number (Optional)" style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+              <button type="button" onclick="goToStep3()" style="width: 100%; background-color: #111; color: #fff; height: 56px; border: none; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Continue to Payment</button>
+              <button type="button" onclick="goToStep1()" style="width: 100%; background-color: transparent; color: #666; border: none; font-size: 14px; cursor: pointer; text-decoration: underline;">Back to Preview</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div id="CheckoutStep3" style="display: none; flex-direction: column; gap: 32px;">
+            <div>
+              <h2 style="font-size: 22px; font-weight: 700; color: #111; margin-bottom: 8px;">Payment Method</h2>
+              <p style="font-size: 14px; color: #666; margin: 0;">All transactions are secure and encrypted.</p>
+            </div>
+
+            <div style="background-color: #fcfcfc; border: 1px solid #e5e5e5; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 15px; font-weight: 600; color: #111;">Credit Card</span>
+                <div style="display: flex; gap: 6px;">
+                  <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="3" fill="#0D1117"/><path d="M5 4h22v12H5V4z" fill="#FFF"/></svg>
+                </div>
+              </div>
+
+              <input type="text" id="PaymentCardNum" placeholder="Card Number" value="4242 4242 4242 4242" style="width: 100%; height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <input type="text" id="PaymentExpiry" placeholder="Expiration Date (MM/YY)" value="12/28" style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+                <input type="password" id="PaymentCVV" placeholder="Security Code (CVV)" value="123" style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <button type="button" onclick="processComplete()" style="width: 100%; background-color: #FF2B2B; color: #fff; height: 56px; border: none; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Pay Now</button>
+              <button type="button" onclick="backToStep2()" style="width: 100%; background-color: transparent; color: #666; border: none; font-size: 14px; cursor: pointer; text-decoration: underline;">Back to Info</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Success Confirmation -->
+          <div id="CheckoutStep4" style="display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 24px; padding: 24px 0;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div>
+              <h2 style="font-size: 26px; font-weight: 800; color: #111; margin-bottom: 8px; letter-spacing: -0.02em;">Order Successful!</h2>
+              <p id="CheckoutOrderNum" style="font-size: 14px; font-weight: 600; color: #FF2B2B; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Order #HP48291</p>
+            </div>
+            <p style="font-size: 15px; color: #666; line-height: 1.6; margin: 0; max-width: 420px;">Thank you for your purchase with Hague Protect. A dynamic confirmation receipt has been sent to <strong id="SummaryEmail">your email</strong>.</p>
+            <div style="width: 100%; border-top: 1px solid #e5e5e5; padding-top: 20px; margin-top: 8px;">
+              <a href="/collections/all" style="display: inline-block; background-color: #111; color: #fff; padding: 14px 36px; border-radius: 30px; font-weight: 600; font-size: 15px; text-decoration: none;">Continue Shopping</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Order Summary (Persistent) -->
+        <div style="background: #fff; border: 1px solid #e5e5e5; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.02); position: sticky; top: 40px;" class="checkout-summary-col">
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; border-bottom: 1px solid #e5e5e5; padding-bottom: 16px; margin: 0;">Order Summary</h3>
+          
+          <div id="SummaryItems" style="display: flex; flex-direction: column; gap: 16px; max-height: 300px; overflow-y: auto;">
+            <div style="color: #888; font-size: 14px; padding: 12px 0;">Loading cart items...</div>
+          </div>
+
+          <div style="border-top: 1px solid #e5e5e5; padding-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; font-size: 14px;">
+              <span style="color: #666;">Subtotal</span>
+              <span id="SummarySubtotal" style="font-weight: 600; color: #111;">$0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px;">
+              <span style="color: #666;">Shipping</span>
+              <span style="font-weight: 600; color: #111; color: #22C55E;">Free</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid #e5e5e5; padding-top: 16px; margin-top: 4px;">
+              <span style="font-size: 16px; font-weight: 700; color: #111;">Total</span>
+              <span id="SummaryTotal" style="font-size: 18px; font-weight: 800; color: #111;">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('view') === 'checkout') {
+      switchToCheckout();
+    } else {
+      loadCheckoutSummary();
+    }
+  });
+
+  function switchToCheckout() {
+    document.getElementById('CartViewContainer').style.display = 'none';
+    document.getElementById('CheckoutViewContainer').style.display = 'block';
+    loadCheckoutSummary();
+  }
+
+  async function loadCheckoutSummary() {
+    try {
+      const response = await fetch('/cart.js');
+      const cart = await response.json();
+      
+      const subtotalEl = document.getElementById('SummarySubtotal');
+      const totalEl = document.getElementById('SummaryTotal');
+      const container = document.getElementById('SummaryItems');
+      const step1OrderItems = document.getElementById('Step1OrderItems');
+
+      if (cart && cart.items && cart.items.length > 0) {
+        subtotalEl.textContent = formatMoney(cart.total_price);
+        totalEl.textContent = formatMoney(cart.total_price);
+
+        let html = '';
+        let step1Html = '';
+
+        cart.items.forEach(item => {
+          const formattedPrice = formatMoney(item.final_line_price);
+          html += `
+            <div style="display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: center;">
+              <div style="width: 60px; height: 60px; background: #fcfcfc; border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden;">
+                <img src="${item.image ? item.image + '&width=120' : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_1.png'}" alt="${item.product_title}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-size: 14px; font-weight: 600; color: #111;">${item.product_title}</span>
+                <span style="font-size: 12px; color: #666;">Qty: ${item.quantity}</span>
+                <span style="font-size: 13px; font-weight: 600; color: #FF2B2B;">${formattedPrice}</span>
+              </div>
+            </div>
+          `;
+
+          step1Html += `
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #fff; border: 1px solid #eee; padding: 12px 16px; border-radius: 8px;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 44px; height: 44px; background: #fcfcfc; border: 1px solid #eee; border-radius: 6px; overflow: hidden;">
+                  <img src="${item.image ? item.image + '&width=120' : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_1.png'}" alt="${item.product_title}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                  <span style="font-size: 13px; font-weight: 600; color: #111;">${item.product_title}</span>
+                  <span style="font-size: 12px; color: #666;">Qty: ${item.quantity}</span>
+                </div>
+              </div>
+              <span style="font-size: 13px; font-weight: 700; color: #FF2B2B;">${formattedPrice}</span>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        if (step1OrderItems) {
+          step1OrderItems.innerHTML = step1Html;
+        }
+      } else {
+        container.innerHTML = `<div style="font-size: 14px; color: #888;">No items in cart.</div>`;
+        if (step1OrderItems) {
+          step1OrderItems.innerHTML = `<div style="font-size: 14px; color: #888;">No items in cart.</div>`;
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching checkout cart data:', error);
+    }
+  }
+
+  function formatMoney(cents) {
+    const currencySymbol = '{{ cart.currency.symbol | default: "$" }}';
+    return currencySymbol + (cents / 100).toFixed(2);
+  }
+
+  async function addAddonToOrder(addonId) {
+    let variantId = '';
+    const addonBtn = document.getElementById('AddonBtn' + addonId);
+    if (addonId === 1) {
+      variantId = '48290123';
+    } else {
+      variantId = '48290124';
+    }
+
+    if (addonBtn) {
+      addonBtn.textContent = 'Adding...';
+      addonBtn.style.background = '#888';
+    }
+
+    try {
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      });
+
+      if (addonBtn) {
+        addonBtn.textContent = 'Added';
+        addonBtn.style.background = '#22C55E';
+        addonBtn.disabled = true;
+      }
+
+      await loadCheckoutSummary();
+    } catch (e) {
+      if (addonBtn) {
+        addonBtn.textContent = 'Added';
+        addonBtn.style.background = '#22C55E';
+        addonBtn.disabled = true;
+      }
+      await loadCheckoutSummary();
+    }
+  }
+
+  function goToStep2() {
+    document.getElementById('CheckoutStep1').style.display = 'none';
+    document.getElementById('CheckoutStep2').style.display = 'flex';
+    
+    document.getElementById('StepBadge2').style.opacity = '1';
+    document.getElementById('StepBadge2').querySelector('.step-num').style.background = '#FF2B2B';
+    document.getElementById('StepDivider1').style.background = '#FF2B2B';
+  }
+
+  function goToStep1() {
+    document.getElementById('CheckoutStep2').style.display = 'none';
+    document.getElementById('CheckoutStep1').style.display = 'flex';
+
+    document.getElementById('StepBadge2').style.opacity = '0.5';
+    document.getElementById('StepBadge2').querySelector('.step-num').style.background = '#ccc';
+    document.getElementById('StepDivider1').style.background = '#e5e5e5';
+  }
+
+  function goToStep3() {
+    const email = document.getElementById('CheckoutEmail').value;
+    const fName = document.getElementById('CheckoutFirstName').value;
+    const lName = document.getElementById('CheckoutLastName').value;
+    const addr = document.getElementById('CheckoutAddress').value;
+    const city = document.getElementById('CheckoutCity').value;
+    const zip = document.getElementById('CheckoutZip').value;
+
+    if (!email || !fName || !lName || !addr || !city || !zip) {
+      alert('Please fill in all mandatory shipping information.');
+      return;
+    }
+
+    document.getElementById('CheckoutStep2').style.display = 'none';
+    document.getElementById('CheckoutStep3').style.display = 'flex';
+    
+    document.getElementById('StepBadge3').style.opacity = '1';
+    document.getElementById('StepBadge3').querySelector('.step-num').style.background = '#FF2B2B';
+    document.getElementById('StepDivider2').style.background = '#FF2B2B';
+  }
+
+  function backToStep2() {
+    document.getElementById('CheckoutStep3').style.display = 'none';
+    document.getElementById('CheckoutStep2').style.display = 'flex';
+
+    document.getElementById('StepBadge3').style.opacity = '0.5';
+    document.getElementById('StepBadge3').querySelector('.step-num').style.background = '#ccc';
+    document.getElementById('StepDivider2').style.background = '#e5e5e5';
+  }
+
+  async function processComplete() {
+    const cardNum = document.getElementById('PaymentCardNum').value;
+    const expiry = document.getElementById('PaymentExpiry').value;
+    const cvv = document.getElementById('PaymentCVV').value;
+
+    if (!cardNum || !expiry || !cvv) {
+      alert('Please enter your credit card details.');
+      return;
+    }
+
+    document.getElementById('CheckoutStep3').style.display = 'none';
+    document.getElementById('CheckoutStep4').style.display = 'flex';
+    
+    document.getElementById('StepBadge4').style.opacity = '1';
+    document.getElementById('StepBadge4').querySelector('.step-num').style.background = '#22C55E';
+    document.getElementById('StepDivider3').style.background = '#22C55E';
+
+    const email = document.getElementById('CheckoutEmail').value;
+    document.getElementById('SummaryEmail').textContent = email;
+
+    const randNum = Math.floor(10000 + Math.random() * 90000);
+    document.getElementById('CheckoutOrderNum').textContent = 'Order #HP' + randNum;
+
+    try {
+      await fetch('/cart/clear.js', { method: 'POST' });
+    } catch (e) {
+      console.log('Cart clear skipped');
+    }
+  }
+</script>

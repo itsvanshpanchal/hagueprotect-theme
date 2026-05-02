@@ -1,0 +1,208 @@
+{%- style -%}
+  .feature-grid {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #ffffff;
+    padding: clamp(100px, 12vw, 160px) 0;
+  }
+
+  .feature-grid__container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .feature-grid__header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .feature-grid__eyebrow {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #FF2B2B;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .feature-grid__heading {
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 800;
+    color: #000;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .feature-grid__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .feature-grid {
+      padding: clamp(50px, 8vw, 60px) 0;
+    }
+    .feature-grid__items {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .feature-grid__items {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-grid__card {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+  }
+
+  .feature-grid__card:hover {
+    transform: translateY(-4px);
+    border-color: #000000;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.05);
+  }
+
+  .feature-grid__card-visual {
+    width: 64px;
+    height: 64px;
+    background-color: #f6f6f6;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FF2B2B;
+    transition: background-color 0.3s;
+  }
+
+  .feature-grid__card:hover .feature-grid__card-visual {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .feature-grid__card-heading {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+  }
+
+  .feature-grid__card-text {
+    font-size: clamp(14px, 1.6vw, 16px);
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+  }
+{%- endstyle -%}
+
+<div class="feature-grid">
+  <div class="feature-grid__container">
+    {%- if section.settings.heading != blank -%}
+      <div class="feature-grid__header">
+        <span class="feature-grid__eyebrow">{{ section.settings.eyebrow | default: 'THE HAGUE EFFECT' }}</span>
+        <h2 class="feature-grid__heading">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="feature-grid__items">
+      {%- for block in section.blocks -%}
+        <div class="feature-grid__card" {{ block.shopify_attributes }}>
+          <div class="feature-grid__card-visual">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.heading | escape }}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
+            {%- else -%}
+              <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            {%- endif -%}
+          </div>
+          <h3 class="feature-grid__card-heading">{{ block.settings.heading | default: 'Deep Cleaning Power' }}</h3>
+          <p class="feature-grid__card-text">{{ block.settings.text | default: 'Extracts ground-in dirt without damaging fragile premium fibers.' }}</p>
+        </div>
+      {%- else -%}
+        <!-- Fallbacks -->
+        {%- for i in (1..3) -%}
+          <div class="feature-grid__card">
+            <div class="feature-grid__card-visual">
+              <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="feature-grid__card-heading">
+              {%- if i == 1 -%}Deep Cleaning Power{%- elsif i == 2 -%}Safe for All Materials{%- else -%}Long Lasting Protection{%- endif -%}
+            </h3>
+            <p class="feature-grid__card-text">
+              {%- if i == 1 -%}Our advanced cinematic foam penetrates down to extract stubborn dirt particles with absolute precision.{%- elsif i == 2 -%}Carefully engineered pH-balanced formula safe for fine leather, suede, nubuck, and mesh.{%- else -%}Includes micro-shield tech that protects against fresh dirt long after cleaning.{%- endif -%}
+            </p>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feature Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE HAGUE EFFECT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Uncompromising Performance"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Icon (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Deep Cleaning Power"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Extracts ground-in dirt without damaging fragile premium fibers."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Grid",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" }
+      ]
+    }
+  ]
+}
+{% endschema %}

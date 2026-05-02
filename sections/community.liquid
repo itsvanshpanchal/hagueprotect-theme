@@ -1,0 +1,198 @@
+{%- style -%}
+  .community-section {
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+  }
+
+  .community-header {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .community__eyebrow {
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .community__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .community__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  .community-card {
+    background-color: #f8f8fa;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--color-border);
+  }
+
+  .community-card:hover {
+    border-color: transparent;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .community-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition-smooth);
+  }
+
+  .community-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: 2;
+    transition: var(--transition-fast);
+  }
+
+  .community-card:hover .community-card__overlay {
+    opacity: 1;
+  }
+
+  .community-card__handle {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-xl);
+  }
+{%- endstyle -%}
+
+<section class="community-section section-spacing" aria-label="Sneaker Care Community">
+  <div class="container">
+    <div class="community-header animate-fade-in">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="community__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="h2">{{ section.settings.heading | default: 'HagueProtect Users' }}</h2>
+    </div>
+
+    <div class="community__grid">
+      {%- for block in section.blocks -%}
+        <div class="community-card animate-fade-in" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Community member's sneakers" class="community-card__image" loading="lazy">
+          {%- else -%}
+            <!-- Fallback Lifestyle/User SVG pattern -->
+            <svg class="community-card__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+              <rect width="300" height="300" fill="#fefefe"/>
+              <circle cx="150" cy="150" r="110" fill="#f7f7f9"/>
+              <circle cx="150" cy="150" r="60" fill="#FF2B2B" opacity="0.04" filter="blur(20px)"/>
+              <!-- Symmetrical decorative design -->
+              <path d="M120 150h60M150 120v60" stroke="#FF2B2B" stroke-width="2" opacity="0.4"/>
+            </svg>
+          {%- endif -%}
+          <div class="community-card__overlay">
+            <span class="community-card__handle">{{ block.settings.handle | default: '@hagueprotect' }}</span>
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Elite aesthetic grid fallbacks -->
+        {%- for i in (1..4) -%}
+          <div class="community-card animate-fade-in">
+            <svg class="community-card__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+              <rect width="300" height="300" fill="#fefefe"/>
+              <circle cx="150" cy="150" r="100" fill="#f9f9fb"/>
+              <path d="M120 180l30-30 30 30" stroke="#FF2B2B" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+              <text x="150" y="240" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#111" opacity="0.3" letter-spacing="2" text-anchor="middle">CLEAN CULTURE</text>
+            </svg>
+            <div class="community-card__overlay">
+              <span class="community-card__handle">
+                {%- if i == 1 -%}@sneaker_luxe{%- elsif i == 2 -%}@hype_curator{%- elsif i == 3 -%}@pristine_kicks{%- else -%}@kickz_protection{%- endif -%}
+              </span>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Community Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Join the Elite"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HagueProtect Users"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_item",
+      "name": "Community Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Lifestyle Image"
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "User Handle",
+          "default": "@hagueprotect"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community Section",
+      "blocks": [
+        { "type": "image_item", "settings": { "handle": "@sneaker_luxe" } },
+        { "type": "image_item", "settings": { "handle": "@hype_curator" } },
+        { "type": "image_item", "settings": { "handle": "@pristine_kicks" } },
+        { "type": "image_item", "settings": { "handle": "@kickz_protection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

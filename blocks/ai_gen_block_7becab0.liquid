@@ -1,0 +1,483 @@
+{% doc %}
+  @prompt
+    so make a section in which you can make 4 section and has a feture of dropdown menu fudnction so add these heading and detail  product detail , technical specification , material and care , the deescription shoul be in point and in detail , also the PRODUCT DETAIL , TECHNICAL SPECIFICATION , MATERIAL AND CARE , SHIPPING AND RETUREN TEXT SHOULD BE BOLD AND INCRESE SIZE OF THE TEXT , SO MAKE THE BORDER CORNER SHOULBE CURVER OF ALL THE SECTION AND LEAVE SOME SPACE BETWEEN EACH SECTION , ALSO MAKE THE SHADOW EFFECT OF AL THE BORDER LINE , SO PLEASE REWRITE  DESCRIPTION IN PRODUCT DETAIL ACCORDING TO PRODUCT ALSO APPLY SAME THING IN ALL SECTION 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-accordion-section-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-accordion-container-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.item_spacing }}px;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.item_border_radius }}px;
+    overflow: hidden;
+    border: 1px solid {{ block.settings.border_color }};
+    box-shadow: {{ block.settings.shadow_horizontal }}px {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px {{ block.settings.shadow_spread }}px {{ block.settings.shadow_color }};
+    transition: box-shadow 0.3s ease;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }}:hover {
+    box-shadow: {{ block.settings.shadow_horizontal | times: 1.5 }}px {{ block.settings.shadow_vertical | times: 1.5 }}px {{ block.settings.shadow_blur | times: 1.5 }}px {{ block.settings.shadow_spread }}px {{ block.settings.shadow_color }};
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }} {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: {{ block.settings.item_padding }}px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-accordion-header-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.hover_color }};
+  }
+
+  .ai-accordion-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.heading_color }};
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-accordion-icon-{{ ai_gen_id }} {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-accordion-icon-{{ ai_gen_id }}.active {
+    transform: rotate(180deg);
+  }
+
+  .ai-accordion-content-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .ai-accordion-content-{{ ai_gen_id }}.active {
+    max-height: 1000px;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} {
+    padding: 0 {{ block.settings.item_padding }}px {{ block.settings.item_padding }}px;
+    color: {{ block.settings.content_color }};
+    font-size: {{ block.settings.content_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} li {
+    margin-bottom: 8px;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} li:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} p {
+    margin: 0 0 12px;
+  }
+
+  .ai-accordion-content-inner-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-accordion-section-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<accordion-section-{{ ai_gen_id }} class="ai-accordion-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-accordion-container-{{ ai_gen_id }}">
+    {% if block.settings.show_item_1 %}
+      <div class="ai-accordion-item-{{ ai_gen_id }}" data-accordion-item>
+        <button class="ai-accordion-header-{{ ai_gen_id }}" aria-expanded="false">
+          <h3 class="ai-accordion-title-{{ ai_gen_id }}">{{ block.settings.heading_1 }}</h3>
+          <svg class="ai-accordion-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="ai-accordion-content-{{ ai_gen_id }}">
+          <div class="ai-accordion-content-inner-{{ ai_gen_id }}">
+            {{ block.settings.content_1 }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_item_2 %}
+      <div class="ai-accordion-item-{{ ai_gen_id }}" data-accordion-item>
+        <button class="ai-accordion-header-{{ ai_gen_id }}" aria-expanded="false">
+          <h3 class="ai-accordion-title-{{ ai_gen_id }}">{{ block.settings.heading_2 }}</h3>
+          <svg class="ai-accordion-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="ai-accordion-content-{{ ai_gen_id }}">
+          <div class="ai-accordion-content-inner-{{ ai_gen_id }}">
+            {{ block.settings.content_2 }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_item_3 %}
+      <div class="ai-accordion-item-{{ ai_gen_id }}" data-accordion-item>
+        <button class="ai-accordion-header-{{ ai_gen_id }}" aria-expanded="false">
+          <h3 class="ai-accordion-title-{{ ai_gen_id }}">{{ block.settings.heading_3 }}</h3>
+          <svg class="ai-accordion-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="ai-accordion-content-{{ ai_gen_id }}">
+          <div class="ai-accordion-content-inner-{{ ai_gen_id }}">
+            {{ block.settings.content_3 }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_item_4 %}
+      <div class="ai-accordion-item-{{ ai_gen_id }}" data-accordion-item>
+        <button class="ai-accordion-header-{{ ai_gen_id }}" aria-expanded="false">
+          <h3 class="ai-accordion-title-{{ ai_gen_id }}">{{ block.settings.heading_4 }}</h3>
+          <svg class="ai-accordion-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="ai-accordion-content-{{ ai_gen_id }}">
+          <div class="ai-accordion-content-inner-{{ ai_gen_id }}">
+            {{ block.settings.content_4 }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</accordion-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AccordionSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.accordionItems = this.querySelectorAll('[data-accordion-item]');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.accordionItems.forEach((item) => {
+          const header = item.querySelector('.ai-accordion-header-{{ ai_gen_id }}');
+          const content = item.querySelector('.ai-accordion-content-{{ ai_gen_id }}');
+          const icon = item.querySelector('.ai-accordion-icon-{{ ai_gen_id }}');
+
+          header.addEventListener('click', () => {
+            const isActive = content.classList.contains('active');
+
+            if (isActive) {
+              content.classList.remove('active');
+              icon.classList.remove('active');
+              header.setAttribute('aria-expanded', 'false');
+            } else {
+              content.classList.add('active');
+              icon.classList.add('active');
+              header.setAttribute('aria-expanded', 'true');
+            }
+          });
+        });
+      }
+    }
+
+    customElements.define('accordion-section-{{ ai_gen_id }}', AccordionSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product accordion",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Space between items",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal",
+      "label": "Horizontal offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "label": "Vertical offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Spread",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hover_color",
+      "label": "Hover background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "content_size",
+      "label": "Content size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_item_1",
+      "label": "Show item 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading",
+      "default": "Product details"
+    },
+    {
+      "type": "richtext",
+      "id": "content_1",
+      "label": "Content",
+      "default": "<ul><li>Professional-grade shoe cleaning kit designed for sneaker enthusiasts</li><li>Complete solution for maintaining and restoring your favorite footwear</li><li>Includes premium cleaning brush, microfiber cloth, and specialized cleaning solution</li><li>Safe for all shoe materials including leather, suede, canvas, and mesh</li><li>Eco-friendly formula that effectively removes dirt, stains, and scuff marks</li><li>Compact and portable design perfect for home use or travel</li><li>Trusted by sneakerheads and professional shoe cleaners worldwide</li></ul>"
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_item_2",
+      "label": "Show item 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading",
+      "default": "Technical specifications"
+    },
+    {
+      "type": "richtext",
+      "id": "content_2",
+      "label": "Content",
+      "default": "<ul><li>Kit includes: 100ml cleaning solution, premium bristle brush, microfiber towel</li><li>Cleaning solution: pH-balanced, biodegradable formula</li><li>Brush dimensions: 15cm length with soft and medium bristle options</li><li>Microfiber cloth: 30cm x 30cm, ultra-absorbent material</li><li>Solution bottle: Leak-proof cap with precision applicator</li><li>Total kit weight: 250 grams</li><li>Packaging: Recyclable cardboard box with protective foam insert</li><li>Shelf life: 24 months from manufacture date</li><li>Made with premium materials for long-lasting performance</li></ul>"
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_item_3",
+      "label": "Show item 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Heading",
+      "default": "Material and care"
+    },
+    {
+      "type": "richtext",
+      "id": "content_3",
+      "label": "Content",
+      "default": "<ul><li>Cleaning solution: Water-based, non-toxic, biodegradable ingredients</li><li>Brush: Natural and synthetic bristles with ergonomic wooden handle</li><li>Microfiber cloth: 80% polyester, 20% polyamide blend</li><li>Store in a cool, dry place away from direct sunlight</li><li>Keep cleaning solution tightly sealed when not in use</li><li>Rinse brush thoroughly after each use and air dry</li><li>Wash microfiber cloth separately in cold water, air dry only</li><li>Do not expose to extreme temperatures or freezing conditions</li><li>Keep out of reach of children and pets</li></ul>"
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_item_4",
+      "label": "Show item 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Heading",
+      "default": "Shipping and returns"
+    },
+    {
+      "type": "richtext",
+      "id": "content_4",
+      "label": "Content",
+      "default": "<ul><li>Free standard shipping on all orders across India</li><li>Express delivery available for major cities (1-2 business days)</li><li>Standard delivery: 3-5 business days to most locations</li><li>Order tracking provided via email and SMS</li><li>30-day hassle-free return policy on unopened products</li><li>Full refund if product is defective or damaged during shipping</li><li>Return shipping costs covered for defective items</li><li>Refunds processed within 5-7 business days after return approval</li><li>Contact customer support for any shipping or return queries</li></ul>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product accordion"
+    }
+  ]
+}
+{% endschema %}

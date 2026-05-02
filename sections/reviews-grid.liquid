@@ -1,0 +1,269 @@
+{%- style -%}
+  .reviews {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #fcfcfd;
+    padding: 80px 0;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .reviews__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .reviews__header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .reviews__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FF2B2B;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .reviews__heading {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .reviews__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .reviews__card {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+  }
+
+  .reviews__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+  }
+
+  .reviews__visual {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: #f6f6f6;
+    position: relative;
+  }
+
+  .reviews__image,
+  .reviews__visual video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .reviews__card:hover .reviews__image {
+    transform: scale(1.04);
+  }
+
+  .reviews__info {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .reviews__stars {
+    display: flex;
+    gap: 4px;
+    color: #FF2B2B;
+  }
+
+  .reviews__star {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .reviews__text {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .reviews__author {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .reviews__author-avatar {
+    width: 24px;
+    height: 24px;
+    background-color: #FF2B2B;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+{%- endstyle -%}
+
+<div class="reviews">
+  <div class="reviews__container">
+    <div class="reviews__header">
+      <span class="reviews__eyebrow">{{ section.settings.eyebrow | default: 'SOCIAL PROOF' }}</span>
+      <h2 class="reviews__heading">{{ section.settings.heading | default: 'Loved by shoe lovers' }}</h2>
+    </div>
+
+    <div class="reviews__grid">
+      {%- for block in section.blocks -%}
+        <div class="reviews__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.video != blank or block.settings.image != blank -%}
+            <div class="reviews__visual">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true }}
+              {%- elsif block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Customer review" class="reviews__image" loading="lazy">
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <div class="reviews__info">
+            <div class="reviews__stars">
+              {%- for i in (1..5) -%}
+                <svg class="reviews__star" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.165-7.333-3.856-7.333 3.856 1.399-8.165-5.934-5.784 8.2-1.192zm0 0"/></svg>
+              {%- endfor -%}
+            </div>
+            <p class="reviews__text">{{ block.settings.text | default: 'I used this on my old high-end leather kicks and they literally look completely restored. Truly elite!' }}</p>
+            <div class="reviews__author">
+              <div class="reviews__author-avatar">
+                {{ block.settings.author | slice: 0 | default: 'A' }}
+              </div>
+              <span>{{ block.settings.author | default: 'Julian A.' }}</span>
+            </div>
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Fallbacks -->
+        {%- for i in (1..3) -%}
+          <div class="reviews__card">
+            <div class="reviews__info">
+              <div class="reviews__stars">
+                {%- for j in (1..5) -%}
+                  <svg class="reviews__star" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.165-7.333-3.856-7.333 3.856 1.399-8.165-5.934-5.784 8.2-1.192zm0 0"/></svg>
+                {%- endfor -%}
+              </div>
+              <p class="reviews__text">
+                {%- if i == 1 -%}"Saved my expensive leather sneakers from severe mud stains. Highly recommended!"{%- elsif i == 2 -%}"The soft formula did wonders on my off-white delicate suede without stiffening."{%- else -%}"Truly fantastic cinematic cleaning. My sneakers look fresh out of the box."{%- endif -%}
+              </p>
+              <div class="reviews__author">
+                <div class="reviews__author-avatar">
+                  {%- if i == 1 -%}M{%- elsif i == 2 -%}T{%- else -%}K{%- endif -%}
+                </div>
+                <span>
+                  {%- if i == 1 -%}Marcus V.{%- elsif i == 2 -%}Theresa K.{%- else -%}Kevin S.{%- endif -%}
+                </span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Social Proof Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SOCIAL PROOF"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved by shoe lovers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Review Photo"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Review Video"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "I used this on my old high-end leather kicks and they literally look completely restored. Truly elite!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer Name",
+          "default": "Julian A."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof Grid",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

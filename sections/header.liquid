@@ -1,0 +1,669 @@
+{%- style -%}
+  .header-wrapper {
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  .header__logo-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header__navigation {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .header__navigation {
+      display: none;
+    }
+  }
+
+  .nav-item {
+    padding: 12px 0;
+  }
+
+  .header__menu-link {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #111111;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header__menu-link:hover {
+    color: #FF2B2B;
+  }
+
+  .menu-pill {
+    background-color: #FF2B2B;
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .menu-pill:hover {
+    background-color: #e02424;
+    transform: translateY(-1px);
+    color: #ffffff !important;
+  }
+
+  .menu-link {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #111111 !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .menu-link:hover {
+    color: #FF2B2B !important;
+  }
+
+  /* Full Width Mega Menu Dropdown Panel */
+  .megamenu-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff !important;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    display: none;
+    z-index: 1001;
+    padding: 48px 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .megamenu-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    width: 100%;
+    align-items: start;
+  }
+
+  .megamenu-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .megamenu-heading {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px;
+    font-weight: 800;
+    color: #111111 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .megamenu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .megamenu-link-item a {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #555555 !important;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    line-height: 1.4;
+  }
+
+  .megamenu-link-item a:hover {
+    color: #FF2B2B !important;
+    transform: translateX(3px);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header__cart-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: #111111;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .header__cart-link:hover {
+    background-color: #111111;
+    color: #ffffff;
+    border-color: #111111;
+  }
+
+  .header__mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #111;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .header__mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* Mobile menu drawer */
+  .mobile-menu-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 8px 0 32px rgba(0,0,0,0.1);
+    z-index: 10002;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu-drawer.is-active {
+    left: 0;
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .mobile-menu-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobile-nav-link {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px;
+    font-weight: 700;
+    color: #111111;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mobile-accordion-content {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 0 8px 12px;
+  }
+
+  .mobile-accordion-category-heading {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+{%- endstyle -%}
+
+<header class="header-wrapper" role="banner">
+  <div class="header-container">
+    
+    <!-- Logo -->
+    <a href="/" class="header__logo-link">
+      <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #000000; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
+        HAGUE<span style="color: #FF2B2B;">PR</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" style="color: #000000; margin: 0 -1px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="header__navigation" role="navigation">
+      {% if section.settings.menu != blank and section.settings.menu.links.size > 0 %}
+        {% for link in section.settings.menu.links %}
+          <div class="nav-item">
+            {%- assign is_shop = false -%}
+            {%- assign downcase_title = link.title | downcase -%}
+            {%- if downcase_title contains 'shop' or downcase_title contains 'collections' -%}
+              {%- assign is_shop = true -%}
+            {%- endif -%}
+
+            {% if forloop.first %}
+              <a href="{{ link.url }}" class="menu-pill" {% if is_shop %}id="ShopTrigger"{% endif %}>
+                {{ link.title }}
+                {% if is_shop %}
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {% endif %}
+              </a>
+            {% else %}
+              <a href="{{ link.url }}" class="menu-link" {% if is_shop %}id="ShopTrigger"{% endif %}>
+                {{ link.title }}
+                {% if is_shop %}
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {% endif %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="nav-item">
+          <a href="/collections/all" class="menu-pill" id="ShopTrigger">
+            Shop
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="/pages/contact-us" class="menu-link">Corporate Gifting</a>
+        </div>
+        <div class="nav-item">
+          <a href="/pages/contact-us" class="menu-link">Business</a>
+        </div>
+        <div class="nav-item">
+          <a href="/collections/all" class="menu-link">Offers</a>
+        </div>
+      {% endif %}
+    </nav>
+
+    <!-- Actions -->
+    <div class="header__actions">
+      <!-- Mobile Toggle -->
+      <button type="button" class="header__mobile-toggle" onclick="openMobileMenu()" aria-label="Open navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Login Button -->
+      <a href="/pages/login" onclick="handleHeaderLogin(event)" class="header__cart-link" aria-label="Account Login">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <span id="HeaderLoginText">Login</span>
+      </a>
+
+      <!-- Cart Button -->
+      <a href="/cart" class="header__cart-link" aria-label="View Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <span>Cart</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
+  <div class="megamenu-panel" id="MegaMenuPanel">
+    <div class="megamenu-grid">
+      
+      <!-- Column 1: Clean & Restore -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Clean & Restore</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Sneaker Care Kits</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Signature Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Essential Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Refresh Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Indepth Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Supreme Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Leather Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Suede Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Leather & Suede Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Suede Dye Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Proteonnxt Kit</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Shop by Use -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Shop by Use</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Delicate Clean</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Deep Clean</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">On the Go Clean</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Mess Free Clean</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Deodorizer</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Care by Fabric Type -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Care by Fabric</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Leather</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Suede</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Canvas</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Mesh</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Knit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Nubuck</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Rubber</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Midsole & Sole</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Mixed Material Care</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Deodorizers -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Deodorizers</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Citrus - Shoe Deodorizer</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Lavender bliss Deodorizer</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Super Saver Bundles -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Super Savers</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Signature + Suede Care</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Essential + Leather Kit</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Indepth + Suede Dye</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Refill Module</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Proteonnxt + Suede Care</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Leather & Suede Care</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Suede Dye + Suede Kit</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 6: Accessories -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading">Accessories</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item"><a href="/collections/all">Microfiber Towel (4 Pack)</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Shoe Tree (2 Pack)</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Crease Defender (2 Pack)</a></li>
+          <li class="megamenu-link-item"><a href="/collections/all">Shoe Cleaning Brush</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div id="MobileMenuOverlay" class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+<div id="MobileMenuDrawer" class="mobile-menu-drawer">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 16px;">
+    <h2 style="font-size: 18px; font-weight: 800; color: #111; margin: 0; text-transform: uppercase; letter-spacing: -0.02em;">Menu</h2>
+    <button type="button" onclick="closeMobileMenu()" style="background: none; border: none; cursor: pointer; color: #111;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="mobile-nav-links">
+    <div>
+      <a href="javascript:void(0)" onclick="toggleMobileAccordion()" class="mobile-nav-link">
+        Shop
+        <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2"/></svg>
+      </a>
+      <div class="mobile-accordion-content" id="MobileShopContent">
+        <div>
+          <h4 class="mobile-accordion-category-heading">Clean & Restore</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Sneaker Care Kits</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Signature Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Essential Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Refresh Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Indepth Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Supreme Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Leather Care Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Suede Care Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Leather & Suede Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Suede Dye Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Proteonnxt Kit</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Shop by Use</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Delicate Clean</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Deep Clean</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">On the Go Clean</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Mess Free Clean</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Deodorizer</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Care by Fabric</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Leather</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Suede</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Canvas</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Mesh</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Knit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Nubuck</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Rubber</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Midsole & Sole</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Mixed Material Care</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Deodorizers</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Citrus - Shoe Deodorizer</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Lavender bliss Deodorizer</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Super Savers</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Signature + Suede Care</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Essential + Leather Kit</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Indepth + Suede Dye</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Refill Module</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Proteonnxt + Suede Care</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Leather & Suede Care</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Suede Dye + Suede Kit</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Accessories</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Microfiber Towel (4 Pack)</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Shoe Tree (2 Pack)</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Crease Defender (2 Pack)</a>
+            <a href="/collections/all" style="color:#666; text-decoration:none; font-size:14px;">Shoe Cleaning Brush</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <a href="/pages/login" onclick="handleHeaderLogin(event)" class="mobile-nav-link" style="color: #FF2B2B;">Login / Account</a>
+    <a href="/pages/contact-us" class="mobile-nav-link">Corporate Gifting</a>
+    <a href="/pages/contact-us" class="mobile-nav-link">Business</a>
+    <a href="/collections/all" class="mobile-nav-link">Offers</a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('ShopTrigger');
+    const panel = document.getElementById('MegaMenuPanel');
+
+    if (trigger && panel) {
+      let timeoutId;
+      const openPanel = () => {
+        clearTimeout(timeoutId);
+        panel.style.display = 'block';
+        setTimeout(() => {
+          panel.style.opacity = '1';
+          panel.style.transform = 'translateY(0)';
+        }, 10);
+      };
+
+      const closePanel = () => {
+        timeoutId = setTimeout(() => {
+          panel.style.opacity = '0';
+          panel.style.transform = 'translateY(12px)';
+          setTimeout(() => {
+            if (panel.style.opacity === '0') {
+              panel.style.display = 'none';
+            }
+          }, 300);
+        }, 100);
+      };
+
+      trigger.addEventListener('mouseenter', openPanel);
+      trigger.addEventListener('mouseleave', closePanel);
+      panel.addEventListener('mouseenter', openPanel);
+      panel.addEventListener('mouseleave', closePanel);
+    }
+  });
+
+  function openMobileMenu() {
+    document.getElementById('MobileMenuOverlay').classList.add('is-active');
+    document.getElementById('MobileMenuDrawer').classList.add('is-active');
+  }
+  function closeMobileMenu() {
+    document.getElementById('MobileMenuOverlay').classList.remove('is-active');
+    document.getElementById('MobileMenuDrawer').classList.remove('is-active');
+  }
+  function toggleMobileAccordion() {
+    const content = document.getElementById('MobileShopContent');
+    const isHidden = window.getComputedStyle(content).display === 'none';
+    if (isHidden) {
+      content.style.display = 'flex';
+    } else {
+      content.style.display = 'none';
+    }
+  }
+
+  function handleHeaderLogin(e) {
+    e.preventDefault();
+    if (localStorage.getItem('customer_email')) {
+      window.location.hash = "#dashboard";
+    } else {
+      window.location.hash = "#login";
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('customer_email')) {
+      const loginText = document.getElementById('HeaderLoginText');
+      if (loginText) {
+        loginText.innerText = 'Account';
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "HAGUEPROTECT"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

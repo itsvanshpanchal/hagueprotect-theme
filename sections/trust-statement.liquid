@@ -1,0 +1,172 @@
+{%- style -%}
+  .trust-statement-section {
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: clamp(100px, 12vw, 160px) 0;
+  }
+
+  .trust-statement__container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    text-align: center;
+  }
+
+  .trust-statement__heading {
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--color-text-main);
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+
+  .trust-statement__heading span {
+    color: var(--color-primary);
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .trust-statement__heading span::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 43, 43, 0.15);
+    border-radius: 2px;
+  }
+
+  .trust-statement__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .trust-statement-section {
+      padding: clamp(50px, 8vw, 60px) 0;
+    }
+    .trust-statement__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .trust-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .trust-card__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    background-color: rgba(255, 43, 43, 0.05);
+    border-radius: 50%;
+    transition: var(--transition-smooth);
+  }
+
+  .trust-card:hover .trust-card__icon {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    transform: scale(1.1) rotate(4deg);
+  }
+
+  .trust-card__title {
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .trust-card__desc {
+    font-size: clamp(14px, 1.6vw, 16px);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 280px;
+  }
+{%- endstyle -%}
+
+<section class="trust-statement-section section-spacing" aria-label="Our trust guarantee">
+  <div class="container trust-statement__container animate-fade-in">
+    <h2 class="trust-statement__heading">
+      {{ section.settings.text | default: 'People demand more from sneaker care: deep cleaning, safe materials, and long-lasting protection.' }} <span>{{ section.settings.brand_text | default: 'HagueProtect delivers.' }}</span>
+    </h2>
+
+    <div class="trust-statement__grid">
+      <div class="trust-card">
+        <div class="trust-card__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="trust-card__title">Deep Cleaning Power</h3>
+        <p class="trust-card__desc">Removes persistent grime effortlessly without color fading.</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-card__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="trust-card__title">Premium Materials Safe</h3>
+        <p class="trust-card__desc">Gentle on suedes, leathers, nubucks, and modern knits.</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-card__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="trust-card__title">Long-Lasting Protection</h3>
+        <p class="trust-card__desc">Creates an invisible hydrophobic shield against dirt & water.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Statement",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Statement Text",
+      "default": "People demand more from sneaker care: deep cleaning, safe materials, and long-lasting protection."
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Impact Text",
+      "default": "HagueProtect delivers."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Statement"
+    }
+  ]
+}
+{% endschema %}

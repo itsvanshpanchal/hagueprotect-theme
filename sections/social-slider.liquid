@@ -1,0 +1,285 @@
+{%- style -%}
+  .social-slider {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    background-color: #ffffff;
+    padding: 80px 0;
+    overflow: hidden;
+  }
+
+  .social-slider__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .social-slider__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+
+  .social-slider__heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .social-slider__nav {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-slider__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #9AA0A6;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #000;
+    transition: all 0.3s ease;
+  }
+
+  .social-slider__arrow:hover {
+    background-color: #FF2B2B;
+    border-color: #FF2B2B;
+    color: #ffffff;
+  }
+
+  .social-slider__arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .social-slider__wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .social-slider__items {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .social-slider__items::-webkit-scrollbar {
+    display: none;
+  }
+
+  .social-slider__card {
+    flex: 0 0 calc(25% - 18px);
+    scroll-snap-align: start;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .social-slider__card {
+      flex: 0 0 calc(33.333% - 16px);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .social-slider__card {
+      flex: 0 0 calc(50% - 12px);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .social-slider__card {
+      flex: 0 0 85%;
+    }
+  }
+
+  .social-slider__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.06);
+  }
+
+  .social-slider__visual {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: #fcfcfc;
+    position: relative;
+  }
+
+  .social-slider__visual img,
+  .social-slider__visual video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .social-slider__card:hover .social-slider__visual img {
+    transform: scale(1.03);
+  }
+
+  .social-slider__info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .social-slider__caption {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .social-slider__handle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FF2B2B;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+{%- endstyle -%}
+
+<div class="social-slider">
+  <div class="social-slider__container">
+    <div class="social-slider__header">
+      <h2 class="social-slider__heading">{{ section.settings.heading | default: 'Trending on socials right now' }}</h2>
+      <div class="social-slider__nav">
+        <button class="social-slider__arrow social-slider__arrow--prev" onclick="scrollSocialSlider(-1)" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="social-slider__arrow social-slider__arrow--next" onclick="scrollSocialSlider(1)" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="social-slider__wrapper">
+      <div class="social-slider__items" id="SocialSliderItems-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <div class="social-slider__card" {{ block.shopify_attributes }}>
+            <div class="social-slider__visual">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true }}
+              {%- elsif block.settings.video_url != blank -%}
+                <video muted loop playsinline controls poster="{{ block.settings.image | image_url: width: 600 }}">
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                </video>
+              {%- elsif block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.caption | default: 'Social media post' | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+
+            <div class="social-slider__info">
+              <p class="social-slider__caption">{{ block.settings.caption | default: 'The high-contrast performance is absolutely unmatched.' }}</p>
+              <span class="social-slider__handle">{{ block.settings.handle | default: '@HAGUEPROTECT' }}</span>
+            </div>
+          </div>
+        {%- else -%}
+          <!-- Fallbacks -->
+          {%- for i in (1..4) -%}
+            <div class="social-slider__card">
+              <div class="social-slider__visual">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="social-slider__info">
+                <p class="social-slider__caption">Deep restoration on every single pair. Truly incredible!</p>
+                <span class="social-slider__handle">@hague_protect_{{ i }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollSocialSlider(direction) {
+    const slider = document.getElementById('SocialSliderItems-{{ section.id }}');
+    if (slider) {
+      const cardWidth = slider.querySelector('.social-slider__card').clientWidth + 24;
+      slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Social Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trending on socials right now"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "social_card",
+      "name": "Social Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Photo"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload Video"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video Link (MP4 format fallback)"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption text",
+          "default": "The high-contrast performance is absolutely unmatched."
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "label": "Social handle",
+          "default": "@HAGUEPROTECT"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Slider",
+      "blocks": [
+        { "type": "social_card" },
+        { "type": "social_card" },
+        { "type": "social_card" },
+        { "type": "social_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

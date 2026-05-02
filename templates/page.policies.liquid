@@ -1,0 +1,84 @@
+<div class="policies-page-wrapper" style="background-color: #fafafc; font-family: 'Inter', sans-serif; padding: 80px 0; min-height: 100vh;">
+  <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 24px;">
+
+    <!-- Policies Page Menu tabs -->
+    <div style="display: flex; gap: 12px; border-bottom: 1px solid #e9e9eb; padding-bottom: 16px; margin-bottom: 48px; overflow-x: auto; white-space: nowrap;">
+      <button type="button" onclick="switchPolicyTab('terms')" id="TabBtn-terms" class="policy-tab-btn active" style="padding: 12px 24px; background: none; border: none; font-size: 14px; font-weight: 700; color: #111; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease;">Terms of Service</button>
+      <button type="button" onclick="switchPolicyTab('shipping')" id="TabBtn-shipping" class="policy-tab-btn" style="padding: 12px 24px; background: none; border: none; font-size: 14px; font-weight: 600; color: #777; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease;">Shipping Policy</button>
+      <button type="button" onclick="switchPolicyTab('refunds')" id="TabBtn-refunds" class="policy-tab-btn" style="padding: 12px 24px; background: none; border: none; font-size: 14px; font-weight: 600; color: #777; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease;">Refunds & Returns</button>
+      <button type="button" onclick="switchPolicyTab('privacy')" id="TabBtn-privacy" class="policy-tab-btn" style="padding: 12px 24px; background: none; border: none; font-size: 14px; font-weight: 600; color: #777; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease;">Privacy Policy</button>
+    </div>
+
+    <!-- Content Area -->
+    <div style="background: #ffffff; border: 1px solid #e9e9eb; border-radius: 16px; padding: 48px; box-shadow: 0 4px 24px rgba(0,0,0,0.01);">
+      
+      <!-- Terms Tab -->
+      <div id="PolicyContent-terms" style="display: block;" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Terms of Service</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>Welcome to Hague Protect. These terms and conditions outline the rules and regulations for the use of Hague Protect's Website and its high-end care products.</p>
+          <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Hague Protect if you do not agree to take all of the terms and conditions stated on this page.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">License</h3>
+          <p>Unless otherwise stated, Hague Protect and/or its licensors own the intellectual property rights for all material on Hague Protect. All intellectual property rights are reserved. You may access this from Hague Protect for your own personal use subjected to restrictions set in these terms and conditions.</p>
+          <p>You must not: republish, sell, rent, sub-license, reproduce, duplicate or redistribute content from Hague Protect.</p>
+        </div>
+      </div>
+
+      <!-- Shipping Tab -->
+      <div id="PolicyContent-shipping" style="display: none;" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Shipping Policy</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>At Hague Protect, we aim to ensure your premium sneaker care products are processed and delivered at the earliest timeline possible.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Processing Timeline</h3>
+          <p>All orders are processed and prepared within 1 business day. Orders placed during weekend periods or public holidays are fulfilled on the next standard working day.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Rates & Times</h3>
+          <p>Free standard shipping is automatically applied store-wide on all purchases above $40. Standard transit within Western Europe is completed within 2 to 4 working days.</p>
+        </div>
+      </div>
+
+      <!-- Refunds Tab -->
+      <div id="PolicyContent-refunds" style="display: none;" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Refunds & Returns</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>We stand by our formulations and believe you will be entirely satisfied with Hague Protect's performance. If for any reason our products did not meet your expectations, our returns process is entirely hassle-free.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Return Window</h3>
+          <p>You have 30 days from the date of your purchase to submit a return request to our customer care team. Once confirmed, we will generate a complimentary shipping label for the product's return.</p>
+        </div>
+      </div>
+
+      <!-- Privacy Tab -->
+      <div id="PolicyContent-privacy" style="display: none;" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Privacy Policy</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>We respect your privacy and are committed to protecting the personally identifiable information you may provide us through the Website. We have adopted this privacy policy to explain what information may be collected on our Website, how we use this information, and under what circumstances we may disclose the information to third parties.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Data Protection</h3>
+          <p>We implement various security measures to maintain the safety of your personal data when you submit an order or enter your details into any form on our store.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchPolicyTab(paneId) {
+    // Hide panes
+    document.querySelectorAll('.policy-pane').forEach(p => p.style.display = 'none');
+    document.getElementById('PolicyContent-' + paneId).style.display = 'block';
+
+    // Update tab labels
+    document.querySelectorAll('.policy-tab-btn').forEach(btn => {
+      btn.classList.remove('active');
+      btn.style.color = '#777';
+      btn.style.fontWeight = '600';
+    });
+    
+    const activeBtn = document.getElementById('TabBtn-' + paneId);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      activeBtn.style.color = '#111';
+      activeBtn.style.fontWeight = '700';
+    }
+  }
+</script>

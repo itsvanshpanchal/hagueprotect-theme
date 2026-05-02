@@ -1,0 +1,147 @@
+{%- style -%}
+  .brand-banner-section {
+    background: {{ section.settings.bg_gradient | default: 'linear-gradient(135deg, #FF2B2B 0%, #e21c1c 100%)' }};
+    padding-top: clamp(80px, 10vw, 160px);
+    padding-bottom: clamp(80px, 10vw, 160px);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Aesthetic watermark text */
+  .brand-banner__bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(8rem, 20vw, 22rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+
+  .brand-banner__container {
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .brand-banner__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .brand-banner__subtitle {
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  .brand-banner__btn {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    font-size: clamp(14px, 1.6vw, 16px);
+    padding: 18px 44px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .brand-banner-section {
+      padding-top: clamp(60px, 12vw, 80px);
+      padding-bottom: clamp(60px, 12vw, 80px);
+    }
+    .brand-banner__container {
+      gap: 24px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .brand-banner__title {
+      font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    .brand-banner__subtitle {
+      font-size: clamp(1rem, 4vw, 1.15rem);
+    }
+    .brand-banner__btn {
+      padding: 16px 36px;
+      font-size: 15px;
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="brand-banner-section" aria-label="Brand Callout">
+  <!-- Subtle large visual background watermark -->
+  <div class="brand-banner__bg-text">
+    HAGUE
+  </div>
+
+  <div class="container">
+    <div class="brand-banner__container animate-fade-in">
+      <h2 class="brand-banner__title">{{ section.settings.heading | default: 'HAGUEPROTECT — Sneaker Care, Redefined' }}</h2>
+      <p class="brand-banner__subtitle">{{ section.settings.subheading | default: 'Experience professional-grade formulas, engineered specifically for premium fabrics, leathers, and suedes.' }}</p>
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-white brand-banner__btn">
+        {{ section.settings.cta_text | default: 'Discover More' }}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HAGUEPROTECT — Sneaker Care, Redefined"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Experience professional-grade formulas, engineered specifically for premium fabrics, leathers, and suedes."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Discover More"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background Gradient",
+      "default": "linear-gradient(135deg, #FF2B2B 0%, #e21c1c 100%)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Banner"
+    }
+  ]
+}
+{% endschema %}

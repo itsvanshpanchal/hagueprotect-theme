@@ -1,0 +1,445 @@
+{% doc %}
+  @prompt
+    i want to add one more section in which show before afn after image in which i can move a a line with hand so it look clean and other side it look bad like that 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-before-after-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-before-after-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    user-select: none;
+  }
+
+  .ai-before-after-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-before-after-image-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-before-after-placeholder-{{ ai_gen_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-before-after-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-before-after-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-before-after-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .ai-before-after-overlay-image-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-before-after-slider-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: {{ block.settings.slider_color }};
+    cursor: ew-resize;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .ai-before-after-slider-button-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: {{ block.settings.handle_size }}px;
+    height: {{ block.settings.handle_size }}px;
+    background-color: {{ block.settings.slider_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .ai-before-after-slider-arrows-{{ ai_gen_id }} {
+    display: flex;
+    gap: 4px;
+    color: {{ block.settings.handle_icon_color }};
+  }
+
+  .ai-before-after-slider-arrows-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.handle_size }}px * 0.3);
+    height: calc({{ block.settings.handle_size }}px * 0.3);
+  }
+
+  .ai-before-after-label-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    padding: 8px 16px;
+    background-color: {{ block.settings.label_bg_color }};
+    color: {{ block.settings.label_text_color }};
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: 600;
+    border-radius: 4px;
+    z-index: 5;
+  }
+
+  .ai-before-after-label-before-{{ ai_gen_id }} {
+    left: 20px;
+  }
+
+  .ai-before-after-label-after-{{ ai_gen_id }} {
+    right: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-before-after-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-before-after-label-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.label_font_size }}px * 0.85);
+      padding: 6px 12px;
+    }
+
+    .ai-before-after-slider-button-{{ ai_gen_id }} {
+      width: calc({{ block.settings.handle_size }}px * 0.85);
+      height: calc({{ block.settings.handle_size }}px * 0.85);
+    }
+  }
+{% endstyle %}
+
+<before-after-slider-{{ ai_gen_id }}
+  class="ai-before-after-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-before-after-container-{{ ai_gen_id }}">
+    <div class="ai-before-after-image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.after_image %}
+        <img
+          src="{{ block.settings.after_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.after_image.alt | default: 'Pristine clean after' | escape }}"
+          loading="lazy"
+          width="{{ block.settings.after_image.width }}"
+          height="{{ block.settings.after_image.height }}"
+          class="ai-before-after-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-before-after-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-before-after-empty-state-{{ ai_gen_id }}">
+            Add your "After" image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% assign overlay_clip = 100 | minus: block.settings.initial_position %}
+    <div
+      class="ai-before-after-overlay-{{ ai_gen_id }}"
+      data-overlay
+      style="clip-path: inset(0 {{ overlay_clip }}% 0 0);"
+    >
+      {% if block.settings.before_image %}
+        <img
+          src="{{ block.settings.before_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.before_image.alt | default: 'Stained before' | escape }}"
+          loading="lazy"
+          class="ai-before-after-overlay-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-before-after-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-before-after-empty-state-{{ ai_gen_id }}">
+            Add your "Before" image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div
+      class="ai-before-after-slider-{{ ai_gen_id }}"
+      data-slider
+      style="left: {{ block.settings.initial_position }}%;"
+    >
+      <div class="ai-before-after-slider-button-{{ ai_gen_id }}">
+        <div class="ai-before-after-slider-arrows-{{ ai_gen_id }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    {% if block.settings.show_labels %}
+      {% if block.settings.before_label != blank %}
+        <div class="ai-before-after-label-{{ ai_gen_id }} ai-before-after-label-before-{{ ai_gen_id }}">
+          {{ block.settings.before_label }}
+        </div>
+      {% endif %}
+      {% if block.settings.after_label != blank %}
+        <div class="ai-before-after-label-{{ ai_gen_id }} ai-before-after-label-after-{{ ai_gen_id }}">
+          {{ block.settings.after_label }}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</before-after-slider-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BeforeAfterSlider{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.isDragging = false;
+      }
+
+      connectedCallback() {
+        this.container = this.querySelector('.ai-before-after-container-{{ ai_gen_id }}');
+        this.slider = this.querySelector('[data-slider]');
+        this.overlay = this.querySelector('[data-overlay]');
+
+        if (!this.container || !this.slider || !this.overlay) return;
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.slider.addEventListener('mousedown', this.startDragging.bind(this));
+        this.slider.addEventListener('touchstart', this.startDragging.bind(this), { passive: true });
+
+        document.addEventListener('mousemove', this.onDrag.bind(this));
+        document.addEventListener('touchmove', this.onDrag.bind(this), { passive: false });
+
+        document.addEventListener('mouseup', this.stopDragging.bind(this));
+        document.addEventListener('touchend', this.stopDragging.bind(this));
+
+        this.container.addEventListener('click', this.onContainerClick.bind(this));
+      }
+
+      startDragging(e) {
+        this.isDragging = true;
+        e.preventDefault();
+      }
+
+      stopDragging() {
+        this.isDragging = false;
+      }
+
+      onDrag(e) {
+        if (!this.isDragging) return;
+
+        e.preventDefault();
+        this.updateSliderPosition(e);
+      }
+
+      onContainerClick(e) {
+        if (e.target.closest('[data-slider]')) return;
+        this.updateSliderPosition(e);
+      }
+
+      updateSliderPosition(e) {
+        const rect = this.container.getBoundingClientRect();
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const x = clientX - rect.left;
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+        this.slider.style.left = percentage + '%';
+        this.overlay.style.clipPath = 'inset(0 ' + (100 - percentage) + '% 0 0)';
+      }
+    }
+
+    customElements.define('before-after-slider-{{ ai_gen_id }}', BeforeAfterSlider{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Before after slider",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "range",
+      "id": "initial_position",
+      "label": "Initial slider position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_labels",
+      "label": "Show labels",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "After"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "label_bg_color",
+      "label": "Label background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_text_color",
+      "label": "Label text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "handle_size",
+      "label": "Handle size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "slider_color",
+      "label": "Slider color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "handle_icon_color",
+      "label": "Handle icon color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before after slider"
+    }
+  ]
+}
+{% endschema %}
