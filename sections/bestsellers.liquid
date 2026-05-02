@@ -22,7 +22,13 @@
 .bestsellers-header-dtc {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.bestsellers__title-group-dtc {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* LEFT LABEL */
@@ -33,12 +39,13 @@
   letter-spacing: 1.5px;
 }
 
-/* CENTER HEADING */
+/* LEFT HEADING */
 .bestsellers__heading-dtc {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 800;
   color: #000;
-  text-align: center;
+  text-align: left;
+  line-height: 1.2;
 }
 
 /* RIGHT LINK */
@@ -168,8 +175,10 @@
 
     <!-- HEADER -->
     <div class="bestsellers-header-dtc">
-      <span class="bestsellers__eyebrow-dtc">BEST SELLERS</span>
-      <h2 class="bestsellers__heading-dtc">Bestselling Sneaker Care</h2>
+      <div class="bestsellers__title-group-dtc">
+        <span class="bestsellers__eyebrow-dtc">BEST SELLERS</span>
+        <h2 class="bestsellers__heading-dtc">Bestselling Sneaker<br>Care</h2>
+      </div>
       <a href="/collections/all" class="bestsellers__view-all-dtc">View All →</a>
     </div>
 
