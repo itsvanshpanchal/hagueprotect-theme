@@ -1,0 +1,94 @@
+{%- style -%}
+  .announcement-bar-marquee {
+    background-color: {{ section.settings.bg_color | default: '#FF1A2D' }};
+    color: {{ section.settings.text_color | default: '#FFFFFF' }};
+    height: 42px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    user-select: none;
+    font-family: 'Inter', sans-serif !important;
+    border: none;
+  }
+
+  .announcement-bar__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll-dtc 20s linear infinite;
+  }
+
+  .announcement-bar-marquee:hover .announcement-bar__track {
+    animation-play-state: paused;
+  }
+
+  .announcement-bar__item {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-scroll-dtc {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.settings.show_announcement -%}
+  <div class="announcement-bar-marquee">
+    <div class="announcement-bar__track">
+      <div class="announcement-bar__item">
+        {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }}
+      </div>
+      <div class="announcement-bar__item">
+        {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }} &nbsp;•&nbsp; {{ section.settings.text }}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "BRISK - World's 1st ILAG® certified ceramic Air Fryer | Shop Now"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FF1A2D"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}
