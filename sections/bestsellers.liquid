@@ -1,77 +1,90 @@
 {%- style -%}
-  .bestsellers-section {
+  .bestsellers-section-dtc {
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     padding: 80px 0;
     font-family: 'Inter', sans-serif !important;
     overflow: hidden;
   }
 
-  .bestsellers-container {
+  .bestsellers-container-dtc {
     max-width: 1320px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 48px;
   }
 
-  .bestsellers-header {
+  .bestsellers-header-dtc {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
-    gap: 16px;
-    text-align: left;
+    gap: 24px;
   }
 
-  @media screen and (max-width: 768px) {
-    .bestsellers-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-  }
-
-  .bestsellers__eyebrow {
-    color: #FF2B2B;
-    font-size: 13px;
+  .bestsellers__eyebrow-dtc {
+    color: #FF2D2D;
+    font-size: clamp(12px, 1.5vw, 14px);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .bestsellers__heading {
+    letter-spacing: 1.5px;
+    flex: 1 1 0;
+    text-align: left;
     margin: 0;
+  }
+
+  .bestsellers__heading-dtc {
     color: #000000;
-    font-size: clamp(28px, 4vw, 36px);
+    font-size: clamp(24px, 3.5vw, 32px);
     font-weight: 800;
+    margin: 0;
+    text-align: center;
+    flex: 2 1 0;
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 
-  .bestsellers__heading span {
-    display: block;
-  }
-
-  .bestsellers__view-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  .bestsellers__view-all-dtc {
     font-size: 14px;
     font-weight: 700;
-    color: #111111;
+    color: #000000;
     text-decoration: none;
-    margin-top: 12px;
+    text-align: right;
+    flex: 1 1 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
     transition: color 0.2s ease;
   }
 
-  .bestsellers__view-all:hover {
-    color: #FF2B2B;
+  .bestsellers__view-all-dtc:hover {
+    color: #FF2D2D;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bestsellers-header-dtc {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+    }
+    .bestsellers__eyebrow-dtc,
+    .bestsellers__heading-dtc,
+    .bestsellers__view-all-dtc {
+      text-align: center;
+      flex: none;
+      justify-content: center;
+    }
+    .bestsellers__heading-dtc {
+      white-space: normal;
+    }
   }
 
   /* Horizontal Scroll Layout */
-  .bestsellers__scroll-wrapper {
+  .bestsellers__scroll-wrapper-dtc {
     display: flex;
     gap: 24px;
     overflow-x: auto;
@@ -83,7 +96,7 @@
     width: 100%;
   }
 
-  .bestsellers__scroll-wrapper::-webkit-scrollbar {
+  .bestsellers__scroll-wrapper-dtc::-webkit-scrollbar {
     display: none;
   }
 
@@ -112,7 +125,7 @@
     position: absolute;
     top: 24px;
     left: 24px;
-    background-color: #FF2B2B;
+    background-color: #FF2D2D;
     color: #ffffff;
     font-size: 10px;
     font-weight: 700;
@@ -128,7 +141,7 @@
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    aspect-ratio: 1 / 1;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,8 +162,8 @@
   }
 
   .prod-card-dtc__image {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
   }
 
@@ -171,7 +184,7 @@
   }
 
   .prod-card-dtc__title {
-    font-size: 15px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 700;
     color: #000000;
     letter-spacing: -0.01em;
@@ -186,6 +199,10 @@
     margin: 0;
     line-height: 1.4;
     white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .prod-card-dtc__rating {
@@ -219,7 +236,7 @@
   }
 
   .prod-card-dtc__price {
-    font-size: 16px;
+    font-size: clamp(16px, 1.8vw, 18px);
     font-weight: 800;
     color: #000000;
   }
@@ -232,7 +249,7 @@
 
   .prod-card-dtc__btn {
     font-size: 13px;
-    padding: 8px 16px;
+    padding: 8px 18px;
     border-radius: 30px;
     border: none;
     font-weight: 700;
@@ -248,24 +265,16 @@
   }
 
   .prod-card-dtc__btn:hover {
-    background-color: #FF2B2B;
+    background-color: #FF2D2D;
     transform: translateY(-2px);
   }
 {%- endstyle -%}
 
-<section class="bestsellers-section" aria-label="Bestselling products">
-  <div class="bestsellers-container">
-    <div class="bestsellers-header">
-      {%- if section.settings.eyebrow != blank -%}
-        <span class="bestsellers__eyebrow">{{ section.settings.eyebrow }}</span>
-      {%- endif -%}
-      <h2 class="bestsellers__heading">
-        {%- if section.settings.heading != blank -%}
-          {{ section.settings.heading | replace: ' ', '<br>' }}
-        {%- else -%}
-          Bestselling<br>Sneaker<br>Care
-        {%- endif -%}
-      </h2>
+<section class="bestsellers-section-dtc" aria-label="Bestselling products">
+  <div class="bestsellers-container-dtc">
+    <div class="bestsellers-header-dtc">
+      <h3 class="bestsellers__eyebrow-dtc">{{ section.settings.eyebrow | default: 'BEST SELLERS' }}</h3>
+      <h2 class="bestsellers__heading-dtc">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
       {%- assign collection_url = section.settings.view_all_link -%}
       {%- if collection_url == blank and section.settings.collection != blank -%}
         {%- assign collection_url = collections[section.settings.collection].url -%}
@@ -273,13 +282,13 @@
       {%- if collection_url == blank -%}
         {%- assign collection_url = '/collections/all' -%}
       {%- endif -%}
-      <a href="{{ collection_url }}" class="bestsellers__view-all">
+      <a href="{{ collection_url }}" class="bestsellers__view-all-dtc">
         {{ section.settings.view_all_text | default: 'View All' }}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
 
-    <div class="bestsellers__scroll-wrapper">
+    <div class="bestsellers__scroll-wrapper-dtc">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -308,7 +317,7 @@
                     <a href="{{ product.url }}" style="text-decoration: none;">
                       <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
                     </a>
-                    <p class="prod-card-dtc__desc">{{ product.description | strip_html | truncate: 50 | default: 'Premium care for high-end sneakers.' }}</p>
+                    <p class="prod-card-dtc__desc">{{ product.description | strip_html | truncate: 60 | default: 'Premium care for high-end sneakers.' }}</p>
                     <div class="prod-card-dtc__rating">
                       <span></span><span></span><span></span><span></span><span class="grey"></span>
                     </div>
@@ -332,7 +341,7 @@
             {%- when 'custom_card' -%}
               <div class="prod-card-dtc" {{ block.shopify_attributes }}>
                 {%- if block.settings.compare_at_price != blank -%}
-                  <span class="prod-card-dtc__badge">Best Seller</span>
+                  <span class="prod-card-dtc__badge">Sale</span>
                 {%- endif -%}
 
                 <div class="prod-card-dtc__image-container">
@@ -398,7 +407,7 @@
                 <a href="{{ product.url }}" style="text-decoration: none;">
                   <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
                 </a>
-                <p class="prod-card-dtc__desc">{{ product.description | strip_html | truncate: 50 | default: 'Premium care for high-end sneakers.' }}</p>
+                <p class="prod-card-dtc__desc">{{ product.description | strip_html | truncate: 60 | default: 'Premium care for high-end sneakers.' }}</p>
                 <div class="prod-card-dtc__rating">
                   <span></span><span></span><span></span><span></span><span class="grey"></span>
                 </div>
@@ -422,9 +431,7 @@
           {%- for i in (1..6) -%}
             <div class="prod-card-dtc">
               {%- if i == 1 or i == 3 -%}
-                <span class="prod-card-dtc__badge">Best Seller</span>
-              {%- else -%}
-                <span class="prod-card-dtc__badge">New</span>
+                <span class="prod-card-dtc__badge">Sale</span>
               {%- endif -%}
 
               <div class="prod-card-dtc__image-container">
@@ -485,7 +492,7 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Best Sellers"
+      "default": "BEST SELLERS"
     },
     {
       "type": "text",
@@ -511,7 +518,7 @@
       "type": "text",
       "id": "view_all_text",
       "label": "View All Text",
-      "default": "View All"
+      "default": "View All →"
     },
     {
       "type": "url",
