@@ -1,253 +1,227 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background: linear-gradient(180deg, #a80d1c 0%, #c1121f 100%);
+    background: linear-gradient(to bottom, {{ section.settings.bg_color | default: '#ff1e43' }} 76%, {{ section.settings.bg_color_bottom | default: '#000000' }} 76%);
   }
 
-  /* SECTION */
-  .hp-slider-sec {
+  .hp-fam-sec {
     position: relative;
-    padding: 60px 0;
+    padding: clamp(40px, 8vw, 80px) 0 0 0;
+    width: 100%;
+    box-sizing: border-box;
     overflow: hidden;
   }
 
-  /* HEADER */
-  .hp-slider-sec__header {
-    max-width: 1200px;
-    margin: 0 auto 30px;
+  .hp-fam-sec__container {
+    max-width: 1300px;
+    margin: 0 auto;
     padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
   }
 
-  .hp-slider-sec__heading {
-    font-size: clamp(20px, 3.5vw, 28px);
+  .hp-fam-sec__heading {
+    font-size: clamp(32px, 6vw, 68px);
     font-weight: 800;
-    color: #fff;
-    margin: 0;
+    color: #ffffff;
+    margin: 0 0 32px 0;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 700px;
   }
 
-  .hp-slider-sec__arrows {
+  /* CATEGORY TABS */
+  .hp-fam-sec__tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
-  }
-
-  /* ARROWS */
-  .hp-slider-sec__arrow {
-    width: 42px;
-    height: 42px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 50%;
-    border: none;
-    color: white;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    display: flex;
+    margin-bottom: 40px;
     align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, transform 0.2s ease;
-    padding: 0;
+  }
+
+  .hp-fam-sec__tab {
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 100px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(12px, 1.5vw, 14px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     outline: none;
+    text-decoration: none;
+    display: inline-block;
   }
 
-  .hp-slider-sec__arrow:hover {
-    background: rgba(255,255,255,0.25);
-    transform: scale(1.05);
+  .hp-fam-sec__tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
   }
 
-  .hp-slider-sec__arrow svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-    display: block;
+  .hp-fam-sec__tab.is-active {
+    background: #000000;
+    color: #ffffff;
   }
 
-  /* SLIDER */
-  .hp-slider-sec__slider {
-    display: flex;
-    gap: 16px;
+  /* SLIDERS */
+  .hp-fam-sec__slider-wrap {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .hp-fam-sec__slider {
+    display: none;
+    gap: clamp(20px, 4vw, 40px);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 10px 20px 30px;
-    scrollbar-width: none;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 0 20px 0;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
-    scroll-behavior: smooth;
   }
 
-  .hp-slider-sec__slider:active {
+  .hp-fam-sec__slider.is-active {
+    display: flex;
+  }
+
+  .hp-fam-sec__slider:active {
     cursor: grabbing;
   }
 
-  .hp-slider-sec__slider::-webkit-scrollbar {
+  .hp-fam-sec__slider::-webkit-scrollbar {
     display: none;
   }
 
+  .hp-fam-sec__slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   /* CARD */
-  .hp-slider-sec__card {
-    flex: 0 0 210px;
-    background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
+  .hp-fam-sec__card {
+    flex: 0 0 clamp(240px, 30vw, 360px);
+    background: transparent;
+    border: none;
+    overflow: visible;
     scroll-snap-align: start;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
     text-decoration: none;
     display: flex;
     flex-direction: column;
-  }
-
-  .hp-slider-sec__card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-  }
-
-  /* IMAGE */
-  .hp-slider-sec__image-wrap {
-    height: 240px;
-    background: #fff;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
+    justify-content: flex-end;
+    transition: transform 0.3s ease;
   }
 
-  .hp-slider-sec__image {
-    max-width: 90%;
-    max-height: 90%;
+  .hp-fam-sec__card:hover {
+    transform: translateY(-8px);
+  }
+
+  .hp-fam-sec__image {
+    width: 100%;
+    height: auto;
+    max-height: clamp(280px, 45vh, 480px);
     object-fit: contain;
-    transition: transform 0.5s ease;
     display: block;
+    pointer-events: none;
   }
 
-  .hp-slider-sec__card:hover .hp-slider-sec__image {
-    transform: scale(1.05);
-  }
-
-  /* INFO */
-  .hp-slider-sec__info {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    background: #ffffff;
-    flex-grow: 1;
-  }
-
-  .hp-slider-sec__title {
-    font-size: 14px;
-    font-weight: 500;
-    color: #111;
-    margin: 0;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    height: 2.6em;
-  }
-
-  .hp-slider-sec__price {
-    font-size: 13px;
-    color: #666;
-    font-weight: 500;
-    margin-top: auto;
-  }
-
-  /* FADE FIX */
-  .hp-slider-sec__fade {
+  /* Floating Scroll Hint Overlays (Fade out on sides) */
+  .hp-fam-sec__fade {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 70px;
+    width: 60px;
     pointer-events: none;
     z-index: 2;
     transition: opacity 0.3s ease;
   }
 
-  .hp-slider-sec__fade--left {
+  .hp-fam-sec__fade--left {
     left: 0;
-    background: linear-gradient(to right, #c1121f, transparent);
+    background: linear-gradient(to right, {{ section.settings.bg_color | default: '#ff1e43' }}, transparent);
   }
 
-  .hp-slider-sec__fade--right {
+  .hp-fam-sec__fade--right {
     right: 0;
-    background: linear-gradient(to left, #c1121f, transparent);
+    background: linear-gradient(to left, {{ section.settings.bg_color | default: '#ff1e43' }}, transparent);
   }
 
-  /* MOBILE */
-  @media(max-width:768px){
-    .hp-slider-sec__card{
-      flex: 0 0 160px;
+  @media screen and (max-width: 767px) {
+    .hp-fam-sec__heading {
+      margin-bottom: 24px;
     }
-
-    .hp-slider-sec__image-wrap{
-      height: 200px;
+    .hp-fam-sec__fade {
+      width: 30px;
     }
-
-    .hp-slider-sec__fade {
-      width: 40px;
+    .hp-fam-sec__card {
+      flex: 0 0 clamp(180px, 50vw, 220px);
     }
   }
 {%- endstyle -%}
 
-<div class="hp-slider-sec" id="slider-{{ section.id }}">
-  <div class="hp-slider-sec__container">
+<div class="hp-fam-sec" id="fam-{{ section.id }}">
+  <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <div class="hp-slider-sec__header">
-        <h2 class="hp-slider-sec__heading">{{ section.settings.heading }}</h2>
-        <div class="hp-slider-sec__arrows">
-          <button class="hp-slider-sec__arrow hp-slider-sec__arrow--prev" aria-label="Previous Products">
-            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
-          </button>
-          <button class="hp-slider-sec__arrow hp-slider-sec__arrow--next" aria-label="Next Products">
-            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-          </button>
-        </div>
+      <h2 class="hp-fam-sec__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hp-fam-sec__tabs">
+        {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+          {%- if collection != blank or block.settings.title != blank -%}
+            <button class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}" data-target="slider-{{ block.id }}">
+              {{ block.settings.title | default: collection.title | upcase }}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     {%- endif -%}
 
-    <div class="hp-slider-sec__fade hp-slider-sec__fade--left"></div>
-    <div class="hp-slider-sec__fade hp-slider-sec__fade--right"></div>
+    <div class="hp-fam-sec__slider-wrap">
+      <div class="hp-fam-sec__fade hp-fam-sec__fade--left"></div>
+      <div class="hp-fam-sec__fade hp-fam-sec__fade--right"></div>
 
-    <div class="hp-slider-sec__slider" id="scroller-{{ section.id }}">
-      {%- assign collection = section.settings.collection -%}
-      {%- if collection != blank and collection.products.size > 0 -%}
-        {%- for product in collection.products limit: section.settings.products_to_show -%}
-          <a href="{{ product.url }}" class="hp-slider-sec__card">
-            <div class="hp-slider-sec__image-wrap">
-              {%- if product.featured_media != blank -%}
-                <img src="{{ product.featured_media | image_url: width: 600 }}"
-                     alt="{{ product.title | escape }}"
-                     class="hp-slider-sec__image"
-                     loading="lazy"
-                     width="300"
-                     height="375">
-              {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag: 'hp-slider-sec__image' }}
-              {%- endif -%}
-            </div>
-            <div class="hp-slider-sec__info">
-              <h3 class="hp-slider-sec__title">{{ product.title }}</h3>
-              <div class="hp-slider-sec__price">{{ product.price | money }}</div>
-            </div>
-          </a>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..6) -%}
-          <div class="hp-slider-sec__card">
-            <div class="hp-slider-sec__image-wrap">
-              {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
-              {{ 'product-' | append: current | placeholder_svg_tag: 'hp-slider-sec__image' }}
-            </div>
-            <div class="hp-slider-sec__info">
-              <h3 class="hp-slider-sec__title">Sample Product Title {{ i }}</h3>
-              <div class="hp-slider-sec__price">{{ 4999 | money }}</div>
-            </div>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+          <div class="hp-fam-sec__slider {% if forloop.first %}is-active{% endif %}" id="slider-{{ block.id }}">
+            {%- if collection != blank and collection.products.size > 0 -%}
+              {%- for product in collection.products limit: section.settings.products_to_show -%}
+                <a href="{{ product.url }}" class="hp-fam-sec__card">
+                  {%- if product.featured_media != blank -%}
+                    <img src="{{ product.featured_media | image_url: width: 800 }}"
+                         alt="{{ product.title | escape }}"
+                         class="hp-fam-sec__image"
+                         loading="lazy">
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                  {%- endif -%}
+                </a>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for i in (1..4) -%}
+                <div class="hp-fam-sec__card">
+                  {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
           </div>
         {%- endfor -%}
+      {%- else -%}
+        <div class="hp-fam-sec__slider is-active">
+          {%- for i in (1..4) -%}
+            <div class="hp-fam-sec__card">
+              {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+              {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+            </div>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
     </div>
   </div>
@@ -255,53 +229,56 @@
 
 <script>
   (function() {
-    const scroller = document.getElementById('scroller-{{ section.id }}');
-    if (!scroller) return;
+    const section = document.getElementById('fam-{{ section.id }}');
+    if (!section) return;
 
-    // Mouse drag scrolling functionality
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+    // Handle tab clicking
+    const tabs = section.querySelectorAll('.hp-fam-sec__tab');
+    const sliders = section.querySelectorAll('.hp-fam-sec__slider');
 
-    scroller.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - scroller.offsetLeft;
-      scrollLeft = scroller.scrollLeft;
-      scroller.style.scrollBehavior = 'auto';
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('is-active'));
+        sliders.forEach(s => s.classList.remove('is-active'));
+
+        tab.classList.add('is-active');
+        const targetSlider = section.querySelector(`#${tab.getAttribute('data-target')}`);
+        if (targetSlider) {
+          targetSlider.classList.add('is-active');
+        }
+      });
     });
 
-    scroller.addEventListener('mouseleave', () => {
-      isDown = false;
-    });
+    // Add drag-to-scroll interactivity
+    sliders.forEach(slider => {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
 
-    scroller.addEventListener('mouseup', () => {
-      isDown = false;
-      scroller.style.scrollBehavior = 'smooth';
-    });
-
-    scroller.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - scroller.offsetLeft;
-      const walk = (x - startX) * 1.5; // Drag speed multiplier
-      scroller.scrollLeft = scrollLeft - walk;
-    });
-
-    // Arrow controls
-    const prevBtn = document.querySelector('#slider-{{ section.id }} .hp-slider-sec__arrow--prev');
-    const nextBtn = document.querySelector('#slider-{{ section.id }} .hp-slider-sec__arrow--next');
-
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', () => {
-        scroller.style.scrollBehavior = 'smooth';
-        scroller.scrollLeft -= 226; // Width of card + gap
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        slider.style.scrollBehavior = 'auto';
       });
 
-      nextBtn.addEventListener('click', () => {
-        scroller.style.scrollBehavior = 'smooth';
-        scroller.scrollLeft += 226;
+      slider.addEventListener('mouseleave', () => {
+        isDown = false;
       });
-    }
+
+      slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.style.scrollBehavior = 'smooth';
+      });
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    });
   })();
 </script>
 
@@ -312,13 +289,20 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Section Heading",
-      "default": "Shop Our Premium Best"
+      "label": "Heading",
+      "default": "Meet the Nuuk fam!"
     },
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
+      "type": "color",
+      "id": "bg_color",
+      "label": "Top Background Color (Red)",
+      "default": "#ff1e43"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_bottom",
+      "label": "Bottom Background Color (Black)",
+      "default": "#000000"
     },
     {
       "type": "range",
@@ -330,12 +314,31 @@
       "label": "Products to show"
     }
   ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Name override (e.g. FANS)"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Horizontal Product Slider",
-      "settings": {
-        "heading": "Shop Our Premium Best"
-      }
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
     }
   ]
 }
