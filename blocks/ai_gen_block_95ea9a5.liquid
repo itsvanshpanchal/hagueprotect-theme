@@ -182,6 +182,38 @@
             assign story_title = block.settings[title_key]
             assign story_description = block.settings[description_key]
             assign story_link = block.settings[link_key]
+
+            if i == 1
+              if product.metafields.custom.story_1_image != blank
+                assign story_image = product.metafields.custom.story_1_image
+              endif
+              if product.metafields.custom.story_1_title != blank
+                assign story_title = product.metafields.custom.story_1_title
+              endif
+              if product.metafields.custom.story_1_description != blank
+                assign story_description = product.metafields.custom.story_1_description
+              endif
+            elsif i == 2
+              if product.metafields.custom.story_2_image != blank
+                assign story_image = product.metafields.custom.story_2_image
+              endif
+              if product.metafields.custom.story_2_title != blank
+                assign story_title = product.metafields.custom.story_2_title
+              endif
+              if product.metafields.custom.story_2_description != blank
+                assign story_description = product.metafields.custom.story_2_description
+              endif
+            elsif i == 3
+              if product.metafields.custom.story_3_image != blank
+                assign story_image = product.metafields.custom.story_3_image
+              endif
+              if product.metafields.custom.story_3_title != blank
+                assign story_title = product.metafields.custom.story_3_title
+              endif
+              if product.metafields.custom.story_3_description != blank
+                assign story_description = product.metafields.custom.story_3_description
+              endif
+            endif
           %}
 
           <a
