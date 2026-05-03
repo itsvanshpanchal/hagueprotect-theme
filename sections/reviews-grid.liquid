@@ -346,9 +346,16 @@
         {%- assign sample_dates = "4/24/2026|3/21/2026|2/20/2026|12/11/2025|10/8/2025|8/24/2025|10/2/2025|12/12/2025|7/24/2025|7/28/2025|7/23/2025|7/18/2025|7/2/2025|6/14/2025" | split: "|" -%}
         {%- assign sample_texts = "nice product|build quality 5/5. overall product is great|Our new go-to cleaner. Truly remarkable formula|The best part of the product is its efficiency. Must buy.|one of a kind product. I love this. Will buy again.|absolutely thrilled. Compact, lightweight, surprisingly powerful.|Love the formula. Hand and shoes are safe. Super premium.|I love everything about it. It works smoothly, looks great, and exceeded my expectations.|Very handy. Elite cleaner. The BLDC motor is a marvel.|It's a very compact travel kit. Its unique feature is safe on suede.|I wasn't sure about spending this much—but OMG I'm so glad I did! The quality is top notch.|excellent|I spent a lot of time thinking if I should spend that much money but it was worth the quality.|It was awesome. My wife loved it." | split: "|" -%}
         {%- assign sample_types = "Classic Kit|Ivory Metal Grey|Tokyo Totti Candy|Classic Shield|Maluku Green|Ivory Metal Grey|Lemonade Yellow|Blackpink Grey|Maluku Green|Blackpink Grey|Ivory Metal Grey|Classic Shield|Maluku Green|Lemonade Yellow" | split: "|" -%}
-        
-        {%- for i in (0..13) -%}
+                {%- for i in (0..13) -%}
           <div class="reviews-sec__card">
+            <div class="reviews-sec__media">
+              <div class="reviews-sec__image reviews-sec__fallback-media" style="background: #f1f1f1; aspect-ratio: 4/5; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+                <svg style="width: 32px; height: 32px; fill: #9e9e9e;" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg>
+                <div class="reviews-sec__play-icon" style="background: rgba(0,0,0,0.45); border: 1.5px solid #fff; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; position: absolute;">
+                  <svg style="width: 14px; height: 14px; fill: #ffffff; margin-left: 2px;" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+            </div>
             <div class="reviews-sec__info">
               <div class="reviews-sec__author-name">
                 {{ sample_names[i] }}
