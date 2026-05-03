@@ -103,7 +103,7 @@
 
   /* CARD */
   .hp-fam-sec__card {
-    flex: 0 0 clamp(240px, 30vw, 360px);
+    flex: 0 0 clamp(300px, 38vw, 440px);
     background: transparent;
     border: none;
     overflow: visible;
@@ -115,6 +115,10 @@
     transition: transform 0.3s ease;
     margin: 0;
     padding: 0;
+    user-drag: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .hp-fam-sec__card:hover {
@@ -124,11 +128,13 @@
   .hp-fam-sec__image {
     width: 100%;
     height: auto;
-    max-height: clamp(280px, 45vh, 480px);
+    max-height: clamp(350px, 55vh, 580px);
     object-fit: contain;
     display: block;
     pointer-events: none;
     margin-bottom: 0;
+    user-drag: none;
+    -webkit-user-drag: none;
   }
 
   @media screen and (max-width: 767px) {
@@ -136,7 +142,10 @@
       margin-bottom: 24px;
     }
     .hp-fam-sec__card {
-      flex: 0 0 clamp(180px, 50vw, 220px);
+      flex: 0 0 clamp(220px, 60vw, 280px);
+    }
+    .hp-fam-sec__image {
+      max-height: clamp(280px, 45vh, 360px);
     }
   }
 {%- endstyle -%}
