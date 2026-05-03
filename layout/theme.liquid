@@ -143,6 +143,11 @@
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     <style>
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+      }
       body, html, p, span, a, div, h1, h2, h3, h4, h5, h6, input, button, select, textarea {
         font-family: 'Inter', sans-serif !important;
         font-weight: 700 !important;
@@ -170,6 +175,7 @@
         100% { opacity: 1; transform: translateY(0); }
       }
     </style>
+
 
     {{ content_for_header }}
   </head>
