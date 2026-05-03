@@ -88,6 +88,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     padding: 0 0 0 0;
     margin-bottom: 0;
     cursor: grab;
@@ -157,14 +158,21 @@
   }
 
   @media screen and (max-width: 767px) {
+    .hp-fam-sec__container {
+      padding: 0 20px;
+    }
     .hp-fam-sec__heading {
       margin-bottom: 24px;
+      font-size: 32px;
     }
     .hp-fam-sec__card {
-      flex: 0 0 clamp(220px, 60vw, 280px);
+      flex: 0 0 clamp(180px, 65vw, 260px);
     }
     .hp-fam-sec__image {
-      max-height: clamp(280px, 45vh, 360px);
+      max-height: clamp(200px, 42vh, 300px);
+    }
+    .hp-fam-sec__slider {
+      gap: 16px;
     }
   }
 {%- endstyle -%}
@@ -286,40 +294,45 @@
       let startX;
       let scrollLeft;
 
-      slider.addEventListener('mousedown', (e) => {
+      slider.addEventListener('pointerdown', (e) => {
+        // Only trigger on left-clicks/touches
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
         isDown = true;
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
         slider.style.scrollBehavior = 'auto';
         slider.classList.add('is-dragging');
+        slider.setPointerCapture(e.pointerId);
       });
 
-      window.addEventListener('mouseup', () => {
+      slider.addEventListener('pointerup', (e) => {
         if (isDown) {
           isDown = false;
           slider.style.scrollBehavior = 'smooth';
           slider.classList.remove('is-dragging');
+          slider.releasePointerCapture(e.pointerId);
         }
       });
 
-      slider.addEventListener('mouseleave', () => {
+      slider.addEventListener('pointercancel', (e) => {
         if (isDown) {
           isDown = false;
           slider.style.scrollBehavior = 'smooth';
           slider.classList.remove('is-dragging');
+          slider.releasePointerCapture(e.pointerId);
         }
       });
 
-      slider.addEventListener('mousemove', (e) => {
+      slider.addEventListener('pointermove', (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.8;
+        const walk = (x - startX) * 1.5;
         slider.scrollLeft = scrollLeft - walk;
       });
     });
   })();
 </script>
+
 
 {% schema %}
 {
