@@ -78,7 +78,8 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding: 0 0 20px 0;
+    padding: 0 0 0 0;
+    margin-bottom: 0;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
@@ -114,6 +115,8 @@
     align-items: center;
     justify-content: flex-end;
     transition: transform 0.3s ease;
+    margin: 0;
+    padding: 0;
   }
 
   .hp-fam-sec__card:hover {
@@ -127,6 +130,7 @@
     object-fit: contain;
     display: block;
     pointer-events: none;
+    margin-bottom: 0;
   }
 
   /* Floating Scroll Hint Overlays (Fade out on sides) */
@@ -190,7 +194,29 @@
         {%- for block in section.blocks -%}
           {%- assign collection = block.settings.collection -%}
           <div class="hp-fam-sec__slider {% if forloop.first %}is-active{% endif %}" id="slider-{{ block.id }}">
-            {%- if collection != blank and collection.products.size > 0 -%}
+            
+            {%- assign has_custom_images = false -%}
+            {%- for i in (1..6) -%}
+              {%- capture img_id -%}image_{{ i }}{%- endcapture -%}
+              {%- if block.settings[img_id] != blank -%}
+                {%- assign has_custom_images = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if has_custom_images -%}
+              {%- for i in (1..6) -%}
+                {%- capture img_id -%}image_{{ i }}{%- endcapture -%}
+                {%- capture url_id -%}url_{{ i }}{%- endcapture -%}
+                {%- if block.settings[img_id] != blank -%}
+                  <a href="{{ block.settings[url_id] | default: '#' }}" class="hp-fam-sec__card">
+                    <img src="{{ block.settings[img_id] | image_url: width: 800 }}"
+                         alt="Product"
+                         class="hp-fam-sec__image"
+                         loading="lazy">
+                  </a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- elsif collection != blank and collection.products.size > 0 -%}
               {%- for product in collection.products limit: section.settings.products_to_show -%}
                 <a href="{{ product.url }}" class="hp-fam-sec__card">
                   {%- if product.featured_media != blank -%}
@@ -328,6 +354,70 @@
           "type": "text",
           "id": "title",
           "label": "Tab Name override (e.g. FANS)"
+        },
+        {
+          "type": "header",
+          "content": "Custom Direct Product Cutout Uploads"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Custom Product Cutout Image 1"
+        },
+        {
+          "type": "url",
+          "id": "url_1",
+          "label": "Custom Product Link 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Custom Product Cutout Image 2"
+        },
+        {
+          "type": "url",
+          "id": "url_2",
+          "label": "Custom Product Link 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Custom Product Cutout Image 3"
+        },
+        {
+          "type": "url",
+          "id": "url_3",
+          "label": "Custom Product Link 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Custom Product Cutout Image 4"
+        },
+        {
+          "type": "url",
+          "id": "url_4",
+          "label": "Custom Product Link 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Custom Product Cutout Image 5"
+        },
+        {
+          "type": "url",
+          "id": "url_5",
+          "label": "Custom Product Link 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Custom Product Cutout Image 6"
+        },
+        {
+          "type": "url",
+          "id": "url_6",
+          "label": "Custom Product Link 6"
         }
       ]
     }
