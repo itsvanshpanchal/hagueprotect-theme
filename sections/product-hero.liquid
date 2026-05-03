@@ -304,8 +304,12 @@
 }
 
 .d2c-pdp-badge-emoji {
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
 }
 
 .d2c-pdp-badge-text {
@@ -797,31 +801,61 @@
       <div class="d2c-pdp-badge-list">
         {%- if section.settings.pill_1_text != blank -%}
           <div class="d2c-pdp-badge-item">
-            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_1_emoji | default: "🔋" }}</span>
+            <span class="d2c-pdp-badge-emoji">
+              {%- if section.settings.pill_1_icon != blank -%}
+                <img src="{{ section.settings.pill_1_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_1_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {%- endif -%}
+            </span>
             <span class="d2c-pdp-badge-text">{{ section.settings.pill_1_text }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.pill_2_text != blank -%}
           <div class="d2c-pdp-badge-item">
-            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_2_emoji | default: "❄️" }}</span>
+            <span class="d2c-pdp-badge-emoji">
+              {%- if section.settings.pill_2_icon != blank -%}
+                <img src="{{ section.settings.pill_2_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_2_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.912 3.874 4.276.622-3.094 3.016.73 4.258L12 14.75l-3.824 2.02.73-4.258-3.094-3.016 4.276-.622z"></path></svg>
+              {%- endif -%}
+            </span>
             <span class="d2c-pdp-badge-text">{{ section.settings.pill_2_text }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.pill_3_text != blank -%}
           <div class="d2c-pdp-badge-item">
-            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_3_emoji | default: "⌨️" }}</span>
+            <span class="d2c-pdp-badge-emoji">
+              {%- if section.settings.pill_3_icon != blank -%}
+                <img src="{{ section.settings.pill_3_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_3_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              {%- endif -%}
+            </span>
             <span class="d2c-pdp-badge-text">{{ section.settings.pill_3_text }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.pill_4_text != blank -%}
           <div class="d2c-pdp-badge-item">
-            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_4_emoji | default: "✥" }}</span>
+            <span class="d2c-pdp-badge-emoji">
+              {%- if section.settings.pill_4_icon != blank -%}
+                <img src="{{ section.settings.pill_4_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_4_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 21 3c-1.5 4-2 5.5-3.1 11.2A7 7 0 0 1 11 20z"></path><path d="M11 20v-5"></path></svg>
+              {%- endif -%}
+            </span>
             <span class="d2c-pdp-badge-text">{{ section.settings.pill_4_text }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.pill_5_text != blank -%}
           <div class="d2c-pdp-badge-item">
-            <span class="d2c-pdp-badge-emoji">{{ section.settings.pill_5_emoji | default: "🛡️" }}</span>
+            <span class="d2c-pdp-badge-emoji">
+              {%- if section.settings.pill_5_icon != blank -%}
+                <img src="{{ section.settings.pill_5_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_5_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+              {%- else -%}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              {%- endif -%}
+            </span>
             <span class="d2c-pdp-badge-text">{{ section.settings.pill_5_text }}</span>
           </div>
         {%- endif -%}
@@ -897,34 +931,6 @@
         <input type="hidden" name="quantity" id="QuantitySelector-Input" value="1">
 
         <div style="display: flex; flex-direction: column; gap: 20px;">
-          <!-- Variant Cards -->
-          {%- if product.variants.size > 1 -%}
-            <div class="d2c-variant-picker">
-              <label class="d2c-label">Select Option</label>
-              <div class="d2c-variant-cards">
-                {%- for variant in product.variants -%}
-                  <div class="d2c-variant-card{% if variant == product.selected_or_first_available_variant %} active{% endif %}" 
-                       data-variant-id="{{ variant.id }}" 
-                       data-price="{{ variant.price | money }}"
-                       data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
-                       data-available="{{ variant.available }}">
-                    {%- if variant.featured_image != blank -%}
-                      <img src="{{ variant.featured_image | image_url: width: 60, height: 60, crop: 'center' }}" alt="{{ variant.title | escape }}" class="d2c-variant-img" loading="lazy">
-                    {%- else -%}
-                      <div class="d2c-variant-fallback-img">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
-                           <rect width="18" height="18" x="3" y="3" rx="4"></rect>
-                           <circle cx="9" cy="9" r="2"></circle>
-                           <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-                        </svg>
-                      </div>
-                    {%- endif -%}
-                    <div class="d2c-variant-name">{{ variant.title }}</div>
-                  </div>
-                {%- endfor -%}
-              </div>
-            </div>
-          {%- endif -%}
 
           <!-- Optional Personalization Block -->
           <div class="d2c-personalization">
@@ -1306,71 +1312,66 @@ function togglePersonalizationInput() {
       "type": "textarea",
       "id": "subtitle_text",
       "label": "Short Description / Subtitle",
-      "default": "Your go-to, on-the-go fan—cool, bold and always by your side."
+      "default": "Premium character-enhancing care formulated to clean and protect every kind of sneaker."
     },
     {
       "type": "header",
       "content": "Highlight Pills"
     },
     {
-      "type": "text",
-      "id": "pill_1_emoji",
-      "label": "Pill 1 Emoji",
-      "default": "🔋"
+      "type": "image_picker",
+      "id": "pill_1_icon",
+      "label": "Pill 1 Icon (Optional Image)"
     },
     {
       "type": "text",
       "id": "pill_1_text",
       "label": "Pill 1 Text",
-      "default": "10 hour Battery Life"
+      "default": "Safe on all premium sneakers"
     },
     {
-      "type": "text",
-      "id": "pill_2_emoji",
-      "label": "Pill 2 Emoji",
-      "default": "❄️"
+      "type": "image_picker",
+      "id": "pill_2_icon",
+      "label": "Pill 2 Icon (Optional Image)"
     },
     {
       "type": "text",
       "id": "pill_2_text",
       "label": "Pill 2 Text",
-      "default": "IceTouch™ for Instant Cooling"
+      "default": "Instantly restores original vibrance"
     },
     {
-      "type": "text",
-      "id": "pill_3_emoji",
-      "label": "Pill 3 Emoji",
-      "default": "⌨️"
+      "type": "image_picker",
+      "id": "pill_3_icon",
+      "label": "Pill 3 Icon (Optional Image)"
     },
     {
       "type": "text",
       "id": "pill_3_text",
       "label": "Pill 3 Text",
-      "default": "180° Folding Head"
+      "default": "Creates invisible protective barrier"
     },
     {
-      "type": "text",
-      "id": "pill_4_emoji",
-      "label": "Pill 4 Emoji",
-      "default": "✥"
+      "type": "image_picker",
+      "id": "pill_4_icon",
+      "label": "Pill 4 Icon (Optional Image)"
     },
     {
       "type": "text",
       "id": "pill_4_text",
       "label": "Pill 4 Text",
-      "default": "13000 RPM, BLDC Motor"
+      "default": "Safe & non-toxic premium formula"
     },
     {
-      "type": "text",
-      "id": "pill_5_emoji",
-      "label": "Pill 5 Emoji",
-      "default": "🛡️"
+      "type": "image_picker",
+      "id": "pill_5_icon",
+      "label": "Pill 5 Icon (Optional Image)"
     },
     {
       "type": "text",
       "id": "pill_5_text",
       "label": "Pill 5 Text",
-      "default": "1 Year Warranty"
+      "default": "Fast shipping & delivery"
     }
   ],
   "presets": [
