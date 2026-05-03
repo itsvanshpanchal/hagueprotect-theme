@@ -75,7 +75,6 @@
     display: none;
     gap: clamp(20px, 4vw, 40px);
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     padding: 0 0 0 0;
@@ -108,7 +107,6 @@
     background: transparent;
     border: none;
     overflow: visible;
-    scroll-snap-align: start;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -133,33 +131,9 @@
     margin-bottom: 0;
   }
 
-  /* Floating Scroll Hint Overlays (Fade out on sides) */
-  .hp-fam-sec__fade {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 60px;
-    pointer-events: none;
-    z-index: 2;
-    transition: opacity 0.3s ease;
-  }
-
-  .hp-fam-sec__fade--left {
-    left: 0;
-    background: linear-gradient(to right, {{ section.settings.bg_color | default: '#ff1e43' }}, transparent);
-  }
-
-  .hp-fam-sec__fade--right {
-    right: 0;
-    background: linear-gradient(to left, {{ section.settings.bg_color | default: '#ff1e43' }}, transparent);
-  }
-
   @media screen and (max-width: 767px) {
     .hp-fam-sec__heading {
       margin-bottom: 24px;
-    }
-    .hp-fam-sec__fade {
-      width: 30px;
     }
     .hp-fam-sec__card {
       flex: 0 0 clamp(180px, 50vw, 220px);
@@ -187,8 +161,6 @@
     {%- endif -%}
 
     <div class="hp-fam-sec__slider-wrap">
-      <div class="hp-fam-sec__fade hp-fam-sec__fade--left"></div>
-      <div class="hp-fam-sec__fade hp-fam-sec__fade--right"></div>
 
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
