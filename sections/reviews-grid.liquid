@@ -288,13 +288,23 @@
     <div class="reviews-sec__masonry">
       {%- for block in section.blocks -%}
         <div class="reviews-sec__card" {{ block.shopify_attributes }}>
-          {%- if block.settings.image != blank -%}
+          {%- if block.settings.video != blank or block.settings.video_url != blank or block.settings.image != blank -%}
             <div class="reviews-sec__media">
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Review Image" class="reviews-sec__image" loading="lazy">
-              {%- if block.settings.has_video -%}
-                <div class="reviews-sec__play-icon">
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: true, class: "reviews-sec__image" }}
+              {%- elsif block.settings.video_url != blank -%}
+                {%- if block.settings.video_url.type == 'youtube' -%}
+                  <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
+                {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                  <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
+                {%- endif -%}
+              {%- elsif block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Review Image" class="reviews-sec__image" loading="lazy">
+                {%- if block.settings.has_video -%}
+                  <div class="reviews-sec__play-icon">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                {%- endif -%}
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -392,6 +402,17 @@
           "type": "image_picker",
           "id": "image",
           "label": "Review Image/Thumbnail"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Review Video (Native Shopify Video Upload)"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "label": "Review Video URL (YouTube or Vimeo)"
         },
         {
           "type": "checkbox",
