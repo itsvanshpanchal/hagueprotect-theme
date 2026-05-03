@@ -66,26 +66,13 @@
     color: #ffffff;
   }
 
-  /* TWO-COLUMN LAYOUT */
+  /* LAYOUT */
   .hp-fam-sec__main-flex {
-    display: flex;
-    gap: 32px;
-    align-items: flex-end;
+    width: 100%;
   }
 
   .hp-fam-sec__slider-left {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .hp-fam-sec__vertical-right {
-    flex: 0 0 clamp(260px, 22vw, 320px);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    position: relative;
-    padding-right: 0;
-    box-sizing: border-box;
+    width: 100%;
   }
 
   /* SLIDERS */
@@ -167,142 +154,6 @@
     user-drag: none;
     -webkit-user-drag: none;
     transform: translateY({{ section.settings.image_offset | default: 0 }}px);
-  }
-
-  /* FEATURED RIGHT SIDE CARD */
-  .hp-fam-sec__sticky-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 16px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    flex: 1;
-    min-height: 380px;
-  }
-
-  .hp-fam-sec__card-badge {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    background: #ff1e43;
-    color: #ffffff;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .hp-fam-sec__card-img-wrap {
-    width: 100%;
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    margin-top: 10px;
-  }
-
-  .hp-fam-sec__card-img-wrap img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .hp-fam-sec__card-rating {
-    font-size: 11px;
-    color: #0baf57;
-    font-weight: 700;
-    background: #e8f7ee;
-    padding: 3px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  .hp-fam-sec__card-title {
-    font-size: 16px;
-    font-weight: 800;
-    color: #111111;
-    margin: 8px 0 4px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-
-  .hp-fam-sec__card-subtitle {
-    font-size: 12px;
-    color: #777777;
-    margin: 0 0 8px 0;
-  }
-
-  .hp-fam-sec__card-desc {
-    font-size: 13px;
-    color: #111111;
-    font-weight: 700;
-    margin: 0 0 12px 0;
-    line-height: 1.35;
-  }
-
-  .hp-fam-sec__card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid #f0f0f0;
-  }
-
-  .hp-fam-sec__card-pricing {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hp-fam-sec__card-compare {
-    font-size: 12px;
-    text-decoration: line-through;
-    color: #999999;
-  }
-
-  .hp-fam-sec__card-price {
-    font-size: 18px;
-    font-weight: 800;
-    color: #111111;
-  }
-
-  .hp-fam-sec__card-btn {
-    background: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  .hp-fam-sec__card-btn:hover {
-    background: #ff1e43;
-  }
-
-  @media screen and (max-width: 1024px) {
-    .hp-fam-sec__main-flex {
-      flex-direction: column;
-    }
-    .hp-fam-sec__vertical-right {
-      flex: none;
-      width: 100%;
-      flex-direction: row;
-      overflow-x: auto;
-      gap: 16px;
-      padding-bottom: 15px;
-    }
-    .hp-fam-sec__sticky-card {
-      flex: 0 0 330px;
-    }
   }
 
   @media screen and (max-width: 767px) {
