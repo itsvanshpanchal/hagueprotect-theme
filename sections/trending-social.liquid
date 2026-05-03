@@ -431,28 +431,54 @@
     const slider = document.getElementById('trending-social-slider-{{ section.id }}');
 
     if (slider) {
-      const firstSlide = slider.querySelector('.trending-social__slide');
-      if (firstSlide) {
-        const slideWidth = firstSlide.clientWidth + {{ section.settings.card_spacing | default: '24' }};
-        let autoScroll = setInterval(() => {
-          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-            slider.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-            slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-          }
-        }, 3000);
+      let isHovered = false;
+      let isDragging = false;
+      let startX;
+      let scrollLeft;
 
-        slider.addEventListener('mouseenter', () => clearInterval(autoScroll));
-        slider.addEventListener('mouseleave', () => {
-          autoScroll = setInterval(() => {
-            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
-              slider.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-              slider.scrollBy({ left: slideWidth, behavior: 'smooth' });
-            }
-          }, 3000);
-        });
+      // Smooth continuous scrolling ticker function
+      function smoothScroll() {
+        if (!isHovered && !isDragging) {
+          slider.scrollLeft += 1;
+          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+            slider.scrollLeft = 0;
+          }
+        }
+        requestAnimationFrame(smoothScroll);
       }
+
+      // Start continuous scrolling
+      requestAnimationFrame(smoothScroll);
+
+      // Handle pause on hover
+      slider.addEventListener('mouseenter', () => { isHovered = true; });
+      slider.addEventListener('mouseleave', () => { isHovered = false; });
+
+      // Handle dragging
+      slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDragging = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // scroll-fast
+        slider.scrollLeft = scrollLeft - walk;
+      });
     }
 
     const allVideos = document.querySelectorAll('.trending-social__media video');
