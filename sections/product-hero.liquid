@@ -652,62 +652,134 @@
   padding-bottom: 16px;
 }
 
-/* MOBILE STICKY Add to Cart */
-.d2c-mobile-sticky-atc {
-  display: none;
+/* FLOATING STICKY Add to Cart Bar */
+.d2c-floating-sticky-atc {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(150px);
+  width: calc(100% - 48px);
+  max-width: 900px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 999;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 767px) {
-  .d2c-mobile-sticky-atc {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #FFFFFF;
-    padding: 12px 16px;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.06);
-    z-index: 1000;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    border-top: 1px solid #EEEEEE;
-  }
+.d2c-floating-sticky-atc.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
 
-  .d2c-sticky-info {
-    display: flex;
-    flex-direction: column;
-  }
+.d2c-floating-sticky-atc__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 16px;
+}
 
-  .d2c-sticky-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--d2c-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 150px;
-  }
+.d2c-floating-sticky-atc__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
 
-  .d2c-sticky-price {
+.d2c-floating-compare-price {
+  font-size: 15px;
+  color: #a1a1a1;
+  text-decoration: line-through;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.d2c-floating-price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.d2c-floating-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.d2c-floating-discount {
+  background-color: #00E676;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.d2c-floating-variant-select {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #fafafa;
+  color: #111;
+  outline: none;
+  cursor: pointer;
+  max-width: 180px;
+}
+
+.d2c-floating-atc-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s;
+  white-space: nowrap;
+}
+
+.d2c-floating-atc-btn:hover {
+  background-color: #222222;
+}
+
+.d2c-floating-atc-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .d2c-floating-sticky-atc {
+    bottom: 12px;
+    width: calc(100% - 24px);
+    border-radius: 16px;
+  }
+  .d2c-floating-sticky-atc__inner {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .d2c-floating-price {
+    font-size: 18px;
+  }
+  .d2c-floating-atc-btn {
+    padding: 10px 16px;
     font-size: 14px;
-    font-weight: 700;
-    color: var(--d2c-primary);
+    border-radius: 8px;
   }
-
-  .d2c-sticky-atc-btn {
-    flex: 1;
-    height: 44px;
-    background: var(--d2c-primary);
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: var(--d2c-radius-sm);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .d2c-floating-variant-select {
+    display: none;
   }
 }
 {%- endstyle -%}
@@ -1042,19 +1114,44 @@
   </div>
 </div>
 
-<!-- Mobile Sticky ATC -->
-<div class="d2c-mobile-sticky-atc">
-  <div class="d2c-sticky-info">
-    <div class="d2c-sticky-title">{{ product.title | escape }}</div>
-    <div class="d2c-sticky-price" id="D2CStickyPriceCurrent">{{ product.price | money }}</div>
-  </div>
-  <button type="button" class="d2c-sticky-atc-btn" id="MobileStickyAtcBtn" {% unless product.available %}disabled{% endunless %}>
-    {%- if product.available -%}
-      Add to Cart
-    {%- else -%}
-      Sold Out
+<!-- Floating Sticky ATC Bar -->
+<div class="d2c-floating-sticky-atc" id="FloatingStickyAtc">
+  <div class="d2c-floating-sticky-atc__inner">
+    <div class="d2c-floating-sticky-atc__left">
+      {%- if product.compare_at_price > product.price -%}
+        <div class="d2c-floating-compare-price">{{ product.compare_at_price | money }}</div>
+      {%- endif -%}
+      <div class="d2c-floating-price-row">
+        <div class="d2c-floating-price">{{ product.price | money }}</div>
+        {%- if product.compare_at_price > product.price -%}
+          {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+          <div class="d2c-floating-discount">{{ discount }}% OFF</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if product.has_only_default_variant == false -%}
+      <div class="d2c-floating-sticky-atc__center">
+        <select id="FloatingStickyAtcVariantSelector" class="d2c-floating-variant-select">
+          {%- for variant in product.variants -%}
+            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title | escape }}
+            </option>
+          {%- endfor -%}
+        </select>
+      </div>
     {%- endif -%}
-  </button>
+
+    <div class="d2c-floating-sticky-atc__right">
+      <button type="button" class="d2c-floating-atc-btn" id="FloatingStickyAtcSubmit" {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}
+          Add to Cart
+        {%- else -%}
+          Sold Out
+        {%- endif -%}
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1219,11 +1316,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Mobile Sticky ATC Click
-  if (stickyBtn) {
-    stickyBtn.addEventListener('click', function() {
-      if (submitBtn) submitBtn.click();
+  // Floating Sticky ATC Click & Visibility
+  const floatingStickyAtc = document.getElementById('FloatingStickyAtc');
+  if (floatingStickyAtc) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        floatingStickyAtc.classList.add('visible');
+      } else {
+        floatingStickyAtc.classList.remove('visible');
+      }
     });
+
+    const atcSubmitBtn = document.getElementById('FloatingStickyAtcSubmit');
+    if (atcSubmitBtn && submitBtn) {
+      atcSubmitBtn.addEventListener('click', function() {
+        const stickyVariantSelect = document.getElementById('FloatingStickyAtcVariantSelector');
+        if (stickyVariantSelect) {
+          const mainFormVariantInput = document.querySelector('input[name="id"]');
+          if (mainFormVariantInput) {
+            mainFormVariantInput.value = stickyVariantSelect.value;
+          }
+        }
+        submitBtn.click();
+      });
+    }
   }
 });
 
