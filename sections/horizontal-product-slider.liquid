@@ -1,24 +1,19 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background: {{ section.settings.bg_color | default: '#c1121f' }};
+    background: linear-gradient(180deg, #a80d1c 0%, #c1121f 100%);
   }
 
+  /* SECTION */
   .hp-slider-sec {
     position: relative;
-    padding: clamp(40px, 6vw, 60px) 0;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 60px 0;
     overflow: hidden;
   }
 
-  .hp-slider-sec__container {
-    position: relative;
-    width: 100%;
-  }
-
+  /* HEADER */
   .hp-slider-sec__header {
     max-width: 1200px;
-    margin: 0 auto 24px auto;
+    margin: 0 auto 30px;
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
@@ -28,9 +23,8 @@
   .hp-slider-sec__heading {
     font-size: clamp(20px, 3.5vw, 28px);
     font-weight: 800;
-    color: #ffffff;
+    color: #fff;
     margin: 0;
-    letter-spacing: -0.02em;
   }
 
   .hp-slider-sec__arrows {
@@ -38,26 +32,26 @@
     gap: 12px;
   }
 
+  /* ARROWS */
   .hp-slider-sec__arrow {
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,0.15);
     border-radius: 50%;
-    color: #ffffff;
+    border: none;
+    color: white;
     cursor: pointer;
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.3s ease, transform 0.2s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     padding: 0;
     outline: none;
   }
 
   .hp-slider-sec__arrow:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.25);
     transform: scale(1.05);
   }
 
@@ -68,17 +62,18 @@
     display: block;
   }
 
+  /* SLIDER */
   .hp-slider-sec__slider {
     display: flex;
-    gap: clamp(16px, 3vw, 24px);
+    gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding: 10px 20px 24px 20px;
+    padding: 10px 20px 30px;
+    scrollbar-width: none;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
+    scroll-behavior: smooth;
   }
 
   .hp-slider-sec__slider:active {
@@ -89,54 +84,40 @@
     display: none;
   }
 
-  .hp-slider-sec__slider {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
+  /* CARD */
   .hp-slider-sec__card {
-    flex: 0 0 240px;
-    background: #ffffff;
-    border-radius: 20px;
+    flex: 0 0 210px;
+    background: #fff;
+    border-radius: 18px;
     overflow: hidden;
     scroll-snap-align: start;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
     text-decoration: none;
     display: flex;
     flex-direction: column;
   }
 
-  @media screen and (max-width: 767px) {
-    .hp-slider-sec__card {
-      flex: 0 0 180px;
-      border-radius: 16px;
-    }
-  }
-
   .hp-slider-sec__card:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
   }
 
+  /* IMAGE */
   .hp-slider-sec__image-wrap {
-    width: 100%;
-    height: 300px;
-    position: relative;
+    height: 240px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    background: #f7f7f7;
-  }
-
-  @media screen and (max-width: 767px) {
-    .hp-slider-sec__image-wrap {
-      height: 220px;
-    }
+    position: relative;
   }
 
   .hp-slider-sec__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
     transition: transform 0.5s ease;
     display: block;
   }
@@ -145,8 +126,9 @@
     transform: scale(1.05);
   }
 
+  /* INFO */
   .hp-slider-sec__info {
-    padding: 14px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -155,9 +137,9 @@
   }
 
   .hp-slider-sec__title {
-    font-size: clamp(13px, 2vw, 15px);
-    font-weight: 600;
-    color: #111111;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
     margin: 0;
     line-height: 1.3;
     display: -webkit-box;
@@ -169,17 +151,17 @@
 
   .hp-slider-sec__price {
     font-size: 13px;
-    color: #444444;
+    color: #666;
     font-weight: 500;
     margin-top: auto;
   }
 
-  /* Fade Hints on Left & Right */
+  /* FADE FIX */
   .hp-slider-sec__fade {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 80px;
+    width: 70px;
     pointer-events: none;
     z-index: 2;
     transition: opacity 0.3s ease;
@@ -187,15 +169,24 @@
 
   .hp-slider-sec__fade--left {
     left: 0;
-    background: linear-gradient(to right, {{ section.settings.bg_color | default: '#c1121f' }}, transparent);
+    background: linear-gradient(to right, #c1121f, transparent);
   }
 
   .hp-slider-sec__fade--right {
     right: 0;
-    background: linear-gradient(to left, {{ section.settings.bg_color | default: '#c1121f' }}, transparent);
+    background: linear-gradient(to left, #c1121f, transparent);
   }
 
-  @media screen and (max-width: 767px) {
+  /* MOBILE */
+  @media(max-width:768px){
+    .hp-slider-sec__card{
+      flex: 0 0 160px;
+    }
+
+    .hp-slider-sec__image-wrap{
+      height: 200px;
+    }
+
     .hp-slider-sec__fade {
       width: 40px;
     }
@@ -303,12 +294,12 @@
     if (prevBtn && nextBtn) {
       prevBtn.addEventListener('click', () => {
         scroller.style.scrollBehavior = 'smooth';
-        scroller.scrollLeft -= 264; // Approx width of card (240) + gap (24)
+        scroller.scrollLeft -= 226; // Width of card + gap
       });
 
       nextBtn.addEventListener('click', () => {
         scroller.style.scrollBehavior = 'smooth';
-        scroller.scrollLeft += 264;
+        scroller.scrollLeft += 226;
       });
     }
   })();
@@ -323,12 +314,6 @@
       "id": "heading",
       "label": "Section Heading",
       "default": "Shop Our Premium Best"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background Color",
-      "default": "#c1121f"
     },
     {
       "type": "collection",
