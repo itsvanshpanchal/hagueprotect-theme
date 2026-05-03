@@ -12,7 +12,7 @@
   }
 
   .hp-fam-sec__container {
-    max-width: 1300px;
+    max-width: 1360px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
@@ -64,6 +64,26 @@
     color: #ffffff;
   }
 
+  /* TWO-COLUMN LAYOUT */
+  .hp-fam-sec__main-flex {
+    display: flex;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .hp-fam-sec__slider-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hp-fam-sec__vertical-right {
+    flex: 0 0 clamp(300px, 26vw, 370px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
   /* SLIDERS */
   .hp-fam-sec__slider-wrap {
     position: relative;
@@ -108,7 +128,7 @@
 
   /* CARD */
   .hp-fam-sec__card {
-    flex: 0 0 clamp(300px, 38vw, 440px);
+    flex: 0 0 clamp(280px, 36vw, 420px);
     background: transparent;
     border: none;
     overflow: visible;
@@ -142,6 +162,142 @@
     -webkit-user-drag: none;
   }
 
+  /* FEATURED RIGHT SIDE CARD */
+  .hp-fam-sec__sticky-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    min-height: 480px;
+  }
+
+  .hp-fam-sec__card-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff1e43;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hp-fam-sec__card-img-wrap {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    margin-top: 15px;
+  }
+
+  .hp-fam-sec__card-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .hp-fam-sec__card-rating {
+    font-size: 13px;
+    color: #0baf57;
+    font-weight: 700;
+    background: #e8f7ee;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .hp-fam-sec__card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111111;
+    margin: 12px 0 4px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .hp-fam-sec__card-subtitle {
+    font-size: 13px;
+    color: #777777;
+    margin: 0 0 10px 0;
+  }
+
+  .hp-fam-sec__card-desc {
+    font-size: 14px;
+    color: #111111;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.35;
+  }
+
+  .hp-fam-sec__card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .hp-fam-sec__card-pricing {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hp-fam-sec__card-compare {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #999999;
+  }
+
+  .hp-fam-sec__card-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111111;
+  }
+
+  .hp-fam-sec__card-btn {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .hp-fam-sec__card-btn:hover {
+    background: #ff1e43;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .hp-fam-sec__main-flex {
+      flex-direction: column;
+    }
+    .hp-fam-sec__vertical-right {
+      flex: none;
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 16px;
+      padding-bottom: 15px;
+    }
+    .hp-fam-sec__sticky-card {
+      flex: 0 0 330px;
+    }
+  }
+
   @media screen and (max-width: 767px) {
     .hp-fam-sec__heading {
       margin-bottom: 24px;
@@ -164,71 +320,128 @@
     {%- if section.blocks.size > 0 -%}
       <div class="hp-fam-sec__tabs">
         {%- for block in section.blocks -%}
-          <button class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}" data-target="slider-{{ block.id }}">
-            {%- if block.type == 'collection' -%}
-              {%- assign collection = block.settings.collection -%}
-              {{ block.settings.title | default: collection.title | default: 'Collection' | upcase }}
-            {%- else -%}
-              {{ block.settings.title | default: 'Custom' | upcase }}
-            {%- endif -%}
-          </button>
+          {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+            <button class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}" data-target="slider-{{ block.id }}">
+              {%- if block.type == 'collection' -%}
+                {%- assign collection = block.settings.collection -%}
+                {{ block.settings.title | default: collection.title | default: 'Collection' | upcase }}
+              {%- else -%}
+                {{ block.settings.title | default: 'Custom' | upcase }}
+              {%- endif -%}
+            </button>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    <div class="hp-fam-sec__slider-wrap">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
-          <div class="hp-fam-sec__slider {% if forloop.first %}is-active{% endif %}" id="slider-{{ block.id }}">
-            
-            {%- if block.type == 'custom_images' -%}
-              {%- for i in (1..6) -%}
-                {%- capture img_id -%}image_{{ i }}{%- endcapture -%}
-                {%- capture url_id -%}url_{{ i }}{%- endcapture -%}
-                {%- if block.settings[img_id] != blank -%}
-                  <a href="{{ block.settings[url_id] | default: '#' }}" class="hp-fam-sec__card">
-                    <img src="{{ block.settings[img_id] | image_url: width: 800 }}"
-                         alt="Product"
-                         class="hp-fam-sec__image"
-                         loading="lazy"
-                         draggable="false">
-                  </a>
-                {%- endif -%}
-              {%- endfor -%}
-            {%- elsif block.type == 'collection' -%}
-              {%- assign collection = block.settings.collection -%}
-              {%- if collection != blank and collection.products.size > 0 -%}
-                {%- for product in collection.products limit: section.settings.products_to_show -%}
-                  <a href="{{ product.url }}" class="hp-fam-sec__card">
-                    {%- if product.featured_media != blank -%}
-                      <img src="{{ product.featured_media | image_url: width: 800 }}"
-                           alt="{{ product.title | escape }}"
-                           class="hp-fam-sec__image"
-                           loading="lazy"
-                           draggable="false">
+    <div class="hp-fam-sec__main-flex">
+      <div class="hp-fam-sec__slider-left">
+        <div class="hp-fam-sec__slider-wrap">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+                <div class="hp-fam-sec__slider {% if forloop.first %}is-active{% endif %}" id="slider-{{ block.id }}">
+                  
+                  {%- if block.type == 'custom_images' -%}
+                    {%- for i in (1..6) -%}
+                      {%- capture img_id -%}image_{{ i }}{%- endcapture -%}
+                      {%- capture url_id -%}url_{{ i }}{%- endcapture -%}
+                      {%- if block.settings[img_id] != blank -%}
+                        <a href="{{ block.settings[url_id] | default: '#' }}" class="hp-fam-sec__card">
+                          <img src="{{ block.settings[img_id] | image_url: width: 800 }}"
+                               alt="Product"
+                               class="hp-fam-sec__image"
+                               loading="lazy"
+                               draggable="false">
+                        </a>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- elsif block.type == 'collection' -%}
+                    {%- assign collection = block.settings.collection -%}
+                    {%- if collection != blank and collection.products.size > 0 -%}
+                      {%- for product in collection.products limit: section.settings.products_to_show -%}
+                        <a href="{{ product.url }}" class="hp-fam-sec__card">
+                          {%- if product.featured_media != blank -%}
+                            <img src="{{ product.featured_media | image_url: width: 800 }}"
+                                 alt="{{ product.title | escape }}"
+                                 class="hp-fam-sec__image"
+                                 loading="lazy"
+                                 draggable="false">
+                          {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                          {%- endif -%}
+                        </a>
+                      {%- endfor -%}
                     {%- else -%}
-                      {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                      {%- for i in (1..4) -%}
+                        <div class="hp-fam-sec__card">
+                          {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                          {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                        </div>
+                      {%- endfor -%}
                     {%- endif -%}
-                  </a>
-                {%- endfor -%}
-              {%- else -%}
-                {%- for i in (1..4) -%}
-                  <div class="hp-fam-sec__card">
-                    {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-                    {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <div class="hp-fam-sec__slider is-active">
+              {%- for i in (1..4) -%}
+                <div class="hp-fam-sec__card">
+                  {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                  {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- assign has_right_cards = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'right_card' -%}
+          {%- assign has_right_cards = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if has_right_cards -%}
+        <div class="hp-fam-sec__vertical-right">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'right_card' -%}
+              {%- assign product = block.settings.product -%}
+              {%- if product != blank -%}
+                <div class="hp-fam-sec__sticky-card">
+                  {%- if block.settings.badge_text != blank -%}
+                    <span class="hp-fam-sec__card-badge">{{ block.settings.badge_text }}</span>
+                  {%- endif -%}
+                  <div class="hp-fam-sec__card-img-wrap">
+                    <img src="{{ product.featured_media | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
                   </div>
-                {%- endfor -%}
+                  <div class="hp-fam-sec__card-meta">
+                    <span class="hp-fam-sec__card-rating">★ {{ block.settings.rating | default: '4.9' }} ({{ block.settings.review_count | default: '260' }})</span>
+                    <h3 class="hp-fam-sec__card-title">{{ product.title }}</h3>
+                    {%- if product.metafields.descriptors.subtitle != blank -%}
+                      <p class="hp-fam-sec__card-subtitle">{{ product.metafields.descriptors.subtitle }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.custom_desc != blank -%}
+                      <p class="hp-fam-sec__card-desc">{{ block.settings.custom_desc }}</p>
+                    {%- endif -%}
+                    <div class="hp-fam-sec__card-footer">
+                      <div class="hp-fam-sec__card-pricing">
+                        {%- if product.compare_at_price > product.price -%}
+                          <span class="hp-fam-sec__card-compare">{{ product.compare_at_price | money }}</span>
+                        {%- endif -%}
+                        <span class="hp-fam-sec__card-price">{{ product.price | money }}</span>
+                      </div>
+                      <form method="post" action="/cart/add">
+                        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                        <button type="submit" class="hp-fam-sec__card-btn">{{ block.settings.cta_text | default: 'Add to Cart' }}</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               {%- endif -%}
             {%- endif -%}
-          </div>
-        {%- endfor -%}
-      {%- else -%}
-        <div class="hp-fam-sec__slider is-active">
-          {%- for i in (1..4) -%}
-            <div class="hp-fam-sec__card">
-              {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-              {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
-            </div>
           {%- endfor -%}
         </div>
       {%- endif -%}
@@ -416,6 +629,47 @@
           "type": "url",
           "id": "url_6",
           "label": "Link 6"
+        }
+      ]
+    },
+    {
+      "type": "right_card",
+      "name": "Featured Right Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "BESTSELLER"
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "4.9"
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review Count",
+          "default": "260"
+        },
+        {
+          "type": "text",
+          "id": "custom_desc",
+          "label": "Short Description",
+          "default": "India's most silent air circulator"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "Add to Cart"
         }
       ]
     }
