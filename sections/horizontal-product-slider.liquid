@@ -12,10 +12,12 @@
   }
 
   .hp-fam-sec__container {
-    max-width: 1360px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 0 40px;
     position: relative;
+    box-sizing: border-box;
   }
 
   .hp-fam-sec__heading {
@@ -68,7 +70,7 @@
   .hp-fam-sec__main-flex {
     display: flex;
     gap: 32px;
-    align-items: stretch;
+    align-items: flex-end;
   }
 
   .hp-fam-sec__slider-left {
@@ -82,6 +84,8 @@
     flex-direction: column;
     gap: 24px;
     position: relative;
+    padding-right: 40px;
+    box-sizing: border-box;
   }
 
   /* SLIDERS */
@@ -102,6 +106,7 @@
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
+    align-items: flex-end;
   }
 
   .hp-fam-sec__slider.is-active {
