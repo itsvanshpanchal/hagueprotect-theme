@@ -160,8 +160,8 @@
         </div>
       {%- else -%}
         <!-- Fallbacks for theme editor default preview -->
-        {%- assign default_questions = "What makes the BFF fan stand out from other hand fans?|What is the battery capacity, and how long does it last on different speed settings?|Is the BFF fan safe to use around children and pets?|Can I charge it with any wire/adapter?|How will I know when my BFF is fully charged?" | split: "|" -%}
-        {%- assign default_answers = "Our BFF fans utilize an ultra-premium, silent, high-RPM motor engineered for dynamic cooling and ultimate reliability.|With a high-capacity 4000mAh battery, it can continuously last up to 12 hours on the low setting and 4 hours on maximum turbo speed.|Yes, completely! The housing has closely spaced premium guards to prevent any contact with the blades.|We strongly recommend using the original Type-C cable included in the box for optimal power delivery.|The built-in intelligent LED indicator turns from blinking amber to solid green when fully charged." | split: "|" -%}
+        {%- assign default_questions = "What makes Hague Protect safe for premium sneakers?|Does the formula alter the color or texture of my shoes?|Is the invisible barrier durable against liquids and stains?|How many times can I clean my shoes with one complete kit?|Are the cleaning brushes safe to use on delicate suede?" | split: "|" -%}
+        {%- assign default_answers = "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas.|No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials.|Yes! It creates a highly durable, nano-tech invisible barrier that repels water, mud, dirt, and stains for up to 4 weeks.|One complete Hague Protect kit allows more than 65 full cleaning and protective applications for your sneakers.|Yes! Use our Premium Soft-Hog Brush gently for delicate materials like suede and premium mesh to clean effectively without causing fraying." | split: "|" -%}
         
         {%- for q in default_questions -%}
           <div class="faq-custom__item">
@@ -215,13 +215,13 @@
           "type": "text",
           "id": "question",
           "label": "Question",
-          "default": "What makes the BFF fan stand out from other hand fans?"
+          "default": "What makes Hague Protect safe for premium sneakers?"
         },
         {
           "type": "textarea",
           "id": "answer",
           "label": "Answer",
-          "default": "Our BFF fans utilize an ultra-premium, silent, high-RPM motor engineered for dynamic cooling and ultimate reliability."
+          "default": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
         }
       ]
     }
@@ -233,15 +233,15 @@
         {
           "type": "faq_item",
           "settings": {
-            "question": "What makes the BFF fan stand out from other hand fans?",
-            "answer": "Our BFF fans utilize an ultra-premium, silent, high-RPM motor engineered for dynamic cooling and ultimate reliability."
+            "question": "What makes Hague Protect safe for premium sneakers?",
+            "answer": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
           }
         },
         {
           "type": "faq_item",
           "settings": {
-            "question": "What is the battery capacity, and how long does it last on different speed settings?",
-            "answer": "With a high-capacity 4000mAh battery, it can continuously last up to 12 hours on the low setting and 4 hours on maximum turbo speed."
+            "question": "Does the formula alter the color or texture of my shoes?",
+            "answer": "No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials."
           }
         }
       ]
