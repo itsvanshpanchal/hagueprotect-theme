@@ -444,6 +444,38 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
+      {%- else -%}
+        {%- assign fallback_product = collections.all.products.first -%}
+        {%- if fallback_product == blank -%}
+          {%- assign fallback_product = all_products.first -%}
+        {%- endif -%}
+        {%- if fallback_product != blank -%}
+          <div class="hp-fam-sec__vertical-right">
+            <div class="hp-fam-sec__sticky-card">
+              <span class="hp-fam-sec__card-badge">BESTSELLER</span>
+              <div class="hp-fam-sec__card-img-wrap">
+                <img src="{{ fallback_product.featured_media | image_url: width: 400 }}" alt="{{ fallback_product.title | escape }}" loading="lazy">
+              </div>
+              <div class="hp-fam-sec__card-meta">
+                <span class="hp-fam-sec__card-rating">★ 4.9 (260)</span>
+                <h3 class="hp-fam-sec__card-title">{{ fallback_product.title }}</h3>
+                <p class="hp-fam-sec__card-desc">India's most silent air circulator</p>
+                <div class="hp-fam-sec__card-footer">
+                  <div class="hp-fam-sec__card-pricing">
+                    {%- if fallback_product.compare_at_price > fallback_product.price -%}
+                      <span class="hp-fam-sec__card-compare">{{ fallback_product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="hp-fam-sec__card-price">{{ fallback_product.price | money }}</span>
+                  </div>
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ fallback_product.selected_or_first_available_variant.id }}">
+                    <button type="submit" class="hp-fam-sec__card-btn">Add to Cart</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
       {%- endif -%}
     </div>
   </div>
@@ -676,9 +708,10 @@
   ],
   "presets": [
     {
-      "name": "Horizontal Product Slider",
+      "name": "Shop by Function and Category",
       "blocks": [
-        { "type": "collection" }
+        { "type": "collection" },
+        { "type": "right_card" }
       ]
     }
   ]
