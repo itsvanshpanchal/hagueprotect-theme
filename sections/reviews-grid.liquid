@@ -287,59 +287,66 @@
 
     <div class="reviews-sec__masonry">
       {%- for block in section.blocks -%}
-        <div class="reviews-sec__card" {{ block.shopify_attributes }}>
-          {%- if block.settings.video != blank or block.settings.video_url != blank or block.settings.image != blank -%}
-            <div class="reviews-sec__media">
-              {%- if block.settings.video != blank -%}
-                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: true, class: "reviews-sec__image" }}
-              {%- elsif block.settings.video_url != blank -%}
-                {%- if block.settings.video_url.type == 'youtube' -%}
-                  <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
-                {%- elsif block.settings.video_url.type == 'vimeo' -%}
-                  <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
-                {%- endif -%}
-              {%- elsif block.settings.image != blank -%}
-                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Review Image" class="reviews-sec__image" loading="lazy">
-                {%- if block.settings.has_video -%}
-                  <div class="reviews-sec__play-icon">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </div>
-                {%- endif -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="reviews-sec__app-block" {{ block.shopify_attributes }} style="break-inside: avoid; margin-bottom: 20px;">
+              {% render block %}
+            </div>
+          {%- when 'review' -%}
+            <div class="reviews-sec__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.video != blank or block.settings.video_url != blank or block.settings.image != blank -%}
+                <div class="reviews-sec__media">
+                  {%- if block.settings.video != blank -%}
+                    {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: true, class: "reviews-sec__image" }}
+                  {%- elsif block.settings.video_url != blank -%}
+                    {%- if block.settings.video_url.type == 'youtube' -%}
+                      <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
+                    {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                      <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="reviews-sec__image" style="aspect-ratio:16/9; border:0;"></iframe>
+                    {%- endif -%}
+                  {%- elsif block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Review Image" class="reviews-sec__image" loading="lazy">
+                    {%- if block.settings.has_video -%}
+                      <div class="reviews-sec__play-icon">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
               {%- endif -%}
+
+              <div class="reviews-sec__info">
+                <div class="reviews-sec__author-name">
+                  {{ block.settings.author | default: 'Arpan A.' }}
+                  {%- if block.settings.is_verified -%}
+                    <span class="reviews-sec__verified-badge">
+                      <svg style="width:12px; height:12px; fill:#616161;" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                      Verified
+                    </span>
+                  {%- endif -%}
+                </div>
+                
+                <div class="reviews-sec__date">{{ block.settings.date | default: '4/24/2026' }}</div>
+
+                <div class="reviews-sec__review-stars">
+                  {%- assign stars = block.settings.rating | default: 5 -%}
+                  {%- for i in (1..stars) -%}
+                    <svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.165-7.333-3.856-7.333 3.856 1.399-8.165-5.934-5.784 8.2-1.192zm0 0"/></svg>
+                  {%- endfor -%}
+                </div>
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="reviews-sec__review-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                <p class="reviews-sec__review-body">{{ block.settings.text | default: 'nice product' }}</p>
+
+                {%- if block.settings.item_type != blank -%}
+                  <div class="reviews-sec__item-type">Item type: <strong>{{ block.settings.item_type }}</strong></div>
+                {%- endif -%}
+              </div>
             </div>
-          {%- endif -%}
-
-          <div class="reviews-sec__info">
-            <div class="reviews-sec__author-name">
-              {{ block.settings.author | default: 'Arpan A.' }}
-              {%- if block.settings.is_verified -%}
-                <span class="reviews-sec__verified-badge">
-                  <svg style="width:12px; height:12px; fill:#616161;" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                  Verified
-                </span>
-              {%- endif -%}
-            </div>
-            
-            <div class="reviews-sec__date">{{ block.settings.date | default: '4/24/2026' }}</div>
-
-            <div class="reviews-sec__review-stars">
-              {%- assign stars = block.settings.rating | default: 5 -%}
-              {%- for i in (1..stars) -%}
-                <svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.165-7.333-3.856-7.333 3.856 1.399-8.165-5.934-5.784 8.2-1.192zm0 0"/></svg>
-              {%- endfor -%}
-            </div>
-
-            {%- if block.settings.title != blank -%}
-              <h3 class="reviews-sec__review-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-
-            <p class="reviews-sec__review-body">{{ block.settings.text | default: 'nice product' }}</p>
-
-            {%- if block.settings.item_type != blank -%}
-              <div class="reviews-sec__item-type">Item type: <strong>{{ block.settings.item_type }}</strong></div>
-            {%- endif -%}
-          </div>
-        </div>
+        {%- endcase -%}
       {%- else -%}
         <!-- Dynamic Fallbacks -->
         {%- assign sample_names = "Arpan A.|Shahbaz M.|Rukshana A.|Anjali Singh|Debadutta D.|Akshith G.|Anjana J.|Hansel|Ramakrishna R.|Er Gurminder D.|Natasha R.|Ridham P.|Gagan Y.|Apin F." | split: "|" -%}
@@ -401,6 +408,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "review",
       "name": "Customer Review Card",
