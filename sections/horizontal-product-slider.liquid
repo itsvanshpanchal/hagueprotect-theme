@@ -92,6 +92,11 @@
     cursor: grabbing;
   }
 
+  .hp-fam-sec__slider.is-dragging .hp-fam-sec__card {
+    pointer-events: none;
+    cursor: grabbing;
+  }
+
   .hp-fam-sec__slider::-webkit-scrollbar {
     display: none;
   }
@@ -264,22 +269,30 @@
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
         slider.style.scrollBehavior = 'auto';
+        slider.classList.add('is-dragging');
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDown) {
+          isDown = false;
+          slider.style.scrollBehavior = 'smooth';
+          slider.classList.remove('is-dragging');
+        }
       });
 
       slider.addEventListener('mouseleave', () => {
-        isDown = false;
-      });
-
-      slider.addEventListener('mouseup', () => {
-        isDown = false;
-        slider.style.scrollBehavior = 'smooth';
+        if (isDown) {
+          isDown = false;
+          slider.style.scrollBehavior = 'smooth';
+          slider.classList.remove('is-dragging');
+        }
       });
 
       slider.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5;
+        const walk = (x - startX) * 1.8;
         slider.scrollLeft = scrollLeft - walk;
       });
     });
