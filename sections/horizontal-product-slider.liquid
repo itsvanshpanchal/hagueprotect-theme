@@ -142,6 +142,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    align-self: flex-end;
     transition: transform 0.3s ease;
     margin: 0;
     padding: 0;
@@ -165,6 +166,7 @@
     margin-bottom: 0;
     user-drag: none;
     -webkit-user-drag: none;
+    transform: translateY({{ section.settings.image_offset | default: 0 }}px);
   }
 
   /* FEATURED RIGHT SIDE CARD */
@@ -579,6 +581,16 @@
       "step": 1,
       "default": 8,
       "label": "Products to show"
+    },
+    {
+      "type": "range",
+      "id": "image_offset",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Move images down/up",
+      "default": 0
     }
   ],
   "blocks": [
