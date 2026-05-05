@@ -46,7 +46,7 @@
     const email = document.getElementById('LoginEmail').value;
 
     btn.disabled = true;
-    btn.innerText = "Signing in...";
+    btn.textContent = "Signing in...";
     
     // Save email in local storage to greet them on dashboard
     localStorage.setItem('customer_email', email);

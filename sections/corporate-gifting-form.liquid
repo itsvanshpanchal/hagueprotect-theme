@@ -120,44 +120,50 @@
         <p class="corp-form__subtitle">Reach us at corporate@hagueprotect.com or WhatsApp: +91 99999 00000</p>
       </div>
 
-      <form id="CorporateContactForm" class="corp-form__body">
+      {%- form 'contact', id: 'CorporateContactForm', class: 'corp-form__body' -%}
+        {%- if form.posted_successfully? -%}
+          <div style="background: #E8F5E9; color: #2E7D32; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 24px; font-weight: 600;">
+            Thanks for reaching out! We'll get back to you shortly.
+          </div>
+        {%- endif -%}
+
         <div class="corp-form__grid">
           <div class="corp-form__group">
-            <input type="text" class="corp-form__input" placeholder="Name *" required>
+            <input type="text" name="contact[name]" class="corp-form__input" placeholder="Name *" required>
           </div>
           <div class="corp-form__group">
-            <input type="text" class="corp-form__input" placeholder="Designation *">
+            <input type="text" name="contact[designation]" class="corp-form__input" placeholder="Designation *">
           </div>
         </div>
 
         <div class="corp-form__group" style="margin-bottom: 24px;">
-          <input type="tel" class="corp-form__input" placeholder="Phone *" required>
+          <input type="tel" name="contact[phone]" class="corp-form__input" placeholder="Phone *" required>
         </div>
 
         <div class="corp-form__checklist-group">
           <p class="corp-form__checklist-title">Interested in Products:</p>
           <div class="corp-form__checklist">
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> 400</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> AM-10(6)</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> LV-8(8)</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> MP-5</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> Net World</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> P-10</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> P-50W</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> P-80(40.5.21)</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> LS-12(8)</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> M-10</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> LS-12(5)</label>
-            <label class="corp-form__checkbox-label"><input type="checkbox" class="corp-form__checkbox"> MP-11(10)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_400]" class="corp-form__checkbox"> 400</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_am10]" class="corp-form__checkbox"> AM-10(6)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_lv8]" class="corp-form__checkbox"> LV-8(8)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_mp5]" class="corp-form__checkbox"> MP-5</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_networld]" class="corp-form__checkbox"> Net World</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_p10]" class="corp-form__checkbox"> P-10</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_p50w]" class="corp-form__checkbox"> P-50W</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_p80]" class="corp-form__checkbox"> P-80(40.5.21)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_ls12_8]" class="corp-form__checkbox"> LS-12(8)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_m10]" class="corp-form__checkbox"> M-10</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_ls12_5]" class="corp-form__checkbox"> LS-12(5)</label>
+            <label class="corp-form__checkbox-label"><input type="checkbox" name="contact[product_mp11]" class="corp-form__checkbox"> MP-11(10)</label>
           </div>
         </div>
 
         <div class="corp-form__group" style="margin-bottom: 32px;">
-          <textarea class="corp-form__input" placeholder="Message" rows="3"></textarea>
+          <textarea name="contact[body]" class="corp-form__input" placeholder="Message" rows="3"></textarea>
         </div>
 
         <button type="submit" class="corp-form__submit">Send</button>
-      </form>
+      {%- endform -%}
     </div>
   </div>
 </div>

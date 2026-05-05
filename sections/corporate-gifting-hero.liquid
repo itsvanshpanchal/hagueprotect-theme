@@ -79,7 +79,7 @@
 
 <div class="corp-hero">
   {% if section.settings.image != blank %}
-    <img src="{{ section.settings.image | image_url: width: 2000 }}" class="corp-hero__bg" alt="Hero Background">
+    <img src="{{ section.settings.image | image_url: width: 2000 }}" class="corp-hero__bg" alt="Hero Background" loading="eager" fetchpriority="high" decoding="async">
   {% else %}
     <div class="corp-hero__bg" style="background: #D32F2F;"></div>
   {% endif %}

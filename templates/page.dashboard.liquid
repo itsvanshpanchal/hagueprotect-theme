@@ -207,7 +207,7 @@
     const email = localStorage.getItem('customer_email');
     if (email) {
       const parts = email.split('@');
-      document.getElementById('UserGreeting').innerText = parts[0].toUpperCase();
+      document.getElementById('UserGreeting').textContent = parts[0].toUpperCase();
     }
   });
 
@@ -260,13 +260,13 @@
       // Transit from Out for Delivery to fully Delivered
       step = 4;
       fillLine.style.width = "88%";
-      step3Indicator.innerText = "✓";
-      step3Label.innerText = "Van reached delivery point";
+      step3Indicator.textContent = "✓";
+      step3Label.textContent = "Van reached delivery point";
 
       step4Indicator.style.background = "#22C55E";
       step4Indicator.style.color = "#fff";
-      step4Indicator.innerText = "✓";
-      step4Label.innerText = "Delivered & Received safely";
+      step4Indicator.textContent = "✓";
+      step4Label.textContent = "Delivered & Received safely";
 
       // Dynamically move vehicle closer on live map view too!
       const vehicle = document.getElementById('MovingVehicle');
@@ -278,12 +278,12 @@
       // Reset back for demonstration
       step = 3;
       fillLine.style.width = "66%";
-      step3Label.innerText = "Delivery van nearby";
+      step3Label.textContent = "Delivery van nearby";
       
       step4Indicator.style.background = "#eee";
       step4Indicator.style.color = "#888";
-      step4Indicator.innerText = "4";
-      step4Label.innerText = "Package drops off";
+      step4Indicator.textContent = "4";
+      step4Label.textContent = "Package drops off";
 
       const vehicle = document.getElementById('MovingVehicle');
       if (vehicle) {

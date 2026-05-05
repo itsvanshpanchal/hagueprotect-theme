@@ -833,7 +833,7 @@
         {%- endif -%}
 
         {%- if product.featured_image != blank -%}
-          <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" id="MainProductImage" class="d2c-media-main-img" loading="eager">
+          <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" id="MainProductImage" class="d2c-media-main-img" loading="eager" fetchpriority="high" decoding="async">
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'd2c-media-main-img' }}
         {%- endif -%}
@@ -915,7 +915,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_1_icon != blank -%}
-                <img src="{{ section.settings.pill_1_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_1_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+                <img src="{{ section.settings.pill_1_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_1_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               {%- endif -%}
@@ -927,7 +927,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_2_icon != blank -%}
-                <img src="{{ section.settings.pill_2_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_2_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+                <img src="{{ section.settings.pill_2_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_2_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.912 3.874 4.276.622-3.094 3.016.73 4.258L12 14.75l-3.824 2.02.73-4.258-3.094-3.016 4.276-.622z"></path></svg>
               {%- endif -%}
@@ -939,7 +939,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_3_icon != blank -%}
-                <img src="{{ section.settings.pill_3_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_3_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+                <img src="{{ section.settings.pill_3_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_3_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               {%- endif -%}
@@ -951,7 +951,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_4_icon != blank -%}
-                <img src="{{ section.settings.pill_4_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_4_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+                <img src="{{ section.settings.pill_4_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_4_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 21 3c-1.5 4-2 5.5-3.1 11.2A7 7 0 0 1 11 20z"></path><path d="M11 20v-5"></path></svg>
               {%- endif -%}
@@ -963,7 +963,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_5_icon != blank -%}
-                <img src="{{ section.settings.pill_5_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_5_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;">
+                <img src="{{ section.settings.pill_5_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_5_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
               {%- endif -%}
@@ -1284,14 +1284,14 @@ document.addEventListener('DOMContentLoaded', function() {
   if (qtyIncrement && qtyDecrement && qtyNumber && qtyInput) {
     qtyIncrement.addEventListener('click', function() {
       quantity++;
-      qtyNumber.innerText = quantity;
+      qtyNumber.textContent = quantity;
       qtyInput.value = quantity;
     });
 
     qtyDecrement.addEventListener('click', function() {
       if (quantity > 1) {
         quantity--;
-        qtyNumber.innerText = quantity;
+        qtyNumber.textContent = quantity;
         qtyInput.value = quantity;
       }
     });
@@ -1317,11 +1317,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const available = this.getAttribute('data-available') === 'true';
 
       if (variantInput) variantInput.value = variantId;
-      if (priceCurrent) priceCurrent.innerText = variantPrice;
-      if (stickyPrice) stickyPrice.innerText = variantPrice;
+      if (priceCurrent) priceCurrent.textContent = variantPrice;
+      if (stickyPrice) stickyPrice.textContent = variantPrice;
 
       if (variantCompare && priceCompare && discountBadge) {
-        priceCompare.innerText = variantCompare;
+        priceCompare.textContent = variantCompare;
         priceCompare.style.display = 'inline';
         discountBadge.style.display = 'inline';
       } else if (priceCompare && discountBadge) {
@@ -1332,20 +1332,20 @@ document.addEventListener('DOMContentLoaded', function() {
       if (available) {
         if (submitBtn) {
           submitBtn.removeAttribute('disabled');
-          submitBtn.innerText = 'Add to Cart';
+          submitBtn.textContent = 'Add to Cart';
         }
         if (stickyBtn) {
           stickyBtn.removeAttribute('disabled');
-          stickyBtn.innerText = 'Add to Cart';
+          stickyBtn.textContent = 'Add to Cart';
         }
       } else {
         if (submitBtn) {
           submitBtn.setAttribute('disabled', 'disabled');
-          submitBtn.innerText = 'Sold Out';
+          submitBtn.textContent = 'Sold Out';
         }
         if (stickyBtn) {
           stickyBtn.setAttribute('disabled', 'disabled');
-          stickyBtn.innerText = 'Sold Out';
+          stickyBtn.textContent = 'Sold Out';
         }
       }
     });
@@ -1362,17 +1362,17 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.d2c-accordion-item').forEach(item => {
         item.classList.remove('active');
         item.querySelector('.d2c-accordion-content').style.maxHeight = null;
-        item.querySelector('.d2c-accordion-icon').innerText = '+';
+        item.querySelector('.d2c-accordion-icon').textContent = '+';
       });
 
       if (!isActive) {
         parent.classList.add('active');
         content.style.maxHeight = content.scrollHeight + 'px';
-        icon.innerText = '−';
+        icon.textContent = '−';
       } else {
         parent.classList.remove('active');
         content.style.maxHeight = null;
-        icon.innerText = '+';
+        icon.textContent = '+';
       }
     });
   });
