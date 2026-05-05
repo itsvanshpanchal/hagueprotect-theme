@@ -185,7 +185,21 @@
     {% section 'header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
+      {%- if request.path contains 'certified-corporation' -%}
+        <div id="CorporateCustomPage">
+          {% section 'corporate-gifting-hero' %}
+          {% section 'corporate-gifting-form' %}
+          {% section 'corporate-gifting-features' %}
+        </div>
+        <style>
+          /* Hide the default 404 content or other layout parts when on this hijacked URL */
+          #MainContent > *:not(#CorporateCustomPage) {
+            display: none !important;
+          }
+        </style>
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
 
     {% section 'footer' %}
