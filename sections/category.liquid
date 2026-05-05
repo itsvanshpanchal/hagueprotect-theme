@@ -22,6 +22,7 @@
     letter-spacing: 0.1em;
   }
 
+  /* Desktop grid */
   .category__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -35,9 +36,103 @@
     }
   }
 
-  @media screen and (max-width: 575px) {
+  /* Mobile slider wrapper */
+  .category__slider-wrapper {
+    display: none;
+  }
+
+  .category__slider-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .category__slider-track .cat-card {
+    flex: 0 0 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Mobile slider nav */
+  .category__slider-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    right: -8px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .category__arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid #D1D2D4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: all 0.2s ease;
+    color: #111111;
+  }
+
+  .category__arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .category__arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+  }
+
+  /* Progress dots */
+  .category__dots {
+    display: none;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .category__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #D1D2D4;
+    transition: background 0.3s ease, width 0.3s ease;
+  }
+
+  .category__dot.active {
+    background: #111111;
+    width: 18px;
+    border-radius: 4px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .category-header {
+      margin-bottom: 32px;
+    }
+    /* Hide desktop grid, show slider */
     .category__grid {
-      grid-template-columns: 1fr;
+      display: none;
+    }
+    .category__slider-wrapper {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    .category__dots {
+      display: flex;
     }
   }
 
@@ -132,71 +227,45 @@
       <h2 class="h2">{{ section.settings.heading | default: 'Shop By Category' }}</h2>
     </div>
 
+    {%- comment -%} Desktop grid (hidden on mobile ≤767px via CSS) {%- endcomment -%}
     <div class="category__grid">
       {%- for block in section.blocks -%}
         <a href="{{ block.settings.collection.url | default: '/collections/all' }}" class="cat-card animate-fade-in" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
             <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | default: 'Product category' | escape }}" class="cat-card__bg-image" loading="lazy">
           {%- else -%}
-            <!-- Premium Placeholder vector art inside SVG for collections -->
             <svg class="cat-card__bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
               <rect width="400" height="500" fill="#f8f8fa"/>
-              <circle cx="200" cy="220" r="90" fill="#ffffff" opacity="0.6" filter="drop-shadow(0 12px 32px rgba(0,0,0,0.03))"/>
-              {%- if forloop.index == 1 -%}
-                <!-- Cleaning Kits Icon overlay -->
-                <path d="M180 180h40v80h-40z" fill="#FF2B2B" opacity="0.2"/>
-              {%- elsif forloop.index == 2 -%}
-                <!-- Brushes Icon overlay -->
-                <path d="M170 170l60 60" stroke="#FF2B2B" stroke-width="8" stroke-linecap="round"/>
-              {%- elsif forloop.index == 3 -%}
-                <!-- Sprays Icon overlay -->
-                <circle cx="200" cy="210" r="30" fill="#111111" opacity="0.1"/>
-              {%- else -%}
-                <!-- Accessories Icon overlay -->
-                <rect x="180" y="190" width="40" height="40" rx="8" fill="#111111" opacity="0.15"/>
+              <circle cx="200" cy="220" r="90" fill="#ffffff" opacity="0.6"/>
+              {%- if forloop.index == 1 -%}<path d="M180 180h40v80h-40z" fill="#FF2B2B" opacity="0.2"/>
+              {%- elsif forloop.index == 2 -%}<path d="M170 170l60 60" stroke="#FF2B2B" stroke-width="8" stroke-linecap="round"/>
+              {%- elsif forloop.index == 3 -%}<circle cx="200" cy="210" r="30" fill="#111111" opacity="0.1"/>
+              {%- else -%}<rect x="180" y="190" width="40" height="40" rx="8" fill="#111111" opacity="0.15"/>
               {%- endif -%}
             </svg>
           {%- endif -%}
-
           <div class="cat-card__overlay"></div>
-
           <div class="cat-card__content">
             <h3 class="cat-card__title">{{ block.settings.title | default: 'Category Title' }}</h3>
             <span class="cat-card__btn">Explore <span>&rarr;</span></span>
           </div>
         </a>
       {%- else -%}
-        <!-- Elite category cards fallbacks -->
         {%- for i in (1..4) -%}
           <a href="/collections/all" class="cat-card animate-fade-in">
             <svg class="cat-card__bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
               <rect width="400" height="500" fill="#fbfbfd"/>
-              <circle cx="200" cy="220" r="100" fill="#ffffff" opacity="0.8" filter="drop-shadow(0 16px 36px rgba(0,0,0,0.03))"/>
-              {%- if i == 1 -%}
-                <path d="M170 180l30-30 30 30-30 30-30-30z" fill="#FF2B2B" opacity="0.2"/>
-                <path d="M200 150v60" stroke="#FF2B2B" stroke-width="2"/>
-              {%- elsif i == 2 -%}
-                <path d="M165 210h70" stroke="#111" stroke-width="6" stroke-linecap="round"/>
-                <path d="M170 180v30m15-30v30m15-30v30m15-30v30" stroke="#111" stroke-width="2"/>
-              {%- elsif i == 3 -%}
-                <rect x="180" y="170" width="40" height="80" rx="10" fill="#111111" opacity="0.1"/>
-                <circle cx="200" cy="150" r="12" fill="#FF2B2B" opacity="0.3"/>
-              {%- else -%}
-                <rect x="175" y="185" width="50" height="50" rx="12" fill="#FF2B2B" opacity="0.2"/>
+              <circle cx="200" cy="220" r="100" fill="#ffffff" opacity="0.8"/>
+              {%- if i == 1 -%}<path d="M170 180l30-30 30 30-30 30-30-30z" fill="#FF2B2B" opacity="0.2"/>
+              {%- elsif i == 2 -%}<path d="M165 210h70" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+              {%- elsif i == 3 -%}<rect x="180" y="170" width="40" height="80" rx="10" fill="#111111" opacity="0.1"/>
+              {%- else -%}<rect x="175" y="185" width="50" height="50" rx="12" fill="#FF2B2B" opacity="0.2"/>
               {%- endif -%}
             </svg>
             <div class="cat-card__overlay"></div>
             <div class="cat-card__content">
               <h3 class="cat-card__title">
-                {%- if i == 1 -%}
-                  Cleaning Kits
-                {%- elsif i == 2 -%}
-                  Brushes & Tools
-                {%- elsif i == 3 -%}
-                  Sprays & Protectors
-                {%- else -%}
-                  Accessories
-                {%- endif -%}
+                {%- if i == 1 -%}Cleaning Kits{%- elsif i == 2 -%}Brushes &amp; Tools{%- elsif i == 3 -%}Sprays &amp; Protectors{%- else -%}Accessories{%- endif -%}
               </h3>
               <span class="cat-card__btn">Explore <span>&rarr;</span></span>
             </div>
@@ -204,8 +273,137 @@
         {%- endfor -%}
       {%- endfor -%}
     </div>
+
+    {%- comment -%} Mobile slider (shown on mobile ≤767px via CSS) {%- endcomment -%}
+    <div class="category__slider-wrapper" id="cat-slider-wrapper-{{ section.id }}">
+      <div style="overflow: hidden;">
+        <div class="category__slider-track" id="cat-track-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            <a href="{{ block.settings.collection.url | default: '/collections/all' }}" class="cat-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title | default: 'Product category' | escape }}" class="cat-card__bg-image" loading="lazy">
+              {%- else -%}
+                <svg class="cat-card__bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+                  <rect width="400" height="500" fill="#f8f8fa"/>
+                  <circle cx="200" cy="220" r="90" fill="#ffffff" opacity="0.6"/>
+                  {%- if forloop.index == 1 -%}<path d="M180 180h40v80h-40z" fill="#FF2B2B" opacity="0.2"/>
+                  {%- elsif forloop.index == 2 -%}<path d="M170 170l60 60" stroke="#FF2B2B" stroke-width="8" stroke-linecap="round"/>
+                  {%- elsif forloop.index == 3 -%}<circle cx="200" cy="210" r="30" fill="#111111" opacity="0.1"/>
+                  {%- else -%}<rect x="180" y="190" width="40" height="40" rx="8" fill="#111111" opacity="0.15"/>
+                  {%- endif -%}
+                </svg>
+              {%- endif -%}
+              <div class="cat-card__overlay"></div>
+              <div class="cat-card__content">
+                <h3 class="cat-card__title">{{ block.settings.title | default: 'Category Title' }}</h3>
+                <span class="cat-card__btn">Explore <span>&rarr;</span></span>
+              </div>
+            </a>
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <a href="/collections/all" class="cat-card">
+                <svg class="cat-card__bg-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+                  <rect width="400" height="500" fill="#fbfbfd"/>
+                  <circle cx="200" cy="220" r="100" fill="#ffffff" opacity="0.8"/>
+                  {%- if i == 1 -%}<path d="M170 180l30-30 30 30-30 30-30-30z" fill="#FF2B2B" opacity="0.2"/>
+                  {%- elsif i == 2 -%}<path d="M165 210h70" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+                  {%- elsif i == 3 -%}<rect x="180" y="170" width="40" height="80" rx="10" fill="#111111" opacity="0.1"/>
+                  {%- else -%}<rect x="175" y="185" width="50" height="50" rx="12" fill="#FF2B2B" opacity="0.2"/>
+                  {%- endif -%}
+                </svg>
+                <div class="cat-card__overlay"></div>
+                <div class="cat-card__content">
+                  <h3 class="cat-card__title">
+                    {%- if i == 1 -%}Cleaning Kits{%- elsif i == 2 -%}Brushes &amp; Tools{%- elsif i == 3 -%}Sprays &amp; Protectors{%- else -%}Accessories{%- endif -%}
+                  </h3>
+                  <span class="cat-card__btn">Explore <span>&rarr;</span></span>
+                </div>
+              </a>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="category__slider-nav">
+        <button class="category__arrow" id="cat-prev-{{ section.id }}" aria-label="Previous" disabled>
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="category__arrow" id="cat-next-{{ section.id }}" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="category__dots" id="cat-dots-{{ section.id }}"></div>
+
   </div>
 </section>
+
+<script>
+  (function() {
+    function initCategorySlider() {
+      var track = document.getElementById('cat-track-{{ section.id }}');
+      var prevBtn = document.getElementById('cat-prev-{{ section.id }}');
+      var nextBtn = document.getElementById('cat-next-{{ section.id }}');
+      var dotsContainer = document.getElementById('cat-dots-{{ section.id }}');
+      if (!track || !prevBtn || !nextBtn) return;
+
+      var slides = track.querySelectorAll('.cat-card');
+      if (slides.length === 0) return;
+
+      var currentIndex = 0;
+      var visibleCards = 2;
+      var maxIndex = Math.max(0, slides.length - visibleCards);
+
+      // Build dots
+      dotsContainer.innerHTML = '';
+      for (var i = 0; i <= maxIndex; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'category__dot' + (i === 0 ? ' active' : '');
+        (function(idx) {
+          dot.addEventListener('click', function() { currentIndex = idx; update(); });
+        })(i);
+        dotsContainer.appendChild(dot);
+      }
+
+      function update() {
+        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+        var slideWidth = slides[0].offsetWidth + 16;
+        track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + 'px)';
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === maxIndex;
+        var dots = dotsContainer.querySelectorAll('.category__dot');
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === currentIndex); });
+      }
+
+      prevBtn.addEventListener('click', function() { currentIndex--; update(); });
+      nextBtn.addEventListener('click', function() { currentIndex++; update(); });
+
+      // Touch swipe
+      var startX = 0;
+      track.addEventListener('touchstart', function(e) { startX = e.changedTouches[0].screenX; }, { passive: true });
+      track.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 40) {
+          currentIndex += diff > 0 ? 1 : -1;
+          update();
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', update);
+      update();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCategorySlider);
+    } else {
+      initCategorySlider();
+    }
+    document.addEventListener('shopify:section:load', initCategorySlider);
+  })();
+</script>
+
+
 
 {% schema %}
 {

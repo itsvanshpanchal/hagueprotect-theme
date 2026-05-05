@@ -239,24 +239,49 @@
   }
 
   @media (max-width: 767px) {
+    .fc-section {
+      padding: 40px 0;
+    }
+    .fc-container {
+      padding: 0 16px;
+    }
+    .fc-heading {
+      font-size: clamp(22px, 6vw, 32px);
+    }
     .fc-slide {
       flex: 0 0 calc(50% - 10px);
       min-width: calc(50% - 10px);
     }
+    /* Always show arrows on mobile, bigger tap targets */
     .fc-nav {
-      left: -8px;
-      right: -8px;
+      left: -4px;
+      right: -4px;
     }
     .fc-arrow {
-      width: 28px;
-      height: 28px;
+      width: 40px;
+      height: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .fc-arrow svg {
+      width: 18px;
+      height: 18px;
     }
   }
 
   @media (max-width: 480px) {
+    /* Keep 2 cards visible on small phones */
     .fc-slide {
-      flex: 0 0 100%;
-      min-width: 100%;
+      flex: 0 0 calc(50% - 8px);
+      min-width: calc(50% - 8px);
+    }
+    .fc-slider-track {
+      gap: 12px;
+    }
+    .fc-slide {
+      padding: 12px;
+    }
+    .fc-category-name {
+      font-size: 13px;
     }
   }
 {%- endstyle -%}
@@ -402,6 +427,30 @@
       updateSlider();
       startAutoplay();
     });
+
+    // ── Touch / swipe support ──
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 40;
+
+    track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoplay();
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          currentIndex++; // swipe left → next
+        } else {
+          currentIndex--; // swipe right → prev
+        }
+        updateSlider();
+      }
+      startAutoplay();
+    }, { passive: true });
 
     window.addEventListener('resize', updateSlider);
     updateSlider();
