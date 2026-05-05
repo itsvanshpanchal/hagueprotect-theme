@@ -151,6 +151,7 @@
 
 
 
+{%- assign card_product = section.settings.product -%}
 <section class="dtc-product-card-section" aria-label="Featured product card">
   <div class="dtc-product-card-container">
     <div class="dtc-product-card">
@@ -159,7 +160,7 @@
       <div class="dtc-product-card__rating">★ 4.9 (260)</div>
 
       <!-- Title -->
-      <h2 class="dtc-product-card__title">{{ section.settings.title | default: 'HĀLO v2' }}</h2>
+      <h2 class="dtc-product-card__title">{{ card_product.title | default: section.settings.title | default: 'HĀLO v2' }}</h2>
 
       <!-- Subtitle -->
       <p class="dtc-product-card__subtitle">{{ section.settings.subtitle | default: 'HĀLO v2 | 3D Air Circulation Fan with Mood Lamp' }}</p>
@@ -176,15 +177,24 @@
       <!-- Footer containing price and Buy Now button -->
       <div class="dtc-product-card__footer">
         <div class="dtc-product-card__price-box">
-          <span class="dtc-product-card__price-old">{{ section.settings.old_price | default: 'Rs. 15,999' }}</span>
-          <span class="dtc-product-card__price-new">{{ section.settings.new_price | default: 'Rs. 10,999' }}</span>
+          <span class="dtc-product-card__price-old">{{ card_product.compare_at_price | money | default: section.settings.old_price | default: 'Rs. 15,999' }}</span>
+          <span class="dtc-product-card__price-new">{{ card_product.price | money | default: section.settings.new_price | default: 'Rs. 10,999' }}</span>
         </div>
 
-        {%- assign current_variant = product.selected_or_first_available_variant -%}
-        {%- form 'product', product, id: 'AddToCartForm-dtc-card' -%}
-          <input type="hidden" name="id" value="{{ current_variant.id | default: 12345678 }}">
-          <button type="submit" name="add" class="dtc-product-card__atc-btn">Buy Now</button>
-        {%- endform -%}
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          {%- if card_product != blank -%}
+            {%- form 'product', card_product, id: 'AddToCartForm-dtc-card' -%}
+              <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+              <button type="submit" name="add" class="dtc-product-card__atc-btn" style="width: 100%;">Add to Cart</button>
+              <div style="margin-top: 10px;">
+                {{ form | payment_button }}
+              </div>
+            {%- endform -%}
+          {%- else -%}
+            <button type="button" class="dtc-product-card__atc-btn" style="width: 100%;">Buy Now</button>
+            <p style="font-size: 10px; color: red; margin-top: 4px;">Please select a product in theme editor</p>
+          {%- endif -%}
+        </div>
       </div>
 
     </div>
@@ -196,9 +206,14 @@
   "name": "Featured Product Card",
   "settings": [
     {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    },
+    {
       "type": "text",
       "id": "title",
-      "label": "Product Title",
+      "label": "Product Title (Fallback)",
       "default": "HĀLO v2"
     },
     {
@@ -216,13 +231,13 @@
     {
       "type": "text",
       "id": "old_price",
-      "label": "Old Price",
+      "label": "Old Price (Fallback)",
       "default": "Rs. 15,999"
     },
     {
       "type": "text",
       "id": "new_price",
-      "label": "New Price",
+      "label": "New Price (Fallback)",
       "default": "Rs. 10,999"
     }
   ],

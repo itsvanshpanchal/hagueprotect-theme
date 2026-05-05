@@ -1065,6 +1065,11 @@
               Sold Out
             {%- endif -%}
           </button>
+
+          <!-- Dynamic Checkout Button (Buy it Now) -->
+          <div class="d2c-buy-now-wrapper" style="margin-top: 12px;">
+            {{ form | payment_button }}
+          </div>
         </div>
       {%- endform -%}
 
