@@ -672,11 +672,13 @@
   const predictiveResults = document.getElementById('PredictiveSearchResults');
   const predictiveContainer = document.getElementById('PredictiveSearchContainer');
   let debounceTimer;
+  let selectedIndex = -1;
 
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       clearTimeout(debounceTimer);
       const query = searchInput.value.trim();
+      selectedIndex = -1;
 
       if (query.length < 2) {
         predictiveContainer.style.display = 'none';
@@ -691,7 +693,7 @@
             const collections = suggestions.resources.results.collections || [];
 
             if (products.length === 0 && collections.length === 0) {
-              predictiveResults.innerHTML = '<p style="padding: 16px; color: #888; text-align: center; font-size: 14px;">No suggestions found</p>';
+              predictiveResults.innerHTML = '<p style="padding: 24px; color: #888; text-align: center; font-size: 14px; font-weight: 500;">No suggestions found for "' + query + '"</p>';
               predictiveContainer.style.display = 'block';
               return;
             }
@@ -699,22 +701,24 @@
             let html = '';
 
             if (collections.length > 0) {
-              html += '<div style="margin-bottom: 20px;"><h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.1em; margin-bottom: 12px; padding: 0 8px;">Categories</h3>';
+              html += '<div style="margin-bottom: 24px;"><h3 style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.15em; margin-bottom: 12px; padding: 0 12px;">Suggested Categories</h3>';
               collections.forEach(col => {
-                html += `<a href="${col.url}" style="display: block; padding: 8px; color: #111; text-decoration: none; font-size: 14px; font-weight: 700; border-radius: 6px; transition: background 0.2s;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">${col.title}</a>`;
+                html += `<a href="${col.url}" class="predictive-item" style="display: block; padding: 12px; color: #111; text-decoration: none; font-size: 15px; font-weight: 700; border-radius: 8px; transition: all 0.2s;">${col.title}</a>`;
               });
               html += '</div>';
             }
 
             if (products.length > 0) {
-              html += '<div><h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.1em; margin-bottom: 12px; padding: 0 8px;">Products</h3>';
+              html += '<div><h3 style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.15em; margin-bottom: 12px; padding: 0 12px;">Suggested Products</h3>';
               products.forEach(prod => {
                 html += `
-                  <a href="${prod.url}" style="display: flex; align-items: center; gap: 12px; padding: 8px; text-decoration: none; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">
-                    <img src="${prod.image}" style="width: 48px; height: 48px; object-fit: contain; background: #f9f9f9; border-radius: 4px;">
-                    <div style="display: flex; flex-direction: column;">
-                      <span style="font-size: 14px; font-weight: 700; color: #111;">${prod.title}</span>
-                      <span style="font-size: 12px; color: #FF2B2B; font-weight: 800;">${prod.price}</span>
+                  <a href="${prod.url}" class="predictive-item" style="display: flex; align-items: center; gap: 16px; padding: 12px; text-decoration: none; border-radius: 10px; transition: all 0.2s; margin-bottom: 4px;">
+                    <div style="width: 56px; height: 56px; background: #f9f9f9; border-radius: 6px; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                      <img src="${prod.image}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                      <span style="font-size: 15px; font-weight: 700; color: #111; line-height: 1.2;">${prod.title}</span>
+                      <span style="font-size: 13px; color: #FF2B2B; font-weight: 800; letter-spacing: 0.02em;">${prod.price}</span>
                     </div>
                   </a>
                 `;
@@ -724,9 +728,52 @@
 
             predictiveResults.innerHTML = html;
             predictiveContainer.style.display = 'block';
+
+            // Inject hover styles dynamically
+            if (!document.getElementById('PredictiveStyles')) {
+              const style = document.createElement('style');
+              style.id = 'PredictiveStyles';
+              style.innerHTML = `
+                .predictive-item:hover, .predictive-item.is-selected { background: #f7f7f7 !important; transform: translateX(4px); }
+                #PredictiveSearchResults::-webkit-scrollbar { width: 6px; }
+                #PredictiveSearchResults::-webkit-scrollbar-track { background: transparent; }
+                #PredictiveSearchResults::-webkit-scrollbar-thumb { background: #eee; border-radius: 10px; }
+              `;
+              document.head.appendChild(style);
+            }
           });
-      }, 300);
+      }, 250);
     });
+
+    // Keyboard Navigation
+    searchInput.addEventListener('keydown', (e) => {
+      const items = predictiveResults.querySelectorAll('.predictive-item');
+      if (items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % items.length;
+        updateSelection(items);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        updateSelection(items);
+      } else if (e.key === 'Enter' && selectedIndex > -1) {
+        e.preventDefault();
+        items[selectedIndex].click();
+      }
+    });
+
+    function updateSelection(items) {
+      items.forEach((item, index) => {
+        if (index === selectedIndex) {
+          item.classList.add('is-selected');
+          item.scrollIntoView({ block: 'nearest' });
+        } else {
+          item.classList.remove('is-selected');
+        }
+      });
+    }
 
     // Close suggestions when clicking outside
     document.addEventListener('click', (e) => {
