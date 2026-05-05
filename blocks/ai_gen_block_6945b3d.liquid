@@ -5,6 +5,7 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /* ── Outer wrapper ── */
   .ai-banner-{{ ai_gen_id }} {
     display: block;
     position: relative;
@@ -13,18 +14,23 @@
     overflow: hidden;
   }
 
+  /* ── Banner wrapper — fixed height on desktop, aspect-ratio on mobile ── */
   .ai-banner-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
     height: {{ block.settings.banner_height }}px;
   }
 
+  /* ── Image fills wrapper ── */
   .ai-banner-image-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
+  /* ── Placeholder ── */
   .ai-banner-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
@@ -52,47 +58,53 @@
     color: #666;
     text-align: center;
     pointer-events: none;
+    white-space: nowrap;
   }
 
+  /* ── Overlay ── */
   .ai-banner-overlay-{{ ai_gen_id }} {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-color: {{ block.settings.overlay_color }};
     opacity: {{ block.settings.overlay_opacity }};
+    pointer-events: none;
   }
 
+  /* ── Content block ── */
   .ai-banner-content-{{ ai_gen_id }} {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: {{ block.settings.text_color }};
     width: 90%;
     max-width: 800px;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .ai-banner-heading-{{ ai_gen_id }} {
     font-size: {{ block.settings.heading_size }}px;
-    margin: 0 0 16px;
+    margin: 0 0 12px;
     font-weight: 700;
+    line-height: 1.2;
   }
 
   .ai-banner-subheading-{{ ai_gen_id }} {
     font-size: {{ block.settings.subheading_size }}px;
     margin: 0;
+    line-height: 1.5;
   }
 
-  /* 🔥 Glassmorphism Button */
+  /* ── Glassmorphism Button ── */
   .ai-banner-button-{{ ai_gen_id }} {
     position: absolute;
-    bottom: 30px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
     padding: 14px 32px;
+    white-space: nowrap;
 
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
@@ -107,45 +119,95 @@
     text-decoration: none;
 
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-
     transition: all 0.3s ease;
   }
 
   .ai-banner-button-{{ ai_gen_id }}:hover {
     background: rgba(255, 255, 255, 0.25);
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
     transform: translateX(-50%) scale(1.05);
     box-shadow: 0 12px 40px rgba(12, 12, 12, 0.35);
   }
 
+  /* ════════════════════════════════
+     MOBILE OPTIMISATIONS  ≤ 749px
+  ════════════════════════════════ */
   @media screen and (max-width: 749px) {
+    /* Full width, aspect-ratio driven height instead of fixed px */
     .ai-banner-{{ ai_gen_id }} {
       width: 100% !important;
     }
 
     .ai-banner-wrapper-{{ ai_gen_id }} {
-      height: auto;
-      min-height: 320px;
+      height: auto !important;
+      aspect-ratio: 4 / 3;
+      min-height: 260px;
     }
 
+    /* Fluid heading & subheading */
     .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: clamp(24px, 6vw, 36px);
+      font-size: clamp(20px, 6vw, 36px);
+      margin-bottom: 8px;
     }
 
     .ai-banner-subheading-{{ ai_gen_id }} {
-      font-size: clamp(14px, 4vw, 18px);
+      font-size: clamp(13px, 3.5vw, 18px);
+    }
+
+    /* Touch-friendly button — larger tap target, smaller font */
+    .ai-banner-button-{{ ai_gen_id }} {
+      bottom: 16px;
+      padding: 12px 24px;
+      font-size: 13px;
+      border-radius: 40px;
+      max-width: calc(100% - 48px);
+      text-align: center;
+    }
+
+    /* Reduce content area padding */
+    .ai-banner-content-{{ ai_gen_id }} {
+      width: 85%;
+      padding: 0 8px;
+      top: 42%;
+    }
+  }
+
+  /* Very small screens ≤ 380px */
+  @media screen and (max-width: 380px) {
+    .ai-banner-wrapper-{{ ai_gen_id }} {
+      aspect-ratio: 3 / 4;
+      min-height: 240px;
+    }
+
+    .ai-banner-heading-{{ ai_gen_id }} {
+      font-size: clamp(18px, 7vw, 28px);
+    }
+
+    .ai-banner-button-{{ ai_gen_id }} {
+      padding: 10px 20px;
+      font-size: 12px;
+      bottom: 12px;
     }
   }
 {% endstyle %}
 
 <div class="ai-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-banner-wrapper-{{ ai_gen_id }}">
-    
+
     {% if block.settings.banner_image %}
       <img
-        src="{{ block.settings.banner_image | image_url: width: 1200 }}"
+        src="{{ block.settings.banner_image | image_url: width: 800 }}"
+        srcset="
+          {{ block.settings.banner_image | image_url: width: 400 }} 400w,
+          {{ block.settings.banner_image | image_url: width: 600 }} 600w,
+          {{ block.settings.banner_image | image_url: width: 800 }} 800w,
+          {{ block.settings.banner_image | image_url: width: 1200 }} 1200w,
+          {{ block.settings.banner_image | image_url: width: 1600 }} 1600w
+        "
+        sizes="(max-width: 749px) 100vw, {{ block.settings.desktop_width_percent }}vw"
         alt="{{ block.settings.banner_image.alt | default: block.settings.heading | default: shop.name | escape }}"
-        loading="lazy"
+        loading="eager"
+        fetchpriority="high"
         width="{{ block.settings.banner_image.width }}"
         height="{{ block.settings.banner_image.height }}"
         class="ai-banner-image-{{ ai_gen_id }}"
@@ -174,13 +236,15 @@
       </div>
     {% endif %}
 
-    <!-- 🔥 Glass Button -->
-    <a href="{{ block.settings.button_link }}" class="ai-banner-button-{{ ai_gen_id }}">
-      {{ block.settings.button_text }}
-    </a>
+    {% if block.settings.button_text != blank %}
+      <a href="{{ block.settings.button_link }}" class="ai-banner-button-{{ ai_gen_id }}">
+        {{ block.settings.button_text }}
+      </a>
+    {% endif %}
 
   </div>
 </div>
+
 
 {% schema %}
 {
