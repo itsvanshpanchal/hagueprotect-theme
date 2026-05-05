@@ -340,6 +340,14 @@
         </svg>
       </button>
 
+      <!-- Search Toggle -->
+      <button type="button" class="header__cart-link" onclick="openSearch()" aria-label="Open search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 21L16.65 16.65" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
       <!-- Login Button -->
       <a href="/pages/login" onclick="handleHeaderLogin(event)" class="header__cart-link" aria-label="Account Login">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -443,6 +451,38 @@
         </ul>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Premium Full-Screen Search Overlay -->
+  <div id="ThemeSearchView" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); z-index: 10000; backdrop-filter: blur(8px);">
+    <div style="position: absolute; top: 24px; right: 24px;">
+      <button onclick="closeSearch()" style="background: none; border: none; cursor: pointer; color: #111; padding: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#eee';" onmouseout="this.style.backgroundColor='transparent';">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    
+    <div style="max-width: 800px; width: 100%; margin: 15vh auto; padding: 0 24px;">
+      <h2 style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; text-align: center;">Search our store</h2>
+      <form action="/search" method="get" role="search" style="position: relative;">
+        <input type="text" 
+               name="q" 
+               id="SearchInput" 
+               placeholder="What are you looking for?" 
+               autocomplete="off"
+               style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #111; padding: 16px 0; font-family: 'Inter', sans-serif; font-size: clamp(24px, 4vw, 42px); font-weight: 800; color: #111; outline: none; transition: border-color 0.3s;"
+               onfocus="this.style.borderBottomColor='#FF2B2B'"
+               onblur="this.style.borderBottomColor='#111'">
+        <button type="submit" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #111;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21L16.65 16.65"/></svg>
+        </button>
+      </form>
+      <div style="margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+        <span style="font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase;">Popular:</span>
+        <a href="/search?q=kit" style="font-size: 13px; color: #111; text-decoration: none; font-weight: 700; border-bottom: 1px solid #ddd;">Kits</a>
+        <a href="/search?q=cleaner" style="font-size: 13px; color: #111; text-decoration: none; font-weight: 700; border-bottom: 1px solid #ddd;">Cleaners</a>
+        <a href="/search?q=suede" style="font-size: 13px; color: #111; text-decoration: none; font-weight: 700; border-bottom: 1px solid #ddd;">Suede Care</a>
+      </div>
     </div>
   </div>
 </header>
@@ -603,6 +643,25 @@
       window.location.hash = "#login";
     }
   }
+
+  function openSearch() {
+    const searchView = document.getElementById('ThemeSearchView');
+    searchView.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      document.getElementById('SearchInput').focus();
+    }, 100);
+  }
+
+  function closeSearch() {
+    document.getElementById('ThemeSearchView').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Close search on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch();
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('customer_email')) {
