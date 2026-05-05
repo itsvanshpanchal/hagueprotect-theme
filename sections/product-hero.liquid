@@ -54,6 +54,7 @@
   background-color: #F7F7F7;
   border-radius: var(--d2c-radius-xl);
   overflow: hidden;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,11 +66,7 @@
   display: flex;
   width: 100%;
   height: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow: hidden; /* Default for desktop */
 }
 
 .d2c-main-media-track::-webkit-scrollbar {
@@ -223,7 +220,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 4px;
+  margin-bottom: -4px;
 }
 
 .d2c-brand-text {
@@ -253,9 +250,8 @@
   font-weight: 700;
   font-family: var(--d2c-heading-font);
   color: #000000;
-  line-height: 1.25;
+  line-height: 1.15;
   margin: 0;
-  padding: 2px 0;
   letter-spacing: -0.5px;
 }
 
@@ -268,9 +264,27 @@
   }
   .d2c-product-title {
     font-size: clamp(24px, 7vw, 32px);
+    line-height: 1.25;
+    padding: 2px 0;
   }
   .d2c-brand-text {
     font-size: 26px;
+  }
+  .d2c-media-main {
+    padding: 0;
+  }
+  .d2c-main-media-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .d2c-main-media-track::-webkit-scrollbar {
+    display: none;
+  }
+  .d2c-brand-award-row {
+    margin-bottom: 4px;
   }
 }
 
@@ -879,11 +893,20 @@
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
       <div class="d2c-brand-award-row">
-        <span style="font-family: 'Dancing Script', cursive; font-size: clamp(32px, 8vw, 42px); font-weight: 700; color: #000000; line-height: 1.3; letter-spacing: 0;">Hague Protect</span>
+        <span class="d2c-handwriting-label" style="font-family: 'Dancing Script', cursive; font-size: 42px; font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
         {%- if section.settings.award_text != blank -%}
           <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}
       </div>
+
+      {%- style -%}
+        @media screen and (max-width: 767px) {
+          .d2c-handwriting-label {
+            font-size: clamp(32px, 8vw, 42px) !important;
+            line-height: 1.3 !important;
+          }
+        }
+      {%- endstyle -%}
 
       <!-- Title -->
       {%- if product.title contains "HagueProtect" -%}
