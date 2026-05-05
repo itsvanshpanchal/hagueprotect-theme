@@ -476,6 +476,10 @@
         <button type="submit" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #111;">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21L16.65 16.65"/></svg>
         </button>
+        <!-- Predictive Search Results Container -->
+        <div id="PredictiveSearchContainer" style="position: absolute; top: 100%; left: 0; width: 100%; background: #fff; border-radius: 0 0 16px 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: none; z-index: 10; margin-top: 4px; overflow: hidden; border-top: 1px solid #f0f0f0;">
+          <div id="PredictiveSearchResults" style="max-height: 450px; overflow-y: auto; padding: 16px;"></div>
+        </div>
       </form>
       <div style="margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
         <span style="font-size: 13px; color: #888; font-weight: 600; text-transform: uppercase;">Popular:</span>
@@ -662,6 +666,75 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSearch();
   });
+
+  // Predictive Search Logic
+  const searchInput = document.getElementById('SearchInput');
+  const predictiveResults = document.getElementById('PredictiveSearchResults');
+  const predictiveContainer = document.getElementById('PredictiveSearchContainer');
+  let debounceTimer;
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      const query = searchInput.value.trim();
+
+      if (query.length < 2) {
+        predictiveContainer.style.display = 'none';
+        return;
+      }
+
+      debounceTimer = setTimeout(() => {
+        fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product,collection&resources[limit]=6`)
+          .then(response => response.json())
+          .then(suggestions => {
+            const products = suggestions.resources.results.products || [];
+            const collections = suggestions.resources.results.collections || [];
+
+            if (products.length === 0 && collections.length === 0) {
+              predictiveResults.innerHTML = '<p style="padding: 16px; color: #888; text-align: center; font-size: 14px;">No suggestions found</p>';
+              predictiveContainer.style.display = 'block';
+              return;
+            }
+
+            let html = '';
+
+            if (collections.length > 0) {
+              html += '<div style="margin-bottom: 20px;"><h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.1em; margin-bottom: 12px; padding: 0 8px;">Categories</h3>';
+              collections.forEach(col => {
+                html += `<a href="${col.url}" style="display: block; padding: 8px; color: #111; text-decoration: none; font-size: 14px; font-weight: 700; border-radius: 6px; transition: background 0.2s;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">${col.title}</a>`;
+              });
+              html += '</div>';
+            }
+
+            if (products.length > 0) {
+              html += '<div><h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #FF2B2B; letter-spacing: 0.1em; margin-bottom: 12px; padding: 0 8px;">Products</h3>';
+              products.forEach(prod => {
+                html += `
+                  <a href="${prod.url}" style="display: flex; align-items: center; gap: 12px; padding: 8px; text-decoration: none; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">
+                    <img src="${prod.image}" style="width: 48px; height: 48px; object-fit: contain; background: #f9f9f9; border-radius: 4px;">
+                    <div style="display: flex; flex-direction: column;">
+                      <span style="font-size: 14px; font-weight: 700; color: #111;">${prod.title}</span>
+                      <span style="font-size: 12px; color: #FF2B2B; font-weight: 800;">${prod.price}</span>
+                    </div>
+                  </a>
+                `;
+              });
+              html += '</div>';
+            }
+
+            predictiveResults.innerHTML = html;
+            predictiveContainer.style.display = 'block';
+          });
+      }, 300);
+    });
+
+    // Close suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!predictiveContainer.contains(e.target) && e.target !== searchInput) {
+        predictiveContainer.style.display = 'none';
+      }
+    });
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('customer_email')) {
