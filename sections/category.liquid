@@ -134,6 +134,20 @@
     .category__dots {
       display: flex;
     }
+    /* Fix card size & text visibility on mobile */
+    .category__slider-track .cat-card {
+      aspect-ratio: 3 / 4;
+      padding: 14px;
+    }
+    .cat-card__title {
+      font-size: clamp(13px, 4vw, 16px);
+    }
+    .cat-card__btn {
+      font-size: 11px;
+    }
+    .cat-card__content {
+      gap: 6px;
+    }
   }
 
   .cat-card {
