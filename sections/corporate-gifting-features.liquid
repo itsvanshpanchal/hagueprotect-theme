@@ -98,22 +98,40 @@
     </div>
 
     <div class="corp-features__list">
-      {% for block in section.blocks %}
-        <div class="corp-feature-row">
-          <div class="corp-feature-content">
-            <div class="corp-feature-number">{{ forloop.index | prepend: '0' }}</div>
-            <h3 class="corp-feature-title">{{ block.settings.title }}</h3>
-            <p class="corp-feature-text">{{ block.settings.text }}</p>
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="corp-feature-row">
+            <div class="corp-feature-content">
+              <div class="corp-feature-number">{{ forloop.index | prepend: '0' }}</div>
+              <h3 class="corp-feature-title">{{ block.settings.title }}</h3>
+              <p class="corp-feature-text">{{ block.settings.text }}</p>
+            </div>
+            <div class="corp-feature-media">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title }}">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+            </div>
           </div>
-          <div class="corp-feature-media">
-            {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title }}">
-            {% else %}
+        {% endfor %}
+      {% else %}
+        {% comment %} Fallback items if no blocks are defined {% endcomment %}
+        {% for i in (1..3) %}
+          {% capture title %}{% cycle 'CO-BRANDING', 'PREMIUM PACKAGING', 'BULK DISCOUNTS' %}{% endcapture %}
+          {% capture text %}{% cycle 'Make our products your own. Partner with HAGUEPROTECT for co-branded products that reflect your style.', 'Exquisite presentation for corporate gifting that leaves a lasting impression on your clients and partners.', 'Special pricing and dedicated support for large volume orders tailored to your business needs.' %}{% endcapture %}
+          <div class="corp-feature-row">
+            <div class="corp-feature-content">
+              <div class="corp-feature-number">0{{ i }}</div>
+              <h3 class="corp-feature-title">{{ title }}</h3>
+              <p class="corp-feature-text">{{ text }}</p>
+            </div>
+            <div class="corp-feature-media">
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </div>

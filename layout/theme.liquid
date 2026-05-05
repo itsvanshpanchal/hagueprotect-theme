@@ -185,17 +185,18 @@
     {% section 'header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {%- if request.path contains 'certified-corporation' -%}
+      {%- if request.path == '/pages/certified-corporation' or request.path == '/certified-corporation' -%}
         <div id="CorporateCustomPage">
           {% section 'corporate-gifting-hero' %}
           {% section 'corporate-gifting-form' %}
           {% section 'corporate-gifting-features' %}
         </div>
         <style>
-          /* Hide the default 404 content or other layout parts when on this hijacked URL */
+          /* Hide everything else to ensure the hijacked page looks clean */
           #MainContent > *:not(#CorporateCustomPage) {
             display: none !important;
           }
+          /* Ensure footer and header are still visible as they are outside MainContent */
         </style>
       {%- else -%}
         {{ content_for_layout }}

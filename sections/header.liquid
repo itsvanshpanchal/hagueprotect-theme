@@ -311,57 +311,24 @@
       </span>
     </a>
 
-    <!-- Navigation -->
     <nav class="header__navigation" role="navigation">
-      {% if section.settings.menu != blank and section.settings.menu.links.size > 0 %}
-        {% for link in section.settings.menu.links %}
-          <div class="nav-item">
-            {%- assign is_shop = false -%}
-            {%- assign downcase_title = link.title | downcase -%}
-            {%- if downcase_title contains 'shop' or downcase_title contains 'collections' -%}
-              {%- assign is_shop = true -%}
-            {%- endif -%}
-
-            {% if forloop.first %}
-              <a href="{{ link.url }}" class="menu-pill" {% if is_shop %}id="ShopTrigger"{% endif %}>
-                {{ link.title }}
-                {% if is_shop %}
-                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
-                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                {% endif %}
-              </a>
-            {% else %}
-              <a href="{{ link.url }}" class="menu-link" {% if is_shop %}id="ShopTrigger"{% endif %}>
-                {{ link.title }}
-                {% if is_shop %}
-                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
-                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                {% endif %}
-              </a>
-            {% endif %}
-          </div>
-        {% endfor %}
-      {% else %}
-        <div class="nav-item">
-          <a href="/collections/all" class="menu-pill" id="ShopTrigger">
-            SHOP ALL
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
-              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-        <div class="nav-item">
-          <a href="/pages/certified-corporation" class="menu-link">CORPORATE GIFTING</a>
-        </div>
-        <div class="nav-item">
-          <a href="/pages/contact-us" class="menu-link">BUSINESS</a>
-        </div>
-        <div class="nav-item">
-          <a href="/collections/all" class="menu-link">OFFERS</a>
-        </div>
-      {% endif %}
+      <div class="nav-item">
+        <a href="/collections/all" class="menu-pill" id="ShopTrigger">
+          SHOP ALL
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
+            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="/pages/certified-corporation" class="menu-link">CORPORATE GIFTING</a>
+      </div>
+      <div class="nav-item">
+        <a href="/pages/contact-us" class="menu-link">BUSINESS</a>
+      </div>
+      <div class="nav-item">
+        <a href="/collections/all" class="menu-link">OFFERS</a>
+      </div>
     </nav>
 
     <!-- Actions -->
