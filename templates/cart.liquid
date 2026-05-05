@@ -156,13 +156,28 @@
                 </div>
               </div>
 
+            <div id="CreditCardForm">
               <input type="text" id="PaymentCardNum" placeholder="Card Number" value="4242 4242 4242 4242" style="width: 100%; height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
               
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
                 <input type="text" id="PaymentExpiry" placeholder="Expiration Date (MM/YY)" value="12/28" style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
                 <input type="password" id="PaymentCVV" placeholder="Security Code (CVV)" value="123" style="height: 52px; padding: 12px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; outline: none;" onfocus="this.style.borderColor='#FF2B2B'" onblur="this.style.borderColor='#ddd'">
               </div>
             </div>
+
+            <!-- Integrated Payment Extension Option -->
+            <div id="PaymentExtensionOption" style="border-top: 1px solid #eee; padding-top: 16px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px;">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="radio" name="payment_method" value="extension" id="RadioExtension" onclick="togglePaymentMethod('extension')" style="accent-color: #FF2B2B; width: 18px; height: 18px;">
+                <span style="font-size: 14px; font-weight: 700; color: #111;">Pay with Payment Extension</span>
+                <span style="background: #E8F5E9; color: #2E7D32; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">Secure</span>
+              </label>
+              
+              <div id="ExtensionInfo" style="display: none; background: #f0f0f2; border-radius: 8px; padding: 16px; border-left: 4px solid #FF2B2B;">
+                <p style="font-size: 13px; color: #444; margin: 0; line-height: 1.5;">You will be connected to our <strong>Integrated Payment Extension</strong> to finalize your transaction securely.</p>
+              </div>
+            </div>
+          </div>
 
             <div style="display: flex; flex-direction: column; gap: 12px;">
               <button type="button" onclick="processComplete()" style="width: 100%; background-color: #FF2B2B; color: #fff; height: 56px; border: none; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Pay Now</button>
@@ -180,6 +195,21 @@
               <p id="CheckoutOrderNum" style="font-size: 14px; font-weight: 600; color: #FF2B2B; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Order #HP48291</p>
             </div>
             <p style="font-size: 15px; color: #666; line-height: 1.6; margin: 0; max-width: 420px;">Thank you for your purchase with Hague Protect. A dynamic confirmation receipt has been sent to <strong id="SummaryEmail">your email</strong>.</p>
+
+            <!-- Payment Method Extension Integration (Last Place) -->
+            <div id="ExtensionSuccessBlock" style="width: 100%; max-width: 440px; background: #ffffff; border: 1px solid #eee; border-radius: 12px; padding: 24px; margin-top: 12px; display: none; text-align: left; box-shadow: 0 8px 24px rgba(0,0,0,0.03);">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <div style="width: 40px; height: 40px; background: #111; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <span style="display: block; font-size: 14px; font-weight: 800; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Payment Extension</span>
+                  <span style="font-size: 12px; color: #22C55E; font-weight: 700;">Verified & Connected</span>
+                </div>
+              </div>
+              <p style="font-size: 13.5px; color: #555; line-height: 1.5; margin: 0 0 16px;">The integrated payment method extension has successfully finalized your transaction. You can now use the extension portal to manage installments or view receipt details.</p>
+              <button type="button" style="width: 100%; background: #f4f4f5; color: #111; border: 1px solid #e5e5e5; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#f4f4f5'">Open Extension Portal</button>
+            </div>
             <div style="width: 100%; border-top: 1px solid #e5e5e5; padding-top: 20px; margin-top: 8px;">
               <a href="/collections/all" style="display: inline-block; background-color: #111; color: #fff; padding: 14px 36px; border-radius: 30px; font-weight: 600; font-size: 15px; text-decoration: none;">Continue Shopping</a>
             </div>
@@ -387,19 +417,46 @@
     document.getElementById('StepDivider2').style.background = '#e5e5e5';
   }
 
+  function togglePaymentMethod(method) {
+    const cardForm = document.getElementById('CreditCardForm');
+    const extInfo = document.getElementById('ExtensionInfo');
+    
+    if (method === 'extension') {
+      cardForm.style.opacity = '0.5';
+      cardForm.style.pointerEvents = 'none';
+      extInfo.style.display = 'block';
+    } else {
+      cardForm.style.opacity = '1';
+      cardForm.style.pointerEvents = 'all';
+      extInfo.style.display = 'none';
+    }
+  }
+
   async function processComplete() {
+    const isExtension = document.getElementById('RadioExtension').checked;
     const cardNum = document.getElementById('PaymentCardNum').value;
     const expiry = document.getElementById('PaymentExpiry').value;
     const cvv = document.getElementById('PaymentCVV').value;
 
-    if (!cardNum || !expiry || !cvv) {
+    if (!isExtension && (!cardNum || !expiry || !cvv)) {
       alert('Please enter your credit card details.');
       return;
     }
 
+    const payBtn = event.target;
+    payBtn.innerText = isExtension ? 'Connecting Extension...' : 'Processing...';
+    payBtn.disabled = true;
+
+    // Simulate connection delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
     document.getElementById('CheckoutStep3').style.display = 'none';
     document.getElementById('CheckoutStep4').style.display = 'flex';
     
+    if (isExtension) {
+      document.getElementById('ExtensionSuccessBlock').style.display = 'block';
+    }
+
     document.getElementById('StepBadge4').style.opacity = '1';
     document.getElementById('StepBadge4').querySelector('.step-num').style.background = '#22C55E';
     document.getElementById('StepDivider3').style.background = '#22C55E';
