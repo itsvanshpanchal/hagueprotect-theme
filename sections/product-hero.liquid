@@ -840,18 +840,23 @@
       </div>
 
       <!-- Title -->
-      {%- if product.title contains "Cleaning Kit" -%}
-        {%- assign parts = product.title | split: "Cleaning Kit" -%}
+      {%- if product.title contains "HagueProtect" -%}
+        {%- assign hp_parts = product.title | split: "HagueProtect" -%}
         <h1 class="d2c-product-title">
-          <span style="color: #000000; font-weight: 700;">{{ parts[0] }}</span><span style="color: #888888; font-weight: 400;">Cleaning Kit</span>{%- if parts[1] != blank -%}<span style="color: #000000; font-weight: 700;">{{ parts[1] }}</span>{%- endif -%}
+          {%- if hp_parts[0] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[0] }}</span>{%- endif -%}<span style="color: #000000; font-weight: 700;">HagueProtect</span>{%- if hp_parts[1] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[1] }}</span>{%- endif -%}
         </h1>
-      {%- elsif product.title contains "cleaning kit" -%}
-        {%- assign parts = product.title | split: "cleaning kit" -%}
+      {%- elsif product.title contains "hagueprotect" -%}
+        {%- assign hp_parts = product.title | split: "hagueprotect" -%}
         <h1 class="d2c-product-title">
-          <span style="color: #000000; font-weight: 700;">{{ parts[0] }}</span><span style="color: #888888; font-weight: 400;">cleaning kit</span>{%- if parts[1] != blank -%}<span style="color: #000000; font-weight: 700;">{{ parts[1] }}</span>{%- endif -%}
+          {%- if hp_parts[0] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[0] }}</span>{%- endif -%}<span style="color: #000000; font-weight: 700;">hagueprotect</span>{%- if hp_parts[1] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[1] }}</span>{%- endif -%}
+        </h1>
+      {%- elsif product.title contains "HAGUEPROTECT" -%}
+        {%- assign hp_parts = product.title | split: "HAGUEPROTECT" -%}
+        <h1 class="d2c-product-title">
+          {%- if hp_parts[0] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[0] }}</span>{%- endif -%}<span style="color: #000000; font-weight: 700;">HAGUEPROTECT</span>{%- if hp_parts[1] != blank -%}<span style="color: #888888; font-weight: 700;">{{ hp_parts[1] }}</span>{%- endif -%}
         </h1>
       {%- else -%}
-        <h1 class="d2c-product-title" style="color: #000000; font-weight: 700;">{{ product.title }}</h1>
+        <h1 class="d2c-product-title" style="color: #888888; font-weight: 700;">{{ product.title }}</h1>
       {%- endif -%}
 
       <!-- Rating / Review Pill Row -->
