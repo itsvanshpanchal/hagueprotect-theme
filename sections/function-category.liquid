@@ -63,18 +63,28 @@
   }
 
   .fc-slider-container {
-    overflow: hidden;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
     box-sizing: border-box;
     position: relative;
     padding-bottom: 8px;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .fc-slider-container::-webkit-scrollbar {
+    display: none;
   }
 
   .fc-slider-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     box-sizing: border-box;
+    /* Width set by JS so scroll works correctly */
   }
 
   .fc-slide {
@@ -94,6 +104,8 @@
     transition: background-color 0.2s ease, border-color 0.2s ease;
     cursor: pointer;
     text-decoration: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .fc-slide:hover {
@@ -350,125 +362,127 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    initFunctionCategorySlider();
-  });
+  (function() {
+    function initFunctionCategorySlider() {
+      const slider = document.getElementById('fc-slider-{{ section.id }}');
+      const track = document.getElementById('fc-track-{{ section.id }}');
+      const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
+      const nextBtn = document.getElementById('fc-next-{{ section.id }}');
+      const fill = document.getElementById('fc-fill-{{ section.id }}');
+      
+      if (!slider || !track || !prevBtn || !nextBtn || !fill) return;
 
-  document.addEventListener('shopify:section:load', function(e) {
-    if (e.target.id.includes('function-category') || e.target.querySelector('.fc-section')) {
-      initFunctionCategorySlider();
-    }
-  });
+      let currentIndex = 0;
+      let autoplayInterval = null;
 
-  function initFunctionCategorySlider() {
-    const track = document.getElementById('fc-track-{{ section.id }}');
-    const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
-    const nextBtn = document.getElementById('fc-next-{{ section.id }}');
-    const fill = document.getElementById('fc-fill-{{ section.id }}');
-    if (!track || !prevBtn || !nextBtn || !fill) return;
+      function getVisibleCardsCount() {
+        if (window.innerWidth <= 767) return 2;
+        if (window.innerWidth <= 991) return 3;
+        return 4;
+      }
 
-    let currentIndex = 0;
-    let autoplayInterval = null;
+      function getSlideWidth() {
+        const slides = track.querySelectorAll('.fc-slide');
+        if (slides.length === 0) return 0;
+        return slides[0].offsetWidth + 20; // width + gap
+      }
 
-    function getVisibleCardsCount() {
-      if (window.innerWidth <= 480) return 1;
-      if (window.innerWidth <= 767) return 2;
-      if (window.innerWidth <= 991) return 3;
-      return 4;
-    }
-
-    function updateSlider() {
-      const slides = track.querySelectorAll('.fc-slide');
-      if (slides.length === 0) return;
-
-      const visible = getVisibleCardsCount();
-      const maxSteps = Math.max(0, slides.length - visible);
-      if (currentIndex > maxSteps) currentIndex = maxSteps;
-      if (currentIndex < 0) currentIndex = 0;
-
-      // Update arrow states
-      prevBtn.disabled = (currentIndex === 0);
-      nextBtn.disabled = (currentIndex === maxSteps);
-
-      // Get individual slide width + gap dynamically
-      const slideWidth = slides[0].offsetWidth;
-      const gap = 20; // Exact defined track gap
-      const offset = currentIndex * (slideWidth + gap);
-
-      track.style.transform = `translateX(-${offset}px)`;
-
-      // Update progress fill width and transform
-      const totalSteps = maxSteps + 1;
-      const fillWidth = 100 / totalSteps;
-      fill.style.width = `${fillWidth}%`;
-      fill.style.transform = `translateX(${currentIndex * 100}%)`;
-    }
-
-    function startAutoplay() {
-      if (autoplayInterval) clearInterval(autoplayInterval);
-      autoplayInterval = setInterval(() => {
+      function updateSlider() {
         const slides = track.querySelectorAll('.fc-slide');
         const visible = getVisibleCardsCount();
         const maxSteps = Math.max(0, slides.length - visible);
-        if (currentIndex >= maxSteps) {
-          currentIndex = 0;
-        } else {
-          currentIndex++;
-        }
-        updateSlider();
-      }, 4000);
-    }
+        
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex > maxSteps) currentIndex = maxSteps;
 
-    function stopAutoplay() {
-      if (autoplayInterval) clearInterval(autoplayInterval);
-    }
-
-    track.addEventListener('mouseenter', stopAutoplay);
-    track.addEventListener('mouseleave', startAutoplay);
-
-    prevBtn.addEventListener('click', () => {
-      currentIndex--;
-      updateSlider();
-      startAutoplay();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      currentIndex++;
-      updateSlider();
-      startAutoplay();
-    });
-
-    // ── Touch / swipe support ──
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const swipeThreshold = 40;
-
-    track.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      stopAutoplay();
-    }, { passive: true });
-
-    track.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          currentIndex++; // swipe left → next
-        } else {
-          currentIndex--; // swipe right → prev
-        }
-        updateSlider();
+        const offset = currentIndex * getSlideWidth();
+        slider.scrollTo({ left: offset, behavior: 'smooth' });
       }
-      startAutoplay();
-    }, { passive: true });
 
-    window.addEventListener('resize', updateSlider);
-    updateSlider();
-    startAutoplay();
-  }
+      function syncUI() {
+        const slides = track.querySelectorAll('.fc-slide');
+        if (slides.length === 0) return;
+        
+        const visible = getVisibleCardsCount();
+        const maxSteps = Math.max(0, slides.length - visible);
+        const slideWidth = getSlideWidth();
+        
+        // Calculate current index from scroll position
+        const scrollIndex = Math.round(slider.scrollLeft / slideWidth);
+        currentIndex = scrollIndex;
 
-  // Execute immediately
-  initFunctionCategorySlider();
+        // Update arrow states
+        prevBtn.disabled = (currentIndex === 0);
+        nextBtn.disabled = (currentIndex >= maxSteps);
+
+        // Update progress bar
+        const totalSteps = maxSteps + 1;
+        const fillWidth = 100 / totalSteps;
+        fill.style.width = `${fillWidth}%`;
+        fill.style.transform = `translateX(${currentIndex * 100}%)`;
+      }
+
+      function startAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(() => {
+          const slides = track.querySelectorAll('.fc-slide');
+          const visible = getVisibleCardsCount();
+          const maxSteps = Math.max(0, slides.length - visible);
+          if (currentIndex >= maxSteps) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          updateSlider();
+        }, 5000);
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+      }
+
+      slider.addEventListener('mouseenter', stopAutoplay);
+      slider.addEventListener('mouseleave', startAutoplay);
+      slider.addEventListener('touchstart', stopAutoplay, { passive: true });
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex--;
+        updateSlider();
+        startAutoplay();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex++;
+        updateSlider();
+        startAutoplay();
+      });
+
+      // Sync UI on scroll (for native swipes)
+      let scrollTimeout;
+      slider.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(syncUI, 50);
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        updateSlider();
+        syncUI();
+      });
+
+      // Initial sync
+      setTimeout(() => {
+        syncUI();
+        startAutoplay();
+      }, 100);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFunctionCategorySlider);
+    } else {
+      initFunctionCategorySlider();
+    }
+    document.addEventListener('shopify:section:load', initFunctionCategorySlider);
+  })();
 </script>
 
 {% schema %}

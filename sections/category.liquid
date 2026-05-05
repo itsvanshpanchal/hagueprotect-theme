@@ -44,13 +44,26 @@
   .category__slider-track {
     display: flex;
     gap: 16px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Native smooth scroll */
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .category__slider-track::-webkit-scrollbar {
+    display: none;
   }
 
   .category__slider-track .cat-card {
     flex: 0 0 calc(50% - 8px);
     min-width: calc(50% - 8px);
     aspect-ratio: 1 / 1;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   /* Mobile slider nav */
@@ -365,7 +378,6 @@
       var slides = track.querySelectorAll('.cat-card');
       if (slides.length === 0) return;
 
-      var currentIndex = 0;
       var visibleCards = 2;
       var maxIndex = Math.max(0, slides.length - visibleCards);
 
@@ -375,37 +387,50 @@
         var dot = document.createElement('div');
         dot.className = 'category__dot' + (i === 0 ? ' active' : '');
         (function(idx) {
-          dot.addEventListener('click', function() { currentIndex = idx; update(); });
+          dot.addEventListener('click', function() { scrollToIndex(idx); });
         })(i);
         dotsContainer.appendChild(dot);
       }
 
-      function update() {
-        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-        var slideWidth = slides[0].offsetWidth + 16;
-        track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + 'px)';
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === maxIndex;
-        var dots = dotsContainer.querySelectorAll('.category__dot');
-        dots.forEach(function(d, i) { d.classList.toggle('active', i === currentIndex); });
+      function getSlideWidth() {
+        return slides[0].offsetWidth + 16; // card width + gap
       }
 
-      prevBtn.addEventListener('click', function() { currentIndex--; update(); });
-      nextBtn.addEventListener('click', function() { currentIndex++; update(); });
+      function scrollToIndex(idx) {
+        idx = Math.max(0, Math.min(idx, maxIndex));
+        track.scrollTo({ left: idx * getSlideWidth(), behavior: 'smooth' });
+      }
 
-      // Touch swipe
-      var startX = 0;
-      track.addEventListener('touchstart', function(e) { startX = e.changedTouches[0].screenX; }, { passive: true });
-      track.addEventListener('touchend', function(e) {
-        var diff = startX - e.changedTouches[0].screenX;
-        if (Math.abs(diff) > 40) {
-          currentIndex += diff > 0 ? 1 : -1;
-          update();
-        }
+      function getCurrentIndex() {
+        return Math.round(track.scrollLeft / getSlideWidth());
+      }
+
+      function syncUI() {
+        var idx = getCurrentIndex();
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx >= maxIndex;
+        dotsContainer.querySelectorAll('.category__dot').forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() {
+        scrollToIndex(getCurrentIndex() - 1);
+      });
+
+      nextBtn.addEventListener('click', function() {
+        scrollToIndex(getCurrentIndex() + 1);
+      });
+
+      // Sync dots & buttons while scrolling
+      var scrollTimer;
+      track.addEventListener('scroll', function() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(syncUI, 80);
       }, { passive: true });
 
-      window.addEventListener('resize', update);
-      update();
+      window.addEventListener('resize', syncUI);
+      syncUI();
     }
 
     if (document.readyState === 'loading') {
@@ -416,6 +441,7 @@
     document.addEventListener('shopify:section:load', initCategorySlider);
   })();
 </script>
+
 
 
 
