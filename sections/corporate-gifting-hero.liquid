@@ -1,0 +1,123 @@
+{%- style -%}
+  .corp-hero {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+  .corp-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .corp-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    z-index: 2;
+  }
+  .corp-hero__container {
+    position: relative;
+    z-index: 3;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 60px;
+  }
+  .corp-hero__content {
+    max-width: 600px;
+  }
+  .corp-hero__title {
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 32px 0;
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .corp-hero__btn {
+    display: inline-block;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 16px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+  .corp-hero__btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 767px) {
+    .corp-hero {
+      height: 400px;
+      text-align: center;
+      justify-content: center;
+    }
+    .corp-hero__container {
+      padding: 0 24px;
+    }
+    .corp-hero__title {
+      font-size: 42px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="corp-hero">
+  {% if section.settings.image != blank %}
+    <img src="{{ section.settings.image | image_url: width: 2000 }}" class="corp-hero__bg" alt="Hero Background">
+  {% else %}
+    <div class="corp-hero__bg" style="background: #D32F2F;"></div>
+  {% endif %}
+  <div class="corp-hero__overlay"></div>
+  <div class="corp-hero__container">
+    <div class="corp-hero__content">
+      <h1 class="corp-hero__title">{{ section.settings.heading | default: 'Corporate Gifting' }}</h1>
+      <a href="{{ section.settings.btn_link | default: '#' }}" class="corp-hero__btn">{{ section.settings.btn_label | default: 'Download Catalog' }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Corporate Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Corporate Gifting"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Download Catalog"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ]
+}
+{% endschema %}

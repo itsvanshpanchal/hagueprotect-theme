@@ -1,0 +1,158 @@
+{%- style -%}
+  .corp-features {
+    padding: 100px 0;
+    background-color: #ffffff;
+  }
+  .corp-features__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+  .corp-features__header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .corp-features__heading {
+    font-size: 42px;
+    font-weight: 800;
+    color: #000;
+    margin: 0;
+  }
+  .corp-feature-row {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: 120px;
+  }
+  .corp-feature-row:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  .corp-feature-content {
+    flex: 1;
+    max-width: 500px;
+  }
+  .corp-feature-number {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 24px;
+  }
+  .corp-feature-number::before {
+    content: "";
+    width: 30px;
+    height: 2px;
+    background: #000;
+  }
+  .corp-feature-title {
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 24px 0;
+    letter-spacing: 0.05em;
+    color: #111;
+  }
+  .corp-feature-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+  .corp-feature-media {
+    flex: 1.2;
+    background: #f7f7f7;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+  .corp-feature-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .corp-features__container {
+      padding: 0 24px;
+    }
+    .corp-feature-row {
+      flex-direction: column !important;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+    .corp-feature-content {
+      max-width: 100%;
+    }
+    .corp-features__heading {
+      font-size: 32px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="corp-features">
+  <div class="corp-features__container">
+    <div class="corp-features__header">
+      <h2 class="corp-features__heading">What's Possible</h2>
+    </div>
+
+    <div class="corp-features__list">
+      {% for block in section.blocks %}
+        <div class="corp-feature-row">
+          <div class="corp-feature-content">
+            <div class="corp-feature-number">{{ forloop.index | prepend: '0' }}</div>
+            <h3 class="corp-feature-title">{{ block.settings.title }}</h3>
+            <p class="corp-feature-text">{{ block.settings.text }}</p>
+          </div>
+          <div class="corp-feature-media">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title }}">
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Corporate Features",
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "CO-BRANDING"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Make our products your own. Partner with HAGUEPROTECT for co-branded products that reflect your style, and a shared love of shoes."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Features",
+      "blocks": [
+        { "type": "feature" }
+      ]
+    }
+  ]
+}
+{% endschema %}
