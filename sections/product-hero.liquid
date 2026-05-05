@@ -223,7 +223,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: -4px;
+  margin-bottom: 4px;
 }
 
 .d2c-brand-text {
@@ -253,8 +253,9 @@
   font-weight: 700;
   font-family: var(--d2c-heading-font);
   color: #000000;
-  line-height: 1.15;
+  line-height: 1.25;
   margin: 0;
+  padding: 2px 0;
   letter-spacing: -0.5px;
 }
 
@@ -878,7 +879,7 @@
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
       <div class="d2c-brand-award-row">
-        <span style="font-family: 'Dancing Script', cursive; font-size: clamp(32px, 8vw, 42px); font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
+        <span style="font-family: 'Dancing Script', cursive; font-size: clamp(32px, 8vw, 42px); font-weight: 700; color: #000000; line-height: 1.3; letter-spacing: 0;">Hague Protect</span>
         {%- if section.settings.award_text != blank -%}
           <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}
