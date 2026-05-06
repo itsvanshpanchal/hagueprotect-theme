@@ -337,14 +337,14 @@
       });
     });
 
-    // Intercept clicking the header cart link
-    const cartLinks = document.querySelectorAll('.header__cart-link, a[href="/cart"]');
-    cartLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
+    // Intercept clicking the header cart link ONLY — use ID to be precise
+    const cartBtn = document.getElementById('HeaderCartBtn');
+    if (cartBtn) {
+      cartBtn.addEventListener('click', (e) => {
         e.preventDefault();
         openCartDrawer();
       });
-    });
+    }
 
     // Handle clicking outside the drawer to close
     const overlay = document.getElementById('CartDrawerOverlay');
