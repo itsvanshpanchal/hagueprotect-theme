@@ -1,0 +1,82 @@
+<div class="register-wrapper" style="background: #fafafa; padding: 120px 0; min-height: calc(100vh - 120px); display: flex; justify-content: center; align-items: center;">
+  <div class="container" style="max-width: 480px; width: 100%; margin: 0 auto; padding: 0 24px;">
+    
+    <!-- Premium Header -->
+    <div style="text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; gap: 8px;">
+      <h1 style="font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 800; color: #111; letter-spacing: -0.03em; margin: 0; text-transform: uppercase;">Create Account</h1>
+      <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Join HAGUE PROTECT for exclusive sneaker care benefits</p>
+    </div>
+
+    <!-- Premium Card -->
+    <div style="background: #ffffff; border: 1px solid #e8e8ea; border-radius: 16px; padding: 40px; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04);">
+      <form id="RegisterForm" style="display: flex; flex-direction: column; gap: 24px;" onsubmit="handleRegister(event)">
+        
+        <!-- Input Field: Full Name -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="RegName" style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Full Name</label>
+          <input type="text" id="RegName" placeholder="Enter your full name" required style="font-family: 'Inter', sans-serif; font-size: 15px; border: 1px solid #ddd; background-color: #fafafa; border-radius: 8px; padding: 16px; outline: none; width: 100%; transition: all 0.2s; color: #111;" onfocus="this.style.borderColor='#FF2B2B'; this.style.backgroundColor='#fff';" onblur="this.style.borderColor='#ddd'; this.style.backgroundColor='#fafafa';">
+        </div>
+
+        <!-- Input Field: Email -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="RegEmail" style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Email Address</label>
+          <input type="email" id="RegEmail" placeholder="Enter your email" required style="font-family: 'Inter', sans-serif; font-size: 15px; border: 1px solid #ddd; background-color: #fafafa; border-radius: 8px; padding: 16px; outline: none; width: 100%; transition: all 0.2s; color: #111;" onfocus="this.style.borderColor='#FF2B2B'; this.style.backgroundColor='#fff';" onblur="this.style.borderColor='#ddd'; this.style.backgroundColor='#fafafa';">
+        </div>
+
+        <!-- Input Field: Password -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="RegPassword" style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Create Password</label>
+          <input type="password" id="RegPassword" placeholder="Minimum 6 characters" required minlength="6" style="font-family: 'Inter', sans-serif; font-size: 15px; border: 1px solid #ddd; background-color: #fafafa; border-radius: 8px; padding: 16px; outline: none; width: 100%; transition: all 0.2s; color: #111;" onfocus="this.style.borderColor='#FF2B2B'; this.style.backgroundColor='#fff';" onblur="this.style.borderColor='#ddd'; this.style.backgroundColor='#fafafa';">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" style="background-color: #FF2B2B; color: #fff; height: 56px; border: none; border-radius: 30px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.2s ease; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 8px;" id="SubmitBtn">
+          Create Account
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition: transform 0.2s;" id="ArrowIcon"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Login Redirect -->
+        <div style="text-align: center; font-size: 13px; color: #666; margin-top: 4px;">
+          Already have an account? <a href="/pages/login" style="color: #FF2B2B; text-decoration: underline; font-weight: 600;">Sign In</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function handleRegister(e) {
+    e.preventDefault();
+    const btn = document.getElementById('SubmitBtn');
+    const name = document.getElementById('RegName').value;
+    const email = document.getElementById('RegEmail').value;
+    const password = document.getElementById('RegPassword').value;
+
+    btn.disabled = true;
+    btn.textContent = "Creating Account...";
+    
+    // Get existing users or initialize empty array
+    let users = JSON.parse(localStorage.getItem('theme_users') || '[]');
+    
+    // Check if user already exists
+    if (users.find(u => u.email === email)) {
+      alert('An account with this email already exists.');
+      btn.disabled = false;
+      btn.textContent = "Create Account";
+      return;
+    }
+
+    // Add new user
+    users.push({ name, email, password });
+    localStorage.setItem('theme_users', JSON.stringify(users));
+
+    // Also auto-login the user for convenience
+    localStorage.setItem('customer_email', email);
+    localStorage.setItem('customer_name', name);
+
+    // Realistic timeout for premium feel
+    setTimeout(() => {
+      window.location.href = "/pages/dashboard";
+    }, 1200);
+  }
+</script>

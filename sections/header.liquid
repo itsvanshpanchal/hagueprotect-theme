@@ -299,6 +299,111 @@
     text-transform: uppercase;
     margin-bottom: 6px;
   }
+  /* Profile Dropdown Styles */
+  .header__account-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 240px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+    display: none;
+    z-index: 1002;
+    margin-top: 12px;
+    padding: 16px 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .header__account-container:hover .profile-dropdown {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dropdown-header {
+    padding: 0 20px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 8px;
+  }
+
+  .dropdown-user-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .dropdown-user-email {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #888;
+  }
+
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    color: #111;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .dropdown-link:hover {
+    background-color: #fafafa;
+    color: #FF2B2B;
+    padding-left: 24px;
+  }
+
+  .dropdown-link svg {
+    color: #888;
+    transition: color 0.2s;
+  }
+
+  .dropdown-link:hover svg {
+    color: #FF2B2B;
+  }
+
+  .dropdown-footer {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  .logout-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    color: #FF2B2B;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .logout-btn:hover {
+    background-color: #FFF3F3;
+    padding-left: 24px;
+  }
 {%- endstyle -%}
 
 <header class="header-wrapper" role="banner">
@@ -348,13 +453,47 @@
         </svg>
       </button>
 
-      <!-- Login Button -->
-      <a href="/pages/login" onclick="handleHeaderLogin(event)" class="header__cart-link" aria-label="Account Login">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 20C4 16.13 7.58 13 12 13C16.42 13 20 16.13 20 20" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+      <!-- Login/Profile Button with Dropdown -->
+      <div class="header__account-container">
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="header__cart-link" aria-label="Account Login">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 20C4 16.13 7.58 13 12 13C16.42 13 20 16.13 20 20" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        
+        {%- if customer -%}
+        <!-- Profile Dropdown (Native Shopify) -->
+        <div class="profile-dropdown" id="ProfileDropdown">
+          <div class="dropdown-header">
+            <span class="dropdown-user-name">{{ customer.first_name | default: 'Member' | upcase }}</span>
+            <span class="dropdown-user-email">{{ customer.email }}</span>
+          </div>
+          <a href="{{ routes.account_url }}" class="dropdown-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Dashboard
+          </a>
+          <a href="{{ routes.account_url }}#history" class="dropdown-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Order History
+          </a>
+          <a href="{{ routes.account_addresses_url }}" class="dropdown-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            My Addresses
+          </a>
+          <a href="/pages/faq" class="dropdown-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3m0 4h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Support Center
+          </a>
+          <div class="dropdown-footer">
+            <a href="{{ routes.account_logout_url }}" class="logout-btn" style="text-decoration: none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3H7a2 2 0 00-2 2v14a2 2 0 002 2h8m4-9l-4-4m4 4l-4 4m4-4H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Sign Out
+            </a>
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
 
       <!-- Cart Button -->
       <a href="/cart" class="header__cart-link" aria-label="View Cart">
@@ -579,7 +718,12 @@
       </div>
     </div>
     
-    <a href="/pages/login" onclick="handleHeaderLogin(event)" class="mobile-nav-link" style="color: #FF2B2B;">Login / Account</a>
+    {%- if customer -%}
+      <a href="{{ routes.account_url }}" class="mobile-nav-link" style="color: #FF2B2B;">My Account ({{ customer.first_name }})</a>
+      <a href="{{ routes.account_logout_url }}" class="mobile-nav-link" style="font-size: 13px; opacity: 0.7;">Sign Out</a>
+    {%- else -%}
+      <a href="{{ routes.account_login_url }}" class="mobile-nav-link" style="color: #FF2B2B;">Login / Register</a>
+    {%- endif -%}
     <a href="/pages/certified-corporation" class="mobile-nav-link">CORPORATE GIFTING</a>
     <a href="/pages/contact-us" class="mobile-nav-link">BUSINESS</a>
     <a href="/collections/all" class="mobile-nav-link">OFFERS</a>
@@ -640,12 +784,7 @@
   }
 
   function handleHeaderLogin(e) {
-    e.preventDefault();
-    if (localStorage.getItem('customer_email')) {
-      window.location.hash = "#dashboard";
-    } else {
-      window.location.hash = "#login";
-    }
+    // Native Shopify login handles redirects automatically
   }
 
   function openSearch() {
@@ -784,12 +923,11 @@
     });
   }
 
+  // Cleaned up localStorage greeting logic as we now use native Liquid customer objects
   document.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('customer_email')) {
-        const loginText = document.getElementById('HeaderLoginText');
-        if (loginText) {
-          loginText.textContent = 'Account';
-        }
+      const dropdown = document.getElementById('ProfileDropdown');
+      if (dropdown) {
+        dropdown.style.display = 'none'; // Will show on hover due to CSS
       }
   });
 </script>

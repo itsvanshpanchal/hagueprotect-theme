@@ -31,7 +31,7 @@
 
         <!-- Social login style helper -->
         <div style="text-align: center; font-size: 13px; color: #666; margin-top: 4px;">
-          New to Hague Protect? <a href="/collections/all" style="color: #FF2B2B; text-decoration: underline; font-weight: 600;">Shop now</a>
+          New to Hague Protect? <a href="/pages/register" style="color: #FF2B2B; text-decoration: underline; font-weight: 600;">Create an account</a>
         </div>
       </form>
     </div>
@@ -42,18 +42,29 @@
   function handleLogin(e) {
     e.preventDefault();
     const btn = document.getElementById('SubmitBtn');
-    const arrow = document.getElementById('ArrowIcon');
     const email = document.getElementById('LoginEmail').value;
+    const password = document.getElementById('LoginPassword').value;
 
     btn.disabled = true;
     btn.textContent = "Signing in...";
     
-    // Save email in local storage to greet them on dashboard
-    localStorage.setItem('customer_email', email);
+    // Check against stored users
+    const users = JSON.parse(localStorage.getItem('theme_users') || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
 
-    // Give it a smooth realistic timeout
-    setTimeout(() => {
-      window.location.href = "/pages/dashboard";
-    }, 900);
+    // If no users found (first time), allow any login for demo purposes, 
+    // OR if user matches stored credentials.
+    if (user || (users.length === 0 && email)) {
+      localStorage.setItem('customer_email', email);
+      if (user) localStorage.setItem('customer_name', user.name);
+
+      setTimeout(() => {
+        window.location.href = "/pages/dashboard";
+      }, 900);
+    } else {
+      alert('Invalid email or password. Please try again or create an account.');
+      btn.disabled = false;
+      btn.textContent = "Sign In";
+    }
   }
 </script>
