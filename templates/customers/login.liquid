@@ -1,47 +1,236 @@
-<div class="login-wrapper" style="background: #fafafa; padding: 120px 0; min-height: calc(100vh - 120px); display: flex; justify-content: center; align-items: center;">
-  <div class="container" style="max-width: 480px; width: 100%; margin: 0 auto; padding: 0 24px;">
-    
-    <!-- Premium Header -->
-    <div style="text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; gap: 8px;">
-      <h1 style="font-family: 'Inter', sans-serif; font-size: 32px; font-weight: 800; color: #111; letter-spacing: -0.03em; margin: 0; text-transform: uppercase;">Sign In</h1>
-      <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Access your exclusive HAGUE PROTECT account</p>
+<style>
+  .login-bg {
+    background: #0a0a0a;
+    min-height: calc(100vh - 72px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 24px;
+    position: relative; overflow: hidden;
+  }
+  .login-bg::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,43,43,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .login-bg::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,43,43,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .login-card {
+    background: #111;
+    border: 1px solid #1f1f1f;
+    border-radius: 20px;
+    width: 100%; max-width: 460px;
+    padding: 48px;
+    position: relative; z-index: 1;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .login-brand {
+    text-align: center; margin-bottom: 36px;
+  }
+  .login-brand-logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: #fff; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 2px;
+    text-decoration: none;
+    margin-bottom: 20px; display: block;
+  }
+  .login-brand-logo span { color: #FF2B2B; }
+  .login-brand h1 {
+    font-size: 28px; font-weight: 800; color: #fff;
+    letter-spacing: -0.03em; margin: 0 0 8px; text-transform: uppercase;
+  }
+  .login-brand p { font-size: 13px; color: #555; margin: 0; font-weight: 500; }
+
+  .login-errors {
+    background: rgba(255,43,43,0.08);
+    border: 1px solid rgba(255,43,43,0.2);
+    border-radius: 10px; padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .login-errors li { color: #FF2B2B; font-size: 13px; font-weight: 600; list-style: none; }
+
+  .login-fields { display: flex; flex-direction: column; gap: 20px; }
+
+  .login-field { display: flex; flex-direction: column; gap: 8px; }
+  .login-field-top { display: flex; justify-content: space-between; align-items: center; }
+  .login-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px; font-weight: 800; color: #555;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .login-forgot {
+    font-size: 12px; color: #FF2B2B; text-decoration: none; font-weight: 600;
+  }
+  .login-forgot:hover { text-decoration: underline; }
+
+  .login-input {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 500; color: #fff;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px; padding: 15px 18px;
+    outline: none; width: 100%;
+    transition: border-color 0.2s, background 0.2s;
+    box-sizing: border-box;
+  }
+  .login-input::placeholder { color: #444; }
+  .login-input:focus { border-color: #FF2B2B; background: #1f0000; }
+
+  .login-submit {
+    background: #FF2B2B; color: #fff;
+    height: 54px; border: none; border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 800;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 0.08em;
+    transition: all 0.2s; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 8px;
+  }
+  .login-submit:hover { background: #e02020; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,43,43,0.3); }
+
+  .login-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 4px 0;
+  }
+  .login-divider::before, .login-divider::after {
+    content: ''; flex: 1; height: 1px; background: #1f1f1f;
+  }
+  .login-divider span { font-size: 11px; color: #444; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .login-register {
+    text-align: center; font-size: 13px; color: #555; font-weight: 500;
+  }
+  .login-register a { color: #FF2B2B; text-decoration: none; font-weight: 700; }
+  .login-register a:hover { text-decoration: underline; }
+
+  /* Password recovery form */
+  .recover-form { display: none; flex-direction: column; gap: 20px; }
+  .recover-back {
+    background: none; border: none; cursor: pointer;
+    color: #FF2B2B; font-size: 13px; font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0; text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+</style>
+
+<div class="login-bg">
+  <div class="login-card">
+    <!-- Branding -->
+    <div class="login-brand">
+      <a href="/" class="login-brand-logo">HAGUE<span>PR</span>OTECT</a>
+      <h1>Sign In</h1>
+      <p>Access your exclusive member account</p>
     </div>
 
-    <!-- Premium Card -->
-    <div style="background: #ffffff; border: 1px solid #e8e8ea; border-radius: 16px; padding: 40px; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04);">
-      {%- form 'customer_login', id: 'CustomerLoginForm' -%}
-        {{ form.errors | default_errors }}
+    <!-- Login Form -->
+    <div id="CustomerLoginSection">
+      {%- form 'customer_login', id: 'CustomerLoginForm', return_to: routes.account_url -%}
+        {%- if form.errors -%}
+          <div class="login-errors">
+            <ul>
+              {%- for error in form.errors -%}
+                <li>{{ form.errors.messages[error] }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
 
-        <div style="display: flex; flex-direction: column; gap: 24px;">
-          <!-- Input Field: Email -->
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="CustomerEmail" style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Email Address</label>
-            <input type="email" name="customer[email]" id="CustomerEmail" placeholder="Enter your email" autocomplete="email" autofocus required style="font-family: 'Inter', sans-serif; font-size: 15px; border: 1px solid #ddd; background-color: #fafafa; border-radius: 8px; padding: 16px; outline: none; width: 100%; transition: all 0.2s; color: #111;" onfocus="this.style.borderColor='#FF2B2B'; this.style.backgroundColor='#fff';" onblur="this.style.borderColor='#ddd'; this.style.backgroundColor='#fafafa';">
+        <div class="login-fields">
+          <div class="login-field">
+            <label for="CustomerEmail" class="login-label">Email Address</label>
+            <input type="email" name="customer[email]" id="CustomerEmail"
+              placeholder="your@email.com"
+              autocomplete="email" autofocus required
+              class="login-input">
           </div>
 
-          <!-- Input Field: Password -->
           {%- if form.password_needed -%}
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label for="CustomerPassword" style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #111; text-transform: uppercase; letter-spacing: 0.05em;">Password</label>
-                <a href="#recover" style="font-size: 12px; color: #FF2B2B; text-decoration: none; font-weight: 600;">Forgot?</a>
+            <div class="login-field">
+              <div class="login-field-top">
+                <label for="CustomerPassword" class="login-label">Password</label>
+                <a href="#recover" class="login-forgot" onclick="showRecover(event)">Forgot?</a>
               </div>
-              <input type="password" name="customer[password]" id="CustomerPassword" placeholder="Enter your password" autocomplete="current-password" required style="font-family: 'Inter', sans-serif; font-size: 15px; border: 1px solid #ddd; background-color: #fafafa; border-radius: 8px; padding: 16px; outline: none; width: 100%; transition: all 0.2s; color: #111;" onfocus="this.style.borderColor='#FF2B2B'; this.style.backgroundColor='#fff';" onblur="this.style.borderColor='#ddd'; this.style.backgroundColor='#fafafa';">
+              <input type="password" name="customer[password]" id="CustomerPassword"
+                placeholder="••••••••"
+                autocomplete="current-password" required
+                class="login-input">
             </div>
           {%- endif -%}
 
-          <!-- Submit Button -->
-          <button type="submit" style="background-color: #111; color: #fff; height: 56px; border: none; border-radius: 30px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.2s ease; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 8px;">
+          <button type="submit" class="login-submit">
             Sign In
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
 
-          <!-- Register Redirect -->
-          <div style="text-align: center; font-size: 13px; color: #666; margin-top: 4px;">
-            New to Hague Protect? <a href="{{ routes.account_register_url }}" style="color: #FF2B2B; text-decoration: underline; font-weight: 600;">Create account</a>
+          <div class="login-divider"><span>or</span></div>
+
+          <div class="login-register">
+            New to Hague Protect?
+            <a href="{{ routes.account_register_url }}">Create account →</a>
           </div>
         </div>
       {%- endform -%}
     </div>
+
+    <!-- Recovery Form -->
+    <div id="RecoverSection" style="display:none;">
+      {%- form 'recover_customer_password', id: 'RecoverForm' -%}
+        {%- if form.posted_successfully? -%}
+          <p style="color:#22c55e; font-size:14px; font-weight:600; margin-bottom:16px;">
+            ✓ Recovery email sent — check your inbox.
+          </p>
+        {%- endif -%}
+
+        <div class="recover-form" id="RecoverFields" style="display:flex;">
+          <button type="button" class="recover-back" onclick="hideRecover()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to Login
+          </button>
+          <div style="margin-bottom:4px;">
+            <h2 style="font-size:20px;font-weight:800;color:#fff;margin:0 0 6px;text-transform:uppercase;">Reset Password</h2>
+            <p style="font-size:13px;color:#555;margin:0;font-weight:500;">Enter your email and we'll send a reset link.</p>
+          </div>
+          <div class="login-field">
+            <label for="RecoverEmail" class="login-label">Email Address</label>
+            <input type="email" name="email" id="RecoverEmail"
+              placeholder="your@email.com"
+              autocomplete="email" required
+              class="login-input">
+          </div>
+          <button type="submit" class="login-submit">
+            Send Reset Link
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="login-register">
+            <a href="#" onclick="hideRecover(); return false;">← Back to sign in</a>
+          </div>
+        </div>
+      {%- endform -%}
+    </div>
+
   </div>
 </div>
+
+<script>
+  function showRecover(e) {
+    if (e) e.preventDefault();
+    document.getElementById('CustomerLoginSection').style.display = 'none';
+    document.getElementById('RecoverSection').style.display = 'block';
+  }
+  function hideRecover() {
+    document.getElementById('RecoverSection').style.display = 'none';
+    document.getElementById('CustomerLoginSection').style.display = 'block';
+  }
+  window.addEventListener('load', function() {
+    if (window.location.hash === '#recover') showRecover();
+  });
+</script>
