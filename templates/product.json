@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "product-hero": {
@@ -9,15 +18,15 @@
         "award_text": "AWARD WINNER",
         "award_bg": "#ff1e43",
         "award_color": "#ffffff",
-        "title_color": "#b8b8b8",
+        "title_color": "#333333",
         "rating_value": "4.9",
         "rating_reviews": "201",
         "rating_pill_bg": "#2ecc71",
-        "subtitle_text": "Premium character-enhancing care formulated to clean and protect every kind of sneaker.",
+        "subtitle_text": "Premium character-enhancing care formulated to clean and protect every kind of sneaker. Safe, effective, and designed for sneaker enthusiasts.",
         "pill_1_text": "Safe on all premium sneakers",
-        "pill_2_text": "Instantly restores original vibrance",
-        "pill_3_text": "Creates invisible protective barrier",
-        "pill_4_text": "Safe & non-toxic premium formula",
+        "pill_2_text": "Instantly restores vibrance",
+        "pill_3_text": "Creates protective barrier",
+        "pill_4_text": "Non-toxic premium formula",
         "pill_5_text": "Fast shipping & delivery"
       }
     },
@@ -108,9 +117,11 @@
       "type": "story-block",
       "name": "Story Banner",
       "settings": {
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "border_radius": 20
+        "image": "shopify://shop_images/ChatGPT_Image_Apr_30_2026_11_26_32_PM.png",
+        "image_mobile": "shopify://shop_images/ChatGPT_Image_May_6_2026_11_06_44_PM.png",
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "border_radius": 16
       }
     },
     "1777780586fbf3795f": {
@@ -151,9 +162,9 @@
       "type": "story-block",
       "name": "Story Banner",
       "settings": {
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "border_radius": 20
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "border_radius": 16
       }
     },
     "blocks_9kCMw3": {
@@ -232,9 +243,9 @@
     "story-block": {
       "type": "story-block",
       "settings": {
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "border_radius": 20
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "border_radius": 16
       }
     },
     "faq": {
@@ -254,6 +265,13 @@
     "1777785112915ce3a0": {
       "type": "apps",
       "settings": {}
+    },
+    "reviews-grid": {
+      "type": "reviews-grid",
+      "settings": {
+        "heading": "People Love BFF",
+        "total_reviews": "201 Reviews"
+      }
     },
     "product-recommendations": {
       "type": "product-recommendations",
@@ -308,12 +326,6 @@
         "smind_sections_product_block_F6KhxA"
       ],
       "settings": {}
-    },
-    "reviews-grid": {
-      "type": "reviews-grid",
-      "settings": {
-        "heading": "People Love BFF"
-      }
     }
   },
   "order": [
