@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "product-hero": {
+      "type": "product-hero",
+      "settings": {
+        "product": "",
+        "brand_text": "SIGNATURE SERIES",
+        "brand_color": "#FF2B2B",
+        "award_text": "BEST SELLER",
+        "award_bg": "#111111",
+        "award_color": "#ffffff",
+        "title_color": "#111111",
+        "rating_value": "5.0",
+        "rating_reviews": "482",
+        "rating_pill_bg": "#2ecc71",
+        "subtitle_text": "The ultimate all-in-one sneaker care solution. Formulated for the most delicate materials and the toughest stains.",
+        "pill_1_text": "Safe on all premium sneakers",
+        "pill_2_text": "Instantly restores original vibrance",
+        "pill_3_text": "Creates invisible protective barrier",
+        "pill_4_text": "Safe & non-toxic premium formula",
+        "pill_5_text": "Fast shipping & delivery"
+      }
+    },
+    "feature-grid": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/quality.png",
+            "heading": "Signature Formula",
+            "text": "Our proprietary blend of cleaning agents designed for high-end sneaker restoration."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/paint.png",
+            "heading": "Material Safe",
+            "text": "Tested on leather, suede, nubuck, and delicate knits to ensure no damage or discoloration."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2"
+      ],
+      "settings": {
+        "eyebrow": "SIGNATURE CARE",
+        "heading": "Unmatched Excellence"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Complementary Products",
+        "collection": "kits"
+      }
+    }
+  },
+  "order": [
+    "product-hero",
+    "feature-grid",
+    "product-recommendations"
+  ]
+}

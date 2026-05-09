@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "product-hero": {
+      "type": "product-hero",
+      "settings": {
+        "product": "",
+        "brand_text": "FRESH SERIES",
+        "brand_color": "#2ecc71",
+        "award_text": "ECO-FRIENDLY",
+        "award_bg": "#2ecc71",
+        "award_color": "#ffffff",
+        "title_color": "#111111",
+        "rating_value": "4.8",
+        "rating_reviews": "156",
+        "rating_pill_bg": "#111111",
+        "subtitle_text": "Keep your footwear smelling fresh and clean with our natural, non-toxic deodorizing formula.",
+        "pill_1_text": "Eliminates odors instantly",
+        "pill_2_text": "Long-lasting freshness",
+        "pill_3_text": "Natural essential oils",
+        "pill_4_text": "Safe for all shoe types",
+        "pill_5_text": "Cruelty-free formula"
+      }
+    },
+    "feature-grid": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/quality.png",
+            "heading": "Natural Scent",
+            "text": "Infused with pure lavender and citrus extracts for a premium olfactory experience."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1"
+      ],
+      "settings": {
+        "eyebrow": "FRESHNESS FIRST",
+        "heading": "Stay Fresh, Every Step"
+      }
+    }
+  },
+  "order": [
+    "product-hero",
+    "feature-grid"
+  ]
+}

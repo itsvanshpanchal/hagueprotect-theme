@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "product-hero": {
+      "type": "product-hero",
+      "settings": {
+        "product": "",
+        "brand_text": "ESSENTIAL TOOLS",
+        "brand_color": "#111111",
+        "award_text": "DURABLE BUILD",
+        "award_bg": "#f39c12",
+        "award_color": "#ffffff",
+        "title_color": "#111111",
+        "rating_value": "4.9",
+        "rating_reviews": "320",
+        "rating_pill_bg": "#2ecc71",
+        "subtitle_text": "Professional-grade tools designed to enhance your cleaning routine and protect your investment.",
+        "pill_1_text": "Premium quality materials",
+        "pill_2_text": "Built to last",
+        "pill_3_text": "Ergonomic design",
+        "pill_4_text": "Compatible with all kits",
+        "pill_5_text": "Essential for proper care"
+      }
+    },
+    "feature-grid": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "image": "shopify://shop_images/quality.png",
+            "heading": "Craftsmanship",
+            "text": "Every tool is engineered for precision and durability."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1"
+      ],
+      "settings": {
+        "eyebrow": "PRO TOOLS",
+        "heading": "Master Your Craft"
+      }
+    }
+  },
+  "order": [
+    "product-hero",
+    "feature-grid"
+  ]
+}
