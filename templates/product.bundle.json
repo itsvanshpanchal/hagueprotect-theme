@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-hero",
+      "settings": {
+        "brand_text": "SUPER SAVER BUNDLE",
+        "awards_text": "Maximum Value & Complete Care",
+        "rating_text": "5.0/5 Top Rated Bundles"
+      }
+    },
+    "family": {
+      "type": "product-family",
+      "settings": {
+        "title": "What's in the Bundle"
+      }
+    },
+    "recommendations": {
+      "type": "horizontal-product-slider",
+      "settings": {
+        "heading": "Complete Your Set"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "family",
+    "recommendations"
+  ]
+}
