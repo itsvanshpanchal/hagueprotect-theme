@@ -247,56 +247,35 @@
       }
     },
     "horizontal-product-slider": {
-      "type": "premium-scrolling-hero",
+      "type": "horizontal-product-slider",
       "blocks": {
-        "prod_1": {
-          "type": "product",
+        "custom_images_WRVxPd": {
+          "type": "custom_images",
           "settings": {
-            "image": "shopify://shop_images/1_2.png",
-            "title": "Signature Kit"
-          }
-        },
-        "prod_2": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/Foot-deo.png",
-            "title": "Deodorizer"
-          }
-        },
-        "prod_3": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/PEN-MARKER.png",
-            "title": "Pen Marker"
-          }
-        },
-        "prod_4": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/bundle_4e26d8bc-3869-4bde-a762-c8e3f512eb89.png",
-            "title": "Bundle Kit"
-          }
-        },
-        "prod_5": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/PROFESSIONAL-CLEANER.png",
-            "title": "Professional Cleaner"
+            "title": "",
+            "image_1": "shopify://shop_images/1_2.png",
+            "url_1": "",
+            "image_2": "shopify://shop_images/Foot-deo.png",
+            "url_2": "",
+            "image_3": "shopify://shop_images/PEN-MARKER.png",
+            "url_3": "",
+            "image_4": "shopify://shop_images/bundle_4e26d8bc-3869-4bde-a762-c8e3f512eb89.png",
+            "url_4": "",
+            "image_5": "shopify://shop_images/PROFESSIONAL-CLEANER.png",
+            "url_5": "",
+            "url_6": ""
           }
         }
       },
       "block_order": [
-        "prod_1",
-        "prod_2",
-        "prod_3",
-        "prod_4",
-        "prod_5"
+        "custom_images_WRVxPd"
       ],
       "settings": {
         "heading": "Shop Our Premium Best",
-        "collection": "kits",
-        "button_label": "CUSTOM",
-        "button_link": ""
+        "bg_color": "#ff1e43",
+        "bg_color_bottom": "#000000",
+        "products_to_show": 8,
+        "image_offset": 0
       }
     },
     "17776122420bbcf27b": {
