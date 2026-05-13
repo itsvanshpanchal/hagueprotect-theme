@@ -1,6 +1,7 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
     background: linear-gradient(to bottom, {{ section.settings.bg_color | default: '#ff1e43' }} 76%, {{ section.settings.bg_color_bottom | default: '#000000' }} 76%);
+    position: relative;
   }
 
   .hp-fam-sec {
@@ -18,6 +19,7 @@
     padding: 0 40px;
     position: relative;
     box-sizing: border-box;
+    z-index: 2;
   }
 
   .hp-fam-sec__heading {
@@ -157,6 +159,134 @@
     transform: translateY({{ section.settings.image_offset | default: 0 }}px);
   }
 
+  /* PREMIUM FLOATING RAIL */
+  .premium-floating-rail {
+    position: absolute;
+    right: 40px;
+    top: 0;
+    bottom: 0;
+    width: 340px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  .rail-mask {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    pointer-events: auto;
+  }
+
+  .rail-track {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 100px 0;
+    will-change: transform;
+  }
+
+  .rail-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 16px;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .rail-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .rail-card-img {
+    width: 100%;
+    height: 180px;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .rail-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .rail-card:hover .rail-card-img img {
+    transform: scale(1.1);
+  }
+
+  .rail-card-info {
+    text-align: left;
+  }
+
+  .rail-card-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .rail-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .rail-card-price {
+    color: #ff1e43;
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .rail-card-rating {
+    color: #ffd700;
+    font-size: 12px;
+  }
+
+  .rail-card-atc {
+    background: #fff;
+    color: #000;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .rail-card-atc:hover {
+    background: #ff1e43;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .premium-floating-rail {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 767px) {
     .hp-fam-sec {
       padding: 32px 0 0 0;
@@ -199,6 +329,8 @@
   }
 {%- endstyle -%}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <div class="hp-fam-sec" id="fam-{{ section.id }}">
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
@@ -237,10 +369,10 @@
                       {%- if block.settings[img_id] != blank -%}
                         <a href="{{ block.settings[url_id] | default: '#' }}" class="hp-fam-sec__card">
                           <img src="{{ block.settings[img_id] | image_url: width: 800 }}"
-                               alt="Product"
-                               class="hp-fam-sec__image"
-                               loading="lazy"
-                               draggable="false">
+                                alt="Product"
+                                class="hp-fam-sec__image"
+                                loading="lazy"
+                                draggable="false">
                         </a>
                       {%- endif -%}
                     {%- endfor -%}
@@ -286,6 +418,60 @@
       </div>
     </div>
   </div>
+
+  {%- comment -%} FLOATING RAIL LAYER {%- endcomment -%}
+  <div class="premium-floating-rail">
+    <div class="rail-mask">
+      <div class="rail-track" id="railTrack-{{ section.id }}">
+        {%- liquid
+          assign rail_collection = section.settings.rail_collection
+          if rail_collection != blank
+            assign rail_products = collections[rail_collection].products | limit: 10
+          else
+            assign rail_products = collections.all.products | limit: 10
+          endif
+        -%}
+        
+        {%- for i in (1..3) -%}
+          {%- for product in rail_products -%}
+            <div class="rail-card" onclick="window.location.href='{{ product.url }}'">
+              <div class="rail-card-img">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}" alt="{{ product.title }}" loading="lazy">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </div>
+              <div class="rail-card-info">
+                <h3 class="rail-card-title">{{ product.title }}</h3>
+                <div class="rail-card-meta">
+                  <span class="rail-card-price">{{ product.price | money_without_trailing_zeros }}</span>
+                  <div class="rail-card-rating">★★★★★</div>
+                </div>
+                <button class="rail-card-atc">Add to Cart</button>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+
+        {%- if rail_products.size == 0 -%}
+           {%- for i in (1..18) -%}
+              <div class="rail-card">
+                <div class="rail-card-img">{{ 'product-1' | placeholder_svg_tag }}</div>
+                <div class="rail-card-info">
+                  <h3 class="rail-card-title">Premium Product {{ i }}</h3>
+                  <div class="rail-card-meta">
+                    <span class="rail-card-price">$49.00</span>
+                    <div class="rail-card-rating">★★★★★</div>
+                  </div>
+                  <button class="rail-card-atc">Add to Cart</button>
+                </div>
+              </div>
+           {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -293,7 +479,7 @@
     const section = document.getElementById('fam-{{ section.id }}');
     if (!section) return;
 
-    // Handle tab clicking
+    // Original Slider Tabs
     const tabs = section.querySelectorAll('.hp-fam-sec__tab');
     const sliders = section.querySelectorAll('.hp-fam-sec__slider');
 
@@ -301,23 +487,16 @@
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('is-active'));
         sliders.forEach(s => s.classList.remove('is-active'));
-
         tab.classList.add('is-active');
         const targetSlider = section.querySelector(`#${tab.getAttribute('data-target')}`);
-        if (targetSlider) {
-          targetSlider.classList.add('is-active');
-        }
+        if (targetSlider) targetSlider.classList.add('is-active');
       });
     });
 
-    // Add drag-to-scroll interactivity
+    // Original Slider Drag
     sliders.forEach(slider => {
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
+      let isDown = false, startX, scrollLeft;
       slider.addEventListener('pointerdown', (e) => {
-        // Only trigger on left-clicks/touches
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         isDown = true;
         startX = e.pageX - slider.offsetLeft;
@@ -326,7 +505,6 @@
         slider.classList.add('is-dragging');
         slider.setPointerCapture(e.pointerId);
       });
-
       slider.addEventListener('pointerup', (e) => {
         if (isDown) {
           isDown = false;
@@ -335,16 +513,6 @@
           slider.releasePointerCapture(e.pointerId);
         }
       });
-
-      slider.addEventListener('pointercancel', (e) => {
-        if (isDown) {
-          isDown = false;
-          slider.style.scrollBehavior = 'smooth';
-          slider.classList.remove('is-dragging');
-          slider.releasePointerCapture(e.pointerId);
-        }
-      });
-
       slider.addEventListener('pointermove', (e) => {
         if (!isDown) return;
         const x = e.pageX - slider.offsetLeft;
@@ -352,6 +520,21 @@
         slider.scrollLeft = scrollLeft - walk;
       });
     });
+
+    // PREMIUM RAIL ANIMATION
+    const railTrack = document.getElementById('railTrack-{{ section.id }}');
+    if (railTrack && typeof gsap !== 'undefined') {
+      const totalHeight = railTrack.scrollHeight / 3;
+      const animation = gsap.to(railTrack, {
+        y: -totalHeight,
+        ease: "none",
+        duration: 35,
+        repeat: -1
+      });
+
+      railTrack.addEventListener('mouseenter', () => animation.pause());
+      railTrack.addEventListener('mouseleave', () => animation.resume());
+    }
   })();
 </script>
 
@@ -396,6 +579,15 @@
       "unit": "px",
       "label": "Move images down/up",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Floating Rail Settings"
+    },
+    {
+      "type": "collection",
+      "id": "rail_collection",
+      "label": "Rail Collection"
     }
   ],
   "blocks": [
@@ -496,4 +688,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}
