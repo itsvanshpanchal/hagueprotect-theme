@@ -248,6 +248,50 @@
     },
     "horizontal-product-slider": {
       "type": "premium-scrolling-hero",
+      "blocks": {
+        "prod_1": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/1_2.png",
+            "title": "Signature Kit"
+          }
+        },
+        "prod_2": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/Foot-deo.png",
+            "title": "Deodorizer"
+          }
+        },
+        "prod_3": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/PEN-MARKER.png",
+            "title": "Pen Marker"
+          }
+        },
+        "prod_4": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/bundle_4e26d8bc-3869-4bde-a762-c8e3f512eb89.png",
+            "title": "Bundle Kit"
+          }
+        },
+        "prod_5": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/PROFESSIONAL-CLEANER.png",
+            "title": "Professional Cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "prod_1",
+        "prod_2",
+        "prod_3",
+        "prod_4",
+        "prod_5"
+      ],
       "settings": {
         "heading": "Shop Our Premium Best",
         "collection": "kits",

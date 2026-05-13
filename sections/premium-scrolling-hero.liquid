@@ -242,24 +242,53 @@
     <div class="premium-hero-right">
       <div class="premium-rail-wrapper">
         <div class="premium-rail-track" id="railTrack-{{ section.id }}">
-          {%- assign products = collections[section.settings.collection].products -%}
-          {%- if products.size > 0 -%}
+          {%- liquid
+            assign rail_items_count = 0
+            if section.blocks.size > 0
+              assign rail_items = section.blocks
+              assign rail_items_count = section.blocks.size
+            else
+              assign rail_items = collections[section.settings.collection].products | limit: 10
+              assign rail_items_count = rail_items.size
+            endif
+          -%}
+
+          {%- if rail_items_count > 0 -%}
             {%- for i in (1..3) -%}
-              {%- for product in products limit: 6 -%}
-                <div class="premium-product-card">
+              {%- for item in rail_items -%}
+                {%- liquid
+                  if section.blocks.size > 0
+                    assign product_obj = item.settings.product
+                    assign item_title = item.settings.title | default: product_obj.title
+                    assign item_price = product_obj.price | money_without_trailing_zeros
+                    assign item_desc = item.settings.description | default: product_obj.description
+                    assign item_image = item.settings.image | default: product_obj.featured_image
+                    assign item_url = product_obj.url
+                  else
+                    assign product_obj = item
+                    assign item_title = product_obj.title
+                    assign item_price = product_obj.price | money_without_trailing_zeros
+                    assign item_desc = product_obj.description
+                    assign item_image = product_obj.featured_image
+                    assign item_url = product_obj.url
+                  endif
+                -%}
+                <div class="premium-product-card" onclick="window.location.href='{{ item_url }}'">
                   <div class="card-image-wrapper">
-                    <img src="{{ product.featured_image | img_url: '600x800', crop: 'center' }}" alt="{{ product.title }}" loading="lazy">
+                    {%- if item_image -%}
+                      <img src="{{ item_image | img_url: '600x800', crop: 'center' }}" alt="{{ item_title }}" loading="lazy">
+                    {%- else -%}
+                      {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                    {%- endif -%}
                   </div>
                   <div class="card-info">
-                    <h3 class="card-title">{{ product.title }}</h3>
-                    <p class="card-desc">{{ product.description | strip_html | truncate: 80 }}</p>
+                    <h3 class="card-title">{{ item_title }}</h3>
+                    <p class="card-desc">{{ item_desc | strip_html | truncate: 80 }}</p>
                     <div class="card-meta">
-                      <span class="card-price">{{ product.price | money_without_trailing_zeros }}</span>
-                      <div class="card-rating">
-                        ★★★★★
-                      </div>
+                      <span class="card-price">{{ item_price }}</span>
+                      <div class="card-rating">★★★★★</div>
                     </div>
-                    <button class="card-atc" onclick="window.location.href='{{ product.url }}'">Add to Cart</button>
+                    <button class="card-atc">Add to Cart</button>
                   </div>
                 </div>
               {%- endfor -%}
@@ -291,10 +320,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const track = document.getElementById('railTrack-{{ section.id }}');
+    if (!track) return;
+
     const isMobile = window.innerWidth <= 1024;
     
     if (isMobile) {
-      // Horizontal scroll for mobile
       gsap.to(track, {
         xPercent: -50,
         ease: "none",
@@ -302,26 +332,17 @@
         repeat: -1
       });
     } else {
-      // Vertical scroll for desktop
-      const totalHeight = track.offsetHeight / 3;
+      const totalHeight = track.scrollHeight / 3;
       gsap.to(track, {
         y: -totalHeight,
         ease: "none",
-        duration: 30,
-        repeat: -1,
-        onReverseComplete: () => {
-          gsap.set(track, { y: 0 });
-        }
+        duration: 40,
+        repeat: -1
       });
     }
 
-    // Pause on hover
-    track.addEventListener('mouseenter', () => {
-      gsap.getTweensOf(track).forEach(t => t.pause());
-    });
-    track.addEventListener('mouseleave', () => {
-      gsap.getTweensOf(track).forEach(t => t.resume());
-    });
+    track.addEventListener('mouseenter', () => gsap.getTweensOf(track).forEach(t => t.pause()));
+    track.addEventListener('mouseleave', () => gsap.getTweensOf(track).forEach(t => t.resume()));
   });
 </script>
 
@@ -338,7 +359,7 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Fallback Collection"
     },
     {
       "type": "text",
@@ -352,9 +373,42 @@
       "label": "Button Link"
     }
   ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title (Optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Custom Description (Optional)"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Premium Scrolling Hero"
+      "name": "Premium Scrolling Hero",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
     }
   ]
 }
