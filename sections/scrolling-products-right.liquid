@@ -1,0 +1,226 @@
+{%- style -%}
+  .scrolling-hero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    background: linear-gradient(to bottom, #FF1F3D 55%, #111111 55%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 60px 0;
+  }
+
+  .scrolling-hero-container {
+    display: flex;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero-left {
+    flex: 0 0 60%;
+    z-index: 2;
+  }
+
+  .hero-left h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(42px, 6vw, 84px);
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  .custom-pill-btn {
+    display: inline-block;
+    background-color: #111111;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 14px 42px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+
+  .custom-pill-btn:hover {
+    background-color: #333333;
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 600px;
+  }
+
+  .scroll-container {
+    position: relative;
+    width: 140px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .scroll-track {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: scrollUp 25s linear infinite;
+  }
+
+  .scroll-container:hover .scroll-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  .scroll-item {
+    width: 140px;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .scroll-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Edge Fading */
+  .fade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, #FF1F3D 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, #111111 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    .scrolling-hero-{{ section.id }} {
+      min-height: auto;
+      padding: 80px 0;
+    }
+    .hero-right {
+      display: none;
+    }
+    .hero-left {
+      flex: 0 0 100%;
+      text-align: center;
+    }
+    .hero-left h1 {
+      font-size: 42px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="scrolling-hero-{{ section.id }}">
+  <div class="scrolling-hero-container">
+    <div class="hero-left">
+      <h1>{{ section.settings.heading }}</h1>
+      <a href="{{ section.settings.button_link }}" class="custom-pill-btn">
+        {{ section.settings.button_label }}
+      </a>
+    </div>
+
+    <div class="hero-right">
+      <div class="scroll-container">
+        <div class="scroll-track">
+          {%- assign products = collections[section.settings.collection].products -%}
+          
+          {%- comment -%} First set of products {%- endcomment -%}
+          {%- for product in products limit: 10 -%}
+            <div class="scroll-item">
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | img_url: '400x600', crop: 'center' }}" alt="{{ product.title }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+          {%- comment -%} Duplicate set for seamless loop {%- endcomment -%}
+          {%- for product in products limit: 10 -%}
+            <div class="scroll-item">
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | img_url: '400x600', crop: 'center' }}" alt="{{ product.title }}" loading="lazy">
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        
+        <div class="fade-top"></div>
+        <div class="fade-bottom"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Scrolling Products Right",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop Our Premium Best"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "CUSTOM"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Products Right"
+    }
+  ]
+}
+{% endschema %}
