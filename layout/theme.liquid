@@ -204,7 +204,7 @@
         </style>
       {%- endif -%}
 
-      <div class="{% if normalized_path contains 'certified-corporation' %}hijack-hidden{% endif %}">
+      <div class="{% if normalized_path contains 'certified-corporation' or normalized_path contains 'corporate' %}hijack-hidden{% endif %}">
         {{ content_for_layout }}
       </div>
     </main>
