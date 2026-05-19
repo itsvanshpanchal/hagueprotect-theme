@@ -1,0 +1,128 @@
+{%- style -%}
+  .how-to-videos {
+    padding: 80px 20px;
+    background-color: #ffffff;
+  }
+  .how-to-videos__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .how-to-videos__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+  .how-to-video-wrapper {
+    width: 100%;
+  }
+  .how-to-video-item {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .how-to-video-item video,
+  .how-to-video-item iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;
+  }
+  .how-to-video-title {
+    margin-top: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #111;
+  }
+  .how-to-video-text {
+    margin-top: 8px;
+    font-size: 16px;
+    text-align: center;
+    color: #555;
+  }
+{%- endstyle -%}
+
+<div class="how-to-videos">
+  <div class="how-to-videos__container">
+    <div class="how-to-videos__grid">
+      {%- for block in section.blocks -%}
+        <div class="how-to-video-wrapper" {{ block.shopify_attributes }}>
+          <div class="how-to-video-item">
+            {%- if block.settings.video_url != blank -%}
+              {%- if block.settings.video_url.type == 'youtube' -%}
+                <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" allow="autoplay; fullscreen" allowfullscreen></iframe>
+              {%- endif -%}
+            {%- elsif block.settings.html5_video != blank -%}
+              <video src="{{ block.settings.html5_video.sources[1].url }}" controls playsinline></video>
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <h3 class="how-to-video-title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="how-to-video-text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How to Use Videos",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Video Title",
+          "default": "Step Instructions"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Video Description"
+        },
+        {
+          "type": "video",
+          "id": "html5_video",
+          "label": "Shopify Video (Upload)"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "label": "YouTube/Vimeo Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How to Use Videos",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}
