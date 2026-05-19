@@ -4,13 +4,25 @@
     background-color: #ffffff;
   }
   .how-to-videos__container {
-    max-width: 900px;
+    max-width: 1440px;
     margin: 0 auto;
   }
   .how-to-videos__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  @media screen and (max-width: 1024px) {
+    .how-to-videos__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .how-to-videos__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
   }
   .how-to-video-wrapper {
     width: 100%;
@@ -35,15 +47,15 @@
     object-fit: cover;
   }
   .how-to-video-title {
-    margin-top: 24px;
-    font-size: 24px;
+    margin-top: 20px;
+    font-size: 18px;
     font-weight: 700;
     text-align: center;
     color: #111;
   }
   .how-to-video-text {
     margin-top: 8px;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     color: #555;
   }
