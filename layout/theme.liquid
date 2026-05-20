@@ -13,10 +13,14 @@
     <link rel="canonical" href="{{ canonical_url }}">
     
     {%- capture seo_title -%}
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if template == 'search.how-to-use' -%}
+        How to Use
+      {%- else -%}
+        {{ page_title }}
+      {%- endif -%}
+      {%- if current_tags %} – tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} – Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} – {{ shop.name }}{% endunless -%}
     {%- endcapture -%}
     <title>{{ seo_title | strip | strip_html | escape | truncate: 55, "" }}</title>
 
