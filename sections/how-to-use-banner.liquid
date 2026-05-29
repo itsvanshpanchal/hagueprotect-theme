@@ -33,12 +33,32 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
+  .how-to-banner__subtitle-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    background: rgba(0,0,0,0.75);
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .how-to-banner__subtitle {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
   @media screen and (max-width: 768px) {
     .how-to-banner {
       min-height: 250px;
     }
     .how-to-banner__title {
       font-size: 32px;
+    }
+    .how-to-banner__subtitle {
+      font-size: 16px;
     }
   }
 {%- endstyle -%}
@@ -50,6 +70,11 @@
   <div class="how-to-banner__content">
     <h1 class="how-to-banner__title">{{ section.settings.title }}</h1>
   </div>
+  {%- if section.settings.subtitle != blank -%}
+    <div class="how-to-banner__subtitle-bar">
+      <p class="how-to-banner__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -66,6 +91,12 @@
       "id": "title",
       "label": "Heading",
       "default": "How to Use"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Bottom Subtitle",
+      "default": "How To Use Reshoevn8r Shoe Cleaning & Protecting Products:"
     },
     {
       "type": "color",

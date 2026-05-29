@@ -95,7 +95,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    font-size: 23px !important;
+    font-size: {{ section.settings.menu_font_size | default: 48 }}px !important;
     font-weight: 800 !important;
     color: {{ section.settings.inactive_color | default: '#000000' }} !important;
     text-decoration: none !important;
@@ -130,8 +130,8 @@
   }
 
   .mat-menu-arrow svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 0.7em !important;
+    height: 0.7em !important;
     fill: none !important;
     stroke: currentColor !important;
   }
@@ -194,11 +194,7 @@
       gap: 50px !important;
     }
     .mat-menu-item {
-      font-size: 20px !important;
-    }
-    .mat-menu-arrow svg {
-      width: 16px !important;
-      height: 16px !important;
+      font-size: calc({{ section.settings.menu_font_size | default: 48 }}px * 0.8) !important;
     }
   }
 
@@ -208,11 +204,7 @@
       gap: 40px !important;
     }
     .mat-menu-item {
-      font-size: 18px !important;
-    }
-    .mat-menu-arrow svg {
-      width: 16px !important;
-      height: 16px !important;
+      font-size: calc({{ section.settings.menu_font_size | default: 48 }}px * 0.7) !important;
     }
     .mat-image-container {
       height: 440px !important;
@@ -245,17 +237,13 @@
       gap: 8px !important;
     }
     .mat-menu-item {
-      font-size: 18px !important;
+      font-size: calc({{ section.settings.menu_font_size | default: 48 }}px * 0.6) !important;
       justify-content: center !important;
       letter-spacing: -0.2px !important;
       margin-bottom: 8px !important;
     }
     .mat-menu-arrow {
       margin-left: 10px !important;
-    }
-    .mat-menu-arrow svg {
-      width: 14px !important;
-      height: 14px !important;
     }
     .mat-image-container {
       height: 380px !important;
@@ -407,12 +395,12 @@
     {
       "type": "range",
       "id": "menu_font_size",
-      "min": 40,
-      "max": 100,
+      "min": 24,
+      "max": 80,
       "step": 2,
       "unit": "px",
       "label": "Menu Font Size (Desktop)",
-      "default": 80
+      "default": 48
     },
     {
       "type": "range",

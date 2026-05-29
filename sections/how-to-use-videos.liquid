@@ -7,6 +7,14 @@
     max-width: 1440px;
     margin: 0 auto;
   }
+  .how-to-videos__heading {
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
+    color: #111;
+    margin: 0 0 48px;
+    letter-spacing: 0.02em;
+  }
   .how-to-videos__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -63,6 +71,9 @@
 
 <div class="how-to-videos">
   <div class="how-to-videos__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="how-to-videos__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
     <div class="how-to-videos__grid">
       {%- for block in section.blocks -%}
         <div class="how-to-video-wrapper" {{ block.shopify_attributes }}>
@@ -94,6 +105,14 @@
 {% schema %}
 {
   "name": "How to Use Videos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "How To Use Reshoevn8r Shoe Cleaning & Protecting Products:"
+    }
+  ],
   "max_blocks": 8,
   "blocks": [
     {
