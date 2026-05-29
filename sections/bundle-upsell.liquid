@@ -432,11 +432,103 @@
                 <span class="bundle-btn-price">{{ initial_variant.price | money_without_trailing_zeros }}</span>
               </button>
             </div>
+          {%- else -%}
+            <!-- Fallback High-Fidelity Mock Product Cards matching the screenshot -->
+            <div class="bundle-product-card" {{ block.shopify_attributes }}>
+              <div class="bundle-product-left-wrapper">
+                <div class="bundle-product-image-area">
+                  {%- if forloop.index == 1 -%}
+                    <!-- BFF Icon SVG -->
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><circle cx="50" cy="45" r="22" fill="#D60000" opacity="0.08"/><path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25-11.2-25-25-25zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" fill="#D60000"/><circle cx="50" cy="50" r="6" fill="#D60000"/><path d="M50 30v10M50 60v10M30 50h10M60 50h10" stroke="#D60000" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- elsif forloop.index == 2 -%}
+                    <!-- Vac Icon SVG -->
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><path d="M70 30L35 55l-15-5 5-8 15-7zM20 50l12 18 8-4-12-18z" fill="#D60000"/><rect x="42" y="32" width="22" height="38" rx="4" fill="#D60000" opacity="0.1" stroke="#D60000" stroke-width="2"/></svg>
+                  {%- else -%}
+                    <!-- Beam Icon SVG -->
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><rect x="25" y="30" width="50" height="40" rx="8" fill="#D60000" opacity="0.1" stroke="#D60000" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#D60000"/></svg>
+                  {%- endif -%}
+                </div>
+                <div class="bundle-product-details-area">
+                  <h3 class="bundle-product-title">
+                    {%- if forloop.index == 1 -%}
+                      BFF | Personal Hand Fan with IceTouch™
+                    {%- elsif forloop.index == 2 -%}
+                      REN GO | 11 kPa Cordless Car Vacuum Cleaner
+                    {%- else -%}
+                      REN BEAM | BEAMTECH™ Powered Mattress Vacuum Cleaner
+                    {%- endif -%}
+                  </h3>
+                  {%- if forloop.index == 1 -%}
+                    <select class="bundle-variant-select" onchange="updateBundleProductVariant(this)">
+                      <option value="default" data-price="Rs. 2,299">Tokyo Totti Candy</option>
+                      <option value="opt2" data-price="Rs. 2,499">Ivory Metal Grey</option>
+                    </select>
+                  {%- elsif forloop.index == 2 -%}
+                    <select class="bundle-variant-select" onchange="updateBundleProductVariant(this)">
+                      <option value="default" data-price="Rs. 3,499">Tactile Black</option>
+                      <option value="opt2" data-price="Rs. 3,699">Pristine White</option>
+                    </select>
+                  {%- endif -%}
+                </div>
+              </div>
+              
+              <button type="button" class="bundle-add-btn" data-variant-id="mock-{{ forloop.index }}">
+                <span class="bundle-btn-text">ADD</span>
+                <span class="bundle-btn-price">
+                  {%- if forloop.index == 1 -%}Rs. 2,299{%- elsif forloop.index == 2 -%}Rs. 3,499{%- else -%}Rs. 7,999{%- endif -%}
+                </span>
+              </button>
+            </div>
           {%- endif -%}
-        {%- else -%}
-          <!-- Block Placeholder -->
-        {%- endfor -%}
-      </div>
+        {%- endif -%}
+      {%- else -%}
+         <!-- Fallback items if no blocks are defined in the Customizer at all -->
+         {%- for i in (1..3) -%}
+            <div class="bundle-product-card">
+              <div class="bundle-product-left-wrapper">
+                <div class="bundle-product-image-area">
+                  {%- if i == 1 -%}
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><circle cx="50" cy="45" r="22" fill="#D60000" opacity="0.08"/><path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25-11.2-25-25-25zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" fill="#D60000"/><circle cx="50" cy="50" r="6" fill="#D60000"/><path d="M50 30v10M50 60v10M30 50h10M60 50h10" stroke="#D60000" stroke-width="2" stroke-linecap="round"/></svg>
+                  {%- elsif i == 2 -%}
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><path d="M70 30L35 55l-15-5 5-8 15-7zM20 50l12 18 8-4-12-18z" fill="#D60000"/><rect x="42" y="32" width="22" height="38" rx="4" fill="#D60000" opacity="0.1" stroke="#D60000" stroke-width="2"/></svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 100 100" style="width: 80px; height: 80px;"><rect width="100" height="100" fill="#fafafa" rx="10"/><rect x="25" y="30" width="50" height="40" rx="8" fill="#D60000" opacity="0.1" stroke="#D60000" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#D60000"/></svg>
+                  {%- endif -%}
+                </div>
+                <div class="bundle-product-details-area">
+                  <h3 class="bundle-product-title">
+                    {%- if i == 1 -%}
+                      BFF | Personal Hand Fan with IceTouch™
+                    {%- elsif i == 2 -%}
+                      REN GO | 11 kPa Cordless Car Vacuum Cleaner
+                    {%- else -%}
+                      REN BEAM | BEAMTECH™ Powered Mattress Vacuum Cleaner
+                    {%- endif -%}
+                  </h3>
+                  {%- if i == 1 -%}
+                    <select class="bundle-variant-select" onchange="updateBundleProductVariant(this)">
+                      <option value="default" data-price="Rs. 2,299">Tokyo Totti Candy</option>
+                      <option value="opt2" data-price="Rs. 2,499">Ivory Metal Grey</option>
+                    </select>
+                  {%- elsif i == 2 -%}
+                    <select class="bundle-variant-select" onchange="updateBundleProductVariant(this)">
+                      <option value="default" data-price="Rs. 3,499">Tactile Black</option>
+                      <option value="opt2" data-price="Rs. 3,699">Pristine White</option>
+                    </select>
+                  {%- endif -%}
+                </div>
+              </div>
+              
+              <button type="button" class="bundle-add-btn" data-variant-id="mock-{{ i }}">
+                <span class="bundle-btn-text">ADD</span>
+                <span class="bundle-btn-price">
+                  {%- if i == 1 -%}Rs. 2,299{%- elsif i == 2 -%}Rs. 3,499{%- else -%}Rs. 7,999{%- endif -%}
+                </span>
+              </button>
+            </div>
+         {%- endfor -%}
+      {%- endfor -%}
+    </div>
   </div>
 </section>
 
