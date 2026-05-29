@@ -117,6 +117,49 @@
         "primary_color": "#ff2b2b"
       }
     },
+    "materials-showcase": {
+      "type": "materials-showcase",
+      "blocks": {
+        "item_1": {
+          "type": "material_item",
+          "settings": {
+            "title": "Suede"
+          }
+        },
+        "item_2": {
+          "type": "material_item",
+          "settings": {
+            "title": "Leather"
+          }
+        },
+        "item_3": {
+          "type": "material_item",
+          "settings": {
+            "title": "Nubuck"
+          }
+        },
+        "item_4": {
+          "type": "material_item",
+          "settings": {
+            "title": "Fabrics"
+          }
+        },
+        "item_5": {
+          "type": "material_item",
+          "settings": {
+            "title": "Soles"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ],
+      "settings": {}
+    },
     "blocks_KyFWkm": {
       "type": "_blocks",
       "blocks": {
@@ -378,6 +421,7 @@
     "hero",
     "bestsellers",
     "trending-social",
+    "materials-showcase",
     "blocks_KyFWkm",
     "function-category",
     "story_block_VFjwgX",
