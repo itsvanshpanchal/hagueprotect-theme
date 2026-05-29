@@ -1,0 +1,620 @@
+{%- style -%}
+  .bundle-sec,
+  .bundle-sec * {
+    box-sizing: border-box !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  }
+
+  .bundle-sec {
+    width: 100% !important;
+    background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
+    padding-top: {{ section.settings.padding_top | default: 40 }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px !important;
+  }
+
+  .bundle-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Coupon Banner styling */
+  .bundle-coupon {
+    display: flex !important;
+    width: 100% !important;
+    height: 72px !important;
+    border-radius: 16px !important;
+    border: 1px solid #E5E5E5 !important;
+    background-color: #FFFFFF !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important;
+  }
+
+  .bundle-coupon-left {
+    width: 45% !important;
+    background-color: #D60000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    color: #FFFFFF !important;
+    padding: 0 20px !important;
+  }
+
+  .bundle-coupon-left-text-1 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 2px !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .bundle-coupon-left-text-2 {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .bundle-coupon-right {
+    width: 55% !important;
+    background-color: #FFFFFF !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    color: #D60000 !important;
+    padding: 0 20px !important;
+  }
+
+  .bundle-coupon-right:hover {
+    background-color: #FFF0F0 !important;
+  }
+
+  .bundle-coupon-right-text {
+    font-size: 36px !important;
+    font-weight: 800 !important;
+    letter-spacing: -1px !important;
+  }
+
+  .bundle-coupon-right-arrow {
+    width: 32px !important;
+    height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .bundle-coupon-right-arrow svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Coupon Circular Cutouts */
+  .bundle-coupon::before,
+  .bundle-coupon::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 24px !important;
+    height: 24px !important;
+    background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
+    border-radius: 50% !important;
+    z-index: 5 !important;
+    border: 1px solid #E5E5E5 !important;
+  }
+
+  .bundle-coupon::before {
+    left: -13px !important;
+    box-shadow: inset -2px 0 4px rgba(0,0,0,0.03) !important;
+  }
+
+  .bundle-coupon::after {
+    right: -13px !important;
+    box-shadow: inset 2px 0 4px rgba(0,0,0,0.03) !important;
+  }
+
+  /* Live Demo CTA */
+  .bundle-live-demo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 64px !important;
+    border-radius: 16px !important;
+    background-color: #D60000 !important;
+    color: #FFFFFF !important;
+    position: relative !important;
+    text-decoration: none !important;
+    margin-bottom: 70px !important;
+    transition: opacity 0.3s ease !important;
+    cursor: pointer !important;
+  }
+
+  .bundle-live-demo:hover {
+    opacity: 0.95 !important;
+  }
+
+  .bundle-live-demo-text {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+  }
+
+  .bundle-live-demo-icon-circle {
+    position: absolute !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    background-color: #330000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #FFFFFF !important;
+  }
+
+  .bundle-live-demo-icon-circle svg {
+    width: 22px !important;
+    height: 22px !important;
+    fill: currentColor !important;
+  }
+
+  /* Title */
+  .bundle-title {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #666666 !important;
+    margin: 0 0 20px 0 !important;
+    text-align: left !important;
+  }
+
+  /* Recommendation Cards */
+  .bundle-product-card {
+    width: 100% !important;
+    height: 160px !important;
+    background-color: #FDFDFD !important;
+    border: 1px solid #E8E8E8 !important;
+    border-radius: 24px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+
+  .bundle-product-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.03) !important;
+  }
+
+  .bundle-product-left-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex: 1 !important;
+  }
+
+  .bundle-product-image-area {
+    width: 110px !important;
+    height: 110px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #EAEAEA !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+
+  .bundle-product-image-area img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .bundle-product-details-area {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+    flex: 1 !important;
+  }
+
+  .bundle-product-title {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    max-height: 62px !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+  }
+
+  .bundle-variant-select {
+    width: 250px !important;
+    height: 48px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #DCDCDC !important;
+    border-radius: 6px !important;
+    font-size: 18px !important;
+    color: #111111 !important;
+    padding: 0 16px !important;
+    outline: none !important;
+    cursor: pointer !important;
+  }
+
+  .bundle-add-btn {
+    width: 180px !important;
+    height: 56px !important;
+    background-color: #000000 !important;
+    border: none !important;
+    border-radius: 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+  }
+
+  .bundle-add-btn:hover {
+    background-color: #D60000 !important;
+  }
+
+  .bundle-add-btn:disabled {
+    background-color: #CCCCCC !important;
+    cursor: not-allowed !important;
+  }
+
+  .bundle-btn-text {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+  }
+
+  .bundle-btn-price {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    opacity: 0.95 !important;
+  }
+
+  /* Responsive Adjustments */
+  @media screen and (max-width: 991px) {
+    .bundle-coupon-right-text {
+      font-size: 28px !important;
+    }
+    .bundle-coupon-right-arrow {
+      width: 24px !important;
+      height: 24px !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .bundle-coupon {
+      height: auto !important;
+      flex-direction: column !important;
+    }
+    .bundle-coupon-left,
+    .bundle-coupon-right {
+      width: 100% !important;
+      padding: 16px !important;
+    }
+    .bundle-coupon-right {
+      border-top: 1px dashed #E5E5E5 !important;
+    }
+    .bundle-coupon::before,
+    .bundle-coupon::after {
+      display: none !important; /* hide cutouts on stacked view */
+    }
+
+    .bundle-product-card {
+      height: auto !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 20px !important;
+      padding: 24px !important;
+    }
+
+    .bundle-product-left-wrapper {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+    }
+
+    .bundle-product-image-area {
+      width: 100% !important;
+      height: 200px !important;
+    }
+
+    .bundle-product-details-area {
+      width: 100% !important;
+    }
+
+    .bundle-variant-select {
+      width: 100% !important;
+    }
+
+    .bundle-add-btn {
+      width: 100% !important;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bundle-sec" aria-label="Bundle Upsell Section">
+  <div class="bundle-container">
+    <!-- BUNDLE OFFER COUPON BAR -->
+    <div class="bundle-coupon">
+      <div class="bundle-coupon-left">
+        <span class="bundle-coupon-left-text-1">{{ section.settings.coupon_subtitle | default: 'Bundle with BFF and' }}</span>
+        <span class="bundle-coupon-left-text-2">{{ section.settings.coupon_title | default: 'Get Rs.1000 OFF' }}</span>
+      </div>
+      <div class="bundle-coupon-right" onclick="location.href='{{ section.settings.live_demo_link | default: '#' }}'">
+        <span class="bundle-coupon-right-text">{{ section.settings.coupon_unlock_text | default: 'TAP TO UNLOCK' }}</span>
+        <span class="bundle-coupon-right-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- JOIN LIVE DEMO CTA -->
+    {%- if section.settings.show_live_demo != false -%}
+      <a href="{{ section.settings.live_demo_link | default: '#' }}" class="bundle-live-demo">
+        <span class="bundle-live-demo-text">{{ section.settings.live_demo_text | default: 'Join Live Demo' }}</span>
+        <div class="bundle-live-demo-icon-circle">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23 7l-7 5 7 5V7z"/>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+          </svg>
+        </div>
+      </a>
+    {%- endif -%}
+
+    <!-- TITLE -->
+    {%- if section.settings.title != blank -%}
+      <h2 class="bundle-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <!-- RECOMMENDATION CARDS -->
+    <div class="bundle-products-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'product_block' -%}
+          {%- assign product_obj = block.settings.product -%}
+          {%- if product_obj != blank -%}
+            <div class="bundle-product-card" {{ block.shopify_attributes }}>
+              <div class="bundle-product-left-wrapper">
+                <div class="bundle-product-image-area">
+                  {%- if block.settings.custom_image != blank -%}
+                    <img src="{{ block.settings.custom_image | image_url: width: 220 }}" alt="{{ product_obj.title | escape }}" loading="lazy">
+                  {%- else -%}
+                    <img src="{{ product_obj.featured_image | image_url: width: 220 }}" alt="{{ product_obj.title | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <div class="bundle-product-details-area">
+                  <h3 class="bundle-product-title">
+                    {{ block.settings.custom_label | default: product_obj.title }}
+                  </h3>
+                  {%- if product_obj.has_only_default_variant == false -%}
+                    <select class="bundle-variant-select" onchange="updateBundleProductVariant(this)">
+                      {%- for variant in product_obj.variants -%}
+                        <option value="{{ variant.id }}" data-price="{{ variant.price | money_without_trailing_zeros }}" {% if variant == product_obj.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                          {{ variant.title }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  {%- endif -%}
+                </div>
+              </div>
+              
+              {%- assign initial_variant = product_obj.selected_or_first_available_variant -%}
+              <button type="button" class="bundle-add-btn" 
+                      data-variant-id="{{ initial_variant.id }}" 
+                      onclick="addBundleProductToCart(this.getAttribute('data-variant-id'), this)"
+                      {% unless initial_variant.available %}disabled{% endunless %}>
+                <span class="bundle-btn-text">ADD</span>
+                <span class="bundle-btn-price">{{ initial_variant.price | money_without_trailing_zeros }}</span>
+              </button>
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <!-- Block Placeholder -->
+        {%- endfor -%}
+      </div>
+  </div>
+</section>
+
+<script>
+  function updateBundleProductVariant(select) {
+    const card = select.closest('.bundle-product-card');
+    const selectedOption = select.options[select.selectedIndex];
+    const price = selectedOption.getAttribute('data-price');
+    const variantId = selectedOption.value;
+    
+    const addBtn = card.querySelector('.bundle-add-btn');
+    if (addBtn) {
+      addBtn.setAttribute('data-variant-id', variantId);
+      const priceText = addBtn.querySelector('.bundle-btn-price');
+      if (priceText) {
+        priceText.textContent = price;
+      }
+    }
+  }
+
+  function addBundleProductToCart(variantId, button) {
+    if (!variantId) return;
+    
+    const originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<span class="bundle-btn-text" style="font-size:16px;">ADDING...</span>';
+    
+    const formData = {
+      'items': [{
+        'id': parseInt(variantId),
+        'quantity': 1
+      }]
+    };
+    
+    fetch(window.Shopify.routes.root + 'cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error adding item to cart');
+      }
+      return response.json();
+    })
+    .then(data => {
+      button.innerHTML = '<span class="bundle-btn-text" style="font-size:16px;">ADDED!</span>';
+      button.style.backgroundColor = '#2D9652'; // green success
+      
+      // Dispatch cart change event for Shopify theme updates
+      document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+      
+      setTimeout(() => {
+        button.disabled = false;
+        button.innerHTML = originalText;
+        button.style.backgroundColor = ''; // restore original background
+      }, 2000);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      button.innerHTML = '<span class="bundle-btn-text" style="font-size:16px;">ERROR</span>';
+      setTimeout(() => {
+        button.disabled = false;
+        button.innerHTML = originalText;
+      }, 2000);
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Upsell",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "text",
+      "id": "coupon_subtitle",
+      "label": "Coupon Subtitle Text",
+      "default": "Bundle with BFF and"
+    },
+    {
+      "type": "text",
+      "id": "coupon_title",
+      "label": "Coupon Main Text",
+      "default": "Get Rs.1000 OFF"
+    },
+    {
+      "type": "text",
+      "id": "coupon_unlock_text",
+      "label": "Coupon Unlock Text",
+      "default": "TAP TO UNLOCK"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_live_demo",
+      "label": "Show Live Demo CTA Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "live_demo_text",
+      "label": "Live Demo Button Text",
+      "default": "Join Live Demo"
+    },
+    {
+      "type": "url",
+      "id": "live_demo_link",
+      "label": "Live Demo Button Link"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Pair it with"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product Recommendation",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "Custom Product Title (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Upsell",
+      "blocks": [
+        {
+          "type": "product_block"
+        },
+        {
+          "type": "product_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
