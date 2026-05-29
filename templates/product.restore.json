@@ -67,10 +67,33 @@
       "settings": {
         "heading": "You may also like"
       }
+    },
+    "bundle-upsell": {
+      "type": "bundle-upsell",
+      "blocks": {
+        "prod_1": {
+          "type": "product_block",
+          "settings": {
+            "product": "signature-shoe-sneaker-cleaning-kit"
+          }
+        },
+        "prod_2": {
+          "type": "product_block",
+          "settings": {
+            "product": "essential-indepth-shoe-sneaker-cleaning-kit"
+          }
+        }
+      },
+      "block_order": [
+        "prod_1",
+        "prod_2"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "product-hero",
+    "bundle-upsell",
     "social-slider",
     "promo-banner",
     "feature-grid",
