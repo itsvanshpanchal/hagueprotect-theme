@@ -1,0 +1,769 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+{%- style -%}
+  .comm-section,
+  .comm-section * {
+    box-sizing: border-box !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  }
+
+  .comm-section {
+    width: 100% !important;
+    background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
+    padding-top: {{ section.settings.padding_top | default: 100 }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px !important;
+    overflow: hidden !important;
+  }
+
+  .comm-container {
+    max-width: 1440px !important;
+    margin: 0 auto !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .comm-container {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comm-container {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+  }
+
+  .comm-top {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 80px !important;
+    margin-bottom: 70px !important;
+    width: 100% !important;
+  }
+
+  .comm-top-left {
+    width: 65% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .comm-top-right {
+    width: 35% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 16px !important;
+  }
+
+  .comm-eyebrow {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    letter-spacing: 4px !important;
+    color: #7A7A7A !important;
+    text-transform: uppercase !important;
+    margin-bottom: 24px !important;
+    display: block !important;
+  }
+
+  .comm-headline {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+    margin: 0 0 35px 0 !important;
+  }
+
+  .comm-headline-number {
+    font-size: 120px !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    line-height: 1 !important;
+    letter-spacing: -5px !important;
+  }
+
+  .comm-headline-logo {
+    font-size: 100px !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    line-height: 1 !important;
+    letter-spacing: -3px !important;
+  }
+
+  .comm-heart-icon {
+    width: 80px !important;
+    height: 80px !important;
+    fill: #D60000 !important;
+    color: #D60000 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  .comm-desc {
+    max-width: 750px !important;
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+    color: #565656 !important;
+    margin: 0 !important;
+  }
+
+  .comm-reviews-badge {
+    width: 360px !important;
+    height: 56px !important;
+    border-radius: 999px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #E5E5E5 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02) !important;
+  }
+
+  .comm-badge-stars {
+    display: inline-flex !important;
+    gap: 5px !important;
+  }
+
+  .comm-badge-stars .comm-star-icon {
+    width: 18px !important;
+    height: 18px !important;
+    fill: #D60000 !important;
+  }
+
+  .comm-badge-text {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #333333 !important;
+  }
+
+  .comm-badge-desc {
+    max-width: 350px !important;
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    color: #7A7A7A !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  .comm-nav {
+    display: flex !important;
+    gap: 16px !important;
+    margin-top: 10px !important;
+  }
+
+  .comm-nav-btn {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #D9D9D9 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    padding: 0 !important;
+    color: #000000 !important;
+  }
+
+  .comm-nav-btn:hover {
+    background-color: #D60000 !important;
+    border-color: #D60000 !important;
+    color: #FFFFFF !important;
+  }
+
+  .comm-nav-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: currentColor !important;
+  }
+
+  /* Carousel */
+  .comm-slider-container {
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .comm-swiper {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .comm-slide {
+    width: 470px !important;
+    height: auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Cards */
+  .comm-card {
+    width: 470px !important;
+    height: 420px !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #EAEAEA !important;
+    border-radius: 26px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
+    padding: 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    position: relative !important;
+  }
+
+  .comm-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important;
+  }
+
+  .comm-card-top {
+    margin-bottom: 30px !important;
+  }
+
+  .comm-card-stars {
+    display: inline-flex !important;
+    gap: 6px !important;
+  }
+
+  .comm-card-stars .comm-star-icon {
+    width: 22px !important;
+    height: 22px !important;
+    fill: #D60000 !important;
+  }
+
+  .comm-card-text {
+    font-size: 18px !important;
+    line-height: 1.9 !important;
+    color: #222222 !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+
+  .comm-quote {
+    color: rgba(214, 0, 0, 0.25) !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+    line-height: 0 !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+  .comm-quote-open {
+    margin-right: 4px !important;
+  }
+  .comm-quote-close {
+    margin-left: 4px !important;
+  }
+
+  .comm-card-divider {
+    height: 1px !important;
+    background-color: #EEEEEE !important;
+    width: 100% !important;
+    margin-top: 40px !important;
+    margin-bottom: 25px !important;
+  }
+
+  .comm-card-footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .comm-customer-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  .comm-cust-name {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    line-height: 1.2 !important;
+  }
+
+  .comm-cust-city {
+    font-size: 15px !important;
+    color: #8A8A8A !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+  }
+
+  .comm-product-badge {
+    width: 160px !important;
+    height: 60px !important;
+    border-radius: 16px !important;
+    background-color: #FAFAFA !important;
+    border: 1px solid #EAEAEA !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 10px 16px !important;
+    box-sizing: border-box !important;
+    gap: 12px !important;
+  }
+
+  .comm-prod-badge-img {
+    width: 36px !important;
+    height: 36px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .comm-prod-badge-fallback-img {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+    background-color: #FFF0F0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 5px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .comm-prod-badge-fallback-img svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .comm-prod-badge-text {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 !important;
+  }
+
+  /* Responsive Adjustments */
+  @media screen and (max-width: 1200px) {
+    .comm-top {
+      gap: 40px !important;
+    }
+    .comm-headline-number {
+      font-size: 90px !important;
+      letter-spacing: -3px !important;
+    }
+    .comm-headline-logo {
+      font-size: 80px !important;
+      letter-spacing: -2px !important;
+    }
+    .comm-heart-icon {
+      width: 60px !important;
+      height: 60px !important;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .comm-top {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      gap: 40px !important;
+    }
+    .comm-top-left {
+      width: 100% !important;
+      align-items: center !important;
+    }
+    .comm-top-right {
+      width: 100% !important;
+      align-items: center !important;
+    }
+    .comm-headline {
+      justify-content: center !important;
+      gap: 20px !important;
+    }
+    .comm-desc {
+      text-align: center !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comm-headline-number {
+      font-size: 64px !important;
+      letter-spacing: -2px !important;
+    }
+    .comm-headline-logo {
+      font-size: 56px !important;
+      letter-spacing: -1px !important;
+    }
+    .comm-heart-icon {
+      width: 44px !important;
+      height: 44px !important;
+    }
+    .comm-headline {
+      gap: 12px !important;
+      margin-bottom: 20px !important;
+    }
+    .comm-desc {
+      font-size: 18px !important;
+    }
+    .comm-slide,
+    .comm-card {
+      width: 320px !important;
+      height: 400px !important;
+      padding: 24px !important;
+    }
+    .comm-card-text {
+      font-size: 16px !important;
+    }
+    .comm-card-divider {
+      margin-top: 20px !important;
+      margin-bottom: 15px !important;
+    }
+  }
+{%- endstyle -%}
+
+<section class="comm-section" aria-label="Community Reviews Slider">
+  <div class="comm-container">
+    <div class="comm-top">
+      <div class="comm-top-left">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="comm-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="comm-headline">
+          <span class="comm-headline-number">{{ section.settings.headline_count }}</span>
+          <svg class="comm-heart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span class="comm-headline-logo">{{ section.settings.headline_brand }}</span>
+        </h2>
+        {%- if section.settings.description != blank -%}
+          <p class="comm-desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+      <div class="comm-top-right">
+        <div class="comm-reviews-badge">
+          <div class="comm-badge-stars">
+            {%- for i in (1..5) -%}
+              <svg class="comm-star-icon" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="comm-badge-text">{{ section.settings.rating_text }} &middot; {{ section.settings.review_count_text }}</span>
+        </div>
+        {%- if section.settings.review_description != blank -%}
+          <p class="comm-badge-desc">{{ section.settings.review_description }}</p>
+        {%- endif -%}
+        <div class="comm-nav">
+          <button class="comm-nav-btn comm-prev" id="comm-prev-{{ section.id }}" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <button class="comm-nav-btn comm-next" id="comm-next-{{ section.id }}" aria-label="Next slide">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="comm-slider-container">
+      <div class="swiper comm-swiper" id="swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <div class="swiper-slide comm-slide" {{ block.shopify_attributes }}>
+                <div class="comm-card">
+                  <div class="comm-card-top">
+                    <div class="comm-card-stars">
+                      {%- assign rating = block.settings.rating | default: 5 -%}
+                      {%- for i in (1..rating) -%}
+                        <svg class="comm-star-icon" viewBox="0 0 24 24">
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+
+                  <p class="comm-card-text">
+                    <span><span class="comm-quote comm-quote-open">“</span>{{ block.settings.text }}<span class="comm-quote comm-quote-close">”</span></span>
+                  </p>
+
+                  <div class="comm-card-divider"></div>
+
+                  <div class="comm-card-footer">
+                    <div class="comm-customer-info">
+                      <span class="comm-cust-name">{{ block.settings.customer_name }}</span>
+                      <span class="comm-cust-city">{{ block.settings.customer_city }}</span>
+                    </div>
+
+                    {%- if block.settings.product != blank or block.settings.product_badge_text != blank -%}
+                      <div class="comm-product-badge">
+                        {%- assign product_obj = block.settings.product -%}
+                        {%- if product_obj != blank -%}
+                          <img class="comm-prod-badge-img" src="{{ product_obj.featured_image | image_url: width: 100, height: 100 }}" alt="{{ product_obj.title | escape }}" loading="lazy">
+                          <span class="comm-prod-badge-text">{{ product_obj.title | escape }}</span>
+                        {%- else -%}
+                          {%- if block.settings.product_badge_image != blank -%}
+                            <img class="comm-prod-badge-img" src="{{ block.settings.product_badge_image | image_url: width: 100, height: 100 }}" alt="{{ block.settings.product_badge_text | escape }}" loading="lazy">
+                          {%- else -%}
+                            <div class="comm-prod-badge-fallback-img">
+                              <svg viewBox="0 0 24 24"><path fill="#D60000" d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM12 17.5c-3.04 0-5.5-2.46-5.5-5.5S9.04 6.5 12 6.5 17.5 8.96 17.5 12 15.04 17.5 12 17.5z"/></svg>
+                            </div>
+                          {%- endif -%}
+                          <span class="comm-prod-badge-text">{{ block.settings.product_badge_text }}</span>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            <!-- Fallbacks if no blocks configured -->
+            {%- for i in (1..4) -%}
+              <div class="swiper-slide comm-slide">
+                <div class="comm-card">
+                  <div class="comm-card-top">
+                    <div class="comm-card-stars">
+                      {%- for j in (1..5) -%}
+                        <svg class="comm-star-icon" viewBox="0 0 24 24">
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+
+                  <p class="comm-card-text">
+                    <span><span class="comm-quote comm-quote-open">“</span>Perfect cleaning performance. Dissolved dirt instantly without damaging premium leather shoes. highly recommended!<span class="comm-quote comm-quote-close">”</span></span>
+                  </p>
+
+                  <div class="comm-card-divider"></div>
+
+                  <div class="comm-card-footer">
+                    <div class="comm-customer-info">
+                      <span class="comm-cust-name">Customer {{ i }}</span>
+                      <span class="comm-cust-city">City Name</span>
+                    </div>
+
+                    <div class="comm-product-badge">
+                      <div class="comm-prod-badge-fallback-img">
+                        <svg viewBox="0 0 24 24"><path fill="#D60000" d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM12 17.5c-3.04 0-5.5-2.46-5.5-5.5S9.04 6.5 12 6.5 17.5 8.96 17.5 12 15.04 17.5 12 17.5z"/></svg>
+                      </div>
+                      <span class="comm-prod-badge-text">Signature Kit</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function initSwiper() {
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('#swiper-{{ section.id }}', {
+          slidesPerView: 'auto',
+          spaceBetween: 28,
+          loop: true,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          },
+          navigation: {
+            nextEl: '#comm-next-{{ section.id }}',
+            prevEl: '#comm-prev-{{ section.id }}',
+          },
+          grabCursor: true,
+          watchSlidesProgress: true,
+          threshold: 5
+        });
+      } else {
+        setTimeout(initSwiper, 50);
+      }
+    }
+    initSwiper();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Community Testimonials",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "COMMUNITY"
+    },
+    {
+      "type": "text",
+      "id": "headline_count",
+      "label": "Headline Count Text",
+      "default": "+100,000"
+    },
+    {
+      "type": "text",
+      "id": "headline_brand",
+      "label": "Headline Brand Text",
+      "default": "shoozas®"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Customers and counting. Sneakerheads, athletes, parents, and collectors trust Shoozas with the pairs they love."
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Badge Rating Value",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "review_count_text",
+      "label": "Badge Reviews Count",
+      "default": "10,000 Reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "review_description",
+      "label": "Badge Review Location Copy",
+      "default": "Includes reviews from customers in the U.S., Mexico, Canada, Australia, and Japan."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 40,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 40,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "We carry the line at our store. Customers come back for refills, which says a lot."
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "Priya K."
+        },
+        {
+          "type": "text",
+          "id": "customer_city",
+          "label": "Customer Location/City",
+          "default": "Denver"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Associated Product"
+        },
+        {
+          "type": "text",
+          "id": "product_badge_text",
+          "label": "Fallback Product Name",
+          "default": "Wholesale"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_badge_image",
+          "label": "Fallback Product Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Community Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "customer_name": "Priya K.",
+            "customer_city": "Denver",
+            "product_badge_text": "Wholesale"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "Does what it says. I use it weekly on white leather. No complaints.",
+            "customer_name": "Jordan A.",
+            "customer_city": "Seattle",
+            "product_badge_text": "Signature Kit"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "My white Air Force 1s took a beating on a road trip. Mud, grass, the whole thing. Spent a Sunday afternoon working through them with the In-Depth kit. They look fresh.",
+            "customer_name": "Eli R.",
+            "customer_city": "Nashville",
+            "product_badge_text": "In-Depth Kit"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
+            "customer_name": "Hannah W.",
+            "customer_city": "Boston",
+            "product_badge_text": "Signature Kit"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

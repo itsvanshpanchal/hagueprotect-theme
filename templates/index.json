@@ -278,6 +278,54 @@
         "image_offset": 0
       }
     },
+    "community-testimonials": {
+      "type": "community-testimonials",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Priya K.",
+            "customer_city": "Denver",
+            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "product_badge_text": "Wholesale"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Jordan A.",
+            "customer_city": "Seattle",
+            "text": "Does what it says. I use it weekly on white leather. No complaints.",
+            "product_badge_text": "Signature Kit"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Eli R.",
+            "customer_city": "Nashville",
+            "text": "My white Air Force 1s took a beating on a road trip. Mud, grass, the whole thing. Spent a Sunday afternoon working through them with the In-Depth kit. They look fresh.",
+            "product_badge_text": "In-Depth Kit"
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "customer_name": "Hannah W.",
+            "customer_city": "Boston",
+            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
+            "product_badge_text": "Signature Kit"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4"
+      ],
+      "settings": {}
+    },
     "17776122420bbcf27b": {
       "type": "_blocks",
       "settings": {}
@@ -325,6 +373,7 @@
     "function-category",
     "story_block_VFjwgX",
     "horizontal-product-slider",
+    "community-testimonials",
     "17776122420bbcf27b",
     "1777632770f72837fc",
     "17776085399dc5249c",
