@@ -13,7 +13,7 @@
       "type": "hero",
       "settings": {
         "eyebrow": "",
-        "heading": "DIRTY KICKS?                                                                    WE MAKE ’EM HEAT.",
+        "heading": "DIRTY KICKS? WE MAKE 'EM HEAT.",
         "subheading": "From beat to heat.",
         "cta_text": "Shop Now",
         "cta_link": "",
@@ -184,32 +184,19 @@
     },
     "blocks_KyFWkm": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_6945b3d_Ka7HNx": {
-          "type": "ai_gen_block_6945b3d",
-          "settings": {
-            "banner_image": "shopify://shop_images/2.png",
-            "banner_height": 650,
-            "desktop_width_percent": 90,
-            "heading": "",
-            "subheading": "",
-            "button_text": "Shop Now",
-            "button_link": "",
-            "heading_size": 36,
-            "subheading_size": 18,
-            "text_color": "#ffffff",
-            "show_overlay": false,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0.3
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_6945b3d_Ka7HNx"
-      ],
       "name": "Banner",
       "settings": {}
+    },
+    "story_block_8WTbcQ": {
+      "type": "story-block",
+      "name": "Story Banner",
+      "settings": {
+        "image": "shopify://shop_images/2.png",
+        "image_mobile": "shopify://shop_images/2.png",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "border_radius": 20
+      }
     },
     "function-category": {
       "type": "function-category",
@@ -464,6 +451,7 @@
     "trending-social",
     "materials-showcase",
     "blocks_KyFWkm",
+    "story_block_8WTbcQ",
     "function-category",
     "story_block_VFjwgX",
     "horizontal-product-slider",
