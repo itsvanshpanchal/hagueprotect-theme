@@ -123,31 +123,41 @@
         "item_1": {
           "type": "material_item",
           "settings": {
-            "title": "Suede"
+            "title": "Suede",
+            "url": "",
+            "description": ""
           }
         },
         "item_2": {
           "type": "material_item",
           "settings": {
-            "title": "Leather"
+            "title": "Leather",
+            "url": "",
+            "description": ""
           }
         },
         "item_3": {
           "type": "material_item",
           "settings": {
-            "title": "Nubuck"
+            "title": "Nubuck",
+            "url": "",
+            "description": ""
           }
         },
         "item_4": {
           "type": "material_item",
           "settings": {
-            "title": "Fabrics"
+            "title": "Fabrics",
+            "url": "",
+            "description": ""
           }
         },
         "item_5": {
           "type": "material_item",
           "settings": {
-            "title": "Soles"
+            "title": "Soles",
+            "url": "",
+            "description": ""
           }
         }
       },
@@ -158,7 +168,19 @@
         "item_4",
         "item_5"
       ],
-      "settings": {}
+      "settings": {
+        "bg_color": "#f7f7f7",
+        "eyebrow": "MATERIALS",
+        "heading": "FOR EVERY MATERIAL.",
+        "description": "Leather, suede, nubuck, fabric, soles. Every material deserves specific care. Find yours.",
+        "active_color": "#d60000",
+        "inactive_color": "#000000",
+        "menu_font_size": 80,
+        "image_radius": 24,
+        "animation_speed": 400,
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
     },
     "blocks_KyFWkm": {
       "type": "_blocks",
@@ -292,7 +314,7 @@
       "name": "Story Banner",
       "settings": {
         "image": "shopify://shop_images/3_0ecd5a92-ec84-47d7-bc61-b29f5e1befcf.png",
-        "image_mobile": "shopify://shop_images/ChatGPT_Image_May_6_2026_11_12_37_PM.png",
+        "image_mobile": "shopify://shop_images/3_0ecd5a92-ec84-47d7-bc61-b29f5e1befcf.png",
         "padding_top": 56,
         "padding_bottom": 44,
         "border_radius": 24
@@ -337,36 +359,44 @@
         "testimonial_1": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
+            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
             "customer_name": "Priya K.",
             "customer_city": "Denver",
-            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "product": "",
             "product_badge_text": "Wholesale"
           }
         },
         "testimonial_2": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
+            "text": "Does what it says. I use it weekly on white leather. No complaints.",
             "customer_name": "Jordan A.",
             "customer_city": "Seattle",
-            "text": "Does what it says. I use it weekly on white leather. No complaints.",
+            "product": "",
             "product_badge_text": "Signature Kit"
           }
         },
         "testimonial_3": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
+            "text": "My white Air Force 1s took a beating on a road trip. Mud, grass, the whole thing. Spent a Sunday afternoon working through them with the In-Depth kit. They look fresh.",
             "customer_name": "Eli R.",
             "customer_city": "Nashville",
-            "text": "My white Air Force 1s took a beating on a road trip. Mud, grass, the whole thing. Spent a Sunday afternoon working through them with the In-Depth kit. They look fresh.",
+            "product": "",
             "product_badge_text": "In-Depth Kit"
           }
         },
         "testimonial_4": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
+            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
             "customer_name": "Hannah W.",
             "customer_city": "Boston",
-            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
+            "product": "",
             "product_badge_text": "Signature Kit"
           }
         }
@@ -377,7 +407,18 @@
         "testimonial_3",
         "testimonial_4"
       ],
-      "settings": {}
+      "settings": {
+        "bg_color": "#f7f7f7",
+        "eyebrow": "COMMUNITY",
+        "headline_count": "+100,000",
+        "headline_brand": "hagueprotect®",
+        "description": "Customers and counting. Sneakerheads, athletes, parents, and collectors trust HagueProtect with the pairs they love.",
+        "rating_text": "4.8",
+        "review_count_text": "10,000 Reviews",
+        "review_description": "Includes reviews from customers in the U.S., Mexico, Canada, Australia, and Japan.",
+        "padding_top": 100,
+        "padding_bottom": 80
+      }
     },
     "17776122420bbcf27b": {
       "type": "_blocks",
