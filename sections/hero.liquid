@@ -74,6 +74,22 @@
     margin: 0;
   }
 
+  .hero-fullscreen__heading .hero-typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    background-color: var(--color-primary, #ff2b2b);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: hero-cursor-blink 1.2s infinite;
+    transition: opacity 0.25s ease;
+  }
+
+  @keyframes hero-cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
   .hero-fullscreen__subheading {
     font-size: clamp(1rem, 1.8vw, 1.25rem);
     color: rgba(255, 255, 255, 0.85);
@@ -150,6 +166,94 @@
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    function initHeroTyping() {
+      const heading = document.querySelector('.hero-fullscreen__heading');
+      if (!heading) return;
+
+      const originalText = heading.textContent.trim();
+      const regex = /(MAKE\s*['’]?\s*EM\s*HEAT\.?)/i;
+      const match = originalText.match(regex);
+      
+      if (!match) return;
+
+      const matchedText = match[0];
+      const index = originalText.indexOf(matchedText);
+
+      const staticPart = originalText.substring(0, index);
+      const typingPart = originalText.substring(index);
+      
+      // Clean up multiple spaces and add a single space after "WE"
+      const cleanStaticPart = staticPart.replace(/\s{2,}/g, '<br>').trim() + ' ';
+
+      heading.innerHTML = `
+        <span class="hero-static-part">${cleanStaticPart}</span><span class="hero-typing-part"></span><span class="hero-typing-cursor"></span>
+      `;
+
+      const typingSpan = heading.querySelector('.hero-typing-part');
+      const cursorSpan = heading.querySelector('.hero-typing-cursor');
+
+      let autoTypingActive = true;
+      let currentLength = 0;
+
+      function typeWord() {
+        if (!autoTypingActive) return;
+        if (currentLength <= typingPart.length) {
+          typingSpan.textContent = typingPart.substring(0, currentLength);
+          currentLength++;
+          setTimeout(typeWord, 100);
+        } else {
+          autoTypingActive = false;
+        }
+      }
+
+      // Start the auto-typing effect on initial load
+      typeWord();
+
+      const scrollMax = 350;
+
+      function handleScroll() {
+        // If the user scrolls, stop auto-typing and let scroll drive typing progress
+        autoTypingActive = false;
+
+        const scrollTop = window.scrollY;
+        // Text is fully typed (1.0) at scrollTop = 0, and untyped (0.0) at scrollTop = scrollMax
+        const fraction = 1 - Math.min(scrollTop / scrollMax, 1);
+        const charsToShow = Math.round(fraction * typingPart.length);
+
+        typingSpan.textContent = typingPart.substring(0, charsToShow);
+
+        if (charsToShow === 0) {
+          cursorSpan.style.opacity = '0';
+        } else {
+          cursorSpan.style.opacity = '1';
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // If page is loaded scrolled, immediately apply the scroll position
+      if (window.scrollY > 0) {
+        handleScroll();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeroTyping);
+    } else {
+      initHeroTyping();
+    }
+
+    // Support Shopify Theme Editor dynamic reloading
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        initHeroTyping();
+      }
+    });
+  })();
+</script>
 
 {% schema %}
 {
