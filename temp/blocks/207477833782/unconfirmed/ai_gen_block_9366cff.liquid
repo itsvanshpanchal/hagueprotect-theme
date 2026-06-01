@@ -1,6 +1,313 @@
+{% doc %}
+  @prompt
+    In the "materials-showcase" section, add support for multiple images that can be added and managed from the theme editor. Each image should be configurable as a block, allowing the merchant to add multiple images with options to upload or select an image and optionally add associated text or label. The images should display in a gallery or grid layout within the section, and the number of images should be fully customizable from the editor sidebar.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-material-item-{{ ai_gen_id }} {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.background_color }};
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-material-item-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-material-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    aspect-ratio: {{ block.settings.image_aspect_ratio }};
+    overflow: hidden;
+  }
+
+  .ai-material-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-material-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-material-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-material-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-material-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+    color: {{ block.settings.label_color }};
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+  }
+
+  .ai-material-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_font_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-material-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-material-item-{{ ai_gen_id }}:hover .ai-material-overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-material-overlay-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    line-height: 1.4;
+  }
+
+  .ai-material-overlay-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_font_size }}px;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+{% endstyle %}
+
+<div class="ai-material-item-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-material-image-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.image %}
+      <img
+        src="{{ block.settings.image | image_url: width: 800 }}"
+        alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+        loading="lazy"
+        width="{{ block.settings.image.width }}"
+        height="{{ block.settings.image.height }}"
+        class="ai-material-image-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-material-placeholder-{{ ai_gen_id }}">
+        {{ 'image' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.text_position == 'overlay' and block.settings.image %}
+      {% if block.settings.label != blank or block.settings.text != blank %}
+        <div class="ai-material-overlay-{{ ai_gen_id }}">
+          {% if block.settings.label != blank %}
+            <h3 class="ai-material-overlay-label-{{ ai_gen_id }}">{{ block.settings.label }}</h3>
+          {% endif %}
+          {% if block.settings.text != blank %}
+            <p class="ai-material-overlay-text-{{ ai_gen_id }}">{{ block.settings.text }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% if block.settings.text_position == 'below' %}
+    {% if block.settings.label != blank or block.settings.text != blank %}
+      <div class="ai-material-content-{{ ai_gen_id }}">
+        {% if block.settings.label != blank %}
+          <h3 class="ai-material-label-{{ ai_gen_id }}">{{ block.settings.label }}</h3>
+        {% endif %}
+        {% if block.settings.text != blank %}
+          <p class="ai-material-text-{{ ai_gen_id }}">{{ block.settings.text }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Material item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Wide (16:9)"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Portrait (3:4)"
+        },
+        {
+          "value": "2 / 3",
+          "label": "Tall (2:3)"
+        }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "below",
+          "label": "Below image"
+        },
+        {
+          "value": "overlay",
+          "label": "Overlay on hover"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Material item"
+    }
+  ]
+}
 {% endschema %}
