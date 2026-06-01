@@ -97,10 +97,75 @@
         "video_8"
       ],
       "settings": {}
+    },
+    "skincare_guide": {
+      "type": "skincare-guide",
+      "blocks": {
+        "concern_1": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Fine Lines & Wrinkles"
+          }
+        },
+        "concern_2": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Acne & Breakouts"
+          }
+        },
+        "concern_3": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Dryness"
+          }
+        },
+        "concern_4": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Pores & Oil Control"
+          }
+        },
+        "concern_5": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Dullness & Uneven Tone"
+          }
+        },
+        "concern_6": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Redness & Sensitivity"
+          }
+        },
+        "concern_7": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Body Care"
+          }
+        },
+        "concern_8": {
+          "type": "skin_concern",
+          "settings": {
+            "title": "Daily Care"
+          }
+        }
+      },
+      "block_order": [
+        "concern_1",
+        "concern_2",
+        "concern_3",
+        "concern_4",
+        "concern_5",
+        "concern_6",
+        "concern_7",
+        "concern_8"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "banner",
-    "videos"
+    "videos",
+    "skincare_guide"
   ]
 }

@@ -1,0 +1,23 @@
+{%- if product != blank -%}
+  {
+    "exists": true,
+    "step": {{ step | json }},
+    "label": {{ label | json }},
+    "title": {{ product.title | json }},
+    "url": {{ product.url | json }},
+    "image": {{ product.featured_image | image_url: width: 600 | json }},
+    "price": {{ product.price | money | json }},
+    "variant_id": {{ product.first_available_variant.id | json }}
+  }
+{%- else -%}
+  {
+    "exists": false,
+    "step": {{ step | json }},
+    "label": {{ label | json }},
+    "title": "",
+    "url": "",
+    "image": "",
+    "price": "",
+    "variant_id": ""
+  }
+{%- endif -%}
