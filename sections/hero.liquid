@@ -142,6 +142,53 @@
     box-shadow: 0 20px 48px rgba(255, 43, 43, 0.5);
   }
 
+  /* Desktop / laptop: left-aligned hero copy + typing animation */
+  @media screen and (min-width: 769px) {
+    .hero-fullscreen {
+      align-items: flex-start;
+      text-align: left;
+      padding-left: var(--site-padding);
+      padding-right: var(--site-padding);
+    }
+
+    .hero-fullscreen__overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.35) 45%,
+        rgba(0, 0, 0, 0.15) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        rgba(0, 0, 0, 0.25) 100%
+      );
+    }
+
+    .hero-fullscreen__content {
+      align-items: flex-start;
+      text-align: left;
+      margin-left: 0;
+      margin-right: auto;
+      max-width: min(800px, 55vw);
+    }
+
+    .hero-fullscreen__heading {
+      text-align: left;
+    }
+
+    .hero-fullscreen__subheading {
+      text-align: left;
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .hero-fullscreen__actions {
+      justify-content: flex-start;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .hero-fullscreen {
       height: auto;
@@ -217,10 +264,36 @@
         rgba(0, 0, 0, 0.35) 100%
       );
     }
+    .hero-fullscreen {
+      align-items: center;
+      text-align: center;
+    }
+
     .hero-fullscreen__content {
+      align-items: center;
+      text-align: center;
       gap: 14px;
       padding-left: max(16px, var(--site-padding));
       padding-right: max(16px, var(--site-padding));
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-fullscreen__heading {
+      text-align: center;
+    }
+
+    .hero-fullscreen__subheading {
+      text-align: center;
+    }
+
+    .hero-fullscreen__actions {
+      justify-content: center;
+    }
+
+    .hero-fullscreen--mobile-art .hero-fullscreen__content {
+      align-items: center;
+      text-align: center;
     }
     .hero-fullscreen__heading {
       font-size: clamp(1.25rem, 5.2vw, 1.75rem);
