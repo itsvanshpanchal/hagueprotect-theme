@@ -145,20 +145,71 @@
   @media screen and (max-width: 768px) {
     .hero-fullscreen {
       height: auto;
-      min-height: min(100svh, 720px);
-      padding-top: clamp(88px, 12vh, 120px);
-      padding-bottom: clamp(48px, 8vh, 72px);
+      min-height: 0;
+      padding-top: clamp(72px, 10vh, 96px);
+      padding-bottom: clamp(32px, 6vh, 48px);
       justify-content: flex-end;
     }
-    .hero-fullscreen__bg-img {
+
+    /* Dedicated mobile banner: autosize to image, no tall letterbox */
+    .hero-fullscreen--mobile-art {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      min-height: 0;
+      background-color: #000000;
+    }
+    .hero-fullscreen--mobile-art .hero-fullscreen__bg {
+      position: relative;
+      inset: auto;
+      flex: 0 0 auto;
+      width: 100%;
+      height: auto;
+      line-height: 0;
+    }
+    .hero-fullscreen--mobile-art .hero-fullscreen__bg picture {
+      position: relative;
+      inset: auto;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .hero-fullscreen--mobile-art .hero-fullscreen__bg-img {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: initial;
+      object-position: center center;
+      display: block;
+      vertical-align: top;
+    }
+    .hero-fullscreen--mobile-art .hero-fullscreen__overlay {
+      display: none;
+    }
+    .hero-fullscreen--mobile-art .hero-fullscreen__content {
+      position: relative;
+      flex: 0 0 auto;
+      width: 100%;
+      gap: 12px;
+      padding: 20px max(16px, var(--site-padding)) 28px;
+      background-color: #000000;
+    }
+
+    .hero-fullscreen:not(.hero-fullscreen--mobile-art) .hero-fullscreen__bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-fullscreen:not(.hero-fullscreen--mobile-art) {
+      min-height: min(85svh, 640px);
+      aspect-ratio: auto;
+    }
+    .hero-fullscreen:not(.hero-fullscreen--mobile-art) .hero-fullscreen__bg-img {
       object-fit: cover;
       object-position: center 42%;
     }
-    .hero-fullscreen__bg-img--dedicated-mobile {
-      object-fit: contain;
-      object-position: center center;
-    }
-    .hero-fullscreen__overlay {
+    .hero-fullscreen:not(.hero-fullscreen--mobile-art) .hero-fullscreen__overlay {
       background: linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.82) 0%,
@@ -196,32 +247,29 @@
     .hero-fullscreen__heading {
       font-size: 1.2rem;
     }
-    .hero-fullscreen__bg-img:not(.hero-fullscreen__bg-img--dedicated-mobile) {
+    .hero-fullscreen:not(.hero-fullscreen--mobile-art) .hero-fullscreen__bg-img {
       object-position: center 38%;
     }
   }
 {%- endstyle -%}
 
-<section class="hero-fullscreen animate-fade-in" aria-label="HAGUEPROTECT Fullscreen Hero Section">
+{%- liquid
+  assign desktop_banner = section.settings.image
+  assign has_dedicated_mobile = false
+  if section.settings.image_mobile != blank
+    assign mobile_banner = section.settings.image_mobile
+    assign has_dedicated_mobile = true
+  else
+    assign mobile_banner = section.settings.image
+  endif
+  if desktop_banner == blank and mobile_banner != blank
+    assign desktop_banner = mobile_banner
+  endif
+  assign hero_img_class = 'hero-fullscreen__bg-img'
+-%}
+
+<section class="hero-fullscreen{% if has_dedicated_mobile %} hero-fullscreen--mobile-art{% endif %} animate-fade-in" aria-label="HAGUEPROTECT Fullscreen Hero Section">
   <div class="hero-fullscreen__bg">
-    {%- liquid
-      assign desktop_banner = section.settings.image
-      assign has_dedicated_mobile = false
-      if section.settings.image_mobile != blank
-        assign mobile_banner = section.settings.image_mobile
-        assign has_dedicated_mobile = true
-      else
-        assign mobile_banner = section.settings.image
-      endif
-      if desktop_banner == blank and mobile_banner != blank
-        assign desktop_banner = mobile_banner
-      endif
-      if has_dedicated_mobile
-        assign hero_img_class = 'hero-fullscreen__bg-img hero-fullscreen__bg-img--dedicated-mobile'
-      else
-        assign hero_img_class = 'hero-fullscreen__bg-img'
-      endif
-    -%}
     {%- if desktop_banner != blank -%}
       <picture>
         {%- if mobile_banner != blank -%}
@@ -236,17 +284,31 @@
             sizes="100vw"
           >
         {%- endif -%}
-        {{
-          desktop_banner
-          | image_url: width: 2800
-          | image_tag:
-            class: hero_img_class,
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '750, 1100, 1500, 2000, 2800',
-            sizes: '(min-width: 769px) 100vw, 0px',
-            alt: ''
-        }}
+        {%- if has_dedicated_mobile -%}
+          {{
+            desktop_banner
+            | image_url: width: 2800
+            | image_tag:
+              class: hero_img_class,
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '750, 1100, 1500, 2000, 2800',
+              sizes: '(min-width: 769px) 100vw, 100vw',
+              alt: ''
+          }}
+        {%- else -%}
+          {{
+            desktop_banner
+            | image_url: width: 2800
+            | image_tag:
+              class: hero_img_class,
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '750, 1100, 1500, 2000, 2800',
+              sizes: '(min-width: 769px) 100vw, 0px',
+              alt: ''
+          }}
+        {%- endif -%}
       </picture>
     {%- endif -%}
   </div>
