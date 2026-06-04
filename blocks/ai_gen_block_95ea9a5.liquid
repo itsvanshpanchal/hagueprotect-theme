@@ -3,6 +3,14 @@
     so make a story banner in smae line but three and it should be scroll side by side  so make that section , i want a baaner size each banner   banner size  1440x560 px, so insted of slider put 3 dots so it look amazing 
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign mobile_section_pad = block.settings.section_padding | times: 0.5 %}
+{% if mobile_section_pad < 16 %}
+  {% assign mobile_section_pad = 16 %}
+{% endif %}
+{% assign mobile_border_radius = block.settings.border_radius %}
+{% if mobile_border_radius > 10 %}
+  {% assign mobile_border_radius = 10 %}
+{% endif %}
 
 {% style %}
   .ai-story-banner-{{ ai_gen_id }} {
@@ -49,10 +57,6 @@
     transition: transform 0.3s ease;
   }
 
-  .ai-story-banner-story-{{ ai_gen_id }}:hover {
-    transform: scale(1.02);
-  }
-
   .ai-story-banner-story-image-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
@@ -62,7 +66,7 @@
   .ai-story-banner-story-placeholder-{{ ai_gen_id }} {
     width: 100%;
     height: 100%;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,9 +74,10 @@
   }
 
   .ai-story-banner-story-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 48px;
+    height: 48px;
+    opacity: 0.35;
+    flex-shrink: 0;
   }
 
   .ai-story-banner-story-overlay-{{ ai_gen_id }} {
@@ -80,9 +85,11 @@
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 2;
     padding: 40px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 100%);
     color: {{ block.settings.text_color }};
+    pointer-events: none;
   }
 
   .ai-story-banner-story-title-{{ ai_gen_id }} {
@@ -101,17 +108,19 @@
 
   .ai-story-banner-empty-state-{{ ai_gen_id }} {
     position: absolute;
-    bottom: 40px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-    font-size: 14px;
+    transform: translate(-50%, -50%);
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 6px;
+    font-size: 12px;
     color: #666;
     text-align: center;
     pointer-events: none;
-    white-space: nowrap;
+    max-width: 85%;
+    line-height: 1.4;
+    z-index: 1;
   }
 
   .ai-story-banner-dots-{{ ai_gen_id }} {
@@ -125,11 +134,14 @@
   .ai-story-banner-dot-{{ ai_gen_id }} {
     width: {{ block.settings.dot_size }}px;
     height: {{ block.settings.dot_size }}px;
+    min-width: {{ block.settings.dot_size }}px;
+    min-height: {{ block.settings.dot_size }}px;
+    flex: 0 0 auto;
     border-radius: 50%;
     background-color: {{ block.settings.dot_color }};
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
     padding: 0;
     opacity: 0.4;
   }
@@ -146,23 +158,97 @@
 
   @media screen and (max-width: 1440px) {
     .ai-story-banner-story-{{ ai_gen_id }} {
-      width: 100%;
+      width: min(100%, 900px);
       height: auto;
       aspect-ratio: 1440 / 560;
     }
   }
 
+  @media screen and (max-width: 991px) {
+    .ai-story-banner-container-{{ ai_gen_id }} {
+      padding: 0 var(--site-padding, 20px);
+    }
+
+    .ai-story-banner-scroll-wrapper-{{ ai_gen_id }} {
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 0;
+    }
+
+    .ai-story-banner-story-{{ ai_gen_id }} {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+      aspect-ratio: 16 / 9;
+      min-height: 200px;
+      max-height: 320px;
+    }
+
+    .ai-story-banner-stories-{{ ai_gen_id }} {
+      gap: 12px;
+    }
+  }
+
   @media screen and (max-width: 749px) {
+    .ai-story-banner-{{ ai_gen_id }} {
+      padding: {{ mobile_section_pad }}px 0;
+      overflow: hidden;
+    }
+
+    .ai-story-banner-container-{{ ai_gen_id }} {
+      padding: 0 var(--site-padding, 16px);
+    }
+
+    .ai-story-banner-scroll-wrapper-{{ ai_gen_id }} {
+      margin: 0 -4px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .ai-story-banner-story-{{ ai_gen_id }} {
+      flex: 0 0 calc(100% - 8px);
+      width: calc(100% - 8px);
+      aspect-ratio: 5 / 3;
+      min-height: 180px;
+      max-height: 220px;
+      border-radius: {{ mobile_border_radius }}px;
+    }
+
+    .ai-story-banner-story-{{ ai_gen_id }}:hover {
+      transform: none;
+    }
+
     .ai-story-banner-story-overlay-{{ ai_gen_id }} {
-      padding: 20px;
+      padding: 16px 14px;
     }
 
     .ai-story-banner-story-title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+      font-size: clamp(18px, 5vw, {{ block.settings.title_size | times: 0.75 | round }}px);
+      margin-bottom: 6px;
     }
 
     .ai-story-banner-story-description-{{ ai_gen_id }} {
-      font-size: {{ block.settings.description_size | times: 0.8 }}px;
+      font-size: clamp(13px, 3.5vw, {{ block.settings.description_size | times: 0.85 | round }}px);
+    }
+
+    .ai-story-banner-empty-state-{{ ai_gen_id }} {
+      font-size: 11px;
+      padding: 8px 12px;
+    }
+
+    .ai-story-banner-dots-{{ ai_gen_id }} {
+      margin-top: 16px;
+      gap: 10px;
+    }
+
+    .ai-story-banner-dot-{{ ai_gen_id }}.active {
+      transform: scale(1.15);
+    }
+  }
+
+  @media (hover: hover) {
+    .ai-story-banner-story-{{ ai_gen_id }}:hover {
+      transform: scale(1.02);
     }
   }
 {% endstyle %}
@@ -225,6 +311,8 @@
             {% if story_image %}
               <img
                 src="{{ story_image | image_url: width: 1440 }}"
+                srcset="{{ story_image | image_url: width: 800 }} 800w, {{ story_image | image_url: width: 1200 }} 1200w, {{ story_image | image_url: width: 1440 }} 1440w"
+                sizes="(max-width: 749px) 100vw, (max-width: 1440px) 90vw, 1440px"
                 alt="{{ story_image.alt | escape }}"
                 class="ai-story-banner-story-image-{{ ai_gen_id }}"
                 loading="lazy"
@@ -234,9 +322,11 @@
             {% else %}
               <div class="ai-story-banner-story-placeholder-{{ ai_gen_id }}">
                 {{ 'image' | placeholder_svg_tag }}
-                <div class="ai-story-banner-empty-state-{{ ai_gen_id }}">
-                  Add story {{ i }} image (1440x560px)
-                </div>
+                {% if story_title == blank and story_description == blank %}
+                  <div class="ai-story-banner-empty-state-{{ ai_gen_id }}">
+                    Add story {{ i }} image (1440×560px)
+                  </div>
+                {% endif %}
               </div>
             {% endif %}
 
