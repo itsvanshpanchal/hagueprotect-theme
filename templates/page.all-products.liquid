@@ -135,4 +135,28 @@
     background-color: #FF2B2B !important;
     transform: translateY(-2px);
   }
+
+  @media screen and (max-width: 768px) {
+    .all-products-wrapper [style*="margin: 0 auto 64px"] {
+      margin-bottom: 40px !important;
+    }
+    .all-products-wrapper [style*="font-size: 42px"] {
+      font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+    }
+    .product-card {
+      padding: 20px !important;
+    }
+    .card-btn {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (hover: none) {
+    .product-card:hover {
+      transform: none;
+    }
+  }
 </style>

@@ -60,6 +60,22 @@
   </div>
 </div>
 
+<style>
+  @media screen and (max-width: 768px) {
+    .faq-page-wrapper {
+      padding-top: 48px !important;
+      padding-bottom: 48px !important;
+    }
+    .faq-page-wrapper [style*="font-size: 42px"] {
+      font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+    }
+    .faq-item button span:first-child {
+      flex: 1;
+      padding-right: 8px;
+    }
+  }
+</style>
+
 <script>
   function toggleFaqAccordion(id) {
     const content = document.getElementById('FaqContent' + id);

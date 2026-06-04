@@ -41,6 +41,20 @@
       transform: translateX(-50%);
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .announcement-bar-marquee {
+      height: 36px;
+    }
+    .announcement-bar__item {
+      font-size: 11px;
+      padding: 0 12px;
+      letter-spacing: 0.03em;
+    }
+    .announcement-bar__track {
+      animation-duration: 28s;
+    }
+  }
 {%- endstyle -%}
 
 {%- if section.settings.show_announcement -%}

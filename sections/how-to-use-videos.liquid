@@ -27,9 +27,26 @@
     }
   }
   @media screen and (max-width: 767px) {
+    .how-to-videos {
+      padding: 48px var(--site-padding, 20px);
+    }
+    .how-to-videos__heading {
+      font-size: clamp(1.125rem, 4.5vw, 1.5rem);
+      margin-bottom: 32px;
+      padding: 0 4px;
+      line-height: 1.35;
+    }
     .how-to-videos__grid {
       grid-template-columns: 1fr;
-      gap: 32px;
+      gap: 28px;
+    }
+    .how-to-video-title {
+      font-size: 16px;
+      margin-top: 16px;
+    }
+    .how-to-video-item video,
+    .how-to-video-item iframe {
+      object-fit: contain;
     }
   }
   .how-to-video-wrapper {
@@ -85,7 +102,7 @@
                 <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}" allow="autoplay; fullscreen" allowfullscreen></iframe>
               {%- endif -%}
             {%- elsif block.settings.html5_video != blank -%}
-              <video src="{{ block.settings.html5_video.sources[1].url }}" controls playsinline></video>
+              <video src="{{ block.settings.html5_video.sources[1].url }}" controls playsinline preload="metadata"></video>
             {%- else -%}
               {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}

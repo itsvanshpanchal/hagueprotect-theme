@@ -52,20 +52,39 @@
   }
   @media screen and (max-width: 768px) {
     .how-to-banner {
-      min-height: 250px;
+      min-height: 220px;
+    }
+    .how-to-banner__content {
+      padding: 16px;
     }
     .how-to-banner__title {
-      font-size: 32px;
+      font-size: clamp(1.5rem, 8vw, 2rem);
+    }
+    .how-to-banner__subtitle-bar {
+      padding: 12px 16px;
     }
     .how-to-banner__subtitle {
-      font-size: 16px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .how-to-banner {
+      min-height: 180px;
     }
   }
 {%- endstyle -%}
 
 <div class="how-to-banner">
   {%- if section.settings.image != blank -%}
-    {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy' }}
+    {{
+      section.settings.image
+      | image_url: width: 2000
+      | image_tag:
+        loading: 'lazy',
+        widths: '375, 750, 1100, 1500, 2000',
+        sizes: '(max-width: 768px) 100vw, 100vw'
+    }}
   {%- endif -%}
   <div class="how-to-banner__content">
     <h1 class="how-to-banner__title">{{ section.settings.title }}</h1>

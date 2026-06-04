@@ -258,8 +258,148 @@ h4 {
 
 /* Mobile Responsiveness Overrides - Tap Targets & Minimum Font Sizes */
 @media screen and (max-width: 768px) {
-  .btn, button, input, select, textarea, a.btn {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .btn,
+  button,
+  input,
+  select,
+  textarea,
+  a.btn {
     min-height: 48px;
     font-size: 16px !important;
+  }
+
+  .section-spacing {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  /* Inline-style page templates */
+  .all-products-wrapper,
+  .about-page-wrapper,
+  .faq-page-wrapper,
+  .dashboard-wrapper,
+  .cart-and-checkout-wrapper {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .all-products-wrapper .container,
+  .about-page-wrapper .container,
+  .faq-page-wrapper .container,
+  .dashboard-wrapper .container,
+  .cart-and-checkout-wrapper .container {
+    padding-left: var(--site-padding) !important;
+    padding-right: var(--site-padding) !important;
+  }
+
+  .all-products-wrapper h1,
+  .about-page-wrapper h1,
+  .faq-page-wrapper h1,
+  .cart-and-checkout-wrapper h1 {
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .all-products-wrapper .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .about-page-wrapper [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-bottom: 48px !important;
+  }
+
+  .about-page-wrapper [style*="padding: 60px"] {
+    padding: 32px 20px !important;
+  }
+
+  .faq-page-wrapper [style*="margin-bottom: 64px"] {
+    margin-bottom: 40px !important;
+  }
+
+  .faq-page-wrapper .faq-item button {
+    padding: 20px 16px !important;
+    font-size: 15px !important;
+    gap: 12px !important;
+  }
+
+  .faq-page-wrapper .faq-item [id^="FaqContent"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .dashboard-wrapper {
+    padding-top: 32px !important;
+  }
+
+  .dashboard-wrapper [style*="padding: 32px 40px"],
+  .dashboard-wrapper [style*="padding: 40px"] {
+    padding: 24px 16px !important;
+  }
+
+  .dashboard-wrapper [style*="font-size: 28px"] {
+    font-size: 22px !important;
+  }
+
+  .dashboard-tab-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap !important;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .dashboard-tab-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-tab-nav button {
+    flex-shrink: 0;
+    padding: 12px 16px !important;
+    font-size: 12px !important;
+  }
+
+  .cart-and-checkout-wrapper form[style*="padding: 40px"] {
+    padding: 24px 16px !important;
+  }
+
+  .cart-and-checkout-wrapper [style*="grid-template-columns: 100px"] {
+    grid-template-columns: 72px 1fr !important;
+    gap: 16px !important;
+  }
+
+  .cart-and-checkout-wrapper [style*="justify-content: flex-end"] {
+    align-items: stretch !important;
+  }
+
+  .cart-and-checkout-wrapper [style*="justify-content: flex-end"] > div:last-child {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .cart-and-checkout-wrapper [style*="justify-content: flex-end"] button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --site-padding: 16px;
+  }
+
+  .btn {
+    white-space: normal;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

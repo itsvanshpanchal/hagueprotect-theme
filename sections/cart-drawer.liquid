@@ -272,6 +272,27 @@
     filter: brightness(0.9);
     transform: translateY(-2px);
   }
+
+  @media screen and (max-width: 768px) {
+    .cart-drawer {
+      width: 100%;
+      right: -100%;
+      max-width: 100vw;
+    }
+    .cart-drawer__header,
+    .cart-drawer__items,
+    .cart-drawer__footer {
+      padding: 20px 16px;
+    }
+    .cart-drawer__close {
+      min-width: 44px;
+      min-height: 44px;
+    }
+    .cart-drawer__qty-btn {
+      min-width: 36px;
+      min-height: 36px;
+    }
+  }
 {%- endstyle -%}
 
 <div id="CartDrawerOverlay" class="cart-drawer-overlay">

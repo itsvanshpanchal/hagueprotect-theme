@@ -93,6 +93,27 @@
     color: #ffffff;
     box-shadow: 0 16px 40px rgba(255, 43, 43, 0.4);
   }
+
+  @media screen and (max-width: 768px) {
+    .video-demo-header {
+      margin-bottom: 32px;
+      padding: 0 4px;
+    }
+    .video-demo__wrapper {
+      border-radius: var(--border-radius-md);
+    }
+    .video-demo__wrapper:hover {
+      transform: none;
+    }
+    .video-demo__play-btn {
+      width: 64px;
+      height: 64px;
+    }
+    .video-demo__play-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
 {%- endstyle -%}
 
 <section class="video-demo-section section-spacing" aria-label="Sneaker transformation in action">

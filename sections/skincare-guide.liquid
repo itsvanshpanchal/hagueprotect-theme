@@ -221,9 +221,55 @@
     margin-bottom: 40px;
   }
   @media screen and (max-width: 768px) {
+    .skincare-guide-container {
+      padding: 0 var(--site-padding, 20px);
+    }
+    .skincare-intro {
+      padding: 40px 0;
+    }
+    .skincare-explanation__title {
+      font-size: clamp(1.375rem, 5vw, 1.75rem);
+      margin-bottom: 20px;
+    }
+    .skincare-divider {
+      margin: 40px auto;
+    }
+    .skincare-divider__text {
+      font-size: 15px;
+    }
     .skincare-concerns__grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
+    }
+    .skincare-routine-switcher {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 4px;
+    }
+    .skincare-routine-switcher__btn {
+      min-height: 44px;
+      padding: 10px 20px;
+    }
+    .skincare-concern-card__title {
+      font-size: 12px;
+      padding: 0 8px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .skincare-concerns__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .skincare-concern-card__title {
+      font-size: 11px;
+      margin-top: 10px;
+    }
+    .skincare-product-card {
+      padding: 20px 16px;
+    }
+    .skincare-builder__btn {
+      width: 100%;
+      text-align: center;
     }
   }
   .skincare-concern-card {

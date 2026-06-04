@@ -50,4 +50,19 @@
     border-color: #FF2B2B !important;
     transform: translateY(-6px);
   }
+
+  @media screen and (max-width: 768px) {
+    .about-page-wrapper [style*="margin: 0 auto 80px"] {
+      margin-bottom: 48px !important;
+    }
+    .about-page-wrapper [style*="font-size: 48px"] {
+      font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+    }
+    .about-card {
+      padding: 28px 24px !important;
+    }
+    .about-page-wrapper [style*="font-size: 24px"] {
+      font-size: 18px !important;
+    }
+  }
 </style>
