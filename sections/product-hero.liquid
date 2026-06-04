@@ -1,5 +1,4 @@
 {%- style -%}
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap');
 
 :root {
   --d2c-primary: #000000;
@@ -10,7 +9,7 @@
   --d2c-accent: #E53935;
   --d2c-stock-green: #2E7D32;
   --d2c-font: 'Inter', sans-serif;
-  --d2c-heading-font: 'Poppins', sans-serif;
+  --d2c-heading-font: 'Inter', sans-serif;
   --d2c-radius-sm: 8px;
   --d2c-radius-md: 10px;
   --d2c-radius-lg: 12px;
@@ -32,6 +31,11 @@
   padding: 24px;
   font-family: var(--d2c-font);
   box-sizing: border-box;
+  width: 100%;
+}
+
+.d2c-product-info {
+  min-width: 0;
 }
 
 @media screen and (max-width: 991px) {
@@ -44,16 +48,159 @@
 
 @media screen and (max-width: 767px) {
   .d2c-pdp-section {
-    padding: 12px 0 48px 0;
+    padding: 12px 0 100px 0;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
+
+  .d2c-pdp-grid,
+  .d2c-media-gallery,
+  .d2c-product-info {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .d2c-pdp-grid {
+    padding: 12px 16px;
+    gap: 20px;
+  }
+
+  .d2c-media-main {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .d2c-media-main-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .d2c-thumbs-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .d2c-brand-award-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 4px !important;
+    width: 100%;
+  }
+
+  .d2c-handwriting-label {
+    font-size: clamp(22px, 6vw, 28px) !important;
+    line-height: 1.2 !important;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .d2c-award-badge {
+    flex-shrink: 0;
+  }
+
   .d2c-product-title {
-    font-size: clamp(24px, 7vw, 32px) !important;
+    font-size: clamp(20px, 5.5vw, 28px) !important;
     line-height: 1.3 !important;
     padding: 4px 0 !important;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
-  .d2c-brand-award-row {
-    margin-bottom: 4px !important;
+
+  .d2c-product-title span {
+    display: inline;
   }
+
+  .d2c-subtitle-text {
+    font-size: 15px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .d2c-pdp-badge-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .d2c-pdp-badge-item {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .d2c-pdp-badge-text {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .d2c-pricing-qty-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .d2c-price-box,
+  .d2c-quantity-box {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .d2c-quantity-box {
+    align-items: flex-start !important;
+  }
+
+  .d2c-qty-selector {
+    width: 100% !important;
+    max-width: 200px;
+  }
+
+  .d2c-price-current {
+    font-size: clamp(22px, 6vw, 28px) !important;
+  }
+
+  .d2c-personalization,
+  .d2c-personalization-toggle {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .d2c-atc-btn,
+  .d2c-buy-now-wrapper,
+  .d2c-buy-now-wrapper .shopify-payment-button,
+  .d2c-buy-now-wrapper .shopify-payment-button__button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .d2c-trust-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 8px;
+    width: 100%;
+  }
+
+  .d2c-trust-text {
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  .d2c-accordion-toggle {
+    padding-right: 4px;
+    font-size: 13px;
+  }
+
   .d2c-variant-cards {
     display: flex !important;
     overflow-x: auto !important;
@@ -61,17 +208,50 @@
     gap: 10px !important;
     scrollbar-width: none !important;
     padding-bottom: 8px !important;
+    width: 100%;
+    max-width: 100%;
   }
+
   .d2c-variant-cards::-webkit-scrollbar {
     display: none;
   }
+
   .d2c-variant-card {
     flex: 0 0 130px !important;
     scroll-snap-align: start !important;
   }
-  .d2c-handwriting-label {
-    font-size: clamp(30px, 8vw, 36px) !important;
-    line-height: 1.4 !important;
+
+  .d2c-floating-sticky-atc {
+    left: 12px;
+    right: 12px;
+    width: auto;
+    max-width: none;
+    bottom: 12px;
+  }
+
+  .d2c-floating-sticky-atc__inner {
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .d2c-floating-sticky-atc__left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .d2c-floating-price {
+    font-size: clamp(16px, 4.5vw, 20px);
+    word-break: break-word;
+  }
+
+  .d2c-floating-atc-btn {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+    padding: 12px 16px;
   }
 }
 
@@ -265,14 +445,6 @@
   letter-spacing: -0.5px;
 }
 
-@media screen and (max-width: 767px) {
-  .d2c-product-title {
-    font-size: 32px;
-  }
-  .d2c-brand-text {
-    font-size: 26px;
-  }
-}
 
 .d2c-rating-badge-row {
   display: flex;
@@ -795,23 +967,6 @@
 }
 
 @media screen and (max-width: 600px) {
-  .d2c-floating-sticky-atc {
-    bottom: 12px;
-    width: calc(100% - 24px);
-    border-radius: 16px;
-  }
-  .d2c-floating-sticky-atc__inner {
-    padding: 10px 14px;
-    gap: 8px;
-  }
-  .d2c-floating-price {
-    font-size: 18px;
-  }
-  .d2c-floating-atc-btn {
-    padding: 10px 16px;
-    font-size: 14px;
-    border-radius: 8px;
-  }
   .d2c-floating-variant-select {
     display: none;
   }
@@ -867,7 +1022,7 @@
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
       <div class="d2c-brand-award-row">
-        <span class="d2c-handwriting-label" style="font-family: 'Dancing Script', cursive; font-size: 42px; font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
+        <span class="d2c-handwriting-label" style="font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
         {%- if section.settings.award_text != blank -%}
           <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}
