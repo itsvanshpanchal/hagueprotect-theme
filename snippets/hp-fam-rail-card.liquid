@@ -1,0 +1,36 @@
+{%- comment -%}
+  Product card for Horizontal Product Slider (desktop rail + mobile carousel)
+  Accepts: product (required)
+{%- endcomment -%}
+<div class="rail-card" data-hp-fam-card onclick="window.location.href='{{ product.url }}'">
+  <div class="rail-card-img">
+    <span class="rail-badge-bestseller">Bestseller</span>
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title | escape }}"
+        loading="lazy"
+        width="600"
+        height="600"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+  <div class="rail-card-info">
+    <div class="rail-rating-row">
+      <div class="rail-rating-badge">★ 4.9</div>
+      <span class="rail-rating-count">(260)</span>
+    </div>
+    <h3 class="rail-card-title">{{ product.title }}</h3>
+    <p class="rail-subtitle">{{ product.type | default: 'Premium' }} | Elite sneaker care</p>
+    <p class="rail-elite-care">Professional-grade cleaning and protection.</p>
+    <div class="rail-price-row">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="rail-price-compare">{{ product.compare_at_price | money_without_trailing_zeros }}</span>
+      {%- endif -%}
+      <span class="rail-price-current">{{ product.price | money_without_trailing_zeros }}</span>
+    </div>
+    <button type="button" class="rail-card-atc" onclick="event.stopPropagation(); window.location.href='{{ product.url }}'">Add to Cart</button>
+  </div>
+</div>

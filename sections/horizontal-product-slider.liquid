@@ -345,9 +345,93 @@
     transform: scale(1.02);
   }
 
-  @media screen and (max-width: 1200px) {
+  /* Mobile / tablet: Nuuk-style product cards (desktop 1200px+ unchanged) */
+  .hp-fam-sec__mobile-rail-wrap {
+    display: none;
+    width: 100%;
+  }
+
+  .hp-fam-sec__mobile-slider {
+    display: none;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    padding: 4px 0 12px;
+    margin: 0 -4px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hp-fam-sec__mobile-slider.is-active {
+    display: flex;
+  }
+
+  .hp-fam-sec__mobile-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hp-fam-sec__mobile-slider:active {
+    cursor: grabbing;
+  }
+
+  .hp-fam-sec__mobile-slider.is-dragging .rail-card {
+    pointer-events: none;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-card {
+    flex: 0 0 88%;
+    max-width: 340px;
+    min-width: 280px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-card-img {
+    height: 200px;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-card-title {
+    font-size: 18px;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-price-current {
+    font-size: 22px;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-card-atc {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} {
+      background: {{ section.settings.bg_color | default: '#ff1e43' }} !important;
+    }
+
+    .hp-fam-sec__slider-left--desktop {
+      display: none !important;
+    }
+
+    .hp-fam-sec__mobile-rail-wrap {
+      display: block;
+      padding-bottom: 36px;
+    }
+
     .premium-floating-rail {
-      display: none;
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .hp-fam-sec__mobile-rail-wrap {
+      display: none !important;
     }
   }
 
@@ -355,45 +439,64 @@
     .hp-fam-sec {
       padding: 32px 0 0 0;
     }
+
     .hp-fam-sec__container {
-      padding: 0 16px;
+      padding: 0 max(16px, var(--site-padding, 16px));
     }
+
     .hp-fam-sec__heading {
       margin-bottom: 20px;
-      font-size: clamp(28px, 8vw, 36px);
+      font-size: clamp(28px, 8vw, 40px);
     }
+
     .hp-fam-sec__tabs {
       flex-wrap: nowrap;
       overflow-x: auto;
-      padding-bottom: 4px;
-      margin-bottom: 24px;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
       gap: 8px;
+      scroll-snap-type: x proximity;
     }
+
     .hp-fam-sec__tabs::-webkit-scrollbar {
       display: none;
     }
+
     .hp-fam-sec__tab {
       flex: 0 0 auto;
       padding: 8px 16px;
+      font-size: 12px;
+      scroll-snap-align: start;
     }
-    .hp-fam-sec__slider {
-      gap: 12px;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 20px;
+
+    .hp-fam-sec__mobile-slider {
+      gap: 14px;
+      padding-bottom: 8px;
     }
-    .hp-fam-sec__card {
-      flex: 0 0 75%;
-      scroll-snap-align: center;
+
+    .hp-fam-sec__mobile-slider .rail-card {
+      flex: 0 0 92%;
+      min-width: 260px;
     }
-    .hp-fam-sec__image {
-      max-height: 280px;
+
+    .hp-fam-sec__mobile-rail-wrap {
+      padding-bottom: 28px;
     }
   }
 {%- endstyle -%}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+{%- liquid
+  assign rail_collection_handle = section.settings.rail_collection
+  if rail_collection_handle != blank
+    assign default_rail_products = collections[rail_collection_handle].products
+  else
+    assign default_rail_products = collections.all.products
+  endif
+-%}
 
 <div class="hp-fam-sec" id="fam-{{ section.id }}">
   <div class="hp-fam-sec__container">
@@ -405,7 +508,11 @@
       <div class="hp-fam-sec__tabs">
         {%- for block in section.blocks -%}
           {%- if block.type == 'collection' or block.type == 'custom_images' -%}
-            <button class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}" data-target="slider-{{ block.id }}">
+            <button
+              class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}"
+              data-target="slider-{{ block.id }}"
+              data-mobile-target="mobile-slider-{{ block.id }}"
+            >
               {%- if block.type == 'collection' -%}
                 {%- assign collection = block.settings.collection -%}
                 {{ block.settings.title | default: collection.title | default: 'Collection' | upcase }}
@@ -419,7 +526,7 @@
     {%- endif -%}
 
     <div class="hp-fam-sec__main-flex">
-      <div class="hp-fam-sec__slider-left">
+      <div class="hp-fam-sec__slider-left hp-fam-sec__slider-left--desktop">
         <div class="hp-fam-sec__slider-wrap">
           {%- if section.blocks.size > 0 -%}
             {%- for block in section.blocks -%}
@@ -480,79 +587,50 @@
           {%- endif -%}
         </div>
       </div>
+
+      {%- comment -%} MOBILE: Nuuk-style horizontal product cards {%- endcomment -%}
+      <div class="hp-fam-sec__mobile-rail-wrap">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+              <div class="hp-fam-sec__mobile-slider {% if forloop.first %}is-active{% endif %}" id="mobile-slider-{{ block.id }}">
+                {%- if block.type == 'collection' -%}
+                  {%- assign tab_collection = block.settings.collection -%}
+                  {%- if tab_collection != blank and tab_collection.products.size > 0 -%}
+                    {%- for product in tab_collection.products limit: section.settings.products_to_show -%}
+                      {% render 'hp-fam-rail-card', product: product %}
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- for product in default_rail_products limit: section.settings.products_to_show -%}
+                      {% render 'hp-fam-rail-card', product: product %}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- else -%}
+                  {%- for product in default_rail_products limit: section.settings.products_to_show -%}
+                    {% render 'hp-fam-rail-card', product: product %}
+                  {%- endfor -%}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <div class="hp-fam-sec__mobile-slider is-active" id="mobile-slider-default-{{ section.id }}">
+            {%- for product in default_rail_products limit: section.settings.products_to_show -%}
+              {% render 'hp-fam-rail-card', product: product %}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 
-  {%- comment -%} FLOATING RAIL LAYER {%- endcomment -%}
+  {%- comment -%} FLOATING RAIL LAYER (desktop only) {%- endcomment -%}
   <div class="premium-floating-rail">
     <div class="rail-mask">
       <div class="rail-track" id="railTrack-{{ section.id }}">
-        {%- liquid
-          assign rail_collection = section.settings.rail_collection
-          if rail_collection != blank
-            assign rail_products = collections[rail_collection].products | limit: 10
-          else
-            assign rail_products = collections.all.products | limit: 10
-          endif
-        -%}
-        
-        {%- for product in rail_products -%}
-          <div class="rail-card" onclick="window.location.href='{{ product.url }}'">
-            <div class="rail-card-img">
-              <span class="rail-badge-bestseller">Bestseller</span>
-              {%- if product.featured_image -%}
-                <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}" loading="lazy">
-              {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag }}
-              {%- endif -%}
-            </div>
-            <div class="rail-card-info">
-              <div class="rail-rating-row">
-                <div class="rail-rating-badge">★ 4.9</div>
-                <span class="rail-rating-count">(260)</span>
-              </div>
-              <h3 class="rail-card-title">{{ product.title }}</h3>
-              <p class="rail-subtitle">Premium | Air Circulation with Care</p>
-              <p class="rail-elite-care">Elite care and ultimate protection.</p>
-              
-              <div class="rail-price-row">
-                {%- if product.compare_at_price > product.price -%}
-                  <span class="rail-price-compare">{{ product.compare_at_price | money_without_trailing_zeros }}</span>
-                {%- endif -%}
-                <span class="rail-price-current">{{ product.price | money_without_trailing_zeros }}</span>
-              </div>
-              
-              <button class="rail-card-atc">Add to Cart</button>
-            </div>
-          </div>
+        {%- for product in default_rail_products limit: 10 -%}
+          {% render 'hp-fam-rail-card', product: product %}
         {%- endfor -%}
-
-        {%- if rail_products.size == 0 -%}
-           {%- for j in (1..6) -%}
-            <div class="rail-card">
-              <div class="rail-card-img">
-                <span class="rail-badge-bestseller">Bestseller</span>
-                {{ 'product-' | append: j | placeholder_svg_tag }}
-              </div>
-              <div class="rail-card-info">
-                <div class="rail-rating-row">
-                  <div class="rail-rating-badge">★ 4.9</div>
-                  <span class="rail-rating-count">(260)</span>
-                </div>
-                <h3 class="rail-card-title">Premium Product {{ j }}</h3>
-                <p class="rail-subtitle">Premium | Air Circulation with Care</p>
-                <p class="rail-elite-care">Elite care and ultimate protection.</p>
-                
-                <div class="rail-price-row">
-                  <span class="rail-price-compare">Rs. 2,999.00</span>
-                  <span class="rail-price-current">Rs. 999.00</span>
-                </div>
-                
-                <button class="rail-card-atc">Add to Cart</button>
-              </div>
-            </div>
-           {%- endfor -%}
-        {%- endif -%}
       </div>
     </div>
   </div>
@@ -563,23 +641,33 @@
     const section = document.getElementById('fam-{{ section.id }}');
     if (!section) return;
 
-    // Original Slider Tabs
     const tabs = section.querySelectorAll('.hp-fam-sec__tab');
     const sliders = section.querySelectorAll('.hp-fam-sec__slider');
+    const mobileSliders = section.querySelectorAll('.hp-fam-sec__mobile-slider');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('is-active'));
         sliders.forEach(s => s.classList.remove('is-active'));
+        mobileSliders.forEach(s => s.classList.remove('is-active'));
         tab.classList.add('is-active');
+
         const targetSlider = section.querySelector(`#${tab.getAttribute('data-target')}`);
         if (targetSlider) targetSlider.classList.add('is-active');
+
+        const mobileTarget = tab.getAttribute('data-mobile-target');
+        if (mobileTarget) {
+          const targetMobile = section.querySelector(`#${mobileTarget}`);
+          if (targetMobile) targetMobile.classList.add('is-active');
+        }
       });
     });
 
-    // Original Slider Drag
-    sliders.forEach(slider => {
-      let isDown = false, startX, scrollLeft;
+    function bindHorizontalDrag(slider) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
       slider.addEventListener('pointerdown', (e) => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         isDown = true;
@@ -589,23 +677,32 @@
         slider.classList.add('is-dragging');
         slider.setPointerCapture(e.pointerId);
       });
+
       slider.addEventListener('pointerup', (e) => {
-        if (isDown) {
-          isDown = false;
-          slider.style.scrollBehavior = 'smooth';
-          slider.classList.remove('is-dragging');
-          slider.releasePointerCapture(e.pointerId);
-        }
+        if (!isDown) return;
+        isDown = false;
+        slider.style.scrollBehavior = 'smooth';
+        slider.classList.remove('is-dragging');
+        slider.releasePointerCapture(e.pointerId);
       });
+
+      slider.addEventListener('pointercancel', () => {
+        isDown = false;
+        slider.style.scrollBehavior = 'smooth';
+        slider.classList.remove('is-dragging');
+      });
+
       slider.addEventListener('pointermove', (e) => {
         if (!isDown) return;
+        e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
         const walk = (x - startX) * 1.5;
         slider.scrollLeft = scrollLeft - walk;
       });
-    });
+    }
 
-    // Rail manual scrolling is handled by CSS (overflow-y: auto)
+    sliders.forEach(bindHorizontalDrag);
+    mobileSliders.forEach(bindHorizontalDrag);
   })();
 </script>
 
@@ -759,4 +856,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}
