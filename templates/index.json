@@ -446,6 +446,7 @@
           "type": "feature",
           "settings": {
             "icon_preset": "shoecare",
+            "icon": "shopify://shop_images/shoe_352cdb45-f6d7-4e1d-a95a-148d98e2d951.gif",
             "title": "SPECIALISED SHOECARE",
             "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
           }
@@ -454,6 +455,7 @@
           "type": "feature",
           "settings": {
             "icon_preset": "streets",
+            "icon": "shopify://shop_images/weather_10b73169-8eb5-498b-a545-d90285e8cf61.gif",
             "title": "INDIAN STREETS TESTED",
             "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
           }
@@ -462,6 +464,7 @@
           "type": "feature",
           "settings": {
             "icon_preset": "quality",
+            "icon": "shopify://shop_images/quality_d4bd5052-e6a8-4d66-b95e-0a5d0b4f693b.webp",
             "title": "QUALITY OBSESSED",
             "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
           }
@@ -470,6 +473,7 @@
           "type": "feature",
           "settings": {
             "icon_preset": "innovating",
+            "icon": "shopify://shop_images/Innovation.webp",
             "title": "ALWAYS INNOVATING",
             "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
           }
@@ -486,10 +490,14 @@
         "bg_color": "#000000",
         "text_color": "#ffffff",
         "accent_color": "#ff2b2b",
+        "icon_badge_size": 88,
+        "glow_intensity": 70,
         "container_width": 1320,
         "padding_top": 88,
         "padding_bottom": 88,
-        "enable_animations": true
+        "enable_animations": true,
+        "enable_float": true,
+        "enable_hover": true
       }
     },
     "17776077287b0fe0da": {
