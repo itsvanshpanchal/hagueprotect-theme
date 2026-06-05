@@ -164,35 +164,6 @@
     max-width: 280px;
   }
 
-  {%- if section.settings.enable_animations -%}
-  .hp-dna-{{ section.id }} .hp-dna__heading.hp-dna__reveal {
-    opacity: 0;
-    transform: translate3d(0, 28px, 0);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-  }
-
-  .hp-dna-{{ section.id }} .hp-dna__icon-badge.hp-dna__icon-reveal {
-    opacity: 0;
-    transform: translate3d(0, 18px, 0) scale(0.94);
-    transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-  }
-
-  .hp-dna-{{ section.id }} .hp-dna__item-copy.hp-dna__reveal {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
-  }
-
-  .hp-dna-{{ section.id }} .hp-dna__reveal.is-visible,
-  .hp-dna-{{ section.id }} .hp-dna__icon-reveal.is-visible {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  {%- endif -%}
-
   @media screen and (max-width: 1024px) {
     .hp-dna-{{ section.id }} .hp-dna__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -232,11 +203,10 @@
   class="hp-dna-{{ section.id }} section-spacing"
   aria-label="{{ section.settings.heading | escape }}"
   data-hp-dna-section="{{ section.id }}"
-  data-enable-animations="{{ section.settings.enable_animations }}"
 >
   <div class="hp-dna__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-dna__heading{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}">
+      <h2 class="hp-dna__heading">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
@@ -244,15 +214,10 @@
     {%- if section.blocks.size > 0 -%}
       <div class="hp-dna__grid">
         {%- for block in section.blocks -%}
-          {%- assign icon_delay = forloop.index | times: 180 | plus: 350 -%}
-          {%- assign copy_delay = forloop.index | times: 120 | plus: 650 -%}
           <div class="hp-dna__item" {{ block.shopify_attributes }}>
             <div class="hp-dna__icon-wrap">
               <div
-                class="hp-dna__icon-badge{% if section.settings.enable_animations %} hp-dna__icon-reveal{% endif %}"
-                {%- if section.settings.enable_animations -%}
-                  style="transition-delay: {{ icon_delay }}ms;"
-                {%- endif -%}
+                class="hp-dna__icon-badge"
                 aria-hidden="true"
               >
                 <span class="hp-dna__icon-float">
@@ -298,12 +263,7 @@
               </div>
             </div>
 
-            <div
-              class="hp-dna__item-copy{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}"
-              {%- if section.settings.enable_animations -%}
-                style="transition-delay: {{ copy_delay }}ms;"
-              {%- endif -%}
-            >
+            <div class="hp-dna__item-copy">
               {%- if block.settings.title != blank -%}
                 <h3 class="hp-dna__item-title">{{ block.settings.title }}</h3>
               {%- endif -%}
@@ -318,40 +278,6 @@
     {%- endif -%}
   </div>
 </section>
-
-{%- if section.settings.enable_animations -%}
-  <script>
-    (function () {
-      var section = document.querySelector('[data-hp-dna-section="{{ section.id }}"][data-enable-animations="true"]');
-      if (!section || !('IntersectionObserver' in window)) return;
-
-      var reveal = function () {
-        section.querySelectorAll('.hp-dna__reveal, .hp-dna__icon-reveal').forEach(function (el) {
-          el.classList.add('is-visible');
-        });
-      };
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        reveal();
-        return;
-      }
-
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              reveal();
-              observer.disconnect();
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-      );
-
-      observer.observe(section);
-    })();
-  </script>
-{%- endif -%}
 
 {% schema %}
 {
@@ -433,12 +359,6 @@
       "step": 4,
       "unit": "px",
       "default": 88
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_animations",
-      "label": "Enable scroll reveal animations",
-      "default": true
     },
     {
       "type": "checkbox",

@@ -200,24 +200,20 @@
       [type="submit"] {
         font-weight: 600 !important;
       }
-      .scroll-trigger {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
+
+      .hp-typewriter-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 0.85em;
+        background-color: currentColor;
+        margin-left: 3px;
+        vertical-align: baseline;
+        animation: hpTypewriterBlink 1s step-end infinite;
       }
-      .scroll-trigger.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      /* Subtle premium text animation */
-      .fade-in-premium {
-        animation: fadeInPremium 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-      @keyframes fadeInPremium {
-        0% { opacity: 0; transform: translateY(15px); }
-        100% { opacity: 1; transform: translateY(0); }
+
+      @keyframes hpTypewriterBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
       }
     </style>
 
@@ -251,39 +247,7 @@
     {% section 'footer' %}
 
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-
-    <!-- Global Scroll-Driven Animation & Text Animations -->
-    <script>
-      window.addEventListener('load', function() {
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initScrollTriggers);
-        } else {
-          setTimeout(initScrollTriggers, 10);
-        }
-
-        function initScrollTriggers() {
-          const triggers = document.querySelectorAll('h1, h2, h3, .promo-banner__content, .feature-grid__card, .story-banner, .faq-item, .reviews-card, .prod-card, .trending-social__slide');
-          
-          triggers.forEach(t => {
-            t.classList.add('scroll-trigger');
-          });
-
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -60px 0px"
-          });
-
-          triggers.forEach(t => observer.observe(t));
-        }
-      });
-    </script>
+    <script src="{{ 'heading-typewriter.js' | asset_url }}" defer="defer"></script>
 
     {% render 'theme-login-overlay' %}
     {% render 'theme-dashboard-overlay' %}

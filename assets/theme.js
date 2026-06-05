@@ -14,30 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  // Smooth appearance transitions
-  const fadeElements = document.querySelectorAll('.animate-fade-in');
-  
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => initFadeObserver(fadeElements));
-  } else {
-    setTimeout(() => initFadeObserver(fadeElements), 50);
-  }
-
-  function initFadeObserver(elements) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          requestAnimationFrame(() => {
-            entry.target.classList.add('fade-in-visible');
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    elements.forEach(elem => {
-      observer.observe(elem);
-    });
-  }
 });

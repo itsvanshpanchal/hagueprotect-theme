@@ -93,25 +93,8 @@
     hyphens: manual;
   }
 
-  .hero-fullscreen__heading .hero-static-part,
-  .hero-fullscreen__heading .hero-typing-part {
-    display: inline;
-  }
-
-  .hero-fullscreen__heading .hero-typing-cursor {
-    display: inline-block;
-    width: 3px;
-    height: 0.85em;
+  .hero-fullscreen__heading .hp-typewriter-cursor {
     background-color: var(--color-primary, #ff2b2b);
-    margin-left: 4px;
-    vertical-align: middle;
-    animation: hero-cursor-blink 1.2s infinite;
-    transition: opacity 0.25s ease;
-  }
-
-  @keyframes hero-cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
   }
 
   .hero-fullscreen__subheading {
@@ -323,7 +306,7 @@
 -%}
 
 <section
-  class="hero-fullscreen{% if has_dedicated_mobile %} hero-fullscreen--mobile-art{% endif %} animate-fade-in"
+  class="hero-fullscreen{% if has_dedicated_mobile %} hero-fullscreen--mobile-art{% endif %}"
   aria-label="HAGUEPROTECT Fullscreen Hero Section"
   {% if has_dedicated_mobile and mobile_banner.width and mobile_banner.height %}
     style="--hero-mobile-aspect: {{ mobile_banner.width }} / {{ mobile_banner.height }};"
@@ -387,92 +370,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (function() {
-    function initHeroTyping() {
-      const heading = document.querySelector('.hero-fullscreen__heading');
-      if (!heading) return;
-
-      const originalText = heading.textContent.trim();
-      const regex = /(MAKE\s*['’]?\s*EM\s*HEAT\.?)/i;
-      const match = originalText.match(regex);
-
-      if (!match) return;
-
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      const typingDelay = isMobile ? 85 : 100;
-      const scrollMax = isMobile ? 280 : 350;
-
-      const matchedText = match[0];
-      const index = originalText.indexOf(matchedText);
-
-      const staticPart = originalText.substring(0, index);
-      const typingPart = originalText.substring(index);
-
-      const cleanStaticPart = staticPart.replace(/\s{2,}/g, ' ').trim() + ' ';
-
-      heading.innerHTML =
-        '<span class="hero-static-part">' +
-        cleanStaticPart +
-        '</span><span class="hero-typing-part"></span><span class="hero-typing-cursor"></span>';
-
-      const typingSpan = heading.querySelector('.hero-typing-part');
-      const cursorSpan = heading.querySelector('.hero-typing-cursor');
-
-      let autoTypingActive = true;
-      let currentLength = 0;
-
-      function typeWord() {
-        if (!autoTypingActive) return;
-        if (currentLength <= typingPart.length) {
-          typingSpan.textContent = typingPart.substring(0, currentLength);
-          currentLength++;
-          setTimeout(typeWord, typingDelay);
-        } else {
-          autoTypingActive = false;
-        }
-      }
-
-      typeWord();
-
-      function handleScroll() {
-        autoTypingActive = false;
-
-        const scrollTop = window.scrollY;
-        const fraction = 1 - Math.min(scrollTop / scrollMax, 1);
-        const charsToShow = Math.round(fraction * typingPart.length);
-
-        typingSpan.textContent = typingPart.substring(0, charsToShow);
-
-        if (charsToShow === 0) {
-          cursorSpan.style.opacity = '0';
-        } else {
-          cursorSpan.style.opacity = '1';
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll, { passive: true });
-
-      if (window.scrollY > 0) {
-        handleScroll();
-      }
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHeroTyping);
-    } else {
-      initHeroTyping();
-    }
-
-    // Support Shopify Theme Editor dynamic reloading
-    document.addEventListener('shopify:section:load', function(event) {
-      if (event.detail.sectionId === '{{ section.id }}') {
-        initHeroTyping();
-      }
-    });
-  })();
-</script>
 
 {% schema %}
 {
