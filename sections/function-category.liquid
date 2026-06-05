@@ -252,58 +252,138 @@
 
   @media (max-width: 767px) {
     .fc-section {
-      padding: 40px 0;
+      padding: 36px 0 40px;
+      background-color: #ffffff;
     }
+
     .fc-container {
-      padding: 0 16px;
+      padding: 0 max(16px, var(--site-padding, 16px));
     }
+
+    .fc-header {
+      margin-bottom: 24px;
+    }
+
     .fc-heading {
-      font-size: clamp(22px, 6vw, 32px);
+      font-size: clamp(20px, 5.5vw, 26px);
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 0 8px;
     }
+
+    .fc-subtitle {
+      display: none;
+    }
+
+    .fc-slider-wrapper {
+      overflow: visible;
+    }
+
+    .fc-slider-container {
+      overflow: visible;
+      scroll-snap-type: none;
+      padding-bottom: 0;
+    }
+
+    .fc-slider-track {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 12px;
+      row-gap: 28px;
+      width: 100% !important;
+    }
+
     .fc-slide {
-      flex: 0 0 calc(50% - 10px);
-      min-width: calc(50% - 10px);
+      flex: none;
+      min-width: 0;
+      width: 100%;
+      aspect-ratio: unset;
+      min-height: 172px;
+      background: #f2f2f4 !important;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 12px 52px;
+      overflow: visible;
+      box-shadow: none;
+      scroll-snap-align: unset;
     }
-    /* Always show arrows on mobile, bigger tap targets */
-    .fc-nav {
-      left: -4px;
-      right: -4px;
+
+    .fc-slide:hover {
+      background: #f2f2f4 !important;
+      border-color: transparent;
     }
-    .fc-arrow {
-      width: 40px;
-      height: 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+
+    .fc-slide:hover .fc-illustration {
+      transform: none;
     }
-    .fc-arrow svg {
-      width: 18px;
-      height: 18px;
+
+    .fc-category-info {
+      max-width: 62%;
+    }
+
+    .fc-category-name {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+      max-width: 100%;
+      -webkit-line-clamp: 3;
+    }
+
+    .fc-product-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #666666;
+    }
+
+    .fc-illustration {
+      top: auto;
+      bottom: -18px;
+      right: -6px;
+      width: 78%;
+      height: auto;
+      min-height: 120px;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    .fc-illustration img,
+    .fc-illustration svg {
+      width: auto !important;
+      height: auto !important;
+      max-width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      object-position: bottom right;
+    }
+
+    .fc-nav,
+    .fc-progress-container {
+      display: none !important;
     }
   }
 
-  @media (max-width: 480px) {
-    /* Keep 2 cards visible on small phones */
-    .fc-slide {
-      flex: 0 0 calc(50% - 8px);
-      min-width: calc(50% - 8px);
-    }
+  @media (max-width: 380px) {
     .fc-slider-track {
-      gap: 12px;
+      gap: 10px;
     }
+
     .fc-slide {
-      padding: 10px;
+      min-height: 158px;
+      padding: 12px 10px 46px;
     }
+
     .fc-category-name {
-      font-size: 12px;
-      max-width: 100%; /* remove the tight width constraint */
+      font-size: 13px;
     }
-    .fc-product-count {
-      font-size: 11px;
-    }
-    .fc-category-info {
-      max-width: 60%; /* give text more room */
-    }
+
     .fc-illustration {
-      width: 58%; /* slightly smaller illustration */
+      width: 74%;
+      bottom: -14px;
+    }
+
+    .fc-illustration img,
+    .fc-illustration svg {
+      max-height: 130px;
     }
   }
 {%- endstyle -%}
@@ -371,6 +451,15 @@
       const fill = document.getElementById('fc-fill-{{ section.id }}');
       
       if (!slider || !track || !prevBtn || !nextBtn || !fill) return;
+
+      function isMobileGrid() {
+        return window.innerWidth <= 767;
+      }
+
+      if (isMobileGrid()) {
+        track.style.width = '';
+        return;
+      }
 
       let currentIndex = 0;
       let autoplayInterval = null;
@@ -465,6 +554,11 @@
       }, { passive: true });
 
       window.addEventListener('resize', () => {
+        if (isMobileGrid()) {
+          stopAutoplay();
+          track.style.width = '';
+          return;
+        }
         updateSlider();
         syncUI();
       });
