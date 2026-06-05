@@ -139,12 +139,18 @@
   .hp-dna-{{ section.id }} .hp-dna__item:nth-child(3) .hp-dna__svg-accent { animation-delay: 1.2s; }
   .hp-dna-{{ section.id }} .hp-dna__item:nth-child(4) .hp-dna__svg-accent { animation-delay: 1.8s; }
 
-  .hp-dna-{{ section.id }} .hp-dna__icon-badge img {
+  .hp-dna-{{ section.id }} .hp-dna__icon-badge img,
+  .hp-dna-{{ section.id }} .hp-dna__icon-custom {
     width: 52%;
     height: 52%;
     object-fit: contain;
     position: relative;
     z-index: 2;
+    display: block;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon-custom--gif {
+    pointer-events: none;
   }
 
   {%- if section.settings.enable_hover -%}
@@ -287,15 +293,35 @@
                 <span class="hp-dna__icon-ring"></span>
                 <span class="hp-dna__icon-float">
                   {%- if block.settings.icon != blank -%}
-                    {{
-                      block.settings.icon
-                      | image_url: width: 160
-                      | image_tag:
-                        loading: 'lazy',
-                        alt: '',
-                        width: 48,
-                        height: 48
-                    }}
+                    {%- liquid
+                      assign custom_icon = block.settings.icon
+                      assign icon_src = custom_icon.src | default: ''
+                      assign icon_is_gif = false
+                      if icon_src contains '.gif'
+                        assign icon_is_gif = true
+                      endif
+                    -%}
+                    {%- if icon_is_gif -%}
+                      <img
+                        src="{{ custom_icon | image_url }}"
+                        class="hp-dna__icon-custom hp-dna__icon-custom--gif"
+                        loading="lazy"
+                        alt=""
+                        width="{{ custom_icon.width }}"
+                        height="{{ custom_icon.height }}"
+                      >
+                    {%- else -%}
+                      {{
+                        custom_icon
+                        | image_url: width: 160
+                        | image_tag:
+                          class: 'hp-dna__icon-custom',
+                          loading: 'lazy',
+                          alt: '',
+                          width: 48,
+                          height: 48
+                      }}
+                    {%- endif -%}
                   {%- else -%}
                     {% render 'hp-dna-icon',
                       preset: block.settings.icon_preset,
@@ -477,15 +503,15 @@
             { "value": "streets", "label": "Indian streets tested" },
             { "value": "quality", "label": "Quality obsessed" },
             { "value": "innovating", "label": "Always innovating" },
-            { "value": "custom", "label": "Custom / upload" }
+            { "value": "custom", "label": "Custom GIF upload" }
           ],
           "default": "shoecare"
         },
         {
           "type": "image_picker",
           "id": "icon",
-          "label": "Custom icon image",
-          "info": "Overrides the default icon when uploaded."
+          "label": "Custom animated icon (GIF)",
+          "info": "Upload an animated GIF or static PNG/JPG. GIFs play in full animation. Overrides the default icon when uploaded."
         },
         {
           "type": "text",

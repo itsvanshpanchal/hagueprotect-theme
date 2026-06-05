@@ -2,9 +2,23 @@
   Product card for Horizontal Product Slider (desktop rail + mobile carousel)
   Accepts: product (required)
 {%- endcomment -%}
+{%- liquid
+  assign card_desc = product.description | strip_html | strip | truncate: 90
+  assign card_variant = product.selected_or_first_available_variant
+  assign show_bestseller = false
+  for tag in product.tags
+    assign tag_down = tag | downcase
+    if tag_down == 'bestseller'
+      assign show_bestseller = true
+      break
+    endif
+  endfor
+-%}
 <div class="rail-card" data-hp-fam-card onclick="window.location.href='{{ product.url }}'">
   <div class="rail-card-img">
-    <span class="rail-badge-bestseller">Bestseller</span>
+    {%- if show_bestseller -%}
+      <span class="rail-badge-bestseller">Bestseller</span>
+    {%- endif -%}
     {%- if product.featured_image -%}
       <img
         src="{{ product.featured_image | image_url: width: 600 }}"
@@ -18,19 +32,28 @@
     {%- endif -%}
   </div>
   <div class="rail-card-info">
-    <div class="rail-rating-row">
-      <div class="rail-rating-badge">★ 4.9</div>
-      <span class="rail-rating-count">(260)</span>
-    </div>
     <h3 class="rail-card-title">{{ product.title }}</h3>
-    <p class="rail-subtitle">{{ product.type | default: 'Premium' }} | Elite sneaker care</p>
-    <p class="rail-elite-care">Professional-grade cleaning and protection.</p>
+    {%- if product.type != blank -%}
+      <p class="rail-subtitle">{{ product.type }}</p>
+    {%- elsif product.vendor != blank -%}
+      <p class="rail-subtitle">{{ product.vendor }}</p>
+    {%- endif -%}
+    {%- if card_desc != blank -%}
+      <p class="rail-elite-care">{{ card_desc }}</p>
+    {%- endif -%}
     <div class="rail-price-row">
       {%- if product.compare_at_price > product.price -%}
         <span class="rail-price-compare">{{ product.compare_at_price | money_without_trailing_zeros }}</span>
       {%- endif -%}
       <span class="rail-price-current">{{ product.price | money_without_trailing_zeros }}</span>
     </div>
-    <button type="button" class="rail-card-atc" onclick="event.stopPropagation(); window.location.href='{{ product.url }}'">Add to Cart</button>
+    {%- if card_variant.available -%}
+      <form action="{{ routes.cart_add_url }}" method="post" onclick="event.stopPropagation();">
+        <input type="hidden" name="id" value="{{ card_variant.id }}">
+        <button type="submit" class="rail-card-atc">Add to Cart</button>
+      </form>
+    {%- else -%}
+      <button type="button" class="rail-card-atc" onclick="event.stopPropagation(); window.location.href='{{ product.url }}'">View Product</button>
+    {%- endif -%}
   </div>
 </div>
