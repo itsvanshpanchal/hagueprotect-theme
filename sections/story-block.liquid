@@ -1,48 +1,56 @@
 {%- style -%}
-  .story-banner-wrapper {
-    width: 100%;
+  .story-banner-wrapper-{{ section.id }} {
+    width: 100vw;
     max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     overflow: hidden;
     background-color: #ffffff;
     padding: {{ section.settings.padding_top | default: 40 }}px 0 {{ section.settings.padding_bottom | default: 40 }}px 0;
+    box-sizing: border-box;
   }
 
-  .story-banner {
+  .story-banner-wrapper-{{ section.id }} .story-banner {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     position: relative;
-    max-width: 1440px;
+    max-width: none;
     aspect-ratio: 1440 / 560;
     overflow: hidden;
-    border-radius: {{ section.settings.border_radius | default: 20 }}px;
+    border-radius: {{ section.settings.border_radius | default: 0 }}px;
     background-color: #f6f6f6;
   }
 
-  .story-banner__image {
+  .story-banner-wrapper-{{ section.id }} .story-banner picture,
+  .story-banner-wrapper-{{ section.id }} .story-banner__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     display: block;
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__image {
+    object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
-  .story-banner:hover .story-banner__image {
+  .story-banner-wrapper-{{ section.id }} .story-banner:hover .story-banner__image {
     transform: scale(1.03);
   }
 
   @media screen and (max-width: 749px) {
-    .story-banner-wrapper {
-      padding: {{ section.settings.padding_top | divided_by: 2 | default: 20 }}px 16px {{ section.settings.padding_bottom | divided_by: 2 | default: 20 }}px 16px;
+    .story-banner-wrapper-{{ section.id }} {
+      padding: {{ section.settings.padding_top | divided_by: 2 | default: 20 }}px 0 {{ section.settings.padding_bottom | divided_by: 2 | default: 20 }}px 0;
     }
-    .story-banner {
+
+    .story-banner-wrapper-{{ section.id }} .story-banner {
       aspect-ratio: 1 / 1;
       min-height: 320px;
-      border-radius: {{ section.settings.border_radius | divided_by: 2 | default: 10 }}px;
+      border-radius: {{ section.settings.border_radius | default: 0 }}px;
     }
   }
 {%- endstyle -%}
 
-<div class="story-banner-wrapper">
+<div class="story-banner-wrapper story-banner-wrapper-{{ section.id }}">
   <div class="story-banner">
     {%- assign banner_img = section.settings.image -%}
     {%- assign mobile_img = section.settings.image_mobile | default: section.settings.image -%}
@@ -127,7 +135,8 @@
       "step": 4,
       "unit": "px",
       "label": "Border Radius",
-      "default": 20
+      "default": 0,
+      "info": "Set to 0 for edge-to-edge banners that touch both sides."
     }
   ],
   "blocks": [
