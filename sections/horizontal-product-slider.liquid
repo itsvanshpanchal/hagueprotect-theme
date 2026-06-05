@@ -402,6 +402,15 @@
     font-size: 18px;
   }
 
+  .hp-fam-sec__mobile-slider .rail-rating-badge {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .hp-fam-sec__mobile-slider .rail-rating-count {
+    font-size: 12px;
+  }
+
   .hp-fam-sec__mobile-slider .rail-price-current {
     font-size: 22px;
   }
@@ -604,16 +613,16 @@
                   {%- assign tab_collection = block.settings.collection -%}
                   {%- if tab_collection != blank and tab_collection.products.size > 0 -%}
                     {%- for product in tab_collection.products limit: section.settings.products_to_show -%}
-                      {% render 'hp-fam-rail-card', product: product %}
+                      {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
                     {%- endfor -%}
                   {%- else -%}
                     {%- for product in default_rail_products limit: section.settings.products_to_show -%}
-                      {% render 'hp-fam-rail-card', product: product %}
+                      {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
                     {%- endfor -%}
                   {%- endif -%}
                 {%- else -%}
                   {%- for product in default_rail_products limit: section.settings.products_to_show -%}
-                    {% render 'hp-fam-rail-card', product: product %}
+                    {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
                   {%- endfor -%}
                 {%- endif -%}
               </div>
@@ -622,7 +631,7 @@
         {%- else -%}
           <div class="hp-fam-sec__mobile-slider is-active" id="mobile-slider-default-{{ section.id }}">
             {%- for product in default_rail_products limit: section.settings.products_to_show -%}
-              {% render 'hp-fam-rail-card', product: product %}
+              {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -635,7 +644,7 @@
     <div class="rail-mask">
       <div class="rail-track" id="railTrack-{{ section.id }}">
         {%- for product in default_rail_products limit: 10 -%}
-          {% render 'hp-fam-rail-card', product: product %}
+          {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
         {%- endfor -%}
       </div>
     </div>
@@ -743,6 +752,18 @@
       "step": 1,
       "default": 8,
       "label": "Products to show"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating count text",
+      "default": "4.8"
     },
     {
       "type": "range",

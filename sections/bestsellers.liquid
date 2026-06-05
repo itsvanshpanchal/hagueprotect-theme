@@ -170,18 +170,21 @@
 .prod-card-dtc__rating-badge {
   background-color: #2ECC71;
   color: #1A1A1A;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 6px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
+  line-height: 1;
+  letter-spacing: 0.2px;
 }
 
 .prod-card-dtc__rating-count {
   font-size: 13px;
-  color: #888888;
+  color: #666666;
+  font-weight: 500;
 }
 
 /* TITLE AREA */
@@ -318,12 +321,14 @@
   }
 
   .prod-card-dtc__rating-row {
-    order: 1;
+    order: 2;
     justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 2px;
   }
 
   .prod-card-dtc__rating-badge {
-    font-size: 13.5px;
+    font-size: 13px;
   }
 
   .prod-card-dtc__rating-badge::after {
@@ -331,7 +336,7 @@
   }
 
   .prod-card-dtc__title {
-    order: 2;
+    order: 1;
     text-align: left;
   }
 
@@ -514,32 +519,30 @@
   }
 
   .prod-card-dtc__rating-row {
-    order: 5;
-    margin-top: 6px;
-    gap: 4px;
+    order: 2;
+    margin-top: 0;
+    margin-bottom: 4px;
+    gap: 6px;
     justify-content: center;
     width: 100%;
   }
 
   .prod-card-dtc__rating-badge {
-    background: transparent;
-    color: #F5A623;
-    font-size: 0;
-    font-weight: 600;
-    padding: 0;
-    letter-spacing: 0;
+    background-color: #2ECC71;
+    color: #1A1A1A;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
   }
 
   .prod-card-dtc__rating-badge::after {
-    content: '★★★★★';
-    font-size: 13px;
-    color: #F5A623;
-    letter-spacing: 1px;
+    content: none;
   }
 
   .prod-card-dtc__rating-count {
     font-size: 12px;
-    color: #888888;
+    color: #666666;
   }
 
   .prod-card-dtc__title {
@@ -564,7 +567,7 @@
   }
 
   .prod-card-dtc__swatches {
-    order: 4;
+    order: 5;
     justify-content: center;
     margin-top: 4px;
   }
@@ -576,7 +579,7 @@
   }
 
   .prod-card-dtc__price-box {
-    order: 2;
+    order: 3;
     margin-top: 2px;
     gap: 0;
     flex-direction: row;
@@ -608,7 +611,7 @@
   }
 
   .prod-card-dtc__emi-row {
-    order: 3;
+    order: 4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -705,6 +708,11 @@
             <div class="prod-card-dtc__content">
               <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
 
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ {{ section.settings.rating_value | default: '4.9' }}</span>
+                <span class="prod-card-dtc__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
+              </div>
+
               {%- if product.type != blank -%}
                 <p class="prod-card-dtc__subtitle">{{ product.type }}</p>
               {%- endif -%}
@@ -735,11 +743,6 @@
                   <div class="prod-card-dtc__swatch is-black" title="Variant"></div>
                 </div>
               {%- endif -%}
-
-              <div class="prod-card-dtc__rating-row">
-                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
-                <span class="prod-card-dtc__rating-count">(4.8)</span>
-              </div>
 
               {%- if card_variant.available -%}
                 <form action="{{ routes.cart_add_url }}" method="post" onclick="event.stopPropagation();" style="margin: 0; padding: 0; width: 100%;">
@@ -793,6 +796,11 @@
             <div class="prod-card-dtc__content">
               <h3 class="prod-card-dtc__title">{{ mock_title }}</h3>
 
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ {{ section.settings.rating_value | default: '4.9' }}</span>
+                <span class="prod-card-dtc__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
+              </div>
+
               <p class="prod-card-dtc__subtitle">Premium | Maximum Care</p>
               <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
 
@@ -809,11 +817,6 @@
               <div class="prod-card-dtc__swatches">
                 <div class="prod-card-dtc__swatch is-white active" title="White"></div>
                 <div class="prod-card-dtc__swatch is-black" title="Black"></div>
-              </div>
-
-              <div class="prod-card-dtc__rating-row">
-                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
-                <span class="prod-card-dtc__rating-count">(4.8)</span>
               </div>
 
               <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/{{ mock_handle }}';">View Details</button>
@@ -834,6 +837,18 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating count text",
+      "default": "4.8"
     },
     {
       "type": "color",
