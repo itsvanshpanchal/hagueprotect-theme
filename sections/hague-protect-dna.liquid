@@ -75,35 +75,14 @@
   }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-glow {
-    position: absolute;
-    inset: 8%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 43, 43, calc(var(--hp-dna-glow) * 0.45)) 0%, transparent 72%);
-    filter: blur(10px);
-    opacity: calc(var(--hp-dna-glow) * 0.6);
-    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-    animation: hp-dna-glow-breathe-{{ section.id }} 6s ease-in-out infinite;
-  }
-
-  .hp-dna-{{ section.id }} .hp-dna__icon-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.22);
-    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 55%, transparent 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 0 0 1px rgba(255, 255, 255, 0.04);
-    transition: border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
+    display: none;
   }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-float {
     position: relative;
     z-index: 2;
-    width: 52%;
-    height: 52%;
+    width: 88%;
+    height: 88%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,8 +120,8 @@
 
   .hp-dna-{{ section.id }} .hp-dna__icon-badge img,
   .hp-dna-{{ section.id }} .hp-dna__icon-custom {
-    width: 52%;
-    height: 52%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     position: relative;
     z-index: 2;
@@ -157,19 +136,6 @@
   @media (hover: hover) and (pointer: fine) {
     .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover {
       transform: scale(1.06);
-    }
-
-    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__icon-glow {
-      opacity: calc(var(--hp-dna-glow) * 1.15);
-      transform: scale(1.12);
-    }
-
-    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__icon-ring {
-      border-color: rgba(255, 43, 43, 0.45);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        0 0 24px rgba(255, 43, 43, 0.28),
-        0 0 0 1px rgba(255, 43, 43, 0.2);
     }
 
     .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__svg-accent {
@@ -236,7 +202,7 @@
 
   @media screen and (max-width: 640px) {
     .hp-dna-{{ section.id }} {
-      --hp-dna-badge: {{ section.settings.icon_badge_size | times: 0.85 | round }}px;
+      --hp-dna-badge: {{ section.settings.icon_badge_size | times: 0.9 | round }}px;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__grid {
@@ -289,8 +255,6 @@
                 {%- endif -%}
                 aria-hidden="true"
               >
-                <span class="hp-dna__icon-glow"></span>
-                <span class="hp-dna__icon-ring"></span>
                 <span class="hp-dna__icon-float">
                   {%- if block.settings.icon != blank -%}
                     {%- liquid
@@ -313,13 +277,13 @@
                     {%- else -%}
                       {{
                         custom_icon
-                        | image_url: width: 160
+                        | image_url: width: 280
                         | image_tag:
                           class: 'hp-dna__icon-custom',
                           loading: 'lazy',
                           alt: '',
-                          width: 48,
-                          height: 48
+                          width: 72,
+                          height: 72
                       }}
                     {%- endif -%}
                   {%- else -%}
@@ -423,12 +387,12 @@
     {
       "type": "range",
       "id": "icon_badge_size",
-      "label": "Icon badge size",
-      "min": 64,
-      "max": 112,
+      "label": "Icon size",
+      "min": 72,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "default": 88
+      "default": 112
     },
     {
       "type": "range",
