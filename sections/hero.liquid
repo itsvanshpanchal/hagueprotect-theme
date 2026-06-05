@@ -401,10 +401,8 @@
       if (!match) return;
 
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (isMobile) {
-        heading.textContent = originalText;
-        return;
-      }
+      const typingDelay = isMobile ? 85 : 100;
+      const scrollMax = isMobile ? 280 : 350;
 
       const matchedText = match[0];
       const index = originalText.indexOf(matchedText);
@@ -430,15 +428,13 @@
         if (currentLength <= typingPart.length) {
           typingSpan.textContent = typingPart.substring(0, currentLength);
           currentLength++;
-          setTimeout(typeWord, 100);
+          setTimeout(typeWord, typingDelay);
         } else {
           autoTypingActive = false;
         }
       }
 
       typeWord();
-
-      const scrollMax = 350;
 
       function handleScroll() {
         autoTypingActive = false;
