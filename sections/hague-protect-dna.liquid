@@ -1,11 +1,30 @@
 {%- style -%}
   .hp-dna-{{ section.id }} {
+    --hp-dna-accent: {{ section.settings.accent_color }};
+    --hp-dna-text: {{ section.settings.text_color }};
+    --hp-dna-badge: {{ section.settings.icon_badge_size }}px;
+    --hp-dna-glow: {{ section.settings.glow_intensity | divided_by: 100.0 }};
     background-color: {{ section.settings.bg_color }};
-    color: {{ section.settings.text_color }};
+    color: var(--hp-dna-text);
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow: hidden;
+  }
+
+  @keyframes hp-dna-float-{{ section.id }} {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -5px, 0); }
+  }
+
+  @keyframes hp-dna-accent-pulse-{{ section.id }} {
+    0%, 100% { opacity: 0.82; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes hp-dna-glow-breathe-{{ section.id }} {
+    0%, 100% { opacity: calc(var(--hp-dna-glow) * 0.55); transform: scale(0.96); }
+    50% { opacity: calc(var(--hp-dna-glow) * 0.9); transform: scale(1.04); }
   }
 
   .hp-dna-{{ section.id }} .hp-dna__container {
@@ -22,7 +41,7 @@
     letter-spacing: 0.02em;
     line-height: 1.25;
     margin: 0 0 clamp(48px, 6vw, 72px);
-    color: {{ section.settings.text_color }};
+    color: var(--hp-dna-text);
   }
 
   .hp-dna-{{ section.id }} .hp-dna__grid {
@@ -38,23 +57,120 @@
     text-align: left;
   }
 
-  .hp-dna-{{ section.id }} .hp-dna__icon {
-    width: 72px;
-    height: 72px;
+  .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
     margin-bottom: 28px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
   }
 
-  .hp-dna-{{ section.id }} .hp-dna__icon svg,
-  .hp-dna-{{ section.id }} .hp-dna__icon img {
-    width: 72px;
-    height: 72px;
-    display: block;
-    object-fit: contain;
+  .hp-dna-{{ section.id }} .hp-dna__icon-badge {
+    position: relative;
+    width: var(--hp-dna-badge);
+    height: var(--hp-dna-badge);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    transform: translateZ(0);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon-glow {
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 43, 43, calc(var(--hp-dna-glow) * 0.45)) 0%, transparent 72%);
+    filter: blur(10px);
+    opacity: calc(var(--hp-dna-glow) * 0.6);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    animation: hp-dna-glow-breathe-{{ section.id }} 6s ease-in-out infinite;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 55%, transparent 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition: border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon-float {
+    position: relative;
+    z-index: 2;
+    width: 52%;
+    height: 52%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+  }
+
+  {%- if section.settings.enable_float -%}
+  .hp-dna-{{ section.id }} .hp-dna__icon-float {
+    animation: hp-dna-float-{{ section.id }} 5.5s ease-in-out infinite;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(1) .hp-dna__icon-float { animation-delay: 0s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(2) .hp-dna__icon-float { animation-delay: 0.8s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(3) .hp-dna__icon-float { animation-delay: 1.6s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(4) .hp-dna__icon-float { animation-delay: 2.4s; }
+  {%- endif -%}
+
+  .hp-dna-{{ section.id }} .hp-dna__svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__svg-accent,
+  .hp-dna-{{ section.id }} .hp-dna__svg-accent-fill {
+    filter: drop-shadow(0 0 4px rgba(255, 43, 43, 0.55));
+    animation: hp-dna-accent-pulse-{{ section.id }} 3.5s ease-in-out infinite;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(1) .hp-dna__svg-accent { animation-delay: 0s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(2) .hp-dna__svg-accent { animation-delay: 0.6s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(3) .hp-dna__svg-accent { animation-delay: 1.2s; }
+  .hp-dna-{{ section.id }} .hp-dna__item:nth-child(4) .hp-dna__svg-accent { animation-delay: 1.8s; }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon-badge img {
+    width: 52%;
+    height: 52%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+  }
+
+  {%- if section.settings.enable_hover -%}
+  @media (hover: hover) and (pointer: fine) {
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover {
+      transform: scale(1.06);
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__icon-glow {
+      opacity: calc(var(--hp-dna-glow) * 1.15);
+      transform: scale(1.12);
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__icon-ring {
+      border-color: rgba(255, 43, 43, 0.45);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 24px rgba(255, 43, 43, 0.28),
+        0 0 0 1px rgba(255, 43, 43, 0.2);
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge:hover .hp-dna__svg-accent {
+      filter: drop-shadow(0 0 8px rgba(255, 43, 43, 0.85));
+    }
+  }
+  {%- endif -%}
 
   .hp-dna-{{ section.id }} .hp-dna__item-title {
     font-size: clamp(14px, 1.4vw, 16px);
@@ -63,7 +179,7 @@
     letter-spacing: 0.06em;
     line-height: 1.3;
     margin: 0 0 14px;
-    color: {{ section.settings.text_color }};
+    color: var(--hp-dna-text);
   }
 
   .hp-dna-{{ section.id }} .hp-dna__item-text {
@@ -71,7 +187,7 @@
     font-weight: 400;
     line-height: 1.55;
     margin: 0;
-    color: {{ section.settings.text_color }};
+    color: var(--hp-dna-text);
     opacity: 0.92;
     max-width: 280px;
   }
@@ -79,21 +195,29 @@
   {%- if section.settings.enable_animations -%}
   .hp-dna-{{ section.id }} .hp-dna__heading.hp-dna__reveal {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate3d(0, 28px, 0);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
 
-  .hp-dna-{{ section.id }} .hp-dna__item.hp-dna__reveal {
+  .hp-dna-{{ section.id }} .hp-dna__icon-badge.hp-dna__icon-reveal {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translate3d(0, 18px, 0) scale(0.94);
+    transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item-copy.hp-dna__reveal {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
 
-  .hp-dna-{{ section.id }} .hp-dna__reveal.is-visible {
+  .hp-dna-{{ section.id }} .hp-dna__reveal.is-visible,
+  .hp-dna-{{ section.id }} .hp-dna__icon-reveal.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   {%- endif -%}
 
@@ -105,25 +229,29 @@
   }
 
   @media screen and (max-width: 640px) {
+    .hp-dna-{{ section.id }} {
+      --hp-dna-badge: {{ section.settings.icon_badge_size | times: 0.85 | round }}px;
+    }
+
     .hp-dna-{{ section.id }} .hp-dna__grid {
       grid-template-columns: 1fr;
       gap: 36px;
     }
 
-    .hp-dna-{{ section.id }} .hp-dna__icon {
-      width: 64px;
-      height: 64px;
+    .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
       margin-bottom: 20px;
-    }
-
-    .hp-dna-{{ section.id }} .hp-dna__icon svg,
-    .hp-dna-{{ section.id }} .hp-dna__icon img {
-      width: 64px;
-      height: 64px;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__item-text {
       max-width: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hp-dna-{{ section.id }} .hp-dna__icon-float,
+    .hp-dna-{{ section.id }} .hp-dna__icon-glow,
+    .hp-dna-{{ section.id }} .hp-dna__svg-accent {
+      animation: none !important;
     }
   }
 {%- endstyle -%}
@@ -144,73 +272,56 @@
     {%- if section.blocks.size > 0 -%}
       <div class="hp-dna__grid">
         {%- for block in section.blocks -%}
-          <div
-            class="hp-dna__item{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}"
-            {{ block.shopify_attributes }}
-            {%- if section.settings.enable_animations -%}
-              style="transition-delay: {{ forloop.index | times: 120 }}ms;"
-            {%- endif -%}
-          >
-            <div class="hp-dna__icon" aria-hidden="true">
-              {%- if block.settings.icon != blank -%}
-                {{
-                  block.settings.icon
-                  | image_url: width: 144
-                  | image_tag:
-                    loading: 'lazy',
-                    alt: '',
-                    width: 72,
-                    height: 72
-                }}
-              {%- else -%}
-                {%- case block.settings.icon_preset -%}
-                  {%- when 'shoecare' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                      <path d="M38 18c8 0 14 6 14 14v4c0 8-6 14-14 14H24c-6 0-10-4-12-8" stroke="{{ section.settings.text_color }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M16 42c0-10 8-16 18-16h4c3 0 6-2 8-5" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M14 46h22M18 52h14" stroke="{{ section.settings.accent_color }}" stroke-width="2.2" stroke-linecap="round"/>
-                      <path d="M42 24c4 2 7 6 8 10" stroke="{{ section.settings.text_color }}" stroke-width="2.2" stroke-linecap="round"/>
-                    </svg>
-                  {%- when 'streets' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                      <circle cx="22" cy="22" r="9" stroke="{{ section.settings.accent_color }}" stroke-width="2.4"/>
-                      <path d="M22 9v3M22 32v3M9 22h3M32 22h3M13 13l2 2M29 29l2 2M13 31l2-2M29 15l2-2" stroke="{{ section.settings.accent_color }}" stroke-width="2" stroke-linecap="round"/>
-                      <path d="M34 40c0-7 5-12 12-12 5 0 9 3 11 7" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                      <path d="M38 46c4 3 9 4 14 2 5-2 9-7 9-13" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                    </svg>
-                  {%- when 'quality' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                      <circle cx="36" cy="28" r="17" stroke="{{ section.settings.text_color }}" stroke-width="2.4"/>
-                      <path d="M24 45l4 9h16l4-9" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linejoin="round"/>
-                      <path d="M29 54h14" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                      <path d="M30 33c2 4 5 5 6 5s4-1 6-5" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M36 20v10" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                      <path d="M31 39h10" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                    </svg>
-                  {%- when 'innovating' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                      <path d="M36 8c-11 0-20 9-20 20 0 8 5 14 11 17v9h18v-9c6-3 11-9 11-17 0-11-9-20-20-20z" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linejoin="round"/>
-                      <path d="M27 58h18" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                      <circle cx="36" cy="27" r="8" stroke="{{ section.settings.accent_color }}" stroke-width="2.2"/>
-                      <circle cx="36" cy="27" r="3.5" stroke="{{ section.settings.accent_color }}" stroke-width="2"/>
-                      <path d="M36 22v10M31 27h10" stroke="{{ section.settings.accent_color }}" stroke-width="1.8" stroke-linecap="round"/>
-                    </svg>
+          {%- assign icon_delay = forloop.index | times: 180 | plus: 350 -%}
+          {%- assign copy_delay = forloop.index | times: 120 | plus: 650 -%}
+          <div class="hp-dna__item" {{ block.shopify_attributes }}>
+            <div class="hp-dna__icon-wrap">
+              <div
+                class="hp-dna__icon-badge{% if section.settings.enable_animations %} hp-dna__icon-reveal{% endif %}"
+                {%- if section.settings.enable_animations -%}
+                  style="transition-delay: {{ icon_delay }}ms;"
+                {%- endif -%}
+                aria-hidden="true"
+              >
+                <span class="hp-dna__icon-glow"></span>
+                <span class="hp-dna__icon-ring"></span>
+                <span class="hp-dna__icon-float">
+                  {%- if block.settings.icon != blank -%}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 160
+                      | image_tag:
+                        loading: 'lazy',
+                        alt: '',
+                        width: 48,
+                        height: 48
+                    }}
                   {%- else -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
-                      <circle cx="36" cy="36" r="20" stroke="{{ section.settings.accent_color }}" stroke-width="2.4"/>
-                      <path d="M36 24v24M24 36h24" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
-                    </svg>
-                {%- endcase -%}
-              {%- endif -%}
+                    {% render 'hp-dna-icon',
+                      preset: block.settings.icon_preset,
+                      accent_color: section.settings.accent_color,
+                      text_color: section.settings.text_color,
+                      index: forloop.index
+                    %}
+                  {%- endif -%}
+                </span>
+              </div>
             </div>
 
-            {%- if block.settings.title != blank -%}
-              <h3 class="hp-dna__item-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
+            <div
+              class="hp-dna__item-copy{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}"
+              {%- if section.settings.enable_animations -%}
+                style="transition-delay: {{ copy_delay }}ms;"
+              {%- endif -%}
+            >
+              {%- if block.settings.title != blank -%}
+                <h3 class="hp-dna__item-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
 
-            {%- if block.settings.description != blank -%}
-              <p class="hp-dna__item-text">{{ block.settings.description }}</p>
-            {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="hp-dna__item-text">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
           </div>
         {%- endfor -%}
       </div>
@@ -223,29 +334,31 @@
     (function () {
       var section = document.querySelector('[data-hp-dna-section="{{ section.id }}"][data-enable-animations="true"]');
       if (!section || !('IntersectionObserver' in window)) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        section.querySelectorAll('.hp-dna__reveal').forEach(function (el) {
+
+      var reveal = function () {
+        section.querySelectorAll('.hp-dna__reveal, .hp-dna__icon-reveal').forEach(function (el) {
           el.classList.add('is-visible');
         });
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        reveal();
         return;
       }
 
-      var items = section.querySelectorAll('.hp-dna__reveal');
       var observer = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
+              reveal();
+              observer.disconnect();
             }
           });
         },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
       );
 
-      items.forEach(function (item) {
-        observer.observe(item);
-      });
+      observer.observe(section);
     })();
   </script>
 {%- endif -%}
@@ -283,6 +396,26 @@
     },
     {
       "type": "range",
+      "id": "icon_badge_size",
+      "label": "Icon badge size",
+      "min": 64,
+      "max": 112,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "glow_intensity",
+      "label": "Red glow intensity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
       "id": "container_width",
       "label": "Container max width",
       "min": 1000,
@@ -315,6 +448,18 @@
       "type": "checkbox",
       "id": "enable_animations",
       "label": "Enable scroll reveal animations",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_float",
+      "label": "Enable icon floating effect",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover",
+      "label": "Enable icon hover interactions",
       "default": true
     }
   ],

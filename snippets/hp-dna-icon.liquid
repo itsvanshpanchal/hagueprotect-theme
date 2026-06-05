@@ -1,0 +1,69 @@
+{%- comment -%}
+  Premium DNA feature icon — luxury outline system
+  Accepts: preset, accent_color, text_color, index
+{%- endcomment -%}
+{%- liquid
+  assign stroke_w = '1.85'
+  assign accent = accent_color | default: '#FF2B2B'
+  assign white = text_color | default: '#FFFFFF'
+-%}
+
+<svg
+  class="hp-dna__svg"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 48 48"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  {%- case preset -%}
+    {%- when 'shoecare' -%}
+      <g class="hp-dna__svg-white">
+        <path d="M30 13c4.5 0 8 3 9 7.5v2.5c0 4.5-3.5 8-8 8h-5.5c-2.5 0-4.5-1.5-5.5-3.5" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M32 18.5c1.5.8 2.5 2.2 2.8 3.8" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+      <g class="hp-dna__svg-accent">
+        <path d="M11 31.5c0-6.5 5.5-11.5 12.5-11.5h2.5c2.2 0 4.2-.8 5.5-2.5" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9.5 34.5h19.5M13 38.5h12.5" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+        <ellipse cx="17" cy="30" rx="2.2" ry="1.2" stroke="{{ accent }}" stroke-width="1.4"/>
+      </g>
+    {%- when 'streets' -%}
+      <g class="hp-dna__svg-accent">
+        <circle cx="16.5" cy="16.5" r="7.5" stroke="{{ accent }}" stroke-width="{{ stroke_w }}"/>
+        <path d="M16.5 7.5v2M16.5 23.5v2M7.5 16.5h2M23.5 16.5h2M10 10l1.5 1.5M21 21l1.5 1.5M10 23l1.5-1.5M21 12l1.5-1.5" stroke="{{ accent }}" stroke-width="1.45" stroke-linecap="round"/>
+      </g>
+      <g class="hp-dna__svg-white">
+        <path d="M25.5 27.5c0-5.5 4.5-9.5 9.5-9.5 3.8 0 6.8 1.8 8.2 4.5" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+        <path d="M27.5 31.5c3.2 2.2 7.2 3 11.2 1.6 3.8-1.3 6.8-4.8 6.8-9.1" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+    {%- when 'quality' -%}
+      <g class="hp-dna__svg-white">
+        <circle cx="24" cy="19.5" r="11.5" stroke="{{ white }}" stroke-width="{{ stroke_w }}"/>
+        <path d="M14.5 33.5l3.2 7.3h12.6l3.2-7.3" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linejoin="round"/>
+        <path d="M18.5 40.8h11" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+      <g class="hp-dna__svg-accent">
+        <path d="M18.5 24.5c1.8 3.2 4 4.5 5.5 4.5s3.7-1.3 5.5-4.5" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M24 13.5v9" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+        <path d="M19.5 29h9" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+    {%- when 'innovating' -%}
+      <g class="hp-dna__svg-white">
+        <path d="M24 5.5c-7.8 0-14 6.2-14 14 0 5.2 3 9.6 7.2 11.8v7.2h13.6v-7.2c4.2-2.2 7.2-6.6 7.2-11.8 0-7.8-6.2-14-14-14z" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linejoin="round"/>
+        <path d="M17.5 38.5h13" stroke="{{ white }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+      <g class="hp-dna__svg-accent">
+        <circle cx="24" cy="18.5" r="5.8" stroke="{{ accent }}" stroke-width="{{ stroke_w }}"/>
+        <circle cx="24" cy="18.5" r="2.2" stroke="{{ accent }}" stroke-width="1.5"/>
+        <path d="M24 15.8v5.4M21.2 18.5h5.6" stroke="{{ accent }}" stroke-width="1.35" stroke-linecap="round"/>
+        <path d="M21.8 20.8l1.2-1.2M26.2 20.8l-1.2-1.2M21.8 16.2l1.2 1.2M26.2 16.2l-1.2 1.2" stroke="{{ accent }}" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    {%- else -%}
+      <g class="hp-dna__svg-white">
+        <circle cx="24" cy="24" r="12" stroke="{{ white }}" stroke-width="{{ stroke_w }}"/>
+      </g>
+      <g class="hp-dna__svg-accent">
+        <path d="M24 15.5v17M15.5 24h17" stroke="{{ accent }}" stroke-width="{{ stroke_w }}" stroke-linecap="round"/>
+      </g>
+  {%- endcase -%}
+</svg>
