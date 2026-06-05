@@ -345,7 +345,7 @@
     transform: scale(1.02);
   }
 
-  /* Mobile / tablet: Nuuk-style product cards (desktop 1200px+ unchanged) */
+  /* Mobile / tablet: horizontal product cards (desktop 1200px+ unchanged) */
   .hp-fam-sec__mobile-rail-wrap {
     display: none;
     width: 100%;
@@ -353,7 +353,8 @@
 
   .hp-fam-sec__mobile-slider {
     display: none;
-    gap: 16px;
+    --hp-fam-card-gap: 12px;
+    gap: var(--hp-fam-card-gap);
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -361,7 +362,7 @@
     -webkit-overflow-scrolling: touch;
     touch-action: pan-x;
     padding: 4px 0 12px;
-    margin: 0 -4px;
+    padding-right: calc((100% - var(--hp-fam-card-gap)) / 3);
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
@@ -386,10 +387,10 @@
   }
 
   .hp-fam-sec__mobile-slider .rail-card {
-    flex: 0 0 88%;
-    max-width: 340px;
-    min-width: 280px;
-    scroll-snap-align: center;
+    flex: 0 0 calc((100% - var(--hp-fam-card-gap)) / 1.5);
+    min-width: 0;
+    max-width: none;
+    scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 
@@ -422,6 +423,8 @@
     .hp-fam-sec__mobile-rail-wrap {
       display: block;
       padding-bottom: 36px;
+      width: 100%;
+      overflow: visible;
     }
 
     .premium-floating-rail {
@@ -471,18 +474,21 @@
       scroll-snap-align: start;
     }
 
+    .hp-fam-sec__mobile-rail-wrap {
+      margin-right: calc(-1 * max(16px, var(--site-padding, 16px)));
+      padding-bottom: 28px;
+    }
+
     .hp-fam-sec__mobile-slider {
-      gap: 14px;
+      --hp-fam-card-gap: 12px;
+      gap: var(--hp-fam-card-gap);
       padding-bottom: 8px;
+      padding-right: max(16px, var(--site-padding, 16px));
     }
 
     .hp-fam-sec__mobile-slider .rail-card {
-      flex: 0 0 92%;
-      min-width: 260px;
-    }
-
-    .hp-fam-sec__mobile-rail-wrap {
-      padding-bottom: 28px;
+      flex: 0 0 calc((100% - var(--hp-fam-card-gap)) / 1.5);
+      scroll-snap-align: start;
     }
   }
 {%- endstyle -%}
@@ -588,7 +594,7 @@
         </div>
       </div>
 
-      {%- comment -%} MOBILE: Nuuk-style horizontal product cards {%- endcomment -%}
+      {%- comment -%} MOBILE: horizontal product cards {%- endcomment -%}
       <div class="hp-fam-sec__mobile-rail-wrap">
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
@@ -715,7 +721,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Meet the Nuuk fam!"
+      "default": "Shop Our Premium Best"
     },
     {
       "type": "color",
