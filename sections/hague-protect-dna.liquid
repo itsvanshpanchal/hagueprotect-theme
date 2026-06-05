@@ -1,0 +1,400 @@
+{%- style -%}
+  .hp-dna-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__container {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 60px);
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__heading {
+    font-size: clamp(22px, 3.2vw, 36px);
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    margin: 0 0 clamp(48px, 6vw, 72px);
+    color: {{ section.settings.text_color }};
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(28px, 3vw, 48px);
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__icon svg,
+  .hp-dna-{{ section.id }} .hp-dna__icon img {
+    width: 72px;
+    height: 72px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item-title {
+    font-size: clamp(14px, 1.4vw, 16px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    margin: 0 0 14px;
+    color: {{ section.settings.text_color }};
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item-text {
+    font-size: clamp(13px, 1.2vw, 15px);
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0;
+    color: {{ section.settings.text_color }};
+    opacity: 0.92;
+    max-width: 280px;
+  }
+
+  {%- if section.settings.enable_animations -%}
+  .hp-dna-{{ section.id }} .hp-dna__heading.hp-dna__reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__item.hp-dna__reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  {%- endif -%}
+
+  @media screen and (max-width: 1024px) {
+    .hp-dna-{{ section.id }} .hp-dna__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 32px;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .hp-dna-{{ section.id }} .hp-dna__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 20px;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon svg,
+    .hp-dna-{{ section.id }} .hp-dna__icon img {
+      width: 64px;
+      height: 64px;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__item-text {
+      max-width: none;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="hp-dna-{{ section.id }} section-spacing"
+  aria-label="{{ section.settings.heading | escape }}"
+  data-hp-dna-section="{{ section.id }}"
+  data-enable-animations="{{ section.settings.enable_animations }}"
+>
+  <div class="hp-dna__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-dna__heading{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hp-dna__grid">
+        {%- for block in section.blocks -%}
+          <div
+            class="hp-dna__item{% if section.settings.enable_animations %} hp-dna__reveal{% endif %}"
+            {{ block.shopify_attributes }}
+            {%- if section.settings.enable_animations -%}
+              style="transition-delay: {{ forloop.index | times: 120 }}ms;"
+            {%- endif -%}
+          >
+            <div class="hp-dna__icon" aria-hidden="true">
+              {%- if block.settings.icon != blank -%}
+                {{
+                  block.settings.icon
+                  | image_url: width: 144
+                  | image_tag:
+                    loading: 'lazy',
+                    alt: '',
+                    width: 72,
+                    height: 72
+                }}
+              {%- else -%}
+                {%- case block.settings.icon_preset -%}
+                  {%- when 'shoecare' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <path d="M38 18c8 0 14 6 14 14v4c0 8-6 14-14 14H24c-6 0-10-4-12-8" stroke="{{ section.settings.text_color }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M16 42c0-10 8-16 18-16h4c3 0 6-2 8-5" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M14 46h22M18 52h14" stroke="{{ section.settings.accent_color }}" stroke-width="2.2" stroke-linecap="round"/>
+                      <path d="M42 24c4 2 7 6 8 10" stroke="{{ section.settings.text_color }}" stroke-width="2.2" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'streets' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="22" cy="22" r="9" stroke="{{ section.settings.accent_color }}" stroke-width="2.4"/>
+                      <path d="M22 9v3M22 32v3M9 22h3M32 22h3M13 13l2 2M29 29l2 2M13 31l2-2M29 15l2-2" stroke="{{ section.settings.accent_color }}" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M34 40c0-7 5-12 12-12 5 0 9 3 11 7" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                      <path d="M38 46c4 3 9 4 14 2 5-2 9-7 9-13" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'quality' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="28" r="17" stroke="{{ section.settings.text_color }}" stroke-width="2.4"/>
+                      <path d="M24 45l4 9h16l4-9" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linejoin="round"/>
+                      <path d="M29 54h14" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                      <path d="M30 33c2 4 5 5 6 5s4-1 6-5" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M36 20v10" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                      <path d="M31 39h10" stroke="{{ section.settings.accent_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'innovating' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <path d="M36 8c-11 0-20 9-20 20 0 8 5 14 11 17v9h18v-9c6-3 11-9 11-17 0-11-9-20-20-20z" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linejoin="round"/>
+                      <path d="M27 58h18" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                      <circle cx="36" cy="27" r="8" stroke="{{ section.settings.accent_color }}" stroke-width="2.2"/>
+                      <circle cx="36" cy="27" r="3.5" stroke="{{ section.settings.accent_color }}" stroke-width="2"/>
+                      <path d="M36 22v10M31 27h10" stroke="{{ section.settings.accent_color }}" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                      <circle cx="36" cy="36" r="20" stroke="{{ section.settings.accent_color }}" stroke-width="2.4"/>
+                      <path d="M36 24v24M24 36h24" stroke="{{ section.settings.text_color }}" stroke-width="2.4" stroke-linecap="round"/>
+                    </svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="hp-dna__item-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <p class="hp-dna__item-text">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- if section.settings.enable_animations -%}
+  <script>
+    (function () {
+      var section = document.querySelector('[data-hp-dna-section="{{ section.id }}"][data-enable-animations="true"]');
+      if (!section || !('IntersectionObserver' in window)) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        section.querySelectorAll('.hp-dna__reveal').forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      var items = section.querySelectorAll('.hp-dna__reveal');
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      items.forEach(function (item) {
+        observer.observe(item);
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "HAGUE PROTECT DNA",
+  "tag": "section",
+  "class": "section-hague-protect-dna",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "HAGUE PROTECT DNA: Culture, Care, and Craft."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Icon accent color",
+      "default": "#FF2B2B"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container max width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "default": 1320
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable scroll reveal animations",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature column",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_preset",
+          "label": "Default icon",
+          "options": [
+            { "value": "shoecare", "label": "Specialised shoecare" },
+            { "value": "streets", "label": "Indian streets tested" },
+            { "value": "quality", "label": "Quality obsessed" },
+            { "value": "innovating", "label": "Always innovating" },
+            { "value": "custom", "label": "Custom / upload" }
+          ],
+          "default": "shoecare"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom icon image",
+          "info": "Overrides the default icon when uploaded."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column heading",
+          "default": "SPECIALISED SHOECARE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HAGUE PROTECT DNA",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "shoecare",
+            "title": "SPECIALISED SHOECARE",
+            "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "streets",
+            "title": "INDIAN STREETS TESTED",
+            "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "quality",
+            "title": "QUALITY OBSESSED",
+            "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "innovating",
+            "title": "ALWAYS INNOVATING",
+            "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

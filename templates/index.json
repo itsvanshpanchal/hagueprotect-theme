@@ -447,6 +447,59 @@
         "bg_color": "#ffffff"
       }
     },
+    "hague-protect-dna": {
+      "type": "hague-protect-dna",
+      "blocks": {
+        "dna_feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "shoecare",
+            "title": "SPECIALISED SHOECARE",
+            "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+          }
+        },
+        "dna_feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "streets",
+            "title": "INDIAN STREETS TESTED",
+            "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
+          }
+        },
+        "dna_feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "quality",
+            "title": "QUALITY OBSESSED",
+            "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
+          }
+        },
+        "dna_feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "innovating",
+            "title": "ALWAYS INNOVATING",
+            "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
+          }
+        }
+      },
+      "block_order": [
+        "dna_feature_1",
+        "dna_feature_2",
+        "dna_feature_3",
+        "dna_feature_4"
+      ],
+      "settings": {
+        "heading": "HAGUE PROTECT DNA: Culture, Care, and Craft.",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "accent_color": "#FF2B2B",
+        "container_width": 1320,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "enable_animations": true
+      }
+    },
     "17776077287b0fe0da": {
       "type": "_blocks",
       "settings": {}
@@ -472,6 +525,7 @@
     "17776085399dc5249c",
     "story_block_X9ACYJ",
     "trust-statement",
+    "hague-protect-dna",
     "17776077287b0fe0da",
     "17776334431f7fc508"
   ]
