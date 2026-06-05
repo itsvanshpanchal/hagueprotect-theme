@@ -301,79 +301,360 @@
   transform: translateY(0);
 }
 
-/* MOBILE — same horizontal scroll layout, alignment only */
+.prod-card-dtc__quick-add,
+.prod-card-dtc__emi-row,
+.prod-card-dtc__price-prefix {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .prod-card-dtc__content {
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .prod-card-dtc__badge::before {
+    content: none;
+  }
+
+  .prod-card-dtc__rating-row {
+    order: 1;
+    justify-content: flex-start;
+  }
+
+  .prod-card-dtc__rating-badge {
+    font-size: 13.5px;
+  }
+
+  .prod-card-dtc__rating-badge::after {
+    content: none;
+  }
+
+  .prod-card-dtc__title {
+    order: 2;
+    text-align: left;
+  }
+
+  .prod-card-dtc__subtitle {
+    order: 3;
+  }
+
+  .prod-card-dtc__desc {
+    order: 4;
+  }
+
+  .prod-card-dtc__swatches {
+    order: 5;
+    justify-content: flex-start;
+  }
+
+  .prod-card-dtc__price-box {
+    order: 6;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .prod-card-dtc__price-old {
+    order: 1;
+  }
+
+  .prod-card-dtc__price-new {
+    order: 2;
+    color: #1A1A1A;
+    font-size: 21px;
+  }
+
+  .prod-card-dtc form:has(.prod-card-dtc__btn),
+  .prod-card-dtc__content > .prod-card-dtc__btn {
+    order: 7;
+    display: block !important;
+  }
+
+  .prod-card-dtc__btn {
+    display: inline-flex !important;
+  }
+
+  .prod-card-dtc__emi-row {
+    display: none !important;
+  }
+}
+
+/* MOBILE — 2-column grid aligned to reference */
 @media (max-width: 767px) {
   .bestsellers-section-dtc {
-    padding: 40px 0;
+    padding: 40px 0 48px;
   }
 
   .bestsellers-container-dtc {
     padding: 0 max(16px, var(--site-padding, 16px));
-    gap: 24px;
+    gap: 28px;
   }
 
   .bestsellers-header-dtc {
     flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .bestsellers__title-group-dtc {
+    align-items: center;
+    width: 100%;
+  }
+
+  .bestsellers__eyebrow-dtc {
+    font-size: 11px;
   }
 
   .bestsellers__heading-dtc {
     font-size: clamp(22px, 6vw, 28px);
-    text-align: left;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .bestsellers__heading-dtc br {
+    display: none;
+  }
+
+  .bestsellers__view-all-dtc {
+    font-size: 13px;
   }
 
   .bestsellers__grid-wrapper-dtc {
-    gap: 14px;
-    padding: 4px 0 8px;
-    scroll-snap-type: x mandatory;
-    margin-right: calc(-1 * max(16px, var(--site-padding, 16px)));
-    padding-right: max(16px, var(--site-padding, 16px));
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 28px;
+    overflow: visible;
+    padding: 0;
   }
 
   .prod-card-dtc {
-    flex: 0 0 calc((100% - 14px) / 1.5);
+    flex: none;
+    width: 100%;
     min-width: 0;
-    scroll-snap-align: start;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    overflow: visible;
   }
 
-  .prod-card-dtc__image-container {
-    height: 180px;
+  .prod-card-dtc:hover {
+    transform: none;
+    box-shadow: none;
   }
 
-  .prod-card-dtc__content {
-    padding: 14px;
-    gap: 8px;
+  .prod-card-dtc__badge {
+    top: 0;
+    left: 0;
+    right: auto;
+    background: transparent;
+    color: #1A1A1A;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 0;
+    border-radius: 0;
+    letter-spacing: 0;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .prod-card-dtc__title {
-    font-size: 15px;
-    line-height: 1.35;
-  }
-
-  .prod-card-dtc__subtitle,
-  .prod-card-dtc__desc {
+  .prod-card-dtc__badge::before {
+    content: '★';
+    color: #E74C3C;
     font-size: 12px;
   }
 
-  .prod-card-dtc__price-new {
-    font-size: 18px;
+  .prod-card-dtc__image-container {
+    height: auto;
+    min-height: 150px;
+    aspect-ratio: 1 / 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 12px 12px;
+    margin-bottom: 10px;
+    position: relative;
   }
 
-  .prod-card-dtc__btn {
-    height: 44px;
+  .prod-card-dtc__remote-icon {
+    display: none;
+  }
+
+  .prod-card-dtc__quick-add {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid #1A1A1A;
+    background: #ffffff;
+    color: #1A1A1A;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 4;
+    padding: 0;
+  }
+
+  .prod-card-dtc__content {
+    padding: 0;
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .prod-card-dtc__rating-row {
+    order: 5;
+    margin-top: 6px;
+    gap: 4px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .prod-card-dtc__rating-badge {
+    background: transparent;
+    color: #F5A623;
+    font-size: 0;
+    font-weight: 600;
+    padding: 0;
+    letter-spacing: 0;
+  }
+
+  .prod-card-dtc__rating-badge::after {
+    content: '★★★★★';
     font-size: 13px;
-    padding: 12px 16px;
+    color: #F5A623;
+    letter-spacing: 1px;
+  }
+
+  .prod-card-dtc__rating-count {
+    font-size: 12px;
+    color: #888888;
+  }
+
+  .prod-card-dtc__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.35;
+    order: 1;
+    margin-top: 0;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prod-card-dtc__subtitle,
+  .prod-card-dtc__desc,
+  .prod-card-dtc__btn,
+  .prod-card-dtc form {
+    display: none !important;
+  }
+
+  .prod-card-dtc__swatches {
+    order: 4;
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  .prod-card-dtc__swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+
+  .prod-card-dtc__price-box {
+    order: 2;
+    margin-top: 2px;
+    gap: 0;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 6px;
+    text-align: center;
+  }
+
+  .prod-card-dtc__price-old {
+    font-size: 11px;
+    color: #aaaaaa;
+    order: 2;
+  }
+
+  .prod-card-dtc__price-new {
+    font-size: 15px;
+    font-weight: 700;
+    color: #E74C3C;
+    order: 1;
+  }
+
+  .prod-card-dtc__price-prefix {
+    display: inline;
+    font-size: 13px;
+    font-weight: 600;
+    color: #E74C3C;
+  }
+
+  .prod-card-dtc__emi-row {
+    order: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+  .prod-card-dtc__emi-text {
+    font-size: 11px;
+    color: #888888;
+    line-height: 1.3;
+  }
+
+  .prod-card-dtc__emi-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #E74C3C;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+    white-space: nowrap;
   }
 }
 
 @media (max-width: 380px) {
-  .prod-card-dtc {
-    flex: 0 0 calc((100% - 12px) / 1.5);
+  .bestsellers__grid-wrapper-dtc {
+    column-gap: 12px;
+    row-gap: 24px;
   }
 
   .prod-card-dtc__image-container {
-    height: 165px;
+    min-height: 130px;
+    padding: 16px 10px 10px;
+  }
+
+  .prod-card-dtc__title {
+    font-size: 13px;
+  }
+
+  .prod-card-dtc__price-new {
+    font-size: 14px;
   }
 }
 
@@ -398,9 +679,10 @@
       {% if products_to_show.size > 0 %}
         {% for product in products_to_show limit: 8 %}
           {%- assign card_variant = product.selected_or_first_available_variant -%}
+          {%- assign emi_monthly = product.price | divided_by: 3 -%}
           <div class="prod-card-dtc" onclick="window.location.href='{{ product.url }}';" style="cursor: pointer;">
 
-            <span class="prod-card-dtc__badge">BESTSELLER</span>
+            <span class="prod-card-dtc__badge">Bestseller</span>
 
             <div class="prod-card-dtc__image-container">
               <img src="{{ product.featured_image | image_url: width: 450 }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
@@ -412,14 +694,15 @@
                   <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
                 </svg>
               </div>
+              {%- if card_variant.available -%}
+                <form action="{{ routes.cart_add_url }}" method="post" onclick="event.stopPropagation();">
+                  <input type="hidden" name="id" value="{{ card_variant.id }}">
+                  <button type="submit" class="prod-card-dtc__quick-add" aria-label="Add {{ product.title | escape }} to cart">+</button>
+                </form>
+              {%- endif -%}
             </div>
 
             <div class="prod-card-dtc__content">
-              <div class="prod-card-dtc__rating-row">
-                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
-                <span class="prod-card-dtc__rating-count">(4.8)</span>
-              </div>
-
               <h3 class="prod-card-dtc__title">{{ product.title }}</h3>
 
               {%- if product.type != blank -%}
@@ -431,18 +714,31 @@
                 <p class="prod-card-dtc__desc">{{ card_desc }}</p>
               {%- endif -%}
 
-              {%- if product.variants.size > 1 -%}
-                <div class="prod-card-dtc__swatches">
-                  <div class="prod-card-dtc__swatch is-black active" title="Variant"></div>
-                  <div class="prod-card-dtc__swatch is-white" title="Variant"></div>
-                </div>
-              {%- endif -%}
-
               <div class="prod-card-dtc__price-box">
+                {%- if product.price_varies -%}
+                  <span class="prod-card-dtc__price-prefix">From</span>
+                {%- endif -%}
+                <span class="prod-card-dtc__price-new">{{ product.price | money }}</span>
                 {%- if product.compare_at_price > product.price -%}
                   <span class="prod-card-dtc__price-old">{{ product.compare_at_price | money }}</span>
                 {%- endif -%}
-                <span class="prod-card-dtc__price-new">{{ product.price | money }}</span>
+              </div>
+
+              <div class="prod-card-dtc__emi-row">
+                <span class="prod-card-dtc__emi-text">or {{ emi_monthly | money }}/Month</span>
+                <span class="prod-card-dtc__emi-badge">Buy on EMI &gt;</span>
+              </div>
+
+              {%- if product.variants.size > 1 -%}
+                <div class="prod-card-dtc__swatches">
+                  <div class="prod-card-dtc__swatch is-white active" title="Variant"></div>
+                  <div class="prod-card-dtc__swatch is-black" title="Variant"></div>
+                </div>
+              {%- endif -%}
+
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
+                <span class="prod-card-dtc__rating-count">(4.8)</span>
               </div>
 
               {%- if card_variant.available -%}
@@ -474,10 +770,8 @@
           {%- endif -%}
 
           <div class="prod-card-dtc" onclick="window.location.href='/products/{{ mock_handle }}';" style="cursor: pointer;">
-            <!-- Badge -->
-            <span class="prod-card-dtc__badge">BESTSELLER</span>
+            <span class="prod-card-dtc__badge">Bestseller</span>
 
-            <!-- Image Container -->
             <div class="prod-card-dtc__image-container">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="prod-card-dtc__image" style="width:100%; height:100%;">
                 <rect width="1000" height="1000" fill="#f7f7f7"/>
@@ -493,31 +787,33 @@
                   <circle cx="12" cy="15" r="1" fill="#E74C3C"/>
                 </svg>
               </div>
+              <button type="button" class="prod-card-dtc__quick-add" aria-label="View {{ mock_title | escape }}">+</button>
             </div>
 
-            <!-- Lower Content -->
             <div class="prod-card-dtc__content">
-              <!-- Rating Row -->
-              <div class="prod-card-dtc__rating-row">
-                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
-                <span class="prod-card-dtc__rating-count">(260)</span>
-              </div>
-
               <h3 class="prod-card-dtc__title">{{ mock_title }}</h3>
-              
+
               <p class="prod-card-dtc__subtitle">Premium | Maximum Care</p>
               <p class="prod-card-dtc__desc">Elite care and ultimate protection.</p>
 
-              <!-- Color Swatches Row -->
-              <div class="prod-card-dtc__swatches">
-                <div class="prod-card-dtc__swatch is-black active" title="Black"></div>
-                <div class="prod-card-dtc__swatch is-white" title="White"></div>
+              <div class="prod-card-dtc__price-box">
+                <span class="prod-card-dtc__price-new">Rs. 999</span>
+                <span class="prod-card-dtc__price-old">Rs. 1,299</span>
               </div>
 
-              <!-- Price -->
-              <div class="prod-card-dtc__price-box">
-                <span class="prod-card-dtc__price-old">Rs. 1,299</span>
-                <span class="prod-card-dtc__price-new">Rs. 999</span>
+              <div class="prod-card-dtc__emi-row">
+                <span class="prod-card-dtc__emi-text">or ₹333/Month</span>
+                <span class="prod-card-dtc__emi-badge">Buy on EMI &gt;</span>
+              </div>
+
+              <div class="prod-card-dtc__swatches">
+                <div class="prod-card-dtc__swatch is-white active" title="White"></div>
+                <div class="prod-card-dtc__swatch is-black" title="Black"></div>
+              </div>
+
+              <div class="prod-card-dtc__rating-row">
+                <span class="prod-card-dtc__rating-badge">★ 4.9</span>
+                <span class="prod-card-dtc__rating-count">(4.8)</span>
               </div>
 
               <button type="button" class="prod-card-dtc__btn" onclick="event.stopPropagation(); window.location.href='/products/{{ mock_handle }}';">View Details</button>
