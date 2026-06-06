@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "product-hero": {
@@ -20,28 +29,6 @@
         "pill_4_text": "Non-toxic premium formula",
         "pill_5_text": "Fast shipping & delivery"
       }
-    },
-    "bundle-upsell": {
-      "type": "bundle-upsell",
-      "blocks": {
-        "prod_1": {
-          "type": "product_block",
-          "settings": {
-            "product": "signature-shoe-sneaker-cleaning-kit"
-          }
-        },
-        "prod_2": {
-          "type": "product_block",
-          "settings": {
-            "product": "essential-indepth-shoe-sneaker-cleaning-kit"
-          }
-        }
-      },
-      "block_order": [
-        "prod_1",
-        "prod_2"
-      ],
-      "settings": {}
     },
     "177761948737529cfa": {
       "type": "_blocks",
@@ -144,7 +131,7 @@
           "type": "ai_gen_block_95ea9a5",
           "settings": {
             "section_padding": 40,
-            "story_gap": 20,
+            "story_gap": 10,
             "border_radius": 12,
             "background_color": "#ffffff",
             "text_color": "#ffffff",
@@ -153,12 +140,15 @@
             "dot_active_color": "#000000",
             "title_size": 36,
             "description_size": 18,
+            "story_1_image": "shopify://shop_images/4_1.png",
             "story_1_title": "New Collection",
             "story_1_description": "Discover our latest arrivals",
             "story_1_link": "",
+            "story_2_image": "shopify://shop_images/7.png",
             "story_2_title": "Summer Sale",
             "story_2_description": "Up to 50% off selected items",
             "story_2_link": "",
+            "story_3_image": "shopify://shop_images/10.png",
             "story_3_title": "Best Sellers",
             "story_3_description": "Shop our most popular products",
             "story_3_link": ""
@@ -408,7 +398,6 @@
   },
   "order": [
     "product-hero",
-    "bundle-upsell",
     "177761948737529cfa",
     "1777619891157d17df",
     "trending_social_Wd4NNh",
