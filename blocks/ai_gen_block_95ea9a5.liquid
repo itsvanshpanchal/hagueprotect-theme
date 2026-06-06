@@ -254,53 +254,25 @@
 {% endstyle %}
 
 {% liquid
-  assign product_story_block = nil
-  assign on_product_page = false
+  assign show_block = true
+  assign assigned_product = block.settings.assigned_product
+
   if product != blank
-    assign on_product_page = true
+    if assigned_product == blank
+      assign show_block = false
+    elsif assigned_product.handle != product.handle
+      assign show_block = false
+    endif
+  elsif assigned_product != blank
+    assign show_block = false
   endif
 
-  if on_product_page and block.blocks.size > 0
-    for child in block.blocks
-      if child.type == 'product_stories' and child.settings.product != blank
-        if child.settings.product.handle == product.handle
-          assign product_story_block = child
-          break
-        endif
-      endif
-    endfor
-  endif
-
-  assign render_slider = true
-  if on_product_page
-    assign render_slider = false
-    for i in (1..3)
-      assign image_key = 'story_' | append: i | append: '_image'
-      assign has_story = false
-
-      if product_story_block != nil and product_story_block.settings[image_key] != blank
-        assign has_story = true
-      endif
-
-      if has_story == false
-        if i == 1 and product.metafields.custom.story_1_image != blank
-          assign has_story = true
-        elsif i == 2 and product.metafields.custom.story_2_image != blank
-          assign has_story = true
-        elsif i == 3 and product.metafields.custom.story_3_image != blank
-          assign has_story = true
-        endif
-      endif
-
-      if has_story
-        assign render_slider = true
-        break
-      endif
-    endfor
+  if request.design_mode and assigned_product == blank
+    assign show_block = true
   endif
 %}
 
-{% if render_slider %}
+{% if show_block %}
 <story-banner-{{ ai_gen_id }} class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-story-banner-container-{{ ai_gen_id }}">
     <div class="ai-story-banner-scroll-wrapper-{{ ai_gen_id }}">
@@ -311,24 +283,12 @@
             assign title_key = 'story_' | append: i | append: '_title'
             assign description_key = 'story_' | append: i | append: '_description'
             assign link_key = 'story_' | append: i | append: '_link'
-            assign story_image = blank
-            assign story_title = blank
-            assign story_description = blank
-            assign story_link = blank
+            assign story_image = block.settings[image_key]
+            assign story_title = block.settings[title_key]
+            assign story_description = block.settings[description_key]
+            assign story_link = block.settings[link_key]
 
-            if product_story_block != nil
-              assign story_image = product_story_block.settings[image_key]
-              assign story_title = product_story_block.settings[title_key]
-              assign story_description = product_story_block.settings[description_key]
-              assign story_link = product_story_block.settings[link_key]
-            elsif on_product_page == false
-              assign story_image = block.settings[image_key]
-              assign story_title = block.settings[title_key]
-              assign story_description = block.settings[description_key]
-              assign story_link = block.settings[link_key]
-            endif
-
-            if on_product_page
+            if product != blank
               if i == 1
                 if product.metafields.custom.story_1_image != blank
                   assign story_image = product.metafields.custom.story_1_image
@@ -419,7 +379,7 @@
 </story-banner-{{ ai_gen_id }}>
 {% endif %}
 
-{% if render_slider %}
+{% if show_block %}
 <script>
   (function() {
     class StoryBanner{{ ai_gen_id }} extends HTMLElement {
@@ -507,6 +467,12 @@
   "name": "Story banner",
   "tag": null,
   "settings": [
+    {
+      "type": "product",
+      "id": "assigned_product",
+      "label": "Assign to product",
+      "info": "Required on product pages. Duplicate this block for each product and assign a different product with unique story images."
+    },
     {
       "type": "header",
       "content": "Layout"
@@ -608,14 +574,6 @@
       "default": 18
     },
     {
-      "type": "paragraph",
-      "content": "On product pages, add a Per-product story slider block for each product. Global story settings below are only used on non-product pages."
-    },
-    {
-      "type": "header",
-      "content": "Default stories (non-product pages)"
-    },
-    {
       "type": "header",
       "content": "Story 1"
     },
@@ -692,92 +650,6 @@
       "type": "url",
       "id": "story_3_link",
       "label": "Link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "product_stories",
-      "name": "Per-product story slider",
-      "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product",
-          "info": "Stories below only appear on this product's page."
-        },
-        {
-          "type": "header",
-          "content": "Story 1"
-        },
-        {
-          "type": "image_picker",
-          "id": "story_1_image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "story_1_title",
-          "label": "Title"
-        },
-        {
-          "type": "textarea",
-          "id": "story_1_description",
-          "label": "Description"
-        },
-        {
-          "type": "url",
-          "id": "story_1_link",
-          "label": "Link"
-        },
-        {
-          "type": "header",
-          "content": "Story 2"
-        },
-        {
-          "type": "image_picker",
-          "id": "story_2_image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "story_2_title",
-          "label": "Title"
-        },
-        {
-          "type": "textarea",
-          "id": "story_2_description",
-          "label": "Description"
-        },
-        {
-          "type": "url",
-          "id": "story_2_link",
-          "label": "Link"
-        },
-        {
-          "type": "header",
-          "content": "Story 3"
-        },
-        {
-          "type": "image_picker",
-          "id": "story_3_image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "story_3_title",
-          "label": "Title"
-        },
-        {
-          "type": "textarea",
-          "id": "story_3_description",
-          "label": "Description"
-        },
-        {
-          "type": "url",
-          "id": "story_3_link",
-          "label": "Link"
-        }
-      ]
     }
   ],
   "presets": [

@@ -51,36 +51,47 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign banner_img = blank
-  assign mobile_img = blank
-  assign on_product_page = false
-  if product != blank
-    assign on_product_page = true
-  endif
+  assign show_section = true
+  assign assigned_product = section.settings.assigned_product
+  assign banner_img = section.settings.image
+  assign mobile_img = section.settings.image_mobile | default: section.settings.image
 
-  if on_product_page
+  if product != blank
+    assign show_section = false
+
+    if assigned_product != blank and assigned_product.handle == product.handle
+      assign show_section = true
+    endif
+
     for block in section.blocks
       if block.type == 'product_banner' and block.settings.product_select != blank
         assign block_product = block.settings.product_select
-        if block_product.handle == product.handle and block.settings.image != blank
-          assign banner_img = block.settings.image
-          assign mobile_img = block.settings.image_mobile | default: block.settings.image
+        if block_product.handle == product.handle
+          assign show_section = true
+          if block.settings.image != blank
+            assign banner_img = block.settings.image
+            assign mobile_img = block.settings.image_mobile | default: block.settings.image
+          endif
           break
         endif
       endif
     endfor
 
-    if banner_img == blank and product.metafields.custom.story_banner_desktop != blank
+    if product.metafields.custom.story_banner_desktop != blank
       assign banner_img = product.metafields.custom.story_banner_desktop
       assign mobile_img = product.metafields.custom.story_banner_mobile | default: product.metafields.custom.story_banner_desktop
+      assign show_section = true
     endif
-  else
-    assign banner_img = section.settings.image
-    assign mobile_img = section.settings.image_mobile | default: section.settings.image
+  elsif assigned_product != blank
+    assign show_section = false
+  endif
+
+  if request.design_mode and assigned_product == blank and product != blank
+    assign show_section = true
   endif
 -%}
 
-{%- if banner_img != blank -%}
+{%- if show_section -%}
 <div class="story-banner-wrapper story-banner-wrapper-{{ section.id }}">
   <div class="story-banner">
     {%- if banner_img != blank -%}
@@ -98,6 +109,8 @@
           fetchpriority="high"
         >
       </picture>
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'story-banner__image' }}
     {%- endif -%}
   </div>
 </div>
@@ -108,23 +121,24 @@
   "name": "Story Banner",
   "settings": [
     {
+      "type": "product",
+      "id": "assigned_product",
+      "label": "Assign to product",
+      "info": "Required for product pages. Duplicate this section for each product, assign the product, then upload its banner images."
+    },
+    {
       "type": "header",
       "content": "Images"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Default desktop banner (non-product pages only)",
-      "info": "On product pages, add a Per-Product Image block below for each product instead of using this default."
+      "label": "Desktop Banner Image (1440x560px)"
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "Default mobile banner (non-product pages only)"
-    },
-    {
-      "type": "paragraph",
-      "content": "On product detail pages, use Per-Product Image blocks to assign a unique banner per product. Global images above are not shown on product pages."
+      "label": "Mobile Banner Image (Optional)"
     },
     {
       "type": "header",
