@@ -50,20 +50,39 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign banner_img = blank
+  assign mobile_img = blank
+  assign on_product_page = false
+  if product != blank
+    assign on_product_page = true
+  endif
+
+  if on_product_page
+    for block in section.blocks
+      if block.type == 'product_banner' and block.settings.product_select != blank
+        assign block_product = block.settings.product_select
+        if block_product.handle == product.handle and block.settings.image != blank
+          assign banner_img = block.settings.image
+          assign mobile_img = block.settings.image_mobile | default: block.settings.image
+          break
+        endif
+      endif
+    endfor
+
+    if banner_img == blank and product.metafields.custom.story_banner_desktop != blank
+      assign banner_img = product.metafields.custom.story_banner_desktop
+      assign mobile_img = product.metafields.custom.story_banner_mobile | default: product.metafields.custom.story_banner_desktop
+    endif
+  else
+    assign banner_img = section.settings.image
+    assign mobile_img = section.settings.image_mobile | default: section.settings.image
+  endif
+-%}
+
+{%- if banner_img != blank -%}
 <div class="story-banner-wrapper story-banner-wrapper-{{ section.id }}">
   <div class="story-banner">
-    {%- assign banner_img = section.settings.image -%}
-    {%- assign mobile_img = section.settings.image_mobile | default: section.settings.image -%}
-
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'product_banner' and block.settings.product_select == product.handle -%}
-        {%- if block.settings.image != blank -%}
-          {%- assign banner_img = block.settings.image -%}
-          {%- assign mobile_img = block.settings.image_mobile | default: block.settings.image -%}
-        {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
-
     {%- if banner_img != blank -%}
       <picture>
         {%- if mobile_img != blank -%}
@@ -79,11 +98,10 @@
           fetchpriority="high"
         >
       </picture>
-    {%- else -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'story-banner__image' }}
     {%- endif -%}
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -96,12 +114,17 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Desktop Banner Image (1440x560px)"
+      "label": "Default desktop banner (non-product pages only)",
+      "info": "On product pages, add a Per-Product Image block below for each product instead of using this default."
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
-      "label": "Mobile Banner Image (Optional - Square)"
+      "label": "Default mobile banner (non-product pages only)"
+    },
+    {
+      "type": "paragraph",
+      "content": "On product detail pages, use Per-Product Image blocks to assign a unique banner per product. Global images above are not shown on product pages."
     },
     {
       "type": "header",
@@ -147,7 +170,8 @@
         {
           "type": "product",
           "id": "product_select",
-          "label": "Select Product"
+          "label": "Select Product",
+          "info": "This banner only appears on the selected product's page."
         },
         {
           "type": "image_picker",
