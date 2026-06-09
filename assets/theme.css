@@ -99,16 +99,8 @@ ol {
 /* Typography Utilities */
 .h1,
 .h2,
-.h3,
-.h4,
-.h5,
-.h6,
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
   font-family: var(--font-family-heading);
   font-weight: var(--heading-weight);
   line-height: var(--heading-line-height);
@@ -116,33 +108,43 @@ h6 {
   text-transform: uppercase;
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
-}
-
-.h1,
-h1,
-.h2,
-h2 {
   font-size: var(--heading-size-xl);
 }
 
 .h3,
+.h4,
+.h5,
+.h6,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-sans);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--color-text-main);
+}
+
+.h3,
 h3 {
-  font-size: var(--heading-size-lg);
+  font-size: clamp(18px, 2.2vw, 22px);
 }
 
 .h4,
 h4 {
-  font-size: var(--heading-size-md);
+  font-size: clamp(16px, 2vw, 18px);
 }
 
 .h5,
 h5 {
-  font-size: var(--heading-size-sm);
+  font-size: clamp(15px, 1.8vw, 17px);
 }
 
 .h6,
 h6 {
-  font-size: var(--heading-size-xs);
+  font-size: clamp(14px, 1.6vw, 16px);
 }
 
 .text-muted {
@@ -430,164 +432,188 @@ h6 {
   }
 }
 
-/* Global headings — match FOR EVERY MATERIAL. style site-wide */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
+/* Section display headings only — big Bahnschrift titles */
+.hp-display-heading,
 main h1,
-main h2,
-main h3,
-main h4,
-main h5,
-main h6,
-.shopify-section h1,
-.shopify-section h2,
-.shopify-section h3,
-.shopify-section h4,
-.shopify-section h5,
-.shopify-section h6,
-#MainContent h1,
-#MainContent h2,
-#MainContent h3,
-#MainContent h4,
-#MainContent h5,
-#MainContent h6,
+.hero-fullscreen__heading,
+.d2c-product-title,
+.skincare-hero__title,
+.corp-hero__title,
+.how-to-banner__title,
 .trending-social__heading,
 .bestsellers__heading-dtc,
 .fc-heading,
 .hp-fam-sec__heading,
-.mat-headline {
+.mat-headline,
+main h2.h2,
+.feature-grid__heading,
+.faq-custom__heading,
+.trust-statement__heading,
+.reviews-sec__heading,
+.product-rec__heading,
+.comm-headline,
+.brand-banner__title,
+.social-slider__heading,
+.hp-dna__heading,
+.promo-banner__heading,
+.corp-features__heading,
+.how-to-videos__heading,
+.bundle-title,
+.skincare-intro__title,
+.skincare-explanation__title,
+.skincare-concerns__title,
+.skincare-builder__title {
   font-family: var(--font-family-heading) !important;
   font-weight: var(--heading-weight) !important;
   letter-spacing: var(--heading-letter-spacing) !important;
   line-height: var(--heading-line-height) !important;
   text-transform: uppercase !important;
+  font-size: var(--heading-size-xl) !important;
   -webkit-font-smoothing: antialiased;
 }
 
-h1,
-.h1,
-main h1,
-.shopify-section h1,
-#MainContent h1 {
-  font-size: var(--heading-size-xl) !important;
-}
-
-h2,
-.h2,
-main h2,
-.shopify-section h2,
-#MainContent h2,
-.trending-social__heading,
-.bestsellers__heading-dtc,
-.fc-heading,
-.hp-fam-sec__heading,
-.mat-headline {
-  font-size: var(--heading-size-xl) !important;
-}
-
-h3,
-.h3,
-main h3,
-.shopify-section h3,
-#MainContent h3 {
-  font-size: var(--heading-size-lg) !important;
-}
-
-h4,
-.h4,
-main h4,
-.shopify-section h4,
-#MainContent h4 {
-  font-size: var(--heading-size-md) !important;
-}
-
-h5,
-.h5,
-main h5,
-.shopify-section h5,
-#MainContent h5 {
-  font-size: var(--heading-size-sm) !important;
-}
-
-h6,
-.h6,
-main h6,
-.shopify-section h6,
-#MainContent h6 {
-  font-size: var(--heading-size-xs) !important;
-}
-
-/* Product detail page — product name (preserve mixed case + extra bold) */
+/* Product detail page title */
 .d2c-product-title,
 .d2c-product-title span {
-  font-family: var(--font-family-heading) !important;
-  font-weight: 900 !important;
-  letter-spacing: var(--heading-letter-spacing) !important;
-  line-height: var(--heading-line-height) !important;
   text-transform: none !important;
-  font-size: var(--heading-size-xl) !important;
-  -webkit-font-smoothing: antialiased;
+  font-weight: 900 !important;
+}
+
+/* Normal subtext — cards, UI labels, descriptions, smaller headings */
+h3,
+h4,
+h5,
+h6,
+.hp-normal-text,
+.prod-card-dtc__title,
+.prod-card-dtc__subtitle,
+.prod-card-dtc__desc,
+.rail-card-title,
+.rail-subtitle,
+.product-rec__title,
+.product-rec__title-main,
+.product-rec__title-sub,
+.family-card__title,
+.family-card__desc,
+.fc-category-name,
+.fc-subtitle,
+.bundle-product-title,
+.trust-card__title,
+.reviews-sec__review-title,
+.footer__title,
+.megamenu-heading,
+.mobile-accordion-category-heading,
+.faq-custom__question,
+.feature-grid__card-heading,
+.corp-feature-title,
+.hp-dna__item-title,
+.how-to-video-title,
+.skincare-concern-card__title,
+.skincare-product-card__title,
+.cat-card__title,
+.card-title,
+.cart-drawer__title,
+.cart-drawer__item-title,
+.corp-form__title,
+.dtc-product-card__title,
+.d2c-subtitle-text,
+.bestsellers__eyebrow-dtc,
+.trending-social__eyebrow,
+.mat-eyebrow,
+.mat-desc,
+.product-family__eyebrow,
+.category__eyebrow,
+.feature-grid__eyebrow,
+.bestsellers__view-all-dtc,
+p,
+span,
+li,
+label {
+  text-transform: none !important;
+}
+
+.prod-card-dtc__title,
+.rail-card-title,
+.product-rec__title,
+.product-rec__title-main,
+.family-card__title,
+.bundle-product-title,
+.fc-category-name,
+.trust-card__title,
+.reviews-sec__review-title,
+.feature-grid__card-heading,
+.cat-card__title,
+.card-title,
+.cart-drawer__item-title,
+.skincare-product-card__title,
+.skincare-concern-card__title,
+.hp-dna__item-title,
+.how-to-video-title,
+.corp-feature-title,
+.faq-custom__question,
+.footer__title,
+.megamenu-heading,
+.mobile-accordion-category-heading,
+.dtc-product-card__title {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 600 !important;
+  font-size: clamp(15px, 2vw, 18px) !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.prod-card-dtc__subtitle,
+.prod-card-dtc__desc,
+.rail-subtitle,
+.family-card__desc,
+.fc-subtitle,
+.d2c-subtitle-text,
+.mat-desc,
+.bestsellers__eyebrow-dtc,
+.trending-social__eyebrow,
+.mat-eyebrow,
+.product-family__eyebrow,
+.category__eyebrow,
+.feature-grid__eyebrow {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 400 !important;
+  font-size: inherit !important;
+  line-height: 1.5 !important;
+  letter-spacing: normal !important;
 }
 
 @media screen and (max-width: 767px) {
-  h1,
-  .h1,
-  h2,
-  .h2,
+  .hp-display-heading,
   main h1,
-  main h2,
-  .shopify-section h1,
-  .shopify-section h2,
-  #MainContent h1,
-  #MainContent h2,
+  .hero-fullscreen__heading,
+  .d2c-product-title,
+  .skincare-hero__title,
+  .corp-hero__title,
+  .how-to-banner__title,
   .trending-social__heading,
   .bestsellers__heading-dtc,
   .fc-heading,
   .hp-fam-sec__heading,
-  .mat-headline {
+  .mat-headline,
+  main h2.h2,
+  .feature-grid__heading,
+  .faq-custom__heading,
+  .trust-statement__heading,
+  .reviews-sec__heading,
+  .product-rec__heading,
+  .comm-headline,
+  .brand-banner__title,
+  .social-slider__heading,
+  .hp-dna__heading,
+  .promo-banner__heading,
+  .corp-features__heading,
+  .how-to-videos__heading,
+  .bundle-title,
+  .skincare-intro__title,
+  .skincare-explanation__title,
+  .skincare-concerns__title,
+  .skincare-builder__title {
     font-size: clamp(28px, 8vw, 36px) !important;
-  }
-
-  h3,
-  .h3,
-  main h3,
-  .shopify-section h3,
-  #MainContent h3 {
-    font-size: clamp(24px, 6.5vw, 32px) !important;
-  }
-
-  h4,
-  .h4,
-  main h4,
-  .shopify-section h4,
-  #MainContent h4 {
-    font-size: clamp(20px, 5.5vw, 28px) !important;
-  }
-
-  h5,
-  .h5,
-  main h5,
-  .shopify-section h5,
-  #MainContent h5 {
-    font-size: clamp(18px, 4.8vw, 24px) !important;
-  }
-
-  h6,
-  .h6,
-  main h6,
-  .shopify-section h6,
-  #MainContent h6 {
-    font-size: clamp(16px, 4.2vw, 20px) !important;
   }
 
   .d2c-product-title,
@@ -595,34 +621,13 @@ main h6,
     font-size: clamp(20px, 5.5vw, 28px) !important;
   }
 
-  #MainContent h3.prod-card-dtc__title,
-  #MainContent h3.rail-card-title,
-  #MainContent h3.product-rec__title,
-  .shopify-section h3.prod-card-dtc__title,
-  .shopify-section h3.rail-card-title,
-  .shopify-section h3.product-rec__title {
+  .prod-card-dtc__title,
+  .rail-card-title,
+  .product-rec__title,
+  .product-rec__title-main,
+  .family-card__title,
+  .fc-category-name,
+  .bundle-product-title {
     font-size: clamp(14px, 3.5vw, 16px) !important;
   }
-}
-
-/* Product card titles — normal size, not section headings */
-#MainContent h3.prod-card-dtc__title,
-#MainContent h3.rail-card-title,
-#MainContent h3.product-rec__title,
-#MainContent h3.family-card__title,
-.shopify-section h3.prod-card-dtc__title,
-.shopify-section h3.rail-card-title,
-.shopify-section h3.product-rec__title,
-.shopify-section h3.family-card__title,
-.prod-card-dtc__title,
-.rail-card-title,
-.product-rec__title,
-.product-rec__title-main,
-.family-card__title {
-  font-family: var(--font-family-sans) !important;
-  font-weight: 600 !important;
-  font-size: clamp(15px, 2vw, 18px) !important;
-  line-height: 1.35 !important;
-  letter-spacing: -0.01em !important;
-  text-transform: none !important;
 }
