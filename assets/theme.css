@@ -421,3 +421,21 @@ main h1,
   font-weight: 600 !important;
   letter-spacing: -0.02em;
 }
+
+/* Key homepage section headings — Bahnschrift */
+.trending-social__heading,
+.bestsellers__heading-dtc,
+.fc-heading,
+.hp-fam-sec__heading {
+  font-family: var(--font-family-h1) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}
+
+/* Product detail page — product name (black + grey title parts) */
+.d2c-product-title,
+.d2c-product-title span {
+  font-family: var(--font-family-h1) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+}

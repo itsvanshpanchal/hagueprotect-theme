@@ -106,15 +106,19 @@
 
   .d2c-product-title {
     font-size: clamp(20px, 5.5vw, 28px) !important;
+    font-family: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 600 !important;
     line-height: 1.3 !important;
     padding: 4px 0 !important;
     max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    letter-spacing: -0.02em !important;
   }
 
   .d2c-product-title span {
     display: inline;
+    font-family: inherit !important;
   }
 
   .d2c-subtitle-text {
@@ -437,12 +441,17 @@
 
 .d2c-product-title {
   font-size: 42px;
-  font-weight: 700;
-  font-family: var(--d2c-heading-font);
+  font-weight: 600;
+  font-family: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #000000;
   line-height: 1.15;
   margin: 0;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
+}
+
+.d2c-product-title span {
+  font-family: inherit;
+  letter-spacing: inherit;
 }
 
 
