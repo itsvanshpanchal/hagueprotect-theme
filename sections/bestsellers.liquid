@@ -3,253 +3,95 @@
 /* SECTION */
 .bestsellers-section-dtc {
   background-color: {{ section.settings.bg_color | default: '#ffffff' }};
-  padding: clamp(80px, 12vw, 140px) 0;
+  padding: 60px 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
   overflow: hidden;
 }
 
-/* CONTAINER — near full width */
+/* CONTAINER */
 .bestsellers-container-dtc {
-  max-width: min(96vw, 1480px);
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 12px;
   display: flex;
   flex-direction: column;
-  gap: clamp(56px, 8vw, 96px);
+  gap: 32px;
   box-sizing: border-box;
 }
 
-/* HEADER — centered luxury */
+/* HEADER */
 .bestsellers-header-dtc {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto;
-  gap: clamp(24px, 4vw, 36px);
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .bestsellers__title-group-dtc {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(14px, 2.5vw, 22px);
-  width: 100%;
+  gap: 6px;
 }
 
+/* LEFT LABEL */
 .bestsellers__eyebrow-dtc {
   color: #E74C3C;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin: 0;
 }
 
+/* LEFT HEADING */
 .bestsellers__heading-dtc {
-  font-size: clamp(34px, 5.5vw, 56px);
+  font-size: clamp(24px, 3.5vw, 32px);
   font-weight: 800;
   color: #1A1A1A;
-  text-align: center;
-  line-height: 1.06;
-  letter-spacing: -0.03em;
+  text-align: left;
+  line-height: 1.2;
   margin: 0;
 }
 
-.bestsellers__heading-dtc br {
-  display: none;
-}
-
-.bestsellers__description-dtc {
-  font-size: clamp(15px, 1.8vw, 18px);
-  font-weight: 400;
-  line-height: 1.7;
-  color: #666666;
-  margin: 0;
-  max-width: 540px;
-}
-
+/* RIGHT LINK */
 .bestsellers__view-all-dtc {
   font-size: 14px;
   font-weight: 600;
   color: #1A1A1A;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  padding-bottom: 2px;
-  border-bottom: 1px solid rgba(26, 26, 26, 0.2);
-  transition: color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
 }
 
-.bestsellers__view-all-dtc:hover {
-  color: #E74C3C;
-  border-color: rgba(231, 76, 60, 0.4);
-  transform: translateY(-1px);
+/* SLIDING EFFECT WRAPPER */
+.bestsellers__grid-wrapper-dtc {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  padding: 12px 4px;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* SCROLL REVEAL */
-.bestsellers-section-dtc [data-bestsellers-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 40px, 0);
-  transition:
-    opacity 800ms ease-out,
-    transform 800ms ease-out;
-  will-change: transform, opacity;
-}
-
-.bestsellers-section-dtc [data-bestsellers-reveal].is-revealed {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.bestsellers-section-dtc [data-bestsellers-reveal="heading"] {
-  transition-delay: 0ms;
-}
-
-.bestsellers-section-dtc [data-bestsellers-reveal="description"] {
-  transition-delay: 120ms;
-}
-
-.bestsellers-section-dtc [data-bestsellers-reveal="view-all"] {
-  transition-delay: 200ms;
-}
-
-.bestsellers-section-dtc .prod-card-dtc[data-bestsellers-reveal="product"] {
-  opacity: 0;
-  transform: translate3d(0, 40px, 0);
-  transition:
-    opacity 800ms ease-out,
-    transform 800ms ease-out,
-    box-shadow 450ms ease,
-    border-color 450ms ease;
-  will-change: transform, opacity;
-}
-
-.bestsellers-section-dtc .prod-card-dtc[data-bestsellers-reveal="product"].is-revealed {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* MAGAZINE SHOWCASE — asymmetric editorial layout */
-.bestsellers__showcase-dtc {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-rows: minmax(220px, auto);
-  gap: clamp(24px, 3vw, 40px);
-  align-items: stretch;
-  overflow: visible;
-  padding: 0;
-}
-
-.prod-card-dtc--featured {
-  grid-column: 1 / 7;
-  grid-row: 1 / 3;
-  min-height: clamp(520px, 52vw, 680px);
-}
-
-.prod-card-dtc--editorial-a {
-  grid-column: 7 / 10;
-  grid-row: 1;
-}
-
-.prod-card-dtc--editorial-b {
-  grid-column: 10 / 13;
-  grid-row: 1;
-}
-
-.prod-card-dtc--editorial-c {
-  grid-column: 7 / 9;
-  grid-row: 2;
-}
-
-.prod-card-dtc--editorial-d {
-  grid-column: 9 / 11;
-  grid-row: 2;
-}
-
-.prod-card-dtc--editorial-e {
-  grid-column: 11 / 13;
-  grid-row: 2;
-}
-
-.prod-card-dtc--editorial-f {
-  grid-column: 1 / 5;
-  grid-row: 3;
-}
-
-.prod-card-dtc--editorial-g {
-  grid-column: 5 / 9;
-  grid-row: 3;
-}
-
-.prod-card-dtc--editorial-h {
-  grid-column: 9 / 13;
-  grid-row: 3;
-}
-
-/* Image-dominant card proportions */
-.prod-card-dtc--featured .prod-card-dtc__image-container {
-  height: auto;
-  flex: 1 1 78%;
-  min-height: clamp(300px, 38vw, 480px);
-}
-
-.prod-card-dtc--editorial-a .prod-card-dtc__image-container,
-.prod-card-dtc--editorial-b .prod-card-dtc__image-container {
-  height: auto;
-  flex: 1 1 74%;
-  min-height: clamp(180px, 16vw, 260px);
-}
-
-.prod-card-dtc--editorial-c .prod-card-dtc__image-container,
-.prod-card-dtc--editorial-d .prod-card-dtc__image-container,
-.prod-card-dtc--editorial-e .prod-card-dtc__image-container {
-  height: auto;
-  flex: 1 1 72%;
-  min-height: clamp(140px, 12vw, 200px);
-}
-
-.prod-card-dtc--editorial-f .prod-card-dtc__image-container,
-.prod-card-dtc--editorial-g .prod-card-dtc__image-container,
-.prod-card-dtc--editorial-h .prod-card-dtc__image-container {
-  height: auto;
-  flex: 1 1 75%;
-  min-height: clamp(200px, 18vw, 280px);
-}
-
-.prod-card-dtc--featured .prod-card-dtc__title {
-  font-size: clamp(22px, 2.8vw, 28px);
-}
-
-.prod-card-dtc--featured .prod-card-dtc__price-new {
-  font-size: clamp(24px, 2.5vw, 28px);
+.bestsellers__grid-wrapper-dtc::-webkit-scrollbar {
+  display: none;
 }
 
 /* PRODUCT CARD TILE */
 .prod-card-dtc {
-  width: 100%;
-  min-width: 0;
+  flex: 0 0 310px;
   background: #ffffff;
   border-radius: 12px;
-  border: 1px solid rgba(26, 26, 26, 0.06);
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   box-sizing: border-box;
   overflow: hidden;
-  transition:
-    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 500ms ease,
-    border-color 500ms ease;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms ease;
   height: 100%;
-  backface-visibility: hidden;
 }
 
 .prod-card-dtc:hover {
-  transform: translate3d(0, -5px, 0);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  border-color: rgba(26, 26, 26, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
 }
 
 /* BADGE */
@@ -285,17 +127,7 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  opacity: 0.85;
-  transform: scale(0.97);
-  transition:
-    transform 800ms ease-out,
-    opacity 800ms ease-out;
-  will-change: transform, opacity;
-}
-
-.prod-card-dtc.is-revealed .prod-card-dtc__image {
-  opacity: 1;
-  transform: scale(1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prod-card-dtc:hover .prod-card-dtc__image {
@@ -553,88 +385,69 @@
   }
 }
 
-/* TABLET — featured full width, asymmetric pairs */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .bestsellers__showcase-dtc {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 24px;
-  }
-
-  .prod-card-dtc--featured {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    min-height: clamp(440px, 60vw, 520px);
-  }
-
-  .prod-card-dtc--editorial-a,
-  .prod-card-dtc--editorial-c,
-  .prod-card-dtc--editorial-e,
-  .prod-card-dtc--editorial-g {
-    grid-column: span 3;
-    grid-row: auto;
-  }
-
-  .prod-card-dtc--editorial-b,
-  .prod-card-dtc--editorial-d,
-  .prod-card-dtc--editorial-f,
-  .prod-card-dtc--editorial-h {
-    grid-column: span 3;
-    grid-row: auto;
-  }
-}
-
-/* MOBILE — featured first, elegant stack */
+/* MOBILE — 2-column grid aligned to reference */
 @media (max-width: 767px) {
   .bestsellers-section-dtc {
-    padding: clamp(56px, 14vw, 80px) 0;
-  }
-
-  .bestsellers-section-dtc [data-bestsellers-reveal],
-  .bestsellers-section-dtc .prod-card-dtc[data-bestsellers-reveal="product"] {
-    transform: translate3d(0, 28px, 0);
+    padding: 40px 0 48px;
   }
 
   .bestsellers-container-dtc {
     padding: 0 max(16px, var(--site-padding, 16px));
-    gap: clamp(40px, 10vw, 56px);
+    gap: 28px;
+  }
+
+  .bestsellers-header-dtc {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .bestsellers__title-group-dtc {
+    align-items: center;
+    width: 100%;
+  }
+
+  .bestsellers__eyebrow-dtc {
+    font-size: 11px;
   }
 
   .bestsellers__heading-dtc {
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: clamp(22px, 6vw, 28px);
+    text-align: center;
+    line-height: 1.2;
   }
 
-  .bestsellers__description-dtc {
-    font-size: 15px;
+  .bestsellers__heading-dtc br {
+    display: none;
   }
 
-  .bestsellers__showcase-dtc {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(28px, 7vw, 40px);
+  .bestsellers__view-all-dtc {
+    font-size: 13px;
   }
 
-  .prod-card-dtc--featured {
-    min-height: auto;
-  }
-
-  .prod-card-dtc--featured .prod-card-dtc__image-container {
-    min-height: clamp(280px, 72vw, 380px);
-    flex: 1 1 76%;
+  .bestsellers__grid-wrapper-dtc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 14px;
+    row-gap: 28px;
+    overflow: visible;
+    padding: 0;
   }
 
   .prod-card-dtc {
     flex: none;
     width: 100%;
     min-width: 0;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    background: #ffffff;
-    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    overflow: visible;
   }
 
   .prod-card-dtc:hover {
-    transform: translate3d(0, -3px, 0);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+    transform: none;
+    box-shadow: none;
   }
 
   .prod-card-dtc__badge {
@@ -662,13 +475,12 @@
 
   .prod-card-dtc__image-container {
     height: auto;
-    min-height: clamp(200px, 55vw, 280px);
-    flex: 1 1 74%;
-    aspect-ratio: auto;
-    background-color: #EEEEEE;
-    border-radius: 0;
-    padding: clamp(16px, 4vw, 24px);
-    margin-bottom: 0;
+    min-height: 150px;
+    aspect-ratio: 1 / 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 12px 12px;
+    margin-bottom: 10px;
     position: relative;
   }
 
@@ -830,8 +642,9 @@
 }
 
 @media (max-width: 380px) {
-  .bestsellers__showcase-dtc {
-    gap: 24px;
+  .bestsellers__grid-wrapper-dtc {
+    column-gap: 12px;
+    row-gap: 24px;
   }
 
   .prod-card-dtc__image-container {
@@ -848,107 +661,34 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bestsellers-section-dtc [data-bestsellers-reveal],
-  .bestsellers-section-dtc .prod-card-dtc[data-bestsellers-reveal="product"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .prod-card-dtc,
-  .prod-card-dtc__image,
-  .prod-card-dtc__btn,
-  .bestsellers__view-all-dtc {
-    transition: none !important;
-  }
-
-  .prod-card-dtc:hover {
-    transform: none;
-  }
-
-  .prod-card-dtc__image {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .prod-card-dtc:hover .prod-card-dtc__image {
-    transform: none !important;
-  }
-}
-
 {%- endstyle -%}
 
-<section
-  class="bestsellers-section-dtc"
-  id="bestsellers-{{ section.id }}"
-  aria-label="Bestseller products"
->
+<section class="bestsellers-section-dtc" aria-label="Bestseller products">
   <div class="bestsellers-container-dtc">
 
     <!-- HEADER -->
     <div class="bestsellers-header-dtc">
       <div class="bestsellers__title-group-dtc">
-        <span class="bestsellers__eyebrow-dtc" data-bestsellers-reveal="heading">
-          {{ section.settings.eyebrow | default: 'BESTSELLING COLLECTION' }}
-        </span>
-        <h2 class="bestsellers__heading-dtc" data-bestsellers-reveal="heading">
-          {{ section.settings.heading | default: 'Bestselling Sneaker Care' }}
-        </h2>
-        {%- assign bestsellers_description = section.settings.description | default: 'Premium sneaker care essentials crafted for collectors and everyday wearers — clean, protect, and restore every pair with confidence.' -%}
-        {%- if bestsellers_description != blank -%}
-          <p class="bestsellers__description-dtc" data-bestsellers-reveal="description">
-            {{ bestsellers_description }}
-          </p>
-        {%- endif -%}
+        <span class="bestsellers__eyebrow-dtc">BEST SELLERS</span>
+        <h2 class="bestsellers__heading-dtc">Bestselling Sneaker<br>Care</h2>
       </div>
-      {%- if section.settings.show_view_all -%}
-        <a
-          href="{{ section.settings.view_all_link | default: '/collections/all' }}"
-          class="bestsellers__view-all-dtc"
-          data-bestsellers-reveal="view-all"
-        >
-          {{ section.settings.view_all_text | default: 'View All' }} →
-        </a>
-      {%- endif -%}
+      <a href="/collections/all" class="bestsellers__view-all-dtc">View All →</a>
     </div>
 
-    <!-- PRODUCTS — magazine showcase -->
-    <div class="bestsellers__showcase-dtc">
+    <!-- PRODUCTS -->
+    <div class="bestsellers__grid-wrapper-dtc">
 
       {% assign products_to_show = collections[section.settings.collection].products %}
       {% if products_to_show.size > 0 %}
         {% for product in products_to_show limit: 8 %}
           {%- assign card_variant = product.selected_or_first_available_variant -%}
           {%- assign emi_monthly = product.price | divided_by: 3 -%}
-          {%- case forloop.index -%}
-            {%- when 1 -%}{%- assign editorial_class = 'prod-card-dtc--featured' -%}
-            {%- when 2 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-a' -%}
-            {%- when 3 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-b' -%}
-            {%- when 4 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-c' -%}
-            {%- when 5 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-d' -%}
-            {%- when 6 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-e' -%}
-            {%- when 7 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-f' -%}
-            {%- when 8 -%}{%- assign editorial_class = 'prod-card-dtc--editorial-g' -%}
-            {%- else -%}{%- assign editorial_class = 'prod-card-dtc--editorial-h' -%}
-          {%- endcase -%}
-          <div
-            class="prod-card-dtc {{ editorial_class }}"
-            data-bestsellers-reveal="product"
-            data-reveal-index="{{ forloop.index0 }}"
-            onclick="window.location.href='{{ product.url }}';"
-            style="cursor: pointer;"
-          >
+          <div class="prod-card-dtc" onclick="window.location.href='{{ product.url }}';" style="cursor: pointer;">
 
             <span class="prod-card-dtc__badge">Bestseller</span>
 
             <div class="prod-card-dtc__image-container">
-              {%- if forloop.first -%}
-                {%- assign card_image_width = 900 -%}
-              {%- else -%}
-                {%- assign card_image_width = 450 -%}
-              {%- endif -%}
-              <img src="{{ product.featured_image | image_url: width: card_image_width }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
+              <img src="{{ product.featured_image | image_url: width: 450 }}" class="prod-card-dtc__image" loading="lazy" alt="{{ product.title | escape }}">
               <div class="prod-card-dtc__remote-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="7" y="2" width="10" height="20" rx="3" stroke="#E74C3C" stroke-width="2"/>
@@ -1021,28 +761,18 @@
           {%- if i == 1 -%}
             {%- assign mock_handle = 'essential-indepth-shoe-sneaker-cleaning-kit' -%}
             {%- assign mock_title = 'Essential In-Depth Shoe Sneaker Cleaning Kit' -%}
-            {%- assign editorial_class = 'prod-card-dtc--featured' -%}
           {%- elsif i == 2 -%}
             {%- assign mock_handle = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits' -%}
             {%- assign mock_title = 'Quick Shoe Sneaker Cleaning Kit' -%}
-            {%- assign editorial_class = 'prod-card-dtc--editorial-a' -%}
           {%- elsif i == 3 -%}
             {%- assign mock_handle = 'signature-shoe-sneaker-cleaning-kit' -%}
             {%- assign mock_title = 'Signature Shoe Sneaker Cleaning Kit' -%}
-            {%- assign editorial_class = 'prod-card-dtc--editorial-b' -%}
           {%- else -%}
             {%- assign mock_handle = 'sneaker-shoe-cleaner-refill-pack' -%}
             {%- assign mock_title = 'Sneaker Shoe Cleaner Refill Pack' -%}
-            {%- assign editorial_class = 'prod-card-dtc--editorial-c' -%}
           {%- endif -%}
 
-          <div
-            class="prod-card-dtc {{ editorial_class }}"
-            data-bestsellers-reveal="product"
-            data-reveal-index="{{ i | minus: 1 }}"
-            onclick="window.location.href='/products/{{ mock_handle }}';"
-            style="cursor: pointer;"
-          >
+          <div class="prod-card-dtc" onclick="window.location.href='/products/{{ mock_handle }}';" style="cursor: pointer;">
             <span class="prod-card-dtc__badge">Bestseller</span>
 
             <div class="prod-card-dtc__image-container">
@@ -1099,101 +829,10 @@
   </div>
 </section>
 
-<script>
-  (function () {
-    var section = document.getElementById('bestsellers-{{ section.id }}');
-    if (!section) return;
-
-    var headerItems = section.querySelectorAll('[data-bestsellers-reveal="heading"], [data-bestsellers-reveal="description"], [data-bestsellers-reveal="view-all"]');
-    var products = section.querySelectorAll('[data-bestsellers-reveal="product"]');
-
-    products.forEach(function (card) {
-      var index = parseInt(card.getAttribute('data-reveal-index') || '0', 10);
-      var delay = index === 0 ? 280 : 380 + (index - 1) * 100;
-      card.style.transitionDelay = delay + 'ms';
-    });
-
-    function revealAll() {
-      headerItems.forEach(function (el) { el.classList.add('is-revealed'); });
-      products.forEach(function (el) { el.classList.add('is-revealed'); });
-    }
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-      revealAll();
-      return;
-    }
-
-    var revealed = false;
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && !revealed) {
-            revealed = true;
-            revealAll();
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
-    );
-
-    observer.observe(section);
-
-    document.addEventListener('shopify:section:load', function (event) {
-      if (event.detail && event.detail.sectionId === '{{ section.id }}') {
-        revealAll();
-      }
-    });
-  })();
-</script>
-
 {% schema %}
 {
   "name": "Bestsellers",
   "settings": [
-    {
-      "type": "header",
-      "content": "Section heading"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow label",
-      "default": "BESTSELLING COLLECTION"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Bestselling Sneaker Care"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Premium sneaker care essentials crafted for collectors and everyday wearers — clean, protect, and restore every pair with confidence."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "Show view all link",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "view_all_text",
-      "label": "View all link text",
-      "default": "View All"
-    },
-    {
-      "type": "url",
-      "id": "view_all_link",
-      "label": "View all link"
-    },
-    {
-      "type": "header",
-      "content": "Products"
-    },
     {
       "type": "collection",
       "id": "collection",
