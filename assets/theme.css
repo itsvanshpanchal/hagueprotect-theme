@@ -12,8 +12,17 @@
   --color-border: #e8e8ea;
 
   --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-family-h1: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-forte: var(--font-family-h1);
+  --font-family-heading: 'Bahnschrift SemiBold', 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-h1: var(--font-family-heading);
+  --font-family-forte: var(--font-family-heading);
+  --heading-weight: 800;
+  --heading-line-height: 1.15;
+  --heading-letter-spacing: -0.025em;
+  --heading-size-xl: clamp(32px, 4.5vw, 44px);
+  --heading-size-lg: clamp(28px, 3.8vw, 38px);
+  --heading-size-md: clamp(24px, 3.2vw, 30px);
+  --heading-size-sm: clamp(20px, 2.8vw, 26px);
+  --heading-size-xs: clamp(18px, 2.4vw, 22px);
   --border-radius-sm: 4px;
   --border-radius-md: 12px;
   --border-radius-lg: 24px;
@@ -93,37 +102,47 @@ ol {
 .h3,
 .h4,
 .h5,
+.h6,
 h1,
 h2,
 h3,
-h4 {
-  font-family: var(--font-family-sans);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--heading-weight);
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: uppercase;
   color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
 }
 
 .h1,
-h1 {
-  font-family: var(--font-family-h1);
-  font-size: clamp(3rem, 5.5vw, 5rem);
-  font-weight: 600;
-}
-
+h1,
 .h2,
 h2 {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: var(--heading-size-xl);
 }
 
 .h3,
 h3 {
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-size: var(--heading-size-lg);
 }
 
 .h4,
 h4 {
-  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-size: var(--heading-size-md);
+}
+
+.h5,
+h5 {
+  font-size: var(--heading-size-sm);
+}
+
+.h6,
+h6 {
+  font-size: var(--heading-size-xs);
 }
 
 .text-muted {
@@ -411,32 +430,168 @@ h4 {
   }
 }
 
-/* Global H1 — Bahnschrift only */
+/* Global headings — match FOR EVERY MATERIAL. style site-wide */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+.shopify-section h1,
+.shopify-section h2,
+.shopify-section h3,
+.shopify-section h4,
+.shopify-section h5,
+.shopify-section h6,
+#MainContent h1,
+#MainContent h2,
+#MainContent h3,
+#MainContent h4,
+#MainContent h5,
+#MainContent h6,
+.trending-social__heading,
+.bestsellers__heading-dtc,
+.fc-heading,
+.hp-fam-sec__heading,
+.mat-headline {
+  font-family: var(--font-family-heading) !important;
+  font-weight: var(--heading-weight) !important;
+  letter-spacing: var(--heading-letter-spacing) !important;
+  line-height: var(--heading-line-height) !important;
+  text-transform: uppercase !important;
+  -webkit-font-smoothing: antialiased;
+}
+
 h1,
 .h1,
 main h1,
 .shopify-section h1,
 #MainContent h1 {
-  font-family: var(--font-family-h1) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em;
+  font-size: var(--heading-size-xl) !important;
 }
 
-/* Key homepage section headings — Bahnschrift */
+h2,
+.h2,
+main h2,
+.shopify-section h2,
+#MainContent h2,
 .trending-social__heading,
 .bestsellers__heading-dtc,
 .fc-heading,
-.hp-fam-sec__heading {
-  font-family: var(--font-family-h1) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em;
+.hp-fam-sec__heading,
+.mat-headline {
+  font-size: var(--heading-size-xl) !important;
 }
 
-/* Product detail page — product name (black + grey title parts) */
+h3,
+.h3,
+main h3,
+.shopify-section h3,
+#MainContent h3 {
+  font-size: var(--heading-size-lg) !important;
+}
+
+h4,
+.h4,
+main h4,
+.shopify-section h4,
+#MainContent h4 {
+  font-size: var(--heading-size-md) !important;
+}
+
+h5,
+.h5,
+main h5,
+.shopify-section h5,
+#MainContent h5 {
+  font-size: var(--heading-size-sm) !important;
+}
+
+h6,
+.h6,
+main h6,
+.shopify-section h6,
+#MainContent h6 {
+  font-size: var(--heading-size-xs) !important;
+}
+
+/* Product detail page — product name (preserve mixed case + extra bold) */
 .d2c-product-title,
 .d2c-product-title span {
-  font-family: 'Bahnschrift SemiBold', 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--font-family-heading) !important;
   font-weight: 900 !important;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--heading-letter-spacing) !important;
+  line-height: var(--heading-line-height) !important;
+  text-transform: none !important;
+  font-size: var(--heading-size-xl) !important;
   -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (max-width: 767px) {
+  h1,
+  .h1,
+  h2,
+  .h2,
+  main h1,
+  main h2,
+  .shopify-section h1,
+  .shopify-section h2,
+  #MainContent h1,
+  #MainContent h2,
+  .trending-social__heading,
+  .bestsellers__heading-dtc,
+  .fc-heading,
+  .hp-fam-sec__heading,
+  .mat-headline {
+    font-size: clamp(28px, 8vw, 36px) !important;
+  }
+
+  h3,
+  .h3,
+  main h3,
+  .shopify-section h3,
+  #MainContent h3 {
+    font-size: clamp(24px, 6.5vw, 32px) !important;
+  }
+
+  h4,
+  .h4,
+  main h4,
+  .shopify-section h4,
+  #MainContent h4 {
+    font-size: clamp(20px, 5.5vw, 28px) !important;
+  }
+
+  h5,
+  .h5,
+  main h5,
+  .shopify-section h5,
+  #MainContent h5 {
+    font-size: clamp(18px, 4.8vw, 24px) !important;
+  }
+
+  h6,
+  .h6,
+  main h6,
+  .shopify-section h6,
+  #MainContent h6 {
+    font-size: clamp(16px, 4.2vw, 20px) !important;
+  }
+
+  .d2c-product-title,
+  .d2c-product-title span {
+    font-size: clamp(20px, 5.5vw, 28px) !important;
+  }
 }
