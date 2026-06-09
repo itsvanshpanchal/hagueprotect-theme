@@ -435,7 +435,8 @@ main h1,
 /* Product detail page — product name (black + grey title parts) */
 .d2c-product-title,
 .d2c-product-title span {
-  font-family: var(--font-family-h1) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em;
+  font-family: 'Bahnschrift SemiBold', 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em;
+  -webkit-font-smoothing: antialiased;
 }
