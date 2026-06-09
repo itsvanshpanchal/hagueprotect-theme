@@ -594,4 +594,35 @@ main h6,
   .d2c-product-title span {
     font-size: clamp(20px, 5.5vw, 28px) !important;
   }
+
+  #MainContent h3.prod-card-dtc__title,
+  #MainContent h3.rail-card-title,
+  #MainContent h3.product-rec__title,
+  .shopify-section h3.prod-card-dtc__title,
+  .shopify-section h3.rail-card-title,
+  .shopify-section h3.product-rec__title {
+    font-size: clamp(14px, 3.5vw, 16px) !important;
+  }
+}
+
+/* Product card titles — normal size, not section headings */
+#MainContent h3.prod-card-dtc__title,
+#MainContent h3.rail-card-title,
+#MainContent h3.product-rec__title,
+#MainContent h3.family-card__title,
+.shopify-section h3.prod-card-dtc__title,
+.shopify-section h3.rail-card-title,
+.shopify-section h3.product-rec__title,
+.shopify-section h3.family-card__title,
+.prod-card-dtc__title,
+.rail-card-title,
+.product-rec__title,
+.product-rec__title-main,
+.family-card__title {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 600 !important;
+  font-size: clamp(15px, 2vw, 18px) !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: none !important;
 }
