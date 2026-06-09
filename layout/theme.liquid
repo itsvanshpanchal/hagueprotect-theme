@@ -138,16 +138,10 @@
     <!-- Performance Resource Hints -->
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.shopify.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload Critical Assets -->
     <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style">
-
-    <!-- Fonts: Inter (Regular 400 + weights for UI) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
@@ -171,7 +165,29 @@
       a,
       div,
       button {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      }
+      h1,
+      .h1,
+      main h1,
+      .shopify-section h1 {
+        font-family: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-weight: 600 !important;
+      }
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .h2,
+      .h3,
+      .h4 {
+        font-weight: 700 !important;
+      }
+      .btn,
+      button,
+      [type="submit"] {
+        font-weight: 600 !important;
       }
       body,
       p,
@@ -182,23 +198,6 @@
       select,
       textarea {
         font-weight: 400 !important;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      .h1,
-      .h2,
-      .h3,
-      .h4 {
-        font-weight: 700 !important;
-      }
-      .btn,
-      button,
-      [type="submit"] {
-        font-weight: 600 !important;
       }
 
       .hp-typewriter-cursor {
