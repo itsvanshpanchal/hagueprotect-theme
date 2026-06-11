@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "brand-banner",
+      "settings": {
+        "heading": "Fabric Care Kit",
+        "subheading": "Precision-engineered formulas for canvas, knit, mesh, and delicate fabrics. Clean deeply without damaging fibers.",
+        "cta_text": "Shop Fabric Care Below",
+        "cta_link": "#care-kit-products",
+        "bg_gradient": "linear-gradient(135deg, #FF2B2B 0%, #c41414 100%)"
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "blocks": {
+        "product_1": { "type": "product", "settings": { "product": "essential-indepth-shoe-sneaker-cleaning-kit" } },
+        "product_2": { "type": "product", "settings": { "product": "haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men" } },
+        "product_3": { "type": "product", "settings": { "product": "signature-shoe-sneaker-cleaning-kit" } },
+        "product_4": { "type": "product", "settings": { "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits" } },
+        "product_5": { "type": "product", "settings": { "product": "supreme-shoe-sneaker-cleaning-kit" } },
+        "product_6": { "type": "product", "settings": { "product": "sneaker-shoe-cleaner-refill-pack" } }
+      },
+      "block_order": ["product_1", "product_2", "product_3", "product_4", "product_5", "product_6"],
+      "settings": {
+        "eyebrow": "FABRIC SPECIALIST",
+        "heading": "All Fabric & Mesh Care Products",
+        "description": "Explore kits and cleaners made for canvas, knit, mesh, and mixed-material uppers.",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "heading": "Mesh-Safe Cleaning", "text": "Lift dirt from knit and mesh uppers without fraying or discoloring delicate threads." } },
+        "feature_2": { "type": "feature", "settings": { "heading": "Canvas & Fabric Ready", "text": "Breaks down grime on canvas and woven fabrics while keeping the original texture intact." } },
+        "feature_3": { "type": "feature", "settings": { "heading": "Stain-Fighting Power", "text": "Targets stubborn marks on fabric uppers with a balanced, sneaker-safe formula." } }
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"],
+      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Care Built for Every Fabric" }
+    },
+    "faq": { "type": "faq", "settings": {} }
+  },
+  "order": ["hero", "products", "features", "faq"]
+}

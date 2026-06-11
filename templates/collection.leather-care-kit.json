@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "brand-banner",
+      "settings": {
+        "heading": "Leather Care Kit",
+        "subheading": "Clean, condition, and protect premium leather sneakers with formulas engineered for long-lasting character and shine.",
+        "cta_text": "Shop Leather Care Below",
+        "cta_link": "#care-kit-products",
+        "bg_gradient": "linear-gradient(135deg, #111111 0%, #333333 100%)"
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "blocks": {
+        "product_1": { "type": "product", "settings": { "product": "leathercarekit" } },
+        "product_2": { "type": "product", "settings": { "product": "haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men" } },
+        "product_3": { "type": "product", "settings": { "product": "signature-shoe-sneaker-cleaning-kit" } },
+        "product_4": { "type": "product", "settings": { "product": "essential-indepth-shoe-sneaker-cleaning-kit" } },
+        "product_5": { "type": "product", "settings": { "product": "supreme-shoe-sneaker-cleaning-kit" } },
+        "product_6": { "type": "product", "settings": { "product": "sneaker-shoe-cleaner-refill-pack" } }
+      },
+      "block_order": ["product_1", "product_2", "product_3", "product_4", "product_5", "product_6"],
+      "settings": {
+        "eyebrow": "LEATHER SPECIALIST",
+        "heading": "All Leather Care Products",
+        "description": "Browse kits and solutions formulated for smooth leather, premium finishes, and everyday sneaker maintenance.",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "heading": "Deep Clean & Condition", "text": "Lifts dirt while nourishing leather so it stays supple instead of drying out." } },
+        "feature_2": { "type": "feature", "settings": { "heading": "Premium Leather Safe", "text": "Balanced formulas designed for high-end sneaker leathers and everyday wear." } },
+        "feature_3": { "type": "feature", "settings": { "heading": "Restore the Finish", "text": "Bring back depth, shine, and character without harsh chemicals." } }
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"],
+      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Leather Care Expertise" }
+    },
+    "faq": { "type": "faq", "settings": {} }
+  },
+  "order": ["hero", "products", "features", "faq"]
+}

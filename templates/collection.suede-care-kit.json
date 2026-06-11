@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "brand-banner",
+      "settings": {
+        "heading": "Suede Care Kit",
+        "subheading": "Protect and restore the delicate nap of suede and nubuck with specialized cleaners, brushes, and care kits.",
+        "cta_text": "Shop Suede Care Below",
+        "cta_link": "#care-kit-products",
+        "bg_gradient": "linear-gradient(135deg, #5c2e2e 0%, #2b1515 100%)"
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "blocks": {
+        "product_1": { "type": "product", "settings": { "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits" } },
+        "product_2": { "type": "product", "settings": { "product": "haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men" } },
+        "product_3": { "type": "product", "settings": { "product": "signature-shoe-sneaker-cleaning-kit" } },
+        "product_4": { "type": "product", "settings": { "product": "essential-indepth-shoe-sneaker-cleaning-kit" } },
+        "product_5": { "type": "product", "settings": { "product": "supreme-shoe-sneaker-cleaning-kit" } },
+        "product_6": { "type": "product", "settings": { "product": "leathercarekit" } }
+      },
+      "block_order": ["product_1", "product_2", "product_3", "product_4", "product_5", "product_6"],
+      "settings": {
+        "eyebrow": "SUEDE SPECIALIST",
+        "heading": "All Suede & Nubuck Care Products",
+        "description": "Gentle formulas and tools designed for napped leathers, suede sneakers, and nubuck finishes.",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": { "type": "feature", "settings": { "heading": "Nap-Safe Cleaning", "text": "Lifts dirt without crushing or matting delicate suede fibers." } },
+        "feature_2": { "type": "feature", "settings": { "heading": "Nubuck Ready", "text": "Works on suede, nubuck, and soft napped materials with balanced care." } },
+        "feature_3": { "type": "feature", "settings": { "heading": "Restore Texture", "text": "Bring back the original look and feel of premium suede uppers." } }
+      },
+      "block_order": ["feature_1", "feature_2", "feature_3"],
+      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Professional Suede Care" }
+    },
+    "faq": { "type": "faq", "settings": {} }
+  },
+  "order": ["hero", "products", "features", "faq"]
+}

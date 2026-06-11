@@ -442,24 +442,41 @@
             {%- if block.type == 'material_item' -%}
               {%- liquid
                 assign mat_href = '#'
-                if block.settings.product != blank
+                assign mat_care_handle = ''
+                assign mat_care_search = ''
+
+                if block.settings.collection != blank
+                  assign mat_href = block.settings.collection.url
+                elsif block.settings.product != blank
                   assign mat_href = block.settings.product.url
-                elsif block.settings.page != blank
-                  assign mat_href = block.settings.page.url
                 elsif block.settings.url != blank
                   assign mat_href = block.settings.url
                 else
                   assign mat_key = block.settings.title | downcase | strip
                   case mat_key
                     when 'suede', 'nubuck'
-                      assign mat_href = routes.search_url | append: '?q=Suede+Care+Kit&type=product'
+                      assign mat_care_handle = 'suede-care-kit'
+                      assign mat_care_search = 'Suede Care Kit'
                     when 'leather'
-                      assign mat_href = '/pages/leather-care-kit'
+                      assign mat_care_handle = 'leather-care-kit'
+                      assign mat_care_search = 'Leather Care Kit'
                     when 'fabrics', 'fabric'
-                      assign mat_href = '/pages/fabric-care-kit'
+                      assign mat_care_handle = 'fabric-care-kit'
+                      assign mat_care_search = 'Fabric Care Kit'
                     when 'soles', 'sole'
-                      assign mat_href = '/products/sneaker-shoe-cleaner-refill-pack'
+                      assign mat_care_handle = 'soles-care-kit'
+                      assign mat_care_search = 'Sole Cleaner'
                   endcase
+
+                  if mat_care_handle != blank
+                    assign mat_col = collections[mat_care_handle]
+                    if mat_col != blank
+                      assign mat_href = mat_col.url
+                    else
+                      assign mat_search_encoded = mat_care_search | url_encode
+                      assign mat_href = routes.search_url | append: '?q=' | append: mat_search_encoded | append: '&type=product'
+                    endif
+                  endif
                 endif
               -%}
               <a href="{{ mat_href }}"
@@ -663,16 +680,22 @@
           "label": "Material Image"
         },
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Care kit collection",
+          "info": "Links to /collections/your-handle. Create the collection in Shopify admin and assign the matching template."
+        },
+        {
           "type": "product",
           "id": "product",
-          "label": "Care kit product",
-          "info": "Preferred link target. Overrides custom URL when set."
+          "label": "Single product link (optional fallback)",
+          "info": "Used only if no collection is selected."
         },
         {
           "type": "page",
           "id": "page",
-          "label": "Care kit page",
-          "info": "Used when no product is selected."
+          "label": "Page link (optional)",
+          "info": "Deprecated — prefer collection link above."
         },
         {
           "type": "url",

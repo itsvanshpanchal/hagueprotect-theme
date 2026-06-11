@@ -522,6 +522,11 @@
   }
 {%- endstyle -%}
 
+{%- capture care_url_leather -%}{%- render 'care-kit-collection-url', handle: 'leather-care-kit', search_query: 'Leather Care Kit' -%}{%- endcapture -%}
+{%- capture care_url_suede -%}{%- render 'care-kit-collection-url', handle: 'suede-care-kit', search_query: 'Suede Care Kit' -%}{%- endcapture -%}
+{%- capture care_url_fabric -%}{%- render 'care-kit-collection-url', handle: 'fabric-care-kit', search_query: 'Fabric Care Kit' -%}{%- endcapture -%}
+{%- capture care_url_soles -%}{%- render 'care-kit-collection-url', handle: 'soles-care-kit', search_query: 'Sole Cleaner' -%}{%- endcapture -%}
+
 <header class="header-wrapper" role="banner">
   <div class="header-container">
     
@@ -638,10 +643,17 @@
           <li class="megamenu-link-item"><a href="/search?q=Refresh+Kit">Refresh Kit</a></li>
           <li class="megamenu-link-item"><a href="/search?q=Indepth+Kit">Indepth Kit</a></li>
           <li class="megamenu-link-item"><a href="/search?q=Supreme+Kit">Supreme Kit</a></li>
-          <li class="megamenu-link-item"><a href="/pages/leather-care-kit">Leather Care Kit</a></li>
-          <li class="megamenu-link-item"><a href="/products/hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits">Suede Care Kit</a></li>
-          <li class="megamenu-link-item"><a href="/pages/fabric-care-kit">Fabric Care Kit</a></li>
-          <li class="megamenu-link-item"><a href="/products/sneaker-shoe-cleaner-refill-pack">Soles Care Kit</a></li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Material Care Kits</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item"><a href="{{ care_url_leather | strip }}">Leather Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="{{ care_url_suede | strip }}">Suede Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="{{ care_url_fabric | strip }}">Fabric Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="{{ care_url_soles | strip }}">Soles Care Kit</a></li>
+        </ul>
+
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
           <li class="megamenu-link-item"><a href="/search?q=Leather+Suede+Care+Kit">Leather & Suede Care Kit</a></li>
           <li class="megamenu-link-item"><a href="/search?q=Suede+Dye+Kit">Suede Dye Kit</a></li>
           <li class="megamenu-link-item"><a href="/search?q=Proteonnxt+Performance+Kit">Proteonnxt Performance Kit</a></li>
@@ -825,10 +837,20 @@
             <a href="/search?q=Refresh+Kit" style="color:#666; text-decoration:none; font-size:14px;">Refresh Kit</a>
             <a href="/search?q=Indepth+Kit" style="color:#666; text-decoration:none; font-size:14px;">Indepth Kit</a>
             <a href="/search?q=Supreme+Kit" style="color:#666; text-decoration:none; font-size:14px;">Supreme Kit</a>
-            <a href="/pages/leather-care-kit" style="color:#666; text-decoration:none; font-size:14px;">Leather Care Kit</a>
-            <a href="/products/hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits" style="color:#666; text-decoration:none; font-size:14px;">Suede Care Kit</a>
-            <a href="/pages/fabric-care-kit" style="color:#666; text-decoration:none; font-size:14px;">Fabric Care Kit</a>
-            <a href="/products/sneaker-shoe-cleaner-refill-pack" style="color:#666; text-decoration:none; font-size:14px;">Soles Care Kit</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">Material Care Kits</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            <a href="{{ care_url_leather | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Leather Care Kit</a>
+            <a href="{{ care_url_suede | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Suede Care Kit</a>
+            <a href="{{ care_url_fabric | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Fabric Care Kit</a>
+            <a href="{{ care_url_soles | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Soles Care Kit</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">More Kits</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
             <a href="/search?q=Leather+Suede+Care+Kit" style="color:#666; text-decoration:none; font-size:14px;">Leather & Suede Care Kit</a>
             <a href="/search?q=Suede+Dye+Kit" style="color:#666; text-decoration:none; font-size:14px;">Suede Dye Kit</a>
             <a href="/search?q=Proteonnxt+Performance+Kit" style="color:#666; text-decoration:none; font-size:14px;">Proteonnxt Performance Kit</a>
