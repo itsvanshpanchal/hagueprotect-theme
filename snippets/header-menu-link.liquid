@@ -1,0 +1,12 @@
+{%- comment -%}
+  Renders a Shop All menu link to a collection page (with search fallback).
+  @param handle {String} collection handle
+  @param search {String} fallback search query
+  @param label {String} link text
+  @param class {String} optional CSS class
+  @param style {String} optional inline style
+{%- endcomment -%}
+{%- capture menu_href -%}
+  {%- render 'care-kit-collection-url', handle: handle, search_query: search -%}
+{%- endcapture -%}
+<a href="{{ menu_href | strip }}"{% if class != blank %} class="{{ class }}"{% endif %}{% if style != blank %} style="{{ style }}"{% endif %}>{{ label }}</a>
