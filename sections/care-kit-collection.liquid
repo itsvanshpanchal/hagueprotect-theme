@@ -1,0 +1,328 @@
+{%- style -%}
+  .ckc-{{ section.id }} {
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: clamp(48px, 8vw, 80px) 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .ckc-{{ section.id }}__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 max(16px, var(--site-padding, 20px));
+    box-sizing: border-box;
+  }
+
+  .ckc-{{ section.id }}__header {
+    margin-bottom: clamp(28px, 5vw, 40px);
+    max-width: 760px;
+  }
+
+  .ckc-{{ section.id }}__eyebrow {
+    color: #E74C3C;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+
+  .ckc-{{ section.id }}__heading {
+    font-family: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0 0 12px;
+  }
+
+  .ckc-{{ section.id }}__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0;
+  }
+
+  .ckc-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .ckc-{{ section.id }}__card {
+    background: #ffffff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  .ckc-{{ section.id }}__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ff2b2b;
+  }
+
+  .ckc-{{ section.id }}__image-wrap {
+    aspect-ratio: 1;
+    background: #f5f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .ckc-{{ section.id }}__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ckc-{{ section.id }}__body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .ckc-{{ section.id }}__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  .ckc-{{ section.id }}__rating-badge {
+    background: #2ecc71;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .ckc-{{ section.id }}__title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+    color: #111111;
+  }
+
+  .ckc-{{ section.id }}__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .ckc-{{ section.id }}__price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111111;
+  }
+
+  .ckc-{{ section.id }}__compare {
+    font-size: 14px;
+    color: #999999;
+    text-decoration: line-through;
+  }
+
+  .ckc-{{ section.id }}__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .ckc-{{ section.id }}__empty {
+    grid-column: 1 / -1;
+    padding: 40px 24px;
+    text-align: center;
+    border: 1px dashed #dddddd;
+    border-radius: 12px;
+    color: #666666;
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ckc-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign has_collection_products = false
+  if section.settings.collection != blank and section.settings.collection.products.size > 0
+    assign has_collection_products = true
+  endif
+
+  assign has_block_products = false
+  for block in section.blocks
+    if block.type == 'product' and block.settings.product != blank
+      assign has_block_products = true
+      break
+    endif
+  endfor
+-%}
+
+<section class="ckc-{{ section.id }}" id="{% if section.settings.section_id != blank %}{{ section.settings.section_id }}{% else %}care-kit-products{% endif %}" aria-label="{{ section.settings.heading | default: 'Care kit products' | escape }}">
+  <div class="ckc-{{ section.id }}__container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="ckc-{{ section.id }}__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ckc-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ckc-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="ckc-{{ section.id }}__desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="ckc-{{ section.id }}__grid">
+      {%- if has_collection_products -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+          {%- render 'care-kit-product-card',
+            product: product,
+            section_id: section.id,
+            rating_value: section.settings.rating_value,
+            rating_count: section.settings.rating_count
+          -%}
+        {%- endfor -%}
+      {%- elsif has_block_products -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'product' and block.settings.product != blank -%}
+            {%- render 'care-kit-product-card',
+              product: block.settings.product,
+              section_id: section.id,
+              rating_value: section.settings.rating_value,
+              rating_count: section.settings.rating_count
+            -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Care Kit Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP THE RANGE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Related Products"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section anchor ID",
+      "default": "care-kit-products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "If selected, products from this collection are shown first."
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "default": 12,
+      "label": "Max products from collection"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating count",
+      "default": "4.8"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Care Kit Collection",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

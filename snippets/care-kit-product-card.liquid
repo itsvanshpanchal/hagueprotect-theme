@@ -1,0 +1,36 @@
+{%- if product != blank -%}
+<a href="{{ product.url }}" class="ckc-{{ section_id }}__card">
+  <div class="ckc-{{ section_id }}__image-wrap">
+    {%- if product.featured_image != blank -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title | escape }}"
+        class="ckc-{{ section_id }}__image"
+        loading="lazy"
+        width="600"
+        height="600"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+
+  <div class="ckc-{{ section_id }}__body">
+    <div class="ckc-{{ section_id }}__rating">
+      <span class="ckc-{{ section_id }}__rating-badge">★ {{ rating_value | default: '4.9' }}</span>
+      <span>({{ rating_count | default: '4.8' }})</span>
+    </div>
+
+    <h3 class="ckc-{{ section_id }}__title">{{ product.title }}</h3>
+
+    <div class="ckc-{{ section_id }}__price-row">
+      <span class="ckc-{{ section_id }}__price">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="ckc-{{ section_id }}__compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <span class="ckc-{{ section_id }}__cta">View Product</span>
+  </div>
+</a>
+{%- endif -%}
