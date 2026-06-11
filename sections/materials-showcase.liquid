@@ -454,9 +454,12 @@
                 else
                   assign mat_key = block.settings.title | downcase | strip
                   case mat_key
-                    when 'suede', 'nubuck'
+                    when 'suede'
                       assign mat_care_handle = 'suede-care-kit'
                       assign mat_care_search = 'Suede Care Kit'
+                    when 'nubuck'
+                      assign mat_care_handle = 'nubuck-care-kit'
+                      assign mat_care_search = 'Nubuck Care Kit'
                     when 'leather'
                       assign mat_care_handle = 'leather-care-kit'
                       assign mat_care_search = 'Leather Care Kit'

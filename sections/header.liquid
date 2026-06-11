@@ -524,6 +524,7 @@
 
 {%- capture care_url_leather -%}{%- render 'care-kit-collection-url', handle: 'leather-care-kit', search_query: 'Leather Care Kit' -%}{%- endcapture -%}
 {%- capture care_url_suede -%}{%- render 'care-kit-collection-url', handle: 'suede-care-kit', search_query: 'Suede Care Kit' -%}{%- endcapture -%}
+{%- capture care_url_nubuck -%}{%- render 'care-kit-collection-url', handle: 'nubuck-care-kit', search_query: 'Nubuck Care Kit' -%}{%- endcapture -%}
 {%- capture care_url_fabric -%}{%- render 'care-kit-collection-url', handle: 'fabric-care-kit', search_query: 'Fabric Care Kit' -%}{%- endcapture -%}
 {%- capture care_url_soles -%}{%- render 'care-kit-collection-url', handle: 'soles-care-kit', search_query: 'Sole Cleaner' -%}{%- endcapture -%}
 
@@ -649,6 +650,7 @@
         <ul class="megamenu-links" style="margin-bottom: 24px;">
           <li class="megamenu-link-item"><a href="{{ care_url_leather | strip }}">Leather Care Kit</a></li>
           <li class="megamenu-link-item"><a href="{{ care_url_suede | strip }}">Suede Care Kit</a></li>
+          <li class="megamenu-link-item"><a href="{{ care_url_nubuck | strip }}">Nubuck Care Kit</a></li>
           <li class="megamenu-link-item"><a href="{{ care_url_fabric | strip }}">Fabric Care Kit</a></li>
           <li class="megamenu-link-item"><a href="{{ care_url_soles | strip }}">Soles Care Kit</a></li>
         </ul>
@@ -724,7 +726,7 @@
           </li>
           <li class="megamenu-link-item">
             <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">6. Nubuck</span>
-            <a href="/products/shield-guard" style="font-size: 13px;">Suede Care</a>
+            <a href="{{ care_url_nubuck | strip }}" style="font-size: 13px;">Nubuck Care Kit</a>
           </li>
           <li class="megamenu-link-item">
             <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">7. Rubber</span>
@@ -844,6 +846,7 @@
           <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
             <a href="{{ care_url_leather | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Leather Care Kit</a>
             <a href="{{ care_url_suede | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Suede Care Kit</a>
+            <a href="{{ care_url_nubuck | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Nubuck Care Kit</a>
             <a href="{{ care_url_fabric | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Fabric Care Kit</a>
             <a href="{{ care_url_soles | strip }}" style="color:#666; text-decoration:none; font-size:14px;">Soles Care Kit</a>
           </div>
