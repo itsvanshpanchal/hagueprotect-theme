@@ -1,13 +1,22 @@
 {
   "sections": {
-    "hero": {
-      "type": "brand-banner",
+    "aplus_top": {
+      "type": "collection-aplus-banner",
       "settings": {
-        "heading": "Soles Care Kit",
-        "subheading": "Restore midsoles and outsoles with professional-grade cleaners built to cut through ground-in dirt, yellowing, and grime.",
-        "cta_text": "Shop Sole Care Below",
-        "cta_link": "#care-kit-products",
-        "bg_gradient": "linear-gradient(135deg, #111111 0%, #333333 100%)"
+        "label": "Top A+ banner",
+        "alt_text": "Soles Care Kit banner"
+      }
+    },
+    "slider_top": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Sole care slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Sole care slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Sole care slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Top A+ slider"
       }
     },
     "products": {
@@ -31,17 +40,29 @@
         "bg_color": "#ffffff"
       }
     },
-    "features": {
-      "type": "feature-grid",
-      "blocks": {
-        "feature_1": { "type": "feature", "settings": { "heading": "Midsole Revival", "text": "Bring oxidized and stained midsoles back to life with targeted sole restoration formulas." } },
-        "feature_2": { "type": "feature", "settings": { "heading": "Outsole Deep Clean", "text": "Remove embedded dirt from rubber outsoles and tread grooves for a ground-up refresh." } },
-        "feature_3": { "type": "feature", "settings": { "heading": "Street-Tested Results", "text": "Engineered for Indian dust, rain, and daily wear so your soles look fresh longer." } }
-      },
-      "block_order": ["feature_1", "feature_2", "feature_3"],
-      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Ground-Up Restoration" }
+    "aplus_middle": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Middle A+ banner",
+        "alt_text": "Sole care feature banner"
+      }
     },
-    "faq": { "type": "faq", "settings": {} }
+    "slider_bottom": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Sole care bottom slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Sole care bottom slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Sole care bottom slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Bottom A+ slider"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
   },
-  "order": ["hero", "products", "features", "faq"]
+  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
 }

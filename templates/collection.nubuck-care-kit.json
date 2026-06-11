@@ -1,13 +1,22 @@
 {
   "sections": {
-    "hero": {
-      "type": "brand-banner",
+    "aplus_top": {
+      "type": "collection-aplus-banner",
       "settings": {
-        "heading": "Nubuck Care Kit",
-        "subheading": "Clean, protect, and restore premium nubuck sneakers with gentle formulas and brushes designed for soft, napped leather.",
-        "cta_text": "Shop Nubuck Care Below",
-        "cta_link": "#care-kit-products",
-        "bg_gradient": "linear-gradient(135deg, #4a3f35 0%, #2a231c 100%)"
+        "label": "Top A+ banner",
+        "alt_text": "Nubuck Care Kit banner"
+      }
+    },
+    "slider_top": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Nubuck care slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Nubuck care slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Nubuck care slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Top A+ slider"
       }
     },
     "products": {
@@ -31,17 +40,29 @@
         "bg_color": "#ffffff"
       }
     },
-    "features": {
-      "type": "feature-grid",
-      "blocks": {
-        "feature_1": { "type": "feature", "settings": { "heading": "Gentle Nap Care", "text": "Lifts dirt without crushing or matting delicate nubuck fibers." } },
-        "feature_2": { "type": "feature", "settings": { "heading": "pH-Balanced Formula", "text": "Safe for premium nubuck sneakers without drying or discoloration." } },
-        "feature_3": { "type": "feature", "settings": { "heading": "Restore the Finish", "text": "Bring back the original texture and tone of nubuck uppers." } }
-      },
-      "block_order": ["feature_1", "feature_2", "feature_3"],
-      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Professional Nubuck Care" }
+    "aplus_middle": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Middle A+ banner",
+        "alt_text": "Nubuck care feature banner"
+      }
     },
-    "faq": { "type": "faq", "settings": {} }
+    "slider_bottom": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Nubuck care bottom slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Nubuck care bottom slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Nubuck care bottom slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Bottom A+ slider"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
   },
-  "order": ["hero", "products", "features", "faq"]
+  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
 }

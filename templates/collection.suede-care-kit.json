@@ -1,13 +1,22 @@
 {
   "sections": {
-    "hero": {
-      "type": "brand-banner",
+    "aplus_top": {
+      "type": "collection-aplus-banner",
       "settings": {
-        "heading": "Suede Care Kit",
-        "subheading": "Protect and restore the delicate nap of suede and nubuck with specialized cleaners, brushes, and care kits.",
-        "cta_text": "Shop Suede Care Below",
-        "cta_link": "#care-kit-products",
-        "bg_gradient": "linear-gradient(135deg, #5c2e2e 0%, #2b1515 100%)"
+        "label": "Top A+ banner",
+        "alt_text": "Suede Care Kit banner"
+      }
+    },
+    "slider_top": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Suede care slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Suede care slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Suede care slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Top A+ slider"
       }
     },
     "products": {
@@ -23,25 +32,37 @@
       "block_order": ["product_1", "product_2", "product_3", "product_4", "product_5", "product_6"],
       "settings": {
         "eyebrow": "SUEDE SPECIALIST",
-        "heading": "All Suede & Nubuck Care Products",
-        "description": "Gentle formulas and tools designed for napped leathers, suede sneakers, and nubuck finishes.",
+        "heading": "All Suede Care Products",
+        "description": "Gentle formulas and tools designed for napped leathers and suede sneaker finishes.",
         "products_limit": 24,
         "rating_value": "4.9",
         "rating_count": "4.8",
         "bg_color": "#ffffff"
       }
     },
-    "features": {
-      "type": "feature-grid",
-      "blocks": {
-        "feature_1": { "type": "feature", "settings": { "heading": "Nap-Safe Cleaning", "text": "Lifts dirt without crushing or matting delicate suede fibers." } },
-        "feature_2": { "type": "feature", "settings": { "heading": "Nubuck Ready", "text": "Works on suede, nubuck, and soft napped materials with balanced care." } },
-        "feature_3": { "type": "feature", "settings": { "heading": "Restore Texture", "text": "Bring back the original look and feel of premium suede uppers." } }
-      },
-      "block_order": ["feature_1", "feature_2", "feature_3"],
-      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Professional Suede Care" }
+    "aplus_middle": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Middle A+ banner",
+        "alt_text": "Suede care feature banner"
+      }
     },
-    "faq": { "type": "faq", "settings": {} }
+    "slider_bottom": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Suede care bottom slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Suede care bottom slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Suede care bottom slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Bottom A+ slider"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
   },
-  "order": ["hero", "products", "features", "faq"]
+  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
 }

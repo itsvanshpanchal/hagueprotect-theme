@@ -1,13 +1,22 @@
 {
   "sections": {
-    "hero": {
-      "type": "brand-banner",
+    "aplus_top": {
+      "type": "collection-aplus-banner",
       "settings": {
-        "heading": "Leather Care Kit",
-        "subheading": "Clean, condition, and protect premium leather sneakers with formulas engineered for long-lasting character and shine.",
-        "cta_text": "Shop Leather Care Below",
-        "cta_link": "#care-kit-products",
-        "bg_gradient": "linear-gradient(135deg, #111111 0%, #333333 100%)"
+        "label": "Top A+ banner",
+        "alt_text": "Leather Care Kit banner"
+      }
+    },
+    "slider_top": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Leather care slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Leather care slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Leather care slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Top A+ slider"
       }
     },
     "products": {
@@ -31,17 +40,29 @@
         "bg_color": "#ffffff"
       }
     },
-    "features": {
-      "type": "feature-grid",
-      "blocks": {
-        "feature_1": { "type": "feature", "settings": { "heading": "Deep Clean & Condition", "text": "Lifts dirt while nourishing leather so it stays supple instead of drying out." } },
-        "feature_2": { "type": "feature", "settings": { "heading": "Premium Leather Safe", "text": "Balanced formulas designed for high-end sneaker leathers and everyday wear." } },
-        "feature_3": { "type": "feature", "settings": { "heading": "Restore the Finish", "text": "Bring back depth, shine, and character without harsh chemicals." } }
-      },
-      "block_order": ["feature_1", "feature_2", "feature_3"],
-      "settings": { "eyebrow": "WHY HAGUE PROTECT", "heading": "Leather Care Expertise" }
+    "aplus_middle": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Middle A+ banner",
+        "alt_text": "Leather care feature banner"
+      }
     },
-    "faq": { "type": "faq", "settings": {} }
+    "slider_bottom": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Leather care bottom slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Leather care bottom slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Leather care bottom slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Bottom A+ slider"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
   },
-  "order": ["hero", "products", "features", "faq"]
+  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
 }
