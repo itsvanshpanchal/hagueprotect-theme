@@ -440,9 +440,32 @@
         <div class="mat-menu">
           {%- for block in section.blocks -%}
             {%- if block.type == 'material_item' -%}
-              <a href="{{ block.settings.url | default: '#' }}" 
-                 class="mat-menu-item{% if forloop.first %} active{% endif %}" 
-                 data-index="{{ forloop.index0 }}" 
+              {%- liquid
+                assign mat_href = '#'
+                if block.settings.product != blank
+                  assign mat_href = block.settings.product.url
+                elsif block.settings.page != blank
+                  assign mat_href = block.settings.page.url
+                elsif block.settings.url != blank
+                  assign mat_href = block.settings.url
+                else
+                  assign mat_key = block.settings.title | downcase | strip
+                  case mat_key
+                    when 'suede', 'nubuck'
+                      assign mat_href = routes.search_url | append: '?q=Suede+Care+Kit&type=product'
+                    when 'leather'
+                      assign mat_href = '/products/leathercarekit'
+                    when 'fabrics', 'fabric'
+                      assign mat_href = '/products/essential-indepth-shoe-sneaker-cleaning-kit'
+                    when 'soles', 'sole'
+                      assign mat_href = '/products/sneaker-shoe-cleaner-refill-pack'
+                  endcase
+                endif
+              -%}
+              <a href="{{ mat_href }}"
+                 class="mat-menu-item{% if forloop.first %} active{% endif %}"
+                 data-index="{{ forloop.index0 }}"
+                 {% if mat_href != '#' %}data-mat-link{% endif %}
                  {{ block.shopify_attributes }}>
                 <span class="mat-menu-item-text">{{ block.settings.title }}</span>
                 <span class="mat-menu-arrow">
@@ -503,18 +526,6 @@
     }
 
     menuItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        const url = this.getAttribute('href');
-        const hasValidUrl = url && url !== '#' && url !== '';
-
-        if (hasValidUrl) {
-          return;
-        }
-
-        e.preventDefault();
-        switchActiveMaterial(this);
-      });
-
       item.addEventListener('mouseenter', function() {
         if (!mobileQuery.matches) {
           switchActiveMaterial(this);
@@ -652,10 +663,22 @@
           "label": "Material Image"
         },
         {
+          "type": "product",
+          "id": "product",
+          "label": "Care kit product",
+          "info": "Preferred link target. Overrides custom URL when set."
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Care kit page",
+          "info": "Used when no product is selected."
+        },
+        {
           "type": "url",
           "id": "url",
-          "label": "Care kit page URL",
-          "info": "Link to the care kit product or page (e.g. /products/leathercarekit or /pages/fabric-care-kit)."
+          "label": "Custom URL (optional)",
+          "info": "Fallback if no product or page is selected."
         },
         {
           "type": "textarea",
