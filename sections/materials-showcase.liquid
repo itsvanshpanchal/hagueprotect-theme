@@ -504,6 +504,13 @@
 
     menuItems.forEach(item => {
       item.addEventListener('click', function(e) {
+        const url = this.getAttribute('href');
+        const hasValidUrl = url && url !== '#' && url !== '';
+
+        if (hasValidUrl) {
+          return;
+        }
+
         e.preventDefault();
         switchActiveMaterial(this);
       });
@@ -647,7 +654,8 @@
         {
           "type": "url",
           "id": "url",
-          "label": "Material Collection URL"
+          "label": "Care kit page URL",
+          "info": "Link to the care kit product or page (e.g. /products/leathercarekit or /pages/fabric-care-kit)."
         },
         {
           "type": "textarea",

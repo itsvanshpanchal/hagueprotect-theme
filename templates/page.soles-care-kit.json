@@ -1,0 +1,68 @@
+{
+  "sections": {
+    "hero": {
+      "type": "brand-banner",
+      "settings": {
+        "heading": "Soles Care Kit",
+        "subheading": "Restore midsoles and outsoles with professional-grade cleaners built to cut through ground-in dirt, yellowing, and grime.",
+        "cta_text": "Shop Sole Care Products",
+        "cta_link": "/products/sole-cleaner",
+        "bg_gradient": "linear-gradient(135deg, #111111 0%, #333333 100%)"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "heading": "Midsole Revival",
+            "text": "Bring oxidized and stained midsoles back to life with targeted sole restoration formulas."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "heading": "Outsole Deep Clean",
+            "text": "Remove embedded dirt from rubber outsoles and tread grooves for a ground-up refresh."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "heading": "Street-Tested Results",
+            "text": "Engineered for Indian dust, rain, and daily wear so your soles look fresh longer."
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3"
+      ],
+      "settings": {
+        "eyebrow": "SOLE SPECIALIST",
+        "heading": "Ground-Up Restoration"
+      }
+    },
+    "products": {
+      "type": "bestsellers",
+      "settings": {
+        "collection": "kits",
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "features",
+    "products",
+    "faq"
+  ]
+}
