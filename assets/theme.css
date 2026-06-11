@@ -480,10 +480,6 @@ main h2.h2,
 }
 
 /* Normal subtext — cards, UI labels, descriptions, smaller headings */
-h3,
-h4,
-h5,
-h6,
 .hp-normal-text,
 .prod-card-dtc__title,
 .prod-card-dtc__subtitle,
@@ -495,8 +491,6 @@ h6,
 .product-rec__title-sub,
 .family-card__title,
 .family-card__desc,
-.fc-category-name,
-.fc-subtitle,
 .bundle-product-title,
 .trust-card__title,
 .reviews-sec__review-title,
@@ -504,9 +498,7 @@ h6,
 .megamenu-heading,
 .mobile-accordion-category-heading,
 .faq-custom__question,
-.feature-grid__card-heading,
 .corp-feature-title,
-.hp-dna__item-title,
 .how-to-video-title,
 .skincare-concern-card__title,
 .skincare-product-card__title,
@@ -525,41 +517,61 @@ h6,
 .category__eyebrow,
 .feature-grid__eyebrow,
 .bestsellers__view-all-dtc,
-p,
-span,
-li,
-label {
+.fc-subtitle {
   text-transform: none !important;
 }
 
-.prod-card-dtc__title,
-.rail-card-title,
-.product-rec__title,
-.product-rec__title-main,
-.family-card__title,
-.bundle-product-title,
-.fc-category-name,
-.trust-card__title,
-.reviews-sec__review-title,
-.feature-grid__card-heading,
-.cat-card__title,
-.card-title,
-.cart-drawer__item-title,
-.skincare-product-card__title,
-.skincare-concern-card__title,
-.hp-dna__item-title,
-.how-to-video-title,
-.corp-feature-title,
-.faq-custom__question,
-.footer__title,
-.megamenu-heading,
-.mobile-accordion-category-heading,
-.dtc-product-card__title {
+/* Category cards + DNA columns — compact UI headings */
+#MainContent h3.fc-category-name,
+.shopify-section h3.fc-category-name,
+.fc-category-name {
   font-family: var(--font-family-sans) !important;
-  font-weight: 600 !important;
-  font-size: clamp(15px, 2vw, 18px) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+}
+
+#MainContent h3.hp-dna__item-title,
+.shopify-section h3.hp-dna__item-title,
+.hp-dna__item-title {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+.hp-dna__item-text,
+.feature-grid__card-text {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+#MainContent h3.feature-grid__card-heading,
+.shopify-section h3.feature-grid__card-heading,
+.feature-grid__card-heading {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
   line-height: 1.35 !important;
   letter-spacing: -0.01em !important;
+  text-transform: none !important;
+}
+
+.fc-product-count {
+  font-family: var(--font-family-sans) !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
 }
 
 .prod-card-dtc__subtitle,
@@ -627,7 +639,14 @@ label {
   .product-rec__title-main,
   .family-card__title,
   .fc-category-name,
+  .hp-dna__item-title,
+  .feature-grid__card-heading,
   .bundle-product-title {
     font-size: clamp(14px, 3.5vw, 16px) !important;
+  }
+
+  .hp-dna__item-text,
+  .feature-grid__card-text {
+    font-size: 13px !important;
   }
 }

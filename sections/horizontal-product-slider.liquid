@@ -9,7 +9,7 @@
     padding: clamp(40px, 8vw, 80px) 0 0 0;
     width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .hp-fam-sec__container {
@@ -358,10 +358,12 @@
     gap: var(--hp-fam-card-gap);
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    touch-action: auto;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
     padding: 4px 0 12px;
     padding-right: calc((100% - var(--hp-fam-card-gap)) / 3);
     cursor: grab;
@@ -392,7 +394,7 @@
     min-width: 0;
     max-width: none;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
   }
 
   .hp-fam-sec__mobile-slider .rail-card-img {
@@ -465,10 +467,13 @@
     .hp-fam-sec__tabs {
       flex-wrap: nowrap;
       overflow-x: auto;
+      overflow-y: hidden;
       padding-bottom: 6px;
       margin-bottom: 20px;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
+      touch-action: auto;
+      overscroll-behavior-x: contain;
       gap: 8px;
       scroll-snap-type: x proximity;
     }
@@ -679,46 +684,72 @@
       });
     });
 
-    function bindHorizontalDrag(slider) {
+    function bindHorizontalDrag(slider, desktopOnly) {
+      if (desktopOnly && window.matchMedia('(max-width: 1199px)').matches) return;
+
       let isDown = false;
+      let isDragging = false;
       let startX = 0;
+      let startY = 0;
       let scrollLeft = 0;
+      let activePointerId = null;
+
+      function endDrag() {
+        isDown = false;
+        isDragging = false;
+        activePointerId = null;
+        slider.style.scrollBehavior = 'smooth';
+        slider.classList.remove('is-dragging');
+      }
 
       slider.addEventListener('pointerdown', (e) => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.pointerType === 'touch') return;
         isDown = true;
-        startX = e.pageX - slider.offsetLeft;
+        isDragging = false;
+        activePointerId = e.pointerId;
+        startX = e.pageX;
+        startY = e.pageY;
         scrollLeft = slider.scrollLeft;
-        slider.style.scrollBehavior = 'auto';
-        slider.classList.add('is-dragging');
-        slider.setPointerCapture(e.pointerId);
       });
 
       slider.addEventListener('pointerup', (e) => {
-        if (!isDown) return;
-        isDown = false;
-        slider.style.scrollBehavior = 'smooth';
-        slider.classList.remove('is-dragging');
-        slider.releasePointerCapture(e.pointerId);
+        if (activePointerId !== e.pointerId) return;
+        if (isDragging) slider.releasePointerCapture(e.pointerId);
+        endDrag();
       });
 
-      slider.addEventListener('pointercancel', () => {
-        isDown = false;
-        slider.style.scrollBehavior = 'smooth';
-        slider.classList.remove('is-dragging');
+      slider.addEventListener('pointercancel', (e) => {
+        if (activePointerId !== e.pointerId) return;
+        if (isDragging) slider.releasePointerCapture(e.pointerId);
+        endDrag();
       });
 
       slider.addEventListener('pointermove', (e) => {
-        if (!isDown) return;
+        if (!isDown || activePointerId !== e.pointerId) return;
+
+        const dx = e.pageX - startX;
+        const dy = e.pageY - startY;
+
+        if (!isDragging) {
+          if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+          if (Math.abs(dy) > Math.abs(dx)) {
+            endDrag();
+            return;
+          }
+          isDragging = true;
+          slider.style.scrollBehavior = 'auto';
+          slider.classList.add('is-dragging');
+          slider.setPointerCapture(e.pointerId);
+        }
+
         e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        slider.scrollLeft = scrollLeft - walk;
+        slider.scrollLeft = scrollLeft - dx * 1.5;
       });
     }
 
-    sliders.forEach(bindHorizontalDrag);
-    mobileSliders.forEach(bindHorizontalDrag);
+    sliders.forEach((slider) => bindHorizontalDrag(slider, false));
+    mobileSliders.forEach((slider) => bindHorizontalDrag(slider, true));
   })();
 </script>
 
