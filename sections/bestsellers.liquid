@@ -437,9 +437,9 @@
 
   @media (max-width: 767px) {
     #shopify-section-{{ section.id }} .bs-coverflow {
-      --bs-card-w: min(82vw, 280px);
-      --bs-media-h: 168px;
-      --bs-spacing: 168px;
+      --bs-card-w: min(72vw, 252px);
+      --bs-media-h: 156px;
+      --bs-spacing: 152px;
       --bs-perspective: 900px;
       --bs-duration: 0.72s;
       padding: 36px 0 44px;
@@ -447,7 +447,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__container {
-      padding: 0 max(12px, var(--site-padding, 16px));
+      padding: 0 max(18px, var(--site-padding, 20px));
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__header {
@@ -491,11 +491,11 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav--prev {
-      left: max(2px, env(safe-area-inset-left, 0px));
+      left: max(6px, env(safe-area-inset-left, 0px));
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav--next {
-      right: max(2px, env(safe-area-inset-right, 0px));
+      right: max(6px, env(safe-area-inset-right, 0px));
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav:active {
@@ -505,7 +505,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: clamp(360px, 98vw, 410px);
+      height: clamp(340px, 92vw, 390px);
       grid-column: 1;
       padding-bottom: 8px;
       perspective-origin: 50% 48%;
@@ -651,13 +651,13 @@
 
   @media (max-width: 380px) {
     #shopify-section-{{ section.id }} .bs-coverflow {
-      --bs-card-w: min(88vw, 260px);
-      --bs-media-h: 152px;
-      --bs-spacing: 148px;
+      --bs-card-w: min(74vw, 236px);
+      --bs-media-h: 146px;
+      --bs-spacing: 138px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: 350px;
+      height: 330px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card,
@@ -689,9 +689,9 @@
   aria-label="{{ section.settings.heading | default: 'Bestselling products' | escape }}"
   data-bs-coverflow
   data-spacing="270"
-  data-mobile-spacing="168"
-  data-mobile-spacing-min="148"
-  data-mobile-spacing-max="178"
+  data-mobile-spacing="152"
+  data-mobile-spacing-min="138"
+  data-mobile-spacing-max="162"
 >
   <div class="bs-coverflow__container">
     <div class="bs-coverflow__header">
@@ -734,7 +734,7 @@
                       <img
                         src="{{ product.featured_image | image_url: width: 480 }}"
                         srcset="{{ product.featured_image | image_url: width: 320 }} 320w, {{ product.featured_image | image_url: width: 480 }} 480w, {{ product.featured_image | image_url: width: 600 }} 600w"
-                        sizes="(max-width: 767px) 82vw, 320px"
+                        sizes="(max-width: 767px) 72vw, 320px"
                         alt="{{ product.featured_image.alt | default: product.title | escape }}"
                         class="bs-coverflow-card__image"
                         loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
@@ -867,9 +867,9 @@
       if (!isMobile()) {
         return parseFloat(section.dataset.spacing || '270');
       }
-      var minSpace = parseFloat(section.dataset.mobileSpacingMin || '148');
-      var maxSpace = parseFloat(section.dataset.mobileSpacingMax || '178');
-      var ratioSpace = window.innerWidth * 0.44;
+      var minSpace = parseFloat(section.dataset.mobileSpacingMin || '138');
+      var maxSpace = parseFloat(section.dataset.mobileSpacingMax || '162');
+      var ratioSpace = window.innerWidth * 0.4;
       return Math.max(minSpace, Math.min(maxSpace, ratioSpace));
     }
 
