@@ -262,8 +262,7 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__body {
-    flex: 1 1 auto;
-    min-height: 0;
+    flex: 0 0 auto;
     padding: 16px 20px 24px;
     display: flex;
     flex-direction: column;
@@ -317,7 +316,7 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-top: auto;
+    margin-top: 0;
     flex-shrink: 0;
   }
 
@@ -502,7 +501,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: clamp(430px, 118vw, 480px);
+      height: clamp(390px, 108vw, 450px);
       grid-column: 1;
       padding-bottom: 12px;
       perspective-origin: 50% 48%;
@@ -515,11 +514,12 @@
 
     #shopify-section-{{ section.id }} .bs-coverflow-card {
       height: auto;
-      min-height: 420px;
+      min-height: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__inner {
-      min-height: 420px;
+      min-height: 0;
+      height: auto;
       border-radius: 16px;
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
     }
@@ -549,13 +549,18 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__body {
-      padding: 12px 14px 18px;
-      gap: 6px;
+      padding: 10px 14px 16px;
+      gap: 4px;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow-card__rating {
+      margin-bottom: 2px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__title {
       font-size: 14px;
       line-height: 1.3;
+      margin-bottom: 2px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__type {
@@ -569,7 +574,7 @@
     #shopify-section-{{ section.id }} .bs-coverflow-card__cta {
       min-height: 46px;
       font-size: 11px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__footer {
@@ -640,12 +645,12 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: 420px;
+      height: 380px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card,
     #shopify-section-{{ section.id }} .bs-coverflow-card__inner {
-      min-height: 400px;
+      min-height: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav {
