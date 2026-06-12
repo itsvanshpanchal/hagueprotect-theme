@@ -11,7 +11,6 @@
     --bs-accent-soft: color-mix(in srgb, {{ accent }} 35%, transparent);
     --bs-accent-glow: color-mix(in srgb, {{ accent }} 55%, transparent);
     --bs-card-w: 320px;
-    --bs-card-h: 520px;
     --bs-media-h: 228px;
     --bs-spacing: 270px;
     --bs-perspective: 1400px;
@@ -94,12 +93,12 @@
 
   #shopify-section-{{ section.id }} .bs-coverflow__viewport {
     position: relative;
-    height: clamp(500px, 58vw, 580px);
+    height: clamp(440px, 52vw, 520px);
     perspective: var(--bs-perspective);
     perspective-origin: 50% 46%;
     overflow: visible;
     touch-action: pan-y pinch-zoom;
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__viewport.is-transitioning .bs-coverflow-card:not(.is-active) {
@@ -118,7 +117,7 @@
     left: 50%;
     top: 50%;
     width: var(--bs-card-w);
-    height: var(--bs-card-h);
+    height: auto;
     margin: 0;
     padding: 0;
     border: none;
@@ -142,9 +141,10 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__inner {
+    position: relative;
     width: 100%;
-    height: 100%;
-    min-height: var(--bs-card-h);
+    height: auto;
+    min-height: 0;
     background: #ffffff;
     border-radius: 20px;
     overflow: hidden;
@@ -263,10 +263,10 @@
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__body {
     flex: 0 0 auto;
-    padding: 16px 20px 24px;
+    padding: 14px 18px 14px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     text-align: left;
     position: relative;
     z-index: 1;
@@ -333,7 +333,8 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__cta {
-    margin-top: 12px;
+    margin-top: 8px;
+    margin-bottom: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -433,7 +434,6 @@
   @media (max-width: 767px) {
     #shopify-section-{{ section.id }} .bs-coverflow {
       --bs-card-w: min(82vw, 280px);
-      --bs-card-h: auto;
       --bs-media-h: 168px;
       --bs-spacing: 168px;
       --bs-perspective: 900px;
@@ -501,9 +501,9 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: clamp(390px, 108vw, 450px);
+      height: clamp(360px, 98vw, 410px);
       grid-column: 1;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       perspective-origin: 50% 48%;
       touch-action: pan-x pan-y;
     }
@@ -549,7 +549,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__body {
-      padding: 10px 14px 16px;
+      padding: 10px 14px 10px;
       gap: 4px;
     }
 
@@ -572,9 +572,10 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__cta {
-      min-height: 46px;
+      min-height: 44px;
       font-size: 11px;
-      margin-top: 8px;
+      margin-top: 6px;
+      margin-bottom: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__footer {
@@ -645,7 +646,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: 380px;
+      height: 350px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card,
