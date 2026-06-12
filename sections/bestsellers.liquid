@@ -1,7 +1,7 @@
 {%- liquid
   assign products_to_show = collections[section.settings.collection].products
   assign product_limit = section.settings.products_limit | default: 8
-  assign accent = section.settings.accent_color | default: '#FFC107'
+  assign accent = section.settings.accent_color | default: '#B8B8B8'
 -%}
 
 {%- style -%}
@@ -872,7 +872,7 @@
       "type": "color",
       "id": "accent_color",
       "label": "Featured glow accent",
-      "default": "#FFC107"
+      "default": "#B8B8B8"
     },
     {
       "type": "checkbox",
