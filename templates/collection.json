@@ -39,28 +39,66 @@
         "bg_color": "#ffffff"
       }
     },
-    "aplus_middle": {
-      "type": "collection-aplus-banner",
+    "story_banner_1": {
+      "type": "story-block",
       "settings": {
-        "label": "Middle A+ banner"
+        "padding_top": 48,
+        "padding_bottom": 24,
+        "border_radius": 0
       }
     },
-    "slider_bottom": {
-      "type": "collection-aplus-slider",
-      "blocks": {
-        "slide_1": { "type": "slide", "settings": { "alt_text": "Bottom slide 1" } },
-        "slide_2": { "type": "slide", "settings": { "alt_text": "Bottom slide 2" } },
-        "slide_3": { "type": "slide", "settings": { "alt_text": "Bottom slide 3" } }
-      },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
+    "story_banner_2": {
+      "type": "story-block",
       "settings": {
-        "label": "Bottom A+ slider"
+        "padding_top": 24,
+        "padding_bottom": 48,
+        "border_radius": 0
       }
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Hague Protect safe for premium sneakers?",
+            "answer": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the formula alter the color or texture of my shoes?",
+            "answer": "No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is the invisible barrier durable against liquids and stains?",
+            "answer": "Yes! It creates a highly durable, nano-tech invisible barrier that repels water, mud, dirt, and stains for up to 4 weeks."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many times can I clean my shoes with one complete kit?",
+            "answer": "One complete Hague Protect kit allows more than 65 full cleaning and protective applications for your sneakers."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the cleaning brushes safe to use on delicate suede?",
+            "answer": "Yes! Use our Premium Soft-Hog Brush gently for delicate materials like suede and premium mesh to clean effectively without causing fraying."
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "heading": "Things people often wonder"
+      }
     }
   },
-  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
+  "order": ["aplus_top", "slider_top", "products", "story_banner_1", "story_banner_2", "faq"]
 }
