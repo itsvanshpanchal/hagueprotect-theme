@@ -1,12 +1,14 @@
 {%- comment -%}
-  Renders a Shop All menu link to an editable collection page.
+  Renders a Shop All menu link to a collection page when it exists,
+  otherwise a styled search results page with the same bottom layout.
   @param handle {String} collection handle
+  @param search {String} fallback search query when the collection is not created yet
   @param template {String} optional collection template suffix (defaults to menu-category)
   @param label {String} link text
   @param class {String} optional CSS class
   @param style {String} optional inline style
 {%- endcomment -%}
 {%- capture menu_href -%}
-  {%- render 'care-kit-collection-url', handle: handle, template: template -%}
+  {%- render 'care-kit-collection-url', handle: handle, search_query: search, label: label, template: template -%}
 {%- endcapture -%}
 <a href="{{ menu_href | strip }}"{% if class != blank %} class="{{ class }}"{% endif %}{% if style != blank %} style="{{ style }}"{% endif %}>{{ label }}</a>
