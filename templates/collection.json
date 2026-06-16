@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "aplus_top": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Top A+ banner"
+      }
+    },
+    "slider_top": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Top A+ slider"
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "settings": {
+        "eyebrow": "SHOP THE RANGE",
+        "heading": "",
+        "description": "",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "aplus_middle": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Middle A+ banner"
+      }
+    },
+    "slider_bottom": {
+      "type": "collection-aplus-slider",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "alt_text": "Bottom slide 1" } },
+        "slide_2": { "type": "slide", "settings": { "alt_text": "Bottom slide 2" } },
+        "slide_3": { "type": "slide", "settings": { "alt_text": "Bottom slide 3" } }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Bottom A+ slider"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
+  },
+  "order": ["aplus_top", "slider_top", "products", "aplus_middle", "slider_bottom", "faq"]
+}
