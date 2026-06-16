@@ -1,51 +1,29 @@
 {%- liquid
   assign kit_handle = handle | default: ''
   assign kit_collection = collections[kit_handle]
-  assign kit_search = search_query | default: label | default: kit_handle | replace: '-', ' '
   assign care_kit_handles = 'leather-care-kit|suede-care-kit|nubuck-care-kit|fabric-care-kit|soles-care-kit' | split: '|'
 
-  if kit_collection != blank and kit_collection.all_products_count > 0
-    if template != blank
-      assign template_suffix = template
-    elsif care_kit_handles contains kit_handle
-      assign template_suffix = kit_handle
-    else
-      assign template_suffix = 'menu-category'
-    endif
-
-    assign collection_url = kit_collection.url
-
-    if template_suffix != blank
-      if collection_url contains '?'
-        assign collection_url = collection_url | append: '&view=' | append: template_suffix
-      else
-        assign collection_url = collection_url | append: '?view=' | append: template_suffix
-      endif
-    endif
-
-    echo collection_url
+  if template != blank
+    assign template_suffix = template
+  elsif care_kit_handles contains kit_handle
+    assign template_suffix = kit_handle
   else
-    capture destination_map
-      render 'menu-destination', handle: kit_handle, product_handle: product_handle, product_view: product_view
-    endcapture
+    assign template_suffix = 'menu-category'
+  endif
 
-    assign destination_parts = destination_map | strip | split: '|'
-    assign mapped_product = destination_parts[0]
-    assign mapped_view = destination_parts[1]
+  if kit_collection != blank
+    assign collection_url = kit_collection.url
+  else
+    assign collection_url = routes.collections_url | append: '/' | append: kit_handle
+  endif
 
-    if mapped_product != blank and all_products[mapped_product] != blank
-      assign product_url = all_products[mapped_product].url
-      if mapped_view != blank
-        if product_url contains '?'
-          assign product_url = product_url | append: '&view=' | append: mapped_view
-        else
-          assign product_url = product_url | append: '?view=' | append: mapped_view
-        endif
-      endif
-      echo product_url
+  if template_suffix != blank
+    if collection_url contains '?'
+      assign collection_url = collection_url | append: '&view=' | append: template_suffix
     else
-      assign encoded_query = kit_search | url_encode
-      echo routes.search_url | append: '?q=' | append: encoded_query | append: '&type=product'
+      assign collection_url = collection_url | append: '?view=' | append: template_suffix
     endif
   endif
+
+  echo collection_url
 -%}
