@@ -25,10 +25,19 @@
       "type": "bestsellers",
       "settings": {
         "collection": "kits",
+        "products_limit": 8,
+        "eyebrow": "BEST SELLERS",
+        "heading": "Bestselling Sneaker Care",
+        "view_all_label": "View All →",
+        "view_all_link": "",
+        "badge_text": "Bestseller",
+        "cta_text": "Shop Now",
         "rating_value": "4.9",
         "rating_count": "4.8",
         "bg_color": "#ffffff",
-        "accent_color": "#B8B8B8"
+        "accent_color": "#b8b8b8",
+        "autoplay": true,
+        "autoplay_speed": 5
       }
     },
     "trending-social": {
@@ -130,6 +139,8 @@
             "title": "Suede",
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_6.jpg",
             "collection": "suede-care-kit",
+            "product": "",
+            "page": "",
             "url": "",
             "description": ""
           }
@@ -140,6 +151,8 @@
             "title": "Leather",
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM.jpg",
             "collection": "leather-care-kit",
+            "product": "",
+            "page": "",
             "url": "",
             "description": ""
           }
@@ -150,6 +163,8 @@
             "title": "Nubuck",
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_4.jpg",
             "collection": "nubuck-care-kit",
+            "product": "",
+            "page": "",
             "url": "",
             "description": ""
           }
@@ -160,6 +175,8 @@
             "title": "Fabrics",
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_3.jpg",
             "collection": "fabric-care-kit",
+            "product": "",
+            "page": "",
             "url": "",
             "description": ""
           }
@@ -170,6 +187,8 @@
             "title": "Soles",
             "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_1.jpg",
             "collection": "soles-care-kit",
+            "product": "",
+            "page": "",
             "url": "",
             "description": ""
           }
@@ -516,6 +535,42 @@
     "17776334431f7fc508": {
       "type": "_blocks",
       "settings": {}
+    },
+    "blocks_znBaDB": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_95ea9a5_6WzRek": {
+          "type": "ai_gen_block_95ea9a5",
+          "settings": {
+            "assigned_product": "",
+            "section_padding": 40,
+            "story_gap": 20,
+            "border_radius": 12,
+            "background_color": "#ffffff",
+            "text_color": "#ffffff",
+            "dot_size": 12,
+            "dot_color": "#000000",
+            "dot_active_color": "#000000",
+            "title_size": 36,
+            "description_size": 18,
+            "story_1_title": "New Collection",
+            "story_1_description": "Discover our latest arrivals",
+            "story_1_link": "",
+            "story_2_title": "Summer Sale",
+            "story_2_description": "Up to 50% off selected items",
+            "story_2_link": "",
+            "story_3_title": "Best Sellers",
+            "story_3_description": "Shop our most popular products",
+            "story_3_link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_95ea9a5_6WzRek"
+      ],
+      "name": "Story banner",
+      "settings": {}
     }
   },
   "order": [
@@ -535,6 +590,7 @@
     "story_block_X9ACYJ",
     "hague-protect-dna",
     "17776077287b0fe0da",
-    "17776334431f7fc508"
+    "17776334431f7fc508",
+    "blocks_znBaDB"
   ]
 }
