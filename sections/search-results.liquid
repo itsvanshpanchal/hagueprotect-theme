@@ -1,0 +1,333 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .search-page {
+    padding: clamp(40px, 8vw, 80px) 0;
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .search-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 max(16px, var(--site-padding, 24px));
+  }
+
+  #shopify-section-{{ section.id }} .search-header {
+    text-align: center;
+    margin-bottom: clamp(32px, 6vw, 60px);
+  }
+
+  #shopify-section-{{ section.id }} .search-title {
+    font-family: 'Bahnschrift', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 600;
+    color: #111111;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .search-count {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e74c3c;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .search-grid,
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__card {
+    background: #ffffff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ff2b2b;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__image-wrap {
+    aspect-ratio: 1;
+    background: #f5f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__rating-badge {
+    background: #2ecc71;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+    color: #111111;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111111;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__compare {
+    font-size: 14px;
+    color: #999999;
+    text-decoration: line-through;
+  }
+
+  #shopify-section-{{ section.id }} .ckc-{{ section.id }}__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  #shopify-section-{{ section.id }} .search-form {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .search-form__input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .search-form__button {
+    background: #111111;
+    color: #ffffff;
+    padding: 0 28px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .search-empty {
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  #shopify-section-{{ section.id }} .search-empty__text {
+    font-size: 18px;
+    color: #666666;
+    margin: 0 0 24px;
+  }
+
+  #shopify-section-{{ section.id }} .search-empty__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #111111;
+    color: #ffffff;
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .search-grid,
+    #shopify-section-{{ section.id }} .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .search-grid,
+    #shopify-section-{{ section.id }} .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #shopify-section-{{ section.id }} .search-grid,
+    #shopify-section-{{ section.id }} .ckc-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<div class="search-page">
+  <div class="search-container">
+    {%- if search.performed -%}
+      <div class="search-header">
+        <h1 class="search-title">{{ section.settings.results_heading | default: 'Results for' }} "{{ search.terms | escape }}"</h1>
+        <p class="search-count">{{ search.results_count }} {{ section.settings.results_count_label | default: 'items found' }}</p>
+      </div>
+
+      {%- if search.results_count > 0 -%}
+        <div class="ckc-{{ section.id }}__grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {%- render 'care-kit-product-card',
+                product: item,
+                section_id: section.id,
+                rating_value: section.settings.rating_value,
+                rating_count: section.settings.rating_count
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="search-empty">
+          <p class="search-empty__text">{{ section.settings.empty_text | default: "We couldn't find any results for your search." }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="search-empty__btn">{{ section.settings.empty_button_label | default: 'Back to Shop' }}</a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="search-header">
+        <h1 class="search-title">{{ section.settings.default_heading | default: 'Search our store' }}</h1>
+      </div>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+        <input type="hidden" name="type" value="product">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder | default: 'What are you looking for?' }}" class="search-form__input">
+        <button type="submit" class="search-form__button">{{ section.settings.button_label | default: 'Search' }}</button>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "enabled_on": {
+    "templates": ["search"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "default_heading",
+      "label": "Default heading",
+      "default": "Search our store"
+    },
+    {
+      "type": "text",
+      "id": "results_heading",
+      "label": "Results heading prefix",
+      "default": "Results for"
+    },
+    {
+      "type": "text",
+      "id": "results_count_label",
+      "label": "Results count label",
+      "default": "items found"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search placeholder",
+      "default": "What are you looking for?"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Search button label",
+      "default": "Search"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_text",
+      "label": "Empty results text",
+      "default": "We couldn't find any results for your search."
+    },
+    {
+      "type": "text",
+      "id": "empty_button_label",
+      "label": "Empty results button label",
+      "default": "Back to Shop"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Rating count",
+      "default": "4.8"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search Results"
+    }
+  ]
+}
+{% endschema %}
