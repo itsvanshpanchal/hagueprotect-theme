@@ -1,29 +1,12 @@
 {%- liquid
   assign kit_handle = handle | default: ''
+  assign kit_search = search_query | default: kit_handle | replace: '-', ' '
   assign kit_collection = collections[kit_handle]
-  assign care_kit_handles = 'leather-care-kit|suede-care-kit|nubuck-care-kit|fabric-care-kit|soles-care-kit' | split: '|'
-
-  if template != blank
-    assign template_suffix = template
-  elsif care_kit_handles contains kit_handle
-    assign template_suffix = kit_handle
-  else
-    assign template_suffix = 'menu-category'
-  endif
 
   if kit_collection != blank
-    assign collection_url = kit_collection.url
+    echo kit_collection.url
   else
-    assign collection_url = routes.collections_url | append: '/' | append: kit_handle
+    assign encoded_query = kit_search | url_encode
+    echo routes.search_url | append: '?q=' | append: encoded_query | append: '&type=product'
   endif
-
-  if template_suffix != blank
-    if collection_url contains '?'
-      assign collection_url = collection_url | append: '&view=' | append: template_suffix
-    else
-      assign collection_url = collection_url | append: '?view=' | append: template_suffix
-    endif
-  endif
-
-  echo collection_url
 -%}
