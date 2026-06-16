@@ -1,0 +1,94 @@
+{%- liquid
+  assign menu_handle = handle | default: ''
+  assign mapped_product = ''
+  assign mapped_view = ''
+
+  case menu_handle
+    when 'signature-kit'
+      assign mapped_product = 'signature-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'signature-kit'
+    when 'essential-kit'
+      assign mapped_product = 'haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men'
+      assign mapped_view = 'essential-kit'
+    when 'refresh-kit'
+      assign mapped_product = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits'
+      assign mapped_view = 'refresh-kit'
+    when 'indepth-kit'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'indepth-kit'
+    when 'supreme-kit'
+      assign mapped_product = 'supreme-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'supreme-kit'
+    when 'leather-care-kit'
+      assign mapped_product = 'leathercarekit'
+      assign mapped_view = 'leather-care-kit'
+    when 'suede-care-kit'
+      assign mapped_product = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits'
+      assign mapped_view = 'suede-care-kit'
+    when 'nubuck-care-kit'
+      assign mapped_product = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits'
+    when 'fabric-care-kit'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+    when 'soles-care-kit'
+      assign mapped_product = 'sneaker-shoe-cleaner-refill-pack'
+      assign mapped_view = 'sole-cleaner'
+    when 'leather-suede-care-kit'
+      assign mapped_product = 'leathercarekit'
+      assign mapped_view = 'leather-suede-care'
+    when 'suede-dye-kit'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'indepth-suede-dye'
+    when 'proteonnxt-performance-kit'
+      assign mapped_product = 'signature-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'performance-kit'
+    when 'sneaker-cleaner-refill', 'refill-module'
+      assign mapped_product = 'sneaker-shoe-cleaner-refill-pack'
+      assign mapped_view = 'refill-module'
+    when 'canvas-care'
+      assign mapped_product = 'signature-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'signature-kit'
+    when 'mesh-care'
+      assign mapped_product = 'hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits'
+      assign mapped_view = 'refresh-kit'
+    when 'knit-care'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'indepth-kit'
+    when 'rubber-care'
+      assign mapped_product = 'haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men'
+      assign mapped_view = 'essential-kit'
+    when 'mixed-material-care'
+      assign mapped_product = 'supreme-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'supreme-kit'
+    when 'signature-suede-bundle'
+      assign mapped_product = 'signature-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'signature-suede'
+    when 'essential-leather-shaper-bundle'
+      assign mapped_product = 'haguepr-essential-shoe-sneaker-cleaning-kit-sneakers-for-men'
+      assign mapped_view = 'essential-leather-shaper'
+    when 'indepth-suede-dye-bundle'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'indepth-suede-dye'
+    when 'proteonnxt-suede-bundle'
+      assign mapped_product = 'signature-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'performance-suede'
+    when 'suede-dye-care-bundle'
+      assign mapped_product = 'essential-indepth-shoe-sneaker-cleaning-kit'
+      assign mapped_view = 'suede-dye-bundle'
+  endcase
+
+  if product_handle != blank
+    assign mapped_product = product_handle
+  endif
+
+  if product_view != blank
+    assign mapped_view = product_view
+  endif
+
+  if mapped_product != blank
+    if mapped_view != blank
+      echo mapped_product | append: '|' | append: mapped_view
+    else
+      echo mapped_product
+    endif
+  endif
+-%}
