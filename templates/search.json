@@ -1,8 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "search_results": {
       "type": "search-results",
       "settings": {
+        "default_heading": "Search our store",
+        "results_heading": "",
+        "results_count_label": "items found",
+        "placeholder": "What are you looking for?",
+        "button_label": "Search",
+        "empty_text": "We couldn't find any results for your search.",
+        "empty_button_label": "Back to Shop",
         "rating_value": "4.9",
         "rating_count": "4.8",
         "bg_color": "#ffffff"
@@ -11,6 +27,7 @@
     "story_banner_1": {
       "type": "story-block",
       "settings": {
+        "assigned_product": "",
         "padding_top": 48,
         "padding_bottom": 24,
         "border_radius": 0
@@ -19,6 +36,7 @@
     "story_banner_2": {
       "type": "story-block",
       "settings": {
+        "assigned_product": "",
         "padding_top": 24,
         "padding_bottom": 48,
         "border_radius": 0
@@ -63,11 +81,22 @@
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
       "settings": {
         "heading": "Things people often wonder"
       }
     }
   },
-  "order": ["search_results", "story_banner_1", "story_banner_2", "faq"]
+  "order": [
+    "search_results",
+    "story_banner_1",
+    "story_banner_2",
+    "faq"
+  ]
 }
