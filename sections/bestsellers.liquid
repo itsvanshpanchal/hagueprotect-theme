@@ -102,7 +102,7 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__viewport.is-transitioning .bs-coverflow-card:not(.is-active) {
-    filter: blur(1.2px);
+    /* Removed expensive blur filter that caused lag during transitions */
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__track {
@@ -127,9 +127,8 @@
     -webkit-tap-highlight-color: transparent;
     transition:
       transform var(--bs-duration) var(--bs-ease),
-      opacity calc(var(--bs-duration) * 0.85) ease,
-      filter calc(var(--bs-duration) * 0.6) ease;
-    will-change: transform, opacity, filter;
+      opacity calc(var(--bs-duration) * 0.85) ease;
+    will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     outline: none;
@@ -237,14 +236,15 @@
     width: 70%;
     height: 24%;
     background: radial-gradient(ellipse, rgba(0, 0, 0, 0.14), transparent 70%);
-    filter: blur(8px);
+    filter: blur(4px);
     opacity: 0.55;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    will-change: opacity, transform;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card.is-active .bs-coverflow-card__media::after {
     opacity: 0.85;
-    width: 82%;
+    transform: translateX(-50%) scaleX(1.17);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__image {
@@ -513,7 +513,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport.is-transitioning .bs-coverflow-card:not(.is-active) {
-      filter: none;
+      /* filter: none; */
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card {
