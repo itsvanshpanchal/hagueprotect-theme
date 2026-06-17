@@ -9,6 +9,21 @@
  */
 {
   "sections": {
+    "search_results": {
+      "type": "search-results",
+      "settings": {
+        "default_heading": "Search our store",
+        "results_heading": "Results for",
+        "results_count_label": "items found",
+        "placeholder": "What are you looking for?",
+        "button_label": "Search",
+        "empty_text": "We couldn't find any results for your search.",
+        "empty_button_label": "Back to Shop",
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
     "story_banner_2": {
       "type": "story-block",
       "settings": {
@@ -70,6 +85,7 @@
     }
   },
   "order": [
+    "search_results",
     "story_banner_2",
     "faq"
   ]
