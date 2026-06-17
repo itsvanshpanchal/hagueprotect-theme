@@ -220,7 +220,7 @@
   <div class="search-container">
     {%- if search.performed -%}
       <div class="search-header">
-        <h1 class="search-title">{{ section.settings.results_heading | default: 'Results for' }} "{{ search.terms | escape }}"</h1>
+        <h1 class="search-title">"{{ search.terms | escape }}"</h1>
         <p class="search-count">{{ search.results_count }} {{ section.settings.results_count_label | default: 'items found' }}</p>
       </div>
 

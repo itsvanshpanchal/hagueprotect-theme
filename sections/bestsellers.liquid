@@ -19,7 +19,7 @@
     background: var(--bs-bg);
     padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 96px);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    overflow: hidden;
+  overflow: hidden;
     position: relative;
   }
 
@@ -35,26 +35,26 @@
 
   #shopify-section-{{ section.id }} .bs-coverflow__container {
     max-width: 1280px;
-    margin: 0 auto;
+  margin: 0 auto;
     padding: 0 max(16px, var(--site-padding, 20px));
     position: relative;
     z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
     gap: 20px;
     margin-bottom: clamp(28px, 5vw, 44px);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
     color: #e74c3c;
-    font-size: 12px;
-    font-weight: 700;
+  font-size: 12px;
+  font-weight: 700;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+  text-transform: uppercase;
     display: block;
     margin-bottom: 8px;
   }
@@ -66,14 +66,14 @@
     line-height: 1.12;
     letter-spacing: -0.02em;
     color: #111111;
-    margin: 0;
-  }
+  margin: 0;
+}
 
   #shopify-section-{{ section.id }} .bs-coverflow__view-all {
-    font-size: 14px;
-    font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
     color: #111111;
-    text-decoration: none;
+  text-decoration: none;
     white-space: nowrap;
     transition: color 0.25s ease;
   }
@@ -145,12 +145,12 @@
     width: 100%;
     height: auto;
     min-height: 0;
-    background: #ffffff;
+  background: #ffffff;
     border-radius: 20px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
     transition:
       box-shadow 0.45s var(--bs-ease),
@@ -186,17 +186,17 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__badge {
-    position: absolute;
+  position: absolute;
     top: 14px;
     right: 14px;
     z-index: 2;
     background: #e74c3c;
-    color: #ffffff;
+  color: #ffffff;
     font-size: 10px;
-    font-weight: 700;
+  font-weight: 700;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 12px;
+  text-transform: uppercase;
+  padding: 6px 12px;
     border-radius: 999px;
   }
 
@@ -221,11 +221,11 @@
     min-height: var(--bs-media-h);
     max-height: var(--bs-media-h);
     background: linear-gradient(180deg, #f8f8fa 0%, #efeff2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
     padding: 20px 18px 16px;
-    overflow: hidden;
+  overflow: hidden;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__media::after {
@@ -264,8 +264,8 @@
   #shopify-section-{{ section.id }} .bs-coverflow-card__body {
     flex: 0 0 auto;
     padding: 14px 18px 14px;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
     gap: 6px;
     text-align: left;
     position: relative;
@@ -274,18 +274,18 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__rating-badge {
     background: #2ecc71;
     color: #111111;
     font-size: 12px;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 6px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__rating-count {
@@ -299,23 +299,23 @@
     font-weight: 600;
     color: #111111;
     line-height: 1.35;
-    margin: 0;
+  margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
+}
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__type {
     font-size: 12px;
-    color: #888888;
-    margin: 0;
+  color: #888888;
+  margin: 0;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__price-row {
-    display: flex;
+  display: flex;
     align-items: baseline;
-    gap: 8px;
+  gap: 8px;
     margin-top: 0;
     flex-shrink: 0;
   }
@@ -336,7 +336,7 @@
     margin-top: 8px;
     margin-bottom: 0;
     display: inline-flex;
-    align-items: center;
+  align-items: center;
     justify-content: center;
     width: 100%;
     min-height: 44px;
@@ -361,14 +361,14 @@
   #shopify-section-{{ section.id }} .bs-coverflow-nav {
     width: clamp(44px, 5vw, 54px);
     height: clamp(44px, 5vw, 54px);
-    border-radius: 50%;
+  border-radius: 50%;
     border: 1px solid rgba(17, 17, 17, 0.08);
     background: #ffffff;
     color: #111111;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+  cursor: pointer;
     flex-shrink: 0;
     z-index: 20;
     transition: transform 0.3s var(--bs-ease), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
@@ -402,7 +402,7 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__dots-row {
-    display: flex;
+  display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -421,10 +421,10 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    border: none;
+  border: none;
     padding: 0;
     background: #d8d8d8;
-    cursor: pointer;
+  cursor: pointer;
     transition: transform 0.3s var(--bs-ease), background 0.3s ease, width 0.3s var(--bs-ease);
   }
 
@@ -454,7 +454,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 12px;
+    gap: 12px;
       margin-bottom: 24px;
     }
 
@@ -700,12 +700,12 @@
           <span class="bs-coverflow__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
         <h2 class="bs-coverflow__heading">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
-      </div>
+          </div>
       {%- if section.settings.view_all_link != blank -%}
         <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All →' }}</a>
-      {%- else -%}
+          {%- else -%}
         <a href="{{ routes.all_products_collection_url }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All →' }}</a>
-      {%- endif -%}
+          {%- endif -%}
     </div>
 
     <div class="bs-coverflow__stage">
@@ -745,12 +745,12 @@
                     {%- else -%}
                       {{ 'product-1' | placeholder_svg_tag: 'bs-coverflow-card__image' }}
                     {%- endif -%}
-                  </div>
+              </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
                       <span class="bs-coverflow-card__rating-badge">★ {{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
-                    </div>
+            </div>
                     <h3 class="bs-coverflow-card__title">{{ product.title }}</h3>
                     {%- if product.type != blank -%}
                       <p class="bs-coverflow-card__type">{{ product.type }}</p>
@@ -760,12 +760,12 @@
                       {%- if product.compare_at_price > product.price -%}
                         <span class="bs-coverflow-card__compare">{{ product.compare_at_price | money }}</span>
                       {%- endif -%}
-                    </div>
+              </div>
                     <span class="bs-coverflow-card__cta">
                       {%- if card_variant.available -%}{{ section.settings.cta_text | default: 'Shop Now' }}{%- else -%}View Product{%- endif -%}
                     </span>
-                  </div>
-                </div>
+              </div>
+              </div>
               </button>
             {%- endfor -%}
           {%- else -%}
@@ -787,18 +787,18 @@
                   <span class="bs-coverflow-card__badge">{{ section.settings.badge_text | default: 'Bestseller' }}</span>
                   <div class="bs-coverflow-card__media">
                     {{ 'product-1' | placeholder_svg_tag: 'bs-coverflow-card__image' }}
-                  </div>
+              </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
                       <span class="bs-coverflow-card__rating-badge">★ {{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
-                    </div>
+            </div>
                     <h3 class="bs-coverflow-card__title">{{ mock_title }}</h3>
                     <p class="bs-coverflow-card__type">Premium Sneaker Care</p>
                     <div class="bs-coverflow-card__price-row">
                       <span class="bs-coverflow-card__price">Rs. 999</span>
                       <span class="bs-coverflow-card__compare">Rs. 1,299</span>
-                    </div>
+          </div>
                     <span class="bs-coverflow-card__cta">{{ section.settings.cta_text | default: 'Shop Now' }}</span>
                   </div>
                 </div>
