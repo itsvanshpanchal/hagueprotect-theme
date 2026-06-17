@@ -27,7 +27,7 @@
   elsif all_products[kit_handle] != blank
     echo all_products[kit_handle].url
   else
-    assign exact_search = '\"' | append: kit_search | append: '\"'
+    assign exact_search = '"' | append: kit_search | append: '"'
     assign encoded_query = exact_search | url_encode
     echo routes.search_url | append: '?q=' | append: encoded_query | append: '&type=product'
   endif
