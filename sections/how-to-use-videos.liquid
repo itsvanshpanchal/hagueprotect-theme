@@ -871,16 +871,7 @@
     // Event Listeners for Cards (Hover desktop / Tap mobile)
     cards.forEach(card => {
       const id = card.dataset.tutorialId;
-      card.addEventListener('mouseenter', () => {
-        if (window.innerWidth > 1024) {
-           // Do not open modal on hover, just activate the state on card?
-           // Wait, "On desktop, when the user moves the cursor over any video card, that tutorial should immediately become active without requiring a click. Clicking should also activate the tutorial. On mobile and tablet devices, hovering should automatically convert to tap interaction."
-           // Does activating mean opening the overlay? Usually hovering opens a preview or changes state. The user says "When a tutorial becomes active, display a beautiful premium overlay". So hover = open overlay. That's extremely aggressive UI, but it's what they asked.
-           // Actually, let's open modal on hover or click.
-           activateTutorial(id);
-           openModal();
-        }
-      });
+
       card.addEventListener('click', () => {
         activateTutorial(id);
         openModal();
