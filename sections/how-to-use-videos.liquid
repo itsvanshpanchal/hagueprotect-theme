@@ -37,6 +37,25 @@
     gap: 30px;
   }
 
+  @media (max-width: 768px) {
+    .premium-htu__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding-bottom: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .premium-htu__grid::-webkit-scrollbar {
+      display: none;
+    }
+    .premium-htu__card {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+  }
+
   .premium-htu__card {
     position: relative;
     background: var(--bg-white);
