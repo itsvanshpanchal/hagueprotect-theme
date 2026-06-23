@@ -39,20 +39,8 @@
 
   @media (max-width: 768px) {
     .premium-htu__grid {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 16px;
-      padding-bottom: 16px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .premium-htu__grid::-webkit-scrollbar {
-      display: none;
-    }
-    .premium-htu__card {
-      flex: 0 0 85%;
-      scroll-snap-align: center;
+      display: grid;
+      grid-template-columns: 1fr;
     }
   }
 
@@ -185,12 +173,14 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
   .premium-htu__modal.is-open {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -803,12 +793,14 @@
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     }
 
     function closeModal() {
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       pauseAllVideos();
       activeId = null;
     }
