@@ -664,6 +664,9 @@
           
           <div class="premium-htu__card-info">
             <h3 class="premium-htu__card-title">{{ block.settings.title | default: 'Tutorial Video' }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p class="premium-htu__card-desc" style="font-size: 14px; color: var(--text-light); margin: 0 0 8px;">{{ block.settings.text }}</p>
+            {%- endif -%}
             <div class="premium-htu__card-meta">
               {%- if block.settings.category != blank -%}
                 <span>{{ block.settings.category }}</span>
@@ -701,6 +704,9 @@
               
               <div class="premium-htu__modal-info">
                 <h2 class="premium-htu__modal-info-title">{{ block.settings.title }}</h2>
+                {%- if block.settings.text != blank -%}
+                  <p class="premium-htu__modal-info-desc" style="font-size: 16px; color: #eee; margin-top: -8px; margin-bottom: 24px;">{{ block.settings.text }}</p>
+                {%- endif -%}
                 <div class="premium-htu__modal-info-meta">
                   {%- if block.settings.duration != blank -%}
                     <div><strong>Est. Time:</strong> {{ block.settings.duration }}</div>
@@ -994,7 +1000,7 @@
   ],
   "blocks": [
     {
-      "type": "tutorial",
+      "type": "video",
       "name": "Tutorial Video",
       "settings": [
         {
@@ -1006,6 +1012,11 @@
           "id": "title",
           "label": "Title",
           "default": "How to Clean Your Sneakers"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Short Description / Subtitle"
         },
         {
           "type": "image_picker",
@@ -1139,8 +1150,8 @@
     {
       "name": "Premium How to Use",
       "blocks": [
-        { "type": "tutorial" },
-        { "type": "tutorial" }
+        { "type": "video" },
+        { "type": "video" }
       ]
     }
   ]
