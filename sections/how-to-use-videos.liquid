@@ -539,64 +539,6 @@
     background: var(--brand-red);
   }
 
-  .premium-htu__modal-slider {
-    height: 160px;
-    background: #111;
-    border-top: 1px solid #333;
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    overflow-x: auto;
-    gap: 16px;
-  }
-
-  .premium-htu__modal-slider::-webkit-scrollbar {
-    height: 6px;
-  }
-  .premium-htu__modal-slider::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
-    border-radius: 10px;
-  }
-
-  .premium-htu__slider-item {
-    flex: 0 0 200px;
-    height: 112px;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: var(--transition);
-  }
-
-  .premium-htu__slider-item:hover,
-  .premium-htu__slider-item.is-active {
-    border-color: var(--brand-red);
-    transform: translateY(-4px);
-  }
-
-  .premium-htu__slider-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .premium-htu__slider-item-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: flex-end;
-    padding: 12px;
-  }
-
-  .premium-htu__slider-item-title {
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.3;
-    margin: 0;
-  }
 
   @media (max-width: 1024px) {
     .premium-htu__crossfade-item {
@@ -642,6 +584,8 @@
           <div class="premium-htu__card-thumb">
             {%- if block.settings.thumbnail != blank -%}
               {{ block.settings.thumbnail | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- elsif block.settings.html5_video != blank and block.settings.html5_video.preview_image -%}
+              {{ block.settings.html5_video.preview_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
             {%- else -%}
               {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
@@ -816,21 +760,7 @@
         {%- endfor -%}
       </div>
 
-      <!-- Bottom Slider -->
-      <div class="premium-htu__modal-slider">
-        {%- for block in section.blocks -%}
-          <div class="premium-htu__slider-item" data-target-id="{{ block.id }}">
-            {%- if block.settings.thumbnail != blank -%}
-              {{ block.settings.thumbnail | image_url: width: 400 | image_tag: loading: 'lazy' }}
-            {%- else -%}
-              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-            <div class="premium-htu__slider-item-overlay">
-              <h4 class="premium-htu__slider-item-title">{{ block.settings.title }}</h4>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
+
     </div>
   </div>
 </div>
