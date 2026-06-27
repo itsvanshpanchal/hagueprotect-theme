@@ -32,15 +32,6 @@
         "border_radius": 0
       }
     },
-    "story_banner_2": {
-      "type": "story-block",
-      "settings": {
-        "assigned_product": "",
-        "padding_top": 24,
-        "padding_bottom": 48,
-        "border_radius": 0
-      }
-    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -93,9 +84,8 @@
     }
   },
   "order": [
-    "products",
     "story_banner_1",
-    "story_banner_2",
+    "products",
     "faq"
   ]
 }
