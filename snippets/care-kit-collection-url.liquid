@@ -4,7 +4,15 @@
   assign kit_search = search_query | default: label | default: kit_handle | replace: '-', ' '
   assign care_kit_handles = 'leather-care-kit|suede-care-kit|nubuck-care-kit|fabric-care-kit|soles-care-kit' | split: '|'
 
-  if kit_collection != blank
+  comment
+    Direct product handles — these kits are known products, so link straight
+    to their product pages instead of relying on collections or all_products.
+  endcomment
+  assign direct_product_handles = 'signature-kit|refresh-kit|indepth-kit|supreme-kit' | split: '|'
+
+  if direct_product_handles contains kit_handle
+    echo '/products/' | append: kit_handle
+  elsif kit_collection != blank
     if template != blank
       assign template_suffix = template
     elsif care_kit_handles contains kit_handle
