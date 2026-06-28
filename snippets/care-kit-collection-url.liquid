@@ -5,13 +5,16 @@
   assign care_kit_handles = 'leather-care-kit|suede-care-kit|nubuck-care-kit|fabric-care-kit|soles-care-kit' | split: '|'
 
   comment
-    Direct product handles — these kits are known products, so link straight
-    to their product pages instead of relying on collections or all_products.
+    Direct product-page redirects — map menu handles to real Shopify
+    product handles so links go straight to product detail pages.
   endcomment
-  assign direct_product_handles = 'signature-kit|refresh-kit|indepth-kit|supreme-kit' | split: '|'
 
-  if direct_product_handles contains kit_handle
-    echo '/products/' | append: kit_handle
+  if kit_handle == 'signature-kit'
+    echo '/products/signature-shoe-sneaker-cleaning-kit'
+  elsif kit_handle == 'indepth-kit'
+    echo '/products/essential-indepth-shoe-sneaker-cleaning-kit'
+  elsif kit_handle == 'supreme-kit'
+    echo '/products/supreme-shoe-sneaker-cleaning-kit'
   elsif kit_collection != blank
     if template != blank
       assign template_suffix = template
@@ -40,3 +43,4 @@
     echo routes.search_url | append: '?q=' | append: encoded_query | append: '&type=product'
   endif
 -%}
+
