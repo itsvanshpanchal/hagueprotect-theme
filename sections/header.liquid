@@ -627,48 +627,147 @@
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
   <div class="megamenu-panel" id="MegaMenuPanel">
-    {%- assign mega_links = linklists[section.settings.shop_all_menu] -%}
-    {%- if mega_links != blank and mega_links.links.size > 0 -%}
-    <div class="megamenu-grid" style="grid-template-columns: repeat({{ mega_links.links.size }}, 1fr); gap: 40px;">
-      {%- for column_link in mega_links.links -%}
-        {%- assign col_index = forloop.index -%}
-        {%- assign col_heading_color = '#111111' -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'mega_column_style' and block.settings.column_index == col_index -%}
-            {%- assign col_heading_color = block.settings.heading_color -%}
-          {%- endif -%}
-        {%- endfor -%}
-        <div class="megamenu-col">
-          {%- for heading_link in column_link.links -%}
-            <h3 class="megamenu-heading" style="color: {{ col_heading_color }} !important; margin-bottom: 12px;">{{ heading_link.title }}</h3>
-            {%- if heading_link.links.size > 0 -%}
-            <ul class="megamenu-links" style="margin-bottom: 24px;">
-              {%- for product_link in heading_link.links -%}
-                <li class="megamenu-link-item">
-                  {%- assign link_parts = product_link.title | split: '|' -%}
-                  {%- if link_parts.size > 1 -%}
-                    <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">{{ link_parts[0] | strip }}</span>
-                    <a href="{{ product_link.url }}" style="font-size: 13px;">{{ link_parts[1] | strip }}</a>
-                  {%- else -%}
-                    <a href="{{ product_link.url }}">{{ product_link.title }}</a>
-                  {%- endif -%}
-                </li>
-              {%- endfor -%}
-            </ul>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      {%- endfor -%}
-    </div>
-    {%- else -%}
-    <div class="megamenu-grid" style="grid-template-columns: 1fr; gap: 40px;">
-      <div class="megamenu-col" style="text-align: center; padding: 24px;">
-        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Shop All Menu</h3>
-        <p style="font-size: 14px; color: #888; font-weight: 500; margin-bottom: 16px;">Configure the mega menu in Theme Settings &rarr; Header &rarr; &ldquo;Shop All Mega Menu&rdquo;.</p>
-        <a href="/collections/all" style="font-size: 14px; color: #FF2B2B; font-weight: 700; text-decoration: none;">Browse All Products &rarr;</a>
+    <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
+      
+      <!-- Column 1: Kits & Solutions -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Sneaker Care Kits</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'signature-kit', search: 'Signature Kit', label: 'Signature Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'refresh-kit', search: 'Refresh Kit', label: 'Refresh Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'indepth-kit', search: 'Indepth Kit', label: 'Indepth Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'supreme-kit', search: 'Supreme Kit', label: 'Supreme Kit' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Material Care Kits</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'fabric-care-kit', search: 'Fabric Care Kit', label: 'Fabric Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Soles Care Kit' %}</li>
+        </ul>
+
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'Leather Suede Care Kit', label: 'Leather & Suede Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-dye-kit', search: 'Suede Dye Kit', label: 'Suede Dye Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'proteonnxt-performance-kit', search: 'Proteonnxt Performance Kit', label: 'Proteonnxt Performance Kit' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Cleaning Solutions</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'power-cleaner', search: 'power cleaner', label: 'Power Cleaner' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-cleaner', search: 'suede cleaner', label: 'Suede Cleaner' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'stain-treater-mesh', search: 'stain treater', label: 'Stain Treater for Mesh' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-ultra-clean', search: 'leather clean', label: 'Leather Ultra Clean' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-cream', search: 'leather cream', label: 'Leather Cream' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-ink-remover', search: 'leather ink', label: 'Leather Ink Remover' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'midsole-reviver', search: 'midsole reviver', label: 'Midsole Reviver' %}</li>
+        </ul>
       </div>
+
+      <!-- Column 2: Shop by Use & More -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Shop by Use</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'delicate-clean', search: 'delicate clean', label: '1. Delicate Clean' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'deep-clean', search: 'deep clean', label: '2. Deep Clean' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'on-the-go-clean', search: 'on the go', label: '3. On the Go Clean' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'mess-free-clean', search: 'mess free', label: '4. Mess free Clean' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shop-by-deodorizer', search: 'deodorizer', label: '5. Deodorizer' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Specialty Care</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'edge-on-custom-pen', search: 'Edge on Custom Pen', label: 'Edge on Custom Pen' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Conditioner</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-conditioner', search: 'Leather Conditioner', label: 'Leather Conditioner' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Refill Pack</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'sneaker-cleaner-refill', search: 'Sneaker Cleaner Refill', label: 'Sneaker Cleaner Refill' %}</li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Care by Fabric -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Care by Fabric</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">1. Leather</span>
+            {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">2. Suede</span>
+            {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">3. Canvas</span>
+            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Signature Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">4. Mesh</span>
+            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Refresh Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">5. Knit</span>
+            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Indepth Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">6. Nubuck</span>
+            {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">7. Rubber</span>
+            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Essential Kit', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">8. Midsole & Sole</span>
+            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Sole Cleaner', style: 'font-size: 13px;' %}
+          </li>
+          <li class="megamenu-link-item">
+            <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">9. Mixed Material</span>
+            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Supreme Kit', style: 'font-size: 13px;' %}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Deodorizers & Accessories -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Deodorizers</h3>
+        <ul class="megamenu-links" style="margin-bottom: 24px;">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'citrus-shoe-deodorizer', search: 'citrus deodorizer', label: 'Citrus - Shoe Deodorizer' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'lavender-bliss-shoe-deodorizer', search: 'lavender deodorizer', label: 'Lavender Bliss - Shoe Deodorizer' %}</li>
+        </ul>
+
+        <h3 class="megamenu-heading" style="margin-bottom: 12px;">Accessories</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'microfiber-towel', search: 'microfiber towel', label: 'Microfiber Towel - Pack of 4' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-tree', search: 'shoe tree', label: 'Shoe Tree - Pack of 2' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'crease-defender', search: 'crease defender', label: 'Crease Defender - Pack of 2' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4' %}</li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Super Savers -->
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">Super Savers</h3>
+        <ul class="megamenu-links">
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'signature-suede-bundle', search: 'signature suede kit', label: 'Signature Kit + Suede Care Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'essential-leather-shaper-bundle', search: 'essential leather shaper', label: 'Essential Kit + Leather Care Kit + Shoe Shaper' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'indepth-suede-dye-bundle', search: 'indepth suede dye', label: 'Indepth Kit + Suede Dye Kit' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'refill-module', search: 'refill module', label: 'Refill Module' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'proteonnxt-suede-bundle', search: 'proteonnxt suede', label: 'Proteonnxt Performance Kit + Suede Care' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'leather suede care', label: 'Leather & Suede Care' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-dye-care-bundle', search: 'suede dye kit', label: 'Suede Dye + Suede Care Kit' %}</li>
+        </ul>
+      </div>
+
     </div>
-    {%- endif -%}
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -725,40 +824,105 @@
         <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2"/></svg>
       </a>
       <div class="mobile-accordion-content" id="MobileShopContent" style="flex-direction: column;">
-        {%- assign mega_links_mobile = linklists[section.settings.shop_all_menu] -%}
-        {%- if mega_links_mobile != blank and mega_links_mobile.links.size > 0 -%}
-          {%- for column_link in mega_links_mobile.links -%}
-            {%- assign col_index_m = forloop.index -%}
-            {%- assign mobile_heading_color = '#111' -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'mega_column_style' and block.settings.column_index == col_index_m -%}
-                {%- assign mobile_heading_color = block.settings.heading_color -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- for heading_link in column_link.links -%}
-              <div>
-                <h4 class="mobile-accordion-category-heading" style="color: {{ mobile_heading_color }};">{{ heading_link.title }}</h4>
-                {%- if heading_link.links.size > 0 -%}
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
-                  {%- for product_link in heading_link.links -%}
-                    {%- assign link_parts_m = product_link.title | split: '|' -%}
-                    {%- if link_parts_m.size > 1 -%}
-                      <a href="{{ product_link.url }}" style="color:#666; text-decoration:none; font-size:14px;">{{ link_parts_m[0] | strip }} &mdash; {{ link_parts_m[1] | strip }}</a>
-                    {%- else -%}
-                      <a href="{{ product_link.url }}" style="color:#666; text-decoration:none; font-size:14px;">{{ product_link.title }}</a>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </div>
-                {%- endif -%}
-              </div>
-            {%- endfor -%}
-          {%- endfor -%}
-        {%- else -%}
-          <div style="padding: 16px 0;">
-            <p style="font-size: 13px; color: #888;">Menu not configured. Visit Theme Settings to set up the Shop All menu.</p>
-            <a href="/collections/all" style="color:#FF2B2B; text-decoration:none; font-size:14px; font-weight: 700;">Browse All Products &rarr;</a>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">Sneaker Care Kits</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'signature-kit', search: 'Signature Kit', label: 'Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'refresh-kit', search: 'Refresh Kit', label: 'Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'indepth-kit', search: 'Indepth Kit', label: 'Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'supreme-kit', search: 'Supreme Kit', label: 'Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
           </div>
-        {%- endif -%}
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">Material Care Kits</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'fabric-care-kit', search: 'Fabric Care Kit', label: 'Fabric Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Soles Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">More Kits</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'Leather Suede Care Kit', label: 'Leather & Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'suede-dye-kit', search: 'Suede Dye Kit', label: 'Suede Dye Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'proteonnxt-performance-kit', search: 'Proteonnxt Performance Kit', label: 'Proteonnxt Performance Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">Cleaning Solutions</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'power-cleaner', search: 'power cleaner', label: 'Power Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'suede-cleaner', search: 'suede cleaner', label: 'Suede Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'stain-treater-mesh', search: 'stain treater', label: 'Stain Treater for Mesh', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'leather-ultra-clean', search: 'leather clean', label: 'Leather Ultra Clean', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'leather-cream', search: 'leather cream', label: 'Leather Cream', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'leather-ink-remover', search: 'leather ink', label: 'Leather Ink Remover', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'midsole-reviver', search: 'midsole reviver', label: 'Midsole Reviver', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Shop by Use</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'delicate-clean', search: 'delicate clean', label: '1. Delicate Clean', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'deep-clean', search: 'deep clean', label: '2. Deep Clean', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'on-the-go-clean', search: 'on the go', label: '3. On the Go Clean', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mess-free-clean', search: 'mess free', label: '4. Mess free Clean', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'shop-by-deodorizer', search: 'deodorizer', label: '5. Deodorizer', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Specialty, Conditioner & Refill</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'edge-on-custom-pen', search: 'Edge on Custom Pen', label: 'Edge on Custom Pen', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'leather-conditioner', search: 'Leather Conditioner', label: 'Leather Conditioner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'sneaker-cleaner-refill', search: 'Sneaker Cleaner Refill', label: 'Sneaker Cleaner Refill', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Care by Fabric</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Canvas — Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Mesh — Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Knit — Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Rubber — Essential Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Midsole & Sole — Sole Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Mixed Material — Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Deodorizers</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'citrus-shoe-deodorizer', search: 'citrus deodorizer', label: 'Citrus - Shoe Deodorizer', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'lavender-bliss-shoe-deodorizer', search: 'lavender deodorizer', label: 'Lavender Bliss - Shoe Deodorizer', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">Super Savers</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'signature-suede-bundle', search: 'signature suede kit', label: 'Signature Kit + Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'essential-leather-shaper-bundle', search: 'essential leather shaper', label: 'Essential Kit + Leather Care Kit + Shoe Shaper', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'indepth-suede-dye-bundle', search: 'indepth suede dye', label: 'Indepth Kit + Suede Dye Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'refill-module', search: 'refill module', label: 'Refill Module', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'proteonnxt-suede-bundle', search: 'proteonnxt suede', label: 'Proteonnxt Performance Kit + Suede Care', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'leather suede care', label: 'Leather & Suede Care', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'suede-dye-care-bundle', search: 'suede dye kit', label: 'Suede Dye + Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
+        <div>
+          <h4 class="mobile-accordion-category-heading">Accessories</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {% render 'header-menu-link', handle: 'microfiber-towel', search: 'microfiber towel', label: 'Microfiber Towel - Pack of 4', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'shoe-tree', search: 'shoe tree', label: 'Shoe Tree - Pack of 2', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'crease-defender', search: 'crease defender', label: 'Crease Defender - Pack of 2', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+          </div>
+        </div>
       </div>
     </div>
     
@@ -988,12 +1152,6 @@
       "default": "main-menu"
     },
     {
-      "type": "link_list",
-      "id": "shop_all_menu",
-      "label": "Shop All Mega Menu",
-      "info": "Select a 3-level navigation menu: Level 1 = Columns, Level 2 = Category Headings, Level 3 = Product Links. Tip: Use a pipe character | in link titles to show subtitles on desktop (e.g. 1. Leather|Leather Care Kit)."
-    },
-    {
       "type": "text",
       "id": "logo_text",
       "label": "Logo Text",
@@ -1004,31 +1162,6 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#ffffff"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "mega_column_style",
-      "name": "Column Heading Color",
-      "limit": 8,
-      "settings": [
-        {
-          "type": "range",
-          "id": "column_index",
-          "min": 1,
-          "max": 8,
-          "step": 1,
-          "label": "Column Number",
-          "default": 1,
-          "info": "Which column in the Shop All menu to apply this color to"
-        },
-        {
-          "type": "color",
-          "id": "heading_color",
-          "label": "Heading Color",
-          "default": "#FF2B2B"
-        }
-      ]
     }
   ]
 }
