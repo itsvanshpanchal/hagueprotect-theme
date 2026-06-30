@@ -666,7 +666,7 @@
     OUR BRANDS — multi-brand navigation bar
     Logos are uploaded to Shopify Assets and referenced directly.
     To repoint a brand, edit only the two URLs below.
-    Required asset files:  vanrosector-logo.png · science-of-raw-logo.png
+    Required asset files:  logo-vanrosector.svg · logo-science-of-raw.svg
     ============================================================
   {%- endcomment -%}
   {%- assign vanrosector_url    = '/pages/vanrosector' -%}
@@ -686,14 +686,14 @@
 
         {%- comment -%} 2 · Vanrosector (native 940×343) {%- endcomment -%}
         <a href="{{ vanrosector_url }}" class="brand-bar__item" aria-label="Vanrosector">
-          <img src="{{ 'vanrosector-logo.png' | asset_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
+          <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
         </a>
 
         <span class="brand-bar__divider" aria-hidden="true"></span>
 
         {%- comment -%} 3 · Science of Raw (native 1000×500) {%- endcomment -%}
         <a href="{{ science_of_raw_url }}" class="brand-bar__item" aria-label="Science of Raw">
-          <img src="{{ 'science-of-raw-logo.png' | asset_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
+          <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
         </a>
 
       </div>
