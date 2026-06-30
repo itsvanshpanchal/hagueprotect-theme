@@ -1,0 +1,40 @@
+{%- comment -%}
+  Custom 404.
+  Shopify serves this template for any URL with no matching resource.
+  We use it so the brand "home pages" resolve even when no Shopify Page
+  record exists yet:
+    /pages/vanrosector      -> renders snippets/brand-vanrosector
+    /pages/science-of-raw   -> renders snippets/brand-science-of-raw
+  Any other unmatched URL shows the normal not-found message below.
+
+  Note: these brand URLs still return an HTTP 404 status. That is fine for
+  visitors (the page looks and works like a home page), but for SEO the
+  proper long-term fix is to create the two Pages in Admin and assign the
+  matching templates — the page route then takes over before this 404.
+{%- endcomment -%}
+
+{%- assign req = request.path | downcase -%}
+
+{%- if req contains 'vanrosector' -%}
+  {%- render 'brand-vanrosector' -%}
+
+{%- elsif req contains 'science-of-raw' -%}
+  {%- render 'brand-science-of-raw' -%}
+
+{%- else -%}
+  <section style="font-family:'Inter',sans-serif; background:#f4f4f5; padding:120px 20px; min-height:60vh; display:flex; align-items:center; justify-content:center;">
+    <div style="max-width:520px; width:100%; text-align:center; background:#ffffff; border:1px solid rgba(0,0,0,0.06); border-radius:24px; box-shadow:0 30px 60px rgba(0,0,0,0.08); padding:56px 40px;">
+      <p style="font-size:13px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:#FF2B2B; margin:0 0 14px;">Error 404</p>
+      <h1 style="font-size:clamp(28px,5vw,40px); font-weight:800; letter-spacing:-0.025em; color:#111; margin:0 0 14px; line-height:1.1;">Page not found</h1>
+      <p style="font-size:16px; color:#6b6b6b; line-height:1.6; margin:0 0 32px;">The page you were looking for doesn't exist or may have moved.</p>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex; gap:8px; max-width:380px; margin:0 auto 28px;">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search the store…" style="flex:1; min-width:0; font-family:inherit; font-size:15px; padding:13px 16px; border:1px solid rgba(0,0,0,0.15); border-radius:100px; outline:none;">
+        <button type="submit" style="font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:#111; border:none; padding:13px 22px; border-radius:100px; cursor:pointer;">Search</button>
+      </form>
+      <a href="/" style="display:inline-flex; align-items:center; gap:9px; font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:#FF2B2B; padding:14px 30px; border-radius:100px; text-decoration:none;">
+        Back to Home
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+{%- endif -%}
