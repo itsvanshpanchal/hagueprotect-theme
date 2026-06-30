@@ -21,6 +21,10 @@
         "image_mobile": "shopify://shop_images/1080x1350_mobile_banner.jpg"
       }
     },
+    "featured-brands": {
+      "type": "featured-brands",
+      "settings": {}
+    },
     "bestsellers": {
       "type": "bestsellers",
       "settings": {
@@ -544,6 +548,7 @@
   },
   "order": [
     "hero",
+    "featured-brands",
     "bestsellers",
     "trending-social",
     "materials-showcase",

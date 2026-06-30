@@ -1,0 +1,313 @@
+{%- comment -%}
+  ============================================================
+  FEATURED BRANDS — homepage multi-brand showcase
+  Vanrosector + Science of Raw. Logos are uploaded to Shopify
+  Assets and referenced directly via asset_url (no image_picker).
+  To repoint a brand, edit only the two URLs below.
+  Required asset files: vanrosector-logo.png · science-of-raw-logo.png
+  ============================================================
+{%- endcomment -%}
+{%- assign vanrosector_url    = 'https://YOUR-VANROSECTOR-STORE-URL' -%}
+{%- assign science_of_raw_url = 'https://YOUR-SCIENCE-OF-RAW-STORE-URL' -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .brands-feature {
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: {{ section.settings.padding_top | default: 88 }}px 16px {{ section.settings.padding_bottom | default: 88 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #FF2B2B;
+    margin: 0 0 12px;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__heading {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0 0 14px;
+    line-height: 1.1;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .brands-feature__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    background: #ffffff;
+    border: 1px solid #ececec;
+    border-radius: 18px;
+    padding: 52px 32px 44px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease;
+    will-change: transform;
+  }
+
+  /* coloured accent bar that animates in on hover */
+  #shopify-section-{{ section.id }} .brand-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--brand-accent, #111111);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #shopify-section-{{ section.id }} .brand-card:hover,
+  #shopify-section-{{ section.id }} .brand-card:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.10);
+    border-color: #e0e0e0;
+    outline: none;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card:hover::before,
+  #shopify-section-{{ section.id }} .brand-card:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  #shopify-section-{{ section.id }} .brand-card:focus-visible {
+    box-shadow: 0 0 0 2px #FF2B2B, 0 24px 48px rgba(0, 0, 0, 0.10);
+  }
+
+  #shopify-section-{{ section.id }} .brand-card__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    margin-bottom: 22px;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card__logo img {
+    display: block;
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 260px;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card__tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #777777;
+    line-height: 1.55;
+    margin: 0 0 24px;
+    max-width: 340px;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand-accent, #111111);
+  }
+
+  #shopify-section-{{ section.id }} .brand-card__cta svg {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #shopify-section-{{ section.id }} .brand-card:hover .brand-card__cta svg,
+  #shopify-section-{{ section.id }} .brand-card:focus-visible .brand-card__cta svg {
+    transform: translateX(5px);
+  }
+
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .brands-feature {
+      padding: {{ section.settings.padding_top | default: 88 | times: 0.65 | round }}px 14px {{ section.settings.padding_bottom | default: 88 | times: 0.65 | round }}px;
+    }
+    #shopify-section-{{ section.id }} .brands-feature__head { margin-bottom: 32px; }
+    #shopify-section-{{ section.id }} .brands-feature__grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    #shopify-section-{{ section.id }} .brand-card { padding: 40px 24px 36px; }
+    #shopify-section-{{ section.id }} .brand-card__logo { height: 72px; margin-bottom: 18px; }
+    #shopify-section-{{ section.id }} .brand-card__logo img { max-height: 56px; max-width: 200px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .brand-card,
+    #shopify-section-{{ section.id }} .brand-card__cta svg { transition: none; }
+    #shopify-section-{{ section.id }} .brand-card:hover,
+    #shopify-section-{{ section.id }} .brand-card:focus-visible { transform: none; }
+    #shopify-section-{{ section.id }} .brand-card:hover .brand-card__cta svg { transform: none; }
+  }
+{%- endstyle -%}
+
+<section class="brands-feature" aria-labelledby="brands-feature-heading-{{ section.id }}">
+  <div class="brands-feature__inner">
+
+    <div class="brands-feature__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="brands-feature__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="brands-feature__heading" id="brands-feature-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="brands-feature__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="brands-feature__grid">
+
+      {%- comment -%} Brand 1 · Vanrosector (native 940×343) {%- endcomment -%}
+      <a href="{{ vanrosector_url }}"
+         class="brand-card"
+         style="--brand-accent: #8a6a3b;"
+         aria-label="Visit Vanrosector">
+        <span class="brand-card__logo">
+          {{ 'vanrosector-logo.png' | asset_url | image_tag: alt: 'Vanrosector', loading: 'lazy', width: 260, height: 95 }}
+        </span>
+        <p class="brand-card__tag">{{ section.settings.vanrosector_tagline }}</p>
+        <span class="brand-card__cta">
+          {{ section.settings.cta_label }}
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      {%- comment -%} Brand 2 · Science of Raw (native 1000×500) {%- endcomment -%}
+      <a href="{{ science_of_raw_url }}"
+         class="brand-card"
+         style="--brand-accent: #27355f;"
+         aria-label="Visit Science of Raw">
+        <span class="brand-card__logo">
+          {{ 'science-of-raw-logo.png' | asset_url | image_tag: alt: 'Science of Raw', loading: 'lazy', width: 260, height: 130 }}
+        </span>
+        <p class="brand-card__tag">{{ section.settings.science_of_raw_tagline }}</p>
+        <span class="brand-card__cta">
+          {{ section.settings.cta_label }}
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Brands",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Logos load from Assets (vanrosector-logo.png, science-of-raw-logo.png). Store URLs are set at the top of sections/featured-brands.liquid."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR FAMILY OF BRANDS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore the Ecosystem"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Three brands, one pursuit of premium care and craft. Discover what else the family has to offer."
+    },
+    {
+      "type": "text",
+      "id": "vanrosector_tagline",
+      "label": "Vanrosector tagline",
+      "default": "Journey Through Nature's Finest Essence."
+    },
+    {
+      "type": "text",
+      "id": "science_of_raw_tagline",
+      "label": "Science of Raw tagline",
+      "default": "Pure, raw, and precisely refined."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Visit Store"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 88
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Brands"
+    }
+  ]
+}
+{% endschema %}
