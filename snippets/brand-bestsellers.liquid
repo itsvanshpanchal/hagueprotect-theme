@@ -1,0 +1,58 @@
+{%- comment -%}
+  Shared bestseller product grid for the brand home pages.
+  Params:
+    accent  - brand accent colour (hex)
+    heading - optional section heading (defaults to "Most loved right now")
+  Pulls from the "kits" collection (same as the homepage bestsellers),
+  falling back to all products if that collection is empty/missing.
+{%- endcomment -%}
+
+{%- assign bs_collection = collections['kits'] -%}
+{%- if bs_collection == empty or bs_collection.products.size == 0 -%}
+  {%- assign bs_collection = collections['all'] -%}
+{%- endif -%}
+{%- assign accent = accent | default: '#111111' -%}
+{%- assign heading = heading | default: 'Most loved right now' -%}
+
+<section style="background:#ffffff; padding:72px 20px;">
+  <div style="max-width:1180px; margin:0 auto;">
+    <div style="text-align:center; max-width:560px; margin:0 auto 44px;">
+      <span style="color:{{ accent }}; font-size:12px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase;">Bestsellers</span>
+      <h2 style="font-size:clamp(24px,3.5vw,34px); font-weight:800; color:#111; margin:12px 0 0; letter-spacing:-0.02em;">{{ heading }}</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:24px;">
+      {%- for product in bs_collection.products limit: 4 -%}
+        <a href="{{ product.url }}" style="display:flex; flex-direction:column; text-decoration:none; background:#fafafa; border:1px solid rgba(0,0,0,0.06); border-radius:18px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease;">
+          <span style="display:block; aspect-ratio:1/1; background:#f1f1f1;">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape | default: product.title }}" width="600" height="600" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; display:block;">
+            {%- endif -%}
+          </span>
+          <span style="display:flex; flex-direction:column; gap:6px; padding:18px 18px 22px;">
+            <span style="font-size:15px; font-weight:700; color:#111; line-height:1.3;">{{ product.title }}</span>
+            <span style="font-size:14px; font-weight:600; color:{{ accent }};">
+              {%- if product.compare_at_price > product.price -%}
+                <span style="color:#FF2B2B;">{{ product.price | money }}</span>
+                <s style="color:#9a9a9a; font-weight:500; margin-left:6px;">{{ product.compare_at_price | money }}</s>
+              {%- else -%}
+                {{ product.price | money }}
+              {%- endif -%}
+            </span>
+          </span>
+        </a>
+      {%- else -%}
+        <p style="grid-column:1/-1; text-align:center; color:#888; margin:0;">Products coming soon.</p>
+      {%- endfor -%}
+    </div>
+
+    {%- if bs_collection.products.size > 0 -%}
+      <div style="text-align:center; margin-top:44px;">
+        <a href="{{ bs_collection.url | default: '/collections/all' }}" style="display:inline-flex; align-items:center; gap:9px; background:{{ accent }}; color:#fff; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; padding:14px 32px; border-radius:100px; text-decoration:none;">
+          Shop all
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>

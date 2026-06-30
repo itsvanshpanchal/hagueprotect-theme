@@ -13,7 +13,9 @@
   matching templates — the page route then takes over before this 404.
 {%- endcomment -%}
 
-{%- assign req = request.path | downcase -%}
+{%- comment -%} Match against several URL signals — request.path can be empty on some 404 responses, so canonical_url / page_description are checked too. {%- endcomment -%}
+{%- capture req -%}{{ request.path }} {{ canonical_url }}{%- endcapture -%}
+{%- assign req = req | downcase -%}
 
 {%- if req contains 'vanrosector' -%}
   {%- render 'brand-vanrosector' -%}
