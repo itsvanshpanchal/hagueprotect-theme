@@ -669,8 +669,9 @@
     Required asset files:  logo-vanrosector.svg · logo-science-of-raw.svg
     ============================================================
   {%- endcomment -%}
-  {%- assign vanrosector_url    = '/pages/vanrosector' -%}
-  {%- assign science_of_raw_url = '/pages/science-of-raw' -%}
+  {%- comment -%} Alternate collection templates — work without an Admin Page. See templates/collection.vanrosector.liquid. {%- endcomment -%}
+  {%- assign vanrosector_url    = '/collections/all?view=vanrosector' -%}
+  {%- assign science_of_raw_url = '/collections/all?view=science-of-raw' -%}
 
   <div class="brand-bar" role="navigation" aria-label="Our brands">
     <div class="brand-bar__inner">
