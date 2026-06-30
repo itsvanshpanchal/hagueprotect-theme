@@ -520,9 +520,171 @@
     background-color: #FFF3F3;
     padding-left: 24px;
   }
+
+  /* Multi-Brand Navigation Bar */
+  .header-brand-bar {
+    background-color: {{ section.settings.brand_bar_bg | default: '#fafafa' }};
+    border-bottom: 1px solid {{ section.settings.brand_bar_border_color | default: '#e5e5e5' }};
+    padding: 10px 16px;
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .header-brand-bar__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-brand-bar__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: {{ section.settings.brand_bar_text_color | default: '#888888' }};
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  .header-brand-bar__logos {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .header-brand-bar__logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.75;
+  }
+
+  .header-brand-bar__logo-link:hover {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+
+  .header-brand-bar__logo-img {
+    display: block;
+    max-height: 28px;
+    object-fit: contain;
+    width: auto;
+  }
+
+  .header__logo-text-mini {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .header__logo-icon-mini {
+    color: #000000;
+    margin: 0 -1px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .header-brand-bar__fallback-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #111111;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header-brand-bar {
+      padding: 8px 12px;
+    }
+    
+    .header-brand-bar__container {
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .header-brand-bar__logos {
+      gap: 20px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .header-brand-bar__logo-img {
+      max-height: 22px;
+    }
+    
+    .header-brand-bar__fallback-text {
+      font-size: 10px;
+    }
+  }
 {%- endstyle -%}
 
 <header class="header-wrapper" role="banner">
+  {%- if section.settings.show_brand_bar -%}
+    <div class="header-brand-bar">
+      <div class="header-brand-bar__container">
+        <span class="header-brand-bar__title">{{ section.settings.brand_bar_title }}</span>
+        <div class="header-brand-bar__logos">
+          <!-- Brand 1: Vanrosector -->
+          <a href="{{ section.settings.vanrosector_url | default: '#' }}" class="header-brand-bar__logo-link" aria-label="Vanrosector">
+            {%- if section.settings.vanrosector_logo != blank -%}
+              {%- assign vr_height = section.settings.vanrosector_width | divided_by: section.settings.vanrosector_logo.aspect_ratio | round -%}
+              <img src="{{ section.settings.vanrosector_logo | image_url: width: 300 }}"
+                   alt="{{ section.settings.vanrosector_logo.alt | escape }}"
+                   width="{{ section.settings.vanrosector_width }}"
+                   height="{{ vr_height }}"
+                   loading="lazy"
+                   class="header-brand-bar__logo-img"
+                   style="width: {{ section.settings.vanrosector_width }}px; height: auto;">
+            {%- else -%}
+              <span class="header-brand-bar__fallback-text">Vanrosector</span>
+            {%- endif -%}
+          </a>
+
+          <!-- Brand 2: Science of Raw -->
+          <a href="{{ section.settings.science_of_raw_url | default: '#' }}" class="header-brand-bar__logo-link" aria-label="Science of Raw">
+            {%- if section.settings.science_of_raw_logo != blank -%}
+              {%- assign sor_height = section.settings.science_of_raw_width | divided_by: section.settings.science_of_raw_logo.aspect_ratio | round -%}
+              <img src="{{ section.settings.science_of_raw_logo | image_url: width: 300 }}"
+                   alt="{{ section.settings.science_of_raw_logo.alt | escape }}"
+                   width="{{ section.settings.science_of_raw_width }}"
+                   height="{{ sor_height }}"
+                   loading="lazy"
+                   class="header-brand-bar__logo-img"
+                   style="width: {{ section.settings.science_of_raw_width }}px; height: auto;">
+            {%- else -%}
+              <span class="header-brand-bar__fallback-text">Science of Raw</span>
+            {%- endif -%}
+          </a>
+
+          <!-- Brand 3: Hague Protect (using current store logo markup, styled smaller) -->
+          <a href="/" class="header-brand-bar__logo-link" aria-label="Hague Protect">
+            <span class="header__logo-text-mini" style="font-size: {{ section.settings.hague_protect_width | divided_by: 8 }}px;">
+              HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon-mini" style="width: {{ section.settings.hague_protect_width | divided_by: 7 }}px; height: {{ section.settings.hague_protect_width | divided_by: 7 }}px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
   <div class="header-container">
     
     <!-- Logo -->
@@ -1198,6 +1360,90 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Multi-Brand Navigation Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_bar",
+      "label": "Show Multi-Brand Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_bar_title",
+      "label": "Brand Bar Title",
+      "default": "OUR BRANDS"
+    },
+    {
+      "type": "color",
+      "id": "brand_bar_bg",
+      "label": "Brand Bar Background",
+      "default": "#fafafa"
+    },
+    {
+      "type": "color",
+      "id": "brand_bar_text_color",
+      "label": "Brand Bar Text Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "brand_bar_border_color",
+      "label": "Brand Bar Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "image_picker",
+      "id": "vanrosector_logo",
+      "label": "Vanrosector Logo"
+    },
+    {
+      "type": "range",
+      "id": "vanrosector_width",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Vanrosector Logo Width",
+      "default": 110
+    },
+    {
+      "type": "url",
+      "id": "vanrosector_url",
+      "label": "Vanrosector Store URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "science_of_raw_logo",
+      "label": "Science of Raw Logo"
+    },
+    {
+      "type": "range",
+      "id": "science_of_raw_width",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Science of Raw Logo Width",
+      "default": 110
+    },
+    {
+      "type": "url",
+      "id": "science_of_raw_url",
+      "label": "Science of Raw Store URL"
+    },
+    {
+      "type": "range",
+      "id": "hague_protect_width",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Hague Protect Mini Logo Width",
+      "default": 110
     }
   ]
 }
