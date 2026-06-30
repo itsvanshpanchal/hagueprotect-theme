@@ -637,13 +637,14 @@
 {%- endstyle -%}
 
 <header class="header-wrapper" role="banner">
-  {%- if section.settings.show_brand_bar -%}
+  {%- if section.settings.show_brand_bar != false -%}
     <div class="header-brand-bar">
       <div class="header-brand-bar__container">
-        <span class="header-brand-bar__title">{{ section.settings.brand_bar_title }}</span>
+        <span class="header-brand-bar__title">{{ section.settings.brand_bar_title | default: 'OUR BRANDS' }}</span>
         <div class="header-brand-bar__logos">
           <!-- Brand 1: Vanrosector -->
-          <a href="{{ section.settings.vanrosector_url | default: '#' }}" class="header-brand-bar__logo-link" aria-label="Vanrosector">
+          {%- assign vanrosector_url = section.settings.vanrosector_url | default: 'https://vanrosector.com' -%}
+          <a href="{{ vanrosector_url }}" class="header-brand-bar__logo-link" aria-label="Vanrosector">
             {%- if section.settings.vanrosector_logo != blank -%}
               {%- assign vr_height = section.settings.vanrosector_width | divided_by: section.settings.vanrosector_logo.aspect_ratio | round -%}
               <img src="{{ section.settings.vanrosector_logo | image_url: width: 300 }}"
@@ -654,12 +655,19 @@
                    class="header-brand-bar__logo-img"
                    style="width: {{ section.settings.vanrosector_width }}px; height: auto;">
             {%- else -%}
-              <span class="header-brand-bar__fallback-text">Vanrosector</span>
+              <img src="{{ 'logo-vanrosector.svg' | asset_url }}"
+                   alt="Vanrosector"
+                   width="{{ section.settings.vanrosector_width | default: 110 }}"
+                   height="37"
+                   loading="lazy"
+                   class="header-brand-bar__logo-img"
+                   style="width: {{ section.settings.vanrosector_width | default: 110 }}px; height: auto;">
             {%- endif -%}
           </a>
 
           <!-- Brand 2: Science of Raw -->
-          <a href="{{ section.settings.science_of_raw_url | default: '#' }}" class="header-brand-bar__logo-link" aria-label="Science of Raw">
+          {%- assign science_of_raw_url = section.settings.science_of_raw_url | default: 'https://scienceofraw.com' -%}
+          <a href="{{ science_of_raw_url }}" class="header-brand-bar__logo-link" aria-label="Science of Raw">
             {%- if section.settings.science_of_raw_logo != blank -%}
               {%- assign sor_height = section.settings.science_of_raw_width | divided_by: section.settings.science_of_raw_logo.aspect_ratio | round -%}
               <img src="{{ section.settings.science_of_raw_logo | image_url: width: 300 }}"
@@ -670,7 +678,13 @@
                    class="header-brand-bar__logo-img"
                    style="width: {{ section.settings.science_of_raw_width }}px; height: auto;">
             {%- else -%}
-              <span class="header-brand-bar__fallback-text">Science of Raw</span>
+              <img src="{{ 'logo-science-of-raw.svg' | asset_url }}"
+                   alt="Science of Raw"
+                   width="{{ section.settings.science_of_raw_width | default: 110 }}"
+                   height="31"
+                   loading="lazy"
+                   class="header-brand-bar__logo-img"
+                   style="width: {{ section.settings.science_of_raw_width | default: 110 }}px; height: auto;">
             {%- endif -%}
           </a>
 
