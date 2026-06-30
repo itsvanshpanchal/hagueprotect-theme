@@ -627,7 +627,12 @@
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
   <div class="megamenu-panel" id="MegaMenuPanel">
-    <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
+    {%- assign shop_all_linklist = linklists[section.settings.shop_all_menu] -%}
+    {%- assign megamenu_cols = 5 -%}
+    {%- if shop_all_linklist.links.size > 0 -%}
+      {%- assign megamenu_cols = 6 -%}
+    {%- endif -%}
+    <div class="megamenu-grid" style="grid-template-columns: repeat({{ megamenu_cols }}, 1fr); gap: 40px;">
       
       <!-- Column 1: Kits & Solutions -->
       <div class="megamenu-col">
@@ -766,6 +771,18 @@
           <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-dye-care-bundle', search: 'suede dye kit', label: 'Suede Dye + Suede Care Kit' %}</li>
         </ul>
       </div>
+
+      <!-- Dynamic Column: items added via Shopify Navigation (shop_all_menu linklist) -->
+      {%- if shop_all_linklist.links.size > 0 -%}
+      <div class="megamenu-col">
+        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">{{ shop_all_linklist.title | default: 'More Products' }}</h3>
+        <ul class="megamenu-links">
+          {%- for link in shop_all_linklist.links -%}
+            <li class="megamenu-link-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endif -%}
 
     </div>
   </div>
@@ -924,6 +941,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Dynamic mobile items added via Shopify Navigation (shop_all_menu linklist) -->
+      {%- if shop_all_linklist.links.size > 0 -%}
+        <div>
+          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">{{ shop_all_linklist.title | default: 'More Products' }}</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+            {%- for link in shop_all_linklist.links -%}
+              <a href="{{ link.url }}" style="color:#666; text-decoration:none; font-size:14px;">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
     </div>
     
     {%- if customer -%}
@@ -1148,8 +1177,15 @@
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Menu",
+      "label": "Main Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_all_menu",
+      "label": "Shop All Dropdown Menu",
+      "info": "Select or create a navigation menu in Shopify Admin → Navigation. Items added here will appear as a dynamic column in the Shop All mega menu and in the mobile drawer automatically.",
+      "default": "shop-all"
     },
     {
       "type": "text",
