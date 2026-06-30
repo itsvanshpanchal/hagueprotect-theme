@@ -1,19 +1,22 @@
 {%- comment -%}
   ============================================================
   FEATURED BRANDS — homepage multi-brand showcase
-  Vanrosector + Science of Raw. Logos are uploaded to Shopify
-  Assets and referenced directly via asset_url (no image_picker).
-  To repoint a brand, edit only the two URLs below.
-  Required asset files: vanrosector-logo.png · science-of-raw-logo.png
+  Vanrosector + Science of Raw. Logos live in Shopify Assets
+  (vanrosector-logo.png / science-of-raw-logo.png) and are
+  referenced directly with asset_url.
+
+  Both brands are hosted ON THIS DOMAIN as Shopify pages:
+    /pages/vanrosector   and   /pages/science-of-raw
+  Clicking a card opens that internal page (same tab).
   ============================================================
 {%- endcomment -%}
-{%- assign vanrosector_url    = 'https://YOUR-VANROSECTOR-STORE-URL' -%}
-{%- assign science_of_raw_url = 'https://YOUR-SCIENCE-OF-RAW-STORE-URL' -%}
+{%- assign vanrosector_url    = section.settings.vanrosector_link | default: '/pages/vanrosector' -%}
+{%- assign science_of_raw_url = section.settings.science_of_raw_link | default: '/pages/science-of-raw' -%}
 
 {%- style -%}
   #shopify-section-{{ section.id }} .brands-feature {
-    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
-    padding: {{ section.settings.padding_top | default: 88 }}px 16px {{ section.settings.padding_bottom | default: 88 }}px;
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: {{ section.settings.padding_top | default: 96 }}px 16px {{ section.settings.padding_bottom | default: 96 }}px;
   }
 
   #shopify-section-{{ section.id }} .brands-feature__inner {
@@ -23,36 +26,36 @@
 
   #shopify-section-{{ section.id }} .brands-feature__head {
     text-align: center;
-    margin-bottom: 48px;
+    max-width: 600px;
+    margin: 0 auto 56px;
   }
 
   #shopify-section-{{ section.id }} .brands-feature__eyebrow {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 800;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #FF2B2B;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
   }
 
   #shopify-section-{{ section.id }} .brands-feature__heading {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(26px, 4vw, 38px);
+    font-size: clamp(28px, 4vw, 42px);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     color: #111111;
-    margin: 0 0 14px;
-    line-height: 1.1;
+    margin: 0 0 16px;
+    line-height: 1.08;
   }
 
   #shopify-section-{{ section.id }} .brands-feature__sub {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    color: #666666;
-    max-width: 560px;
-    margin: 0 auto;
+    color: #6b6b6b;
+    margin: 0;
     line-height: 1.6;
   }
 
@@ -63,6 +66,10 @@
   }
 
   #shopify-section-{{ section.id }} .brand-card {
+    --accent: #111111;
+    --bg-from: #ffffff;
+    --bg-to: #f6f6f6;
+    --glow: rgba(0,0,0,0.05);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -70,85 +77,103 @@
     justify-content: center;
     text-align: center;
     text-decoration: none;
-    background: #ffffff;
-    border: 1px solid #ececec;
-    border-radius: 18px;
-    padding: 52px 32px 44px;
+    background: linear-gradient(160deg, var(--bg-from) 0%, var(--bg-to) 100%);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 24px;
+    padding: 56px 40px 48px;
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.35s ease;
+    isolation: isolate;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
   }
 
-  /* coloured accent bar that animates in on hover */
-  #shopify-section-{{ section.id }} .brand-card::before {
-    content: '';
+  /* soft coloured glow blob, top-right */
+  #shopify-section-{{ section.id }} .brand-card__glow {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--brand-accent, #111111);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    top: -90px;
+    right: -90px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--glow);
+    filter: blur(36px);
+    z-index: -1;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    opacity: 0.85;
   }
 
   #shopify-section-{{ section.id }} .brand-card:hover,
   #shopify-section-{{ section.id }} .brand-card:focus-visible {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.10);
-    border-color: #e0e0e0;
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
     outline: none;
   }
 
-  #shopify-section-{{ section.id }} .brand-card:hover::before,
-  #shopify-section-{{ section.id }} .brand-card:focus-visible::before {
-    transform: scaleX(1);
-  }
-
   #shopify-section-{{ section.id }} .brand-card:focus-visible {
-    box-shadow: 0 0 0 2px #FF2B2B, 0 24px 48px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 0 0 2px var(--accent), 0 30px 60px rgba(0, 0, 0, 0.12);
   }
 
-  #shopify-section-{{ section.id }} .brand-card__logo {
+  #shopify-section-{{ section.id }} .brand-card:hover .brand-card__glow,
+  #shopify-section-{{ section.id }} .brand-card:focus-visible .brand-card__glow {
+    transform: scale(1.25) translate(-12px, 12px);
+    opacity: 1;
+  }
+
+  /* white plate that lifts the logo off the tinted card */
+  #shopify-section-{{ section.id }} .brand-card__plate {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90px;
-    margin-bottom: 22px;
+    width: 100%;
+    max-width: 320px;
+    height: 132px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+    padding: 20px 28px;
   }
 
-  #shopify-section-{{ section.id }} .brand-card__logo img {
+  #shopify-section-{{ section.id }} .brand-card__plate img {
     display: block;
-    height: auto;
     width: auto;
-    max-height: 72px;
-    max-width: 260px;
+    height: auto;
+    max-height: 84px;
+    max-width: 100%;
     object-fit: contain;
   }
 
   #shopify-section-{{ section.id }} .brand-card__tag {
     font-family: 'Inter', sans-serif;
-    font-size: 14.5px;
+    font-size: 15px;
     font-weight: 500;
-    color: #777777;
-    line-height: 1.55;
-    margin: 0 0 24px;
-    max-width: 340px;
+    color: #5f5f5f;
+    line-height: 1.6;
+    margin: 0 0 28px;
+    max-width: 360px;
   }
 
+  /* premium filled pill button */
   #shopify-section-{{ section.id }} .brand-card__cta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 800;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--brand-accent, #111111);
+    color: #ffffff;
+    background: var(--accent);
+    padding: 13px 26px;
+    border-radius: 100px;
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .brand-card:hover .brand-card__cta,
+  #shopify-section-{{ section.id }} .brand-card:focus-visible .brand-card__cta {
+    filter: brightness(1.12);
   }
 
   #shopify-section-{{ section.id }} .brand-card__cta svg {
@@ -162,23 +187,26 @@
 
   @media screen and (max-width: 768px) {
     #shopify-section-{{ section.id }} .brands-feature {
-      padding: {{ section.settings.padding_top | default: 88 | times: 0.65 | round }}px 14px {{ section.settings.padding_bottom | default: 88 | times: 0.65 | round }}px;
+      padding: {{ section.settings.padding_top | default: 96 | times: 0.6 | round }}px 14px {{ section.settings.padding_bottom | default: 96 | times: 0.6 | round }}px;
     }
-    #shopify-section-{{ section.id }} .brands-feature__head { margin-bottom: 32px; }
+    #shopify-section-{{ section.id }} .brands-feature__head { margin-bottom: 36px; }
     #shopify-section-{{ section.id }} .brands-feature__grid {
       grid-template-columns: 1fr;
       gap: 18px;
     }
-    #shopify-section-{{ section.id }} .brand-card { padding: 40px 24px 36px; }
-    #shopify-section-{{ section.id }} .brand-card__logo { height: 72px; margin-bottom: 18px; }
-    #shopify-section-{{ section.id }} .brand-card__logo img { max-height: 56px; max-width: 200px; }
+    #shopify-section-{{ section.id }} .brand-card { padding: 40px 24px 36px; border-radius: 20px; }
+    #shopify-section-{{ section.id }} .brand-card__plate { height: 104px; margin-bottom: 22px; padding: 16px 20px; }
+    #shopify-section-{{ section.id }} .brand-card__plate img { max-height: 64px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     #shopify-section-{{ section.id }} .brand-card,
+    #shopify-section-{{ section.id }} .brand-card__glow,
+    #shopify-section-{{ section.id }} .brand-card__cta,
     #shopify-section-{{ section.id }} .brand-card__cta svg { transition: none; }
     #shopify-section-{{ section.id }} .brand-card:hover,
     #shopify-section-{{ section.id }} .brand-card:focus-visible { transform: none; }
+    #shopify-section-{{ section.id }} .brand-card:hover .brand-card__glow { transform: none; }
     #shopify-section-{{ section.id }} .brand-card:hover .brand-card__cta svg { transform: none; }
   }
 {%- endstyle -%}
@@ -201,10 +229,11 @@
       {%- comment -%} Brand 1 · Vanrosector (native 940×343) {%- endcomment -%}
       <a href="{{ vanrosector_url }}"
          class="brand-card"
-         style="--brand-accent: #8a6a3b;"
-         aria-label="Visit Vanrosector">
-        <span class="brand-card__logo">
-          {{ 'vanrosector-logo.png' | asset_url | image_tag: alt: 'Vanrosector', loading: 'lazy', width: 260, height: 95 }}
+         style="--accent:#8a6a3b; --bg-from:#fbf8f2; --bg-to:#f1e7d6; --glow:rgba(138,106,59,0.30);"
+         aria-label="Explore Vanrosector">
+        <span class="brand-card__glow" aria-hidden="true"></span>
+        <span class="brand-card__plate">
+          <img src="{{ 'vanrosector-logo.png' | asset_url }}" alt="Vanrosector" width="280" height="102" loading="lazy" decoding="async">
         </span>
         <p class="brand-card__tag">{{ section.settings.vanrosector_tagline }}</p>
         <span class="brand-card__cta">
@@ -216,10 +245,11 @@
       {%- comment -%} Brand 2 · Science of Raw (native 1000×500) {%- endcomment -%}
       <a href="{{ science_of_raw_url }}"
          class="brand-card"
-         style="--brand-accent: #27355f;"
-         aria-label="Visit Science of Raw">
-        <span class="brand-card__logo">
-          {{ 'science-of-raw-logo.png' | asset_url | image_tag: alt: 'Science of Raw', loading: 'lazy', width: 260, height: 130 }}
+         style="--accent:#27355f; --bg-from:#f6f8fc; --bg-to:#e6ecf7; --glow:rgba(39,53,95,0.28);"
+         aria-label="Explore Science of Raw">
+        <span class="brand-card__glow" aria-hidden="true"></span>
+        <span class="brand-card__plate">
+          <img src="{{ 'science-of-raw-logo.png' | asset_url }}" alt="Science of Raw" width="240" height="120" loading="lazy" decoding="async">
         </span>
         <p class="brand-card__tag">{{ section.settings.science_of_raw_tagline }}</p>
         <span class="brand-card__cta">
@@ -239,7 +269,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Logos load from Assets (vanrosector-logo.png, science-of-raw-logo.png). Store URLs are set at the top of sections/featured-brands.liquid."
+      "content": "Logos load from Assets (vanrosector-logo.png, science-of-raw-logo.png). Links default to internal pages /pages/vanrosector and /pages/science-of-raw."
     },
     {
       "type": "text",
@@ -260,10 +290,22 @@
       "default": "Three brands, one pursuit of premium care and craft. Discover what else the family has to offer."
     },
     {
+      "type": "url",
+      "id": "vanrosector_link",
+      "label": "Vanrosector page",
+      "info": "Defaults to /pages/vanrosector"
+    },
+    {
       "type": "text",
       "id": "vanrosector_tagline",
       "label": "Vanrosector tagline",
       "default": "Journey Through Nature's Finest Essence."
+    },
+    {
+      "type": "url",
+      "id": "science_of_raw_link",
+      "label": "Science of Raw page",
+      "info": "Defaults to /pages/science-of-raw"
     },
     {
       "type": "text",
@@ -275,7 +317,7 @@
       "type": "text",
       "id": "cta_label",
       "label": "Button label",
-      "default": "Visit Store"
+      "default": "Explore"
     },
     {
       "type": "color",
@@ -291,7 +333,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 88
+      "default": 96
     },
     {
       "type": "range",
@@ -301,7 +343,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 88
+      "default": 96
     }
   ],
   "presets": [

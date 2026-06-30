@@ -669,8 +669,8 @@
     Required asset files:  vanrosector-logo.png · science-of-raw-logo.png
     ============================================================
   {%- endcomment -%}
-  {%- assign vanrosector_url    = 'https://YOUR-VANROSECTOR-STORE-URL' -%}
-  {%- assign science_of_raw_url = 'https://YOUR-SCIENCE-OF-RAW-STORE-URL' -%}
+  {%- assign vanrosector_url    = '/pages/vanrosector' -%}
+  {%- assign science_of_raw_url = '/pages/science-of-raw' -%}
 
   <div class="brand-bar" role="navigation" aria-label="Our brands">
     <div class="brand-bar__inner">
@@ -685,15 +685,15 @@
         <span class="brand-bar__divider" aria-hidden="true"></span>
 
         {%- comment -%} 2 · Vanrosector (native 940×343) {%- endcomment -%}
-        <a href="{{ vanrosector_url }}" class="brand-bar__item" aria-label="Visit Vanrosector">
-          {{ 'vanrosector-logo.png' | asset_url | image_tag: alt: 'Vanrosector', class: 'brand-bar__img', loading: 'lazy', width: 200, height: 73 }}
+        <a href="{{ vanrosector_url }}" class="brand-bar__item" aria-label="Vanrosector">
+          <img src="{{ 'vanrosector-logo.png' | asset_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
         </a>
 
         <span class="brand-bar__divider" aria-hidden="true"></span>
 
         {%- comment -%} 3 · Science of Raw (native 1000×500) {%- endcomment -%}
-        <a href="{{ science_of_raw_url }}" class="brand-bar__item" aria-label="Visit Science of Raw">
-          {{ 'science-of-raw-logo.png' | asset_url | image_tag: alt: 'Science of Raw', class: 'brand-bar__img', loading: 'lazy', width: 200, height: 100 }}
+        <a href="{{ science_of_raw_url }}" class="brand-bar__item" aria-label="Science of Raw">
+          <img src="{{ 'science-of-raw-logo.png' | asset_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
         </a>
 
       </div>
