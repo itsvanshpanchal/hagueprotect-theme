@@ -1,14 +1,16 @@
 {%- comment -%}
   Shared bestseller product grid for the brand home pages.
   Params:
-    accent  - brand accent colour (hex)
-    heading - optional section heading (defaults to "Most loved right now")
-  Pulls from the "kits" collection (same as the homepage bestsellers),
-  falling back to all products if that collection is empty/missing.
+    accent     - brand accent colour (hex)
+    heading    - optional section heading (defaults to "Most loved right now")
+    collection - the brand's OWN collection handle (e.g. 'vanrosector').
+                 Each brand passes its own handle so its products stay
+                 isolated and never merge with the other brands. Falls back
+                 to all products only if that collection is missing/empty.
 {%- endcomment -%}
 
-{%- assign bs_collection = collections['kits'] -%}
-{%- if bs_collection == empty or bs_collection.products.size == 0 -%}
+{%- assign bs_collection = collections[collection] -%}
+{%- if bs_collection == blank or bs_collection == empty or bs_collection.products.size == 0 -%}
   {%- assign bs_collection = collections['all'] -%}
 {%- endif -%}
 {%- assign accent = accent | default: '#111111' -%}
