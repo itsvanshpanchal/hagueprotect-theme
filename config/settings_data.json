@@ -31,7 +31,51 @@
           "menu": "main-menu",
           "logo_text": "HAGUEPROTECT",
           "bg_color": "#ffffff"
-        }
+        },
+        "blocks": {
+          "column_1": {
+            "type": "column",
+            "settings": {
+              "accent_heading": true,
+              "products": "## Sneaker Care Kits\nSignature Kit | signature-kit | Signature Kit\nRefresh Kit | refresh-kit | Refresh Kit\nIndepth Kit | indepth-kit | Indepth Kit\nSupreme Kit | supreme-kit | Supreme Kit\n## Material Care Kits\nLeather Care Kit | leather-care-kit | Leather Care Kit\nSuede Care Kit | suede-care-kit | Suede Care Kit\nNubuck Care Kit | nubuck-care-kit | Nubuck Care Kit\nFabric Care Kit | fabric-care-kit | Fabric Care Kit\nSoles Care Kit | soles-care-kit | Sole Cleaner\n##\nLeather & Suede Care Kit | leather-suede-care-kit | Leather Suede Care Kit\nSuede Dye Kit | suede-dye-kit | Suede Dye Kit\nProteonnxt Performance Kit | proteonnxt-performance-kit | Proteonnxt Performance Kit\n## Cleaning Solutions\nPower Cleaner | power-cleaner | power cleaner\nSuede Cleaner | suede-cleaner | suede cleaner\nStain Treater for Mesh | stain-treater-mesh | stain treater\nLeather Ultra Clean | leather-ultra-clean | leather clean\nLeather Cream | leather-cream | leather cream\nLeather Ink Remover | leather-ink-remover | leather ink\nMidsole Reviver | midsole-reviver | midsole reviver"
+            }
+          },
+          "column_2": {
+            "type": "column",
+            "settings": {
+              "accent_heading": false,
+              "products": "## Shop by Use\n1. Delicate Clean | delicate-clean | delicate clean\n2. Deep Clean | deep-clean | deep clean\n3. On the Go Clean | on-the-go-clean | on the go\n4. Mess free Clean | mess-free-clean | mess free\n5. Deodorizer | shop-by-deodorizer | deodorizer\n## Specialty Care\nEdge on Custom Pen | edge-on-custom-pen | Edge on Custom Pen\n## Conditioner\nLeather Conditioner | leather-conditioner | Leather Conditioner\n## Refill Pack\nSneaker Cleaner Refill | sneaker-cleaner-refill | Sneaker Cleaner Refill"
+            }
+          },
+          "column_3": {
+            "type": "column",
+            "settings": {
+              "accent_heading": false,
+              "products": "## Care by Fabric\nLeather Care | leather-care-kit | Leather Care Kit | 1. Leather\nSuede Care Kit | suede-care-kit | Suede Care Kit | 2. Suede\nSignature Kit | canvas-care | Signature Kit | 3. Canvas\nRefresh Kit | mesh-care | Refresh Kit | 4. Mesh\nIndepth Kit | knit-care | Indepth Kit | 5. Knit\nNubuck Care Kit | nubuck-care-kit | Nubuck Care Kit | 6. Nubuck\nEssential Kit | rubber-care | Essential Kit | 7. Rubber\nSole Cleaner | soles-care-kit | Sole Cleaner | 8. Midsole & Sole\nSupreme Kit | mixed-material-care | Supreme Kit | 9. Mixed Material"
+            }
+          },
+          "column_4": {
+            "type": "column",
+            "settings": {
+              "accent_heading": false,
+              "products": "## Deodorizers\nCitrus - Shoe Deodorizer | citrus-shoe-deodorizer | citrus deodorizer\nLavender Bliss - Shoe Deodorizer | lavender-bliss-shoe-deodorizer | lavender deodorizer\n## Accessories\nMicrofiber Towel - Pack of 4 | microfiber-towel | microfiber towel\nShoe Tree - Pack of 2 | shoe-tree | shoe tree\nCrease Defender - Pack of 2 | crease-defender | crease defender\nShoe Cleaning Brush - Pack of 4 | shoe-cleaning-brush | cleaning brush"
+            }
+          },
+          "column_5": {
+            "type": "column",
+            "settings": {
+              "accent_heading": true,
+              "products": "## Super Savers\nSignature Kit + Suede Care Kit | signature-suede-bundle | signature suede kit\nEssential Kit + Leather Care Kit + Shoe Shaper | essential-leather-shaper-bundle | essential leather shaper\nIndepth Kit + Suede Dye Kit | indepth-suede-dye-bundle | indepth suede dye\nRefill Module | refill-module | refill module\nProteonnxt Performance Kit + Suede Care | proteonnxt-suede-bundle | proteonnxt suede\nLeather & Suede Care | leather-suede-care-kit | leather suede care\nSuede Dye + Suede Care Kit | suede-dye-care-bundle | suede dye kit"
+            }
+          }
+        },
+        "block_order": [
+          "column_1",
+          "column_2",
+          "column_3",
+          "column_4",
+          "column_5"
+        ]
       },
       "footer": {
         "type": "footer",

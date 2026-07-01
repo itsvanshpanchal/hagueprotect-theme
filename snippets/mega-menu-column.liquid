@@ -1,0 +1,72 @@
+{%- comment -%}
+  Renders one editable Shop All mega-menu column from a section block.
+
+  The block's "products" textarea is parsed line by line:
+    ## Heading Text          -> a category heading
+    ##                       -> a list break with no heading (start a new group)
+    Label | handle           -> a product link (handle = product/collection handle)
+    Label | handle | search  -> optional 3rd field: search-page fallback query
+    Label | handle | search | caption -> optional 4th field: small grey sub-label
+
+  Links are resolved by the existing 'header-menu-link' snippet, so special
+  handles (e.g. signature-kit) and search fallbacks keep working exactly as before.
+
+  @param block {Object} the section block
+  @param mode  {String} 'desktop' (default) or 'mobile'
+{%- endcomment -%}
+{%- liquid
+  assign _mode = mode | default: 'desktop'
+  assign _accent = block.settings.accent_heading
+  assign _raw = block.settings.products | default: ''
+  assign _lines = _raw | strip | newline_to_br | split: '<br />'
+-%}
+{%- if _mode == 'mobile' -%}
+  {%- assign _open = false -%}
+  {%- for line in _lines -%}
+    {%- assign t = line | strip -%}
+    {%- if t == blank -%}{%- continue -%}{%- endif -%}
+    {%- assign prefix = t | slice: 0, 2 -%}
+    {%- if prefix == '##' -%}
+      {%- if _open -%}</div></div>{%- endif -%}
+      {%- assign htext = t | remove_first: '##' | strip -%}
+      <div>{%- if htext != blank -%}<h4 class="mobile-accordion-category-heading"{% if _accent %} style="color: #FF2B2B;"{% endif %}>{{ htext }}</h4>{%- endif -%}<div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
+      {%- assign _open = true -%}
+    {%- else -%}
+      {%- unless _open -%}<div><div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">{%- assign _open = true -%}{%- endunless -%}
+      {%- assign parts = t | split: '|' -%}
+      {%- assign p_label = parts[0] | strip -%}
+      {%- assign p_handle = parts[1] | strip -%}
+      {%- assign p_search = parts[2] | strip -%}
+      {% render 'header-menu-link', handle: p_handle, search: p_search, label: p_label, style: 'color:#666; text-decoration:none; font-size:14px;' %}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if _open -%}</div></div>{%- endif -%}
+{%- else -%}
+  <div class="megamenu-col" {{ block.shopify_attributes }}>
+  {%- assign _open = false -%}
+  {%- for line in _lines -%}
+    {%- assign t = line | strip -%}
+    {%- if t == blank -%}{%- continue -%}{%- endif -%}
+    {%- assign prefix = t | slice: 0, 2 -%}
+    {%- if prefix == '##' -%}
+      {%- if _open -%}</ul>{%- endif -%}
+      {%- assign htext = t | remove_first: '##' | strip -%}
+      {%- if htext != blank -%}<h3 class="megamenu-heading" style="{% if _accent %}color: #FF2B2B !important; {% endif %}margin-bottom: 12px;">{{ htext }}</h3>{%- endif -%}<ul class="megamenu-links" style="margin-bottom: 24px;">
+      {%- assign _open = true -%}
+    {%- else -%}
+      {%- unless _open -%}<ul class="megamenu-links" style="margin-bottom: 24px;">{%- assign _open = true -%}{%- endunless -%}
+      {%- assign parts = t | split: '|' -%}
+      {%- assign p_label = parts[0] | strip -%}
+      {%- assign p_handle = parts[1] | strip -%}
+      {%- assign p_search = parts[2] | strip -%}
+      {%- assign p_cap = parts[3] | strip -%}
+      {%- if p_cap != blank -%}
+        <li class="megamenu-link-item"><span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">{{ p_cap }}</span>{% render 'header-menu-link', handle: p_handle, search: p_search, label: p_label, style: 'font-size: 13px;' %}</li>
+      {%- else -%}
+        <li class="megamenu-link-item">{% render 'header-menu-link', handle: p_handle, search: p_search, label: p_label %}</li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if _open -%}</ul>{%- endif -%}
+  </div>
+{%- endif -%}
