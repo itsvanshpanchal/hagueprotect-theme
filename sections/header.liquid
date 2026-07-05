@@ -143,10 +143,72 @@
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
     display: none;
     z-index: 1001;
-    padding: 48px 0;
+    padding: 0;
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* ── Brand tab bar inside megamenu ───────────────────────── */
+  .megamenu-brand-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid #ebebeb;
+    padding: 0 40px;
+    background: #fafafa;
+  }
+
+  .megamenu-brand-tab {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    padding: 14px 24px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .megamenu-brand-tab:hover {
+    color: #111;
+  }
+
+  .megamenu-brand-tab.is-active {
+    color: #111;
+    border-bottom-color: #FF2B2B;
+  }
+
+  .megamenu-tab-logo {
+    height: 18px;
+    width: auto;
+    display: block;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+  }
+
+  .megamenu-brand-tab:hover .megamenu-tab-logo,
+  .megamenu-brand-tab.is-active .megamenu-tab-logo {
+    opacity: 1;
+  }
+
+  /* ── Brand panes ─────────────────────────────────────────── */
+  .megamenu-brand-pane {
+    display: none;
+    padding: 40px 0;
+  }
+
+  .megamenu-brand-pane.is-active {
+    display: block;
   }
 
   .megamenu-grid {
@@ -200,6 +262,19 @@
   .megamenu-link-item a:hover {
     color: #FF2B2B !important;
     transform: translateX(3px);
+  }
+
+  /* ── Mobile brand section headings ──────────────────────── */
+  .mobile-brand-section-heading {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #FF2B2B;
+    text-transform: uppercase;
+    padding: 14px 0 6px;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 4px;
   }
 
   .header__actions {
@@ -804,32 +879,122 @@
   </div>
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
+  {%- assign shop_all_linklist    = linklists[section.settings.shop_all_menu] -%}
+  {%- assign vanrosector_linklist = linklists[section.settings.vanrosector_menu] -%}
+  {%- assign sor_linklist         = linklists[section.settings.sor_menu] -%}
+
   <div class="megamenu-panel" id="MegaMenuPanel">
-    {%- assign shop_all_linklist = linklists[section.settings.shop_all_menu] -%}
-    {%- assign megamenu_cols = section.blocks.size -%}
-    {%- if shop_all_linklist.links.size > 0 -%}
-      {%- assign megamenu_cols = megamenu_cols | plus: 1 -%}
-    {%- endif -%}
-    {%- if megamenu_cols < 1 -%}{%- assign megamenu_cols = 1 -%}{%- endif -%}
-    <div class="megamenu-grid" style="grid-template-columns: repeat({{ megamenu_cols }}, 1fr); gap: 40px;">
 
-      {%- for block in section.blocks -%}
-        {%- render 'mega-menu-column', block: block, mode: 'desktop' -%}
-      {%- endfor -%}
+    <!-- ── Brand Tab Bar ─────────────────────────────────── -->
+    <div class="megamenu-brand-tabs">
 
-      <!-- Dynamic Column: items added via Shopify Navigation (shop_all_menu linklist) -->
-      {%- if shop_all_linklist.links.size > 0 -%}
-      <div class="megamenu-col">
-        <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">{{ shop_all_linklist.title | default: 'More Products' }}</h3>
-        <ul class="megamenu-links">
-          {%- for link in shop_all_linklist.links -%}
-            <li class="megamenu-link-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
-          {%- endfor -%}
-        </ul>
-      </div>
+      <!-- Hague Protect tab -->
+      <button class="megamenu-brand-tab is-active" data-brand-tab="hp" type="button">
+        HAGUE<span style="color:#FF2B2B;">PR</span><svg style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin:0 -1px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+      </button>
+
+      {%- if vanrosector_linklist.links.size > 0 or section.settings.vanrosector_menu != blank -%}
+      <button class="megamenu-brand-tab" data-brand-tab="vanrosector" type="button">
+        <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="megamenu-tab-logo">
+      </button>
+      {%- endif -%}
+
+      {%- if sor_linklist.links.size > 0 or section.settings.sor_menu != blank -%}
+      <button class="megamenu-brand-tab" data-brand-tab="sor" type="button">
+        <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="megamenu-tab-logo">
+      </button>
       {%- endif -%}
 
     </div>
+
+    <!-- ── PANE 1: Hague Protect (existing blocks – untouched) ── -->
+    <div class="megamenu-brand-pane is-active" id="MegaPane-hp">
+      {%- assign megamenu_cols = section.blocks.size -%}
+      {%- if shop_all_linklist.links.size > 0 -%}
+        {%- assign megamenu_cols = megamenu_cols | plus: 1 -%}
+      {%- endif -%}
+      {%- if megamenu_cols < 1 -%}{%- assign megamenu_cols = 1 -%}{%- endif -%}
+      <div class="megamenu-grid" style="grid-template-columns: repeat({{ megamenu_cols }}, 1fr); gap: 40px;">
+        {%- for block in section.blocks -%}
+          {%- render 'mega-menu-column', block: block, mode: 'desktop' -%}
+        {%- endfor -%}
+        {%- if shop_all_linklist.links.size > 0 -%}
+          <div class="megamenu-col">
+            <h3 class="megamenu-heading" style="color: #FF2B2B !important; margin-bottom: 12px;">{{ shop_all_linklist.title | default: 'More Products' }}</h3>
+            <ul class="megamenu-links">
+              {%- for link in shop_all_linklist.links -%}
+                <li class="megamenu-link-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- ── PANE 2: Vanrosector ──────────────────────────────── -->
+    <div class="megamenu-brand-pane" id="MegaPane-vanrosector">
+      {%- if vanrosector_linklist.links.size > 0 -%}
+        {%- comment -%} Group links by their parent titles if nested, else show flat columns {%- endcomment -%}
+        <div class="megamenu-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 40px;">
+          {%- assign vr_current_heading = '' -%}
+          {%- assign vr_in_col = false -%}
+          {%- for link in vanrosector_linklist.links -%}
+            {%- if link.links.size > 0 -%}
+              {%- if vr_in_col -%}</ul></div>{%- endif -%}
+              <div class="megamenu-col">
+                <h3 class="megamenu-heading" style="margin-bottom: 12px;">{{ link.title }}</h3>
+                <ul class="megamenu-links">
+                  {%- for sub in link.links -%}
+                    <li class="megamenu-link-item"><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+              {%- assign vr_in_col = false -%}
+            {%- else -%}
+              {%- unless vr_in_col -%}<div class="megamenu-col"><ul class="megamenu-links">{%- assign vr_in_col = true -%}{%- endunless -%}
+              <li class="megamenu-link-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if vr_in_col -%}</ul></div>{%- endif -%}
+        </div>
+      {%- else -%}
+        <div style="max-width:1320px;margin:0 auto;padding:0 24px;">
+          <p style="font-family:'Inter',sans-serif;font-size:13px;color:#aaa;padding:20px 0;">No menu assigned — go to <strong>Theme Editor → Header → Vanrosector Menu</strong> and select a Shopify navigation menu.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- ── PANE 3: Science of Raw ───────────────────────────── -->
+    <div class="megamenu-brand-pane" id="MegaPane-sor">
+      {%- if sor_linklist.links.size > 0 -%}
+        <div class="megamenu-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 40px;">
+          {%- assign sor_in_col = false -%}
+          {%- for link in sor_linklist.links -%}
+            {%- if link.links.size > 0 -%}
+              {%- if sor_in_col -%}</ul></div>{%- endif -%}
+              <div class="megamenu-col">
+                <h3 class="megamenu-heading" style="margin-bottom: 12px;">{{ link.title }}</h3>
+                <ul class="megamenu-links">
+                  {%- for sub in link.links -%}
+                    <li class="megamenu-link-item"><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+              {%- assign sor_in_col = false -%}
+            {%- else -%}
+              {%- unless sor_in_col -%}<div class="megamenu-col"><ul class="megamenu-links">{%- assign sor_in_col = true -%}{%- endunless -%}
+              <li class="megamenu-link-item"><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if sor_in_col -%}</ul></div>{%- endif -%}
+        </div>
+      {%- else -%}
+        <div style="max-width:1320px;margin:0 auto;padding:0 24px;">
+          <p style="font-family:'Inter',sans-serif;font-size:13px;color:#aaa;padding:20px 0;">No menu assigned — go to <strong>Theme Editor → Header → Science of Raw Menu</strong> and select a Shopify navigation menu.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -886,22 +1051,60 @@
         <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2"/></svg>
       </a>
       <div class="mobile-accordion-content" id="MobileShopContent" style="flex-direction: column;">
-        {%- for block in section.blocks -%}
-          {%- render 'mega-menu-column', block: block, mode: 'mobile' -%}
-        {%- endfor -%}
-      </div>
 
-      <!-- Dynamic mobile items added via Shopify Navigation (shop_all_menu linklist) -->
-      {%- if shop_all_linklist.links.size > 0 -%}
-        <div>
-          <h4 class="mobile-accordion-category-heading" style="color: #FF2B2B;">{{ shop_all_linklist.title | default: 'More Products' }}</h4>
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
-            {%- for link in shop_all_linklist.links -%}
-              <a href="{{ link.url }}" style="color:#666; text-decoration:none; font-size:14px;">{{ link.title }}</a>
+        <!-- Hague Protect section -->
+        {%- if section.blocks.size > 0 or shop_all_linklist.links.size > 0 -%}
+          <p class="mobile-brand-section-heading">Hague Protect</p>
+          {%- for block in section.blocks -%}
+            {%- render 'mega-menu-column', block: block, mode: 'mobile' -%}
+          {%- endfor -%}
+          {%- if shop_all_linklist.links.size > 0 -%}
+            <div>
+              <h4 class="mobile-accordion-category-heading">{{ shop_all_linklist.title | default: 'More Products' }}</h4>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;padding-left:8px;">
+                {%- for link in shop_all_linklist.links -%}
+                  <a href="{{ link.url }}" style="color:#666;text-decoration:none;font-size:14px;">{{ link.title }}</a>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        <!-- Vanrosector section -->
+        {%- if vanrosector_linklist.links.size > 0 -%}
+          <p class="mobile-brand-section-heading">Vanrosector</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;padding-left:8px;">
+            {%- for link in vanrosector_linklist.links -%}
+              {%- if link.links.size > 0 -%}
+                <h4 class="mobile-accordion-category-heading">{{ link.title }}</h4>
+                {%- for sub in link.links -%}
+                  <a href="{{ sub.url }}" style="color:#666;text-decoration:none;font-size:14px;padding-left:8px;">{{ sub.title }}</a>
+                {%- endfor -%}
+              {%- else -%}
+                <a href="{{ link.url }}" style="color:#666;text-decoration:none;font-size:14px;">{{ link.title }}</a>
+              {%- endif -%}
             {%- endfor -%}
           </div>
-        </div>
-      {%- endif -%}
+        {%- endif -%}
+
+        <!-- Science of Raw section -->
+        {%- if sor_linklist.links.size > 0 -%}
+          <p class="mobile-brand-section-heading">Science of Raw</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px;padding-left:8px;">
+            {%- for link in sor_linklist.links -%}
+              {%- if link.links.size > 0 -%}
+                <h4 class="mobile-accordion-category-heading">{{ link.title }}</h4>
+                {%- for sub in link.links -%}
+                  <a href="{{ sub.url }}" style="color:#666;text-decoration:none;font-size:14px;padding-left:8px;">{{ sub.title }}</a>
+                {%- endfor -%}
+              {%- else -%}
+                <a href="{{ link.url }}" style="color:#666;text-decoration:none;font-size:14px;">{{ link.title }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
     </div>
     
     {%- if customer -%}
@@ -920,8 +1123,9 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const trigger = document.getElementById('ShopTrigger');
-    const panel = document.getElementById('MegaMenuPanel');
+    const panel   = document.getElementById('MegaMenuPanel');
 
+    // ── Mega menu open / close ─────────────────────────────────
     if (trigger && panel) {
       let timeoutId;
       const openPanel = () => {
@@ -950,6 +1154,25 @@
       panel.addEventListener('mouseenter', openPanel);
       panel.addEventListener('mouseleave', closePanel);
     }
+
+    // ── Brand tab switcher ────────────────────────────────────
+    const brandTabs  = document.querySelectorAll('.megamenu-brand-tab');
+    const brandPanes = document.querySelectorAll('.megamenu-brand-pane');
+
+    brandTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.brandTab;
+
+        // Deactivate all tabs & panes
+        brandTabs.forEach(t  => t.classList.remove('is-active'));
+        brandPanes.forEach(p => p.classList.remove('is-active'));
+
+        // Activate clicked tab and matching pane
+        tab.classList.add('is-active');
+        const pane = document.getElementById('MegaPane-' + target);
+        if (pane) pane.classList.add('is-active');
+      });
+    });
   });
 
   function openMobileMenu() {
@@ -1130,11 +1353,39 @@
       "default": "main-menu"
     },
     {
+      "type": "header",
+      "content": "Shop All — Hague Protect"
+    },
+    {
       "type": "link_list",
       "id": "shop_all_menu",
-      "label": "Shop All Dropdown Menu",
-      "info": "Select or create a navigation menu in Shopify Admin → Navigation. Items added here will appear as a dynamic column in the Shop All mega menu and in the mobile drawer automatically.",
+      "label": "Hague Protect Extra Column",
+      "info": "Optional extra column shown in the Hague Protect tab. Create a menu in Shopify Admin → Navigation and select it here.",
       "default": "shop-all"
+    },
+    {
+      "type": "header",
+      "content": "Shop All — Vanrosector"
+    },
+    {
+      "type": "link_list",
+      "id": "vanrosector_menu",
+      "label": "Vanrosector Menu",
+      "info": "Create a navigation menu in Shopify Admin → Navigation for Vanrosector products. Top-level items with children become column headings. Top-level items without children appear as flat links."
+    },
+    {
+      "type": "header",
+      "content": "Shop All — Science of Raw (SOR)"
+    },
+    {
+      "type": "link_list",
+      "id": "sor_menu",
+      "label": "Science of Raw Menu",
+      "info": "Create a navigation menu in Shopify Admin → Navigation for Science of Raw products. Top-level items with children become column headings. Top-level items without children appear as flat links."
+    },
+    {
+      "type": "header",
+      "content": "Branding"
     },
     {
       "type": "text",
