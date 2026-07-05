@@ -152,7 +152,7 @@
       <div class="pb2__icon-col">
         {%- if section.settings.gif_1 != blank -%}
           <img class="pb2__icon-gif"
-               src="{{ section.settings.gif_1 }}"
+               src="{{ section.settings.gif_1 | image_url: width: 160 }}"
                alt="{{ section.settings.label_1 | default: '72 Hour Cleaning' | escape }}"
                loading="lazy">
         {%- else -%}
@@ -169,7 +169,7 @@
       <div class="pb2__icon-col">
         {%- if section.settings.gif_2 != blank -%}
           <img class="pb2__icon-gif"
-               src="{{ section.settings.gif_2 }}"
+               src="{{ section.settings.gif_2 | image_url: width: 160 }}"
                alt="{{ section.settings.label_2 | default: 'Environmentally Friendly' | escape }}"
                loading="lazy">
         {%- else -%}
@@ -187,7 +187,7 @@
       <div class="pb2__icon-col">
         {%- if section.settings.gif_3 != blank -%}
           <img class="pb2__icon-gif"
-               src="{{ section.settings.gif_3 }}"
+               src="{{ section.settings.gif_3 | image_url: width: 160 }}"
                alt="{{ section.settings.label_3 | default: 'Biotechnology' | escape }}"
                loading="lazy">
         {%- else -%}
@@ -233,10 +233,9 @@
       "content": "Icon 1 — 72 Hour Cleaning"
     },
     {
-      "type": "url",
+      "type": "image_picker",
       "id": "gif_1",
-      "label": "Icon 1 GIF URL",
-      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
+      "label": "Icon 1 — Upload GIF"
     },
     {
       "type": "text",
@@ -249,10 +248,9 @@
       "content": "Icon 2 — Environmentally Friendly"
     },
     {
-      "type": "url",
+      "type": "image_picker",
       "id": "gif_2",
-      "label": "Icon 2 GIF URL",
-      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
+      "label": "Icon 2 — Upload GIF"
     },
     {
       "type": "text",
@@ -265,10 +263,9 @@
       "content": "Icon 3 — Biotechnology"
     },
     {
-      "type": "url",
+      "type": "image_picker",
       "id": "gif_3",
-      "label": "Icon 3 GIF URL",
-      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
+      "label": "Icon 3 — Upload GIF"
     },
     {
       "type": "text",
