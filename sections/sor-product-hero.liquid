@@ -1,0 +1,1413 @@
+{%- style -%}
+/* ============================================================
+   SCIENCE OF RAW — Product Detail Page
+   Palette: Deep navy / clinical clean (#27355f, #f6f8fc)
+   ============================================================ */
+
+:root {
+  --sor-primary:     #1a2440;
+  --sor-accent:      #27355f;
+  --sor-accent-lt:   #4a5fa0;
+  --sor-highlight:   #3d7dd4;
+  --sor-bg:          #f6f8fc;
+  --sor-bg-card:     #ffffff;
+  --sor-surface:     #edf0f8;
+  --sor-border:      #d0d8ea;
+  --sor-text:        #1e2a46;
+  --sor-muted:       #5a6b88;
+  --sor-green:       #1a7a4a;
+  --sor-red:         #c62828;
+  --sor-font:        'Inter', sans-serif;
+  --sor-radius-sm:   8px;
+  --sor-radius-md:   12px;
+  --sor-radius-lg:   16px;
+  --sor-radius-xl:   20px;
+  --sor-radius-pill: 100px;
+}
+
+.sor-pdp-wrap {
+  background: var(--sor-bg);
+  font-family: var(--sor-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOP BRAND STRIP ── */
+.sor-brand-strip {
+  background: var(--sor-accent);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sor-brand-strip__logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.sor-brand-strip__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--sor-radius-pill);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ── SCIENCE TICKER ── */
+.sor-ticker {
+  background: var(--sor-bg-card);
+  border-bottom: 1px solid var(--sor-border);
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.sor-ticker__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sor-accent);
+  white-space: nowrap;
+}
+
+/* ── MAIN GRID ── */
+.sor-pdp-grid {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+  .sor-pdp-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 20px 16px 80px;
+  }
+}
+
+/* ── GALLERY ── */
+.sor-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+@media (max-width: 991px) { .sor-gallery { position: static; } }
+
+.sor-gallery__main {
+  background: var(--sor-bg-card);
+  border-radius: var(--sor-radius-xl);
+  border: 1px solid var(--sor-border);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(27,36,64,0.07);
+}
+
+.sor-gallery__main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 24px;
+  transition: transform 0.4s ease;
+}
+
+.sor-gallery__main:hover .sor-gallery__main-img {
+  transform: scale(1.05);
+}
+
+/* lab-certified corner badge */
+.sor-gallery__cert {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--sor-highlight);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: var(--sor-radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sor-gallery__badge-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--sor-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--sor-radius-pill);
+}
+
+.sor-gallery__nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid var(--sor-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  z-index: 2;
+}
+
+.sor-gallery__nav-btn:hover { background: #fff; box-shadow: 0 2px 10px rgba(27,36,64,0.12); }
+.sor-gallery__nav-btn--prev { left: 12px; }
+.sor-gallery__nav-btn--next { right: 12px; }
+
+.sor-gallery__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.sor-gallery__thumbs::-webkit-scrollbar { display: none; }
+
+.sor-gallery__thumb {
+  flex: 0 0 72px;
+  height: 72px;
+  border-radius: var(--sor-radius-md);
+  background: var(--sor-surface);
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sor-gallery__thumb.active,
+.sor-gallery__thumb:hover {
+  border-color: var(--sor-highlight);
+  box-shadow: 0 0 0 3px rgba(61,125,212,0.18);
+}
+
+.sor-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* ── PRODUCT INFO PANEL ── */
+.sor-info { display: flex; flex-direction: column; gap: 20px; }
+
+/* brand + rating row */
+.sor-info__brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sor-brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sor-surface);
+  border: 1px solid var(--sor-border);
+  color: var(--sor-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--sor-radius-pill);
+}
+
+.sor-lab-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e8f0fe;
+  color: var(--sor-highlight);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: var(--sor-radius-pill);
+}
+
+.sor-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e8f5e9;
+  color: var(--sor-green);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: var(--sor-radius-pill);
+}
+
+/* title */
+.sor-info__title {
+  font-size: clamp(22px, 3.8vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--sor-primary);
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* formula line */
+.sor-formula-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #f0f4ff 0%, #e8f0fe 100%);
+  border: 1px solid var(--sor-border);
+  border-radius: var(--sor-radius-md);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sor-accent);
+}
+
+/* subtitle */
+.sor-info__subtitle {
+  font-size: 15px;
+  color: var(--sor-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* key facts grid */
+.sor-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sor-fact-card {
+  background: var(--sor-bg-card);
+  border: 1px solid var(--sor-border);
+  border-radius: var(--sor-radius-md);
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sor-fact-card__value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--sor-highlight);
+}
+
+.sor-fact-card__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sor-muted);
+}
+
+/* benefit pills */
+.sor-benefits { display: flex; flex-direction: column; gap: 8px; }
+
+.sor-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sor-text);
+}
+
+.sor-benefit-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sor-accent) 0%, var(--sor-accent-lt) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* divider */
+.sor-divider {
+  border: none;
+  border-top: 1px solid var(--sor-border);
+  margin: 0;
+}
+
+/* variant picker */
+.sor-variant-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sor-muted);
+  margin-bottom: 8px;
+}
+
+.sor-variant-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.sor-variant-card {
+  border: 1px solid var(--sor-border);
+  border-radius: var(--sor-radius-md);
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  background: var(--sor-bg-card);
+  user-select: none;
+}
+
+.sor-variant-card:hover {
+  border-color: var(--sor-accent-lt);
+  background: var(--sor-surface);
+}
+
+.sor-variant-card.active {
+  border: 2px solid var(--sor-highlight);
+  background: rgba(61,125,212,0.05);
+}
+
+.sor-variant-card__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--sor-surface);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sor-variant-card__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sor-primary);
+  line-height: 1.2;
+}
+
+.sor-variant-card__price {
+  font-size: 12px;
+  color: var(--sor-muted);
+}
+
+/* pricing block */
+.sor-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sor-price-current {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  color: var(--sor-primary);
+  letter-spacing: -0.02em;
+}
+
+.sor-price-compare {
+  font-size: 18px;
+  color: var(--sor-muted);
+  text-decoration: line-through;
+}
+
+.sor-price-save {
+  background: #e3f2fd;
+  color: #0d47a1;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--sor-radius-pill);
+}
+
+/* qty + ATC */
+.sor-cart-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.sor-qty {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--sor-border);
+  border-radius: var(--sor-radius-md);
+  overflow: hidden;
+  height: 52px;
+  background: var(--sor-bg-card);
+}
+
+.sor-qty__btn {
+  width: 44px;
+  height: 100%;
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: var(--sor-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.sor-qty__btn:hover { background: var(--sor-surface); }
+
+.sor-qty__num {
+  flex: 1;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sor-primary);
+  min-width: 36px;
+}
+
+.sor-atc-btn {
+  flex: 1;
+  height: 52px;
+  background: linear-gradient(135deg, var(--sor-accent) 0%, #1a2d5a 100%);
+  color: #fff;
+  font-family: var(--sor-font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: var(--sor-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sor-atc-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sor-atc-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.sor-atc-btn:active { transform: translateY(0); }
+
+.sor-buy-now-wrapper {
+  margin-top: -8px;
+}
+
+.sor-buy-now-wrapper .shopify-payment-button__button {
+  border-radius: var(--sor-radius-md) !important;
+  font-family: var(--sor-font) !important;
+  height: 52px !important;
+  font-weight: 700 !important;
+}
+
+/* stock indicator */
+.sor-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sor-green);
+}
+
+.sor-stock__dot {
+  width: 8px;
+  height: 8px;
+  background: var(--sor-green);
+  border-radius: 50%;
+  animation: sorPulse 2s infinite;
+}
+
+@keyframes sorPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(26,122,74,0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(26,122,74,0); }
+}
+
+/* trust badges */
+.sor-trust-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px 0;
+  border-top: 1px solid var(--sor-border);
+  border-bottom: 1px solid var(--sor-border);
+}
+
+@media (max-width: 600px) {
+  .sor-trust-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+.sor-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.sor-trust-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--sor-highlight);
+}
+
+.sor-trust-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--sor-text);
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* accordions */
+.sor-accordions { display: flex; flex-direction: column; }
+
+.sor-accordion-item { border-bottom: 1px solid var(--sor-border); }
+
+.sor-accordion-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--sor-font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sor-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s;
+}
+
+.sor-accordion-toggle:hover { color: var(--sor-highlight); }
+
+.sor-accordion-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--sor-highlight);
+}
+
+.sor-accordion-item.open .sor-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.sor-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+  font-size: 14px;
+  color: var(--sor-muted);
+  line-height: 1.7;
+}
+
+.sor-accordion-item.open .sor-accordion-body {
+  max-height: 600px;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sor-accordion-body-inner { padding-bottom: 16px; }
+
+/* ── SCIENCE CREDENTIAL BAR ── */
+.sor-science-bar {
+  background: linear-gradient(135deg, var(--sor-primary) 0%, var(--sor-accent) 100%);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.sor-science-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+}
+
+.sor-science-stat__num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.sor-science-stat__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+}
+
+.sor-science-stat__sep {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* ── FLOATING STICKY BAR ── */
+.sor-sticky-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  width: calc(100% - 48px);
+  max-width: 640px;
+  background: var(--sor-primary);
+  border-radius: var(--sor-radius-xl);
+  box-shadow: 0 12px 40px rgba(26,36,64,0.32);
+  z-index: 999;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+  opacity: 0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.sor-sticky-bar.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sor-sticky-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  gap: 16px;
+}
+
+.sor-sticky-bar__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.sor-sticky-bar__price {
+  font-size: 16px;
+  font-weight: 800;
+  color: #93b4e8;
+  white-space: nowrap;
+}
+
+.sor-sticky-bar__btn {
+  background: var(--sor-highlight);
+  color: #fff;
+  font-family: var(--sor-font);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--sor-radius-pill);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.2s;
+}
+
+.sor-sticky-bar__btn:hover { filter: brightness(1.1); }
+
+@media (max-width: 767px) {
+  .sor-sticky-bar {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: translateY(120px);
+  }
+  .sor-sticky-bar.visible { transform: translateY(0); }
+  .sor-facts-grid { grid-template-columns: 1fr 1fr; }
+}
+{%- endstyle -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_title = product.title
+  assign product_desc = section.settings.subtitle_text | default: product.description
+  assign brand_text = section.settings.brand_text | default: 'SCIENCE OF RAW'
+  assign rating_value = section.settings.rating_value | default: '4.8'
+  assign rating_count = section.settings.rating_reviews | default: '94'
+  assign formula_line = section.settings.formula_line | default: 'Lab-Verified Formula — Batch Tested for Purity'
+  assign badge_text = section.settings.badge_text | default: 'CLINICALLY TESTED'
+  assign pill_1 = section.settings.pill_1_text | default: 'Raw & unprocessed actives'
+  assign pill_2 = section.settings.pill_2_text | default: 'Zero synthetic fillers'
+  assign pill_3 = section.settings.pill_3_text | default: 'Batch-tested for purity'
+  assign pill_4 = section.settings.pill_4_text | default: 'Sustainably sourced'
+  assign pill_5 = section.settings.pill_5_text | default: 'pH-balanced formulation'
+  assign stat_1_val = section.settings.stat_1_value | default: '97%'
+  assign stat_1_lbl = section.settings.stat_1_label | default: 'Efficacy Rate'
+  assign stat_2_val = section.settings.stat_2_value | default: '100%'
+  assign stat_2_lbl = section.settings.stat_2_label | default: 'Raw Ingredients'
+  assign stat_3_val = section.settings.stat_3_value | default: '0'
+  assign stat_3_lbl = section.settings.stat_3_label | default: 'Synthetic Fillers'
+-%}
+
+<div class="sor-pdp-wrap" id="sor-pdp-{{ section.id }}">
+
+  {%- comment -%} BRAND STRIP {%- endcomment -%}
+  <div class="sor-brand-strip">
+    <img
+      src="{{ 'logo-science-of-raw.svg' | asset_url }}"
+      alt="Science of Raw"
+      class="sor-brand-strip__logo"
+      width="180" height="28"
+    >
+    <span class="sor-brand-strip__badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1h4l1 4H2L3 1z" stroke="currentColor" stroke-width="1.2"/><path d="M2 5l1 4h4l1-4" stroke="currentColor" stroke-width="1.2"/></svg>
+      Precision Skincare Science
+    </span>
+  </div>
+
+  {%- comment -%} TICKER BAR {%- endcomment -%}
+  <div class="sor-ticker">
+    <div class="sor-ticker__item">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0L7.4 4.4H12L8.3 7.1 9.7 11.5 6 8.8 2.3 11.5 3.7 7.1 0 4.4H4.6z"/></svg>
+      Lab Certified
+    </div>
+    <div class="sor-ticker__item">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Dermatologist Approved
+    </div>
+    <div class="sor-ticker__item">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 6h4M6 4v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      GMP Manufactured
+    </div>
+    <div class="sor-ticker__item">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l3 2.5v4L6 11 3 7.5V3.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+      Cruelty Free
+    </div>
+  </div>
+
+  {%- comment -%} MAIN GRID {%- endcomment -%}
+  <div class="sor-pdp-grid">
+
+    {%- comment -%} ── LEFT: GALLERY ── {%- endcomment -%}
+    <div class="sor-gallery" id="sor-gallery-{{ section.id }}">
+      <div class="sor-gallery__main">
+        {%- if badge_text != blank -%}
+          <span class="sor-gallery__badge-overlay">{{ badge_text }}</span>
+        {%- endif -%}
+
+        <span class="sor-gallery__cert">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><path d="M4 0L5 2.8H8L5.5 4.5 6.5 7.2 4 5.5 1.5 7.2 2.5 4.5 0 2.8H3z"/></svg>
+          Lab Verified
+        </span>
+
+        <button class="sor-gallery__nav-btn sor-gallery__nav-btn--prev" onclick="sorGalleryNav('{{ section.id }}', -1)" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#27355f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        {%- if product.images.size > 0 -%}
+          {%- for image in product.images -%}
+            <img
+              id="sor-main-{{ section.id }}-{{ forloop.index0 }}"
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | default: product_title | escape }}"
+              class="sor-gallery__main-img"
+              width="800" height="800"
+              loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
+              style="{{ forloop.first | iif: 'display:block', 'display:none' }}"
+            >
+          {%- endfor -%}
+        {%- else -%}
+          {{ 'product-2' | placeholder_svg_tag: 'sor-gallery__main-img' }}
+        {%- endif -%}
+
+        <button class="sor-gallery__nav-btn sor-gallery__nav-btn--next" onclick="sorGalleryNav('{{ section.id }}', 1)" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#27355f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div class="sor-gallery__thumbs">
+          {%- for image in product.images -%}
+            <div
+              class="sor-gallery__thumb {% if forloop.first %}active{% endif %}"
+              onclick="sorGallerySet('{{ section.id }}', {{ forloop.index0 }})"
+            >
+              <img
+                src="{{ image | image_url: width: 150 }}"
+                alt="{{ image.alt | default: product_title | escape }}"
+                width="72" height="72"
+                loading="lazy"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT: PRODUCT INFO ── {%- endcomment -%}
+    <div class="sor-info">
+
+      {%- comment -%} Brand + Rating row {%- endcomment -%}
+      <div class="sor-info__brand-row">
+        <span class="sor-brand-tag">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="#27355f"><path d="M5 1l3 2.5v4L5 9 2 7.5V3.5z"/></svg>
+          {{ brand_text }}
+        </span>
+        <span class="sor-lab-tag">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3.5 1h3L7 5l1 4H2L3 5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          Lab Tested
+        </span>
+        <span class="sor-rating-pill">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#1a7a4a"><path d="M6 1l1.4 2.9 3.2.5-2.3 2.2.5 3.2L6 8.2l-2.8 1.6.5-3.2L1.4 4.4l3.2-.5z"/></svg>
+          {{ rating_value }} · {{ rating_count }} reviews
+        </span>
+      </div>
+
+      {%- comment -%} Title {%- endcomment -%}
+      <h1 class="sor-info__title">{{ product_title }}</h1>
+
+      {%- comment -%} Formula line {%- endcomment -%}
+      {%- if formula_line != blank -%}
+        <div class="sor-formula-line">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 1h4L10 6l2 7H2l2-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          {{ formula_line }}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Subtitle {%- endcomment -%}
+      <p class="sor-info__subtitle">{{ product_desc }}</p>
+
+      {%- comment -%} Key science facts {%- endcomment -%}
+      <div class="sor-facts-grid">
+        <div class="sor-fact-card">
+          <span class="sor-fact-card__value">{{ stat_1_val }}</span>
+          <span class="sor-fact-card__label">{{ stat_1_lbl }}</span>
+        </div>
+        <div class="sor-fact-card">
+          <span class="sor-fact-card__value">{{ stat_2_val }}</span>
+          <span class="sor-fact-card__label">{{ stat_2_lbl }}</span>
+        </div>
+        <div class="sor-fact-card">
+          <span class="sor-fact-card__value">{{ stat_3_val }}</span>
+          <span class="sor-fact-card__label">{{ stat_3_lbl }}</span>
+        </div>
+      </div>
+
+      {%- comment -%} Benefits {%- endcomment -%}
+      <div class="sor-benefits">
+        {%- for i in (1..5) -%}
+          {%- liquid
+            case i
+              when 1
+                assign pill_text = pill_1
+              when 2
+                assign pill_text = pill_2
+              when 3
+                assign pill_text = pill_3
+              when 4
+                assign pill_text = pill_4
+              when 5
+                assign pill_text = pill_5
+            endcase
+          -%}
+          {%- if pill_text != blank -%}
+            <div class="sor-benefit-item">
+              <span class="sor-benefit-dot">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1.5 4L4 6.5 8.5 1.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              {{ pill_text }}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <hr class="sor-divider">
+
+      {%- comment -%} Variant Picker {%- endcomment -%}
+      {%- if product.variants.size > 1 -%}
+        <div class="sor-variant-picker" id="sor-variant-picker-{{ section.id }}">
+          <div class="sor-variant-label">Choose Variant</div>
+          <div class="sor-variant-cards">
+            {%- for variant in product.variants -%}
+              <div
+                class="sor-variant-card {% if variant == current_variant %}active{% endif %}"
+                data-variant-id="{{ variant.id }}"
+                data-variant-price="{{ variant.price | money }}"
+                data-variant-compare="{{ variant.compare_at_price | money }}"
+                data-variant-available="{{ variant.available }}"
+                onclick="sorSelectVariant('{{ section.id }}', this)"
+              >
+                {%- if variant.featured_image -%}
+                  <img class="sor-variant-card__img" src="{{ variant.featured_image | image_url: width: 80 }}" alt="{{ variant.title | escape }}" width="40" height="40" loading="lazy">
+                {%- else -%}
+                  <div class="sor-variant-card__img" style="display:flex;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 1h8L14 9l2 8H2l2-8z" stroke="#27355f" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  </div>
+                {%- endif -%}
+                <div>
+                  <div class="sor-variant-card__name">{{ variant.title }}</div>
+                  <div class="sor-variant-card__price">{{ variant.price | money }}</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        <hr class="sor-divider">
+      {%- endif -%}
+
+      {%- comment -%} Pricing {%- endcomment -%}
+      <div class="sor-pricing" id="sor-pricing-{{ section.id }}">
+        <span class="sor-price-current">{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="sor-price-compare">{{ current_variant.compare_at_price | money }}</span>
+          {%- assign savings = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+          <span class="sor-price-save">{{ savings }}% OFF</span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Stock {%- endcomment -%}
+      {%- if current_variant.available -%}
+        <div class="sor-stock">
+          <span class="sor-stock__dot"></span>
+          In Stock — Ships in 24 hours
+        </div>
+      {%- else -%}
+        <div class="sor-stock" style="color:var(--sor-red);">
+          <span class="sor-stock__dot" style="background:var(--sor-red);animation:none;"></span>
+          Currently Out of Stock
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Cart Row {%- endcomment -%}
+      {%- form 'product', product, id: "sor-product-form-{{ section.id }}", novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" id="sor-variant-id-{{ section.id }}" value="{{ current_variant.id }}">
+
+        <div class="sor-cart-row">
+          <div class="sor-qty">
+            <button type="button" class="sor-qty__btn" onclick="sorQty('{{ section.id }}', -1)" aria-label="Decrease">−</button>
+            <span class="sor-qty__num" id="sor-qty-num-{{ section.id }}">1</span>
+            <button type="button" class="sor-qty__btn" onclick="sorQty('{{ section.id }}', 1)" aria-label="Increase">+</button>
+            <input type="hidden" name="quantity" id="sor-qty-input-{{ section.id }}" value="1">
+          </div>
+          <button
+            type="submit"
+            class="sor-atc-btn"
+            id="sor-atc-btn-{{ section.id }}"
+            {% unless current_variant.available %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 2h2l2.5 9h7l1.5-6H5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="15" r="1" fill="#fff"/><circle cx="13" cy="15" r="1" fill="#fff"/></svg>
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="sor-buy-now-wrapper" id="sor-buy-now-{{ section.id }}">
+          {%- unless current_variant.available -%}
+            <style>#sor-buy-now-{{ section.id }}{display:none}</style>
+          {%- endunless -%}
+          {{ form | payment_button }}
+        </div>
+      {%- endform -%}
+
+      {%- comment -%} Trust badges {%- endcomment -%}
+      <div class="sor-trust-row">
+        <div class="sor-trust-item">
+          <svg class="sor-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M8 4h16l2 12H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 16l2 12h12l2-12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span class="sor-trust-text">Lab Tested</span>
+        </div>
+        <div class="sor-trust-item">
+          <svg class="sor-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4z" stroke="currentColor" stroke-width="2"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="sor-trust-text">Certified Pure</span>
+        </div>
+        <div class="sor-trust-item">
+          <svg class="sor-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M6 8h20v16a2 2 0 01-2 2H8a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M10 8V6a6 6 0 0112 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="sor-trust-text">Secure Pay</span>
+        </div>
+        <div class="sor-trust-item">
+          <svg class="sor-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4L8 8v8c0 5 3.6 9.7 8 11 4.4-1.3 8-6 8-11V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span class="sor-trust-text">Cruelty Free</span>
+        </div>
+      </div>
+
+      {%- comment -%} Accordions {%- endcomment -%}
+      <div class="sor-accordions">
+
+        <div class="sor-accordion-item">
+          <button class="sor-accordion-toggle" onclick="sorAccordion(this)">
+            About this Formula
+            <svg class="sor-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="sor-accordion-body">
+            <div class="sor-accordion-body-inner">
+              {{ product.description }}
+            </div>
+          </div>
+        </div>
+
+        <div class="sor-accordion-item">
+          <button class="sor-accordion-toggle" onclick="sorAccordion(this)">
+            Application Protocol
+            <svg class="sor-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="sor-accordion-body">
+            <div class="sor-accordion-body-inner">
+              {%- if section.settings.how_to_use != blank -%}
+                {{ section.settings.how_to_use }}
+              {%- else -%}
+                <p>Apply 2–3 drops to freshly cleansed skin. Work into skin using upward strokes. Allow 90 seconds for full absorption before layering serums or moisturisers. Optimal results with AM and PM application.</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="sor-accordion-item">
+          <button class="sor-accordion-toggle" onclick="sorAccordion(this)">
+            Active Ingredient Breakdown
+            <svg class="sor-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="sor-accordion-body">
+            <div class="sor-accordion-body-inner">
+              {%- if section.settings.ingredients != blank -%}
+                {{ section.settings.ingredients }}
+              {%- else -%}
+                <p>{{ product.metafields.custom.ingredients | default: 'Full INCI listing on inner packaging. All Science of Raw formulations are batch-tested and contain zero synthetic fillers, parabens, or sulphates.' }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="sor-accordion-item">
+          <button class="sor-accordion-toggle" onclick="sorAccordion(this)">
+            Delivery & Returns Policy
+            <svg class="sor-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="sor-accordion-body">
+            <div class="sor-accordion-body-inner">
+              <p>Free shipping on orders over ₹1,499. Express 48-hour delivery available at checkout. Hassle-free returns within 7 days on sealed, unused products.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} SCIENCE CREDENTIAL BAR {%- endcomment -%}
+  <div class="sor-science-bar">
+    <div class="sor-science-stat">
+      <span class="sor-science-stat__num">{{ stat_1_val }}</span>
+      <span class="sor-science-stat__label">{{ stat_1_lbl }}</span>
+    </div>
+    <span class="sor-science-stat__sep"></span>
+    <div class="sor-science-stat">
+      <span class="sor-science-stat__num">{{ stat_2_val }}</span>
+      <span class="sor-science-stat__label">{{ stat_2_lbl }}</span>
+    </div>
+    <span class="sor-science-stat__sep"></span>
+    <div class="sor-science-stat">
+      <span class="sor-science-stat__num">{{ stat_3_val }}</span>
+      <span class="sor-science-stat__label">{{ stat_3_lbl }}</span>
+    </div>
+    <span class="sor-science-stat__sep"></span>
+    <div class="sor-science-stat">
+      <span class="sor-science-stat__num">GMP</span>
+      <span class="sor-science-stat__label">Certified</span>
+    </div>
+  </div>
+
+  {%- comment -%} FLOATING STICKY BAR {%- endcomment -%}
+  <div class="sor-sticky-bar" id="sor-sticky-{{ section.id }}">
+    <div class="sor-sticky-bar__inner">
+      <span class="sor-sticky-bar__title">{{ product_title }}</span>
+      <span class="sor-sticky-bar__price" id="sor-sticky-price-{{ section.id }}">{{ current_variant.price | money }}</span>
+      <button class="sor-sticky-bar__btn" onclick="document.getElementById('sor-product-form-{{ section.id }}').querySelector('[type=submit]').click()">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var sid = '{{ section.id }}';
+
+  /* ── Gallery ── */
+  var galleryIdx = 0;
+  var totalImages = {{ product.images.size }};
+
+  function sorSetGalleryImg(idx) {
+    if (totalImages === 0) return;
+    galleryIdx = ((idx % totalImages) + totalImages) % totalImages;
+    for (var i = 0; i < totalImages; i++) {
+      var el = document.getElementById('sor-main-' + sid + '-' + i);
+      if (el) el.style.display = (i === galleryIdx) ? 'block' : 'none';
+    }
+    var thumbs = document.querySelectorAll('#sor-gallery-' + sid + ' .sor-gallery__thumb');
+    thumbs.forEach(function(t, ti) { t.classList.toggle('active', ti === galleryIdx); });
+  }
+
+  window.sorGalleryNav = function(s, dir) { if (s === sid) sorSetGalleryImg(galleryIdx + dir); };
+  window.sorGallerySet = function(s, idx) { if (s === sid) sorSetGalleryImg(idx); };
+
+  /* ── Quantity ── */
+  var qty = 1;
+  window.sorQty = function(s, delta) {
+    if (s !== sid) return;
+    qty = Math.max(1, qty + delta);
+    var numEl = document.getElementById('sor-qty-num-' + sid);
+    var inpEl = document.getElementById('sor-qty-input-' + sid);
+    if (numEl) numEl.textContent = qty;
+    if (inpEl) inpEl.value = qty;
+  };
+
+  /* ── Variant ── */
+  window.sorSelectVariant = function(s, card) {
+    if (s !== sid) return;
+    var cards = document.querySelectorAll('#sor-variant-picker-' + sid + ' .sor-variant-card');
+    cards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+
+    var vid = card.getAttribute('data-variant-id');
+    var price = card.getAttribute('data-variant-price');
+    var avail = card.getAttribute('data-variant-available') === 'true';
+
+    var hidInp = document.getElementById('sor-variant-id-' + sid);
+    if (hidInp) hidInp.value = vid;
+
+    var priceEl = document.querySelector('#sor-pricing-' + sid + ' .sor-price-current');
+    if (priceEl) priceEl.textContent = price;
+
+    var stickyPrice = document.getElementById('sor-sticky-price-' + sid);
+    if (stickyPrice) stickyPrice.textContent = price;
+
+    var btn = document.getElementById('sor-atc-btn-' + sid);
+    if (btn) { btn.disabled = !avail; btn.style.opacity = avail ? '1' : '0.5'; }
+  };
+
+  /* ── Accordion ── */
+  window.sorAccordion = function(btn) {
+    var item = btn.closest('.sor-accordion-item');
+    var isOpen = item.classList.contains('open');
+    var allItems = btn.closest('.sor-accordions').querySelectorAll('.sor-accordion-item');
+    allItems.forEach(function(it) { it.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  };
+
+  /* ── Sticky bar ── */
+  var atcBtn = document.getElementById('sor-atc-btn-' + sid);
+  var stickyBar = document.getElementById('sor-sticky-' + sid);
+
+  if (atcBtn && stickyBar) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        stickyBar.classList.toggle('visible', !e.isIntersecting);
+      });
+    }, { threshold: 0 });
+    io.observe(atcBtn);
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Science of Raw Product Detail",
+  "tag": "section",
+  "class": "sor-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Identity"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Label",
+      "default": "SCIENCE OF RAW"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Product Badge (gallery overlay)",
+      "default": "CLINICALLY TESTED"
+    },
+    {
+      "type": "text",
+      "id": "formula_line",
+      "label": "Formula Descriptor Line",
+      "default": "Lab-Verified Formula — Batch Tested for Purity"
+    },
+    {
+      "type": "header",
+      "content": "Ratings"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating Value",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "rating_reviews",
+      "label": "Review Count",
+      "default": "94"
+    },
+    {
+      "type": "header",
+      "content": "Product Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_text",
+      "label": "Product Subtitle",
+      "default": "Pure, raw, and precisely refined — formulated with honest, clean ingredients and backed by science."
+    },
+    {
+      "type": "header",
+      "content": "Science Stats"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 Value",
+      "default": "97%"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Efficacy Rate"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 Value",
+      "default": "100%"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Raw Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 Value",
+      "default": "0"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Synthetic Fillers"
+    },
+    {
+      "type": "header",
+      "content": "Benefit Pills"
+    },
+    {
+      "type": "text",
+      "id": "pill_1_text",
+      "label": "Benefit 1",
+      "default": "Raw & unprocessed actives"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_text",
+      "label": "Benefit 2",
+      "default": "Zero synthetic fillers"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_text",
+      "label": "Benefit 3",
+      "default": "Batch-tested for purity"
+    },
+    {
+      "type": "text",
+      "id": "pill_4_text",
+      "label": "Benefit 4",
+      "default": "Sustainably sourced"
+    },
+    {
+      "type": "text",
+      "id": "pill_5_text",
+      "label": "Benefit 5",
+      "default": "pH-balanced formulation"
+    },
+    {
+      "type": "header",
+      "content": "Accordion Content"
+    },
+    {
+      "type": "richtext",
+      "id": "how_to_use",
+      "label": "Application Protocol"
+    },
+    {
+      "type": "richtext",
+      "id": "ingredients",
+      "label": "Active Ingredient Breakdown"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science of Raw Product Detail"
+    }
+  ]
+}
+{% endschema %}

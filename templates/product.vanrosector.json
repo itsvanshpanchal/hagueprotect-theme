@@ -1,0 +1,116 @@
+{
+  "sections": {
+    "vanrosector-product-hero": {
+      "type": "vanrosector-product-hero",
+      "settings": {
+        "brand_text": "VANROSECTOR",
+        "badge_text": "NEW ARRIVAL",
+        "rating_value": "4.9",
+        "rating_reviews": "128",
+        "subtitle_text": "A nature-crafted formula, thoughtfully sourced and expertly blended to elevate your everyday ritual.",
+        "pill_1_text": "Pure natural ingredients",
+        "pill_2_text": "Dermatologist tested",
+        "pill_3_text": "Free from harsh chemicals",
+        "pill_4_text": "Eco-conscious packaging",
+        "pill_5_text": "Fast & secure delivery"
+      }
+    },
+    "feature-grid-vr": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_vr_1": {
+          "type": "feature",
+          "settings": {
+            "heading": "Nature's Finest Essences",
+            "text": "Every Vanrosector ingredient is sourced from nature's most potent botanicals — chosen for efficacy and purity."
+          }
+        },
+        "feature_vr_2": {
+          "type": "feature",
+          "settings": {
+            "heading": "Gentle Yet Powerful",
+            "text": "Our formulas are free from harsh sulphates and synthetic fragrances — kind to skin, effective for results."
+          }
+        },
+        "feature_vr_3": {
+          "type": "feature",
+          "settings": {
+            "heading": "Eco-Conscious Ritual",
+            "text": "Sustainably produced with biodegradable packaging — a ritual you can feel good about."
+          }
+        }
+      },
+      "block_order": ["feature_vr_1", "feature_vr_2", "feature_vr_3"],
+      "settings": {
+        "eyebrow": "WHY VANROSECTOR",
+        "heading": "The Vanrosector Difference"
+      }
+    },
+    "reviews-grid-vr": {
+      "type": "reviews-grid",
+      "blocks": {
+        "review_vr_1": {
+          "type": "review",
+          "settings": {
+            "author": "Priya M.",
+            "is_verified": true,
+            "date": "2 weeks ago",
+            "rating": 5,
+            "title": "My skin has never felt better",
+            "text": "I've been using Vanrosector for a month and the difference is incredible. Texture improved, hydration locked in all day.",
+            "item_type": ""
+          }
+        },
+        "review_vr_2": {
+          "type": "review",
+          "settings": {
+            "author": "Arjun S.",
+            "is_verified": true,
+            "date": "Last week",
+            "rating": 5,
+            "title": "Clean formula that actually works",
+            "text": "Love that there are no harsh chemicals. It's gentle on my sensitive skin and the results are real.",
+            "item_type": ""
+          }
+        },
+        "review_vr_3": {
+          "type": "review",
+          "settings": {
+            "author": "Divya K.",
+            "is_verified": true,
+            "date": "3 weeks ago",
+            "rating": 5,
+            "title": "Worth every rupee",
+            "text": "Premium quality, natural scent, gorgeous packaging. Will not go back to chemical-laden alternatives.",
+            "item_type": ""
+          }
+        }
+      },
+      "block_order": ["review_vr_1", "review_vr_2", "review_vr_3"],
+      "settings": {
+        "heading": "People Love Vanrosector",
+        "total_reviews": "128 Reviews"
+      }
+    },
+    "product-recommendations-vr": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You might also love",
+        "collection": "vanrosector"
+      }
+    },
+    "faq-vr": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
+    }
+  },
+  "order": [
+    "vanrosector-product-hero",
+    "feature-grid-vr",
+    "reviews-grid-vr",
+    "faq-vr",
+    "product-recommendations-vr"
+  ]
+}

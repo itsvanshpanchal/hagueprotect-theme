@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "sor-product-hero": {
+      "type": "sor-product-hero",
+      "settings": {
+        "brand_text": "SCIENCE OF RAW",
+        "badge_text": "CLINICALLY TESTED",
+        "formula_line": "Lab-Verified Formula — Batch Tested for Purity",
+        "rating_value": "4.8",
+        "rating_reviews": "94",
+        "subtitle_text": "Pure, raw, and precisely refined — formulated with honest, clean ingredients and backed by science.",
+        "stat_1_value": "97%",
+        "stat_1_label": "Efficacy Rate",
+        "stat_2_value": "100%",
+        "stat_2_label": "Raw Ingredients",
+        "stat_3_value": "0",
+        "stat_3_label": "Synthetic Fillers",
+        "pill_1_text": "Raw & unprocessed actives",
+        "pill_2_text": "Zero synthetic fillers",
+        "pill_3_text": "Batch-tested for purity",
+        "pill_4_text": "Sustainably sourced",
+        "pill_5_text": "pH-balanced formulation"
+      }
+    },
+    "feature-grid-sor": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature_sor_1": {
+          "type": "feature",
+          "settings": {
+            "heading": "Lab-Verified Actives",
+            "text": "Every active ingredient is independently tested for potency and purity before entering a Science of Raw formulation."
+          }
+        },
+        "feature_sor_2": {
+          "type": "feature",
+          "settings": {
+            "heading": "Zero Synthetic Fillers",
+            "text": "We refuse shortcuts. No parabens, no sulphates, no synthetic binders — only what your skin actually needs."
+          }
+        },
+        "feature_sor_3": {
+          "type": "feature",
+          "settings": {
+            "heading": "Precision pH Balance",
+            "text": "Formulated to match your skin's natural pH for optimal absorption and long-lasting efficacy."
+          }
+        }
+      },
+      "block_order": ["feature_sor_1", "feature_sor_2", "feature_sor_3"],
+      "settings": {
+        "eyebrow": "THE SCIENCE",
+        "heading": "What Makes Science of Raw Different"
+      }
+    },
+    "reviews-grid-sor": {
+      "type": "reviews-grid",
+      "blocks": {
+        "review_sor_1": {
+          "type": "review",
+          "settings": {
+            "author": "Nikita R.",
+            "is_verified": true,
+            "date": "1 week ago",
+            "rating": 5,
+            "title": "Finally a brand that backs claims with science",
+            "text": "Every ingredient listed has a purpose. No fluff, no filler. My skin responded beautifully within two weeks.",
+            "item_type": ""
+          }
+        },
+        "review_sor_2": {
+          "type": "review",
+          "settings": {
+            "author": "Rohan B.",
+            "is_verified": true,
+            "date": "2 weeks ago",
+            "rating": 5,
+            "title": "Clinical results at home",
+            "text": "The efficacy is real. Visible improvement in texture and tone. Dermatologist approved and it shows.",
+            "item_type": ""
+          }
+        },
+        "review_sor_3": {
+          "type": "review",
+          "settings": {
+            "author": "Ananya T.",
+            "is_verified": true,
+            "date": "Last month",
+            "rating": 5,
+            "title": "Pure, powerful, and precise",
+            "text": "Zero irritation on my sensitive skin. The clean formula is transparent about every ingredient. Trust established.",
+            "item_type": ""
+          }
+        }
+      },
+      "block_order": ["review_sor_1", "review_sor_2", "review_sor_3"],
+      "settings": {
+        "heading": "Trusted by Science Believers",
+        "total_reviews": "94 Reviews"
+      }
+    },
+    "product-recommendations-sor": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Complete Your Routine",
+        "collection": "science-of-raw"
+      }
+    },
+    "faq-sor": {
+      "type": "faq",
+      "settings": {
+        "heading": "Science. Answered."
+      }
+    }
+  },
+  "order": [
+    "sor-product-hero",
+    "feature-grid-sor",
+    "reviews-grid-sor",
+    "faq-sor",
+    "product-recommendations-sor"
+  ]
+}

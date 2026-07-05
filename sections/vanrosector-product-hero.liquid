@@ -1,0 +1,1149 @@
+{%- style -%}
+/* ============================================================
+   VANROSECTOR PRODUCT DETAIL PAGE — Brand-specific styles
+   Palette: Warm earthy / natural tones (#8a6a3b, #fbf8f2)
+   ============================================================ */
+
+:root {
+  --vr-primary:     #2c2113;
+  --vr-accent:      #8a6a3b;
+  --vr-accent-lt:   #c4a47a;
+  --vr-bg:          #fbf8f2;
+  --vr-bg-card:     #ffffff;
+  --vr-surface:     #f3ede3;
+  --vr-border:      #e3d5c0;
+  --vr-text:        #3a2e1e;
+  --vr-muted:       #7a6a52;
+  --vr-green:       #2d6a4f;
+  --vr-font:        'Inter', sans-serif;
+  --vr-radius-sm:   8px;
+  --vr-radius-md:   12px;
+  --vr-radius-lg:   16px;
+  --vr-radius-xl:   20px;
+  --vr-radius-pill: 100px;
+}
+
+.vr-pdp-wrap {
+  background: var(--vr-bg);
+  font-family: var(--vr-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOP BRAND STRIP ── */
+.vr-brand-strip {
+  background: var(--vr-primary);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.vr-brand-strip__logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+.vr-brand-strip__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--vr-radius-pill);
+  border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* ── MAIN GRID ── */
+.vr-pdp-grid {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 991px) {
+  .vr-pdp-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 20px 16px 80px;
+  }
+}
+
+/* ── GALLERY ── */
+.vr-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+@media (max-width: 991px) {
+  .vr-gallery { position: static; }
+}
+
+.vr-gallery__main {
+  background: var(--vr-surface);
+  border-radius: var(--vr-radius-xl);
+  border: 1px solid var(--vr-border);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.vr-gallery__main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 20px;
+  transition: transform 0.4s ease;
+}
+
+.vr-gallery__main:hover .vr-gallery__main-img {
+  transform: scale(1.06);
+}
+
+.vr-gallery__badge-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--vr-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--vr-radius-pill);
+}
+
+.vr-gallery__nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--vr-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.vr-gallery__nav-btn:hover { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.vr-gallery__nav-btn--prev { left: 12px; }
+.vr-gallery__nav-btn--next { right: 12px; }
+
+.vr-gallery__thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.vr-gallery__thumbs::-webkit-scrollbar { display: none; }
+
+.vr-gallery__thumb {
+  flex: 0 0 72px;
+  height: 72px;
+  border-radius: var(--vr-radius-md);
+  background: var(--vr-surface);
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vr-gallery__thumb.active,
+.vr-gallery__thumb:hover {
+  border-color: var(--vr-accent);
+  box-shadow: 0 0 0 3px rgba(138,106,59,0.18);
+}
+.vr-gallery__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* ── PRODUCT INFO PANEL ── */
+.vr-info { display: flex; flex-direction: column; gap: 20px; }
+
+/* brand + rating row */
+.vr-info__brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.vr-brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--vr-surface);
+  border: 1px solid var(--vr-border);
+  color: var(--vr-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--vr-radius-pill);
+}
+
+.vr-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #e8f5e9;
+  color: var(--vr-green);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: var(--vr-radius-pill);
+}
+
+/* title */
+.vr-info__title {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--vr-primary);
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* subtitle */
+.vr-info__subtitle {
+  font-size: 15px;
+  color: var(--vr-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* benefit pills */
+.vr-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vr-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vr-text);
+}
+
+.vr-benefit-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--vr-accent) 0%, var(--vr-accent-lt) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* divider */
+.vr-divider {
+  border: none;
+  border-top: 1px solid var(--vr-border);
+  margin: 0;
+}
+
+/* variant picker */
+.vr-variant-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vr-muted);
+  margin-bottom: 8px;
+}
+
+.vr-variant-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.vr-variant-card {
+  border: 1px solid var(--vr-border);
+  border-radius: var(--vr-radius-md);
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  background: var(--vr-bg-card);
+  user-select: none;
+}
+
+.vr-variant-card:hover {
+  border-color: var(--vr-accent-lt);
+  background: var(--vr-surface);
+}
+
+.vr-variant-card.active {
+  border: 2px solid var(--vr-accent);
+  background: rgba(138,106,59,0.05);
+}
+
+.vr-variant-card__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--vr-surface);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.vr-variant-card__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vr-primary);
+  line-height: 1.2;
+}
+
+.vr-variant-card__price {
+  font-size: 12px;
+  color: var(--vr-muted);
+}
+
+/* pricing block */
+.vr-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vr-price-current {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 800;
+  color: var(--vr-primary);
+  letter-spacing: -0.02em;
+}
+
+.vr-price-compare {
+  font-size: 18px;
+  color: var(--vr-muted);
+  text-decoration: line-through;
+}
+
+.vr-price-save {
+  background: #fff3e0;
+  color: #e65100;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--vr-radius-pill);
+}
+
+/* qty + ATC */
+.vr-cart-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.vr-qty {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--vr-border);
+  border-radius: var(--vr-radius-md);
+  overflow: hidden;
+  height: 52px;
+  background: var(--vr-bg-card);
+}
+
+.vr-qty__btn {
+  width: 44px;
+  height: 100%;
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: var(--vr-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.vr-qty__btn:hover { background: var(--vr-surface); }
+
+.vr-qty__num {
+  flex: 1;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vr-primary);
+  min-width: 36px;
+}
+
+.vr-atc-btn {
+  flex: 1;
+  height: 52px;
+  background: linear-gradient(135deg, var(--vr-accent) 0%, #6b4f29 100%);
+  color: #fff;
+  font-family: var(--vr-font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: var(--vr-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vr-atc-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.vr-atc-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.vr-atc-btn:active { transform: translateY(0); }
+
+.vr-buy-now-wrapper {
+  margin-top: -8px;
+}
+
+.vr-buy-now-wrapper .shopify-payment-button__button {
+  border-radius: var(--vr-radius-md) !important;
+  font-family: var(--vr-font) !important;
+  height: 52px !important;
+  font-weight: 700 !important;
+}
+
+/* stock indicator */
+.vr-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vr-green);
+}
+
+.vr-stock__dot {
+  width: 8px;
+  height: 8px;
+  background: var(--vr-green);
+  border-radius: 50%;
+  animation: vrPulse 1.8s infinite;
+}
+
+@keyframes vrPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(45,106,79,0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 5px rgba(45,106,79,0); }
+}
+
+/* trust badges */
+.vr-trust-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px 0;
+  border-top: 1px solid var(--vr-border);
+  border-bottom: 1px solid var(--vr-border);
+}
+
+@media (max-width: 600px) {
+  .vr-trust-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+.vr-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.vr-trust-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--vr-accent);
+}
+
+.vr-trust-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--vr-text);
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* accordions */
+.vr-accordions { display: flex; flex-direction: column; }
+
+.vr-accordion-item {
+  border-bottom: 1px solid var(--vr-border);
+}
+
+.vr-accordion-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--vr-font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vr-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s;
+}
+
+.vr-accordion-toggle:hover { color: var(--vr-accent); }
+
+.vr-accordion-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  color: var(--vr-accent);
+}
+
+.vr-accordion-item.open .vr-accordion-icon {
+  transform: rotate(45deg);
+}
+
+.vr-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0,1,0,1);
+  font-size: 14px;
+  color: var(--vr-muted);
+  line-height: 1.7;
+}
+
+.vr-accordion-item.open .vr-accordion-body {
+  max-height: 600px;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.vr-accordion-body-inner { padding-bottom: 16px; }
+
+/* ── FLOATING STICKY BAR ── */
+.vr-sticky-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  width: calc(100% - 48px);
+  max-width: 640px;
+  background: var(--vr-primary);
+  border-radius: var(--vr-radius-xl);
+  box-shadow: 0 12px 40px rgba(44,33,19,0.32);
+  z-index: 999;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+  opacity: 0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.vr-sticky-bar.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.vr-sticky-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  gap: 16px;
+}
+
+.vr-sticky-bar__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.vr-sticky-bar__price {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--vr-accent-lt);
+  white-space: nowrap;
+}
+
+.vr-sticky-bar__btn {
+  background: var(--vr-accent);
+  color: #fff;
+  font-family: var(--vr-font);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: var(--vr-radius-pill);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.2s;
+}
+
+.vr-sticky-bar__btn:hover { filter: brightness(1.1); }
+
+@media (max-width: 767px) {
+  .vr-sticky-bar {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: translateY(120px);
+  }
+  .vr-sticky-bar.visible {
+    transform: translateY(0);
+  }
+}
+{%- endstyle -%}
+
+{%- liquid
+  assign current_product = product
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_title = product.title
+  assign product_desc = section.settings.subtitle_text | default: product.description
+  assign brand_text = section.settings.brand_text | default: 'VANROSECTOR'
+  assign rating_value = section.settings.rating_value | default: '4.9'
+  assign rating_count = section.settings.rating_reviews | default: '128'
+  assign pill_1 = section.settings.pill_1_text | default: 'Pure natural ingredients'
+  assign pill_2 = section.settings.pill_2_text | default: 'Dermatologist tested'
+  assign pill_3 = section.settings.pill_3_text | default: 'Free from harsh chemicals'
+  assign pill_4 = section.settings.pill_4_text | default: 'Eco-conscious packaging'
+  assign pill_5 = section.settings.pill_5_text | default: 'Fast & secure delivery'
+  assign badge_text = section.settings.badge_text | default: 'NEW ARRIVAL'
+-%}
+
+<div class="vr-pdp-wrap" id="vr-pdp-{{ section.id }}">
+
+  {%- comment -%} BRAND STRIP {%- endcomment -%}
+  <div class="vr-brand-strip">
+    <img
+      src="{{ 'logo-vanrosector.svg' | asset_url }}"
+      alt="Vanrosector"
+      class="vr-brand-strip__logo"
+      width="140" height="28"
+    >
+    <span class="vr-brand-strip__badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M5 3v2l1.5 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Nature-Crafted Skincare
+    </span>
+  </div>
+
+  {%- comment -%} MAIN GRID {%- endcomment -%}
+  <div class="vr-pdp-grid">
+
+    {%- comment -%} ── LEFT: GALLERY ── {%- endcomment -%}
+    <div class="vr-gallery" id="vr-gallery-{{ section.id }}">
+      <div class="vr-gallery__main">
+        {%- if badge_text != blank -%}
+          <span class="vr-gallery__badge-overlay">{{ badge_text }}</span>
+        {%- endif -%}
+
+        <button class="vr-gallery__nav-btn vr-gallery__nav-btn--prev" onclick="vrGalleryNav('{{ section.id }}', -1)" aria-label="Previous image">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#2c2113" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        {%- if product.images.size > 0 -%}
+          {%- for image in product.images -%}
+            <img
+              id="vr-main-{{ section.id }}-{{ forloop.index0 }}"
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | default: product_title | escape }}"
+              class="vr-gallery__main-img"
+              width="800" height="800"
+              loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
+              style="{{ forloop.first | iif: 'display:block', 'display:none' }}"
+            >
+          {%- endfor -%}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'vr-gallery__main-img' }}
+        {%- endif -%}
+
+        <button class="vr-gallery__nav-btn vr-gallery__nav-btn--next" onclick="vrGalleryNav('{{ section.id }}', 1)" aria-label="Next image">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#2c2113" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      {%- if product.images.size > 1 -%}
+        <div class="vr-gallery__thumbs">
+          {%- for image in product.images -%}
+            <div
+              class="vr-gallery__thumb {% if forloop.first %}active{% endif %}"
+              onclick="vrGallerySet('{{ section.id }}', {{ forloop.index0 }})"
+            >
+              <img
+                src="{{ image | image_url: width: 150 }}"
+                alt="{{ image.alt | default: product_title | escape }}"
+                width="72" height="72"
+                loading="lazy"
+              >
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT: PRODUCT INFO ── {%- endcomment -%}
+    <div class="vr-info">
+
+      {%- comment -%} Brand + Rating row {%- endcomment -%}
+      <div class="vr-info__brand-row">
+        <span class="vr-brand-tag">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1l1.2 2.4L9 3.8 7 5.7l.5 2.8L5 7.1 2.5 8.5 3 5.7 1 3.8l2.8-.4z" fill="#8a6a3b"/></svg>
+          {{ brand_text }}
+        </span>
+        <span class="vr-rating-pill">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="#2d6a4f"><path d="M6 1l1.4 2.9 3.2.5-2.3 2.2.5 3.2L6 8.2l-2.8 1.6.5-3.2L1.4 4.4l3.2-.5z"/></svg>
+          {{ rating_value }} · {{ rating_count }} reviews
+        </span>
+      </div>
+
+      {%- comment -%} Title {%- endcomment -%}
+      <h1 class="vr-info__title">{{ product_title }}</h1>
+
+      {%- comment -%} Subtitle {%- endcomment -%}
+      <p class="vr-info__subtitle">{{ product_desc }}</p>
+
+      {%- comment -%} Benefits {%- endcomment -%}
+      <div class="vr-benefits">
+        {%- for i in (1..5) -%}
+          {%- liquid
+            case i
+              when 1
+                assign pill_text = pill_1
+              when 2
+                assign pill_text = pill_2
+              when 3
+                assign pill_text = pill_3
+              when 4
+                assign pill_text = pill_4
+              when 5
+                assign pill_text = pill_5
+            endcase
+          -%}
+          {%- if pill_text != blank -%}
+            <div class="vr-benefit-item">
+              <span class="vr-benefit-dot">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1.5 4L4 6.5 8.5 1.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              {{ pill_text }}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <hr class="vr-divider">
+
+      {%- comment -%} Variant Picker {%- endcomment -%}
+      {%- if product.variants.size > 1 -%}
+        <div class="vr-variant-picker" id="vr-variant-picker-{{ section.id }}">
+          <div class="vr-variant-label">Choose Option</div>
+          <div class="vr-variant-cards">
+            {%- for variant in product.variants -%}
+              <div
+                class="vr-variant-card {% if variant == current_variant %}active{% endif %}"
+                data-variant-id="{{ variant.id }}"
+                data-variant-price="{{ variant.price | money }}"
+                data-variant-compare="{{ variant.compare_at_price | money }}"
+                data-variant-available="{{ variant.available }}"
+                onclick="vrSelectVariant('{{ section.id }}', this)"
+              >
+                {%- if variant.featured_image -%}
+                  <img class="vr-variant-card__img" src="{{ variant.featured_image | image_url: width: 80 }}" alt="{{ variant.title | escape }}" width="40" height="40" loading="lazy">
+                {%- else -%}
+                  <div class="vr-variant-card__img" style="display:flex;align-items:center;justify-content:center;">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="3" stroke="#8a6a3b" stroke-width="1.5"/></svg>
+                  </div>
+                {%- endif -%}
+                <div>
+                  <div class="vr-variant-card__name">{{ variant.title }}</div>
+                  <div class="vr-variant-card__price">{{ variant.price | money }}</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        <hr class="vr-divider">
+      {%- endif -%}
+
+      {%- comment -%} Pricing {%- endcomment -%}
+      <div class="vr-pricing" id="vr-pricing-{{ section.id }}">
+        <span class="vr-price-current">{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="vr-price-compare">{{ current_variant.compare_at_price | money }}</span>
+          {%- assign savings = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+          <span class="vr-price-save">{{ savings }}% OFF</span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Stock {%- endcomment -%}
+      {%- if current_variant.available -%}
+        <div class="vr-stock">
+          <span class="vr-stock__dot"></span>
+          In Stock — Ready to Ship
+        </div>
+      {%- else -%}
+        <div class="vr-stock" style="color:#b71c1c;">
+          <span class="vr-stock__dot" style="background:#b71c1c;animation:none;"></span>
+          Out of Stock
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Cart Row {%- endcomment -%}
+      {%- form 'product', product, id: "vr-product-form-{{ section.id }}", novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" id="vr-variant-id-{{ section.id }}" value="{{ current_variant.id }}">
+
+        <div class="vr-cart-row">
+          <div class="vr-qty">
+            <button type="button" class="vr-qty__btn" onclick="vrQty('{{ section.id }}', -1)" aria-label="Decrease quantity">−</button>
+            <span class="vr-qty__num" id="vr-qty-num-{{ section.id }}">1</span>
+            <button type="button" class="vr-qty__btn" onclick="vrQty('{{ section.id }}', 1)" aria-label="Increase quantity">+</button>
+            <input type="hidden" name="quantity" id="vr-qty-input-{{ section.id }}" value="1">
+          </div>
+          <button
+            type="submit"
+            class="vr-atc-btn"
+            id="vr-atc-btn-{{ section.id }}"
+            {% unless current_variant.available %}disabled style="opacity:0.5;cursor:not-allowed;"{% endunless %}
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 2h2l2.5 9h7l1.5-6H5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="15" r="1" fill="#fff"/><circle cx="13" cy="15" r="1" fill="#fff"/></svg>
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="vr-buy-now-wrapper" id="vr-buy-now-{{ section.id }}">
+          {%- unless current_variant.available -%}
+            <style>#vr-buy-now-{{ section.id }}{display:none}</style>
+          {%- endunless -%}
+          {{ form | payment_button }}
+        </div>
+      {%- endform -%}
+
+      {%- comment -%} Trust badges {%- endcomment -%}
+      <div class="vr-trust-row">
+        <div class="vr-trust-item">
+          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l10 5v8c0 6-4.5 11-10 13C10.5 28 6 23 6 17V9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="vr-trust-text">100% Natural</span>
+        </div>
+        <div class="vr-trust-item">
+          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4z" stroke="currentColor" stroke-width="2"/><path d="M16 10v8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="vr-trust-text">Fast Delivery</span>
+        </div>
+        <div class="vr-trust-item">
+          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M6 8h20v16a2 2 0 01-2 2H8a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M10 8V6a6 6 0 0112 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="vr-trust-text">Secure Checkout</span>
+        </div>
+        <div class="vr-trust-item">
+          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M8 20l4-8 4 6 3-4 5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="vr-trust-text">Easy Returns</span>
+        </div>
+      </div>
+
+      {%- comment -%} Accordions {%- endcomment -%}
+      <div class="vr-accordions">
+
+        <div class="vr-accordion-item">
+          <button class="vr-accordion-toggle" onclick="vrAccordion(this)">
+            Description & Key Benefits
+            <svg class="vr-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="vr-accordion-body">
+            <div class="vr-accordion-body-inner">
+              {{ product.description }}
+            </div>
+          </div>
+        </div>
+
+        <div class="vr-accordion-item">
+          <button class="vr-accordion-toggle" onclick="vrAccordion(this)">
+            How to Use
+            <svg class="vr-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="vr-accordion-body">
+            <div class="vr-accordion-body-inner">
+              {%- if section.settings.how_to_use != blank -%}
+                {{ section.settings.how_to_use }}
+              {%- else -%}
+                <p>Apply a small amount to clean skin. Massage gently in circular motions. Allow to absorb for 2–3 minutes before layering other products. Use morning and evening for best results.</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="vr-accordion-item">
+          <button class="vr-accordion-toggle" onclick="vrAccordion(this)">
+            Ingredients
+            <svg class="vr-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="vr-accordion-body">
+            <div class="vr-accordion-body-inner">
+              {%- if section.settings.ingredients != blank -%}
+                {{ section.settings.ingredients }}
+              {%- else -%}
+                <p>{{ product.metafields.custom.ingredients | default: 'Full ingredient list available on packaging. All Vanrosector formulations are free from parabens, sulphates, and synthetic fragrances.' }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="vr-accordion-item">
+          <button class="vr-accordion-toggle" onclick="vrAccordion(this)">
+            Shipping & Returns
+            <svg class="vr-accordion-icon" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4 9h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="vr-accordion-body">
+            <div class="vr-accordion-body-inner">
+              <p>Free standard shipping on orders over ₹999. Express delivery in 2–4 business days. Easy 7-day returns on unopened products.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} FLOATING STICKY BAR {%- endcomment -%}
+  <div class="vr-sticky-bar" id="vr-sticky-{{ section.id }}">
+    <div class="vr-sticky-bar__inner">
+      <span class="vr-sticky-bar__title">{{ product_title }}</span>
+      <span class="vr-sticky-bar__price" id="vr-sticky-price-{{ section.id }}">{{ current_variant.price | money }}</span>
+      <button class="vr-sticky-bar__btn" onclick="document.getElementById('vr-product-form-{{ section.id }}').querySelector('[type=submit]').click()">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var sid = '{{ section.id }}';
+
+  /* ── Gallery ── */
+  var galleryIdx = 0;
+  var totalImages = {{ product.images.size }};
+
+  function vrSetGalleryImg(idx) {
+    if (totalImages === 0) return;
+    galleryIdx = ((idx % totalImages) + totalImages) % totalImages;
+    for (var i = 0; i < totalImages; i++) {
+      var el = document.getElementById('vr-main-' + sid + '-' + i);
+      if (el) el.style.display = (i === galleryIdx) ? 'block' : 'none';
+    }
+    var thumbs = document.querySelectorAll('#vr-gallery-' + sid + ' .vr-gallery__thumb');
+    thumbs.forEach(function(t, ti) { t.classList.toggle('active', ti === galleryIdx); });
+  }
+
+  window.vrGalleryNav = function(s, dir) { if (s === sid) vrSetGalleryImg(galleryIdx + dir); };
+  window.vrGallerySet = function(s, idx) { if (s === sid) vrSetGalleryImg(idx); };
+
+  /* ── Quantity ── */
+  var qty = 1;
+  window.vrQty = function(s, delta) {
+    if (s !== sid) return;
+    qty = Math.max(1, qty + delta);
+    var numEl = document.getElementById('vr-qty-num-' + sid);
+    var inpEl = document.getElementById('vr-qty-input-' + sid);
+    if (numEl) numEl.textContent = qty;
+    if (inpEl) inpEl.value = qty;
+  };
+
+  /* ── Variant ── */
+  window.vrSelectVariant = function(s, card) {
+    if (s !== sid) return;
+    var cards = document.querySelectorAll('#vr-variant-picker-' + sid + ' .vr-variant-card');
+    cards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+
+    var vid = card.getAttribute('data-variant-id');
+    var price = card.getAttribute('data-variant-price');
+    var avail = card.getAttribute('data-variant-available') === 'true';
+
+    var hidInp = document.getElementById('vr-variant-id-' + sid);
+    if (hidInp) hidInp.value = vid;
+
+    var priceEl = document.querySelector('#vr-pricing-' + sid + ' .vr-price-current');
+    if (priceEl) priceEl.textContent = price;
+
+    var stickyPrice = document.getElementById('vr-sticky-price-' + sid);
+    if (stickyPrice) stickyPrice.textContent = price;
+
+    var btn = document.getElementById('vr-atc-btn-' + sid);
+    if (btn) { btn.disabled = !avail; btn.style.opacity = avail ? '1' : '0.5'; }
+  };
+
+  /* ── Accordion ── */
+  window.vrAccordion = function(btn) {
+    var item = btn.closest('.vr-accordion-item');
+    var isOpen = item.classList.contains('open');
+    // close all in same wrap
+    var allItems = btn.closest('.vr-accordions').querySelectorAll('.vr-accordion-item');
+    allItems.forEach(function(it) { it.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  };
+
+  /* ── Sticky bar ── */
+  var atcBtn = document.getElementById('vr-atc-btn-' + sid);
+  var stickyBar = document.getElementById('vr-sticky-' + sid);
+
+  if (atcBtn && stickyBar) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        stickyBar.classList.toggle('visible', !e.isIntersecting);
+      });
+    }, { threshold: 0 });
+    io.observe(atcBtn);
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Vanrosector Product Detail",
+  "tag": "section",
+  "class": "vr-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Identity"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Label",
+      "default": "VANROSECTOR"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Product Badge (overlay)",
+      "default": "NEW ARRIVAL"
+    },
+    {
+      "type": "header",
+      "content": "Ratings"
+    },
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating Value",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_reviews",
+      "label": "Review Count",
+      "default": "128"
+    },
+    {
+      "type": "header",
+      "content": "Product Copy"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle_text",
+      "label": "Product Subtitle",
+      "default": "A nature-crafted formula, thoughtfully sourced and expertly blended to elevate your everyday ritual."
+    },
+    {
+      "type": "header",
+      "content": "Benefit Pills"
+    },
+    {
+      "type": "text",
+      "id": "pill_1_text",
+      "label": "Benefit 1",
+      "default": "Pure natural ingredients"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_text",
+      "label": "Benefit 2",
+      "default": "Dermatologist tested"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_text",
+      "label": "Benefit 3",
+      "default": "Free from harsh chemicals"
+    },
+    {
+      "type": "text",
+      "id": "pill_4_text",
+      "label": "Benefit 4",
+      "default": "Eco-conscious packaging"
+    },
+    {
+      "type": "text",
+      "id": "pill_5_text",
+      "label": "Benefit 5",
+      "default": "Fast & secure delivery"
+    },
+    {
+      "type": "header",
+      "content": "Accordion Content"
+    },
+    {
+      "type": "richtext",
+      "id": "how_to_use",
+      "label": "How to Use"
+    },
+    {
+      "type": "richtext",
+      "id": "ingredients",
+      "label": "Ingredients"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vanrosector Product Detail"
+    }
+  ]
+}
+{% endschema %}
