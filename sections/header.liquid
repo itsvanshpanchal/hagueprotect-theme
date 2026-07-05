@@ -55,6 +55,19 @@
     flex-shrink: 0;
   }
 
+  .header__logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .header__logo-img {
+      height: 28px;
+    }
+  }
+
   .header__navigation {
     display: flex;
     align-items: center;
@@ -736,6 +749,28 @@
 {%- endstyle -%}
 
 <header class="header-wrapper" role="banner">
+  {%- liquid
+    assign brand_context = 'hagueprotect'
+    capture req_url
+      echo request.path
+      echo ' '
+      echo canonical_url
+    endcapture
+    assign req_url = req_url | downcase
+
+    if req_url contains 'vanrosector' or template contains 'vanrosector' or collection.handle contains 'vanrosector' or product.handle contains 'vanrosector'
+      assign brand_context = 'vanrosector'
+    elsif req_url contains 'science-of-raw' or req_url contains 'science_of_raw' or req_url contains 'sor-' or template contains 'science-of-raw' or collection.handle contains 'science-of-raw' or product.handle contains 'science-of-raw'
+      assign brand_context = 'science-of-raw'
+    endif
+
+    assign logo_link = '/'
+    if brand_context == 'vanrosector'
+      assign logo_link = '/collections/all?view=vanrosector'
+    elsif brand_context == 'science-of-raw'
+      assign logo_link = '/collections/all?view=science-of-raw'
+    endif
+  -%}
   {%- comment -%}
     ============================================================
     OUR BRANDS — multi-brand navigation bar
@@ -779,10 +814,16 @@
   <div class="header-container">
     
     <!-- Logo -->
-    <a href="/" class="header__logo-link" aria-label="{{ shop.name | default: 'HAGUEPROTECT' }} home">
-      <span class="header__logo-text">
-        HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
-      </span>
+    <a href="{{ logo_link }}" class="header__logo-link" aria-label="Home">
+      {%- if brand_context == 'vanrosector' -%}
+        <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="header__logo-img" width="150" height="55" loading="eager" decoding="async">
+      {%- elsif brand_context == 'science-of-raw' -%}
+        <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
+      {%- else -%}
+        <span class="header__logo-text">
+          HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+        </span>
+      {%- endif -%}
     </a>
 
     <nav class="header__navigation" role="navigation">
