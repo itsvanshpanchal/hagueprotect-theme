@@ -1,60 +1,59 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
 
 {%- style -%}
-  .pb {
+  .pb2 {
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
-    padding: clamp(48px, 7vw, 90px) 0;
+    padding: clamp(56px, 8vw, 100px) 0;
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   }
 
-  .pb__wrap {
-    max-width: 680px;
+  .pb2__wrap {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
     text-align: center;
   }
 
   /* ─── Icon Row ─── */
-  .pb__icons {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0;
+  .pb2__icons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    margin-bottom: 28px;
+    margin-bottom: 48px;
   }
 
-  .pb__icon-col {
-    flex: 1;
+  .pb2__icon-col {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 18px;
   }
 
-  .pb__icon-gif {
-    width: 60px;
-    height: 60px;
+  /* GIF / img */
+  .pb2__icon-gif {
+    width: 80px;
+    height: 80px;
     object-fit: contain;
     display: block;
   }
 
-  /* Fallback SVG colour */
-  .pb__icon-svg {
-    width: 52px;
-    height: 52px;
-    color: #111;
+  /* Fallback SVG */
+  .pb2__icon-svg {
+    width: 74px;
+    height: 74px;
+    fill: #111;
+    display: block;
   }
 
-  .pb__icon-label {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
+  .pb2__icon-label {
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 700;
     color: #111111;
     letter-spacing: 0;
     margin: 0;
@@ -62,141 +61,158 @@
   }
 
   /* ─── Divider ─── */
-  .pb__rule {
-    width: 48px;
+  .pb2__rule {
+    width: 56px;
     height: 1px;
     background: #cccccc;
     border: none;
-    margin: 0 0 56px 0;
+    margin: 0 0 72px 0;
   }
 
-  /* ─── Stat Block ─── */
-  .pb__stat-block {
+  /* ─── 100% Block ─── */
+  .pb2__stat-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .pb__big-num {
-    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  .pb2__big-num {
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
-    font-size: clamp(90px, 17vw, 170px);
-    line-height: 0.88;
+    font-style: normal;
+    font-size: clamp(100px, 18vw, 190px);
+    line-height: 0.9;
     color: #111111;
     letter-spacing: -0.02em;
-    margin: 0 0 6px 0;
+    margin: 0 0 14px 0;
   }
 
-  .pb__stat-heading {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(13px, 1.6vw, 15px);
+  .pb2__stat-heading {
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(15px, 1.8vw, 18px);
     font-weight: 700;
     color: #111111;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     margin: 0;
   }
 
-  .pb__stat-text {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(13px, 1.5vw, 15px);
+  .pb2__stat-text {
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(13px, 1.4vw, 15px);
     font-weight: 400;
-    color: #555555;
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 4px auto 0;
+    color: #444444;
+    line-height: 1.75;
+    max-width: 500px;
+    margin: 6px auto 0;
   }
 
   /* ─── Responsive ─── */
-  @media screen and (max-width: 600px) {
-    .pb__icons {
+  @media screen and (max-width: 768px) {
+    .pb2__wrap {
+      padding: 0 20px;
+    }
+
+    .pb2__icons {
       gap: 0;
+      margin-bottom: 36px;
     }
 
-    .pb__icon-gif {
-      width: 44px;
-      height: 44px;
+    .pb2__icon-gif,
+    .pb2__icon-svg {
+      width: 58px;
+      height: 58px;
     }
 
-    .pb__big-num {
-      font-size: clamp(72px, 22vw, 110px);
+    .pb2__big-num {
+      font-size: clamp(80px, 22vw, 130px);
     }
 
-    .pb__icon-label {
-      font-size: 11px;
+    .pb2__rule {
+      margin-bottom: 48px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .pb2__icons {
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
   }
 {%- endstyle -%}
 
-<section class="pb" aria-label="Product highlights">
-  <div class="pb__wrap">
+<section class="pb2" aria-label="Product highlights">
+  <div class="pb2__wrap">
 
-    {%- comment -%} ── Icon Row ── {%- endcomment -%}
-    <div class="pb__icons">
+    {%- comment -%}── Icon Row ──{%- endcomment -%}
+    <div class="pb2__icons">
 
-      {%- comment -%} Icon 1 – 72 Hour Cleaning {%- endcomment -%}
-      <div class="pb__icon-col">
+      {%- comment -%} Icon 1 {%- endcomment -%}
+      <div class="pb2__icon-col">
         {%- if section.settings.gif_1 != blank -%}
-          <img
-            class="pb__icon-gif"
-            src="{{ section.settings.gif_1 }}"
-            alt="{{ section.settings.label_1 | default: '72 Hour Cleaning' | escape }}"
-            loading="lazy">
+          <img class="pb2__icon-gif"
+               src="{{ section.settings.gif_1 }}"
+               alt="{{ section.settings.label_1 | default: '72 Hour Cleaning' | escape }}"
+               loading="lazy">
         {%- else -%}
-          {%- comment -%} Fallback: hourglass SVG {%- endcomment -%}
-          <svg class="pb__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 2v2h.01L6 4c0 3.87 2.5 7.18 6 8-3.5.82-6 4.13-6 8v.01H6V22h12v-1.99h-.01V20c0-3.87-2.5-7.18-6-8 3.5-.82 6-4.13 6-8l-.01-.01H18V2H6zm10 2c0 3.22-2.05 6-4 7.25C10.05 10 8 7.22 8 4h8zm-4 9.75C14.05 17 16.05 19.78 16 20H8c-.05-1.22 2.05-4 4-5.25z"/>
+          {%- comment -%} Fallback: clock/timer circle {%- endcomment -%}
+          <svg class="pb2__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="#111" stroke-width="8" fill="none"/>
+            <path d="M50 50 L50 18 A32 32 0 0 1 82 50 Z" fill="#111"/>
           </svg>
         {%- endif -%}
-        <p class="pb__icon-label">{{ section.settings.label_1 | default: '72 Hour Cleaning' }}</p>
+        <p class="pb2__icon-label">{{ section.settings.label_1 | default: '72 Hour Cleaning' }}</p>
       </div>
 
-      {%- comment -%} Icon 2 – Environmentally Friendly {%- endcomment -%}
-      <div class="pb__icon-col">
+      {%- comment -%} Icon 2 {%- endcomment -%}
+      <div class="pb2__icon-col">
         {%- if section.settings.gif_2 != blank -%}
-          <img
-            class="pb__icon-gif"
-            src="{{ section.settings.gif_2 }}"
-            alt="{{ section.settings.label_2 | default: 'Environmentally Friendly' | escape }}"
-            loading="lazy">
+          <img class="pb2__icon-gif"
+               src="{{ section.settings.gif_2 }}"
+               alt="{{ section.settings.label_2 | default: 'Environmentally Friendly' | escape }}"
+               loading="lazy">
         {%- else -%}
-          {%- comment -%} Fallback: leaf SVG {%- endcomment -%}
-          <svg class="pb__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-13 5 0-3 3-5.5 5-6z"/>
+          {%- comment -%} Fallback: eye/diamond circle {%- endcomment -%}
+          <svg class="pb2__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="#111" stroke-width="8" fill="none"/>
+            <polygon points="50,22 72,50 50,78 28,50" fill="#111"/>
+            <circle cx="50" cy="50" r="8" fill="#fff"/>
           </svg>
         {%- endif -%}
-        <p class="pb__icon-label">{{ section.settings.label_2 | default: 'Environmentally Friendly' }}</p>
+        <p class="pb2__icon-label">{{ section.settings.label_2 | default: 'Environmentally Friendly' }}</p>
       </div>
 
-      {%- comment -%} Icon 3 – Biotechnology {%- endcomment -%}
-      <div class="pb__icon-col">
+      {%- comment -%} Icon 3 {%- endcomment -%}
+      <div class="pb2__icon-col">
         {%- if section.settings.gif_3 != blank -%}
-          <img
-            class="pb__icon-gif"
-            src="{{ section.settings.gif_3 }}"
-            alt="{{ section.settings.label_3 | default: 'Biotechnology' | escape }}"
-            loading="lazy">
+          <img class="pb2__icon-gif"
+               src="{{ section.settings.gif_3 }}"
+               alt="{{ section.settings.label_3 | default: 'Biotechnology' | escape }}"
+               loading="lazy">
         {%- else -%}
-          {%- comment -%} Fallback: biotech/atom SVG {%- endcomment -%}
-          <svg class="pb__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z"/>
+          {%- comment -%} Fallback: square frame with corner circles {%- endcomment -%}
+          <svg class="pb2__icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <rect x="22" y="22" width="56" height="56" rx="6" stroke="#111" stroke-width="8" fill="none"/>
+            <circle cx="22" cy="22" r="9" fill="#111"/>
+            <circle cx="78" cy="22" r="9" fill="#111"/>
+            <circle cx="22" cy="78" r="9" fill="#111"/>
+            <circle cx="78" cy="78" r="9" fill="#111"/>
           </svg>
         {%- endif -%}
-        <p class="pb__icon-label">{{ section.settings.label_3 | default: 'Biotechnology' }}</p>
+        <p class="pb2__icon-label">{{ section.settings.label_3 | default: 'Biotechnology' }}</p>
       </div>
 
     </div>
 
-    {%- comment -%} ── Divider ── {%- endcomment -%}
-    <hr class="pb__rule">
+    {%- comment -%}── Divider ──{%- endcomment -%}
+    <hr class="pb2__rule">
 
-    {%- comment -%} ── 100% Biodegradable Block ── {%- endcomment -%}
-    <div class="pb__stat-block">
-      <p class="pb__big-num">{{ section.settings.stat_value | default: '100%' }}</p>
-      <h2 class="pb__stat-heading">{{ section.settings.stat_heading | default: 'Biodegradable Cleaning Solution' }}</h2>
-      <p class="pb__stat-text">{{ section.settings.stat_text | default: 'It delivers a deep, long-lasting clean without the use of harsh chemicals, making it hypoallergenic, non-toxic, vegan-friendly, and safe for skin, pets, and the planet.' }}</p>
+    {%- comment -%}── 100% Stat Block ──{%- endcomment -%}
+    <div class="pb2__stat-block">
+      <p class="pb2__big-num">{{ section.settings.stat_value | default: '100%' }}</p>
+      <h2 class="pb2__stat-heading">{{ section.settings.stat_heading | default: 'Biodegradable Cleaning Solution' }}</h2>
+      <p class="pb2__stat-text">{{ section.settings.stat_text | default: 'It delivers a deep, long-lasting clean without the use of harsh chemicals, making it hypoallergenic, non-toxic, vegan-friendly, and safe for skin, pets, and the planet.' }}</p>
     </div>
 
   </div>
@@ -220,7 +236,7 @@
       "type": "url",
       "id": "gif_1",
       "label": "Icon 1 GIF URL",
-      "info": "Upload your GIF to Shopify Files, then paste the URL here"
+      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
     },
     {
       "type": "text",
@@ -236,7 +252,7 @@
       "type": "url",
       "id": "gif_2",
       "label": "Icon 2 GIF URL",
-      "info": "Upload your GIF to Shopify Files, then paste the URL here"
+      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
     },
     {
       "type": "text",
@@ -252,7 +268,7 @@
       "type": "url",
       "id": "gif_3",
       "label": "Icon 3 GIF URL",
-      "info": "Upload your GIF to Shopify Files, then paste the URL here"
+      "info": "Upload your GIF to Shopify Files and paste the CDN URL here"
     },
     {
       "type": "text",
@@ -273,7 +289,7 @@
     {
       "type": "text",
       "id": "stat_heading",
-      "label": "Heading (displayed in ALL CAPS automatically)",
+      "label": "Heading",
       "default": "Biodegradable Cleaning Solution"
     },
     {
