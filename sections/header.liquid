@@ -751,10 +751,22 @@
 <header class="header-wrapper" role="banner">
   {%- liquid
     assign brand_context = 'hagueprotect'
+
+    capture content_url
+      echo content_for_header
+    endcapture
+
+    assign page_url = ''
+    if content_url contains '"pageurl":"'
+      assign page_url = content_url | split: '"pageurl":"' | last | split: '"' | first | replace: '\/', '/' | replace: '%20', ' ' | replace: '%3f', '?' | replace: '%3d', '=' | replace: '%26', '&' | downcase
+    endif
+
     capture req_url
       echo request.path
       echo ' '
       echo canonical_url
+      echo ' '
+      echo page_url
     endcapture
     assign req_url = req_url | downcase
 
@@ -762,6 +774,16 @@
       assign brand_context = 'vanrosector'
     elsif req_url contains 'science-of-raw' or req_url contains 'science_of_raw' or req_url contains 'sor-' or template contains 'science-of-raw' or collection.handle contains 'science-of-raw' or product.handle contains 'science-of-raw'
       assign brand_context = 'science-of-raw'
+    endif
+
+    if template contains 'product' and product != blank
+      for c in product.collections
+        if c.handle == 'vanrosector'
+          assign brand_context = 'vanrosector'
+        elsif c.handle == 'science-of-raw'
+          assign brand_context = 'science-of-raw'
+        endif
+      endfor
     endif
 
     assign logo_link = '/'
