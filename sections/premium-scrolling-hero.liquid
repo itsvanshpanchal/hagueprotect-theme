@@ -408,30 +408,29 @@
       "label": "Background Type",
       "options": [
         { "value": "gradient", "label": "Default Gradient" },
-        { "value": "image",    "label": "Image" },
-        { "value": "video",    "label": "Video" }
+        { "value": "image",    "label": "Image / GIF" },
+        { "value": "video",    "label": "Video (MP4)" }
       ],
       "default": "gradient",
-      "info": "Choose whether to use the default gradient, a custom image, or a looping video as the section background."
+      "info": "Choose the section background. Use 'Image / GIF' for photos or animated GIFs. Use 'Video (MP4)' for a looping video."
     },
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background Image",
-      "info": "Used when Background Type is set to 'Image'. Recommended: 1920×1080px or larger."
+      "label": "Background Image or GIF",
+      "info": "Active when type is 'Image / GIF'. Upload a JPG, PNG, WebP, or animated GIF. Recommended size: 1920×1080px."
     },
     {
-      "type": "video_url",
+      "type": "text",
       "id": "background_video",
-      "label": "Background Video URL",
-      "accept": ["mp4"],
-      "info": "Used when Background Type is set to 'Video'. Upload an .mp4 file to Shopify Files and paste its URL here."
+      "label": "Background Video URL (.mp4)",
+      "info": "Active when type is 'Video (MP4)'. Go to Shopify Admin → Content → Files, upload your .mp4, then paste the file URL here."
     },
     {
       "type": "image_picker",
       "id": "background_video_poster",
-      "label": "Video Poster Image",
-      "info": "Shows while the video is loading. Optional."
+      "label": "Video Poster / Fallback Image",
+      "info": "Shown while the video loads or on mobile. Optional but recommended."
     },
     {
       "type": "range",
