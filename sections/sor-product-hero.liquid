@@ -864,8 +864,8 @@
               alt="{{ image.alt | default: product_title | escape }}"
               class="sor-gallery__main-img"
               width="800" height="800"
-              loading="{{ forloop.first | iif: 'eager', 'lazy' }}"
-              style="{{ forloop.first | iif: 'display:block', 'display:none' }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              style="{% if forloop.first %}display:block{% else %}display:none{% endif %}"
             >
           {%- endfor -%}
         {%- else -%}
