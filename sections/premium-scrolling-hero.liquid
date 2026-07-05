@@ -3,7 +3,13 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #FF1F3D 55%, #111111 55%);
+    {% if section.settings.background_type == 'image' and section.settings.background_image != blank %}
+      background: #111111;
+    {% elsif section.settings.background_type == 'video' and section.settings.background_video != blank %}
+      background: #111111;
+    {% else %}
+      background: linear-gradient(to bottom, #FF1F3D 55%, #111111 55%);
+    {% endif %}
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -11,6 +17,31 @@
     color: #ffffff;
   }
 
+  /* ── Background media layers ─────────────────────────────── */
+  .premium-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .premium-hero-bg img,
+  .premium-hero-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .premium-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+  }
+
+  /* ── Layout ──────────────────────────────────────────────── */
   .premium-hero-container {
     display: flex;
     max-width: 1400px;
@@ -19,6 +50,8 @@
     padding: 0 40px;
     align-items: center;
     gap: 40px;
+    position: relative;
+    z-index: 5;
   }
 
   .premium-hero-left {
@@ -223,7 +256,9 @@
 
   @media screen and (max-width: 768px) {
     .premium-hero-{{ section.id }} {
-      background: linear-gradient(to bottom, #FF1F3D 100%, #111111 0%);
+      {% unless section.settings.background_type == 'image' or section.settings.background_type == 'video' %}
+        background: linear-gradient(to bottom, #FF1F3D 100%, #111111 0%);
+      {% endunless %}
     }
   }
 {%- endstyle -%}
@@ -231,6 +266,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <section class="premium-hero-{{ section.id }}">
+
+  {%- comment -%}── Background: Video ────────────────────────────────────────{%- endcomment -%}
+  {%- if section.settings.background_type == 'video' and section.settings.background_video != blank -%}
+    <div class="premium-hero-bg">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="{{ section.settings.background_video_poster | img_url: '1920x' }}"
+      >
+        <source src="{{ section.settings.background_video }}" type="video/mp4">
+      </video>
+    </div>
+    <div class="premium-hero-overlay"></div>
+
+  {%- comment -%}── Background: Image ────────────────────────────────────────{%- endcomment -%}
+  {%- elsif section.settings.background_type == 'image' and section.settings.background_image != blank -%}
+    <div class="premium-hero-bg">
+      <img
+        src="{{ section.settings.background_image | img_url: '1920x' }}"
+        alt="{{ section.settings.background_image.alt | default: 'Background' }}"
+        loading="eager"
+      >
+    </div>
+    <div class="premium-hero-overlay"></div>
+  {%- endif -%}
+
   <div class="premium-hero-container">
     <div class="premium-hero-left">
       <h1>{{ section.settings.heading }}</h1>
@@ -336,9 +399,63 @@
       "default": "Shop Our Premium Best"
     },
     {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background Type",
+      "options": [
+        { "value": "gradient", "label": "Default Gradient" },
+        { "value": "image",    "label": "Image" },
+        { "value": "video",    "label": "Video" }
+      ],
+      "default": "gradient",
+      "info": "Choose whether to use the default gradient, a custom image, or a looping video as the section background."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Used when Background Type is set to 'Image'. Recommended: 1920×1080px or larger."
+    },
+    {
+      "type": "video_url",
+      "id": "background_video",
+      "label": "Background Video URL",
+      "accept": ["mp4"],
+      "info": "Used when Background Type is set to 'Video'. Upload an .mp4 file to Shopify Files and paste its URL here."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_video_poster",
+      "label": "Video Poster Image",
+      "info": "Shows while the video is loading. Optional."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 40,
+      "info": "Controls how dark the overlay is on top of the image or video background."
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Button"
     },
     {
       "type": "text",
