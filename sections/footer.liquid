@@ -308,7 +308,9 @@
     <div class="footer-grid">
       <div class="footer-col-info">
         <a href="/" class="footer__logo-link">
-          {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+          {%- if section.settings.logo_image != blank -%}
+            <img src="{{ section.settings.logo_image | image_url: width: 130 }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
+          {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
             {%- assign footer_logo = 'logo-hagueprotect.png' -%}
             {%- if section.settings.logo_text contains '.' -%}{%- assign footer_logo = section.settings.logo_text -%}{%- endif -%}
             <img src="{{ footer_logo | asset_url }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
@@ -443,6 +445,11 @@
       "id": "logo_text",
       "label": "Logo Text",
       "default": "HAGUEPROTECT"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
     },
     {
       "type": "textarea",

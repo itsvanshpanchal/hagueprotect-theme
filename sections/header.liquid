@@ -850,7 +850,9 @@
 
         {%- comment -%} 1 · Hague Protect → current store homepage {%- endcomment -%}
         <a href="/" class="brand-bar__item" aria-label="Hague Protect — Home">
-          {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+          {%- if section.settings.logo_hp != blank -%}
+            <img src="{{ section.settings.logo_hp | image_url: width: 130 }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
+          {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
             {%- assign bar_logo = 'logo-hagueprotect.png' -%}
             {%- if section.settings.logo_text contains '.' -%}{%- assign bar_logo = section.settings.logo_text -%}{%- endif -%}
             <img src="{{ bar_logo | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
@@ -863,14 +865,22 @@
 
         {%- comment -%} 2 · Vanrosector (native 940×343) {%- endcomment -%}
         <a href="{{ vanrosector_url }}" class="brand-bar__item" aria-label="Vanrosector">
-          <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
+          {%- if section.settings.logo_vr != blank -%}
+            <img src="{{ section.settings.logo_vr | image_url: width: 200 }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
+          {%- else -%}
+            <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
+          {%- endif -%}
         </a>
 
         <span class="brand-bar__divider" aria-hidden="true"></span>
 
         {%- comment -%} 3 · Science of Raw (native 1000×500) {%- endcomment -%}
         <a href="{{ science_of_raw_url }}" class="brand-bar__item" aria-label="Science of Raw">
-          <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
+          {%- if section.settings.logo_sor != blank -%}
+            <img src="{{ section.settings.logo_sor | image_url: width: 200 }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
+          {%- else -%}
+            <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
+          {%- endif -%}
         </a>
 
       </div>
@@ -881,19 +891,29 @@
     
     <!-- Logo -->
     <a href="{{ logo_link }}" class="header__logo-link" id="HeaderLogoLink" aria-label="Home"
-       data-vr-logo="{{ 'logo-vanrosector.svg' | asset_url }}"
-       data-sor-logo="{{ 'logo-science-of-raw.svg' | asset_url }}"
-       data-hp-logo="{%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}{{ 'logo-hagueprotect.png' | asset_url }}{%- endif -%}"
+       data-vr-logo="{%- if section.settings.logo_vr != blank -%}{{ section.settings.logo_vr | image_url: width: 150 }}{%- else -%}{{ 'logo-vanrosector.svg' | asset_url }}{%- endif -%}"
+       data-sor-logo="{%- if section.settings.logo_sor != blank -%}{{ section.settings.logo_sor | image_url: width: 150 }}{%- else -%}{{ 'logo-science-of-raw.svg' | asset_url }}{%- endif -%}"
+       data-hp-logo="{%- if section.settings.logo_hp != blank -%}{{ section.settings.logo_hp | image_url: width: 220 }}{%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}{%- assign hp_logo = 'logo-hagueprotect.png' -%}{%- if section.settings.logo_text contains '.' -%}{%- assign hp_logo = section.settings.logo_text -%}{%- endif -%}{{ hp_logo | asset_url }}{%- endif -%}"
        data-vr-href="/collections/all?view=vanrosector"
        data-sor-href="/collections/all?view=science-of-raw"
        data-hp-href="/"
        data-brand="{{ brand_context }}">
       {%- if brand_context == 'vanrosector' -%}
-        <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="header__logo-img" width="150" height="55" loading="eager" decoding="async">
+        {%- if section.settings.logo_vr != blank -%}
+          <img src="{{ section.settings.logo_vr | image_url: width: 150 }}" alt="Vanrosector" class="header__logo-img" width="150" height="55" loading="eager" decoding="async">
+        {%- else -%}
+          <img src="{{ 'logo-vanrosector.svg' | asset_url }}" alt="Vanrosector" class="header__logo-img" width="150" height="55" loading="eager" decoding="async">
+        {%- endif -%}
       {%- elsif brand_context == 'science-of-raw' -%}
-        <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
+        {%- if section.settings.logo_sor != blank -%}
+          <img src="{{ section.settings.logo_sor | image_url: width: 150 }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
+        {%- else -%}
+          <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
+        {%- endif -%}
       {%- else -%}
-        {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+        {%- if section.settings.logo_hp != blank -%}
+          <img src="{{ section.settings.logo_hp | image_url: width: 220 }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
+        {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
           {%- assign main_logo = 'logo-hagueprotect.png' -%}
           {%- if section.settings.logo_text contains '.' -%}{%- assign main_logo = section.settings.logo_text -%}{%- endif -%}
           <img src="{{ main_logo | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
@@ -1038,7 +1058,9 @@
 
       <!-- Hague Protect tab -->
       <button class="megamenu-brand-tab is-active" data-brand-tab="hp" type="button">
-        {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+        {%- if section.settings.logo_hp != blank -%}
+          <img src="{{ section.settings.logo_hp | image_url: width: 130 }}" alt="Hague Protect" class="megamenu-tab-logo">
+        {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
           {%- assign tab_logo = 'logo-hagueprotect.png' -%}
           {%- if section.settings.logo_text contains '.' -%}{%- assign tab_logo = section.settings.logo_text -%}{%- endif -%}
           <img src="{{ tab_logo | asset_url }}" alt="Hague Protect" class="megamenu-tab-logo">
@@ -1546,6 +1568,21 @@
       "id": "logo_text",
       "label": "Logo Text",
       "default": "HAGUEPROTECT"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_hp",
+      "label": "Hague Protect Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_vr",
+      "label": "Vanrosector Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_sor",
+      "label": "Science of Raw Logo"
     },
     {
       "type": "color",
