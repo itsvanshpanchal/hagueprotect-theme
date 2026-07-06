@@ -308,9 +308,13 @@
     <div class="footer-grid">
       <div class="footer-col-info">
         <a href="/" class="footer__logo-link">
-          <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
-            HAGUE<span style="color: #FF2B2B;">PR</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" style="color: #ffffff; margin: 0 -1px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
-          </span>
+          {%- if section.settings.logo_text contains '.' -%}
+            <img src="{{ section.settings.logo_text | asset_url }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
+          {%- else -%}
+            <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
+              HAGUE<span style="color: #FF2B2B;">PR</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" style="color: #ffffff; margin: 0 -1px; display: inline-block; vertical-align: middle;"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+            </span>
+          {%- endif -%}
         </a>
         <p class="footer__description">
           {{ section.settings.description | default: 'Premium sneaker care solutions for professional-grade cleaning, protection, and restoration.' }}
