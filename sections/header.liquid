@@ -852,12 +852,8 @@
         <a href="/" class="brand-bar__item" aria-label="Hague Protect — Home">
           {%- if section.settings.logo_hp != blank -%}
             <img src="{{ section.settings.logo_hp | image_url: width: 130 }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
-          {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
-            {%- assign bar_logo = 'logo-hagueprotect.png' -%}
-            {%- if section.settings.logo_text contains '.' -%}{%- assign bar_logo = section.settings.logo_text -%}{%- endif -%}
-            <img src="{{ bar_logo | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
           {%- else -%}
-            <span class="brand-bar__hague" aria-hidden="true">{{ section.settings.logo_text }}</span>
+            <img src="{{ 'logo-hagueprotect.png' | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
           {%- endif -%}
         </a>
 
@@ -893,7 +889,7 @@
     <a href="{{ logo_link }}" class="header__logo-link" id="HeaderLogoLink" aria-label="Home"
        data-vr-logo="{%- if section.settings.logo_vr != blank -%}{{ section.settings.logo_vr | image_url: width: 150 }}{%- else -%}{{ 'logo-vanrosector.svg' | asset_url }}{%- endif -%}"
        data-sor-logo="{%- if section.settings.logo_sor != blank -%}{{ section.settings.logo_sor | image_url: width: 150 }}{%- else -%}{{ 'logo-science-of-raw.svg' | asset_url }}{%- endif -%}"
-       data-hp-logo="{%- if section.settings.logo_hp != blank -%}{{ section.settings.logo_hp | image_url: width: 220 }}{%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}{%- assign hp_logo = 'logo-hagueprotect.png' -%}{%- if section.settings.logo_text contains '.' -%}{%- assign hp_logo = section.settings.logo_text -%}{%- endif -%}{{ hp_logo | asset_url }}{%- endif -%}"
+       data-hp-logo="{%- if section.settings.logo_hp != blank -%}{{ section.settings.logo_hp | image_url: width: 220 }}{%- else -%}{{ 'logo-hagueprotect.png' | asset_url }}{%- endif -%}"
        data-vr-href="/collections/all?view=vanrosector"
        data-sor-href="/collections/all?view=science-of-raw"
        data-hp-href="/"
@@ -913,14 +909,8 @@
       {%- else -%}
         {%- if section.settings.logo_hp != blank -%}
           <img src="{{ section.settings.logo_hp | image_url: width: 220 }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
-        {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
-          {%- assign main_logo = 'logo-hagueprotect.png' -%}
-          {%- if section.settings.logo_text contains '.' -%}{%- assign main_logo = section.settings.logo_text -%}{%- endif -%}
-          <img src="{{ main_logo | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
         {%- else -%}
-          <span class="header__logo-text">
-            {{ section.settings.logo_text }}
-          </span>
+          <img src="{{ 'logo-hagueprotect.png' | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
         {%- endif -%}
       {%- endif -%}
     </a>
@@ -943,11 +933,7 @@
           } else if (needBrand === 'hagueprotect') {
             el.href = el.getAttribute('data-hp-href') || '/';
             var hpLogo = el.getAttribute('data-hp-logo');
-            if (hpLogo) {
-              el.innerHTML = '<img src="' + hpLogo + '" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38">';
-            } else {
-              el.innerHTML = '<span class="header__logo-text">HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT</span>';
-            }
+            el.innerHTML = '<img src="' + hpLogo + '" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38">';
           }
         }
       })();
