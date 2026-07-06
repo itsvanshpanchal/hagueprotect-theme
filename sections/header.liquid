@@ -850,10 +850,12 @@
 
         {%- comment -%} 1 · Hague Protect → current store homepage {%- endcomment -%}
         <a href="/" class="brand-bar__item" aria-label="Hague Protect — Home">
-          {%- if section.settings.logo_text contains '.' -%}
-            <img src="{{ section.settings.logo_text | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
+          {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+            {%- assign bar_logo = 'logo-hagueprotect.png' -%}
+            {%- if section.settings.logo_text contains '.' -%}{%- assign bar_logo = section.settings.logo_text -%}{%- endif -%}
+            <img src="{{ bar_logo | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
           {%- else -%}
-            <span class="brand-bar__hague" aria-hidden="true">HAGUE<span style="color:#FF2B2B;">PR</span><svg class="brand-bar__hague-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT</span>
+            <span class="brand-bar__hague" aria-hidden="true">{{ section.settings.logo_text }}</span>
           {%- endif -%}
         </a>
 
@@ -881,7 +883,7 @@
     <a href="{{ logo_link }}" class="header__logo-link" id="HeaderLogoLink" aria-label="Home"
        data-vr-logo="{{ 'logo-vanrosector.svg' | asset_url }}"
        data-sor-logo="{{ 'logo-science-of-raw.svg' | asset_url }}"
-       data-hp-logo="{%- if section.settings.logo_text contains '.' -%}{{ section.settings.logo_text | asset_url }}{%- endif -%}"
+       data-hp-logo="{%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}{{ 'logo-hagueprotect.png' | asset_url }}{%- endif -%}"
        data-vr-href="/collections/all?view=vanrosector"
        data-sor-href="/collections/all?view=science-of-raw"
        data-hp-href="/"
@@ -891,11 +893,13 @@
       {%- elsif brand_context == 'science-of-raw' -%}
         <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
       {%- else -%}
-        {%- if section.settings.logo_text contains '.' -%}
-          <img src="{{ section.settings.logo_text | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
+        {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+          {%- assign main_logo = 'logo-hagueprotect.png' -%}
+          {%- if section.settings.logo_text contains '.' -%}{%- assign main_logo = section.settings.logo_text -%}{%- endif -%}
+          <img src="{{ main_logo | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
         {%- else -%}
           <span class="header__logo-text">
-            HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+            {{ section.settings.logo_text }}
           </span>
         {%- endif -%}
       {%- endif -%}
@@ -1034,10 +1038,12 @@
 
       <!-- Hague Protect tab -->
       <button class="megamenu-brand-tab is-active" data-brand-tab="hp" type="button">
-        {%- if section.settings.logo_text contains '.' -%}
-          <img src="{{ section.settings.logo_text | asset_url }}" alt="Hague Protect" class="megamenu-tab-logo">
+        {%- if section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
+          {%- assign tab_logo = 'logo-hagueprotect.png' -%}
+          {%- if section.settings.logo_text contains '.' -%}{%- assign tab_logo = section.settings.logo_text -%}{%- endif -%}
+          <img src="{{ tab_logo | asset_url }}" alt="Hague Protect" class="megamenu-tab-logo">
         {%- else -%}
-          HAGUE<span style="color:#FF2B2B;">PR</span><svg style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin:0 -1px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
+          {{ section.settings.logo_text }}
         {%- endif -%}
       </button>
 
