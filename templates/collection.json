@@ -82,11 +82,42 @@
       "settings": {
         "heading": "Things people often wonder"
       }
+    },
+    "horizontal_product_slider_V8C88Y": {
+      "type": "horizontal-product-slider",
+      "blocks": {
+        "collection_WEYkmB": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_WEYkmB"
+      ],
+      "name": "Shop by Function and Category",
+      "settings": {
+        "heading": "Shop Our Premium Best",
+        "bg_color": "#ff1e43",
+        "bg_color_bottom": "#000000",
+        "products_to_show": 8,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "image_offset": 0,
+        "rail_collection": "",
+        "enable_video_bg": true,
+        "video_bg_filename": "700_F_414745561_45lFsXNeGsWZrwxGXoeHeP5Bt76L5fX0_ST_202607062218.mp4",
+        "video_opacity": 100,
+        "overlay_opacity": 50
+      }
     }
   },
   "order": [
     "story_banner_1",
     "products",
+    "horizontal_product_slider_V8C88Y",
     "faq"
   ]
 }
