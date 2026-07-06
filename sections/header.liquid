@@ -751,37 +751,75 @@
 <header class="header-wrapper" role="banner">
   {%- liquid
     assign brand_context = 'hagueprotect'
+    assign _path = request.path | downcase
+    assign _canon = canonical_url | downcase
+    assign _tsuffix = template.suffix | default: '' | downcase
+    assign _tname = template.name | default: '' | downcase
 
-    capture content_url
-      echo content_for_header
-    endcapture
-
-    assign page_url = ''
-    if content_url contains '"pageurl":"'
-      assign page_url = content_url | split: '"pageurl":"' | last | split: '"' | first | replace: '\/', '/' | replace: '%20', ' ' | replace: '%3f', '?' | replace: '%3d', '=' | replace: '%26', '&' | downcase
-    endif
-
-    capture req_url
-      echo request.path
-      echo ' '
-      echo canonical_url
-      echo ' '
-      echo page_url
-    endcapture
-    assign req_url = req_url | downcase
-
-    if req_url contains 'vanrosector' or template contains 'vanrosector' or collection.handle contains 'vanrosector' or product.handle contains 'vanrosector'
+    comment
+      1. Template suffix — most reliable for alternate templates
+    endcomment
+    if _tsuffix == 'vanrosector'
       assign brand_context = 'vanrosector'
-    elsif req_url contains 'science-of-raw' or req_url contains 'science_of_raw' or req_url contains 'sor-' or template contains 'science-of-raw' or collection.handle contains 'science-of-raw' or product.handle contains 'science-of-raw'
+    elsif _tsuffix == 'science-of-raw'
       assign brand_context = 'science-of-raw'
     endif
 
-    if template contains 'product' and product != blank
+    comment
+      2. URL path and canonical URL
+    endcomment
+    if brand_context == 'hagueprotect'
+      if _path contains 'vanrosector' or _canon contains 'vanrosector'
+        assign brand_context = 'vanrosector'
+      elsif _path contains 'science-of-raw' or _path contains 'science_of_raw' or _canon contains 'science-of-raw' or _canon contains 'science_of_raw'
+        assign brand_context = 'science-of-raw'
+      endif
+    endif
+
+    comment
+      3. Collection handle
+    endcomment
+    if brand_context == 'hagueprotect' and collection != blank
+      if collection.handle == 'vanrosector'
+        assign brand_context = 'vanrosector'
+      elsif collection.handle == 'science-of-raw'
+        assign brand_context = 'science-of-raw'
+      endif
+    endif
+
+    comment
+      4. Product handle
+    endcomment
+    if brand_context == 'hagueprotect' and product != blank
+      if product.handle contains 'vanrosector'
+        assign brand_context = 'vanrosector'
+      elsif product.handle contains 'science-of-raw'
+        assign brand_context = 'science-of-raw'
+      endif
+    endif
+
+    comment
+      5. Page handle
+    endcomment
+    if brand_context == 'hagueprotect' and page != blank
+      if page.handle contains 'vanrosector'
+        assign brand_context = 'vanrosector'
+      elsif page.handle contains 'science-of-raw'
+        assign brand_context = 'science-of-raw'
+      endif
+    endif
+
+    comment
+      6. Product collections fallback
+    endcomment
+    if brand_context == 'hagueprotect' and _tname == 'product' and product != blank
       for c in product.collections
         if c.handle == 'vanrosector'
           assign brand_context = 'vanrosector'
+          break
         elsif c.handle == 'science-of-raw'
           assign brand_context = 'science-of-raw'
+          break
         endif
       endfor
     endif
