@@ -129,10 +129,10 @@
   /* Desktop / laptop: left-aligned hero copy + typing animation */
   @media screen and (min-width: 769px) {
     .hero-fullscreen {
-      align-items: flex-start;
+      align-items: center;
       text-align: left;
-      padding-left: var(--site-padding);
-      padding-right: var(--site-padding);
+      padding-left: 0;
+      padding-right: 0;
       padding-top: 100px;
     }
 
@@ -148,13 +148,14 @@
     .hero-fullscreen__content {
       align-items: flex-start;
       text-align: left;
-      margin-left: 0;
-      margin-right: auto;
-      max-width: min(800px, 55vw);
+      margin: 0 auto;
+      max-width: 1280px;
+      width: 100%;
     }
 
     .hero-fullscreen__heading {
       text-align: left;
+      max-width: min(800px, 55vw);
     }
 
     .hero-fullscreen__subheading {
