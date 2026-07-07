@@ -7,9 +7,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    padding-bottom: 80px;
+    padding-bottom: 0;
     color: #ffffff;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -171,14 +171,14 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       width: 100%;
       max-width: 100vw;
       height: auto;
       min-height: min(82svh, 620px);
       max-height: 92svh;
-      padding: 0 0 clamp(24px, 5vw, 36px);
+      padding: 0;
       overflow: hidden;
       text-align: center;
       background: #111;
@@ -357,11 +357,7 @@
     {%- endif -%}
     <h1 class="hero-fullscreen__heading">{{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}</h1>
     <p class="hero-fullscreen__subheading">{{ section.settings.subheading | default: 'Professional-grade cleaning for everyday wear. Advanced protection formulas designed for premium materials.' }}</p>
-    <div class="hero-fullscreen__actions">
-      <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-primary hero-fullscreen__btn">
-        {{ section.settings.cta_text | default: 'Shop Now' }}
-      </a>
-    </div>
+
   </div>
 </section>
 
