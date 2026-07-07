@@ -79,7 +79,7 @@
     text-decoration: none;
     background: linear-gradient(160deg, var(--bg-from) 0%, var(--bg-to) 100%);
     border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 24px;
+    border-radius: 0;
     padding: 56px 40px 48px;
     overflow: hidden;
     isolation: isolate;
@@ -126,20 +126,20 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 320px;
-    height: 132px;
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    max-width: none;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
     margin-bottom: 28px;
-    padding: 20px 28px;
+    padding: 0;
   }
 
   #shopify-section-{{ section.id }} .brand-card__plate img {
     display: block;
-    width: auto;
+    width: 100%;
     height: auto;
-    max-height: 84px;
+    max-height: none;
     max-width: 100%;
     object-fit: contain;
   }
@@ -194,9 +194,9 @@
       grid-template-columns: 1fr;
       gap: 18px;
     }
-    #shopify-section-{{ section.id }} .brand-card { padding: 40px 24px 36px; border-radius: 20px; }
-    #shopify-section-{{ section.id }} .brand-card__plate { height: 104px; margin-bottom: 22px; padding: 16px 20px; }
-    #shopify-section-{{ section.id }} .brand-card__plate img { max-height: 64px; }
+    #shopify-section-{{ section.id }} .brand-card { padding: 40px 24px 36px; border-radius: 0; }
+    #shopify-section-{{ section.id }} .brand-card__plate { height: auto; margin-bottom: 22px; padding: 0; }
+    #shopify-section-{{ section.id }} .brand-card__plate img { max-height: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
