@@ -34,19 +34,22 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__container {
-    max-width: var(--site-max-width, 1320px);
-  margin: 0 auto;
-    padding: 0 max(16px, var(--site-padding, 20px));
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
     position: relative;
     z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: 20px;
     margin-bottom: clamp(28px, 5vw, 44px);
+    max-width: var(--site-max-width, 1320px);
+    margin-inline: auto;
+    width: 100%;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
@@ -447,7 +450,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__container {
-      padding: 0 max(18px, var(--site-padding, 20px));
+      padding: 0 12px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__header {
