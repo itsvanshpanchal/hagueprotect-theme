@@ -123,44 +123,36 @@
       opacity: {{ block.settings.image_opacity }};
     }
 
-    {% if block.settings.stack_mobile %}
-      .ai-story-banner-wrapper-{{ ai_gen_id }} {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .ai-story-banner-content-{{ ai_gen_id }} {
-        position: relative;
-        left: 0;
-        top: 0;
-        transform: none;
-        width: 100%;
-        max-width: 100%;
-        padding: 32px 20px;
-        box-sizing: border-box;
-      }
-    {% else %}
-      .ai-story-banner-content-{{ ai_gen_id }} {
-        padding: {{ block.settings.content_padding | times: 0.6 }}px;
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        max-width: calc(100% - 40px);
-      }
-    {% endif %}
+    .ai-story-banner-content-{{ ai_gen_id }} {
+      padding: 16px;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: calc(100% - 32px);
+      box-sizing: border-box;
+    }
 
     .ai-story-banner-heading-{{ ai_gen_id }} {
-      font-size: clamp(20px, 6vw, {{ block.settings.heading_size | times: 0.7 }}px);
-      margin-bottom: 12px;
+      font-size: clamp(15px, 4.5vw, 20px);
+      margin-bottom: 8px;
     }
 
     .ai-story-banner-subheading-{{ ai_gen_id }} {
-      font-size: clamp(15px, 4.5vw, {{ block.settings.subheading_size | times: 0.8 }}px);
-      margin-bottom: 12px;
+      font-size: clamp(13px, 3.5vw, 15px);
+      margin-bottom: 8px;
     }
 
     .ai-story-banner-text-{{ ai_gen_id }} {
-      font-size: clamp(13px, 3.8vw, {{ block.settings.text_size | times: 0.9 }}px);
+      font-size: clamp(11px, 3vw, 13px);
+    }
+
+    .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
+      margin-top: 12px;
+    }
+
+    .ai-story-banner-button-{{ ai_gen_id }} {
+      padding: 8px 16px;
+      font-size: 13px;
     }
   }
 {% endstyle %}
@@ -293,12 +285,7 @@
       "label": "Show overlay",
       "default": false
     },
-    {
-      "type": "checkbox",
-      "id": "stack_mobile",
-      "label": "Stack content below image on mobile",
-      "default": true
-    },
+
     {
       "type": "color",
       "id": "overlay_color",
