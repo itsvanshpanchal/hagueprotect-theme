@@ -1,10 +1,17 @@
 {%- if product != blank -%}
-<a href="{{ product.url }}" class="ckc-{{ section_id }}__card">
+{%- liquid
+  assign target_product = product
+  if product.title == blank and product != blank
+    assign target_product = all_products[product]
+  endif
+-%}
+{%- if target_product != blank -%}
+<a href="{{ target_product.url }}" class="ckc-{{ section_id }}__card">
   <div class="ckc-{{ section_id }}__image-wrap">
-    {%- if product.featured_image != blank -%}
+    {%- if target_product.featured_image != blank -%}
       <img
-        src="{{ product.featured_image | image_url: width: 600 }}"
-        alt="{{ product.title | escape }}"
+        src="{{ target_product.featured_image | image_url: width: 600 }}"
+        alt="{{ target_product.title | escape }}"
         class="ckc-{{ section_id }}__image"
         loading="lazy"
         width="600"
@@ -21,16 +28,17 @@
       <span>({{ rating_count | default: '4.8' }})</span>
     </div>
 
-    <h3 class="ckc-{{ section_id }}__title">{{ product.title }}</h3>
+    <h3 class="ckc-{{ section_id }}__title">{{ target_product.title }}</h3>
 
     <div class="ckc-{{ section_id }}__price-row">
-      <span class="ckc-{{ section_id }}__price">{{ product.price | money }}</span>
-      {%- if product.compare_at_price > product.price -%}
-        <span class="ckc-{{ section_id }}__compare">{{ product.compare_at_price | money }}</span>
+      <span class="ckc-{{ section_id }}__price">{{ target_product.price | money }}</span>
+      {%- if target_product.compare_at_price > target_product.price -%}
+        <span class="ckc-{{ section_id }}__compare">{{ target_product.compare_at_price | money }}</span>
       {%- endif -%}
     </div>
 
     <span class="ckc-{{ section_id }}__cta">View Product</span>
   </div>
 </a>
+{%- endif -%}
 {%- endif -%}
