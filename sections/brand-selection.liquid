@@ -1,0 +1,570 @@
+{%- comment -%}
+  ============================================================
+  BRAND SELECTION — luxury multi-brand portrait cards
+  ------------------------------------------------------------
+  Tall, portrait-oriented cards inspired by high-end fashion
+  retailers (Hugo Boss, Armani Exchange, Ralph Lauren, etc.).
+
+  • Full-bleed background image (object-fit: cover)
+  • Soft rounded corners + light neutral section background
+  • Bottom dark gradient for logo legibility
+  • Brand logo pinned to the bottom-centre of the card
+  • Whole card is a single clickable link
+  • Hover: image zooms gently while the card lifts with a soft shadow
+
+  SCALABLE: each brand is a block, so you can add / remove / reorder
+  brands from the theme editor while keeping the same design system.
+
+  LOGOS VIA THEME CODE (not the editor):
+  Upload the logo file into /assets (e.g. logo-vanrosector.svg) and
+  type its filename into the block's "Logo file name (assets)" field.
+  It is then served with the asset_url filter.
+  ============================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign card_radius = section.settings.card_radius | default: 24
+  assign ratio = section.settings.card_ratio | default: '3 / 4'
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .brandsel {
+    background: {{ section.settings.bg_color | default: '#f5f4f2' }};
+    padding: {{ section.settings.padding_top | default: 100 }}px 20px {{ section.settings.padding_bottom | default: 100 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel__inner {
+    max-width: {{ section.settings.max_width | default: 1240 }}px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel__head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 60px;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color | default: '#b08d57' }};
+    margin: 0 0 14px;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel__heading {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(30px, 4.4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.028em;
+    color: {{ section.settings.heading_color | default: '#111111' }};
+    margin: 0 0 16px;
+    line-height: 1.05;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: {{ section.settings.subheading_color | default: '#6b6b6b' }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Fluid grid: auto-fits however many brand blocks exist,
+     each card never narrower than 300px, so 2 sit side-by-side
+     on desktop and stack cleanly on mobile. */
+  #shopify-section-{{ section.id }} .brandsel__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_most: 2 }}, minmax(0, 1fr));
+    gap: {{ section.settings.card_gap | default: 32 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .brandsel--3up .brandsel__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #shopify-section-{{ section.id }} .brandsel--4up .brandsel__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  #shopify-section-{{ section.id }} .bcard {
+    position: relative;
+    display: block;
+    aspect-ratio: {{ ratio }};
+    border-radius: {{ card_radius }}px;
+    overflow: hidden;
+    isolation: isolate;
+    text-decoration: none;
+    background: #e9e7e3;
+    box-shadow: 0 12px 30px rgba(17, 17, 17, 0.06);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  #shopify-section-{{ section.id }} .bcard__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: {{ section.settings.image_position | default: 'center' }};
+    z-index: 0;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Bottom-up dark gradient for logo legibility */
+  #shopify-section-{{ section.id }} .bcard__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, {{ section.settings.overlay_strength | default: 55 | divided_by: 100.0 }}) 0%,
+      rgba(0, 0, 0, {{ section.settings.overlay_strength | default: 55 | divided_by: 100.0 | times: 0.35 }}) 42%,
+      rgba(0, 0, 0, 0) 72%
+    );
+  }
+
+  #shopify-section-{{ section.id }} .bcard__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 36px 28px 40px;
+  }
+
+  #shopify-section-{{ section.id }} .bcard__logo {
+    display: block;
+    width: auto;
+    max-width: 70%;
+    max-height: {{ section.settings.logo_max_height | default: 76 }}px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #shopify-section-{{ section.id }} .bcard__name {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  #shopify-section-{{ section.id }} .bcard__tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 10px 0 0;
+    line-height: 1.5;
+    max-width: 320px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  /* Hover: lift card + zoom image */
+  #shopify-section-{{ section.id }} .bcard:hover,
+  #shopify-section-{{ section.id }} .bcard:focus-visible {
+    transform: translateY(-10px);
+    box-shadow: 0 34px 64px rgba(17, 17, 17, 0.18);
+    outline: none;
+  }
+
+  #shopify-section-{{ section.id }} .bcard:hover .bcard__img,
+  #shopify-section-{{ section.id }} .bcard:focus-visible .bcard__img {
+    transform: scale(1.06);
+  }
+
+  #shopify-section-{{ section.id }} .bcard:hover .bcard__logo,
+  #shopify-section-{{ section.id }} .bcard:focus-visible .bcard__logo {
+    transform: translateY(-4px);
+  }
+
+  /* Keyboard focus ring */
+  #shopify-section-{{ section.id }} .bcard:focus-visible {
+    box-shadow: 0 34px 64px rgba(17, 17, 17, 0.18), 0 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 6px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Tablet */
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .brandsel--3up .brandsel__grid,
+    #shopify-section-{{ section.id }} .brandsel--4up .brandsel__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Mobile — stack all cards, single column */
+  @media screen and (max-width: 640px) {
+    #shopify-section-{{ section.id }} .brandsel {
+      padding: {{ section.settings.padding_top | default: 100 | times: 0.6 | round }}px 16px {{ section.settings.padding_bottom | default: 100 | times: 0.6 | round }}px;
+    }
+    #shopify-section-{{ section.id }} .brandsel__head { margin-bottom: 36px; }
+    #shopify-section-{{ section.id }} .brandsel__grid,
+    #shopify-section-{{ section.id }} .brandsel--3up .brandsel__grid,
+    #shopify-section-{{ section.id }} .brandsel--4up .brandsel__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    #shopify-section-{{ section.id }} .bcard { aspect-ratio: {{ section.settings.card_ratio_mobile | default: '4 / 5' }}; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .bcard,
+    #shopify-section-{{ section.id }} .bcard__img,
+    #shopify-section-{{ section.id }} .bcard__logo { transition: none; }
+    #shopify-section-{{ section.id }} .bcard:hover,
+    #shopify-section-{{ section.id }} .bcard:focus-visible { transform: none; }
+    #shopify-section-{{ section.id }} .bcard:hover .bcard__img { transform: none; }
+    #shopify-section-{{ section.id }} .bcard:hover .bcard__logo { transform: none; }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign layout_class = ''
+  if section.blocks.size == 3
+    assign layout_class = 'brandsel--3up'
+  elsif section.blocks.size >= 4
+    assign layout_class = 'brandsel--4up'
+  endif
+-%}
+
+<section class="brandsel {{ layout_class }}" aria-labelledby="brandsel-heading-{{ section.id }}">
+  <div class="brandsel__inner">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="brandsel__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="brandsel__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="brandsel__heading" id="brandsel-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="brandsel__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="brandsel__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign brand_url = block.settings.link
+          if brand_url == blank
+            assign brand_url = '#'
+          endif
+
+          assign brand_name = block.settings.name | default: 'Brand'
+          assign logo_file = block.settings.logo_asset | strip
+        -%}
+        <a href="{{ brand_url }}"
+           class="bcard"
+           aria-label="{{ block.settings.aria_label | default: brand_name | escape }}"
+           {{ block.shopify_attributes }}>
+
+          {%- comment -%} Background image: editor picker first, else asset filename, else neutral fill {%- endcomment -%}
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag:
+                 class: 'bcard__img',
+                 widths: '400, 600, 800, 1000, 1200',
+                 sizes: '(max-width: 640px) 90vw, 40vw',
+                 loading: 'lazy',
+                 alt: brand_name | escape }}
+          {%- elsif block.settings.image_asset != blank -%}
+            <img class="bcard__img"
+                 src="{{ block.settings.image_asset | strip | asset_url }}"
+                 alt="{{ brand_name | escape }}"
+                 loading="lazy" decoding="async">
+          {%- else -%}
+            <span class="bcard__img" style="background: linear-gradient(135deg,#d9d5ce,#ede9e2);"></span>
+          {%- endif -%}
+
+          <span class="bcard__overlay"></span>
+
+          <span class="bcard__content">
+            {%- if logo_file != blank -%}
+              <img class="bcard__logo"
+                   src="{{ logo_file | asset_url }}"
+                   alt="{{ brand_name | escape }} logo"
+                   loading="lazy" decoding="async">
+            {%- elsif block.settings.show_name_fallback -%}
+              <p class="bcard__name">{{ brand_name }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.tagline != blank -%}
+              <p class="bcard__tag">{{ block.settings.tagline }}</p>
+            {%- endif -%}
+          </span>
+        </a>
+      {%- else -%}
+        <p style="text-align:center;font-family:'Inter',sans-serif;color:#6b6b6b;">
+          Add a brand block to get started.
+        </p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Selection",
+  "tag": "section",
+  "class": "section-brand-selection",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR FAMILY OF BRANDS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose Your World"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Two distinct houses, one standard of excellence."
+    },
+    {
+      "type": "header",
+      "content": "Card design"
+    },
+    {
+      "type": "select",
+      "id": "card_ratio",
+      "label": "Card shape (desktop)",
+      "options": [
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 5", "label": "Portrait tall (4:5)" },
+        { "value": "2 / 3", "label": "Portrait taller (2:3)" },
+        { "value": "9 / 16", "label": "Portrait extreme (9:16)" }
+      ],
+      "default": "3 / 4"
+    },
+    {
+      "type": "select",
+      "id": "card_ratio_mobile",
+      "label": "Card shape (mobile)",
+      "options": [
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "1 / 1", "label": "Square (1:1)" }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "overlay_strength",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Bottom gradient strength",
+      "default": 55
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image focal point",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_height",
+      "min": 32,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Logo max height",
+      "default": 76
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Max content width",
+      "default": 1240
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#f5f4f2"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#b08d57"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading",
+      "default": "#6b6b6b"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Brand name",
+          "default": "Brand"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image",
+          "info": "Recommended portrait, at least 800 × 1100px. Leave empty to use an image uploaded via theme code below."
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Background image file name (assets)",
+          "info": "Optional. Used only if no Background image is picked above. e.g. brand-vanrosector-bg.jpg"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo file name (assets)",
+          "info": "Upload the logo into /assets via theme code, then enter its file name. e.g. logo-vanrosector.svg"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_name_fallback",
+          "label": "Show brand name if no logo",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "info": "Optional short line shown under the logo."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card link",
+          "info": "Brand page, collection, or landing page."
+        },
+        {
+          "type": "text",
+          "id": "aria_label",
+          "label": "Accessibility label",
+          "info": "Optional. Defaults to the brand name."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Selection",
+      "blocks": [
+        {
+          "type": "brand",
+          "settings": {
+            "name": "Vanrosector",
+            "logo_asset": "logo-vanrosector.svg",
+            "tagline": "Journey Through Nature's Finest Essence.",
+            "link": "/collections/all?view=vanrosector"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "name": "Science of Raw",
+            "logo_asset": "logo-science-of-raw.svg",
+            "tagline": "Pure, raw, and precisely refined.",
+            "link": "/collections/all?view=science-of-raw"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
