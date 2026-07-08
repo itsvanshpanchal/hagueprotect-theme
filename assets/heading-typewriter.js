@@ -28,7 +28,12 @@
     element.dataset.typewriterActive = 'true';
 
     var originalHTML = element.innerHTML;
-    var fullText = element.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
+    var fullText = element.innerHTML
+      .replace(/<br\s*[\/]?>/gi, '[[BR]]')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*\[\[BR\]\]\s*/g, '\n')
+      .trim();
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
 
     var originalPosition = window.getComputedStyle(element).position;
