@@ -3,7 +3,7 @@
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     overflow: hidden;
     position: relative;
-    padding: clamp(40px, 6vw, 80px) 0;
+    padding: 10px 0;
   }
 
   .trending-social-section .container {
@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 64px;
+    margin-bottom: 24px;
     gap: 32px;
     max-width: var(--site-max-width, 1320px);
     margin-inline: auto;
@@ -25,7 +25,7 @@
 
   @media screen and (max-width: 768px) {
     .trending-social-section {
-      padding: clamp(20px, 4vw, 40px) 0;
+      padding: 10px 0;
     }
     .trending-social-section .container {
       padding-left: 12px !important;
@@ -34,7 +34,7 @@
     .trending-social-header {
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 32px;
+      margin-bottom: 16px;
       gap: 16px;
     }
   }
