@@ -8,21 +8,26 @@
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     background-color: {{ section.settings.bg_color }};
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   @media screen and (min-width: 750px) {
     .featured-brands-{{ section.id }} {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-left: 40px;
+      padding-right: 40px;
     }
   }
 
   /* ── Eyebrow + Heading ───────────────────────────── */
   .fb__header {
-    text-align: center;
-    max-width: 720px;
+    text-align: left;
+    max-width: var(--site-max-width, 1320px);
     margin: 0 auto 32px;
-    padding: 0 24px;
+    padding: 0;
+    width: 100%;
   }
 
   @media screen and (min-width: 750px) {
@@ -71,20 +76,20 @@
     gap: 20px;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 0;
   }
 
   @media screen and (min-width: 750px) {
     .fb__grid {
       flex-direction: row;
       gap: 20px;
-      padding: 0 20px;
+      padding: 0;
     }
   }
 
   @media screen and (min-width: 990px) {
     .fb__grid {
-      padding: 0 20px;
+      padding: 0;
     }
   }
 

@@ -10,14 +10,16 @@
     background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
     padding-top: {{ section.settings.padding_top | default: 110 }}px !important;
     padding-bottom: {{ section.settings.padding_bottom | default: 110 }}px !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
     overflow: hidden !important;
   }
 
   .mat-container {
     max-width: var(--site-max-width, 1320px) !important;
     margin: 0 auto !important;
-    padding-left: var(--site-padding) !important;
-    padding-right: var(--site-padding) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .mat-grid {
