@@ -108,7 +108,7 @@
 
   @media screen and (min-width: 750px) {
     .fb__card {
-      width: 50%;
+      width: calc(33.333% - 16px);
     }
   }
 
@@ -309,7 +309,7 @@
           {{ section.settings.vanrosector_image | image_url: width: 1200 | image_tag:
             class: 'fb__card-img',
             loading: 'lazy',
-            sizes: '(min-width: 750px) 50vw, 100vw',
+            sizes: '(min-width: 750px) 33vw, 100vw',
             widths: '375, 550, 750, 1000, 1200',
             alt: 'VanRoSector'
           }}
@@ -359,7 +359,7 @@
           {{ section.settings.science_of_raw_image | image_url: width: 1200 | image_tag:
             class: 'fb__card-img',
             loading: 'lazy',
-            sizes: '(min-width: 750px) 50vw, 100vw',
+            sizes: '(min-width: 750px) 33vw, 100vw',
             widths: '375, 550, 750, 1000, 1200',
             alt: 'Science of Raw'
           }}
@@ -387,6 +387,56 @@
 
         {%- if section.settings.science_of_raw_tagline != blank -%}
           <p class="fb__card-tagline">{{ section.settings.science_of_raw_tagline }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <span class="fb__card-cta">
+            {{ section.settings.cta_label }}
+            <span class="fb__card-cta-arrow">→</span>
+          </span>
+        {%- endif -%}
+      </div>
+    </a>
+
+    <!-- ════════ BRAND 3: HagueProtect ════════ -->
+    <a
+      href="{{ section.settings.hagueprotect_link | default: '#' }}"
+      class="fb__card"
+      aria-label="Shop HagueProtect"
+    >
+      <div class="fb__card-img-wrap">
+        {%- if section.settings.hagueprotect_image != blank -%}
+          {{ section.settings.hagueprotect_image | image_url: width: 1200 | image_tag:
+            class: 'fb__card-img',
+            loading: 'lazy',
+            sizes: '(min-width: 750px) 33vw, 100vw',
+            widths: '375, 550, 750, 1000, 1200',
+            alt: 'HagueProtect'
+          }}
+        {%- else -%}
+          <div class="fb__card-empty">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="fb__card-overlay"></div>
+
+      <div class="fb__card-content">
+        {%- if section.settings.hagueprotect_svg != blank -%}
+          <div class="fb__card-logo-svg">{{ section.settings.hagueprotect_svg }}</div>
+        {%- elsif section.settings.hagueprotect_logo != blank -%}
+          {{ section.settings.hagueprotect_logo | image_url: width: 400 | image_tag:
+            class: 'fb__card-logo',
+            loading: 'lazy',
+            alt: 'HagueProtect logo'
+          }}
+        {%- else -%}
+          <h3 class="fb__card-name">HagueProtect</h3>
+        {%- endif -%}
+
+        {%- if section.settings.hagueprotect_tagline != blank -%}
+          <p class="fb__card-tagline">{{ section.settings.hagueprotect_tagline }}</p>
         {%- endif -%}
 
         {%- if section.settings.cta_label != blank -%}
@@ -504,6 +554,39 @@
     {
       "type": "url",
       "id": "science_of_raw_link",
+      "label": "Brand Link"
+    },
+    {
+      "type": "header",
+      "content": "━━━ Brand 3: HagueProtect ━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "hagueprotect_image",
+      "label": "Background Image",
+      "info": "Use a tall portrait lifestyle image (e.g. 900×1200px)."
+    },
+    {
+      "type": "image_picker",
+      "id": "hagueprotect_logo",
+      "label": "Logo (Image)",
+      "info": "White or light-colored logo works best."
+    },
+    {
+      "type": "html",
+      "id": "hagueprotect_svg",
+      "label": "Logo (SVG Code)",
+      "info": "Paste SVG markup to upload logo directly through theme code."
+    },
+    {
+      "type": "text",
+      "id": "hagueprotect_tagline",
+      "label": "Tagline",
+      "default": "Premium Sneaker Care."
+    },
+    {
+      "type": "url",
+      "id": "hagueprotect_link",
       "label": "Brand Link"
     },
     {
