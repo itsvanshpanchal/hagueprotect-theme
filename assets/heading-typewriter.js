@@ -28,23 +28,18 @@
     element.dataset.typewriterActive = 'true';
 
     var originalHTML = element.innerHTML;
-    var fullText = element.textContent.trim();
+    var fullText = element.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
 
-    element.textContent = '';
-    element.setAttribute('aria-label', fullText);
-
-    var cursor = document.createElement('span');
-    cursor.className = 'hp-typewriter-cursor';
-    cursor.setAttribute('aria-hidden', 'true');
-    element.appendChild(cursor);
+    element.innerHTML = '';
+    element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
 
     var index = 0;
 
     function tick() {
       if (index <= fullText.length) {
-        element.textContent = fullText.substring(0, index);
-        element.appendChild(cursor);
+        var currentText = fullText.substring(0, index);
+        element.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="hp-typewriter-cursor" aria-hidden="true"></span>';
         index += 1;
         window.setTimeout(tick, speed);
       } else {
