@@ -1,74 +1,98 @@
 {%- style -%}
   /* ═══════════════════════════════════════════════════
      FEATURED BRANDS — Luxury Brand Selection Section
-     Inspired by Iconic, Blue Giraffe, Hugo Boss, etc.
+     Two portrait brand cards, side-by-side on desktop
      ═══════════════════════════════════════════════════ */
 
-  /* ── Section wrapper ─────────────────────────────── */
-  .featured-brands-section-{{ section.id }} {
+  .featured-brands-{{ section.id }} {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-    background-color: {{ section.settings.background_color }};
+    background-color: {{ section.settings.bg_color }};
   }
 
   @media screen and (min-width: 750px) {
-    .featured-brands-section-{{ section.id }} {
+    .featured-brands-{{ section.id }} {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 
-  /* ── Section heading ─────────────────────────────── */
-  .featured-brands__heading {
+  /* ── Eyebrow + Heading ───────────────────────────── */
+  .fb__header {
     text-align: center;
-    margin: 0 0 36px 0;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: {{ section.settings.heading_color }};
+    max-width: 720px;
+    margin: 0 auto 32px;
+    padding: 0 24px;
   }
 
   @media screen and (min-width: 750px) {
-    .featured-brands__heading {
+    .fb__header {
       margin-bottom: 48px;
-      font-size: 15px;
-      letter-spacing: 5px;
     }
   }
 
-  /* ── Grid container ──────────────────────────────── */
-  .featured-brands__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: {{ section.settings.max_width }}px;
-    margin: 0 auto;
-    padding: 0 20px;
+  .fb__eyebrow {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 12px;
+  }
+
+  .fb__title {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.3;
   }
 
   @media screen and (min-width: 750px) {
-    .featured-brands__grid {
+    .fb__title {
+      font-size: 34px;
+    }
+  }
+
+  .fb__subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* ── Grid ─────────────────────────────────────────── */
+  .fb__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .fb__grid {
       flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: {{ section.settings.card_gap }}px;
+      gap: 24px;
       padding: 0 40px;
     }
   }
 
   @media screen and (min-width: 990px) {
-    .featured-brands__grid {
+    .fb__grid {
       padding: 0 60px;
     }
   }
 
-  /* ── Brand card ──────────────────────────────────── */
-  .featured-brands__card {
+  /* ── Brand Card ──────────────────────────────────── */
+  .fb__card {
     position: relative;
     display: block;
     width: 100%;
-    border-radius: {{ section.settings.card_radius }}px;
+    border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
     aspect-ratio: 3 / 4;
@@ -82,26 +106,26 @@
   }
 
   @media screen and (min-width: 750px) {
-    .featured-brands__card {
-      width: calc(50% - {{ section.settings.card_gap | divided_by: 2 }}px);
+    .fb__card {
+      width: 50%;
     }
   }
 
-  .featured-brands__card:hover,
-  .featured-brands__card:focus-visible {
+  .fb__card:hover,
+  .fb__card:focus-visible {
     transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
     outline: none;
   }
 
   /* ── Background image ────────────────────────────── */
-  .featured-brands__card-image-wrap {
+  .fb__card-img-wrap {
     position: absolute;
     inset: 0;
     overflow: hidden;
   }
 
-  .featured-brands__card-image {
+  .fb__card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -110,21 +134,21 @@
     will-change: transform;
   }
 
-  .featured-brands__card:hover .featured-brands__card-image {
+  .fb__card:hover .fb__card-img {
     transform: scale(1.05);
   }
 
   /* ── Gradient overlay ────────────────────────────── */
-  .featured-brands__card-overlay {
+  .fb__card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 55%;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.65) 0%,
-      rgba(0, 0, 0, 0.25) 50%,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 45%,
       rgba(0, 0, 0, 0) 100%
     );
     pointer-events: none;
@@ -132,153 +156,247 @@
     transition: opacity 0.5s ease;
   }
 
-  .featured-brands__card:hover .featured-brands__card-overlay {
-    opacity: 0.85;
+  .fb__card:hover .fb__card-overlay {
+    opacity: 0.9;
   }
 
-  /* ── Logo at bottom-center ───────────────────────── */
-  .featured-brands__card-logo-wrap {
+  /* ── Card content at bottom ──────────────────────── */
+  .fb__card-content {
     position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 2;
-    width: 70%;
-    max-width: 200px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    padding: 0 24px 28px;
+    text-align: center;
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   @media screen and (min-width: 750px) {
-    .featured-brands__card-logo-wrap {
-      bottom: 40px;
+    .fb__card-content {
+      padding-bottom: 36px;
     }
   }
 
-  .featured-brands__card:hover .featured-brands__card-logo-wrap {
-    transform: translateX(-50%) translateY(-2px);
+  .fb__card:hover .fb__card-content {
+    transform: translateY(-3px);
   }
 
-  /* Logo image */
-  .featured-brands__card-logo {
-    width: 100%;
+  /* ── Logo ─────────────────────────────────────────── */
+  .fb__card-logo {
+    max-width: 180px;
+    max-height: 70px;
+    width: auto;
     height: auto;
-    max-height: 80px;
     object-fit: contain;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
-    transition: filter 0.5s ease;
+    margin-bottom: 10px;
   }
 
-  .featured-brands__card:hover .featured-brands__card-logo {
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
-  }
-
-  /* SVG logo support (pasted directly in theme code) */
-  .featured-brands__card-logo-svg {
-    width: 100%;
+  .fb__card-logo-svg {
     max-width: 170px;
-    height: auto;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
-    transition: filter 0.5s ease;
+    margin-bottom: 10px;
   }
 
-  .featured-brands__card-logo-svg svg {
+  .fb__card-logo-svg svg {
     width: 100%;
     height: auto;
     display: block;
     fill: #ffffff;
   }
 
-  .featured-brands__card:hover .featured-brands__card-logo-svg {
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+  /* ── Tagline ─────────────────────────────────────── */
+  .fb__card-tagline {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin: 0 0 14px;
+    line-height: 1.5;
+    max-width: 260px;
   }
 
-  /* ── Fallback text title ─────────────────────────── */
-  .featured-brands__card-fallback {
-    color: #ffffff;
-    margin: 0;
-    text-align: center;
+  /* ── CTA button ──────────────────────────────────── */
+  .fb__card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 18px;
-    font-weight: 500;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    padding: 8px 24px;
+    transition: all 0.35s ease;
+    background: transparent;
   }
 
-  /* ── Empty / placeholder state ───────────────────── */
-  .featured-brands__card-empty {
+  .fb__card:hover .fb__card-cta {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .fb__card-cta-arrow {
+    display: inline-block;
+    transition: transform 0.35s ease;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .fb__card:hover .fb__card-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ── Empty placeholder ───────────────────────────── */
+  .fb__card-empty {
     width: 100%;
     height: 100%;
-    background: linear-gradient(145deg, #e9e9e9 0%, #d4d4d4 100%);
+    background: linear-gradient(145deg, #e2e2e2 0%, #ccc 100%);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .featured-brands__card-empty svg {
-    width: 60%;
-    max-width: 240px;
-    height: auto;
-    opacity: 0.35;
+  .fb__card-empty svg {
+    width: 50%;
+    max-width: 200px;
+    opacity: 0.3;
+  }
+
+  /* ── Fallback text logo ──────────────────────────── */
+  .fb__card-name {
+    color: #ffffff;
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 {%- endstyle -%}
 
-<div class="featured-brands-section-{{ section.id }}">
-  {%- if section.settings.heading != blank -%}
-    <h2 class="featured-brands__heading">{{ section.settings.heading }}</h2>
-  {%- endif -%}
+<div class="featured-brands-{{ section.id }}">
+  <!-- Section Header -->
+  <div class="fb__header">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="fb__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="fb__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="fb__subtitle">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
 
-  <div class="featured-brands__grid">
-    {%- for block in section.blocks -%}
-      <a
-        href="{{ block.settings.brand_link | default: '#' }}"
-        class="featured-brands__card"
-        aria-label="{{ block.settings.title | default: 'Shop brand' | escape }}"
-        {{ block.shopify_attributes }}
-      >
-        <!-- Background Image -->
-        <div class="featured-brands__card-image-wrap">
-          {%- if block.settings.background_image != blank -%}
-            {{ block.settings.background_image | image_url: width: 1200 | image_tag:
-              class: 'featured-brands__card-image',
-              loading: 'lazy',
-              sizes: '(min-width: 750px) 50vw, 100vw',
-              widths: '375, 550, 750, 1000, 1200',
-              alt: block.settings.title | default: block.settings.background_image.alt | escape
-            }}
-          {%- else -%}
-            <div class="featured-brands__card-empty">
-              {{ 'lifestyle-1' | placeholder_svg_tag }}
-            </div>
-          {%- endif -%}
-        </div>
+  <!-- Brand Cards Grid -->
+  <div class="fb__grid">
 
-        <!-- Gradient Overlay -->
-        <div class="featured-brands__card-overlay"></div>
+    <!-- ════════ BRAND 1: VanRoSector ════════ -->
+    <a
+      href="{{ section.settings.vanrosector_link | default: '#' }}"
+      class="fb__card"
+      aria-label="Shop VanRoSector"
+    >
+      <div class="fb__card-img-wrap">
+        {%- if section.settings.vanrosector_image != blank -%}
+          {{ section.settings.vanrosector_image | image_url: width: 1200 | image_tag:
+            class: 'fb__card-img',
+            loading: 'lazy',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            widths: '375, 550, 750, 1000, 1200',
+            alt: 'VanRoSector'
+          }}
+        {%- else -%}
+          <div class="fb__card-empty">
+            {{ 'lifestyle-1' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
 
-        <!-- Brand Logo -->
-        <div class="featured-brands__card-logo-wrap">
-          {%- if block.settings.custom_svg_code != blank -%}
-            <!-- Logo uploaded directly through theme code -->
-            <div class="featured-brands__card-logo-svg">
-              {{ block.settings.custom_svg_code }}
-            </div>
-          {%- elsif block.settings.brand_logo != blank -%}
-            {{ block.settings.brand_logo | image_url: width: 400 | image_tag:
-              class: 'featured-brands__card-logo',
-              loading: 'lazy',
-              alt: block.settings.title | default: block.settings.brand_logo.alt | escape
-            }}
-          {%- else -%}
-            <h3 class="featured-brands__card-fallback">
-              {{ block.settings.title | default: 'Brand Name' }}
-            </h3>
-          {%- endif -%}
-        </div>
-      </a>
-    {%- endfor -%}
+      <div class="fb__card-overlay"></div>
+
+      <div class="fb__card-content">
+        {%- if section.settings.vanrosector_svg != blank -%}
+          <div class="fb__card-logo-svg">{{ section.settings.vanrosector_svg }}</div>
+        {%- elsif section.settings.vanrosector_logo != blank -%}
+          {{ section.settings.vanrosector_logo | image_url: width: 400 | image_tag:
+            class: 'fb__card-logo',
+            loading: 'lazy',
+            alt: 'VanRoSector logo'
+          }}
+        {%- else -%}
+          <h3 class="fb__card-name">VanRoSector</h3>
+        {%- endif -%}
+
+        {%- if section.settings.vanrosector_tagline != blank -%}
+          <p class="fb__card-tagline">{{ section.settings.vanrosector_tagline }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <span class="fb__card-cta">
+            {{ section.settings.cta_label }}
+            <span class="fb__card-cta-arrow">→</span>
+          </span>
+        {%- endif -%}
+      </div>
+    </a>
+
+    <!-- ════════ BRAND 2: Science of Raw ════════ -->
+    <a
+      href="{{ section.settings.science_of_raw_link | default: '#' }}"
+      class="fb__card"
+      aria-label="Shop Science of Raw"
+    >
+      <div class="fb__card-img-wrap">
+        {%- if section.settings.science_of_raw_image != blank -%}
+          {{ section.settings.science_of_raw_image | image_url: width: 1200 | image_tag:
+            class: 'fb__card-img',
+            loading: 'lazy',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            widths: '375, 550, 750, 1000, 1200',
+            alt: 'Science of Raw'
+          }}
+        {%- else -%}
+          <div class="fb__card-empty">
+            {{ 'lifestyle-2' | placeholder_svg_tag }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="fb__card-overlay"></div>
+
+      <div class="fb__card-content">
+        {%- if section.settings.science_of_raw_svg != blank -%}
+          <div class="fb__card-logo-svg">{{ section.settings.science_of_raw_svg }}</div>
+        {%- elsif section.settings.science_of_raw_logo != blank -%}
+          {{ section.settings.science_of_raw_logo | image_url: width: 400 | image_tag:
+            class: 'fb__card-logo',
+            loading: 'lazy',
+            alt: 'Science of Raw logo'
+          }}
+        {%- else -%}
+          <h3 class="fb__card-name">Science of Raw</h3>
+        {%- endif -%}
+
+        {%- if section.settings.science_of_raw_tagline != blank -%}
+          <p class="fb__card-tagline">{{ section.settings.science_of_raw_tagline }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank -%}
+          <span class="fb__card-cta">
+            {{ section.settings.cta_label }}
+            <span class="fb__card-cta-arrow">→</span>
+          </span>
+        {%- endif -%}
+      </div>
+    </a>
+
   </div>
 </div>
 
@@ -289,52 +407,103 @@
   "class": "section",
   "settings": [
     {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR FAMILY OF BRANDS"
+    },
+    {
       "type": "text",
       "id": "heading",
-      "label": "Section Heading",
-      "default": "Shop by Brand"
+      "label": "Heading",
+      "default": "Explore the Ecosystem"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Button Label",
+      "default": "Explore"
     },
     {
       "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Section Background",
+      "id": "bg_color",
+      "label": "Section Background Color",
       "default": "#f5f5f0"
     },
     {
-      "type": "range",
-      "id": "max_width",
-      "min": 800,
-      "max": 1600,
-      "step": 50,
-      "unit": "px",
-      "label": "Maximum Width",
-      "default": 1200
+      "type": "header",
+      "content": "━━━ Brand 1: VanRoSector ━━━"
     },
     {
-      "type": "range",
-      "id": "card_gap",
-      "min": 8,
-      "max": 48,
-      "step": 4,
-      "unit": "px",
-      "label": "Gap Between Cards",
-      "default": 24
+      "type": "image_picker",
+      "id": "vanrosector_image",
+      "label": "Background Image",
+      "info": "Use a tall portrait lifestyle image (e.g. 900×1200px)."
     },
     {
-      "type": "range",
-      "id": "card_radius",
-      "min": 0,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Card Corner Radius",
-      "default": 14
+      "type": "image_picker",
+      "id": "vanrosector_logo",
+      "label": "Logo (Image)",
+      "info": "White or light-colored logo works best."
+    },
+    {
+      "type": "html",
+      "id": "vanrosector_svg",
+      "label": "Logo (SVG Code)",
+      "info": "Paste SVG markup to upload logo directly through theme code."
+    },
+    {
+      "type": "text",
+      "id": "vanrosector_tagline",
+      "label": "Tagline",
+      "default": "Journey Through Nature's Finest Essence."
+    },
+    {
+      "type": "url",
+      "id": "vanrosector_link",
+      "label": "Brand Link"
+    },
+    {
+      "type": "header",
+      "content": "━━━ Brand 2: Science of Raw ━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "science_of_raw_image",
+      "label": "Background Image",
+      "info": "Use a tall portrait lifestyle image (e.g. 900×1200px)."
+    },
+    {
+      "type": "image_picker",
+      "id": "science_of_raw_logo",
+      "label": "Logo (Image)",
+      "info": "White or light-colored logo works best."
+    },
+    {
+      "type": "html",
+      "id": "science_of_raw_svg",
+      "label": "Logo (SVG Code)",
+      "info": "Paste SVG markup to upload logo directly through theme code."
+    },
+    {
+      "type": "text",
+      "id": "science_of_raw_tagline",
+      "label": "Tagline",
+      "default": "Pure, raw, and precisely refined."
+    },
+    {
+      "type": "url",
+      "id": "science_of_raw_link",
+      "label": "Brand Link"
     },
     {
       "type": "header",
@@ -344,80 +513,26 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Top Padding",
-      "default": 60
+      "default": 96
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Bottom Padding",
-      "default": 60
-    }
-  ],
-  "blocks": [
-    {
-      "type": "brand",
-      "name": "Brand Card",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "background_image",
-          "label": "Background Image",
-          "info": "Use a tall portrait-oriented lifestyle image (e.g. 900×1200px) for best results."
-        },
-        {
-          "type": "image_picker",
-          "id": "brand_logo",
-          "label": "Brand Logo (Image)",
-          "info": "White or light-colored logos work best against the gradient overlay."
-        },
-        {
-          "type": "html",
-          "id": "custom_svg_code",
-          "label": "Brand Logo (SVG Code)",
-          "info": "Paste SVG markup here to upload the logo directly through theme code rather than the image picker."
-        },
-        {
-          "type": "url",
-          "id": "brand_link",
-          "label": "Brand Link",
-          "info": "Link to the brand's collection, page, or external landing page."
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Brand Name",
-          "info": "Used as fallback text if no logo is provided, and for accessibility labels.",
-          "default": "Brand Name"
-        }
-      ]
+      "default": 96
     }
   ],
   "presets": [
     {
-      "name": "Featured Brands",
-      "blocks": [
-        {
-          "type": "brand",
-          "settings": {
-            "title": "Brand One"
-          }
-        },
-        {
-          "type": "brand",
-          "settings": {
-            "title": "Brand Two"
-          }
-        }
-      ]
+      "name": "Featured Brands"
     }
   ]
 }
