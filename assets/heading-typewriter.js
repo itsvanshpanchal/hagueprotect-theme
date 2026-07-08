@@ -31,7 +31,14 @@
     var fullText = element.innerHTML.replace(/<br\s*[\/]?>/gi, '\n').replace(/<[^>]+>/g, '').trim();
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
 
-    element.innerHTML = '';
+    var originalPosition = window.getComputedStyle(element).position;
+    if (originalPosition === 'static') {
+      element.style.position = 'relative';
+    }
+
+    element.innerHTML = '<span style="visibility: hidden;" aria-hidden="true">' + originalHTML + '</span><span class="hp-typewriter-text" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></span>';
+    var textContainer = element.querySelector('.hp-typewriter-text');
+    
     element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
 
     var index = 0;
@@ -39,11 +46,12 @@
     function tick() {
       if (index <= fullText.length) {
         var currentText = fullText.substring(0, index);
-        element.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="hp-typewriter-cursor" aria-hidden="true"></span>';
+        textContainer.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="hp-typewriter-cursor" aria-hidden="true"></span>';
         index += 1;
         window.setTimeout(tick, speed);
       } else {
         element.innerHTML = originalHTML;
+        element.style.position = '';
         element.dataset.typewriterDone = 'true';
         delete element.dataset.typewriterActive;
       }
