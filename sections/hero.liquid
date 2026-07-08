@@ -130,7 +130,7 @@
   @media screen and (min-width: 769px) {
     .hero-fullscreen {
       align-items: center;
-      text-align: center;
+      text-align: left;
       padding-left: 40px;
       padding-right: 40px;
       padding-top: 100px;
@@ -146,8 +146,8 @@
     }
 
     .hero-fullscreen__content {
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
+      text-align: left;
       margin: 0 auto;
       max-width: var(--site-max-width, 1320px);
       width: 100%;
@@ -156,18 +156,18 @@
     }
 
     .hero-fullscreen__heading {
-      text-align: center;
+      text-align: left;
       max-width: min(800px, 55vw);
     }
 
     .hero-fullscreen__subheading {
-      text-align: center;
-      margin-left: auto;
+      text-align: left;
+      margin-left: 0;
       margin-right: auto;
     }
 
     .hero-fullscreen__actions {
-      justify-content: center;
+      justify-content: flex-start;
     }
   }
 
