@@ -12,19 +12,12 @@
     "aplus_top": {
       "type": "collection-aplus-banner",
       "settings": {
-        "label": "Top A+ banner"
-      }
-    },
-    "slider_top": {
-      "type": "collection-aplus-slider",
-      "blocks": {
-        "slide_1": { "type": "slide", "settings": { "alt_text": "Slide 1" } },
-        "slide_2": { "type": "slide", "settings": { "alt_text": "Slide 2" } },
-        "slide_3": { "type": "slide", "settings": { "alt_text": "Slide 3" } }
-      },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
-      "settings": {
-        "label": "Top A+ slider"
+        "label": "Top A+ banner",
+        "alt_text": "",
+        "link": "",
+        "bg_color": "#f6f6f6",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "products": {
@@ -34,6 +27,8 @@
         "eyebrow": "SHOP THE RANGE",
         "heading": "",
         "description": "",
+        "section_id": "care-kit-products",
+        "collection": "",
         "products_limit": 24,
         "rating_value": "4.9",
         "rating_count": "4.8",
@@ -43,6 +38,7 @@
     "story_banner_1": {
       "type": "story-block",
       "settings": {
+        "assigned_product": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "border_radius": 0
@@ -51,6 +47,7 @@
     "story_banner_2": {
       "type": "story-block",
       "settings": {
+        "assigned_product": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "border_radius": 0
@@ -95,11 +92,23 @@
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
       "settings": {
         "heading": "Things people often wonder"
       }
     }
   },
-  "order": ["aplus_top", "slider_top", "products", "story_banner_1", "story_banner_2", "faq"]
+  "order": [
+    "aplus_top",
+    "products",
+    "story_banner_1",
+    "story_banner_2",
+    "faq"
+  ]
 }
