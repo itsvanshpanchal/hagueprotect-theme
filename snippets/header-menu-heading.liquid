@@ -1,0 +1,22 @@
+{%- comment -%}
+  Clickable megamenu / mobile category heading linking to a collection page.
+  @param handle {String} Shopify collection handle
+  @param search {String} fallback search query when collection is not created yet
+  @param label {String} visible heading text
+  @param accent {Boolean} optional red accent style
+  @param variant {String} 'desktop' (default) or 'mobile'
+  @param style {String} optional inline style on the heading wrapper
+{%- endcomment -%}
+{%- capture heading_href -%}
+  {%- render 'care-kit-collection-url', handle: handle, search_query: search, label: label, template: 'menu-category' -%}
+{%- endcapture -%}
+
+{%- if variant == 'mobile' -%}
+  <h4 class="mobile-accordion-category-heading megamenu-heading-link{% if accent %} megamenu-heading-link--accent{% endif %}"{% if style != blank %} style="{{ style }}"{% endif %}>
+    <a href="{{ heading_href | strip }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h4>
+{%- else -%}
+  <h3 class="megamenu-heading megamenu-heading-link{% if accent %} megamenu-heading-link--accent{% endif %}"{% if style != blank %} style="{{ style }}"{% else %} style="margin-bottom: 12px;"{% endif %}>
+    <a href="{{ heading_href | strip }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h3>
+{%- endif -%}
