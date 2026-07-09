@@ -66,15 +66,16 @@
   .header__logo-group {
     display: flex;
     align-items: center;
-    gap: clamp(14px, 2.5vw, 28px);
+    gap: clamp(18px, 3vw, 36px);
     flex-shrink: 1;
     min-width: 0;
   }
 
   .header__logo-link--brand .header__logo-img {
-    height: 28px;
+    height: 38px;
     width: auto;
-    max-width: 110px;
+    max-width: 170px;
+    object-fit: contain;
   }
 
   .header__navigation {
@@ -290,12 +291,12 @@
     }
 
     .header__logo-group {
-      gap: 10px;
+      gap: 12px;
     }
 
     .header__logo-link--brand .header__logo-img {
-      height: 22px;
-      max-width: 72px;
+      height: 30px;
+      max-width: 110px;
     }
 
     .header__logo-text {
@@ -568,13 +569,13 @@
     assign science_of_raw_url = section.settings.sor_link | default: '/collections/all?view=science-of-raw'
 
     if section.settings.logo_vr != blank
-      assign vr_logo_url = section.settings.logo_vr | image_url: width: 220
+      assign vr_logo_url = section.settings.logo_vr | image_url: width: 340
     else
       assign vr_logo_url = 'logo-vanrosector.svg' | asset_url
     endif
 
     if section.settings.logo_sor != blank
-      assign sor_logo_url = section.settings.logo_sor | image_url: width: 220
+      assign sor_logo_url = section.settings.logo_sor | image_url: width: 340
     else
       assign sor_logo_url = 'logo-science-of-raw.svg' | asset_url
     endif
@@ -601,8 +602,8 @@
           src="{{ vr_logo_url }}"
           alt="Vanrosector"
           class="header__logo-img"
-          width="110"
-          height="28"
+          width="170"
+          height="38"
           loading="eager"
           decoding="async"
         >
@@ -613,8 +614,8 @@
           src="{{ sor_logo_url }}"
           alt="Science of Raw"
           class="header__logo-img"
-          width="110"
-          height="28"
+          width="170"
+          height="38"
           loading="eager"
           decoding="async"
         >
