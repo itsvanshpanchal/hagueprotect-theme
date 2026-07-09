@@ -63,6 +63,20 @@
     display: block;
   }
 
+  .header__logo-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.5vw, 28px);
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .header__logo-link--brand .header__logo-img {
+    height: 28px;
+    width: auto;
+    max-width: 110px;
+  }
+
   .header__navigation {
     display: flex;
     align-items: center;
@@ -273,6 +287,15 @@
     .header__logo-link {
       max-width: 100%;
       overflow: hidden;
+    }
+
+    .header__logo-group {
+      gap: 10px;
+    }
+
+    .header__logo-link--brand .header__logo-img {
+      height: 22px;
+      max-width: 72px;
     }
 
     .header__logo-text {
@@ -543,22 +566,60 @@
 
     assign vanrosector_url = section.settings.vanrosector_link | default: '/collections/all?view=vanrosector'
     assign science_of_raw_url = section.settings.sor_link | default: '/collections/all?view=science-of-raw'
+
+    if section.settings.logo_vr != blank
+      assign vr_logo_url = section.settings.logo_vr | image_url: width: 220
+    else
+      assign vr_logo_url = 'logo-vanrosector.svg' | asset_url
+    endif
+
+    if section.settings.logo_sor != blank
+      assign sor_logo_url = section.settings.logo_sor | image_url: width: 220
+    else
+      assign sor_logo_url = 'logo-science-of-raw.svg' | asset_url
+    endif
   -%}
 
   <div class="header-container">
     
-    <!-- Logo -->
-    <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="{{ shop.name }} home">
-      <img
-        src="{{ header_logo_url }}"
-        alt="{{ shop.name }}"
-        class="header__logo-img"
-        style="max-width: {{ header_logo_width }}px; height: auto;"
-        width="{{ header_logo_width }}"
-        loading="eager"
-        decoding="async"
-      >
-    </a>
+    <!-- Logos: Hague Protect + VNR + SOR -->
+    <div class="header__logo-group">
+      <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="Hague Protect home">
+        <img
+          src="{{ header_logo_url }}"
+          alt="Hague Protect"
+          class="header__logo-img"
+          style="max-width: {{ header_logo_width }}px; height: auto;"
+          width="{{ header_logo_width }}"
+          loading="eager"
+          decoding="async"
+        >
+      </a>
+
+      <a href="{{ vanrosector_url }}" class="header__logo-link header__logo-link--brand" aria-label="Vanrosector">
+        <img
+          src="{{ vr_logo_url }}"
+          alt="Vanrosector"
+          class="header__logo-img"
+          width="110"
+          height="28"
+          loading="eager"
+          decoding="async"
+        >
+      </a>
+
+      <a href="{{ science_of_raw_url }}" class="header__logo-link header__logo-link--brand" aria-label="Science of Raw">
+        <img
+          src="{{ sor_logo_url }}"
+          alt="Science of Raw"
+          class="header__logo-img"
+          width="110"
+          height="28"
+          loading="eager"
+          decoding="async"
+        >
+      </a>
+    </div>
 
     <nav class="header__navigation" role="navigation">
       <div class="nav-item">
@@ -568,15 +629,6 @@
             <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-      </div>
-      <div class="nav-item">
-        <a href="{{ routes.root_url }}" class="menu-link">HAGUE PROTECT</a>
-      </div>
-      <div class="nav-item">
-        <a href="{{ vanrosector_url }}" class="menu-link">VNR</a>
-      </div>
-      <div class="nav-item">
-        <a href="{{ science_of_raw_url }}" class="menu-link">SOR</a>
       </div>
       <div class="nav-item">
         <a href="/search?view=how-to-use" class="menu-link">HOW TO USE</a>
@@ -1221,12 +1273,22 @@
     },
     {
       "type": "header",
-      "content": "Brand navigation links"
+      "content": "Brand logos (left side)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_vr",
+      "label": "Vanrosector (VNR) logo"
     },
     {
       "type": "url",
       "id": "vanrosector_link",
       "label": "Vanrosector (VNR) link"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_sor",
+      "label": "Science of Raw (SOR) logo"
     },
     {
       "type": "url",
