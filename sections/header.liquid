@@ -83,6 +83,11 @@
     max-width: 220px;
   }
 
+  .header__logo-link--sor-main .header__logo-img {
+    height: auto;
+    max-width: 220px;
+  }
+
   .header__navigation {
     display: flex;
     align-items: center;
@@ -306,6 +311,11 @@
 
     .header__logo-link--sor .header__logo-img {
       height: 42px;
+      max-width: 145px;
+    }
+
+    .header__logo-link--sor-main .header__logo-img {
+      height: auto;
       max-width: 145px;
     }
 
@@ -591,29 +601,91 @@
     else
       assign sor_logo_url = 'logo-science-of-raw.svg' | asset_url
     endif
+
+    assign hague_home_url = routes.root_url
+    assign active_brand = 'hague'
+
+    if template.suffix == 'vanrosector' or request.path contains 'vanrosector'
+      assign active_brand = 'vanrosector'
+    elsif template.suffix == 'science-of-raw' or request.path contains 'science-of-raw'
+      assign active_brand = 'science-of-raw'
+    endif
+
+    assign logo_one_url = header_logo_url
+    assign logo_one_alt = 'Hague Protect'
+    assign logo_one_link = hague_home_url
+    assign logo_one_width = header_logo_width
+    assign logo_one_link_class = 'header__logo-link'
+    assign logo_one_img_class = 'header__logo-img'
+
+    assign logo_two_url = vr_logo_url
+    assign logo_two_alt = 'Vanrosector'
+    assign logo_two_link = vanrosector_url
+    assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
+    assign logo_two_img_class = 'header__logo-img'
+
+    assign logo_three_url = sor_logo_url
+    assign logo_three_alt = 'Science of Raw'
+    assign logo_three_link = science_of_raw_url
+    assign logo_three_link_class = 'header__logo-link header__logo-link--brand header__logo-link--sor'
+    assign logo_three_img_class = 'header__logo-img'
+
+    if active_brand == 'vanrosector'
+      assign logo_one_url = vr_logo_url
+      assign logo_one_alt = 'Vanrosector'
+      assign logo_one_link = vanrosector_url
+      assign logo_one_width = header_logo_width
+      assign logo_one_link_class = 'header__logo-link'
+      assign logo_one_img_class = 'header__logo-img'
+
+      assign logo_two_url = header_logo_url
+      assign logo_two_alt = 'Hague Protect'
+      assign logo_two_link = hague_home_url
+      assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
+      assign logo_two_img_class = 'header__logo-img'
+    elsif active_brand == 'science-of-raw'
+      assign logo_one_url = sor_logo_url
+      assign logo_one_alt = 'Science of Raw'
+      assign logo_one_link = science_of_raw_url
+      assign logo_one_width = header_logo_width
+      assign logo_one_link_class = 'header__logo-link header__logo-link--sor-main'
+      assign logo_one_img_class = 'header__logo-img'
+
+      assign logo_two_url = header_logo_url
+      assign logo_two_alt = 'Hague Protect'
+      assign logo_two_link = hague_home_url
+      assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
+      assign logo_two_img_class = 'header__logo-img'
+
+      assign logo_three_url = vr_logo_url
+      assign logo_three_alt = 'Vanrosector'
+      assign logo_three_link = vanrosector_url
+      assign logo_three_link_class = 'header__logo-link header__logo-link--brand'
+      assign logo_three_img_class = 'header__logo-img'
+    endif
   -%}
 
   <div class="header-container">
     
-    <!-- Logos: Hague Protect + VNR + SOR -->
+    <!-- Logos: primary brand + partner logos -->
     <div class="header__logo-group">
-      <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="Hague Protect home">
+      <a href="{{ logo_one_link }}" class="{{ logo_one_link_class }}" aria-label="{{ logo_one_alt }} home">
         <img
-          src="{{ header_logo_url }}"
-          alt="Hague Protect"
-          class="header__logo-img"
-          style="max-width: {{ header_logo_width }}px; height: auto;"
-          width="{{ header_logo_width }}"
+          src="{{ logo_one_url }}"
+          alt="{{ logo_one_alt }}"
+          class="{{ logo_one_img_class }}"
+          style="max-width: {{ logo_one_width }}px; height: auto;"
+          width="{{ logo_one_width }}"
           loading="eager"
           decoding="async"
         >
       </a>
 
-      <a href="{{ vanrosector_url }}" class="header__logo-link header__logo-link--brand" aria-label="Vanrosector">
+      <a href="{{ logo_two_link }}" class="{{ logo_two_link_class }}" aria-label="{{ logo_two_alt }}">
         <img
-          src="{{ vr_logo_url }}"
-          alt="Vanrosector"
-          class="header__logo-img"
+          src="{{ logo_two_url }}"
+          alt="{{ logo_two_alt }}"
+          class="{{ logo_two_img_class }}"
           width="200"
           height="46"
           loading="eager"
@@ -621,11 +693,11 @@
         >
       </a>
 
-      <a href="{{ science_of_raw_url }}" class="header__logo-link header__logo-link--brand header__logo-link--sor" aria-label="Science of Raw">
+      <a href="{{ logo_three_link }}" class="{{ logo_three_link_class }}" aria-label="{{ logo_three_alt }}">
         <img
-          src="{{ sor_logo_url }}"
-          alt="Science of Raw"
-          class="header__logo-img"
+          src="{{ logo_three_url }}"
+          alt="{{ logo_three_alt }}"
+          class="{{ logo_three_img_class }}"
           width="220"
           height="54"
           loading="eager"
