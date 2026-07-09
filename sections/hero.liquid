@@ -46,15 +46,9 @@
     display: block;
   }
 
-  /* Overlay to make content/text highly visible and legible */
+  /* Overlay disabled — show hero image without dark shadow */
   .hero-fullscreen__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.3) 100%);
-    z-index: 2;
+    display: none;
   }
 
   .hero-fullscreen__content {
@@ -128,15 +122,6 @@
       padding-right: 40px;
       padding-top: 80px;
       padding-bottom: 80px;
-    }
-
-    .hero-fullscreen__overlay {
-      background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.65) 0%,
-        rgba(0, 0, 0, 0.1) 50%,
-        rgba(0, 0, 0, 0.25) 100%
-      );
     }
 
     .hero-fullscreen__content {
@@ -215,17 +200,6 @@
       display: block;
     }
 
-    .hero-fullscreen__overlay {
-      display: block;
-      background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.9) 0%,
-        rgba(0, 0, 0, 0.55) 38%,
-        rgba(0, 0, 0, 0.15) 68%,
-        transparent 100%
-      );
-    }
-
     .hero-fullscreen__content {
       position: relative;
       z-index: 3;
@@ -248,13 +222,11 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
     padding: 0 4px;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
   }
 
     .hero-fullscreen__subheading {
       max-width: 100%;
       padding: 0 6px;
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
     }
 
     .hero-fullscreen__actions {
