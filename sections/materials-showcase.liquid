@@ -1,8 +1,12 @@
 {%- style -%}
   .mat-section,
-  .mat-section * {
+  .mat-section *:not(.mat-headline) {
     box-sizing: border-box !important;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  }
+
+  .mat-section .mat-headline {
+    font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif) !important;
   }
 
   .mat-section {
@@ -53,13 +57,8 @@
   }
 
   .mat-headline {
-    font-size: clamp(32px, 4.5vw, 44px) !important;
-    font-weight: 800 !important;
     color: #000000 !important;
-    line-height: 1.15 !important;
-    letter-spacing: -1px !important;
     margin: 0 0 15px 0 !important;
-    text-transform: uppercase !important;
   }
 
   .mat-desc {
@@ -334,7 +333,6 @@
     .mat-headline {
       color: #ffffff !important;
       margin-bottom: 16px !important;
-      font-size: clamp(28px, 8vw, 36px) !important;
     }
 
     .mat-desc {

@@ -26,6 +26,10 @@
   --heading-size-md: clamp(30px, 3.8vw, 44px);
   --heading-size-sm: clamp(26px, 3.2vw, 36px);
   --heading-size-xs: clamp(22px, 2.8vw, 30px);
+  --section-heading-size: clamp(40px, 5.5vw, 64px);
+  --section-heading-size-mobile: clamp(32px, 8vw, 40px);
+  --section-header-spacing: 48px;
+  --section-header-spacing-mobile: 32px;
   --border-radius-sm: 4px;
   --border-radius-md: 12px;
   --border-radius-lg: 24px;
@@ -479,6 +483,48 @@ main h2.h2,
 .hero-fullscreen__heading {
   font-size: var(--heading-size-hero) !important;
   line-height: 1.02 !important;
+}
+
+/* Unified homepage section titles — equal size, weight, and spacing */
+.bs-coverflow__heading,
+.fb__title,
+.trending-social__heading,
+.mat-headline,
+.fc-heading {
+  font-family: var(--font-family-heading) !important;
+  font-size: var(--section-heading-size) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.05 !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bs-coverflow__header,
+.fb__header,
+.trending-social-header,
+.fc-header {
+  margin-bottom: var(--section-header-spacing) !important;
+}
+
+@media screen and (max-width: 767px) {
+  .bs-coverflow__heading,
+  .fb__title,
+  .trending-social__heading,
+  .mat-headline,
+  .fc-heading {
+    font-size: var(--section-heading-size-mobile) !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .bs-coverflow__header,
+  .fb__header,
+  .trending-social-header,
+  .fc-header {
+    margin-bottom: var(--section-header-spacing-mobile) !important;
+  }
 }
 
 /* Product detail page title */
