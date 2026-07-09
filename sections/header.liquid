@@ -78,6 +78,11 @@
     object-fit: contain;
   }
 
+  .header__logo-link--sor .header__logo-img {
+    height: 54px;
+    max-width: 220px;
+  }
+
   .header__navigation {
     display: flex;
     align-items: center;
@@ -297,6 +302,11 @@
     .header__logo-link--brand .header__logo-img {
       height: 36px;
       max-width: 130px;
+    }
+
+    .header__logo-link--sor .header__logo-img {
+      height: 42px;
+      max-width: 145px;
     }
 
     .header__logo-text {
@@ -609,13 +619,13 @@
         >
       </a>
 
-      <a href="{{ science_of_raw_url }}" class="header__logo-link header__logo-link--brand" aria-label="Science of Raw">
+      <a href="{{ science_of_raw_url }}" class="header__logo-link header__logo-link--brand header__logo-link--sor" aria-label="Science of Raw">
         <img
           src="{{ sor_logo_url }}"
           alt="Science of Raw"
           class="header__logo-img"
-          width="200"
-          height="46"
+          width="220"
+          height="54"
           loading="eager"
           decoding="async"
         >
