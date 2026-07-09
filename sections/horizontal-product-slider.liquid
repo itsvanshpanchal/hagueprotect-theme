@@ -1,24 +1,15 @@
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    {%- if section.settings.enable_video_bg -%}
-    background: transparent;
-    position: relative;
-    {%- else -%}
     background: linear-gradient(to bottom, {{ section.settings.bg_color | default: '#ff1e43' }} 76%, {{ section.settings.bg_color_bottom | default: '#000000' }} 76%);
     position: relative;
-    {%- endif -%}
   }
 
   .hp-fam-sec {
     position: relative;
-    padding: clamp(40px, 8vw, 80px) 0 clamp(48px, 6vw, 72px) 0;
+    padding: clamp(40px, 8vw, 80px) 0 0 0;
     width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .hp-fam-sec--has-video {
-    min-height: clamp(620px, 72vh, 920px);
+    overflow: visible;
   }
 
   .hp-fam-sec__container {
@@ -28,7 +19,7 @@
     padding: 0 40px;
     position: relative;
     box-sizing: border-box;
-    z-index: 3;
+    z-index: 2;
   }
 
   .hp-fam-sec__heading {
@@ -433,14 +424,8 @@
   }
 
   @media screen and (max-width: 1199px) {
-    {%- unless section.settings.enable_video_bg -%}
     #shopify-section-{{ section.id }} {
       background: {{ section.settings.bg_color | default: '#ff1e43' }} !important;
-    }
-    {%- endunless -%}
-
-    .hp-fam-sec--has-video {
-      min-height: clamp(560px, 68vh, 820px);
     }
 
     .hp-fam-sec__slider-left--desktop {
@@ -524,44 +509,38 @@
 
   .hp-fam-sec__video-bg {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    overflow: hidden;
+    z-index: 1;
     pointer-events: none;
     opacity: calc({{ section.settings.video_opacity | default: 100 }} / 100);
-    background: {{ section.settings.bg_color | default: '#ff1e43' }};
-    overflow: visible;
   }
-
-  .hp-fam-sec__video-bg video,
-  .hp-fam-sec__video-bg .hp-fam-sec__video {
+  .hp-fam-sec__video-bg video {
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
-    margin: auto;
-    object-fit: contain;
-    object-position: center center;
-    filter: brightness(calc({{ section.settings.video_brightness | default: 125 }} / 100)) contrast(calc({{ section.settings.video_contrast | default: 108 }} / 100)) saturate(1.08);
+    transform: translate(-50%, -50%);
+    object-fit: cover;
     z-index: 1;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
-
   .hp-fam-sec__video-overlay {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom,
-      {{ section.settings.bg_color | default: '#ff1e43' | color_modify: 'alpha', 0.12 }} 0%,
-      {{ section.settings.bg_color | default: '#ff1e43' | color_modify: 'alpha', 0.22 }} 55%,
-      {{ section.settings.bg_color_bottom | default: '#000000' | color_modify: 'alpha', 0.62 }} 100%
+    background: linear-gradient(to bottom, 
+      {{ section.settings.bg_color | default: '#ff1e43' | color_modify: 'alpha', 0.4 }} 0%, 
+      {{ section.settings.bg_color_bottom | default: '#000000' | color_modify: 'alpha', 0.85 }} 85%
     );
     z-index: 2;
     pointer-events: none;
-    opacity: calc({{ section.settings.overlay_opacity | default: 30 }} / 100);
+    opacity: calc({{ section.settings.overlay_opacity | default: 100 }} / 100);
   }
 {%- endstyle -%}
 
@@ -576,11 +555,11 @@
   endif
 -%}
 
-<div class="hp-fam-sec{% if section.settings.enable_video_bg %} hp-fam-sec--has-video{% endif %}" id="fam-{{ section.id }}">
+<div class="hp-fam-sec" id="fam-{{ section.id }}">
   {%- if section.settings.enable_video_bg -%}
     <div class="hp-fam-sec__video-bg">
       {%- if section.settings.video_bg != blank -%}
-        {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'hp-fam-sec__video', preload: 'auto' }}
+        {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
       {%- elsif section.settings.video_bg_filename != blank -%}
         <video autoplay loop muted playsinline preload="auto" class="hp-fam-sec__video">
           <source src="{{ section.settings.video_bg_filename | asset_url }}" type="video/mp4">
@@ -898,37 +877,6 @@
       "label": "Shopify Hosted Video Background"
     },
     {
-      "type": "select",
-      "id": "video_fit",
-      "label": "Video fit",
-      "options": [
-        { "value": "contain", "label": "Show full video (no crop) — recommended" },
-        { "value": "cover", "label": "Fill section (may crop edges)" }
-      ],
-      "default": "contain",
-      "info": "Full video mode is always used to prevent cropping. This setting is kept for reference only."
-    },
-    {
-      "type": "range",
-      "id": "video_brightness",
-      "min": 80,
-      "max": 150,
-      "step": 5,
-      "default": 125,
-      "label": "Video brightness",
-      "unit": "%"
-    },
-    {
-      "type": "range",
-      "id": "video_contrast",
-      "min": 90,
-      "max": 130,
-      "step": 2,
-      "default": 108,
-      "label": "Video contrast",
-      "unit": "%"
-    },
-    {
       "type": "range",
       "id": "video_opacity",
       "min": 0,
@@ -944,7 +892,7 @@
       "min": 0,
       "max": 100,
       "step": 5,
-      "default": 30,
+      "default": 50,
       "label": "Overlay Opacity",
       "unit": "%"
     },
