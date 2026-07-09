@@ -606,8 +606,6 @@ main h2.h2,
 .trust-card__title,
 .reviews-sec__review-title,
 .footer__title,
-.megamenu-heading,
-.mobile-accordion-category-heading,
 .faq-custom__question,
 .corp-feature-title,
 .how-to-video-title,
@@ -630,6 +628,29 @@ main h2.h2,
 .bestsellers__view-all-dtc,
 .fc-subtitle {
   text-transform: none !important;
+}
+
+/* Header submenu headings — normal compact nav size */
+h3.megamenu-heading,
+.megamenu-heading,
+h4.mobile-accordion-category-heading,
+.mobile-accordion-category-heading {
+  font-family: var(--font-family-sans) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #111111 !important;
+  margin: 0 !important;
+}
+
+h4.mobile-accordion-category-heading,
+.mobile-accordion-category-heading {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 6px !important;
 }
 
 /* Category cards + DNA columns — compact UI headings */
