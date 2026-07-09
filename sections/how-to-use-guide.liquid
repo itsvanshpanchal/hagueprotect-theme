@@ -1,492 +1,494 @@
 {%- style -%}
-  .htu-guide {
-    --htu-red: #ff2b2b;
-    --htu-dark: #0a0a0a;
-    --htu-gray: #565656;
+  .htu-v2 {
+    --red: #ff2b2b;
+    --ink: #111111;
+    --muted: #6b6b6b;
+    --cream: #f6f4f1;
+    --line: #e6e2dc;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: #ffffff;
-    overflow: hidden;
+    color: var(--ink);
   }
 
-  .htu-guide__intro {
-    position: relative;
-    background: var(--htu-dark);
-    color: #ffffff;
-    padding: clamp(72px, 10vw, 110px) max(20px, var(--site-padding, 24px));
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .htu-guide__intro-mesh {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(255, 43, 43, 0.28) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(255, 43, 43, 0.12) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  .htu-guide__intro-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
+  /* ── Opener ── */
+  .htu-v2__opener {
+    padding: clamp(56px, 8vw, 88px) max(20px, var(--site-padding, 24px)) clamp(40px, 5vw, 56px);
+    max-width: 1320px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: end;
+    border-bottom: 1px solid var(--line);
   }
 
-  .htu-guide__eyebrow {
-    font-size: 12px;
+  .htu-v2__opener-label {
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--htu-red);
-    margin: 0 0 16px;
-  }
-
-  .htu-guide__title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 7vw, 80px);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    line-height: 0.95;
+    color: var(--red);
     margin: 0 0 20px;
   }
 
-  .htu-guide__title span {
-    color: var(--htu-red);
-  }
-
-  .htu-guide__desc {
-    font-size: 17px;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.7);
+  .htu-v2__opener-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     margin: 0;
   }
 
-  /* Protocol steps ring */
-  .htu-guide__protocol {
-    padding: clamp(64px, 8vw, 96px) max(20px, var(--site-padding, 24px));
-    background: #fafafa;
+  .htu-v2__opener-aside {
+    padding-bottom: 8px;
   }
 
-  .htu-guide__protocol-inner {
-    max-width: 1320px;
-    margin: 0 auto;
+  .htu-v2__opener-text {
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 28px;
+    max-width: 420px;
   }
 
-  .htu-guide__protocol-head {
-    text-align: center;
-    margin-bottom: clamp(40px, 6vw, 64px);
+  .htu-v2__opener-stat {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
   }
 
-  .htu-guide__protocol-title {
+  .htu-v2__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .htu-v2__stat-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(32px, 4.5vw, 52px);
+    font-size: 36px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .htu-v2__stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  /* ── Horizontal protocol rail ── */
+  .htu-v2__rail-wrap {
+    background: var(--cream);
+    padding: clamp(48px, 6vw, 72px) 0;
+    overflow: hidden;
+  }
+
+  .htu-v2__rail-head {
+    max-width: 1320px;
+    margin: 0 auto clamp(28px, 4vw, 40px);
+    padding: 0 max(20px, var(--site-padding, 24px));
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .htu-v2__rail-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: #111111;
-    margin: 0 0 10px;
+    margin: 0;
     line-height: 1;
   }
 
-  .htu-guide__protocol-sub {
-    font-size: 15px;
-    color: var(--htu-gray);
-    margin: 0;
+  .htu-v2__rail-hint {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .htu-guide__steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    position: relative;
+  .htu-v2__rail {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px max(20px, var(--site-padding, 24px)) 16px;
+    cursor: grab;
+    scrollbar-width: none;
   }
 
-  .htu-guide__steps::before {
-    content: '';
-    position: absolute;
-    top: 52px;
-    left: 16.66%;
-    right: 16.66%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--htu-red) 0%, var(--htu-red) 50%, #dddddd 50%, #dddddd 100%);
-    z-index: 0;
+  .htu-v2__rail::-webkit-scrollbar {
+    display: none;
   }
 
-  .htu-guide__step {
-    position: relative;
-    z-index: 1;
+  .htu-v2__rail.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .htu-v2__rail-card {
+    flex: 0 0 clamp(280px, 72vw, 380px);
+    scroll-snap-align: start;
     background: #ffffff;
-    border: 1px solid #ececec;
-    border-radius: 20px;
-    padding: 32px 28px;
-    text-align: center;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    padding: 0;
+    overflow: hidden;
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s ease;
   }
 
-  .htu-guide__step.is-visible {
+  .htu-v2__rail-card.is-in {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .htu-guide__step:hover {
-    border-color: var(--htu-red);
-    box-shadow: 0 20px 50px rgba(255, 43, 43, 0.1);
-    transform: translateY(-6px);
+  .htu-v2__rail-card:nth-child(2) { transition-delay: 0.08s; }
+  .htu-v2__rail-card:nth-child(3) { transition-delay: 0.16s; }
+
+  .htu-v2__rail-card:hover {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
   }
 
-  .htu-guide__step.is-visible:hover {
-    transform: translateY(-6px);
-  }
-
-  .htu-guide__step-icon {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: #111111;
+  .htu-v2__rail-top {
+    background: var(--ink);
     color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.04em;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: background 0.3s ease, transform 0.3s ease;
+    padding: 28px 28px 24px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .htu-guide__step:hover .htu-guide__step-icon {
-    background: var(--htu-red);
-    transform: scale(1.08);
+  .htu-v2__rail-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
   }
 
-  .htu-guide__step-name {
+  .htu-v2__rail-card:hover .htu-v2__rail-top::after {
+    transform: scaleX(1);
+  }
+
+  .htu-v2__rail-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.04em;
+    font-size: 64px;
+    line-height: 0.85;
+    opacity: 0.15;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .htu-v2__rail-step {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
     text-transform: uppercase;
-    color: #111111;
-    margin: 0 0 10px;
+    letter-spacing: 0.04em;
+    margin: 0 0 6px;
     line-height: 1;
+    position: relative;
   }
 
-  .htu-guide__step-text {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--htu-gray);
-    margin: 0;
-  }
-
-  .htu-guide__step-time {
-    display: inline-flex;
-    margin-top: 16px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: #f5f5f5;
+  .htu-v2__rail-time {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #888888;
+    color: rgba(255, 255, 255, 0.45);
+    position: relative;
   }
 
-  /* Material navigator */
-  .htu-guide__materials {
-    padding: clamp(64px, 8vw, 96px) max(20px, var(--site-padding, 24px));
-    background: #ffffff;
+  .htu-v2__rail-body {
+    padding: 24px 28px 28px;
   }
 
-  .htu-guide__materials-inner {
-    max-width: 1320px;
-    margin: 0 auto;
-  }
-
-  .htu-guide__mat-head {
-    margin-bottom: 36px;
-  }
-
-  .htu-guide__mat-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(32px, 4.5vw, 52px);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #111111;
-    margin: 0 0 8px;
-    line-height: 1;
-  }
-
-  .htu-guide__mat-sub {
-    font-size: 15px;
-    color: var(--htu-gray);
+  .htu-v2__rail-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
     margin: 0;
   }
 
-  .htu-guide__tabs-wrap {
-    position: relative;
-    margin-bottom: 36px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  /* ── Materials journal ── */
+  .htu-v2__journal {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(56px, 7vw, 80px) max(20px, var(--site-padding, 24px));
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
   }
 
-  .htu-guide__tabs-wrap::-webkit-scrollbar {
-    display: none;
+  .htu-v2__nav {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 24px);
   }
 
-  .htu-guide__tabs {
+  .htu-v2__nav-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .htu-v2__nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 8px;
-    min-width: max-content;
-    position: relative;
-    padding-bottom: 4px;
+    flex-direction: column;
+    gap: 2px;
   }
 
-  .htu-guide__tab {
-    padding: 14px 28px;
-    border: none;
-    border-radius: 999px;
-    background: #f5f5f5;
-    color: #666666;
-    font-size: 14px;
-    font-weight: 800;
+  .htu-v2__nav-link {
+    display: block;
+    padding: 10px 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: color 0.25s ease, background 0.25s ease;
-    white-space: nowrap;
-    font-family: 'Inter', sans-serif;
+    color: #bbb;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 14px;
+    margin-left: -14px;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
 
-  .htu-guide__tab.is-active {
-    background: #111111;
-    color: #ffffff;
+  .htu-v2__nav-link.is-active,
+  .htu-v2__nav-link:hover {
+    color: var(--ink);
+    border-left-color: var(--red);
   }
 
-  .htu-guide__tab:hover:not(.is-active) {
-    color: var(--htu-red);
+  .htu-v2__chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .htu-guide__panels {
-    position: relative;
-    min-height: 320px;
+  .htu-v2__chapter {
+    padding: clamp(40px, 5vw, 56px) 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--header-height, 80px) + 32px);
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .htu-guide__panel {
-    display: none;
-    animation: htuPanelIn 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  .htu-v2__chapter.is-in {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .htu-guide__panel.is-active {
+  .htu-v2__chapter:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .htu-v2__chapter-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
     gap: clamp(24px, 4vw, 48px);
     align-items: center;
   }
 
-  @keyframes htuPanelIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+  .htu-v2__chapter:nth-child(even) .htu-v2__chapter-grid {
+    direction: rtl;
   }
 
-  .htu-guide__panel-visual {
-    position: relative;
-    border-radius: 20px;
+  .htu-v2__chapter:nth-child(even) .htu-v2__chapter-grid > * {
+    direction: ltr;
+  }
+
+  .htu-v2__chapter-visual {
+    border-radius: 4px;
     overflow: hidden;
-    aspect-ratio: 4/3;
-    background: #111111;
+    aspect-ratio: 5/4;
+    background: var(--cream);
+    position: relative;
   }
 
-  .htu-guide__panel-visual img {
+  .htu-v2__chapter-visual img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s ease;
   }
 
-  .htu-guide__panel-visual-placeholder {
+  .htu-v2__chapter:hover .htu-v2__chapter-visual img {
+    transform: scale(1.04);
+  }
+
+  .htu-v2__chapter-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a0808 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(145deg, #eceae6, #ddd9d3);
   }
 
-  .htu-guide__panel-visual-placeholder span {
+  .htu-v2__chapter-placeholder span {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 8vw, 72px);
-    color: rgba(255, 255, 255, 0.08);
+    font-size: clamp(40px, 6vw, 64px);
+    color: rgba(0, 0, 0, 0.07);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
-  .htu-guide__panel-badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: var(--htu-red);
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
+  .htu-v2__chapter-index {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
   }
 
-  .htu-guide__panel-content h3 {
+  .htu-v2__chapter-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(28px, 3.5vw, 40px);
+    font-size: clamp(36px, 5vw, 56px);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #111111;
-    margin: 0 0 12px;
-    line-height: 1;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    margin: 0 0 14px;
   }
 
-  .htu-guide__panel-desc {
+  .htu-v2__chapter-desc {
     font-size: 15px;
     line-height: 1.65;
-    color: var(--htu-gray);
+    color: var(--muted);
     margin: 0 0 24px;
   }
 
-  .htu-guide__tips {
+  .htu-v2__tips {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 28px;
+    gap: 0;
+    margin-bottom: 24px;
   }
 
-  .htu-guide__tip {
-    display: flex;
-    align-items: flex-start;
+  .htu-v2__tip {
+    display: grid;
+    grid-template-columns: 28px 1fr;
     gap: 14px;
-    padding: 16px 18px;
-    border-radius: 14px;
-    background: #fafafa;
-    border: 1px solid #ececec;
-    transition: border-color 0.25s ease, background 0.25s ease;
-  }
-
-  .htu-guide__tip:hover {
-    border-color: var(--htu-red);
-    background: #fff8f8;
-  }
-
-  .htu-guide__tip-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: #111111;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .htu-guide__tip-text {
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
     font-size: 14px;
     line-height: 1.5;
-    color: #333333;
-    margin: 0;
+    color: #333;
   }
 
-  .htu-guide__panel-link {
+  .htu-v2__tip:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .htu-v2__tip-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--red);
+    line-height: 1.4;
+  }
+
+  .htu-v2__chapter-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--htu-red);
+    color: var(--ink);
     text-decoration: none;
+    padding: 14px 24px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
-  .htu-guide__panel-link:hover {
-    text-decoration: underline;
+  .htu-v2__chapter-link:hover {
+    background: var(--ink);
+    color: #ffffff;
   }
 
-  /* Do / Don't wall */
-  .htu-guide__wisdom {
-    padding: clamp(64px, 8vw, 96px) max(20px, var(--site-padding, 24px));
-    background: #fafafa;
+  /* ── Rules strip ── */
+  .htu-v2__rules {
+    background: var(--ink);
+    color: #ffffff;
+    padding: clamp(48px, 6vw, 72px) max(20px, var(--site-padding, 24px));
+    overflow: hidden;
   }
 
-  .htu-guide__wisdom-inner {
+  .htu-v2__rules-inner {
     max-width: 1320px;
     margin: 0 auto;
   }
 
-  .htu-guide__wisdom-title {
+  .htu-v2__rules-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: clamp(28px, 4vw, 40px);
+    flex-wrap: wrap;
+  }
+
+  .htu-v2__rules-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(32px, 4.5vw, 52px);
+    font-size: clamp(28px, 4vw, 44px);
     text-transform: uppercase;
-    text-align: center;
     letter-spacing: 0.03em;
-    color: #111111;
-    margin: 0 0 clamp(32px, 5vw, 48px);
+    margin: 0;
     line-height: 1;
   }
 
-  .htu-guide__wisdom-grid {
+  .htu-v2__rules-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: clamp(24px, 4vw, 48px);
   }
 
-  .htu-guide__wisdom-col {
-    border-radius: 20px;
-    padding: clamp(28px, 4vw, 40px);
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .htu-guide__wisdom-col.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .htu-guide__wisdom-col--do {
-    background: #ffffff;
-    border: 1px solid #e8f5e9;
-    box-shadow: 0 8px 32px rgba(46, 125, 50, 0.06);
-  }
-
-  .htu-guide__wisdom-col--dont {
-    background: #ffffff;
-    border: 1px solid #ffebee;
-    box-shadow: 0 8px 32px rgba(211, 47, 47, 0.06);
-  }
-
-  .htu-guide__wisdom-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
+  .htu-v2__rules-col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  .htu-guide__wisdom-col--do .htu-guide__wisdom-label {
-    color: #2e7d32;
-  }
+  .htu-v2__rules-col--yes h4 { color: #6fcf97; }
+  .htu-v2__rules-col--no h4 { color: #ff6b6b; }
 
-  .htu-guide__wisdom-col--dont .htu-guide__wisdom-label {
-    color: #c62828;
-  }
-
-  .htu-guide__wisdom-list {
+  .htu-v2__rules-col ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -495,280 +497,316 @@
     gap: 14px;
   }
 
-  .htu-guide__wisdom-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
+  .htu-v2__rules-col li {
     font-size: 14px;
     line-height: 1.55;
-    color: #444444;
+    color: rgba(255, 255, 255, 0.72);
+    padding-left: 20px;
+    position: relative;
   }
 
-  .htu-guide__wisdom-list li::before {
+  .htu-v2__rules-col li::before {
     content: '';
-    width: 8px;
-    height: 8px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 6px;
   }
 
-  .htu-guide__wisdom-col--do .htu-guide__wisdom-list li::before {
-    background: #2e7d32;
+  .htu-v2__rules-col--yes li::before { background: #6fcf97; }
+  .htu-v2__rules-col--no li::before { background: #ff6b6b; }
+
+  /* ── CTA band ── */
+  .htu-v2__cta {
+    background: var(--red);
+    padding: clamp(40px, 5vw, 56px) max(20px, var(--site-padding, 24px));
   }
 
-  .htu-guide__wisdom-col--dont .htu-guide__wisdom-list li::before {
-    background: #c62828;
-  }
-
-  /* CTA */
-  .htu-guide__cta {
-    padding: clamp(48px, 6vw, 72px) max(20px, var(--site-padding, 24px)) clamp(72px, 10vw, 110px);
-    background: #ffffff;
-  }
-
-  .htu-guide__cta-card {
+  .htu-v2__cta-inner {
     max-width: 1320px;
     margin: 0 auto;
-    background: var(--htu-dark);
-    border-radius: 24px;
-    padding: clamp(40px, 6vw, 64px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 32px;
+    gap: 24px;
     flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
   }
 
-  .htu-guide__cta-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 50% 80% at 100% 50%, rgba(255, 43, 43, 0.2) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .htu-guide__cta-content {
-    position: relative;
-    z-index: 1;
-    max-width: 520px;
-  }
-
-  .htu-guide__cta-title {
+  .htu-v2__cta-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(32px, 4vw, 48px);
+    font-size: clamp(28px, 4vw, 44px);
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: #ffffff;
-    margin: 0 0 10px;
+    margin: 0 0 4px;
     line-height: 1;
   }
 
-  .htu-guide__cta-text {
-    font-size: 15px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.65);
+  .htu-v2__cta-sub {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
   }
 
-  .htu-guide__cta-btn {
-    position: relative;
-    z-index: 1;
+  .htu-v2__cta-btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 18px 36px;
-    border-radius: 999px;
-    background: var(--htu-red);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    padding: 16px 32px;
+    background: #ffffff;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 8px 32px rgba(255, 43, 43, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     white-space: nowrap;
   }
 
-  .htu-guide__cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(255, 43, 43, 0.45);
+  .htu-v2__cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ── Mobile nav (horizontal) ── */
+  .htu-v2__mob-nav {
+    display: none;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 24px;
+    margin-bottom: 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .htu-v2__mob-nav::-webkit-scrollbar { display: none; }
+
+  .htu-v2__mob-nav a {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .htu-v2__mob-nav a.is-active,
+  .htu-v2__mob-nav a:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+    background: var(--cream);
   }
 
   @media screen and (max-width: 900px) {
-    .htu-guide__steps {
+    .htu-v2__opener {
       grid-template-columns: 1fr;
-      gap: 20px;
+      align-items: start;
     }
 
-    .htu-guide__steps::before {
+    .htu-v2__journal {
+      grid-template-columns: 1fr;
+    }
+
+    .htu-v2__nav {
       display: none;
     }
 
-    .htu-guide__panel.is-active {
+    .htu-v2__mob-nav {
+      display: flex;
+    }
+
+    .htu-v2__chapter-grid,
+    .htu-v2__chapter:nth-child(even) .htu-v2__chapter-grid {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+
+    .htu-v2__rules-cols {
       grid-template-columns: 1fr;
     }
 
-    .htu-guide__wisdom-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .htu-guide__cta-card {
+    .htu-v2__cta-inner {
       flex-direction: column;
       text-align: center;
     }
   }
 {%- endstyle -%}
 
-<section class="htu-guide" data-htu-guide aria-label="Sneaker care guide">
-  <!-- Intro -->
-  <div class="htu-guide__intro">
-    <div class="htu-guide__intro-mesh" aria-hidden="true"></div>
-    <div class="htu-guide__intro-inner">
-      <p class="htu-guide__eyebrow">{{ section.settings.intro_eyebrow | default: 'The Protocol' }}</p>
-      <h2 class="htu-guide__title">
-        {{ section.settings.intro_title | default: 'Prep.' }}
-        <span>{{ section.settings.intro_title_accent | default: 'Clean. Protect.' }}</span>
-      </h2>
-      <p class="htu-guide__desc">{{ section.settings.intro_text | default: 'Every premium sneaker deserves a system — not shortcuts. Master the Hague Protect three-step protocol for results that last.' }}</p>
+<section class="htu-v2" data-htu-guide aria-label="Sneaker care guide">
+  <!-- Editorial opener -->
+  <div class="htu-v2__opener" data-htu-reveal>
+    <div>
+      <p class="htu-v2__opener-label">{{ section.settings.intro_eyebrow | default: 'Care Manual' }}</p>
+      <h2 class="htu-v2__opener-title">{{ section.settings.intro_title | default: 'The Right Way to Clean Sneakers' }}</h2>
     </div>
-  </div>
-
-  <!-- 3-step protocol -->
-  <div class="htu-guide__protocol">
-    <div class="htu-guide__protocol-inner">
-      <div class="htu-guide__protocol-head">
-        <h3 class="htu-guide__protocol-title">{{ section.settings.protocol_heading | default: 'The 3-Step System' }}</h3>
-        <p class="htu-guide__protocol-sub">{{ section.settings.protocol_subheading | default: 'Follow this sequence every time for professional-grade results.' }}</p>
-      </div>
-      <div class="htu-guide__steps">
-        <div class="htu-guide__step" data-htu-step>
-          <div class="htu-guide__step-icon">01</div>
-          <h4 class="htu-guide__step-name">{{ section.settings.step1_title | default: 'Prep' }}</h4>
-          <p class="htu-guide__step-text">{{ section.settings.step1_text | default: 'Remove laces, knock off loose dirt, and brush dry debris before applying any solution.' }}</p>
-          <span class="htu-guide__step-time">{{ section.settings.step1_time | default: '~2 min' }}</span>
+    <div class="htu-v2__opener-aside">
+      <p class="htu-v2__opener-text">{{ section.settings.intro_text | default: 'No washing machines. No shortcuts. Just a proven three-step system and material-specific techniques that protect what you wear.' }}</p>
+      <div class="htu-v2__opener-stat">
+        <div class="htu-v2__stat">
+          <span class="htu-v2__stat-num">3</span>
+          <span class="htu-v2__stat-label">Steps</span>
         </div>
-        <div class="htu-guide__step" data-htu-step>
-          <div class="htu-guide__step-icon">02</div>
-          <h4 class="htu-guide__step-name">{{ section.settings.step2_title | default: 'Clean' }}</h4>
-          <p class="htu-guide__step-text">{{ section.settings.step2_text | default: 'Apply pH-balanced cleaner with the right brush. Work in gentle circular motions — never soak the material.' }}</p>
-          <span class="htu-guide__step-time">{{ section.settings.step2_time | default: '~5 min' }}</span>
+        <div class="htu-v2__stat">
+          <span class="htu-v2__stat-num">5</span>
+          <span class="htu-v2__stat-label">Materials</span>
         </div>
-        <div class="htu-guide__step" data-htu-step>
-          <div class="htu-guide__step-icon">03</div>
-          <h4 class="htu-guide__step-name">{{ section.settings.step3_title | default: 'Protect' }}</h4>
-          <p class="htu-guide__step-text">{{ section.settings.step3_text | default: 'Let shoes air dry fully, then apply invisible nano-barrier spray for up to 4 weeks of stain & liquid resistance.' }}</p>
-          <span class="htu-guide__step-time">{{ section.settings.step3_time | default: '~3 min' }}</span>
+        <div class="htu-v2__stat">
+          <span class="htu-v2__stat-num">~10</span>
+          <span class="htu-v2__stat-label">Minutes</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Material-specific guide -->
-  <div class="htu-guide__materials">
-    <div class="htu-guide__materials-inner">
-      <div class="htu-guide__mat-head">
-        <h3 class="htu-guide__mat-title">{{ section.settings.materials_heading | default: 'Care by Material' }}</h3>
-        <p class="htu-guide__mat-sub">{{ section.settings.materials_subheading | default: 'Select your upper material for tailored tips and the right brush.' }}</p>
-      </div>
-
-      <div class="htu-guide__tabs-wrap">
-        <div class="htu-guide__tabs" role="tablist">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'material' -%}
-              <button
-                type="button"
-                class="htu-guide__tab{% if forloop.first %} is-active{% endif %}"
-                data-htu-tab="{{ block.id }}"
-                role="tab"
-                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                {{ block.shopify_attributes }}
-              >
-                {{ block.settings.title }}
-              </button>
-            {%- endif -%}
-          {%- endfor -%}
+  <!-- Horizontal protocol rail -->
+  <div class="htu-v2__rail-wrap">
+    <div class="htu-v2__rail-head">
+      <h3 class="htu-v2__rail-title">{{ section.settings.protocol_heading | default: 'The Protocol' }}</h3>
+      <span class="htu-v2__rail-hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Scroll to explore
+      </span>
+    </div>
+    <div class="htu-v2__rail" data-htu-rail>
+      <article class="htu-v2__rail-card" data-htu-reveal>
+        <div class="htu-v2__rail-top">
+          <span class="htu-v2__rail-num">01</span>
+          <h4 class="htu-v2__rail-step">{{ section.settings.step1_title | default: 'Prep' }}</h4>
+          <span class="htu-v2__rail-time">{{ section.settings.step1_time | default: '~2 min' }}</span>
         </div>
-      </div>
+        <div class="htu-v2__rail-body">
+          <p class="htu-v2__rail-text">{{ section.settings.step1_text | default: 'Remove laces and insoles. Knock off loose dirt and brush dry debris with a soft brush before any liquid touches the upper.' }}</p>
+        </div>
+      </article>
+      <article class="htu-v2__rail-card" data-htu-reveal>
+        <div class="htu-v2__rail-top">
+          <span class="htu-v2__rail-num">02</span>
+          <h4 class="htu-v2__rail-step">{{ section.settings.step2_title | default: 'Clean' }}</h4>
+          <span class="htu-v2__rail-time">{{ section.settings.step2_time | default: '~5 min' }}</span>
+        </div>
+        <div class="htu-v2__rail-body">
+          <p class="htu-v2__rail-text">{{ section.settings.step2_text | default: 'Apply pH-balanced cleaner with the correct brush. Work in gentle circles — damp the material, never soak it.' }}</p>
+        </div>
+      </article>
+      <article class="htu-v2__rail-card" data-htu-reveal>
+        <div class="htu-v2__rail-top">
+          <span class="htu-v2__rail-num">03</span>
+          <h4 class="htu-v2__rail-step">{{ section.settings.step3_title | default: 'Protect' }}</h4>
+          <span class="htu-v2__rail-time">{{ section.settings.step3_time | default: '~3 min' }}</span>
+        </div>
+        <div class="htu-v2__rail-body">
+          <p class="htu-v2__rail-text">{{ section.settings.step3_text | default: 'Air dry completely away from heat. Spray nano-barrier protector evenly for up to 4 weeks of liquid and stain resistance.' }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
 
-      <div class="htu-guide__panels">
+  <!-- Material journal -->
+  <div class="htu-v2__journal">
+    <nav class="htu-v2__nav" aria-label="Materials">
+      <p class="htu-v2__nav-title">{{ section.settings.materials_heading | default: 'By Material' }}</p>
+      <ul class="htu-v2__nav-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'material' -%}
-            {%- liquid
-              assign mat_link = block.settings.link
-              if mat_link == blank and block.settings.collection != blank
-                assign mat_link = block.settings.collection.url
-              endif
-            -%}
-            <div
-              class="htu-guide__panel{% if forloop.first %} is-active{% endif %}"
-              data-htu-panel="{{ block.id }}"
-              role="tabpanel"
-            >
-              <div class="htu-guide__panel-visual">
+            <li>
+              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link{% if forloop.first %} is-active{% endif %}" data-htu-nav>
+                {{ block.settings.title }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="htu-v2__chapters">
+      <div class="htu-v2__mob-nav" aria-label="Materials">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'material' -%}
+            <a href="#htu-mat-{{ block.id }}" class="{% if forloop.first %}is-active{% endif %}" data-htu-nav>{{ block.settings.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'material' -%}
+          {%- liquid
+            assign mat_link = block.settings.link
+            if mat_link == blank and block.settings.collection != blank
+              assign mat_link = block.settings.collection.url
+            endif
+          -%}
+          <article
+            id="htu-mat-{{ block.id }}"
+            class="htu-v2__chapter"
+            data-htu-chapter
+            data-htu-reveal
+            {{ block.shopify_attributes }}
+          >
+            <div class="htu-v2__chapter-grid">
+              <div class="htu-v2__chapter-visual">
                 {%- if block.settings.image != blank -%}
                   <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
                 {%- else -%}
-                  <div class="htu-guide__panel-visual-placeholder" aria-hidden="true">
+                  <div class="htu-v2__chapter-placeholder" aria-hidden="true">
                     <span>{{ block.settings.title }}</span>
                   </div>
                 {%- endif -%}
-                <span class="htu-guide__panel-badge">{{ block.settings.badge | default: 'Material Guide' }}</span>
               </div>
-              <div class="htu-guide__panel-content">
-                <h3>{{ block.settings.title }} Care</h3>
-                <p class="htu-guide__panel-desc">{{ block.settings.description }}</p>
-                <div class="htu-guide__tips">
+              <div class="htu-v2__chapter-copy">
+                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} — {{ block.settings.badge | default: 'Guide' }}</p>
+                <h3 class="htu-v2__chapter-name">{{ block.settings.title }}</h3>
+                <p class="htu-v2__chapter-desc">{{ block.settings.description }}</p>
+                <div class="htu-v2__tips">
                   {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
                   {%- for tip in tips -%}
                     {%- if tip != blank -%}
-                      <div class="htu-guide__tip">
-                        <span class="htu-guide__tip-num">{{ forloop.index }}</span>
-                        <p class="htu-guide__tip-text">{{ tip | strip }}</p>
+                      <div class="htu-v2__tip">
+                        <span class="htu-v2__tip-n">{{ forloop.index }}</span>
+                        <span>{{ tip | strip }}</span>
                       </div>
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
                 {%- if mat_link != blank -%}
-                  <a href="{{ mat_link }}" class="htu-guide__panel-link">
-                    Shop {{ block.settings.title }} Care
+                  <a href="{{ mat_link }}" class="htu-v2__chapter-link">
+                    Shop {{ block.settings.title }}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </a>
                 {%- endif -%}
               </div>
             </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 
-  <!-- Do / Don't -->
-  <div class="htu-guide__wisdom">
-    <div class="htu-guide__wisdom-inner">
-      <h3 class="htu-guide__wisdom-title">{{ section.settings.wisdom_heading | default: 'Pro Rules' }}</h3>
-      <div class="htu-guide__wisdom-grid">
-        <div class="htu-guide__wisdom-col htu-guide__wisdom-col--do" data-htu-reveal>
-          <span class="htu-guide__wisdom-label">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Always Do
-          </span>
-          <ul class="htu-guide__wisdom-list">
+  <!-- Rules -->
+  <div class="htu-v2__rules" data-htu-reveal>
+    <div class="htu-v2__rules-inner">
+      <div class="htu-v2__rules-head">
+        <h3 class="htu-v2__rules-title">{{ section.settings.wisdom_heading | default: 'Golden Rules' }}</h3>
+      </div>
+      <div class="htu-v2__rules-cols">
+        <div class="htu-v2__rules-col htu-v2__rules-col--yes">
+          <h4>Always</h4>
+          <ul>
             {%- assign do_items = section.settings.do_list | newline_to_br | split: '<br />' -%}
             {%- for item in do_items -%}
               {%- if item != blank -%}<li>{{ item | strip }}</li>{%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
-        <div class="htu-guide__wisdom-col htu-guide__wisdom-col--dont" data-htu-reveal>
-          <span class="htu-guide__wisdom-label">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-            Never Do
-          </span>
-          <ul class="htu-guide__wisdom-list">
+        <div class="htu-v2__rules-col htu-v2__rules-col--no">
+          <h4>Never</h4>
+          <ul>
             {%- assign dont_items = section.settings.dont_list | newline_to_br | split: '<br />' -%}
             {%- for item in dont_items -%}
               {%- if item != blank -%}<li>{{ item | strip }}</li>{%- endif -%}
@@ -780,15 +818,15 @@
   </div>
 
   <!-- CTA -->
-  <div class="htu-guide__cta">
-    <div class="htu-guide__cta-card" data-htu-reveal>
-      <div class="htu-guide__cta-content">
-        <h3 class="htu-guide__cta-title">{{ section.settings.cta_title | default: 'Ready to Start?' }}</h3>
-        <p class="htu-guide__cta-text">{{ section.settings.cta_text | default: 'Get the complete kit with every brush, solution, and protector you need — in one box.' }}</p>
+  <div class="htu-v2__cta">
+    <div class="htu-v2__cta-inner" data-htu-reveal>
+      <div>
+        <h3 class="htu-v2__cta-title">{{ section.settings.cta_title | default: 'Get the Complete Kit' }}</h3>
+        <p class="htu-v2__cta-sub">{{ section.settings.cta_text | default: 'Every brush, solution, and protector — curated in one box.' }}</p>
       </div>
-      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="htu-guide__cta-btn">
-        {{ section.settings.cta_label | default: 'Shop Care Kits' }}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="htu-v2__cta-btn">
+        {{ section.settings.cta_label | default: 'Shop Now' }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
   </div>
@@ -801,47 +839,44 @@
   "name": "How To Use Guide",
   "settings": [
     { "type": "header", "content": "Intro" },
-    { "type": "text", "id": "intro_eyebrow", "label": "Eyebrow", "default": "The Protocol" },
-    { "type": "text", "id": "intro_title", "label": "Title line 1", "default": "Prep." },
-    { "type": "text", "id": "intro_title_accent", "label": "Title accent (red)", "default": "Clean. Protect." },
-    { "type": "textarea", "id": "intro_text", "label": "Description", "default": "Every premium sneaker deserves a system — not shortcuts. Master the Hague Protect three-step protocol for results that last." },
+    { "type": "text", "id": "intro_eyebrow", "label": "Eyebrow", "default": "Care Manual" },
+    { "type": "text", "id": "intro_title", "label": "Title", "default": "The Right Way to Clean Sneakers" },
+    { "type": "textarea", "id": "intro_text", "label": "Description", "default": "No washing machines. No shortcuts. Just a proven three-step system and material-specific techniques that protect what you wear." },
     { "type": "header", "content": "3-Step Protocol" },
-    { "type": "text", "id": "protocol_heading", "label": "Heading", "default": "The 3-Step System" },
-    { "type": "text", "id": "protocol_subheading", "label": "Subheading", "default": "Follow this sequence every time for professional-grade results." },
+    { "type": "text", "id": "protocol_heading", "label": "Rail heading", "default": "The Protocol" },
     { "type": "text", "id": "step1_title", "label": "Step 1 title", "default": "Prep" },
-    { "type": "textarea", "id": "step1_text", "label": "Step 1 text", "default": "Remove laces, knock off loose dirt, and brush dry debris before applying any solution." },
+    { "type": "textarea", "id": "step1_text", "label": "Step 1 text", "default": "Remove laces and insoles. Knock off loose dirt and brush dry debris with a soft brush before any liquid touches the upper." },
     { "type": "text", "id": "step1_time", "label": "Step 1 time", "default": "~2 min" },
     { "type": "text", "id": "step2_title", "label": "Step 2 title", "default": "Clean" },
-    { "type": "textarea", "id": "step2_text", "label": "Step 2 text", "default": "Apply pH-balanced cleaner with the right brush. Work in gentle circular motions — never soak the material." },
+    { "type": "textarea", "id": "step2_text", "label": "Step 2 text", "default": "Apply pH-balanced cleaner with the correct brush. Work in gentle circles — damp the material, never soak it." },
     { "type": "text", "id": "step2_time", "label": "Step 2 time", "default": "~5 min" },
     { "type": "text", "id": "step3_title", "label": "Step 3 title", "default": "Protect" },
-    { "type": "textarea", "id": "step3_text", "label": "Step 3 text", "default": "Let shoes air dry fully, then apply invisible nano-barrier spray for up to 4 weeks of stain & liquid resistance." },
+    { "type": "textarea", "id": "step3_text", "label": "Step 3 text", "default": "Air dry completely away from heat. Spray nano-barrier protector evenly for up to 4 weeks of liquid and stain resistance." },
     { "type": "text", "id": "step3_time", "label": "Step 3 time", "default": "~3 min" },
     { "type": "header", "content": "Materials" },
-    { "type": "text", "id": "materials_heading", "label": "Heading", "default": "Care by Material" },
-    { "type": "text", "id": "materials_subheading", "label": "Subheading", "default": "Select your upper material for tailored tips and the right brush." },
-    { "type": "header", "content": "Pro Rules" },
-    { "type": "text", "id": "wisdom_heading", "label": "Heading", "default": "Pro Rules" },
-    { "type": "textarea", "id": "do_list", "label": "Always do (one per line)", "default": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry — never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first" },
-    { "type": "textarea", "id": "dont_list", "label": "Never do (one per line)", "default": "Never put sneakers in a washing machine\nDon't use harsh bleach or alcohol-based cleaners\nAvoid scrubbing suede with stiff bristles\nDon't wear shoes before they're completely dry\nNever skip the protection step" },
+    { "type": "text", "id": "materials_heading", "label": "Nav label", "default": "By Material" },
+    { "type": "header", "content": "Rules" },
+    { "type": "text", "id": "wisdom_heading", "label": "Rules heading", "default": "Golden Rules" },
+    { "type": "textarea", "id": "do_list", "label": "Always (one per line)", "default": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry — never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first" },
+    { "type": "textarea", "id": "dont_list", "label": "Never (one per line)", "default": "Never put sneakers in a washing machine\nDon't use harsh bleach or alcohol-based cleaners\nAvoid scrubbing suede with stiff bristles\nDon't wear shoes before they're completely dry\nNever skip the protection step" },
     { "type": "header", "content": "CTA" },
-    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Ready to Start?" },
-    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Get the complete kit with every brush, solution, and protector you need — in one box." },
-    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Care Kits" },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Get the Complete Kit" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Every brush, solution, and protector — curated in one box." },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Now" },
     { "type": "url", "id": "cta_url", "label": "CTA link" }
   ],
   "blocks": [
     {
       "type": "material",
-      "name": "Material tab",
+      "name": "Material",
       "settings": [
         { "type": "text", "id": "title", "label": "Material name", "default": "Suede" },
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "badge", "label": "Badge", "default": "Delicate Care" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Suede needs gentle, dry-first cleaning to preserve its napped texture." },
         { "type": "textarea", "id": "tips", "label": "Tips (one per line)", "default": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying" },
-        { "type": "collection", "id": "collection", "label": "Link to collection" },
-        { "type": "url", "id": "link", "label": "Custom link (optional)" }
+        { "type": "collection", "id": "collection", "label": "Collection link" },
+        { "type": "url", "id": "link", "label": "Custom link" }
       ]
     }
   ],

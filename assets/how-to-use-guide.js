@@ -2,54 +2,80 @@
   'use strict';
 
   function initHowToGuide(section) {
-    const tabs = section.querySelectorAll('[data-htu-tab]');
-    const panels = section.querySelectorAll('[data-htu-panel]');
-    const indicator = section.querySelector('[data-htu-indicator]');
-    const steps = section.querySelectorAll('[data-htu-step]');
-    const revealItems = section.querySelectorAll('[data-htu-reveal]');
+    const chapters = section.querySelectorAll('[data-htu-chapter]');
+    const navLinks = section.querySelectorAll('[data-htu-nav]');
+    const reveals = section.querySelectorAll('[data-htu-reveal]');
+    const rail = section.querySelector('[data-htu-rail]');
 
-    function setActiveTab(tab) {
-      const key = tab.dataset.htuTab;
-      tabs.forEach((t) => t.classList.toggle('is-active', t === tab));
-      panels.forEach((p) => p.classList.toggle('is-active', p.dataset.htuPanel === key));
-
-      if (indicator) {
-        indicator.style.width = tab.offsetWidth + 'px';
-        indicator.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
-      }
+    /* Scroll-spy: highlight material nav */
+    if (chapters.length && navLinks.length) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.id;
+            navLinks.forEach((link) => {
+              link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+            });
+          });
+        },
+        { rootMargin: '-40% 0px -45% 0px', threshold: 0 }
+      );
+      chapters.forEach((ch) => spy.observe(ch));
     }
 
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => setActiveTab(tab));
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        const target = section.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
 
-    if (tabs.length && indicator) {
-      const active = section.querySelector('[data-htu-tab].is-active') || tabs[0];
-      requestAnimationFrame(() => setActiveTab(active));
-      window.addEventListener('resize', () => {
-        const current = section.querySelector('[data-htu-tab].is-active') || tabs[0];
-        if (current) setActiveTab(current);
+    /* Horizontal rail drag scroll on desktop */
+    if (rail) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      rail.addEventListener('mousedown', (e) => {
+        isDown = true;
+        rail.classList.add('is-dragging');
+        startX = e.pageX - rail.offsetLeft;
+        scrollLeft = rail.scrollLeft;
+      });
+      rail.addEventListener('mouseleave', () => {
+        isDown = false;
+        rail.classList.remove('is-dragging');
+      });
+      rail.addEventListener('mouseup', () => {
+        isDown = false;
+        rail.classList.remove('is-dragging');
+      });
+      rail.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - rail.offsetLeft;
+        rail.scrollLeft = scrollLeft - (x - startX) * 1.5;
       });
     }
-
-    steps.forEach((step, i) => {
-      step.style.transitionDelay = i * 0.12 + 's';
-    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add('is-in');
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
-
-    revealItems.forEach((el) => observer.observe(el));
-    steps.forEach((el) => observer.observe(el));
+    reveals.forEach((el) => observer.observe(el));
   }
 
   function boot() {
