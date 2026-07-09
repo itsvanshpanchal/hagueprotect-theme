@@ -36,6 +36,12 @@
   --section-subheading-color: #565656;
   --section-subheading-max-width: 600px;
   --section-subheading-spacing-top: 12px;
+  --section-label-size: 12px;
+  --section-label-weight: 700;
+  --section-label-line-height: 1.5;
+  --section-label-color: #e74c3c;
+  --section-label-letter-spacing: 0.14em;
+  --section-label-margin-bottom: 12px;
   --border-radius-sm: 4px;
   --border-radius-md: 12px;
   --border-radius-lg: 24px;
@@ -533,12 +539,41 @@ main h2.h2,
   }
 }
 
+/* Unified section labels — eyebrows and intro lines above headings */
+.hero-fullscreen__eyebrow,
+.hero-fullscreen__subheading,
+.fb__eyebrow,
+.bs-coverflow__eyebrow,
+.trending-social__eyebrow,
+.mat-eyebrow,
+.fc-subtitle,
+.comm-eyebrow,
+[class*="ai-story-banner-subheading-"] {
+  font-family: var(--font-family-sans) !important;
+  font-size: var(--section-label-size) !important;
+  font-weight: var(--section-label-weight) !important;
+  line-height: var(--section-label-line-height) !important;
+  letter-spacing: var(--section-label-letter-spacing) !important;
+  color: var(--section-label-color) !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  display: block !important;
+  margin: 0 0 var(--section-label-margin-bottom) 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fc-header .fc-subtitle {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* Unified section subheadings — Inter body style like materials description */
 .mat-desc,
 .fb__subtitle,
-.fc-subtitle,
 .brand-banner__subtitle,
-.hero-fullscreen__subheading,
 .comm-desc,
 .comm-badge-desc,
 .skincare-hero__subtitle,
@@ -562,13 +597,11 @@ main h2.h2,
 }
 
 /* Subheadings on dark/image backgrounds */
-.hero-fullscreen__subheading,
 .brand-banner__subtitle {
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
 /* Centered section headers */
-.fc-header .fc-subtitle,
 .comm-desc,
 .comm-badge-desc {
   text-align: center !important;
@@ -577,8 +610,18 @@ main h2.h2,
 }
 
 @media screen and (max-width: 767px) {
-  .hero-fullscreen__subheading {
-    text-align: center !important;
+  .mat-desc,
+  .fb__subtitle,
+  .brand-banner__subtitle,
+  .comm-desc,
+  .comm-badge-desc,
+  .skincare-hero__subtitle,
+  .skincare-concerns__subtitle,
+  .corp-form__subtitle,
+  .d2c-subtitle-text,
+  .vr-info__subtitle,
+  .sor-info__subtitle,
+  [class*="ckc-"][class*="__desc"] {
     max-width: 100% !important;
   }
 }
@@ -619,14 +662,11 @@ main h2.h2,
 .dtc-product-card__title,
 .d2c-subtitle-text,
 .bestsellers__eyebrow-dtc,
-.trending-social__eyebrow,
-.mat-eyebrow,
 .mat-desc,
 .product-family__eyebrow,
 .category__eyebrow,
 .feature-grid__eyebrow,
-.bestsellers__view-all-dtc,
-.fc-subtitle {
+.bestsellers__view-all-dtc {
   text-transform: none !important;
 }
 
@@ -710,12 +750,9 @@ h4.mobile-accordion-category-heading,
 .prod-card-dtc__desc,
 .rail-subtitle,
 .family-card__desc,
-.fc-subtitle,
 .d2c-subtitle-text,
 .mat-desc,
 .bestsellers__eyebrow-dtc,
-.trending-social__eyebrow,
-.mat-eyebrow,
 .product-family__eyebrow,
 .category__eyebrow,
 .feature-grid__eyebrow {
