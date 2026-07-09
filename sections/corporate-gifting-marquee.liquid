@@ -1,0 +1,115 @@
+{%- style -%}
+  .corp-marquee {
+    background: #111111;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 20px 0;
+    overflow: hidden;
+  }
+
+  .corp-marquee__label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 16px;
+    padding: 0 20px;
+  }
+
+  .corp-marquee__track-wrap {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .corp-marquee__track {
+    display: flex;
+    gap: 48px;
+    animation: corpMarqueeScroll 35s linear infinite;
+    flex-shrink: 0;
+  }
+
+  .corp-marquee__track--reverse {
+    animation-direction: reverse;
+    animation-duration: 40s;
+    margin-top: 12px;
+  }
+
+  @keyframes corpMarqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .corp-marquee__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+  }
+
+  .corp-marquee__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff2b2b;
+    flex-shrink: 0;
+  }
+
+  .corp-marquee__item--accent {
+    color: #ffffff;
+  }
+{%- endstyle -%}
+
+<section class="corp-marquee" aria-label="Use cases">
+  <p class="corp-marquee__label">{{ section.settings.label | default: 'Trusted for employee onboarding, client appreciation, festival hampers & more' }}</p>
+
+  <div class="corp-marquee__track-wrap">
+    <div class="corp-marquee__track">
+      {%- assign items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones,Retail Partners,Influencer PR,Anniversary Boxes,Onboarding Packs' | split: ',' -%}
+      {%- for i in (1..2) -%}
+        {%- for item in items -%}
+          <span class="corp-marquee__item{% if forloop.index == 3 or forloop.index == 7 %} corp-marquee__item--accent{% endif %}">
+            <span class="corp-marquee__dot"></span>
+            {{ item }}
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="corp-marquee__track-wrap">
+    <div class="corp-marquee__track corp-marquee__track--reverse">
+      {%- assign items2 = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST,Sample Kits,Volume Discounts' | split: ',' -%}
+      {%- for i in (1..2) -%}
+        {%- for item in items2 -%}
+          <span class="corp-marquee__item">
+            <span class="corp-marquee__dot"></span>
+            {{ item }}
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Corporate Marquee",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Trusted for employee onboarding, client appreciation, festival hampers & more"
+    }
+  ],
+  "presets": [{ "name": "Corporate Marquee" }]
+}
+{% endschema %}

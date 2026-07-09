@@ -1,123 +1,484 @@
 {%- style -%}
   .corp-hero {
+    --corp-accent: #ff2b2b;
+    --corp-dark: #0a0a0a;
     position: relative;
-    width: 100%;
-    height: 450px;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background-color: #f5f5f5;
+    background: var(--corp-dark);
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
-  .corp-hero__bg {
+
+  .corp-hero__mesh {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 20%, rgba(255, 43, 43, 0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 85% 75%, rgba(255, 43, 43, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 60% 10%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+      linear-gradient(165deg, #0a0a0a 0%, #141414 45%, #1a0808 100%);
+  }
+
+  .corp-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .corp-hero__bg-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
-  }
-  .corp-hero__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.1);
-    z-index: 2;
-  }
-  .corp-hero__container {
-    position: relative;
-    z-index: 3;
-    max-width: 1440px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 60px;
-  }
-  .corp-hero__content {
-    max-width: 600px;
-  }
-  .corp-hero__title {
-    font-size: clamp(48px, 6vw, 84px);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0 0 32px 0;
-    line-height: 1;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  }
-  .corp-hero__btn {
-    display: inline-block;
-    background-color: #000000;
-    color: #ffffff;
-    padding: 16px 32px;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 100px;
-    transition: all 0.3s ease;
-  }
-  .corp-hero__btn:hover {
-    background-color: #333;
-    transform: translateY(-2px);
+    z-index: 0;
+    opacity: 0.35;
   }
 
-  @media screen and (max-width: 767px) {
-    .corp-hero {
-      height: 400px;
+  .corp-hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    animation: corpOrbFloat 12s ease-in-out infinite;
+  }
+
+  .corp-hero__orb--1 {
+    width: 420px;
+    height: 420px;
+    background: rgba(255, 43, 43, 0.25);
+    top: -10%;
+    right: 5%;
+    animation-delay: 0s;
+  }
+
+  .corp-hero__orb--2 {
+    width: 280px;
+    height: 280px;
+    background: rgba(255, 100, 100, 0.15);
+    bottom: 10%;
+    left: -5%;
+    animation-delay: -4s;
+  }
+
+  @keyframes corpOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(20px, -30px) scale(1.08); }
+  }
+
+  .corp-hero__container {
+    position: relative;
+    z-index: 5;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    padding: clamp(100px, 14vh, 140px) max(20px, var(--site-padding, 24px)) clamp(60px, 8vh, 80px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .corp-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--corp-accent);
+    margin-bottom: 20px;
+  }
+
+  .corp-hero__eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--corp-accent);
+  }
+
+  .corp-hero__title {
+    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+    font-size: clamp(52px, 7.5vw, 96px);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin: 0 0 24px;
+    text-transform: uppercase;
+  }
+
+  .corp-hero__title em {
+    font-style: normal;
+    color: var(--corp-accent);
+    display: block;
+  }
+
+  .corp-hero__sub {
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 36px;
+    max-width: 480px;
+  }
+
+  .corp-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+
+  .corp-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .corp-hero__btn--primary {
+    background: var(--corp-accent);
+    color: #ffffff;
+    box-shadow: 0 8px 32px rgba(255, 43, 43, 0.4);
+  }
+
+  .corp-hero__btn--primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(255, 43, 43, 0.5);
+  }
+
+  .corp-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+  }
+
+  .corp-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-3px);
+  }
+
+  .corp-hero__stats {
+    display: flex;
+    gap: clamp(24px, 4vw, 48px);
+    flex-wrap: wrap;
+  }
+
+  .corp-hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .corp-hero__stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .corp-hero__stat-num span {
+    color: var(--corp-accent);
+  }
+
+  .corp-hero__stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Floating showcase */
+  .corp-hero__showcase {
+    position: relative;
+    height: clamp(380px, 52vh, 520px);
+    perspective: 1200px;
+  }
+
+  .corp-hero__card {
+    position: absolute;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .corp-hero__card--main {
+    width: 72%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(-8deg) rotateX(4deg);
+    z-index: 3;
+    animation: corpCardMain 6s ease-in-out infinite;
+  }
+
+  .corp-hero__card--back {
+    width: 55%;
+    top: 8%;
+    right: 0;
+    transform: rotateY(12deg) rotateX(-6deg);
+    z-index: 1;
+    opacity: 0.7;
+    animation: corpCardBack 7s ease-in-out infinite;
+  }
+
+  .corp-hero__card--front {
+    width: 48%;
+    bottom: 5%;
+    left: 0;
+    transform: rotateY(-15deg) rotateX(8deg);
+    z-index: 4;
+    animation: corpCardFront 5s ease-in-out infinite;
+  }
+
+  @keyframes corpCardMain {
+    0%, 100% { transform: translate(-50%, -50%) rotateY(-8deg) rotateX(4deg); }
+    50% { transform: translate(-50%, -52%) rotateY(-5deg) rotateX(2deg); }
+  }
+
+  @keyframes corpCardBack {
+    0%, 100% { transform: rotateY(12deg) rotateX(-6deg) translateY(0); }
+    50% { transform: rotateY(12deg) rotateX(-6deg) translateY(-12px); }
+  }
+
+  @keyframes corpCardFront {
+    0%, 100% { transform: rotateY(-15deg) rotateX(8deg) translateY(0); }
+    50% { transform: rotateY(-15deg) rotateX(8deg) translateY(-16px); }
+  }
+
+  .corp-hero__card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .corp-hero__card-body {
+    padding: 16px 18px;
+  }
+
+  .corp-hero__card-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--corp-accent);
+    margin-bottom: 6px;
+  }
+
+  .corp-hero__card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .corp-hero__scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    animation: corpScrollBounce 2s ease-in-out infinite;
+  }
+
+  .corp-hero__scroll-hint svg {
+    opacity: 0.6;
+  }
+
+  @keyframes corpScrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .corp-hero__container {
+      grid-template-columns: 1fr;
       text-align: center;
+    }
+
+    .corp-hero__sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .corp-hero__actions {
       justify-content: center;
     }
-    .corp-hero__container {
-      padding: 0 24px;
+
+    .corp-hero__stats {
+      justify-content: center;
     }
-    .corp-hero__title {
-      font-size: 42px;
+
+    .corp-hero__eyebrow {
+      justify-content: center;
+    }
+
+    .corp-hero__showcase {
+      height: 320px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .corp-hero__showcase {
+      height: 260px;
+    }
+
+    .corp-hero__scroll-hint {
+      display: none;
     }
   }
 {%- endstyle -%}
 
-<div class="corp-hero">
+<section class="corp-hero" id="corp-hero">
   {% if section.settings.image != blank %}
-    <img src="{{ section.settings.image | image_url: width: 2000 }}" class="corp-hero__bg" alt="Hero Background" loading="eager" fetchpriority="high" decoding="async">
-  {% else %}
-    <div class="corp-hero__bg" style="background: #D32F2F;"></div>
+    <img
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      class="corp-hero__bg-img"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    >
   {% endif %}
-  <div class="corp-hero__overlay"></div>
+  <div class="corp-hero__mesh"></div>
+  <div class="corp-hero__grain"></div>
+  <div class="corp-hero__orb corp-hero__orb--1" aria-hidden="true"></div>
+  <div class="corp-hero__orb corp-hero__orb--2" aria-hidden="true"></div>
+
   <div class="corp-hero__container">
-    <div class="corp-hero__content">
-      <h1 class="corp-hero__title">{{ section.settings.heading | default: 'Corporate Gifting' }}</h1>
-      <a href="{{ section.settings.btn_link | default: '#' }}" class="corp-hero__btn">{{ section.settings.btn_label | default: 'Download Catalog' }}</a>
+    <div class="corp-hero__copy">
+      <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
+      <h1 class="corp-hero__title">
+        {{ section.settings.heading_line1 | default: 'Corporate' }}
+        <em>{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
+      </h1>
+      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts — crafted to impress.' }}</p>
+
+      <div class="corp-hero__actions">
+        <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary">
+          {{ section.settings.btn_label | default: 'Start Your Order' }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        {% if section.settings.btn2_link != blank %}
+          <a href="{{ section.settings.btn2_link }}" class="corp-hero__btn corp-hero__btn--ghost">{{ section.settings.btn2_label | default: 'Download Catalog' }}</a>
+        {% endif %}
+      </div>
+
+      <div class="corp-hero__stats">
+        <div class="corp-hero__stat">
+          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat1_num | default: '500' }}">0<span>+</span></span>
+          <span class="corp-hero__stat-label">{{ section.settings.stat1_label | default: 'Brands Gifted' }}</span>
+        </div>
+        <div class="corp-hero__stat">
+          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat2_num | default: '50' }}">0<span>K+</span></span>
+          <span class="corp-hero__stat-label">{{ section.settings.stat2_label | default: 'Kits Delivered' }}</span>
+        </div>
+        <div class="corp-hero__stat">
+          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat3_num | default: '98' }}">0<span>%</span></span>
+          <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="corp-hero__showcase" aria-hidden="true">
+      <div class="corp-hero__card corp-hero__card--back">
+        {% if section.settings.card_image_2 != blank %}
+          <img src="{{ section.settings.card_image_2 | image_url: width: 600 }}" class="corp-hero__card-img" alt="">
+        {% else %}
+          <div class="corp-hero__card-img" style="background: linear-gradient(135deg, #2a2a2a, #1a1a1a); min-height: 120px;"></div>
+        {% endif %}
+        <div class="corp-hero__card-body">
+          <p class="corp-hero__card-tag">Co-Branded</p>
+          <p class="corp-hero__card-title">Your Logo. Our Quality.</p>
+        </div>
+      </div>
+      <div class="corp-hero__card corp-hero__card--main">
+        {% if section.settings.card_image_1 != blank %}
+          <img src="{{ section.settings.card_image_1 | image_url: width: 800 }}" class="corp-hero__card-img" alt="">
+        {% elsif section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 800 }}" class="corp-hero__card-img" alt="">
+        {% else %}
+          <div class="corp-hero__card-img" style="background: linear-gradient(135deg, #ff2b2b 0%, #8b0000 100%); min-height: 180px;"></div>
+        {% endif %}
+        <div class="corp-hero__card-body">
+          <p class="corp-hero__card-tag">Premium Kit</p>
+          <p class="corp-hero__card-title">Executive Gift Box</p>
+        </div>
+      </div>
+      <div class="corp-hero__card corp-hero__card--front">
+        {% if section.settings.card_image_3 != blank %}
+          <img src="{{ section.settings.card_image_3 | image_url: width: 500 }}" class="corp-hero__card-img" alt="">
+        {% else %}
+          <div class="corp-hero__card-img" style="background: linear-gradient(135deg, #1a1a1a, #333); min-height: 100px;"></div>
+        {% endif %}
+        <div class="corp-hero__card-body">
+          <p class="corp-hero__card-tag">Bulk</p>
+          <p class="corp-hero__card-title">Team Onboarding</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="corp-hero__scroll-hint" aria-hidden="true">
+    <span>Explore</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Corporate Hero",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background Image"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Corporate Gifting"
-    },
-    {
-      "type": "text",
-      "id": "btn_label",
-      "label": "Button Label",
-      "default": "Download Catalog"
-    },
-    {
-      "type": "url",
-      "id": "btn_link",
-      "label": "Button Link"
-    }
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Gifting Studio" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Corporate" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "Gifting" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts — crafted to impress." },
+    { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Start Your Order" },
+    { "type": "url", "id": "btn_link", "label": "Primary button link" },
+    { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Download Catalog" },
+    { "type": "url", "id": "btn2_link", "label": "Secondary button link" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "500" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Brands Gifted" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "50" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Kits Delivered" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "98" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Satisfaction" },
+    { "type": "image_picker", "id": "card_image_1", "label": "Showcase card (main)" },
+    { "type": "image_picker", "id": "card_image_2", "label": "Showcase card (back)" },
+    { "type": "image_picker", "id": "card_image_3", "label": "Showcase card (front)" }
   ]
 }
 {% endschema %}

@@ -1,166 +1,316 @@
 {%- style -%}
   .corp-features {
-    padding: 100px 0;
-    background-color: #ffffff;
+    padding: clamp(80px, 10vw, 120px) 0;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
+
   .corp-features__container {
-    max-width: 1440px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 0 max(20px, var(--site-padding, 24px));
   }
+
   .corp-features__header {
-    text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: clamp(40px, 6vw, 64px);
+    max-width: 560px;
   }
-  .corp-features__heading {
-    font-size: 42px;
-    font-weight: 800;
-    color: #000;
-    margin: 0;
-  }
-  .corp-feature-row {
-    display: flex;
-    align-items: center;
-    gap: 100px;
-    margin-bottom: 120px;
-  }
-  .corp-feature-row:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-  .corp-feature-content {
-    flex: 1;
-    max-width: 500px;
-  }
-  .corp-feature-number {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    font-weight: 800;
-    color: #111;
-    margin-bottom: 24px;
-  }
-  .corp-feature-number::before {
-    content: "";
-    width: 30px;
-    height: 2px;
-    background: #000;
-  }
-  .corp-feature-title {
-    font-size: 32px;
-    font-weight: 800;
+
+  .corp-features__eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin: 0 0 24px 0;
-    letter-spacing: 0.05em;
-    color: #111;
+    color: #e74c3c;
+    margin: 0 0 12px;
   }
-  .corp-feature-text {
+
+  .corp-features__heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111111;
+    margin: 0 0 16px;
+    line-height: 1;
+  }
+
+  .corp-features__sub {
     font-size: 16px;
-    line-height: 1.6;
-    color: #555;
+    line-height: 1.65;
+    color: #565656;
     margin: 0;
   }
-  .corp-feature-media {
-    flex: 1.2;
-    background: #f7f7f7;
-    border-radius: 4px;
-    overflow: hidden;
-    aspect-ratio: 16 / 10;
+
+  /* Bento grid */
+  .corp-bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
   }
-  .corp-feature-media img {
+
+  .corp-bento__item {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 280px;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease, box-shadow 0.35s ease;
+  }
+
+  .corp-bento__item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .corp-bento__item:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .corp-bento__item--large {
+    grid-column: span 7;
+    grid-row: span 2;
+    min-height: 480px;
+  }
+
+  .corp-bento__item--medium {
+    grid-column: span 5;
+    min-height: 320px;
+  }
+
+  .corp-bento__item--small {
+    grid-column: span 4;
+    min-height: 260px;
+  }
+
+  .corp-bento__item--accent {
+    background: #111111;
+    border-color: #111111;
+    color: #ffffff;
+  }
+
+  .corp-bento__item--accent .corp-bento__text {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .corp-bento__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .corp-bento__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .corp-bento__item:hover .corp-bento__media img {
+    transform: scale(1.05);
+  }
+
+  .corp-bento__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+  }
+
+  .corp-bento__item--no-img {
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+    justify-content: center;
+    padding: 36px;
+  }
+
+  .corp-bento__item--no-img.corp-bento__item--accent {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  }
+
+  .corp-bento__item--no-img .corp-bento__media {
+    display: none;
+  }
+
+  .corp-bento__content {
+    position: relative;
+    z-index: 2;
+    padding: 28px;
+  }
+
+  .corp-bento__item--no-img .corp-bento__content {
+    padding: 0;
+  }
+
+  .corp-bento__num {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #ff2b2b;
+    margin-bottom: 12px;
+  }
+
+  .corp-bento__item--accent .corp-bento__num {
+    color: #ff2b2b;
+  }
+
+  .corp-bento__item:not(.corp-bento__item--accent) .corp-bento__media + .corp-bento__content .corp-bento__num,
+  .corp-bento__item:not(.corp-bento__item--accent) .corp-bento__media + .corp-bento__content .corp-bento__title,
+  .corp-bento__item:not(.corp-bento__item--accent) .corp-bento__media + .corp-bento__content .corp-bento__text {
+    color: #ffffff;
+  }
+
+  .corp-bento__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    line-height: 1.05;
+    color: #111111;
+  }
+
+  .corp-bento__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0;
+    max-width: 400px;
+  }
+
+  .corp-bento__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    color: #ff2b2b;
   }
 
   @media screen and (max-width: 1024px) {
-    .corp-features__container {
-      padding: 0 24px;
+    .corp-bento__item--large,
+    .corp-bento__item--medium,
+    .corp-bento__item--small {
+      grid-column: span 12;
+      min-height: 300px;
     }
-    .corp-feature-row {
-      flex-direction: column !important;
-      gap: 40px;
-      margin-bottom: 64px;
-    }
-    .corp-feature-content {
-      max-width: 100%;
-    }
-    .corp-features__heading {
-      font-size: 32px;
+
+    .corp-bento__item--large {
+      grid-row: span 1;
+      min-height: 360px;
     }
   }
 {%- endstyle -%}
 
-<div class="corp-features">
+<section class="corp-features" data-corp-reveal>
   <div class="corp-features__container">
     <div class="corp-features__header">
-      <h2 class="corp-features__heading">What's Possible</h2>
+      <p class="corp-features__eyebrow">{{ section.settings.eyebrow | default: "What's Possible" }}</p>
+      <h2 class="corp-features__heading">{{ section.settings.heading | default: 'Built for Brands That Care' }}</h2>
+      <p class="corp-features__sub">{{ section.settings.subheading | default: 'Every detail — from co-branded packaging to bulk logistics — designed to make your gift unforgettable.' }}</p>
     </div>
 
-    <div class="corp-features__list">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          <div class="corp-feature-row">
-            <div class="corp-feature-content">
-              <div class="corp-feature-number">{{ forloop.index | prepend: '0' }}</div>
-              <h3 class="corp-feature-title">{{ block.settings.title }}</h3>
-              <p class="corp-feature-text">{{ block.settings.text }}</p>
-            </div>
-            <div class="corp-feature-media">
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title }}">
-              {% else %}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        {% comment %} Fallback items if no blocks are defined {% endcomment %}
-        {% for i in (1..3) %}
-          {% capture title %}{% cycle 'CO-BRANDING', 'PREMIUM PACKAGING', 'BULK DISCOUNTS' %}{% endcapture %}
-          {% capture text %}{% cycle 'Make our products your own. Partner with HAGUEPROTECT for co-branded products that reflect your style.', 'Exquisite presentation for corporate gifting that leaves a lasting impression on your clients and partners.', 'Special pricing and dedicated support for large volume orders tailored to your business needs.' %}{% endcapture %}
-          <div class="corp-feature-row">
-            <div class="corp-feature-content">
-              <div class="corp-feature-number">0{{ i }}</div>
-              <h3 class="corp-feature-title">{{ title }}</h3>
-              <p class="corp-feature-text">{{ text }}</p>
-            </div>
-            <div class="corp-feature-media">
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    <div class="corp-bento">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign layout = block.settings.layout | default: 'medium' -%}
+          <div
+            class="corp-bento__item corp-bento__item--{{ layout }}{% if block.settings.dark_card %} corp-bento__item--accent{% endif %}{% if block.settings.image == blank %} corp-bento__item--no-img{% endif %}"
+            data-corp-bento
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              <div class="corp-bento__media">
+                <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+              </div>
+            {%- endif -%}
+            <div class="corp-bento__content">
+              <p class="corp-bento__num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</p>
+              <h3 class="corp-bento__title">{{ block.settings.title }}</h3>
+              <p class="corp-bento__text">{{ block.settings.text }}</p>
             </div>
           </div>
-        {% endfor %}
-      {% endif %}
+        {%- endfor -%}
+      {%- else -%}
+        <div class="corp-bento__item corp-bento__item--large" data-corp-bento>
+          <div class="corp-bento__media">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#2a2a2a,#111);"></div>
+          </div>
+          <div class="corp-bento__content">
+            <p class="corp-bento__num">01</p>
+            <h3 class="corp-bento__title">Co-Branding</h3>
+            <p class="corp-bento__text">Make our products your own. Partner with Hague Protect for co-branded kits that reflect your brand identity.</p>
+          </div>
+        </div>
+        <div class="corp-bento__item corp-bento__item--medium corp-bento__item--accent corp-bento__item--no-img" data-corp-bento>
+          <div class="corp-bento__content">
+            <svg class="corp-bento__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="8" y="14" width="32" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M8 20h32M16 14V10a4 4 0 018 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="corp-bento__num">02</p>
+            <h3 class="corp-bento__title">Premium Packaging</h3>
+            <p class="corp-bento__text">Exquisite presentation for corporate gifting that leaves a lasting impression on clients and partners.</p>
+          </div>
+        </div>
+        <div class="corp-bento__item corp-bento__item--small" data-corp-bento>
+          <div class="corp-bento__media">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#ff2b2b,#8b0000);"></div>
+          </div>
+          <div class="corp-bento__content">
+            <p class="corp-bento__num">03</p>
+            <h3 class="corp-bento__title">Bulk Discounts</h3>
+            <p class="corp-bento__text">Special pricing and dedicated support for large volume orders.</p>
+          </div>
+        </div>
+        <div class="corp-bento__item corp-bento__item--small corp-bento__item--no-img" data-corp-bento>
+          <div class="corp-bento__content">
+            <svg class="corp-bento__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/><path d="M24 16v8l6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="corp-bento__num">04</p>
+            <h3 class="corp-bento__title">Fast Turnaround</h3>
+            <p class="corp-bento__text">From brief to delivery in as little as 7 business days for standard orders.</p>
+          </div>
+        </div>
+        <div class="corp-bento__item corp-bento__item--medium" data-corp-bento>
+          <div class="corp-bento__media">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a,#333);"></div>
+          </div>
+          <div class="corp-bento__content">
+            <p class="corp-bento__num">05</p>
+            <h3 class="corp-bento__title">Pan-India Delivery</h3>
+            <p class="corp-bento__text">Ship to multiple locations with tracking, GST invoicing, and consolidated billing.</p>
+          </div>
+        </div>
+      {%- endif -%}
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
   "name": "Corporate Features",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What's Possible" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for Brands That Care" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Every detail — from co-branded packaging to bulk logistics — designed to make your gift unforgettable." }
+  ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature Block",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "CO-BRANDING"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Description",
-          "default": "Make our products your own. Partner with HAGUEPROTECT for co-branded products that reflect your style, and a shared love of shoes."
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Feature Image"
-        }
+        { "type": "select", "id": "layout", "label": "Card size", "options": [
+          { "value": "large", "label": "Large" },
+          { "value": "medium", "label": "Medium" },
+          { "value": "small", "label": "Small" }
+        ], "default": "medium" },
+        { "type": "checkbox", "id": "dark_card", "label": "Dark card style" },
+        { "type": "text", "id": "title", "label": "Title", "default": "CO-BRANDING" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Make our products your own. Partner with Hague Protect for co-branded products that reflect your style." },
+        { "type": "image_picker", "id": "image", "label": "Feature image" }
       ]
     }
   ],
@@ -168,7 +318,9 @@
     {
       "name": "Corporate Features",
       "blocks": [
-        { "type": "feature" }
+        { "type": "feature", "settings": { "layout": "large", "title": "Co-Branding", "text": "Make our products your own. Partner with Hague Protect for co-branded kits that reflect your brand identity." } },
+        { "type": "feature", "settings": { "layout": "medium", "dark_card": true, "title": "Premium Packaging", "text": "Exquisite presentation for corporate gifting that leaves a lasting impression." } },
+        { "type": "feature", "settings": { "layout": "small", "title": "Bulk Discounts", "text": "Special pricing and dedicated support for large volume orders." } }
       ]
     }
   ]

@@ -1,168 +1,385 @@
 {%- style -%}
   .corp-form {
-    padding: 60px 0;
-    background-color: #ffffff;
+    padding: clamp(80px, 10vw, 120px) 0;
+    background: #fafafa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  .corp-form__container {
-    max-width: 900px;
+
+  .corp-form__wrap {
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 max(20px, var(--site-padding, 24px));
   }
-  .corp-form__header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .corp-form__title {
-    font-size: 28px;
-    font-weight: 700;
-    margin: 0 0 12px 0;
-    color: #000;
-  }
-  .corp-form__subtitle {
-    margin: 0;
-  }
-  .corp-form__subtitle a {
-    color: #666;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+
   .corp-form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
+    min-height: 600px;
+  }
+
+  .corp-form__visual {
+    position: relative;
+    background: #0a0a0a;
+    padding: clamp(40px, 5vw, 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .corp-form__visual-mesh {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 80%, rgba(255, 43, 43, 0.3) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 90% 20%, rgba(255, 43, 43, 0.12) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  .corp-form__visual-content {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+  }
+
+  .corp-form__visual-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ff2b2b;
+    margin-bottom: 16px;
+  }
+
+  .corp-form__visual-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 20px;
+  }
+
+  .corp-form__visual-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 0 40px;
+    max-width: 320px;
+  }
+
+  .corp-form__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .corp-form__contact {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .corp-form__contact:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 43, 43, 0.4);
+  }
+
+  .corp-form__contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 43, 43, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #ff2b2b;
+  }
+
+  .corp-form__contact-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 2px;
+  }
+
+  .corp-form__contact-value {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .corp-form__panel {
+    background: #ffffff;
+    padding: clamp(36px, 5vw, 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .corp-form__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111111;
+    margin: 0 0 8px;
+    line-height: 1;
+  }
+
+  .corp-form__subtitle {
+    font-size: 14px;
+    color: #666666;
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+
+  .corp-form__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-bottom: 16px;
   }
+
   .corp-form__group {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 16px;
   }
-  .corp-form__input-wrapper {
-    display: flex;
-    align-items: center;
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
-    background: #fff;
-    overflow: hidden;
-    transition: border-color 0.3s;
+
+  .corp-form__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 8px;
   }
-  .corp-form__input-wrapper:focus-within {
-    border-color: #000;
-  }
+
   .corp-form__input {
     width: 100%;
     padding: 14px 16px;
-    border: 1px solid #dcdcdc;
-    border-radius: 6px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 12px;
     font-family: inherit;
-    font-size: 14px;
-    color: #333;
+    font-size: 15px;
+    color: #111111;
+    background: #fafafa;
     outline: none;
-    background: #fff;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     box-sizing: border-box;
   }
+
   .corp-form__input::placeholder {
-    color: #666;
+    color: #aaaaaa;
   }
+
   .corp-form__input:focus {
-    border-color: #000;
+    border-color: #ff2b2b;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 43, 43, 0.1);
   }
-  .corp-form__input-wrapper .corp-form__input {
-    border: none;
-    border-radius: 0;
+
+  .corp-form__phone-wrap {
+    display: flex;
+    align-items: stretch;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fafafa;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .corp-form__input-wrapper .corp-form__input:focus {
-    border: none;
+
+  .corp-form__phone-wrap:focus-within {
+    border-color: #ff2b2b;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 43, 43, 0.1);
   }
+
   .corp-form__phone-prefix {
     display: flex;
     align-items: center;
-    padding: 0 0 0 16px;
-    gap: 8px;
+    gap: 6px;
+    padding: 0 14px;
     font-size: 14px;
-    color: #333;
-    background: #fff;
+    font-weight: 600;
+    color: #333333;
+    background: #f0f0f0;
+    border-right: 1.5px solid #e8e8e8;
     white-space: nowrap;
   }
-  textarea.corp-form__input {
-    resize: vertical;
-    min-height: 140px;
-  }
-  .corp-form__submit {
-    width: 100%;
-    background: #000;
-    color: #fff;
+
+  .corp-form__phone-wrap .corp-form__input {
     border: none;
-    padding: 16px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .corp-form__submit:hover {
-    background: #333;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
-  @media screen and (max-width: 767px) {
-    .corp-form {
-      padding: 40px 0;
-    }
+  .corp-form__phone-wrap .corp-form__input:focus {
+    box-shadow: none;
+  }
+
+  textarea.corp-form__input {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .corp-form__success {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8f2);
+    color: #2e7d32;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgba(46, 125, 50, 0.2);
+  }
+
+  .corp-form__submit {
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .corp-form__submit:hover {
+    background: #ff2b2b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 43, 43, 0.35);
+  }
+
+  @media screen and (max-width: 900px) {
     .corp-form__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .corp-form__visual {
+      min-height: auto;
+    }
+
+    .corp-form__row {
       grid-template-columns: 1fr;
     }
   }
 {%- endstyle -%}
 
-<div class="corp-form">
-  <div class="corp-form__container">
-    <div class="corp-form__header">
-      <h2 class="corp-form__title">Get in Touch</h2>
-      <p class="corp-form__subtitle">
-        You can also reach us at <a href="mailto:gifting@nuuk.in">gifting@nuuk.in</a> or on WhatsApp at <a href="https://wa.me/917009205008">7009205008</a>
-      </p>
-    </div>
-
-    {%- form 'contact', id: 'CorporateContactForm', class: 'corp-form__body' -%}
-      {%- if form.posted_successfully? -%}
-        <div style="background: #E8F5E9; color: #2E7D32; padding: 16px; border-radius: 6px; text-align: center; margin-bottom: 24px; font-weight: 500;">
-          Thanks for reaching out! We'll get back to you shortly.
+<section class="corp-form" id="corp-inquiry">
+  <div class="corp-form__wrap">
+    <div class="corp-form__grid">
+      <div class="corp-form__visual">
+        <div class="corp-form__visual-mesh" aria-hidden="true"></div>
+        <div class="corp-form__visual-content">
+          <p class="corp-form__visual-eyebrow">{{ section.settings.eyebrow | default: "Let's Talk" }}</p>
+          <h2 class="corp-form__visual-title">{{ section.settings.side_title | default: 'Your Gift Story Starts Here' }}</h2>
+          <p class="corp-form__visual-text">{{ section.settings.side_text | default: 'Share your requirements and our gifting specialists will craft a custom proposal within 48 hours.' }}</p>
         </div>
-      {%- endif -%}
-
-      <div class="corp-form__grid">
-        <input type="text" name="contact[name]" class="corp-form__input" placeholder="Name *" required>
-        <input type="text" name="contact[company]" class="corp-form__input" placeholder="Company Name *" required>
+        <div class="corp-form__contacts">
+          <a href="mailto:{{ section.settings.email | default: 'gifting@nuuk.in' }}" class="corp-form__contact">
+            <span class="corp-form__contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+            <span>
+              <span class="corp-form__contact-label">Email</span>
+              <span class="corp-form__contact-value">{{ section.settings.email | default: 'gifting@nuuk.in' }}</span>
+            </span>
+          </a>
+          <a href="https://wa.me/{{ section.settings.whatsapp | default: '917009205008' }}" class="corp-form__contact" target="_blank" rel="noopener">
+            <span class="corp-form__contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.48 2 2 6.03 2 11.17c0 1.8.52 3.52 1.5 5.02L2 22l6.05-1.58A9.93 9.93 0 0012 20.33C17.52 20.33 22 16.3 22 11.17S17.52 2 12 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span>
+              <span class="corp-form__contact-label">WhatsApp</span>
+              <span class="corp-form__contact-value">{{ section.settings.phone_display | default: '7009205008' }}</span>
+            </span>
+          </a>
+        </div>
       </div>
 
-      <div class="corp-form__group">
-        <div class="corp-form__input-wrapper">
-          <div class="corp-form__phone-prefix">
-            <span>🇮🇳</span>
-            <span>+91</span>
+      <div class="corp-form__panel">
+        <h2 class="corp-form__title">{{ section.settings.form_title | default: 'Request a Quote' }}</h2>
+        <p class="corp-form__subtitle">{{ section.settings.form_subtitle | default: "Fill in the details below and we'll be in touch shortly." }}</p>
+
+        {%- form 'contact', id: 'CorporateContactForm', class: 'corp-form__body' -%}
+          <input type="hidden" name="contact[tags]" value="corporate-gifting">
+
+          {%- if form.posted_successfully? -%}
+            <div class="corp-form__success">
+              Thanks for reaching out! Our gifting team will get back to you within 48 hours.
+            </div>
+          {%- endif -%}
+
+          <div class="corp-form__row">
+            <div>
+              <label class="corp-form__label" for="CorpName">Name</label>
+              <input type="text" id="CorpName" name="contact[name]" class="corp-form__input" placeholder="Your name" required>
+            </div>
+            <div>
+              <label class="corp-form__label" for="CorpCompany">Company</label>
+              <input type="text" id="CorpCompany" name="contact[company]" class="corp-form__input" placeholder="Company name" required>
+            </div>
           </div>
-          <input type="tel" name="contact[phone]" class="corp-form__input" placeholder="Phone *" required>
-        </div>
-      </div>
 
-      <div class="corp-form__group">
-        <textarea name="contact[body]" class="corp-form__input" placeholder="Message *" required></textarea>
-      </div>
+          <div class="corp-form__group">
+            <label class="corp-form__label" for="CorpEmail">Work Email</label>
+            <input type="email" id="CorpEmail" name="contact[email]" class="corp-form__input" placeholder="you@company.com" required>
+          </div>
 
-      <button type="submit" class="corp-form__submit">Submit</button>
-    {%- endform -%}
+          <div class="corp-form__group">
+            <label class="corp-form__label" for="CorpPhone">Phone</label>
+            <div class="corp-form__phone-wrap">
+              <span class="corp-form__phone-prefix">🇮🇳 +91</span>
+              <input type="tel" id="CorpPhone" name="contact[phone]" class="corp-form__input" placeholder="Phone number" required>
+            </div>
+          </div>
+
+          <div class="corp-form__group">
+            <label class="corp-form__label" for="CorpMessage">Tell us about your order</label>
+            <textarea id="CorpMessage" name="contact[body]" class="corp-form__input" placeholder="Quantity, budget, branding needs, delivery timeline..." required></textarea>
+          </div>
+
+          <button type="submit" class="corp-form__submit">Send Inquiry</button>
+        {%- endform -%}
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
   "name": "Corporate Form",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Corporate Form"
-    }
-  ]
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Side panel eyebrow", "default": "Let's Talk" },
+    { "type": "text", "id": "side_title", "label": "Side panel title", "default": "Your Gift Story Starts Here" },
+    { "type": "textarea", "id": "side_text", "label": "Side panel text", "default": "Share your requirements and our gifting specialists will craft a custom proposal within 48 hours." },
+    { "type": "text", "id": "email", "label": "Email", "default": "gifting@nuuk.in" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp number (no +)", "default": "917009205008" },
+    { "type": "text", "id": "phone_display", "label": "Phone display", "default": "7009205008" },
+    { "type": "text", "id": "form_title", "label": "Form title", "default": "Request a Quote" },
+    { "type": "text", "id": "form_subtitle", "label": "Form subtitle", "default": "Fill in the details below and we'll be in touch shortly." }
+  ],
+  "presets": [{ "name": "Corporate Form" }]
 }
 {% endschema %}

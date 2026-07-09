@@ -1,0 +1,217 @@
+{%- style -%}
+  .corp-process {
+    padding: clamp(80px, 10vw, 120px) 0;
+    background: #fafafa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .corp-process__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  .corp-process__header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto clamp(48px, 6vw, 72px);
+  }
+
+  .corp-process__eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e74c3c;
+    margin: 0 0 12px;
+  }
+
+  .corp-process__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111111;
+    margin: 0 0 16px;
+    line-height: 1;
+  }
+
+  .corp-process__desc {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #565656;
+    margin: 0;
+  }
+
+  .corp-process__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .corp-process__grid::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff2b2b 0%, #ff2b2b 50%, #ececec 50%, #ececec 100%);
+    background-size: 200% 100%;
+    z-index: 0;
+  }
+
+  .corp-process__step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 16px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .corp-process__step.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .corp-process__step:nth-child(2) { transition-delay: 0.1s; }
+  .corp-process__step:nth-child(3) { transition-delay: 0.2s; }
+  .corp-process__step:nth-child(4) { transition-delay: 0.3s; }
+
+  .corp-process__num {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #111111;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .corp-process__step:hover .corp-process__num {
+    background: #ff2b2b;
+    border-color: #ff2b2b;
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+
+  .corp-process__step-title {
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #111111;
+    margin: 0 0 10px;
+  }
+
+  .corp-process__step-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #666666;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 900px) {
+    .corp-process__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 24px;
+    }
+
+    .corp-process__grid::before {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .corp-process__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="corp-process" data-corp-reveal>
+  <div class="corp-process__container">
+    <div class="corp-process__header">
+      <p class="corp-process__eyebrow">{{ section.settings.eyebrow | default: 'How It Works' }}</p>
+      <h2 class="corp-process__title">{{ section.settings.heading | default: 'From Brief to Doorstep' }}</h2>
+      <p class="corp-process__desc">{{ section.settings.description | default: 'A seamless four-step process designed for busy teams. We handle everything — you take the credit.' }}</p>
+    </div>
+
+    <div class="corp-process__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="corp-process__step" data-corp-step {{ block.shopify_attributes }}>
+            <div class="corp-process__num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</div>
+            <h3 class="corp-process__step-title">{{ block.settings.title }}</h3>
+            <p class="corp-process__step-text">{{ block.settings.text }}</p>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="corp-process__step" data-corp-step>
+          <div class="corp-process__num">01</div>
+          <h3 class="corp-process__step-title">Share Your Brief</h3>
+          <p class="corp-process__step-text">Tell us quantity, budget, branding needs, and delivery timeline.</p>
+        </div>
+        <div class="corp-process__step" data-corp-step>
+          <div class="corp-process__num">02</div>
+          <h3 class="corp-process__step-title">Custom Proposal</h3>
+          <p class="corp-process__step-text">Receive curated kit options, mockups, and volume pricing within 48 hours.</p>
+        </div>
+        <div class="corp-process__step" data-corp-step>
+          <div class="corp-process__num">03</div>
+          <h3 class="corp-process__step-title">Approve & Produce</h3>
+          <p class="corp-process__step-text">Co-branded packaging, custom inserts, and quality checks at every stage.</p>
+        </div>
+        <div class="corp-process__step" data-corp-step>
+          <div class="corp-process__num">04</div>
+          <h3 class="corp-process__step-title">Deliver & Delight</h3>
+          <p class="corp-process__step-text">Pan-India shipping with tracking. Your recipients get a gift they'll remember.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Corporate Process",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How It Works" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From Brief to Doorstep" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A seamless four-step process designed for busy teams. We handle everything — you take the credit." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step Title" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Step description." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Process",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Share Your Brief", "text": "Tell us quantity, budget, branding needs, and delivery timeline." } },
+        { "type": "step", "settings": { "title": "Custom Proposal", "text": "Receive curated kit options, mockups, and volume pricing within 48 hours." } },
+        { "type": "step", "settings": { "title": "Approve & Produce", "text": "Co-branded packaging, custom inserts, and quality checks at every stage." } },
+        { "type": "step", "settings": { "title": "Deliver & Delight", "text": "Pan-India shipping with tracking. Your recipients get a gift they'll remember." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

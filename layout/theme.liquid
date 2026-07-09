@@ -433,9 +433,13 @@
       {%- if normalized_path contains 'certified-corporation' or normalized_path contains 'corporate' -%}
         <div id="CorporateCustomPage">
           {% section 'corporate-gifting-hero' %}
-          {% section 'corporate-gifting-form' %}
+          {% section 'corporate-gifting-marquee' %}
+          {% section 'corporate-gifting-process' %}
           {% section 'corporate-gifting-features' %}
+          {% section 'corporate-gifting-packages' %}
+          {% section 'corporate-gifting-form' %}
         </div>
+        <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
         <style>
           /* Hide the default 404 or page content when on the hijacked URL */
           .hijack-hidden { display: none !important; }
