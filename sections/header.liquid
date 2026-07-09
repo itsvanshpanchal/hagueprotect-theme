@@ -55,6 +55,14 @@
     flex-shrink: 0;
   }
 
+  .header__logo-img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
   .header__navigation {
     display: flex;
     align-items: center;
@@ -526,21 +534,27 @@
   <div class="header-container">
     
     <!-- Logo -->
-    <a href="/" class="header__logo-link" aria-label="{{ shop.name }} home">
-  {% if section.settings.logo_image %}
-    <img
-      src="{{ section.settings.logo_image | image_url: width: 300 }}"
-      alt="{{ shop.name }}"
-      style="max-width: {{ section.settings.logo_width | default: 160 }}px; height: auto; display: block;"
-      loading="eager"
-    >
-  {% else %}
-    <span class="header__logo-text">
-      HAGUE<span style="color: #FF2B2B;">PR</span><svg class="header__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.5"/></svg>TECT
-    </span>
-  {% endif %}
-</a>
-
+    <a href="{{ routes.root_url }}" class="header__logo-link" aria-label="{{ shop.name }} home">
+      {%- liquid
+        assign header_logo_width = section.settings.logo_width | default: 200
+        if section.settings.logo_image != blank
+          assign header_logo_url = section.settings.logo_image | image_url: width: 400
+        elsif section.settings.logo_text != blank and section.settings.logo_text contains '.'
+          assign header_logo_url = section.settings.logo_text | asset_url
+        else
+          assign header_logo_url = 'logo-hagueprotect.png' | asset_url
+        endif
+      -%}
+      <img
+        src="{{ header_logo_url }}"
+        alt="{{ shop.name }}"
+        class="header__logo-img"
+        style="max-width: {{ header_logo_width }}px; height: auto;"
+        width="{{ header_logo_width }}"
+        loading="eager"
+        decoding="async"
+      >
+    </a>
 
     <nav class="header__navigation" role="navigation">
       <div class="nav-item">
@@ -1156,6 +1170,21 @@
   "name": "Header",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 200
+    },
+    {
       "type": "link_list",
       "id": "menu",
       "label": "Menu",
@@ -1164,8 +1193,9 @@
     {
       "type": "text",
       "id": "logo_text",
-      "label": "Logo Text",
-      "default": "HAGUEPROTECT"
+      "label": "Logo asset fallback",
+      "default": "logo-hagueprotect.png",
+      "info": "Optional. Use a theme asset filename (e.g. logo-hagueprotect.png) when no logo image is uploaded."
     },
     {
       "type": "color",
