@@ -497,6 +497,37 @@ main h2.h2,
   line-height: 1.02 !important;
 }
 
+/* Typewriter: plain text while typing, display heading after complete */
+main h1.hp-typewriter--typing,
+main h2.hp-typewriter--typing,
+main h3.hp-typewriter--typing,
+main h1.hp-typewriter--typing .hp-typewriter-text,
+main h2.hp-typewriter--typing .hp-typewriter-text,
+main h3.hp-typewriter--typing .hp-typewriter-text,
+main h1.hp-typewriter--typing > span[aria-hidden="true"],
+main h2.hp-typewriter--typing > span[aria-hidden="true"],
+main h3.hp-typewriter--typing > span[aria-hidden="true"] {
+  font-family: var(--font-family-sans) !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 1.5 !important;
+  text-transform: none !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-fullscreen__heading.hp-typewriter--typing,
+.hero-fullscreen__heading.hp-typewriter--typing .hp-typewriter-text,
+.hero-fullscreen__heading.hp-typewriter--typing > span[aria-hidden="true"] {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+main h1.hp-typewriter--done,
+main h2.hp-typewriter--done,
+main h3.hp-typewriter--done {
+  transition: font-size 0.35s ease, line-height 0.35s ease, letter-spacing 0.35s ease;
+}
+
 /* Unified homepage section titles — equal size, weight, and spacing */
 .bs-coverflow__heading,
 .fb__title,

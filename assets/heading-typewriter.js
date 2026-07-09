@@ -26,6 +26,7 @@
     if (!shouldType(element)) return;
 
     element.dataset.typewriterActive = 'true';
+    element.classList.add('hp-typewriter--typing');
 
     var originalHTML = element.innerHTML;
     var fullText = element.innerHTML
@@ -55,6 +56,8 @@
         index += 1;
         window.setTimeout(tick, speed);
       } else {
+        element.classList.remove('hp-typewriter--typing');
+        element.classList.add('hp-typewriter--done');
         element.innerHTML = originalHTML;
         element.style.position = '';
         element.dataset.typewriterDone = 'true';
