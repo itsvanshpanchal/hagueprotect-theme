@@ -30,6 +30,12 @@
   --section-heading-size-mobile: clamp(32px, 8vw, 40px);
   --section-header-spacing: 48px;
   --section-header-spacing-mobile: 32px;
+  --section-subheading-size: 16px;
+  --section-subheading-weight: 400;
+  --section-subheading-line-height: 1.6;
+  --section-subheading-color: #565656;
+  --section-subheading-max-width: 600px;
+  --section-subheading-spacing-top: 12px;
   --border-radius-sm: 4px;
   --border-radius-md: 12px;
   --border-radius-lg: 24px;
@@ -524,6 +530,56 @@ main h2.h2,
   .trending-social-header,
   .fc-header {
     margin-bottom: var(--section-header-spacing-mobile) !important;
+  }
+}
+
+/* Unified section subheadings — Inter body style like materials description */
+.mat-desc,
+.fb__subtitle,
+.fc-subtitle,
+.brand-banner__subtitle,
+.hero-fullscreen__subheading,
+.comm-desc,
+.comm-badge-desc,
+.skincare-hero__subtitle,
+.skincare-concerns__subtitle,
+.corp-form__subtitle,
+.d2c-subtitle-text,
+.vr-info__subtitle,
+.sor-info__subtitle,
+[class*="ckc-"][class*="__desc"] {
+  font-family: var(--font-family-sans) !important;
+  font-size: var(--section-subheading-size) !important;
+  font-weight: var(--section-subheading-weight) !important;
+  line-height: var(--section-subheading-line-height) !important;
+  letter-spacing: normal !important;
+  color: var(--section-subheading-color) !important;
+  text-transform: none !important;
+  text-align: left !important;
+  max-width: var(--section-subheading-max-width) !important;
+  margin: var(--section-subheading-spacing-top) 0 0 0 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subheadings on dark/image backgrounds */
+.hero-fullscreen__subheading,
+.brand-banner__subtitle {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* Centered section headers */
+.fc-header .fc-subtitle,
+.comm-desc,
+.comm-badge-desc {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media screen and (max-width: 767px) {
+  .hero-fullscreen__subheading {
+    text-align: center !important;
+    max-width: 100% !important;
   }
 }
 
