@@ -2,7 +2,7 @@
   'use strict';
 
   var EXCLUDE_ANCESTORS =
-    '.cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, [data-no-typewriter]';
+    '.cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, .faq-custom, [data-no-typewriter]';
 
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
