@@ -1,0 +1,145 @@
+{%- comment -%}
+  Left sidebar collection filters. Requires `collection` and `section_id`.
+{%- endcomment -%}
+
+<aside
+  class="col-filters col-filters--{{ section_id }}"
+  id="ColFilters-{{ section_id }}"
+  data-col-filters
+  aria-label="Product filters"
+>
+  <div class="col-filters__inner">
+    <div class="col-filters__head">
+      <h2 class="col-filters__title">Filter</h2>
+      <button type="button" class="col-filters__close" data-col-filters-close aria-label="Close filters">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {%- if collection.filters.size > 0 -%}
+      <facet-filters-form data-section-id="{{ section_id }}">
+        <form class="col-filters__form" id="FacetFiltersForm-{{ section_id }}">
+          {%- for filter in collection.filters -%}
+            <details class="col-filters__group" {% if filter.active_values.size > 0 %}open{% endif %}>
+              <summary class="col-filters__group-label">
+                <span>{{ filter.label | escape }}</span>
+                <svg class="col-filters__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+
+              <div class="col-filters__group-body">
+                {%- case filter.type -%}
+                  {%- when 'boolean' -%}
+                    <ul class="col-filters__list" role="list">
+                      {%- for value in filter.values -%}
+                        <li class="col-filters__item">
+                          <label class="col-filters__check">
+                            <input
+                              type="checkbox"
+                              name="{{ value.param_name }}"
+                              value="{{ value.value }}"
+                              {% if value.active %}checked{% endif %}
+                              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                            >
+                            <span class="col-filters__check-box" aria-hidden="true"></span>
+                            <span class="col-filters__check-label">{{ value.label | escape }}</span>
+                            <span class="col-filters__count">({{ value.count }})</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+
+                  {%- when 'list' -%}
+                    <ul class="col-filters__list" role="list">
+                      {%- for value in filter.values -%}
+                        <li class="col-filters__item">
+                          <label class="col-filters__check">
+                            <input
+                              type="checkbox"
+                              name="{{ value.param_name }}"
+                              value="{{ value.value }}"
+                              {% if value.active %}checked{% endif %}
+                              {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                            >
+                            <span class="col-filters__check-box" aria-hidden="true"></span>
+                            <span class="col-filters__check-label">
+                              {%- if filter.presentation == 'swatch' and value.swatch != blank -%}
+                                <span
+                                  class="col-filters__swatch"
+                                  style="{% if value.swatch.color %}background-color: {{ value.swatch.color }};{% endif %}{% if value.swatch.image %}background-image: url({{ value.swatch.image | image_url: width: 40 }});{% endif %}"
+                                ></span>
+                              {%- endif -%}
+                              {{ value.label | escape }}
+                            </span>
+                            <span class="col-filters__count">({{ value.count }})</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+
+                  {%- when 'price_range' -%}
+                    <div class="col-filters__price">
+                      <div class="col-filters__price-fields">
+                        <label class="col-filters__price-field">
+                          <span class="visually-hidden">From</span>
+                          <span class="col-filters__price-prefix">{{ cart.currency.symbol }}</span>
+                          <input
+                            type="number"
+                            name="{{ filter.min_value.param_name }}"
+                            {%- if filter.min_value.value -%}
+                              value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            placeholder="0"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            class="col-filters__price-input"
+                          >
+                        </label>
+                        <span class="col-filters__price-sep" aria-hidden="true">–</span>
+                        <label class="col-filters__price-field">
+                          <span class="visually-hidden">To</span>
+                          <span class="col-filters__price-prefix">{{ cart.currency.symbol }}</span>
+                          <input
+                            type="number"
+                            name="{{ filter.max_value.param_name }}"
+                            {%- if filter.max_value.value -%}
+                              value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                            {%- endif -%}
+                            placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            min="0"
+                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            class="col-filters__price-input"
+                          >
+                        </label>
+                      </div>
+                      <p class="col-filters__price-hint">
+                        Highest: {{ filter.range_max | money }}
+                      </p>
+                    </div>
+                {%- endcase -%}
+              </div>
+            </details>
+          {%- endfor -%}
+        </form>
+      </facet-filters-form>
+    {%- else -%}
+      <p class="col-filters__empty">
+        No filters configured yet. Add filters in Shopify Admin → Search &amp; Discovery.
+      </p>
+    {%- endif -%}
+
+    {%- assign active_count = 0 -%}
+    {%- for filter in collection.filters -%}
+      {%- assign active_count = active_count | plus: filter.active_values.size -%}
+    {%- endfor -%}
+
+    {%- if active_count > 0 -%}
+      <a href="{{ collection.url }}" class="col-filters__clear">Clear all filters</a>
+    {%- endif -%}
+  </div>
+</aside>
+
+<div class="col-filters__overlay" data-col-filters-overlay hidden></div>

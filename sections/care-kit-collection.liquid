@@ -1,3 +1,30 @@
+{%- liquid
+  assign use_collection_filters = false
+  if section.settings.enable_filters and template.name == 'collection' and collection != blank
+    assign use_collection_filters = true
+  endif
+
+  assign has_global_collection = false
+  if collection != blank and collection.products.size > 0
+    assign has_global_collection = true
+  endif
+
+  assign has_collection_products = false
+  if section.settings.collection != blank and section.settings.collection.products.size > 0
+    assign has_collection_products = true
+  endif
+
+  assign has_block_products = false
+  for block in section.blocks
+    if block.type == 'product' and block.settings.product != blank
+      assign has_block_products = true
+      break
+    endif
+  endfor
+
+  assign products_per_page = section.settings.products_limit | default: 24
+-%}
+
 {%- style -%}
   .ckc-{{ section.id }} {
     background: {{ section.settings.bg_color | default: '#ffffff' }};
@@ -6,7 +33,7 @@
   }
 
   .ckc-{{ section.id }}__container {
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 max(16px, var(--site-padding, 20px));
     box-sizing: border-box;
@@ -38,12 +65,367 @@
 
   .ckc-{{ section.id }}__desc {
     margin: 0;
+    color: #565656;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Filter layout */
+  .ckc-{{ section.id }}__layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 40px);
+    align-items: start;
+  }
+
+  .ckc-{{ section.id }}__main {
+    min-width: 0;
+  }
+
+  .ckc-{{ section.id }}__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ececec;
+    flex-wrap: wrap;
+  }
+
+  .ckc-{{ section.id }}__count {
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+  }
+
+  .ckc-{{ section.id }}__count strong {
+    color: #111111;
+    font-weight: 700;
+  }
+
+  .ckc-{{ section.id }}__toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+
+  .ckc-{{ section.id }}__filter-btn {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid #dddddd;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111111;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .ckc-{{ section.id }}__filter-btn:hover {
+    border-color: #ff2b2b;
+    color: #ff2b2b;
+  }
+
+  .ckc-{{ section.id }}__sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ckc-{{ section.id }}__sort-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666666;
+    white-space: nowrap;
+  }
+
+  .ckc-{{ section.id }}__sort-select {
+    appearance: none;
+    padding: 10px 36px 10px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23111' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111111;
+    cursor: pointer;
+    min-width: 180px;
+  }
+
+  .ckc-{{ section.id }}__sort-select:focus {
+    outline: none;
+    border-color: #ff2b2b;
+    box-shadow: 0 0 0 3px rgba(255, 43, 43, 0.12);
+  }
+
+  /* Sidebar filters */
+  .col-filters--{{ section.id }} {
+    position: sticky;
+    top: calc(var(--header-height, 80px) + 20px);
+    align-self: start;
+  }
+
+  .col-filters__inner {
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .col-filters__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .col-filters__title {
+    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111111;
+    margin: 0;
+  }
+
+  .col-filters__close {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #111111;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .col-filters__group {
+    border-bottom: 1px solid #ececec;
+    padding: 4px 0;
+  }
+
+  .col-filters__group:last-of-type {
+    border-bottom: none;
+  }
+
+  .col-filters__group-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .col-filters__group-label::-webkit-details-marker {
+    display: none;
+  }
+
+  .col-filters__chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .col-filters__group[open] .col-filters__chevron {
+    transform: rotate(180deg);
+  }
+
+  .col-filters__group-body {
+    padding-bottom: 12px;
+  }
+
+  .col-filters__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .col-filters__check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-size: 14px;
+    color: #333333;
+  }
+
+  .col-filters__check:hover {
+    background: #ffffff;
+  }
+
+  .col-filters__check input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .col-filters__check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #cccccc;
+    border-radius: 5px;
+    flex-shrink: 0;
+    position: relative;
+    background: #ffffff;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .col-filters__check input:checked + .col-filters__check-box {
+    background: #ff2b2b;
+    border-color: #ff2b2b;
+  }
+
+  .col-filters__check input:checked + .col-filters__check-box::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .col-filters__check input:disabled + .col-filters__check-box {
+    opacity: 0.4;
+  }
+
+  .col-filters__check-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+  }
+
+  .col-filters__count {
+    font-size: 12px;
+    color: #999999;
+    flex-shrink: 0;
+  }
+
+  .col-filters__swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+  }
+
+  .col-filters__price-fields {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .col-filters__price-field {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .col-filters__price-prefix {
+    position: absolute;
+    left: 10px;
+    font-size: 13px;
+    color: #888888;
+    pointer-events: none;
+  }
+
+  .col-filters__price-input {
+    width: 100%;
+    padding: 10px 10px 10px 24px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 13px;
+    background: #ffffff;
+  }
+
+  .col-filters__price-input:focus {
+    outline: none;
+    border-color: #ff2b2b;
+  }
+
+  .col-filters__price-sep {
+    color: #999999;
+    font-size: 13px;
+  }
+
+  .col-filters__price-hint {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: #888888;
+  }
+
+  .col-filters__empty {
+    font-size: 13px;
+    color: #888888;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .col-filters__clear {
+    display: inline-flex;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff2b2b;
+    text-decoration: none;
+  }
+
+  .col-filters__clear:hover {
+    text-decoration: underline;
+  }
+
+  .col-filters__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9998;
   }
 
   .ckc-{{ section.id }}__grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
+    transition: opacity 0.2s ease;
+  }
+
+  .ckc-{{ section.id }}__grid.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .ckc-{{ section.id }}__card {
@@ -156,50 +538,134 @@
     font-size: 15px;
   }
 
-  @media screen and (max-width: 1024px) {
-    .ckc-{{ section.id }}__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
+  .ckc-{{ section.id }}__pagination {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
-  @media screen and (max-width: 768px) {
-    .ckc-{{ section.id }}__grid {
+  .ckc-{{ section.id }}__pagination a,
+  .ckc-{{ section.id }}__pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #111111;
+    border: 1px solid #ececec;
+    background: #ffffff;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .ckc-{{ section.id }}__pagination a:hover {
+    border-color: #ff2b2b;
+    color: #ff2b2b;
+  }
+
+  .ckc-{{ section.id }}__pagination .current {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .ckc-{{ section.id }}__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .ckc-{{ section.id }}__filter-btn {
+      display: inline-flex;
+    }
+
+    .col-filters--{{ section.id }} {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: min(320px, 88vw);
+      height: 100%;
+      z-index: 9999;
+      transform: translateX(-105%);
+      transition: transform 0.3s ease;
+      background: #ffffff;
+      overflow-y: auto;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .col-filters--{{ section.id }} .col-filters__inner {
+      border: none;
+      border-radius: 0;
+      min-height: 100%;
+      background: #ffffff;
+    }
+
+    .col-filters__close {
+      display: inline-flex;
+    }
+
+    .col-filters__overlay {
+      display: block;
+    }
+
+    body.col-filters-open .col-filters--{{ section.id }} {
+      transform: translateX(0);
+    }
+
+    .ckc-{{ section.id }}__grid,
+    .ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
   }
 
+  @media screen and (max-width: 768px) {
+    .ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ckc-{{ section.id }}__sort-label {
+      display: none;
+    }
+
+    .ckc-{{ section.id }}__sort-select {
+      min-width: 150px;
+    }
+  }
+
   @media screen and (max-width: 480px) {
-    .ckc-{{ section.id }}__grid {
+    .ckc-{{ section.id }}__grid,
+    .ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
       grid-template-columns: 1fr;
     }
   }
 {%- endstyle -%}
 
-{%- liquid
-  assign has_global_collection = false
-  if collection != blank and collection.products.size > 0
-    assign has_global_collection = true
-  endif
-
-  assign has_collection_products = false
-  if section.settings.collection != blank and section.settings.collection.products.size > 0
-    assign has_collection_products = true
-  endif
-
-  assign has_block_products = false
-  for block in section.blocks
-    if block.type == 'product' and block.settings.product != blank
-      assign has_block_products = true
-      break
-    endif
-  endfor
--%}
-
-<section class="ckc-{{ section.id }}" id="{% if section.settings.section_id != blank %}{{ section.settings.section_id }}{% else %}care-kit-products{% endif %}" aria-label="{{ section.settings.heading | default: 'Care kit products' | escape }}">
+<section
+  class="ckc-{{ section.id }}{% unless use_collection_filters %} ckc-{{ section.id }}--no-filters{% endunless %}"
+  id="{% if section.settings.section_id != blank %}{{ section.settings.section_id }}{% else %}care-kit-products{% endif %}"
+  aria-label="{{ section.settings.heading | default: 'Care kit products' | escape }}"
+>
   <div class="ckc-{{ section.id }}__container">
-    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank -%}
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank or collection.title != blank -%}
       <div class="ckc-{{ section.id }}__header">
         {%- if section.settings.eyebrow != blank -%}
           <p class="ckc-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -211,44 +677,135 @@
         {%- endif -%}
         {%- if section.settings.description != blank -%}
           <p class="ckc-{{ section.id }}__desc">{{ section.settings.description }}</p>
+        {%- elsif collection != blank and collection.description != blank -%}
+          <p class="ckc-{{ section.id }}__desc">{{ collection.description }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
 
-    <div class="ckc-{{ section.id }}__grid">
-      {%- if has_global_collection -%}
-        {%- for product in collection.products limit: section.settings.products_limit -%}
-          {%- render 'care-kit-product-card',
-            product: product,
-            section_id: section.id,
-            rating_value: section.settings.rating_value,
-            rating_count: section.settings.rating_count
-          -%}
-        {%- endfor -%}
-      {%- elsif has_collection_products -%}
-        {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
-          {%- render 'care-kit-product-card',
-            product: product,
-            section_id: section.id,
-            rating_value: section.settings.rating_value,
-            rating_count: section.settings.rating_count
-          -%}
-        {%- endfor -%}
-      {%- elsif has_block_products -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'product' and block.settings.product != blank -%}
+    {%- if use_collection_filters -%}
+      <div class="ckc-{{ section.id }}__layout">
+        {%- render 'collection-filters-sidebar', collection: collection, section_id: section.id -%}
+
+        <div class="ckc-{{ section.id }}__main">
+          <div class="ckc-{{ section.id }}__toolbar" data-col-toolbar="{{ section.id }}">
+            <p class="ckc-{{ section.id }}__count">
+              <strong>{{ collection.products_count }}</strong>
+              {%- if collection.products_count == 1 -%}
+                product
+              {%- else -%}
+                products
+              {%- endif -%}
+            </p>
+            <div class="ckc-{{ section.id }}__toolbar-actions">
+              <button type="button" class="ckc-{{ section.id }}__filter-btn" data-col-filters-open>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Filter
+              </button>
+              <div class="ckc-{{ section.id }}__sort">
+                <label class="ckc-{{ section.id }}__sort-label" for="SortBy-{{ section.id }}">Sort by</label>
+                <select
+                  id="SortBy-{{ section.id }}"
+                  class="ckc-{{ section.id }}__sort-select"
+                  data-col-sort-select
+                  data-section-id="{{ section.id }}"
+                  aria-label="Sort products"
+                >
+                  {%- for option in collection.sort_options -%}
+                    <option
+                      value="{{ option.value }}"
+                      {% if option.value == collection.sort_by %}selected{% endif %}
+                    >
+                      {{ option.name }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="CollectionGrid-{{ section.id }}">
+            {%- paginate collection.products by products_per_page -%}
+              <div class="ckc-{{ section.id }}__grid">
+                {%- if collection.products.size > 0 -%}
+                  {%- for product in collection.products -%}
+                    {%- render 'care-kit-product-card',
+                      product: product,
+                      section_id: section.id,
+                      rating_value: section.settings.rating_value,
+                      rating_count: section.settings.rating_count
+                    -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  <p class="ckc-{{ section.id }}__empty">No products match your filters. Try adjusting or clearing filters.</p>
+                {%- endif -%}
+              </div>
+
+              {%- if paginate.pages > 1 -%}
+                <nav class="ckc-{{ section.id }}__pagination" aria-label="Pagination">
+                  {%- if paginate.previous -%}
+                    <a href="{{ paginate.previous.url }}">←</a>
+                  {%- endif -%}
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <a href="{{ part.url }}">{{ part.title }}</a>
+                    {%- else -%}
+                      {%- if part.title == paginate.current_page -%}
+                        <span class="current" aria-current="page">{{ part.title }}</span>
+                      {%- else -%}
+                        <span>{{ part.title }}</span>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if paginate.next -%}
+                    <a href="{{ paginate.next.url }}">→</a>
+                  {%- endif -%}
+                </nav>
+              {%- endif -%}
+            {%- endpaginate -%}
+          </div>
+        </div>
+      </div>
+
+      <script src="{{ 'collection-facets.js' | asset_url }}" defer="defer"></script>
+    {%- else -%}
+      <div class="ckc-{{ section.id }}__grid">
+        {%- if has_global_collection -%}
+          {%- for product in collection.products limit: section.settings.products_limit -%}
             {%- render 'care-kit-product-card',
-              product: block.settings.product,
+              product: product,
               section_id: section.id,
               rating_value: section.settings.rating_value,
               rating_count: section.settings.rating_count
             -%}
-          {%- endif -%}
-        {%- endfor -%}
-      {%- else -%}
-        <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
-      {%- endif -%}
-    </div>
+          {%- endfor -%}
+        {%- elsif has_collection_products -%}
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            {%- render 'care-kit-product-card',
+              product: product,
+              section_id: section.id,
+              rating_value: section.settings.rating_value,
+              rating_count: section.settings.rating_count
+            -%}
+          {%- endfor -%}
+        {%- elsif has_block_products -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'product' and block.settings.product != blank -%}
+              {%- render 'care-kit-product-card',
+                product: block.settings.product,
+                section_id: section.id,
+                rating_value: section.settings.rating_value,
+                rating_count: section.settings.rating_count
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -259,6 +816,13 @@
     "templates": ["collection", "page"]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_filters",
+      "label": "Show left sidebar filters",
+      "default": true,
+      "info": "On collection pages, shows filter sidebar with sort and Shopify filters."
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -292,10 +856,10 @@
       "type": "range",
       "id": "products_limit",
       "min": 4,
-      "max": 24,
-      "step": 1,
-      "default": 12,
-      "label": "Max products from collection"
+      "max": 48,
+      "step": 4,
+      "default": 24,
+      "label": "Products per page"
     },
     {
       "type": "text",
