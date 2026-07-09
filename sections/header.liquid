@@ -62,9 +62,21 @@
     display: block;
   }
 
+  .header__logo-img--hp {
+    height: 36px;
+    width: auto;
+    max-width: min(260px, 52vw);
+    object-fit: contain;
+  }
+
   @media screen and (max-width: 1024px) {
     .header__logo-img {
       height: 28px;
+    }
+
+    .header__logo-img--hp {
+      height: 26px;
+      max-width: min(200px, 48vw);
     }
   }
 
@@ -830,6 +842,12 @@
     elsif brand_context == 'science-of-raw'
       assign logo_link = '/collections/all?view=science-of-raw'
     endif
+
+    if section.settings.logo_hp != blank
+      assign hp_logo_url = section.settings.logo_hp | image_url: width: 320
+    else
+      assign hp_logo_url = 'logo-hagueprotect.png' | asset_url
+    endif
   -%}
   {%- comment -%}
     ============================================================
@@ -850,11 +868,7 @@
 
         {%- comment -%} 1 · Hague Protect → current store homepage {%- endcomment -%}
         <a href="/" class="brand-bar__item" aria-label="Hague Protect — Home">
-          {%- if section.settings.logo_hp != blank -%}
-            <img src="{{ section.settings.logo_hp | image_url: width: 130 }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
-          {%- else -%}
-            <img src="{{ 'logo-hagueprotect.png' | asset_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="29" loading="lazy" decoding="async">
-          {%- endif -%}
+          <img src="{{ hp_logo_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="24" loading="lazy" decoding="async">
         </a>
 
         <span class="brand-bar__divider" aria-hidden="true"></span>
@@ -889,7 +903,7 @@
     <a href="{{ logo_link }}" class="header__logo-link" id="HeaderLogoLink" aria-label="Home"
        data-vr-logo="{%- if section.settings.logo_vr != blank -%}{{ section.settings.logo_vr | image_url: width: 150 }}{%- else -%}{{ 'logo-vanrosector.svg' | asset_url }}{%- endif -%}"
        data-sor-logo="{%- if section.settings.logo_sor != blank -%}{{ section.settings.logo_sor | image_url: width: 150 }}{%- else -%}{{ 'logo-science-of-raw.svg' | asset_url }}{%- endif -%}"
-       data-hp-logo="{%- if section.settings.logo_hp != blank -%}{{ section.settings.logo_hp | image_url: width: 220 }}{%- else -%}{{ 'logo-hagueprotect.png' | asset_url }}{%- endif -%}"
+       data-hp-logo="{{ hp_logo_url }}"
        data-vr-href="/collections/all?view=vanrosector"
        data-sor-href="/collections/all?view=science-of-raw"
        data-hp-href="/"
@@ -907,11 +921,7 @@
           <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
         {%- endif -%}
       {%- else -%}
-        {%- if section.settings.logo_hp != blank -%}
-          <img src="{{ section.settings.logo_hp | image_url: width: 220 }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
-        {%- else -%}
-          <img src="{{ 'logo-hagueprotect.png' | asset_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38" loading="eager" decoding="async">
-        {%- endif -%}
+        <img src="{{ hp_logo_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="260" height="36" loading="eager" decoding="async">
       {%- endif -%}
     </a>
     <script>
@@ -933,7 +943,7 @@
           } else if (needBrand === 'hagueprotect') {
             el.href = el.getAttribute('data-hp-href') || '/';
             var hpLogo = el.getAttribute('data-hp-logo');
-            el.innerHTML = '<img src="' + hpLogo + '" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="220" height="38">';
+            el.innerHTML = '<img src="' + hpLogo + '" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="260" height="36">';
           }
         }
       })();
@@ -1053,15 +1063,7 @@
 
       <!-- Hague Protect tab -->
       <button class="megamenu-brand-tab is-active" data-brand-tab="hp" type="button">
-        {%- if section.settings.logo_hp != blank -%}
-          <img src="{{ section.settings.logo_hp | image_url: width: 130 }}" alt="Hague Protect" class="megamenu-tab-logo">
-        {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
-          {%- assign tab_logo = 'logo-hagueprotect.png' -%}
-          {%- if section.settings.logo_text contains '.' -%}{%- assign tab_logo = section.settings.logo_text -%}{%- endif -%}
-          <img src="{{ tab_logo | asset_url }}" alt="Hague Protect" class="megamenu-tab-logo">
-        {%- else -%}
-          {{ section.settings.logo_text }}
-        {%- endif -%}
+        <img src="{{ hp_logo_url }}" alt="Hague Protect" class="megamenu-tab-logo" width="130" height="24" loading="lazy" decoding="async">
       </button>
 
       {%- if vanrosector_linklist.links.size > 0 or section.settings.vanrosector_menu != blank -%}
@@ -1562,15 +1564,10 @@
       "content": "Branding"
     },
     {
-      "type": "text",
-      "id": "logo_text",
-      "label": "Logo Text",
-      "default": "HAGUEPROTECT"
-    },
-    {
       "type": "image_picker",
       "id": "logo_hp",
-      "label": "Hague Protect Logo"
+      "label": "Hague Protect Logo",
+      "info": "Optional. If empty, the theme uses assets/logo-hagueprotect.png."
     },
     {
       "type": "image_picker",
