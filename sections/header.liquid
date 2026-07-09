@@ -843,10 +843,11 @@
       assign logo_link = '/collections/all?view=science-of-raw'
     endif
 
+    assign hp_logo_asset = 'logo-hagueprotect.png'
     if section.settings.logo_hp != blank
       assign hp_logo_url = section.settings.logo_hp | image_url: width: 320
     else
-      assign hp_logo_url = 'logo-hagueprotect.png' | asset_url
+      assign hp_logo_url = hp_logo_asset | asset_url
     endif
   -%}
   {%- comment -%}
@@ -921,7 +922,15 @@
           <img src="{{ 'logo-science-of-raw.svg' | asset_url }}" alt="Science of Raw" class="header__logo-img" width="150" height="75" loading="eager" decoding="async">
         {%- endif -%}
       {%- else -%}
-        <img src="{{ hp_logo_url }}" alt="HagueProtect" class="header__logo-img header__logo-img--hp" width="260" height="36" loading="eager" decoding="async">
+        <img
+          src="{{ hp_logo_url }}"
+          alt="HagueProtect"
+          class="header__logo-img header__logo-img--hp"
+          width="260"
+          height="36"
+          loading="eager"
+          decoding="async"
+        >
       {%- endif -%}
     </a>
     <script>
