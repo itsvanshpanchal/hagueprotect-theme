@@ -517,30 +517,40 @@
     z-index: 1;
     pointer-events: none;
     opacity: calc({{ section.settings.video_opacity | default: 100 }} / 100);
+    background: {{ section.settings.bg_color | default: '#ff1e43' }};
   }
-  .hp-fam-sec__video-bg video {
+
+  .hp-fam-sec__video-bg video,
+  .hp-fam-sec__video-bg .hp-fam-sec__video {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 100%;
     height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     transform: translate(-50%, -50%);
-    object-fit: cover;
+    object-fit: {{ section.settings.video_fit | default: 'contain' }};
+    object-position: center center;
+    filter: brightness(calc({{ section.settings.video_brightness | default: 125 }} / 100)) contrast(calc({{ section.settings.video_contrast | default: 108 }} / 100)) saturate(1.08);
     z-index: 1;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
+
   .hp-fam-sec__video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, 
-      {{ section.settings.bg_color | default: '#ff1e43' | color_modify: 'alpha', 0.4 }} 0%, 
-      {{ section.settings.bg_color_bottom | default: '#000000' | color_modify: 'alpha', 0.85 }} 85%
+    background: linear-gradient(to bottom,
+      {{ section.settings.bg_color | default: '#ff1e43' | color_modify: 'alpha', 0.18 }} 0%,
+      {{ section.settings.bg_color_bottom | default: '#000000' | color_modify: 'alpha', 0.52 }} 85%
     );
     z-index: 2;
     pointer-events: none;
-    opacity: calc({{ section.settings.overlay_opacity | default: 100 }} / 100);
+    opacity: calc({{ section.settings.overlay_opacity | default: 35 }} / 100);
   }
 {%- endstyle -%}
 
@@ -559,7 +569,7 @@
   {%- if section.settings.enable_video_bg -%}
     <div class="hp-fam-sec__video-bg">
       {%- if section.settings.video_bg != blank -%}
-        {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
+        {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'hp-fam-sec__video', preload: 'auto' }}
       {%- elsif section.settings.video_bg_filename != blank -%}
         <video autoplay loop muted playsinline preload="auto" class="hp-fam-sec__video">
           <source src="{{ section.settings.video_bg_filename | asset_url }}" type="video/mp4">
@@ -877,6 +887,37 @@
       "label": "Shopify Hosted Video Background"
     },
     {
+      "type": "select",
+      "id": "video_fit",
+      "label": "Video fit",
+      "options": [
+        { "value": "contain", "label": "Show full video (no crop)" },
+        { "value": "cover", "label": "Fill section (may crop edges)" }
+      ],
+      "default": "contain",
+      "info": "Use 'Show full video' to prevent the background from being cut off."
+    },
+    {
+      "type": "range",
+      "id": "video_brightness",
+      "min": 80,
+      "max": 150,
+      "step": 5,
+      "default": 125,
+      "label": "Video brightness",
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "video_contrast",
+      "min": 90,
+      "max": 130,
+      "step": 2,
+      "default": 108,
+      "label": "Video contrast",
+      "unit": "%"
+    },
+    {
       "type": "range",
       "id": "video_opacity",
       "min": 0,
@@ -892,7 +933,7 @@
       "min": 0,
       "max": 100,
       "step": 5,
-      "default": 50,
+      "default": 35,
       "label": "Overlay Opacity",
       "unit": "%"
     },
