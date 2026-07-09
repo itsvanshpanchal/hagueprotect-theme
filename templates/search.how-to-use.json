@@ -92,197 +92,89 @@
         "heading": "How To Use HAGUEPROTECT Shoe Cleaning & Protecting Products:"
       }
     },
-    "skincare_guide": {
-      "type": "skincare-guide",
+    "guide": {
+      "type": "how-to-use-guide",
       "blocks": {
-        "concern_1": {
-          "type": "skin_concern",
+        "mat_suede": {
+          "type": "material",
           "settings": {
-            "title": "Fine Lines & Wrinkles",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
+            "title": "Suede",
+            "badge": "Delicate Care",
+            "description": "Suede needs gentle, dry-first cleaning to preserve its napped texture.",
+            "tips": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying",
+            "collection": "suede-care-kit"
           }
         },
-        "concern_2": {
-          "type": "skin_concern",
+        "mat_leather": {
+          "type": "material",
           "settings": {
-            "title": "Acne & Breakouts",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
+            "title": "Leather",
+            "badge": "Smooth Finish",
+            "description": "Smooth leather responds best to pH-balanced cleaner and light conditioning.",
+            "tips": "Wipe with a damp microfiber cloth first\nApply cleaner in small circular motions\nBuff with a clean dry cloth for shine\nCondition monthly to prevent cracking",
+            "collection": "leather-care-kit"
           }
         },
-        "concern_3": {
-          "type": "skin_concern",
+        "mat_nubuck": {
+          "type": "material",
           "settings": {
-            "title": "Dryness",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
+            "title": "Nubuck",
+            "badge": "Soft Nap",
+            "description": "Nubuck is finer than suede — treat it with extra care and minimal water.",
+            "tips": "Always brush dry before any wet cleaning\nUse the softest brush in your kit\nPat dry — never rub aggressively\nApply protector to maintain water resistance",
+            "collection": "nubuck-care-kit"
           }
         },
-        "concern_4": {
-          "type": "skin_concern",
+        "mat_fabric": {
+          "type": "material",
           "settings": {
-            "title": "Pores & Oil Control",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
+            "title": "Mesh & Fabric",
+            "badge": "Breathable",
+            "description": "Knit, mesh, and canvas uppers need targeted cleaning without overwetting.",
+            "tips": "Remove insoles and laces before cleaning\nUse the medium brush on mesh panels\nAvoid soaking — foam cleaner works best\nAir dry stuffed with paper towels",
+            "collection": "fabric-care-kit"
           }
         },
-        "concern_5": {
-          "type": "skin_concern",
+        "mat_soles": {
+          "type": "material",
           "settings": {
-            "title": "Dullness & Uneven Tone",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
-          }
-        },
-        "concern_6": {
-          "type": "skin_concern",
-          "settings": {
-            "title": "Redness & Sensitivity",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
-          }
-        },
-        "concern_7": {
-          "type": "skin_concern",
-          "settings": {
-            "title": "Body Care",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
-          }
-        },
-        "concern_8": {
-          "type": "skin_concern",
-          "settings": {
-            "title": "Daily Care",
-            "ess_prod_1": "",
-            "ess_prod_1_lbl": "READY",
-            "ess_prod_2": "",
-            "ess_prod_2_lbl": "TARGET",
-            "ess_prod_3": "",
-            "ess_prod_3_lbl": "PROTECT",
-            "adv_prod_1": "",
-            "adv_prod_1_lbl": "READY",
-            "adv_prod_2": "",
-            "adv_prod_2_lbl": "TARGET",
-            "adv_prod_3": "",
-            "adv_prod_3_lbl": "PROTECT"
+            "title": "Soles",
+            "badge": "Deep Clean",
+            "description": "Midsoles and outsoles can handle more aggressive cleaning for icy-white results.",
+            "tips": "Use the stiff brush on rubber soles\nApply sole-specific cleaner for yellowing\nScrub midsoles in back-and-forth strokes\nWipe clean and protect from future yellowing",
+            "collection": "soles-care-kit"
           }
         }
       },
       "block_order": [
-        "concern_1",
-        "concern_2",
-        "concern_3",
-        "concern_4",
-        "concern_5",
-        "concern_6",
-        "concern_7",
-        "concern_8"
+        "mat_suede",
+        "mat_leather",
+        "mat_nubuck",
+        "mat_fabric",
+        "mat_soles"
       ],
       "settings": {
-        "hero_title": "HAGUEPROTECT Beginner's Guide",
-        "hero_text": "Find the routine that matches your skin concern from our basic, easy and fast steps.",
-        "intro_title": "New to skincare? Or ready to level up? Start here.",
-        "intro_text": "Discover COSRX skincare routines for healthy, glowing skin! Match your specific skincare concern to easily begin your basic and advanced routine steps.",
-        "intro_bg": "#f7f7f7",
-        "routine_title": "COSRX Basic 3-Step Routine",
-        "step_1_title": "Ready",
-        "step_1_text": "Cleanse & tone skin to prep it for target treatments.",
-        "step_2_title": "Target",
-        "step_2_text": "Apply concentrated active ingredients to target specific skin concerns.",
-        "step_3_title": "Protect",
-        "step_3_text": "Lock in hydration and protect the skin barrier with moisturizer during the day and cream/oil for overnight care.",
-        "routine_note": "* Full 4-step routine is recommended for advanced treatments.",
-        "divider_1_text": "Find the Perfect Routine for Your Skin",
-        "concern_heading": "Simply choose your skin concern",
-        "concern_subheading": "We understand that skin care can be confusing. That's why we make it simple. Pick the skin concern below to discover recommended products.",
-        "cta_text": "GET FULL ROUTINE NOW & SAVE 30%",
-        "cta_url": "",
-        "cta_bg_color": "#fff000",
-        "cta_text_color": "#000000",
-        "divider_2_text": "Let's build R.T.P. Routine together!",
-        "builder_label": "Skincare Beginner Guide",
-        "builder_title": "Already know your skin?",
-        "builder_text": "Skip the guide and search for items directly! Filter skin concerns, textures, ingredients, and find what works for you.",
-        "builder_btn_text": "Build Your Routine",
-        "builder_btn_url": ""
+        "intro_eyebrow": "The Protocol",
+        "intro_title": "Prep.",
+        "intro_title_accent": "Clean. Protect.",
+        "intro_text": "Every premium sneaker deserves a system — not shortcuts. Master the Hague Protect three-step protocol for results that last.",
+        "protocol_heading": "The 3-Step System",
+        "protocol_subheading": "Follow this sequence every time for professional-grade results.",
+        "materials_heading": "Care by Material",
+        "materials_subheading": "Select your upper material for tailored tips and the right brush.",
+        "wisdom_heading": "Pro Rules",
+        "do_list": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry — never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first",
+        "dont_list": "Never put sneakers in a washing machine\nDon't use harsh bleach or alcohol-based cleaners\nAvoid scrubbing suede with stiff bristles\nDon't wear shoes before they're completely dry\nNever skip the protection step",
+        "cta_title": "Ready to Start?",
+        "cta_text": "Get the complete kit with every brush, solution, and protector you need — in one box.",
+        "cta_label": "Shop Care Kits",
+        "cta_url": "/collections/all"
       }
     }
   },
   "order": [
     "banner",
     "videos",
-    "skincare_guide"
+    "guide"
   ]
 }
