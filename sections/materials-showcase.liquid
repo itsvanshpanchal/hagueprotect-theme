@@ -29,7 +29,7 @@
   .mat-grid {
     display: grid !important;
     grid-template-columns: 45% 55% !important;
-    align-items: center !important;
+    align-items: start !important;
     gap: 80px !important;
   }
 
@@ -42,8 +42,9 @@
 
   .mat-right {
     display: flex !important;
-    align-items: center !important;
+    align-items: flex-start !important;
     justify-content: center !important;
+    padding-top: 88px !important;
   }
 
   .mat-eyebrow {
@@ -192,6 +193,9 @@
     .mat-grid {
       grid-template-columns: 48% 52% !important;
       gap: 40px !important;
+    }
+    .mat-right {
+      padding-top: 64px !important;
     }
     .mat-menu-item {
       font-size: calc({{ section.settings.menu_font_size | default: 48 }}px * 0.7) !important;
