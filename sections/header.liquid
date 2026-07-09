@@ -528,111 +528,6 @@
     background-color: #FFF3F3;
     padding-left: 24px;
   }
-
-  /* Our Brands — multi-brand navigation bar */
-  .brand-bar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ececec;
-    width: 100%;
-    position: relative;
-    z-index: 1001;
-    padding: 12px 16px;
-  }
-
-  .brand-bar__inner {
-    max-width: 1320px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-  }
-
-  .brand-bar__eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.22em;
-    color: #9a9a9a;
-    text-transform: uppercase;
-    user-select: none;
-    margin: 0;
-  }
-
-  .brand-bar__logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(28px, 6vw, 72px);
-    width: 100%;
-  }
-
-  .brand-bar__item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 4px;
-    text-decoration: none;
-    opacity: 0.72;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, opacity;
-  }
-
-  .brand-bar__item:hover,
-  .brand-bar__item:focus-visible {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-
-  .brand-bar__item:focus-visible {
-    outline: 2px solid #FF2B2B;
-    outline-offset: 4px;
-    border-radius: 4px;
-  }
-
-  .brand-bar__img {
-    display: block;
-    height: 32px;
-    width: auto;
-    max-width: 170px;
-    object-fit: contain;
-  }
-
-  .brand-bar__divider {
-    width: 1px;
-    height: 26px;
-    background: #e3e3e3;
-    flex-shrink: 0;
-  }
-
-  @media screen and (max-width: 1024px) {
-    .brand-bar { padding: 10px 14px; }
-    .brand-bar__item { height: 32px; }
-    .brand-bar__img { height: 28px; }
-    .brand-bar__divider { height: 22px; }
-  }
-
-  @media screen and (max-width: 600px) {
-    .brand-bar { padding: 9px 10px; }
-    .brand-bar__logos { gap: clamp(14px, 5vw, 28px); }
-    .brand-bar__item { height: auto; padding: 6px 8px; }
-    .brand-bar__img { height: 22px; max-width: 96px; }
-    .brand-bar__divider { height: 18px; }
-    .brand-bar__eyebrow { font-size: 9px; letter-spacing: 0.18em; }
-  }
-
-  @media screen and (max-width: 360px) {
-    .brand-bar__logos { gap: 12px; }
-    .brand-bar__img { height: 19px; max-width: 80px; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .brand-bar__item { transition: opacity 0.3s ease; }
-    .brand-bar__item:hover,
-    .brand-bar__item:focus-visible { transform: none; }
-  }
 {%- endstyle -%}
 
 <header class="header-wrapper" role="banner">
@@ -648,44 +543,7 @@
 
     assign vanrosector_url = section.settings.vanrosector_link | default: '/collections/all?view=vanrosector'
     assign science_of_raw_url = section.settings.sor_link | default: '/collections/all?view=science-of-raw'
-
-    if section.settings.logo_vr != blank
-      assign vr_logo_url = section.settings.logo_vr | image_url: width: 200
-    else
-      assign vr_logo_url = 'logo-vanrosector.svg' | asset_url
-    endif
-
-    if section.settings.logo_sor != blank
-      assign sor_logo_url = section.settings.logo_sor | image_url: width: 200
-    else
-      assign sor_logo_url = 'logo-science-of-raw.svg' | asset_url
-    endif
   -%}
-
-  {%- if section.settings.show_brand_bar -%}
-  <div class="brand-bar" role="navigation" aria-label="Our brands">
-    <div class="brand-bar__inner">
-      <p class="brand-bar__eyebrow">{{ section.settings.brand_bar_eyebrow | default: 'Our Brands' }}</p>
-      <div class="brand-bar__logos">
-        <a href="{{ routes.root_url }}" class="brand-bar__item" aria-label="Hague Protect — Home">
-          <img src="{{ header_logo_url }}" alt="Hague Protect" class="brand-bar__img" width="130" height="24" loading="lazy" decoding="async">
-        </a>
-
-        <span class="brand-bar__divider" aria-hidden="true"></span>
-
-        <a href="{{ vanrosector_url }}" class="brand-bar__item" aria-label="Vanrosector">
-          <img src="{{ vr_logo_url }}" alt="Vanrosector" class="brand-bar__img" width="200" height="73" loading="lazy" decoding="async">
-        </a>
-
-        <span class="brand-bar__divider" aria-hidden="true"></span>
-
-        <a href="{{ science_of_raw_url }}" class="brand-bar__item" aria-label="Science of Raw">
-          <img src="{{ sor_logo_url }}" alt="Science of Raw" class="brand-bar__img" width="200" height="100" loading="lazy" decoding="async">
-        </a>
-      </div>
-    </div>
-  </div>
-  {%- endif -%}
 
   <div class="header-container">
     
@@ -710,6 +568,15 @@
             <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
+      </div>
+      <div class="nav-item">
+        <a href="{{ routes.root_url }}" class="menu-link">HAGUE PROTECT</a>
+      </div>
+      <div class="nav-item">
+        <a href="{{ vanrosector_url }}" class="menu-link">VNR</a>
+      </div>
+      <div class="nav-item">
+        <a href="{{ science_of_raw_url }}" class="menu-link">SOR</a>
       </div>
       <div class="nav-item">
         <a href="/search?view=how-to-use" class="menu-link">HOW TO USE</a>
@@ -1102,6 +969,9 @@
     {%- else -%}
       <a href="{{ routes.account_login_url }}" class="mobile-nav-link" style="color: #FF2B2B;">Login / Register</a>
     {%- endif -%}
+    <a href="{{ routes.root_url }}" class="mobile-nav-link">HAGUE PROTECT</a>
+    <a href="{{ vanrosector_url }}" class="mobile-nav-link">VNR</a>
+    <a href="{{ science_of_raw_url }}" class="mobile-nav-link">SOR</a>
     <a href="/search?view=how-to-use" class="mobile-nav-link">HOW TO USE</a>
     <a href="/search?view=corporate-gifting" class="mobile-nav-link">CORPORATE GIFTING</a>
     <a href="/pages/contact-us" class="mobile-nav-link">BUSINESS</a>
@@ -1351,39 +1221,17 @@
     },
     {
       "type": "header",
-      "content": "Our Brands bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_brand_bar",
-      "label": "Show Our Brands bar",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "brand_bar_eyebrow",
-      "label": "Brands bar label",
-      "default": "Our Brands"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_vr",
-      "label": "Vanrosector logo"
+      "content": "Brand navigation links"
     },
     {
       "type": "url",
       "id": "vanrosector_link",
-      "label": "Vanrosector link"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_sor",
-      "label": "Science of Raw logo"
+      "label": "Vanrosector (VNR) link"
     },
     {
       "type": "url",
       "id": "sor_link",
-      "label": "Science of Raw link"
+      "label": "Science of Raw (SOR) link"
     }
   ]
 }
