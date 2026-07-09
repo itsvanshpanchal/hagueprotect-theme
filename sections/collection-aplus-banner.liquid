@@ -43,8 +43,8 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign desktop_img = section.settings.image
-  assign mobile_img = section.settings.image_mobile | default: section.settings.image
+  assign desktop_img = section.settings.image | default: collection.image
+  assign mobile_img = section.settings.image_mobile | default: section.settings.image | default: collection.image
   assign banner_alt = section.settings.alt_text | default: desktop_img.alt | default: collection.title | default: 'Collection banner'
 -%}
 
@@ -100,7 +100,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Desktop banner image",
-      "info": "Recommended: 2800 x 1400 px (2:1)"
+      "info": "Recommended: 2800 x 1400 px (2:1). If empty, uses the collection image from Shopify Admin."
     },
     {
       "type": "image_picker",

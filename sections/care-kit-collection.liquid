@@ -1,8 +1,15 @@
 {%- liquid
+  assign on_collection_page = false
+  if template.name == 'collection' and collection != blank
+    assign on_collection_page = true
+  endif
+
   assign use_collection_filters = false
-  if section.settings.enable_filters and template.name == 'collection' and collection != blank
+  if section.settings.enable_filters and on_collection_page
     assign use_collection_filters = true
   endif
+
+  assign use_paginated_collection = on_collection_page
 
   assign has_global_collection = false
   if collection != blank and collection.products.size > 0
@@ -770,6 +777,83 @@
       </div>
 
       <script src="{{ 'collection-facets.js' | asset_url }}" defer="defer"></script>
+    {%- elsif use_paginated_collection -%}
+      <div class="ckc-{{ section.id }}__main">
+        <div class="ckc-{{ section.id }}__toolbar" data-col-toolbar="{{ section.id }}">
+          <p class="ckc-{{ section.id }}__count">
+            <strong>{{ collection.products_count }}</strong>
+            {%- if collection.products_count == 1 -%}
+              product
+            {%- else -%}
+              products
+            {%- endif -%}
+          </p>
+          <div class="ckc-{{ section.id }}__toolbar-actions">
+            <div class="ckc-{{ section.id }}__sort">
+              <label class="ckc-{{ section.id }}__sort-label" for="SortBy-{{ section.id }}">Sort by</label>
+              <select
+                id="SortBy-{{ section.id }}"
+                class="ckc-{{ section.id }}__sort-select"
+                data-col-sort-select
+                data-section-id="{{ section.id }}"
+                aria-label="Sort products"
+              >
+                {%- for option in collection.sort_options -%}
+                  <option
+                    value="{{ option.value }}"
+                    {% if option.value == collection.sort_by %}selected{% endif %}
+                  >
+                    {{ option.name }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div id="CollectionGrid-{{ section.id }}">
+          {%- paginate collection.products by products_per_page -%}
+            <div class="ckc-{{ section.id }}__grid">
+              {%- if collection.products.size > 0 -%}
+                {%- for product in collection.products -%}
+                  {%- render 'care-kit-product-card',
+                    product: product,
+                    section_id: section.id,
+                    rating_value: section.settings.rating_value,
+                    rating_count: section.settings.rating_count
+                  -%}
+                {%- endfor -%}
+              {%- else -%}
+                <p class="ckc-{{ section.id }}__empty">No products in this collection yet. Add products in Shopify Admin → Products → Collections.</p>
+              {%- endif -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="ckc-{{ section.id }}__pagination" aria-label="Pagination">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}">←</a>
+                {%- endif -%}
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}">{{ part.title }}</a>
+                  {%- else -%}
+                    {%- if part.title == paginate.current_page -%}
+                      <span class="current" aria-current="page">{{ part.title }}</span>
+                    {%- else -%}
+                      <span>{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}">→</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+          {%- endpaginate -%}
+        </div>
+      </div>
+
+      <script src="{{ 'collection-facets.js' | asset_url }}" defer="defer"></script>
     {%- else -%}
       <div class="ckc-{{ section.id }}__grid">
         {%- if has_global_collection -%}
@@ -802,7 +886,7 @@
             {%- endif -%}
           {%- endfor -%}
         {%- else -%}
-          <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
+          <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here. On collection pages, products are loaded automatically from the collection in Shopify Admin.</p>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -821,7 +905,7 @@
       "id": "enable_filters",
       "label": "Show left sidebar filters",
       "default": true,
-      "info": "On collection pages, shows filter sidebar with sort and Shopify filters."
+      "info": "On collection pages, shows filter sidebar with sort. Products are loaded automatically from the collection you manage in Shopify Admin."
     },
     {
       "type": "text",
@@ -833,7 +917,8 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Related Products"
+      "default": "",
+      "info": "Leave blank on collection pages to use the collection title from Shopify Admin."
     },
     {
       "type": "textarea",
