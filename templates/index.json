@@ -520,11 +520,56 @@
         "padding_bottom": 80
       }
     },
-    "17776122420bbcf27b": {
+    "blocks_dbdLjg": {
       "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a9c1cbe_xtLrq7": {
+          "type": "ai_gen_block_a9c1cbe",
+          "settings": {
+            "desktop_width_percent": 100,
+            "background_image": "shopify://shop_images/6.png",
+            "image_opacity": 1,
+            "background_color": "#f5f5f5",
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_max_width": 600,
+            "content_padding": 60,
+            "content_offset_left": 60,
+            "content_offset_top": 200,
+            "heading": "Tell Your Story",
+            "heading_size": 48,
+            "heading_color": "#000000",
+            "heading_spacing": 20,
+            "subheading": "Share your brand's journey",
+            "subheading_size": 24,
+            "subheading_color": "#333333",
+            "subheading_spacing": 15,
+            "text": "<p>Craft a compelling narrative that connects with your audience and showcases what makes your brand unique.</p>",
+            "text_size": 16,
+            "text_color": "#666666",
+            "button_text": "Learn More",
+            "button_link": "",
+            "button_spacing": 25,
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 30,
+            "button_border_radius": 4,
+            "button_background_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a9c1cbe_xtLrq7"
+      ],
+      "name": "Story banner",
       "settings": {}
     },
-    "1777632770f72837fc": {
+    "17776122420bbcf27b": {
       "type": "_blocks",
       "settings": {}
     },
@@ -532,62 +577,65 @@
       "type": "apps",
       "settings": {}
     },
-    "1783686350a5803724": {
-      "type": "_blocks",
+    "hague-protect-dna": {
+      "type": "hague-protect-dna",
       "blocks": {
-        "ai_gen_block_a93cc62_ae3LLW": {
-          "type": "ai_gen_block_a93cc62",
+        "dna_feature_1": {
+          "type": "feature",
           "settings": {
-            "heading": "Your heading here",
-            "text": "<p>Add your text content here.</p>",
-            "image": "shopify://shop_images/6.png",
-            "section_height": 500,
-            "mobile_section_height": 400,
-            "container_width": 1200,
-            "text_max_width": 600,
-            "text_alignment": "left",
-            "vertical_alignment": "center",
-            "section_padding_top": 50,
-            "section_padding_bottom": 50,
-            "show_overlay": true,
-            "overlay_color": "#000000",
-            "overlay_opacity": 0,
-            "heading_font": "assistant_n4",
-            "heading_size": 48,
-            "heading_spacing": 16,
-            "body_font": "assistant_n4",
-            "text_size": 18,
-            "heading_color": "#ffffff",
-            "text_color": "#ffffff"
-          },
-          "blocks": {}
+            "icon_preset": "shoecare",
+            "icon": "shopify://shop_images/shoe_352cdb45-f6d7-4e1d-a95a-148d98e2d951.gif",
+            "title": "SPECIALISED SHOECARE",
+            "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+          }
+        },
+        "dna_feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "streets",
+            "icon": "shopify://shop_images/weather_10b73169-8eb5-498b-a545-d90285e8cf61.gif",
+            "title": "INDIAN STREETS TESTED",
+            "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
+          }
+        },
+        "dna_feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "quality",
+            "icon": "shopify://shop_images/quality_d4bd5052-e6a8-4d66-b95e-0a5d0b4f693b.webp",
+            "title": "QUALITY OBSESSED",
+            "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
+          }
+        },
+        "dna_feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "innovating",
+            "icon": "shopify://shop_images/Innovation.webp",
+            "title": "ALWAYS INNOVATING",
+            "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
+          }
         }
       },
       "block_order": [
-        "ai_gen_block_a93cc62_ae3LLW"
+        "dna_feature_1",
+        "dna_feature_2",
+        "dna_feature_3",
+        "dna_feature_4"
       ],
-      "settings": {}
-    },
-    "17776077287b0fe0da": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "17776334431f7fc508": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "blocks_znBaDB": {
-      "type": "_blocks",
-      "name": "Story banner",
-      "settings": {}
-    },
-    "17830962286b04cbad": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "17836860331b9c8ad3": {
-      "type": "_blocks",
-      "settings": {}
+      "settings": {
+        "heading": "HAGUE PROTECT DNA: Culture, Care, and Craft.",
+        "bg_color": "#121111",
+        "text_color": "#ffffff",
+        "accent_color": "#ff2b2b",
+        "icon_badge_size": 128,
+        "glow_intensity": 70,
+        "container_width": 1320,
+        "padding_top": 64,
+        "padding_bottom": 80,
+        "enable_float": true,
+        "enable_hover": true
+      }
     }
   },
   "order": [
@@ -603,14 +651,9 @@
     "corporate_gifting_marquee_pCHxwt",
     "horizontal-product-slider",
     "community-testimonials",
+    "blocks_dbdLjg",
     "17776122420bbcf27b",
-    "1777632770f72837fc",
     "17776085399dc5249c",
-    "1783686350a5803724",
-    "17776077287b0fe0da",
-    "17776334431f7fc508",
-    "blocks_znBaDB",
-    "17830962286b04cbad",
-    "17836860331b9c8ad3"
+    "hague-protect-dna"
   ]
 }
