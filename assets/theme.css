@@ -46,6 +46,7 @@
   --border-radius-md: 12px;
   --border-radius-lg: 24px;
   --border-radius-xl: 100px;
+  --homepage-corner: 16px;
 
   --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   --transition-fast: all 0.2s ease-in-out;
@@ -904,4 +905,9 @@ h4.mobile-accordion-category-heading,
 
 .corp-packages__card--featured .corp-packages__cta {
   color: #ffffff !important;
+}
+
+/* Homepage — unified corner radius across all card/media elements */
+body.template-index {
+  --homepage-corner: 16px;
 }

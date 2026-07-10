@@ -136,7 +136,7 @@
     height: auto;
     min-height: 0;
   background: #ffffff;
-    border-radius: 20px;
+    border-radius: var(--homepage-corner, 16px);
     overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -193,7 +193,7 @@
   #shopify-section-{{ section.id }} .bs-coverflow-card__glow-ring {
     position: absolute;
     inset: -3px;
-    border-radius: 22px;
+    border-radius: var(--homepage-corner, 16px);
     background: linear-gradient(135deg, var(--bs-accent), transparent 55%, var(--bs-accent-soft));
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -276,7 +276,7 @@
     font-size: 12px;
   font-weight: 700;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: var(--homepage-corner, 16px);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__rating-count {
@@ -513,7 +513,7 @@
     #shopify-section-{{ section.id }} .bs-coverflow-card__inner {
       min-height: 0;
       height: auto;
-      border-radius: 16px;
+      border-radius: var(--homepage-corner, 16px);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
     }
 

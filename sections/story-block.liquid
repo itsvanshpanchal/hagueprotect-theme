@@ -17,7 +17,7 @@
     max-width: none;
     aspect-ratio: 1440 / 560;
     overflow: hidden;
-    border-radius: {{ section.settings.border_radius | default: 0 }}px;
+    border-radius: var(--homepage-corner, 16px);
     background-color: #f6f6f6;
   }
 
@@ -45,7 +45,7 @@
     .story-banner-wrapper-{{ section.id }} .story-banner {
       aspect-ratio: 1 / 1;
       min-height: 320px;
-      border-radius: {{ section.settings.border_radius | default: 0 }}px;
+      border-radius: var(--homepage-corner, 16px);
     }
   }
 {%- endstyle -%}
@@ -172,8 +172,8 @@
       "step": 4,
       "unit": "px",
       "label": "Border Radius",
-      "default": 0,
-      "info": "Set to 0 for edge-to-edge banners that touch both sides."
+      "default": 16,
+      "info": "Homepage uses the unified 16px corner radius."
     }
   ],
   "blocks": [
