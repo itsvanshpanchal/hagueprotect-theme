@@ -1,0 +1,264 @@
+{%- style -%}
+  .biz-advantages {
+    padding: clamp(80px, 10vw, 120px) 0;
+    background: #0a0c12;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .biz-advantages__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  .biz-advantages__header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: clamp(48px, 6vw, 72px);
+  }
+
+  .biz-advantages__eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ff2b2b;
+    margin: 0 0 12px;
+  }
+
+  .biz-advantages__heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 5.5vw, 68px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .biz-advantages__sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    max-width: 480px;
+    justify-self: end;
+  }
+
+  .biz-advantages__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, minmax(220px, auto));
+    gap: 20px;
+  }
+
+  .biz-advantages__item {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 220px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .biz-advantages__item:hover {
+    border-color: rgba(79, 140, 255, 0.35);
+    transform: translateY(-4px);
+  }
+
+  .biz-advantages__item--1 { grid-column: 1 / 5; grid-row: 1 / 2; background: linear-gradient(145deg, #141a28, #0e121c); }
+  .biz-advantages__item--2 { grid-column: 5 / 9; grid-row: 1 / 2; background: linear-gradient(145deg, #1a1220, #120e18); }
+  .biz-advantages__item--3 { grid-column: 9 / 13; grid-row: 1 / 3; background: linear-gradient(160deg, #ff2b2b 0%, #8b0000 100%); min-height: 460px; }
+  .biz-advantages__item--4 { grid-column: 1 / 5; grid-row: 2 / 3; background: linear-gradient(145deg, #101820, #0c1018); }
+  .biz-advantages__item--5 { grid-column: 5 / 9; grid-row: 2 / 3; background: linear-gradient(145deg, #121828, #0a0e16); }
+
+  .biz-advantages__item-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .biz-advantages__item-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+  }
+
+  .biz-advantages__item-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .biz-advantages__item-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: #4f8cff;
+  }
+
+  .biz-advantages__item--3 .biz-advantages__item-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .biz-advantages__item-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+  }
+
+  .biz-advantages__item-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+  }
+
+  .biz-advantages__item--3 .biz-advantages__item-text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .biz-advantages__header {
+      grid-template-columns: 1fr;
+    }
+
+    .biz-advantages__sub {
+      justify-self: start;
+    }
+
+    .biz-advantages__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .biz-advantages__item--1,
+    .biz-advantages__item--2,
+    .biz-advantages__item--3,
+    .biz-advantages__item--4,
+    .biz-advantages__item--5 {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      min-height: 220px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="biz-advantages" data-no-typewriter>
+  <div class="biz-advantages__container">
+    <header class="biz-advantages__header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="biz-advantages__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="biz-advantages__heading">{{ section.settings.heading | default: 'Why Partner With Hague Protect' }}</h2>
+      </div>
+      {%- if section.settings.subheading != blank -%}
+        <p class="biz-advantages__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="biz-advantages__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'advantage' -%}
+            <article class="biz-advantages__item biz-advantages__item--{{ forloop.index }}" data-biz-reveal {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="biz-advantages__item-media">
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="" loading="lazy">
+                </div>
+              {%- endif -%}
+              <div class="biz-advantages__item-content">
+                <div class="biz-advantages__item-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="1.5"/></svg>
+                </div>
+                <h3 class="biz-advantages__item-title">{{ block.settings.title }}</h3>
+                <p class="biz-advantages__item-text">{{ block.settings.text }}</p>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <article class="biz-advantages__item biz-advantages__item--1" data-biz-reveal>
+          <div class="biz-advantages__item-content">
+            <div class="biz-advantages__item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <h3 class="biz-advantages__item-title">Competitive Margins</h3>
+            <p class="biz-advantages__item-text">Tiered wholesale pricing that protects your margins at every volume level.</p>
+          </div>
+        </article>
+        <article class="biz-advantages__item biz-advantages__item--2" data-biz-reveal>
+          <div class="biz-advantages__item-content">
+            <div class="biz-advantages__item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <h3 class="biz-advantages__item-title">Fast Fulfillment</h3>
+            <p class="biz-advantages__item-text">99% fill rate with pan-India logistics and express dispatch options.</p>
+          </div>
+        </article>
+        <article class="biz-advantages__item biz-advantages__item--3" data-biz-reveal>
+          <div class="biz-advantages__item-content">
+            <div class="biz-advantages__item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <h3 class="biz-advantages__item-title">Dedicated Account Team</h3>
+            <p class="biz-advantages__item-text">A single point of contact for orders, marketing assets, training, and growth planning — so you never chase support.</p>
+          </div>
+        </article>
+        <article class="biz-advantages__item biz-advantages__item--4" data-biz-reveal>
+          <div class="biz-advantages__item-content">
+            <div class="biz-advantages__item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 21V9" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <h3 class="biz-advantages__item-title">Marketing Support</h3>
+            <p class="biz-advantages__item-text">POS displays, product training, and co-branded launch campaigns.</p>
+          </div>
+        </article>
+        <article class="biz-advantages__item biz-advantages__item--5" data-biz-reveal>
+          <div class="biz-advantages__item-content">
+            <div class="biz-advantages__item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <h3 class="biz-advantages__item-title">Premium Quality</h3>
+            <p class="biz-advantages__item-text">Lab-tested formulations trusted by sneaker enthusiasts nationwide.</p>
+          </div>
+        </article>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Business Advantages",
+  "enabled_on": { "templates": ["page.contact-us"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Hague Advantage" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Partner With Us" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "We don't just supply products — we build partnerships that drive revenue, retention, and brand loyalty." }
+  ],
+  "blocks": [
+    {
+      "type": "advantage",
+      "name": "Advantage",
+      "limit": 5,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Background image (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Competitive Margins" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Tiered wholesale pricing for every volume." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Business Advantages" }]
+}
+{% endschema %}

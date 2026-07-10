@@ -1,0 +1,163 @@
+{%- style -%}
+  .biz-marquee {
+    background: linear-gradient(180deg, #0a0c12 0%, #111520 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 28px 0;
+    overflow: hidden;
+  }
+
+  .biz-marquee__label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 18px;
+    padding: 0 20px;
+  }
+
+  .biz-marquee__track-wrap {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .biz-marquee__track {
+    display: flex;
+    gap: 56px;
+    animation: bizMarqueeScroll 38s linear infinite;
+    flex-shrink: 0;
+  }
+
+  .biz-marquee__track--reverse {
+    animation-direction: reverse;
+    animation-duration: 42s;
+    margin-top: 14px;
+  }
+
+  @keyframes bizMarqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .biz-marquee__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+  }
+
+  .biz-marquee__item--accent {
+    color: #ffffff;
+  }
+
+  .biz-marquee__slash {
+    color: #4f8cff;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign top_items = ''
+  assign bottom_items = ''
+  for block in section.blocks
+    if block.type == 'marquee_text' and block.settings.text != blank
+      if block.settings.row == 'bottom'
+        assign bottom_items = bottom_items | append: block.settings.text | append: '||'
+      else
+        assign top_items = top_items | append: block.settings.text | append: '||'
+      endif
+    endif
+  endfor
+-%}
+
+<section class="biz-marquee" aria-label="Partner types" data-no-typewriter>
+  {%- if section.settings.label != blank -%}
+    <p class="biz-marquee__label">{{ section.settings.label }}</p>
+  {%- endif -%}
+
+  <div class="biz-marquee__track-wrap">
+    <div class="biz-marquee__track">
+      {%- if section.blocks.size > 0 -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'marquee_text' and block.settings.text != blank and block.settings.row != 'bottom' -%}
+              <span class="biz-marquee__item{% if block.settings.accent %} biz-marquee__item--accent{% endif %}" {{ block.shopify_attributes }}>
+                <span class="biz-marquee__slash">/</span>{{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign defaults = 'Sneaker Boutiques,Retail Chains,E-Commerce Brands,Distributors,Corporate Stores,D2C Labels' | split: ',' -%}
+        {%- for i in (1..2) -%}
+          {%- for item in defaults -%}
+            <span class="biz-marquee__item"><span class="biz-marquee__slash">/</span>{{ item }}</span>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="biz-marquee__track-wrap">
+    <div class="biz-marquee__track biz-marquee__track--reverse">
+      {%- if section.blocks.size > 0 -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'marquee_text' and block.settings.text != blank and block.settings.row == 'bottom' -%}
+              <span class="biz-marquee__item{% if block.settings.accent %} biz-marquee__item--accent{% endif %}" {{ block.shopify_attributes }}>
+                <span class="biz-marquee__slash">/</span>{{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign defaults2 = 'Wholesale Supply,White Label,POS Displays,Bulk Orders,Launch Kits,Account Support' | split: ',' -%}
+        {%- for i in (1..2) -%}
+          {%- for item in defaults2 -%}
+            <span class="biz-marquee__item biz-marquee__item--accent"><span class="biz-marquee__slash">/</span>{{ item }}</span>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Business Marquee",
+  "enabled_on": { "templates": ["page.contact-us"] },
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Trusted by businesses across India" }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_text",
+      "name": "Marquee text",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Retail Chains" },
+        {
+          "type": "select",
+          "id": "row",
+          "label": "Row",
+          "options": [
+            { "value": "top", "label": "Top row" },
+            { "value": "bottom", "label": "Bottom row" }
+          ],
+          "default": "top"
+        },
+        { "type": "checkbox", "id": "accent", "label": "Highlight text", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Business Marquee" }]
+}
+{% endschema %}

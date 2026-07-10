@@ -933,6 +933,32 @@ h4.mobile-accordion-category-heading,
   color: #ffffff !important;
 }
 
+/* Business page — always show section content */
+.biz-solutions__card,
+.biz-advantages__item,
+.biz-process__step,
+[data-biz-reveal] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.biz-hero__title,
+.biz-advantages__heading,
+.biz-form__visual-title {
+  color: #ffffff !important;
+}
+
+.biz-solutions__heading,
+.biz-process__heading,
+.biz-process__step-title {
+  color: #0a0c12 !important;
+}
+
+.biz-process__step-text {
+  color: #5a6270 !important;
+}
+
 /* Homepage — unified corner radius (matches bestsellers cards: 20px) */
 body.template-index {
   --homepage-corner: 20px;

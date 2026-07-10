@@ -1,0 +1,492 @@
+{%- style -%}
+  .biz-hero {
+    --biz-accent: #ff2b2b;
+    --biz-blue: #4f8cff;
+    --biz-dark: #07090f;
+    position: relative;
+    min-height: min(100vh, 920px);
+    min-height: min(100svh, 920px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--biz-dark);
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .biz-hero__grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+  }
+
+  .biz-hero__mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 55% 45% at 85% 25%, rgba(79, 140, 255, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 15% 75%, rgba(255, 43, 43, 0.2) 0%, transparent 50%),
+      linear-gradient(165deg, #060810 0%, #0b1018 45%, #0a0c12 100%);
+  }
+
+  .biz-hero__bg-img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.18;
+  }
+
+  .biz-hero__container {
+    position: relative;
+    z-index: 5;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    padding: clamp(110px, 14vh, 150px) max(20px, var(--site-padding, 24px)) clamp(56px, 8vh, 88px);
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .biz-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--biz-blue);
+    margin-bottom: 20px;
+  }
+
+  .biz-hero__eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--biz-blue), var(--biz-accent));
+  }
+
+  .biz-hero__title {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(58px, 8.5vw, 108px);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    margin: 0 0 22px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+  }
+
+  .biz-hero__title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #ffffff 0%, #a8c4ff 50%, var(--biz-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+  }
+
+  .biz-hero__sub {
+    font-size: clamp(15px, 1.7vw, 18px);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 34px;
+    max-width: 520px;
+  }
+
+  .biz-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  .biz-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 30px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .biz-hero__btn--primary {
+    background: var(--biz-accent);
+    color: #ffffff;
+    border: 2px solid var(--biz-accent);
+    box-shadow: 0 12px 40px rgba(255, 43, 43, 0.35);
+  }
+
+  .biz-hero__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(255, 43, 43, 0.45);
+  }
+
+  .biz-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+  }
+
+  .biz-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .biz-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 28px;
+  }
+
+  .biz-hero__stat {
+    flex: 1;
+    min-width: 100px;
+    padding-right: 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    margin-right: 24px;
+  }
+
+  .biz-hero__stat:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .biz-hero__stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .biz-hero__stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .biz-hero__visual {
+    position: relative;
+    min-height: 420px;
+  }
+
+  .biz-hero__card {
+    position: absolute;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s ease;
+  }
+
+  .biz-hero__card:hover {
+    transform: translateY(-6px);
+  }
+
+  .biz-hero__card--1 {
+    top: 0;
+    right: 8%;
+    width: min(280px, 90%);
+    z-index: 3;
+    animation: bizFloat1 6s ease-in-out infinite;
+  }
+
+  .biz-hero__card--2 {
+    top: 38%;
+    left: 0;
+    width: min(260px, 85%);
+    z-index: 2;
+    animation: bizFloat2 7s ease-in-out infinite;
+  }
+
+  .biz-hero__card--3 {
+    bottom: 0;
+    right: 0;
+    width: min(300px, 92%);
+    z-index: 4;
+    animation: bizFloat3 5.5s ease-in-out infinite;
+  }
+
+  @keyframes bizFloat1 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes bizFloat2 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  @keyframes bizFloat3 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .biz-hero__card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(79, 140, 255, 0.25), rgba(255, 43, 43, 0.2));
+    color: #ffffff;
+  }
+
+  .biz-hero__card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #ffffff;
+  }
+
+  .biz-hero__card-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+
+  .biz-hero__card-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+
+  .biz-hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .biz-hero__orb--1 {
+    width: 200px;
+    height: 200px;
+    background: rgba(79, 140, 255, 0.25);
+    top: 10%;
+    right: 20%;
+  }
+
+  .biz-hero__orb--2 {
+    width: 160px;
+    height: 160px;
+    background: rgba(255, 43, 43, 0.2);
+    bottom: 15%;
+    left: 10%;
+  }
+
+  @media screen and (max-width: 900px) {
+    .biz-hero__container {
+      grid-template-columns: 1fr;
+    }
+
+    .biz-hero__visual {
+      min-height: 360px;
+      margin-top: 20px;
+    }
+
+    .biz-hero__card--1 { right: 0; }
+    .biz-hero__card--2 { left: 5%; }
+  }
+
+  @media screen and (max-width: 600px) {
+    .biz-hero__stat {
+      flex: 0 0 calc(50% - 12px);
+      border-right: none;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+
+    .biz-hero__stats {
+      gap: 0 24px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign stat1 = section.settings.stat1_num | strip
+  assign stat2 = section.settings.stat2_num | strip
+  assign stat3 = section.settings.stat3_num | strip
+  if stat1 == blank
+    assign stat1 = '1200'
+  endif
+  if stat2 == blank
+    assign stat2 = '40'
+  endif
+  if stat3 == blank
+    assign stat3 = '99'
+  endif
+-%}
+
+<section class="biz-hero" id="biz-hero" data-no-typewriter>
+  {%- if section.settings.bg_image != blank -%}
+    {{ section.settings.bg_image | image_url: width: 2000 | image_tag: class: 'biz-hero__bg-img', loading: 'eager', alt: '' }}
+  {%- endif -%}
+  <div class="biz-hero__mesh" aria-hidden="true"></div>
+  <div class="biz-hero__grid-bg" aria-hidden="true"></div>
+
+  <div class="biz-hero__container">
+    <div class="biz-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="biz-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h1 class="biz-hero__title">
+        {{ section.settings.heading_line1 | default: 'Partner' }}
+        <em>{{ section.settings.heading_line2 | default: 'With Us' }}</em>
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="biz-hero__sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="biz-hero__actions">
+        {%- if section.settings.btn_label != blank -%}
+          <a href="{{ section.settings.btn_link | default: '#biz-inquiry' }}" class="biz-hero__btn biz-hero__btn--primary">
+            {{ section.settings.btn_label }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.btn2_label != blank -%}
+          <a href="{{ section.settings.btn2_link | default: '#biz-solutions' }}" class="biz-hero__btn biz-hero__btn--ghost">{{ section.settings.btn2_label }}</a>
+        {%- endif -%}
+      </div>
+
+      <div class="biz-hero__stats">
+        <div class="biz-hero__stat">
+          <span class="biz-hero__stat-num" data-biz-counter data-biz-counter-value="{{ stat1 | escape }}">{{ stat1 }}+</span>
+          <span class="biz-hero__stat-label">{{ section.settings.stat1_label | default: 'Retail Partners' }}</span>
+        </div>
+        <div class="biz-hero__stat">
+          <span class="biz-hero__stat-num" data-biz-counter data-biz-counter-value="{{ stat2 | escape }}">{{ stat2 }}+</span>
+          <span class="biz-hero__stat-label">{{ section.settings.stat2_label | default: 'Cities Served' }}</span>
+        </div>
+        <div class="biz-hero__stat">
+          <span class="biz-hero__stat-num" data-biz-counter data-biz-counter-value="{{ stat3 | escape }}">{{ stat3 }}%</span>
+          <span class="biz-hero__stat-label">{{ section.settings.stat3_label | default: 'Fill Rate' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="biz-hero__visual" aria-hidden="true">
+      <div class="biz-hero__orb biz-hero__orb--1"></div>
+      <div class="biz-hero__orb biz-hero__orb--2"></div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'floating_card' -%}
+          <div class="biz-hero__card biz-hero__card--{{ forloop.index }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 500 }}"
+                alt="{{ block.settings.title | escape }}"
+                class="biz-hero__card-img"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="biz-hero__card-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="1.5"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+            {%- endif -%}
+            <p class="biz-hero__card-title">{{ block.settings.title }}</p>
+            <p class="biz-hero__card-text">{{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <div class="biz-hero__card biz-hero__card--1">
+          <div class="biz-hero__card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="biz-hero__card-title">Wholesale Supply</p>
+          <p class="biz-hero__card-text">Bulk pricing with flexible MOQs for retailers and distributors.</p>
+        </div>
+        <div class="biz-hero__card biz-hero__card--2">
+          <div class="biz-hero__card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <p class="biz-hero__card-title">Retail Partnerships</p>
+          <p class="biz-hero__card-text">Co-branded displays, POS assets, and launch support.</p>
+        </div>
+        <div class="biz-hero__card biz-hero__card--3">
+          <div class="biz-hero__card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p class="biz-hero__card-title">Fast Fulfillment</p>
+          <p class="biz-hero__card-text">Pan-India logistics with 99% on-time delivery rate.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Business Hero",
+  "max_blocks": 3,
+  "enabled_on": {
+    "templates": ["page.contact-us"]
+  },
+  "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Partnership Hub" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Grow Your" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "Business" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support — built to scale with you." },
+    { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Become a Partner" },
+    { "type": "url", "id": "btn_link", "label": "Primary button link" },
+    { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Explore Solutions" },
+    { "type": "url", "id": "btn2_link", "label": "Secondary button link" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "1200" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Retail Partners" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "40" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Cities Served" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "99" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Fill Rate" }
+  ],
+  "blocks": [
+    {
+      "type": "floating_card",
+      "name": "Floating card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Wholesale Supply" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Bulk pricing with flexible MOQs." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Business Hero" }]
+}
+{% endschema %}

@@ -1,14 +1,163 @@
 {
   "sections": {
-    "main": {
-      "type": "corporate-gifting-form",
+    "hero": {
+      "type": "business-hero",
+      "blocks": {
+        "card_1": {
+          "type": "floating_card",
+          "settings": {
+            "title": "Wholesale Supply",
+            "text": "Bulk pricing with flexible MOQs for retailers and distributors."
+          }
+        },
+        "card_2": {
+          "type": "floating_card",
+          "settings": {
+            "title": "Retail Partnerships",
+            "text": "Co-branded displays, POS assets, and launch support."
+          }
+        },
+        "card_3": {
+          "type": "floating_card",
+          "settings": {
+            "title": "Fast Fulfillment",
+            "text": "Pan-India logistics with 99% on-time delivery rate."
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3"],
       "settings": {
-        "heading": "Contact Us",
-        "subheading": "We'd love to hear from you. Send us a message and we'll get back to you shortly."
+        "eyebrow": "B2B Partnership Hub",
+        "heading_line1": "Grow Your",
+        "heading_line2": "Business",
+        "subheading": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support — built to scale with you.",
+        "btn_label": "Become a Partner",
+        "btn_link": "#biz-inquiry",
+        "btn2_label": "Explore Solutions",
+        "btn2_link": "#biz-solutions",
+        "stat1_num": "1200",
+        "stat1_label": "Retail Partners",
+        "stat2_num": "40",
+        "stat2_label": "Cities Served",
+        "stat3_num": "99",
+        "stat3_label": "Fill Rate"
+      }
+    },
+    "marquee": {
+      "type": "business-marquee",
+      "blocks": {
+        "t1": { "type": "marquee_text", "settings": { "text": "Sneaker Boutiques", "row": "top" } },
+        "t2": { "type": "marquee_text", "settings": { "text": "Retail Chains", "row": "top", "accent": true } },
+        "t3": { "type": "marquee_text", "settings": { "text": "E-Commerce Brands", "row": "top" } },
+        "t4": { "type": "marquee_text", "settings": { "text": "Distributors", "row": "top" } },
+        "t5": { "type": "marquee_text", "settings": { "text": "Corporate Stores", "row": "top" } },
+        "b1": { "type": "marquee_text", "settings": { "text": "Wholesale Supply", "row": "bottom", "accent": true } },
+        "b2": { "type": "marquee_text", "settings": { "text": "White Label", "row": "bottom" } },
+        "b3": { "type": "marquee_text", "settings": { "text": "POS Displays", "row": "bottom" } },
+        "b4": { "type": "marquee_text", "settings": { "text": "Bulk Orders", "row": "bottom", "accent": true } },
+        "b5": { "type": "marquee_text", "settings": { "text": "Account Support", "row": "bottom" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "b1", "b2", "b3", "b4", "b5"],
+      "settings": {
+        "label": "Trusted by businesses across India"
+      }
+    },
+    "solutions": {
+      "type": "business-solutions",
+      "blocks": {
+        "s1": {
+          "type": "solution",
+          "settings": {
+            "title": "Wholesale Supply",
+            "text": "Competitive margins with tiered pricing, flexible MOQs, and pan-India fulfillment for retailers and distributors.",
+            "link_label": "Learn more",
+            "link": "#biz-inquiry"
+          }
+        },
+        "s2": {
+          "type": "solution",
+          "settings": {
+            "title": "Retail Partnerships",
+            "text": "In-store displays, training materials, and co-marketing support to drive sell-through at your locations.",
+            "link_label": "Learn more",
+            "link": "#biz-inquiry",
+            "featured": true
+          }
+        },
+        "s3": {
+          "type": "solution",
+          "settings": {
+            "title": "White Label",
+            "text": "Custom packaging and branding on our premium formulations — launch your own sneaker care line.",
+            "link_label": "Learn more",
+            "link": "#biz-inquiry"
+          }
+        },
+        "s4": {
+          "type": "solution",
+          "settings": {
+            "title": "E-Commerce Programs",
+            "text": "Dropship-ready inventory, marketplace listings support, and dedicated account managers for online brands.",
+            "link_label": "Learn more",
+            "link": "#biz-inquiry"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "eyebrow": "What We Offer",
+        "heading": "Built for Scale",
+        "subheading": "Whether you're a boutique retailer or a national chain, we have a partnership model designed for your growth."
+      }
+    },
+    "advantages": {
+      "type": "business-advantages",
+      "blocks": {
+        "a1": { "type": "advantage", "settings": { "title": "Competitive Margins", "text": "Tiered wholesale pricing that protects your margins at every volume level." } },
+        "a2": { "type": "advantage", "settings": { "title": "Fast Fulfillment", "text": "99% fill rate with pan-India logistics and express dispatch options." } },
+        "a3": { "type": "advantage", "settings": { "title": "Dedicated Account Team", "text": "A single point of contact for orders, marketing assets, training, and growth planning." } },
+        "a4": { "type": "advantage", "settings": { "title": "Marketing Support", "text": "POS displays, product training, and co-branded launch campaigns." } },
+        "a5": { "type": "advantage", "settings": { "title": "Premium Quality", "text": "Lab-tested formulations trusted by sneaker enthusiasts nationwide." } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4", "a5"],
+      "settings": {
+        "eyebrow": "The Hague Advantage",
+        "heading": "Why Partner With Us",
+        "subheading": "We don't just supply products — we build partnerships that drive revenue, retention, and brand loyalty."
+      }
+    },
+    "process": {
+      "type": "business-process",
+      "blocks": {
+        "p1": { "type": "step", "settings": { "title": "Apply", "text": "Share your business details, locations, and volume requirements through our partner form." } },
+        "p2": { "type": "step", "settings": { "title": "Onboard", "text": "Get matched with a dedicated account manager and receive your custom pricing proposal." } },
+        "p3": { "type": "step", "settings": { "title": "Launch", "text": "Receive your first shipment with POS materials, training, and marketing support." } },
+        "p4": { "type": "step", "settings": { "title": "Scale", "text": "Grow with reorder incentives, seasonal campaigns, and expanded product access." } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": {
+        "eyebrow": "Getting Started",
+        "heading": "Partner in 4 Steps",
+        "subheading": "From first inquiry to first shipment — we make onboarding seamless."
+      }
+    },
+    "form": {
+      "type": "business-form",
+      "settings": {
+        "eyebrow": "Partner With Us",
+        "side_title": "Let's Build Together",
+        "side_text": "Tell us about your business and our partnerships team will respond with a custom proposal within 24–48 hours.",
+        "form_title": "Apply to Partner",
+        "form_subtitle": "Fill in your details and we'll get back to you with pricing and next steps."
       }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "marquee",
+    "solutions",
+    "advantages",
+    "process",
+    "form"
   ]
 }
