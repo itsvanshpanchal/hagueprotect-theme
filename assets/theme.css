@@ -973,17 +973,19 @@ body.template-index {
   body.template-index .mat-left {
     align-items: flex-start !important;
     text-align: left !important;
-    padding-left: max(8px, calc(var(--homepage-mobile-gutter) - 8px)) !important;
-    padding-right: var(--homepage-mobile-gutter) !important;
+    padding-left: max(16px, var(--site-padding, 20px)) !important;
+    padding-right: max(16px, var(--site-padding, 20px)) !important;
   }
 
   body.template-index .mat-eyebrow,
   body.template-index .mat-headline,
   body.template-index .mat-desc {
     margin-left: 0 !important;
-    margin-right: auto !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
     text-align: left !important;
     width: 100% !important;
+    max-width: none !important;
   }
 
   body.template-index .mat-menu {
