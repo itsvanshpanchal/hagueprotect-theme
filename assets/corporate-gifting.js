@@ -20,20 +20,34 @@
       const suffixHTML = suffix ? suffix.outerHTML : '';
       el.dataset.counted = 'true';
 
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const showTarget = function () {
         el.innerHTML = String(target) + suffixHTML;
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        showTarget();
+        return;
+      }
+
+      if (target <= 1) {
+        showTarget();
         return;
       }
 
       const duration = 1800;
       const start = performance.now();
+      el.innerHTML = '1' + suffixHTML;
 
       function tick(now) {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(target * eased);
+        const current = Math.max(1, Math.round(1 + (target - 1) * eased));
         el.innerHTML = String(current) + suffixHTML;
-        if (progress < 1) requestAnimationFrame(tick);
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          showTarget();
+        }
       }
 
       requestAnimationFrame(tick);

@@ -455,26 +455,35 @@
       </div>
 
       {%- liquid
-        assign stat1_num = section.settings.stat1_num | default: '500' | strip
-        assign stat2_num = section.settings.stat2_num | default: '50' | strip
-        assign stat3_num = section.settings.stat3_num | default: '98' | strip
+        assign stat1_num = section.settings.stat1_num | strip
+        assign stat2_num = section.settings.stat2_num | strip
+        assign stat3_num = section.settings.stat3_num | strip
+        if stat1_num == blank
+          assign stat1_num = '500'
+        endif
+        if stat2_num == blank
+          assign stat2_num = '50'
+        endif
+        if stat3_num == blank
+          assign stat3_num = '98'
+        endif
       -%}
       <div class="corp-hero__stats">
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat1_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>+</span>
+          <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat1_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat1_label | default: 'Brands Gifted' }}</span>
         </div>
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat2_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>K+</span>
+          <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat2_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>K+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat2_label | default: 'Kits Delivered' }}</span>
         </div>
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat3_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>%</span>
+          <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat3_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>%</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
         </div>
@@ -592,96 +601,111 @@
 
 <script>
   (function () {
-    function parseTarget(raw) {
-      const match = String(raw || '').trim().match(/(\d+)/);
+    function parseCounterValue(raw) {
+      const match = String(raw || '').trim().match(/^(\d+)/);
       return match ? parseInt(match[1], 10) : NaN;
     }
 
-    function animateValue(numberEl, target) {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    function animateHeroCounter(counterEl) {
+      if (!counterEl || counterEl.dataset.corpHeroCounterReady === 'true') return;
+
+      const numberEl = counterEl.querySelector('[data-corp-hero-counter-number]');
+      const rawValue = counterEl.getAttribute('data-corp-hero-counter-value') || (numberEl ? numberEl.textContent : '');
+      const target = parseCounterValue(rawValue);
+
+      if (!numberEl || isNaN(target)) return;
+
+      counterEl.dataset.corpHeroCounterReady = 'true';
+
+      const showTarget = function () {
         numberEl.textContent = String(target);
+      };
+
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        showTarget();
+        return;
+      }
+
+      if (target <= 1) {
+        showTarget();
         return;
       }
 
       const duration = 1800;
       const start = performance.now();
-      numberEl.textContent = '0';
+      numberEl.textContent = '1';
 
       function tick(now) {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        numberEl.textContent = String(Math.round(target * eased));
+        const current = Math.max(1, Math.round(1 + (target - 1) * eased));
+        numberEl.textContent = String(current);
+
         if (progress < 1) {
           requestAnimationFrame(tick);
         } else {
-          numberEl.textContent = String(target);
+          showTarget();
         }
       }
 
       requestAnimationFrame(tick);
     }
 
-    function initHeroStats(root) {
-      const scope = root && root.querySelector ? root : document;
-      const stats = scope.querySelectorAll('.corp-hero [data-corp-stat]');
-
-      stats.forEach(function (statEl) {
-        if (statEl.dataset.corpStatAnimated === 'true') return;
-
-        const numberEl = statEl.querySelector('[data-corp-stat-number]');
-        if (!numberEl) return;
-
-        const raw = statEl.getAttribute('data-corp-stat-value') || numberEl.textContent.trim();
-        const target = parseTarget(raw);
-
-        if (isNaN(target)) {
-          numberEl.textContent = raw || '0';
-          return;
-        }
-
-        statEl.dataset.corpStatAnimated = 'true';
-        animateValue(numberEl, target);
-      });
+    function initHeroCounters(root) {
+      const scope = root && root.querySelectorAll ? root : document;
+      scope.querySelectorAll('[data-corp-hero-counter]').forEach(animateHeroCounter);
 
       scope.querySelectorAll('.corp-hero [data-corp-count]').forEach(function (el) {
         if (el.dataset.counted === 'true') return;
 
-        const target = parseTarget(el.getAttribute('data-corp-count') || el.textContent);
+        const target = parseCounterValue(el.getAttribute('data-corp-count') || el.textContent);
         if (isNaN(target)) return;
 
         const suffix = el.querySelector('span');
         const suffixHTML = suffix ? suffix.outerHTML : '';
         el.dataset.counted = 'true';
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const showTarget = function () {
           el.innerHTML = String(target) + suffixHTML;
+        };
+
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          showTarget();
+          return;
+        }
+
+        if (target <= 1) {
+          showTarget();
           return;
         }
 
         const duration = 1800;
         const start = performance.now();
+        el.innerHTML = '1' + suffixHTML;
 
         function tick(now) {
           const progress = Math.min((now - start) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          el.innerHTML = String(Math.round(target * eased)) + suffixHTML;
-          if (progress < 1) requestAnimationFrame(tick);
+          const current = Math.max(1, Math.round(1 + (target - 1) * eased));
+          el.innerHTML = String(current) + suffixHTML;
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            showTarget();
+          }
         }
 
         requestAnimationFrame(tick);
       });
     }
 
-    initHeroStats();
-
+    initHeroCounters();
     document.addEventListener('DOMContentLoaded', function () {
-      initHeroStats();
+      initHeroCounters();
     });
-
     document.addEventListener('shopify:section:load', function (event) {
-      if (event.target) {
-        initHeroStats(event.target);
-      }
+      if (event.target) initHeroCounters(event.target);
     });
   })();
 </script>
