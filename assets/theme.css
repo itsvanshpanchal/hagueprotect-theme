@@ -973,7 +973,7 @@ body.template-index {
   body.template-index .mat-left {
     align-items: flex-start !important;
     text-align: left !important;
-    padding-left: var(--homepage-mobile-gutter) !important;
+    padding-left: max(8px, calc(var(--homepage-mobile-gutter) - 8px)) !important;
     padding-right: var(--homepage-mobile-gutter) !important;
   }
 

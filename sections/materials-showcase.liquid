@@ -210,6 +210,8 @@
 
   @media screen and (max-width: 768px) {
     .mat-section {
+      --mat-mobile-gutter-right: var(--homepage-mobile-gutter, max(16px, var(--site-padding, 20px)));
+      --mat-mobile-gutter-left: max(8px, calc(var(--mat-mobile-gutter-right) - 8px));
       position: relative !important;
       isolation: isolate !important;
       min-height: min(88dvh, 680px) !important;
@@ -324,7 +326,7 @@
       text-align: left !important;
       justify-content: flex-end !important;
       min-height: min(88dvh, 680px) !important;
-      padding: 56px var(--homepage-mobile-gutter, max(16px, var(--site-padding, 20px))) 32px !important;
+      padding: 56px var(--mat-mobile-gutter-right) 32px var(--mat-mobile-gutter-left) !important;
     }
 
     .mat-eyebrow {
