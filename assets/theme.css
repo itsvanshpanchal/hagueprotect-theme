@@ -911,3 +911,131 @@ h4.mobile-accordion-category-heading,
 body.template-index {
   --homepage-corner: 20px;
 }
+
+/* Homepage mobile — symmetric centered text alignment */
+@media screen and (max-width: 767px) {
+  body.template-index .hero-fullscreen {
+    align-items: center !important;
+  }
+
+  body.template-index .hero-fullscreen__content {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  body.template-index .hero-fullscreen__heading,
+  body.template-index .hero-fullscreen__eyebrow,
+  body.template-index .hero-fullscreen__subheading {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.template-index .hero-fullscreen__actions {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  body.template-index .bs-coverflow__header,
+  body.template-index .fb__header,
+  body.template-index .trending-social-header,
+  body.template-index .trending-social__heading-group,
+  body.template-index .fc-header {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  body.template-index .bs-coverflow__heading,
+  body.template-index .fb__title,
+  body.template-index .trending-social__heading,
+  body.template-index .mat-headline,
+  body.template-index .fc-heading,
+  body.template-index .hp-fam-sec__heading,
+  body.template-index .hp-dna__heading,
+  body.template-index .comm-headline {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.template-index .fb__eyebrow,
+  body.template-index .bs-coverflow__eyebrow,
+  body.template-index .trending-social__eyebrow,
+  body.template-index .mat-eyebrow,
+  body.template-index .fc-subtitle,
+  body.template-index .comm-eyebrow,
+  body.template-index [class*="ai-story-banner-subheading-"] {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.template-index .mat-desc,
+  body.template-index .fb__subtitle,
+  body.template-index .comm-desc,
+  body.template-index .comm-badge-desc {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+
+  body.template-index .bs-coverflow__view-all {
+    text-align: center !important;
+    align-self: center !important;
+  }
+
+  body.template-index .mat-left {
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: max(16px, var(--site-padding, 20px)) !important;
+    padding-right: max(16px, var(--site-padding, 20px)) !important;
+  }
+
+  body.template-index .mat-menu {
+    align-items: center !important;
+  }
+
+  body.template-index .mat-menu-item {
+    justify-content: center !important;
+    transform-origin: center center !important;
+  }
+
+  body.template-index .hp-dna__item,
+  body.template-index .hp-dna__item-copy {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  body.template-index .hp-dna__item-title,
+  body.template-index .hp-dna__item-text {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+  }
+
+  body.template-index .hp-dna__icon-wrap {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  body.template-index .hp-fam-sec__container {
+    text-align: center !important;
+  }
+
+  body.template-index .hp-fam-sec__heading {
+    max-width: none !important;
+  }
+
+  body.template-index .hp-fam-sec__tabs {
+    justify-content: center !important;
+  }
+
+  body.template-index .comm-top,
+  body.template-index .comm-top-left,
+  body.template-index .comm-top-right {
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
