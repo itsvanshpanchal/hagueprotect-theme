@@ -53,6 +53,17 @@
     align-items: stretch;
   }
 
+  @keyframes corpCardReveal {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .corp-packages__card {
     position: relative;
     border-radius: 20px;
@@ -62,18 +73,19 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
+    animation: corpCardReveal 0.7s ease both;
   }
 
   .corp-packages__card.is-visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
-  .corp-packages__card:nth-child(2) { transition-delay: 0.1s; }
-  .corp-packages__card:nth-child(3) { transition-delay: 0.2s; }
+  .corp-packages__card:nth-child(1) { animation-delay: 0.05s; }
+  .corp-packages__card:nth-child(2) { animation-delay: 0.15s; }
+  .corp-packages__card:nth-child(3) { animation-delay: 0.25s; }
 
   .corp-packages__card:hover {
     transform: translateY(-8px);

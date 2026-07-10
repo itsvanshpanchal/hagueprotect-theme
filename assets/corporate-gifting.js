@@ -1,31 +1,45 @@
 (function () {
   'use strict';
 
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+  }
+
+  function revealElement(el) {
+    el.classList.add('is-visible');
+  }
+
   function initReveal() {
-    const steps = document.querySelectorAll('[data-corp-step]');
-    const bentoItems = document.querySelectorAll('[data-corp-bento]');
-    const cards = document.querySelectorAll('[data-corp-card]');
+    const targets = document.querySelectorAll('[data-corp-step], [data-corp-bento], [data-corp-card]');
+    if (!targets.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+    targets.forEach((el) => {
+      if (el.classList.contains('is-visible')) return;
 
-          const el = entry.target;
+      if (isInViewport(el)) {
+        revealElement(el);
+        return;
+      }
 
-          if (el.hasAttribute('data-corp-step') || el.hasAttribute('data-corp-bento') || el.hasAttribute('data-corp-card')) {
-            el.classList.add('is-visible');
-          }
+      if (!('IntersectionObserver' in window)) {
+        revealElement(el);
+        return;
+      }
 
-          observer.unobserve(el);
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
-    );
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            revealElement(entry.target);
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -10px 0px' }
+      );
 
-    steps.forEach((el) => observer.observe(el));
-    bentoItems.forEach((el) => observer.observe(el));
-    cards.forEach((el) => observer.observe(el));
+      observer.observe(el);
+    });
   }
 
   function smoothScrollCTA() {
@@ -41,13 +55,16 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initReveal();
-      smoothScrollCTA();
-    });
-  } else {
+  function boot() {
     initReveal();
     smoothScrollCTA();
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener('shopify:section:load', boot);
 })();
