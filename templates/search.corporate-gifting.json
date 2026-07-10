@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -14,6 +23,7 @@
         "showcase_main": {
           "type": "showcase_image",
           "settings": {
+            "image": "shopify://shop_images/7_b2c2be7d-be89-4ffa-adaf-6bea6e3b75b7.jpg",
             "position": "main",
             "tag": "Premium Kit",
             "caption": "Executive Gift Box"
@@ -22,6 +32,7 @@
         "showcase_front": {
           "type": "showcase_image",
           "settings": {
+            "image": "shopify://shop_images/6a4e8cbb85605ccbcc8ab2ee.jpg",
             "position": "front",
             "tag": "Bulk",
             "caption": "Team Onboarding"
@@ -41,43 +52,203 @@
         "btn_label": "Start Your Order",
         "btn_link": "#corp-inquiry",
         "btn2_label": "Download Catalog",
-        "scroll_hint": "Explore",
+        "btn2_link": "",
         "stat1_num": "500",
         "stat1_label": "Brands Gifted",
         "stat2_num": "50",
         "stat2_label": "Kits Delivered",
         "stat3_num": "98",
         "stat3_label": "Satisfaction",
-        "showcase_mode": "collage"
+        "showcase_mode": "collage",
+        "single_showcase_tag": "Premium Kit",
+        "single_showcase_caption": "Executive Gift Box"
       }
     },
     "marquee": {
       "type": "corporate-gifting-marquee",
       "blocks": {
-        "top_1": { "type": "marquee_text", "settings": { "text": "Employee Welcome Kits", "row": "top" } },
-        "top_2": { "type": "marquee_text", "settings": { "text": "Client Appreciation", "row": "top" } },
-        "top_3": { "type": "marquee_text", "settings": { "text": "Festival Hampers", "row": "top", "accent": true } },
-        "top_4": { "type": "marquee_text", "settings": { "text": "Conference Swag", "row": "top" } },
-        "top_5": { "type": "marquee_text", "settings": { "text": "CEO Gifts", "row": "top" } },
-        "top_6": { "type": "marquee_text", "settings": { "text": "Team Milestones", "row": "top" } },
-        "top_7": { "type": "marquee_text", "settings": { "text": "Retail Partners", "row": "top", "accent": true } },
-        "top_8": { "type": "marquee_text", "settings": { "text": "Influencer PR", "row": "top" } },
-        "top_9": { "type": "marquee_text", "settings": { "text": "Anniversary Boxes", "row": "top" } },
-        "top_10": { "type": "marquee_text", "settings": { "text": "Onboarding Packs", "row": "top" } },
-        "bottom_1": { "type": "marquee_text", "settings": { "text": "Co-Branded Packaging", "row": "bottom" } },
-        "bottom_2": { "type": "marquee_text", "settings": { "text": "Bulk Pricing", "row": "bottom" } },
-        "bottom_3": { "type": "marquee_text", "settings": { "text": "Dedicated Manager", "row": "bottom" } },
-        "bottom_4": { "type": "marquee_text", "settings": { "text": "Custom Inserts", "row": "bottom" } },
-        "bottom_5": { "type": "marquee_text", "settings": { "text": "Logo Embossing", "row": "bottom" } },
-        "bottom_6": { "type": "marquee_text", "settings": { "text": "Gift Wrapping", "row": "bottom" } },
-        "bottom_7": { "type": "marquee_text", "settings": { "text": "Pan-India Delivery", "row": "bottom" } },
-        "bottom_8": { "type": "marquee_text", "settings": { "text": "Invoice & GST", "row": "bottom" } },
-        "bottom_9": { "type": "marquee_text", "settings": { "text": "Sample Kits", "row": "bottom" } },
-        "bottom_10": { "type": "marquee_text", "settings": { "text": "Volume Discounts", "row": "bottom" } }
+        "top_1": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Employee Welcome Kits",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_2": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Client Appreciation",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_3": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Festival Hampers",
+            "row": "top",
+            "accent": true
+          }
+        },
+        "top_4": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Conference Swag",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_5": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "CEO Gifts",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_6": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Team Milestones",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_7": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Retail Partners",
+            "row": "top",
+            "accent": true
+          }
+        },
+        "top_8": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Influencer PR",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_9": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Anniversary Boxes",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "top_10": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Onboarding Packs",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "bottom_1": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Co-Branded Packaging",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_2": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Bulk Pricing",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_3": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Dedicated Manager",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_4": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Custom Inserts",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_5": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Logo Embossing",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_6": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Gift Wrapping",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_7": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Pan-India Delivery",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_8": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Invoice & GST",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_9": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Sample Kits",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "bottom_10": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Volume Discounts",
+            "row": "bottom",
+            "accent": false
+          }
+        }
       },
       "block_order": [
-        "top_1", "top_2", "top_3", "top_4", "top_5", "top_6", "top_7", "top_8", "top_9", "top_10",
-        "bottom_1", "bottom_2", "bottom_3", "bottom_4", "bottom_5", "bottom_6", "bottom_7", "bottom_8", "bottom_9", "bottom_10"
+        "top_1",
+        "top_2",
+        "top_3",
+        "top_4",
+        "top_5",
+        "top_6",
+        "top_7",
+        "top_8",
+        "top_9",
+        "top_10",
+        "bottom_1",
+        "bottom_2",
+        "bottom_3",
+        "bottom_4",
+        "bottom_5",
+        "bottom_6",
+        "bottom_7",
+        "bottom_8",
+        "bottom_9",
+        "bottom_10"
       ],
       "settings": {
         "label": "Trusted for every occasion"
@@ -86,12 +257,41 @@
     "process": {
       "type": "corporate-gifting-process",
       "blocks": {
-        "step_1": { "type": "step", "settings": { "title": "Share Your Brief", "text": "Tell us quantity, budget, branding needs, and delivery timeline." } },
-        "step_2": { "type": "step", "settings": { "title": "Custom Proposal", "text": "Receive curated kit options, mockups, and volume pricing within 48 hours." } },
-        "step_3": { "type": "step", "settings": { "title": "Approve & Produce", "text": "Co-branded packaging, custom inserts, and quality checks at every stage." } },
-        "step_4": { "type": "step", "settings": { "title": "Deliver & Delight", "text": "Pan-India shipping with tracking. Your recipients get a gift they'll remember." } }
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Share Your Brief",
+            "text": "Tell us quantity, budget, branding needs, and delivery timeline."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Custom Proposal",
+            "text": "Receive curated kit options, mockups, and volume pricing within 48 hours."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Approve & Produce",
+            "text": "Co-branded packaging, custom inserts, and quality checks at every stage."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Deliver & Delight",
+            "text": "Pan-India shipping with tracking. Your recipients get a gift they'll remember."
+          }
+        }
       },
-      "block_order": ["step_1", "step_2", "step_3", "step_4"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
       "settings": {
         "eyebrow": "How It Works",
         "heading": "From Brief to Doorstep",
@@ -101,13 +301,69 @@
     "features": {
       "type": "corporate-gifting-features",
       "blocks": {
-        "feature_1": { "type": "feature", "settings": { "title": "Co-Branding", "text": "Make our products your own. Partner with Hague Protect for co-branded kits that reflect your brand identity." } },
-        "feature_2": { "type": "feature", "settings": { "title": "Premium Packaging", "dark_card": true, "text": "Exquisite presentation for corporate gifting that leaves a lasting impression." } },
-        "feature_3": { "type": "feature", "settings": { "title": "Bulk Discounts", "red_card": true, "text": "Special pricing and dedicated support for large volume orders." } },
-        "feature_4": { "type": "feature", "settings": { "title": "Fast Turnaround", "light_card": true, "text": "From brief to delivery in as little as 7 business days for standard orders." } },
-        "feature_5": { "type": "feature", "settings": { "title": "Pan-India Delivery", "text": "Ship to multiple locations with tracking, GST invoicing, and consolidated billing." } }
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Co-Branding",
+            "text": "Make our products your own. Partner with Hague Protect for co-branded kits that reflect your brand identity.",
+            "dark_card": false,
+            "red_card": false,
+            "light_card": false,
+            "show_icon": true
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Packaging",
+            "text": "Exquisite presentation for corporate gifting that leaves a lasting impression.",
+            "dark_card": true,
+            "red_card": false,
+            "light_card": false,
+            "show_icon": true
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Bulk Discounts",
+            "text": "Special pricing and dedicated support for large volume orders.",
+            "dark_card": false,
+            "red_card": true,
+            "light_card": false,
+            "show_icon": true
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "title": "Fast Turnaround",
+            "text": "From brief to delivery in as little as 7 business days for standard orders.",
+            "dark_card": false,
+            "red_card": false,
+            "light_card": true,
+            "show_icon": true
+          }
+        },
+        "feature_5": {
+          "type": "feature",
+          "settings": {
+            "title": "Pan-India Delivery",
+            "text": "Ship to multiple locations with tracking, GST invoicing, and consolidated billing.",
+            "dark_card": false,
+            "red_card": false,
+            "light_card": false,
+            "show_icon": true
+          }
+        }
       },
-      "block_order": ["feature_1", "feature_2", "feature_3", "feature_4", "feature_5"],
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4",
+        "feature_5"
+      ],
       "settings": {
         "eyebrow": "What's Possible",
         "heading": "Built for Brands That Care",
@@ -125,7 +381,8 @@
             "quantity_hint": "25 – 100 units",
             "perks": "Quick-clean solution + microfiber cloth\nStandard branded sleeve\nVolume pricing from 25 units\n7-day production lead time",
             "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry"
+            "cta_link": "#corp-inquiry",
+            "featured": false
           }
         },
         "package_2": {
@@ -134,10 +391,10 @@
             "tier_label": "Executive",
             "title": "Signature Box",
             "quantity_hint": "50 – 500 units",
-            "featured": true,
             "perks": "Full cleaning kit with premium brushes\nCo-branded rigid gift box\nCustom thank-you card insert\nDedicated account manager",
             "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry"
+            "cta_link": "#corp-inquiry",
+            "featured": true
           }
         },
         "package_3": {
@@ -148,16 +405,20 @@
             "quantity_hint": "500+ units",
             "perks": "Fully custom kit curation\nLogo embossing & premium packaging\nMulti-location delivery\nPriority production & white-glove support",
             "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry"
+            "cta_link": "#corp-inquiry",
+            "featured": false
           }
         }
       },
-      "block_order": ["package_1", "package_2", "package_3"],
+      "block_order": [
+        "package_1",
+        "package_2",
+        "package_3"
+      ],
       "settings": {
         "eyebrow": "Gift Tiers",
         "heading": "Pick Your Perfect Kit",
-        "description": "Flexible packages for every occasion — from startup swag to enterprise executive gifts.",
-        "featured_badge": "Most Popular"
+        "description": "Flexible packages for every occasion — from startup swag to enterprise executive gifts."
       }
     },
     "form": {
@@ -166,26 +427,11 @@
         "eyebrow": "Let's Talk",
         "side_title": "Your Gift Story Starts Here",
         "side_text": "Share your requirements and our gifting specialists will craft a custom proposal within 48 hours.",
-        "email_label": "Email",
         "email": "gifting@nuuk.in",
-        "whatsapp_label": "WhatsApp",
         "whatsapp": "917009205008",
         "phone_display": "7009205008",
         "form_title": "Request a Quote",
-        "form_subtitle": "Fill in the details below and we'll be in touch shortly.",
-        "label_name": "Name",
-        "placeholder_name": "Your name",
-        "label_company": "Company",
-        "placeholder_company": "Company name",
-        "label_email": "Work Email",
-        "placeholder_email": "you@company.com",
-        "label_phone": "Phone",
-        "phone_prefix": "🇮🇳 +91",
-        "placeholder_phone": "Phone number",
-        "label_message": "Tell us about your order",
-        "placeholder_message": "Quantity, budget, branding needs, delivery timeline...",
-        "submit_label": "Send Inquiry",
-        "success_message": "Thanks for reaching out! Our gifting team will get back to you within 48 hours."
+        "form_subtitle": "Fill in the details below and we'll be in touch shortly."
       }
     }
   },
