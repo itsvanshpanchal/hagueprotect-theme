@@ -424,26 +424,7 @@
     {% section 'header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {%- assign normalized_path = request.path | downcase -%}
-      {%- if normalized_path contains 'certified-corporation' or normalized_path contains 'corporate' -%}
-        <div id="CorporateCustomPage">
-          {% section 'corporate-gifting-hero' %}
-          {% section 'corporate-gifting-marquee' %}
-          {% section 'corporate-gifting-process' %}
-          {% section 'corporate-gifting-features' %}
-          {% section 'corporate-gifting-packages' %}
-          {% section 'corporate-gifting-form' %}
-        </div>
-        <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
-        <style>
-          /* Hide the default 404 or page content when on the hijacked URL */
-          .hijack-hidden { display: none !important; }
-        </style>
-      {%- endif -%}
-
-      <div class="{% if normalized_path contains 'certified-corporation' or normalized_path contains 'corporate' %}hijack-hidden{% endif %}">
-        {{ content_for_layout }}
-      </div>
+      {{ content_for_layout }}
     </main>
 
     {% section 'footer' %}
