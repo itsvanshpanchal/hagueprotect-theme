@@ -67,34 +67,76 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign has_marquee_blocks = false
+  for block in section.blocks
+    if block.type == 'marquee_text' and block.settings.text != blank
+      assign has_marquee_blocks = true
+      break
+    endif
+  endfor
+-%}
+
 <section class="corp-marquee" aria-label="Use cases">
   <p class="corp-marquee__label">{{ section.settings.label | default: 'Trusted for employee onboarding, client appreciation, festival hampers & more' }}</p>
 
   <div class="corp-marquee__track-wrap">
     <div class="corp-marquee__track">
-      {%- assign items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones,Retail Partners,Influencer PR,Anniversary Boxes,Onboarding Packs' | split: ',' -%}
-      {%- for i in (1..2) -%}
-        {%- for item in items -%}
-          <span class="corp-marquee__item{% if forloop.index == 3 or forloop.index == 7 %} corp-marquee__item--accent{% endif %}">
-            <span class="corp-marquee__dot"></span>
-            {{ item }}
-          </span>
+      {%- if has_marquee_blocks == false -%}
+        {%- assign items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones,Retail Partners,Influencer PR,Anniversary Boxes,Onboarding Packs' | split: ',' -%}
+        {%- for i in (1..2) -%}
+          {%- for item in items -%}
+            <span class="corp-marquee__item{% if forloop.index == 3 or forloop.index == 7 %} corp-marquee__item--accent{% endif %}">
+              <span class="corp-marquee__dot"></span>
+              {{ item }}
+            </span>
+          {%- endfor -%}
         {%- endfor -%}
-      {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'marquee_text' and block.settings.row == 'top' and block.settings.text != blank -%}
+              <span
+                class="corp-marquee__item{% if block.settings.accent %} corp-marquee__item--accent{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="corp-marquee__dot"></span>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 
   <div class="corp-marquee__track-wrap">
     <div class="corp-marquee__track corp-marquee__track--reverse">
-      {%- assign items2 = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST,Sample Kits,Volume Discounts' | split: ',' -%}
-      {%- for i in (1..2) -%}
-        {%- for item in items2 -%}
-          <span class="corp-marquee__item">
-            <span class="corp-marquee__dot"></span>
-            {{ item }}
-          </span>
+      {%- if has_marquee_blocks == false -%}
+        {%- assign items2 = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST,Sample Kits,Volume Discounts' | split: ',' -%}
+        {%- for i in (1..2) -%}
+          {%- for item in items2 -%}
+            <span class="corp-marquee__item">
+              <span class="corp-marquee__dot"></span>
+              {{ item }}
+            </span>
+          {%- endfor -%}
         {%- endfor -%}
-      {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'marquee_text' and block.settings.row == 'bottom' and block.settings.text != blank -%}
+              <span
+                class="corp-marquee__item{% if block.settings.accent %} corp-marquee__item--accent{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="corp-marquee__dot"></span>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -102,14 +144,71 @@
 {% schema %}
 {
   "name": "Corporate Marquee",
+  "max_blocks": 30,
   "settings": [
     {
       "type": "text",
       "id": "label",
-      "label": "Label",
+      "label": "Label above marquee",
       "default": "Trusted for employee onboarding, client appreciation, festival hampers & more"
     }
   ],
-  "presets": [{ "name": "Corporate Marquee" }]
+  "blocks": [
+    {
+      "type": "marquee_text",
+      "name": "Marquee text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Employee Welcome Kits"
+        },
+        {
+          "type": "select",
+          "id": "row",
+          "label": "Row",
+          "options": [
+            { "value": "top", "label": "Top row (scrolls left)" },
+            { "value": "bottom", "label": "Bottom row (scrolls right)" }
+          ],
+          "default": "top"
+        },
+        {
+          "type": "checkbox",
+          "id": "accent",
+          "label": "Highlight in white",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Marquee",
+      "blocks": [
+        { "type": "marquee_text", "settings": { "text": "Employee Welcome Kits", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Client Appreciation", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Festival Hampers", "row": "top", "accent": true } },
+        { "type": "marquee_text", "settings": { "text": "Conference Swag", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "CEO Gifts", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Team Milestones", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Retail Partners", "row": "top", "accent": true } },
+        { "type": "marquee_text", "settings": { "text": "Influencer PR", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Anniversary Boxes", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Onboarding Packs", "row": "top" } },
+        { "type": "marquee_text", "settings": { "text": "Co-Branded Packaging", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Bulk Pricing", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Dedicated Manager", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Custom Inserts", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Logo Embossing", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Gift Wrapping", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Pan-India Delivery", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Invoice & GST", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Sample Kits", "row": "bottom" } },
+        { "type": "marquee_text", "settings": { "text": "Volume Discounts", "row": "bottom" } }
+      ]
+    }
+  ]
 }
 {% endschema %}
