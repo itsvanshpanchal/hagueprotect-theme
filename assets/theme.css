@@ -875,6 +875,31 @@ h4.mobile-accordion-category-heading,
   }
 }
 
+/* Corporate Gifting — always show section content (no JS reveal required) */
+.corp-process__step,
+.corp-bento__item,
+.corp-packages__card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.corp-process__step-title,
+.corp-process__step-text {
+  color: #111111 !important;
+}
+
+.corp-process__step-text {
+  color: #666666 !important;
+}
+
+.corp-packages__tier,
+.corp-packages__qty,
+.corp-packages__list li {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
 /* Corporate Gifting — white text on dark/red backgrounds */
 .corp-hero__title,
 .corp-hero h1,

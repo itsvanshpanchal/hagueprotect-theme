@@ -51,17 +51,6 @@
     gap: 20px;
   }
 
-  @keyframes corpBentoReveal {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .corp-bento__item {
     position: relative;
     border-radius: 16px;
@@ -73,21 +62,9 @@
     justify-content: flex-end;
     min-height: 200px;
     opacity: 1;
-    transform: translateY(0);
-    animation: corpBentoReveal 0.65s ease both;
+    transform: none;
     transition: box-shadow 0.3s ease;
   }
-
-  .corp-bento__item.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .corp-bento__item:nth-child(1) { animation-delay: 0.05s; }
-  .corp-bento__item:nth-child(2) { animation-delay: 0.12s; }
-  .corp-bento__item:nth-child(3) { animation-delay: 0.19s; }
-  .corp-bento__item:nth-child(4) { animation-delay: 0.26s; }
-  .corp-bento__item:nth-child(5) { animation-delay: 0.33s; }
 
   .corp-bento__item:hover {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
@@ -259,7 +236,7 @@
   }
 {%- endstyle -%}
 
-<section class="corp-features" data-corp-reveal>
+<section class="corp-features" data-no-typewriter>
   <div class="corp-features__container">
     <div class="corp-features__header">
       <p class="corp-features__eyebrow">{{ section.settings.eyebrow | default: "What's Possible" }}</p>
