@@ -180,6 +180,10 @@
     color: var(--corp-accent);
   }
 
+  .corp-hero__stat-num__value {
+    color: #ffffff !important;
+  }
+
   .corp-hero__stat-label {
     font-size: 11px;
     font-weight: 600;
@@ -450,17 +454,28 @@
         {%- endif -%}
       </div>
 
+      {%- liquid
+        assign stat1_num = section.settings.stat1_num | default: '500' | strip
+        assign stat2_num = section.settings.stat2_num | default: '50' | strip
+        assign stat3_num = section.settings.stat3_num | default: '98' | strip
+      -%}
       <div class="corp-hero__stats">
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat1_num | default: '500' }}">0<span>+</span></span>
+          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat1_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>+</span>
+          </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat1_label | default: 'Brands Gifted' }}</span>
         </div>
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat2_num | default: '50' }}">0<span>K+</span></span>
+          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat2_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>K+</span>
+          </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat2_label | default: 'Kits Delivered' }}</span>
         </div>
         <div class="corp-hero__stat">
-          <span class="corp-hero__stat-num" data-corp-count="{{ section.settings.stat3_num | default: '98' }}">0<span>%</span></span>
+          <span class="corp-hero__stat-num" data-corp-stat data-corp-stat-value="{{ stat3_num | escape }}">
+            <span class="corp-hero__stat-num__value" data-corp-stat-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-stat-suffix>%</span>
+          </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
         </div>
       </div>
@@ -574,6 +589,87 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
 </section>
+
+<script>
+  (function () {
+    function parseStatTarget(raw) {
+      const match = String(raw || '').trim().match(/^(\d+)/);
+      return match ? parseInt(match[1], 10) : NaN;
+    }
+
+    function animateStat(el) {
+      if (el.dataset.corpStatAnimated === 'true') return;
+
+      const numberEl = el.querySelector('[data-corp-stat-number]');
+      const raw = el.getAttribute('data-corp-stat-value') || (numberEl ? numberEl.textContent : '');
+      const target = parseStatTarget(raw);
+
+      if (!numberEl || isNaN(target)) return;
+
+      el.dataset.corpStatAnimated = 'true';
+      numberEl.textContent = '0';
+
+      const duration = 1800;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(target * eased);
+        numberEl.textContent = String(current);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          numberEl.textContent = String(target);
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function initCorpHeroStats() {
+      const stats = document.querySelectorAll('.corp-hero [data-corp-stat]');
+      if (!stats.length) return;
+
+      stats.forEach((el) => {
+        if (el.dataset.corpStatAnimated === 'true') return;
+
+        const reveal = () => animateStat(el);
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                reveal();
+                observer.unobserve(entry.target);
+              });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
+          );
+          observer.observe(el);
+
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            reveal();
+            observer.unobserve(el);
+          }
+        } else {
+          reveal();
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCorpHeroStats);
+    } else {
+      initCorpHeroStats();
+    }
+
+    document.addEventListener('shopify:section:load', initCorpHeroStats);
+  })();
+</script>
 
 {% schema %}
 {
