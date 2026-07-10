@@ -583,6 +583,7 @@ main h3 > span[aria-hidden="true"] {
     font-size: var(--section-heading-size-mobile) !important;
     line-height: 1.05 !important;
     letter-spacing: 0.03em !important;
+    text-align: left !important;
   }
 
   .bs-coverflow__header,
@@ -910,44 +911,36 @@ h4.mobile-accordion-category-heading,
 /* Homepage — unified corner radius (matches bestsellers cards: 20px) */
 body.template-index {
   --homepage-corner: 20px;
+  --homepage-mobile-gutter: max(16px, var(--site-padding, 20px));
 }
 
-/* Homepage mobile — left-aligned section headings */
+/* Homepage mobile — left-aligned headings only; full left for FOR EVERY MATERIAL */
 @media screen and (max-width: 767px) {
+  body.template-index .bs-coverflow__container,
+  body.template-index .trending-social-section .container,
+  body.template-index .fc-container,
+  body.template-index .hp-fam-sec__container,
+  body.template-index .hp-dna__container,
+  body.template-index [class*="featured-brands-"] {
+    padding-left: var(--homepage-mobile-gutter) !important;
+    padding-right: var(--homepage-mobile-gutter) !important;
+  }
+
   body.template-index .hero-fullscreen {
-    align-items: flex-start !important;
+    padding-left: var(--homepage-mobile-gutter) !important;
+    padding-right: var(--homepage-mobile-gutter) !important;
   }
 
   body.template-index .hero-fullscreen__content {
-    align-items: flex-start !important;
-    text-align: left !important;
-  }
-
-  body.template-index .hero-fullscreen__heading,
-  body.template-index .hero-fullscreen__eyebrow {
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
-
-  body.template-index .hero-fullscreen__actions {
-    justify-content: flex-start !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     width: 100% !important;
   }
 
-  body.template-index .bs-coverflow__header,
-  body.template-index .fb__header,
-  body.template-index .trending-social-header,
-  body.template-index .trending-social__heading-group,
-  body.template-index .fc-header {
-    align-items: flex-start !important;
-    text-align: left !important;
-  }
-
+  body.template-index .hero-fullscreen__heading,
   body.template-index .bs-coverflow__heading,
   body.template-index .fb__title,
   body.template-index .trending-social__heading,
-  body.template-index .mat-headline,
   body.template-index .fc-heading,
   body.template-index .hp-fam-sec__heading,
   body.template-index .hp-dna__heading,
@@ -955,67 +948,56 @@ body.template-index {
     text-align: left !important;
     margin-left: 0 !important;
     margin-right: auto !important;
+    width: 100% !important;
   }
 
+  body.template-index .comm-headline {
+    justify-content: flex-start !important;
+  }
+
+  body.template-index .hero-fullscreen__eyebrow,
+  body.template-index .hero-fullscreen__subheading,
   body.template-index .fb__eyebrow,
+  body.template-index .fb__subtitle,
   body.template-index .bs-coverflow__eyebrow,
   body.template-index .trending-social__eyebrow,
-  body.template-index .mat-eyebrow,
   body.template-index .comm-eyebrow,
+  body.template-index .comm-desc,
   body.template-index [class*="ai-story-banner-subheading-"] {
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
-
-  body.template-index .fc-subtitle {
     text-align: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  body.template-index .bs-coverflow__view-all {
-    text-align: left !important;
-    align-self: flex-start !important;
-  }
-
+  /* FOR EVERY MATERIAL — full section left-aligned */
   body.template-index .mat-left {
     align-items: flex-start !important;
     text-align: left !important;
-    padding-left: max(16px, var(--site-padding, 20px)) !important;
-    padding-right: max(16px, var(--site-padding, 20px)) !important;
+    padding-left: var(--homepage-mobile-gutter) !important;
+    padding-right: var(--homepage-mobile-gutter) !important;
   }
 
+  body.template-index .mat-eyebrow,
   body.template-index .mat-headline,
   body.template-index .mat-desc {
     margin-left: 0 !important;
     margin-right: auto !important;
     text-align: left !important;
+    width: 100% !important;
   }
 
   body.template-index .mat-menu {
     align-items: flex-start !important;
+    width: 100% !important;
   }
 
   body.template-index .mat-menu-item {
     justify-content: flex-start !important;
     transform-origin: left center !important;
-  }
-
-  body.template-index .hp-fam-sec__container {
-    text-align: left !important;
+    width: 100% !important;
   }
 
   body.template-index .hp-fam-sec__heading {
     max-width: none !important;
-  }
-
-  body.template-index .comm-top-left {
-    align-items: flex-start !important;
-    text-align: left !important;
-  }
-
-  body.template-index .comm-headline {
-    justify-content: flex-start !important;
   }
 }

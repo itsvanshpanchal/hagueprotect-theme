@@ -27,14 +27,18 @@
       padding: 24px 0 0;
     }
     .trending-social-section .container {
-      padding-left: 12px !important;
-      padding-right: 12px !important;
+      padding-left: max(16px, var(--site-padding, 20px)) !important;
+      padding-right: max(16px, var(--site-padding, 20px)) !important;
     }
     .trending-social-header {
       flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
+      align-items: stretch;
+      text-align: center;
       gap: 16px;
+    }
+
+    .trending-social__heading {
+      text-align: left;
     }
   }
 
