@@ -1,50 +1,16 @@
-/* Per-material display typography — Suede, Leather, Nubuck, Fabrics, Soles */
-.mat-font {
+/* Material menu typography — unified across Suede, Leather, Nubuck, Fabrics, Soles */
+.mat-font,
+[class*="mat-font--"],
+.mat-section .mat-menu-item[class*="mat-font--"],
+.mat-section .mat-menu-item-text[class*="mat-font--"] {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
   text-transform: none !important;
   letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.mat-font--suede,
-.mat-section .mat-font--suede,
-.mat-section .mat-menu-item.mat-font--suede,
-.mat-section .mat-menu-item-text.mat-font--suede {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-weight: 900 !important;
-  font-style: normal !important;
-}
-
-.mat-font--leather,
-.mat-section .mat-font--leather,
-.mat-section .mat-menu-item.mat-font--leather,
-.mat-section .mat-menu-item-text.mat-font--leather {
-  font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-weight: 900 !important;
-  font-style: normal !important;
-}
-
-.mat-font--nubuck,
-.mat-section .mat-font--nubuck,
-.mat-section .mat-menu-item.mat-font--nubuck,
-.mat-section .mat-menu-item-text.mat-font--nubuck {
-  font-family: 'Archivo Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
-}
-
-.mat-font--fabrics,
-.mat-font--soles,
-.mat-section .mat-font--fabrics,
-.mat-section .mat-font--soles,
-.mat-section .mat-menu-item.mat-font--fabrics,
-.mat-section .mat-menu-item.mat-font--soles,
-.mat-section .mat-menu-item-text.mat-font--fabrics,
-.mat-section .mat-menu-item-text.mat-font--soles {
-  font-family: 'Roboto Slab', Georgia, 'Times New Roman', serif !important;
-  font-weight: 900 !important;
-  font-style: normal !important;
 }
 
 @media screen and (max-width: 768px) {
