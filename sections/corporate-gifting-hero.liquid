@@ -592,32 +592,25 @@
 
 <script>
   (function () {
-    function parseStatTarget(raw) {
-      const match = String(raw || '').trim().match(/^(\d+)/);
+    function parseTarget(raw) {
+      const match = String(raw || '').trim().match(/(\d+)/);
       return match ? parseInt(match[1], 10) : NaN;
     }
 
-    function animateStat(el) {
-      if (el.dataset.corpStatAnimated === 'true') return;
-
-      const numberEl = el.querySelector('[data-corp-stat-number]');
-      const raw = el.getAttribute('data-corp-stat-value') || (numberEl ? numberEl.textContent : '');
-      const target = parseStatTarget(raw);
-
-      if (!numberEl || isNaN(target)) return;
-
-      el.dataset.corpStatAnimated = 'true';
-      numberEl.textContent = '0';
+    function animateValue(numberEl, target) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        numberEl.textContent = String(target);
+        return;
+      }
 
       const duration = 1800;
       const start = performance.now();
+      numberEl.textContent = '0';
 
       function tick(now) {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(target * eased);
-        numberEl.textContent = String(current);
-
+        numberEl.textContent = String(Math.round(target * eased));
         if (progress < 1) {
           requestAnimationFrame(tick);
         } else {
@@ -628,46 +621,68 @@
       requestAnimationFrame(tick);
     }
 
-    function initCorpHeroStats() {
-      const stats = document.querySelectorAll('.corp-hero [data-corp-stat]');
-      if (!stats.length) return;
+    function initHeroStats(root) {
+      const scope = root && root.querySelector ? root : document;
+      const stats = scope.querySelectorAll('.corp-hero [data-corp-stat]');
 
-      stats.forEach((el) => {
-        if (el.dataset.corpStatAnimated === 'true') return;
+      stats.forEach(function (statEl) {
+        if (statEl.dataset.corpStatAnimated === 'true') return;
 
-        const reveal = () => animateStat(el);
+        const numberEl = statEl.querySelector('[data-corp-stat-number]');
+        if (!numberEl) return;
 
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                reveal();
-                observer.unobserve(entry.target);
-              });
-            },
-            { threshold: 0.15, rootMargin: '0px 0px -20px 0px' }
-          );
-          observer.observe(el);
+        const raw = statEl.getAttribute('data-corp-stat-value') || numberEl.textContent.trim();
+        const target = parseTarget(raw);
 
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            reveal();
-            observer.unobserve(el);
-          }
-        } else {
-          reveal();
+        if (isNaN(target)) {
+          numberEl.textContent = raw || '0';
+          return;
         }
+
+        statEl.dataset.corpStatAnimated = 'true';
+        animateValue(numberEl, target);
+      });
+
+      scope.querySelectorAll('.corp-hero [data-corp-count]').forEach(function (el) {
+        if (el.dataset.counted === 'true') return;
+
+        const target = parseTarget(el.getAttribute('data-corp-count') || el.textContent);
+        if (isNaN(target)) return;
+
+        const suffix = el.querySelector('span');
+        const suffixHTML = suffix ? suffix.outerHTML : '';
+        el.dataset.counted = 'true';
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          el.innerHTML = String(target) + suffixHTML;
+          return;
+        }
+
+        const duration = 1800;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.innerHTML = String(Math.round(target * eased)) + suffixHTML;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCorpHeroStats);
-    } else {
-      initCorpHeroStats();
-    }
+    initHeroStats();
 
-    document.addEventListener('shopify:section:load', initCorpHeroStats);
+    document.addEventListener('DOMContentLoaded', function () {
+      initHeroStats();
+    });
+
+    document.addEventListener('shopify:section:load', function (event) {
+      if (event.target) {
+        initHeroStats(event.target);
+      }
+    });
   })();
 </script>
 
