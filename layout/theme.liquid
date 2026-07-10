@@ -432,7 +432,9 @@
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'heading-typewriter.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
-    {%- if template.name == 'page' and page.handle == 'contact' -%}
+    {%- if template.name == 'search' and template.suffix == 'business' -%}
+      <script src="{{ 'business-page.js' | asset_url }}" defer="defer"></script>
+    {%- elsif template.name == 'page' and page.handle == 'contact' -%}
       <script src="{{ 'business-page.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
