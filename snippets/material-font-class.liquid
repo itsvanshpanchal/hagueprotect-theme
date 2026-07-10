@@ -1,0 +1,17 @@
+{%- liquid
+  assign s = source | default: '' | downcase | strip
+  assign mat_key = ''
+
+  if s contains 'nubuck'
+    assign mat_key = 'nubuck'
+  elsif s contains 'sole'
+    assign mat_key = 'soles'
+  elsif s contains 'fabric' or s contains 'mesh' or s contains 'knit' or s contains 'canvas'
+    assign mat_key = 'fabrics'
+  elsif s contains 'suede'
+    assign mat_key = 'suede'
+  elsif s contains 'leather'
+    assign mat_key = 'leather'
+  endif
+-%}
+{%- if mat_key != blank -%}mat-font mat-font--{{ mat_key }}{%- endif -%}

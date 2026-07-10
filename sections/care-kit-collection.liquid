@@ -23,6 +23,13 @@
   endfor
 
   assign products_per_page = section.settings.products_limit | default: 24
+
+  assign ckc_material_source = ''
+  if collection != blank and collection.handle != blank
+    assign ckc_material_source = collection.handle
+  elsif section.settings.collection != blank
+    assign ckc_material_source = section.settings.collection.handle
+  endif
 -%}
 
 {%- style -%}
@@ -54,13 +61,16 @@
   }
 
   .ckc-{{ section.id }}__heading {
-    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
     font-size: clamp(28px, 4vw, 40px);
-    font-weight: 600;
     line-height: 1.15;
-    letter-spacing: -0.02em;
     color: #111111;
     margin: 0 0 12px;
+  }
+
+  .ckc-{{ section.id }}__heading:not(.mat-font) {
+    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   .ckc-{{ section.id }}__desc {
@@ -671,9 +681,9 @@
           <p class="ckc-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="ckc-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+          <h2 class="ckc-{{ section.id }}__heading {% render 'material-font-class', source: ckc_material_source %}">{{ section.settings.heading }}</h2>
         {%- elsif collection != blank and collection.title != blank -%}
-          <h2 class="ckc-{{ section.id }}__heading">{{ collection.title }}</h2>
+          <h2 class="ckc-{{ section.id }}__heading {% render 'material-font-class', source: ckc_material_source %}">{{ collection.title }}</h2>
         {%- endif -%}
         {%- if section.settings.description != blank -%}
           <p class="ckc-{{ section.id }}__desc">{{ section.settings.description }}</p>

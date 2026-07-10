@@ -70,9 +70,7 @@
 
   .mat-menu-item,
   .mat-menu-item-text {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
     font-size: {{ section.settings.menu_font_size | default: 48 }}px !important;
-    font-weight: 900 !important;
     font-style: normal !important;
     text-transform: none !important;
     text-decoration: none !important;
@@ -81,7 +79,6 @@
     position: relative !important;
     transform-origin: left center !important;
     line-height: 1.1 !important;
-    letter-spacing: -0.03em !important;
     -webkit-font-smoothing: antialiased !important;
   }
 
@@ -356,8 +353,6 @@
     .mat-menu-item,
     .mat-menu-item-text {
       font-size: clamp(32px, 7vw, 48px) !important;
-      font-weight: 900 !important;
-      letter-spacing: -0.03em !important;
       line-height: 1.1 !important;
     }
 
@@ -482,11 +477,11 @@
                 endif
               -%}
               <a href="{{ mat_href }}"
-                 class="mat-menu-item{% if forloop.first %} active{% endif %}"
+                 class="mat-menu-item {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} active{% endif %}"
                  data-index="{{ forloop.index0 }}"
                  {% if mat_href != '#' %}data-mat-link{% endif %}
                  {{ block.shopify_attributes }}>
-                <span class="mat-menu-item-text">{{ block.settings.title }}</span>
+                <span class="mat-menu-item-text {% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</span>
                 <span class="mat-menu-arrow">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>

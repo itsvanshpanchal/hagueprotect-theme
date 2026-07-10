@@ -1,0 +1,33 @@
+/* Per-material display typography — Suede, Leather, Nubuck, Fabrics, Soles */
+.mat-font {
+  text-transform: none !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mat-font--suede {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}
+
+.mat-font--leather {
+  font-family: 'League Spartan', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}
+
+.mat-font--nubuck {
+  font-family: 'Archivo Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+.mat-font--fabrics,
+.mat-font--soles {
+  font-family: 'Roboto Slab', Georgia, 'Times New Roman', serif !important;
+  font-weight: 900 !important;
+  font-style: normal !important;
+}

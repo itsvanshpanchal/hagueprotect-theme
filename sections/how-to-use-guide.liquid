@@ -268,16 +268,19 @@
   .htu-v2__nav-link {
     display: block;
     padding: 10px 0;
-    font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
     color: #bbb;
     text-decoration: none;
     border-left: 2px solid transparent;
     padding-left: 14px;
     margin-left: -14px;
     transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .htu-v2__nav-link:not(.mat-font) {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .htu-v2__nav-link.is-active,
@@ -355,12 +358,15 @@
     background: linear-gradient(145deg, #eceae6, #ddd9d3);
   }
 
-  .htu-v2__chapter-placeholder span {
+  .htu-v2__chapter-placeholder span:not(.mat-font) {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 6vw, 64px);
-    color: rgba(0, 0, 0, 0.07);
     text-transform: uppercase;
     letter-spacing: 0.08em;
+  }
+
+  .htu-v2__chapter-placeholder span {
+    font-size: clamp(40px, 6vw, 64px);
+    color: rgba(0, 0, 0, 0.07);
   }
 
   .htu-v2__chapter-index {
@@ -373,12 +379,15 @@
   }
 
   .htu-v2__chapter-name {
-    font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(36px, 5vw, 56px);
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
     line-height: 0.95;
     margin: 0 0 14px;
+  }
+
+  .htu-v2__chapter-name:not(.mat-font) {
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .htu-v2__chapter-desc {
@@ -588,13 +597,16 @@
     flex-shrink: 0;
     padding: 10px 18px;
     border: 1px solid var(--line);
-    font-family: 'Bebas Neue', sans-serif;
     font-size: 16px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
     text-decoration: none;
     color: var(--muted);
     transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .htu-v2__mob-nav a:not(.mat-font) {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .htu-v2__mob-nav a.is-active,
@@ -716,7 +728,7 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'material' -%}
             <li>
-              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link{% if forloop.first %} is-active{% endif %}" data-htu-nav>
+              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>
                 {{ block.settings.title }}
               </a>
             </li>
@@ -729,7 +741,7 @@
       <div class="htu-v2__mob-nav" aria-label="Materials">
         {%- for block in section.blocks -%}
           {%- if block.type == 'material' -%}
-            <a href="#htu-mat-{{ block.id }}" class="{% if forloop.first %}is-active{% endif %}" data-htu-nav>{{ block.settings.title }}</a>
+            <a href="#htu-mat-{{ block.id }}" class="{% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>{{ block.settings.title }}</a>
           {%- endif -%}
         {%- endfor -%}
       </div>
@@ -755,13 +767,13 @@
                   <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
                 {%- else -%}
                   <div class="htu-v2__chapter-placeholder" aria-hidden="true">
-                    <span>{{ block.settings.title }}</span>
+                    <span class="{% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</span>
                   </div>
                 {%- endif -%}
               </div>
               <div class="htu-v2__chapter-copy">
                 <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} — {{ block.settings.badge | default: 'Guide' }}</p>
-                <h3 class="htu-v2__chapter-name">{{ block.settings.title }}</h3>
+                <h3 class="htu-v2__chapter-name {% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</h3>
                 <p class="htu-v2__chapter-desc">{{ block.settings.description }}</p>
                 <div class="htu-v2__tips">
                   {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
