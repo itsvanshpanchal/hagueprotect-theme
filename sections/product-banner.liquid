@@ -1,6 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
 
 {%- style -%}
   .pb2 {
@@ -86,6 +86,13 @@
     color: #111111;
     letter-spacing: -0.02em;
     margin: 0 0 14px 0;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pb2__big-num__value,
+  .pb2__big-num__suffix {
+    font-weight: 900;
   }
 
   .pb2__stat-heading {
@@ -210,13 +217,78 @@
 
     {%- comment -%}── 100% Stat Block ──{%- endcomment -%}
     <div class="pb2__stat-block">
-      <p class="pb2__big-num">{{ section.settings.stat_value | default: '100%' }}</p>
+      <p
+        class="pb2__big-num"
+        data-pb2-counter
+        data-pb2-counter-value="{{ section.settings.stat_value | default: '100%' | escape }}"
+        aria-label="{{ section.settings.stat_value | default: '100%' | escape }}"
+      >
+        <span class="pb2__big-num__value" data-pb2-counter-number>1</span><span class="pb2__big-num__suffix" data-pb2-counter-suffix>%</span>
+      </p>
       <h2 class="pb2__stat-heading">{{ section.settings.stat_heading | default: 'Biodegradable Cleaning Solution' }}</h2>
       <p class="pb2__stat-text">{{ section.settings.stat_text | default: 'It delivers a deep, long-lasting clean without the use of harsh chemicals, making it hypoallergenic, non-toxic, vegan-friendly, and safe for skin, pets, and the planet.' }}</p>
     </div>
 
   </div>
 </section>
+
+<script>
+  (function () {
+    const counterEl = document.querySelector('[data-pb2-counter]');
+    if (!counterEl) return;
+
+    const numberEl = counterEl.querySelector('[data-pb2-counter-number]');
+    const suffixEl = counterEl.querySelector('[data-pb2-counter-suffix]');
+    const rawValue = counterEl.getAttribute('data-pb2-counter-value') || '100%';
+    const match = rawValue.trim().match(/^(\d+)(.*)$/);
+    const target = match ? parseInt(match[1], 10) : 100;
+    const suffix = match ? match[2] : '%';
+    const duration = 1800;
+    let hasAnimated = false;
+
+    if (suffixEl) suffixEl.textContent = suffix;
+    if (numberEl) numberEl.textContent = '1';
+
+    const animateCounter = () => {
+      if (hasAnimated || !numberEl) return;
+      hasAnimated = true;
+
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.max(1, Math.round(1 + (target - 1) * eased));
+        numberEl.textContent = String(current);
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          numberEl.textContent = String(target);
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+      observer.observe(counterEl);
+    } else {
+      animateCounter();
+    }
+  })();
+</script>
 
 {% schema %}
 {
