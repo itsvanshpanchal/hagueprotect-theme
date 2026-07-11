@@ -1,0 +1,56 @@
+{%- comment -%}
+  Section typography from theme editor. Falls back to Theme settings → Typography.
+  Pass selectors: h1_selector, h2_selector, paragraph_selector, eyebrow_selector
+  Optional: h1_size_desktop_default, h1_size_mobile_default for hero-sized H1
+{%- endcomment -%}
+{%- liquid
+  assign h1_family = section.settings.h1_font_family | default: settings.font_h1_family | default: 'bebas_neue'
+  assign h2_family = section.settings.h2_font_family | default: settings.font_h2_family | default: 'bebas_neue'
+  assign paragraph_family = section.settings.paragraph_font_family | default: settings.font_paragraph_family | default: 'inter'
+  assign eyebrow_family = section.settings.eyebrow_font_family | default: settings.font_eyebrow_family | default: 'inter'
+
+  assign h1_desktop_fallback = h1_size_desktop_default | default: settings.font_hero_h1_size_desktop | default: settings.font_h1_size_desktop | default: 64
+  assign h1_mobile_fallback = h1_size_mobile_default | default: settings.font_hero_h1_size_mobile | default: settings.font_h1_size_mobile | default: 40
+
+  assign h1_size_desktop = section.settings.h1_font_size_desktop | default: h1_desktop_fallback
+  assign h1_size_mobile = section.settings.h1_font_size_mobile | default: h1_mobile_fallback
+  assign h2_size_desktop = section.settings.h2_font_size_desktop | default: settings.font_h2_size_desktop | default: 52
+  assign h2_size_mobile = section.settings.h2_font_size_mobile | default: settings.font_h2_size_mobile | default: 34
+  assign paragraph_size_desktop = section.settings.paragraph_font_size_desktop | default: settings.font_paragraph_size_desktop | default: 16
+  assign paragraph_size_mobile = section.settings.paragraph_font_size_mobile | default: settings.font_paragraph_size_mobile | default: 15
+  assign eyebrow_size_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 12
+  assign eyebrow_size_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 12
+-%}
+{%- style -%}
+  {%- if h1_selector != blank -%}
+  #shopify-section-{{ section.id }} {{ h1_selector }} {
+    font-family: {% render 'hp-font-stack', font_key: h1_family %} !important;
+    font-size: clamp({{ h1_size_mobile }}px, 8vw, {{ h1_size_desktop }}px) !important;
+  }
+  {%- endif -%}
+  {%- if h2_selector != blank -%}
+  #shopify-section-{{ section.id }} {{ h2_selector }} {
+    font-family: {% render 'hp-font-stack', font_key: h2_family %} !important;
+    font-size: clamp({{ h2_size_mobile }}px, 5.5vw, {{ h2_size_desktop }}px) !important;
+  }
+  {%- endif -%}
+  {%- if paragraph_selector != blank -%}
+  #shopify-section-{{ section.id }} {{ paragraph_selector }} {
+    font-family: {% render 'hp-font-stack', font_key: paragraph_family %} !important;
+    font-size: clamp({{ paragraph_size_mobile }}px, 2.5vw, {{ paragraph_size_desktop }}px) !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+  }
+  {%- endif -%}
+  {%- if eyebrow_selector != blank -%}
+  #shopify-section-{{ section.id }} {{ eyebrow_selector }} {
+    font-family: {% render 'hp-font-stack', font_key: eyebrow_family %} !important;
+    font-size: clamp({{ eyebrow_size_mobile }}px, 1.6vw, {{ eyebrow_size_desktop }}px) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+  {%- endif -%}
+{%- endstyle -%}

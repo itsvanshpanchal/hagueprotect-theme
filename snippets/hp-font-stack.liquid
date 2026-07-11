@@ -1,0 +1,16 @@
+{%- comment -%}
+  Returns a CSS font-family stack for a typography key.
+  Usage: {% render 'hp-font-stack', font_key: 'bebas_neue' %}
+{%- endcomment -%}
+{%- case font_key -%}
+  {%- when 'inter' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'montserrat' -%}
+    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'anton' -%}
+    'Anton', 'Impact', 'Arial Narrow', sans-serif
+  {%- when 'oswald' -%}
+    'Oswald', 'Impact', 'Arial Narrow', sans-serif
+  {%- else -%}
+    'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif
+{%- endcase -%}
