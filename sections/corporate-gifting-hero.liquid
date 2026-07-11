@@ -8,7 +8,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
     background: var(--corp-dark);
     color: #ffffff;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -54,7 +55,7 @@
     width: 100%;
     padding: clamp(110px, 14vh, 150px) max(20px, var(--site-padding, 24px)) clamp(48px, 6vh, 72px);
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: 0.95fr 1.05fr;
     gap: clamp(40px, 6vw, 72px);
     align-items: center;
   }
@@ -192,17 +193,20 @@
     color: rgba(255, 255, 255, 0.45);
   }
 
-  /* Showcase collage */
+  /* Showcase — Trishul layout (center + left/right wings behind) */
   .corp-hero__showcase {
     position: relative;
-    height: clamp(400px, 54vh, 560px);
-    max-width: 520px;
+    height: clamp(460px, 62vh, 640px);
+    max-width: 680px;
+    min-height: 420px;
     margin-left: auto;
     width: 100%;
+    overflow: visible;
   }
 
   .corp-hero__showcase--single {
     height: clamp(380px, 50vh, 520px);
+    overflow: hidden;
   }
 
   .corp-hero__showcase--single .corp-hero__frame {
@@ -223,6 +227,7 @@
     border: 1px solid rgba(255, 255, 255, 0.14);
     box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+    will-change: transform;
   }
 
   .corp-hero__frame:hover {
@@ -230,47 +235,57 @@
     z-index: 10 !important;
   }
 
-  .corp-hero__frame--back {
-    width: 58%;
-    top: 4%;
-    right: 0;
-    z-index: 1;
-    transform: rotate(4deg);
-    opacity: 0.85;
-    animation: corpFrameBack 7s ease-in-out infinite;
-  }
-
+  /* Center prong — main image */
   .corp-hero__frame--main {
-    width: 74%;
-    top: 50%;
+    width: 64%;
+    bottom: 6%;
     left: 50%;
-    z-index: 3;
-    transform: translate(-50%, -50%) rotate(-3deg);
+    top: auto;
+    z-index: 4;
+    transform: translateX(-50%) rotate(-1deg);
     animation: corpFrameMain 6s ease-in-out infinite;
   }
 
+  /* Left wing — behind center, popping up-left */
+  .corp-hero__frame--back {
+    width: 52%;
+    bottom: 10%;
+    left: -2%;
+    top: auto;
+    z-index: 1;
+    transform: rotate(-16deg) translate(-6%, -18%);
+    transform-origin: 85% 88%;
+    opacity: 0.92;
+    animation: corpFrameLeft 7s ease-in-out infinite;
+  }
+
+  /* Right wing — behind center, popping up-right */
   .corp-hero__frame--front {
     width: 52%;
-    bottom: 2%;
-    left: 0;
-    z-index: 4;
-    transform: rotate(-6deg);
-    animation: corpFrameFront 5.5s ease-in-out infinite;
+    bottom: 10%;
+    right: -2%;
+    left: auto;
+    top: auto;
+    z-index: 2;
+    transform: rotate(16deg) translate(6%, -18%);
+    transform-origin: 15% 88%;
+    opacity: 0.92;
+    animation: corpFrameRight 6.5s ease-in-out infinite;
   }
 
   @keyframes corpFrameMain {
-    0%, 100% { transform: translate(-50%, -50%) rotate(-3deg); }
-    50% { transform: translate(-50%, -52%) rotate(-1deg); }
+    0%, 100% { transform: translateX(-50%) rotate(-1deg) translateY(0); }
+    50% { transform: translateX(-50%) rotate(-1deg) translateY(-10px); }
   }
 
-  @keyframes corpFrameBack {
-    0%, 100% { transform: rotate(4deg) translateY(0); }
-    50% { transform: rotate(4deg) translateY(-10px); }
+  @keyframes corpFrameLeft {
+    0%, 100% { transform: rotate(-16deg) translate(-6%, -18%); }
+    50% { transform: rotate(-14deg) translate(-8%, -24%); }
   }
 
-  @keyframes corpFrameFront {
-    0%, 100% { transform: rotate(-6deg) translateY(0); }
-    50% { transform: rotate(-6deg) translateY(-14px); }
+  @keyframes corpFrameRight {
+    0%, 100% { transform: rotate(16deg) translate(6%, -18%); }
+    50% { transform: rotate(14deg) translate(8%, -24%); }
   }
 
   .corp-hero__frame-media {
@@ -412,13 +427,38 @@
 
     .corp-hero__showcase {
       margin: 0 auto;
-      height: 340px;
+      height: 380px;
+      max-width: 100%;
+    }
+
+    .corp-hero__frame--main {
+      width: 68%;
+    }
+
+    .corp-hero__frame--back,
+    .corp-hero__frame--front {
+      width: 48%;
     }
   }
 
   @media screen and (max-width: 600px) {
     .corp-hero__showcase {
-      height: 280px;
+      height: 300px;
+    }
+
+    .corp-hero__frame--main {
+      width: 72%;
+      bottom: 4%;
+    }
+
+    .corp-hero__frame--back {
+      left: -6%;
+      transform: rotate(-14deg) translate(-4%, -14%);
+    }
+
+    .corp-hero__frame--front {
+      right: -6%;
+      transform: rotate(14deg) translate(4%, -14%);
     }
 
     .corp-hero__scroll-hint {
@@ -779,7 +819,7 @@
       "id": "showcase_mode",
       "label": "Showcase layout",
       "options": [
-        { "value": "collage", "label": "3-image collage" },
+        { "value": "collage", "label": "Trishul (3-image)" },
         { "value": "single", "label": "Single large image" }
       ],
       "default": "collage",
@@ -828,9 +868,9 @@
       "type": "header",
       "content": "Legacy image settings (used if no blocks added)"
     },
-    { "type": "image_picker", "id": "card_image_1", "label": "Collage — center image" },
-    { "type": "image_picker", "id": "card_image_2", "label": "Collage — back image" },
-    { "type": "image_picker", "id": "card_image_3", "label": "Collage — front image" }
+    { "type": "image_picker", "id": "card_image_1", "label": "Trishul — center image" },
+    { "type": "image_picker", "id": "card_image_2", "label": "Trishul — left wing image" },
+    { "type": "image_picker", "id": "card_image_3", "label": "Trishul — right wing image" }
   ],
   "blocks": [
     {
@@ -849,10 +889,11 @@
           "label": "Card position",
           "options": [
             { "value": "main", "label": "Center (main)" },
-            { "value": "back", "label": "Back right" },
-            { "value": "front", "label": "Front left" }
+            { "value": "back", "label": "Left wing (behind)" },
+            { "value": "front", "label": "Right wing (behind)" }
           ],
-          "default": "main"
+          "default": "main",
+          "info": "Trishul layout: center image in front, left and right wings pop up behind."
         },
         { "type": "text", "id": "tag", "label": "Small label", "default": "Premium Kit" },
         { "type": "text", "id": "caption", "label": "Caption", "default": "Executive Gift Box" },
