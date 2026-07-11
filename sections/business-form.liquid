@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .biz-form {
     padding: clamp(80px, 10vw, 120px) 0;
     background: #f0f2f8;
@@ -304,7 +307,7 @@
         <div class="biz-form__visual-content">
           <p class="biz-form__visual-eyebrow">{{ section.settings.eyebrow | default: 'Partner With Us' }}</p>
           <h2 class="biz-form__visual-title">{{ section.settings.side_title | default: "Let's Build Together" }}</h2>
-          <p class="biz-form__visual-text">{{ section.settings.side_text | default: "Tell us about your business and our partnerships team will respond with a custom proposal within 24–48 hours." }}</p>
+          <p class="biz-form__visual-text">{{ section.settings.side_text | default: "Tell us about your business and our partnerships team will respond with a custom proposal within 24â€“48 hours." }}</p>
         </div>
         <div class="biz-form__contacts">
           <a href="mailto:{{ section.settings.email | default: 'business@hagueprotect.com' }}" class="biz-form__contact">
@@ -337,7 +340,7 @@
 
           {%- if form.posted_successfully? -%}
             <div class="biz-form__success">
-              {{ section.settings.success_message | default: "Thank you! Our partnerships team will reach out within 24–48 hours." }}
+              {{ section.settings.success_message | default: "Thank you! Our partnerships team will reach out within 24â€“48 hours." }}
             </div>
           {%- endif -%}
 
@@ -372,7 +375,7 @@
           <div class="biz-form__group">
             <label class="biz-form__label" for="BizPhone">{{ section.settings.label_phone | default: 'Phone' }}</label>
             <div class="biz-form__phone-wrap">
-              <span class="biz-form__phone-prefix">{{ section.settings.phone_prefix | default: '🇮🇳 +91' }}</span>
+              <span class="biz-form__phone-prefix">{{ section.settings.phone_prefix | default: 'ðŸ‡®ðŸ‡³ +91' }}</span>
               <input type="tel" id="BizPhone" name="contact[phone]" class="biz-form__input" placeholder="{{ section.settings.placeholder_phone | default: 'Phone number' }}" required>
             </div>
           </div>
@@ -397,7 +400,7 @@
     { "type": "image_picker", "id": "side_image", "label": "Side panel background image" },
     { "type": "text", "id": "eyebrow", "label": "Side panel eyebrow", "default": "Partner With Us" },
     { "type": "text", "id": "side_title", "label": "Side panel title", "default": "Let's Build Together" },
-    { "type": "textarea", "id": "side_text", "label": "Side panel text", "default": "Tell us about your business and our partnerships team will respond with a custom proposal within 24–48 hours." },
+    { "type": "textarea", "id": "side_text", "label": "Side panel text", "default": "Tell us about your business and our partnerships team will respond with a custom proposal within 24â€“48 hours." },
     { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
     { "type": "text", "id": "email", "label": "Email address", "default": "business@hagueprotect.com" },
     { "type": "text", "id": "whatsapp_label", "label": "WhatsApp label", "default": "WhatsApp" },
@@ -414,12 +417,152 @@
     { "type": "text", "id": "label_email", "label": "Email label", "default": "Work Email" },
     { "type": "text", "id": "placeholder_email", "label": "Email placeholder", "default": "you@company.com" },
     { "type": "text", "id": "label_phone", "label": "Phone label", "default": "Phone" },
-    { "type": "text", "id": "phone_prefix", "label": "Phone prefix", "default": "🇮🇳 +91" },
+    { "type": "text", "id": "phone_prefix", "label": "Phone prefix", "default": "ðŸ‡®ðŸ‡³ +91" },
     { "type": "text", "id": "placeholder_phone", "label": "Phone placeholder", "default": "Phone number" },
     { "type": "text", "id": "label_message", "label": "Message label", "default": "Tell us about your needs" },
     { "type": "text", "id": "placeholder_message", "label": "Message placeholder", "default": "Locations, monthly volume, product categories of interest..." },
     { "type": "text", "id": "submit_label", "label": "Submit button", "default": "Submit Application" },
-    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Thank you! Our partnerships team will reach out within 24–48 hours." }
+    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Thank you! Our partnerships team will reach out within 24â€“48 hours." }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "presets": [{ "name": "Business Form" }]
 }

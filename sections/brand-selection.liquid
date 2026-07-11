@@ -1,16 +1,16 @@
 {%- comment -%}
   ============================================================
-  BRAND SELECTION — luxury multi-brand portrait cards
+  BRAND SELECTION â€” luxury multi-brand portrait cards
   ------------------------------------------------------------
   Tall, portrait-oriented cards inspired by high-end fashion
   retailers (Hugo Boss, Armani Exchange, Ralph Lauren, etc.).
 
-  • Full-bleed background image (object-fit: cover)
-  • Soft rounded corners + light neutral section background
-  • Bottom dark gradient for logo legibility
-  • Brand logo pinned to the bottom-centre of the card
-  • Whole card is a single clickable link
-  • Hover: image zooms gently while the card lifts with a soft shadow
+  â€¢ Full-bleed background image (object-fit: cover)
+  â€¢ Soft rounded corners + light neutral section background
+  â€¢ Bottom dark gradient for logo legibility
+  â€¢ Brand logo pinned to the bottom-centre of the card
+  â€¢ Whole card is a single clickable link
+  â€¢ Hover: image zooms gently while the card lifts with a soft shadow
 
   SCALABLE: each brand is a block, so you can add / remove / reorder
   brands from the theme editor while keeping the same design system.
@@ -28,6 +28,9 @@
 -%}
 
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   #shopify-section-{{ section.id }} .brandsel {
     background: {{ section.settings.bg_color | default: '#f5f4f2' }};
     padding: {{ section.settings.padding_top | default: 100 }}px 20px {{ section.settings.padding_bottom | default: 100 }}px;
@@ -200,7 +203,7 @@
     }
   }
 
-  /* Mobile — stack all cards, single column */
+  /* Mobile â€” stack all cards, single column */
   @media screen and (max-width: 640px) {
     #shopify-section-{{ section.id }} .brandsel {
       padding: {{ section.settings.padding_top | default: 100 | times: 0.6 | round }}px 16px {{ section.settings.padding_bottom | default: 100 | times: 0.6 | round }}px;
@@ -484,6 +487,146 @@
       "label": "Subheading",
       "default": "#6b6b6b"
     }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "blocks": [
     {
@@ -500,7 +643,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Background image",
-          "info": "Recommended portrait, at least 800 × 1100px. Leave empty to use an image uploaded via theme code below."
+          "info": "Recommended portrait, at least 800 Ã— 1100px. Leave empty to use an image uploaded via theme code below."
         },
         {
           "type": "text",

@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .reviews-sec {
     background-color: #fafafc;
     padding: clamp(40px, 6vw, 80px) 0;
@@ -351,7 +354,7 @@
         <!-- Dynamic Fallbacks -->
         {%- assign sample_names = "Arpan A.|Shahbaz M.|Rukshana A.|Anjali Singh|Debadutta D.|Akshith G.|Anjana J.|Hansel|Ramakrishna R.|Er Gurminder D.|Natasha R.|Ridham P.|Gagan Y.|Apin F." | split: "|" -%}
         {%- assign sample_dates = "4/24/2026|3/21/2026|2/20/2026|12/11/2025|10/8/2025|8/24/2025|10/2/2025|12/12/2025|7/24/2025|7/28/2025|7/23/2025|7/18/2025|7/2/2025|6/14/2025" | split: "|" -%}
-        {%- assign sample_texts = "nice product|build quality 5/5. overall product is great|Our new go-to cleaner. Truly remarkable formula|The best part of the product is its efficiency. Must buy.|one of a kind product. I love this. Will buy again.|absolutely thrilled. Compact, lightweight, surprisingly powerful.|Love the formula. Hand and shoes are safe. Super premium.|I love everything about it. It works smoothly, looks great, and exceeded my expectations.|Very handy. Elite cleaner. The BLDC motor is a marvel.|It's a very compact travel kit. Its unique feature is safe on suede.|I wasn't sure about spending this much—but OMG I'm so glad I did! The quality is top notch.|excellent|I spent a lot of time thinking if I should spend that much money but it was worth the quality.|It was awesome. My wife loved it." | split: "|" -%}
+        {%- assign sample_texts = "nice product|build quality 5/5. overall product is great|Our new go-to cleaner. Truly remarkable formula|The best part of the product is its efficiency. Must buy.|one of a kind product. I love this. Will buy again.|absolutely thrilled. Compact, lightweight, surprisingly powerful.|Love the formula. Hand and shoes are safe. Super premium.|I love everything about it. It works smoothly, looks great, and exceeded my expectations.|Very handy. Elite cleaner. The BLDC motor is a marvel.|It's a very compact travel kit. Its unique feature is safe on suede.|I wasn't sure about spending this muchâ€”but OMG I'm so glad I did! The quality is top notch.|excellent|I spent a lot of time thinking if I should spend that much money but it was worth the quality.|It was awesome. My wife loved it." | split: "|" -%}
         {%- assign sample_types = "Classic Kit|Ivory Metal Grey|Tokyo Totti Candy|Classic Shield|Maluku Green|Ivory Metal Grey|Lemonade Yellow|Blackpink Grey|Maluku Green|Blackpink Grey|Ivory Metal Grey|Classic Shield|Maluku Green|Lemonade Yellow" | split: "|" -%}
         
         {%- for i in (0..13) -%}
@@ -407,6 +410,146 @@
       "label": "Summary Text",
       "default": "201 Reviews"
     }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "blocks": [
     {

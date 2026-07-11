@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .biz-hero {
     --biz-accent: #ff2b2b;
     --biz-blue: #4f8cff;
@@ -464,7 +467,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Partnership Hub" },
     { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Grow Your" },
     { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "Business" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support — built to scale with you." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support â€” built to scale with you." },
     { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Become a Partner" },
     { "type": "url", "id": "btn_link", "label": "Primary button link" },
     { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Explore Solutions" },
@@ -475,6 +478,146 @@
     { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Cities Served" },
     { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "99" },
     { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Fill Rate" }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "blocks": [
     {

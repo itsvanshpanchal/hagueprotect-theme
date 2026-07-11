@@ -1,0 +1,40 @@
+{%- liquid
+  assign h1_family = settings.font_h1_family | default: 'bebas_neue'
+  assign h2_family = settings.font_h2_family | default: 'bebas_neue'
+  assign paragraph_family = settings.font_paragraph_family | default: 'inter'
+  assign eyebrow_family = settings.font_eyebrow_family | default: 'inter'
+
+  assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
+  assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44
+  assign h1_desktop = settings.font_h1_size_desktop | default: 64
+  assign h1_mobile = settings.font_h1_size_mobile | default: 40
+  assign h2_desktop = settings.font_h2_size_desktop | default: 52
+  assign h2_mobile = settings.font_h2_size_mobile | default: 34
+  assign paragraph_desktop = settings.font_paragraph_size_desktop | default: 16
+  assign paragraph_mobile = settings.font_paragraph_size_mobile | default: 15
+  assign eyebrow_desktop = settings.font_eyebrow_size_desktop | default: 12
+  assign eyebrow_mobile = settings.font_eyebrow_size_mobile | default: 12
+-%}
+<style>
+  :root {
+    --font-family-heading: {% render 'hp-font-stack', font_key: h1_family %};
+    --font-family-h2: {% render 'hp-font-stack', font_key: h2_family %};
+    --font-family-subheading: {% render 'hp-font-stack', font_key: h2_family %};
+    --font-family-sans: {% render 'hp-font-stack', font_key: paragraph_family %};
+    --font-family-eyebrow: {% render 'hp-font-stack', font_key: eyebrow_family %};
+    --heading-size-hero: clamp({{ hero_h1_mobile }}px, 8vw, {{ hero_h1_desktop }}px);
+    --heading-size-xl: clamp({{ h1_mobile }}px, 5.5vw, {{ h1_desktop }}px);
+    --section-heading-size: clamp({{ h2_mobile }}px, 5.5vw, {{ h2_desktop }}px);
+    --section-heading-size-mobile: clamp({{ h2_mobile }}px, 8vw, {{ h2_mobile | plus: 6 }}px);
+    --section-subheading-size: {{ paragraph_desktop }}px;
+    --section-label-size: {{ eyebrow_desktop }}px;
+    --body-font-size: {{ paragraph_desktop }}px;
+  }
+  @media screen and (max-width: 767px) {
+    :root {
+      --section-subheading-size: {{ paragraph_mobile }}px;
+      --section-label-size: {{ eyebrow_mobile }}px;
+      --body-font-size: {{ paragraph_mobile }}px;
+    }
+  }
+</style>

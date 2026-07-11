@@ -1,1 +1,185 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Hague Protect",
+    "theme_version": "2.1.0",
+    "theme_author": "Hague Protect",
+    "theme_documentation_url": "https://hagueprotect.com",
+    "theme_support_url": "https://hagueprotect.com"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Global font defaults for the entire site. Each section also has its own Typography panel to override these values."
+      },
+      {
+        "type": "header",
+        "content": "H1 — Hero & main headings"
+      },
+      {
+        "type": "select",
+        "id": "font_h1_family",
+        "label": "H1 font family",
+        "options": [
+          { "value": "bebas_neue", "label": "Bebas Neue" },
+          { "value": "anton", "label": "Anton" },
+          { "value": "oswald", "label": "Oswald" },
+          { "value": "inter", "label": "Inter" },
+          { "value": "montserrat", "label": "Montserrat" }
+        ],
+        "default": "bebas_neue"
+      },
+      {
+        "type": "range",
+        "id": "font_hero_h1_size_desktop",
+        "label": "Hero H1 size (desktop)",
+        "min": 32,
+        "max": 120,
+        "step": 2,
+        "unit": "px",
+        "default": 72
+      },
+      {
+        "type": "range",
+        "id": "font_hero_h1_size_mobile",
+        "label": "Hero H1 size (mobile)",
+        "min": 24,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 44
+      },
+      {
+        "type": "range",
+        "id": "font_h1_size_desktop",
+        "label": "H1 size (desktop)",
+        "min": 28,
+        "max": 96,
+        "step": 2,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "font_h1_size_mobile",
+        "label": "H1 size (mobile)",
+        "min": 20,
+        "max": 64,
+        "step": 2,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "H2 — Section headings"
+      },
+      {
+        "type": "select",
+        "id": "font_h2_family",
+        "label": "H2 font family",
+        "options": [
+          { "value": "bebas_neue", "label": "Bebas Neue" },
+          { "value": "anton", "label": "Anton" },
+          { "value": "oswald", "label": "Oswald" },
+          { "value": "inter", "label": "Inter" },
+          { "value": "montserrat", "label": "Montserrat" }
+        ],
+        "default": "bebas_neue"
+      },
+      {
+        "type": "range",
+        "id": "font_h2_size_desktop",
+        "label": "H2 size (desktop)",
+        "min": 20,
+        "max": 96,
+        "step": 2,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "font_h2_size_mobile",
+        "label": "H2 size (mobile)",
+        "min": 16,
+        "max": 64,
+        "step": 2,
+        "unit": "px",
+        "default": 34
+      },
+      {
+        "type": "header",
+        "content": "Paragraph — Body & descriptions"
+      },
+      {
+        "type": "select",
+        "id": "font_paragraph_family",
+        "label": "Paragraph font family",
+        "options": [
+          { "value": "inter", "label": "Inter" },
+          { "value": "montserrat", "label": "Montserrat" },
+          { "value": "bebas_neue", "label": "Bebas Neue" },
+          { "value": "oswald", "label": "Oswald" }
+        ],
+        "default": "inter"
+      },
+      {
+        "type": "range",
+        "id": "font_paragraph_size_desktop",
+        "label": "Paragraph size (desktop)",
+        "min": 11,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "font_paragraph_size_mobile",
+        "label": "Paragraph size (mobile)",
+        "min": 11,
+        "max": 28,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "header",
+        "content": "Eyebrow — Small labels"
+      },
+      {
+        "type": "select",
+        "id": "font_eyebrow_family",
+        "label": "Eyebrow font family",
+        "options": [
+          { "value": "inter", "label": "Inter" },
+          { "value": "montserrat", "label": "Montserrat" },
+          { "value": "bebas_neue", "label": "Bebas Neue" },
+          { "value": "oswald", "label": "Oswald" }
+        ],
+        "default": "inter"
+      },
+      {
+        "type": "range",
+        "id": "font_eyebrow_size_desktop",
+        "label": "Eyebrow size (desktop)",
+        "min": 9,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "font_eyebrow_size_mobile",
+        "label": "Eyebrow size (mobile)",
+        "min": 9,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      }
+    ]
+  }
+]

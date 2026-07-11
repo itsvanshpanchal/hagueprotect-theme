@@ -1,6 +1,9 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
 /* ============================================================
-   VANROSECTOR PRODUCT DETAIL PAGE — Brand-specific styles
+   VANROSECTOR PRODUCT DETAIL PAGE â€” Brand-specific styles
    Palette: Warm earthy / natural tones (#8a6a3b, #fbf8f2)
    ============================================================ */
 
@@ -29,7 +32,7 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── TOP BRAND STRIP ── */
+/* â”€â”€ TOP BRAND STRIP â”€â”€ */
 .vr-brand-strip {
   background: var(--vr-primary);
   padding: 10px 24px;
@@ -59,7 +62,7 @@
   border: 1px solid rgba(255,255,255,0.22);
 }
 
-/* ── MAIN GRID ── */
+/* â”€â”€ MAIN GRID â”€â”€ */
 .vr-pdp-grid {
   display: grid;
   grid-template-columns: 55% 1fr;
@@ -78,7 +81,7 @@
   }
 }
 
-/* ── GALLERY ── */
+/* â”€â”€ GALLERY â”€â”€ */
 .vr-gallery {
   display: flex;
   flex-direction: column;
@@ -182,7 +185,7 @@
   padding: 4px;
 }
 
-/* ── PRODUCT INFO PANEL ── */
+/* â”€â”€ PRODUCT INFO PANEL â”€â”€ */
 .vr-info { display: flex; flex-direction: column; gap: 20px; }
 
 /* brand + rating row */
@@ -562,7 +565,7 @@
 
 .vr-accordion-body-inner { padding-bottom: 16px; }
 
-/* ── FLOATING STICKY BAR ── */
+/* â”€â”€ FLOATING STICKY BAR â”€â”€ */
 .vr-sticky-bar {
   position: fixed;
   bottom: 24px;
@@ -677,7 +680,7 @@
   {%- comment -%} MAIN GRID {%- endcomment -%}
   <div class="vr-pdp-grid">
 
-    {%- comment -%} ── LEFT: GALLERY ── {%- endcomment -%}
+    {%- comment -%} â”€â”€ LEFT: GALLERY â”€â”€ {%- endcomment -%}
     <div class="vr-gallery" id="vr-gallery-{{ section.id }}">
       <div class="vr-gallery__main">
         {%- if badge_text != blank -%}
@@ -728,7 +731,7 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} ── RIGHT: PRODUCT INFO ── {%- endcomment -%}
+    {%- comment -%} â”€â”€ RIGHT: PRODUCT INFO â”€â”€ {%- endcomment -%}
     <div class="vr-info">
 
       {%- comment -%} Brand + Rating row {%- endcomment -%}
@@ -739,7 +742,7 @@
         </span>
         <span class="vr-rating-pill">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="#2d6a4f"><path d="M6 1l1.4 2.9 3.2.5-2.3 2.2.5 3.2L6 8.2l-2.8 1.6.5-3.2L1.4 4.4l3.2-.5z"/></svg>
-          {{ rating_value }} · {{ rating_count }} reviews
+          {{ rating_value }} Â· {{ rating_count }} reviews
         </span>
       </div>
 
@@ -825,7 +828,7 @@
       {%- if current_variant.available -%}
         <div class="vr-stock">
           <span class="vr-stock__dot"></span>
-          In Stock — Ready to Ship
+          In Stock â€” Ready to Ship
         </div>
       {%- else -%}
         <div class="vr-stock" style="color:#b71c1c;">
@@ -840,7 +843,7 @@
 
         <div class="vr-cart-row">
           <div class="vr-qty">
-            <button type="button" class="vr-qty__btn" onclick="vrQty('{{ section.id }}', -1)" aria-label="Decrease quantity">−</button>
+            <button type="button" class="vr-qty__btn" onclick="vrQty('{{ section.id }}', -1)" aria-label="Decrease quantity">âˆ’</button>
             <span class="vr-qty__num" id="vr-qty-num-{{ section.id }}">1</span>
             <button type="button" class="vr-qty__btn" onclick="vrQty('{{ section.id }}', 1)" aria-label="Increase quantity">+</button>
             <input type="hidden" name="quantity" id="vr-qty-input-{{ section.id }}" value="1">
@@ -909,7 +912,7 @@
               {%- if section.settings.how_to_use != blank -%}
                 {{ section.settings.how_to_use }}
               {%- else -%}
-                <p>Apply a small amount to clean skin. Massage gently in circular motions. Allow to absorb for 2–3 minutes before layering other products. Use morning and evening for best results.</p>
+                <p>Apply a small amount to clean skin. Massage gently in circular motions. Allow to absorb for 2â€“3 minutes before layering other products. Use morning and evening for best results.</p>
               {%- endif -%}
             </div>
           </div>
@@ -938,7 +941,7 @@
           </button>
           <div class="vr-accordion-body">
             <div class="vr-accordion-body-inner">
-              <p>Free standard shipping on orders over ₹999. Express delivery in 2–4 business days. Easy 7-day returns on unopened products.</p>
+              <p>Free standard shipping on orders over â‚¹999. Express delivery in 2â€“4 business days. Easy 7-day returns on unopened products.</p>
             </div>
           </div>
         </div>
@@ -964,7 +967,7 @@
 (function(){
   var sid = '{{ section.id }}';
 
-  /* ── Gallery ── */
+  /* â”€â”€ Gallery â”€â”€ */
   var galleryIdx = 0;
   var totalImages = {{ product.images.size }};
 
@@ -982,7 +985,7 @@
   window.vrGalleryNav = function(s, dir) { if (s === sid) vrSetGalleryImg(galleryIdx + dir); };
   window.vrGallerySet = function(s, idx) { if (s === sid) vrSetGalleryImg(idx); };
 
-  /* ── Quantity ── */
+  /* â”€â”€ Quantity â”€â”€ */
   var qty = 1;
   window.vrQty = function(s, delta) {
     if (s !== sid) return;
@@ -993,7 +996,7 @@
     if (inpEl) inpEl.value = qty;
   };
 
-  /* ── Variant ── */
+  /* â”€â”€ Variant â”€â”€ */
   window.vrSelectVariant = function(s, card) {
     if (s !== sid) return;
     var cards = document.querySelectorAll('#vr-variant-picker-' + sid + ' .vr-variant-card');
@@ -1017,7 +1020,7 @@
     if (btn) { btn.disabled = !avail; btn.style.opacity = avail ? '1' : '0.5'; }
   };
 
-  /* ── Accordion ── */
+  /* â”€â”€ Accordion â”€â”€ */
   window.vrAccordion = function(btn) {
     var item = btn.closest('.vr-accordion-item');
     var isOpen = item.classList.contains('open');
@@ -1027,7 +1030,7 @@
     if (!isOpen) item.classList.add('open');
   };
 
-  /* ── Sticky bar ── */
+  /* â”€â”€ Sticky bar â”€â”€ */
   var atcBtn = document.getElementById('vr-atc-btn-' + sid);
   var stickyBar = document.getElementById('vr-sticky-' + sid);
 
@@ -1139,6 +1142,146 @@
       "id": "ingredients",
       "label": "Ingredients"
     }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "presets": [
     {

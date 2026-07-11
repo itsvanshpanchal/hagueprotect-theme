@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .premium-hero-{{ section.id }} {
     position: relative;
     width: 100%;
@@ -17,7 +20,7 @@
     color: #ffffff;
   }
 
-  /* ── Background media layers ─────────────────────────────── */
+  /* â”€â”€ Background media layers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .premium-hero-bg {
     position: absolute;
     inset: 0;
@@ -41,7 +44,7 @@
     background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
   }
 
-  /* ── Layout ──────────────────────────────────────────────── */
+  /* â”€â”€ Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .premium-hero-container {
     display: flex;
     max-width: var(--site-max-width, 1320px);
@@ -266,7 +269,7 @@
 
 <section class="premium-hero-{{ section.id }}">
 
-  {%- comment -%}── Background: Video ────────────────────────────────────────{%- endcomment -%}
+  {%- comment -%}â”€â”€ Background: Video â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€{%- endcomment -%}
   {%- if section.settings.background_type == 'video' and section.settings.background_video != blank -%}
     <div class="premium-hero-bg">
       <video
@@ -281,7 +284,7 @@
     </div>
     <div class="premium-hero-overlay"></div>
 
-  {%- comment -%}── Background: Image ────────────────────────────────────────{%- endcomment -%}
+  {%- comment -%}â”€â”€ Background: Image â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€{%- endcomment -%}
   {%- elsif section.settings.background_type == 'image' and section.settings.background_image != blank -%}
     <div class="premium-hero-bg">
       <img
@@ -318,7 +321,7 @@
                     <div class="card-meta">
                       <span class="card-price">{{ product.price | money_without_trailing_zeros }}</span>
                       <div class="card-rating">
-                        ★★★★★
+                        â˜…â˜…â˜…â˜…â˜…
                       </div>
                     </div>
                     <button class="card-atc" onclick="window.location.href='{{ product.url }}'">Add to Cart</button>
@@ -337,7 +340,7 @@
                     <p class="card-desc">Experience the ultimate in luxury care for your high-end footwear collection.</p>
                     <div class="card-meta">
                       <span class="card-price">$49.00</span>
-                      <div class="card-rating">★★★★★</div>
+                      <div class="card-rating">â˜…â˜…â˜…â˜…â˜…</div>
                     </div>
                     <button class="card-atc">Add to Cart</button>
                   </div>
@@ -417,13 +420,13 @@
       "type": "image_picker",
       "id": "background_image",
       "label": "Background Image or GIF",
-      "info": "Active when type is 'Image / GIF'. Upload a JPG, PNG, WebP, or animated GIF. Recommended size: 1920×1080px."
+      "info": "Active when type is 'Image / GIF'. Upload a JPG, PNG, WebP, or animated GIF. Recommended size: 1920Ã—1080px."
     },
     {
       "type": "text",
       "id": "background_video",
       "label": "Background Video URL (.mp4)",
-      "info": "Active when type is 'Video (MP4)'. Go to Shopify Admin → Content → Files, upload your .mp4, then paste the file URL here."
+      "info": "Active when type is 'Video (MP4)'. Go to Shopify Admin â†’ Content â†’ Files, upload your .mp4, then paste the file URL here."
     },
     {
       "type": "image_picker",
@@ -466,6 +469,146 @@
       "id": "button_link",
       "label": "Button Link"
     }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "presets": [
     {

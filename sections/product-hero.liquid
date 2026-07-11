@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
 
 :root {
   --d2c-primary: #000000;
@@ -1156,7 +1159,7 @@
         <div class="d2c-quantity-box" style="display: flex; flex-direction: column; align-items: flex-end;">
           <label class="d2c-label" style="font-size: 14px; font-weight: 700; color: #000000; margin-bottom: 6px; text-transform: none; letter-spacing: 0;">Quantity</label>
           <div class="d2c-qty-selector" style="width: 140px; height: 44px; border: 1.5px solid #000000; border-radius: 12px; display: flex; align-items: center; overflow: hidden; background: #FFFFFF;">
-            <button type="button" class="d2c-qty-btn" id="Qty-Decrement" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">−</button>
+            <button type="button" class="d2c-qty-btn" id="Qty-Decrement" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">âˆ’</button>
             <div class="d2c-qty-number" id="Qty-Number" style="flex: 1; text-align: center; font-size: 16px; font-weight: 700; color: #000000;">1</div>
             <button type="button" class="d2c-qty-btn" id="Qty-Increment" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">+</button>
           </div>
@@ -1507,7 +1510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!isActive) {
         parent.classList.add('active');
         content.style.maxHeight = content.scrollHeight + 'px';
-        icon.textContent = '−';
+        icon.textContent = 'âˆ’';
       } else {
         parent.classList.remove('active');
         content.style.maxHeight = null;
@@ -1689,6 +1692,146 @@ function togglePersonalizationInput() {
       "label": "Pill 5 Text",
       "default": "Fast shipping & delivery"
     }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "presets": [
     {

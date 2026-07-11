@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .header-wrapper {
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     border-bottom: 1px solid #e5e5e5;
@@ -1318,13 +1321,13 @@
           <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
             {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care', style: 'color:#666; text-decoration:none; font-size:14px;' %}
             {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Canvas — Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Mesh — Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Knit — Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Canvas â€” Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Mesh â€” Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Knit â€” Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
             {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Rubber — Essential Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Midsole & Sole — Sole Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Mixed Material — Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Rubber â€” Essential Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Midsole & Sole â€” Sole Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Mixed Material â€” Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
           </div>
         </div>
         <div>
@@ -1724,7 +1727,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Create each collection in Shopify Admin → Products → Collections, add products, then select it below. Recommended URL handle: sneaker-care-kits, material-care-kits, cleaning-solutions, shop-by-use, care-by-fabric, deodorizers, accessories, super-savers. Assign theme template menu-category to each collection for the full shop layout."
+      "content": "Create each collection in Shopify Admin â†’ Products â†’ Collections, add products, then select it below. Recommended URL handle: sneaker-care-kits, material-care-kits, cleaning-solutions, shop-by-use, care-by-fabric, deodorizers, accessories, super-savers. Assign theme template menu-category to each collection for the full shop layout."
     },
     {
       "type": "collection",
@@ -1765,6 +1768,144 @@
       "type": "collection",
       "id": "col_super_savers",
       "label": "Super Savers"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings → Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     }
   ]
 }

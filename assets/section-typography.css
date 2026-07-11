@@ -1,0 +1,60 @@
+/* Per-section typography — uses CSS variables set on #shopify-section-{id} */
+[id^="shopify-section-"] h1,
+[id^="shopify-section-"] .hero-fullscreen__heading,
+[id^="shopify-section-"] .corp-hero__title,
+[id^="shopify-section-"] .biz-hero__title,
+[id^="shopify-section-"] .story-banner__heading {
+  font-family: var(--font-family-heading) !important;
+  font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
+}
+
+[id^="shopify-section-"] h2,
+[id^="shopify-section-"] .fb__title,
+[id^="shopify-section-"] .fc-heading,
+[id^="shopify-section-"] .mat-headline,
+[id^="shopify-section-"] .bs-coverflow__heading,
+[id^="shopify-section-"] .trending-social__heading,
+[id^="shopify-section-"] .comm-headline,
+[id^="shopify-section-"] .story-banner__subheading {
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-size: var(--section-heading-size) !important;
+}
+
+[id^="shopify-section-"] h3,
+[id^="shopify-section-"] h4,
+[id^="shopify-section-"] h5,
+[id^="shopify-section-"] h6 {
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+}
+
+[id^="shopify-section-"] p,
+[id^="shopify-section-"] .hero-fullscreen__subheading,
+[id^="shopify-section-"] .corp-hero__sub,
+[id^="shopify-section-"] .fb__subtitle,
+[id^="shopify-section-"] .mat-desc,
+[id^="shopify-section-"] .story-banner__paragraph,
+[id^="shopify-section-"] .comm-desc {
+  font-family: var(--font-family-sans) !important;
+  font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+}
+
+[id^="shopify-section-"] .hero-fullscreen__eyebrow,
+[id^="shopify-section-"] .fb__eyebrow,
+[id^="shopify-section-"] .bs-coverflow__eyebrow,
+[id^="shopify-section-"] .trending-social__eyebrow,
+[id^="shopify-section-"] .mat-eyebrow,
+[id^="shopify-section-"] .fc-subtitle,
+[id^="shopify-section-"] .comm-eyebrow,
+[id^="shopify-section-"] .corp-hero__eyebrow,
+[id^="shopify-section-"] .story-banner__eyebrow {
+  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+  font-size: var(--section-label-size) !important;
+}
+
+[id^="shopify-section-"] .hero-fullscreen__subheading,
+[id^="shopify-section-"] .story-banner__paragraph {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+}

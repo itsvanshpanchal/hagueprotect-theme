@@ -1,131 +1,3 @@
-{%- style -%}
-  {% render 'section-typography-vars', section: section %}
-
-
-  .how-to-banner {
-    position: relative;
-    width: 100%;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
-    overflow: hidden;
-  }
-  .how-to-banner img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
-  .how-to-banner__content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: #fff;
-    padding: 20px;
-  }
-  .how-to-banner__title {
-    font-size: 48px;
-    font-weight: 800;
-    margin: 0;
-    color: {{ section.settings.text_color }};
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .how-to-banner__subtitle-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    background: rgba(0,0,0,0.75);
-    padding: 16px 20px;
-    text-align: center;
-  }
-  .how-to-banner__subtitle {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    margin: 0;
-    letter-spacing: 0.02em;
-  }
-  @media screen and (max-width: 768px) {
-    .how-to-banner {
-      min-height: 220px;
-    }
-    .how-to-banner__content {
-      padding: 16px;
-    }
-    .how-to-banner__title {
-      font-size: clamp(1.5rem, 8vw, 2rem);
-    }
-    .how-to-banner__subtitle-bar {
-      padding: 12px 16px;
-    }
-    .how-to-banner__subtitle {
-      font-size: 14px;
-      line-height: 1.4;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    .how-to-banner {
-      min-height: 180px;
-    }
-  }
-{%- endstyle -%}
-
-<div class="how-to-banner">
-  {%- if section.settings.image != blank -%}
-    {{
-      section.settings.image
-      | image_url: width: 2000
-      | image_tag:
-        loading: 'lazy',
-        widths: '375, 750, 1100, 1500, 2000',
-        sizes: '(max-width: 768px) 100vw, 100vw'
-    }}
-  {%- endif -%}
-  <div class="how-to-banner__content">
-    <h1 class="how-to-banner__title">{{ section.settings.title }}</h1>
-  </div>
-  {%- if section.settings.subtitle != blank -%}
-    <div class="how-to-banner__subtitle-bar">
-      <p class="how-to-banner__subtitle">{{ section.settings.subtitle }}</p>
-    </div>
-  {%- endif -%}
-</div>
-
-{% schema %}
-{
-  "name": "How to Use Banner",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Banner Image"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "How to Use"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Bottom Subtitle",
-      "default": "How To Use HAGUEPROTECT Shoe Cleaning & Protecting Products:"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#ffffff"
-    }
 ,
     {
       "type": "header",
@@ -133,7 +5,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings → Typography."
     },
     {
       "type": "select",
@@ -265,12 +137,3 @@
       "unit": "px",
       "default": 12
     }
-
-  ],
-  "presets": [
-    {
-      "name": "How to Use Banner"
-    }
-  ]
-}
-{% endschema %}

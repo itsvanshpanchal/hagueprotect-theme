@@ -1,4 +1,6 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
   .hero-fullscreen {
     height: 100vh;
     min-height: 600px;
@@ -41,7 +43,7 @@
     display: block;
   }
 
-  /* Overlay disabled — show hero image without dark shadow */
+  /* Overlay disabled â€” show hero image without dark shadow */
   .hero-fullscreen__overlay {
     display: none;
   }
@@ -69,7 +71,7 @@
 
   .hero-fullscreen__heading {
     font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', sans-serif) !important;
-    font-size: clamp(48px, 8vw, 88px);
+    font-size: var(--heading-size-hero, clamp(48px, 8vw, 88px));
     font-weight: 400;
     line-height: 1.02;
     letter-spacing: 0.03em;
@@ -89,6 +91,8 @@
 
   .hero-fullscreen__subheading {
     max-width: 600px;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
   }
 
   .hero-fullscreen__actions {
@@ -186,8 +190,8 @@
     }
 
     .hero-fullscreen__heading {
-      font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
-      font-size: clamp(40px, 11vw, 64px);
+      font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif) !important;
+      font-size: var(--heading-size-hero, clamp(40px, 11vw, 64px));
       font-weight: 400;
       line-height: 1.02;
       letter-spacing: 0.03em;
@@ -468,6 +472,144 @@
       "id": "image_mobile",
       "label": "Mobile banner image",
       "info": "Displayed on phones and screens 768px wide or smaller. Square or portrait images work best. If empty, the desktop banner is used."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings → Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     }
   ],
   "presets": [

@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .htu-v2 {
     --red: #ff2b2b;
     --ink: #111111;
@@ -10,7 +13,7 @@
     color: var(--ink);
   }
 
-  /* ── Opener ── */
+  /* â”€â”€ Opener â”€â”€ */
   .htu-v2__opener {
     padding: clamp(56px, 8vw, 88px) max(20px, var(--site-padding, 24px)) clamp(40px, 5vw, 56px);
     max-width: 1320px;
@@ -79,7 +82,7 @@
     color: #999;
   }
 
-  /* ── Horizontal protocol rail ── */
+  /* â”€â”€ Horizontal protocol rail â”€â”€ */
   .htu-v2__rail-wrap {
     background: var(--cream);
     padding: clamp(48px, 6vw, 72px) 0;
@@ -229,7 +232,7 @@
     margin: 0;
   }
 
-  /* ── Materials journal ── */
+  /* â”€â”€ Materials journal â”€â”€ */
   .htu-v2__journal {
     max-width: 1320px;
     margin: 0 auto;
@@ -447,7 +450,7 @@
     color: #ffffff;
   }
 
-  /* ── Rules strip ── */
+  /* â”€â”€ Rules strip â”€â”€ */
   .htu-v2__rules {
     background: var(--ink);
     color: #ffffff;
@@ -527,7 +530,7 @@
   .htu-v2__rules-col--yes li::before { background: #6fcf97; }
   .htu-v2__rules-col--no li::before { background: #ff6b6b; }
 
-  /* ── CTA band ── */
+  /* â”€â”€ CTA band â”€â”€ */
   .htu-v2__cta {
     background: var(--red);
     padding: clamp(40px, 5vw, 56px) max(20px, var(--site-padding, 24px));
@@ -580,7 +583,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
-  /* ── Mobile nav (horizontal) ── */
+  /* â”€â”€ Mobile nav (horizontal) â”€â”€ */
   .htu-v2__mob-nav {
     display: none;
     overflow-x: auto;
@@ -704,7 +707,7 @@
           <span class="htu-v2__rail-time">{{ section.settings.step2_time | default: '~5 min' }}</span>
         </div>
         <div class="htu-v2__rail-body">
-          <p class="htu-v2__rail-text">{{ section.settings.step2_text | default: 'Apply pH-balanced cleaner with the correct brush. Work in gentle circles — damp the material, never soak it.' }}</p>
+          <p class="htu-v2__rail-text">{{ section.settings.step2_text | default: 'Apply pH-balanced cleaner with the correct brush. Work in gentle circles â€” damp the material, never soak it.' }}</p>
         </div>
       </article>
       <article class="htu-v2__rail-card" data-htu-reveal>
@@ -772,7 +775,7 @@
                 {%- endif -%}
               </div>
               <div class="htu-v2__chapter-copy">
-                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} — {{ block.settings.badge | default: 'Guide' }}</p>
+                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} â€” {{ block.settings.badge | default: 'Guide' }}</p>
                 <h3 class="htu-v2__chapter-name {% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</h3>
                 <p class="htu-v2__chapter-desc">{{ block.settings.description }}</p>
                 <div class="htu-v2__tips">
@@ -834,7 +837,7 @@
     <div class="htu-v2__cta-inner" data-htu-reveal>
       <div>
         <h3 class="htu-v2__cta-title">{{ section.settings.cta_title | default: 'Get the Complete Kit' }}</h3>
-        <p class="htu-v2__cta-sub">{{ section.settings.cta_text | default: 'Every brush, solution, and protector — curated in one box.' }}</p>
+        <p class="htu-v2__cta-sub">{{ section.settings.cta_text | default: 'Every brush, solution, and protector â€” curated in one box.' }}</p>
       </div>
       <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="htu-v2__cta-btn">
         {{ section.settings.cta_label | default: 'Shop Now' }}
@@ -860,7 +863,7 @@
     { "type": "textarea", "id": "step1_text", "label": "Step 1 text", "default": "Remove laces and insoles. Knock off loose dirt and brush dry debris with a soft brush before any liquid touches the upper." },
     { "type": "text", "id": "step1_time", "label": "Step 1 time", "default": "~2 min" },
     { "type": "text", "id": "step2_title", "label": "Step 2 title", "default": "Clean" },
-    { "type": "textarea", "id": "step2_text", "label": "Step 2 text", "default": "Apply pH-balanced cleaner with the correct brush. Work in gentle circles — damp the material, never soak it." },
+    { "type": "textarea", "id": "step2_text", "label": "Step 2 text", "default": "Apply pH-balanced cleaner with the correct brush. Work in gentle circles â€” damp the material, never soak it." },
     { "type": "text", "id": "step2_time", "label": "Step 2 time", "default": "~5 min" },
     { "type": "text", "id": "step3_title", "label": "Step 3 title", "default": "Protect" },
     { "type": "textarea", "id": "step3_text", "label": "Step 3 text", "default": "Air dry completely away from heat. Spray nano-barrier protector evenly for up to 4 weeks of liquid and stain resistance." },
@@ -869,13 +872,153 @@
     { "type": "text", "id": "materials_heading", "label": "Nav label", "default": "By Material" },
     { "type": "header", "content": "Rules" },
     { "type": "text", "id": "wisdom_heading", "label": "Rules heading", "default": "Golden Rules" },
-    { "type": "textarea", "id": "do_list", "label": "Always (one per line)", "default": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry — never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first" },
+    { "type": "textarea", "id": "do_list", "label": "Always (one per line)", "default": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry â€” never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first" },
     { "type": "textarea", "id": "dont_list", "label": "Never (one per line)", "default": "Never put sneakers in a washing machine\nDon't use harsh bleach or alcohol-based cleaners\nAvoid scrubbing suede with stiff bristles\nDon't wear shoes before they're completely dry\nNever skip the protection step" },
     { "type": "header", "content": "CTA" },
     { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Get the Complete Kit" },
-    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Every brush, solution, and protector — curated in one box." },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Every brush, solution, and protector â€” curated in one box." },
     { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Now" },
     { "type": "url", "id": "cta_url", "label": "CTA link" }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "blocks": [
     {
@@ -886,7 +1029,7 @@
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "badge", "label": "Badge", "default": "Delicate Care" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Suede needs gentle, dry-first cleaning to preserve its napped texture." },
-        { "type": "textarea", "id": "tips", "label": "Tips (one per line)", "default": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying" },
+        { "type": "textarea", "id": "tips", "label": "Tips (one per line)", "default": "Use the soft-hog brush only â€” never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture â€” damp, never soaking\nRestore nap with a suede eraser after drying" },
         { "type": "collection", "id": "collection", "label": "Collection link" },
         { "type": "url", "id": "link", "label": "Custom link" }
       ]
@@ -896,10 +1039,10 @@
     {
       "name": "How To Use Guide",
       "blocks": [
-        { "type": "material", "settings": { "title": "Suede", "badge": "Delicate Care", "description": "Suede needs gentle, dry-first cleaning to preserve its napped texture.", "tips": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying" } },
+        { "type": "material", "settings": { "title": "Suede", "badge": "Delicate Care", "description": "Suede needs gentle, dry-first cleaning to preserve its napped texture.", "tips": "Use the soft-hog brush only â€” never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture â€” damp, never soaking\nRestore nap with a suede eraser after drying" } },
         { "type": "material", "settings": { "title": "Leather", "badge": "Smooth Finish", "description": "Smooth leather responds best to pH-balanced cleaner and light conditioning.", "tips": "Wipe with a damp microfiber cloth first\nApply cleaner in small circular motions\nBuff with a clean dry cloth for shine\nCondition monthly to prevent cracking" } },
-        { "type": "material", "settings": { "title": "Nubuck", "badge": "Soft Nap", "description": "Nubuck is finer than suede — treat it with extra care and minimal water.", "tips": "Always brush dry before any wet cleaning\nUse the softest brush in your kit\nPat dry — never rub aggressively\nApply protector to maintain water resistance" } },
-        { "type": "material", "settings": { "title": "Mesh & Fabric", "badge": "Breathable", "description": "Knit, mesh, and canvas uppers need targeted cleaning without overwetting.", "tips": "Remove insoles and laces before cleaning\nUse the medium brush on mesh panels\nAvoid soaking — foam cleaner works best\nAir dry stuffed with paper towels" } },
+        { "type": "material", "settings": { "title": "Nubuck", "badge": "Soft Nap", "description": "Nubuck is finer than suede â€” treat it with extra care and minimal water.", "tips": "Always brush dry before any wet cleaning\nUse the softest brush in your kit\nPat dry â€” never rub aggressively\nApply protector to maintain water resistance" } },
+        { "type": "material", "settings": { "title": "Mesh & Fabric", "badge": "Breathable", "description": "Knit, mesh, and canvas uppers need targeted cleaning without overwetting.", "tips": "Remove insoles and laces before cleaning\nUse the medium brush on mesh panels\nAvoid soaking â€” foam cleaner works best\nAir dry stuffed with paper towels" } },
         { "type": "material", "settings": { "title": "Soles", "badge": "Deep Clean", "description": "Midsoles and outsoles can handle more aggressive cleaning for icy-white results.", "tips": "Use the stiff brush on rubber soles\nApply sole-specific cleaner for yellowing\nScrub midsoles in back-and-forth strokes\nWipe clean and protect from future yellowing" } }
       ]
     }

@@ -1,4 +1,7 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+
   .corp-hero {
     --corp-accent: #ff2b2b;
     --corp-dark: #0a0a0a;
@@ -193,7 +196,7 @@
     color: rgba(255, 255, 255, 0.45);
   }
 
-  /* Showcase — Trishul layout (center + left/right wings behind) */
+  /* Showcase â€” Trishul layout (center + left/right wings behind) */
   .corp-hero__showcase {
     position: relative;
     height: clamp(460px, 62vh, 640px);
@@ -235,7 +238,7 @@
     z-index: 10 !important;
   }
 
-  /* Center prong — main image */
+  /* Center prong â€” main image */
   .corp-hero__frame--main {
     width: 64%;
     bottom: 6%;
@@ -246,7 +249,7 @@
     animation: corpFrameMain 6s ease-in-out infinite;
   }
 
-  /* Left wing — behind center, popping up-left */
+  /* Left wing â€” behind center, popping up-left */
   .corp-hero__frame--back {
     width: 52%;
     bottom: 10%;
@@ -259,7 +262,7 @@
     animation: corpFrameLeft 7s ease-in-out infinite;
   }
 
-  /* Right wing — behind center, popping up-right */
+  /* Right wing â€” behind center, popping up-right */
   .corp-hero__frame--front {
     width: 52%;
     bottom: 10%;
@@ -495,7 +498,7 @@
         {{ section.settings.heading_line1 | default: 'Corporate' }}
         <em>{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
-      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts — crafted to impress.' }}</p>
+      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts â€” crafted to impress.' }}</p>
 
       <div class="corp-hero__actions">
         <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary">
@@ -794,7 +797,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Gifting Studio" },
     { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Corporate" },
     { "type": "text", "id": "heading_line2", "label": "Heading line 2 (red accent)", "default": "Gifting" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts — crafted to impress." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts â€” crafted to impress." },
     { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Start Your Order" },
     { "type": "url", "id": "btn_link", "label": "Primary button link" },
     { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Download Catalog" },
@@ -868,9 +871,149 @@
       "type": "header",
       "content": "Legacy image settings (used if no blocks added)"
     },
-    { "type": "image_picker", "id": "card_image_1", "label": "Trishul — center image" },
-    { "type": "image_picker", "id": "card_image_2", "label": "Trishul — left wing image" },
-    { "type": "image_picker", "id": "card_image_3", "label": "Trishul — right wing image" }
+    { "type": "image_picker", "id": "card_image_1", "label": "Trishul â€” center image" },
+    { "type": "image_picker", "id": "card_image_2", "label": "Trishul â€” left wing image" },
+    { "type": "image_picker", "id": "card_image_3", "label": "Trishul â€” right wing image" }
+,
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "select",
+      "id": "h1_font_family",
+      "label": "H1 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_desktop",
+      "label": "H1 size (desktop)",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "h1_font_size_mobile",
+      "label": "H1 size (mobile)",
+      "min": 18,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "H2 font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "H2 size (desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "H2 size (mobile)",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Paragraph font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Paragraph size (desktop)",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Paragraph size (mobile)",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Eyebrow / label font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Eyebrow size (desktop)",
+      "min": 9,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Eyebrow size (mobile)",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+
   ],
   "blocks": [
     {

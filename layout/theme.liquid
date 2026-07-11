@@ -141,7 +141,8 @@
     <link rel="dns-prefetch" href="https://cdn.shopify.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {% render 'theme-typography-css' %}
     
     <!-- Preload Critical Assets -->
     <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
@@ -149,6 +150,7 @@
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'section-typography.css' | asset_url | stylesheet_tag }}
     {{ 'material-fonts.css' | asset_url | stylesheet_tag }}
 
     <style>
@@ -204,19 +206,19 @@
       .skincare-builder__title,
       .corp-hero__title,
       .how-to-banner__title {
-        font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
+        font-family: var(--font-family-heading) !important;
         font-weight: 400 !important;
         letter-spacing: 0.03em !important;
         line-height: 1.05 !important;
         text-transform: uppercase !important;
-        font-size: clamp(40px, 5.5vw, 64px) !important;
+        font-size: var(--heading-size-xl) !important;
         -webkit-font-smoothing: antialiased;
       }
 
       .hero-fullscreen__heading {
-        font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
+        font-family: var(--font-family-heading) !important;
         font-weight: 400 !important;
-        font-size: clamp(48px, 8vw, 88px) !important;
+        font-size: var(--heading-size-hero) !important;
         letter-spacing: 0.03em !important;
         line-height: 1.02 !important;
         text-transform: uppercase !important;
