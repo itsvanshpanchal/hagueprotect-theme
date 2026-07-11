@@ -557,7 +557,7 @@ main h3 > span[aria-hidden="true"] {
 .trending-social__heading,
 .mat-headline,
 .fc-heading {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-family: var(--font-family-heading) !important;
   font-size: var(--section-heading-size) !important;
   font-weight: 400 !important;
   letter-spacing: 0.03em !important;
@@ -594,8 +594,9 @@ main h3 > span[aria-hidden="true"] {
   }
 }
 
-/* Unified section labels — eyebrows above headings */
+/* Unified section labels — eyebrows and intro lines above headings */
 .hero-fullscreen__eyebrow,
+.hero-fullscreen__subheading,
 .fb__eyebrow,
 .bs-coverflow__eyebrow,
 .trending-social__eyebrow,
@@ -603,7 +604,7 @@ main h3 > span[aria-hidden="true"] {
 .fc-subtitle,
 .comm-eyebrow,
 [class*="ai-story-banner-subheading-"] {
-  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+  font-family: var(--font-family-sans) !important;
   font-size: var(--section-label-size) !important;
   font-weight: var(--section-label-weight) !important;
   line-height: var(--section-label-line-height) !important;
@@ -615,24 +616,6 @@ main h3 > span[aria-hidden="true"] {
   margin: 0 0 var(--section-label-margin-bottom) 0 !important;
   padding: 0 !important;
   max-width: none !important;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Hero paragraph — separate from eyebrow labels */
-.hero-fullscreen__subheading,
-.story-banner__paragraph {
-  font-family: var(--font-family-sans) !important;
-  font-size: var(--section-subheading-size) !important;
-  font-weight: var(--section-subheading-weight) !important;
-  line-height: var(--section-subheading-line-height) !important;
-  letter-spacing: normal !important;
-  color: #ffffff !important;
-  text-transform: none !important;
-  text-align: inherit !important;
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  max-width: 600px !important;
   -webkit-font-smoothing: antialiased;
 }
 
