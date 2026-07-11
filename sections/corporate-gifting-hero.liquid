@@ -330,11 +330,9 @@
 
   .corp-hero__frame-caption {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 2;
     padding: 18px 18px 16px;
+    box-sizing: border-box;
   }
 
   .corp-hero__frame-tag {
@@ -501,7 +499,10 @@
             >
             <div class="corp-hero__frame-overlay"></div>
             {%- if section.settings.single_showcase_caption != blank -%}
-              <div class="corp-hero__frame-caption">
+              <div
+                class="corp-hero__frame-caption"
+                style="{% render 'hero-caption-position', x: section.settings.single_caption_x, y: section.settings.single_caption_y, align: section.settings.single_caption_align %}"
+              >
                 {%- if section.settings.single_showcase_tag != blank -%}
                   <p class="corp-hero__frame-tag">{{ section.settings.single_showcase_tag }}</p>
                 {%- endif -%}
@@ -532,7 +533,10 @@
                 {%- endif -%}
                 <div class="corp-hero__frame-overlay"></div>
                 {%- if block.settings.tag != blank or block.settings.caption != blank -%}
-                  <div class="corp-hero__frame-caption">
+                  <div
+                    class="corp-hero__frame-caption"
+                    style="{% render 'hero-caption-position', x: block.settings.caption_x, y: block.settings.caption_y, align: block.settings.caption_align %}"
+                  >
                     {%- if block.settings.tag != blank -%}
                       <p class="corp-hero__frame-tag">{{ block.settings.tag }}</p>
                     {%- endif -%}
@@ -555,7 +559,7 @@
               <div class="corp-hero__frame-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add back image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption">
+            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Co-Branded</p>
               <p class="corp-hero__frame-title">Your Logo. Our Quality.</p>
             </div>
@@ -569,7 +573,7 @@
               <div class="corp-hero__frame-placeholder" style="background:linear-gradient(145deg,#ff2b2b,#8b0000);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add main image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption">
+            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Premium Kit</p>
               <p class="corp-hero__frame-title">Executive Gift Box</p>
             </div>
@@ -583,7 +587,7 @@
               <div class="corp-hero__frame-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add front image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption">
+            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Bulk</p>
               <p class="corp-hero__frame-title">Team Onboarding</p>
             </div>
@@ -775,6 +779,37 @@
     { "type": "text", "id": "single_showcase_tag", "label": "Single image label", "default": "Premium Kit" },
     { "type": "text", "id": "single_showcase_caption", "label": "Single image caption", "default": "Executive Gift Box" },
     {
+      "type": "range",
+      "id": "single_caption_x",
+      "label": "Single image text horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "single_caption_y",
+      "label": "Single image text vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 75
+    },
+    {
+      "type": "select",
+      "id": "single_caption_align",
+      "label": "Single image text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
       "type": "header",
       "content": "Legacy image settings (used if no blocks added)"
     },
@@ -805,7 +840,38 @@
           "default": "main"
         },
         { "type": "text", "id": "tag", "label": "Small label", "default": "Premium Kit" },
-        { "type": "text", "id": "caption", "label": "Caption", "default": "Executive Gift Box" }
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Executive Gift Box" },
+        {
+          "type": "range",
+          "id": "caption_x",
+          "label": "Text horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "caption_y",
+          "label": "Text vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 75
+        },
+        {
+          "type": "select",
+          "id": "caption_align",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        }
       ]
     }
   ],
@@ -818,7 +884,10 @@
           "settings": {
             "position": "back",
             "tag": "Co-Branded",
-            "caption": "Your Logo. Our Quality."
+            "caption": "Your Logo. Our Quality.",
+            "caption_x": 0,
+            "caption_y": 75,
+            "caption_align": "left"
           }
         },
         {
@@ -826,7 +895,10 @@
           "settings": {
             "position": "main",
             "tag": "Premium Kit",
-            "caption": "Executive Gift Box"
+            "caption": "Executive Gift Box",
+            "caption_x": 0,
+            "caption_y": 75,
+            "caption_align": "left"
           }
         },
         {
@@ -834,7 +906,10 @@
           "settings": {
             "position": "front",
             "tag": "Bulk",
-            "caption": "Team Onboarding"
+            "caption": "Team Onboarding",
+            "caption_x": 0,
+            "caption_y": 75,
+            "caption_align": "left"
           }
         }
       ]

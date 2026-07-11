@@ -5,16 +5,10 @@
     width: 100%;
     max-width: 100vw;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    display: block;
     color: #ffffff;
     overflow-x: hidden;
     overflow-y: hidden;
-    text-align: center;
     box-sizing: border-box;
   }
 
@@ -53,17 +47,20 @@
   }
 
   .hero-fullscreen__content {
-    position: relative;
+    position: absolute;
     z-index: 3;
-    width: 100%;
-    max-width: 800px;
-    padding-left: var(--site-padding);
-    padding-right: var(--site-padding);
+    left: var(--hero-content-x, 5%);
+    top: var(--hero-content-y, 18%);
+    transform: translate(var(--hero-content-tx, 0), 0);
+    width: max-content;
+    max-width: min(800px, 55vw);
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: var(--hero-content-items, flex-start);
     gap: 20px;
     box-sizing: border-box;
+    text-align: var(--hero-content-align, left);
   }
 
   .hero-fullscreen__eyebrow {
@@ -96,7 +93,7 @@
 
   .hero-fullscreen__actions {
     display: flex;
-    justify-content: center;
+    justify-content: var(--hero-content-actions, flex-start);
     width: 100%;
   }
 
@@ -114,58 +111,29 @@
     box-shadow: 0 20px 48px rgba(255, 43, 43, 0.5);
   }
 
-  /* Desktop / laptop: left-aligned hero copy + typing animation */
+  /* Desktop / laptop: typing animation */
   @media screen and (min-width: 769px) {
-    .hero-fullscreen {
-      align-items: center;
-      text-align: left;
-      padding-left: 40px;
-      padding-right: 40px;
-      padding-top: 80px;
-      padding-bottom: 80px;
-    }
-
-    .hero-fullscreen__content {
-      align-items: flex-start;
-      text-align: left;
-      margin: 0 auto;
-      max-width: var(--site-max-width, 1320px);
-      width: 100%;
-      padding-left: 0;
-      padding-right: 0;
-    }
-
     .hero-fullscreen__heading {
-      text-align: left;
+      text-align: var(--hero-content-align, left);
       max-width: min(800px, 55vw);
     }
 
     .hero-fullscreen__subheading {
-      text-align: left;
+      text-align: var(--hero-content-align, left);
       margin-left: 0;
       margin-right: auto;
-    }
-
-    .hero-fullscreen__actions {
-      justify-content: flex-start;
     }
   }
 
   @media screen and (max-width: 768px) {
     .hero-fullscreen {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       width: 100%;
       max-width: 100vw;
       height: auto;
       min-height: min(82svh, 620px);
       max-height: 92svh;
-      padding: 40px 0;
       overflow: hidden;
-      text-align: center;
       background: transparent;
     }
 
@@ -173,6 +141,22 @@
       min-height: 0;
       max-height: none;
       aspect-ratio: var(--hero-mobile-aspect, 4 / 5);
+    }
+
+    .hero-fullscreen__content {
+      left: var(--hero-content-x-mobile, 50%);
+      top: var(--hero-content-y-mobile, 12%);
+      transform: translate(var(--hero-content-tx-mobile, -50%), 0);
+      align-items: var(--hero-content-items-mobile, center);
+      text-align: var(--hero-content-align-mobile, center);
+      max-width: calc(100% - 32px);
+      width: 100%;
+      padding: 0 max(16px, var(--site-padding));
+      gap: 12px;
+    }
+
+    .hero-fullscreen__content .hero-fullscreen__actions {
+      justify-content: var(--hero-content-actions-mobile, center);
     }
 
     .hero-fullscreen__bg {
@@ -201,41 +185,22 @@
       display: block;
     }
 
-    .hero-fullscreen__content {
-      position: relative;
-      z-index: 3;
-      flex: 0 0 auto;
+    .hero-fullscreen__heading {
+      font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
+      font-size: clamp(40px, 11vw, 64px);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 0 4px;
+      text-align: inherit;
       width: 100%;
-      align-items: center;
-      text-align: center;
-      gap: 12px;
-      padding: 0 max(16px, var(--site-padding));
-      margin: 0 auto;
-      background: transparent;
-      box-sizing: border-box;
     }
-
-  .hero-fullscreen__heading {
-    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
-    font-size: clamp(40px, 11vw, 64px);
-    font-weight: 400;
-    line-height: 1.02;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    padding: 0 4px;
-    text-align: left;
-    align-self: flex-start;
-    width: 100%;
-  }
 
     .hero-fullscreen__subheading {
       max-width: 100%;
       padding: 0 6px;
-    }
-
-    .hero-fullscreen__actions {
-      justify-content: center;
-      margin-top: 4px;
+      text-align: inherit;
     }
 
     .hero-fullscreen__btn {
@@ -270,14 +235,54 @@
     assign desktop_banner = mobile_banner
   endif
   assign hero_img_class = 'hero-fullscreen__bg-img'
+
+  assign content_x = section.settings.content_position_x | default: 5
+  assign content_y = section.settings.content_position_y | default: 18
+  assign content_align = section.settings.content_align | default: 'left'
+  assign content_x_mobile = section.settings.content_position_x_mobile | default: 50
+  assign content_y_mobile = section.settings.content_position_y_mobile | default: 12
+  assign content_align_mobile = section.settings.content_align_mobile | default: 'center'
+
+  case content_align
+    when 'center'
+      assign content_tx = '-50%'
+      assign content_items = 'center'
+      assign content_actions = 'center'
+    when 'right'
+      assign content_tx = '-100%'
+      assign content_items = 'flex-end'
+      assign content_actions = 'flex-end'
+    else
+      assign content_tx = '0'
+      assign content_items = 'flex-start'
+      assign content_actions = 'flex-start'
+  endcase
+
+  case content_align_mobile
+    when 'center'
+      assign content_tx_mobile = '-50%'
+      assign content_items_mobile = 'center'
+      assign content_actions_mobile = 'center'
+    when 'right'
+      assign content_tx_mobile = '-100%'
+      assign content_items_mobile = 'flex-end'
+      assign content_actions_mobile = 'flex-end'
+    else
+      assign content_tx_mobile = '0'
+      assign content_items_mobile = 'flex-start'
+      assign content_actions_mobile = 'flex-start'
+  endcase
+
+  assign hero_style = '--hero-content-x: ' | append: content_x | append: '%; --hero-content-y: ' | append: content_y | append: '%; --hero-content-tx: ' | append: content_tx | append: '; --hero-content-align: ' | append: content_align | append: '; --hero-content-items: ' | append: content_items | append: '; --hero-content-actions: ' | append: content_actions | append: '; --hero-content-x-mobile: ' | append: content_x_mobile | append: '%; --hero-content-y-mobile: ' | append: content_y_mobile | append: '%; --hero-content-tx-mobile: ' | append: content_tx_mobile | append: '; --hero-content-align-mobile: ' | append: content_align_mobile | append: '; --hero-content-items-mobile: ' | append: content_items_mobile | append: '; --hero-content-actions-mobile: ' | append: content_actions_mobile | append: ';'
+  if has_dedicated_mobile and mobile_banner.width and mobile_banner.height
+    assign hero_style = hero_style | append: ' --hero-mobile-aspect: ' | append: mobile_banner.width | append: ' / ' | append: mobile_banner.height | append: ';'
+  endif
 -%}
 
 <section
   class="hero-fullscreen{% if has_dedicated_mobile %} hero-fullscreen--mobile-art{% endif %}"
   aria-label="HAGUEPROTECT Fullscreen Hero Section"
-  {% if has_dedicated_mobile and mobile_banner.width and mobile_banner.height %}
-    style="--hero-mobile-aspect: {{ mobile_banner.width }} / {{ mobile_banner.height }};"
-  {% endif %}
+  style="{{ hero_style }}"
 >
   <div class="hero-fullscreen__bg">
     {%- if desktop_banner != blank -%}
@@ -377,6 +382,76 @@
       "type": "url",
       "id": "cta_link",
       "label": "CTA Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Text position (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "content_position_x",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "content_position_y",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Text position (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "content_position_x_mobile",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "content_position_y_mobile",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "content_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
