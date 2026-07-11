@@ -5,7 +5,7 @@
 
 {%- comment -%}
   ============================================================
-  BRAND PAGE â€” editable brand landing (banner + bestsellers)
+  BRAND PAGE Ã¢â‚¬â€ editable brand landing (banner + bestsellers)
   Used by the alternate collection templates:
     collection.vanrosector.json   -> /collections/all?view=vanrosector
     collection.science-of-raw.json-> /collections/all?view=science-of-raw
@@ -126,7 +126,7 @@
   "settings": [
     { "type": "header", "content": "Banner" },
     { "type": "image_picker", "id": "logo", "label": "Logo image", "info": "Overrides the fallback below when set." },
-    { "type": "text", "id": "logo_asset", "label": "Logo fallback (asset filename)", "info": "e.g. logo-vanrosector.svg â€” used if no logo image is chosen." },
+    { "type": "text", "id": "logo_asset", "label": "Logo fallback (asset filename)", "info": "e.g. logo-vanrosector.svg Ã¢â‚¬â€ used if no logo image is chosen." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Brand heading" },
     { "type": "textarea", "id": "subheading", "label": "Subheading" },
@@ -159,7 +159,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

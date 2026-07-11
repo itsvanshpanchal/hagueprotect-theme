@@ -361,7 +361,7 @@
       });
     });
 
-    // Intercept clicking the header cart link ONLY â€” use ID to be precise
+    // Intercept clicking the header cart link ONLY Ã¢â‚¬â€ use ID to be precise
     const cartBtn = document.getElementById('HeaderCartBtn');
     if (cartBtn) {
       cartBtn.addEventListener('click', (e) => {
@@ -497,6 +497,12 @@
     {
       "type": "header",
       "content": "Typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

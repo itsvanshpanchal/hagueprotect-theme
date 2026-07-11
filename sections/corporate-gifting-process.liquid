@@ -154,7 +154,7 @@
     <div class="corp-process__header">
       <p class="corp-process__eyebrow">{{ section.settings.eyebrow | default: 'How It Works' }}</p>
       <h2 class="corp-process__title">{{ section.settings.heading | default: 'From Brief to Doorstep' }}</h2>
-      <p class="corp-process__desc">{{ section.settings.description | default: 'A seamless four-step process designed for busy teams. We handle everything â€” you take the credit.' }}</p>
+      <p class="corp-process__desc">{{ section.settings.description | default: 'A seamless four-step process designed for busy teams. We handle everything Ã¢â‚¬â€ you take the credit.' }}</p>
     </div>
 
     <div class="corp-process__grid">
@@ -213,7 +213,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How It Works" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "From Brief to Doorstep" },
-    { "type": "textarea", "id": "description", "label": "Description", "default": "A seamless four-step process designed for busy teams. We handle everything â€” you take the credit." }
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A seamless four-step process designed for busy teams. We handle everything Ã¢â‚¬â€ you take the credit." }
 ,
     {
       "type": "header",
@@ -221,7 +221,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

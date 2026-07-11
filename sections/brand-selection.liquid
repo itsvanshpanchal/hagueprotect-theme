@@ -1,16 +1,16 @@
 {%- comment -%}
   ============================================================
-  BRAND SELECTION â€” luxury multi-brand portrait cards
+  BRAND SELECTION Ã¢â‚¬â€ luxury multi-brand portrait cards
   ------------------------------------------------------------
   Tall, portrait-oriented cards inspired by high-end fashion
   retailers (Hugo Boss, Armani Exchange, Ralph Lauren, etc.).
 
-  â€¢ Full-bleed background image (object-fit: cover)
-  â€¢ Soft rounded corners + light neutral section background
-  â€¢ Bottom dark gradient for logo legibility
-  â€¢ Brand logo pinned to the bottom-centre of the card
-  â€¢ Whole card is a single clickable link
-  â€¢ Hover: image zooms gently while the card lifts with a soft shadow
+  Ã¢â‚¬Â¢ Full-bleed background image (object-fit: cover)
+  Ã¢â‚¬Â¢ Soft rounded corners + light neutral section background
+  Ã¢â‚¬Â¢ Bottom dark gradient for logo legibility
+  Ã¢â‚¬Â¢ Brand logo pinned to the bottom-centre of the card
+  Ã¢â‚¬Â¢ Whole card is a single clickable link
+  Ã¢â‚¬Â¢ Hover: image zooms gently while the card lifts with a soft shadow
 
   SCALABLE: each brand is a block, so you can add / remove / reorder
   brands from the theme editor while keeping the same design system.
@@ -203,7 +203,7 @@
     }
   }
 
-  /* Mobile â€” stack all cards, single column */
+  /* Mobile Ã¢â‚¬â€ stack all cards, single column */
   @media screen and (max-width: 640px) {
     #shopify-section-{{ section.id }} .brandsel {
       padding: {{ section.settings.padding_top | default: 100 | times: 0.6 | round }}px 16px {{ section.settings.padding_bottom | default: 100 | times: 0.6 | round }}px;
@@ -494,7 +494,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",
@@ -643,7 +649,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Background image",
-          "info": "Recommended portrait, at least 800 Ã— 1100px. Leave empty to use an image uploaded via theme code below."
+          "info": "Recommended portrait, at least 800 Ãƒâ€” 1100px. Leave empty to use an image uploaded via theme code below."
         },
         {
           "type": "text",

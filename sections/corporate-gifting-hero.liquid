@@ -196,7 +196,7 @@
     color: rgba(255, 255, 255, 0.45);
   }
 
-  /* Showcase â€” Trishul layout (center + left/right wings behind) */
+  /* Showcase Ã¢â‚¬â€ Trishul layout (center + left/right wings behind) */
   .corp-hero__showcase {
     position: relative;
     height: clamp(460px, 62vh, 640px);
@@ -238,7 +238,7 @@
     z-index: 10 !important;
   }
 
-  /* Center prong â€” main image */
+  /* Center prong Ã¢â‚¬â€ main image */
   .corp-hero__frame--main {
     width: 64%;
     bottom: 6%;
@@ -249,7 +249,7 @@
     animation: corpFrameMain 6s ease-in-out infinite;
   }
 
-  /* Left wing â€” behind center, popping up-left */
+  /* Left wing Ã¢â‚¬â€ behind center, popping up-left */
   .corp-hero__frame--back {
     width: 52%;
     bottom: 10%;
@@ -262,7 +262,7 @@
     animation: corpFrameLeft 7s ease-in-out infinite;
   }
 
-  /* Right wing â€” behind center, popping up-right */
+  /* Right wing Ã¢â‚¬â€ behind center, popping up-right */
   .corp-hero__frame--front {
     width: 52%;
     bottom: 10%;
@@ -498,7 +498,7 @@
         {{ section.settings.heading_line1 | default: 'Corporate' }}
         <em>{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
-      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts â€” crafted to impress.' }}</p>
+      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts Ã¢â‚¬â€ crafted to impress.' }}</p>
 
       <div class="corp-hero__actions">
         <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary">
@@ -797,7 +797,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Gifting Studio" },
     { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Corporate" },
     { "type": "text", "id": "heading_line2", "label": "Heading line 2 (red accent)", "default": "Gifting" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts â€” crafted to impress." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts Ã¢â‚¬â€ crafted to impress." },
     { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Start Your Order" },
     { "type": "url", "id": "btn_link", "label": "Primary button link" },
     { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Download Catalog" },
@@ -871,9 +871,9 @@
       "type": "header",
       "content": "Legacy image settings (used if no blocks added)"
     },
-    { "type": "image_picker", "id": "card_image_1", "label": "Trishul â€” center image" },
-    { "type": "image_picker", "id": "card_image_2", "label": "Trishul â€” left wing image" },
-    { "type": "image_picker", "id": "card_image_3", "label": "Trishul â€” right wing image" }
+    { "type": "image_picker", "id": "card_image_1", "label": "Trishul Ã¢â‚¬â€ center image" },
+    { "type": "image_picker", "id": "card_image_2", "label": "Trishul Ã¢â‚¬â€ left wing image" },
+    { "type": "image_picker", "id": "card_image_3", "label": "Trishul Ã¢â‚¬â€ right wing image" }
 ,
     {
       "type": "header",
@@ -881,7 +881,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

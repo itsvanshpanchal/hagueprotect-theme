@@ -696,9 +696,9 @@
         <h2 class="bs-coverflow__heading">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
           </div>
       {%- if section.settings.view_all_link != blank -%}
-        <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All â†’' }}</a>
+        <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All Ã¢â€ â€™' }}</a>
           {%- else -%}
-        <a href="{{ routes.all_products_collection_url }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All â†’' }}</a>
+        <a href="{{ routes.all_products_collection_url }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All Ã¢â€ â€™' }}</a>
           {%- endif -%}
     </div>
 
@@ -742,7 +742,7 @@
               </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
-                      <span class="bs-coverflow-card__rating-badge">â˜… {{ section.settings.rating_value | default: '4.9' }}</span>
+                      <span class="bs-coverflow-card__rating-badge">Ã¢Ëœâ€¦ {{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
             </div>
                     <h3 class="bs-coverflow-card__title">{{ product.title }}</h3>
@@ -784,7 +784,7 @@
               </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
-                      <span class="bs-coverflow-card__rating-badge">â˜… {{ section.settings.rating_value | default: '4.9' }}</span>
+                      <span class="bs-coverflow-card__rating-badge">Ã¢Ëœâ€¦ {{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
             </div>
                     <h3 class="bs-coverflow-card__title">{{ mock_title }}</h3>
@@ -1158,7 +1158,7 @@
       "type": "text",
       "id": "view_all_label",
       "label": "View all label",
-      "default": "View All â†’"
+      "default": "View All Ã¢â€ â€™"
     },
     {
       "type": "url",
@@ -1224,7 +1224,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

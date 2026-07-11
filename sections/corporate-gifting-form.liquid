@@ -380,7 +380,7 @@
           <div class="corp-form__group">
             <label class="corp-form__label" for="CorpPhone">{{ section.settings.label_phone | default: 'Phone' }}</label>
             <div class="corp-form__phone-wrap">
-              <span class="corp-form__phone-prefix">{{ section.settings.phone_prefix | default: 'ðŸ‡®ðŸ‡³ +91' }}</span>
+              <span class="corp-form__phone-prefix">{{ section.settings.phone_prefix | default: 'Ã°Å¸â€¡Â®Ã°Å¸â€¡Â³ +91' }}</span>
               <input type="tel" id="CorpPhone" name="contact[phone]" class="corp-form__input" placeholder="{{ section.settings.placeholder_phone | default: 'Phone number' }}" required>
             </div>
           </div>
@@ -430,7 +430,7 @@
     { "type": "text", "id": "label_email", "label": "Email label", "default": "Work Email" },
     { "type": "text", "id": "placeholder_email", "label": "Email placeholder", "default": "you@company.com" },
     { "type": "text", "id": "label_phone", "label": "Phone label", "default": "Phone" },
-    { "type": "text", "id": "phone_prefix", "label": "Phone prefix", "default": "ðŸ‡®ðŸ‡³ +91" },
+    { "type": "text", "id": "phone_prefix", "label": "Phone prefix", "default": "Ã°Å¸â€¡Â®Ã°Å¸â€¡Â³ +91" },
     { "type": "text", "id": "placeholder_phone", "label": "Phone placeholder", "default": "Phone number" },
     { "type": "text", "id": "label_message", "label": "Message label", "default": "Tell us about your order" },
     { "type": "text", "id": "placeholder_message", "label": "Message placeholder", "default": "Quantity, budget, branding needs, delivery timeline..." },
@@ -443,7 +443,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

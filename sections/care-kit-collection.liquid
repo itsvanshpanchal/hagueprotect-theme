@@ -759,7 +759,7 @@
               {%- if paginate.pages > 1 -%}
                 <nav class="ckc-{{ section.id }}__pagination" aria-label="Pagination">
                   {%- if paginate.previous -%}
-                    <a href="{{ paginate.previous.url }}">â†</a>
+                    <a href="{{ paginate.previous.url }}">Ã¢â€ Â</a>
                   {%- endif -%}
                   {%- for part in paginate.parts -%}
                     {%- if part.is_link -%}
@@ -773,7 +773,7 @@
                     {%- endif -%}
                   {%- endfor -%}
                   {%- if paginate.next -%}
-                    <a href="{{ paginate.next.url }}">â†’</a>
+                    <a href="{{ paginate.next.url }}">Ã¢â€ â€™</a>
                   {%- endif -%}
                 </nav>
               {%- endif -%}
@@ -899,7 +899,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

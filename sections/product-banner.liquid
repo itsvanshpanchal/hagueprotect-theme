@@ -22,7 +22,7 @@
     text-align: center;
   }
 
-  /* â”€â”€â”€ Icon Row â”€â”€â”€ */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Icon Row Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   .pb2__icons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -63,7 +63,7 @@
     line-height: 1.4;
   }
 
-  /* â”€â”€â”€ Divider â”€â”€â”€ */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Divider Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   .pb2__rule {
     width: 56px;
     height: 1px;
@@ -72,7 +72,7 @@
     margin: 0 0 72px 0;
   }
 
-  /* â”€â”€â”€ 100% Block â”€â”€â”€ */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ 100% Block Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   .pb2__stat-block {
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@
     margin: 6px auto 0;
   }
 
-  /* â”€â”€â”€ Responsive â”€â”€â”€ */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Responsive Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   @media screen and (max-width: 768px) {
     .pb2__wrap {
       padding: 0 20px;
@@ -155,7 +155,7 @@
 <section class="pb2" aria-label="Product highlights">
   <div class="pb2__wrap">
 
-    {%- comment -%}â”€â”€ Icon Row â”€â”€{%- endcomment -%}
+    {%- comment -%}Ã¢â€â‚¬Ã¢â€â‚¬ Icon Row Ã¢â€â‚¬Ã¢â€â‚¬{%- endcomment -%}
     <div class="pb2__icons">
 
       {%- comment -%} Icon 1 {%- endcomment -%}
@@ -215,10 +215,10 @@
 
     </div>
 
-    {%- comment -%}â”€â”€ Divider â”€â”€{%- endcomment -%}
+    {%- comment -%}Ã¢â€â‚¬Ã¢â€â‚¬ Divider Ã¢â€â‚¬Ã¢â€â‚¬{%- endcomment -%}
     <hr class="pb2__rule">
 
-    {%- comment -%}â”€â”€ 100% Stat Block â”€â”€{%- endcomment -%}
+    {%- comment -%}Ã¢â€â‚¬Ã¢â€â‚¬ 100% Stat Block Ã¢â€â‚¬Ã¢â€â‚¬{%- endcomment -%}
     <div class="pb2__stat-block">
       <p
         class="pb2__big-num"
@@ -305,12 +305,12 @@
     },
     {
       "type": "header",
-      "content": "Icon 1 â€” 72 Hour Cleaning"
+      "content": "Icon 1 Ã¢â‚¬â€ 72 Hour Cleaning"
     },
     {
       "type": "image_picker",
       "id": "gif_1",
-      "label": "Icon 1 â€” Upload GIF"
+      "label": "Icon 1 Ã¢â‚¬â€ Upload GIF"
     },
     {
       "type": "text",
@@ -320,12 +320,12 @@
     },
     {
       "type": "header",
-      "content": "Icon 2 â€” Environmentally Friendly"
+      "content": "Icon 2 Ã¢â‚¬â€ Environmentally Friendly"
     },
     {
       "type": "image_picker",
       "id": "gif_2",
-      "label": "Icon 2 â€” Upload GIF"
+      "label": "Icon 2 Ã¢â‚¬â€ Upload GIF"
     },
     {
       "type": "text",
@@ -335,12 +335,12 @@
     },
     {
       "type": "header",
-      "content": "Icon 3 â€” Biotechnology"
+      "content": "Icon 3 Ã¢â‚¬â€ Biotechnology"
     },
     {
       "type": "image_picker",
       "id": "gif_3",
-      "label": "Icon 3 â€” Upload GIF"
+      "label": "Icon 3 Ã¢â‚¬â€ Upload GIF"
     },
     {
       "type": "text",
@@ -377,7 +377,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

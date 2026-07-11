@@ -1159,7 +1159,7 @@
         <div class="d2c-quantity-box" style="display: flex; flex-direction: column; align-items: flex-end;">
           <label class="d2c-label" style="font-size: 14px; font-weight: 700; color: #000000; margin-bottom: 6px; text-transform: none; letter-spacing: 0;">Quantity</label>
           <div class="d2c-qty-selector" style="width: 140px; height: 44px; border: 1.5px solid #000000; border-radius: 12px; display: flex; align-items: center; overflow: hidden; background: #FFFFFF;">
-            <button type="button" class="d2c-qty-btn" id="Qty-Decrement" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">âˆ’</button>
+            <button type="button" class="d2c-qty-btn" id="Qty-Decrement" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">Ã¢Ë†â€™</button>
             <div class="d2c-qty-number" id="Qty-Number" style="flex: 1; text-align: center; font-size: 16px; font-weight: 700; color: #000000;">1</div>
             <button type="button" class="d2c-qty-btn" id="Qty-Increment" style="width: 44px; height: 100%; border: none; background: none; font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none;">+</button>
           </div>
@@ -1510,7 +1510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!isActive) {
         parent.classList.add('active');
         content.style.maxHeight = content.scrollHeight + 'px';
-        icon.textContent = 'âˆ’';
+        icon.textContent = 'Ã¢Ë†â€™';
       } else {
         parent.classList.remove('active');
         content.style.maxHeight = null;
@@ -1699,7 +1699,13 @@ function togglePersonalizationInput() {
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

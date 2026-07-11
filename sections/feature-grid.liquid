@@ -82,20 +82,76 @@
   }
 
   .feature-grid__card-visual {
-    width: 64px;
-    height: 64px;
-    background-color: #f6f6f6;
-    border-radius: 14px;
+    --fg-icon-primary: #111111;
+    --fg-icon-accent: #FF2B2B;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(145deg, #fafafa 0%, #f0f0f0 100%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FF2B2B;
-    transition: background-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  }
+
+  .feature-grid__card-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 28% 18%, rgba(255, 43, 43, 0.14), transparent 58%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
   }
 
   .feature-grid__card:hover .feature-grid__card-visual {
-    background-color: #000000;
-    color: #ffffff;
+    --fg-icon-primary: #ffffff;
+    --fg-icon-accent: #FF2B2B;
+    background: linear-gradient(145deg, #1a1a1a 0%, #000000 100%);
+    border-color: #000000;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .feature-grid__card:hover .feature-grid__card-visual::before {
+    opacity: 1;
+  }
+
+  .feature-grid__card-icon {
+    width: 42px;
+    height: 42px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-grid__icon-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .feature-grid__icon-accent {
+    filter: drop-shadow(0 0 3px rgba(255, 43, 43, 0.35));
+    transition: filter 0.35s ease;
+  }
+
+  .feature-grid__card:hover .feature-grid__icon-accent {
+    filter: drop-shadow(0 0 6px rgba(255, 43, 43, 0.65));
+  }
+
+  .feature-grid__card-visual img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
   }
 
   .feature-grid__card-heading {
@@ -127,9 +183,21 @@
         <div class="feature-grid__card" {{ block.shopify_attributes }}>
           <div class="feature-grid__card-visual">
             {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: width: 120 }}" alt="{{ block.settings.heading | escape }}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
+              <img
+                src="{{ block.settings.image | image_url: width: 120 }}"
+                alt="{{ block.settings.heading | escape }}"
+                loading="lazy"
+                width="42"
+                height="42"
+              >
             {%- else -%}
-              <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+              <div class="feature-grid__card-icon">
+                {% render 'feature-grid-icon',
+                  preset: block.settings.icon_preset,
+                  primary_color: 'var(--fg-icon-primary)',
+                  accent_color: 'var(--fg-icon-accent)'
+                %}
+              </div>
             {%- endif -%}
           </div>
           <h3 class="feature-grid__card-heading">{{ block.settings.heading | default: 'Deep Cleaning Power' }}</h3>
@@ -137,10 +205,17 @@
         </div>
       {%- else -%}
         <!-- Fallbacks -->
+        {%- assign fallback_icons = 'lasting,color,protection' | split: ',' -%}
         {%- for i in (1..3) -%}
           <div class="feature-grid__card">
             <div class="feature-grid__card-visual">
-              <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+              <div class="feature-grid__card-icon">
+                {% render 'feature-grid-icon',
+                  preset: fallback_icons[forloop.index0],
+                  primary_color: 'var(--fg-icon-primary)',
+                  accent_color: 'var(--fg-icon-accent)'
+                %}
+              </div>
             </div>
             <h3 class="feature-grid__card-heading">
               {%- if i == 1 -%}Deep Cleaning Power{%- elsif i == 2 -%}Safe for All Materials{%- else -%}Long Lasting Protection{%- endif -%}
@@ -178,7 +253,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",
@@ -318,9 +399,24 @@
       "name": "Feature Item",
       "settings": [
         {
+          "type": "select",
+          "id": "icon_preset",
+          "label": "Icon style",
+          "options": [
+            { "value": "lasting", "label": "Long-lasting / durability" },
+            { "value": "color", "label": "Color restoration" },
+            { "value": "protection", "label": "Premium protection" },
+            { "value": "deep_clean", "label": "Deep cleaning" },
+            { "value": "safe", "label": "Safe for materials" },
+            { "value": "shield", "label": "Shield technology" }
+          ],
+          "default": "lasting"
+        },
+        {
           "type": "image_picker",
           "id": "image",
-          "label": "Feature Icon (Optional)"
+          "label": "Custom icon image (optional)",
+          "info": "Overrides the icon style above when set."
         },
         {
           "type": "text",

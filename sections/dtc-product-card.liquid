@@ -160,13 +160,13 @@
     <div class="dtc-product-card">
       
       <!-- Top rating badge -->
-      <div class="dtc-product-card__rating">â˜… 4.9 (260)</div>
+      <div class="dtc-product-card__rating">Ã¢Ëœâ€¦ 4.9 (260)</div>
 
       <!-- Title -->
-      <h2 class="dtc-product-card__title">{{ card_product.title | default: section.settings.title | default: 'HÄ€LO v2' }}</h2>
+      <h2 class="dtc-product-card__title">{{ card_product.title | default: section.settings.title | default: 'HÃ„â‚¬LO v2' }}</h2>
 
       <!-- Subtitle -->
-      <p class="dtc-product-card__subtitle">{{ section.settings.subtitle | default: 'HÄ€LO v2 | 3D Air Circulation Fan with Mood Lamp' }}</p>
+      <p class="dtc-product-card__subtitle">{{ section.settings.subtitle | default: 'HÃ„â‚¬LO v2 | 3D Air Circulation Fan with Mood Lamp' }}</p>
 
       <!-- Short selling line description -->
       <p class="dtc-product-card__desc">{{ section.settings.desc | default: "India's most silent air circulator" }}</p>
@@ -217,13 +217,13 @@
       "type": "text",
       "id": "title",
       "label": "Product Title (Fallback)",
-      "default": "HÄ€LO v2"
+      "default": "HÃ„â‚¬LO v2"
     },
     {
       "type": "text",
       "id": "subtitle",
       "label": "Subtitle",
-      "default": "HÄ€LO v2 | 3D Air Circulation Fan with Mood Lamp"
+      "default": "HÃ„â‚¬LO v2 | 3D Air Circulation Fan with Mood Lamp"
     },
     {
       "type": "text",
@@ -250,7 +250,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

@@ -43,7 +43,7 @@
     display: block;
   }
 
-  /* Overlay disabled â€” show hero image without dark shadow */
+  /* Overlay disabled Ã¢â‚¬â€ show hero image without dark shadow */
   .hero-fullscreen__overlay {
     display: none;
   }
@@ -217,7 +217,7 @@
 
   @media screen and (max-width: 380px) {
     .hero-fullscreen__heading {
-      font-size: clamp(36px, 10vw, 48px);
+      font-size: var(--heading-size-hero, clamp(36px, 10vw, 48px));
     }
 
     .hero-fullscreen__bg-img {
@@ -479,7 +479,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings → Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

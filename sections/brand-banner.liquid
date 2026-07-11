@@ -91,7 +91,7 @@
 
   <div class="container">
     <div class="brand-banner__container animate-fade-in">
-      <h2 class="brand-banner__title">{{ section.settings.heading | default: 'HAGUEPROTECT â€” Sneaker Care, Redefined' }}</h2>
+      <h2 class="brand-banner__title">{{ section.settings.heading | default: 'HAGUEPROTECT Ã¢â‚¬â€ Sneaker Care, Redefined' }}</h2>
       <p class="brand-banner__subtitle">{{ section.settings.subheading | default: 'Experience professional-grade formulas, engineered specifically for premium fabrics, leathers, and suedes.' }}</p>
       <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-white brand-banner__btn">
         {{ section.settings.cta_text | default: 'Discover More' }}
@@ -108,7 +108,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "HAGUEPROTECT â€” Sneaker Care, Redefined"
+      "default": "HAGUEPROTECT Ã¢â‚¬â€ Sneaker Care, Redefined"
     },
     {
       "type": "textarea",
@@ -140,7 +140,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

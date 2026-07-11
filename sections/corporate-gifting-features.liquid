@@ -47,7 +47,7 @@
     margin: 0;
   }
 
-  /* Bento grid â€” fixed 3-row layout */
+  /* Bento grid Ã¢â‚¬â€ fixed 3-row layout */
   .corp-bento {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -246,7 +246,7 @@
     <div class="corp-features__header">
       <p class="corp-features__eyebrow">{{ section.settings.eyebrow | default: "What's Possible" }}</p>
       <h2 class="corp-features__heading">{{ section.settings.heading | default: 'Built for Brands That Care' }}</h2>
-      <p class="corp-features__sub">{{ section.settings.subheading | default: 'Every detail â€” from co-branded packaging to bulk logistics â€” designed to make your gift unforgettable.' }}</p>
+      <p class="corp-features__sub">{{ section.settings.subheading | default: 'Every detail Ã¢â‚¬â€ from co-branded packaging to bulk logistics Ã¢â‚¬â€ designed to make your gift unforgettable.' }}</p>
     </div>
 
     <div class="corp-bento">
@@ -359,7 +359,7 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What's Possible" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Built for Brands That Care" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Every detail â€” from co-branded packaging to bulk logistics â€” designed to make your gift unforgettable." }
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Every detail Ã¢â‚¬â€ from co-branded packaging to bulk logistics Ã¢â‚¬â€ designed to make your gift unforgettable." }
 ,
     {
       "type": "header",
@@ -367,7 +367,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",

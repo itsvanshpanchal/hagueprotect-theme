@@ -257,7 +257,7 @@
       <h2 class="h2">{{ section.settings.heading | default: 'Shop By Category' }}</h2>
     </div>
 
-    {%- comment -%} Desktop grid (hidden on mobile â‰¤767px via CSS) {%- endcomment -%}
+    {%- comment -%} Desktop grid (hidden on mobile Ã¢â€°Â¤767px via CSS) {%- endcomment -%}
     <div class="category__grid">
       {%- for block in section.blocks -%}
         <a href="{{ block.settings.collection.url | default: '/collections/all' }}" class="cat-card animate-fade-in" {{ block.shopify_attributes }}>
@@ -304,7 +304,7 @@
       {%- endfor -%}
     </div>
 
-    {%- comment -%} Mobile slider (shown on mobile â‰¤767px via CSS) {%- endcomment -%}
+    {%- comment -%} Mobile slider (shown on mobile Ã¢â€°Â¤767px via CSS) {%- endcomment -%}
     <div class="category__slider-wrapper" id="cat-slider-wrapper-{{ section.id }}">
       <div style="overflow: hidden;">
         <div class="category__slider-track" id="cat-track-{{ section.id }}">
@@ -477,7 +477,13 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings â†’ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+    },
+    {
+      "type": "checkbox",
+      "id": "typography_override",
+      "label": "Override theme typography for this section",
+      "default": false
     },
     {
       "type": "select",
