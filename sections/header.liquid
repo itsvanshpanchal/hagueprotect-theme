@@ -154,7 +154,7 @@
     top: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    min-width: 280px;
+    min-width: 190px;
     background: #ffffff;
     border: 1px solid #e5e5e5;
     border-radius: 12px;
@@ -175,8 +175,7 @@
   .brand-dropdown__item {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
+    justify-content: center;
     padding: 12px 14px;
     border-radius: 8px;
     text-decoration: none;
@@ -208,14 +207,10 @@
     max-width: 132px;
   }
 
-  .brand-dropdown__label {
-    line-height: 1.2;
-  }
-
   .mobile-brand-link {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
     padding: 10px 8px;
     color: #666;
     text-decoration: none;
@@ -974,17 +969,14 @@
           </svg>
         </a>
         <div class="brand-dropdown" id="BrandDropdown" role="menu" aria-label="Brand menu">
-          <a href="{{ hague_home_url }}" class="brand-dropdown__item" role="menuitem">
+          <a href="{{ hague_home_url }}" class="brand-dropdown__item" role="menuitem" aria-label="Hague Protect">
             <img src="{{ header_logo_url }}" alt="Hague Protect" class="brand-dropdown__logo" height="36" loading="lazy" decoding="async">
-            <span class="brand-dropdown__label">Hague Protect</span>
           </a>
-          <a href="{{ vanrosector_url }}" class="brand-dropdown__item" role="menuitem">
+          <a href="{{ vanrosector_url }}" class="brand-dropdown__item" role="menuitem" aria-label="Vanrosector">
             <img src="{{ vr_logo_url }}" alt="Vanrosector" class="brand-dropdown__logo" height="36" loading="lazy" decoding="async">
-            <span class="brand-dropdown__label">Vanrosector</span>
           </a>
-          <a href="{{ science_of_raw_url }}" class="brand-dropdown__item" role="menuitem">
+          <a href="{{ science_of_raw_url }}" class="brand-dropdown__item" role="menuitem" aria-label="Science of Raw">
             <img src="{{ sor_logo_url }}" alt="Science of Raw" class="brand-dropdown__logo brand-dropdown__logo--sor" height="40" loading="lazy" decoding="async">
-            <span class="brand-dropdown__label">Science of Raw</span>
           </a>
         </div>
       </div>
@@ -1373,17 +1365,14 @@
         <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2"/></svg>
       </a>
       <div class="mobile-accordion-content" id="MobileBrandContent" style="flex-direction: column;">
-        <a href="{{ hague_home_url }}" class="mobile-brand-link">
+        <a href="{{ hague_home_url }}" class="mobile-brand-link" aria-label="Hague Protect">
           <img src="{{ header_logo_url }}" alt="Hague Protect" height="28" loading="lazy" decoding="async">
-          <span>Hague Protect</span>
         </a>
-        <a href="{{ vanrosector_url }}" class="mobile-brand-link">
+        <a href="{{ vanrosector_url }}" class="mobile-brand-link" aria-label="Vanrosector">
           <img src="{{ vr_logo_url }}" alt="Vanrosector" height="28" loading="lazy" decoding="async">
-          <span>Vanrosector</span>
         </a>
-        <a href="{{ science_of_raw_url }}" class="mobile-brand-link">
+        <a href="{{ science_of_raw_url }}" class="mobile-brand-link" aria-label="Science of Raw">
           <img src="{{ sor_logo_url }}" alt="Science of Raw" height="28" loading="lazy" decoding="async">
-          <span>Science of Raw</span>
         </a>
       </div>
     </div>
