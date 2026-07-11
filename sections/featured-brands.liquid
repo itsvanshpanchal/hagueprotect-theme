@@ -309,10 +309,10 @@
           {{ section.settings.vanrosector_logo | image_url: width: 400 | image_tag:
             class: 'fb__card-logo',
             loading: 'lazy',
-            alt: 'VanRoSector logo'
+            alt: section.settings.vanrosector_name | default: 'VanRoSector' | escape
           }}
-        {%- else -%}
-          <h3 class="fb__card-name">VanRoSector</h3>
+        {%- elsif section.settings.vanrosector_name != blank -%}
+          <h3 class="fb__card-name">{{ section.settings.vanrosector_name }}</h3>
         {%- endif -%}
 
         {%- if section.settings.vanrosector_tagline != blank -%}
@@ -359,10 +359,10 @@
           {{ section.settings.science_of_raw_logo | image_url: width: 400 | image_tag:
             class: 'fb__card-logo',
             loading: 'lazy',
-            alt: 'Science of Raw logo'
+            alt: section.settings.science_of_raw_name | default: 'Science of Raw' | escape
           }}
-        {%- else -%}
-          <h3 class="fb__card-name">Science of Raw</h3>
+        {%- elsif section.settings.science_of_raw_name != blank -%}
+          <h3 class="fb__card-name">{{ section.settings.science_of_raw_name }}</h3>
         {%- endif -%}
 
         {%- if section.settings.science_of_raw_tagline != blank -%}
@@ -409,10 +409,10 @@
           {{ section.settings.hagueprotect_logo | image_url: width: 400 | image_tag:
             class: 'fb__card-logo',
             loading: 'lazy',
-            alt: 'HagueProtect logo'
+            alt: section.settings.hagueprotect_name | default: 'HagueProtect' | escape
           }}
-        {%- else -%}
-          <h3 class="fb__card-name">HagueProtect</h3>
+        {%- elsif section.settings.hagueprotect_name != blank -%}
+          <h3 class="fb__card-name">{{ section.settings.hagueprotect_name }}</h3>
         {%- endif -%}
 
         {%- if section.settings.hagueprotect_tagline != blank -%}
@@ -494,6 +494,13 @@
     },
     {
       "type": "text",
+      "id": "vanrosector_name",
+      "label": "Brand name text",
+      "default": "VanRoSector",
+      "info": "Shown on the card when no logo image or SVG is set. Remove the logo to display this text."
+    },
+    {
+      "type": "text",
       "id": "vanrosector_tagline",
       "label": "Tagline",
       "default": "Journey Through Nature's Finest Essence."
@@ -527,6 +534,13 @@
     },
     {
       "type": "text",
+      "id": "science_of_raw_name",
+      "label": "Brand name text",
+      "default": "Science of Raw",
+      "info": "Shown on the card when no logo image or SVG is set. Remove the logo to display this text."
+    },
+    {
+      "type": "text",
       "id": "science_of_raw_tagline",
       "label": "Tagline",
       "default": "Pure, raw, and precisely refined."
@@ -557,6 +571,13 @@
       "id": "hagueprotect_svg",
       "label": "Logo (SVG Code)",
       "info": "Paste SVG markup to upload logo directly through theme code."
+    },
+    {
+      "type": "text",
+      "id": "hagueprotect_name",
+      "label": "Brand name text",
+      "default": "HagueProtect",
+      "info": "Shown on the card when no logo image or SVG is set. Remove the logo to display this text."
     },
     {
       "type": "text",
