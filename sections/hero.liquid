@@ -51,16 +51,60 @@
     z-index: 3;
     left: var(--hero-content-x, 5%);
     top: var(--hero-content-y, 18%);
-    transform: translate(var(--hero-content-tx, 0), 0);
     width: max-content;
     max-width: min(800px, 55vw);
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: var(--hero-content-items, flex-start);
     gap: 20px;
     box-sizing: border-box;
-    text-align: var(--hero-content-align, left);
+  }
+
+  .hero-fullscreen__content--align-left .hero-fullscreen__subheading {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .hero-fullscreen__content--align-center .hero-fullscreen__subheading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-fullscreen__content--align-right .hero-fullscreen__subheading {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  @media screen and (min-width: 769px) {
+    .hero-fullscreen__content--align-left {
+      transform: translate(0, 0);
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .hero-fullscreen__content--align-center {
+      transform: translate(-50%, 0);
+      text-align: center;
+      align-items: center;
+    }
+
+    .hero-fullscreen__content--align-right {
+      transform: translate(-100%, 0);
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .hero-fullscreen__content--align-left .hero-fullscreen__actions {
+      justify-content: flex-start;
+    }
+
+    .hero-fullscreen__content--align-center .hero-fullscreen__actions {
+      justify-content: center;
+    }
+
+    .hero-fullscreen__content--align-right .hero-fullscreen__actions {
+      justify-content: flex-end;
+    }
   }
 
   .hero-fullscreen__eyebrow {
@@ -93,7 +137,6 @@
 
   .hero-fullscreen__actions {
     display: flex;
-    justify-content: var(--hero-content-actions, flex-start);
     width: 100%;
   }
 
@@ -111,17 +154,15 @@
     box-shadow: 0 20px 48px rgba(255, 43, 43, 0.5);
   }
 
-  /* Desktop / laptop: typing animation */
+  /* Desktop / laptop */
   @media screen and (min-width: 769px) {
     .hero-fullscreen__heading {
-      text-align: var(--hero-content-align, left);
       max-width: min(800px, 55vw);
+      text-align: inherit;
     }
 
     .hero-fullscreen__subheading {
-      text-align: var(--hero-content-align, left);
-      margin-left: 0;
-      margin-right: auto;
+      text-align: inherit;
     }
   }
 
@@ -146,17 +187,40 @@
     .hero-fullscreen__content {
       left: var(--hero-content-x-mobile, 50%);
       top: var(--hero-content-y-mobile, 12%);
-      transform: translate(var(--hero-content-tx-mobile, -50%), 0);
-      align-items: var(--hero-content-items-mobile, center);
-      text-align: var(--hero-content-align-mobile, center);
       max-width: calc(100% - 32px);
       width: 100%;
       padding: 0 max(16px, var(--site-padding));
       gap: 12px;
     }
 
-    .hero-fullscreen__content .hero-fullscreen__actions {
-      justify-content: var(--hero-content-actions-mobile, center);
+    .hero-fullscreen__content--align-mobile-left {
+      transform: translate(0, 0);
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .hero-fullscreen__content--align-mobile-center {
+      transform: translate(-50%, 0);
+      text-align: center;
+      align-items: center;
+    }
+
+    .hero-fullscreen__content--align-mobile-right {
+      transform: translate(-100%, 0);
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .hero-fullscreen__content--align-mobile-left .hero-fullscreen__actions {
+      justify-content: flex-start;
+    }
+
+    .hero-fullscreen__content--align-mobile-center .hero-fullscreen__actions {
+      justify-content: center;
+    }
+
+    .hero-fullscreen__content--align-mobile-right .hero-fullscreen__actions {
+      justify-content: flex-end;
     }
 
     .hero-fullscreen__bg {
@@ -236,44 +300,28 @@
   endif
   assign hero_img_class = 'hero-fullscreen__bg-img'
 
-  assign content_x = section.settings.content_position_x | default: 5
-  assign content_y = section.settings.content_position_y | default: 18
+  assign content_x = section.settings.content_position_x | default: 5 | plus: 0
+  assign content_y = section.settings.content_position_y | default: 18 | plus: 0
   assign content_align = section.settings.content_align | default: 'left'
-  assign content_x_mobile = section.settings.content_position_x_mobile | default: 50
-  assign content_y_mobile = section.settings.content_position_y_mobile | default: 12
+  assign content_x_mobile = section.settings.content_position_x_mobile | default: 50 | plus: 0
+  assign content_y_mobile = section.settings.content_position_y_mobile | default: 12 | plus: 0
   assign content_align_mobile = section.settings.content_align_mobile | default: 'center'
 
-  case content_align
-    when 'center'
-      assign content_tx = '-50%'
-      assign content_items = 'center'
-      assign content_actions = 'center'
-    when 'right'
-      assign content_tx = '-100%'
-      assign content_items = 'flex-end'
-      assign content_actions = 'flex-end'
-    else
-      assign content_tx = '0'
-      assign content_items = 'flex-start'
-      assign content_actions = 'flex-start'
-  endcase
+  assign anchor_x = content_x
+  if content_align == 'center' and anchor_x <= 15
+    assign anchor_x = 50
+  elsif content_align == 'right' and anchor_x <= 20
+    assign anchor_x = 90
+  endif
 
-  case content_align_mobile
-    when 'center'
-      assign content_tx_mobile = '-50%'
-      assign content_items_mobile = 'center'
-      assign content_actions_mobile = 'center'
-    when 'right'
-      assign content_tx_mobile = '-100%'
-      assign content_items_mobile = 'flex-end'
-      assign content_actions_mobile = 'flex-end'
-    else
-      assign content_tx_mobile = '0'
-      assign content_items_mobile = 'flex-start'
-      assign content_actions_mobile = 'flex-start'
-  endcase
+  assign anchor_x_mobile = content_x_mobile
+  if content_align_mobile == 'center' and anchor_x_mobile <= 20
+    assign anchor_x_mobile = 50
+  elsif content_align_mobile == 'right' and anchor_x_mobile <= 25
+    assign anchor_x_mobile = 90
+  endif
 
-  assign hero_style = '--hero-content-x: ' | append: content_x | append: '%; --hero-content-y: ' | append: content_y | append: '%; --hero-content-tx: ' | append: content_tx | append: '; --hero-content-align: ' | append: content_align | append: '; --hero-content-items: ' | append: content_items | append: '; --hero-content-actions: ' | append: content_actions | append: '; --hero-content-x-mobile: ' | append: content_x_mobile | append: '%; --hero-content-y-mobile: ' | append: content_y_mobile | append: '%; --hero-content-tx-mobile: ' | append: content_tx_mobile | append: '; --hero-content-align-mobile: ' | append: content_align_mobile | append: '; --hero-content-items-mobile: ' | append: content_items_mobile | append: '; --hero-content-actions-mobile: ' | append: content_actions_mobile | append: ';'
+  assign hero_style = '--hero-content-x: ' | append: anchor_x | append: '%; --hero-content-y: ' | append: content_y | append: '%; --hero-content-x-mobile: ' | append: anchor_x_mobile | append: '%; --hero-content-y-mobile: ' | append: content_y_mobile | append: '%;'
   if has_dedicated_mobile and mobile_banner.width and mobile_banner.height
     assign hero_style = hero_style | append: ' --hero-mobile-aspect: ' | append: mobile_banner.width | append: ' / ' | append: mobile_banner.height | append: ';'
   endif
@@ -329,7 +377,7 @@
   </div>
   <div class="hero-fullscreen__overlay"></div>
 
-  <div class="hero-fullscreen__content">
+  <div class="hero-fullscreen__content hero-fullscreen__content--align-{{ content_align }} hero-fullscreen__content--align-mobile-{{ content_align_mobile }}">
     {%- if section.settings.eyebrow != blank -%}
       <span class="hero-fullscreen__eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
@@ -395,7 +443,8 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "default": 5
+      "default": 5,
+      "info": "Left: distance from left edge. Center: anchor point (50 = page center). Right: anchor point (90 = near right edge)."
     },
     {
       "type": "range",
@@ -430,7 +479,8 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "default": 50
+      "default": 5,
+      "info": "Left: distance from left edge. Center: anchor point (50 = page center). Right: anchor point (90 = near right edge)."0
     },
     {
       "type": "range",

@@ -335,6 +335,21 @@
     box-sizing: border-box;
   }
 
+  .corp-hero__frame-caption--align-left {
+    transform: translate(0, 0);
+    text-align: left;
+  }
+
+  .corp-hero__frame-caption--align-center {
+    transform: translate(-50%, 0);
+    text-align: center;
+  }
+
+  .corp-hero__frame-caption--align-right {
+    transform: translate(-100%, 0);
+    text-align: right;
+  }
+
   .corp-hero__frame-tag {
     font-size: 10px;
     font-weight: 700;
@@ -500,7 +515,7 @@
             <div class="corp-hero__frame-overlay"></div>
             {%- if section.settings.single_showcase_caption != blank -%}
               <div
-                class="corp-hero__frame-caption"
+                class="corp-hero__frame-caption corp-hero__frame-caption--align-{{ section.settings.single_caption_align | default: 'left' }}"
                 style="{% render 'hero-caption-position', x: section.settings.single_caption_x, y: section.settings.single_caption_y, align: section.settings.single_caption_align %}"
               >
                 {%- if section.settings.single_showcase_tag != blank -%}
@@ -534,7 +549,7 @@
                 <div class="corp-hero__frame-overlay"></div>
                 {%- if block.settings.tag != blank or block.settings.caption != blank -%}
                   <div
-                    class="corp-hero__frame-caption"
+                    class="corp-hero__frame-caption corp-hero__frame-caption--align-{{ block.settings.caption_align | default: 'left' }}"
                     style="{% render 'hero-caption-position', x: block.settings.caption_x, y: block.settings.caption_y, align: block.settings.caption_align %}"
                   >
                     {%- if block.settings.tag != blank -%}
@@ -559,7 +574,7 @@
               <div class="corp-hero__frame-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add back image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
+            <div class="corp-hero__frame-caption corp-hero__frame-caption--align-left" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Co-Branded</p>
               <p class="corp-hero__frame-title">Your Logo. Our Quality.</p>
             </div>
@@ -573,7 +588,7 @@
               <div class="corp-hero__frame-placeholder" style="background:linear-gradient(145deg,#ff2b2b,#8b0000);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add main image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
+            <div class="corp-hero__frame-caption corp-hero__frame-caption--align-left" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Premium Kit</p>
               <p class="corp-hero__frame-title">Executive Gift Box</p>
             </div>
@@ -587,7 +602,7 @@
               <div class="corp-hero__frame-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add front image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
-            <div class="corp-hero__frame-caption" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
+            <div class="corp-hero__frame-caption corp-hero__frame-caption--align-left" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
               <p class="corp-hero__frame-tag">Bulk</p>
               <p class="corp-hero__frame-title">Team Onboarding</p>
             </div>

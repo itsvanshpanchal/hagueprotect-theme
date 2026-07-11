@@ -1,15 +1,12 @@
 {%- liquid
-  assign pos_x = x | default: 0
-  assign pos_y = y | default: 75
+  assign pos_x = x | default: 0 | plus: 0
+  assign pos_y = y | default: 75 | plus: 0
   assign pos_align = align | default: 'left'
 
-  case pos_align
-    when 'center'
-      assign pos_tx = '-50%'
-    when 'right'
-      assign pos_tx = '-100%'
-    else
-      assign pos_tx = '0'
-  endcase
+  if pos_align == 'center' and pos_x <= 15
+    assign pos_x = 50
+  elsif pos_align == 'right' and pos_x <= 20
+    assign pos_x = 90
+  endif
 -%}
-left: {{ pos_x }}%; top: {{ pos_y }}%; transform: translate({{ pos_tx }}, 0); text-align: {{ pos_align }}; right: auto; bottom: auto; width: max-content; max-width: calc(100% - 24px);
+left: {{ pos_x }}%; top: {{ pos_y }}%; right: auto; bottom: auto; width: max-content; max-width: calc(100% - 24px);
