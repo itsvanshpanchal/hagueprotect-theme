@@ -253,6 +253,11 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign fb_cta_label = section.settings.cta_label | default: 'Explore'
+  assign fb_cta_label = fb_cta_label | replace: 'Ã¢â€ â€™', '' | replace: 'â†’', '' | replace: '→', '' | replace: 'Â†’', '' | replace: 'Â†', '' | strip
+-%}
+
 <div class="featured-brands-{{ section.id }}">
   <!-- Section Header -->
   <div class="fb__header">
@@ -313,7 +318,7 @@
 
         {%- if section.settings.cta_label != blank -%}
           <span class="fb__card-cta">
-            {{ section.settings.cta_label }}
+            {{ fb_cta_label }}
           </span>
         {%- endif -%}
       </div>
@@ -362,7 +367,7 @@
 
         {%- if section.settings.cta_label != blank -%}
           <span class="fb__card-cta">
-            {{ section.settings.cta_label }}
+            {{ fb_cta_label }}
           </span>
         {%- endif -%}
       </div>
@@ -411,7 +416,7 @@
 
         {%- if section.settings.cta_label != blank -%}
           <span class="fb__card-cta">
-            {{ section.settings.cta_label }}
+            {{ fb_cta_label }}
           </span>
         {%- endif -%}
       </div>
