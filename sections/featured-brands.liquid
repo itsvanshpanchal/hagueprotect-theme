@@ -254,8 +254,15 @@
 {%- endstyle -%}
 
 {%- liquid
-  assign fb_cta_label = section.settings.cta_label | default: 'Explore'
-  assign fb_cta_label = fb_cta_label | replace: 'Ã¢â€ â€™', '' | replace: 'â†’', '' | replace: '→', '' | replace: 'Â†’', '' | replace: 'Â†', '' | strip
+  assign fb_cta_label = section.settings.cta_label | default: 'Explore' | strip
+  assign fb_cta_label = fb_cta_label | split: ' ' | first | strip
+  assign fb_cta_label = fb_cta_label | remove: 'â†’' | remove: '→' | remove: 'Â†’' | remove: 'Â†' | remove: "'" | remove: '’' | strip
+  if fb_cta_label contains 'Ã' or fb_cta_label contains 'Â' or fb_cta_label contains 'â€' or fb_cta_label contains 'â†'
+    assign fb_cta_label = 'Explore'
+  endif
+  if fb_cta_label == blank
+    assign fb_cta_label = 'Explore'
+  endif
 -%}
 
 <div class="featured-brands-{{ section.id }}">
