@@ -2,6 +2,14 @@
   assign products_to_show = collections[section.settings.collection].products
   assign product_limit = section.settings.products_limit | default: 8
   assign accent = section.settings.accent_color | default: '#B8B8B8'
+  assign bs_bg = section.settings.bg_color | default: '#ffffff'
+  assign bs_text = '#111111'
+  assign bs_text_muted = '#666666'
+  assign bg_brightness = bs_bg | color_brightness
+  if bg_brightness < 128
+    assign bs_text = '#ffffff'
+    assign bs_text_muted = 'rgba(255, 255, 255, 0.72)'
+  endif
 -%}
 
 {%- style -%}
@@ -60,14 +68,14 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading {
-    color: #111111;
+    color: {{ bs_text }} !important;
     margin: 0;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__view-all {
   font-size: 14px;
   font-weight: 600;
-    color: #111111;
+    color: {{ bs_text }};
   text-decoration: none;
     white-space: nowrap;
     transition: color 0.25s ease;
@@ -602,7 +610,7 @@
       text-align: center;
       font-size: 13px;
       font-weight: 600;
-      color: #666666;
+      color: {{ bs_text_muted }};
       letter-spacing: 0.06em;
       margin: 0;
       line-height: 1;
