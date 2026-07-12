@@ -253,17 +253,7 @@
   }
 {%- endstyle -%}
 
-{%- liquid
-  assign fb_cta_label = section.settings.cta_label | default: 'Explore' | strip
-  assign fb_cta_label = fb_cta_label | split: ' ' | first | strip
-  assign fb_cta_label = fb_cta_label | remove: 'â†’' | remove: '→' | remove: 'Â†’' | remove: 'Â†' | remove: "'" | remove: '’' | strip
-  if fb_cta_label contains 'Ã' or fb_cta_label contains 'Â' or fb_cta_label contains 'â€' or fb_cta_label contains 'â†'
-    assign fb_cta_label = 'Explore'
-  endif
-  if fb_cta_label == blank
-    assign fb_cta_label = 'Explore'
-  endif
--%}
+{%- assign fb_cta_label = 'Explore' -%}
 
 <div class="featured-brands-{{ section.id }}">
   <!-- Section Header -->
@@ -324,9 +314,7 @@
         {%- endif -%}
 
         {%- if section.settings.cta_label != blank -%}
-          <span class="fb__card-cta">
-            {{ fb_cta_label }}
-          </span>
+          <span class="fb__card-cta">{{ fb_cta_label }}</span>
         {%- endif -%}
       </div>
     </a>
@@ -373,9 +361,7 @@
         {%- endif -%}
 
         {%- if section.settings.cta_label != blank -%}
-          <span class="fb__card-cta">
-            {{ fb_cta_label }}
-          </span>
+          <span class="fb__card-cta">{{ fb_cta_label }}</span>
         {%- endif -%}
       </div>
     </a>
@@ -422,9 +408,7 @@
         {%- endif -%}
 
         {%- if section.settings.cta_label != blank -%}
-          <span class="fb__card-cta">
-            {{ fb_cta_label }}
-          </span>
+          <span class="fb__card-cta">{{ fb_cta_label }}</span>
         {%- endif -%}
       </div>
     </a>
@@ -473,13 +457,13 @@
     },
     {
       "type": "header",
-      "content": "Ã¢â€ÂÃ¢â€ÂÃ¢â€Â Brand 1: VanRoSector Ã¢â€ÂÃ¢â€ÂÃ¢â€Â"
+      "content": "Brand 1: VanRoSector"
     },
     {
       "type": "image_picker",
       "id": "vanrosector_image",
       "label": "Background Image",
-      "info": "Use a tall portrait lifestyle image (e.g. 900Ãƒâ€”1200px)."
+      "info": "Use a tall portrait lifestyle image (e.g. 900x1200px)."
     },
     {
       "type": "image_picker",
@@ -513,13 +497,13 @@
     },
     {
       "type": "header",
-      "content": "Ã¢â€ÂÃ¢â€ÂÃ¢â€Â Brand 2: Science of Raw Ã¢â€ÂÃ¢â€ÂÃ¢â€Â"
+      "content": "Brand 2: Science of Raw"
     },
     {
       "type": "image_picker",
       "id": "science_of_raw_image",
       "label": "Background Image",
-      "info": "Use a tall portrait lifestyle image (e.g. 900Ãƒâ€”1200px)."
+      "info": "Use a tall portrait lifestyle image (e.g. 900x1200px)."
     },
     {
       "type": "image_picker",
@@ -553,13 +537,13 @@
     },
     {
       "type": "header",
-      "content": "Ã¢â€ÂÃ¢â€ÂÃ¢â€Â Brand 3: HagueProtect Ã¢â€ÂÃ¢â€ÂÃ¢â€Â"
+      "content": "Brand 3: HagueProtect"
     },
     {
       "type": "image_picker",
       "id": "hagueprotect_image",
       "label": "Background Image",
-      "info": "Use a tall portrait lifestyle image (e.g. 900Ãƒâ€”1200px)."
+      "info": "Use a tall portrait lifestyle image (e.g. 900x1200px)."
     },
     {
       "type": "image_picker",
@@ -622,7 +606,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings Ã¢â€ â€™ Typography."
+      "content": "Font and size for this section. Global defaults: Theme settings > Typography."
     },
     {
       "type": "checkbox",
