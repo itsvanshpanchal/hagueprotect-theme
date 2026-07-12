@@ -13,7 +13,14 @@
       "cart-drawer": {
         "type": "cart-drawer",
         "settings": {
-          "primary_color": "#ff2b2b"
+          "primary_color": "#ff2b2b",
+          "typography_override": false,
+          "h1_font_family": "inter",
+          "h1_font_size_desktop": 64,
+          "h1_font_size_mobile": 40,
+          "paragraph_font_family": "inter",
+          "paragraph_font_size_desktop": 16,
+          "paragraph_font_size_mobile": 15
         }
       },
       "announcement-bar": {
@@ -22,22 +29,49 @@
           "show_announcement": true,
           "text": "COMPLEMENTARY SHIPPING AND FREE SAMPLES ABOVE 1999 SHOPPING",
           "bg_color": "#000000",
-          "text_color": "#ffffff"
+          "text_color": "#ffffff",
+          "typography_override": false,
+          "h1_font_family": "bebas_neue",
+          "h1_font_size_desktop": 64,
+          "h1_font_size_mobile": 40,
+          "h2_font_family": "bebas_neue",
+          "h2_font_size_desktop": 52,
+          "h2_font_size_mobile": 34,
+          "paragraph_font_family": "inter",
+          "paragraph_font_size_desktop": 16,
+          "paragraph_font_size_mobile": 15,
+          "eyebrow_font_family": "inter",
+          "eyebrow_font_size_desktop": 12,
+          "eyebrow_font_size_mobile": 12
         }
       },
       "footer": {
         "type": "footer",
         "settings": {
           "logo_text": "HAGUEPROTECT",
+          "logo_image": "shopify://shop_images/400X100---SHOPIFY-HAGUE_06c33035-d0b0-4522-97b0-fee50428ffa6.png",
           "description": "Premium sneaker care solutions for professional-grade cleaning, protection, and restoration.",
-          "bg_color": "#fafafa",
+          "bg_color": "#FCFCFC",
           "menu_title_1": "Quick Links",
           "menu_title_2": "Customer Care",
-          "privacy_policy_page": "",
-          "terms_policy_page": "",
-          "refund_policy_page": "",
-          "shipping_policy_page": "",
-          "newsletter_title": "Newsletter"
+          "privacy_policy_page": "privacy-policy",
+          "terms_policy_page": "terms-of-service",
+          "refund_policy_page": "return-policy",
+          "shipping_policy_page": "shipping",
+          "newsletter_title": "Newsletter",
+          "typography_override": false,
+          "h1_font_family": "bebas_neue",
+          "h1_font_size_desktop": 64,
+          "h1_font_size_mobile": 40,
+          "h2_font_family": "bebas_neue",
+          "h2_font_size_desktop": 52,
+          "h2_font_size_mobile": 34,
+          "paragraph_font_family": "inter",
+          "paragraph_font_size_desktop": 16,
+          "paragraph_font_size_mobile": 15,
+          "eyebrow_font_family": "inter",
+          "eyebrow_font_size_desktop": 12,
+          "eyebrow_font_size_mobile": 12
         }
       },
       "header": {
@@ -62,7 +96,20 @@
           "col_care_by_fabric": "",
           "col_deodorizers": "",
           "col_accessories": "",
-          "col_super_savers": ""
+          "col_super_savers": "",
+          "typography_override": false,
+          "h1_font_family": "bebas_neue",
+          "h1_font_size_desktop": 64,
+          "h1_font_size_mobile": 40,
+          "h2_font_family": "bebas_neue",
+          "h2_font_size_desktop": 52,
+          "h2_font_size_mobile": 34,
+          "paragraph_font_family": "inter",
+          "paragraph_font_size_desktop": 16,
+          "paragraph_font_size_mobile": 15,
+          "eyebrow_font_family": "inter",
+          "eyebrow_font_size_desktop": 12,
+          "eyebrow_font_size_mobile": 12
         }
       },
       "corporate-gifting-hero": {
