@@ -143,8 +143,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     {% render 'theme-typography-css' %}
-    {% render 'theme-layout-css' %}
-    
+
     <!-- Preload Critical Assets -->
     <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
     <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
@@ -153,6 +152,7 @@
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     {{ 'section-typography.css' | asset_url | stylesheet_tag }}
     {{ 'material-fonts.css' | asset_url | stylesheet_tag }}
+    {% render 'theme-layout-css' %}
 
     <style>
       html, body {
@@ -425,7 +425,7 @@
 
     {{ content_for_header }}
   </head>
-  <body>
+  <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
     {% section 'cart-drawer' %}
     {% section 'announcement-bar' %}
     {% section 'header' %}

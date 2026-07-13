@@ -7,7 +7,19 @@
     --site-max-width: {{ site_max_width }}px;
   }
 
-  body.template-index {
+  .template-index {
     --section-label-color: {{ homepage_label_color }};
+  }
+
+  .template-index .hero-fullscreen__eyebrow,
+  .template-index .fb__eyebrow,
+  .template-index .bs-coverflow__eyebrow,
+  .template-index .trending-social__eyebrow,
+  .template-index .mat-eyebrow,
+  .template-index .fc-subtitle,
+  .template-index .comm-eyebrow,
+  .template-index .story-banner__eyebrow,
+  .template-index [class*="ai-story-banner-subheading-"] {
+    color: {{ homepage_label_color }} !important;
   }
 </style>

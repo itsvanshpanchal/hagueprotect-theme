@@ -65,7 +65,7 @@
 
   #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
     display: block;
-    color: var(--section-label-color, #2563eb) !important;
+    color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading {
