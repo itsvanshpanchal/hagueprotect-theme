@@ -1,8 +1,13 @@
 {%- liquid
   assign site_max_width = settings.site_max_width | default: 1440
+  assign homepage_label_color = settings.homepage_label_color | default: '#2563eb'
 -%}
 <style>
   :root {
     --site-max-width: {{ site_max_width }}px;
+  }
+
+  body.template-index {
+    --section-label-color: {{ homepage_label_color }};
   }
 </style>
