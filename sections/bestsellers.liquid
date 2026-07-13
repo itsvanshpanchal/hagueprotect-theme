@@ -287,9 +287,18 @@
     background: #2ecc71;
     color: #111111;
     font-size: 12px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 6px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .bs-coverflow-card__rating-badge::before {
+    content: "\2605";
+    font-size: 11px;
+    line-height: 1;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__rating-count {
@@ -705,9 +714,9 @@
         <h2 class="bs-coverflow__heading">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
           </div>
       {%- if section.settings.view_all_link != blank -%}
-        <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All Ã¢â€ â€™' }}</a>
+        <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All' }}</a>
           {%- else -%}
-        <a href="{{ routes.all_products_collection_url }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All Ã¢â€ â€™' }}</a>
+        <a href="{{ routes.all_products_collection_url }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All' }}</a>
           {%- endif -%}
     </div>
 
@@ -751,7 +760,7 @@
               </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
-                      <span class="bs-coverflow-card__rating-badge">Ã¢Ëœâ€¦ {{ section.settings.rating_value | default: '4.9' }}</span>
+                      <span class="bs-coverflow-card__rating-badge">{{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
             </div>
                     <h3 class="bs-coverflow-card__title">{{ product.title }}</h3>
@@ -793,7 +802,7 @@
               </div>
                   <div class="bs-coverflow-card__body">
                     <div class="bs-coverflow-card__rating">
-                      <span class="bs-coverflow-card__rating-badge">Ã¢Ëœâ€¦ {{ section.settings.rating_value | default: '4.9' }}</span>
+                      <span class="bs-coverflow-card__rating-badge">{{ section.settings.rating_value | default: '4.9' }}</span>
                       <span class="bs-coverflow-card__rating-count">({{ section.settings.rating_count | default: '4.8' }})</span>
             </div>
                     <h3 class="bs-coverflow-card__title">{{ mock_title }}</h3>
@@ -1167,7 +1176,7 @@
       "type": "text",
       "id": "view_all_label",
       "label": "View all label",
-      "default": "View All Ã¢â€ â€™"
+      "default": "View All"
     },
     {
       "type": "url",

@@ -1,15 +1,22 @@
+{%- liquid
+  assign layout_style = section.settings.layout_style | default: 'compact'
+  assign is_page_layout = false
+  if layout_style == 'page' or section.settings.page_title != blank
+    assign is_page_layout = true
+  endif
+-%}
+
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
-
-  .faq-custom {
-    background-color: #F8F9FA;
-    padding: clamp(60px, 8vw, 100px) 0;
+  #shopify-section-{{ section.id }} .faq-custom {
+    background-color: {{ section.settings.bg_color | default: '#F8F9FA' }};
+    padding: {% if is_page_layout %}clamp(72px, 10vw, 110px){% else %}clamp(60px, 8vw, 100px){% endif %} 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
-  .faq-custom__container {
-    max-width: var(--site-max-width);
+  #shopify-section-{{ section.id }} .faq-custom__container {
+    max-width: {% if is_page_layout %}900px{% else %}var(--site-max-width){% endif %};
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -18,19 +25,49 @@
     gap: 40px;
   }
 
-  .faq-custom__header {
+  #shopify-section-{{ section.id }} .faq-custom__header {
     text-align: center;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 16px;
     margin-bottom: 8px;
+    width: 100%;
   }
 
-  .faq-custom__heading {
+  #shopify-section-{{ section.id }} .faq-custom__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: {{ section.settings.accent_color | default: '#2563eb' }};
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__page-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(32px, 5vw, 42px) !important;
+    font-weight: 800 !important;
+    color: #111111 !important;
+    margin: 0;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03em !important;
+    text-transform: none !important;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__page-description {
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__heading {
     font-family: 'Inter', sans-serif !important;
     font-size: clamp(16px, 2.5vw, 18px) !important;
     font-weight: 600 !important;
-    color: #E02020 !important;
+    color: {{ section.settings.accent_color | default: '#E02020' }} !important;
     margin: 0;
     padding-bottom: 6px;
     position: relative;
@@ -39,18 +76,18 @@
     text-transform: capitalize !important;
   }
 
-  .faq-custom__heading::after {
+  #shopify-section-{{ section.id }} .faq-custom__heading::after {
     content: '';
     position: absolute;
     bottom: -4px;
     left: 25%;
     right: 25%;
     height: 3px;
-    background-color: #E02020;
+    background-color: {{ section.settings.accent_color | default: '#E02020' }};
     border-radius: 2px;
   }
 
-  .faq-custom__items {
+  #shopify-section-{{ section.id }} .faq-custom__items {
     background: #ffffff;
     border-radius: 16px;
     border: 1px solid rgba(0, 0, 0, 0.08);
@@ -61,21 +98,21 @@
   }
 
   @media screen and (max-width: 768px) {
-    .faq-custom__items {
+    #shopify-section-{{ section.id }} .faq-custom__items {
       padding: 12px 20px;
     }
   }
 
-  .faq-custom__item {
+  #shopify-section-{{ section.id }} .faq-custom__item {
     border-bottom: 1px solid #f0f0f0;
     overflow: hidden;
   }
 
-  .faq-custom__item:last-child {
+  #shopify-section-{{ section.id }} .faq-custom__item:last-child {
     border-bottom: none;
   }
 
-  .faq-custom__trigger {
+  #shopify-section-{{ section.id }} .faq-custom__trigger {
     width: 100%;
     background: none;
     border: none;
@@ -89,9 +126,9 @@
     outline: none;
   }
 
-  .faq-custom__question {
+  #shopify-section-{{ section.id }} .faq-custom__question {
     font-family: 'Inter', sans-serif !important;
-    font-size: clamp(14px, 1.6vw, 16px) !important;
+    font-size: clamp(14px, 1.6vw, 17px) !important;
     font-weight: 600 !important;
     color: #111111 !important;
     margin: 0;
@@ -101,7 +138,7 @@
     text-transform: none !important;
   }
 
-  .faq-custom__icon-wrapper {
+  #shopify-section-{{ section.id }} .faq-custom__icon-wrapper {
     width: 26px;
     height: 26px;
     background-color: #000000;
@@ -114,7 +151,7 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
-  .faq-custom__icon-wrapper span {
+  #shopify-section-{{ section.id }} .faq-custom__icon-wrapper span {
     font-size: 16px;
     font-weight: 600;
     line-height: 1;
@@ -122,84 +159,113 @@
     transition: transform 0.3s ease;
   }
 
-  .faq-custom__item.active .faq-custom__icon-wrapper {
+  #shopify-section-{{ section.id }} .faq-custom__item.active .faq-custom__icon-wrapper {
     background-color: #000000;
     transform: rotate(45deg);
   }
 
-  .faq-custom__panel {
+  #shopify-section-{{ section.id }} .faq-custom__panel {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .faq-custom__item.active .faq-custom__panel {
-    max-height: 400px;
-  }
-
-  .faq-custom__answer {
+  #shopify-section-{{ section.id }} .faq-custom__answer {
     padding-bottom: 24px;
     font-size: clamp(14px, 1.6vw, 15px);
     color: #4A4A4A;
     line-height: 1.6;
     margin: 0;
   }
+
+  #shopify-section-{{ section.id }} .faq-custom__answer p {
+    margin: 0 0 12px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__answer p:last-child {
+    margin-bottom: 0;
+  }
 {%- endstyle -%}
 
-<div class="faq-custom" data-no-typewriter>
+<div class="faq-custom" data-no-typewriter data-faq-section="{{ section.id }}">
   <div class="faq-custom__container">
     <div class="faq-custom__header">
-      <h2 class="faq-custom__heading">{{ section.settings.heading | default: 'Product' }}</h2>
+      {%- if is_page_layout -%}
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="faq-custom__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.page_title != blank -%}
+          <h1 class="faq-custom__page-title">{{ section.settings.page_title }}</h1>
+        {%- endif -%}
+        {%- if section.settings.page_description != blank -%}
+          <p class="faq-custom__page-description">{{ section.settings.page_description }}</p>
+        {%- endif -%}
+      {%- elsif section.settings.heading != blank -%}
+        <h2 class="faq-custom__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
     </div>
 
     <div class="faq-custom__items">
       {%- for block in section.blocks -%}
         <div class="faq-custom__item" {{ block.shopify_attributes }}>
-          <button type="button" class="faq-custom__trigger" onclick="toggleFaqCustomItem(this)">
+          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
             <h3 class="faq-custom__question">{{ block.settings.question }}</h3>
-            <div class="faq-custom__icon-wrapper">
-              <span>&#43;</span>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true">
+              <span>+</span>
             </div>
           </button>
-          <div class="faq-custom__panel">
-            <p class="faq-custom__answer">{{ block.settings.answer }}</p>
+          <div class="faq-custom__panel" data-faq-panel hidden>
+            <div class="faq-custom__answer">{{ block.settings.answer }}</div>
           </div>
         </div>
       {%- else -%}
-        <!-- Fallbacks for theme editor default preview -->
-        {%- assign default_questions = "What makes Hague Protect safe for premium sneakers?|Does the formula alter the color or texture of my shoes?|Is the invisible barrier durable against liquids and stains?|How many times can I clean my shoes with one complete kit?|Are the cleaning brushes safe to use on delicate suede?" | split: "|" -%}
-        {%- assign default_answers = "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas.|No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials.|Yes! It creates a highly durable, nano-tech invisible barrier that repels water, mud, dirt, and stains for up to 4 weeks.|One complete Hague Protect kit allows more than 65 full cleaning and protective applications for your sneakers.|Yes! Use our Premium Soft-Hog Brush gently for delicate materials like suede and premium mesh to clean effectively without causing fraying." | split: "|" -%}
-        
-        {%- for q in default_questions -%}
-          <div class="faq-custom__item">
-            <button type="button" class="faq-custom__trigger" onclick="toggleFaqCustomItem(this)">
-              <h3 class="faq-custom__question">{{ q }}</h3>
-              <div class="faq-custom__icon-wrapper">
-                <span>&#43;</span>
-              </div>
-            </button>
-            <div class="faq-custom__panel">
-              <p class="faq-custom__answer">{{ default_answers[forloop.index0] }}</p>
+        <div class="faq-custom__item">
+          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
+            <h3 class="faq-custom__question">Add FAQ items in the theme editor</h3>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true">
+              <span>+</span>
             </div>
+          </button>
+          <div class="faq-custom__panel" data-faq-panel hidden>
+            <div class="faq-custom__answer">Click Add block and choose FAQ Item to add questions and answers.</div>
           </div>
-        {%- endfor -%}
+        </div>
       {%- endfor -%}
     </div>
   </div>
 </div>
 
 <script>
-  function toggleFaqCustomItem(btn) {
-    const item = btn.parentElement;
-    const isActive = item.classList.contains('active');
-    
-    const items = item.parentElement.querySelectorAll('.faq-custom__item');
-    items.forEach(i => i.classList.remove('active'));
-    
-    if (!isActive) {
-      item.classList.add('active');
-    }
-  }
+  (function () {
+    const root = document.querySelector('[data-faq-section="{{ section.id }}"]');
+    if (!root) return;
+
+    root.querySelectorAll('[data-faq-trigger]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const item = btn.closest('.faq-custom__item');
+        const panel = item.querySelector('[data-faq-panel]');
+        const isActive = item.classList.contains('active');
+
+        root.querySelectorAll('.faq-custom__item').forEach(function (entry) {
+          entry.classList.remove('active');
+          const entryPanel = entry.querySelector('[data-faq-panel]');
+          const entryBtn = entry.querySelector('[data-faq-trigger]');
+          if (entryPanel) {
+            entryPanel.style.maxHeight = '0px';
+            entryPanel.hidden = true;
+          }
+          if (entryBtn) entryBtn.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isActive && panel) {
+          item.classList.add('active');
+          panel.hidden = false;
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
 </script>
 
 {% schema %}
@@ -207,12 +273,64 @@
   "name": "FAQ Accordion",
   "settings": [
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout style",
+      "options": [
+        { "value": "compact", "label": "Compact (product/collection pages)" },
+        { "value": "page", "label": "Full page (FAQ page)" }
+      ],
+      "default": "compact"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#2563eb"
+    },
+    {
+      "type": "header",
+      "content": "Full page header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Help & Support"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "page_description",
+      "label": "Page description",
+      "default": "Everything you need to know about formula use, shipping timelines, and returns."
+    },
+    {
+      "type": "header",
+      "content": "Compact section label"
+    },
+    {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Product"
-    }
-,
+      "label": "Section label",
+      "default": "Product",
+      "info": "Shown on compact layout only (e.g. below products on collection pages)."
+    },
     {
       "type": "header",
       "content": "Typography"
@@ -357,7 +475,6 @@
       "unit": "px",
       "default": 12
     }
-
   ],
   "blocks": [
     {
@@ -371,10 +488,10 @@
           "default": "What makes Hague Protect safe for premium sneakers?"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
+          "default": "<p>Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas.</p>"
         }
       ]
     }
@@ -387,14 +504,14 @@
           "type": "faq_item",
           "settings": {
             "question": "What makes Hague Protect safe for premium sneakers?",
-            "answer": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
+            "answer": "<p>Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Does the formula alter the color or texture of my shoes?",
-            "answer": "No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials."
+            "answer": "<p>No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials.</p>"
           }
         }
       ]

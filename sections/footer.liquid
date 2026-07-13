@@ -345,10 +345,19 @@
       <div class="footer-col-menu">
         <h3 class="footer__title">{{ section.settings.menu_title_1 | default: 'Quick Links' }}</h3>
         <nav class="footer__menu">
+          {%- liquid
+            if section.settings.faq_page != blank
+              assign faq_href = section.settings.faq_page.url
+            elsif pages['faq'] != blank
+              assign faq_href = pages['faq'].url
+            else
+              assign faq_href = '/pages/faq'
+            endif
+          -%}
           <a href="/" class="footer__link">Home</a>
           <a href="/collections/all" class="footer__link">All Products</a>
           <a href="/pages/about-us" class="footer__link">About Us</a>
-          <a href="/pages/faq" class="footer__link">FAQs</a>
+          <a href="{{ faq_href }}" class="footer__link">FAQs</a>
           <a href="/search?view=business" class="footer__link">Contact</a>
         </nav>
       </div>
@@ -418,7 +427,7 @@
           <p class="footer__newsletter-desc">Subscribe to unlock premium sneaker care tips, drops, and elite offers.</p>
           <form class="footer__form" action="/contact#contact_form" method="post">
             <input type="hidden" name="form_type" value="customer">
-            <input type="hidden" name="utf8" value="Ã¢Å“â€œ">
+            <input type="hidden" name="utf8" value="&#10003;">
             <input type="email" name="contact[email]" class="footer__input" placeholder="Enter your email" required aria-label="Email address">
             <button type="submit" class="footer__form-btn" aria-label="Subscribe">
               Submit
@@ -505,6 +514,11 @@
       "type": "page",
       "id": "shipping_policy_page",
       "label": "Shipping Policy page"
+    },
+    {
+      "type": "page",
+      "id": "faq_page",
+      "label": "FAQ page"
     },
     {
       "type": "text",
