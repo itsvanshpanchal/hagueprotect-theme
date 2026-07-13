@@ -19,9 +19,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 100%;
-    margin: 0;
-    padding: 0 16px;
+    max-width: var(--site-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--site-padding, 16px);
     width: 100%;
     gap: 12px;
   }
@@ -306,7 +307,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 32px;
-    max-width: 1320px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
     padding: 0 24px;
     width: 100%;

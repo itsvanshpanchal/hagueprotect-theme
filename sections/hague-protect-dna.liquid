@@ -31,7 +31,7 @@
   }
 
   .hp-dna-{{ section.id }} .hp-dna__container {
-    max-width: {{ section.settings.container_width }}px;
+    max-width: {{ section.settings.container_width | default: settings.site_max_width | default: 1440 }}px;
     margin: 0 auto;
     padding: 0 clamp(20px, 4vw, 60px);
   }
@@ -344,7 +344,7 @@
       "max": 1600,
       "step": 20,
       "unit": "px",
-      "default": 1320
+      "default": 1440
     },
     {
       "type": "range",

@@ -1,0 +1,8 @@
+{%- liquid
+  assign site_max_width = settings.site_max_width | default: 1440
+-%}
+<style>
+  :root {
+    --site-max-width: {{ site_max_width }}px;
+  }
+</style>

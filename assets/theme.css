@@ -51,7 +51,7 @@
   --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   --transition-fast: all 0.2s ease-in-out;
 
-  --site-max-width: 1320px;
+  --site-max-width: 1440px;
   --site-padding: 32px;
 }
 
@@ -177,7 +177,8 @@ h6 {
 }
 
 /* Layout Containers */
-.container {
+.container,
+.site-stack {
   max-width: var(--site-max-width);
   margin-left: auto;
   margin-right: auto;

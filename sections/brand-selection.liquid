@@ -37,7 +37,7 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__inner {
-    max-width: {{ section.settings.max_width | default: 1240 }}px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
   }
 
@@ -437,7 +437,7 @@
       "step": 20,
       "unit": "px",
       "label": "Max content width",
-      "default": 1240
+      "default": 1440
     },
     {
       "type": "range",

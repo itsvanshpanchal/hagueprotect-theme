@@ -181,5 +181,24 @@
         "default": 12
       }
     ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Sets the maximum content width for section stacks across the site. Keeps layout consistent on laptops and large screens."
+      },
+      {
+        "type": "range",
+        "id": "site_max_width",
+        "label": "Site max width",
+        "min": 1200,
+        "max": 1920,
+        "step": 20,
+        "unit": "px",
+        "default": 1440
+      }
+    ]
   }
 ]
