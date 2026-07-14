@@ -602,12 +602,13 @@ main h3 > span[aria-hidden="true"] {
  * Wrap the label + heading in .section-heading-stack for pixel-consistent gaps.
  */
 .section-heading-stack {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   align-items: flex-start;
-  gap: var(--section-label-to-title-gap);
-  margin: 0;
-  padding: 0;
+  gap: var(--section-label-to-title-gap) !important;
+  row-gap: var(--section-label-to-title-gap) !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .section-heading-stack--center {
@@ -621,11 +622,15 @@ main h3 > span[aria-hidden="true"] {
 
 .section-heading-stack > * {
   margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* Only zero margins between stacked label + title; title may keep bottom spacing to body copy */
 .section-heading-stack > *:not(:last-child) {
   margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.2 !important;
 }
 
 @media screen and (max-width: 989px) {
@@ -668,7 +673,7 @@ main h3 > span[aria-hidden="true"] {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Inside a stack, gap owns the spacing — no extra margin */
+/* Inside a stack, gap owns the spacing — kill every competing margin */
 .section-heading-stack > .hero-fullscreen__eyebrow,
 .section-heading-stack > .fb__eyebrow,
 .section-heading-stack > .bs-coverflow__eyebrow,
@@ -682,8 +687,33 @@ main h3 > span[aria-hidden="true"] {
 .section-heading-stack > .promo-banner__eyebrow,
 .section-heading-stack > .brandsel__eyebrow,
 .section-heading-stack > .section-heading-stack__label,
-.section-heading-stack > [class*="ai-story-banner-subheading-"] {
+.section-heading-stack > [class*="ai-story-banner-subheading-"],
+body.template-index .section-heading-stack > .hero-fullscreen__eyebrow,
+body.template-index .section-heading-stack > .fb__eyebrow,
+body.template-index .section-heading-stack > .bs-coverflow__eyebrow,
+body.template-index .section-heading-stack > .trending-social__eyebrow,
+body.template-index .section-heading-stack > .mat-eyebrow,
+body.template-index .section-heading-stack > .fc-subtitle,
+body.template-index .section-heading-stack > .comm-eyebrow,
+body.template-index .section-heading-stack > .story-banner__eyebrow,
+body.template-index .section-heading-stack > .section-heading-stack__label,
+body.template-index .section-heading-stack > [class*="ai-story-banner-subheading-"] {
   margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  width: auto !important;
+  max-width: none !important;
+  line-height: 1.2 !important;
+}
+
+body.template-index .section-heading-stack--center > .fc-subtitle,
+body.template-index .section-heading-stack--center > .feature-grid__eyebrow,
+body.template-index .section-heading-stack--center > .brandsel__eyebrow {
+  text-align: center !important;
 }
 
 /* Hero & story paragraphs — not eyebrow style */
@@ -1099,16 +1129,22 @@ body.template-index {
 
   body.template-index .hero-fullscreen__eyebrow,
   body.template-index .hero-fullscreen__subheading,
-  body.template-index .fb__eyebrow,
   body.template-index .fb__subtitle,
-  body.template-index .bs-coverflow__eyebrow,
-  body.template-index .trending-social__eyebrow,
-  body.template-index .comm-eyebrow,
   body.template-index .comm-desc,
   body.template-index [class*="ai-story-banner-subheading-"] {
     text-align: center !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  /* Labels above titles stay left-aligned with their heading stack */
+  body.template-index .fb__eyebrow,
+  body.template-index .bs-coverflow__eyebrow,
+  body.template-index .trending-social__eyebrow,
+  body.template-index .comm-eyebrow {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   /* FOR EVERY MATERIAL — full section left-aligned */
