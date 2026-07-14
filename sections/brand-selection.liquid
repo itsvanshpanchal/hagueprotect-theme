@@ -54,7 +54,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color | default: '#b08d57' }};
-    margin: 0 0 14px;
+    margin: 0;
   }
 
   #shopify-section-{{ section.id }} .brandsel__heading {
@@ -245,11 +245,15 @@
 
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
       <div class="brandsel__head">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="brandsel__eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="brandsel__heading" id="brandsel-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+          <div class="section-heading-stack section-heading-stack--center">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="brandsel__eyebrow">{{ section.settings.eyebrow }}</p>
+            {%- endif -%}
+            {%- if section.settings.heading != blank -%}
+              <h2 class="brandsel__heading" id="brandsel-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+          </div>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <p class="brandsel__sub">{{ section.settings.subheading }}</p>

@@ -258,12 +258,14 @@
 <div class="featured-brands-{{ section.id }}">
   <!-- Section Header -->
   <div class="fb__header">
-    {%- if section.settings.eyebrow != blank -%}
-      <span class="fb__eyebrow">{{ section.settings.eyebrow }}</span>
-    {%- endif -%}
-    {%- if section.settings.heading != blank -%}
-      <h2 class="fb__title">{{ section.settings.heading }}</h2>
-    {%- endif -%}
+    <div class="section-heading-stack">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="fb__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="fb__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
     {%- if section.settings.subheading != blank -%}
       <p class="fb__subtitle">{{ section.settings.subheading }}</p>
     {%- endif -%}

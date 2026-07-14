@@ -45,7 +45,7 @@
 
   .fc-heading {
     color: var(--fc-text);
-    margin: 0 0 6px 0;
+    margin: 0;
   }
 
   .fc-subtitle {
@@ -429,11 +429,11 @@
 
 <section class="fc-section" aria-label="Shop by Function and Category">
   <div class="fc-container">
-    <div class="fc-header animate-fade-in">
-      <h2 class="fc-heading">{{ section.settings.heading | default: 'Shop by Function and Category' }}</h2>
+    <div class="fc-header animate-fade-in section-heading-stack section-heading-stack--center">
       {%- if section.settings.subtitle != blank -%}
         <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
+      <h2 class="fc-heading">{{ section.settings.heading | default: 'Shop by Function and Category' }}</h2>
     </div>
 
     <div class="fc-slider-wrapper">

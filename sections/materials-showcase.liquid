@@ -459,10 +459,12 @@
     <div class="mat-grid">
       <!-- LEFT COLUMN -->
       <div class="mat-left">
-        {%- if section.settings.eyebrow != blank -%}
-          <span class="mat-eyebrow">{{ section.settings.eyebrow }}</span>
-        {%- endif -%}
-        <h2 class="mat-headline">{{ section.settings.heading }}</h2>
+        <div class="section-heading-stack">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="mat-eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h2 class="mat-headline">{{ section.settings.heading }}</h2>
+        </div>
         {%- if section.settings.description != blank -%}
           <p class="mat-desc">{{ section.settings.description }}</p>
         {%- endif -%}

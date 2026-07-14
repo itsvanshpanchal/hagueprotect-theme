@@ -164,11 +164,15 @@
 
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank or section.settings.paragraph != blank -%}
       <div class="story-banner__content">
-        {%- if section.settings.eyebrow != blank -%}
-          <span class="story-banner__eyebrow">{{ section.settings.eyebrow }}</span>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="story-banner__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+          <div class="section-heading-stack">
+            {%- if section.settings.eyebrow != blank -%}
+              <span class="story-banner__eyebrow">{{ section.settings.eyebrow }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading != blank -%}
+              <h2 class="story-banner__heading">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+          </div>
         {%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <h3 class="story-banner__subheading">{{ section.settings.subheading }}</h3>

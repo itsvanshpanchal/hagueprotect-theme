@@ -139,8 +139,10 @@
     {%- endfor -%}
 
     <div class="promo-banner__content">
-      <p class="promo-banner__eyebrow">{{ eyebrow }}</p>
-      <h2 class="promo-banner__heading">{{ heading }}</h2>
+      <div class="section-heading-stack">
+        <p class="promo-banner__eyebrow">{{ eyebrow }}</p>
+        <h2 class="promo-banner__heading">{{ heading }}</h2>
+      </div>
       {%- if section.settings.button_text != blank -%}
         <a href="{{ section.settings.button_link | default: '#AddToCartForm' }}" class="promo-banner__cta">
           {{ section.settings.button_text }}

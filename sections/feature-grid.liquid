@@ -29,7 +29,7 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: #FF2B2B;
-    margin-bottom: 16px;
+    margin: 0;
     display: block;
   }
 
@@ -172,7 +172,7 @@
 <div class="feature-grid">
   <div class="feature-grid__container">
     {%- if section.settings.heading != blank -%}
-      <div class="feature-grid__header">
+      <div class="feature-grid__header section-heading-stack section-heading-stack--center">
         <span class="feature-grid__eyebrow">{{ section.settings.eyebrow | default: 'THE HAGUE EFFECT' }}</span>
         <h2 class="feature-grid__heading">{{ section.settings.heading }}</h2>
       </div>

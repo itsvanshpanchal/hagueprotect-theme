@@ -48,7 +48,7 @@
   .trending-social__heading-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
   }
 
   .trending-social__eyebrow {
@@ -301,7 +301,7 @@
 <section class="trending-social-section" aria-label="Trending on social media">
   <div class="container">
     <div class="trending-social-header animate-fade-in">
-      <div class="trending-social__heading-group">
+      <div class="trending-social__heading-group section-heading-stack">
         {%- if section.settings.eyebrow != blank -%}
           <span class="trending-social__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}

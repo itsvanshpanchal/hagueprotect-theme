@@ -707,12 +707,12 @@
 >
   <div class="bs-coverflow__container">
     <div class="bs-coverflow__header">
-      <div>
+      <div class="section-heading-stack">
         {%- if section.settings.eyebrow != blank -%}
           <span class="bs-coverflow__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
         <h2 class="bs-coverflow__heading">{{ section.settings.heading | default: 'Bestselling Sneaker Care' }}</h2>
-          </div>
+      </div>
       {%- if section.settings.view_all_link != blank -%}
         <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All' }}</a>
           {%- else -%}
