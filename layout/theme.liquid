@@ -171,11 +171,25 @@
       button {
         font-family: inherit;
       }
-      /* Section display headings only */
+      /* Hero / H1 display headings — use H1 typography vars */
       .hp-display-heading,
       main h1,
       .hero-fullscreen__heading,
       .d2c-product-title,
+      .skincare-hero__title,
+      .corp-hero__title,
+      .how-to-banner__title,
+      .brand-banner__title {
+        font-family: var(--font-family-heading) !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.03em !important;
+        line-height: 1.05 !important;
+        text-transform: uppercase !important;
+        font-size: var(--heading-size-xl) !important;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Section titles (H2) — use H2 typography vars so section overrides apply */
       .trending-social__heading,
       .bestsellers__heading-dtc,
       .bs-coverflow__heading,
@@ -189,26 +203,22 @@
       .reviews-sec__heading,
       .product-rec__heading,
       .comm-headline,
-      .brand-banner__title,
       .social-slider__heading,
       .hp-dna__heading,
       .promo-banner__heading,
       .corp-features__heading,
       .how-to-videos__heading,
       .bundle-title,
-      .skincare-hero__title,
       .skincare-intro__title,
       .skincare-explanation__title,
       .skincare-concerns__title,
-      .skincare-builder__title,
-      .corp-hero__title,
-      .how-to-banner__title {
-        font-family: var(--font-family-heading) !important;
+      .skincare-builder__title {
+        font-family: var(--font-family-h2, var(--font-family-heading)) !important;
         font-weight: 400 !important;
         letter-spacing: 0.03em !important;
         line-height: 1.05 !important;
         text-transform: uppercase !important;
-        font-size: var(--heading-size-xl) !important;
+        font-size: var(--section-heading-size) !important;
         -webkit-font-smoothing: antialiased;
       }
 

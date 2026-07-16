@@ -1,67 +1,29 @@
+{%- comment -%}
+  Per-section typography CSS variables.
+  Always uses THIS section's font settings so Theme Editor changes apply only here.
+  Falls back to Theme settings > Typography when a section value is blank.
+{%- endcomment -%}
 {%- liquid
-  assign use_override = section.settings.typography_override
-
-  assign h1_family = settings.font_h1_family | default: 'bebas_neue'
-  assign h2_family = settings.font_h2_family | default: 'bebas_neue'
-  assign paragraph_family = settings.font_paragraph_family | default: 'inter'
-  assign eyebrow_family = settings.font_eyebrow_family | default: 'inter'
+  assign h1_family = section.settings.h1_font_family | default: settings.font_h1_family | default: 'bebas_neue'
+  assign h2_family = section.settings.h2_font_family | default: settings.font_h2_family | default: 'bebas_neue'
+  assign paragraph_family = section.settings.paragraph_font_family | default: settings.font_paragraph_family | default: 'inter'
+  assign eyebrow_family = section.settings.eyebrow_font_family | default: settings.font_eyebrow_family | default: 'inter'
 
   assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
   assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44
-  assign h1_desktop = settings.font_h1_size_desktop | default: 64
-  assign h1_mobile = settings.font_h1_size_mobile | default: 40
-  assign h2_desktop = settings.font_h2_size_desktop | default: 52
-  assign h2_mobile = settings.font_h2_size_mobile | default: 34
-  assign paragraph_desktop = settings.font_paragraph_size_desktop | default: 16
-  assign paragraph_mobile = settings.font_paragraph_size_mobile | default: 15
-  assign eyebrow_desktop = settings.font_eyebrow_size_desktop | default: 12
-  assign eyebrow_mobile = settings.font_eyebrow_size_mobile | default: 12
-
-  if use_override
-    if section.settings.h1_font_family != blank
-      assign h1_family = section.settings.h1_font_family
-    endif
-    if section.settings.h2_font_family != blank
-      assign h2_family = section.settings.h2_font_family
-    endif
-    if section.settings.paragraph_font_family != blank
-      assign paragraph_family = section.settings.paragraph_font_family
-    endif
-    if section.settings.eyebrow_font_family != blank
-      assign eyebrow_family = section.settings.eyebrow_font_family
-    endif
-    if section.settings.h1_font_size_desktop != blank
-      assign h1_desktop = section.settings.h1_font_size_desktop
-    endif
-    if section.settings.h1_font_size_mobile != blank
-      assign h1_mobile = section.settings.h1_font_size_mobile
-    endif
-    if section.settings.h2_font_size_desktop != blank
-      assign h2_desktop = section.settings.h2_font_size_desktop
-    endif
-    if section.settings.h2_font_size_mobile != blank
-      assign h2_mobile = section.settings.h2_font_size_mobile
-    endif
-    if section.settings.paragraph_font_size_desktop != blank
-      assign paragraph_desktop = section.settings.paragraph_font_size_desktop
-    endif
-    if section.settings.paragraph_font_size_mobile != blank
-      assign paragraph_mobile = section.settings.paragraph_font_size_mobile
-    endif
-    if section.settings.eyebrow_font_size_desktop != blank
-      assign eyebrow_desktop = section.settings.eyebrow_font_size_desktop
-    endif
-    if section.settings.eyebrow_font_size_mobile != blank
-      assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile
-    endif
-  endif
+  assign h1_desktop = section.settings.h1_font_size_desktop | default: settings.font_h1_size_desktop | default: 64
+  assign h1_mobile = section.settings.h1_font_size_mobile | default: settings.font_h1_size_mobile | default: 40
+  assign h2_desktop = section.settings.h2_font_size_desktop | default: settings.font_h2_size_desktop | default: 52
+  assign h2_mobile = section.settings.h2_font_size_mobile | default: settings.font_h2_size_mobile | default: 34
+  assign paragraph_desktop = section.settings.paragraph_font_size_desktop | default: settings.font_paragraph_size_desktop | default: 16
+  assign paragraph_mobile = section.settings.paragraph_font_size_mobile | default: settings.font_paragraph_size_mobile | default: 15
+  assign eyebrow_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 12
+  assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 12
 
   case section.type
     when 'hero', 'corporate-gifting-hero', 'business-hero', 'premium-scrolling-hero'
-      if use_override
-        assign hero_h1_desktop = h1_desktop
-        assign hero_h1_mobile = h1_mobile
-      endif
+      assign hero_h1_desktop = h1_desktop
+      assign hero_h1_mobile = h1_mobile
   endcase
 -%}
 #shopify-section-{{ section.id }} {

@@ -1,39 +1,67 @@
-/* Per-section typography — CSS variables set on #shopify-section-{id} */
-.shopify-section h1,
-.shopify-section .hero-fullscreen__heading,
-.shopify-section .corp-hero__title,
-.shopify-section .biz-hero__title,
-.shopify-section .story-banner__heading {
+/* Per-section typography — CSS variables set on #shopify-section-{id} by section-typography-vars.
+   Prefer these rules over hardcoded Inter/Bebas in section files. */
+
+/* H1 / hero headlines */
+#MainContent .shopify-section h1,
+#MainContent .shopify-section .hero-fullscreen__heading,
+#MainContent .shopify-section .corp-hero__title,
+#MainContent .shopify-section .biz-hero__title,
+#MainContent .shopify-section .story-banner__heading {
   font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
 }
 
-.shopify-section h2,
-.shopify-section .fb__title,
-.shopify-section .fc-heading,
-.shopify-section .mat-headline,
-.shopify-section .bs-coverflow__heading,
-.shopify-section .trending-social__heading,
-.shopify-section .comm-headline,
-.shopify-section .story-banner__subheading {
+/* H2 / section titles */
+#MainContent .shopify-section h2,
+#MainContent .shopify-section .fb__title,
+#MainContent .shopify-section .fc-heading,
+#MainContent .shopify-section .mat-headline,
+#MainContent .shopify-section .bs-coverflow__heading,
+#MainContent .shopify-section .trending-social__heading,
+#MainContent .shopify-section .comm-headline,
+#MainContent .shopify-section .comm-headline-number,
+#MainContent .shopify-section .comm-headline-logo,
+#MainContent .shopify-section .story-banner__subheading,
+#MainContent .shopify-section .feature-grid__heading,
+#MainContent .shopify-section .hp-dna__heading,
+#MainContent .shopify-section .hp-fam-sec__heading,
+#MainContent .shopify-section .product-rec__heading,
+#MainContent .shopify-section .trust-statement__heading,
+#MainContent .shopify-section .reviews-sec__heading,
+#MainContent .shopify-section .social-slider__heading,
+#MainContent .shopify-section .promo-banner__heading,
+#MainContent .shopify-section .brand-banner__title {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-size: var(--section-heading-size) !important;
 }
 
-.shopify-section h3,
-.shopify-section h4,
-.shopify-section h5,
-.shopify-section h6 {
+#MainContent .shopify-section h3,
+#MainContent .shopify-section h4,
+#MainContent .shopify-section h5,
+#MainContent .shopify-section h6 {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
 }
 
-.shopify-section .hero-fullscreen__subheading,
-.shopify-section .corp-hero__sub,
-.shopify-section .fb__subtitle,
-.shopify-section .mat-desc,
-.shopify-section .story-banner__paragraph,
-.shopify-section .comm-desc {
+/* Paragraph / body / descriptions */
+#MainContent .shopify-section .hero-fullscreen__subheading,
+#MainContent .shopify-section .corp-hero__sub,
+#MainContent .shopify-section .fb__subtitle,
+#MainContent .shopify-section .mat-desc,
+#MainContent .shopify-section .story-banner__paragraph,
+#MainContent .shopify-section .comm-desc,
+#MainContent .shopify-section .bs-coverflow-card__title,
+#MainContent .shopify-section .bs-coverflow-card__type,
+#MainContent .shopify-section .fc-category-name,
+#MainContent .shopify-section .fc-product-count {
   font-family: var(--font-family-sans) !important;
+}
+
+#MainContent .shopify-section .hero-fullscreen__subheading,
+#MainContent .shopify-section .corp-hero__sub,
+#MainContent .shopify-section .fb__subtitle,
+#MainContent .shopify-section .mat-desc,
+#MainContent .shopify-section .story-banner__paragraph,
+#MainContent .shopify-section .comm-desc {
   font-size: var(--section-subheading-size, var(--body-font-size)) !important;
   text-transform: none !important;
   letter-spacing: normal !important;
@@ -41,28 +69,33 @@
   line-height: 1.55 !important;
 }
 
-.shopify-section .hero-fullscreen__eyebrow,
-.shopify-section .fb__eyebrow,
-.shopify-section .bs-coverflow__eyebrow,
-.shopify-section .trending-social__eyebrow,
-.shopify-section .mat-eyebrow,
-.shopify-section .fc-subtitle,
-.shopify-section .comm-eyebrow,
-.shopify-section .corp-hero__eyebrow,
-.shopify-section .story-banner__eyebrow {
+/* Eyebrow / small labels */
+#MainContent .shopify-section .hero-fullscreen__eyebrow,
+#MainContent .shopify-section .fb__eyebrow,
+#MainContent .shopify-section .bs-coverflow__eyebrow,
+#MainContent .shopify-section .trending-social__eyebrow,
+#MainContent .shopify-section .mat-eyebrow,
+#MainContent .shopify-section .fc-subtitle,
+#MainContent .shopify-section .comm-eyebrow,
+#MainContent .shopify-section .corp-hero__eyebrow,
+#MainContent .shopify-section .story-banner__eyebrow,
+#MainContent .shopify-section .feature-grid__eyebrow {
   font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
   font-size: var(--section-label-size) !important;
 }
 
 @media screen and (max-width: 767px) {
-  .shopify-section h2,
-  .shopify-section .fb__title,
-  .shopify-section .fc-heading,
-  .shopify-section .mat-headline,
-  .shopify-section .bs-coverflow__heading,
-  .shopify-section .trending-social__heading,
-  .shopify-section .comm-headline,
-  .shopify-section .story-banner__subheading {
+  #MainContent .shopify-section h2,
+  #MainContent .shopify-section .fb__title,
+  #MainContent .shopify-section .fc-heading,
+  #MainContent .shopify-section .mat-headline,
+  #MainContent .shopify-section .bs-coverflow__heading,
+  #MainContent .shopify-section .trending-social__heading,
+  #MainContent .shopify-section .comm-headline,
+  #MainContent .shopify-section .story-banner__subheading,
+  #MainContent .shopify-section .feature-grid__heading,
+  #MainContent .shopify-section .hp-dna__heading,
+  #MainContent .shopify-section .hp-fam-sec__heading {
     font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
   }
 }

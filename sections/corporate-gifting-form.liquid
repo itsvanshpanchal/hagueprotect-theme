@@ -401,55 +401,171 @@
 {
   "name": "Corporate Form",
   "enabled_on": {
-    "templates": ["search.corporate-gifting", "page.corporate", "page.contact-us"]
+    "templates": [
+      "search.corporate-gifting",
+      "page.corporate",
+      "page.contact-us"
+    ]
   },
   "settings": [
     {
       "type": "header",
       "content": "Side panel"
     },
-    { "type": "image_picker", "id": "side_image", "label": "Side panel background image" },
-    { "type": "text", "id": "eyebrow", "label": "Side panel eyebrow", "default": "Let's Talk" },
-    { "type": "text", "id": "side_title", "label": "Side panel title", "default": "Your Gift Story Starts Here" },
-    { "type": "textarea", "id": "side_text", "label": "Side panel text", "default": "Share your requirements and our gifting specialists will craft a custom proposal within 48 hours." },
-    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
-    { "type": "text", "id": "email", "label": "Email address", "default": "gifting@nuuk.in" },
-    { "type": "text", "id": "whatsapp_label", "label": "WhatsApp label", "default": "WhatsApp" },
-    { "type": "text", "id": "whatsapp", "label": "WhatsApp number (no +)", "default": "917009205008" },
-    { "type": "text", "id": "phone_display", "label": "Phone display", "default": "7009205008" },
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Side panel background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Side panel eyebrow",
+      "default": "Let's Talk"
+    },
+    {
+      "type": "text",
+      "id": "side_title",
+      "label": "Side panel title",
+      "default": "Your Gift Story Starts Here"
+    },
+    {
+      "type": "textarea",
+      "id": "side_text",
+      "label": "Side panel text",
+      "default": "Share your requirements and our gifting specialists will craft a custom proposal within 48 hours."
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "gifting@nuuk.in"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp label",
+      "default": "WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number (no +)",
+      "default": "917009205008"
+    },
+    {
+      "type": "text",
+      "id": "phone_display",
+      "label": "Phone display",
+      "default": "7009205008"
+    },
     {
       "type": "header",
       "content": "Form"
     },
-    { "type": "text", "id": "form_title", "label": "Form title", "default": "Request a Quote" },
-    { "type": "text", "id": "form_subtitle", "label": "Form subtitle", "default": "Fill in the details below and we'll be in touch shortly." },
-    { "type": "text", "id": "label_name", "label": "Name label", "default": "Name" },
-    { "type": "text", "id": "placeholder_name", "label": "Name placeholder", "default": "Your name" },
-    { "type": "text", "id": "label_company", "label": "Company label", "default": "Company" },
-    { "type": "text", "id": "placeholder_company", "label": "Company placeholder", "default": "Company name" },
-    { "type": "text", "id": "label_email", "label": "Email label", "default": "Work Email" },
-    { "type": "text", "id": "placeholder_email", "label": "Email placeholder", "default": "you@company.com" },
-    { "type": "text", "id": "label_phone", "label": "Phone label", "default": "Phone" },
-    { "type": "text", "id": "phone_prefix", "label": "Phone prefix", "default": "Ã°Å¸â€¡Â®Ã°Å¸â€¡Â³ +91" },
-    { "type": "text", "id": "placeholder_phone", "label": "Phone placeholder", "default": "Phone number" },
-    { "type": "text", "id": "label_message", "label": "Message label", "default": "Tell us about your order" },
-    { "type": "text", "id": "placeholder_message", "label": "Message placeholder", "default": "Quantity, budget, branding needs, delivery timeline..." },
-    { "type": "text", "id": "submit_label", "label": "Submit button", "default": "Send Inquiry" },
-    { "type": "textarea", "id": "success_message", "label": "Success message", "default": "Thanks for reaching out! Our gifting team will get back to you within 48 hours." }
-,
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Form subtitle",
+      "default": "Fill in the details below and we'll be in touch shortly."
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_name",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "label_company",
+      "label": "Company label",
+      "default": "Company"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_company",
+      "label": "Company placeholder",
+      "default": "Company name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Email label",
+      "default": "Work Email"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_email",
+      "label": "Email placeholder",
+      "default": "you@company.com"
+    },
+    {
+      "type": "text",
+      "id": "label_phone",
+      "label": "Phone label",
+      "default": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "phone_prefix",
+      "label": "Phone prefix",
+      "default": "Ã°Å¸â€¡Â®Ã°Å¸â€¡Â³ +91"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_phone",
+      "label": "Phone placeholder",
+      "default": "Phone number"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "Message label",
+      "default": "Tell us about your order"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_message",
+      "label": "Message placeholder",
+      "default": "Quantity, budget, branding needs, delivery timeline..."
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "Send Inquiry"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out! Our gifting team will get back to you within 48 hours."
+    },
     {
       "type": "header",
       "content": "Typography"
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings > Typography."
-    },
-    {
-      "type": "checkbox",
-      "id": "typography_override",
-      "label": "Override theme typography for this section",
-      "default": false
+      "content": "Fonts and sizes for THIS section only. Changing them here will not affect other sections. Theme settings > Typography sets defaults for new sections."
     },
     {
       "type": "header",
@@ -461,18 +577,54 @@
       "label": "H1 font family",
       "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -508,18 +660,54 @@
       "label": "H2 font family",
       "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -555,17 +743,50 @@
       "label": "Paragraph font family",
       "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -601,17 +822,50 @@
       "label": "Eyebrow / label font family",
       "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -637,8 +891,11 @@
       "unit": "px",
       "default": 12
     }
-
   ],
-  "presets": [{ "name": "Corporate Form" }]
+  "presets": [
+    {
+      "name": "Corporate Form"
+    }
+  ]
 }
 {% endschema %}

@@ -149,7 +149,10 @@
   "name": "Corporate Marquee",
   "max_blocks": 30,
   "enabled_on": {
-    "templates": ["search.corporate-gifting", "page.corporate"]
+    "templates": [
+      "search.corporate-gifting",
+      "page.corporate"
+    ]
   },
   "settings": [
     {
@@ -157,21 +160,14 @@
       "id": "label",
       "label": "Label above marquee",
       "default": "Trusted for employee onboarding, client appreciation, festival hampers & more"
-    }
-,
+    },
     {
       "type": "header",
       "content": "Typography"
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings > Typography."
-    },
-    {
-      "type": "checkbox",
-      "id": "typography_override",
-      "label": "Override theme typography for this section",
-      "default": false
+      "content": "Fonts and sizes for THIS section only. Changing them here will not affect other sections. Theme settings > Typography sets defaults for new sections."
     },
     {
       "type": "header",
@@ -183,18 +179,54 @@
       "label": "H1 font family",
       "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -230,18 +262,54 @@
       "label": "H2 font family",
       "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -277,17 +345,50 @@
       "label": "Paragraph font family",
       "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -323,17 +424,50 @@
       "label": "Eyebrow / label font family",
       "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -359,7 +493,6 @@
       "unit": "px",
       "default": 12
     }
-
   ],
   "blocks": [
     {
@@ -377,8 +510,14 @@
           "id": "row",
           "label": "Row",
           "options": [
-            { "value": "top", "label": "Top row (scrolls left)" },
-            { "value": "bottom", "label": "Bottom row (scrolls right)" }
+            {
+              "value": "top",
+              "label": "Top row (scrolls left)"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom row (scrolls right)"
+            }
           ],
           "default": "top"
         },
@@ -395,26 +534,148 @@
     {
       "name": "Corporate Marquee",
       "blocks": [
-        { "type": "marquee_text", "settings": { "text": "Employee Welcome Kits", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Client Appreciation", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Festival Hampers", "row": "top", "accent": true } },
-        { "type": "marquee_text", "settings": { "text": "Conference Swag", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "CEO Gifts", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Team Milestones", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Retail Partners", "row": "top", "accent": true } },
-        { "type": "marquee_text", "settings": { "text": "Influencer PR", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Anniversary Boxes", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Onboarding Packs", "row": "top" } },
-        { "type": "marquee_text", "settings": { "text": "Co-Branded Packaging", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Bulk Pricing", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Dedicated Manager", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Custom Inserts", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Logo Embossing", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Gift Wrapping", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Pan-India Delivery", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Invoice & GST", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Sample Kits", "row": "bottom" } },
-        { "type": "marquee_text", "settings": { "text": "Volume Discounts", "row": "bottom" } }
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Employee Welcome Kits",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Client Appreciation",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Festival Hampers",
+            "row": "top",
+            "accent": true
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Conference Swag",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "CEO Gifts",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Team Milestones",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Retail Partners",
+            "row": "top",
+            "accent": true
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Influencer PR",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Anniversary Boxes",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Onboarding Packs",
+            "row": "top"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Co-Branded Packaging",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Bulk Pricing",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Dedicated Manager",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Custom Inserts",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Logo Embossing",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Gift Wrapping",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Pan-India Delivery",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Invoice & GST",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Sample Kits",
+            "row": "bottom"
+          }
+        },
+        {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Volume Discounts",
+            "row": "bottom"
+          }
+        }
       ]
     }
   ]

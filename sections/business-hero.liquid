@@ -460,38 +460,107 @@
   "name": "Business Hero",
   "max_blocks": 3,
   "enabled_on": {
-    "templates": ["search.business", "page.contact", "page.contact-us"]
+    "templates": [
+      "search.business",
+      "page.contact",
+      "page.contact-us"
+    ]
   },
   "settings": [
-    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "B2B Partnership Hub" },
-    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Grow Your" },
-    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (accent)", "default": "Business" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support Ã¢â‚¬â€ built to scale with you." },
-    { "type": "text", "id": "btn_label", "label": "Primary button", "default": "Become a Partner" },
-    { "type": "url", "id": "btn_link", "label": "Primary button link" },
-    { "type": "text", "id": "btn2_label", "label": "Secondary button", "default": "Explore Solutions" },
-    { "type": "url", "id": "btn2_link", "label": "Secondary button link" },
-    { "type": "text", "id": "stat1_num", "label": "Stat 1 number", "default": "1200" },
-    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Retail Partners" },
-    { "type": "text", "id": "stat2_num", "label": "Stat 2 number", "default": "40" },
-    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Cities Served" },
-    { "type": "text", "id": "stat3_num", "label": "Stat 3 number", "default": "99" },
-    { "type": "text", "id": "stat3_label", "label": "Stat 3 label", "default": "Fill Rate" }
-,
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "B2B Partnership Hub"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Grow Your"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2 (accent)",
+      "default": "Business"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Join 1,200+ retailers, distributors, and e-commerce brands powering premium sneaker care. Wholesale supply, white-label programs, and dedicated account support Ã¢â‚¬â€ built to scale with you."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Primary button",
+      "default": "Become a Partner"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Secondary button",
+      "default": "Explore Solutions"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "stat1_num",
+      "label": "Stat 1 number",
+      "default": "1200"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Stat 1 label",
+      "default": "Retail Partners"
+    },
+    {
+      "type": "text",
+      "id": "stat2_num",
+      "label": "Stat 2 number",
+      "default": "40"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Stat 2 label",
+      "default": "Cities Served"
+    },
+    {
+      "type": "text",
+      "id": "stat3_num",
+      "label": "Stat 3 number",
+      "default": "99"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "Stat 3 label",
+      "default": "Fill Rate"
+    },
     {
       "type": "header",
       "content": "Typography"
     },
     {
       "type": "paragraph",
-      "content": "Font and size for this section. Global defaults: Theme settings > Typography."
-    },
-    {
-      "type": "checkbox",
-      "id": "typography_override",
-      "label": "Override theme typography for this section",
-      "default": false
+      "content": "Fonts and sizes for THIS section only. Changing them here will not affect other sections. Theme settings > Typography sets defaults for new sections."
     },
     {
       "type": "header",
@@ -503,18 +572,54 @@
       "label": "H1 font family",
       "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -550,18 +655,54 @@
       "label": "H2 font family",
       "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
       "options": [
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        },
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        }
       ],
       "default": "bebas_neue"
     },
@@ -597,17 +738,50 @@
       "label": "Paragraph font family",
       "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -643,17 +817,50 @@
       "label": "Eyebrow / label font family",
       "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
       "options": [
-        { "value": "inter", "label": "Inter" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "bahnschrift", "label": "Bahnschrift" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "inter_18pt", "label": "Inter 18pt" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald" }
+        {
+          "value": "inter",
+          "label": "Inter"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald"
+        }
       ],
       "default": "inter"
     },
@@ -679,19 +886,36 @@
       "unit": "px",
       "default": 12
     }
-
   ],
   "blocks": [
     {
       "type": "floating_card",
       "name": "Floating card",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Card image (optional)" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Wholesale Supply" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Bulk pricing with flexible MOQs." }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Wholesale Supply"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Bulk pricing with flexible MOQs."
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Business Hero" }]
+  "presets": [
+    {
+      "name": "Business Hero"
+    }
+  ]
 }
 {% endschema %}

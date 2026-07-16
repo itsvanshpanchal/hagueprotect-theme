@@ -5,13 +5,7 @@
     },
     {
       "type": "paragraph",
-      "content": "By default this section uses Theme settings > Typography. Enable override below to customize this section only."
-    },
-    {
-      "type": "checkbox",
-      "id": "typography_override",
-      "label": "Override theme typography for this section",
-      "default": false
+      "content": "Fonts and sizes for THIS section only. Changing them here will not affect other sections. Theme settings > Typography sets defaults for new sections."
     },
     {
       "type": "select",
@@ -114,7 +108,7 @@
     {
       "type": "select",
       "id": "eyebrow_font_family",
-      "label": "Eyebrow / label font family",
+      "label": "Eyebrow font family",
       "options": [
         { "value": "inter", "label": "Inter" },
         { "value": "montserrat", "label": "Montserrat" },
