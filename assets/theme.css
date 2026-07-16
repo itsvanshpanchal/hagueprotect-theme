@@ -30,7 +30,7 @@
   --section-subheading-color: #565656;
   --section-subheading-max-width: 600px;
   --section-subheading-spacing-top: 12px;
-  --section-label-weight: 700;
+  --section-label-weight: var(--font-weight-eyebrow, 700);
   --section-label-line-height: 1.5;
   --section-label-color: #e74c3c;
   --section-label-letter-spacing: 0.14em;
@@ -555,7 +555,8 @@ main h3 > span[aria-hidden="true"] {
 .fc-heading {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-size: var(--section-heading-size) !important;
-  font-weight: 400 !important;
+  font-weight: var(--font-weight-h2, 400) !important;
+  font-style: var(--font-style-h2, normal) !important;
   letter-spacing: 0.03em !important;
   line-height: 1.05 !important;
   text-transform: uppercase !important;
@@ -653,7 +654,8 @@ main h3 > span[aria-hidden="true"] {
 [class*="ai-story-banner-subheading-"] {
   font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
   font-size: var(--section-label-size) !important;
-  font-weight: var(--section-label-weight) !important;
+  font-weight: var(--font-weight-eyebrow, var(--section-label-weight)) !important;
+  font-style: var(--font-style-eyebrow, normal) !important;
   line-height: var(--section-label-line-height) !important;
   letter-spacing: var(--section-label-letter-spacing) !important;
   color: var(--section-label-color) !important;

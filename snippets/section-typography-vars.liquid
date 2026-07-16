@@ -9,6 +9,16 @@
   assign paragraph_family = section.settings.paragraph_font_family | default: settings.font_paragraph_family | default: 'inter'
   assign eyebrow_family = section.settings.eyebrow_font_family | default: settings.font_eyebrow_family | default: 'inter'
 
+  assign h1_weight = section.settings.h1_font_weight | default: settings.font_h1_weight | default: '400'
+  assign h2_weight = section.settings.h2_font_weight | default: settings.font_h2_weight | default: '400'
+  assign paragraph_weight = section.settings.paragraph_font_weight | default: settings.font_paragraph_weight | default: '400'
+  assign eyebrow_weight = section.settings.eyebrow_font_weight | default: settings.font_eyebrow_weight | default: '700'
+
+  assign h1_style = section.settings.h1_font_style | default: settings.font_h1_style | default: 'normal'
+  assign h2_style = section.settings.h2_font_style | default: settings.font_h2_style | default: 'normal'
+  assign paragraph_style = section.settings.paragraph_font_style | default: settings.font_paragraph_style | default: 'normal'
+  assign eyebrow_style = section.settings.eyebrow_font_style | default: settings.font_eyebrow_style | default: 'normal'
+
   assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
   assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44
   assign h1_desktop = section.settings.h1_font_size_desktop | default: settings.font_h1_size_desktop | default: 64
@@ -32,6 +42,14 @@
   --font-family-subheading: {% render 'hp-font-stack', font_key: h2_family %};
   --font-family-sans: {% render 'hp-font-stack', font_key: paragraph_family %};
   --font-family-eyebrow: {% render 'hp-font-stack', font_key: eyebrow_family %};
+  --font-weight-heading: {{ h1_weight }};
+  --font-weight-h2: {{ h2_weight }};
+  --font-weight-sans: {{ paragraph_weight }};
+  --font-weight-eyebrow: {{ eyebrow_weight }};
+  --font-style-heading: {{ h1_style }};
+  --font-style-h2: {{ h2_style }};
+  --font-style-sans: {{ paragraph_style }};
+  --font-style-eyebrow: {{ eyebrow_style }};
   --heading-size-hero: clamp({{ hero_h1_mobile }}px, 8vw, {{ hero_h1_desktop }}px);
   --heading-size-xl: clamp({{ h1_mobile }}px, 5.5vw, {{ h1_desktop }}px);
   --section-heading-size: clamp({{ h2_mobile }}px, 5.5vw, {{ h2_desktop }}px);

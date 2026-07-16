@@ -12,7 +12,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Global font defaults for the entire site. To customize a single section, open that section's Typography panel and enable \"Override theme typography for this section\"."
+        "content": "Global font defaults for the entire site. Open any section's Typography panel to change fonts/weights for that section only."
       },
       {
         "type": "header",
@@ -24,27 +24,117 @@
         "label": "H1 font family",
         "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
         "options": [
-          { "value": "bebas_neue", "label": "Bebas Neue" },
-          { "value": "anton", "label": "Anton" },
-          { "value": "oswald", "label": "Oswald" },
-          { "value": "inter", "label": "Inter" },
-          { "value": "montserrat", "label": "Montserrat" },
-          { "value": "bahnschrift", "label": "Bahnschrift" },
-          { "value": "calisto_mt", "label": "Calisto MT" },
-          { "value": "jacques_gilles", "label": "Jacques Gilles" },
-          { "value": "inter_18pt", "label": "Inter 18pt" },
-          { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-          { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-          { "value": "freight_text_pro", "label": "FreightText Pro" }
+          {
+            "value": "bebas_neue",
+            "label": "Bebas Neue"
+          },
+          {
+            "value": "anton",
+            "label": "Anton"
+          },
+          {
+            "value": "oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "inter",
+            "label": "Inter"
+          },
+          {
+            "value": "montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro"
+          }
         ],
         "default": "bebas_neue"
+      },
+      {
+        "type": "select",
+        "id": "font_h1_weight",
+        "label": "H1 font weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semibold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold (800)"
+          },
+          {
+            "value": "900",
+            "label": "Black (900)"
+          }
+        ],
+        "default": "400",
+        "info": "Light / Regular / Medium / Semibold / Bold / Extra Bold / Black for hero & main headings."
+      },
+      {
+        "type": "select",
+        "id": "font_h1_style",
+        "label": "H1 font style",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "italic",
+            "label": "Italic"
+          }
+        ],
+        "default": "normal",
+        "info": "Italic works best with Calisto MT."
       },
       {
         "type": "range",
         "id": "font_hero_h1_size_desktop",
         "label": "Hero H1 size (desktop)",
-      "info": "Text size for the homepage hero headline on desktop, e.g. DIRTY KICKS?",
-      "min": 32,
+        "info": "Text size for the homepage hero headline on desktop, e.g. DIRTY KICKS?",
+        "min": 32,
         "max": 120,
         "step": 2,
         "unit": "px",
@@ -54,8 +144,8 @@
         "type": "range",
         "id": "font_hero_h1_size_mobile",
         "label": "Hero H1 size (mobile)",
-      "info": "Text size for the homepage hero headline on mobile.",
-      "min": 24,
+        "info": "Text size for the homepage hero headline on mobile.",
+        "min": 24,
         "max": 80,
         "step": 2,
         "unit": "px",
@@ -65,8 +155,8 @@
         "type": "range",
         "id": "font_h1_size_desktop",
         "label": "H1 size (desktop)",
-      "info": "Text size for the largest main headings on desktop.",
-      "min": 28,
+        "info": "Text size for the largest main headings on desktop.",
+        "min": 28,
         "max": 96,
         "step": 2,
         "unit": "px",
@@ -76,8 +166,8 @@
         "type": "range",
         "id": "font_h1_size_mobile",
         "label": "H1 size (mobile)",
-      "info": "Text size for the largest main headings on mobile.",
-      "min": 20,
+        "info": "Text size for the largest main headings on mobile.",
+        "min": 20,
         "max": 64,
         "step": 2,
         "unit": "px",
@@ -93,27 +183,116 @@
         "label": "H2 font family",
         "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
         "options": [
-          { "value": "bebas_neue", "label": "Bebas Neue" },
-          { "value": "anton", "label": "Anton" },
-          { "value": "oswald", "label": "Oswald" },
-          { "value": "inter", "label": "Inter" },
-          { "value": "montserrat", "label": "Montserrat" },
-          { "value": "bahnschrift", "label": "Bahnschrift" },
-          { "value": "calisto_mt", "label": "Calisto MT" },
-          { "value": "jacques_gilles", "label": "Jacques Gilles" },
-          { "value": "inter_18pt", "label": "Inter 18pt" },
-          { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-          { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-          { "value": "freight_text_pro", "label": "FreightText Pro" }
+          {
+            "value": "bebas_neue",
+            "label": "Bebas Neue"
+          },
+          {
+            "value": "anton",
+            "label": "Anton"
+          },
+          {
+            "value": "oswald",
+            "label": "Oswald"
+          },
+          {
+            "value": "inter",
+            "label": "Inter"
+          },
+          {
+            "value": "montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro"
+          }
         ],
         "default": "bebas_neue"
+      },
+      {
+        "type": "select",
+        "id": "font_h2_weight",
+        "label": "H2 font weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semibold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold (800)"
+          },
+          {
+            "value": "900",
+            "label": "Black (900)"
+          }
+        ],
+        "default": "400",
+        "info": "Light / Regular / Medium / Semibold / Bold / Extra Bold / Black for section titles."
+      },
+      {
+        "type": "select",
+        "id": "font_h2_style",
+        "label": "H2 font style",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "italic",
+            "label": "Italic"
+          }
+        ],
+        "default": "normal"
       },
       {
         "type": "range",
         "id": "font_h2_size_desktop",
         "label": "H2 size (desktop)",
-      "info": "Text size for large section titles on desktop, e.g. Bestselling Sneaker Care.",
-      "min": 20,
+        "info": "Text size for large section titles on desktop, e.g. Bestselling Sneaker Care.",
+        "min": 20,
         "max": 96,
         "step": 2,
         "unit": "px",
@@ -123,8 +302,8 @@
         "type": "range",
         "id": "font_h2_size_mobile",
         "label": "H2 size (mobile)",
-      "info": "Text size for large section titles on mobile.",
-      "min": 16,
+        "info": "Text size for large section titles on mobile.",
+        "min": 16,
         "max": 64,
         "step": 2,
         "unit": "px",
@@ -140,26 +319,112 @@
         "label": "Paragraph font family",
         "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
         "options": [
-          { "value": "inter", "label": "Inter" },
-          { "value": "montserrat", "label": "Montserrat" },
-          { "value": "bahnschrift", "label": "Bahnschrift" },
-          { "value": "calisto_mt", "label": "Calisto MT" },
-          { "value": "jacques_gilles", "label": "Jacques Gilles" },
-          { "value": "inter_18pt", "label": "Inter 18pt" },
-          { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-          { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-          { "value": "freight_text_pro", "label": "FreightText Pro" },
-          { "value": "bebas_neue", "label": "Bebas Neue" },
-          { "value": "oswald", "label": "Oswald" }
+          {
+            "value": "inter",
+            "label": "Inter"
+          },
+          {
+            "value": "montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro"
+          },
+          {
+            "value": "bebas_neue",
+            "label": "Bebas Neue"
+          },
+          {
+            "value": "oswald",
+            "label": "Oswald"
+          }
         ],
         "default": "inter"
+      },
+      {
+        "type": "select",
+        "id": "font_paragraph_weight",
+        "label": "Paragraph font weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semibold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold (800)"
+          },
+          {
+            "value": "900",
+            "label": "Black (900)"
+          }
+        ],
+        "default": "400",
+        "info": "Light / Regular / Medium / Semibold / Bold / Extra Bold / Black for body text."
+      },
+      {
+        "type": "select",
+        "id": "font_paragraph_style",
+        "label": "Paragraph font style",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "italic",
+            "label": "Italic"
+          }
+        ],
+        "default": "normal"
       },
       {
         "type": "range",
         "id": "font_paragraph_size_desktop",
         "label": "Paragraph size (desktop)",
-      "info": "Text size for body copy and descriptions on desktop.",
-      "min": 11,
+        "info": "Text size for body copy and descriptions on desktop.",
+        "min": 11,
         "max": 32,
         "step": 1,
         "unit": "px",
@@ -169,8 +434,8 @@
         "type": "range",
         "id": "font_paragraph_size_mobile",
         "label": "Paragraph size (mobile)",
-      "info": "Text size for body copy and descriptions on mobile.",
-      "min": 11,
+        "info": "Text size for body copy and descriptions on mobile.",
+        "min": 11,
         "max": 28,
         "step": 1,
         "unit": "px",
@@ -186,26 +451,112 @@
         "label": "Eyebrow font family",
         "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
         "options": [
-          { "value": "inter", "label": "Inter" },
-          { "value": "montserrat", "label": "Montserrat" },
-          { "value": "bahnschrift", "label": "Bahnschrift" },
-          { "value": "calisto_mt", "label": "Calisto MT" },
-          { "value": "jacques_gilles", "label": "Jacques Gilles" },
-          { "value": "inter_18pt", "label": "Inter 18pt" },
-          { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-          { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-          { "value": "freight_text_pro", "label": "FreightText Pro" },
-          { "value": "bebas_neue", "label": "Bebas Neue" },
-          { "value": "oswald", "label": "Oswald" }
+          {
+            "value": "inter",
+            "label": "Inter"
+          },
+          {
+            "value": "montserrat",
+            "label": "Montserrat"
+          },
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro"
+          },
+          {
+            "value": "bebas_neue",
+            "label": "Bebas Neue"
+          },
+          {
+            "value": "oswald",
+            "label": "Oswald"
+          }
         ],
         "default": "inter"
+      },
+      {
+        "type": "select",
+        "id": "font_eyebrow_weight",
+        "label": "Eyebrow font weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Regular (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semibold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extra Bold (800)"
+          },
+          {
+            "value": "900",
+            "label": "Black (900)"
+          }
+        ],
+        "default": "700",
+        "info": "Light / Regular / Medium / Semibold / Bold / Extra Bold / Black for small labels."
+      },
+      {
+        "type": "select",
+        "id": "font_eyebrow_style",
+        "label": "Eyebrow font style",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "italic",
+            "label": "Italic"
+          }
+        ],
+        "default": "normal"
       },
       {
         "type": "range",
         "id": "font_eyebrow_size_desktop",
         "label": "Eyebrow size (desktop)",
-      "info": "Text size for small blue labels on desktop, e.g. BEST SELLERS.",
-      "min": 9,
+        "info": "Text size for small blue labels on desktop, e.g. BEST SELLERS.",
+        "min": 9,
         "max": 24,
         "step": 1,
         "unit": "px",
@@ -215,8 +566,8 @@
         "type": "range",
         "id": "font_eyebrow_size_mobile",
         "label": "Eyebrow size (mobile)",
-      "info": "Text size for small blue labels on mobile.",
-      "min": 9,
+        "info": "Text size for small blue labels on mobile.",
+        "min": 9,
         "max": 20,
         "step": 1,
         "unit": "px",
