@@ -1708,6 +1708,10 @@ function togglePersonalizationInput() {
       "default": false
     },
     {
+      "type": "header",
+      "content": "Main headline — largest text in this section"
+    },
+    {
       "type": "select",
       "id": "h1_font_family",
       "label": "H1 font family",
@@ -1732,6 +1736,7 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "h1_font_size_desktop",
       "label": "H1 size (desktop)",
+      "info": "Text size for the largest headline in this section on desktop.",
       "min": 24,
       "max": 120,
       "step": 2,
@@ -1742,11 +1747,16 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "h1_font_size_mobile",
       "label": "H1 size (mobile)",
+      "info": "Text size for the largest headline in this section on mobile.",
       "min": 18,
       "max": 80,
       "step": 2,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section title — large heading (e.g. Bestselling Sneaker Care)"
     },
     {
       "type": "select",
@@ -1773,6 +1783,7 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "h2_font_size_desktop",
       "label": "H2 size (desktop)",
+      "info": "Text size for the section title on desktop, e.g. Bestselling Sneaker Care.",
       "min": 20,
       "max": 96,
       "step": 2,
@@ -1783,11 +1794,16 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "h2_font_size_mobile",
       "label": "H2 size (mobile)",
+      "info": "Text size for the section title on mobile.",
       "min": 16,
       "max": 64,
       "step": 2,
       "unit": "px",
       "default": 34
+    },
+    {
+      "type": "header",
+      "content": "Body text — descriptions and paragraphs"
     },
     {
       "type": "select",
@@ -1813,6 +1829,7 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "paragraph_font_size_desktop",
       "label": "Paragraph size (desktop)",
+      "info": "Text size for descriptions and body text on desktop.",
       "min": 11,
       "max": 32,
       "step": 1,
@@ -1823,11 +1840,16 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "paragraph_font_size_mobile",
       "label": "Paragraph size (mobile)",
+      "info": "Text size for descriptions and body text on mobile.",
       "min": 11,
       "max": 28,
       "step": 1,
       "unit": "px",
       "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Small label — blue text above title (e.g. BEST SELLERS)"
     },
     {
       "type": "select",
@@ -1853,6 +1875,7 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "eyebrow_font_size_desktop",
       "label": "Eyebrow size (desktop)",
+      "info": "Text size for the small label above the title on desktop, e.g. BEST SELLERS.",
       "min": 9,
       "max": 24,
       "step": 1,
@@ -1863,6 +1886,7 @@ function togglePersonalizationInput() {
       "type": "range",
       "id": "eyebrow_font_size_mobile",
       "label": "Eyebrow size (mobile)",
+      "info": "Text size for the small label above the title on mobile.",
       "min": 9,
       "max": 20,
       "step": 1,
