@@ -93,6 +93,7 @@
   }
 
   .ai-story-banner-story-title-{{ ai_gen_id }} {
+    font-family: {% case block.settings.title_font_family %}{% when 'anton' %}'Anton', Impact, sans-serif{% when 'oswald' %}'Oswald', Impact, sans-serif{% when 'inter' %}'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif{% when 'montserrat' %}'Montserrat', sans-serif{% when 'bahnschrift' %}'Bahnschrift', 'Segoe UI', sans-serif{% else %}'Bebas Neue', Impact, 'Arial Narrow', sans-serif{% endcase %};
     font-size: {{ block.settings.title_size }}px;
     font-weight: 700;
     margin: 0 0 10px 0;
@@ -100,6 +101,7 @@
   }
 
   .ai-story-banner-story-description-{{ ai_gen_id }} {
+    font-family: {% case block.settings.description_font_family %}{% when 'bebas_neue' %}'Bebas Neue', Impact, sans-serif{% when 'anton' %}'Anton', Impact, sans-serif{% when 'oswald' %}'Oswald', Impact, sans-serif{% when 'montserrat' %}'Montserrat', sans-serif{% when 'bahnschrift' %}'Bahnschrift', 'Segoe UI', sans-serif{% else %}'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif{% endcase %};
     font-size: {{ block.settings.description_size }}px;
     margin: 0;
     line-height: 1.4;
@@ -554,6 +556,20 @@
       "content": "Typography"
     },
     {
+      "type": "select",
+      "id": "title_font_family",
+      "label": "Title font family",
+      "options": [
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bahnschrift", "label": "Bahnschrift" }
+      ],
+      "default": "bebas_neue"
+    },
+    {
       "type": "range",
       "id": "title_size",
       "label": "Title size",
@@ -562,6 +578,20 @@
       "step": 2,
       "unit": "px",
       "default": 36
+    },
+    {
+      "type": "select",
+      "id": "description_font_family",
+      "label": "Description font family",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "bahnschrift", "label": "Bahnschrift" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald" }
+      ],
+      "default": "inter"
     },
     {
       "type": "range",

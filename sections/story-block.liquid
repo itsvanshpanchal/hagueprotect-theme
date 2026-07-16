@@ -19,7 +19,7 @@
     max-width: none;
     aspect-ratio: 1440 / 560;
     overflow: hidden;
-    border-radius: var(--homepage-corner, 20px);
+    border-radius: {{ section.settings.border_radius | default: 20 }}px;
     background-color: #f6f6f6;
   }
 
@@ -29,45 +29,66 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: {{ section.settings.text_vertical_position | default: 'center' }};
+    align-items: {% case section.settings.text_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
     gap: 12px;
     padding: clamp(24px, 6vw, 72px);
+    text-align: {{ section.settings.text_align | default: 'left' }};
     pointer-events: none;
+    {%- if section.settings.show_text_shadow -%}
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    {%- endif -%}
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__content > * {
+    pointer-events: auto;
+    max-width: {{ section.settings.text_max_width | default: 720 }}px;
+    width: 100%;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow {
-    color: #e74c3c;
+    display: block;
     margin: 0;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+    font-size: var(--section-label-size) !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    line-height: 1.4 !important;
+    color: {{ section.settings.eyebrow_color | default: '#2563eb' }} !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading {
-    font-family: var(--font-family-heading);
-    font-size: var(--heading-size-xl);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: #111111;
-    margin: 0;
-    max-width: 720px;
+    font-family: var(--font-family-heading) !important;
+    font-size: var(--heading-size-xl) !important;
+    font-weight: 400 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+    text-transform: uppercase !important;
+    color: {{ section.settings.heading_color | default: '#111111' }} !important;
+    margin: 0 !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
-    font-family: var(--font-family-h2, var(--font-family-heading));
-    font-size: var(--section-heading-size);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: #111111;
-    margin: 0;
-    max-width: 720px;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-size: var(--section-heading-size) !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.03em !important;
+    text-transform: uppercase !important;
+    color: {{ section.settings.subheading_color | default: '#111111' }} !important;
+    margin: 0 !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-    color: #444444 !important;
-    max-width: 560px;
+    font-family: var(--font-family-sans) !important;
+    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+    font-weight: 400 !important;
+    line-height: 1.55 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    color: {{ section.settings.paragraph_color | default: '#444444' }} !important;
+    margin: 0 !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner picture,
@@ -94,7 +115,10 @@
     .story-banner-wrapper-{{ section.id }} .story-banner {
       aspect-ratio: 1 / 1;
       min-height: 320px;
-      border-radius: var(--homepage-corner, 20px);
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
+      font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
   }
 {%- endstyle -%}
@@ -104,6 +128,10 @@
   assign assigned_product = section.settings.assigned_product
   assign banner_img = section.settings.image
   assign mobile_img = section.settings.image_mobile | default: section.settings.image
+  assign banner_eyebrow = section.settings.eyebrow
+  assign banner_heading = section.settings.heading
+  assign banner_subheading = section.settings.subheading
+  assign banner_paragraph = section.settings.paragraph
 
   if product != blank
     assign show_section = false
@@ -120,6 +148,18 @@
           if block.settings.image != blank
             assign banner_img = block.settings.image
             assign mobile_img = block.settings.image_mobile | default: block.settings.image
+          endif
+          if block.settings.eyebrow != blank
+            assign banner_eyebrow = block.settings.eyebrow
+          endif
+          if block.settings.heading != blank
+            assign banner_heading = block.settings.heading
+          endif
+          if block.settings.subheading != blank
+            assign banner_subheading = block.settings.subheading
+          endif
+          if block.settings.paragraph != blank
+            assign banner_paragraph = block.settings.paragraph
           endif
           break
         endif
@@ -138,6 +178,11 @@
   if request.design_mode and assigned_product == blank and product != blank
     assign show_section = true
   endif
+
+  assign has_text = false
+  if banner_eyebrow != blank or banner_heading != blank or banner_subheading != blank or banner_paragraph != blank
+    assign has_text = true
+  endif
 -%}
 
 {%- if show_section -%}
@@ -148,12 +193,12 @@
         {%- if mobile_img != blank -%}
           <source media="(max-width: 749px)" srcset="{{ mobile_img | image_url: width: 800 }}">
         {%- endif -%}
-        <img 
-          src="{{ banner_img | image_url: width: 1440 }}" 
+        <img
+          src="{{ banner_img | image_url: width: 1440 }}"
           srcset="{{ banner_img | image_url: width: 1000 }} 1000w, {{ banner_img | image_url: width: 1440 }} 1440w, {{ banner_img | image_url: width: 1920 }} 1920w"
           sizes="100vw"
-          alt="{{ banner_img.alt | default: product.title | default: shop.name | escape }} story banner" 
-          class="story-banner__image" 
+          alt="{{ banner_img.alt | default: banner_heading | default: product.title | default: shop.name | escape }} story banner"
+          class="story-banner__image"
           loading="eager"
           fetchpriority="high"
         >
@@ -162,23 +207,23 @@
       {{ 'lifestyle-1' | placeholder_svg_tag: 'story-banner__image' }}
     {%- endif -%}
 
-    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank or section.settings.paragraph != blank -%}
+    {%- if has_text -%}
       <div class="story-banner__content">
-        {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+        {%- if banner_eyebrow != blank or banner_heading != blank -%}
           <div class="section-heading-stack">
-            {%- if section.settings.eyebrow != blank -%}
-              <span class="story-banner__eyebrow">{{ section.settings.eyebrow }}</span>
+            {%- if banner_eyebrow != blank -%}
+              <span class="story-banner__eyebrow">{{ banner_eyebrow }}</span>
             {%- endif -%}
-            {%- if section.settings.heading != blank -%}
-              <h2 class="story-banner__heading">{{ section.settings.heading }}</h2>
+            {%- if banner_heading != blank -%}
+              <h2 class="story-banner__heading">{{ banner_heading }}</h2>
             {%- endif -%}
           </div>
         {%- endif -%}
-        {%- if section.settings.subheading != blank -%}
-          <h3 class="story-banner__subheading">{{ section.settings.subheading }}</h3>
+        {%- if banner_subheading != blank -%}
+          <h3 class="story-banner__subheading">{{ banner_subheading }}</h3>
         {%- endif -%}
-        {%- if section.settings.paragraph != blank -%}
-          <p class="story-banner__paragraph">{{ section.settings.paragraph }}</p>
+        {%- if banner_paragraph != blank -%}
+          <p class="story-banner__paragraph">{{ banner_paragraph }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -212,27 +257,119 @@
     },
     {
       "type": "header",
-      "content": "Optional text overlay"
+      "content": "Banner text (editable overlay)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Type your banner text here. Leave blank to show image only. Fonts & sizes are controlled in Typography below."
     },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow label"
+      "label": "Eyebrow / small label",
+      "info": "Small label above the main heading (uses Eyebrow typography)."
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "H1 heading"
+      "label": "Main heading (H1)",
+      "info": "Largest text on the banner (uses H1 typography)."
     },
     {
       "type": "text",
       "id": "subheading",
-      "label": "H2 subheading"
+      "label": "Subheading (H2)",
+      "info": "Secondary title under the main heading (uses H2 typography)."
     },
     {
       "type": "textarea",
       "id": "paragraph",
-      "label": "Paragraph text"
+      "label": "Paragraph / body text",
+      "info": "Supporting copy under the titles (uses Paragraph typography)."
+    },
+    {
+      "type": "header",
+      "content": "Text style & position"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_vertical_position",
+      "label": "Vertical position",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "min": 280,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "label": "Text max width",
+      "default": 720
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_shadow",
+      "label": "Add text shadow for contrast",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#2563eb"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "paragraph_color",
+      "label": "Paragraph color",
+      "default": "#444444"
     },
     {
       "type": "header",
@@ -279,13 +416,13 @@
     },
     {
       "type": "header",
-      "content": "Main headline — largest text in this section"
+      "content": "Main heading (H1) — largest text on banner"
     },
     {
       "type": "select",
       "id": "h1_font_family",
       "label": "H1 font family",
-      "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
+      "info": "Font for the Main heading on this story banner.",
       "options": [
         {
           "value": "bebas_neue",
@@ -362,13 +499,13 @@
     },
     {
       "type": "header",
-      "content": "Section title — large heading (e.g. Bestselling Sneaker Care)"
+      "content": "Subheading (H2)"
     },
     {
       "type": "select",
       "id": "h2_font_family",
       "label": "H2 font family",
-      "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
+      "info": "Font for the Subheading on this story banner.",
       "options": [
         {
           "value": "bebas_neue",
@@ -445,13 +582,13 @@
     },
     {
       "type": "header",
-      "content": "Body text — descriptions and paragraphs"
+      "content": "Paragraph / body text"
     },
     {
       "type": "select",
       "id": "paragraph_font_family",
       "label": "Paragraph font family",
-      "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
+      "info": "Font for the paragraph / body text on this story banner.",
       "options": [
         {
           "value": "inter",
@@ -524,13 +661,13 @@
     },
     {
       "type": "header",
-      "content": "Small label — blue text above title (e.g. BEST SELLERS)"
+      "content": "Eyebrow / small label"
     },
     {
       "type": "select",
       "id": "eyebrow_font_family",
       "label": "Eyebrow / label font family",
-      "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
+      "info": "Font for the eyebrow / small label on this story banner.",
       "options": [
         {
           "value": "inter",
@@ -605,7 +742,7 @@
   "blocks": [
     {
       "type": "product_banner",
-      "name": "Per-Product Image",
+      "name": "Per-product banner",
       "settings": [
         {
           "type": "product",
@@ -622,6 +759,34 @@
           "type": "image_picker",
           "id": "image_mobile",
           "label": "Specific Mobile Image"
+        },
+        {
+          "type": "header",
+          "content": "Text for this product (optional)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Overrides the section text when this product page is viewed. Leave blank to keep section text."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow / small label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Main heading (H1)"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading (H2)"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph",
+          "label": "Paragraph / body text"
         }
       ]
     }
@@ -633,4 +798,3 @@
   ]
 }
 {% endschema %}
-
