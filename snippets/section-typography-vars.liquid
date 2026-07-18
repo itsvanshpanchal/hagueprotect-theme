@@ -18,6 +18,49 @@
   assign h2_style = section.settings.h2_font_style | default: settings.font_h2_style | default: 'normal'
   assign paragraph_style = section.settings.paragraph_font_style | default: settings.font_paragraph_style | default: 'normal'
   assign eyebrow_style = section.settings.eyebrow_font_style | default: settings.font_eyebrow_style | default: 'normal'
+-%}
+{%- capture h1_implied_weight -%}{% render 'hp-font-weight', font_key: h1_family %}{%- endcapture -%}
+{%- capture h2_implied_weight -%}{% render 'hp-font-weight', font_key: h2_family %}{%- endcapture -%}
+{%- capture paragraph_implied_weight -%}{% render 'hp-font-weight', font_key: paragraph_family %}{%- endcapture -%}
+{%- capture eyebrow_implied_weight -%}{% render 'hp-font-weight', font_key: eyebrow_family %}{%- endcapture -%}
+{%- capture h1_implied_style -%}{% render 'hp-font-style', font_key: h1_family %}{%- endcapture -%}
+{%- capture h2_implied_style -%}{% render 'hp-font-style', font_key: h2_family %}{%- endcapture -%}
+{%- capture paragraph_implied_style -%}{% render 'hp-font-style', font_key: paragraph_family %}{%- endcapture -%}
+{%- capture eyebrow_implied_style -%}{% render 'hp-font-style', font_key: eyebrow_family %}{%- endcapture -%}
+{%- liquid
+  assign h1_implied_weight = h1_implied_weight | strip
+  assign h2_implied_weight = h2_implied_weight | strip
+  assign paragraph_implied_weight = paragraph_implied_weight | strip
+  assign eyebrow_implied_weight = eyebrow_implied_weight | strip
+  assign h1_implied_style = h1_implied_style | strip
+  assign h2_implied_style = h2_implied_style | strip
+  assign paragraph_implied_style = paragraph_implied_style | strip
+  assign eyebrow_implied_style = eyebrow_implied_style | strip
+
+  if h1_implied_weight != '400'
+    assign h1_weight = h1_implied_weight
+  endif
+  if h2_implied_weight != '400'
+    assign h2_weight = h2_implied_weight
+  endif
+  if paragraph_implied_weight != '400'
+    assign paragraph_weight = paragraph_implied_weight
+  endif
+  if eyebrow_implied_weight != '400'
+    assign eyebrow_weight = eyebrow_implied_weight
+  endif
+  if h1_implied_style == 'italic'
+    assign h1_style = 'italic'
+  endif
+  if h2_implied_style == 'italic'
+    assign h2_style = 'italic'
+  endif
+  if paragraph_implied_style == 'italic'
+    assign paragraph_style = 'italic'
+  endif
+  if eyebrow_implied_style == 'italic'
+    assign eyebrow_style = 'italic'
+  endif
 
   assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
   assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44

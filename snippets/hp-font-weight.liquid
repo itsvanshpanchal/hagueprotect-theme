@@ -1,0 +1,14 @@
+{%- comment -%}
+  Implied CSS font-weight for Google font weight variants that share one family name.
+  Named file variants (Bahnschrift Bold, Inter 18pt Medium, etc.) use unique font-family
+  names, so they stay at 400.
+{%- endcomment -%}
+{%- case font_key -%}
+  {%- when 'inter_light', 'montserrat_light', 'oswald_light' -%}300
+  {%- when 'inter_medium', 'montserrat_medium', 'oswald_medium' -%}500
+  {%- when 'inter_semibold', 'montserrat_semibold', 'oswald_semibold' -%}600
+  {%- when 'inter_bold', 'montserrat_bold', 'oswald_bold' -%}700
+  {%- when 'inter_extrabold' -%}800
+  {%- when 'inter_black' -%}900
+  {%- else -%}400
+{%- endcase -%}

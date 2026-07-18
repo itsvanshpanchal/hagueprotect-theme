@@ -1,0 +1,5 @@
+{%- comment -%}Outputs implied font-style for italic variants.{%- endcomment -%}
+{%- case font_key -%}
+  {%- when 'calisto_mt_italic', 'calisto_mt_bold_italic' -%}italic
+  {%- else -%}normal
+{%- endcase -%}

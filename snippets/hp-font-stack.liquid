@@ -1,27 +1,71 @@
-{%- comment -%}Returns CSS font-family stack for a typography key.{%- endcomment -%}
+{%- comment -%}Returns CSS font-family stack for a typography key (includes real weight variants).{%- endcomment -%}
 {%- case font_key -%}
-  {%- when 'inter' -%}
+  {%- when 'inter', 'inter_regular' -%}
     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
-  {%- when 'inter_18pt' -%}
+  {%- when 'inter_light' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_medium' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_semibold' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_bold' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_extrabold' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_black' -%}
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+  {%- when 'inter_18pt', 'inter_18pt_regular' -%}
     'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
-  {%- when 'montserrat' -%}
+  {%- when 'inter_18pt_medium' -%}
+    'Inter 18pt Medium', 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'inter_18pt_semibold' -%}
+    'Inter 18pt Semibold', 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'inter_18pt_bold' -%}
+    'Inter 18pt Bold', 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'montserrat', 'montserrat_regular' -%}
+    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'montserrat_light' -%}
+    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'montserrat_medium' -%}
+    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'montserrat_semibold' -%}
+    'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+  {%- when 'montserrat_bold' -%}
     'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
   {%- when 'anton' -%}
     'Anton', 'Impact', 'Arial Narrow', sans-serif
-  {%- when 'oswald' -%}
+  {%- when 'oswald', 'oswald_regular' -%}
     'Oswald', 'Impact', 'Arial Narrow', sans-serif
-  {%- when 'bahnschrift' -%}
+  {%- when 'oswald_light' -%}
+    'Oswald', 'Impact', 'Arial Narrow', sans-serif
+  {%- when 'oswald_medium' -%}
+    'Oswald', 'Impact', 'Arial Narrow', sans-serif
+  {%- when 'oswald_semibold' -%}
+    'Oswald', 'Impact', 'Arial Narrow', sans-serif
+  {%- when 'oswald_bold' -%}
+    'Oswald', 'Impact', 'Arial Narrow', sans-serif
+  {%- when 'bahnschrift', 'bahnschrift_regular' -%}
     'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif
-  {%- when 'calisto_mt' -%}
+  {%- when 'bahnschrift_semibold' -%}
+    'Bahnschrift Semibold', 'Bahnschrift', 'Segoe UI', Arial, sans-serif
+  {%- when 'bahnschrift_bold' -%}
+    'Bahnschrift Bold', 'Bahnschrift', 'Segoe UI', Arial, sans-serif
+  {%- when 'calisto_mt', 'calisto_mt_regular' -%}
     'Calisto MT', 'Times New Roman', Georgia, serif
+  {%- when 'calisto_mt_bold' -%}
+    'Calisto MT Bold', 'Calisto MT', 'Times New Roman', Georgia, serif
+  {%- when 'calisto_mt_italic' -%}
+    'Calisto MT Italic', 'Calisto MT', 'Times New Roman', Georgia, serif
+  {%- when 'calisto_mt_bold_italic' -%}
+    'Calisto MT Bold Italic', 'Calisto MT', 'Times New Roman', Georgia, serif
   {%- when 'jacques_gilles' -%}
     'Jacques Gilles', 'Calisto MT', Georgia, serif
   {%- when 'luthon_southard_script' -%}
     'Luthon Southard Script', 'Brush Script MT', cursive
   {%- when 'luthon_southard_serif' -%}
     'Luthon Southard Serif', 'Calisto MT', Georgia, serif
-  {%- when 'freight_text_pro' -%}
-    'FreightText Pro', 'Calisto MT', Georgia, serif
+  {%- when 'freight_text_pro', 'freight_text_pro_book' -%}
+    'FreightText Pro Book', 'FreightText Pro', 'Calisto MT', Georgia, serif
   {%- else -%}
     'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif
 {%- endcase -%}
