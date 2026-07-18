@@ -12,16 +12,16 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Font family list includes custom brand fonts with real weights at the top (Bahnschrift Bold, Inter 18pt Semibold, Calisto MT Bold, etc.). Pick the exact variant from the dropdown."
+        "content": "4 font groups: 1 Biggest title, 2 Section heading, 3 Normal text, 4 Tiny text above title. Pick a font from the list — brand fonts are at the top."
       },
       {
         "type": "header",
-        "content": "H1 — Hero & main headings"
+        "content": "1. Biggest title"
       },
       {
         "type": "select",
         "id": "font_h1_family",
-        "label": "H1 font family",
+        "label": "Font",
         "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
           {
@@ -166,7 +166,7 @@
       {
         "type": "select",
         "id": "font_h1_weight",
-        "label": "H1 font weight",
+        "label": "Weight",
         "options": [
           {
             "value": "300",
@@ -203,7 +203,7 @@
       {
         "type": "select",
         "id": "font_h1_style",
-        "label": "H1 font style",
+        "label": "Style",
         "options": [
           {
             "value": "normal",
@@ -220,7 +220,7 @@
       {
         "type": "range",
         "id": "font_hero_h1_size_desktop",
-        "label": "Hero H1 size (desktop)",
+        "label": "Hero size on computer",
         "info": "Text size for the homepage hero headline on desktop, e.g. DIRTY KICKS?",
         "min": 32,
         "max": 120,
@@ -231,7 +231,7 @@
       {
         "type": "range",
         "id": "font_hero_h1_size_mobile",
-        "label": "Hero H1 size (mobile)",
+        "label": "Hero size on phone",
         "info": "Text size for the homepage hero headline on mobile.",
         "min": 24,
         "max": 80,
@@ -242,7 +242,7 @@
       {
         "type": "range",
         "id": "font_h1_size_desktop",
-        "label": "H1 size (desktop)",
+        "label": "Size on computer",
         "info": "Text size for the largest main headings on desktop.",
         "min": 28,
         "max": 96,
@@ -253,7 +253,7 @@
       {
         "type": "range",
         "id": "font_h1_size_mobile",
-        "label": "H1 size (mobile)",
+        "label": "Size on phone",
         "info": "Text size for the largest main headings on mobile.",
         "min": 20,
         "max": 64,
@@ -263,12 +263,12 @@
       },
       {
         "type": "header",
-        "content": "H2 — Section headings"
+        "content": "2. Section heading"
       },
       {
         "type": "select",
         "id": "font_h2_family",
-        "label": "H2 font family",
+        "label": "Font",
         "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
           {
@@ -413,7 +413,7 @@
       {
         "type": "select",
         "id": "font_h2_weight",
-        "label": "H2 font weight",
+        "label": "Weight",
         "options": [
           {
             "value": "300",
@@ -450,7 +450,7 @@
       {
         "type": "select",
         "id": "font_h2_style",
-        "label": "H2 font style",
+        "label": "Style",
         "options": [
           {
             "value": "normal",
@@ -466,7 +466,7 @@
       {
         "type": "range",
         "id": "font_h2_size_desktop",
-        "label": "H2 size (desktop)",
+        "label": "Size on computer",
         "info": "Text size for large section titles on desktop, e.g. Bestselling Sneaker Care.",
         "min": 20,
         "max": 96,
@@ -477,7 +477,7 @@
       {
         "type": "range",
         "id": "font_h2_size_mobile",
-        "label": "H2 size (mobile)",
+        "label": "Size on phone",
         "info": "Text size for large section titles on mobile.",
         "min": 16,
         "max": 64,
@@ -487,12 +487,12 @@
       },
       {
         "type": "header",
-        "content": "Paragraph — Body & descriptions"
+        "content": "3. Normal text"
       },
       {
         "type": "select",
         "id": "font_paragraph_family",
-        "label": "Paragraph font family",
+        "label": "Font",
         "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
           {
@@ -633,7 +633,7 @@
       {
         "type": "select",
         "id": "font_paragraph_weight",
-        "label": "Paragraph font weight",
+        "label": "Weight",
         "options": [
           {
             "value": "300",
@@ -670,7 +670,7 @@
       {
         "type": "select",
         "id": "font_paragraph_style",
-        "label": "Paragraph font style",
+        "label": "Style",
         "options": [
           {
             "value": "normal",
@@ -686,7 +686,7 @@
       {
         "type": "range",
         "id": "font_paragraph_size_desktop",
-        "label": "Paragraph size (desktop)",
+        "label": "Size on computer",
         "info": "Text size for body copy and descriptions on desktop.",
         "min": 11,
         "max": 32,
@@ -697,7 +697,7 @@
       {
         "type": "range",
         "id": "font_paragraph_size_mobile",
-        "label": "Paragraph size (mobile)",
+        "label": "Size on phone",
         "info": "Text size for body copy and descriptions on mobile.",
         "min": 11,
         "max": 28,
@@ -707,12 +707,12 @@
       },
       {
         "type": "header",
-        "content": "Eyebrow — Small labels"
+        "content": "4. Tiny text above title"
       },
       {
         "type": "select",
         "id": "font_eyebrow_family",
-        "label": "Eyebrow font family",
+        "label": "Font",
         "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
           {
@@ -853,7 +853,7 @@
       {
         "type": "select",
         "id": "font_eyebrow_weight",
-        "label": "Eyebrow font weight",
+        "label": "Weight",
         "options": [
           {
             "value": "300",
@@ -890,7 +890,7 @@
       {
         "type": "select",
         "id": "font_eyebrow_style",
-        "label": "Eyebrow font style",
+        "label": "Style",
         "options": [
           {
             "value": "normal",
@@ -906,7 +906,7 @@
       {
         "type": "range",
         "id": "font_eyebrow_size_desktop",
-        "label": "Eyebrow size (desktop)",
+        "label": "Size on computer",
         "info": "Text size for small blue labels on desktop, e.g. BEST SELLERS.",
         "min": 9,
         "max": 24,
@@ -917,7 +917,7 @@
       {
         "type": "range",
         "id": "font_eyebrow_size_mobile",
-        "label": "Eyebrow size (mobile)",
+        "label": "Size on phone",
         "info": "Text size for small blue labels on mobile.",
         "min": 9,
         "max": 20,

@@ -10,7 +10,7 @@
     {
       "type": "select",
       "id": "h1_font_family",
-      "label": "H1 font family",
+      "label": "Font",
       "options": [
         { "value": "bebas_neue", "label": "Bebas Neue" },
         { "value": "anton", "label": "Anton" },
@@ -23,7 +23,7 @@
     {
       "type": "range",
       "id": "h1_font_size_desktop",
-      "label": "H1 size (desktop)",
+      "label": "Size on computer",
       "min": 24,
       "max": 120,
       "step": 2,
@@ -33,7 +33,7 @@
     {
       "type": "range",
       "id": "h1_font_size_mobile",
-      "label": "H1 size (mobile)",
+      "label": "Size on phone",
       "min": 18,
       "max": 80,
       "step": 2,
@@ -43,7 +43,7 @@
     {
       "type": "select",
       "id": "h2_font_family",
-      "label": "H2 font family",
+      "label": "Font",
       "options": [
         { "value": "bebas_neue", "label": "Bebas Neue" },
         { "value": "anton", "label": "Anton" },
@@ -56,7 +56,7 @@
     {
       "type": "range",
       "id": "h2_font_size_desktop",
-      "label": "H2 size (desktop)",
+      "label": "Size on computer",
       "min": 20,
       "max": 96,
       "step": 2,
@@ -66,7 +66,7 @@
     {
       "type": "range",
       "id": "h2_font_size_mobile",
-      "label": "H2 size (mobile)",
+      "label": "Size on phone",
       "min": 16,
       "max": 64,
       "step": 2,
@@ -76,7 +76,7 @@
     {
       "type": "select",
       "id": "paragraph_font_family",
-      "label": "Paragraph font family",
+      "label": "Font",
       "options": [
         { "value": "inter", "label": "Inter" },
         { "value": "montserrat", "label": "Montserrat" },
@@ -88,7 +88,7 @@
     {
       "type": "range",
       "id": "paragraph_font_size_desktop",
-      "label": "Paragraph size (desktop)",
+      "label": "Size on computer",
       "min": 11,
       "max": 32,
       "step": 1,
@@ -98,7 +98,7 @@
     {
       "type": "range",
       "id": "paragraph_font_size_mobile",
-      "label": "Paragraph size (mobile)",
+      "label": "Size on phone",
       "min": 11,
       "max": 28,
       "step": 1,
@@ -108,7 +108,7 @@
     {
       "type": "select",
       "id": "eyebrow_font_family",
-      "label": "Eyebrow font family",
+      "label": "Font",
       "options": [
         { "value": "inter", "label": "Inter" },
         { "value": "montserrat", "label": "Montserrat" },
@@ -120,7 +120,7 @@
     {
       "type": "range",
       "id": "eyebrow_font_size_desktop",
-      "label": "Eyebrow size (desktop)",
+      "label": "Size on computer",
       "min": 9,
       "max": 24,
       "step": 1,
@@ -130,7 +130,7 @@
     {
       "type": "range",
       "id": "eyebrow_font_size_mobile",
-      "label": "Eyebrow size (mobile)",
+      "label": "Size on phone",
       "min": 9,
       "max": 20,
       "step": 1,
