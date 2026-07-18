@@ -1,8 +1,65 @@
 {% doc %}
-  @prompt
-    so now create a story banner section in which we can use text and please dont use black shadow effect, generate a story banner and the text should be left side, not the image should uplode in full size in and  please move text little down and little left , make the text little left side, also add image upload for  mobile view
+  Story banner with editable overlay text + per-block typography.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{%- liquid
+  assign heading_family = block.settings.heading_font_family | default: 'bebas_neue'
+  assign subheading_family = block.settings.subheading_font_family | default: 'inter'
+  assign text_family = block.settings.text_font_family | default: 'inter'
+  assign button_family = block.settings.button_font_family | default: 'inter'
+
+  assign heading_weight = block.settings.heading_font_weight | default: '400'
+  assign subheading_weight = block.settings.subheading_font_weight | default: '700'
+  assign text_weight = block.settings.text_font_weight | default: '400'
+  assign button_weight = block.settings.button_font_weight | default: '600'
+
+  assign heading_style = block.settings.heading_font_style | default: 'normal'
+  assign subheading_style = block.settings.subheading_font_style | default: 'normal'
+  assign text_style = block.settings.text_font_style | default: 'normal'
+-%}
+{%- capture heading_implied -%}{% render 'hp-font-weight', font_key: heading_family %}{%- endcapture -%}
+{%- capture subheading_implied -%}{% render 'hp-font-weight', font_key: subheading_family %}{%- endcapture -%}
+{%- capture text_implied -%}{% render 'hp-font-weight', font_key: text_family %}{%- endcapture -%}
+{%- capture button_implied -%}{% render 'hp-font-weight', font_key: button_family %}{%- endcapture -%}
+{%- capture heading_named -%}{% render 'hp-font-is-named-face', font_key: heading_family %}{%- endcapture -%}
+{%- capture subheading_named -%}{% render 'hp-font-is-named-face', font_key: subheading_family %}{%- endcapture -%}
+{%- capture text_named -%}{% render 'hp-font-is-named-face', font_key: text_family %}{%- endcapture -%}
+{%- capture button_named -%}{% render 'hp-font-is-named-face', font_key: button_family %}{%- endcapture -%}
+{%- liquid
+  assign heading_implied = heading_implied | strip
+  assign subheading_implied = subheading_implied | strip
+  assign text_implied = text_implied | strip
+  assign button_implied = button_implied | strip
+  assign heading_named = heading_named | strip
+  assign subheading_named = subheading_named | strip
+  assign text_named = text_named | strip
+  assign button_named = button_named | strip
+
+  if heading_named != blank
+    assign heading_weight = '400'
+    assign heading_style = 'normal'
+  elsif heading_implied != '400'
+    assign heading_weight = heading_implied
+  endif
+  if subheading_named != blank
+    assign subheading_weight = '400'
+    assign subheading_style = 'normal'
+  elsif subheading_implied != '400'
+    assign subheading_weight = subheading_implied
+  endif
+  if text_named != blank
+    assign text_weight = '400'
+    assign text_style = 'normal'
+  elsif text_implied != '400'
+    assign text_weight = text_implied
+  endif
+  if button_named != blank
+    assign button_weight = '400'
+  elsif button_implied != '400'
+    assign button_weight = button_implied
+  endif
+-%}
 
 {% style %}
   .ai-story-banner-{{ ai_gen_id }} {
@@ -66,28 +123,49 @@
     text-align: left;
     left: {{ block.settings.content_offset_left }}px;
     top: {{ block.settings.content_offset_top }}px;
-  }
-
-  .ai-story-banner-heading-{{ ai_gen_id }} {
-    color: {{ block.settings.heading_color }};
-    font-size: {{ block.settings.heading_size }}px;
-    margin: 0 0 {{ block.settings.heading_spacing }}px;
-    line-height: 1.2;
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .ai-story-banner-subheading-{{ ai_gen_id }} {
     color: {{ block.settings.subheading_color }};
+    font-family: {% render 'hp-font-stack', font_key: subheading_family %};
     font-size: {{ block.settings.subheading_size }}px;
+    font-weight: {{ subheading_weight }};
+    font-style: {{ subheading_style }};
     margin: 0 0 {{ block.settings.subheading_spacing }}px;
     line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ai-story-banner-heading-{{ ai_gen_id }} {
+    color: {{ block.settings.heading_color }};
+    font-family: {% render 'hp-font-stack', font_key: heading_family %};
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: {{ heading_weight }};
+    font-style: {{ heading_style }};
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    line-height: 1.05;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
 
   .ai-story-banner-text-{{ ai_gen_id }} {
     color: {{ block.settings.text_color }};
+    font-family: {% render 'hp-font-stack', font_key: text_family %};
     font-size: {{ block.settings.text_size }}px;
-    line-height: 1.6;
+    font-weight: {{ text_weight }};
+    font-style: {{ text_style }};
+    line-height: 1.55;
     margin: 0;
+  }
+
+  .ai-story-banner-text-{{ ai_gen_id }} p {
+    margin: 0;
+    color: inherit;
+    font: inherit;
   }
 
   .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
@@ -101,9 +179,10 @@
     color: {{ block.settings.button_text_color }};
     text-decoration: none;
     border-radius: {{ block.settings.button_border_radius }}px;
+    font-family: {% render 'hp-font-stack', font_key: button_family %};
     font-size: {{ block.settings.button_text_size }}px;
+    font-weight: {{ button_weight }};
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 600;
   }
 
   .ai-story-banner-button-{{ ai_gen_id }}:hover {
@@ -133,17 +212,17 @@
     }
 
     .ai-story-banner-heading-{{ ai_gen_id }} {
-      font-size: clamp(15px, 4.5vw, 20px);
+      font-size: clamp(18px, 5.5vw, {{ block.settings.heading_size }}px);
       margin-bottom: 8px;
     }
 
     .ai-story-banner-subheading-{{ ai_gen_id }} {
-      font-size: clamp(13px, 3.5vw, 15px);
+      font-size: clamp(11px, 3.2vw, {{ block.settings.subheading_size }}px);
       margin-bottom: 8px;
     }
 
     .ai-story-banner-text-{{ ai_gen_id }} {
-      font-size: clamp(11px, 3vw, 13px);
+      font-size: clamp(12px, 3.2vw, {{ block.settings.text_size }}px);
     }
 
     .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
@@ -199,16 +278,16 @@
     {% endif %}
 
     <div class="ai-story-banner-content-{{ ai_gen_id }}">
-      {% if block.settings.heading != blank %}
-        <h2 class="ai-story-banner-heading-{{ ai_gen_id }}">
-          {{ block.settings.heading }}
-        </h2>
-      {% endif %}
-
       {% if block.settings.subheading != blank %}
         <div class="ai-story-banner-subheading-{{ ai_gen_id }}">
           {{ block.settings.subheading }}
         </div>
+      {% endif %}
+
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-story-banner-heading-{{ ai_gen_id }}">
+          {{ block.settings.heading }}
+        </h2>
       {% endif %}
 
       {% if block.settings.text != blank %}
@@ -257,7 +336,8 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Desktop image"
+      "label": "Desktop image",
+      "info": "Use a photo WITHOUT text if you want fonts editable. Text painted into the image cannot be restyled."
     },
     {
       "type": "image_picker",
@@ -285,7 +365,6 @@
       "label": "Show overlay",
       "default": false
     },
-
     {
       "type": "color",
       "id": "overlay_color",
@@ -347,6 +426,51 @@
     },
     {
       "type": "header",
+      "content": "Banner text"
+    },
+    {
+      "type": "paragraph",
+      "content": "Edit overlay text here. Order on the banner: Subheading (eyebrow) \u2192 Heading \u2192 Body. Scroll down for Typography (font family / weight)."
+    },
+    {
+      "type": "header",
+      "content": "Subheading / eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading / eyebrow",
+      "default": "Share your brand's journey",
+      "info": "Small label shown above the main heading."
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#2563eb"
+    },
+    {
+      "type": "range",
+      "id": "subheading_spacing",
+      "label": "Spacing below subheading",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
       "content": "Heading"
     },
     {
@@ -369,53 +493,17 @@
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#000000"
+      "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "heading_spacing",
-      "label": "Spacing below",
+      "label": "Spacing below heading",
       "min": 0,
       "max": 50,
       "step": 5,
       "unit": "px",
       "default": 20
-    },
-    {
-      "type": "header",
-      "content": "Subheading"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Share your brand's journey"
-    },
-    {
-      "type": "range",
-      "id": "subheading_size",
-      "label": "Subheading size",
-      "min": 14,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 24
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading color",
-      "default": "#333333"
-    },
-    {
-      "type": "range",
-      "id": "subheading_spacing",
-      "label": "Spacing below",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 15
     },
     {
       "type": "header",
@@ -441,7 +529,789 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "default": "#666666"
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font controls for THIS banner only. Custom brand weights (Bahnschrift Bold, Inter 18pt Semibold, etc.) are at the TOP of each font family list. If text does not change, your background image may have text baked in \u2014 use a photo-only image and edit the text fields above."
+    },
+    {
+      "type": "header",
+      "content": "Heading typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        }
+      ],
+      "default": "bebas_neue",
+      "info": "Custom brand fonts with Regular / Medium / Semibold / Bold are at the TOP."
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Subheading / eyebrow typography"
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_family",
+      "label": "Subheading font family",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        }
+      ],
+      "default": "inter",
+      "info": "Small label above the heading (e.g. SHARE YOUR BRAND'S JOURNEY)."
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_weight",
+      "label": "Subheading font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_style",
+      "label": "Subheading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Body text typography"
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Body font family",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Body font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "text_font_style",
+      "label": "Body font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Button typography"
+    },
+    {
+      "type": "select",
+      "id": "button_font_family",
+      "label": "Button font family",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "600"
     },
     {
       "type": "header",
