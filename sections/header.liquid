@@ -36,9 +36,10 @@
   }
 
   .header__logo-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-heading) !important;
     font-size: 21px;
-    font-weight: 700;
+    font-weight: var(--font-weight-heading, 700) !important;
+    font-style: var(--font-style-heading, normal) !important;
     color: #000000;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -181,9 +182,10 @@
     border-radius: 8px;
     text-decoration: none;
     color: #111111;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans) !important;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-style: var(--font-style-sans, normal) !important;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -215,8 +217,10 @@
     padding: 10px 8px;
     color: #666;
     text-decoration: none;
+    font-family: var(--font-family-sans) !important;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: var(--font-weight-sans, 600) !important;
+    font-style: var(--font-style-sans, normal) !important;
   }
 
   .mobile-brand-link img {
@@ -227,9 +231,10 @@
   }
 
   .header__menu-link {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #111111;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -250,9 +255,10 @@
     color: #ffffff !important;
     padding: 8px 18px;
     border-radius: 4px;
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: var(--font-weight-sans, 800) !important;
+    font-style: var(--font-style-sans, normal) !important;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     text-decoration: none;
@@ -268,9 +274,10 @@
   }
 
   .menu-link {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: var(--font-weight-sans, 800) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #111111 !important;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -321,9 +328,10 @@
   }
 
   .megamenu-heading {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: 14px !important;
-    font-weight: 800 !important;
+    font-weight: var(--font-weight-h2, 800) !important;
+    font-style: var(--font-style-h2, normal) !important;
     color: #111111 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
@@ -380,9 +388,10 @@
   }
 
   .megamenu-link-item a {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 13.5px;
-    font-weight: 500;
+    font-weight: var(--font-weight-sans, 500) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #555555 !important;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -408,9 +417,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-style: var(--font-style-sans, normal) !important;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     background-color: #fafafa;
@@ -675,9 +685,10 @@
   }
 
   .mobile-nav-link {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #111111;
     text-transform: uppercase;
     text-decoration: none;
@@ -694,9 +705,10 @@
   }
 
   .mobile-accordion-category-heading {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: 13px !important;
-    font-weight: 700 !important;
+    font-weight: var(--font-weight-h2, 700) !important;
+    font-style: var(--font-style-h2, normal) !important;
     color: #111 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.06em !important;
@@ -741,8 +753,10 @@
 
   .dropdown-user-name {
     display: block;
+    font-family: var(--font-family-sans) !important;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: var(--font-weight-sans, 800) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #111;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -750,8 +764,10 @@
 
   .dropdown-user-email {
     display: block;
+    font-family: var(--font-family-sans) !important;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: var(--font-weight-sans, 500) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #888;
   }
 
@@ -762,8 +778,10 @@
     padding: 10px 20px;
     color: #111;
     text-decoration: none;
+    font-family: var(--font-family-sans) !important;
     font-size: 13.5px;
-    font-weight: 700;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-style: var(--font-style-sans, normal) !important;
     transition: all 0.2s;
   }
 
@@ -1207,14 +1225,14 @@
     </div>
     
     <div style="max-width: 800px; width: 100%; margin: 15vh auto; padding: 0 24px;">
-      <h2 style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; text-align: center;">Search our store</h2>
+      <h2 style="font-family: var(--font-family-eyebrow, var(--font-family-sans)); font-size: 14px; font-weight: var(--font-weight-eyebrow, 800); font-style: var(--font-style-eyebrow, normal); color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; text-align: center;">Search our store</h2>
       <form action="/search" method="get" role="search" style="position: relative;">
         <input type="text" 
                name="q" 
                id="SearchInput" 
                placeholder="What are you looking for?" 
                autocomplete="off"
-               style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #111; padding: 16px 0; font-family: 'Inter', sans-serif; font-size: clamp(24px, 4vw, 42px); font-weight: 800; color: #111; outline: none; transition: border-color 0.3s;"
+               style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #111; padding: 16px 0; font-family: var(--font-family-heading); font-size: clamp(24px, 4vw, 42px); font-weight: var(--font-weight-heading, 800); font-style: var(--font-style-heading, normal); color: #111; outline: none; transition: border-color 0.3s;"
                onfocus="this.style.borderBottomColor='#FF2B2B'"
                onblur="this.style.borderBottomColor='#111'">
         <button type="submit" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #111;">
@@ -1765,11 +1783,11 @@
     },
     {
       "type": "paragraph",
-      "content": "Fonts for THIS section only. Custom brand weight variants are at the TOP of each font family dropdown (Bahnschrift Bold, Inter 18pt Semibold, Calisto MT Bold, etc.)."
+      "content": "Fonts for THIS header only. Paragraph = nav links & menus. H2 = mega-menu column titles. Eyebrow = search label. H1 = logo text & search field. Custom brand weights are at the TOP of each font family dropdown."
     },
     {
       "type": "header",
-      "content": "Main headline — largest text in this section"
+      "content": "Logo / search title (H1)"
     },
     {
       "type": "select",
@@ -1994,7 +2012,7 @@
     },
     {
       "type": "header",
-      "content": "Section title — large heading (e.g. Bestselling Sneaker Care)"
+      "content": "Mega-menu titles (H2)"
     },
     {
       "type": "select",
@@ -2218,7 +2236,7 @@
     },
     {
       "type": "header",
-      "content": "Body text — descriptions and paragraphs"
+      "content": "Nav links & menus (Paragraph)"
     },
     {
       "type": "select",
@@ -2438,7 +2456,7 @@
     },
     {
       "type": "header",
-      "content": "Small label — blue text above title (e.g. BEST SELLERS)"
+      "content": "Search label (Eyebrow)"
     },
     {
       "type": "select",
