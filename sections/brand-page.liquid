@@ -40,7 +40,7 @@
       {%- endif -%}
 
       {%- if section.settings.eyebrow != blank -%}
-        <p style="font-size:12px; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; color:{{ accent }}; margin:0;">{{ section.settings.eyebrow }}</p>
+        <p style="font-family: var(--font-family-eyebrow, var(--font-family-sans)); font-size: var(--section-label-size, 12px); font-weight: var(--font-weight-eyebrow, 800); font-style: var(--font-style-eyebrow, normal); letter-spacing:0.2em; text-transform:uppercase; color:{{ accent }}; margin:0;">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
@@ -281,7 +281,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Fonts for this section only. 1 Biggest title, 2 Section heading, 3 Normal text, 4 Tiny text above title. Brand fonts are at the top of each list."
+      "content": "Only fonts used in this section: 1. Biggest title, 2. Section heading, 3. Normal text, 4. Tiny text above title. Brand fonts are at the top of each list."
     },
     {
       "type": "header",
