@@ -327,6 +327,10 @@
     gap: 16px;
   }
 
+  #shopify-section-{{ section.id }} h3.megamenu-heading,
+  #shopify-section-{{ section.id }} .megamenu-heading,
+  #shopify-section-{{ section.id }} h4.mobile-accordion-category-heading,
+  #shopify-section-{{ section.id }} .mobile-accordion-category-heading,
   .megamenu-heading {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: 14px !important;
@@ -387,9 +391,10 @@
     margin: 0;
   }
 
+  #shopify-section-{{ section.id }} .megamenu-link-item a,
   .megamenu-link-item a {
     font-family: var(--font-family-sans) !important;
-    font-size: 13.5px;
+    font-size: 13.5px !important;
     font-weight: var(--font-weight-sans, 500) !important;
     font-style: var(--font-style-sans, normal) !important;
     color: #555555 !important;
@@ -704,6 +709,7 @@
     padding: 8px 0 8px 12px;
   }
 
+  #shopify-section-{{ section.id }} .mobile-accordion-category-heading,
   .mobile-accordion-category-heading {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: 13px !important;
@@ -1783,7 +1789,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Fonts for the header only. Logo text, Menu dropdown titles, Shop All menu, and Search text. Brand fonts are at the top of each list."
+      "content": "Fonts for the header only. Logo text, Mega menu subheadings, Shop All menu, and Search text. Brand fonts are at the top of each list."
     },
     {
       "type": "header",
@@ -2012,7 +2018,7 @@
     },
     {
       "type": "header",
-      "content": "Menu dropdown titles"
+      "content": "Mega menu subheadings"
     },
     {
       "type": "select",
