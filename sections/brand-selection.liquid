@@ -48,7 +48,7 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__eyebrow {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.22em;
@@ -58,7 +58,7 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__heading {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans);
     font-size: clamp(30px, 4.4vw, 48px);
     font-weight: 800;
     letter-spacing: -0.028em;
@@ -68,7 +68,7 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__sub {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans);
     font-size: 16px;
     font-weight: 500;
     color: {{ section.settings.subheading_color | default: '#6b6b6b' }};
@@ -152,7 +152,7 @@
   }
 
   #shopify-section-{{ section.id }} .bcard__name {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans);
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 0.02em;
@@ -162,7 +162,7 @@
   }
 
   #shopify-section-{{ section.id }} .bcard__tag {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family-sans);
     font-size: 14px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
@@ -312,7 +312,7 @@
           </span>
         </a>
       {%- else -%}
-        <p style="text-align:center;font-family:'Inter',sans-serif;color:#6b6b6b;">
+        <p style="text-align:center;font-family: var(--font-family-sans);color:#6b6b6b;">
           Add a brand block to get started.
         </p>
       {%- endfor -%}

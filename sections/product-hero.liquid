@@ -11,8 +11,8 @@
   --d2c-border: #DDDDDD;
   --d2c-accent: #E53935;
   --d2c-stock-green: #2E7D32;
-  --d2c-font: 'Inter', sans-serif;
-  --d2c-heading-font: 'Inter', sans-serif;
+  --d2c-font: var(--font-family-sans);
+  --d2c-heading-font: var(--font-family-heading);
   --d2c-radius-sm: 8px;
   --d2c-radius-md: 10px;
   --d2c-radius-lg: 12px;
@@ -109,7 +109,7 @@
 
   .d2c-product-title {
     font-size: clamp(20px, 5.5vw, 28px) !important;
-    font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif !important;
+    font-family: var(--font-family-heading) !important;
     font-weight: 900 !important;
     line-height: 1.3 !important;
     padding: 4px 0 !important;
@@ -446,7 +446,7 @@
 .d2c-product-title {
   font-size: 42px;
   font-weight: 900;
-  font-family: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+  font-family: var(--font-family-heading);
   color: #000000;
   line-height: 1.15;
   margin: 0;
@@ -1033,7 +1033,7 @@
     <div class="d2c-product-info">
       <!-- Tag / Category Label -->
       <div class="d2c-brand-award-row">
-        <span class="d2c-handwriting-label" style="font-family: 'Inter', sans-serif; font-size: 42px; font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
+        <span class="d2c-handwriting-label" style="font-family: var(--font-family-sans); font-size: 42px; font-weight: 700; color: #000000; line-height: 1; letter-spacing: 0;">Hague Protect</span>
         {%- if section.settings.award_text != blank -%}
           <span class="d2c-award-badge">{{ section.settings.award_text }}</span>
         {%- endif -%}

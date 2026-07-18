@@ -318,7 +318,7 @@
             {%- if section.settings.logo_text contains '.' -%}{%- assign footer_logo = section.settings.logo_text -%}{%- endif -%}
             <img src="{{ footer_logo | asset_url }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
           {%- else -%}
-            <span style="font-family: 'Inter', sans-serif; font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
+            <span style="font-family: var(--font-family-sans); font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
               {{ section.settings.logo_text }}
             </span>
           {%- endif -%}

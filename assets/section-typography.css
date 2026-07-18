@@ -6,6 +6,9 @@
 #MainContent .shopify-section .hero-fullscreen__heading,
 #MainContent .shopify-section .corp-hero__title,
 #MainContent .shopify-section .biz-hero__title,
+#MainContent .shopify-section .how-to-banner__title,
+#MainContent .shopify-section .d2c-product-title,
+#MainContent .shopify-section .skincare-hero__title,
 #MainContent .shopify-section .story-banner__heading {
   font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
@@ -15,6 +18,14 @@
 
 /* H2 / section titles — exclude AI Story banner headings (they use block typography) */
 #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
+#MainContent .shopify-section .skincare-builder__title,
+#MainContent .shopify-section .skincare-concerns__title,
+#MainContent .shopify-section .skincare-explanation__title,
+#MainContent .shopify-section .skincare-intro__title,
+#MainContent .shopify-section .corp-features__heading,
+#MainContent .shopify-section .how-to-videos__heading,
+#MainContent .shopify-section .bestsellers__heading-dtc,
+#MainContent .shopify-section .bundle-title,
 #MainContent .shopify-section .fb__title,
 #MainContent .shopify-section .fc-heading,
 #MainContent .shopify-section .mat-headline,

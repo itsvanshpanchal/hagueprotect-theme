@@ -12,7 +12,7 @@
   #shopify-section-{{ section.id }} .faq-custom {
     background-color: {{ section.settings.bg_color | default: '#F8F9FA' }};
     padding: {% if is_page_layout %}clamp(72px, 10vw, 110px){% else %}clamp(60px, 8vw, 100px){% endif %} 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-family-sans);
   }
 
   #shopify-section-{{ section.id }} .faq-custom__container {
@@ -45,7 +45,7 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__page-title {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: clamp(32px, 5vw, 42px) !important;
     font-weight: 800 !important;
     color: #111111 !important;
@@ -64,7 +64,7 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__heading {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: clamp(16px, 2.5vw, 18px) !important;
     font-weight: 600 !important;
     color: {{ section.settings.accent_color | default: '#E02020' }} !important;
@@ -127,7 +127,7 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__question {
-    font-family: 'Inter', sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: clamp(14px, 1.6vw, 17px) !important;
     font-weight: 600 !important;
     color: #111111 !important;

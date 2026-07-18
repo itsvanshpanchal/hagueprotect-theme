@@ -15,8 +15,8 @@
      Do not hardcode them here — that overwrites editor changes. */
   --font-family-h1: var(--font-family-heading);
   --font-family-forte: var(--font-family-heading);
-  --heading-weight: 400;
-  --subheading-weight: 400;
+  --heading-weight: var(--font-weight-heading, 400);
+  --subheading-weight: var(--font-weight-h2, 400);
   --heading-line-height: 1.05;
   --heading-letter-spacing: 0.03em;
   --heading-size-lg: clamp(36px, 4.8vw, 56px);
@@ -449,16 +449,29 @@ h6 {
   }
 }
 
-/* Section display headings only — Bebas Neue titles */
+/* H1 / hero display headings — driven by H1 typography vars */
 .hp-display-heading,
 main h1,
 .hero-fullscreen__heading,
 .d2c-product-title,
 .skincare-hero__title,
 .corp-hero__title,
-.how-to-banner__title,
+.how-to-banner__title {
+  font-family: var(--font-family-heading) !important;
+  font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
+  font-style: var(--font-style-heading, normal) !important;
+  letter-spacing: var(--heading-letter-spacing) !important;
+  line-height: var(--heading-line-height) !important;
+  text-transform: uppercase !important;
+  font-size: var(--heading-size-xl) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Section titles (H2) — driven by H2 typography vars so section editor changes apply */
 .trending-social__heading,
 .bestsellers__heading-dtc,
+.bs-coverflow__heading,
+.fb__title,
 .fc-heading,
 .hp-fam-sec__heading,
 .mat-headline,
@@ -468,23 +481,24 @@ main h2.h2,
 .reviews-sec__heading,
 .product-rec__heading,
 .comm-headline,
-.brand-banner__title,
 .social-slider__heading,
 .hp-dna__heading,
 .promo-banner__heading,
 .corp-features__heading,
 .how-to-videos__heading,
 .bundle-title,
+.brand-banner__title,
 .skincare-intro__title,
 .skincare-explanation__title,
 .skincare-concerns__title,
 .skincare-builder__title {
-  font-family: var(--font-family-heading) !important;
-  font-weight: var(--heading-weight) !important;
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-weight: var(--font-weight-h2, var(--subheading-weight, 400)) !important;
+  font-style: var(--font-style-h2, normal) !important;
   letter-spacing: var(--heading-letter-spacing) !important;
   line-height: var(--heading-line-height) !important;
   text-transform: uppercase !important;
-  font-size: var(--heading-size-xl) !important;
+  font-size: var(--section-heading-size, var(--heading-size-xl)) !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -498,7 +512,7 @@ main h2.h2,
 .hero-fullscreen__heading > span[aria-hidden="true"] {
   font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero) !important;
-  font-weight: var(--heading-weight) !important;
+  font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
   letter-spacing: var(--heading-letter-spacing) !important;
   line-height: 1.02 !important;
   text-transform: uppercase !important;

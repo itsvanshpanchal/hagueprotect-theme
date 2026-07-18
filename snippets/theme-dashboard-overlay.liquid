@@ -10,10 +10,10 @@
     <!-- User Welcome Greeting Banner -->
     <div style="background: #ffffff; border: 1px solid #e8e8ea; border-radius: 16px; padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.02); flex-wrap: wrap;">
       <div style="display: flex; flex-direction: column; gap: 6px;">
-        <h1 style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 800; color: #111; letter-spacing: -0.03em; margin: 0; text-transform: uppercase;">Hello, <span id="ThemeUserGreeting">Guest</span></h1>
-        <p style="font-family: 'Inter', sans-serif; font-size: 14px; color: #666; margin: 0; line-height: 1.5;">Welcome back to your HAGUE PROTECT dashboard.</p>
+        <h1 style="font-family: var(--font-family-sans); font-size: 28px; font-weight: 800; color: #111; letter-spacing: -0.03em; margin: 0; text-transform: uppercase;">Hello, <span id="ThemeUserGreeting">Guest</span></h1>
+        <p style="font-family: var(--font-family-sans); font-size: 14px; color: #666; margin: 0; line-height: 1.5;">Welcome back to your HAGUE PROTECT dashboard.</p>
       </div>
-      <button onclick="localStorage.clear(); window.location.hash='#login'; checkView();" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 700; color: #FF2B2B; text-decoration: none; border: 1.5px solid #FF2B2B; background: transparent; padding: 12px 24px; border-radius: 30px; transition: all 0.2s ease; cursor: pointer;">
+      <button onclick="localStorage.clear(); window.location.hash='#login'; checkView();" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-family-sans); font-size: 13.5px; font-weight: 700; color: #FF2B2B; text-decoration: none; border: 1.5px solid #FF2B2B; background: transparent; padding: 12px 24px; border-radius: 30px; transition: all 0.2s ease; cursor: pointer;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3H7a2 2 0 00-2 2v14a2 2 0 002 2h8m4-9l-4-4m4 4l-4 4m4-4H9" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Sign Out
       </button>
@@ -23,10 +23,10 @@
     <div style="display: flex; flex-direction: column; gap: 32px; background: #ffffff; border: 1px solid #e8e8ea; border-radius: 16px; padding: 40px; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.02);">
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px solid #eee; padding-bottom: 24px; flex-wrap: wrap;">
         <div style="display: flex; flex-direction: column; gap: 4px;">
-          <span style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.08em;">Recent Package</span>
-          <h3 style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: #111; margin:0; text-transform: uppercase; letter-spacing: -0.02em;">Order #HG928371</h3>
+          <span style="font-family: var(--font-family-sans); font-size: 12px; font-weight: 800; color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.08em;">Recent Package</span>
+          <h3 style="font-family: var(--font-family-sans); font-size: 20px; font-weight: 800; color: #111; margin:0; text-transform: uppercase; letter-spacing: -0.02em;">Order #HG928371</h3>
         </div>
-        <span style="background: #FFF3F3; color: #FF2B2B; font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 700; padding: 10px 20px; border-radius: 30px; letter-spacing: 0.03em; border: 1px solid #FFE5E5;">Est. Delivery: Today</span>
+        <span style="background: #FFF3F3; color: #FF2B2B; font-family: var(--font-family-sans); font-size: 13.5px; font-weight: 700; padding: 10px 20px; border-radius: 30px; letter-spacing: 0.03em; border: 1px solid #FFE5E5;">Est. Delivery: Today</span>
       </div>
 
       <!-- Amazon Progress Steps Tracker -->
@@ -37,22 +37,22 @@
 
           <div class="track-step" style="display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 3; width: 25%; text-align: center;">
             <div style="width: 42px; height: 42px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);">✓</div>
-            <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #111;">Order Confirmed</span>
+            <span style="font-family: var(--font-family-sans); font-size: 14px; font-weight: 700; color: #111;">Order Confirmed</span>
           </div>
 
           <div class="track-step" style="display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 3; width: 25%; text-align: center;">
             <div style="width: 42px; height: 42px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);">✓</div>
-            <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #111;">Processing</span>
+            <span style="font-family: var(--font-family-sans); font-size: 14px; font-weight: 700; color: #111;">Processing</span>
           </div>
 
           <div class="track-step" style="display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 3; width: 25%; text-align: center;">
             <div id="ThemeStep3Indicator" style="width: 42px; height: 42px; border-radius: 50%; background: #22C55E; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">✓</div>
-            <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #111;" id="ThemeStep3Label">Out for Delivery</span>
+            <span style="font-family: var(--font-family-sans); font-size: 14px; font-weight: 700; color: #111;" id="ThemeStep3Label">Out for Delivery</span>
           </div>
 
           <div class="track-step" style="display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 3; width: 25%; text-align: center;">
             <div id="ThemeStep4Indicator" style="width: 42px; height: 42px; border-radius: 50%; background: #eee; color: #888; display: flex; align-items: center; justify-content: center; font-weight: 800; border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">4</div>
-            <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #666;" id="ThemeStep4Label">Delivered</span>
+            <span style="font-family: var(--font-family-sans); font-size: 14px; font-weight: 700; color: #666;" id="ThemeStep4Label">Delivered</span>
           </div>
         </div>
       </div>

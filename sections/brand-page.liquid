@@ -24,7 +24,7 @@
   assign products_count = section.settings.products_count | default: 4
 -%}
 
-<div class="brandpage" style="font-family:'Inter',sans-serif;">
+<div class="brandpage" style="font-family: var(--font-family-sans);">
 
   <!-- Banner -->
   <section style="background:linear-gradient(165deg,{{ section.settings.banner_bg_from | default: '#f6f6f6' }} 0%,{{ section.settings.banner_bg_to | default: '#e9e9e9' }} 100%); padding:{{ section.settings.banner_padding | default: 96 }}px 20px; text-align:center;">

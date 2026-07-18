@@ -3,7 +3,7 @@
 [class*="mat-font--"],
 .mat-section .mat-menu-item[class*="mat-font--"],
 .mat-section .mat-menu-item-text[class*="mat-font--"] {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-family: var(--font-family-sans) !important;
   font-weight: 400 !important;
   font-style: normal !important;
   text-transform: none !important;
