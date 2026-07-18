@@ -1,180 +1,182 @@
 <style>
-  /* ── Bahnschrift ── */
+  /* Custom brand fonts — dual format hints for better browser support */
+
+  /* Bahnschrift */
   @font-face {
     font-family: 'Bahnschrift';
-    src: url('{{ 'bahnschrift-regular.otf' | asset_url }}') format('opentype');
+    src: url({{ 'bahnschrift-regular.otf' | asset_url | json }}) format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Bahnschrift';
-    src: url('{{ 'bahnschrift-semibold.otf' | asset_url }}') format('opentype');
+    src: url({{ 'bahnschrift-semibold.otf' | asset_url | json }}) format('opentype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Bahnschrift';
-    src: url('{{ 'bahnschrift-bold.otf' | asset_url }}') format('opentype');
+    src: url({{ 'bahnschrift-bold.otf' | asset_url | json }}) format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Bahnschrift Semibold';
-    src: url('{{ 'bahnschrift-semibold.otf' | asset_url }}') format('opentype');
-    font-weight: 400;
+    src: url({{ 'bahnschrift-semibold.otf' | asset_url | json }}) format('opentype');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Bahnschrift Bold';
-    src: url('{{ 'bahnschrift-bold.otf' | asset_url }}') format('opentype');
-    font-weight: 400;
+    src: url({{ 'bahnschrift-bold.otf' | asset_url | json }}) format('opentype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
 
-  /* ── Calisto MT ── */
+  /* Calisto MT */
   @font-face {
     font-family: 'Calisto MT';
-    src: url('{{ 'calisto-mt-regular.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'calisto-mt-regular.ttf' | asset_url | json }}) format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT';
-    src: url('{{ 'calisto-mt-bold.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'calisto-mt-bold.ttf' | asset_url | json }}) format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT';
-    src: url('{{ 'calisto-mt-italic.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'calisto-mt-italic.ttf' | asset_url | json }}) format('truetype');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT';
-    src: url('{{ 'calisto-mt-bold-italic.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'calisto-mt-bold-italic.ttf' | asset_url | json }}) format('truetype');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT Bold';
-    src: url('{{ 'calisto-mt-bold.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'calisto-mt-bold.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT Italic';
-    src: url('{{ 'calisto-mt-italic.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'calisto-mt-italic.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calisto MT Bold Italic';
-    src: url('{{ 'calisto-mt-bold-italic.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'calisto-mt-bold-italic.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
 
-  /* ── Jacques Gilles ── */
+  /* Jacques Gilles */
   @font-face {
     font-family: 'Jacques Gilles';
-    src: url('{{ 'jacques-gilles.otf' | asset_url }}') format('opentype');
-    font-weight: 400;
+    src: url({{ 'jacques-gilles.otf' | asset_url | json }}) format('opentype');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
   }
 
-  /* ── Inter 18pt ── */
+  /* Inter 18pt */
   @font-face {
     font-family: 'Inter 18pt';
-    src: url('{{ 'inter-18pt-regular.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'inter-18pt-regular.ttf' | asset_url | json }}) format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt';
-    src: url('{{ 'inter-18pt-medium.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'inter-18pt-medium.ttf' | asset_url | json }}) format('truetype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt';
-    src: url('{{ 'inter-18pt-semibold.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'inter-18pt-semibold.ttf' | asset_url | json }}) format('truetype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt';
-    src: url('{{ 'inter-18pt-bold.ttf' | asset_url }}') format('truetype');
+    src: url({{ 'inter-18pt-bold.ttf' | asset_url | json }}) format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt Medium';
-    src: url('{{ 'inter-18pt-medium.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'inter-18pt-medium.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt Semibold';
-    src: url('{{ 'inter-18pt-semibold.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'inter-18pt-semibold.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Inter 18pt Bold';
-    src: url('{{ 'inter-18pt-bold.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
+    src: url({{ 'inter-18pt-bold.ttf' | asset_url | json }}) format('truetype');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }
 
-  /* ── Luthon Southard ── */
+  /* Luthon Southard */
   @font-face {
     font-family: 'Luthon Southard Script';
-    src: url('{{ 'luthon-southard-script.otf' | asset_url }}') format('opentype');
-    font-weight: 400;
+    src: url({{ 'luthon-southard-script.otf' | asset_url | json }}) format('opentype');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Luthon Southard Serif';
-    src: url('{{ 'luthon-southard-serif.otf' | asset_url }}') format('opentype');
-    font-weight: 400;
+    src: url({{ 'luthon-southard-serif.otf' | asset_url | json }}) format('opentype');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
   }
 
-  /* ── FreightText Pro ── */
+  /* FreightText Pro */
   @font-face {
     font-family: 'FreightText Pro';
-    src: url('{{ 'freight-text-pro-book.woff2' | asset_url }}') format('woff2');
-    font-weight: 400;
+    src: url({{ 'freight-text-pro-book.woff2' | asset_url | json }}) format('woff2');
+    font-weight: 400 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'FreightText Pro Book';
-    src: url('{{ 'freight-text-pro-book.woff2' | asset_url }}') format('woff2');
-    font-weight: 400;
+    src: url({{ 'freight-text-pro-book.woff2' | asset_url | json }}) format('woff2');
+    font-weight: 400 900;
     font-style: normal;
     font-display: swap;
   }

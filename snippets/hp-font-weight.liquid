@@ -1,7 +1,7 @@
 {%- comment -%}
-  Implied CSS font-weight for Google font weight variants that share one family name.
-  Named file variants (Bahnschrift Bold, Inter 18pt Medium, etc.) use unique font-family
-  names, so they stay at 400.
+  Implied CSS font-weight.
+  - Google shared-family variants (Inter Bold, etc.) need numeric weight.
+  - Named file faces (Bahnschrift Bold, Inter 18pt Medium) stay at 400.
 {%- endcomment -%}
 {%- case font_key -%}
   {%- when 'inter_light', 'montserrat_light', 'oswald_light' -%}300
@@ -10,5 +10,9 @@
   {%- when 'inter_bold', 'montserrat_bold', 'oswald_bold' -%}700
   {%- when 'inter_extrabold' -%}800
   {%- when 'inter_black' -%}900
+  {%- when 'bahnschrift_semibold', 'bahnschrift_bold',
+    'calisto_mt_bold', 'calisto_mt_italic', 'calisto_mt_bold_italic',
+    'inter_18pt_medium', 'inter_18pt_semibold', 'inter_18pt_bold',
+    'freight_text_pro_book' -%}400
   {%- else -%}400
 {%- endcase -%}

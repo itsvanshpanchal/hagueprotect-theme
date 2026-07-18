@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Hague Protect",
-    "theme_version": "2.1.0",
+    "theme_version": "2.2.0",
     "theme_author": "Hague Protect",
     "theme_documentation_url": "https://hagueprotect.com",
     "theme_support_url": "https://hagueprotect.com"
@@ -12,7 +12,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Global font defaults for the entire site. Open any section's Typography panel to change fonts/weights for that section only."
+        "content": "Font family list includes custom brand fonts with real weights at the top (Bahnschrift Bold, Inter 18pt Semibold, Calisto MT Bold, etc.). Pick the exact variant from the dropdown."
       },
       {
         "type": "header",
@@ -22,8 +22,68 @@
         "type": "select",
         "id": "font_h1_family",
         "label": "H1 font family",
-        "info": "Controls the largest hero headline text, e.g. \"DIRTY KICKS? WE MAKE 'EM HEAT.\" on the homepage banner.",
+        "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift Regular"
+          },
+          {
+            "value": "bahnschrift_semibold",
+            "label": "Bahnschrift Semibold"
+          },
+          {
+            "value": "bahnschrift_bold",
+            "label": "Bahnschrift Bold"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT Regular"
+          },
+          {
+            "value": "calisto_mt_bold",
+            "label": "Calisto MT Bold"
+          },
+          {
+            "value": "calisto_mt_italic",
+            "label": "Calisto MT Italic"
+          },
+          {
+            "value": "calisto_mt_bold_italic",
+            "label": "Calisto MT Bold Italic"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt Regular"
+          },
+          {
+            "value": "inter_18pt_medium",
+            "label": "Inter 18pt Medium"
+          },
+          {
+            "value": "inter_18pt_semibold",
+            "label": "Inter 18pt Semibold"
+          },
+          {
+            "value": "inter_18pt_bold",
+            "label": "Inter 18pt Bold"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro Book"
+          },
           {
             "value": "bebas_neue",
             "label": "Bebas Neue"
@@ -99,66 +159,6 @@
           {
             "value": "montserrat_bold",
             "label": "Montserrat Bold"
-          },
-          {
-            "value": "bahnschrift",
-            "label": "Bahnschrift Regular"
-          },
-          {
-            "value": "bahnschrift_semibold",
-            "label": "Bahnschrift Semibold"
-          },
-          {
-            "value": "bahnschrift_bold",
-            "label": "Bahnschrift Bold"
-          },
-          {
-            "value": "calisto_mt",
-            "label": "Calisto MT Regular"
-          },
-          {
-            "value": "calisto_mt_bold",
-            "label": "Calisto MT Bold"
-          },
-          {
-            "value": "calisto_mt_italic",
-            "label": "Calisto MT Italic"
-          },
-          {
-            "value": "calisto_mt_bold_italic",
-            "label": "Calisto MT Bold Italic"
-          },
-          {
-            "value": "jacques_gilles",
-            "label": "Jacques Gilles"
-          },
-          {
-            "value": "inter_18pt",
-            "label": "Inter 18pt Regular"
-          },
-          {
-            "value": "inter_18pt_medium",
-            "label": "Inter 18pt Medium"
-          },
-          {
-            "value": "inter_18pt_semibold",
-            "label": "Inter 18pt Semibold"
-          },
-          {
-            "value": "inter_18pt_bold",
-            "label": "Inter 18pt Bold"
-          },
-          {
-            "value": "luthon_southard_script",
-            "label": "Luthon Southard Script"
-          },
-          {
-            "value": "luthon_southard_serif",
-            "label": "Luthon Southard Serif"
-          },
-          {
-            "value": "freight_text_pro",
-            "label": "FreightText Pro Book"
           }
         ],
         "default": "bebas_neue"
@@ -269,8 +269,68 @@
         "type": "select",
         "id": "font_h2_family",
         "label": "H2 font family",
-        "info": "Controls large section titles, e.g. \"Bestselling Sneaker Care\", \"Explore the Ecosystem\", \"Trending on Social Media\".",
+        "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift Regular"
+          },
+          {
+            "value": "bahnschrift_semibold",
+            "label": "Bahnschrift Semibold"
+          },
+          {
+            "value": "bahnschrift_bold",
+            "label": "Bahnschrift Bold"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT Regular"
+          },
+          {
+            "value": "calisto_mt_bold",
+            "label": "Calisto MT Bold"
+          },
+          {
+            "value": "calisto_mt_italic",
+            "label": "Calisto MT Italic"
+          },
+          {
+            "value": "calisto_mt_bold_italic",
+            "label": "Calisto MT Bold Italic"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt Regular"
+          },
+          {
+            "value": "inter_18pt_medium",
+            "label": "Inter 18pt Medium"
+          },
+          {
+            "value": "inter_18pt_semibold",
+            "label": "Inter 18pt Semibold"
+          },
+          {
+            "value": "inter_18pt_bold",
+            "label": "Inter 18pt Bold"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro Book"
+          },
           {
             "value": "bebas_neue",
             "label": "Bebas Neue"
@@ -346,66 +406,6 @@
           {
             "value": "montserrat_bold",
             "label": "Montserrat Bold"
-          },
-          {
-            "value": "bahnschrift",
-            "label": "Bahnschrift Regular"
-          },
-          {
-            "value": "bahnschrift_semibold",
-            "label": "Bahnschrift Semibold"
-          },
-          {
-            "value": "bahnschrift_bold",
-            "label": "Bahnschrift Bold"
-          },
-          {
-            "value": "calisto_mt",
-            "label": "Calisto MT Regular"
-          },
-          {
-            "value": "calisto_mt_bold",
-            "label": "Calisto MT Bold"
-          },
-          {
-            "value": "calisto_mt_italic",
-            "label": "Calisto MT Italic"
-          },
-          {
-            "value": "calisto_mt_bold_italic",
-            "label": "Calisto MT Bold Italic"
-          },
-          {
-            "value": "jacques_gilles",
-            "label": "Jacques Gilles"
-          },
-          {
-            "value": "inter_18pt",
-            "label": "Inter 18pt Regular"
-          },
-          {
-            "value": "inter_18pt_medium",
-            "label": "Inter 18pt Medium"
-          },
-          {
-            "value": "inter_18pt_semibold",
-            "label": "Inter 18pt Semibold"
-          },
-          {
-            "value": "inter_18pt_bold",
-            "label": "Inter 18pt Bold"
-          },
-          {
-            "value": "luthon_southard_script",
-            "label": "Luthon Southard Script"
-          },
-          {
-            "value": "luthon_southard_serif",
-            "label": "Luthon Southard Serif"
-          },
-          {
-            "value": "freight_text_pro",
-            "label": "FreightText Pro Book"
           }
         ],
         "default": "bebas_neue"
@@ -493,8 +493,68 @@
         "type": "select",
         "id": "font_paragraph_family",
         "label": "Paragraph font family",
-        "info": "Controls body text and descriptions below titles, e.g. product copy, subtitles, and paragraph content.",
+        "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift Regular"
+          },
+          {
+            "value": "bahnschrift_semibold",
+            "label": "Bahnschrift Semibold"
+          },
+          {
+            "value": "bahnschrift_bold",
+            "label": "Bahnschrift Bold"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT Regular"
+          },
+          {
+            "value": "calisto_mt_bold",
+            "label": "Calisto MT Bold"
+          },
+          {
+            "value": "calisto_mt_italic",
+            "label": "Calisto MT Italic"
+          },
+          {
+            "value": "calisto_mt_bold_italic",
+            "label": "Calisto MT Bold Italic"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt Regular"
+          },
+          {
+            "value": "inter_18pt_medium",
+            "label": "Inter 18pt Medium"
+          },
+          {
+            "value": "inter_18pt_semibold",
+            "label": "Inter 18pt Semibold"
+          },
+          {
+            "value": "inter_18pt_bold",
+            "label": "Inter 18pt Bold"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro Book"
+          },
           {
             "value": "inter",
             "label": "Inter Regular"
@@ -542,66 +602,6 @@
           {
             "value": "montserrat_bold",
             "label": "Montserrat Bold"
-          },
-          {
-            "value": "bahnschrift",
-            "label": "Bahnschrift Regular"
-          },
-          {
-            "value": "bahnschrift_semibold",
-            "label": "Bahnschrift Semibold"
-          },
-          {
-            "value": "bahnschrift_bold",
-            "label": "Bahnschrift Bold"
-          },
-          {
-            "value": "calisto_mt",
-            "label": "Calisto MT Regular"
-          },
-          {
-            "value": "calisto_mt_bold",
-            "label": "Calisto MT Bold"
-          },
-          {
-            "value": "calisto_mt_italic",
-            "label": "Calisto MT Italic"
-          },
-          {
-            "value": "calisto_mt_bold_italic",
-            "label": "Calisto MT Bold Italic"
-          },
-          {
-            "value": "jacques_gilles",
-            "label": "Jacques Gilles"
-          },
-          {
-            "value": "inter_18pt",
-            "label": "Inter 18pt Regular"
-          },
-          {
-            "value": "inter_18pt_medium",
-            "label": "Inter 18pt Medium"
-          },
-          {
-            "value": "inter_18pt_semibold",
-            "label": "Inter 18pt Semibold"
-          },
-          {
-            "value": "inter_18pt_bold",
-            "label": "Inter 18pt Bold"
-          },
-          {
-            "value": "luthon_southard_script",
-            "label": "Luthon Southard Script"
-          },
-          {
-            "value": "luthon_southard_serif",
-            "label": "Luthon Southard Serif"
-          },
-          {
-            "value": "freight_text_pro",
-            "label": "FreightText Pro Book"
           },
           {
             "value": "bebas_neue",
@@ -713,8 +713,68 @@
         "type": "select",
         "id": "font_eyebrow_family",
         "label": "Eyebrow font family",
-        "info": "Controls small blue labels above section titles, e.g. \"BEST SELLERS\", \"SOCIAL PROOF\", \"OUR FAMILY OF BRANDS\".",
+        "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
         "options": [
+          {
+            "value": "bahnschrift",
+            "label": "Bahnschrift Regular"
+          },
+          {
+            "value": "bahnschrift_semibold",
+            "label": "Bahnschrift Semibold"
+          },
+          {
+            "value": "bahnschrift_bold",
+            "label": "Bahnschrift Bold"
+          },
+          {
+            "value": "calisto_mt",
+            "label": "Calisto MT Regular"
+          },
+          {
+            "value": "calisto_mt_bold",
+            "label": "Calisto MT Bold"
+          },
+          {
+            "value": "calisto_mt_italic",
+            "label": "Calisto MT Italic"
+          },
+          {
+            "value": "calisto_mt_bold_italic",
+            "label": "Calisto MT Bold Italic"
+          },
+          {
+            "value": "inter_18pt",
+            "label": "Inter 18pt Regular"
+          },
+          {
+            "value": "inter_18pt_medium",
+            "label": "Inter 18pt Medium"
+          },
+          {
+            "value": "inter_18pt_semibold",
+            "label": "Inter 18pt Semibold"
+          },
+          {
+            "value": "inter_18pt_bold",
+            "label": "Inter 18pt Bold"
+          },
+          {
+            "value": "jacques_gilles",
+            "label": "Jacques Gilles"
+          },
+          {
+            "value": "luthon_southard_script",
+            "label": "Luthon Southard Script"
+          },
+          {
+            "value": "luthon_southard_serif",
+            "label": "Luthon Southard Serif"
+          },
+          {
+            "value": "freight_text_pro",
+            "label": "FreightText Pro Book"
+          },
           {
             "value": "inter",
             "label": "Inter Regular"
@@ -762,66 +822,6 @@
           {
             "value": "montserrat_bold",
             "label": "Montserrat Bold"
-          },
-          {
-            "value": "bahnschrift",
-            "label": "Bahnschrift Regular"
-          },
-          {
-            "value": "bahnschrift_semibold",
-            "label": "Bahnschrift Semibold"
-          },
-          {
-            "value": "bahnschrift_bold",
-            "label": "Bahnschrift Bold"
-          },
-          {
-            "value": "calisto_mt",
-            "label": "Calisto MT Regular"
-          },
-          {
-            "value": "calisto_mt_bold",
-            "label": "Calisto MT Bold"
-          },
-          {
-            "value": "calisto_mt_italic",
-            "label": "Calisto MT Italic"
-          },
-          {
-            "value": "calisto_mt_bold_italic",
-            "label": "Calisto MT Bold Italic"
-          },
-          {
-            "value": "jacques_gilles",
-            "label": "Jacques Gilles"
-          },
-          {
-            "value": "inter_18pt",
-            "label": "Inter 18pt Regular"
-          },
-          {
-            "value": "inter_18pt_medium",
-            "label": "Inter 18pt Medium"
-          },
-          {
-            "value": "inter_18pt_semibold",
-            "label": "Inter 18pt Semibold"
-          },
-          {
-            "value": "inter_18pt_bold",
-            "label": "Inter 18pt Bold"
-          },
-          {
-            "value": "luthon_southard_script",
-            "label": "Luthon Southard Script"
-          },
-          {
-            "value": "luthon_southard_serif",
-            "label": "Luthon Southard Serif"
-          },
-          {
-            "value": "freight_text_pro",
-            "label": "FreightText Pro Book"
           },
           {
             "value": "bebas_neue",

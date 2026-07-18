@@ -1,0 +1,12 @@
+{%- comment -%}
+  Named file variants use unique font-family names registered at weight 400 / style normal.
+  Return true-ish via non-empty when key is a dedicated face file.
+{%- endcomment -%}
+{%- case font_key -%}
+  {%- when 'bahnschrift_semibold', 'bahnschrift_bold',
+    'calisto_mt_bold', 'calisto_mt_italic', 'calisto_mt_bold_italic',
+    'inter_18pt_medium', 'inter_18pt_semibold', 'inter_18pt_bold',
+    'freight_text_pro_book' -%}
+    named
+  {%- else -%}
+{%- endcase -%}

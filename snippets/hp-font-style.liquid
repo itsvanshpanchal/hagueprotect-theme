@@ -1,5 +1,7 @@
-{%- comment -%}Outputs implied font-style for italic variants.{%- endcomment -%}
+{%- comment -%}
+  For shared Calisto MT family only. Named italic faces already bake italic glyphs
+  and are registered as font-style: normal.
+{%- endcomment -%}
 {%- case font_key -%}
-  {%- when 'calisto_mt_italic', 'calisto_mt_bold_italic' -%}italic
   {%- else -%}normal
 {%- endcase -%}
