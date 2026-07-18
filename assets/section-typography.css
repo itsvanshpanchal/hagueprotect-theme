@@ -13,8 +13,8 @@
   font-style: var(--font-style-heading, normal) !important;
 }
 
-/* H2 / section titles */
-#MainContent .shopify-section h2,
+/* H2 / section titles — exclude AI Story banner headings (they use block typography) */
+#MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
 #MainContent .shopify-section .fb__title,
 #MainContent .shopify-section .fc-heading,
 #MainContent .shopify-section .mat-headline,
@@ -39,7 +39,7 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
-#MainContent .shopify-section h3,
+#MainContent .shopify-section h3:not([class*="ai-story-banner"]),
 #MainContent .shopify-section h4,
 #MainContent .shopify-section h5,
 #MainContent .shopify-section h6 {
@@ -94,7 +94,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  #MainContent .shopify-section h2,
+  #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
   #MainContent .shopify-section .fb__title,
   #MainContent .shopify-section .fc-heading,
   #MainContent .shopify-section .mat-headline,

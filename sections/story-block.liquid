@@ -46,6 +46,7 @@
     width: 100%;
   }
 
+  #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow,
   .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow {
     display: block;
     margin: 0;
@@ -59,6 +60,7 @@
     color: {{ section.settings.eyebrow_color | default: '#2563eb' }} !important;
   }
 
+  #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading,
   .story-banner-wrapper-{{ section.id }} .story-banner__heading {
     font-family: var(--font-family-heading) !important;
     font-size: var(--heading-size-xl) !important;
@@ -71,6 +73,7 @@
     margin: 0 !important;
   }
 
+  #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__subheading,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: var(--section-heading-size) !important;
@@ -83,6 +86,7 @@
     margin: 0 !important;
   }
 
+  #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
   .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
     font-family: var(--font-family-sans) !important;
     font-size: var(--section-subheading-size, var(--body-font-size)) !important;
@@ -219,12 +223,12 @@
               <span class="story-banner__eyebrow">{{ banner_eyebrow }}</span>
             {%- endif -%}
             {%- if banner_heading != blank -%}
-              <h2 class="story-banner__heading">{{ banner_heading }}</h2>
+              <div class="story-banner__heading" role="heading" aria-level="2">{{ banner_heading }}</div>
             {%- endif -%}
           </div>
         {%- endif -%}
         {%- if banner_subheading != blank -%}
-          <h3 class="story-banner__subheading">{{ banner_subheading }}</h3>
+          <div class="story-banner__subheading" role="heading" aria-level="3">{{ banner_subheading }}</div>
         {%- endif -%}
         {%- if banner_paragraph != blank -%}
           <p class="story-banner__paragraph">{{ banner_paragraph }}</p>

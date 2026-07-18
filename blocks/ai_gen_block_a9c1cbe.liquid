@@ -61,6 +61,18 @@
   endif
 -%}
 
+
+{%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
+{%- capture subheading_stack -%}{% render 'hp-font-stack', font_key: subheading_family %}{%- endcapture -%}
+{%- capture text_stack -%}{% render 'hp-font-stack', font_key: text_family %}{%- endcapture -%}
+{%- capture button_stack -%}{% render 'hp-font-stack', font_key: button_family %}{%- endcapture -%}
+{%- liquid
+  assign heading_stack = heading_stack | strip
+  assign subheading_stack = subheading_stack | strip
+  assign text_stack = text_stack | strip
+  assign button_stack = button_stack | strip
+-%}
+
 {% style %}
   .ai-story-banner-{{ ai_gen_id }} {
     position: relative;
@@ -128,60 +140,63 @@
     gap: 0;
   }
 
+  #MainContent .shopify-section .ai-story-banner-subheading-{{ ai_gen_id }},
   .ai-story-banner-subheading-{{ ai_gen_id }} {
-    color: {{ block.settings.subheading_color }};
-    font-family: {% render 'hp-font-stack', font_key: subheading_family %};
-    font-size: {{ block.settings.subheading_size }}px;
-    font-weight: {{ subheading_weight }};
-    font-style: {{ subheading_style }};
-    margin: 0 0 {{ block.settings.subheading_spacing }}px;
-    line-height: 1.4;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    color: {{ block.settings.subheading_color }} !important;
+    font-family: {{ subheading_stack }} !important;
+    font-size: {{ block.settings.subheading_size }}px !important;
+    font-weight: {{ subheading_weight }} !important;
+    font-style: {{ subheading_style }} !important;
+    margin: 0 0 {{ block.settings.subheading_spacing }}px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
   }
 
+  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }},
+  #MainContent .shopify-section h2.ai-story-banner-heading-{{ ai_gen_id }},
   .ai-story-banner-heading-{{ ai_gen_id }} {
-    color: {{ block.settings.heading_color }};
-    font-family: {% render 'hp-font-stack', font_key: heading_family %};
-    font-size: {{ block.settings.heading_size }}px;
-    font-weight: {{ heading_weight }};
-    font-style: {{ heading_style }};
-    margin: 0 0 {{ block.settings.heading_spacing }}px;
-    line-height: 1.05;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
+    color: {{ block.settings.heading_color }} !important;
+    font-family: {{ heading_stack }} !important;
+    font-size: {{ block.settings.heading_size }}px !important;
+    font-weight: {{ heading_weight }} !important;
+    font-style: {{ heading_style }} !important;
+    margin: 0 0 {{ block.settings.heading_spacing }}px !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+    text-transform: uppercase !important;
   }
 
-  .ai-story-banner-text-{{ ai_gen_id }} {
-    color: {{ block.settings.text_color }};
-    font-family: {% render 'hp-font-stack', font_key: text_family %};
-    font-size: {{ block.settings.text_size }}px;
-    font-weight: {{ text_weight }};
-    font-style: {{ text_style }};
-    line-height: 1.55;
-    margin: 0;
-  }
-
+  #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
+  #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }} p,
+  .ai-story-banner-text-{{ ai_gen_id }},
   .ai-story-banner-text-{{ ai_gen_id }} p {
-    margin: 0;
-    color: inherit;
-    font: inherit;
+    color: {{ block.settings.text_color }} !important;
+    font-family: {{ text_stack }} !important;
+    font-size: {{ block.settings.text_size }}px !important;
+    font-weight: {{ text_weight }} !important;
+    font-style: {{ text_style }} !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
   }
 
   .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
     margin-top: {{ block.settings.button_spacing }}px;
   }
 
+  #MainContent .shopify-section .ai-story-banner-button-{{ ai_gen_id }},
   .ai-story-banner-button-{{ ai_gen_id }} {
     display: inline-block;
     padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
     background-color: {{ block.settings.button_background_color }};
-    color: {{ block.settings.button_text_color }};
+    color: {{ block.settings.button_text_color }} !important;
     text-decoration: none;
     border-radius: {{ block.settings.button_border_radius }}px;
-    font-family: {% render 'hp-font-stack', font_key: button_family %};
-    font-size: {{ block.settings.button_text_size }}px;
-    font-weight: {{ button_weight }};
+    font-family: {{ button_stack }} !important;
+    font-size: {{ block.settings.button_text_size }}px !important;
+    font-weight: {{ button_weight }} !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -285,9 +300,9 @@
       {% endif %}
 
       {% if block.settings.heading != blank %}
-        <h2 class="ai-story-banner-heading-{{ ai_gen_id }}">
+        <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
           {{ block.settings.heading }}
-        </h2>
+        </div>
       {% endif %}
 
       {% if block.settings.text != blank %}
