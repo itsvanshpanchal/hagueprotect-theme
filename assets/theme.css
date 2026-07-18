@@ -849,7 +849,7 @@ body.template-index .section-heading-stack--center > .brandsel__eyebrow {
   text-transform: none !important;
 }
 
-/* Header mega menu subheadings — controlled by Header Typography → Mega menu subheadings */
+/* Header mega menu — titles + subcategory links (Header → Mega menu text) */
 h3.megamenu-heading,
 .megamenu-heading,
 h4.mobile-accordion-category-heading,
@@ -872,6 +872,22 @@ h4.mobile-accordion-category-heading,
   font-style: var(--font-style-h2, normal) !important;
   letter-spacing: 0.06em !important;
   margin-bottom: 6px !important;
+}
+
+.megamenu-panel,
+.megamenu-panel a,
+.megamenu-panel span,
+.megamenu-link-item,
+.megamenu-link-item a,
+.mobile-menu-drawer a,
+.mobile-accordion-content a {
+  font-family: var(--font-family-h2, var(--font-family-sans)) !important;
+  font-style: var(--font-style-h2, normal) !important;
+}
+
+.megamenu-link-item a,
+.mobile-accordion-content a {
+  font-weight: var(--font-weight-h2, 500) !important;
 }
 
 /* Category cards + DNA columns — compact UI headings */

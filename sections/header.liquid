@@ -327,6 +327,7 @@
     gap: 16px;
   }
 
+  /* Mega menu: titles + subcategory links share the same editor font group */
   #shopify-section-{{ section.id }} h3.megamenu-heading,
   #shopify-section-{{ section.id }} .megamenu-heading,
   #shopify-section-{{ section.id }} h4.mobile-accordion-category-heading,
@@ -347,6 +348,7 @@
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: inherit !important;
+    font-style: inherit !important;
     color: inherit !important;
     text-transform: inherit !important;
     letter-spacing: inherit !important;
@@ -391,17 +393,32 @@
     margin: 0;
   }
 
+  #shopify-section-{{ section.id }} .megamenu-panel,
+  #shopify-section-{{ section.id }} .megamenu-panel a,
+  #shopify-section-{{ section.id }} .megamenu-panel span,
+  #shopify-section-{{ section.id }} .megamenu-link-item,
   #shopify-section-{{ section.id }} .megamenu-link-item a,
+  #shopify-section-{{ section.id }} .mobile-menu-drawer a,
+  #shopify-section-{{ section.id }} .mobile-accordion-content a,
   .megamenu-link-item a {
-    font-family: var(--font-family-sans) !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-style: var(--font-style-h2, normal) !important;
+  }
+
+  #shopify-section-{{ section.id }} .megamenu-link-item a,
+  #shopify-section-{{ section.id }} .mobile-accordion-content a,
+  .megamenu-link-item a {
     font-size: 13.5px !important;
-    font-weight: var(--font-weight-sans, 500) !important;
-    font-style: var(--font-style-sans, normal) !important;
+    font-weight: var(--font-weight-h2, 500) !important;
     color: #555555 !important;
     text-decoration: none;
     transition: all 0.2s ease;
     display: inline-block;
     line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .megamenu-panel span {
+    font-weight: var(--font-weight-h2, 700) !important;
   }
 
   .megamenu-link-item a:hover {
@@ -1789,7 +1806,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Fonts for the header only. Logo text, Mega menu subheadings, Shop All menu, and Search text. Brand fonts are at the top of each list."
+      "content": "Fonts for the header only. Logo text, Mega menu text (titles + links), Shop All menu, and Search text. Brand fonts are at the top of each list."
     },
     {
       "type": "header",
@@ -2018,7 +2035,7 @@
     },
     {
       "type": "header",
-      "content": "Mega menu subheadings"
+      "content": "Mega menu text (titles + links)"
     },
     {
       "type": "select",
