@@ -308,8 +308,10 @@
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow-card__title {
-    font-size: clamp(15px, 1.8vw, 17px);
-    font-weight: 600;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 600);
+    font-style: var(--font-style-sans, normal);
     color: #111111;
     line-height: 1.35;
   margin: 0;

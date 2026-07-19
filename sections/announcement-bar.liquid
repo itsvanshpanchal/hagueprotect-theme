@@ -27,8 +27,9 @@
   }
 
   .announcement-bar__item {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: var(--body-font-size, 13px);
+    font-weight: var(--font-weight-sans, 700);
+    font-style: var(--font-style-sans, normal);
     letter-spacing: 0.05em;
     padding: 0 16px;
     display: flex;
@@ -45,12 +46,12 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 989px) {
     .announcement-bar-marquee {
       height: 36px;
     }
     .announcement-bar__item {
-      font-size: 11px;
+      font-size: var(--body-font-size, 11px);
       padding: 0 12px;
       letter-spacing: 0.03em;
     }

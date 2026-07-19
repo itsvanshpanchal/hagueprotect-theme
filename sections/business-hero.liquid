@@ -65,8 +65,10 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 11px;
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size, 11px);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--biz-blue);
@@ -82,8 +84,9 @@
 
   .biz-hero__title {
     font-family: var(--font-family-heading);
-    font-size: clamp(58px, 8.5vw, 108px);
-    font-weight: 400;
+    font-size: var(--heading-size-hero, var(--heading-size-xl));
+    font-weight: var(--font-weight-heading, 400);
+    font-style: var(--font-style-heading, normal);
     line-height: 0.88;
     letter-spacing: 0.02em;
     margin: 0 0 22px;
@@ -101,7 +104,10 @@
   }
 
   .biz-hero__sub {
-    font-size: clamp(15px, 1.7vw, 18px);
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     line-height: 1.75;
     color: rgba(255, 255, 255, 0.72);
     margin: 0 0 34px;
@@ -177,7 +183,9 @@
 
   .biz-hero__stat-num {
     font-family: var(--font-family-heading);
-    font-size: clamp(36px, 4vw, 48px);
+    font-size: var(--section-heading-size, 42px);
+    font-weight: var(--font-weight-heading, 400);
+    font-style: var(--font-style-heading, normal);
     line-height: 1;
     letter-spacing: 0.02em;
     color: #ffffff;

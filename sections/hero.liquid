@@ -1,5 +1,34 @@
+{%- liquid
+  assign hero_title_desktop = section.settings.h1_font_size_desktop | default: settings.font_hero_h1_size_desktop | default: settings.font_h1_size_desktop | default: 72
+  assign hero_title_mobile = section.settings.h1_font_size_mobile | default: settings.font_hero_h1_size_mobile | default: settings.font_h1_size_mobile | default: 44
+-%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
+
+  /* Biggest title sizes — literal px from Typography (high specificity beats global CSS) */
+  #MainContent #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
+  #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
+  #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
+  #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+  #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading,
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"] {
+    font-size: {{ hero_title_desktop }}px !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+    #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading,
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"] {
+      font-size: {{ hero_title_mobile }}px !important;
+    }
+  }
 
   .hero-fullscreen {
     height: 100vh;

@@ -76,6 +76,49 @@
     when 'hero', 'corporate-gifting-hero', 'business-hero', 'premium-scrolling-hero'
       assign hero_h1_desktop = h1_desktop
       assign hero_h1_mobile = h1_mobile
+    when 'header', 'footer', 'announcement-bar', 'cart-drawer'
+      # Compact chrome UI — remap leftover homepage display sizes (e.g. 52/64)
+      assign h1_desktop = section.settings.h1_font_size_desktop | default: 21
+      assign h1_mobile = section.settings.h1_font_size_mobile | default: 14
+      assign h2_desktop = section.settings.h2_font_size_desktop | default: 14
+      assign h2_mobile = section.settings.h2_font_size_mobile | default: 13
+      assign paragraph_desktop = section.settings.paragraph_font_size_desktop | default: 15
+      assign paragraph_mobile = section.settings.paragraph_font_size_mobile | default: 14
+      assign eyebrow_desktop = section.settings.eyebrow_font_size_desktop | default: 12
+      assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile | default: 12
+      if h1_desktop > 40
+        assign h1_desktop = 21
+      endif
+      if h1_mobile > 28
+        assign h1_mobile = 14
+      endif
+      if h2_desktop > 24
+        assign h2_desktop = 14
+      endif
+      if h2_mobile > 20
+        assign h2_mobile = 13
+      endif
+      if paragraph_desktop > 24
+        assign paragraph_desktop = 15
+      endif
+      if paragraph_mobile > 20
+        assign paragraph_mobile = 14
+      endif
+      if section.type == 'header'
+        if eyebrow_desktop < 14 or eyebrow_desktop > 48
+          assign eyebrow_desktop = 28
+        endif
+        if eyebrow_mobile < 14 or eyebrow_mobile > 36
+          assign eyebrow_mobile = 22
+        endif
+      else
+        if eyebrow_desktop > 20
+          assign eyebrow_desktop = 12
+        endif
+        if eyebrow_mobile > 18
+          assign eyebrow_mobile = 12
+        endif
+      endif
   endcase
 -%}
 #shopify-section-{{ section.id }} {
@@ -102,7 +145,7 @@
   --section-label-size: {{ eyebrow_desktop }}px;
   --body-font-size: {{ paragraph_desktop }}px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 989px) {
   #shopify-section-{{ section.id }} {
     --heading-size-hero: {{ hero_h1_mobile }}px;
     --heading-size-xl: {{ h1_mobile }}px;

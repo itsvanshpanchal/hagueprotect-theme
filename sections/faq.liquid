@@ -36,8 +36,10 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__eyebrow {
-    font-size: 13px;
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size, 13px);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: {{ section.settings.accent_color | default: '#2563eb' }};
@@ -45,9 +47,10 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__page-title {
-    font-family: var(--font-family-sans) !important;
-    font-size: clamp(32px, 5vw, 42px) !important;
-    font-weight: 800 !important;
+    font-family: var(--font-family-heading) !important;
+    font-size: var(--heading-size-xl) !important;
+    font-weight: var(--font-weight-heading, 800) !important;
+    font-style: var(--font-style-heading, normal) !important;
     color: #111111 !important;
     margin: 0;
     line-height: 1.1 !important;
@@ -56,7 +59,10 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__page-description {
-    font-size: 16px;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     color: #666666;
     line-height: 1.6;
     margin: 0;
@@ -64,9 +70,10 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__heading {
-    font-family: var(--font-family-sans) !important;
-    font-size: clamp(16px, 2.5vw, 18px) !important;
-    font-weight: 600 !important;
+    font-family: var(--font-family-h2, var(--font-family-sans)) !important;
+    font-size: var(--section-heading-size) !important;
+    font-weight: var(--font-weight-h2, 600) !important;
+    font-style: var(--font-style-h2, normal) !important;
     color: {{ section.settings.accent_color | default: '#E02020' }} !important;
     margin: 0;
     padding-bottom: 6px;
@@ -128,8 +135,9 @@
 
   #shopify-section-{{ section.id }} .faq-custom__question {
     font-family: var(--font-family-sans) !important;
-    font-size: clamp(14px, 1.6vw, 17px) !important;
-    font-weight: 600 !important;
+    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+    font-weight: var(--font-weight-sans, 600) !important;
+    font-style: var(--font-style-sans, normal) !important;
     color: #111111 !important;
     margin: 0;
     line-height: 1.4 !important;

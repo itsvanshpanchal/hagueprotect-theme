@@ -24,8 +24,10 @@
   }
 
   .feature-grid__eyebrow {
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: #FF2B2B;
@@ -34,8 +36,10 @@
   }
 
   .feature-grid__heading {
-    font-size: clamp(38px, 6vw, 60px);
-    font-weight: 800;
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 800);
+    font-style: var(--font-style-h2, normal);
     color: #000;
     margin: 0;
     letter-spacing: -0.02em;
@@ -155,14 +159,19 @@
   }
 
   .feature-grid__card-heading {
-    font-size: clamp(18px, 2vw, 22px);
-    font-weight: 700;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 18px);
+    font-weight: var(--font-weight-sans, 700);
+    font-style: var(--font-style-sans, normal);
     color: #000000;
     margin: 0;
   }
 
   .feature-grid__card-text {
-    font-size: clamp(14px, 1.6vw, 16px);
+    font-family: var(--font-family-sans);
+    font-size: var(--body-font-size, 14px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     color: #555555;
     line-height: 1.6;
     margin: 0;

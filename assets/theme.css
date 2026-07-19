@@ -84,8 +84,8 @@ body {
   font-family: var(--font-family-sans);
   color: var(--color-text-main);
   background-color: var(--color-bg-main);
-  font-size: 16px;
-  font-weight: 400;
+  font-size: var(--body-font-size, 16px);
+  font-weight: var(--font-weight-sans, 400);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -113,17 +113,27 @@ ol {
 
 /* Typography Utilities */
 .h1,
-.h2,
-h1,
-h2 {
+h1 {
   font-family: var(--font-family-heading);
-  font-weight: var(--heading-weight);
+  font-weight: var(--font-weight-heading, var(--heading-weight));
   line-height: var(--heading-line-height);
   letter-spacing: var(--heading-letter-spacing);
   text-transform: uppercase;
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
   font-size: var(--heading-size-xl);
+}
+
+.h2,
+h2 {
+  font-family: var(--font-family-h2, var(--font-family-heading));
+  font-weight: var(--font-weight-h2, var(--heading-weight));
+  line-height: var(--heading-line-height);
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--section-heading-size, var(--heading-size-xl));
 }
 
 .h3,
@@ -134,8 +144,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-family-heading);
-  font-weight: var(--heading-weight);
+  font-family: var(--font-family-h2, var(--font-family-heading));
+  font-weight: var(--font-weight-h2, var(--heading-weight));
   line-height: 1.1;
   letter-spacing: var(--heading-letter-spacing);
   text-transform: uppercase;
@@ -145,22 +155,22 @@ h6 {
 
 .h3,
 h3 {
-  font-size: var(--heading-size-md);
+  font-size: var(--section-subheading-size, var(--heading-size-md));
 }
 
 .h4,
 h4 {
-  font-size: var(--heading-size-sm);
+  font-size: var(--section-subheading-size, var(--heading-size-sm));
 }
 
 .h5,
 h5 {
-  font-size: var(--heading-size-xs);
+  font-size: var(--section-label-size, var(--heading-size-xs));
 }
 
 .h6,
 h6 {
-  font-size: clamp(20px, 2.4vw, 26px);
+  font-size: var(--section-label-size, var(--body-font-size, 16px));
 }
 
 .text-muted {
@@ -451,8 +461,7 @@ h6 {
 
 /* H1 / hero display headings — driven by H1 typography vars */
 .hp-display-heading,
-main h1,
-.hero-fullscreen__heading,
+main h1:not(.hero-fullscreen__heading),
 .d2c-product-title,
 .skincare-hero__title,
 .corp-hero__title,
@@ -539,9 +548,10 @@ main h3 > span[aria-hidden="true"] {
 /* FAQ — compact headings, no display title style */
 .faq-custom .faq-custom__heading,
 .faq-custom h2.faq-custom__heading {
-  font-family: var(--font-family-sans) !important;
-  font-size: clamp(16px, 2.5vw, 18px) !important;
-  font-weight: 600 !important;
+  font-family: var(--font-family-h2, var(--font-family-sans)) !important;
+  font-size: var(--section-heading-size) !important;
+  font-weight: var(--font-weight-h2, 600) !important;
+  font-style: var(--font-style-h2, normal) !important;
   letter-spacing: -0.01em !important;
   line-height: 1.3 !important;
   text-transform: capitalize !important;
@@ -552,8 +562,9 @@ main h3 > span[aria-hidden="true"] {
 .faq-custom .faq-custom__question,
 .faq-custom h3.faq-custom__question {
   font-family: var(--font-family-sans) !important;
-  font-size: clamp(14px, 1.6vw, 16px) !important;
-  font-weight: 600 !important;
+  font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+  font-weight: var(--font-weight-sans, 600) !important;
+  font-style: var(--font-style-sans, normal) !important;
   letter-spacing: -0.01em !important;
   line-height: 1.4 !important;
   text-transform: none !important;
@@ -585,7 +596,7 @@ main h3 > span[aria-hidden="true"] {
   margin-bottom: var(--section-header-spacing) !important;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 989px) {
   .bs-coverflow__heading,
   .fb__title,
   .trending-social__heading,
@@ -837,7 +848,7 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
 .d2c-product-title,
 .d2c-product-title span {
   text-transform: none !important;
-  font-weight: 900 !important;
+  font-weight: var(--font-weight-heading, 900) !important;
 }
 
 /* Normal subtext — cards, UI labels, descriptions, smaller headings */
@@ -879,7 +890,7 @@ h3.megamenu-heading,
 h4.mobile-accordion-category-heading,
 .mobile-accordion-category-heading {
   font-family: var(--font-family-h2, var(--font-family-sans)) !important;
-  font-size: 14px !important;
+  font-size: var(--section-heading-size, 14px) !important;
   font-weight: var(--font-weight-h2, 800) !important;
   font-style: var(--font-style-h2, normal) !important;
   line-height: 1.2 !important;
@@ -891,7 +902,7 @@ h4.mobile-accordion-category-heading,
 
 h4.mobile-accordion-category-heading,
 .mobile-accordion-category-heading {
-  font-size: 13px !important;
+  font-size: var(--section-heading-size, 13px) !important;
   font-weight: var(--font-weight-h2, 700) !important;
   font-style: var(--font-style-h2, normal) !important;
   letter-spacing: 0.06em !important;
@@ -911,6 +922,7 @@ h4.mobile-accordion-category-heading,
 
 .megamenu-link-item a,
 .mobile-accordion-content a {
+  font-size: var(--section-heading-size, 13.5px) !important;
   font-weight: var(--font-weight-h2, 500) !important;
 }
 
@@ -918,9 +930,9 @@ h4.mobile-accordion-category-heading,
 #MainContent h3.fc-category-name,
 .shopify-section h3.fc-category-name,
 .fc-category-name {
-  font-family: var(--font-family-subheading) !important;
-  font-weight: 700 !important;
-  font-size: 15px !important;
+  font-family: var(--font-family-sans, var(--font-family-subheading)) !important;
+  font-weight: var(--font-weight-sans, 700) !important;
+  font-size: var(--section-subheading-size, 15px) !important;
   line-height: 1.3 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
@@ -929,9 +941,9 @@ h4.mobile-accordion-category-heading,
 #MainContent h3.hp-dna__item-title,
 .shopify-section h3.hp-dna__item-title,
 .hp-dna__item-title {
-  font-family: var(--font-family-subheading) !important;
-  font-weight: 700 !important;
-  font-size: 15px !important;
+  font-family: var(--font-family-sans, var(--font-family-subheading)) !important;
+  font-weight: var(--font-weight-sans, 700) !important;
+  font-size: var(--section-subheading-size, 15px) !important;
   line-height: 1.35 !important;
   letter-spacing: 0.05em !important;
   text-transform: uppercase !important;
@@ -939,9 +951,9 @@ h4.mobile-accordion-category-heading,
 
 .hp-dna__item-text,
 .feature-grid__card-text {
-  font-family: var(--font-family-subheading) !important;
-  font-weight: 400 !important;
-  font-size: 14px !important;
+  font-family: var(--font-family-sans, var(--font-family-subheading)) !important;
+  font-weight: var(--font-weight-sans, 400) !important;
+  font-size: var(--body-font-size, 14px) !important;
   line-height: 1.55 !important;
   letter-spacing: normal !important;
   text-transform: none !important;
@@ -950,18 +962,18 @@ h4.mobile-accordion-category-heading,
 #MainContent h3.feature-grid__card-heading,
 .shopify-section h3.feature-grid__card-heading,
 .feature-grid__card-heading {
-  font-family: var(--font-family-subheading) !important;
-  font-weight: 700 !important;
-  font-size: 18px !important;
+  font-family: var(--font-family-sans, var(--font-family-subheading)) !important;
+  font-weight: var(--font-weight-sans, 700) !important;
+  font-size: var(--section-subheading-size, 18px) !important;
   line-height: 1.35 !important;
   letter-spacing: -0.01em !important;
   text-transform: none !important;
 }
 
 .fc-product-count {
-  font-family: var(--font-family-subheading) !important;
-  font-weight: 600 !important;
-  font-size: 12px !important;
+  font-family: var(--font-family-sans, var(--font-family-subheading)) !important;
+  font-weight: var(--font-weight-sans, 600) !important;
+  font-size: var(--section-label-size, 12px) !important;
   line-height: 1.4 !important;
   letter-spacing: normal !important;
   text-transform: none !important;
@@ -980,9 +992,9 @@ h4.mobile-accordion-category-heading,
   letter-spacing: normal !important;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 989px) {
   .hp-display-heading,
-  main h1,
+  main h1:not(.hero-fullscreen__heading),
   .d2c-product-title,
   .skincare-hero__title,
   .corp-hero__title,
@@ -992,7 +1004,8 @@ h4.mobile-accordion-category-heading,
 
   .hero-fullscreen__heading,
   .hero-fullscreen__heading .hp-typewriter-text,
-  .hero-fullscreen__heading > span[aria-hidden="true"] {
+  .hero-fullscreen__heading > span[aria-hidden="true"],
+  h1.hero-fullscreen__heading {
     font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
   }
 
@@ -1024,7 +1037,7 @@ h4.mobile-accordion-category-heading,
 
   .d2c-product-title,
   .d2c-product-title span {
-    font-size: clamp(20px, 5.5vw, 28px) !important;
+    font-size: var(--heading-size-xl) !important;
   }
 
   .prod-card-dtc__title,
@@ -1036,12 +1049,12 @@ h4.mobile-accordion-category-heading,
   .hp-dna__item-title,
   .feature-grid__card-heading,
   .bundle-product-title {
-    font-size: clamp(14px, 3.5vw, 16px) !important;
+    font-size: var(--section-subheading-size, 16px) !important;
   }
 
   .hp-dna__item-text,
   .feature-grid__card-text {
-    font-size: 13px !important;
+    font-size: var(--body-font-size, 13px) !important;
   }
 }
 

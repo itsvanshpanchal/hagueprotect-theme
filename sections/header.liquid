@@ -37,7 +37,7 @@
 
   .header__logo-text {
     font-family: var(--font-family-heading) !important;
-    font-size: 21px;
+    font-size: var(--heading-size-xl, 21px) !important;
     font-weight: var(--font-weight-heading, 700) !important;
     font-style: var(--font-style-heading, normal) !important;
     color: #000000;
@@ -256,7 +256,7 @@
     padding: 8px 18px;
     border-radius: 4px;
     font-family: var(--font-family-sans) !important;
-    font-size: 15px;
+    font-size: var(--body-font-size, 15px) !important;
     font-weight: var(--font-weight-sans, 800) !important;
     font-style: var(--font-style-sans, normal) !important;
     text-transform: uppercase;
@@ -275,7 +275,7 @@
 
   .menu-link {
     font-family: var(--font-family-sans) !important;
-    font-size: 15px;
+    font-size: var(--body-font-size, 15px) !important;
     font-weight: var(--font-weight-sans, 800) !important;
     font-style: var(--font-style-sans, normal) !important;
     color: #111111 !important;
@@ -334,7 +334,7 @@
   #shopify-section-{{ section.id }} .mobile-accordion-category-heading,
   .megamenu-heading {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-    font-size: 14px !important;
+    font-size: var(--section-heading-size, 14px) !important;
     font-weight: var(--font-weight-h2, 800) !important;
     font-style: var(--font-style-h2, normal) !important;
     color: #111111 !important;
@@ -408,7 +408,7 @@
   #shopify-section-{{ section.id }} .megamenu-link-item a,
   #shopify-section-{{ section.id }} .mobile-accordion-content a,
   .megamenu-link-item a {
-    font-size: 13.5px !important;
+    font-size: var(--section-heading-size, 13.5px) !important;
     font-weight: var(--font-weight-h2, 500) !important;
     color: #555555 !important;
     text-decoration: none;
@@ -547,7 +547,7 @@
     }
 
     .header__logo-text {
-      font-size: clamp(14px, 3.6vw, 18px);
+      font-size: var(--heading-size-xl, 18px) !important;
       letter-spacing: 0.03em;
       max-width: 100%;
     }
@@ -632,7 +632,7 @@
 
   @media screen and (max-width: 380px) {
     .header__logo-text {
-      font-size: 13px;
+      font-size: var(--heading-size-xl, 13px) !important;
     }
 
     .header__logo-icon {
@@ -729,7 +729,7 @@
   #shopify-section-{{ section.id }} .mobile-accordion-category-heading,
   .mobile-accordion-category-heading {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-    font-size: 13px !important;
+    font-size: var(--section-heading-size, 13px) !important;
     font-weight: var(--font-weight-h2, 700) !important;
     font-style: var(--font-style-h2, normal) !important;
     color: #111 !important;
@@ -1248,14 +1248,14 @@
     </div>
     
     <div style="max-width: 800px; width: 100%; margin: 15vh auto; padding: 0 24px;">
-      <h2 style="font-family: var(--font-family-eyebrow, var(--font-family-sans)); font-size: 14px; font-weight: var(--font-weight-eyebrow, 800); font-style: var(--font-style-eyebrow, normal); color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; text-align: center;">Search our store</h2>
+      <h2 style="font-family: var(--font-family-eyebrow, var(--font-family-sans)); font-size: var(--section-label-size, 14px); font-weight: var(--font-weight-eyebrow, 800); font-style: var(--font-style-eyebrow, normal); color: #FF2B2B; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; text-align: center;">Search our store</h2>
       <form action="/search" method="get" role="search" style="position: relative;">
         <input type="text" 
                name="q" 
                id="SearchInput" 
                placeholder="What are you looking for?" 
                autocomplete="off"
-               style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #111; padding: 16px 0; font-family: var(--font-family-heading); font-size: clamp(24px, 4vw, 42px); font-weight: var(--font-weight-heading, 800); font-style: var(--font-style-heading, normal); color: #111; outline: none; transition: border-color 0.3s;"
+               style="width: 100%; background: transparent; border: none; border-bottom: 2px solid #111; padding: 16px 0; font-family: var(--font-family-eyebrow, var(--font-family-heading)); font-size: var(--section-label-size, 28px); font-weight: var(--font-weight-eyebrow, 800); font-style: var(--font-style-eyebrow, normal); color: #111; outline: none; transition: border-color 0.3s;"
                onfocus="this.style.borderBottomColor='#FF2B2B'"
                onblur="this.style.borderBottomColor='#111'">
         <button type="submit" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #111;">
@@ -2043,23 +2043,23 @@
       "type": "range",
       "id": "h1_font_size_desktop",
       "label": "Size on computer",
-      "info": "Text size for the largest headline in this section on desktop.",
-      "min": 24,
-      "max": 120,
-      "step": 2,
+      "info": "Logo text size on desktop.",
+      "min": 12,
+      "max": 40,
+      "step": 1,
       "unit": "px",
-      "default": 64
+      "default": 21
     },
     {
       "type": "range",
       "id": "h1_font_size_mobile",
       "label": "Size on phone",
-      "info": "Text size for the largest headline in this section on mobile.",
-      "min": 18,
-      "max": 80,
-      "step": 2,
+      "info": "Logo text size on mobile.",
+      "min": 10,
+      "max": 28,
+      "step": 1,
       "unit": "px",
-      "default": 40
+      "default": 14
     },
     {
       "type": "header",
@@ -2295,23 +2295,23 @@
       "type": "range",
       "id": "h2_font_size_desktop",
       "label": "Size on computer",
-      "info": "Text size for the section title on desktop, e.g. Bestselling Sneaker Care.",
-      "min": 20,
-      "max": 96,
-      "step": 2,
+      "info": "Mega menu title and link size on desktop.",
+      "min": 10,
+      "max": 24,
+      "step": 1,
       "unit": "px",
-      "default": 52
+      "default": 14
     },
     {
       "type": "range",
       "id": "h2_font_size_mobile",
       "label": "Size on phone",
-      "info": "Text size for the section title on mobile.",
-      "min": 16,
-      "max": 64,
-      "step": 2,
+      "info": "Mega menu title and link size on mobile.",
+      "min": 10,
+      "max": 20,
+      "step": 1,
       "unit": "px",
-      "default": 34
+      "default": 13
     },
     {
       "type": "header",
@@ -2543,23 +2543,23 @@
       "type": "range",
       "id": "paragraph_font_size_desktop",
       "label": "Size on computer",
-      "info": "Text size for descriptions and body text on desktop.",
-      "min": 11,
-      "max": 32,
+      "info": "Shop All / top nav link size on desktop.",
+      "min": 10,
+      "max": 24,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 15
     },
     {
       "type": "range",
       "id": "paragraph_font_size_mobile",
       "label": "Size on phone",
-      "info": "Text size for descriptions and body text on mobile.",
-      "min": 11,
-      "max": 28,
+      "info": "Shop All / top nav link size on mobile.",
+      "min": 10,
+      "max": 20,
       "step": 1,
       "unit": "px",
-      "default": 15
+      "default": 14
     },
     {
       "type": "header",
@@ -2791,23 +2791,23 @@
       "type": "range",
       "id": "eyebrow_font_size_desktop",
       "label": "Size on computer",
-      "info": "Text size for the small label above the title on desktop, e.g. BEST SELLERS.",
-      "min": 9,
-      "max": 24,
+      "info": "Search field text size on desktop.",
+      "min": 12,
+      "max": 48,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 28
     },
     {
       "type": "range",
       "id": "eyebrow_font_size_mobile",
       "label": "Size on phone",
-      "info": "Text size for the small label above the title on mobile.",
-      "min": 9,
-      "max": 20,
+      "info": "Search field text size on mobile.",
+      "min": 12,
+      "max": 36,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 22
     }
   ]
 }

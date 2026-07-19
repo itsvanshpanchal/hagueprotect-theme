@@ -1,15 +1,10 @@
-/* Per-section typography — CSS variables set on #shopify-section-{id} by section-typography-vars.
-   Prefer these rules over hardcoded Inter/Bebas in section files. */
+/* Per-section typography — vars set on #shopify-section-{id} by section-typography-vars.
+   This file is the single cascade for MainContent marketing text.
+   Always prefer CSS variables; never hardcode px sizes for editable text. */
 
-/* H1 / hero headlines */
-#MainContent .shopify-section h1 {
-  font-family: var(--font-family-heading) !important;
-  font-size: var(--heading-size-xl) !important;
-  font-weight: var(--font-weight-heading, 400) !important;
-  font-style: var(--font-style-heading, normal) !important;
-}
-
-#MainContent .shopify-section .hero-fullscreen__heading,
+/* ========== H1 / Biggest title ========== */
+#MainContent .shopify-section h1:not(.hero-fullscreen__heading),
+#MainContent .shopify-section .hp-display-heading,
 #MainContent .shopify-section .corp-hero__title,
 #MainContent .shopify-section .biz-hero__title,
 #MainContent .shopify-section .how-to-banner__title,
@@ -17,12 +12,23 @@
 #MainContent .shopify-section .skincare-hero__title,
 #MainContent .shopify-section .story-banner__heading {
   font-family: var(--font-family-heading) !important;
+  font-size: var(--heading-size-xl) !important;
+  font-weight: var(--font-weight-heading, 400) !important;
+  font-style: var(--font-style-heading, normal) !important;
+}
+
+/* Hero title — uses hero size var (section Biggest title on hero sections) */
+#MainContent .shopify-section h1.hero-fullscreen__heading,
+#MainContent .shopify-section .hero-fullscreen__heading,
+#MainContent .shopify-section .hero-fullscreen__heading .hp-typewriter-text,
+#MainContent .shopify-section .hero-fullscreen__heading > span[aria-hidden="true"] {
+  font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
   font-weight: var(--font-weight-heading, 400) !important;
   font-style: var(--font-style-heading, normal) !important;
 }
 
-/* H2 / section titles — exclude AI Story banner headings (they use block typography) */
+/* ========== H2 / Section heading ========== */
 #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
 #MainContent .shopify-section .skincare-builder__title,
 #MainContent .shopify-section .skincare-concerns__title,
@@ -49,7 +55,9 @@
 #MainContent .shopify-section .reviews-sec__heading,
 #MainContent .shopify-section .social-slider__heading,
 #MainContent .shopify-section .promo-banner__heading,
-#MainContent .shopify-section .brand-banner__title {
+#MainContent .shopify-section .brand-banner__title,
+#MainContent .shopify-section .faq-custom__heading,
+#MainContent .shopify-section .brandsel__title {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-size: var(--section-heading-size) !important;
   font-weight: var(--font-weight-h2, 400) !important;
@@ -65,17 +73,27 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
-/* Paragraph / body / descriptions */
+/* ========== Paragraph / Normal text ========== */
 #MainContent .shopify-section .hero-fullscreen__subheading,
 #MainContent .shopify-section .corp-hero__sub,
 #MainContent .shopify-section .fb__subtitle,
 #MainContent .shopify-section .mat-desc,
 #MainContent .shopify-section .story-banner__paragraph,
 #MainContent .shopify-section .comm-desc,
+#MainContent .shopify-section .comm-badge-desc,
+#MainContent .shopify-section .brand-banner__subtitle,
+#MainContent .shopify-section .d2c-subtitle-text,
+#MainContent .shopify-section .vr-info__subtitle,
+#MainContent .shopify-section .sor-info__subtitle,
+#MainContent .shopify-section .skincare-hero__subtitle,
+#MainContent .shopify-section .skincare-concerns__subtitle,
+#MainContent .shopify-section .corp-form__subtitle,
+#MainContent .shopify-section .faq-custom__question,
 #MainContent .shopify-section .bs-coverflow-card__title,
 #MainContent .shopify-section .bs-coverflow-card__type,
 #MainContent .shopify-section .fc-category-name,
-#MainContent .shopify-section .fc-product-count {
+#MainContent .shopify-section .fc-product-count,
+#MainContent .shopify-section [class*="ckc-"][class*="__desc"] {
   font-family: var(--font-family-sans) !important;
   font-weight: var(--font-weight-sans, 400) !important;
   font-style: var(--font-style-sans, normal) !important;
@@ -86,14 +104,22 @@
 #MainContent .shopify-section .fb__subtitle,
 #MainContent .shopify-section .mat-desc,
 #MainContent .shopify-section .story-banner__paragraph,
-#MainContent .shopify-section .comm-desc {
+#MainContent .shopify-section .comm-desc,
+#MainContent .shopify-section .comm-badge-desc,
+#MainContent .shopify-section .brand-banner__subtitle,
+#MainContent .shopify-section .d2c-subtitle-text,
+#MainContent .shopify-section .vr-info__subtitle,
+#MainContent .shopify-section .sor-info__subtitle,
+#MainContent .shopify-section .skincare-hero__subtitle,
+#MainContent .shopify-section .skincare-concerns__subtitle,
+#MainContent .shopify-section .corp-form__subtitle {
   font-size: var(--section-subheading-size, var(--body-font-size)) !important;
   text-transform: none !important;
   letter-spacing: normal !important;
   line-height: 1.55 !important;
 }
 
-/* Eyebrow / small labels */
+/* ========== Eyebrow / Tiny text ========== */
 #MainContent .shopify-section .hero-fullscreen__eyebrow,
 #MainContent .shopify-section .fb__eyebrow,
 #MainContent .shopify-section .bs-coverflow__eyebrow,
@@ -102,16 +128,42 @@
 #MainContent .shopify-section .fc-subtitle,
 #MainContent .shopify-section .comm-eyebrow,
 #MainContent .shopify-section .corp-hero__eyebrow,
+#MainContent .shopify-section .biz-hero__eyebrow,
 #MainContent .shopify-section .story-banner__eyebrow,
-#MainContent .shopify-section .feature-grid__eyebrow {
+#MainContent .shopify-section .feature-grid__eyebrow,
+#MainContent .shopify-section .promo-banner__eyebrow,
+#MainContent .shopify-section .brandsel__eyebrow,
+#MainContent .shopify-section .section-heading-stack__label,
+#MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
   font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
   font-size: var(--section-label-size) !important;
   font-weight: var(--font-weight-eyebrow, 700) !important;
   font-style: var(--font-style-eyebrow, normal) !important;
 }
 
-@media screen and (max-width: 767px) {
+/* ========== Mobile / tablet (matches Shopify editor + phones) ========== */
+@media screen and (max-width: 989px) {
+  #MainContent .shopify-section h1:not(.hero-fullscreen__heading),
+  #MainContent .shopify-section .hp-display-heading,
+  #MainContent .shopify-section .corp-hero__title,
+  #MainContent .shopify-section .biz-hero__title,
+  #MainContent .shopify-section .how-to-banner__title,
+  #MainContent .shopify-section .d2c-product-title,
+  #MainContent .shopify-section .skincare-hero__title,
+  #MainContent .shopify-section .story-banner__heading {
+    font-size: var(--heading-size-xl) !important;
+  }
+
+  #MainContent .shopify-section h1.hero-fullscreen__heading,
+  #MainContent .shopify-section .hero-fullscreen__heading,
+  #MainContent .shopify-section .hero-fullscreen__heading .hp-typewriter-text,
+  #MainContent .shopify-section .hero-fullscreen__heading > span[aria-hidden="true"] {
+    font-size: var(--heading-size-hero) !important;
+  }
+
   #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
+  #MainContent .shopify-section .bestsellers__heading-dtc,
+  #MainContent .shopify-section .bundle-title,
   #MainContent .shopify-section .fb__title,
   #MainContent .shopify-section .fc-heading,
   #MainContent .shopify-section .mat-headline,
@@ -121,7 +173,51 @@
   #MainContent .shopify-section .story-banner__subheading,
   #MainContent .shopify-section .feature-grid__heading,
   #MainContent .shopify-section .hp-dna__heading,
-  #MainContent .shopify-section .hp-fam-sec__heading {
+  #MainContent .shopify-section .hp-fam-sec__heading,
+  #MainContent .shopify-section .product-rec__heading,
+  #MainContent .shopify-section .trust-statement__heading,
+  #MainContent .shopify-section .reviews-sec__heading,
+  #MainContent .shopify-section .social-slider__heading,
+  #MainContent .shopify-section .promo-banner__heading,
+  #MainContent .shopify-section .brand-banner__title,
+  #MainContent .shopify-section .faq-custom__heading,
+  #MainContent .shopify-section .corp-features__heading,
+  #MainContent .shopify-section .how-to-videos__heading,
+  #MainContent .shopify-section .skincare-builder__title,
+  #MainContent .shopify-section .skincare-concerns__title,
+  #MainContent .shopify-section .skincare-explanation__title,
+  #MainContent .shopify-section .skincare-intro__title {
     font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
+  }
+
+  #MainContent .shopify-section .hero-fullscreen__subheading,
+  #MainContent .shopify-section .corp-hero__sub,
+  #MainContent .shopify-section .fb__subtitle,
+  #MainContent .shopify-section .mat-desc,
+  #MainContent .shopify-section .story-banner__paragraph,
+  #MainContent .shopify-section .comm-desc,
+  #MainContent .shopify-section .comm-badge-desc,
+  #MainContent .shopify-section .brand-banner__subtitle,
+  #MainContent .shopify-section .d2c-subtitle-text,
+  #MainContent .shopify-section .skincare-hero__subtitle,
+  #MainContent .shopify-section .skincare-concerns__subtitle,
+  #MainContent .shopify-section .corp-form__subtitle {
+    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+  }
+
+  #MainContent .shopify-section .hero-fullscreen__eyebrow,
+  #MainContent .shopify-section .fb__eyebrow,
+  #MainContent .shopify-section .bs-coverflow__eyebrow,
+  #MainContent .shopify-section .trending-social__eyebrow,
+  #MainContent .shopify-section .mat-eyebrow,
+  #MainContent .shopify-section .fc-subtitle,
+  #MainContent .shopify-section .comm-eyebrow,
+  #MainContent .shopify-section .corp-hero__eyebrow,
+  #MainContent .shopify-section .story-banner__eyebrow,
+  #MainContent .shopify-section .feature-grid__eyebrow,
+  #MainContent .shopify-section .promo-banner__eyebrow,
+  #MainContent .shopify-section .brandsel__eyebrow,
+  #MainContent .shopify-section .section-heading-stack__label {
+    font-size: var(--section-label-size) !important;
   }
 }
