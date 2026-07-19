@@ -719,9 +719,33 @@ body.template-index .section-heading-stack > [class*="ai-story-banner-subheading
   line-height: 1.2 !important;
 }
 
+/* Centered stacks: every label follows its centered heading */
+.section-heading-stack--center > .hero-fullscreen__eyebrow,
+.section-heading-stack--center > .fb__eyebrow,
+.section-heading-stack--center > .bs-coverflow__eyebrow,
+.section-heading-stack--center > .trending-social__eyebrow,
+.section-heading-stack--center > .mat-eyebrow,
+.section-heading-stack--center > .fc-subtitle,
+.section-heading-stack--center > .comm-eyebrow,
+.section-heading-stack--center > .corp-hero__eyebrow,
+.section-heading-stack--center > .story-banner__eyebrow,
+.section-heading-stack--center > .feature-grid__eyebrow,
+.section-heading-stack--center > .promo-banner__eyebrow,
+.section-heading-stack--center > .brandsel__eyebrow,
+.section-heading-stack--center > .section-heading-stack__label,
+.section-heading-stack--center > [class*="ai-story-banner-subheading-"],
+body.template-index .section-heading-stack--center > .hero-fullscreen__eyebrow,
+body.template-index .section-heading-stack--center > .fb__eyebrow,
+body.template-index .section-heading-stack--center > .bs-coverflow__eyebrow,
+body.template-index .section-heading-stack--center > .trending-social__eyebrow,
+body.template-index .section-heading-stack--center > .mat-eyebrow,
 body.template-index .section-heading-stack--center > .fc-subtitle,
+body.template-index .section-heading-stack--center > .comm-eyebrow,
+body.template-index .section-heading-stack--center > .story-banner__eyebrow,
 body.template-index .section-heading-stack--center > .feature-grid__eyebrow,
-body.template-index .section-heading-stack--center > .brandsel__eyebrow {
+body.template-index .section-heading-stack--center > .brandsel__eyebrow,
+body.template-index .section-heading-stack--center > .section-heading-stack__label,
+body.template-index .section-heading-stack--center > [class*="ai-story-banner-subheading-"] {
   text-align: center !important;
 }
 
@@ -1146,24 +1170,28 @@ body.template-index {
     justify-content: flex-start !important;
   }
 
+  /* Eyebrows + descriptions follow their left-aligned headings */
   body.template-index .hero-fullscreen__eyebrow,
   body.template-index .hero-fullscreen__subheading,
   body.template-index .fb__subtitle,
   body.template-index .comm-desc,
-  body.template-index [class*="ai-story-banner-subheading-"] {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* Labels above titles stay left-aligned with their heading stack */
   body.template-index .fb__eyebrow,
   body.template-index .bs-coverflow__eyebrow,
   body.template-index .trending-social__eyebrow,
+  body.template-index .fc-subtitle,
+  body.template-index .section-heading-stack--center > .fc-subtitle,
   body.template-index .comm-eyebrow {
     text-align: left !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Story banner heading stays centered, so its subheading stays centered too */
+  body.template-index [class*="ai-story-banner-subheading-"] {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* FOR EVERY MATERIAL — full section left-aligned */
