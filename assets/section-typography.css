@@ -2,7 +2,13 @@
    Prefer these rules over hardcoded Inter/Bebas in section files. */
 
 /* H1 / hero headlines */
-#MainContent .shopify-section h1,
+#MainContent .shopify-section h1 {
+  font-family: var(--font-family-heading) !important;
+  font-size: var(--heading-size-xl) !important;
+  font-weight: var(--font-weight-heading, 400) !important;
+  font-style: var(--font-style-heading, normal) !important;
+}
+
 #MainContent .shopify-section .hero-fullscreen__heading,
 #MainContent .shopify-section .corp-hero__title,
 #MainContent .shopify-section .biz-hero__title,
