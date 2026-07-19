@@ -337,13 +337,26 @@
     {%- if section.settings.eyebrow != blank -%}
       <span class="hero-fullscreen__eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
+    {%- liquid
+      assign hero_line2 = section.settings.heading_line2
+      assign hero_line3 = section.settings.heading_line3
+      comment
+        Older saved settings still hold "WE MAKE 'EM HEAT." on one line —
+        split it so 'EM HEAT always lands on its own third line.
+      endcomment
+      if hero_line3 == blank and hero_line2 contains "'EM "
+        assign hero_parts = hero_line2 | split: "'EM "
+        assign hero_line3 = "'EM " | append: hero_parts[1]
+        assign hero_line2 = hero_parts[0] | strip
+      endif
+    -%}
     <h1 class="hero-fullscreen__heading">
       {{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}
-      {%- if section.settings.heading_line2 != blank -%}
-        <br>{{ section.settings.heading_line2 }}
+      {%- if hero_line2 != blank -%}
+        <br>{{ hero_line2 }}
       {%- endif -%}
-      {%- if section.settings.heading_line3 != blank -%}
-        <br>{{ section.settings.heading_line3 }}
+      {%- if hero_line3 != blank -%}
+        <br>{{ hero_line3 }}
       {%- endif -%}
     </h1>
     <p class="hero-fullscreen__subheading">{{ section.settings.subheading | default: 'Professional-grade cleaning for everyday wear. Advanced protection formulas designed for premium materials.' }}</p>
