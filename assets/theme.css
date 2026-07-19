@@ -980,14 +980,22 @@ h4.mobile-accordion-category-heading,
   letter-spacing: normal !important;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .hp-display-heading,
   main h1,
-  .hero-fullscreen__heading,
   .d2c-product-title,
   .skincare-hero__title,
   .corp-hero__title,
-  .how-to-banner__title,
+  .how-to-banner__title {
+    font-size: var(--heading-size-xl, var(--heading-size-hero)) !important;
+  }
+
+  .hero-fullscreen__heading,
+  .hero-fullscreen__heading .hp-typewriter-text,
+  .hero-fullscreen__heading > span[aria-hidden="true"] {
+    font-size: var(--heading-size-hero, var(--heading-size-xl)) !important;
+  }
+
   .trending-social__heading,
   .bestsellers__heading-dtc,
   .fc-heading,
@@ -1011,7 +1019,7 @@ h4.mobile-accordion-category-heading,
   .skincare-explanation__title,
   .skincare-concerns__title,
   .skincare-builder__title {
-    font-size: clamp(28px, 8vw, 36px) !important;
+    font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
   }
 
   .d2c-product-title,
