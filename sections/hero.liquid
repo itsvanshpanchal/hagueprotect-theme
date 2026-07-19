@@ -342,6 +342,9 @@
       {%- if section.settings.heading_line2 != blank -%}
         <br>{{ section.settings.heading_line2 }}
       {%- endif -%}
+      {%- if section.settings.heading_line3 != blank -%}
+        <br>{{ section.settings.heading_line3 }}
+      {%- endif -%}
     </h1>
     <p class="hero-fullscreen__subheading">{{ section.settings.subheading | default: 'Professional-grade cleaning for everyday wear. Advanced protection formulas designed for premium materials.' }}</p>
 
@@ -368,7 +371,13 @@
       "type": "text",
       "id": "heading_line2",
       "label": "Heading (Line 2)",
-      "default": "WE MAKE 'EM HEAT."
+      "default": "WE MAKE"
+    },
+    {
+      "type": "text",
+      "id": "heading_line3",
+      "label": "Heading (Line 3)",
+      "default": "'EM HEAT."
     },
     {
       "type": "textarea",
