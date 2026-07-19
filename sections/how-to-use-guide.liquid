@@ -26,8 +26,10 @@
   }
 
   .htu-v2__opener-label {
-    font-size: 11px;
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size, 11px);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--red);
@@ -35,8 +37,10 @@
   }
 
   .htu-v2__opener-title {
-    font-family: var(--font-family-heading);
-    font-size: clamp(52px, 8vw, 96px);
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 400);
+    font-style: var(--font-style-h2, normal);
     line-height: 0.9;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -48,7 +52,10 @@
   }
 
   .htu-v2__opener-text {
-    font-size: clamp(15px, 1.6vw, 18px);
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     line-height: 1.7;
     color: var(--muted);
     margin: 0 0 28px;
@@ -101,8 +108,10 @@
   }
 
   .htu-v2__rail-title {
-    font-family: var(--font-family-heading);
-    font-size: clamp(28px, 4vw, 44px);
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 400);
+    font-style: var(--font-style-h2, normal);
     text-transform: uppercase;
     letter-spacing: 0.03em;
     margin: 0;

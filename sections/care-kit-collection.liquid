@@ -64,7 +64,10 @@
   }
 
   .ckc-{{ section.id }}__heading {
-    font-size: clamp(28px, 4vw, 40px);
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 700);
+    font-style: var(--font-style-h2, normal);
     line-height: 1.15;
     color: #111111;
     margin: 0 0 12px;

@@ -391,7 +391,7 @@
 
     .mat-menu-item,
     .mat-menu-item-text {
-      font-size: clamp(32px, 7.2vw, 44px) !important;
+      font-size: min({{ section.settings.menu_font_size | default: 36 }}px, 44px) !important;
       line-height: 1.08 !important;
     }
 

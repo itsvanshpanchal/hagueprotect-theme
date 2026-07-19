@@ -42,8 +42,10 @@
   }
 
   .brand-banner__title {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 800;
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 800);
+    font-style: var(--font-style-h2, normal);
     line-height: 1.1;
     color: #ffffff;
     letter-spacing: -0.03em;
@@ -53,15 +55,19 @@
 
   .brand-banner__subtitle {
     max-width: 700px;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
   }
 
   .brand-banner__btn {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-    font-size: clamp(14px, 1.6vw, 16px);
+    font-size: var(--body-font-size, 15px);
     padding: 18px 44px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 989px) {
     .brand-banner-section {
       padding-top: clamp(60px, 12vw, 80px);
       padding-bottom: clamp(60px, 12vw, 80px);
@@ -72,11 +78,11 @@
       padding-right: 16px;
     }
     .brand-banner__title {
-      font-size: clamp(1.8rem, 8vw, 2.5rem);
+      font-size: var(--section-heading-size);
     }
     .brand-banner__btn {
       padding: 16px 36px;
-      font-size: 15px;
+      font-size: var(--body-font-size, 15px);
       width: 100%;
       max-width: 320px;
     }

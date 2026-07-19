@@ -26,9 +26,10 @@
   }
 
   .hp-fam-sec__heading {
-    font-size: clamp(32px, 6vw, 68px);
-    font-family: var(--font-family-heading);
-    font-weight: 600;
+    font-size: var(--section-heading-size);
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-weight: var(--font-weight-h2, 600);
+    font-style: var(--font-style-h2, normal);
     color: #ffffff;
     margin: 0 0 32px 0;
     line-height: 1.05;
@@ -51,8 +52,10 @@
     padding: 10px 20px;
     border-radius: 100px;
     color: rgba(255, 255, 255, 0.85);
-    font-size: clamp(12px, 1.5vw, 14px);
-    font-weight: 700;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-label-size, 13px);
+    font-weight: var(--font-weight-sans, 700);
+    font-style: var(--font-style-sans, normal);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -464,7 +467,7 @@
 
     .hp-fam-sec__heading {
       margin-bottom: 20px;
-      font-size: clamp(28px, 8vw, 40px);
+      font-size: var(--section-heading-size);
     }
 
     .hp-fam-sec__tabs {

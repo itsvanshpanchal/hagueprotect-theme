@@ -19,8 +19,10 @@
   }
 
   .trust-statement__heading {
-    font-size: clamp(2.6rem, 6vw, 4.2rem);
-    font-weight: 800;
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 800);
+    font-style: var(--font-style-h2, normal);
     line-height: 1.25;
     color: var(--color-text-main);
     letter-spacing: -0.04em;
@@ -51,12 +53,12 @@
     width: 100%;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 989px) {
     .trust-statement-section {
       padding: clamp(50px, 8vw, 60px) 0;
     }
     .trust-statement__heading {
-      font-size: clamp(1.6rem, 5vw, 2.2rem);
+      font-size: var(--section-heading-size);
     }
     .trust-statement__heading span {
       white-space: normal;
@@ -93,15 +95,20 @@
   }
 
   .trust-card__title {
-    font-size: clamp(16px, 2vw, 20px);
-    font-weight: 700;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 18px);
+    font-weight: var(--font-weight-sans, 700);
+    font-style: var(--font-style-sans, normal);
     color: var(--color-text-main);
     letter-spacing: -0.02em;
     margin: 0;
   }
 
   .trust-card__desc {
-    font-size: clamp(14px, 1.6vw, 16px);
+    font-family: var(--font-family-sans);
+    font-size: var(--body-font-size, 14px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;

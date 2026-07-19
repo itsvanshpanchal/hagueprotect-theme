@@ -57,7 +57,11 @@
 #MainContent .shopify-section .promo-banner__heading,
 #MainContent .shopify-section .brand-banner__title,
 #MainContent .shopify-section .faq-custom__heading,
-#MainContent .shopify-section .brandsel__title {
+#MainContent .shopify-section .brandsel__title,
+#MainContent .shopify-section .biz-solutions__heading,
+#MainContent .shopify-section .biz-advantages__heading,
+#MainContent .shopify-section .htu-v2__opener-title,
+#MainContent .shopify-section [class*="ckc-"][class*="__heading"] {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-size: var(--section-heading-size) !important;
   font-weight: var(--font-weight-h2, 400) !important;
@@ -112,7 +116,13 @@
 #MainContent .shopify-section .sor-info__subtitle,
 #MainContent .shopify-section .skincare-hero__subtitle,
 #MainContent .shopify-section .skincare-concerns__subtitle,
-#MainContent .shopify-section .corp-form__subtitle {
+#MainContent .shopify-section .corp-form__subtitle,
+#MainContent .shopify-section .biz-solutions__sub,
+#MainContent .shopify-section .biz-advantages__sub,
+#MainContent .shopify-section .htu-v2__opener-text,
+#MainContent .shopify-section .how-to-banner__subtitle,
+#MainContent .shopify-section .comm-card-text,
+#MainContent .shopify-section .trust-card__desc {
   font-size: var(--section-subheading-size, var(--body-font-size)) !important;
   text-transform: none !important;
   letter-spacing: normal !important;
@@ -129,6 +139,9 @@
 #MainContent .shopify-section .comm-eyebrow,
 #MainContent .shopify-section .corp-hero__eyebrow,
 #MainContent .shopify-section .biz-hero__eyebrow,
+#MainContent .shopify-section .biz-solutions__eyebrow,
+#MainContent .shopify-section .biz-advantages__eyebrow,
+#MainContent .shopify-section .htu-v2__opener-label,
 #MainContent .shopify-section .story-banner__eyebrow,
 #MainContent .shopify-section .feature-grid__eyebrow,
 #MainContent .shopify-section .promo-banner__eyebrow,
@@ -186,7 +199,10 @@
   #MainContent .shopify-section .skincare-builder__title,
   #MainContent .shopify-section .skincare-concerns__title,
   #MainContent .shopify-section .skincare-explanation__title,
-  #MainContent .shopify-section .skincare-intro__title {
+  #MainContent .shopify-section .skincare-intro__title,
+  #MainContent .shopify-section .biz-solutions__heading,
+  #MainContent .shopify-section .biz-advantages__heading,
+  #MainContent .shopify-section .htu-v2__opener-title {
     font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
   }
 

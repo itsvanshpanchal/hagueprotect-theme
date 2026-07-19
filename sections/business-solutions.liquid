@@ -21,8 +21,10 @@
   }
 
   .biz-solutions__eyebrow {
-    font-size: 12px;
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size, 12px);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #4f8cff;
@@ -30,9 +32,10 @@
   }
 
   .biz-solutions__heading {
-    font-family: var(--font-family-heading);
-    font-size: clamp(42px, 5.5vw, 68px);
-    font-weight: 400;
+    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-size: var(--section-heading-size);
+    font-weight: var(--font-weight-h2, 400);
+    font-style: var(--font-style-h2, normal);
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #0a0c12 !important;
@@ -41,7 +44,10 @@
   }
 
   .biz-solutions__sub {
-    font-size: 16px;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 16px);
+    font-weight: var(--font-weight-sans, 400);
+    font-style: var(--font-style-sans, normal);
     line-height: 1.65;
     color: #5a6270;
     margin: 0;

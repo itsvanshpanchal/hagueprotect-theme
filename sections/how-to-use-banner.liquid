@@ -29,8 +29,10 @@
     padding: 20px;
   }
   .how-to-banner__title {
-    font-size: 48px;
-    font-weight: 800;
+    font-family: var(--font-family-heading);
+    font-size: var(--heading-size-xl);
+    font-weight: var(--font-weight-heading, 800);
+    font-style: var(--font-style-heading, normal);
     margin: 0;
     color: {{ section.settings.text_color }};
     text-transform: uppercase;
@@ -47,13 +49,15 @@
     text-align: center;
   }
   .how-to-banner__subtitle {
-    font-size: 22px;
-    font-weight: 700;
+    font-family: var(--font-family-sans);
+    font-size: var(--section-subheading-size, 22px);
+    font-weight: var(--font-weight-sans, 700);
+    font-style: var(--font-style-sans, normal);
     color: #fff;
     margin: 0;
     letter-spacing: 0.02em;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 989px) {
     .how-to-banner {
       min-height: 220px;
     }
@@ -61,13 +65,13 @@
       padding: 16px;
     }
     .how-to-banner__title {
-      font-size: clamp(1.5rem, 8vw, 2rem);
+      font-size: var(--heading-size-xl);
     }
     .how-to-banner__subtitle-bar {
       padding: 12px 16px;
     }
     .how-to-banner__subtitle {
-      font-size: 14px;
+      font-size: var(--section-subheading-size, 14px);
       line-height: 1.4;
     }
   }
