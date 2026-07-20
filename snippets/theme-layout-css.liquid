@@ -49,6 +49,7 @@
   */
   body.template-index {
     --homepage-section-gutter: 40px;
+    --homepage-section-gutter-right: 56px;
     /* Same inset on monitors — do not center inside 1440px */
     --homepage-text-inset: var(--homepage-section-gutter);
   }
@@ -56,16 +57,18 @@
   @media screen and (max-width: 989px) {
     body.template-index {
       --homepage-section-gutter: 28px;
+      --homepage-section-gutter-right: 40px;
     }
   }
 
   @media screen and (max-width: 767px) {
     body.template-index {
       --homepage-section-gutter: 24px;
+      --homepage-section-gutter-right: 32px;
     }
   }
 
-  /* Full width on large monitors — only the small left/right gutter */
+  /* Full width on large monitors — left/right gutters (right a little wider) */
   body.template-index #MainContent .bs-coverflow__container,
   body.template-index #MainContent .trending-social-section .container,
   body.template-index #MainContent .fc-container,
@@ -85,7 +88,7 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
-    padding-right: var(--homepage-section-gutter) !important;
+    padding-right: var(--homepage-section-gutter-right) !important;
     box-sizing: border-box !important;
   }
 
@@ -128,7 +131,7 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
-    padding-right: var(--homepage-section-gutter) !important;
+    padding-right: var(--homepage-section-gutter-right) !important;
   }
 
   /* Heading + subheading text: flush left, same edge */
@@ -190,7 +193,7 @@
     left: var(--homepage-section-gutter) !important;
     right: auto !important;
     transform: none !important;
-    width: calc(100% - (var(--homepage-section-gutter) * 2)) !important;
+    width: calc(100% - var(--homepage-section-gutter) - var(--homepage-section-gutter-right)) !important;
     max-width: none !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -201,7 +204,7 @@
   @media screen and (max-width: 989px) {
     body.template-index .hero-fullscreen__content {
       left: var(--homepage-section-gutter) !important;
-      width: calc(100% - (var(--homepage-section-gutter) * 2)) !important;
+      width: calc(100% - var(--homepage-section-gutter) - var(--homepage-section-gutter-right)) !important;
     }
   }
 
@@ -210,7 +213,7 @@
     left: 0 !important;
     right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
-    padding-right: var(--homepage-section-gutter) !important;
+    padding-right: var(--homepage-section-gutter-right) !important;
     align-items: flex-start !important;
     text-align: left !important;
     box-sizing: border-box !important;
