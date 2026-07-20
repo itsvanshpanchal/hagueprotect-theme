@@ -19,7 +19,7 @@
     max-width: var(--site-max-width);
     width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 var(--homepage-section-gutter, 8px);
     position: relative;
     box-sizing: border-box;
     z-index: 2;
@@ -462,7 +462,7 @@
     }
 
     .hp-fam-sec__container {
-      padding: 0 max(16px, var(--site-padding, 16px));
+      padding: 0 var(--homepage-section-gutter, 6px);
     }
 
     .hp-fam-sec__heading {
@@ -496,7 +496,7 @@
     }
 
     .hp-fam-sec__mobile-rail-wrap {
-      margin-right: calc(-1 * max(16px, var(--site-padding, 16px)));
+      margin-right: calc(-1 * var(--homepage-section-gutter, 6px));
       padding-bottom: 28px;
     }
 
@@ -504,7 +504,7 @@
       --hp-fam-card-gap: 12px;
       gap: var(--hp-fam-card-gap);
       padding-bottom: 8px;
-      padding-right: max(16px, var(--site-padding, 16px));
+      padding-right: var(--homepage-section-gutter, 6px);
     }
 
     .hp-fam-sec__mobile-slider .rail-card {

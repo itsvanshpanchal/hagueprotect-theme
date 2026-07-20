@@ -35,8 +35,8 @@
     z-index: 3 !important;
     max-width: var(--site-max-width) !important;
     margin: 0 auto !important;
-    padding-left: var(--homepage-section-gutter, 40px) !important;
-    padding-right: var(--homepage-section-gutter, 40px) !important;
+    padding-left: var(--homepage-section-gutter, 8px) !important;
+    padding-right: var(--homepage-section-gutter, 8px) !important;
   }
 
   .mat-grid {
@@ -234,7 +234,7 @@
 
   @media screen and (max-width: 768px) {
     .mat-section {
-      --mat-mobile-gutter: max(16px, var(--site-padding, 20px));
+      --mat-mobile-gutter: var(--homepage-section-gutter, 6px);
       min-height: min(88dvh, 680px) !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;

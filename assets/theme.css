@@ -1299,7 +1299,7 @@ h4.mobile-accordion-category-heading,
 .template-index,
 body.template-index {
   --homepage-corner: 20px;
-  --homepage-mobile-gutter: 8px;
+  --homepage-mobile-gutter: 6px;
   --section-label-color: #2563eb;
 }
 
@@ -1327,8 +1327,8 @@ body.template-index {
   }
 
   body.template-index .mat-left {
-    padding-left: max(16px, var(--site-padding, 20px)) !important;
-    padding-right: max(16px, var(--site-padding, 20px)) !important;
+    padding-left: max(6px, var(--homepage-section-gutter, 6px)) !important;
+    padding-right: max(6px, var(--homepage-section-gutter, 6px)) !important;
   }
 
   body.template-index .mat-eyebrow,

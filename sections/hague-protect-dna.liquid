@@ -33,7 +33,7 @@
   .hp-dna-{{ section.id }} .hp-dna__container {
     max-width: {{ section.settings.container_width | default: settings.site_max_width | default: 1440 }}px;
     margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 60px);
+    padding: 0 var(--homepage-section-gutter, 8px);
   }
 
   .hp-dna-{{ section.id }} .hp-dna__heading {

@@ -32,7 +32,7 @@
     justify-content: {{ section.settings.text_vertical_position | default: 'center' }};
     align-items: {% case section.settings.text_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
     gap: 12px;
-    padding: clamp(24px, 6vw, 72px);
+    padding: clamp(24px, 6vw, 72px) var(--homepage-section-gutter, 8px);
     text-align: {{ section.settings.text_align | default: 'left' }};
     pointer-events: none;
     {%- if section.settings.show_text_shadow -%}

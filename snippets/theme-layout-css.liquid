@@ -48,32 +48,40 @@
     Same max-width, same gutter, same left edge on every section.
   */
   body.template-index {
-    --homepage-section-gutter: 12px;
+    --homepage-section-gutter: 8px;
     --homepage-text-inset: max(
       var(--homepage-section-gutter),
       calc((100vw - var(--site-max-width)) / 2 + var(--homepage-section-gutter))
     );
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 989px) {
     body.template-index {
       --homepage-section-gutter: 8px;
     }
   }
 
+  @media screen and (max-width: 767px) {
+    body.template-index {
+      --homepage-section-gutter: 6px;
+    }
+  }
+
   /* Shared outer column — headings AND cards sit inside this same box */
-  body.template-index .bs-coverflow__container,
-  body.template-index .trending-social-section .container,
-  body.template-index .fc-container,
-  body.template-index .feature-grid__container,
-  body.template-index .promo-banner__container,
-  body.template-index .hp-fam-sec__container,
-  body.template-index .hp-dna__container,
-  body.template-index .comm-container,
-  body.template-index .mat-container,
-  body.template-index .fb__header,
-  body.template-index .fb__grid,
-  body.template-index .brandsel__inner {
+  body.template-index #MainContent .bs-coverflow__container,
+  body.template-index #MainContent .trending-social-section .container,
+  body.template-index #MainContent .fc-container,
+  body.template-index #MainContent .feature-grid__container,
+  body.template-index #MainContent .promo-banner__container,
+  body.template-index #MainContent .hp-fam-sec__container,
+  body.template-index #MainContent .hp-dna__container,
+  body.template-index #MainContent .comm-container,
+  body.template-index #MainContent .mat-container,
+  body.template-index #MainContent .fb__header,
+  body.template-index #MainContent .fb__grid,
+  body.template-index #MainContent .brandsel__inner,
+  body.template-index #MainContent [class*="featured-brands-"] .fb__header,
+  body.template-index #MainContent [class*="featured-brands-"] .fb__grid {
     max-width: var(--site-max-width) !important;
     width: 100% !important;
     margin-left: auto !important;
@@ -206,7 +214,7 @@
   body.template-index .story-banner__content {
     left: 0 !important;
     right: 0 !important;
-    padding-left: var(--homepage-text-inset) !important;
+    padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter) !important;
     align-items: flex-start !important;
     text-align: left !important;
@@ -214,7 +222,7 @@
   }
 
   body.template-index [class*="ai-story-banner-content-"] {
-    left: var(--homepage-text-inset) !important;
+    left: var(--homepage-section-gutter) !important;
     margin-left: 0 !important;
     padding-left: 0 !important;
     text-align: left !important;

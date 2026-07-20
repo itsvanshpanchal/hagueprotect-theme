@@ -48,7 +48,7 @@
   #shopify-section-{{ section.id }} .bs-coverflow__container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 var(--homepage-section-gutter, 8px);
     position: relative;
     z-index: 1;
   }
@@ -465,7 +465,7 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__container {
-      padding: 0 max(16px, var(--site-padding, 20px));
+      padding: 0 var(--homepage-section-gutter, 6px);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__header {
