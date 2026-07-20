@@ -89,13 +89,14 @@
     display: flex;
     flex-direction: column;
     align-items: var(--hero-content-items, flex-start);
-    gap: 20px;
+    gap: 0;
     box-sizing: border-box;
     text-align: var(--hero-content-align, left);
   }
 
   .hero-fullscreen__eyebrow {
     display: block;
+    margin: 0 0 var(--section-label-to-title-gap, 12px) 0;
   }
 
   .hero-fullscreen__heading {
@@ -122,12 +123,14 @@
     max-width: 600px;
     font-family: var(--font-family-sans);
     font-size: var(--section-subheading-size, 16px);
+    margin-top: var(--section-subheading-spacing-top, 12px);
   }
 
   .hero-fullscreen__actions {
     display: flex;
     justify-content: var(--hero-content-actions, flex-start);
     width: 100%;
+    margin-top: 20px;
   }
 
   .hero-fullscreen__btn {
@@ -185,11 +188,12 @@
       max-width: calc(100% - 32px);
       width: 100%;
       padding: 0 max(16px, var(--site-padding));
-      gap: 12px;
+      gap: 0;
     }
 
     .hero-fullscreen__content .hero-fullscreen__actions {
       justify-content: var(--hero-content-actions-mobile, center);
+      margin-top: 12px;
     }
 
     .hero-fullscreen__bg {
@@ -541,6 +545,54 @@
       "id": "image_mobile",
       "label": "Mobile banner image",
       "info": "Displayed on phones and screens 768px wide or smaller. Square or portrait images work best. If empty, the desktop banner is used."
+    },
+    {
+      "type": "header",
+      "content": "Text spacing"
+    },
+    {
+      "type": "paragraph",
+      "content": "Space between the main title and the description/subheading below it. Does not change fonts — only the gap. Applies on every screen size for this section."
+    },
+    {
+      "type": "range",
+      "id": "heading_subheading_spacing_desktop",
+      "label": "Title to description — computer",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "heading_subheading_spacing_mobile",
+      "label": "Title to description — phone",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_title_spacing_desktop",
+      "label": "Eyebrow to title — computer",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_title_spacing_mobile",
+      "label": "Eyebrow to title — phone",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "header",

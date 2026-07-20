@@ -120,6 +120,11 @@
         endif
       endif
   endcase
+
+  assign title_desc_spacing_desktop = section.settings.heading_subheading_spacing_desktop | default: settings.heading_subheading_spacing_desktop | default: 12
+  assign title_desc_spacing_mobile = section.settings.heading_subheading_spacing_mobile | default: settings.heading_subheading_spacing_mobile | default: 10
+  assign eyebrow_title_spacing_desktop = section.settings.eyebrow_title_spacing_desktop | default: settings.eyebrow_title_spacing_desktop | default: 12
+  assign eyebrow_title_spacing_mobile = section.settings.eyebrow_title_spacing_mobile | default: settings.eyebrow_title_spacing_mobile | default: 10
 -%}
 #shopify-section-{{ section.id }} {
   --font-family-heading: {% render 'hp-font-stack', font_key: h1_family %};
@@ -144,6 +149,9 @@
   --section-subheading-size: {{ paragraph_desktop }}px;
   --section-label-size: {{ eyebrow_desktop }}px;
   --body-font-size: {{ paragraph_desktop }}px;
+  --section-subheading-spacing-top: {{ title_desc_spacing_desktop }}px;
+  --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
+  --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
 }
 @media screen and (max-width: 989px) {
   #shopify-section-{{ section.id }} {
@@ -153,5 +161,8 @@
     --section-subheading-size: {{ paragraph_mobile }}px;
     --section-label-size: {{ eyebrow_mobile }}px;
     --body-font-size: {{ paragraph_mobile }}px;
+    --section-subheading-spacing-top: {{ title_desc_spacing_mobile }}px;
+    --section-label-to-title-gap: {{ eyebrow_title_spacing_mobile }}px;
+    --section-label-margin-bottom: {{ eyebrow_title_spacing_mobile }}px;
   }
 }
