@@ -19,26 +19,32 @@
 
   .mat-section {
     width: 100% !important;
-    background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
+    position: relative !important;
+    isolation: isolate !important;
+    background-color: {{ section.settings.bg_color | default: '#111111' }} !important;
     padding-top: {{ section.settings.padding_top | default: 110 }}px !important;
     padding-bottom: {{ section.settings.padding_bottom | default: 110 }}px !important;
-    padding-left: 40px !important;
-    padding-right: 40px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     overflow: hidden !important;
+    min-height: min(72vh, 720px) !important;
   }
 
   .mat-container {
+    position: relative !important;
+    z-index: 3 !important;
     max-width: var(--site-max-width) !important;
     margin: 0 auto !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding-left: max(24px, var(--site-padding, 40px)) !important;
+    padding-right: max(24px, var(--site-padding, 40px)) !important;
   }
 
   .mat-grid {
     display: grid !important;
-    grid-template-columns: 45% 55% !important;
-    align-items: start !important;
-    gap: 80px !important;
+    grid-template-columns: minmax(280px, 520px) 1fr !important;
+    align-items: center !important;
+    gap: 40px !important;
+    min-height: inherit !important;
   }
 
   .mat-left {
@@ -46,13 +52,13 @@
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: center !important;
+    position: relative !important;
+    z-index: 3 !important;
+    max-width: 560px !important;
   }
 
   .mat-right {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    padding-top: 88px !important;
+    display: none !important;
   }
 
   .mat-eyebrow {
@@ -60,19 +66,21 @@
   }
 
   .mat-headline {
-    color: #000000 !important;
+    color: #ffffff !important;
     margin: 0 !important;
     font-size: var(--section-heading-size) !important;
     line-height: 1.05 !important;
   }
 
-  .mat-desc {
-    margin-bottom: 35px !important;
-    font-size: var(--section-subheading-size, 17px) !important;
-    line-height: 1.6 !important;
+  .mat-section .mat-desc {
+    color: rgba(255, 255, 255, 0.88) !important;
   }
 
-  /* Material menu */
+  .mat-section .mat-headline,
+  .mat-section .mat-headline .hp-heading-line--1 {
+    color: #ffffff !important;
+  }
+
   .mat-menu {
     display: flex !important;
     flex-direction: column !important;
@@ -100,7 +108,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    color: {{ section.settings.inactive_color | default: '#000000' }} !important;
+    color: rgba(255, 255, 255, 0.55) !important;
   }
 
   .mat-menu-item-text {
@@ -138,63 +146,75 @@
     stroke: currentColor !important;
   }
 
-  /* Image Area */
-  .mat-image-container {
-    width: 100% !important;
-    max-width: 700px !important;
-    height: 520px !important;
-    border-radius: var(--homepage-corner, 20px) !important;
-    overflow: hidden !important;
-    position: relative !important;
-  }
-
-  .mat-image-layer {
+  .mat-bg-stage {
+    display: block !important;
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
-    opacity: 0 !important;
-    transform: scale(1.05) !important;
-    transition: opacity {{ section.settings.animation_speed | default: 400 }}ms cubic-bezier(0.25, 1, 0.5, 1), 
-                transform {{ section.settings.animation_speed | default: 400 }}ms cubic-bezier(0.25, 1, 0.5, 1) !important;
-    z-index: 1 !important;
+    z-index: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
   }
 
-  .mat-image-layer.active {
-    opacity: 1 !important;
-    transform: scale(1) !important;
+  .mat-bg-overlay {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
     z-index: 2 !important;
+    pointer-events: none !important;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.45) 42%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0.08) 100%
+    ) !important;
   }
 
-  .mat-image-fallback {
+  .mat-bg-stage .mat-image-container {
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .mat-bg-stage .mat-image-layer,
+  .mat-bg-stage .mat-image-fallback {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     opacity: 0 !important;
-    transform: scale(1.05) !important;
-    transition: opacity {{ section.settings.animation_speed | default: 400 }}ms cubic-bezier(0.25, 1, 0.5, 1), 
-                transform {{ section.settings.animation_speed | default: 400 }}ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform: scale(1.06) !important;
+    transition: opacity {{ section.settings.animation_speed | default: 400 }}ms cubic-bezier(0.25, 1, 0.5, 1),
+                transform {{ section.settings.animation_speed | default: 500 }}ms cubic-bezier(0.25, 1, 0.5, 1) !important;
     z-index: 1 !important;
+  }
+
+  .mat-bg-stage .mat-image-layer {
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .mat-bg-stage .mat-image-fallback {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
-  .mat-image-fallback.active {
+  .mat-bg-stage .mat-image-layer.active,
+  .mat-bg-stage .mat-image-fallback.active {
     opacity: 1 !important;
     transform: scale(1) !important;
     z-index: 2 !important;
   }
 
-  /* Responsiveness */
   @media screen and (max-width: 1200px) {
-    .mat-grid {
-      gap: 50px !important;
-    }
     .mat-menu-item,
     .mat-menu-item-text {
       font-size: calc(min({{ section.settings.menu_font_size | default: 52 }}px, 60px) * 0.8) !important;
@@ -203,69 +223,33 @@
 
   @media screen and (max-width: 1024px) {
     .mat-grid {
-      grid-template-columns: 48% 52% !important;
-      gap: 40px !important;
-    }
-    .mat-right {
-      padding-top: 64px !important;
+      grid-template-columns: minmax(240px, 1fr) !important;
+      gap: 0 !important;
     }
     .mat-menu-item,
     .mat-menu-item-text {
       font-size: calc(min({{ section.settings.menu_font_size | default: 52 }}px, 60px) * 0.7) !important;
-    }
-    .mat-image-container {
-      height: 440px !important;
     }
   }
 
   @media screen and (max-width: 768px) {
     .mat-section {
       --mat-mobile-gutter: max(16px, var(--site-padding, 20px));
-      position: relative !important;
-      isolation: isolate !important;
       min-height: min(88dvh, 680px) !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      background-color: #111111 !important;
-      overflow: hidden !important;
-    }
-
-    .mat-bg-stage {
-      display: block !important;
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      min-height: min(88dvh, 680px) !important;
-      z-index: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      pointer-events: none !important;
     }
 
     .mat-bg-overlay {
-      display: block !important;
-      position: absolute !important;
-      inset: 0 !important;
-      z-index: 2 !important;
-      pointer-events: none !important;
       background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.78) 0%,
         rgba(0, 0, 0, 0.42) 45%,
         rgba(0, 0, 0, 0.62) 100%
       ) !important;
-      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
     }
 
     .mat-container {
-      position: static !important;
-      z-index: auto !important;
       max-width: none !important;
       width: 100% !important;
       padding-left: 0 !important;
@@ -275,69 +259,34 @@
 
     .mat-grid {
       display: block !important;
-      position: static !important;
       min-height: min(88dvh, 680px) !important;
-      gap: 0 !important;
     }
 
-    .mat-right {
-      display: none !important;
-    }
-
-    .mat-bg-stage .mat-image-container {
-      position: absolute !important;
-      inset: 0 !important;
-      max-width: none !important;
-      width: 100% !important;
-      height: 100% !important;
+    .mat-bg-stage .mat-image-container,
+    .mat-bg-stage .mat-image-layer,
+    .mat-bg-stage .mat-image-fallback {
       min-height: min(88dvh, 680px) !important;
-      border-radius: 0 !important;
-      overflow: hidden !important;
     }
 
     .mat-bg-stage .mat-image-layer,
     .mat-bg-stage .mat-image-fallback {
-      opacity: 0 !important;
       transform: scale(1.14) !important;
       transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1),
                   transform 850ms cubic-bezier(0.25, 1, 0.5, 1) !important;
-      will-change: opacity, transform !important;
-    }
-
-    .mat-bg-stage .mat-image-layer {
-      object-fit: cover !important;
-      object-position: center center !important;
-      width: 100% !important;
-      height: 100% !important;
-      min-height: min(88dvh, 680px) !important;
-    }
-
-    .mat-bg-stage .mat-image-fallback {
-      width: 100% !important;
-      height: 100% !important;
-      min-height: min(88dvh, 680px) !important;
-    }
-
-    .mat-bg-stage .mat-image-fallback svg {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
     }
 
     .mat-bg-stage .mat-image-layer.active,
     .mat-bg-stage .mat-image-fallback.active {
-      opacity: 1 !important;
       transform: scale(1) !important;
     }
 
     .mat-left {
-      position: relative !important;
-      z-index: 3 !important;
       align-items: var(--section-heading-items, flex-start) !important;
       text-align: var(--section-heading-align, left) !important;
       justify-content: flex-end !important;
       min-height: min(88dvh, 680px) !important;
       width: 100% !important;
+      max-width: none !important;
       padding: 56px var(--mat-mobile-gutter) 32px var(--mat-mobile-gutter) !important;
     }
 
@@ -351,44 +300,6 @@
       max-width: 100% !important;
     }
 
-    .mat-eyebrow {
-      display: block !important;
-      text-align: var(--section-heading-align, left) !important;
-      margin-left: var(--section-heading-margin-left, 0) !important;
-      padding-left: 0 !important;
-      color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
-    }
-
-    .mat-headline {
-      color: #ffffff !important;
-      margin-bottom: 0 !important;
-      font-size: var(--section-heading-size) !important;
-      line-height: 1.05 !important;
-      max-width: none !important;
-      margin-left: var(--section-heading-margin-left, 0) !important;
-      margin-right: var(--section-heading-margin-right, auto) !important;
-      padding-left: 0 !important;
-      text-align: var(--section-heading-align, left) !important;
-    }
-
-    .mat-desc {
-      color: rgba(255, 255, 255, 0.88) !important;
-      margin-bottom: 24px !important;
-      max-width: none !important;
-      font-size: var(--section-subheading-size, 16px) !important;
-      line-height: 1.55 !important;
-      margin-left: var(--section-heading-margin-left, 0) !important;
-      margin-right: var(--section-heading-margin-right, auto) !important;
-      padding-left: 0 !important;
-      text-align: var(--section-heading-align, left) !important;
-    }
-
-    .mat-menu {
-      align-items: var(--section-heading-items, flex-start) !important;
-      gap: 2px !important;
-      width: 100% !important;
-    }
-
     .mat-menu-item,
     .mat-menu-item-text {
       font-size: min({{ section.settings.menu_font_size | default: 36 }}px, 44px) !important;
@@ -396,29 +307,8 @@
     }
 
     .mat-menu-item {
-      justify-content: flex-start !important;
-      transform-origin: left center !important;
-      margin-bottom: 0 !important;
-      margin-left: 0 !important;
       padding: 6px 0 !important;
-      padding-left: 0 !important;
       min-height: 40px !important;
-      color: rgba(255, 255, 255, 0.55) !important;
-      -webkit-tap-highlight-color: transparent !important;
-    }
-
-    .mat-menu-item:hover,
-    .mat-menu-item.active,
-    .mat-menu-item:hover .mat-menu-item-text,
-    .mat-menu-item.active .mat-menu-item-text {
-      color: {{ section.settings.active_color | default: '#D60000' }} !important;
-      transform: scale(1.02) !important;
-    }
-
-    .mat-menu-item.active .mat-menu-arrow {
-      opacity: 1 !important;
-      transform: translateX(0) !important;
-      color: {{ section.settings.active_color | default: '#D60000' }} !important;
     }
 
     .mat-menu-arrow {
@@ -426,13 +316,6 @@
     }
   }
 
-  .mat-bg-stage {
-    display: none;
-  }
-
-  .mat-bg-overlay {
-    display: none;
-  }
 {%- endstyle -%}
 
 <section class="mat-section" aria-label="Materials Showcase Section" data-mat-section>
@@ -442,7 +325,7 @@
         {%- if block.type == 'material_item' -%}
           {%- if block.settings.image != blank -%}
             <img class="mat-image-layer{% if forloop.first %} active{% endif %}"
-                 src="{{ block.settings.image | image_url: width: 1600 }}"
+                 src="{{ block.settings.image | image_url: width: 2400 }}"
                  alt=""
                  data-index="{{ forloop.index0 }}"
                  loading="lazy">
@@ -537,33 +420,6 @@
           {%- endfor -%}
         </div>
       </div>
-      
-      <!-- RIGHT COLUMN -->
-      <div class="mat-right">
-        <div class="mat-image-container">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'material_item' -%}
-              {%- if block.settings.image != blank -%}
-                <img class="mat-image-layer{% if forloop.first %} active{% endif %}" 
-                     src="{{ block.settings.image | image_url: width: 1000 }}" 
-                     alt="{{ block.settings.title | escape }}" 
-                     data-index="{{ forloop.index0 }}" 
-                     loading="lazy">
-              {%- else -%}
-                <!-- Vector Illustration Fallback Layer -->
-                <div class="mat-image-fallback{% if forloop.first %} active{% endif %}" 
-                     data-index="{{ forloop.index0 }}">
-                  <svg viewBox="0 0 700 520" style="width: 100%; height: 100%;">
-                    <rect width="700" height="520" fill="#EAEAEA"/>
-                    <circle cx="350" cy="260" r="140" fill="{{ section.settings.active_color | default: '#D60000' }}" opacity="0.05" filter="blur(24px)"/>
-                    <text x="350" y="275" font-size="32" font-weight="900" fill="#111111" text-anchor="middle" opacity="0.25" letter-spacing="4px">{{ block.settings.title | uppercase }}</text>
-                  </svg>
-                </div>
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -577,17 +433,12 @@
     const mobileQuery = window.matchMedia('(max-width: 768px)');
 
     function getActiveLayers() {
-      if (mobileQuery.matches) {
-        return matSection.querySelectorAll('.mat-bg-stage .mat-image-layer, .mat-bg-stage .mat-image-fallback');
-      }
-      return matSection.querySelectorAll('.mat-right .mat-image-layer, .mat-right .mat-image-fallback');
+      return matSection.querySelectorAll('.mat-bg-stage .mat-image-layer, .mat-bg-stage .mat-image-fallback');
     }
 
     menuItems.forEach(item => {
       item.addEventListener('mouseenter', function() {
-        if (!mobileQuery.matches) {
-          switchActiveMaterial(this);
-        }
+        switchActiveMaterial(this);
       });
     });
 
@@ -602,13 +453,11 @@
         layer.classList.toggle('active', isMatch);
       });
 
-      if (mobileQuery.matches) {
-        matSection.classList.add('mat-section--switching');
-        window.clearTimeout(matSection._matSwitchTimer);
-        matSection._matSwitchTimer = window.setTimeout(function() {
-          matSection.classList.remove('mat-section--switching');
-        }, 700);
-      }
+      matSection.classList.add('mat-section--switching');
+      window.clearTimeout(matSection._matSwitchTimer);
+      matSection._matSwitchTimer = window.setTimeout(function() {
+        matSection.classList.remove('mat-section--switching');
+      }, 700);
     }
   });
 </script>
