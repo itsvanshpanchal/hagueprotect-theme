@@ -480,7 +480,7 @@ main h1:not(.hero-fullscreen__heading),
   -webkit-font-smoothing: antialiased;
 }
 
-/* Section titles (H2) — driven by H2 typography vars so section editor changes apply */
+/* Section titles (H2) — sentence case (not Hero). Second line color via .hp-heading-line--2 */
 .trending-social__heading,
 .bestsellers__heading-dtc,
 .bs-coverflow__heading,
@@ -493,7 +493,6 @@ main h2.h2,
 .trust-statement__heading,
 .reviews-sec__heading,
 .product-rec__heading,
-.comm-headline,
 .social-slider__heading,
 .hp-dna__heading,
 .promo-banner__heading,
@@ -501,6 +500,11 @@ main h2.h2,
 .how-to-videos__heading,
 .bundle-title,
 .brand-banner__title,
+.brandsel__heading,
+.biz-solutions__heading,
+.biz-advantages__heading,
+.story-banner__heading,
+.story-banner__subheading,
 .skincare-intro__title,
 .skincare-explanation__title,
 .skincare-concerns__title,
@@ -508,11 +512,144 @@ main h2.h2,
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-weight: var(--font-weight-h2, var(--subheading-weight, 400)) !important;
   font-style: var(--font-style-h2, normal) !important;
-  letter-spacing: var(--heading-letter-spacing) !important;
+  letter-spacing: -0.02em !important;
   line-height: var(--heading-line-height) !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
   font-size: var(--section-heading-size, var(--heading-size-xl)) !important;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Sentence case: first letter capital, rest lowercase — Hero excluded */
+.trending-social__heading .hp-heading-line,
+.bestsellers__heading-dtc .hp-heading-line,
+.bs-coverflow__heading .hp-heading-line,
+.fb__title .hp-heading-line,
+.fc-heading .hp-heading-line,
+.hp-fam-sec__heading .hp-heading-line,
+.mat-headline .hp-heading-line,
+.feature-grid__heading .hp-heading-line,
+.trust-statement__heading .hp-heading-line,
+.reviews-sec__heading .hp-heading-line,
+.product-rec__heading .hp-heading-line,
+.social-slider__heading .hp-heading-line,
+.hp-dna__heading .hp-heading-line,
+.promo-banner__heading .hp-heading-line,
+.corp-features__heading .hp-heading-line,
+.how-to-videos__heading .hp-heading-line,
+.bundle-title .hp-heading-line,
+.brand-banner__title .hp-heading-line,
+.brandsel__heading .hp-heading-line,
+.biz-solutions__heading .hp-heading-line,
+.biz-advantages__heading .hp-heading-line,
+.story-banner__heading .hp-heading-line,
+.story-banner__subheading .hp-heading-line,
+.skincare-intro__title .hp-heading-line,
+.skincare-explanation__title .hp-heading-line,
+.skincare-concerns__title .hp-heading-line,
+.skincare-builder__title .hp-heading-line,
+#MainContent .shopify-section:not(.shopify-section-hero) h2 .hp-heading-line,
+#MainContent .shopify-section:not(.shopify-section-hero) .hp-heading-line {
+  display: block;
+  text-transform: lowercase !important;
+}
+
+.trending-social__heading .hp-heading-line::first-letter,
+.bestsellers__heading-dtc .hp-heading-line::first-letter,
+.bs-coverflow__heading .hp-heading-line::first-letter,
+.fb__title .hp-heading-line::first-letter,
+.fc-heading .hp-heading-line::first-letter,
+.hp-fam-sec__heading .hp-heading-line::first-letter,
+.mat-headline .hp-heading-line::first-letter,
+.feature-grid__heading .hp-heading-line::first-letter,
+.trust-statement__heading .hp-heading-line::first-letter,
+.reviews-sec__heading .hp-heading-line::first-letter,
+.product-rec__heading .hp-heading-line::first-letter,
+.social-slider__heading .hp-heading-line::first-letter,
+.hp-dna__heading .hp-heading-line::first-letter,
+.promo-banner__heading .hp-heading-line::first-letter,
+.corp-features__heading .hp-heading-line::first-letter,
+.how-to-videos__heading .hp-heading-line::first-letter,
+.bundle-title .hp-heading-line::first-letter,
+.brand-banner__title .hp-heading-line::first-letter,
+.brandsel__heading .hp-heading-line::first-letter,
+.biz-solutions__heading .hp-heading-line::first-letter,
+.biz-advantages__heading .hp-heading-line::first-letter,
+.story-banner__heading .hp-heading-line::first-letter,
+.story-banner__subheading .hp-heading-line::first-letter,
+.skincare-intro__title .hp-heading-line::first-letter,
+.skincare-explanation__title .hp-heading-line::first-letter,
+.skincare-concerns__title .hp-heading-line::first-letter,
+.skincare-builder__title .hp-heading-line::first-letter,
+#MainContent .shopify-section:not(.shopify-section-hero) h2 .hp-heading-line::first-letter,
+#MainContent .shopify-section:not(.shopify-section-hero) .hp-heading-line::first-letter {
+  text-transform: uppercase !important;
+}
+
+.hp-heading-line--2 {
+  color: var(--section-heading-line2-color, #6b6b6b) !important;
+}
+
+.premium-htu__title .hp-heading-line,
+.premium-htu__title:not(:has(.hp-heading-line)) {
+  display: block;
+  text-transform: lowercase !important;
+}
+.premium-htu__title .hp-heading-line::first-letter,
+.premium-htu__title:not(:has(.hp-heading-line))::first-letter {
+  text-transform: uppercase !important;
+}
+
+/* Fallback sentence case when heading is plain text (no line wrapper yet) */
+.trending-social__heading:not(:has(.hp-heading-line)),
+.bestsellers__heading-dtc:not(:has(.hp-heading-line)),
+.bs-coverflow__heading:not(:has(.hp-heading-line)),
+.fb__title:not(:has(.hp-heading-line)),
+.fc-heading:not(:has(.hp-heading-line)),
+.hp-fam-sec__heading:not(:has(.hp-heading-line)),
+.mat-headline:not(:has(.hp-heading-line)),
+.feature-grid__heading:not(:has(.hp-heading-line)),
+.trust-statement__heading:not(:has(.hp-heading-line)),
+.reviews-sec__heading:not(:has(.hp-heading-line)),
+.product-rec__heading:not(:has(.hp-heading-line)),
+.social-slider__heading:not(:has(.hp-heading-line)),
+.hp-dna__heading:not(:has(.hp-heading-line)),
+.promo-banner__heading:not(:has(.hp-heading-line)),
+.corp-features__heading:not(:has(.hp-heading-line)),
+.how-to-videos__heading:not(:has(.hp-heading-line)),
+.bundle-title:not(:has(.hp-heading-line)),
+.brand-banner__title:not(:has(.hp-heading-line)),
+.brandsel__heading:not(:has(.hp-heading-line)),
+.biz-solutions__heading:not(:has(.hp-heading-line)),
+.biz-advantages__heading:not(:has(.hp-heading-line)),
+.story-banner__heading:not(:has(.hp-heading-line)),
+.story-banner__subheading:not(:has(.hp-heading-line)) {
+  text-transform: lowercase !important;
+}
+
+.trending-social__heading:not(:has(.hp-heading-line))::first-letter,
+.bestsellers__heading-dtc:not(:has(.hp-heading-line))::first-letter,
+.bs-coverflow__heading:not(:has(.hp-heading-line))::first-letter,
+.fb__title:not(:has(.hp-heading-line))::first-letter,
+.fc-heading:not(:has(.hp-heading-line))::first-letter,
+.hp-fam-sec__heading:not(:has(.hp-heading-line))::first-letter,
+.mat-headline:not(:has(.hp-heading-line))::first-letter,
+.feature-grid__heading:not(:has(.hp-heading-line))::first-letter,
+.trust-statement__heading:not(:has(.hp-heading-line))::first-letter,
+.reviews-sec__heading:not(:has(.hp-heading-line))::first-letter,
+.product-rec__heading:not(:has(.hp-heading-line))::first-letter,
+.social-slider__heading:not(:has(.hp-heading-line))::first-letter,
+.hp-dna__heading:not(:has(.hp-heading-line))::first-letter,
+.promo-banner__heading:not(:has(.hp-heading-line))::first-letter,
+.corp-features__heading:not(:has(.hp-heading-line))::first-letter,
+.how-to-videos__heading:not(:has(.hp-heading-line))::first-letter,
+.bundle-title:not(:has(.hp-heading-line))::first-letter,
+.brand-banner__title:not(:has(.hp-heading-line))::first-letter,
+.brandsel__heading:not(:has(.hp-heading-line))::first-letter,
+.biz-solutions__heading:not(:has(.hp-heading-line))::first-letter,
+.biz-advantages__heading:not(:has(.hp-heading-line))::first-letter,
+.story-banner__heading:not(:has(.hp-heading-line))::first-letter,
+.story-banner__subheading:not(:has(.hp-heading-line))::first-letter {
+  text-transform: uppercase !important;
 }
 
 .hero-fullscreen__heading {
@@ -576,7 +713,7 @@ main h3 > span[aria-hidden="true"] {
   margin: 0 !important;
 }
 
-/* Unified homepage section titles — equal size, weight, and spacing */
+/* Unified homepage section titles — equal size/weight; sentence case via .hp-heading-line */
 .bs-coverflow__heading,
 .fb__title,
 .trending-social__heading,
@@ -586,9 +723,9 @@ main h3 > span[aria-hidden="true"] {
   font-size: var(--section-heading-size) !important;
   font-weight: var(--font-weight-h2, 400) !important;
   font-style: var(--font-style-h2, normal) !important;
-  letter-spacing: 0.03em !important;
+  letter-spacing: -0.02em !important;
   line-height: 1.05 !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
   margin: 0 !important;
   -webkit-font-smoothing: antialiased;
 }

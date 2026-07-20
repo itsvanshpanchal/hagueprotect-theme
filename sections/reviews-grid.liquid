@@ -266,7 +266,7 @@
 <div class="reviews-sec">
   <div class="reviews-sec__container">
     <div class="reviews-sec__header">
-      <h2 class="reviews-sec__heading">{{ section.settings.heading | default: 'People Love BFF' }}</h2>
+      <h2 class="reviews-sec__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'People Love BFF', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       
       <div class="reviews-sec__summary-row">
         <div class="reviews-sec__summary-left">
@@ -405,6 +405,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "People Love BFF"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "text",

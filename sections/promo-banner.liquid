@@ -141,7 +141,7 @@
     <div class="promo-banner__content">
       <div class="section-heading-stack">
         <p class="promo-banner__eyebrow">{{ eyebrow }}</p>
-        <h2 class="promo-banner__heading">{{ heading }}</h2>
+        <h2 class="promo-banner__heading">{% render 'section-heading-text', text: heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
       {%- if section.settings.button_text != blank -%}
         <a href="{{ section.settings.button_link | default: '#AddToCartForm' }}" class="promo-banner__cta">
@@ -175,6 +175,18 @@
       "id": "heading",
       "label": "Fallback Heading",
       "default": "YOU HAD ME AT CLEAN!"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "image_picker",

@@ -217,7 +217,7 @@
   <div class="hp-dna__container">
     {%- if section.settings.heading != blank -%}
       <h2 class="hp-dna__heading">
-        {{ section.settings.heading }}
+        {% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}
       </h2>
     {%- endif -%}
 
@@ -301,6 +301,18 @@
       "id": "heading",
       "label": "Section heading",
       "default": "HAGUE PROTECT DNA: Culture, Care, and Craft."
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "color",

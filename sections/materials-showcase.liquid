@@ -469,7 +469,7 @@
           {%- if section.settings.eyebrow != blank -%}
             <span class="mat-eyebrow">{{ section.settings.eyebrow }}</span>
           {%- endif -%}
-          <h2 class="mat-headline">{{ section.settings.heading }}</h2>
+          <h2 class="mat-headline">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
         </div>
         {%- if section.settings.description != blank -%}
           <p class="mat-desc">{{ section.settings.description }}</p>
@@ -634,6 +634,18 @@
       "id": "heading",
       "label": "Heading Text",
       "default": "FOR EVERY MATERIAL."
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "textarea",

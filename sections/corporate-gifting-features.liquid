@@ -33,8 +33,8 @@
     font-family: var(--font-family-heading);
     font-size: clamp(40px, 5.5vw, 64px);
     font-weight: 400;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-transform: none;
     color: #111111 !important;
     margin: 0;
     line-height: 1;
@@ -246,7 +246,7 @@
   <div class="corp-features__container">
     <div class="corp-features__header">
       <p class="corp-features__eyebrow">{{ section.settings.eyebrow | default: "What's Possible" }}</p>
-      <h2 class="corp-features__heading">{{ section.settings.heading | default: 'Built for Brands That Care' }}</h2>
+      <h2 class="corp-features__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Built for Brands That Care', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       <p class="corp-features__sub">{{ section.settings.subheading | default: 'Every detail Ã¢â‚¬â€ from co-branded packaging to bulk logistics Ã¢â‚¬â€ designed to make your gift unforgettable.' }}</p>
     </div>
 
@@ -372,6 +372,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "Built for Brands That Care"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "textarea",

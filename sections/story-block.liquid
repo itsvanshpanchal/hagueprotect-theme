@@ -68,7 +68,7 @@
     font-style: var(--font-style-heading, normal) !important;
     line-height: 1.05 !important;
     letter-spacing: 0.03em !important;
-    text-transform: uppercase !important;
+    text-transform: none !important;
     color: {{ section.settings.heading_color | default: '#111111' }} !important;
     margin: 0 !important;
   }
@@ -80,8 +80,8 @@
     font-weight: var(--font-weight-h2, 400) !important;
     font-style: var(--font-style-h2, normal) !important;
     line-height: 1.1 !important;
-    letter-spacing: 0.03em !important;
-    text-transform: uppercase !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
     color: {{ section.settings.subheading_color | default: '#111111' }} !important;
     margin: 0 !important;
   }
@@ -226,7 +226,7 @@
               <span class="story-banner__eyebrow">{{ banner_eyebrow }}</span>
             {%- endif -%}
             {%- if banner_heading != blank -%}
-              <div class="story-banner__heading" role="heading" aria-level="2">{{ banner_heading }}</div>
+              <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: banner_heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</div>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -285,6 +285,18 @@
       "id": "heading",
       "label": "Biggest title",
       "info": "Largest text on the banner (uses Big headline typography)."
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "text",

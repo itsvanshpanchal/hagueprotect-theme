@@ -97,7 +97,7 @@
 
   <div class="container">
     <div class="brand-banner__container animate-fade-in">
-      <h2 class="brand-banner__title">{{ section.settings.heading | default: 'HAGUEPROTECT Ã¢â‚¬â€ Sneaker Care, Redefined' }}</h2>
+      <h2 class="brand-banner__title">{% render 'section-heading-text', text: section.settings.heading | default: 'HAGUEPROTECT — Sneaker Care, Redefined', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       <p class="brand-banner__subtitle">{{ section.settings.subheading | default: 'Experience professional-grade formulas, engineered specifically for premium fabrics, leathers, and suedes.' }}</p>
       <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn-white brand-banner__btn">
         {{ section.settings.cta_text | default: 'Discover More' }}
@@ -115,6 +115,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "HAGUEPROTECT Ã¢â‚¬â€ Sneaker Care, Redefined"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "textarea",

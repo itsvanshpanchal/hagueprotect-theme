@@ -1089,6 +1089,20 @@
       },
       {
         "type": "header",
+        "content": "Section heading style"
+      },
+      {
+        "type": "paragraph",
+        "content": "Applies to all section titles except the homepage Hero (Hero stays uppercase). Titles use sentence case (first letter capital, rest lowercase). The second heading line can use a separate color."
+      },
+      {
+        "type": "color",
+        "id": "heading_line2_color",
+        "label": "Second line of heading color",
+        "default": "#6b6b6b"
+      },
+      {
+        "type": "header",
         "content": "Eyebrow to title spacing"
       },
       {

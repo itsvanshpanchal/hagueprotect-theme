@@ -183,7 +183,7 @@
     {%- if section.settings.heading != blank -%}
       <div class="feature-grid__header section-heading-stack section-heading-stack--center">
         <span class="feature-grid__eyebrow">{{ section.settings.eyebrow | default: 'THE HAGUE EFFECT' }}</span>
-        <h2 class="feature-grid__heading">{{ section.settings.heading }}</h2>
+        <h2 class="feature-grid__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
     {%- endif -%}
 
@@ -254,6 +254,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "Uncompromising Performance"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "header",

@@ -2,6 +2,7 @@
   assign site_max_width = settings.site_max_width | default: 1440
   assign homepage_label_color = settings.homepage_label_color | default: '#2563eb'
   assign section_heading_align = settings.section_heading_align | default: 'left'
+  assign heading_line2_color = settings.heading_line2_color | default: '#6b6b6b'
   assign eyebrow_title_spacing_desktop = settings.eyebrow_title_spacing_desktop | default: 12
   assign eyebrow_title_spacing_mobile = settings.eyebrow_title_spacing_mobile | default: 10
   assign heading_subheading_spacing_desktop = settings.heading_subheading_spacing_desktop | default: 12
@@ -24,6 +25,7 @@
     --section-heading-items: {{ section_heading_items }};
     --section-heading-margin-left: {{ section_heading_margin_left }};
     --section-heading-margin-right: {{ section_heading_margin_right }};
+    --section-heading-line2-color: {{ heading_line2_color }};
     --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
     --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
     --section-subheading-spacing-top: {{ heading_subheading_spacing_desktop }}px;

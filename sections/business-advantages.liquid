@@ -39,8 +39,8 @@
     font-size: var(--section-heading-size);
     font-weight: var(--font-weight-h2, 400);
     font-style: var(--font-style-h2, normal);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-transform: none;
     color: #ffffff !important;
     margin: 0;
     line-height: 1;
@@ -179,7 +179,7 @@
         {%- if section.settings.eyebrow != blank -%}
           <p class="biz-advantages__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        <h2 class="biz-advantages__heading">{{ section.settings.heading | default: 'Why Partner With Hague Protect' }}</h2>
+        <h2 class="biz-advantages__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Why Partner With Hague Protect', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
       {%- if section.settings.subheading != blank -%}
         <p class="biz-advantages__sub">{{ section.settings.subheading }}</p>
@@ -269,6 +269,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "Why Partner With Us"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "textarea",

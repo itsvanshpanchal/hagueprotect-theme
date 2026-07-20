@@ -265,7 +265,7 @@
         <span class="fb__eyebrow">{{ section.settings.eyebrow }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="fb__title">{{ section.settings.heading }}</h2>
+        <h2 class="fb__title">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       {%- endif -%}
     </div>
     {%- if section.settings.subheading != blank -%}

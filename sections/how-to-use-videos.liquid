@@ -586,7 +586,7 @@
   <div class="premium-htu__container">
     {%- if section.settings.heading != blank -%}
       <div class="premium-htu__header">
-        <h2 class="premium-htu__title">{{ section.settings.heading }}</h2>
+        <h2 class="premium-htu__title">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
     {%- endif -%}
 
@@ -931,6 +931,18 @@
       "id": "heading",
       "label": "Section Heading",
       "default": "Interactive Product Guides"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "header",

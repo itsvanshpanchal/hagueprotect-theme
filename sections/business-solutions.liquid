@@ -36,8 +36,8 @@
     font-size: var(--section-heading-size);
     font-weight: var(--font-weight-h2, 400);
     font-style: var(--font-style-h2, normal);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-transform: none;
     color: #0a0c12 !important;
     margin: 0;
     line-height: 1;
@@ -188,7 +188,7 @@
       {%- if section.settings.eyebrow != blank -%}
         <p class="biz-solutions__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      <h2 class="biz-solutions__heading">{{ section.settings.heading | default: 'Business Solutions' }}</h2>
+      <h2 class="biz-solutions__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Business Solutions', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       {%- if section.settings.subheading != blank -%}
         <p class="biz-solutions__sub">{{ section.settings.subheading }}</p>
       {%- endif -%}
@@ -274,6 +274,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "Built for Scale"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "textarea",

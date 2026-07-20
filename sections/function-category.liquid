@@ -434,7 +434,7 @@
       {%- if section.settings.subtitle != blank -%}
         <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
-      <h2 class="fc-heading">{{ section.settings.heading | default: 'Shop by Function and Category' }}</h2>
+      <h2 class="fc-heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Shop by Function and Category', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
     </div>
 
     <div class="fc-slider-wrapper">
@@ -672,6 +672,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "Shop by Function and Category"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading — second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "text",

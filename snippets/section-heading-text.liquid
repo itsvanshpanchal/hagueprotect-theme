@@ -1,0 +1,26 @@
+{%- comment -%}
+  Section heading text — sentence case + optional second line color.
+  Does not change merchant copy; only wraps/styles it.
+  Params: text, line2 (optional), line2_color (optional)
+{%- endcomment -%}
+{%- liquid
+  assign line1 = text | strip
+  assign line2_raw = line2 | default: '' | strip
+
+  if line2_raw == blank and line1 != blank
+    assign tmp = line1 | replace: '<br />', '|||' | replace: '<br/>', '|||' | replace: '<br>', '|||'
+    assign parts = tmp | split: '|||'
+    if parts.size > 1
+      assign line1 = parts[0] | strip
+      assign line2_raw = parts[1] | strip
+    endif
+  endif
+
+  assign c2 = line2_color | default: settings.heading_line2_color | default: '#6b6b6b'
+-%}
+{%- if line2_raw != blank -%}
+  <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
+  <span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
+{%- else -%}
+  <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
+{%- endif -%}
