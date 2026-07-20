@@ -43,147 +43,16 @@
     --section-label-color: {{ homepage_label_color }};
   }
 
-  /* Same alignment on every screen size for section top headings + matching subcopy.
-     !important beats per-section #shopify-section-{id} / hardcoded center rules. */
-  .bs-coverflow__header,
-  .bs-coverflow__heading,
-  .bs-coverflow__eyebrow,
-  .fb__header,
-  .fb__title,
-  .fb__eyebrow,
-  .fb__subtitle,
-  .trending-social-header,
-  .trending-social__heading-group,
-  .trending-social__heading,
-  .trending-social__eyebrow,
-  .mat-left,
-  .mat-headline,
-  .mat-eyebrow,
-  .mat-desc,
-  .fc-header,
-  .fc-heading,
-  .fc-subtitle,
-  .hp-dna__heading,
-  .hp-fam-sec__heading,
-  .product-family-header,
-  .feature-grid__header,
-  .feature-grid__heading,
-  .feature-grid__eyebrow,
-  .promo-banner__header,
-  .promo-banner__heading,
-  .promo-banner__eyebrow,
-  .brand-banner,
-  .brand-banner__title,
-  .brand-banner__subtitle,
-  .brandsel__heading,
-  .brandsel__eyebrow,
-  .brandsel__sub,
-  .comm-headline,
-  .comm-eyebrow,
-  .comm-desc,
-  .comm-badge-desc,
-  .story-banner__heading,
-  .story-banner__subheading,
-  .story-banner__eyebrow,
-  .story-banner__paragraph,
-  [class*="ai-story-banner-heading-"],
-  [class*="ai-story-banner-subheading-"],
-  .trust-statement__heading,
-  .reviews-sec__heading,
-  .product-rec__heading,
-  .social-slider__heading,
-  .faq-custom__heading,
-  .bundle-title,
-  .corp-features__heading,
-  .corp-features__sub,
-  .how-to-videos__heading,
-  .biz-solutions__heading,
-  .biz-solutions__sub,
-  .biz-advantages__heading,
-  .hero-fullscreen__heading,
-  .hero-fullscreen__subheading,
-  .hero-fullscreen__eyebrow,
-  .section-heading-stack:not(.section-heading-stack--center) {
-    text-align: var(--section-heading-align, left) !important;
-  }
-
-  /* Keep every heading line + subheading on one shared left edge */
-  .hero-fullscreen__heading .hero-heading-line,
-  .hp-heading-line,
-  .bs-coverflow__heading,
-  .bs-coverflow__eyebrow,
-  .fb__title,
-  .fb__eyebrow,
-  .fb__subtitle,
-  .trending-social__heading,
-  .trending-social__eyebrow,
-  .mat-headline,
-  .mat-eyebrow,
-  .mat-desc,
-  .fc-heading,
-  .fc-subtitle,
-  .feature-grid__heading,
-  .feature-grid__eyebrow,
-  .brand-banner__title,
-  .brand-banner__subtitle,
-  .brandsel__heading,
-  .brandsel__eyebrow,
-  .brandsel__sub,
-  .story-banner__heading,
-  .story-banner__subheading,
-  .story-banner__eyebrow,
-  .story-banner__paragraph,
-  .hero-fullscreen__heading,
-  .hero-fullscreen__subheading,
-  .hero-fullscreen__eyebrow,
-  .section-heading-stack > * {
-    margin-left: 0 !important;
-    padding-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .hero-fullscreen__heading .hero-heading-line,
-  .hp-heading-line {
-    display: block !important;
-    width: 100% !important;
-    text-align: inherit !important;
-  }
-
-  .bs-coverflow__header,
-  .fb__header,
-  .trending-social-header,
-  .trending-social__heading-group,
-  .fc-header,
-  .mat-left,
-  .product-family-header,
-  .feature-grid__header,
-  .promo-banner__header,
-  .hero-fullscreen__content,
-  .section-heading-stack:not(.section-heading-stack--center) {
-    align-items: var(--section-heading-items, flex-start) !important;
-  }
-
-  .comm-headline {
-    justify-content: var(--section-heading-items, flex-start) !important;
-  }
-
-  .fb__subtitle,
-  .mat-desc,
-  .brand-banner__subtitle,
-  .brandsel__sub,
-  .comm-desc,
-  .comm-badge-desc,
-  .story-banner__paragraph,
-  .corp-features__sub,
-  .biz-solutions__sub,
-  .hero-fullscreen__subheading {
-    margin-left: var(--section-heading-margin-left, 0) !important;
-    margin-right: var(--section-heading-margin-right, auto) !important;
-  }
-
-  /* Homepage: one shared horizontal gutter so headings line up down the page */
+  /*
+    Homepage: ONE content column for every section heading + subheading.
+    Same max-width, same gutter, same left edge on every section.
+  */
   body.template-index {
     --homepage-section-gutter: 40px;
+    --homepage-text-inset: max(
+      var(--homepage-section-gutter),
+      calc((100vw - var(--site-max-width)) / 2 + var(--homepage-section-gutter))
+    );
   }
 
   @media screen and (max-width: 767px) {
@@ -192,6 +61,7 @@
     }
   }
 
+  /* Shared outer column — headings AND cards sit inside this same box */
   body.template-index .bs-coverflow__container,
   body.template-index .trending-social-section .container,
   body.template-index .fc-container,
@@ -199,39 +69,171 @@
   body.template-index .promo-banner__container,
   body.template-index .hp-fam-sec__container,
   body.template-index .hp-dna__container,
-  body.template-index [class*="featured-brands-"] {
+  body.template-index .comm-container,
+  body.template-index .mat-container,
+  body.template-index .fb__header,
+  body.template-index .fb__grid,
+  body.template-index .brandsel__inner {
+    max-width: var(--site-max-width) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter) !important;
+    box-sizing: border-box !important;
   }
 
-  body.template-index .fb__header {
+  /* Featured brands section padding was doubling the gutter */
+  body.template-index [class*="featured-brands-"] {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 
-  /* Hero heading + subheading share one left edge inside the content box */
-  body.template-index .hero-fullscreen__heading,
-  body.template-index .hero-fullscreen__subheading,
-  body.template-index .hero-fullscreen__eyebrow,
-  body.template-index .hero-fullscreen__heading .hero-heading-line {
-    text-align: left !important;
-    margin-left: 0 !important;
-    padding-left: 0 !important;
+  /* Headers inside the shared column: no extra inset / centering */
+  body.template-index .bs-coverflow__header,
+  body.template-index .trending-social-header,
+  body.template-index .fc-header,
+  body.template-index .mat-left,
+  body.template-index .feature-grid__header,
+  body.template-index .promo-banner__content,
+  body.template-index .hp-dna__heading,
+  body.template-index .hp-fam-sec__heading,
+  body.template-index .comm-top,
+  body.template-index .brandsel__head,
+  body.template-index .fb__header .section-heading-stack,
+  body.template-index .section-heading-stack {
+    max-width: none !important;
     width: 100% !important;
-  }
-
-  body.template-index .hero-fullscreen__content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: left !important;
     align-items: flex-start !important;
   }
 
-  /* Explicitly centered stacks always win (opt-in only) */
-  .section-heading-stack--center,
-  .section-heading-stack--center > * {
-    text-align: center !important;
+  /* fb__header is itself a column box — keep its gutter, zero nested stack */
+  body.template-index .fb__header {
+    text-align: left !important;
   }
 
-  .section-heading-stack--center {
-    align-items: center !important;
+  body.template-index .fb__header.section-heading-stack {
+    max-width: var(--site-max-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--homepage-section-gutter) !important;
+    padding-right: var(--homepage-section-gutter) !important;
+  }
+
+  /* Heading + subheading text: flush left, same edge */
+  body.template-index .bs-coverflow__heading,
+  body.template-index .bs-coverflow__eyebrow,
+  body.template-index .fb__title,
+  body.template-index .fb__eyebrow,
+  body.template-index .fb__subtitle,
+  body.template-index .trending-social__heading,
+  body.template-index .trending-social__eyebrow,
+  body.template-index .mat-headline,
+  body.template-index .mat-eyebrow,
+  body.template-index .mat-desc,
+  body.template-index .fc-heading,
+  body.template-index .fc-subtitle,
+  body.template-index .feature-grid__heading,
+  body.template-index .feature-grid__eyebrow,
+  body.template-index .promo-banner__heading,
+  body.template-index .promo-banner__eyebrow,
+  body.template-index .hp-fam-sec__heading,
+  body.template-index .hp-dna__heading,
+  body.template-index .comm-headline,
+  body.template-index .comm-eyebrow,
+  body.template-index .comm-desc,
+  body.template-index .brandsel__heading,
+  body.template-index .brandsel__eyebrow,
+  body.template-index .brandsel__sub,
+  body.template-index .story-banner__heading,
+  body.template-index .story-banner__subheading,
+  body.template-index .story-banner__eyebrow,
+  body.template-index .story-banner__paragraph,
+  body.template-index [class*="ai-story-banner-heading-"],
+  body.template-index [class*="ai-story-banner-subheading-"],
+  body.template-index .hero-fullscreen__heading,
+  body.template-index .hero-fullscreen__subheading,
+  body.template-index .hero-fullscreen__eyebrow,
+  body.template-index .hp-heading-line,
+  body.template-index .hero-heading-line {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  body.template-index .hp-heading-line,
+  body.template-index .hero-heading-line {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  body.template-index .fc-header .fc-subtitle {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Hero pinned to the same inset as section headings */
+  body.template-index .hero-fullscreen__content {
+    left: var(--homepage-text-inset) !important;
+    right: auto !important;
+    transform: none !important;
+    width: min(
+      calc(var(--site-max-width) - (var(--homepage-section-gutter) * 2)),
+      calc(100vw - (var(--homepage-text-inset) * 2))
+    ) !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    body.template-index .hero-fullscreen__content {
+      left: var(--homepage-section-gutter) !important;
+      width: calc(100% - (var(--homepage-section-gutter) * 2)) !important;
+    }
+  }
+
+  /* Story / AI banners: text starts on the shared inset */
+  body.template-index .story-banner__content {
+    left: 0 !important;
+    right: 0 !important;
+    padding-left: var(--homepage-text-inset) !important;
+    padding-right: var(--homepage-section-gutter) !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  body.template-index [class*="ai-story-banner-content-"] {
+    left: var(--homepage-text-inset) !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Kill forced center stacks on homepage */
+  body.template-index .section-heading-stack--center,
+  body.template-index .section-heading-stack--center > * {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+
+  @media screen and (max-width: 767px) {
+    body.template-index .fc-heading,
+    body.template-index .fc-subtitle {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
   }
 
   .template-index .hero-fullscreen__eyebrow,
