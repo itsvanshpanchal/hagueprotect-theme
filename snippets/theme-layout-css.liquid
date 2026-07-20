@@ -49,10 +49,8 @@
   */
   body.template-index {
     --homepage-section-gutter: 8px;
-    --homepage-text-inset: max(
-      var(--homepage-section-gutter),
-      calc((100vw - var(--site-max-width)) / 2 + var(--homepage-section-gutter))
-    );
+    /* Same small inset on monitors — do not center inside 1440px */
+    --homepage-text-inset: var(--homepage-section-gutter);
   }
 
   @media screen and (max-width: 989px) {
@@ -67,7 +65,7 @@
     }
   }
 
-  /* Shared outer column — headings AND cards sit inside this same box */
+  /* Full width on large monitors — only the small left/right gutter */
   body.template-index #MainContent .bs-coverflow__container,
   body.template-index #MainContent .trending-social-section .container,
   body.template-index #MainContent .fc-container,
@@ -82,10 +80,10 @@
   body.template-index #MainContent .brandsel__inner,
   body.template-index #MainContent [class*="featured-brands-"] .fb__header,
   body.template-index #MainContent [class*="featured-brands-"] .fb__grid {
-    max-width: var(--site-max-width) !important;
+    max-width: none !important;
     width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter) !important;
     box-sizing: border-box !important;
@@ -126,9 +124,9 @@
   }
 
   body.template-index .fb__header.section-heading-stack {
-    max-width: var(--site-max-width) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter) !important;
   }
@@ -187,15 +185,12 @@
     margin-right: 0 !important;
   }
 
-  /* Hero pinned to the same inset as section headings */
+  /* Hero: same small inset on monitors, tablets, and phones */
   body.template-index .hero-fullscreen__content {
-    left: var(--homepage-text-inset) !important;
+    left: var(--homepage-section-gutter) !important;
     right: auto !important;
     transform: none !important;
-    width: min(
-      calc(var(--site-max-width) - (var(--homepage-section-gutter) * 2)),
-      calc(100vw - (var(--homepage-text-inset) * 2))
-    ) !important;
+    width: calc(100% - (var(--homepage-section-gutter) * 2)) !important;
     max-width: none !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
