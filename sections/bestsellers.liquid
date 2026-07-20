@@ -467,15 +467,15 @@
 
     #shopify-section-{{ section.id }} .bs-coverflow__header {
       flex-direction: column;
-      align-items: stretch;
-      text-align: center;
+      align-items: var(--section-heading-items, flex-start);
+      text-align: var(--section-heading-align, left);
       gap: 12px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__heading {
       max-width: 18ch;
       margin-inline: 0;
-      text-align: left;
+      text-align: var(--section-heading-align, left);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__view-all {

@@ -41,13 +41,13 @@
     --section-label-color: {{ homepage_label_color }};
   }
 
-  /* Same alignment on every screen size — no breakpoint flip */
+  /* Same alignment on every screen size — no breakpoint flip.
+     !important is required so this beats per-section #shopify-section-{id} rules. */
   .bs-coverflow__heading,
   .fb__title,
   .trending-social__heading,
   .mat-headline,
   .fc-heading,
-  .comm-headline,
   .bs-coverflow__eyebrow,
   .fb__eyebrow,
   .trending-social__eyebrow,
@@ -57,27 +57,20 @@
   .fb__subtitle,
   .mat-desc,
   .comm-desc {
-    text-align: var(--section-heading-align, left);
+    text-align: var(--section-heading-align, left) !important;
   }
 
   .bs-coverflow__header,
   .fb__header,
   .trending-social-header,
   .fc-header,
+  .mat-left,
   .section-heading-stack:not(.section-heading-stack--center) {
-    align-items: var(--section-heading-items, flex-start);
+    align-items: var(--section-heading-items, flex-start) !important;
   }
 
-  .bs-coverflow__heading,
-  .fb__title,
-  .trending-social__heading,
-  .mat-headline,
-  .fc-heading,
-  .fb__subtitle,
-  .mat-desc,
-  .comm-desc {
-    margin-left: var(--section-heading-margin-left, 0);
-    margin-right: var(--section-heading-margin-right, auto);
+  .comm-headline {
+    justify-content: var(--section-heading-items, flex-start) !important;
   }
 
   /* Explicitly centered stacks always win */
