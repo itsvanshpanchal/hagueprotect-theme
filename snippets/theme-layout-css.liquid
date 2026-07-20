@@ -48,7 +48,7 @@
     Same max-width, same gutter, same left edge on every section.
   */
   body.template-index {
-    --homepage-section-gutter: 40px;
+    --homepage-section-gutter: 20px;
     --homepage-text-inset: max(
       var(--homepage-section-gutter),
       calc((100vw - var(--site-max-width)) / 2 + var(--homepage-section-gutter))
@@ -57,7 +57,7 @@
 
   @media screen and (max-width: 767px) {
     body.template-index {
-      --homepage-section-gutter: max(16px, var(--site-padding, 20px));
+      --homepage-section-gutter: 12px;
     }
   }
 
