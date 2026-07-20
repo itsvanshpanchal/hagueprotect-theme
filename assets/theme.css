@@ -666,9 +666,9 @@ main h2.h2,
   font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero) !important;
   font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
-  letter-spacing: var(--heading-letter-spacing) !important;
-  line-height: 1.02 !important;
-  text-transform: uppercase !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.05 !important;
+  text-transform: none !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }

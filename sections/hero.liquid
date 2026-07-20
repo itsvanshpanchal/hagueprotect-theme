@@ -10,10 +10,12 @@
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+  #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line,
   #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
   #shopify-section-{{ section.id }} .hero-fullscreen__heading,
   #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
-  #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"] {
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line {
     font-size: {{ hero_title_desktop }}px !important;
   }
 
@@ -22,10 +24,12 @@
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line,
     #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
     #shopify-section-{{ section.id }} .hero-fullscreen__heading,
     #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
-    #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"] {
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line {
       font-size: {{ hero_title_mobile }}px !important;
     }
   }
@@ -103,8 +107,8 @@
     font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', sans-serif) !important;
     font-size: var(--heading-size-hero) !important;
     font-weight: 400;
-    line-height: 1.02;
-    letter-spacing: 0.03em;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     color: #ffffff;
     margin: 0;
     width: 100%;
@@ -112,7 +116,22 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: manual;
-    text-transform: uppercase;
+    text-transform: none !important;
+  }
+
+  .hero-fullscreen__heading .hero-heading-line {
+    display: block;
+    text-transform: lowercase !important;
+    color: inherit;
+  }
+
+  .hero-fullscreen__heading .hero-heading-line--1::first-letter {
+    text-transform: uppercase !important;
+  }
+
+  .hero-fullscreen__heading .hero-heading-line--3 {
+    color: {{ section.settings.heading_line3_color | default: '#c8c8c8' }} !important;
+    font-style: italic;
   }
 
   .hero-fullscreen__heading .hp-typewriter-cursor {
@@ -226,9 +245,9 @@
       font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif) !important;
       font-size: var(--heading-size-hero) !important;
       font-weight: 400;
-      line-height: 1.02;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: none !important;
       padding: 0 4px;
       text-align: inherit;
       width: 100%;
@@ -384,12 +403,12 @@
       endif
     -%}
     <h1 class="hero-fullscreen__heading">
-      {{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}
+      <span class="hero-heading-line hero-heading-line--1">{{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}</span>
       {%- if hero_line2 != blank -%}
-        <br>{{ hero_line2 }}
+        <span class="hero-heading-line hero-heading-line--2">{{ hero_line2 }}</span>
       {%- endif -%}
       {%- if hero_line3 != blank -%}
-        <br>{{ hero_line3 }}
+        <span class="hero-heading-line hero-heading-line--3">{{ hero_line3 }}</span>
       {%- endif -%}
     </h1>
     <p class="hero-fullscreen__subheading">{{ section.settings.subheading | default: 'Professional-grade cleaning for everyday wear. Advanced protection formulas designed for premium materials.' }}</p>
@@ -424,6 +443,13 @@
       "id": "heading_line3",
       "label": "Heading (Line 3)",
       "default": "'EM HEAT."
+    },
+    {
+      "type": "color",
+      "id": "heading_line3_color",
+      "label": "Heading line 3 color",
+      "info": "Color for the third heading line (sentence case, italic).",
+      "default": "#c8c8c8"
     },
     {
       "type": "textarea",
