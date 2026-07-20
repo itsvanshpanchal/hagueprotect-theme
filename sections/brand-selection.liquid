@@ -63,7 +63,7 @@
     font-weight: 800;
     letter-spacing: -0.028em;
     color: {{ section.settings.heading_color | default: '#111111' }};
-    margin: 0 0 16px;
+    margin: 0;
     line-height: 1.05;
   }
 
@@ -72,7 +72,7 @@
     font-size: 16px;
     font-weight: 500;
     color: {{ section.settings.subheading_color | default: '#6b6b6b' }};
-    margin: var(--section-subheading-spacing-top) 0 0 0;
+    margin-top: var(--section-subheading-spacing-top);
     line-height: 1.6;
   }
 
