@@ -761,7 +761,22 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
 }
 
 /* Hero & story paragraphs — not eyebrow style */
-.hero-fullscreen__subheading,
+.hero-fullscreen__subheading {
+  font-family: var(--font-family-sans) !important;
+  font-size: var(--section-subheading-size) !important;
+  font-weight: var(--section-subheading-weight) !important;
+  line-height: var(--section-subheading-line-height) !important;
+  letter-spacing: normal !important;
+  color: #ffffff !important;
+  text-transform: none !important;
+  text-align: inherit !important;
+  display: block !important;
+  margin: var(--section-subheading-spacing-top) 0 0 0 !important;
+  padding: 0 !important;
+  max-width: 600px !important;
+  -webkit-font-smoothing: antialiased;
+}
+
 .story-banner__paragraph {
   font-family: var(--font-family-sans) !important;
   font-size: var(--section-subheading-size) !important;
@@ -772,7 +787,7 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   text-transform: none !important;
   text-align: inherit !important;
   display: block !important;
-  margin: 0 !important;
+  margin: var(--section-subheading-spacing-top) 0 0 0 !important;
   padding: 0 !important;
   max-width: 600px !important;
   -webkit-font-smoothing: antialiased;
@@ -800,6 +815,11 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
 .d2c-subtitle-text,
 .vr-info__subtitle,
 .sor-info__subtitle,
+.brandsel__sub,
+.biz-solutions__sub,
+.biz-advantages__sub,
+.biz-hero__sub,
+.corp-features__sub,
 [class*="ckc-"][class*="__desc"] {
   font-family: var(--font-family-sans) !important;
   font-size: var(--section-subheading-size) !important;

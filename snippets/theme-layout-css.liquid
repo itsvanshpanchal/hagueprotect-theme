@@ -1,10 +1,19 @@
 {%- liquid
   assign site_max_width = settings.site_max_width | default: 1440
   assign homepage_label_color = settings.homepage_label_color | default: '#2563eb'
+  assign heading_subheading_spacing_desktop = settings.heading_subheading_spacing_desktop | default: 12
+  assign heading_subheading_spacing_mobile = settings.heading_subheading_spacing_mobile | default: 10
 -%}
 <style>
   :root {
     --site-max-width: {{ site_max_width }}px;
+    --section-subheading-spacing-top: {{ heading_subheading_spacing_desktop }}px;
+  }
+
+  @media screen and (max-width: 989px) {
+    :root {
+      --section-subheading-spacing-top: {{ heading_subheading_spacing_mobile }}px;
+    }
   }
 
   .template-index {

@@ -1062,6 +1062,34 @@
         "label": "Homepage eyebrow / label color",
         "info": "Color for small labels above section titles (e.g. BEST SELLERS, SOCIAL PROOF). Use a strong color like blue so they stay visible on light backgrounds.",
         "default": "#2563eb"
+      },
+      {
+        "type": "header",
+        "content": "Heading to description spacing"
+      },
+      {
+        "type": "paragraph",
+        "content": "Space between a section main title and the description line below it (e.g. Bestsellers → body text). Does not change font styles — only the gap."
+      },
+      {
+        "type": "range",
+        "id": "heading_subheading_spacing_desktop",
+        "label": "Space on computer",
+        "min": 0,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "heading_subheading_spacing_mobile",
+        "label": "Space on phone",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 10
       }
     ]
   }
