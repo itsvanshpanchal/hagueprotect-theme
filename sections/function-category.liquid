@@ -91,7 +91,7 @@
     background-color: #fdfeff !important;
     border: 1px solid var(--fc-border);
     border-radius: var(--homepage-corner, 20px);
-    padding: 20px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -138,11 +138,12 @@
     line-height: 1.3 !important;
     color: #111111;
     margin: 0 0 4px 0;
-    max-width: calc(100% - 70px);
+    max-width: 100%;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.85);
   }
 
   .fc-product-count {
@@ -155,25 +156,27 @@
   .fc-category-info {
     position: relative;
     z-index: 3;
-    max-width: 55%;
+    max-width: 70%;
     pointer-events: auto;
+    padding: 20px;
   }
 
   .fc-illustration {
     position: absolute;
-    top: 15px;
-    bottom: 0;
-    right: 0;
-    width: 68%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: stretch;
     pointer-events: none;
     transition: filter 0.45s ease;
     transform-style: preserve-3d;
     will-change: transform;
-    z-index: 2;
+    z-index: 1;
     color: var(--fc-text);
+    overflow: hidden;
+    border-radius: inherit;
   }
 
   @media (min-width: 768px) {
@@ -188,13 +191,21 @@
 
   .fc-illustration img,
   .fc-illustration svg {
-    width: auto !important;
+    width: 100% !important;
     height: 100% !important;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: center center;
     transition: filter 0.45s ease;
     transform: translateZ(0);
+    display: block;
+  }
+
+  .fc-illustration svg {
+    object-fit: contain;
+    padding: 18%;
+    box-sizing: border-box;
   }
 
   @media (min-width: 768px) {
@@ -324,19 +335,20 @@
       flex: none;
       min-width: 0;
       width: 100%;
-      aspect-ratio: unset;
-      min-height: 196px;
+      aspect-ratio: 1 / 1;
+      min-height: 0;
       background: #f2f2f4 !important;
       border: none;
       border-radius: var(--homepage-corner, 20px);
-      padding: 14px 12px 10px;
+      padding: 0;
       overflow: hidden;
       box-shadow: none;
       scroll-snap-align: unset;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 0;
+      position: relative;
     }
 
     .fc-slide:hover {
@@ -351,6 +363,8 @@
     .fc-category-info {
       max-width: 100%;
       flex: 0 0 auto;
+      padding: 12px;
+      z-index: 3;
     }
 
     .fc-category-name {
@@ -368,30 +382,36 @@
     }
 
     .fc-illustration {
-      position: relative;
-      inset: auto;
-      top: auto;
-      right: auto;
-      bottom: auto;
-      flex: 1 1 auto;
+      position: absolute;
+      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      flex: none;
       width: 100%;
-      height: 108px;
-      max-height: 108px;
-      min-height: 108px;
-      margin-top: auto;
-      align-items: flex-end;
-      justify-content: flex-end;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      margin-top: 0;
+      align-items: stretch;
+      justify-content: stretch;
       overflow: hidden;
     }
 
     .fc-illustration img,
     .fc-illustration svg {
-      width: auto !important;
-      height: auto !important;
-      max-width: 88%;
-      max-height: 100%;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none;
+      max-height: none;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .fc-illustration svg {
       object-fit: contain;
-      object-position: bottom right;
+      padding: 18%;
+      box-sizing: border-box;
     }
 
     .fc-nav,
@@ -407,23 +427,27 @@
     }
 
     .fc-slide {
-      min-height: 184px;
-      padding: 12px 10px 8px;
+      min-height: 0;
+      padding: 0;
     }
 
     .fc-category-name {
       font-size: 13px;
     }
 
+    .fc-category-info {
+      padding: 10px;
+    }
+
     .fc-illustration {
-      height: 96px;
-      max-height: 96px;
-      min-height: 96px;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
     }
 
     .fc-illustration img,
     .fc-illustration svg {
-      max-width: 84%;
+      max-width: none;
     }
   }
 {%- endstyle -%}
@@ -449,7 +473,7 @@
               </div>
               <div class="fc-illustration">
                 {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.title }}" loading="lazy">
+                  <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title }}" loading="lazy" width="900" height="900">
                 {%- elsif block.settings.svg_code != blank -%}
                   {{ block.settings.svg_code }}
                 {%- else -%}
