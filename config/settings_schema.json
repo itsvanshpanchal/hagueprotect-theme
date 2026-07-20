@@ -1065,16 +1065,44 @@
       },
       {
         "type": "header",
-        "content": "Heading to description spacing"
+        "content": "Eyebrow to title spacing"
       },
       {
         "type": "paragraph",
-        "content": "Space between a section main title and the description line below it (e.g. Bestsellers → body text). Does not change font styles — only the gap."
+        "content": "Gap between the small label above a section title (eyebrow, e.g. BEST SELLERS) and the main heading directly below it. Applies anywhere sections use the label + title stack."
+      },
+      {
+        "type": "range",
+        "id": "eyebrow_title_spacing_desktop",
+        "label": "Eyebrow gap on computer",
+        "min": 0,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "eyebrow_title_spacing_mobile",
+        "label": "Eyebrow gap on phone",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "Title to description spacing"
+      },
+      {
+        "type": "paragraph",
+        "content": "Gap between the main section title and the normal body-style description line below it (not the eyebrow label). Does not change fonts — only the gap."
       },
       {
         "type": "range",
         "id": "heading_subheading_spacing_desktop",
-        "label": "Space on computer",
+        "label": "Description gap on computer",
         "min": 0,
         "max": 48,
         "step": 2,
@@ -1084,7 +1112,7 @@
       {
         "type": "range",
         "id": "heading_subheading_spacing_mobile",
-        "label": "Space on phone",
+        "label": "Description gap on phone",
         "min": 0,
         "max": 40,
         "step": 2,

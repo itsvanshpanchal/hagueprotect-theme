@@ -1,17 +1,23 @@
 {%- liquid
   assign site_max_width = settings.site_max_width | default: 1440
   assign homepage_label_color = settings.homepage_label_color | default: '#2563eb'
+  assign eyebrow_title_spacing_desktop = settings.eyebrow_title_spacing_desktop | default: 12
+  assign eyebrow_title_spacing_mobile = settings.eyebrow_title_spacing_mobile | default: 10
   assign heading_subheading_spacing_desktop = settings.heading_subheading_spacing_desktop | default: 12
   assign heading_subheading_spacing_mobile = settings.heading_subheading_spacing_mobile | default: 10
 -%}
 <style>
   :root {
     --site-max-width: {{ site_max_width }}px;
+    --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
+    --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
     --section-subheading-spacing-top: {{ heading_subheading_spacing_desktop }}px;
   }
 
   @media screen and (max-width: 989px) {
     :root {
+      --section-label-to-title-gap: {{ eyebrow_title_spacing_mobile }}px;
+      --section-label-margin-bottom: {{ eyebrow_title_spacing_mobile }}px;
       --section-subheading-spacing-top: {{ heading_subheading_spacing_mobile }}px;
     }
   }
