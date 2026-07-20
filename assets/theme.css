@@ -903,8 +903,11 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   text-align: inherit !important;
   display: block !important;
   margin-top: var(--section-subheading-spacing-top) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   padding: 0 !important;
-  max-width: 600px !important;
+  max-width: none !important;
+  width: 100% !important;
   -webkit-font-smoothing: antialiased;
 }
 

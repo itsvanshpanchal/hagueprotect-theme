@@ -100,8 +100,53 @@
   .biz-solutions__heading,
   .biz-solutions__sub,
   .biz-advantages__heading,
+  .hero-fullscreen__heading,
+  .hero-fullscreen__subheading,
+  .hero-fullscreen__eyebrow,
   .section-heading-stack:not(.section-heading-stack--center) {
     text-align: var(--section-heading-align, left) !important;
+  }
+
+  /* Keep every heading line + subheading on one shared left edge */
+  .hero-fullscreen__heading .hero-heading-line,
+  .hp-heading-line,
+  .bs-coverflow__heading,
+  .bs-coverflow__eyebrow,
+  .fb__title,
+  .fb__eyebrow,
+  .fb__subtitle,
+  .trending-social__heading,
+  .trending-social__eyebrow,
+  .mat-headline,
+  .mat-eyebrow,
+  .mat-desc,
+  .fc-heading,
+  .fc-subtitle,
+  .feature-grid__heading,
+  .feature-grid__eyebrow,
+  .brand-banner__title,
+  .brand-banner__subtitle,
+  .brandsel__heading,
+  .brandsel__eyebrow,
+  .brandsel__sub,
+  .story-banner__heading,
+  .story-banner__subheading,
+  .story-banner__eyebrow,
+  .story-banner__paragraph,
+  .hero-fullscreen__heading,
+  .hero-fullscreen__subheading,
+  .hero-fullscreen__eyebrow,
+  .section-heading-stack > * {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hero-fullscreen__heading .hero-heading-line,
+  .hp-heading-line {
+    display: block !important;
+    width: 100% !important;
+    text-align: inherit !important;
   }
 
   .bs-coverflow__header,
@@ -113,6 +158,7 @@
   .product-family-header,
   .feature-grid__header,
   .promo-banner__header,
+  .hero-fullscreen__content,
   .section-heading-stack:not(.section-heading-stack--center) {
     align-items: var(--section-heading-items, flex-start) !important;
   }
@@ -129,9 +175,53 @@
   .comm-badge-desc,
   .story-banner__paragraph,
   .corp-features__sub,
-  .biz-solutions__sub {
+  .biz-solutions__sub,
+  .hero-fullscreen__subheading {
     margin-left: var(--section-heading-margin-left, 0) !important;
     margin-right: var(--section-heading-margin-right, auto) !important;
+  }
+
+  /* Homepage: one shared horizontal gutter so headings line up down the page */
+  body.template-index {
+    --homepage-section-gutter: 40px;
+  }
+
+  @media screen and (max-width: 767px) {
+    body.template-index {
+      --homepage-section-gutter: max(16px, var(--site-padding, 20px));
+    }
+  }
+
+  body.template-index .bs-coverflow__container,
+  body.template-index .trending-social-section .container,
+  body.template-index .fc-container,
+  body.template-index .feature-grid__container,
+  body.template-index .promo-banner__container,
+  body.template-index .hp-fam-sec__container,
+  body.template-index .hp-dna__container,
+  body.template-index [class*="featured-brands-"] {
+    padding-left: var(--homepage-section-gutter) !important;
+    padding-right: var(--homepage-section-gutter) !important;
+  }
+
+  body.template-index .fb__header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Hero heading + subheading share one left edge inside the content box */
+  body.template-index .hero-fullscreen__heading,
+  body.template-index .hero-fullscreen__subheading,
+  body.template-index .hero-fullscreen__eyebrow,
+  body.template-index .hero-fullscreen__heading .hero-heading-line {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    width: 100% !important;
+  }
+
+  body.template-index .hero-fullscreen__content {
+    align-items: flex-start !important;
   }
 
   /* Explicitly centered stacks always win (opt-in only) */
