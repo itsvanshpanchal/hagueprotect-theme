@@ -163,8 +163,21 @@
     font-style: {{ heading_style }} !important;
     margin: 0 0 {{ block.settings.heading_spacing }}px !important;
     line-height: 1.05 !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
+  }
+
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line {
+    display: block;
+    text-transform: lowercase !important;
+  }
+
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line::first-letter {
     text-transform: uppercase !important;
+  }
+
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--2 {
+    color: {{ block.settings.heading_line2_color | default: settings.heading_line2_color | default: '#6b6b6b' }} !important;
   }
 
   #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
@@ -301,7 +314,7 @@
 
       {% if block.settings.heading != blank %}
         <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
-          {{ block.settings.heading }}
+          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color %}
         </div>
       {% endif %}
 
@@ -493,6 +506,18 @@
       "id": "heading",
       "label": "Biggest title",
       "default": "Tell Your Story"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Biggest title — second line",
+      "info": "Optional. Shown under the title in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Second line color",
+      "default": "#6b6b6b"
     },
     {
       "type": "range",

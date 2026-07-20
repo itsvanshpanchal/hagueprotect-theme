@@ -67,10 +67,26 @@
     font-weight: var(--font-weight-heading, 400) !important;
     font-style: var(--font-style-heading, normal) !important;
     line-height: 1.05 !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: -0.02em !important;
     text-transform: none !important;
     color: {{ section.settings.heading_color | default: '#111111' }} !important;
     margin: 0 !important;
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line {
+    display: block !important;
+    text-transform: lowercase !important;
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line::first-letter,
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line::first-letter {
+    text-transform: uppercase !important;
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line--2,
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line--2 {
+    color: {{ section.settings.heading_line2_color | default: settings.heading_line2_color | default: '#6b6b6b' }} !important;
   }
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__subheading,
@@ -231,7 +247,7 @@
           </div>
         {%- endif -%}
         {%- if banner_subheading != blank -%}
-          <div class="story-banner__subheading" role="heading" aria-level="3">{{ banner_subheading }}</div>
+          <div class="story-banner__subheading" role="heading" aria-level="3">{% render 'section-heading-text', text: banner_subheading, line2: '', line2_color: section.settings.heading_line2_color %}</div>
         {%- endif -%}
         {%- if banner_paragraph != blank -%}
           <p class="story-banner__paragraph">{{ banner_paragraph }}</p>
