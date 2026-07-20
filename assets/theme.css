@@ -30,6 +30,10 @@
   --section-subheading-color: #565656;
   --section-subheading-max-width: 600px;
   --section-subheading-spacing-top: 12px;
+  --section-heading-align: left;
+  --section-heading-items: flex-start;
+  --section-heading-margin-left: 0;
+  --section-heading-margin-right: auto;
   --section-label-weight: var(--font-weight-eyebrow, 700);
   --section-label-line-height: 1.5;
   --section-label-color: #e74c3c;
@@ -605,7 +609,6 @@ main h3 > span[aria-hidden="true"] {
     font-size: var(--section-heading-size-mobile) !important;
     line-height: 1.05 !important;
     letter-spacing: 0.03em !important;
-    text-align: left !important;
   }
 
   .bs-coverflow__header,
@@ -673,7 +676,7 @@ main h3 > span[aria-hidden="true"] {
   letter-spacing: var(--section-label-letter-spacing) !important;
   color: var(--section-label-color) !important;
   text-transform: uppercase !important;
-  text-align: left !important;
+  text-align: inherit !important;
   display: block !important;
   margin: 0 0 var(--section-label-to-title-gap) 0 !important;
   padding: 0 !important;
@@ -712,7 +715,7 @@ body.template-index .section-heading-stack > [class*="ai-story-banner-subheading
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding: 0 !important;
-  text-align: left !important;
+  text-align: inherit !important;
   width: auto !important;
   max-width: none !important;
   line-height: 1.2 !important;
@@ -815,7 +818,7 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   letter-spacing: normal !important;
   color: var(--section-subheading-color) !important;
   text-transform: none !important;
-  text-align: left !important;
+  text-align: inherit !important;
   max-width: var(--section-subheading-max-width) !important;
   margin-top: var(--section-subheading-spacing-top) !important;
   -webkit-font-smoothing: antialiased;
@@ -826,12 +829,12 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-/* Centered section headers */
+/* Community descriptions follow Layout alignment */
 .comm-desc,
 .comm-badge-desc {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  text-align: var(--section-heading-align, left) !important;
+  margin-left: var(--section-heading-margin-left, 0) !important;
+  margin-right: var(--section-heading-margin-right, auto) !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -1157,7 +1160,7 @@ body.template-index {
   --section-label-color: #2563eb;
 }
 
-/* Homepage mobile — left-aligned headings only; full left for FOR EVERY MATERIAL */
+/* Homepage mobile — gutters only; alignment comes from Layout setting on all sizes */
 @media screen and (max-width: 767px) {
   body.template-index .bs-coverflow__container,
   body.template-index .trending-social-section .container,
@@ -1180,52 +1183,7 @@ body.template-index {
     width: 100% !important;
   }
 
-  body.template-index .hero-fullscreen__heading,
-  body.template-index .bs-coverflow__heading,
-  body.template-index .fb__title,
-  body.template-index .trending-social__heading,
-  body.template-index .fc-heading,
-  body.template-index .hp-fam-sec__heading,
-  body.template-index .hp-dna__heading,
-  body.template-index .comm-headline {
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-    width: 100% !important;
-  }
-
-  body.template-index .comm-headline {
-    justify-content: flex-start !important;
-  }
-
-  /* Eyebrows + descriptions follow their left-aligned headings */
-  body.template-index .hero-fullscreen__eyebrow,
-  body.template-index .hero-fullscreen__subheading,
-  body.template-index .fb__subtitle,
-  body.template-index .comm-desc,
-  body.template-index .fb__eyebrow,
-  body.template-index .bs-coverflow__eyebrow,
-  body.template-index .trending-social__eyebrow,
-  body.template-index .fc-subtitle,
-  body.template-index .section-heading-stack--center > .fc-subtitle,
-  body.template-index .comm-eyebrow {
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
-  }
-
-  /* Story banner heading stays centered, so its subheading stays centered too */
-  body.template-index [class*="ai-story-banner-subheading-"] {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* FOR EVERY MATERIAL — full section left-aligned */
   body.template-index .mat-left {
-    align-items: flex-start !important;
-    text-align: left !important;
     padding-left: max(16px, var(--site-padding, 20px)) !important;
     padding-right: max(16px, var(--site-padding, 20px)) !important;
   }
@@ -1233,22 +1191,14 @@ body.template-index {
   body.template-index .mat-eyebrow,
   body.template-index .mat-headline,
   body.template-index .mat-desc {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin-left: var(--section-heading-margin-left, 0) !important;
+    margin-right: var(--section-heading-margin-right, auto) !important;
     padding-left: 0 !important;
-    text-align: left !important;
     width: 100% !important;
     max-width: none !important;
   }
 
   body.template-index .mat-menu {
-    align-items: flex-start !important;
-    width: 100% !important;
-  }
-
-  body.template-index .mat-menu-item {
-    justify-content: flex-start !important;
-    transform-origin: left center !important;
     width: 100% !important;
   }
 

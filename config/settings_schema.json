@@ -1065,6 +1065,30 @@
       },
       {
         "type": "header",
+        "content": "Section text alignment"
+      },
+      {
+        "type": "paragraph",
+        "content": "How section titles, eyebrows, and descriptions align on every screen size (phone, tablet, and desktop). Does not force a different layout per breakpoint. Sections built as centered (e.g. Feature Grid, Brand Selection) stay centered."
+      },
+      {
+        "type": "select",
+        "id": "section_heading_align",
+        "label": "Default section heading alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "header",
         "content": "Eyebrow to title spacing"
       },
       {

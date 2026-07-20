@@ -386,8 +386,8 @@
   @media screen and (max-width: 991px) {
     .comm-top {
       flex-direction: column !important;
-      align-items: center !important;
-      text-align: center !important;
+      align-items: var(--section-heading-items, flex-start) !important;
+      text-align: var(--section-heading-align, left) !important;
       gap: 40px !important;
     }
     .comm-top-left {
@@ -399,11 +399,11 @@
       align-items: center !important;
     }
     .comm-headline {
-      justify-content: flex-start !important;
+      justify-content: var(--section-heading-items, flex-start) !important;
       gap: 20px !important;
     }
     .comm-desc {
-      text-align: center !important;
+      text-align: var(--section-heading-align, left) !important;
     }
   }
 

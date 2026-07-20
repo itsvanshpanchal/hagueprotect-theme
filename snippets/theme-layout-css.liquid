@@ -1,14 +1,29 @@
 {%- liquid
   assign site_max_width = settings.site_max_width | default: 1440
   assign homepage_label_color = settings.homepage_label_color | default: '#2563eb'
+  assign section_heading_align = settings.section_heading_align | default: 'left'
   assign eyebrow_title_spacing_desktop = settings.eyebrow_title_spacing_desktop | default: 12
   assign eyebrow_title_spacing_mobile = settings.eyebrow_title_spacing_mobile | default: 10
   assign heading_subheading_spacing_desktop = settings.heading_subheading_spacing_desktop | default: 12
   assign heading_subheading_spacing_mobile = settings.heading_subheading_spacing_mobile | default: 10
+
+  if section_heading_align == 'center'
+    assign section_heading_items = 'center'
+    assign section_heading_margin_left = 'auto'
+    assign section_heading_margin_right = 'auto'
+  else
+    assign section_heading_items = 'flex-start'
+    assign section_heading_margin_left = '0'
+    assign section_heading_margin_right = 'auto'
+  endif
 -%}
 <style>
   :root {
     --site-max-width: {{ site_max_width }}px;
+    --section-heading-align: {{ section_heading_align }};
+    --section-heading-items: {{ section_heading_items }};
+    --section-heading-margin-left: {{ section_heading_margin_left }};
+    --section-heading-margin-right: {{ section_heading_margin_right }};
     --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
     --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
     --section-subheading-spacing-top: {{ heading_subheading_spacing_desktop }}px;
@@ -24,6 +39,55 @@
 
   .template-index {
     --section-label-color: {{ homepage_label_color }};
+  }
+
+  /* Same alignment on every screen size — no breakpoint flip */
+  .bs-coverflow__heading,
+  .fb__title,
+  .trending-social__heading,
+  .mat-headline,
+  .fc-heading,
+  .comm-headline,
+  .bs-coverflow__eyebrow,
+  .fb__eyebrow,
+  .trending-social__eyebrow,
+  .mat-eyebrow,
+  .fc-subtitle,
+  .comm-eyebrow,
+  .fb__subtitle,
+  .mat-desc,
+  .comm-desc {
+    text-align: var(--section-heading-align, left);
+  }
+
+  .bs-coverflow__header,
+  .fb__header,
+  .trending-social-header,
+  .fc-header,
+  .section-heading-stack:not(.section-heading-stack--center) {
+    align-items: var(--section-heading-items, flex-start);
+  }
+
+  .bs-coverflow__heading,
+  .fb__title,
+  .trending-social__heading,
+  .mat-headline,
+  .fc-heading,
+  .fb__subtitle,
+  .mat-desc,
+  .comm-desc {
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
+  }
+
+  /* Explicitly centered stacks always win */
+  .section-heading-stack--center,
+  .section-heading-stack--center > * {
+    text-align: center !important;
+  }
+
+  .section-heading-stack--center {
+    align-items: center !important;
   }
 
   .template-index .hero-fullscreen__eyebrow,

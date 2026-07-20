@@ -333,8 +333,8 @@
     .mat-left {
       position: relative !important;
       z-index: 3 !important;
-      align-items: flex-start !important;
-      text-align: left !important;
+      align-items: var(--section-heading-items, flex-start) !important;
+      text-align: var(--section-heading-align, left) !important;
       justify-content: flex-end !important;
       min-height: min(88dvh, 680px) !important;
       width: 100% !important;
@@ -346,15 +346,15 @@
     .mat-desc,
     .mat-menu,
     .mat-menu-item {
-      align-self: flex-start !important;
+      align-self: var(--section-heading-items, flex-start) !important;
       width: 100% !important;
       max-width: 100% !important;
     }
 
     .mat-eyebrow {
       display: block !important;
-      text-align: left !important;
-      margin-left: 0 !important;
+      text-align: var(--section-heading-align, left) !important;
+      margin-left: var(--section-heading-margin-left, 0) !important;
       padding-left: 0 !important;
       color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
     }
@@ -365,10 +365,10 @@
       font-size: var(--section-heading-size) !important;
       line-height: 1.05 !important;
       max-width: none !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+      margin-left: var(--section-heading-margin-left, 0) !important;
+      margin-right: var(--section-heading-margin-right, auto) !important;
       padding-left: 0 !important;
-      text-align: left !important;
+      text-align: var(--section-heading-align, left) !important;
     }
 
     .mat-desc {
@@ -377,14 +377,14 @@
       max-width: none !important;
       font-size: var(--section-subheading-size, 16px) !important;
       line-height: 1.55 !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+      margin-left: var(--section-heading-margin-left, 0) !important;
+      margin-right: var(--section-heading-margin-right, auto) !important;
       padding-left: 0 !important;
-      text-align: left !important;
+      text-align: var(--section-heading-align, left) !important;
     }
 
     .mat-menu {
-      align-items: flex-start !important;
+      align-items: var(--section-heading-items, flex-start) !important;
       gap: 2px !important;
       width: 100% !important;
     }
