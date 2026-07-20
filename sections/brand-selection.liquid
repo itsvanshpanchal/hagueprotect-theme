@@ -42,9 +42,11 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__head {
-    text-align: center;
+    text-align: var(--section-heading-align, left);
     max-width: 680px;
-    margin: 0 auto 60px;
+    margin: 0 0 60px;
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
   }
 
   #shopify-section-{{ section.id }} .brandsel__eyebrow {

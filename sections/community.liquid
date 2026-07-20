@@ -7,14 +7,15 @@
   }
 
   .community-header {
-    text-align: center;
+    text-align: var(--section-heading-align, left);
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
     margin-bottom: 56px;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    align-items: var(--section-heading-items, flex-start);
   }
 
   .community__eyebrow {

@@ -929,9 +929,9 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
 }
 
 .fc-header .fc-subtitle {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  text-align: var(--section-heading-align, left) !important;
+  margin-left: var(--section-heading-margin-left, 0) !important;
+  margin-right: var(--section-heading-margin-right, auto) !important;
 }
 
 /* Unified section subheadings — Inter body style like materials description */

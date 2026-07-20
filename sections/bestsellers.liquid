@@ -61,16 +61,19 @@
     max-width: var(--site-max-width);
     margin-inline: auto;
     width: 100%;
+    text-align: var(--section-heading-align, left);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
     display: block;
     color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
+    text-align: var(--section-heading-align, left);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading {
     color: {{ bs_text }} !important;
     margin: 0;
+    text-align: var(--section-heading-align, left);
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__view-all {

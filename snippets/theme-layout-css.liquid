@@ -43,30 +43,76 @@
     --section-label-color: {{ homepage_label_color }};
   }
 
-  /* Same alignment on every screen size — no breakpoint flip.
-     !important is required so this beats per-section #shopify-section-{id} rules. */
+  /* Same alignment on every screen size for section top headings + matching subcopy.
+     !important beats per-section #shopify-section-{id} / hardcoded center rules. */
+  .bs-coverflow__header,
   .bs-coverflow__heading,
-  .fb__title,
-  .trending-social__heading,
-  .mat-headline,
-  .fc-heading,
   .bs-coverflow__eyebrow,
+  .fb__header,
+  .fb__title,
   .fb__eyebrow,
-  .trending-social__eyebrow,
-  .mat-eyebrow,
-  .fc-subtitle,
-  .comm-eyebrow,
   .fb__subtitle,
+  .trending-social-header,
+  .trending-social__heading-group,
+  .trending-social__heading,
+  .trending-social__eyebrow,
+  .mat-left,
+  .mat-headline,
+  .mat-eyebrow,
   .mat-desc,
-  .comm-desc {
+  .fc-header,
+  .fc-heading,
+  .fc-subtitle,
+  .hp-dna__heading,
+  .hp-fam-sec__heading,
+  .product-family-header,
+  .feature-grid__header,
+  .feature-grid__heading,
+  .feature-grid__eyebrow,
+  .promo-banner__header,
+  .promo-banner__heading,
+  .promo-banner__eyebrow,
+  .brand-banner,
+  .brand-banner__title,
+  .brand-banner__subtitle,
+  .brandsel__heading,
+  .brandsel__eyebrow,
+  .brandsel__sub,
+  .comm-headline,
+  .comm-eyebrow,
+  .comm-desc,
+  .comm-badge-desc,
+  .story-banner__heading,
+  .story-banner__subheading,
+  .story-banner__eyebrow,
+  .story-banner__paragraph,
+  [class*="ai-story-banner-heading-"],
+  [class*="ai-story-banner-subheading-"],
+  .trust-statement__heading,
+  .reviews-sec__heading,
+  .product-rec__heading,
+  .social-slider__heading,
+  .faq-custom__heading,
+  .bundle-title,
+  .corp-features__heading,
+  .corp-features__sub,
+  .how-to-videos__heading,
+  .biz-solutions__heading,
+  .biz-solutions__sub,
+  .biz-advantages__heading,
+  .section-heading-stack:not(.section-heading-stack--center) {
     text-align: var(--section-heading-align, left) !important;
   }
 
   .bs-coverflow__header,
   .fb__header,
   .trending-social-header,
+  .trending-social__heading-group,
   .fc-header,
   .mat-left,
+  .product-family-header,
+  .feature-grid__header,
+  .promo-banner__header,
   .section-heading-stack:not(.section-heading-stack--center) {
     align-items: var(--section-heading-items, flex-start) !important;
   }
@@ -75,7 +121,20 @@
     justify-content: var(--section-heading-items, flex-start) !important;
   }
 
-  /* Explicitly centered stacks always win */
+  .fb__subtitle,
+  .mat-desc,
+  .brand-banner__subtitle,
+  .brandsel__sub,
+  .comm-desc,
+  .comm-badge-desc,
+  .story-banner__paragraph,
+  .corp-features__sub,
+  .biz-solutions__sub {
+    margin-left: var(--section-heading-margin-left, 0) !important;
+    margin-right: var(--section-heading-margin-right, auto) !important;
+  }
+
+  /* Explicitly centered stacks always win (opt-in only) */
   .section-heading-stack--center,
   .section-heading-stack--center > * {
     text-align: center !important;

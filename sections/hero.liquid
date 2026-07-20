@@ -117,6 +117,8 @@
     word-wrap: break-word;
     hyphens: manual;
     text-transform: none !important;
+    text-align: var(--hero-content-align, left) !important;
+    align-self: stretch;
   }
 
   .hero-fullscreen__heading .hero-heading-line {
@@ -140,9 +142,12 @@
 
   .hero-fullscreen__subheading {
     max-width: 600px;
+    width: 100%;
     font-family: var(--font-family-sans);
     font-size: var(--section-subheading-size, 16px);
     margin-top: var(--section-subheading-spacing-top, 12px);
+    text-align: var(--hero-content-align, left) !important;
+    align-self: stretch;
   }
 
   .hero-fullscreen__actions {
@@ -199,11 +204,11 @@
     }
 
     .hero-fullscreen__content {
-      left: var(--hero-content-x-mobile, 50%);
+      left: var(--hero-content-x-mobile, 5%);
       top: var(--hero-content-y-mobile, 12%);
-      transform: translate(var(--hero-content-tx-mobile, -50%), 0);
-      align-items: var(--hero-content-items-mobile, center);
-      text-align: var(--hero-content-align-mobile, center);
+      transform: translate(var(--hero-content-tx-mobile, 0), 0);
+      align-items: var(--hero-content-items-mobile, flex-start);
+      text-align: var(--hero-content-align-mobile, left);
       max-width: calc(100% - 32px);
       width: 100%;
       padding: 0 max(16px, var(--site-padding));
@@ -248,15 +253,15 @@
       line-height: 1.05;
       letter-spacing: -0.02em;
       text-transform: none !important;
-      padding: 0 4px;
-      text-align: inherit;
+      padding: 0;
+      text-align: var(--hero-content-align-mobile, left) !important;
       width: 100%;
     }
 
     .hero-fullscreen__subheading {
       max-width: 100%;
-      padding: 0 6px;
-      text-align: inherit;
+      padding: 0;
+      text-align: var(--hero-content-align-mobile, left) !important;
     }
 
     .hero-fullscreen__btn {
@@ -297,7 +302,7 @@
   assign content_align = section.settings.content_align | default: 'left'
   assign content_x_mobile = section.settings.content_position_x_mobile | default: 50
   assign content_y_mobile = section.settings.content_position_y_mobile | default: 12
-  assign content_align_mobile = section.settings.content_align_mobile | default: 'center'
+  assign content_align_mobile = section.settings.content_align_mobile | default: 'left'
 
   case content_align
     when 'center'
@@ -554,7 +559,7 @@
           "label": "Right"
         }
       ],
-      "default": "center"
+      "default": "left"
     },
     {
       "type": "header",

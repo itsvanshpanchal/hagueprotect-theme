@@ -15,9 +15,11 @@
   }
 
   .biz-solutions__header {
-    text-align: center;
+    text-align: var(--section-heading-align, left);
     max-width: 680px;
-    margin: 0 auto clamp(48px, 6vw, 72px);
+    margin: 0 0 clamp(48px, 6vw, 72px);
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
   }
 
   .biz-solutions__eyebrow {

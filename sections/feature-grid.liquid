@@ -18,9 +18,11 @@
   }
 
   .feature-grid__header {
-    text-align: center;
+    text-align: var(--section-heading-align, left);
     max-width: 750px;
-    margin: 0 auto;
+    margin: 0;
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
   }
 
   .feature-grid__eyebrow {
@@ -181,7 +183,7 @@
 <div class="feature-grid">
   <div class="feature-grid__container">
     {%- if section.settings.heading != blank -%}
-      <div class="feature-grid__header section-heading-stack section-heading-stack--center">
+      <div class="feature-grid__header section-heading-stack">
         <span class="feature-grid__eyebrow">{{ section.settings.eyebrow | default: 'THE HAGUE EFFECT' }}</span>
         <h2 class="feature-grid__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
