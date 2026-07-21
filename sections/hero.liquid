@@ -425,6 +425,66 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    var section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!section) return;
+    var heading = section.querySelector('.hero-fullscreen__heading');
+    if (!heading) return;
+    var lines = Array.prototype.slice.call(heading.querySelectorAll('.hero-heading-line'));
+    if (!lines.length) return;
+
+    /* Respect reduced-motion: leave the fully-styled heading in place. */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var data = lines.map(function (el) { return { el: el, text: el.textContent || '' }; });
+
+    function run() {
+      if (heading.dataset.heroTyped) return;
+      heading.dataset.heroTyped = 'true';
+
+      /* Reserve the final height so nothing below jumps while typing. */
+      heading.style.minHeight = heading.offsetHeight + 'px';
+      data.forEach(function (d) { d.el.textContent = ''; });
+
+      var cursor = document.createElement('span');
+      cursor.className = 'hp-typewriter-cursor';
+      cursor.setAttribute('aria-hidden', 'true');
+
+      var li = 0, ci = 0, speed = 55, linePause = 180;
+
+      function tick() {
+        var d = data[li];
+        d.el.textContent = d.text.substring(0, ci);
+        d.el.appendChild(cursor);
+
+        if (ci < d.text.length) {
+          ci += 1;
+          window.setTimeout(tick, speed);
+        } else if (li < data.length - 1) {
+          li += 1;
+          ci = 0;
+          window.setTimeout(tick, linePause);
+        }
+        /* Finished: cursor stays blinking on the last line. */
+      }
+
+      tick();
+    }
+
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { run(); obs.disconnect(); }
+        });
+      }, { threshold: 0.35 });
+      obs.observe(heading);
+    } else {
+      run();
+    }
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Hero Section",
