@@ -134,6 +134,9 @@
   .hero-fullscreen__heading .hero-heading-line--3 {
     color: {{ section.settings.heading_line3_color | default: '#c8c8c8' }} !important;
     font-style: italic !important;
+    /* Pull the leading apostrophe's glyph side-bearing back so its visual
+       left edge lines up flush with the lines above it. */
+    text-indent: {{ section.settings.heading_line3_indent | default: '-0.11em' }};
   }
 
   .hero-fullscreen__heading .hp-typewriter-cursor {
