@@ -411,7 +411,7 @@
         assign hero_line2 = hero_parts[0] | strip
       endif
     -%}
-    <h1 class="hero-fullscreen__heading">
+    <h1 class="hero-fullscreen__heading" data-no-typewriter>
       <span class="hero-heading-line hero-heading-line--1">{{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}</span>
       {%- if hero_line2 != blank -%}
         <span class="hero-heading-line hero-heading-line--2">{{ hero_line2 }}</span>
