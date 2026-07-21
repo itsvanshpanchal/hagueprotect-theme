@@ -51,12 +51,10 @@
     --homepage-section-gutter: 48px;
     --homepage-section-gutter-right: 48px;
     --homepage-text-inset: var(--homepage-section-gutter);
-    /* Distance from the section edge to the content, so full-bleed sections
-       (hero, banners) line up with the centered, capped content column on
-       monitors wider than --site-max-width. On smaller screens this collapses
-       to the plain gutter. 100% (not 100vw) keeps it exact next to scrollbars. */
-    --homepage-edge: max(var(--homepage-section-gutter), calc((100% - var(--site-max-width)) / 2 + var(--homepage-section-gutter)));
-    --homepage-edge-right: max(var(--homepage-section-gutter-right), calc((100% - var(--site-max-width)) / 2 + var(--homepage-section-gutter-right)));
+    /* Content is anchored flush-left with the gutter on every screen size,
+       including big monitors — never centered. */
+    --homepage-edge: var(--homepage-section-gutter);
+    --homepage-edge-right: var(--homepage-section-gutter-right);
   }
 
   @media screen and (max-width: 989px) {
@@ -73,8 +71,8 @@
     }
   }
 
-  /* Cap the content column at --site-max-width and center it, so every homepage
-     section matches the rest of the site on big monitors. Gutters preserved. */
+  /* Full width, flush-left with the gutter on big monitors — content stays on
+     the left, every section shares the same left edge (one vertical line). */
   body.template-index #MainContent .bs-coverflow__container,
   body.template-index #MainContent .trending-social-section .container,
   body.template-index #MainContent .fc-container,
@@ -89,10 +87,10 @@
   body.template-index #MainContent .brandsel__inner,
   body.template-index #MainContent [class*="featured-brands-"] .fb__header,
   body.template-index #MainContent [class*="featured-brands-"] .fb__grid {
-    max-width: var(--site-max-width) !important;
+    max-width: none !important;
     width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter-right) !important;
     box-sizing: border-box !important;
@@ -133,9 +131,9 @@
   }
 
   body.template-index .fb__header.section-heading-stack {
-    max-width: var(--site-max-width) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-left: var(--homepage-section-gutter) !important;
     padding-right: var(--homepage-section-gutter-right) !important;
   }
