@@ -22,8 +22,67 @@
     ).filter(shouldType);
   }
 
+  /* Headings built from styled line spans (e.g. section-heading-text renders
+     .hp-heading-line, hero renders .hero-heading-line). Type INTO those spans
+     so per-line styling — casing, colored/second line, line breaks — survives. */
+  function typeStructuredHeading(element, lineEls) {
+    element.dataset.typewriterActive = 'true';
+
+    var data = Array.prototype.map.call(lineEls, function (el) {
+      return { el: el, text: el.textContent || '' };
+    });
+
+    var full = data
+      .map(function (d) { return d.text; })
+      .join(' ');
+    var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
+    var linePause = 180;
+
+    /* Reserve final height so content below doesn't jump while typing. */
+    var originalMinHeight = element.style.minHeight;
+    element.style.minHeight = element.offsetHeight + 'px';
+    data.forEach(function (d) { d.el.textContent = ''; });
+
+    var cursor = document.createElement('span');
+    cursor.className = 'hp-typewriter-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+
+    element.setAttribute('aria-label', full);
+
+    var li = 0;
+    var ci = 0;
+
+    function tick() {
+      var d = data[li];
+      d.el.textContent = d.text.substring(0, ci);
+      d.el.appendChild(cursor);
+
+      if (ci < d.text.length) {
+        ci += 1;
+        window.setTimeout(tick, speed);
+      } else if (li < data.length - 1) {
+        li += 1;
+        ci = 0;
+        window.setTimeout(tick, linePause);
+      } else {
+        if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+        element.style.minHeight = originalMinHeight;
+        element.dataset.typewriterDone = 'true';
+        delete element.dataset.typewriterActive;
+      }
+    }
+
+    tick();
+  }
+
   function typeHeading(element) {
     if (!shouldType(element)) return;
+
+    var lineEls = element.querySelectorAll('.hp-heading-line, .hero-heading-line');
+    if (lineEls.length) {
+      typeStructuredHeading(element, lineEls);
+      return;
+    }
 
     element.dataset.typewriterActive = 'true';
 
