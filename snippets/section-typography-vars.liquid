@@ -142,8 +142,8 @@
   --font-style-h2: {{ h2_style }};
   --font-style-sans: {{ paragraph_style }};
   --font-style-eyebrow: {{ eyebrow_style }};
-  --heading-size-hero: {{ hero_h1_desktop }}px;
-  --heading-size-xl: {{ h1_desktop }}px;
+  --heading-size-hero: clamp({{ hero_h1_desktop }}px, {{ hero_h1_desktop | divided_by: 16.0 }}vw, {{ hero_h1_desktop | times: 1.5 | round }}px);
+  --heading-size-xl: clamp({{ h1_desktop }}px, {{ h1_desktop | divided_by: 16.0 }}vw, {{ h1_desktop | times: 1.5 | round }}px);
   --section-heading-size: {{ h2_desktop }}px;
   --section-heading-size-mobile: {{ h2_mobile }}px;
   --section-subheading-size: {{ paragraph_desktop }}px;
