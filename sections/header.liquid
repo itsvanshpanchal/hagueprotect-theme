@@ -1115,14 +1115,6 @@
 
     <nav class="header__navigation" role="navigation">
       <div class="nav-item">
-        <a href="javascript:void(0)" class="menu-pill" id="ShopTrigger">
-          SHOP ALL
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 2px;">
-            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-      <div class="nav-item">
         <a href="/search?view=how-to-use" class="menu-link">HOW TO USE</a>
       </div>
       <div class="nav-item">
@@ -1563,10 +1555,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const trigger = document.getElementById('ShopTrigger');
     const panel = document.getElementById('MegaMenuPanel');
 
-    if (trigger && panel) {
+    if (panel) {
       let timeoutId;
       const defaultBrand = panel.getAttribute('data-default-brand') === 'vanrosector' ? 'vanrosector' : 'hague';
 
@@ -1600,8 +1591,6 @@
         }, 120);
       };
 
-      trigger.addEventListener('mouseenter', () => openPanel(defaultBrand));
-      trigger.addEventListener('mouseleave', closePanel);
       panel.addEventListener('mouseenter', () => {
         clearTimeout(timeoutId);
         openPanel(panel.classList.contains('megamenu-panel--vanrosector') ? 'vanrosector' : 'hague');
