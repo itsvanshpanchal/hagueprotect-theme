@@ -426,6 +426,110 @@
     transform: translateX(3px);
   }
 
+  /* Vanrosector Shop All mega-menu */
+  .megamenu-panel--vanrosector {
+    --vr-accent: #8a6a3b;
+    padding: 36px 0 40px;
+  }
+
+  .megamenu-grid--vanrosector {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 20px;
+    max-width: none;
+    padding: 0 28px;
+    align-items: start;
+  }
+
+  .megamenu-panel--vanrosector .megamenu-heading--vr,
+  .megamenu-panel--vanrosector .megamenu-heading--vr-accent {
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 12px;
+  }
+
+  .megamenu-panel--vanrosector .megamenu-heading--vr-accent {
+    color: var(--vr-accent) !important;
+  }
+
+  .megamenu-panel--vanrosector .megamenu-link-item a {
+    font-size: 12.5px !important;
+  }
+
+  .megamenu-panel--vanrosector .megamenu-link-item a:hover {
+    color: var(--vr-accent) !important;
+  }
+
+  .megamenu-panel--vanrosector a.vr-scent-link {
+    color: var(--vr-accent) !important;
+    font-size: 12px !important;
+  }
+
+  .megamenu-panel--vanrosector a.vr-scent-link:hover {
+    color: #6e542e !important;
+  }
+
+  .megamenu-col--vr-wide {
+    min-width: 0;
+  }
+
+  .megamenu-links--vr-scents {
+    max-height: 280px;
+    overflow-y: auto;
+    gap: 7px;
+    padding-right: 6px;
+    scrollbar-width: thin;
+  }
+
+  .megamenu-links--vr-scents::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .megamenu-links--vr-scents::-webkit-scrollbar-thumb {
+    background: #d4c4a8;
+    border-radius: 4px;
+  }
+
+  .vr-shop-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .vr-shop-mobile__links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-left: 8px;
+  }
+
+  .vr-shop-mobile__links--scent {
+    max-height: 220px;
+    overflow-y: auto;
+    gap: 6px;
+  }
+
+  .mobile-accordion-category-heading.megamenu-heading-link--vr-accent {
+    color: #8a6a3b !important;
+  }
+
+  @media screen and (max-width: 1400px) {
+    .megamenu-grid--vanrosector {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 28px 24px;
+    }
+
+    .megamenu-links--vr-scents {
+      max-height: 220px;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    .megamenu-grid--vanrosector {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   .header__actions {
     display: flex;
     align-items: center;
@@ -884,9 +988,9 @@
     assign brand_menu_label = section.settings.brand_menu_label | default: 'BRAND'
     assign active_brand = 'hague'
 
-    if template.suffix == 'vanrosector' or request.path contains 'vanrosector'
+    if template.suffix == 'vanrosector' or request.path contains 'vanrosector' or request.query_string contains 'view=vanrosector'
       assign active_brand = 'vanrosector'
-    elsif template.suffix == 'science-of-raw' or request.path contains 'science-of-raw'
+    elsif template.suffix == 'science-of-raw' or request.path contains 'science-of-raw' or request.query_string contains 'view=science-of-raw'
       assign active_brand = 'science-of-raw'
     endif
 
@@ -1095,7 +1199,10 @@
   </div>
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
-  <div class="megamenu-panel" id="MegaMenuPanel">
+  <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% endif %}" id="MegaMenuPanel">
+    {%- if active_brand == 'vanrosector' -%}
+      {% render 'vanrosector-shop-all-menu', variant: 'desktop' %}
+    {%- else -%}
     <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
       
       <!-- Column 1: Kits & Solutions -->
@@ -1218,7 +1325,7 @@
           <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'microfiber-towel', search: 'microfiber towel', label: 'Microfiber Towel - Pack of 4' %}</li>
           <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-tree', search: 'shoe tree', label: 'Shoe Tree - Pack of 2' %}</li>
           <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'crease-defender', search: 'crease defender', label: 'Crease Defender - Pack of 2' %}</li>
-          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4' %}</li>
+          <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'shoe cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4' %}</li>
         </ul>
       </div>
 
@@ -1237,6 +1344,7 @@
       </div>
 
     </div>
+    {%- endif -%}
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -1293,6 +1401,9 @@
         <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="2"/></svg>
       </a>
       <div class="mobile-accordion-content" id="MobileShopContent" style="flex-direction: column;">
+        {%- if active_brand == 'vanrosector' -%}
+          {% render 'vanrosector-shop-all-menu', variant: 'mobile' %}
+        {%- else -%}
         <div>
           {% render 'header-menu-heading', menu_collection: section.settings.col_sneaker_care_kits, handle: 'sneaker-care-kits', search: 'Sneaker Care Kit', label: 'Sneaker Care Kits', accent: true, variant: 'mobile' %}
           <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
@@ -1355,13 +1466,13 @@
           <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; padding-left: 8px;">
             {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care', style: 'color:#666; text-decoration:none; font-size:14px;' %}
             {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Canvas Ã¢â‚¬â€ Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Mesh Ã¢â‚¬â€ Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Knit Ã¢â‚¬â€ Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Canvas — Signature Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Mesh — Refresh Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Knit — Indepth Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
             {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Rubber Ã¢â‚¬â€ Essential Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Midsole & Sole Ã¢â‚¬â€ Sole Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Mixed Material Ã¢â‚¬â€ Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Rubber — Essential Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Midsole & Sole — Sole Cleaner', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+            {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Mixed Material — Supreme Kit', style: 'color:#666; text-decoration:none; font-size:14px;' %}
           </div>
         </div>
         <div>
@@ -1392,6 +1503,7 @@
             {% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4', style: 'color:#666; text-decoration:none; font-size:14px;' %}
           </div>
         </div>
+        {%- endif -%}
       </div>
     </div>
     
