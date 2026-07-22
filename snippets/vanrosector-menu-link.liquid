@@ -1,0 +1,12 @@
+{%- comment -%}
+  Vanrosector Shop All link — always stays in Vanrosector brand context.
+  @param handle {String}
+  @param search {String}
+  @param label {String}
+  @param class {String}
+  @param style {String}
+{%- endcomment -%}
+{%- capture menu_href -%}
+  {%- render 'vanrosector-menu-url', handle: handle, search_query: search, label: label -%}
+{%- endcapture -%}
+<a href="{{ menu_href | strip }}"{% if class != blank %} class="{{ class }}"{% endif %}{% if style != blank %} style="{{ style }}"{% endif %}>{{ label }}</a>

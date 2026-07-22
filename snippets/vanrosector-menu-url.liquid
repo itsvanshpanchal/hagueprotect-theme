@@ -1,0 +1,36 @@
+{%- comment -%}
+  Builds a Vanrosector-scoped URL so Shop All links never drop into Hague Protect.
+  Priority: collection (?view=vanrosector) → product (?view=vanrosector) → brand catalog/search.
+  @param handle {String}
+  @param search_query {String}
+  @param label {String}
+{%- endcomment -%}
+{%- liquid
+  assign vr_handle = handle | default: '' | strip
+  assign vr_search = search_query | default: label | default: vr_handle | replace: '-', ' ' | strip
+  assign vr_collection = collections[vr_handle]
+
+  if vr_collection != blank
+    assign vr_url = vr_collection.url
+    if vr_url contains '?'
+      echo vr_url | append: '&view=vanrosector'
+    else
+      echo vr_url | append: '?view=vanrosector'
+    endif
+  elsif vr_handle != blank and all_products[vr_handle] != blank
+    assign vr_url = all_products[vr_handle].url
+    if vr_url contains '?'
+      echo vr_url | append: '&view=vanrosector'
+    else
+      echo vr_url | append: '?view=vanrosector'
+    endif
+  else
+    comment
+      Keep the shopper inside Vanrosector: brand catalog + search query.
+      brand=vanrosector is also read by the header for active_brand.
+    endcomment
+    assign exact_search = '"' | append: vr_search | append: '"'
+    assign encoded_query = exact_search | url_encode
+    echo '/collections/all?view=vanrosector&brand=vanrosector&q=' | append: encoded_query
+  endif
+-%}
