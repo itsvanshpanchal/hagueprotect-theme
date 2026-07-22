@@ -1,12 +1,12 @@
 {%- comment -%}
-  Clickable golden heading for Vanrosector Shop All columns.
-  @param handle {String} collection/product handle
+  Clickable golden heading for Vanrosector Shop All — goes to collection page.
+  @param handle {String} collection handle
   @param search {String} fallback search query
   @param label {String} heading text
   @param variant {String} 'desktop' (default) or 'mobile'
 {%- endcomment -%}
 {%- capture heading_href -%}
-  {%- render 'vanrosector-menu-url', handle: handle, search_query: search, label: label -%}
+  {%- render 'vanrosector-menu-url', handle: handle, search_query: search, label: label, link_type: 'collection' -%}
 {%- endcapture -%}
 {%- assign heading_href = heading_href | strip -%}
 

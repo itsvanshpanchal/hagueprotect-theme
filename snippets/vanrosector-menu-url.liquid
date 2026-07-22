@@ -1,36 +1,69 @@
 {%- comment -%}
-  Builds a Vanrosector-scoped URL so Shop All links never drop into Hague Protect.
-  Priority: collection (?view=vanrosector) → product (?view=vanrosector) → brand catalog/search.
+  Builds a Vanrosector-scoped URL.
   @param handle {String}
   @param search_query {String}
   @param label {String}
+  @param link_type {String} 'collection' | 'product' (default: auto)
 {%- endcomment -%}
 {%- liquid
   assign vr_handle = handle | default: '' | strip
   assign vr_search = search_query | default: label | default: vr_handle | replace: '-', ' ' | strip
-  assign vr_collection = collections[vr_handle]
+  assign vr_type = link_type | default: 'auto' | strip
 
-  if vr_collection != blank
-    assign vr_url = vr_collection.url
-    if vr_url contains '?'
-      echo vr_url | append: '&view=vanrosector'
+  if vr_type == 'collection'
+    assign vr_collection = collections[vr_handle]
+    if vr_collection != blank
+      assign vr_url = vr_collection.url
+      if vr_url contains '?'
+        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+      else
+        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+      endif
+    elsif vr_handle != blank
+      echo '/collections/' | append: vr_handle | append: '?view=vanrosector&brand=vanrosector'
     else
-      echo vr_url | append: '?view=vanrosector'
+      echo '/collections/vanrosector?view=vanrosector&brand=vanrosector'
     endif
-  elsif vr_handle != blank and all_products[vr_handle] != blank
-    assign vr_url = all_products[vr_handle].url
-    if vr_url contains '?'
-      echo vr_url | append: '&view=vanrosector'
+
+  elsif vr_type == 'product'
+    if vr_handle != blank and all_products[vr_handle] != blank
+      assign vr_url = all_products[vr_handle].url
+      if vr_url contains '?'
+        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+      else
+        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+      endif
+    elsif vr_handle != blank
+      echo '/products/' | append: vr_handle | append: '?view=vanrosector&brand=vanrosector'
     else
-      echo vr_url | append: '?view=vanrosector'
+      assign exact_search = '"' | append: vr_search | append: '"'
+      assign encoded_query = exact_search | url_encode
+      echo '/collections/all?view=vanrosector&brand=vanrosector&q=' | append: encoded_query
     endif
+
   else
     comment
-      Keep the shopper inside Vanrosector: brand catalog + search query.
-      brand=vanrosector is also read by the header for active_brand.
+      Legacy auto mode: collection → product → brand catalog
     endcomment
-    assign exact_search = '"' | append: vr_search | append: '"'
-    assign encoded_query = exact_search | url_encode
-    echo '/collections/all?view=vanrosector&brand=vanrosector&q=' | append: encoded_query
+    assign vr_collection = collections[vr_handle]
+    if vr_collection != blank
+      assign vr_url = vr_collection.url
+      if vr_url contains '?'
+        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+      else
+        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+      endif
+    elsif vr_handle != blank and all_products[vr_handle] != blank
+      assign vr_url = all_products[vr_handle].url
+      if vr_url contains '?'
+        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+      else
+        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+      endif
+    else
+      assign exact_search = '"' | append: vr_search | append: '"'
+      assign encoded_query = exact_search | url_encode
+      echo '/collections/all?view=vanrosector&brand=vanrosector&q=' | append: encoded_query
+    endif
   endif
 -%}
