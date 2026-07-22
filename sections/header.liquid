@@ -426,6 +426,10 @@
     transform: translateX(3px);
   }
 
+  .megamenu-brand-panel[hidden] {
+    display: none !important;
+  }
+
   /* Vanrosector Shop All mega-menu */
   .megamenu-panel--vanrosector {
     --vr-accent: #8a6a3b;
@@ -1012,18 +1016,21 @@
     assign logo_one_width = header_logo_width
     assign logo_one_link_class = 'header__logo-link'
     assign logo_one_img_class = 'header__logo-img'
+    assign logo_one_brand = 'hague'
 
     assign logo_two_url = vr_logo_url
     assign logo_two_alt = 'Vanrosector'
     assign logo_two_link = vanrosector_url
     assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
     assign logo_two_img_class = 'header__logo-img'
+    assign logo_two_brand = 'vanrosector'
 
     assign logo_three_url = sor_logo_url
     assign logo_three_alt = 'Science of Raw'
     assign logo_three_link = science_of_raw_url
     assign logo_three_link_class = 'header__logo-link header__logo-link--brand header__logo-link--sor'
     assign logo_three_img_class = 'header__logo-img'
+    assign logo_three_brand = 'science-of-raw'
 
     if active_brand == 'vanrosector'
       assign logo_one_url = vr_logo_url
@@ -1032,12 +1039,14 @@
       assign logo_one_width = header_logo_width
       assign logo_one_link_class = 'header__logo-link'
       assign logo_one_img_class = 'header__logo-img'
+      assign logo_one_brand = 'vanrosector'
 
       assign logo_two_url = header_logo_url
       assign logo_two_alt = 'Hague Protect'
       assign logo_two_link = hague_home_url
       assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
       assign logo_two_img_class = 'header__logo-img'
+      assign logo_two_brand = 'hague'
     elsif active_brand == 'science-of-raw'
       assign logo_one_url = sor_logo_url
       assign logo_one_alt = 'Science of Raw'
@@ -1045,26 +1054,29 @@
       assign logo_one_width = header_logo_width
       assign logo_one_link_class = 'header__logo-link header__logo-link--sor-main'
       assign logo_one_img_class = 'header__logo-img'
+      assign logo_one_brand = 'science-of-raw'
 
       assign logo_two_url = header_logo_url
       assign logo_two_alt = 'Hague Protect'
       assign logo_two_link = hague_home_url
       assign logo_two_link_class = 'header__logo-link header__logo-link--brand'
       assign logo_two_img_class = 'header__logo-img'
+      assign logo_two_brand = 'hague'
 
       assign logo_three_url = vr_logo_url
       assign logo_three_alt = 'Vanrosector'
       assign logo_three_link = vanrosector_url
       assign logo_three_link_class = 'header__logo-link header__logo-link--brand'
       assign logo_three_img_class = 'header__logo-img'
+      assign logo_three_brand = 'vanrosector'
     endif
   -%}
 
   <div class="header-container">
     
-    <!-- Logos: primary brand + partner logos -->
+    <!-- Logos: primary brand + partner logos (hover opens that brand's Shop All) -->
     <div class="header__logo-group" style="--logo-primary-max: {{ logo_one_width }}px;">
-      <a href="{{ logo_one_link }}" class="{{ logo_one_link_class }} header__logo-link--primary" aria-label="{{ logo_one_alt }} home">
+      <a href="{{ logo_one_link }}" class="{{ logo_one_link_class }} header__logo-link--primary" aria-label="{{ logo_one_alt }} home" data-mega-brand="{{ logo_one_brand }}">
         <img
           src="{{ logo_one_url }}"
           alt="{{ logo_one_alt }}"
@@ -1077,7 +1089,7 @@
       </a>
 
       <div class="header__logo-partners" aria-label="Partner brands">
-        <a href="{{ logo_two_link }}" class="{{ logo_two_link_class }}" aria-label="{{ logo_two_alt }}">
+        <a href="{{ logo_two_link }}" class="{{ logo_two_link_class }}" aria-label="{{ logo_two_alt }}" data-mega-brand="{{ logo_two_brand }}">
           <img
             src="{{ logo_two_url }}"
             alt="{{ logo_two_alt }}"
@@ -1088,7 +1100,7 @@
           >
         </a>
 
-        <a href="{{ logo_three_link }}" class="{{ logo_three_link_class }}" aria-label="{{ logo_three_alt }}">
+        <a href="{{ logo_three_link }}" class="{{ logo_three_link_class }}" aria-label="{{ logo_three_alt }}" data-mega-brand="{{ logo_three_brand }}">
           <img
             src="{{ logo_three_url }}"
             alt="{{ logo_three_alt }}"
@@ -1210,11 +1222,9 @@
     </div>
   </div>
 
-  <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU dropdown right inside the header wrapper -->
-  <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% endif %}" id="MegaMenuPanel">
-    {%- if active_brand == 'vanrosector' -%}
-      {% render 'vanrosector-shop-all-menu', variant: 'desktop' %}
-    {%- else -%}
+  <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU — both brand menus live here; logos/Shop All switch which is shown -->
+  <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% else %}hague{% endif %}">
+    <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' %} hidden{% endif %}>
     <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
       
       <!-- Column 1: Kits & Solutions -->
@@ -1356,7 +1366,10 @@
       </div>
 
     </div>
-    {%- endif -%}
+    </div>
+    <div class="megamenu-brand-panel megamenu-panel--vanrosector" data-brand-menu="vanrosector"{% unless active_brand == 'vanrosector' %} hidden{% endunless %}>
+      {% render 'vanrosector-shop-all-menu', variant: 'desktop' %}
+    </div>
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -1555,8 +1568,19 @@
 
     if (trigger && panel) {
       let timeoutId;
-      const openPanel = () => {
+      const defaultBrand = panel.getAttribute('data-default-brand') === 'vanrosector' ? 'vanrosector' : 'hague';
+
+      const showBrandMenu = (brand) => {
+        const key = brand === 'vanrosector' ? 'vanrosector' : 'hague';
+        panel.querySelectorAll('[data-brand-menu]').forEach((el) => {
+          el.hidden = el.getAttribute('data-brand-menu') !== key;
+        });
+        panel.classList.toggle('megamenu-panel--vanrosector', key === 'vanrosector');
+      };
+
+      const openPanel = (brand) => {
         clearTimeout(timeoutId);
+        showBrandMenu(brand || defaultBrand);
         panel.style.display = 'block';
         setTimeout(() => {
           panel.style.opacity = '1';
@@ -1573,13 +1597,27 @@
               panel.style.display = 'none';
             }
           }, 300);
-        }, 100);
+        }, 120);
       };
 
-      trigger.addEventListener('mouseenter', openPanel);
+      trigger.addEventListener('mouseenter', () => openPanel(defaultBrand));
       trigger.addEventListener('mouseleave', closePanel);
-      panel.addEventListener('mouseenter', openPanel);
+      panel.addEventListener('mouseenter', () => {
+        clearTimeout(timeoutId);
+        openPanel(panel.classList.contains('megamenu-panel--vanrosector') ? 'vanrosector' : 'hague');
+      });
       panel.addEventListener('mouseleave', closePanel);
+
+      /* Logo hover → open that brand's Shop All (Hague / Vanrosector only) */
+      document.querySelectorAll('[data-mega-brand]').forEach((logo) => {
+        const brand = logo.getAttribute('data-mega-brand');
+        if (brand !== 'hague' && brand !== 'vanrosector') return;
+
+        logo.addEventListener('mouseenter', () => openPanel(brand));
+        logo.addEventListener('mouseleave', closePanel);
+      });
+
+      showBrandMenu(defaultBrand);
     }
 
     const brandNav = document.getElementById('BrandNav');
