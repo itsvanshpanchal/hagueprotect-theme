@@ -1,0 +1,21 @@
+{%- comment -%}
+  Clickable golden heading for Vanrosector Shop All columns.
+  @param handle {String} collection/product handle
+  @param search {String} fallback search query
+  @param label {String} heading text
+  @param variant {String} 'desktop' (default) or 'mobile'
+{%- endcomment -%}
+{%- capture heading_href -%}
+  {%- render 'vanrosector-menu-url', handle: handle, search_query: search, label: label -%}
+{%- endcapture -%}
+{%- assign heading_href = heading_href | strip -%}
+
+{%- if variant == 'mobile' -%}
+  <h4 class="mobile-accordion-category-heading megamenu-heading-link megamenu-heading-link--vr-gold">
+    <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h4>
+{%- else -%}
+  <h3 class="megamenu-heading megamenu-heading--vr megamenu-heading-link">
+    <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h3>
+{%- endif -%}

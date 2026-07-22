@@ -9,7 +9,7 @@
 {%- if variant == 'mobile' -%}
   <div class="vr-shop-mobile">
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Private Collection</h4>
+      {% render 'vanrosector-menu-heading', handle: 'private-collection', search: 'Private Collection', label: 'Private Collection', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'les-ateliers-vanrosector', search: 'Les Ateliers Vanrosector', label: 'Les Ateliers Vanrosector', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'oud-selection', search: 'Oud Selection', label: 'Oud Selection', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -19,7 +19,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Discovery Sets</h4>
+      {% render 'vanrosector-menu-heading', handle: 'discovery-sets', search: 'Discovery Sets', label: 'Discovery Sets', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'fresh-creations', search: 'Fresh Creations', label: 'Fresh Creations', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'summer-wardrobe', search: 'Summer Wardrobe', label: 'Summer Wardrobe', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -29,7 +29,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Essential Oils</h4>
+      {% render 'vanrosector-menu-heading', handle: 'essential-oils', search: 'Essential Oils', label: 'Essential Oils', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'essential-oil-singles', search: 'Essential Oil Singles', label: 'Essential Oil Singles', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'essential-oil-sets', search: 'Essential Oil Sets', label: 'Essential Oil Sets', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -41,7 +41,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Diffuser Oils</h4>
+      {% render 'vanrosector-menu-heading', handle: 'diffuser-oils', search: 'Diffuser Oils', label: 'Diffuser Oils', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'diffuser-oil-singles', search: 'Diffuser Oil Singles', label: 'Diffuser Oil Singles', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'diffuser-oil-sets', search: 'Diffuser Oil Sets', label: 'Diffuser Oil Sets', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -49,7 +49,7 @@
         {% render 'vanrosector-menu-link', handle: 'seasonal-collections', search: 'Seasonal Collections', label: 'Seasonal Collections', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'new-arrivals', search: 'New Arrivals', label: 'New Arrivals', style: 'color:#666; text-decoration:none; font-size:14px;' %}
       </div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr-accent">Shop by Scent</h4>
+      {% render 'vanrosector-menu-heading', handle: 'shop-by-scent', search: 'Shop by Scent', label: 'Shop by Scent', variant: 'mobile' %}
       <div class="vr-shop-mobile__links vr-shop-mobile__links--scent">
         {% render 'vanrosector-menu-link', handle: 'berry-chill', search: 'Berry Chill', label: 'Berry Chill', class: 'vr-scent-link', style: 'color:#8a6a3b; text-decoration:none; font-size:13px;' %}
         {% render 'vanrosector-menu-link', handle: 'berry-velvet', search: 'Berry Velvet', label: 'Berry Velvet', class: 'vr-scent-link', style: 'color:#8a6a3b; text-decoration:none; font-size:13px;' %}
@@ -83,7 +83,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Spa Oils</h4>
+      {% render 'vanrosector-menu-heading', handle: 'spa-oils', search: 'Spa Oils', label: 'Spa Oils', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'signature-spa-blends', search: 'Signature Spa Blends', label: 'Signature Spa Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'massage-therapy-blends', search: 'Massage Therapy Blends', label: 'Massage Therapy Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -94,7 +94,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Wellbeing Concerns</h4>
+      {% render 'vanrosector-menu-heading', handle: 'wellbeing-concerns', search: 'Wellbeing Concerns', label: 'Wellbeing Concerns', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'sleep', search: 'Sleep', label: 'Sleep', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'emotional-wellness', search: 'Emotional Wellness', label: 'Emotional Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -114,7 +114,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Gifts</h4>
+      {% render 'vanrosector-menu-heading', handle: 'gifts', search: 'Gifts', label: 'Gifts', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'iconics', search: 'Iconics', label: 'Iconics', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'little-luxuries', search: 'Little Luxuries', label: 'Little Luxuries', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -125,7 +125,7 @@
     </div>
 
     <div>
-      <h4 class="mobile-accordion-category-heading megamenu-heading-link--vr">Learn</h4>
+      {% render 'vanrosector-menu-heading', handle: 'learn', search: 'Learn', label: 'Learn', variant: 'mobile' %}
       <div class="vr-shop-mobile__links">
         {% render 'vanrosector-menu-link', handle: 'about-essential-oils', search: 'About Essential Oils', label: 'About Essential Oils', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'aromatherapy-guide', search: 'Aromatherapy Guide', label: 'Aromatherapy Guide', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -144,7 +144,7 @@
   <div class="megamenu-grid megamenu-grid--vanrosector">
     <!-- Private Collection -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Private Collection</h3>
+      {% render 'vanrosector-menu-heading', handle: 'private-collection', search: 'Private Collection', label: 'Private Collection' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'les-ateliers-vanrosector', search: 'Les Ateliers Vanrosector', label: 'Les Ateliers Vanrosector' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'oud-selection', search: 'Oud Selection', label: 'Oud Selection' %}</li>
@@ -155,7 +155,7 @@
 
     <!-- Discovery Sets -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Discovery Sets</h3>
+      {% render 'vanrosector-menu-heading', handle: 'discovery-sets', search: 'Discovery Sets', label: 'Discovery Sets' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'fresh-creations', search: 'Fresh Creations', label: 'Fresh Creations' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'summer-wardrobe', search: 'Summer Wardrobe', label: 'Summer Wardrobe' %}</li>
@@ -166,7 +166,7 @@
 
     <!-- Essential Oils -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Essential Oils</h3>
+      {% render 'vanrosector-menu-heading', handle: 'essential-oils', search: 'Essential Oils', label: 'Essential Oils' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'essential-oil-singles', search: 'Essential Oil Singles', label: 'Essential Oil Singles' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'essential-oil-sets', search: 'Essential Oil Sets', label: 'Essential Oil Sets' %}</li>
@@ -179,7 +179,7 @@
 
     <!-- Diffuser Oils + Shop by Scent -->
     <div class="megamenu-col megamenu-col--vr-wide">
-      <h3 class="megamenu-heading megamenu-heading--vr">Diffuser Oils</h3>
+      {% render 'vanrosector-menu-heading', handle: 'diffuser-oils', search: 'Diffuser Oils', label: 'Diffuser Oils' %}
       <ul class="megamenu-links" style="margin-bottom: 16px;">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'diffuser-oil-singles', search: 'Diffuser Oil Singles', label: 'Diffuser Oil Singles' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'diffuser-oil-sets', search: 'Diffuser Oil Sets', label: 'Diffuser Oil Sets' %}</li>
@@ -187,7 +187,7 @@
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'seasonal-collections', search: 'Seasonal Collections', label: 'Seasonal Collections' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'new-arrivals', search: 'New Arrivals', label: 'New Arrivals' %}</li>
       </ul>
-      <h3 class="megamenu-heading megamenu-heading--vr-accent">Shop by Scent</h3>
+      {% render 'vanrosector-menu-heading', handle: 'shop-by-scent', search: 'Shop by Scent', label: 'Shop by Scent' %}
       <ul class="megamenu-links megamenu-links--vr-scents">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'berry-chill', search: 'Berry Chill', label: 'Berry Chill', class: 'vr-scent-link' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'berry-velvet', search: 'Berry Velvet', label: 'Berry Velvet', class: 'vr-scent-link' %}</li>
@@ -222,7 +222,7 @@
 
     <!-- Spa Oils -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Spa Oils</h3>
+      {% render 'vanrosector-menu-heading', handle: 'spa-oils', search: 'Spa Oils', label: 'Spa Oils' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'signature-spa-blends', search: 'Signature Spa Blends', label: 'Signature Spa Blends' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'massage-therapy-blends', search: 'Massage Therapy Blends', label: 'Massage Therapy Blends' %}</li>
@@ -234,7 +234,7 @@
 
     <!-- Wellbeing Concerns -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Wellbeing Concerns</h3>
+      {% render 'vanrosector-menu-heading', handle: 'wellbeing-concerns', search: 'Wellbeing Concerns', label: 'Wellbeing Concerns' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'sleep', search: 'Sleep', label: 'Sleep' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'emotional-wellness', search: 'Emotional Wellness', label: 'Emotional Wellness' %}</li>
@@ -255,7 +255,7 @@
 
     <!-- Gifts -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Gifts</h3>
+      {% render 'vanrosector-menu-heading', handle: 'gifts', search: 'Gifts', label: 'Gifts' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'iconics', search: 'Iconics', label: 'Iconics' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'little-luxuries', search: 'Little Luxuries', label: 'Little Luxuries' %}</li>
@@ -267,7 +267,7 @@
 
     <!-- Learn -->
     <div class="megamenu-col">
-      <h3 class="megamenu-heading megamenu-heading--vr">Learn</h3>
+      {% render 'vanrosector-menu-heading', handle: 'learn', search: 'Learn', label: 'Learn' %}
       <ul class="megamenu-links">
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'about-essential-oils', search: 'About Essential Oils', label: 'About Essential Oils' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'aromatherapy-guide', search: 'Aromatherapy Guide', label: 'Aromatherapy Guide' %}</li>
