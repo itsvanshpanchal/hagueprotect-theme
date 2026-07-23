@@ -37,69 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 20px;
-  }
-
-  @media screen and (min-width: 1025px) {
-    /* Logos stay packed on the left; search + icons sit on the right */
-    .header-top__inner .header__logo-group {
-      flex: 0 1 auto;
-      width: auto;
-      max-width: calc(100% - 460px);
-      min-width: 0;
-      justify-content: flex-start;
-      gap: 12px;
-    }
-
-    .header-top__inner .header__logo-link--primary {
-      flex: 0 0 auto;
-      min-width: 0;
-    }
-
-    .header-top__inner .header__logo-link--primary .header__logo-img {
-      max-width: min(var(--logo-primary-max, 200px), 100%);
-      width: auto;
-      height: auto;
-    }
-
-    .header-top__inner .header__logo-partners {
-      flex: 0 0 auto;
-      flex-shrink: 0;
-      min-width: 0;
-      gap: 8px;
-    }
-
-    .header-top__inner .header__logo-partners .header__logo-link {
-      flex: 0 0 auto;
-    }
-
-    .header-top__inner .header__logo-partners .header__logo-img {
-      max-width: min(130px, 14vw);
-      height: auto;
-      max-height: 40px;
-    }
-
-    .header-top__inner .header__logo-link--sor .header__logo-img,
-    .header-top__inner .header__logo-link--sor-main .header__logo-img {
-      max-width: min(150px, 16vw);
-      max-height: 44px;
-    }
-
-    .header-top__inner .header__search {
-      flex: 0 0 340px;
-      width: 340px;
-      max-width: 340px;
-      min-width: 340px;
-      margin-left: auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .header-top__inner .header__actions {
-      flex: 0 0 auto;
-      margin-left: 0;
-      justify-content: flex-end;
-    }
+    gap: 16px;
   }
 
   /* Bottom tier: centered nav links */
@@ -168,7 +106,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    flex-shrink: 1;
+    flex-shrink: 0;
     min-width: 0;
   }
 
@@ -206,18 +144,24 @@
   }
 
   .header__logo-group {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: clamp(18px, 3vw, 36px);
-    flex: 0 1 auto;
+    justify-content: flex-start;
+    gap: 10px;
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
     min-width: 0;
   }
 
   .header__logo-partners {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: {{ section.settings.partner_logo_gap | default: 8 }}px;
+    flex: 0 0 auto;
     flex-shrink: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .header__logo-partners .header__logo-link {
@@ -261,6 +205,51 @@
   .header__logo-link--sor-main .header__logo-img {
     height: auto;
     max-width: 220px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-group {
+      display: inline-flex !important;
+      flex: 0 0 auto !important;
+      width: max-content !important;
+      max-width: calc(100% - 480px);
+      justify-content: flex-start !important;
+      gap: 10px !important;
+    }
+
+    /* Flatten partners into the same flex row so they can't be pushed away */
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners {
+      display: contents;
+    }
+
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary,
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link {
+      flex: 0 0 auto;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link:last-child {
+      margin-left: 0;
+    }
+
+    #shopify-section-{{ section.id }} .header-top__inner .header__search {
+      flex: 0 0 340px;
+      width: 340px;
+      max-width: 340px;
+      min-width: 340px;
+      margin-left: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    #shopify-section-{{ section.id }} .header-top__inner .header__actions {
+      flex: 0 0 auto;
+      margin-left: 0;
+    }
+
+    #shopify-section-{{ section.id }} .header__search-btn {
+      display: none !important;
+    }
   }
 
   .header__navigation {
