@@ -36,33 +36,23 @@
   .header-top__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: clamp(16px, 2.5vw, 36px);
+    justify-content: flex-start;
+    gap: 20px;
   }
 
   @media screen and (min-width: 1025px) {
+    /* Logos take leftover space on the left; search + icons stay fixed on the right */
     .header-top__inner .header__logo-group {
-      flex: 1 1 0;
+      flex: 1 1 auto;
       min-width: 0;
+      max-width: 100%;
       justify-content: flex-start;
-    }
-
-    .header-top__inner .header__search {
-      flex: 0 1 400px;
-      width: 100%;
-      max-width: 400px;
-      min-width: 200px;
-    }
-
-    .header-top__inner .header__actions {
-      flex: 1 1 0;
-      min-width: 0;
-      justify-content: flex-end;
+      overflow: hidden;
     }
 
     .header-top__inner .header__logo-link--primary {
-      min-width: 0;
       flex: 0 1 auto;
+      min-width: 0;
     }
 
     .header-top__inner .header__logo-link--primary .header__logo-img {
@@ -72,16 +62,42 @@
     }
 
     .header-top__inner .header__logo-partners {
+      flex: 0 1 auto;
       flex-shrink: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .header-top__inner .header__logo-partners .header__logo-link {
+      flex: 0 1 auto;
       min-width: 0;
     }
 
     .header-top__inner .header__logo-partners .header__logo-img {
-      max-width: min(140px, 18vw);
+      max-width: min(130px, 14vw);
+      height: auto;
+      max-height: 40px;
     }
 
+    .header-top__inner .header__logo-link--sor .header__logo-img,
     .header-top__inner .header__logo-link--sor-main .header__logo-img {
-      max-width: min(200px, 28vw);
+      max-width: min(150px, 16vw);
+      max-height: 44px;
+    }
+
+    .header-top__inner .header__search {
+      flex: 0 0 340px;
+      width: 340px;
+      max-width: 340px;
+      min-width: 340px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-top__inner .header__actions {
+      flex: 0 0 auto;
+      margin-left: 0;
+      justify-content: flex-end;
     }
   }
 
@@ -733,9 +749,10 @@
     }
 
     .header-top__inner .header__search {
-      flex-basis: 280px;
-      max-width: 300px;
-      min-width: 180px;
+      flex: 0 0 280px;
+      width: 280px;
+      max-width: 280px;
+      min-width: 280px;
     }
 
     .header__logo-group {
