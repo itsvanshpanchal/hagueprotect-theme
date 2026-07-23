@@ -147,7 +147,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 20px;
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
@@ -157,7 +157,7 @@
   .header__logo-partners {
     display: inline-flex;
     align-items: center;
-    gap: {{ section.settings.partner_logo_gap | default: 8 }}px;
+    gap: 20px;
     flex: 0 0 auto;
     flex-shrink: 0;
     margin: 0;
@@ -167,44 +167,35 @@
   .header__logo-partners .header__logo-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
     width: auto;
+    height: 40px;
     line-height: 0;
   }
 
-  .header__logo-partners .header__logo-link:first-child .header__logo-img {
-    object-position: right center;
+  .header__logo-link--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
   }
 
-  .header__logo-partners .header__logo-link:last-child .header__logo-img {
-    object-position: left center;
-  }
-
-  .header__logo-partners .header__logo-link:last-child {
-    margin-left: -6px;
+  .header__logo-link--primary .header__logo-img,
+  .header__logo-link--brand .header__logo-img,
+  .header__logo-link--sor .header__logo-img,
+  .header__logo-link--sor-main .header__logo-img {
+    height: 40px;
+    width: auto;
+    max-height: 40px;
+    max-width: 180px;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
   }
 
   .header__logo-link--primary .header__logo-img {
-    max-width: var(--logo-primary-max, 200px);
-  }
-
-  .header__logo-link--brand .header__logo-img {
-    height: 46px;
-    width: auto;
-    max-width: 168px;
-    object-fit: contain;
-  }
-
-  .header__logo-link--sor .header__logo-img {
-    height: 54px;
-    width: auto;
-    max-width: 176px;
-    object-fit: contain;
-  }
-
-  .header__logo-link--sor-main .header__logo-img {
-    height: auto;
-    max-width: 220px;
+    max-width: min(var(--logo-primary-max, 200px), 200px);
   }
 
   @media screen and (min-width: 1025px) {
@@ -213,23 +204,36 @@
       flex: 0 0 auto !important;
       width: max-content !important;
       max-width: calc(100% - 480px);
+      align-items: center !important;
       justify-content: flex-start !important;
-      gap: 10px !important;
+      gap: 22px !important;
     }
 
-    /* Flatten partners into the same flex row so they can't be pushed away */
+    /* Flatten partners into the same flex row so all 3 logos share one alignment */
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners {
       display: contents;
     }
 
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary,
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link {
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link,
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary {
       flex: 0 0 auto;
-      margin: 0;
+      margin: 0 !important;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
     }
 
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link:last-child {
-      margin-left: 0;
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-img {
+      height: 42px !important;
+      max-height: 42px !important;
+      width: auto !important;
+      max-width: 190px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+    }
+
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary .header__logo-img {
+      max-width: min(var(--logo-primary-max, 200px), 210px) !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__search {
@@ -1248,7 +1252,7 @@
             alt="{{ logo_one_alt }}"
             class="{{ logo_one_img_class }}"
             width="{{ logo_one_width }}"
-            height="46"
+            height="42"
             loading="eager"
             decoding="async"
           >
@@ -1260,7 +1264,7 @@
               src="{{ logo_two_url }}"
               alt="{{ logo_two_alt }}"
               class="{{ logo_two_img_class }}"
-              height="46"
+              height="42"
               loading="eager"
               decoding="async"
             >
@@ -1271,7 +1275,7 @@
               src="{{ logo_three_url }}"
               alt="{{ logo_three_alt }}"
               class="{{ logo_three_img_class }}"
-              height="54"
+              height="42"
               loading="eager"
               decoding="async"
             >
