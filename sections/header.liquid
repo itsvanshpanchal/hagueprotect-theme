@@ -34,18 +34,8 @@
   }
 
   .header-top__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 480px) minmax(0, 1fr);
-    align-items: center;
+    justify-content: space-between;
     gap: 20px;
-  }
-
-  .header-top__inner .header__logo-group {
-    justify-self: start;
-  }
-
-  .header-top__inner .header__actions {
-    justify-self: end;
   }
 
   /* Bottom tier: centered nav links */
@@ -58,53 +48,6 @@
     justify-content: center;
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .header__search {
-    display: flex;
-    justify-content: center;
-    min-width: 0;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-  }
-
-  .header__search-form {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-    border: 1px solid #d8d8d8;
-    border-radius: 8px;
-    padding: 10px 14px;
-    background: #fafafa;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-  }
-
-  .header__search-form:focus-within {
-    border-color: #111111;
-    background: #ffffff;
-  }
-
-  .header__search-form svg {
-    flex-shrink: 0;
-    color: #666666;
-  }
-
-  .header__search-input {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-family: var(--font-family-sans);
-    font-size: 14px;
-    font-weight: var(--font-weight-sans, 500);
-    color: #111111;
-  }
-
-  .header__search-input::placeholder {
-    color: #999999;
   }
 
   .header__logo-link {
@@ -217,8 +160,7 @@
 
   @media screen and (max-width: 1024px) {
     .header__navigation,
-    .header-nav-bar,
-    .header__search {
+    .header-nav-bar {
       display: none;
     }
   }
@@ -643,12 +585,6 @@
     flex-shrink: 0;
   }
 
-  @media screen and (min-width: 1025px) {
-    .header__search-btn {
-      display: none;
-    }
-  }
-
   .header__cart-link,
   .header__account-btn {
     display: flex;
@@ -688,11 +624,6 @@
   }
 
   @media screen and (max-width: 1280px) and (min-width: 1025px) {
-    .header-top__inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(180px, 320px) auto;
-      gap: 14px;
-    }
-
     .header__logo-group {
       gap: clamp(12px, 2vw, 24px);
     }
@@ -1225,24 +1156,6 @@
             >
           </a>
         </div>
-      </div>
-
-      <div class="header__search">
-        <form action="{{ routes.search_url }}" method="get" role="search" class="header__search-form">
-          <input type="hidden" name="type" value="product">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="11" cy="11" r="8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M21 21L16.65 16.65" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <input
-            type="search"
-            name="q"
-            class="header__search-input"
-            placeholder="Search products"
-            aria-label="Search products"
-            autocomplete="off"
-          >
-        </form>
       </div>
 
       <div class="header__actions">
