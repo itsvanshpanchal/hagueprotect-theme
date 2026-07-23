@@ -34,18 +34,55 @@
   }
 
   .header-top__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 480px) minmax(0, 1fr);
+    display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: clamp(16px, 2.5vw, 36px);
   }
 
-  .header-top__inner .header__logo-group {
-    justify-self: start;
-  }
+  @media screen and (min-width: 1025px) {
+    .header-top__inner .header__logo-group {
+      flex: 1 1 0;
+      min-width: 0;
+      justify-content: flex-start;
+    }
 
-  .header-top__inner .header__actions {
-    justify-self: end;
+    .header-top__inner .header__search {
+      flex: 0 1 400px;
+      width: 100%;
+      max-width: 400px;
+      min-width: 200px;
+    }
+
+    .header-top__inner .header__actions {
+      flex: 1 1 0;
+      min-width: 0;
+      justify-content: flex-end;
+    }
+
+    .header-top__inner .header__logo-link--primary {
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+
+    .header-top__inner .header__logo-link--primary .header__logo-img {
+      max-width: min(var(--logo-primary-max, 200px), 100%);
+      width: auto;
+      height: auto;
+    }
+
+    .header-top__inner .header__logo-partners {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .header-top__inner .header__logo-partners .header__logo-img {
+      max-width: min(140px, 18vw);
+    }
+
+    .header-top__inner .header__logo-link--sor-main .header__logo-img {
+      max-width: min(200px, 28vw);
+    }
   }
 
   /* Bottom tier: centered nav links */
@@ -64,7 +101,6 @@
     display: flex;
     justify-content: center;
     min-width: 0;
-    width: 100%;
   }
 
   .header__search-form {
@@ -74,8 +110,9 @@
     gap: 10px;
     border: 1px solid #d0d0d0;
     border-radius: 999px;
-    padding: 11px 18px;
+    padding: 10px 18px;
     background: #ffffff;
+    box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -692,12 +729,17 @@
 
   @media screen and (max-width: 1280px) and (min-width: 1025px) {
     .header-top__inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(200px, 340px) auto;
       gap: 14px;
     }
 
+    .header-top__inner .header__search {
+      flex-basis: 280px;
+      max-width: 300px;
+      min-width: 180px;
+    }
+
     .header__logo-group {
-      gap: clamp(12px, 2vw, 24px);
+      gap: clamp(10px, 1.5vw, 20px);
     }
 
     .header-nav-bar .header__navigation {
