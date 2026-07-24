@@ -106,7 +106,6 @@
 #MainContent .shopify-section .hero-fullscreen__subheading,
 #MainContent .shopify-section .corp-hero__sub,
 #MainContent .shopify-section .fb__subtitle,
-#MainContent .shopify-section .mat-desc,
 #MainContent .shopify-section .story-banner__paragraph,
 #MainContent .shopify-section .comm-desc,
 #MainContent .shopify-section .comm-badge-desc,
@@ -127,6 +126,13 @@
   text-transform: none !important;
   letter-spacing: normal !important;
   line-height: 1.55 !important;
+}
+
+#MainContent .shopify-section .mat-desc {
+  font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  line-height: 1.15 !important;
 }
 
 /* ========== Eyebrow / Tiny text ========== */

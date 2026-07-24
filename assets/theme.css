@@ -938,7 +938,6 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
 }
 
 /* Unified section subheadings — Inter body style like materials description */
-.mat-desc,
 .fb__subtitle,
 .brand-banner__subtitle,
 .comm-desc,
@@ -960,6 +959,19 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   line-height: var(--section-subheading-line-height) !important;
   letter-spacing: normal !important;
   color: var(--section-subheading-color) !important;
+  text-transform: none !important;
+  text-align: inherit !important;
+  max-width: var(--section-subheading-max-width) !important;
+  margin-top: var(--section-subheading-spacing-top) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mat-desc {
+  font-family: var(--font-family-sans) !important;
+  font-size: var(--section-subheading-size) !important;
+  font-weight: var(--section-subheading-weight) !important;
+  line-height: 1.15 !important;
+  letter-spacing: normal !important;
   text-transform: none !important;
   text-align: inherit !important;
   max-width: var(--section-subheading-max-width) !important;
@@ -1141,7 +1153,7 @@ h4.mobile-accordion-category-heading,
   font-family: var(--font-family-subheading) !important;
   font-weight: 400 !important;
   font-size: inherit !important;
-  line-height: 1.5 !important;
+  line-height: 1.15 !important;
   letter-spacing: normal !important;
 }
 
