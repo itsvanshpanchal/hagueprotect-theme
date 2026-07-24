@@ -979,6 +979,11 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   -webkit-font-smoothing: antialiased;
 }
 
+/* Community intro copy — Darker Grotesque needs tighter leading */
+.comm-desc {
+  line-height: 1.15 !important;
+}
+
 /* Subheadings on dark/image backgrounds */
 .brand-banner__subtitle {
   color: rgba(255, 255, 255, 0.88) !important;
