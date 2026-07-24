@@ -30,6 +30,11 @@
   elsif section.settings.collection != blank
     assign ckc_material_source = section.settings.collection.handle
   endif
+
+  assign ckc_accent = '#E74C3C'
+  if template.suffix == 'vanrosector-category' or request.query_string contains 'brand=vanrosector'
+    assign ckc_accent = '#8a6a3b'
+  endif
 -%}
 
 {%- style -%}
@@ -55,7 +60,7 @@
   }
 
   .ckc-{{ section.id }}__eyebrow {
-    color: #E74C3C;
+    color: {{ ckc_accent }};
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.12em;

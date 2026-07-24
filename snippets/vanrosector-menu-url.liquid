@@ -15,14 +15,14 @@
     if vr_collection != blank
       assign vr_url = vr_collection.url
       if vr_url contains '?'
-        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+        echo vr_url | append: '&view=vanrosector-category&brand=vanrosector'
       else
-        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+        echo vr_url | append: '?view=vanrosector-category&brand=vanrosector'
       endif
     elsif vr_handle != blank
-      echo '/collections/' | append: vr_handle | append: '?view=vanrosector&brand=vanrosector'
+      echo '/collections/' | append: vr_handle | append: '?view=vanrosector-category&brand=vanrosector'
     else
-      echo '/collections/vanrosector?view=vanrosector&brand=vanrosector'
+      echo '/collections/vanrosector?view=vanrosector-category&brand=vanrosector'
     endif
 
   elsif vr_type == 'product'
@@ -49,9 +49,9 @@
     if vr_collection != blank
       assign vr_url = vr_collection.url
       if vr_url contains '?'
-        echo vr_url | append: '&view=vanrosector&brand=vanrosector'
+        echo vr_url | append: '&view=vanrosector-category&brand=vanrosector'
       else
-        echo vr_url | append: '?view=vanrosector&brand=vanrosector'
+        echo vr_url | append: '?view=vanrosector-category&brand=vanrosector'
       endif
     elsif vr_handle != blank and all_products[vr_handle] != blank
       assign vr_url = all_products[vr_handle].url

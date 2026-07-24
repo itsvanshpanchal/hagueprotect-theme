@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * Vanrosector category collection page.
+ * Used by golden mega-menu headings via ?view=vanrosector-category&brand=vanrosector
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "aplus_top": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Top A+ banner",
+        "alt_text": "",
+        "link": "",
+        "bg_color": "#f7f4ef",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "settings": {
+        "enable_filters": true,
+        "eyebrow": "VANROSECTOR",
+        "heading": "",
+        "description": "",
+        "section_id": "vanrosector-products",
+        "collection": "",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff",
+        "h2_font_family": "bahnschrift",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "700",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 12,
+        "eyebrow_font_size_mobile": 12
+      }
+    },
+    "story_banner_1": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "border_radius": 0
+      }
+    },
+    "story_banner_2": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "border_radius": 0
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Vanrosector oils different?",
+            "answer": "Vanrosector blends are crafted for refined scent experiences — from private reserve fragrances to everyday essential and diffuser oils — with careful attention to quality and character."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I use essential oils and diffuser oils?",
+            "answer": "Follow each product’s guidance. Diffuser oils are intended for aromatic diffusion; spa and massage blends are formulated for wellness rituals. Always dilute essential oils as directed before skin use."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Vanrosector products suitable as gifts?",
+            "answer": "Yes. Discovery sets, iconics, and little luxuries are designed for gifting — from starter kits to elevated private collection pieces."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I choose a scent?",
+            "answer": "Browse Shop by Scent for named fragrances, or explore Wellbeing Concerns and Spa Oils if you prefer selecting by mood, ritual, or wellness focus."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I learn more about Vanrosector?",
+            "answer": "Visit the Learn section in the Vanrosector menu, or open Our Story from the Shop All panel for brand background and FAQs."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "heading": "Things people often wonder"
+      }
+    }
+  },
+  "order": [
+    "aplus_top",
+    "products",
+    "story_banner_1",
+    "story_banner_2",
+    "faq"
+  ]
+}
