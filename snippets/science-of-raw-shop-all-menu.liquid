@@ -1,0 +1,274 @@
+{%- comment -%}
+  Science of Raw Shop All mega-menu (desktop + mobile).
+  @param variant {String} 'desktop' (default) or 'mobile'
+{%- endcomment -%}
+{%- liquid
+  assign variant = variant | default: 'desktop'
+-%}
+
+{%- if variant == 'mobile' -%}
+  <div class="sor-shop-mobile">
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'private-collection', search: 'Private Collection', label: 'Private Collection', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'les-ateliers-science-of-raw', search: 'Les Ateliers Science of Raw', label: 'Les Ateliers Science of Raw', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'oud-selection', search: 'Oud Selection', label: 'Oud Selection', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'oversized-collection', search: 'Oversized Collection', label: 'Oversized Collection', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: '40ml-beautiful-stories', search: '40ml Beautiful Stories', label: '40ml Beautiful Stories', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'discovery-sets', search: 'Discovery Sets', label: 'Discovery Sets', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'fresh-creations', search: 'Fresh Creations', label: 'Fresh Creations', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'summer-wardrobe', search: 'Summer Wardrobe', label: 'Summer Wardrobe', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'starter-kits', search: 'Starter Kits', label: 'Starter Kits', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'science-of-raw-best-sellers', search: 'Best Sellers', label: 'Best Sellers', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'essential-oils', search: 'Essential Oils', label: 'Essential Oils', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'essential-oil-singles', search: 'Essential Oil Singles', label: 'Essential Oil Singles', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'essential-oil-sets', search: 'Essential Oil Sets', label: 'Essential Oil Sets', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'shop-by-blends', search: 'Shop by Blends', label: 'Shop by Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'diffuser-blends', search: 'Diffuser Blends', label: 'Diffuser Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'organic-collection', search: 'Organic Collection', label: 'Organic Collection', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'limited-editions', search: 'Limited Editions', label: 'Limited Editions', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'diffuser-oils', search: 'Diffuser Oils', label: 'Diffuser Oils', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'diffuser-oil-singles', search: 'Diffuser Oil Singles', label: 'Diffuser Oil Singles', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'diffuser-oil-sets', search: 'Diffuser Oil Sets', label: 'Diffuser Oil Sets', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'diffuser-best-sellers', search: 'Best Sellers', label: 'Best Sellers', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'seasonal-collections', search: 'Seasonal Collections', label: 'Seasonal Collections', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'new-arrivals', search: 'New Arrivals', label: 'New Arrivals', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+      {% render 'science-of-raw-menu-heading', handle: 'shop-by-scent', search: 'Shop by Scent', label: 'Shop by Scent', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links sor-shop-mobile__links--scent">
+        {% render 'science-of-raw-menu-link', handle: 'berry-elixir', search: 'Berry Elixir', label: 'Berry Elixir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'berry-velvet', search: 'Berry Velvet', label: 'Berry Velvet', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'lavender-woods', search: 'Lavender Woods', label: 'Lavender Woods', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'rose-absolute', search: 'Rose Absolute', label: 'Rose Absolute', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'coastal-marine', search: 'Coastal Marine', label: 'Coastal Marine', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'vanilla-woods', search: 'Vanilla Woods', label: 'Vanilla Woods', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'oud-noir', search: 'Oud Noir', label: 'Oud Noir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'private-garden', search: 'Private Garden', label: 'Private Garden', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'coffee-ember', search: 'Coffee Ember', label: 'Coffee Ember', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'mint-fraiche', search: 'Mint Fraiche', label: 'Mint Fraiche', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'nude-petals', search: 'Nude Petals', label: 'Nude Petals', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'herbal-botanique', search: 'Herbal Botanique', label: 'Herbal Botanique', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'forest-intense', search: 'Forest Intense', label: 'Forest Intense', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'foret-noire', search: 'Forêt Noire', label: 'Forêt Noire', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'green-herbal', search: 'Green Herbal', label: 'Green Herbal', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'calm-herbal-woods', search: 'Calm Herbal Woods', label: 'Calm Herbal Woods', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'soft-sunrise', search: 'Soft Sunrise', label: 'Soft Sunrise', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'santal-noir', search: 'Santal Noir', label: 'Santal Noir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'crimson-rouge', search: 'Crimson Rouge', label: 'Crimson Rouge', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'caramel-noir', search: 'Caramel Noir', label: 'Caramel Noir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'rosewood-noir', search: 'Rosewood Noir', label: 'Rosewood Noir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'citrus-veil', search: 'Citrus Veil', label: 'Citrus Veil', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'citrus-fruite', search: 'Citrus Fruité', label: 'Citrus Fruité', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'luminous-elixir', search: 'Luminous Elixir', label: 'Luminous Elixir', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'naked-bloom', search: 'Naked Bloom', label: 'Naked Bloom', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'midnight-intense', search: 'Midnight Intense', label: 'Midnight Intense', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'spiced-apple', search: 'Spiced Apple', label: 'Spiced Apple', class: 'sor-scent-link', style: 'color:#1b365d; text-decoration:none; font-size:13px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'spa-oils', search: 'Spa Oils', label: 'Spa Oils', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'signature-spa-blends', search: 'Signature Spa Blends', label: 'Signature Spa Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'massage-therapy-blends', search: 'Massage Therapy Blends', label: 'Massage Therapy Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'steam-sauna-blends', search: 'Steam & Sauna Blends', label: 'Steam & Sauna Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'wellness-spa-blends', search: 'Wellness Spa Blends', label: 'Wellness Spa Blends', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'professional-collection', search: 'Professional Collection', label: 'Professional Collection', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'wellbeing-concerns', search: 'Wellbeing Concerns', label: 'Wellbeing Concerns', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'sleep', search: 'Sleep', label: 'Sleep', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'emotional-wellness', search: 'Emotional Wellness', label: 'Emotional Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'daily-wellness', search: 'Daily Wellness', label: 'Daily Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'physical-wellness', search: 'Physical Wellness', label: 'Physical Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'womens-wellness', search: "Women's Wellness", label: "Women's Wellness", style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'stress-anxiety', search: 'Stress & Anxiety', label: 'Stress & Anxiety', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'energy-focus', search: 'Energy & Focus', label: 'Energy & Focus', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'respiratory-wellness', search: 'Respiratory Wellness', label: 'Respiratory Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'travel-wellness', search: 'Travel Wellness', label: 'Travel Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'recovery-relief', search: 'Recovery & Relief', label: 'Recovery & Relief', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'mindfulness-meditation', search: 'Mindfulness & Meditation', label: 'Mindfulness & Meditation', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'mood-happiness', search: 'Mood & Happiness', label: 'Mood & Happiness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'grounding-balance', search: 'Grounding & Balance', label: 'Grounding & Balance', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'personalized-wellness', search: 'Personalized Wellness', label: 'Personalized Wellness', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'gifts', search: 'Gifts', label: 'Gifts', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'iconics', search: 'Iconics', label: 'Iconics', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'little-luxuries', search: 'Little Luxuries', label: 'Little Luxuries', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'art-of-gifting', search: 'Art of Gifting', label: 'Art of Gifting', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'create-your-bundle', search: 'Create Your Bundle', label: 'Create Your Bundle', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'gift-cards', search: 'Gift Cards', label: 'Gift Cards', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+
+    <div>
+      {% render 'science-of-raw-menu-heading', handle: 'learn', search: 'Learn', label: 'Learn', variant: 'mobile' %}
+      <div class="sor-shop-mobile__links">
+        {% render 'science-of-raw-menu-link', handle: 'about-essential-oils', search: 'About Essential Oils', label: 'About Essential Oils', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'aromatherapy-guide', search: 'Aromatherapy Guide', label: 'Aromatherapy Guide', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'ingredients', search: 'Ingredients', label: 'Ingredients', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'how-to-use', search: 'How to Use', label: 'How to Use', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        {% render 'science-of-raw-menu-link', handle: 'benefits', search: 'Benefits', label: 'Benefits', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        <a href="/pages/faq?brand=science-of-raw" style="color:#666; text-decoration:none; font-size:14px;">FAQs</a>
+        {% render 'science-of-raw-menu-link', handle: 'ritual-quiz', search: 'Ritual Quiz', label: 'Ritual Quiz', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+        <a href="/pages/science-of-raw" style="color:#666; text-decoration:none; font-size:14px;">Our Story</a>
+        {% render 'science-of-raw-menu-link', handle: 'sustainability', search: 'Sustainability', label: 'Sustainability', style: 'color:#666; text-decoration:none; font-size:14px;' %}
+      </div>
+    </div>
+  </div>
+
+{%- else -%}
+  <div class="megamenu-grid megamenu-grid--science-of-raw">
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'private-collection', search: 'Private Collection', label: 'Private Collection' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'les-ateliers-science-of-raw', search: 'Les Ateliers Science of Raw', label: 'Les Ateliers Science of Raw' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'oud-selection', search: 'Oud Selection', label: 'Oud Selection' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'oversized-collection', search: 'Oversized Collection', label: 'Oversized Collection' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: '40ml-beautiful-stories', search: '40ml Beautiful Stories', label: '40ml Beautiful Stories' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'discovery-sets', search: 'Discovery Sets', label: 'Discovery Sets' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'fresh-creations', search: 'Fresh Creations', label: 'Fresh Creations' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'summer-wardrobe', search: 'Summer Wardrobe', label: 'Summer Wardrobe' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'starter-kits', search: 'Starter Kits', label: 'Starter Kits' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'science-of-raw-best-sellers', search: 'Best Sellers', label: 'Best Sellers' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'essential-oils', search: 'Essential Oils', label: 'Essential Oils' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'essential-oil-singles', search: 'Essential Oil Singles', label: 'Essential Oil Singles' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'essential-oil-sets', search: 'Essential Oil Sets', label: 'Essential Oil Sets' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'shop-by-blends', search: 'Shop by Blends', label: 'Shop by Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'diffuser-blends', search: 'Diffuser Blends', label: 'Diffuser Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'organic-collection', search: 'Organic Collection', label: 'Organic Collection' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'limited-editions', search: 'Limited Editions', label: 'Limited Editions' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col megamenu-col--sor-wide">
+      {% render 'science-of-raw-menu-heading', handle: 'diffuser-oils', search: 'Diffuser Oils', label: 'Diffuser Oils' %}
+      <ul class="megamenu-links" style="margin-bottom: 16px;">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'diffuser-oil-singles', search: 'Diffuser Oil Singles', label: 'Diffuser Oil Singles' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'diffuser-oil-sets', search: 'Diffuser Oil Sets', label: 'Diffuser Oil Sets' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'diffuser-best-sellers', search: 'Best Sellers', label: 'Best Sellers' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'seasonal-collections', search: 'Seasonal Collections', label: 'Seasonal Collections' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'new-arrivals', search: 'New Arrivals', label: 'New Arrivals' %}</li>
+      </ul>
+      {% render 'science-of-raw-menu-heading', handle: 'shop-by-scent', search: 'Shop by Scent', label: 'Shop by Scent' %}
+      <ul class="megamenu-links megamenu-links--sor-scents">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'berry-elixir', search: 'Berry Elixir', label: 'Berry Elixir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'berry-velvet', search: 'Berry Velvet', label: 'Berry Velvet', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'lavender-woods', search: 'Lavender Woods', label: 'Lavender Woods', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'rose-absolute', search: 'Rose Absolute', label: 'Rose Absolute', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'coastal-marine', search: 'Coastal Marine', label: 'Coastal Marine', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'vanilla-woods', search: 'Vanilla Woods', label: 'Vanilla Woods', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'oud-noir', search: 'Oud Noir', label: 'Oud Noir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'private-garden', search: 'Private Garden', label: 'Private Garden', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'coffee-ember', search: 'Coffee Ember', label: 'Coffee Ember', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'mint-fraiche', search: 'Mint Fraiche', label: 'Mint Fraiche', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'nude-petals', search: 'Nude Petals', label: 'Nude Petals', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'herbal-botanique', search: 'Herbal Botanique', label: 'Herbal Botanique', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'forest-intense', search: 'Forest Intense', label: 'Forest Intense', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'foret-noire', search: 'Forêt Noire', label: 'Forêt Noire', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'green-herbal', search: 'Green Herbal', label: 'Green Herbal', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'calm-herbal-woods', search: 'Calm Herbal Woods', label: 'Calm Herbal Woods', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'soft-sunrise', search: 'Soft Sunrise', label: 'Soft Sunrise', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'santal-noir', search: 'Santal Noir', label: 'Santal Noir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'crimson-rouge', search: 'Crimson Rouge', label: 'Crimson Rouge', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'caramel-noir', search: 'Caramel Noir', label: 'Caramel Noir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'rosewood-noir', search: 'Rosewood Noir', label: 'Rosewood Noir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'citrus-veil', search: 'Citrus Veil', label: 'Citrus Veil', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'citrus-fruite', search: 'Citrus Fruité', label: 'Citrus Fruité', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'luminous-elixir', search: 'Luminous Elixir', label: 'Luminous Elixir', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'naked-bloom', search: 'Naked Bloom', label: 'Naked Bloom', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'midnight-intense', search: 'Midnight Intense', label: 'Midnight Intense', class: 'sor-scent-link' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'spiced-apple', search: 'Spiced Apple', label: 'Spiced Apple', class: 'sor-scent-link' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'spa-oils', search: 'Spa Oils', label: 'Spa Oils' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'signature-spa-blends', search: 'Signature Spa Blends', label: 'Signature Spa Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'massage-therapy-blends', search: 'Massage Therapy Blends', label: 'Massage Therapy Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'steam-sauna-blends', search: 'Steam & Sauna Blends', label: 'Steam & Sauna Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'wellness-spa-blends', search: 'Wellness Spa Blends', label: 'Wellness Spa Blends' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'professional-collection', search: 'Professional Collection', label: 'Professional Collection' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'wellbeing-concerns', search: 'Wellbeing Concerns', label: 'Wellbeing Concerns' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'sleep', search: 'Sleep', label: 'Sleep' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'emotional-wellness', search: 'Emotional Wellness', label: 'Emotional Wellness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'daily-wellness', search: 'Daily Wellness', label: 'Daily Wellness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'physical-wellness', search: 'Physical Wellness', label: 'Physical Wellness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'womens-wellness', search: "Women's Wellness", label: "Women's Wellness" %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'stress-anxiety', search: 'Stress & Anxiety', label: 'Stress & Anxiety' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'energy-focus', search: 'Energy & Focus', label: 'Energy & Focus' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'respiratory-wellness', search: 'Respiratory Wellness', label: 'Respiratory Wellness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'travel-wellness', search: 'Travel Wellness', label: 'Travel Wellness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'recovery-relief', search: 'Recovery & Relief', label: 'Recovery & Relief' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'mindfulness-meditation', search: 'Mindfulness & Meditation', label: 'Mindfulness & Meditation' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'mood-happiness', search: 'Mood & Happiness', label: 'Mood & Happiness' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'grounding-balance', search: 'Grounding & Balance', label: 'Grounding & Balance' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'personalized-wellness', search: 'Personalized Wellness', label: 'Personalized Wellness' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'gifts', search: 'Gifts', label: 'Gifts' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'iconics', search: 'Iconics', label: 'Iconics' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'little-luxuries', search: 'Little Luxuries', label: 'Little Luxuries' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'art-of-gifting', search: 'Art of Gifting', label: 'Art of Gifting' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'create-your-bundle', search: 'Create Your Bundle', label: 'Create Your Bundle' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'gift-cards', search: 'Gift Cards', label: 'Gift Cards' %}</li>
+      </ul>
+    </div>
+
+    <div class="megamenu-col">
+      {% render 'science-of-raw-menu-heading', handle: 'learn', search: 'Learn', label: 'Learn' %}
+      <ul class="megamenu-links">
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'about-essential-oils', search: 'About Essential Oils', label: 'About Essential Oils' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'aromatherapy-guide', search: 'Aromatherapy Guide', label: 'Aromatherapy Guide' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'ingredients', search: 'Ingredients', label: 'Ingredients' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'how-to-use', search: 'How to Use', label: 'How to Use' %}</li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'benefits', search: 'Benefits', label: 'Benefits' %}</li>
+        <li class="megamenu-link-item"><a href="/pages/faq?brand=science-of-raw">FAQs</a></li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'ritual-quiz', search: 'Ritual Quiz', label: 'Ritual Quiz' %}</li>
+        <li class="megamenu-link-item"><a href="/pages/science-of-raw">Our Story</a></li>
+        <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'sustainability', search: 'Sustainability', label: 'Sustainability' %}</li>
+      </ul>
+    </div>
+  </div>
+{%- endif -%}

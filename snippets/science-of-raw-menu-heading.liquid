@@ -1,0 +1,21 @@
+{%- comment -%}
+  Clickable heading for Science of Raw Shop All — goes to collection page.
+  @param handle {String} collection handle
+  @param search {String} fallback search query
+  @param label {String} heading text
+  @param variant {String} 'desktop' (default) or 'mobile'
+{%- endcomment -%}
+{%- capture heading_href -%}
+  {%- render 'science-of-raw-menu-url', handle: handle, search_query: search, label: label, link_type: 'collection' -%}
+{%- endcapture -%}
+{%- assign heading_href = heading_href | strip -%}
+
+{%- if variant == 'mobile' -%}
+  <h4 class="mobile-accordion-category-heading megamenu-heading-link megamenu-heading-link--sor">
+    <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h4>
+{%- else -%}
+  <h3 class="megamenu-heading megamenu-heading--sor megamenu-heading-link">
+    <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
+  </h3>
+{%- endif -%}

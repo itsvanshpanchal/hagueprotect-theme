@@ -1,0 +1,66 @@
+{%- comment -%}
+  Builds a Science of Raw-scoped URL.
+  @param handle {String}
+  @param search_query {String}
+  @param label {String}
+  @param link_type {String} 'collection' | 'product' (default: auto)
+{%- endcomment -%}
+{%- liquid
+  assign sor_handle = handle | default: '' | strip
+  assign sor_search = search_query | default: label | default: sor_handle | replace: '-', ' ' | strip
+  assign sor_type = link_type | default: 'auto' | strip
+
+  if sor_type == 'collection'
+    assign sor_collection = collections[sor_handle]
+    if sor_collection != blank
+      assign sor_url = sor_collection.url
+      if sor_url contains '?'
+        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+      else
+        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+      endif
+    elsif sor_handle != blank
+      echo '/collections/' | append: sor_handle | append: '?view=science-of-raw&brand=science-of-raw'
+    else
+      echo '/collections/all?view=science-of-raw&brand=science-of-raw'
+    endif
+
+  elsif sor_type == 'product'
+    if sor_handle != blank and all_products[sor_handle] != blank
+      assign sor_url = all_products[sor_handle].url
+      if sor_url contains '?'
+        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+      else
+        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+      endif
+    elsif sor_handle != blank
+      echo '/products/' | append: sor_handle | append: '?view=science-of-raw&brand=science-of-raw'
+    else
+      assign exact_search = '"' | append: sor_search | append: '"'
+      assign encoded_query = exact_search | url_encode
+      echo '/collections/all?view=science-of-raw&brand=science-of-raw&q=' | append: encoded_query
+    endif
+
+  else
+    assign sor_collection = collections[sor_handle]
+    if sor_collection != blank
+      assign sor_url = sor_collection.url
+      if sor_url contains '?'
+        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+      else
+        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+      endif
+    elsif sor_handle != blank and all_products[sor_handle] != blank
+      assign sor_url = all_products[sor_handle].url
+      if sor_url contains '?'
+        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+      else
+        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+      endif
+    else
+      assign exact_search = '"' | append: sor_search | append: '"'
+      assign encoded_query = exact_search | url_encode
+      echo '/collections/all?view=science-of-raw&brand=science-of-raw&q=' | append: encoded_query
+    endif
+  endif
+-%}

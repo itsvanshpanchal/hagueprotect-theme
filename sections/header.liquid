@@ -629,6 +629,95 @@
     color: #6e542e !important;
   }
 
+  /* Science of Raw Shop All mega-menu */
+  .megamenu-panel--science-of-raw {
+    --sor-accent: #1b365d;
+    padding: 36px 0 40px;
+  }
+
+  .megamenu-grid--science-of-raw {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 20px;
+    max-width: none;
+    padding: 0 28px;
+    align-items: start;
+  }
+
+  .megamenu-panel--science-of-raw .megamenu-heading--sor,
+  .megamenu-panel--science-of-raw .megamenu-heading--sor .megamenu-heading-link__a {
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 12px;
+    color: var(--sor-accent) !important;
+  }
+
+  .megamenu-panel--science-of-raw .megamenu-heading--sor .megamenu-heading-link__a:hover {
+    color: #0f2240 !important;
+  }
+
+  .megamenu-panel--science-of-raw .megamenu-link-item a {
+    font-size: 12.5px !important;
+  }
+
+  .megamenu-panel--science-of-raw .megamenu-link-item a:hover {
+    color: var(--sor-accent) !important;
+  }
+
+  .megamenu-panel--science-of-raw a.sor-scent-link {
+    color: var(--sor-accent) !important;
+    font-size: 12px !important;
+  }
+
+  .megamenu-panel--science-of-raw a.sor-scent-link:hover {
+    color: #0f2240 !important;
+  }
+
+  .megamenu-col--sor-wide {
+    min-width: 0;
+  }
+
+  .megamenu-links--sor-scents {
+    max-height: 280px;
+    overflow-y: auto;
+    gap: 7px;
+    padding-right: 6px;
+    scrollbar-width: thin;
+  }
+
+  .megamenu-links--sor-scents::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .megamenu-links--sor-scents::-webkit-scrollbar-thumb {
+    background: #a8b8d0;
+    border-radius: 4px;
+  }
+
+  .sor-shop-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sor-shop-mobile__links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-left: 8px;
+  }
+
+  .sor-shop-mobile__links--scent {
+    max-height: 220px;
+    overflow-y: auto;
+    gap: 6px;
+  }
+
+  .mobile-accordion-category-heading.megamenu-heading-link--sor,
+  .mobile-accordion-category-heading.megamenu-heading-link--sor .megamenu-heading-link__a {
+    color: #1b365d !important;
+  }
+
   .megamenu-col--vr-wide {
     min-width: 0;
   }
@@ -683,18 +772,21 @@
   }
 
   @media screen and (max-width: 1400px) {
-    .megamenu-grid--vanrosector {
+    .megamenu-grid--vanrosector,
+    .megamenu-grid--science-of-raw {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 28px 24px;
     }
 
-    .megamenu-links--vr-scents {
+    .megamenu-links--vr-scents,
+    .megamenu-links--sor-scents {
       max-height: 220px;
     }
   }
 
   @media screen and (max-width: 1100px) {
-    .megamenu-grid--vanrosector {
+    .megamenu-grid--vanrosector,
+    .megamenu-grid--science-of-raw {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
@@ -1417,8 +1509,8 @@
   </div>
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU — both brand menus live here; logos/Shop All switch which is shown -->
-  <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% else %}hague{% endif %}">
-    <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' %} hidden{% endif %}>
+  <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% elsif active_brand == 'science-of-raw' %} megamenu-panel--science-of-raw{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% elsif active_brand == 'science-of-raw' %}science-of-raw{% else %}hague{% endif %}">
+    <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
     <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
       
       <!-- Column 1: Kits & Solutions -->
@@ -1564,6 +1656,9 @@
     <div class="megamenu-brand-panel megamenu-panel--vanrosector" data-brand-menu="vanrosector"{% unless active_brand == 'vanrosector' %} hidden{% endunless %}>
       {% render 'vanrosector-shop-all-menu', variant: 'desktop' %}
     </div>
+    <div class="megamenu-brand-panel megamenu-panel--science-of-raw" data-brand-menu="science-of-raw"{% unless active_brand == 'science-of-raw' %} hidden{% endunless %}>
+      {% render 'science-of-raw-shop-all-menu', variant: 'desktop' %}
+    </div>
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -1650,14 +1745,20 @@
 
     if (panel) {
       let timeoutId;
-      const defaultBrand = panel.getAttribute('data-default-brand') === 'vanrosector' ? 'vanrosector' : 'hague';
+      let currentBrand = panel.getAttribute('data-default-brand') || 'hague';
+      if (currentBrand !== 'vanrosector' && currentBrand !== 'science-of-raw') currentBrand = 'hague';
+      const defaultBrand = currentBrand;
 
       const showBrandMenu = (brand) => {
-        const key = brand === 'vanrosector' ? 'vanrosector' : 'hague';
+        let key = 'hague';
+        if (brand === 'vanrosector') key = 'vanrosector';
+        else if (brand === 'science-of-raw') key = 'science-of-raw';
+        currentBrand = key;
         panel.querySelectorAll('[data-brand-menu]').forEach((el) => {
           el.hidden = el.getAttribute('data-brand-menu') !== key;
         });
         panel.classList.toggle('megamenu-panel--vanrosector', key === 'vanrosector');
+        panel.classList.toggle('megamenu-panel--science-of-raw', key === 'science-of-raw');
       };
 
       const openPanel = (brand) => {
@@ -1684,14 +1785,14 @@
 
       panel.addEventListener('mouseenter', () => {
         clearTimeout(timeoutId);
-        openPanel(panel.classList.contains('megamenu-panel--vanrosector') ? 'vanrosector' : 'hague');
+        openPanel(currentBrand);
       });
       panel.addEventListener('mouseleave', closePanel);
 
-      /* Logo hover → open that brand's Shop All (Hague / Vanrosector only) */
+      /* Logo hover → open that brand's Shop All (Hague / Vanrosector / Science of Raw) */
       document.querySelectorAll('[data-mega-brand]').forEach((logo) => {
         const brand = logo.getAttribute('data-mega-brand');
-        if (brand !== 'hague' && brand !== 'vanrosector') return;
+        if (brand !== 'hague' && brand !== 'vanrosector' && brand !== 'science-of-raw') return;
 
         logo.addEventListener('mouseenter', () => openPanel(brand));
         logo.addEventListener('mouseleave', closePanel);

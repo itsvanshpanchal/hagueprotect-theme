@@ -1,0 +1,12 @@
+{%- comment -%}
+  Science of Raw Shop All sub-link — goes to product detail page.
+  @param handle {String} product handle
+  @param search {String}
+  @param label {String}
+  @param class {String}
+  @param style {String}
+{%- endcomment -%}
+{%- capture menu_href -%}
+  {%- render 'science-of-raw-menu-url', handle: handle, search_query: search, label: label, link_type: 'product' -%}
+{%- endcapture -%}
+<a href="{{ menu_href | strip }}"{% if class != blank %} class="{{ class }}"{% endif %}{% if style != blank %} style="{{ style }}"{% endif %}>{{ label }}</a>
