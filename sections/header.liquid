@@ -1282,7 +1282,7 @@
 
     if template.suffix == 'vanrosector' or template.suffix == 'vanrosector-category' or request.path contains 'vanrosector' or request.query_string contains 'view=vanrosector' or request.query_string contains 'brand=vanrosector'
       assign active_brand = 'vanrosector'
-    elsif template.suffix == 'science-of-raw' or request.path contains 'science-of-raw' or request.query_string contains 'view=science-of-raw' or request.query_string contains 'brand=science-of-raw'
+    elsif template.suffix == 'science-of-raw' or template.suffix == 'science-of-raw-category' or request.path contains 'science-of-raw' or request.query_string contains 'view=science-of-raw' or request.query_string contains 'brand=science-of-raw'
       assign active_brand = 'science-of-raw'
     endif
 

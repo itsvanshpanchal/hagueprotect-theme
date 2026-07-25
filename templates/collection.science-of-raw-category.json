@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * Science of Raw category collection page.
+ * Used by mega-menu headings via ?view=science-of-raw-category&brand=science-of-raw
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "aplus_top": {
+      "type": "collection-aplus-banner",
+      "settings": {
+        "label": "Top A+ banner",
+        "alt_text": "",
+        "link": "",
+        "bg_color": "#f3f5f8",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "settings": {
+        "enable_filters": true,
+        "eyebrow": "SCIENCE OF RAW",
+        "heading": "",
+        "description": "",
+        "section_id": "science-of-raw-products",
+        "collection": "",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff",
+        "h2_font_family": "bahnschrift",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "700",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 12,
+        "eyebrow_font_size_mobile": 12
+      }
+    },
+    "story_banner_1": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "border_radius": 0
+      }
+    },
+    "story_banner_2": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "border_radius": 0
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Science of Raw?",
+            "answer": "Science of Raw is a wellness and fragrance brand focused on essential oils, home fragrance, spa rituals, and scent collections crafted for everyday wellbeing."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I choose between Essential Oils and Home Fragrance?",
+            "answer": "Essential Oils are ideal for personal wellness blends and aromatic use. Home Fragrance and Diffuser Collections are designed for scenting your space with single oils and curated scent stories."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are Spa Rituals used for?",
+            "answer": "Spa Ritual concentrates are formulated for massage, professional, and signature blend rituals. Always follow product guidance for dilution and safe use."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I shop by wellness need?",
+            "answer": "Use Shop by Wellness to browse by focus areas such as better sleep, stress relief, energy & clarity, travel essentials, and more."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I learn more about the brand?",
+            "answer": "Open the Learn section in the Science of Raw Shop All menu for brand stories, guides, and related pages."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "heading": "Things people often wonder"
+      }
+    }
+  },
+  "order": [
+    "aplus_top",
+    "products",
+    "story_banner_1",
+    "story_banner_2",
+    "faq"
+  ]
+}

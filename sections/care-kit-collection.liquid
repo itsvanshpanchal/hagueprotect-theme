@@ -34,6 +34,8 @@
   assign ckc_accent = '#E74C3C'
   if template.suffix == 'vanrosector-category' or request.query_string contains 'brand=vanrosector'
     assign ckc_accent = '#8a6a3b'
+  elsif template.suffix == 'science-of-raw-category' or request.query_string contains 'brand=science-of-raw'
+    assign ckc_accent = '#1b365d'
   endif
 -%}
 

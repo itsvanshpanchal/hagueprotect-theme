@@ -15,14 +15,14 @@
     if sor_collection != blank
       assign sor_url = sor_collection.url
       if sor_url contains '?'
-        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+        echo sor_url | append: '&view=science-of-raw-category&brand=science-of-raw'
       else
-        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+        echo sor_url | append: '?view=science-of-raw-category&brand=science-of-raw'
       endif
     elsif sor_handle != blank
-      echo '/collections/' | append: sor_handle | append: '?view=science-of-raw&brand=science-of-raw'
+      echo '/collections/' | append: sor_handle | append: '?view=science-of-raw-category&brand=science-of-raw'
     else
-      echo '/collections/all?view=science-of-raw&brand=science-of-raw'
+      echo '/collections/all?view=science-of-raw-category&brand=science-of-raw'
     endif
 
   elsif sor_type == 'product'
@@ -46,9 +46,9 @@
     if sor_collection != blank
       assign sor_url = sor_collection.url
       if sor_url contains '?'
-        echo sor_url | append: '&view=science-of-raw&brand=science-of-raw'
+        echo sor_url | append: '&view=science-of-raw-category&brand=science-of-raw'
       else
-        echo sor_url | append: '?view=science-of-raw&brand=science-of-raw'
+        echo sor_url | append: '?view=science-of-raw-category&brand=science-of-raw'
       endif
     elsif sor_handle != blank and all_products[sor_handle] != blank
       assign sor_url = all_products[sor_handle].url
