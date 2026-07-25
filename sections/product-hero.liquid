@@ -819,12 +819,21 @@
 .d2c-trust-icon {
   width: 32px;
   height: 32px;
-  color: #E02020;
+  color: {{ section.settings.trust_color | default: '#E02020' }};
+  display: block;
+  object-fit: contain;
+}
+
+.d2c-trust-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
 }
 
 .d2c-trust-text {
   font-size: 15px;
-  color: #E02020;
+  color: {{ section.settings.trust_color | default: '#E02020' }};
   font-weight: 700;
   line-height: 1.3;
 }
@@ -1220,24 +1229,80 @@
         </div>
       {%- endform -%}
 
-      <!-- Trust Badges Row -->
+      <!-- Trust Badges Row — logos/labels editable in Theme Editor -->
       <div class="d2c-trust-row">
-        <div class="d2c-trust-item">
-          <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/></svg>
-          <span class="d2c-trust-text">Eco Friendly</span>
-        </div>
-        <div class="d2c-trust-item">
-          <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span class="d2c-trust-text">Certified Care</span>
-        </div>
-        <div class="d2c-trust-item">
-          <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <span class="d2c-trust-text">Material Safe</span>
-        </div>
-        <div class="d2c-trust-item">
-          <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-6m0-4V2m-7.5 5.5v11a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-11"/></svg>
-          <span class="d2c-trust-text">Tested Efficacy</span>
-        </div>
+        {%- if section.settings.trust_1_label != blank -%}
+          <div class="d2c-trust-item">
+            {%- if section.settings.trust_1_icon != blank -%}
+              <img
+                class="d2c-trust-icon-img"
+                src="{{ section.settings.trust_1_icon | image_url: width: 96 }}"
+                alt="{{ section.settings.trust_1_label | escape }}"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- else -%}
+              <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 14 4-4M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/></svg>
+            {%- endif -%}
+            <span class="d2c-trust-text">{{ section.settings.trust_1_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_2_label != blank -%}
+          <div class="d2c-trust-item">
+            {%- if section.settings.trust_2_icon != blank -%}
+              <img
+                class="d2c-trust-icon-img"
+                src="{{ section.settings.trust_2_icon | image_url: width: 96 }}"
+                alt="{{ section.settings.trust_2_label | escape }}"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- else -%}
+              <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            {%- endif -%}
+            <span class="d2c-trust-text">{{ section.settings.trust_2_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_3_label != blank -%}
+          <div class="d2c-trust-item">
+            {%- if section.settings.trust_3_icon != blank -%}
+              <img
+                class="d2c-trust-icon-img"
+                src="{{ section.settings.trust_3_icon | image_url: width: 96 }}"
+                alt="{{ section.settings.trust_3_label | escape }}"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- else -%}
+              <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            {%- endif -%}
+            <span class="d2c-trust-text">{{ section.settings.trust_3_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_4_label != blank -%}
+          <div class="d2c-trust-item">
+            {%- if section.settings.trust_4_icon != blank -%}
+              <img
+                class="d2c-trust-icon-img"
+                src="{{ section.settings.trust_4_icon | image_url: width: 96 }}"
+                alt="{{ section.settings.trust_4_label | escape }}"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- else -%}
+              <svg class="d2c-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22v-6m0-4V2m-7.5 5.5v11a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-11"/></svg>
+            {%- endif -%}
+            <span class="d2c-trust-text">{{ section.settings.trust_4_label }}</span>
+          </div>
+        {%- endif -%}
       </div>
 
       <!-- Accordions -->
@@ -1696,6 +1761,64 @@ function togglePersonalizationInput() {
       "id": "pill_5_text",
       "label": "Pill 5 Text",
       "default": "Fast shipping & delivery"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges row"
+    },
+    {
+      "type": "paragraph",
+      "content": "The 4 icons under Add to Cart. Upload your own logo images, or leave blank to keep the default icons. Clear a label to hide that badge."
+    },
+    {
+      "type": "color",
+      "id": "trust_color",
+      "label": "Badge color (text + default icons)",
+      "default": "#E02020"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_1_icon",
+      "label": "Badge 1 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_label",
+      "label": "Badge 1 label",
+      "default": "Eco Friendly"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_2_icon",
+      "label": "Badge 2 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_label",
+      "label": "Badge 2 label",
+      "default": "Certified Care"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_3_icon",
+      "label": "Badge 3 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_label",
+      "label": "Badge 3 label",
+      "default": "Material Safe"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_4_icon",
+      "label": "Badge 4 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_label",
+      "label": "Badge 4 label",
+      "default": "Tested Efficacy"
     },
     {
       "type": "header",

@@ -501,13 +501,22 @@
 .vr-trust-icon {
   width: 28px;
   height: 28px;
-  color: var(--vr-accent);
+  color: {{ section.settings.trust_color | default: '#8a6a3b' }};
+  display: block;
+  object-fit: contain;
+}
+
+.vr-trust-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
 }
 
 .vr-trust-text {
   font-size: 11px;
   font-weight: 700;
-  color: var(--vr-text);
+  color: {{ section.settings.trust_color | default: '#8a6a3b' }};
   line-height: 1.3;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -869,22 +878,46 @@
 
       {%- comment -%} Trust badges {%- endcomment -%}
       <div class="vr-trust-row">
-        <div class="vr-trust-item">
-          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4l10 5v8c0 6-4.5 11-10 13C10.5 28 6 23 6 17V9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="vr-trust-text">100% Natural</span>
-        </div>
-        <div class="vr-trust-item">
-          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4z" stroke="currentColor" stroke-width="2"/><path d="M16 10v8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <span class="vr-trust-text">Fast Delivery</span>
-        </div>
-        <div class="vr-trust-item">
-          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M6 8h20v16a2 2 0 01-2 2H8a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M10 8V6a6 6 0 0112 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <span class="vr-trust-text">Secure Checkout</span>
-        </div>
-        <div class="vr-trust-item">
-          <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none"><path d="M8 20l4-8 4 6 3-4 5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/></svg>
-          <span class="vr-trust-text">Easy Returns</span>
-        </div>
+        {%- if section.settings.trust_1_label != blank -%}
+          <div class="vr-trust-item">
+            {%- if section.settings.trust_1_icon != blank -%}
+              <img class="vr-trust-icon-img" src="{{ section.settings.trust_1_icon | image_url: width: 96 }}" alt="{{ section.settings.trust_1_label | escape }}" width="28" height="28" loading="lazy" decoding="async">
+            {%- else -%}
+              <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4l10 5v8c0 6-4.5 11-10 13C10.5 28 6 23 6 17V9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 16l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- endif -%}
+            <span class="vr-trust-text">{{ section.settings.trust_1_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_2_label != blank -%}
+          <div class="vr-trust-item">
+            {%- if section.settings.trust_2_icon != blank -%}
+              <img class="vr-trust-icon-img" src="{{ section.settings.trust_2_icon | image_url: width: 96 }}" alt="{{ section.settings.trust_2_label | escape }}" width="28" height="28" loading="lazy" decoding="async">
+            {%- else -%}
+              <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4z" stroke="currentColor" stroke-width="2"/><path d="M16 10v8l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            {%- endif -%}
+            <span class="vr-trust-text">{{ section.settings.trust_2_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_3_label != blank -%}
+          <div class="vr-trust-item">
+            {%- if section.settings.trust_3_icon != blank -%}
+              <img class="vr-trust-icon-img" src="{{ section.settings.trust_3_icon | image_url: width: 96 }}" alt="{{ section.settings.trust_3_label | escape }}" width="28" height="28" loading="lazy" decoding="async">
+            {%- else -%}
+              <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 8h20v16a2 2 0 01-2 2H8a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M10 8V6a6 6 0 0112 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            {%- endif -%}
+            <span class="vr-trust-text">{{ section.settings.trust_3_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.trust_4_label != blank -%}
+          <div class="vr-trust-item">
+            {%- if section.settings.trust_4_icon != blank -%}
+              <img class="vr-trust-icon-img" src="{{ section.settings.trust_4_icon | image_url: width: 96 }}" alt="{{ section.settings.trust_4_label | escape }}" width="28" height="28" loading="lazy" decoding="async">
+            {%- else -%}
+              <svg class="vr-trust-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 20l4-8 4 6 3-4 5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" stroke-width="2"/></svg>
+            {%- endif -%}
+            <span class="vr-trust-text">{{ section.settings.trust_4_label }}</span>
+          </div>
+        {%- endif -%}
       </div>
 
       {%- comment -%} Accordions {%- endcomment -%}
@@ -1127,6 +1160,64 @@
       "id": "pill_5_text",
       "label": "Benefit 5",
       "default": "Fast & secure delivery"
+    },
+    {
+      "type": "header",
+      "content": "Trust badges row"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload logos for each badge. Leave logo blank to keep the default icon. Clear a label to hide that badge."
+    },
+    {
+      "type": "color",
+      "id": "trust_color",
+      "label": "Badge color",
+      "default": "#8a6a3b"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_1_icon",
+      "label": "Badge 1 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_label",
+      "label": "Badge 1 label",
+      "default": "100% Natural"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_2_icon",
+      "label": "Badge 2 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_label",
+      "label": "Badge 2 label",
+      "default": "Fast Delivery"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_3_icon",
+      "label": "Badge 3 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_label",
+      "label": "Badge 3 label",
+      "default": "Secure Checkout"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_4_icon",
+      "label": "Badge 4 logo"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_label",
+      "label": "Badge 4 label",
+      "default": "Easy Returns"
     },
     {
       "type": "header",
