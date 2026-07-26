@@ -249,8 +249,11 @@
       margin-bottom: 8px;
     }
 
-    .ai-story-banner-text-{{ ai_gen_id }} {
-      font-size: clamp(12px, 3.2vw, {{ block.settings.text_size }}px);
+    #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
+    #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }} p,
+    .ai-story-banner-text-{{ ai_gen_id }},
+    .ai-story-banner-text-{{ ai_gen_id }} p {
+      font-size: {{ block.settings.text_size }}px !important;
     }
 
     .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
@@ -560,7 +563,7 @@
       "id": "text_size",
       "label": "Text size",
       "min": 12,
-      "max": 24,
+      "max": 40,
       "step": 1,
       "unit": "px",
       "default": 16
