@@ -4,34 +4,37 @@
   if layout_style == 'page' or section.settings.page_title != blank
     assign is_page_layout = true
   endif
+  assign accent = section.settings.accent_color | default: '#FF2B2B'
+  assign wa_raw = section.settings.cta_whatsapp | default: settings.floating_whatsapp | default: '917009205008' | strip
+  assign wa_digits = wa_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
 -%}
 
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
   #shopify-section-{{ section.id }} .faq-custom {
-    background-color: {{ section.settings.bg_color | default: '#F8F9FA' }};
-    padding: {% if is_page_layout %}clamp(72px, 10vw, 110px){% else %}clamp(60px, 8vw, 100px){% endif %} 0;
+    background-color: {{ section.settings.bg_color | default: '#F7F7F8' }};
+    padding: {% if is_page_layout %}clamp(56px, 8vw, 96px){% else %}clamp(60px, 8vw, 100px){% endif %} 0;
     font-family: var(--font-family-sans);
   }
 
   #shopify-section-{{ section.id }} .faq-custom__container {
-    max-width: {% if is_page_layout %}900px{% else %}var(--site-max-width){% endif %};
+    max-width: {% if is_page_layout %}860px{% else %}var(--site-max-width){% endif %};
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 max(20px, var(--homepage-section-gutter, 24px));
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    align-items: {% if is_page_layout %}stretch{% else %}center{% endif %};
+    gap: {% if is_page_layout %}36px{% else %}40px{% endif %};
   }
 
   #shopify-section-{{ section.id }} .faq-custom__header {
-    text-align: var(--section-heading-align, left);
+    text-align: {% if is_page_layout %}left{% else %}var(--section-heading-align, left){% endif %};
     display: flex;
     flex-direction: column;
-    align-items: var(--section-heading-items, flex-start);
-    gap: 16px;
-    margin-bottom: 8px;
+    align-items: {% if is_page_layout %}flex-start{% else %}var(--section-heading-items, flex-start){% endif %};
+    gap: {% if is_page_layout %}12px{% else %}16px{% endif %};
+    margin-bottom: {% if is_page_layout %}4px{% else %}8px{% endif %};
     width: 100%;
   }
 
@@ -41,32 +44,32 @@
     font-weight: var(--font-weight-eyebrow, 700);
     font-style: var(--font-style-eyebrow, normal);
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: {{ section.settings.accent_color | default: '#2563eb' }};
+    letter-spacing: 0.14em;
+    color: {{ accent }};
     margin: 0;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__page-title {
-    font-family: var(--font-family-heading) !important;
-    font-size: var(--heading-size-xl) !important;
-    font-weight: var(--font-weight-heading, 800) !important;
-    font-style: var(--font-style-heading, normal) !important;
+    font-family: 'Bahnschrift', var(--font-family-heading), sans-serif !important;
+    font-size: clamp(34px, 5vw, 52px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     color: #111111 !important;
     margin: 0;
-    line-height: 1.1 !important;
-    letter-spacing: -0.03em !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
     text-transform: none !important;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__page-description {
     font-family: var(--font-family-sans);
-    font-size: var(--section-subheading-size, 16px);
+    font-size: clamp(15px, 1.6vw, 18px);
     font-weight: var(--font-weight-sans, 400);
     font-style: var(--font-style-sans, normal);
-    color: #666666;
-    line-height: 1.6;
+    color: #5c5c5c;
+    line-height: 1.55;
     margin: 0;
-    max-width: 640px;
+    max-width: 620px;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__heading {
@@ -74,7 +77,7 @@
     font-size: var(--section-heading-size) !important;
     font-weight: var(--font-weight-h2, 600) !important;
     font-style: var(--font-style-h2, normal) !important;
-    color: {{ section.settings.accent_color | default: '#E02020' }} !important;
+    color: {{ accent }} !important;
     margin: 0;
     padding-bottom: 6px;
     position: relative;
@@ -87,31 +90,31 @@
     content: '';
     position: absolute;
     bottom: -4px;
-    left: 25%;
-    right: 25%;
+    left: 0;
+    width: 48px;
     height: 3px;
-    background-color: {{ section.settings.accent_color | default: '#E02020' }};
+    background-color: {{ accent }};
     border-radius: 2px;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__items {
     background: #ffffff;
-    border-radius: 16px;
+    border-radius: {% if is_page_layout %}12px{% else %}16px{% endif %};
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    box-shadow: {% if is_page_layout %}none{% else %}0 4px 20px rgba(0, 0, 0, 0.03){% endif %};
     width: 100%;
-    padding: 16px 40px;
+    padding: {% if is_page_layout %}8px 28px{% else %}16px 40px{% endif %};
     box-sizing: border-box;
   }
 
   @media screen and (max-width: 768px) {
     #shopify-section-{{ section.id }} .faq-custom__items {
-      padding: 12px 20px;
+      padding: {% if is_page_layout %}4px 16px{% else %}12px 20px{% endif %};
     }
   }
 
   #shopify-section-{{ section.id }} .faq-custom__item {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #ececec;
     overflow: hidden;
   }
 
@@ -123,33 +126,39 @@
     width: 100%;
     background: none;
     border: none;
-    padding: 24px 0;
+    padding: {% if is_page_layout %}22px 0{% else %}24px 0{% endif %};
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     cursor: pointer;
     text-align: left;
     color: #000000;
     outline: none;
   }
 
+  #shopify-section-{{ section.id }} .faq-custom__trigger:focus-visible {
+    outline: 2px solid {{ accent }};
+    outline-offset: 4px;
+  }
+
   #shopify-section-{{ section.id }} .faq-custom__question {
     font-family: var(--font-family-sans) !important;
-    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
-    font-weight: var(--font-weight-sans, 600) !important;
+    font-size: {% if is_page_layout %}clamp(15px, 1.5vw, 17px){% else %}var(--section-subheading-size, var(--body-font-size)){% endif %} !important;
+    font-weight: 600 !important;
     font-style: var(--font-style-sans, normal) !important;
     color: #111111 !important;
     margin: 0;
     line-height: 1.4 !important;
-    padding-right: 20px;
+    padding-right: 12px;
     letter-spacing: -0.01em !important;
     text-transform: none !important;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__icon-wrapper {
-    width: 26px;
-    height: 26px;
-    background-color: #000000;
+    width: 28px;
+    height: 28px;
+    background-color: #111111;
     color: #ffffff;
     border-radius: 50%;
     display: flex;
@@ -160,32 +169,31 @@
   }
 
   #shopify-section-{{ section.id }} .faq-custom__icon-wrapper span {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
     line-height: 1;
     transform: translateY(-1px);
-    transition: transform 0.3s ease;
   }
 
   #shopify-section-{{ section.id }} .faq-custom__item.active .faq-custom__icon-wrapper {
-    background-color: #000000;
+    background-color: {{ accent }};
     transform: rotate(45deg);
   }
 
   #shopify-section-{{ section.id }} .faq-custom__panel {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   #shopify-section-{{ section.id }} .faq-custom__answer {
-    padding-bottom: 24px;
+    padding-bottom: 22px;
     font-family: var(--font-family-sans);
-    font-size: var(--body-font-size, 15px);
+    font-size: {% if is_page_layout %}15px{% else %}var(--body-font-size, 15px){% endif %};
     font-weight: var(--font-weight-sans, 400);
     font-style: var(--font-style-sans, normal);
-    color: #4A4A4A;
-    line-height: 1.6;
+    color: #555555;
+    line-height: 1.65;
     margin: 0;
   }
 
@@ -196,9 +204,110 @@
   #shopify-section-{{ section.id }} .faq-custom__answer p:last-child {
     margin-bottom: 0;
   }
+
+  #shopify-section-{{ section.id }} .faq-custom__answer a {
+    color: {{ accent }};
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 28px 32px;
+    background: #111111;
+    color: #ffffff;
+    border-radius: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 420px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-title {
+    margin: 0;
+    font-family: 'Bahnschrift', var(--font-family-heading), sans-serif;
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-btn--primary {
+    background: {{ accent }};
+    color: #ffffff;
+    border: 1px solid {{ accent }};
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-btn--primary:hover {
+    background: #e02424;
+    border-color: #e02424;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-btn--ghost {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom__cta-btn--ghost:hover {
+    border-color: #ffffff;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .faq-custom__cta {
+      padding: 24px 20px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-custom__cta-actions {
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .faq-custom__cta-btn {
+      flex: 1 1 auto;
+    }
+  }
 {%- endstyle -%}
 
-<div class="faq-custom" data-no-typewriter data-faq-section="{{ section.id }}">
+<div class="faq-custom{% if is_page_layout %} faq-custom--page{% endif %}" data-no-typewriter data-faq-section="{{ section.id }}">
   <div class="faq-custom__container">
     <div class="faq-custom__header">
       {%- if is_page_layout -%}
@@ -243,6 +352,31 @@
         </div>
       {%- endfor -%}
     </div>
+
+    {%- if is_page_layout and section.settings.show_cta -%}
+      <div class="faq-custom__cta">
+        <div class="faq-custom__cta-copy">
+          {%- if section.settings.cta_title != blank -%}
+            <h2 class="faq-custom__cta-title">{{ section.settings.cta_title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.cta_text != blank -%}
+            <p class="faq-custom__cta-text">{{ section.settings.cta_text }}</p>
+          {%- endif -%}
+        </div>
+        <div class="faq-custom__cta-actions">
+          {%- if wa_digits != blank -%}
+            <a class="faq-custom__cta-btn faq-custom__cta-btn--primary" href="https://wa.me/{{ wa_digits }}" target="_blank" rel="noopener noreferrer">
+              WhatsApp us
+            </a>
+          {%- endif -%}
+          {%- if section.settings.cta_link != blank -%}
+            <a class="faq-custom__cta-btn faq-custom__cta-btn--ghost" href="{{ section.settings.cta_link }}">
+              {{ section.settings.cta_link_label | default: 'Contact support' }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -307,13 +441,13 @@
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
-      "default": "#f8f9fa"
+      "default": "#f7f7f8"
     },
     {
       "type": "color",
       "id": "accent_color",
       "label": "Accent color",
-      "default": "#2563eb"
+      "default": "#FF2B2B"
     },
     {
       "type": "header",
@@ -323,7 +457,7 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Tiny text above title",
-      "default": "Help & Support"
+      "default": "Hague Protect Support"
     },
     {
       "type": "text",
@@ -335,7 +469,47 @@
       "type": "textarea",
       "id": "page_description",
       "label": "Page description",
-      "default": "Everything you need to know about formula use, shipping timelines, and returns."
+      "default": "Answers about our formulas, materials, shipping across India, and how to care for your sneakers the Hague Protect way."
+    },
+    {
+      "type": "header",
+      "content": "Page contact CTA"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show contact CTA on FAQ page",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA title",
+      "default": "Still need help?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Message our team for product advice, order help, or care tips for leather, suede, and sneakers."
+    },
+    {
+      "type": "text",
+      "id": "cta_whatsapp",
+      "label": "WhatsApp number",
+      "default": "917009205008",
+      "info": "Country code + number, digits only."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_link_label",
+      "label": "Secondary CTA label",
+      "default": "Contact support"
     },
     {
       "type": "header",
