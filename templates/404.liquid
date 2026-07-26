@@ -4,7 +4,12 @@
   Brand homes still render here when no Admin page exists:
     /pages/vanrosector      -> snippets/brand-vanrosector
     /pages/science-of-raw   -> snippets/brand-science-of-raw
-  FAQ routes (/pages/faq, /pages/faqs) redirect to /search?view=faq.
+  Missing Admin pages redirect to search alternate templates:
+    /pages/faq|faqs              -> /search?view=faq
+    /pages/contact|contact-us    -> /search?view=business
+    /pages/collabs               -> /search?view=collabs
+    /pages/certified-corporation -> /search?view=certified-corporation
+    /pages/student-offer         -> /search?view=student-offer
   Path matching uses JS because request.path is often empty/wrong on 404.
 {%- endcomment -%}
 
@@ -22,6 +27,21 @@
         /\/pages\/faqs?$/.test(path)
       ) {
         window.location.replace('/search?view=faq' + search);
+        return;
+      }
+
+      var pageMap = {
+        '/pages/contact': '/search?view=business',
+        '/pages/contact-us': '/search?view=business',
+        '/pages/collabs': '/search?view=collabs',
+        '/pages/certified-corporation': '/search?view=certified-corporation',
+        '/pages/certified-corp': '/search?view=certified-corporation',
+        '/pages/student-offer': '/search?view=student-offer',
+        '/pages/student-offers': '/search?view=student-offer'
+      };
+
+      if (pageMap[path]) {
+        window.location.replace(pageMap[path] + search);
         return;
       }
 
@@ -92,6 +112,58 @@
   </section>
   <meta http-equiv="refresh" content="0;url={{ policy_redirect }}">
   <script>window.location.replace({{ policy_redirect | json }});</script>
+
+{%- elsif req contains 'pages/contact' or req contains 'contact-us' -%}
+  {%- assign contact_redirect = '/search?view=business' -%}
+  <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#f7f7f8; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
+    <div style="max-width:420px; width:100%; text-align:center;">
+      <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF2B2B; margin:0 0 12px;">Hague Protect</p>
+      <h1 style="font-size:28px; font-weight:700; color:#111; margin:0 0 12px; letter-spacing:-0.02em;">Opening contact…</h1>
+      <p style="font-size:15px; color:#666; margin:0 0 24px; line-height:1.5;">Taking you to the contact page.</p>
+      <a href="{{ contact_redirect }}" style="display:inline-flex; align-items:center; gap:8px; background:#FF2B2B; color:#fff; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; padding:14px 26px; border-radius:100px;">Contact us</a>
+    </div>
+  </section>
+  <meta http-equiv="refresh" content="0;url={{ contact_redirect }}">
+  <script>window.location.replace({{ contact_redirect | json }});</script>
+
+{%- elsif req contains 'collabs' -%}
+  {%- assign info_redirect = '/search?view=collabs' -%}
+  <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#f7f7f8; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
+    <div style="max-width:420px; width:100%; text-align:center;">
+      <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF2B2B; margin:0 0 12px;">Hague Protect</p>
+      <h1 style="font-size:28px; font-weight:700; color:#111; margin:0 0 12px; letter-spacing:-0.02em;">Opening Collabs…</h1>
+      <p style="font-size:15px; color:#666; margin:0 0 24px; line-height:1.5;">Taking you to partnerships.</p>
+      <a href="{{ info_redirect }}" style="display:inline-flex; align-items:center; gap:8px; background:#FF2B2B; color:#fff; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; padding:14px 26px; border-radius:100px;">View Collabs</a>
+    </div>
+  </section>
+  <meta http-equiv="refresh" content="0;url={{ info_redirect }}">
+  <script>window.location.replace({{ info_redirect | json }});</script>
+
+{%- elsif req contains 'certified-corporation' or req contains 'certified-corp' -%}
+  {%- assign info_redirect = '/search?view=certified-corporation' -%}
+  <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#f7f7f8; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
+    <div style="max-width:420px; width:100%; text-align:center;">
+      <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF2B2B; margin:0 0 12px;">Hague Protect</p>
+      <h1 style="font-size:28px; font-weight:700; color:#111; margin:0 0 12px; letter-spacing:-0.02em;">Opening Certified Corporation…</h1>
+      <p style="font-size:15px; color:#666; margin:0 0 24px; line-height:1.5;">Taking you to standards & trust.</p>
+      <a href="{{ info_redirect }}" style="display:inline-flex; align-items:center; gap:8px; background:#FF2B2B; color:#fff; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; padding:14px 26px; border-radius:100px;">Continue</a>
+    </div>
+  </section>
+  <meta http-equiv="refresh" content="0;url={{ info_redirect }}">
+  <script>window.location.replace({{ info_redirect | json }});</script>
+
+{%- elsif req contains 'student-offer' -%}
+  {%- assign info_redirect = '/search?view=student-offer' -%}
+  <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#f7f7f8; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
+    <div style="max-width:420px; width:100%; text-align:center;">
+      <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF2B2B; margin:0 0 12px;">Hague Protect</p>
+      <h1 style="font-size:28px; font-weight:700; color:#111; margin:0 0 12px; letter-spacing:-0.02em;">Opening Student Offer…</h1>
+      <p style="font-size:15px; color:#666; margin:0 0 24px; line-height:1.5;">Taking you to the campus offer.</p>
+      <a href="{{ info_redirect }}" style="display:inline-flex; align-items:center; gap:8px; background:#FF2B2B; color:#fff; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; padding:14px 26px; border-radius:100px;">View offer</a>
+    </div>
+  </section>
+  <meta http-equiv="refresh" content="0;url={{ info_redirect }}">
+  <script>window.location.replace({{ info_redirect | json }});</script>
 
 {%- else -%}
   <section style="font-family:'Inter',sans-serif; background:#f4f4f5; padding:120px 20px; min-height:60vh; display:flex; align-items:center; justify-content:center;">

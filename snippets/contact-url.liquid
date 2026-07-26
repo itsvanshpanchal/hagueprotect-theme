@@ -1,0 +1,12 @@
+{%- comment -%}
+  Prefer a real Shopify page, else the business/contact search template.
+{%- endcomment -%}
+{%- liquid
+  if pages['contact-us'] != blank
+    echo pages['contact-us'].url
+  elsif pages['contact'] != blank
+    echo pages['contact'].url
+  else
+    echo routes.search_url | append: '?view=business'
+  endif
+-%}
