@@ -132,7 +132,14 @@
         {% render 'vanrosector-menu-link', handle: 'ingredients', search: 'Ingredients', label: 'Ingredients', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'how-to-use', search: 'How to Use', label: 'How to Use', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'vanrosector-menu-link', handle: 'benefits', search: 'Benefits', label: 'Benefits', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-        <a href="/pages/faq?brand=vanrosector" style="color:#666; text-decoration:none; font-size:14px;">FAQs</a>
+        {%- capture faq_href -%}{% render 'faq-url' %}{%- endcapture -%}
+        {%- assign faq_href = faq_href | strip -%}
+        {%- if faq_href contains '?' -%}
+          {%- assign faq_href = faq_href | append: '&brand=vanrosector' -%}
+        {%- else -%}
+          {%- assign faq_href = faq_href | append: '?brand=vanrosector' -%}
+        {%- endif -%}
+        <a href="{{ faq_href }}" style="color:#666; text-decoration:none; font-size:14px;">FAQs</a>
         {% render 'vanrosector-menu-link', handle: 'ritual-quiz', search: 'Ritual Quiz', label: 'Ritual Quiz', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         <a href="/pages/vanrosector" style="color:#666; text-decoration:none; font-size:14px;">Our Story</a>
         {% render 'vanrosector-menu-link', handle: 'sustainability', search: 'Sustainability', label: 'Sustainability', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -274,7 +281,14 @@
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'ingredients', search: 'Ingredients', label: 'Ingredients' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'how-to-use', search: 'How to Use', label: 'How to Use' %}</li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'benefits', search: 'Benefits', label: 'Benefits' %}</li>
-        <li class="megamenu-link-item"><a href="/pages/faq?brand=vanrosector">FAQs</a></li>
+        {%- capture faq_href -%}{% render 'faq-url' %}{%- endcapture -%}
+        {%- assign faq_href = faq_href | strip -%}
+        {%- if faq_href contains '?' -%}
+          {%- assign faq_href = faq_href | append: '&brand=vanrosector' -%}
+        {%- else -%}
+          {%- assign faq_href = faq_href | append: '?brand=vanrosector' -%}
+        {%- endif -%}
+        <li class="megamenu-link-item"><a href="{{ faq_href }}">FAQs</a></li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'ritual-quiz', search: 'Ritual Quiz', label: 'Ritual Quiz' %}</li>
         <li class="megamenu-link-item"><a href="/pages/vanrosector">Our Story</a></li>
         <li class="megamenu-link-item">{% render 'vanrosector-menu-link', handle: 'sustainability', search: 'Sustainability', label: 'Sustainability' %}</li>

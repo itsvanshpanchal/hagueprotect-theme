@@ -364,10 +364,11 @@
           {%- liquid
             if section.settings.faq_page != blank
               assign faq_href = section.settings.faq_page.url
-            elsif pages['faq'] != blank
-              assign faq_href = pages['faq'].url
             else
-              assign faq_href = '/search?view=faq'
+              capture faq_href
+                render 'faq-url'
+              endcapture
+              assign faq_href = faq_href | strip
             endif
           -%}
           <a href="/" class="footer__link">Home</a>

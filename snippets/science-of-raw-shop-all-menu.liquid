@@ -130,7 +130,14 @@
         {% render 'science-of-raw-menu-link', handle: 'our-ingredients', search: 'Our Ingredients', label: 'Our Ingredients', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'science-of-raw-menu-link', handle: 'usage-guide', search: 'Usage Guide', label: 'Usage Guide', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         {% render 'science-of-raw-menu-link', handle: 'why-essential-oils', search: 'Why Essential Oils', label: 'Why Essential Oils', style: 'color:#666; text-decoration:none; font-size:14px;' %}
-        <a href="/pages/faq?brand=science-of-raw" style="color:#666; text-decoration:none; font-size:14px;">Help Center</a>
+        {%- capture faq_href -%}{% render 'faq-url' %}{%- endcapture -%}
+        {%- assign faq_href = faq_href | strip -%}
+        {%- if faq_href contains '?' -%}
+          {%- assign faq_href = faq_href | append: '&brand=science-of-raw' -%}
+        {%- else -%}
+          {%- assign faq_href = faq_href | append: '?brand=science-of-raw' -%}
+        {%- endif -%}
+        <a href="{{ faq_href }}" style="color:#666; text-decoration:none; font-size:14px;">Help Center</a>
         {% render 'science-of-raw-menu-link', handle: 'find-your-ritual', search: 'Find Your Ritual', label: 'Find Your Ritual', style: 'color:#666; text-decoration:none; font-size:14px;' %}
         <a href="/pages/science-of-raw" style="color:#666; text-decoration:none; font-size:14px;">Our Journey</a>
         {% render 'science-of-raw-menu-link', handle: 'our-sustainability', search: 'Our Sustainability', label: 'Our Sustainability', style: 'color:#666; text-decoration:none; font-size:14px;' %}
@@ -262,7 +269,14 @@
         <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'our-ingredients', search: 'Our Ingredients', label: 'Our Ingredients' %}</li>
         <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'usage-guide', search: 'Usage Guide', label: 'Usage Guide' %}</li>
         <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'why-essential-oils', search: 'Why Essential Oils', label: 'Why Essential Oils' %}</li>
-        <li class="megamenu-link-item"><a href="/pages/faq?brand=science-of-raw">Help Center</a></li>
+        {%- capture faq_href -%}{% render 'faq-url' %}{%- endcapture -%}
+        {%- assign faq_href = faq_href | strip -%}
+        {%- if faq_href contains '?' -%}
+          {%- assign faq_href = faq_href | append: '&brand=science-of-raw' -%}
+        {%- else -%}
+          {%- assign faq_href = faq_href | append: '?brand=science-of-raw' -%}
+        {%- endif -%}
+        <li class="megamenu-link-item"><a href="{{ faq_href }}">Help Center</a></li>
         <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'find-your-ritual', search: 'Find Your Ritual', label: 'Find Your Ritual' %}</li>
         <li class="megamenu-link-item"><a href="/pages/science-of-raw">Our Journey</a></li>
         <li class="megamenu-link-item">{% render 'science-of-raw-menu-link', handle: 'our-sustainability', search: 'Our Sustainability', label: 'Our Sustainability' %}</li>
