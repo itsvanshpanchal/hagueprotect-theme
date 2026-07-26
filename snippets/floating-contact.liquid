@@ -1,0 +1,125 @@
+{%- if settings.floating_contact_enable -%}
+  {%- liquid
+    assign wa_raw = settings.floating_whatsapp | default: '917009205008' | strip
+    assign wa_digits = wa_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
+    assign phone_raw = settings.floating_phone | default: '7009205008' | strip
+    assign phone_digits = phone_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
+    if phone_digits.size == 10
+      assign phone_href = '91' | append: phone_digits
+    else
+      assign phone_href = phone_digits
+    endif
+  -%}
+
+  <nav class="hp-float-contact" aria-label="Quick contact">
+    {%- if wa_digits != blank -%}
+      <a
+        class="hp-float-contact__btn hp-float-contact__btn--whatsapp"
+        href="https://wa.me/{{ wa_digits }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <span class="hp-float-contact__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.89.49 3.72 1.42 5.34L2 22l4.89-1.51a9.86 9.86 0 0 0 5.15 1.42h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/>
+            <path fill="#fff" d="M17.47 14.38c-.25-.12-1.48-.73-1.71-.81-.23-.09-.4-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74 1.49.64 1.95.7 2.65.59.43-.07 1.48-.6 1.69-1.19.21-.58.21-1.08.14-1.19-.06-.1-.23-.17-.48-.29Z"/>
+          </svg>
+        </span>
+      </a>
+    {%- endif -%}
+
+    {%- if phone_href != blank -%}
+      <a
+        class="hp-float-contact__btn hp-float-contact__btn--call"
+        href="tel:+{{ phone_href }}"
+        aria-label="Call us"
+      >
+        <span class="hp-float-contact__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#2F80ED" d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.4 21 3 13.6 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/>
+          </svg>
+        </span>
+      </a>
+    {%- endif -%}
+  </nav>
+
+  <style>
+    .hp-float-contact {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9990;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .hp-float-contact__btn {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 48px;
+      margin-right: 0;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-right: none;
+      border-radius: 999px 0 0 999px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, width 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hp-float-contact__btn:hover,
+    .hp-float-contact__btn:focus-visible {
+      width: 58px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      outline: none;
+    }
+
+    .hp-float-contact__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      margin-left: 2px;
+    }
+
+    .hp-float-contact__icon svg {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+
+    .hp-float-contact__btn--call .hp-float-contact__icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media screen and (max-width: 749px) {
+      .hp-float-contact {
+        top: auto;
+        bottom: 110px;
+        transform: none;
+        gap: 8px;
+      }
+
+      .hp-float-contact__btn {
+        width: 48px;
+        height: 44px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hp-float-contact__btn {
+        transition: none;
+      }
+    }
+  </style>
+{%- endif -%}

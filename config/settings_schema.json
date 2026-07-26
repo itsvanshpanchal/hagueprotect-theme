@@ -1158,5 +1158,31 @@
         "default": 10
       }
     ]
+  },
+  {
+    "name": "Floating contact",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "floating_contact_enable",
+        "label": "Show WhatsApp and Call buttons",
+        "default": true,
+        "info": "Fixed buttons on the right edge of every page."
+      },
+      {
+        "type": "text",
+        "id": "floating_whatsapp",
+        "label": "WhatsApp number",
+        "default": "917009205008",
+        "info": "Country code + number, digits only (e.g. 917009205008)."
+      },
+      {
+        "type": "text",
+        "id": "floating_phone",
+        "label": "Call number",
+        "default": "7009205008",
+        "info": "Shown as a tel: link. 10-digit Indian numbers get +91 automatically."
+      }
+    ]
   }
 ]
