@@ -28,6 +28,11 @@
         "pill_3_text": "Creates protective barrier",
         "pill_4_text": "Non-toxic premium formula",
         "pill_5_text": "Fast shipping & delivery",
+        "trust_color": "#e02020",
+        "trust_1_label": "Eco Friendly",
+        "trust_2_label": "Certified Care",
+        "trust_3_label": "Material Safe",
+        "trust_4_label": "Tested Efficacy",
         "h1_font_family": "bahnschrift_semibold",
         "h1_font_weight": "700",
         "h1_font_style": "normal",
@@ -37,6 +42,29 @@
         "paragraph_font_weight": "600",
         "paragraph_font_style": "normal",
         "paragraph_font_size_desktop": 20,
+        "paragraph_font_size_mobile": 15
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "collection": "kits",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "h2_font_family": "bebas_neue",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
         "paragraph_font_size_mobile": 15
       }
     },
@@ -583,6 +611,12 @@
         "eyebrow": "Help & Support",
         "page_title": "Frequently Asked Questions",
         "page_description": "Everything you need to know about formula use, shipping timelines, and returns.",
+        "show_cta": true,
+        "cta_title": "Still need help?",
+        "cta_text": "Message our team for product advice, order help, or care tips for leather, suede, and sneakers.",
+        "cta_whatsapp": "917009205008",
+        "cta_link": "",
+        "cta_link_label": "Contact support",
         "heading": "Things people often wonder",
         "heading_line2": "",
         "heading_line2_color": "#6b6b6b",
@@ -702,29 +736,6 @@
         "paragraph_font_size_mobile": 15
       }
     },
-    "product-recommendations": {
-      "type": "product-recommendations",
-      "settings": {
-        "heading": "You may also like",
-        "heading_line2": "",
-        "heading_line2_color": "#6b6b6b",
-        "collection": "kits",
-        "heading_subheading_spacing_desktop": 12,
-        "heading_subheading_spacing_mobile": 10,
-        "eyebrow_title_spacing_desktop": 12,
-        "eyebrow_title_spacing_mobile": 10,
-        "h2_font_family": "bebas_neue",
-        "h2_font_weight": "400",
-        "h2_font_style": "normal",
-        "h2_font_size_desktop": 52,
-        "h2_font_size_mobile": 34,
-        "paragraph_font_family": "inter",
-        "paragraph_font_weight": "400",
-        "paragraph_font_style": "normal",
-        "paragraph_font_size_desktop": 16,
-        "paragraph_font_size_mobile": 15
-      }
-    },
     "17776217619baf64a8": {
       "type": "apps",
       "settings": {}
@@ -775,6 +786,7 @@
   },
   "order": [
     "product-hero",
+    "product-recommendations",
     "product-banner",
     "177761948737529cfa",
     "1777619891157d17df",
@@ -793,7 +805,6 @@
     "177778510772477f83",
     "1777785112915ce3a0",
     "reviews-grid",
-    "product-recommendations",
     "17776217619baf64a8",
     "17776217106953ee30",
     "1777619912f6c02733"
