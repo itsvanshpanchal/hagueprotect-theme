@@ -41,10 +41,21 @@
     align-items: center;
     gap: 6px;
     margin-bottom: 16px;
+    text-decoration: none;
   }
 
   .footer__logo-link span {
-    color: var(--color-primary);
+    color: #ffffff;
+  }
+
+  .footer__logo-img {
+    height: 38px !important;
+    width: auto !important;
+    max-width: 220px !important;
+    object-fit: contain !important;
+    display: block !important;
+    /* Dark Hague Protect mark on black footer — force to white */
+    filter: brightness(0) invert(1) !important;
   }
 
   .footer__description {
@@ -326,16 +337,35 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col-info">
-        <a href="/" class="footer__logo-link">
+        <a href="/" class="footer__logo-link" aria-label="Hague Protect home">
           {%- if section.settings.logo_image != blank -%}
-            <img src="{{ section.settings.logo_image | image_url: width: 130 }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
+            <img
+              class="footer__logo-img"
+              src="{{ section.settings.logo_image | image_url: width: 440 }}"
+              srcset="{{ section.settings.logo_image | image_url: width: 220 }} 220w, {{ section.settings.logo_image | image_url: width: 440 }} 440w"
+              sizes="220px"
+              alt="Hague Protect"
+              width="220"
+              height="38"
+              loading="lazy"
+              decoding="async"
+            >
           {%- elsif section.settings.logo_text == 'HAGUEPROTECT' or section.settings.logo_text contains '.' -%}
             {%- assign footer_logo = 'logo-hagueprotect.png' -%}
             {%- if section.settings.logo_text contains '.' -%}{%- assign footer_logo = section.settings.logo_text -%}{%- endif -%}
-            <img src="{{ footer_logo | asset_url }}" alt="Hague Protect" style="height: 30px; width: auto; object-fit: contain; display: block;" width="130" height="30" loading="lazy" decoding="async">
+            <img
+              class="footer__logo-img"
+              src="{{ footer_logo | asset_url }}"
+              alt="Hague Protect"
+              width="220"
+              height="38"
+              loading="lazy"
+              decoding="async"
+            >
           {%- else -%}
-            <span style="font-family: var(--font-family-heading); font-size: var(--heading-size-xl, 21px); font-weight: var(--font-weight-heading, 700); font-style: var(--font-style-heading, normal); color: #ffffff; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 1px;">
-              {{ section.settings.logo_text }}
+            <span style="font-family: var(--font-family-heading); font-size: clamp(18px, 2.2vw, 22px); font-weight: 700; color: #ffffff; letter-spacing: 0.04em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px;">
+              <span aria-hidden="true" style="display:inline-flex; width:28px; height:28px; border:1.5px solid #ffffff; border-radius:6px; align-items:center; justify-content:center; font-size:11px; letter-spacing:0; line-height:1;">HP</span>
+              {{ section.settings.logo_text | default: 'HAGUEPROTECT' }}
             </span>
           {%- endif -%}
         </a>
@@ -491,7 +521,8 @@
     {
       "type": "image_picker",
       "id": "logo_image",
-      "label": "Logo Image"
+      "label": "Logo Image",
+      "info": "Dark logos are automatically shown in white on the black footer."
     },
     {
       "type": "textarea",
