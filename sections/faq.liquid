@@ -1,7 +1,7 @@
 {%- liquid
   assign layout_style = section.settings.layout_style | default: 'compact'
   assign is_page_layout = false
-  if layout_style == 'page' or section.settings.page_title != blank
+  if layout_style == 'page'
     assign is_page_layout = true
   endif
   assign accent = section.settings.accent_color | default: '#FF2B2B'
@@ -74,7 +74,7 @@
 
   #shopify-section-{{ section.id }} .faq-custom__heading {
     font-family: var(--font-family-h2, var(--font-family-sans)) !important;
-    font-size: var(--section-heading-size) !important;
+    font-size: {% if is_page_layout %}var(--section-heading-size){% else %}clamp(18px, 2.2vw, 22px){% endif %} !important;
     font-weight: var(--font-weight-h2, 600) !important;
     font-style: var(--font-style-h2, normal) !important;
     color: {{ accent }} !important;
@@ -95,6 +95,24 @@
     height: 3px;
     background-color: {{ accent }};
     border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom:not(.faq-custom--page) .faq-custom__header {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom:not(.faq-custom--page) .faq-custom__items {
+    max-width: 920px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom:not(.faq-custom--page) .faq-custom__question {
+    font-size: clamp(14px, 1.5vw, 16px) !important;
+    font-weight: 600 !important;
+  }
+
+  #shopify-section-{{ section.id }} .faq-custom:not(.faq-custom--page) .faq-custom__answer {
+    font-size: clamp(13px, 1.4vw, 15px);
   }
 
   #shopify-section-{{ section.id }} .faq-custom__items {
@@ -316,41 +334,73 @@
         {%- endif -%}
         {%- if section.settings.page_title != blank -%}
           <h1 class="faq-custom__page-title">{{ section.settings.page_title }}</h1>
+        {%- elsif section.settings.heading != blank -%}
+          <h1 class="faq-custom__page-title">{{ section.settings.heading }}</h1>
         {%- endif -%}
         {%- if section.settings.page_description != blank -%}
           <p class="faq-custom__page-description">{{ section.settings.page_description }}</p>
         {%- endif -%}
       {%- elsif section.settings.heading != blank -%}
         <h2 class="faq-custom__heading">{{ section.settings.heading }}</h2>
+      {%- else -%}
+        <h2 class="faq-custom__heading">Frequently asked questions</h2>
       {%- endif -%}
     </div>
 
     <div class="faq-custom__items">
-      {%- for block in section.blocks -%}
-        <div class="faq-custom__item" {{ block.shopify_attributes }}>
-          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
-            <h3 class="faq-custom__question">{{ block.settings.question }}</h3>
-            <div class="faq-custom__icon-wrapper" aria-hidden="true">
-              <span>+</span>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="faq-custom__item" {{ block.shopify_attributes }}>
+            <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
+              <h3 class="faq-custom__question">{{ block.settings.question }}</h3>
+              <div class="faq-custom__icon-wrapper" aria-hidden="true">
+                <span>+</span>
+              </div>
+            </button>
+            <div class="faq-custom__panel" data-faq-panel hidden>
+              <div class="faq-custom__answer">{{ block.settings.answer }}</div>
             </div>
-          </button>
-          <div class="faq-custom__panel" data-faq-panel hidden>
-            <div class="faq-custom__answer">{{ block.settings.answer }}</div>
           </div>
-        </div>
+        {%- endfor -%}
       {%- else -%}
+        {%- comment -%} Compact defaults for product/collection pages with no blocks yet {%- endcomment -%}
         <div class="faq-custom__item">
           <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
-            <h3 class="faq-custom__question">Add FAQ items in the theme editor</h3>
-            <div class="faq-custom__icon-wrapper" aria-hidden="true">
-              <span>+</span>
-            </div>
+            <h3 class="faq-custom__question">Are Hague Protect formulas safe for my sneakers?</h3>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
           </button>
           <div class="faq-custom__panel" data-faq-panel hidden>
-            <div class="faq-custom__answer">Click Add block and choose FAQ Item to add questions and answers.</div>
+            <div class="faq-custom__answer"><p>Yes. Our formulas are pH-balanced and made for premium footwear materials including leather, suede, nubuck, mesh, canvas, and rubber. Always follow the care steps on the product page.</p></div>
           </div>
         </div>
-      {%- endfor -%}
+        <div class="faq-custom__item">
+          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
+            <h3 class="faq-custom__question">Will this change the color or finish?</h3>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
+          </button>
+          <div class="faq-custom__panel" data-faq-panel hidden>
+            <div class="faq-custom__answer"><p>No. Hague Protect systems are designed to clean and protect without stripping color or damaging finishes when used as directed.</p></div>
+          </div>
+        </div>
+        <div class="faq-custom__item">
+          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
+            <h3 class="faq-custom__question">How long does delivery take in India?</h3>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
+          </button>
+          <div class="faq-custom__panel" data-faq-panel hidden>
+            <div class="faq-custom__answer"><p>Orders placed before 12pm IST on business days usually ship the same day. Delivery across India typically takes 2 to 5 business days depending on your location.</p></div>
+          </div>
+        </div>
+        <div class="faq-custom__item">
+          <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
+            <h3 class="faq-custom__question">What if I need help choosing a kit?</h3>
+            <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
+          </button>
+          <div class="faq-custom__panel" data-faq-panel hidden>
+            <div class="faq-custom__answer"><p>Match the kit to your material, or message us on WhatsApp with a photo of your shoes and we’ll recommend the right care system.</p></div>
+          </div>
+        </div>
+      {%- endif -%}
     </div>
 
     {%- if is_page_layout and section.settings.show_cta -%}
@@ -405,7 +455,12 @@
         if (!isActive && panel) {
           item.classList.add('active');
           panel.hidden = false;
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.style.maxHeight = 'none';
+          var height = panel.scrollHeight;
+          panel.style.maxHeight = '0px';
+          // Force reflow before expanding
+          void panel.offsetHeight;
+          panel.style.maxHeight = height + 'px';
           btn.setAttribute('aria-expanded', 'true');
         }
       });

@@ -119,6 +119,26 @@
           assign eyebrow_mobile = 12
         endif
       endif
+    when 'faq'
+      # Product/collection FAQ stays compact unless layout_style is full page
+      unless section.settings.layout_style == 'page'
+        assign h2_desktop = section.settings.h2_font_size_desktop | default: 20
+        assign h2_mobile = section.settings.h2_font_size_mobile | default: 18
+        assign paragraph_desktop = section.settings.paragraph_font_size_desktop | default: 15
+        assign paragraph_mobile = section.settings.paragraph_font_size_mobile | default: 14
+        if h2_desktop > 28
+          assign h2_desktop = 20
+        endif
+        if h2_mobile > 24
+          assign h2_mobile = 18
+        endif
+        if paragraph_desktop > 20
+          assign paragraph_desktop = 15
+        endif
+        if paragraph_mobile > 18
+          assign paragraph_mobile = 14
+        endif
+      endunless
   endcase
 
   assign title_desc_spacing_desktop = section.settings.heading_subheading_spacing_desktop | default: settings.heading_subheading_spacing_desktop | default: 12

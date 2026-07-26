@@ -716,6 +716,11 @@ main h3 > span[aria-hidden="true"] {
   margin: 0 !important;
 }
 
+.faq-custom:not(.faq-custom--page) .faq-custom__heading,
+.faq-custom:not(.faq-custom--page) h2.faq-custom__heading {
+  font-size: clamp(18px, 2.2vw, 22px) !important;
+}
+
 .faq-custom .faq-custom__question,
 .faq-custom h3.faq-custom__question {
   font-family: var(--font-family-sans) !important;
@@ -727,6 +732,11 @@ main h3 > span[aria-hidden="true"] {
   text-transform: none !important;
   color: #111111 !important;
   margin: 0 !important;
+}
+
+.faq-custom:not(.faq-custom--page) .faq-custom__question,
+.faq-custom:not(.faq-custom--page) h3.faq-custom__question {
+  font-size: clamp(14px, 1.5vw, 16px) !important;
 }
 
 /* Unified homepage section titles — equal size/weight; sentence case via .hp-heading-line */
