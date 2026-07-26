@@ -405,16 +405,44 @@
 
     var track = root.querySelector('[data-hp-dna-track]');
     var dots = root.querySelectorAll('[data-hp-dna-dot]');
-    if (!track || !dots.length) return;
+    if (!track || !itemsReady(track)) return;
 
     var mq = window.matchMedia('(max-width: 749px)');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var items = track.querySelectorAll('.hp-dna__item');
     var ticking = false;
+    var index = 0;
+    var timer = null;
+    var resumeTimer = null;
+    var paused = false;
+    var AUTO_MS = 3500;
+    var RESUME_MS = 5000;
 
-    function setActive(index) {
-      dots.forEach(function (dot, i) {
-        dot.classList.toggle('is-active', i === index);
+    function itemsReady(el) {
+      return el && el.querySelectorAll('.hp-dna__item').length > 1;
+    }
+
+    function padLeft() {
+      return parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    }
+
+    function setActive(i) {
+      index = i;
+      dots.forEach(function (dot, di) {
+        dot.classList.toggle('is-active', di === i);
       });
+    }
+
+    function goTo(i, behavior) {
+      if (!items.length) return;
+      var next = ((i % items.length) + items.length) % items.length;
+      var target = items[next];
+      if (!target) return;
+      track.scrollTo({
+        left: target.offsetLeft - padLeft(),
+        behavior: behavior || 'smooth'
+      });
+      setActive(next);
     }
 
     function updateFromScroll() {
@@ -442,29 +470,80 @@
       });
     }
 
+    function stopAuto() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (!mq.matches || reduceMotion.matches || paused || items.length < 2) return;
+      timer = setInterval(function () {
+        if (!mq.matches || document.hidden || paused) return;
+        goTo(index + 1, 'smooth');
+      }, AUTO_MS);
+    }
+
+    function pauseAuto() {
+      paused = true;
+      stopAuto();
+      if (resumeTimer) clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () {
+        paused = false;
+        startAuto();
+      }, RESUME_MS);
+    }
+
     track.addEventListener('scroll', onScroll, { passive: true });
+    track.addEventListener('pointerdown', pauseAuto, { passive: true });
+    track.addEventListener('touchstart', pauseAuto, { passive: true });
 
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () {
         if (!mq.matches) return;
-        var index = Number(dot.getAttribute('data-hp-dna-dot') || 0);
-        var target = items[index];
-        if (!target) return;
-        track.scrollTo({
-          left: target.offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0),
-          behavior: 'smooth'
-        });
-        setActive(index);
+        pauseAuto();
+        var i = Number(dot.getAttribute('data-hp-dna-dot') || 0);
+        goTo(i, 'smooth');
       });
     });
 
-    if (mq.addEventListener) {
-      mq.addEventListener('change', updateFromScroll);
-    } else if (mq.addListener) {
-      mq.addListener(updateFromScroll);
+    function onViewportChange() {
+      updateFromScroll();
+      if (mq.matches) startAuto();
+      else stopAuto();
+    }
+
+    if (mq.addEventListener) mq.addEventListener('change', onViewportChange);
+    else if (mq.addListener) mq.addListener(onViewportChange);
+
+    if (reduceMotion.addEventListener) {
+      reduceMotion.addEventListener('change', onViewportChange);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAuto();
+      else if (!paused) startAuto();
+    });
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          var visible = entries.some(function (e) { return e.isIntersecting; });
+          if (!visible) {
+            stopAuto();
+          } else if (!paused) {
+            startAuto();
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(root);
     }
 
     updateFromScroll();
+    startAuto();
   })();
 </script>
 
