@@ -36,27 +36,24 @@
     line-height: 1.05;
     letter-spacing: -0.02em;
     max-width: 700px;
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
   }
 
-  .hp-fam-sec__heading::first-letter {
+  .hp-fam-sec__heading::first-letter,
+  .hp-fam-sec__heading .hp-typewriter-text,
+  .hp-fam-sec__heading .hp-typewriter-cursor {
     text-transform: none !important;
   }
 
-  .hp-fam-sec__heading.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hp-fam-sec__heading {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
+  .hp-fam-sec__heading .hp-typewriter-text,
+  .hp-fam-sec__heading > span[aria-hidden="true"] {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    font-style: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    text-transform: none !important;
+    color: inherit !important;
   }
 
   /* CATEGORY TABS */
@@ -600,7 +597,7 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading" data-no-typewriter>{{ section.settings.heading }}</h2>
+      <h2 class="hp-fam-sec__heading">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -739,25 +736,6 @@
   (function() {
     const section = document.getElementById('fam-{{ section.id }}');
     if (!section) return;
-
-    const heading = section.querySelector('.hp-fam-sec__heading');
-    if (heading) {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        heading.classList.add('is-visible');
-      } else if ('IntersectionObserver' in window) {
-        const headingObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              heading.classList.add('is-visible');
-              headingObserver.disconnect();
-            }
-          });
-        }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
-        headingObserver.observe(heading);
-      } else {
-        heading.classList.add('is-visible');
-      }
-    }
 
     const bgVideo = section.querySelector('.hp-fam-sec__video-bg video');
     if (bgVideo) {
