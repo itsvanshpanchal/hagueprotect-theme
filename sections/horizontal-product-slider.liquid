@@ -27,14 +27,31 @@
 
   .hp-fam-sec__heading {
     font-size: var(--section-heading-size);
-    font-family: var(--font-family-h2, var(--font-family-heading));
-    font-weight: var(--font-weight-h2, 600);
-    font-style: var(--font-style-h2, normal);
+    font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     color: #ffffff;
     margin: 0 0 32px 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
     max-width: 700px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .hp-fam-sec__heading.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hp-fam-sec__heading {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 
   /* CATEGORY TABS */
@@ -524,7 +541,8 @@
     pointer-events: none;
     opacity: calc({{ section.settings.video_opacity | default: 100 }} / 100);
   }
-  .hp-fam-sec__video-bg video {
+  .hp-fam-sec__video-bg video,
+  .hp-fam-sec__video-bg .hp-fam-sec__video {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -532,6 +550,7 @@
     height: 100%;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    object-position: center center;
     z-index: 1;
   }
   .hp-fam-sec__video-overlay {
@@ -576,7 +595,7 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading">{{ section.settings.heading }}</h2>
+      <h2 class="hp-fam-sec__heading" data-no-typewriter>{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -715,6 +734,42 @@
   (function() {
     const section = document.getElementById('fam-{{ section.id }}');
     if (!section) return;
+
+    const heading = section.querySelector('.hp-fam-sec__heading');
+    if (heading) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heading.classList.add('is-visible');
+      } else if ('IntersectionObserver' in window) {
+        const headingObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              heading.classList.add('is-visible');
+              headingObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
+        headingObserver.observe(heading);
+      } else {
+        heading.classList.add('is-visible');
+      }
+    }
+
+    const bgVideo = section.querySelector('.hp-fam-sec__video-bg video');
+    if (bgVideo) {
+      bgVideo.muted = true;
+      bgVideo.setAttribute('playsinline', '');
+      const tryPlay = function() {
+        const playPromise = bgVideo.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(function() {});
+        }
+      };
+      tryPlay();
+      bgVideo.addEventListener('loadeddata', tryPlay, { once: true });
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) tryPlay();
+      });
+    }
 
     const tabs = section.querySelectorAll('.hp-fam-sec__tab');
     const sliders = section.querySelectorAll('.hp-fam-sec__slider');
