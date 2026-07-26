@@ -206,171 +206,156 @@
     overflow: visible !important;
   }
 
-  .comm-slide {
-    width: 470px !important;
-    height: auto !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Cards */
+  /* Cards — image on top, review text below */
   .comm-card {
-    width: 470px !important;
-    height: 420px !important;
-    background-color: #FFFFFF !important;
-    border: 1px solid #EAEAEA !important;
-    border-radius: var(--homepage-corner, 20px) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
-    padding: 40px !important;
+    width: 320px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background-color: #F3F3F3 !important;
+    border: 1px solid #E8E8E8 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05) !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     box-sizing: border-box !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
     position: relative !important;
+    overflow: hidden !important;
   }
 
   .comm-card:hover {
     transform: translateY(-5px) !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.1) !important;
   }
 
-  .comm-card-top {
-    margin-bottom: 30px !important;
-  }
-
-  .comm-card-stars {
-    display: inline-flex !important;
-    gap: 6px !important;
-  }
-
-  .comm-card-stars .comm-star-icon {
-    width: 22px !important;
-    height: 22px !important;
-    fill: #D60000 !important;
-  }
-
-  .comm-card-text {
-    font-family: var(--font-family-sans) !important;
-    font-size: var(--section-subheading-size, 18px) !important;
-    line-height: 1.9 !important;
-    color: #222222 !important;
-    font-weight: var(--font-weight-sans, 400) !important;
-    font-style: var(--font-style-sans, normal) !important;
-    margin: 0 !important;
-    flex-grow: 1 !important;
-    display: flex !important;
-    align-items: flex-start !important;
-  }
-
-  .comm-card-quote::before,
-  .comm-card-quote::after {
-    color: rgba(214, 0, 0, 0.25) !important;
-    font-size: var(--section-subheading-size, 26px) !important;
-    font-weight: var(--font-weight-sans, 900) !important;
-    line-height: 0 !important;
-    display: inline-block !important;
-    vertical-align: middle !important;
-  }
-
-  .comm-card-quote::before {
-    content: '\201C';
-    margin-right: 4px !important;
-  }
-
-  .comm-card-quote::after {
-    content: '\201D';
-    margin-left: 4px !important;
-  }
-
-  .comm-card-divider {
-    height: 1px !important;
-    background-color: #EEEEEE !important;
+  .comm-card-media {
+    position: relative !important;
     width: 100% !important;
-    margin-top: 40px !important;
-    margin-bottom: 25px !important;
+    aspect-ratio: 1 / 1 !important;
+    background: #e8e8e8 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
   }
 
-  .comm-card-footer {
+  .comm-card-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .comm-card-media-placeholder {
+    width: 100% !important;
+    height: 100% !important;
     display: flex !important;
-    justify-content: space-between !important;
     align-items: center !important;
-    width: 100% !important;
+    justify-content: center !important;
+    background: linear-gradient(145deg, #ececec 0%, #dcdcdc 100%) !important;
+    color: #9a9a9a !important;
   }
 
-  .comm-customer-info {
+  .comm-card-media-placeholder svg {
+    width: 48px !important;
+    height: 48px !important;
+    opacity: 0.55 !important;
+  }
+
+  .comm-card-body {
+    padding: 18px 20px 22px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 4px !important;
+    gap: 8px !important;
+    background: #F3F3F3 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .comm-card-author {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
   }
 
   .comm-cust-name {
     font-family: var(--font-family-sans) !important;
-    font-size: var(--section-subheading-size, 18px) !important;
-    font-weight: var(--font-weight-sans, 600) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
     font-style: var(--font-style-sans, normal) !important;
-    color: #222222 !important;
+    color: #111111 !important;
     line-height: 1.2 !important;
   }
 
-  .comm-cust-city {
+  .comm-verified {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
     font-family: var(--font-family-sans) !important;
-    font-size: var(--body-font-size, 15px) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
     color: #8A8A8A !important;
+    line-height: 1 !important;
+  }
+
+  .comm-verified svg {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .comm-card-date {
+    font-family: var(--font-family-sans) !important;
+    font-size: 12px !important;
+    color: #A0A0A0 !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+  }
+
+  .comm-card-stars {
+    display: inline-flex !important;
+    gap: 3px !important;
+    margin-top: 2px !important;
+  }
+
+  .comm-card-stars .comm-star-icon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #F5B800 !important;
+  }
+
+  .comm-card-title {
+    font-family: var(--font-family-sans) !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    color: #111111 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    margin: 4px 0 0 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  .comm-card-text {
+    font-family: var(--font-family-sans) !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: #4A4A4A !important;
     font-weight: var(--font-weight-sans, 400) !important;
     font-style: var(--font-style-sans, normal) !important;
-    line-height: 1.2 !important;
+    margin: 0 !important;
   }
 
-  .comm-product-badge {
-    width: 160px !important;
-    height: 60px !important;
-    border-radius: var(--homepage-corner, 20px) !important;
-    background-color: #FAFAFA !important;
-    border: 1px solid #EAEAEA !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    padding: 10px 16px !important;
-    box-sizing: border-box !important;
-    gap: 12px !important;
+  .comm-card-quote::before,
+  .comm-card-quote::after {
+    content: none !important;
   }
 
-  .comm-prod-badge-img {
-    width: 36px !important;
-    height: 36px !important;
-    object-fit: cover !important;
-    border-radius: var(--homepage-corner, 20px) !important;
+  .comm-slide {
+    width: 320px !important;
+    height: auto !important;
     flex-shrink: 0 !important;
-  }
-
-  .comm-prod-badge-fallback-img {
-    width: 36px !important;
-    height: 36px !important;
-    border-radius: var(--homepage-corner, 20px) !important;
-    background-color: #FFF0F0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 5px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .comm-prod-badge-fallback-img svg {
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  .comm-prod-badge-text {
-    font-family: var(--font-family-sans) !important;
-    font-size: var(--body-font-size, 14px) !important;
-    font-weight: var(--font-weight-sans, 600) !important;
-    font-style: var(--font-style-sans, normal) !important;
-    color: #222222 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    flex: 1 !important;
   }
 
   /* Responsive Adjustments */
@@ -435,16 +420,18 @@
     }
     .comm-slide,
     .comm-card {
-      width: 320px !important;
-      height: 400px !important;
-      padding: 24px !important;
+      width: 280px !important;
+      height: auto !important;
+      padding: 0 !important;
+    }
+    .comm-card-body {
+      padding: 16px 16px 18px !important;
     }
     .comm-card-text {
-      font-size: var(--section-subheading-size, 16px) !important;
+      font-size: 13px !important;
     }
-    .comm-card-divider {
-      margin-top: 20px !important;
-      margin-bottom: 15px !important;
+    .comm-card-title {
+      font-size: 13px !important;
     }
   }
 {%- endstyle -%}
@@ -499,88 +486,112 @@
         <div class="swiper-wrapper">
           {%- for block in section.blocks -%}
             {%- if block.type == 'testimonial' -%}
+              {%- liquid
+                assign card_image = block.settings.review_image
+                if card_image == blank
+                  assign card_image = block.settings.product_badge_image
+                endif
+                if card_image == blank and block.settings.product != blank
+                  assign card_image = block.settings.product.featured_image
+                endif
+                assign review_date = block.settings.review_date | default: block.settings.customer_city
+              -%}
               <div class="swiper-slide comm-slide" {{ block.shopify_attributes }}>
-                <div class="comm-card">
-                  <div class="comm-card-top">
-                    <div class="comm-card-stars">
-                      {%- assign rating = block.settings.rating | default: 5 -%}
-                      {%- for i in (1..rating) -%}
-                        <svg class="comm-star-icon" viewBox="0 0 24 24">
-                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                <article class="comm-card">
+                  <div class="comm-card-media">
+                    {%- if card_image != blank -%}
+                      <img
+                        src="{{ card_image | image_url: width: 800 }}"
+                        srcset="{{ card_image | image_url: width: 400 }} 400w, {{ card_image | image_url: width: 800 }} 800w"
+                        sizes="320px"
+                        alt="{{ block.settings.customer_name | default: 'Customer review' | escape }}"
+                        loading="lazy"
+                        width="{{ card_image.width | default: 800 }}"
+                        height="{{ card_image.height | default: 800 }}"
+                      >
+                    {%- else -%}
+                      <div class="comm-card-media-placeholder" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2"/>
+                          <circle cx="8.5" cy="8.5" r="1.5"/>
+                          <path d="M21 15l-5-5L5 21"/>
                         </svg>
-                      {%- endfor -%}
-                    </div>
-                  </div>
-
-                  <p class="comm-card-text">
-                    <span class="comm-card-quote">{{ block.settings.text }}</span>
-                  </p>
-
-                  <div class="comm-card-divider"></div>
-
-                  <div class="comm-card-footer">
-                    <div class="comm-customer-info">
-                      <span class="comm-cust-name">{{ block.settings.customer_name }}</span>
-                      <span class="comm-cust-city">{{ block.settings.customer_city }}</span>
-                    </div>
-
-                    {%- if block.settings.product != blank or block.settings.product_badge_text != blank -%}
-                      <div class="comm-product-badge">
-                        {%- assign product_obj = block.settings.product -%}
-                        {%- if product_obj != blank -%}
-                          <img class="comm-prod-badge-img" src="{{ product_obj.featured_image | image_url: width: 100, height: 100 }}" alt="{{ product_obj.title | escape }}" loading="lazy">
-                          <span class="comm-prod-badge-text">{{ product_obj.title | escape }}</span>
-                        {%- else -%}
-                          {%- if block.settings.product_badge_image != blank -%}
-                            <img class="comm-prod-badge-img" src="{{ block.settings.product_badge_image | image_url: width: 100, height: 100 }}" alt="{{ block.settings.product_badge_text | escape }}" loading="lazy">
-                          {%- else -%}
-                            <div class="comm-prod-badge-fallback-img">
-                              <svg viewBox="0 0 24 24"><path fill="#D60000" d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM12 17.5c-3.04 0-5.5-2.46-5.5-5.5S9.04 6.5 12 6.5 17.5 8.96 17.5 12 15.04 17.5 12 17.5z"/></svg>
-                            </div>
-                          {%- endif -%}
-                          <span class="comm-prod-badge-text">{{ block.settings.product_badge_text }}</span>
-                        {%- endif -%}
                       </div>
                     {%- endif -%}
                   </div>
-                </div>
-              </div>
-            {%- endif -%}
-          {%- else -%}
-            <!-- Fallbacks if no blocks configured -->
-            {%- for i in (1..4) -%}
-              <div class="swiper-slide comm-slide">
-                <div class="comm-card">
-                  <div class="comm-card-top">
-                    <div class="comm-card-stars">
-                      {%- for j in (1..5) -%}
-                        <svg class="comm-star-icon" viewBox="0 0 24 24">
+
+                  <div class="comm-card-body">
+                    <div class="comm-card-author">
+                      <span class="comm-cust-name">{{ block.settings.customer_name | default: 'Sample Customer' }}</span>
+                      {%- unless block.settings.hide_verified -%}
+                        <span class="comm-verified">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" stroke="#9A9A9A" stroke-width="1.8"/>
+                            <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#9A9A9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          Verified
+                        </span>
+                      {%- endunless -%}
+                    </div>
+
+                    {%- if review_date != blank -%}
+                      <p class="comm-card-date">{{ review_date }}</p>
+                    {%- endif -%}
+
+                    <div class="comm-card-stars" aria-label="{{ block.settings.rating | default: 5 }} out of 5 stars">
+                      {%- assign rating = block.settings.rating | default: 5 -%}
+                      {%- for i in (1..rating) -%}
+                        <svg class="comm-star-icon" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                         </svg>
                       {%- endfor -%}
                     </div>
+
+                    {%- if block.settings.review_title != blank -%}
+                      <h3 class="comm-card-title">{{ block.settings.review_title }}</h3>
+                    {%- endif -%}
+
+                    {%- if block.settings.text != blank -%}
+                      <p class="comm-card-text">{{ block.settings.text }}</p>
+                    {%- endif -%}
                   </div>
-
-                  <p class="comm-card-text">
-                    <span class="comm-card-quote">Perfect cleaning performance. Dissolved dirt instantly without damaging premium leather shoes. highly recommended!</span>
-                  </p>
-
-                  <div class="comm-card-divider"></div>
-
-                  <div class="comm-card-footer">
-                    <div class="comm-customer-info">
-                      <span class="comm-cust-name">Customer {{ i }}</span>
-                      <span class="comm-cust-city">City Name</span>
-                    </div>
-
-                    <div class="comm-product-badge">
-                      <div class="comm-prod-badge-fallback-img">
-                        <svg viewBox="0 0 24 24"><path fill="#D60000" d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM12 17.5c-3.04 0-5.5-2.46-5.5-5.5S9.04 6.5 12 6.5 17.5 8.96 17.5 12 15.04 17.5 12 17.5z"/></svg>
-                      </div>
-                      <span class="comm-prod-badge-text">Signature Kit</span>
+                </article>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="swiper-slide comm-slide">
+                <article class="comm-card">
+                  <div class="comm-card-media">
+                    <div class="comm-card-media-placeholder" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <path d="M21 15l-5-5L5 21"/>
+                      </svg>
                     </div>
                   </div>
-                </div>
+                  <div class="comm-card-body">
+                    <div class="comm-card-author">
+                      <span class="comm-cust-name">Sample Customer</span>
+                      <span class="comm-verified">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10" stroke="#9A9A9A" stroke-width="1.8"/>
+                          <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#9A9A9A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Verified
+                      </span>
+                    </div>
+                    <p class="comm-card-date">Today</p>
+                    <div class="comm-card-stars">
+                      {%- for j in (1..5) -%}
+                        <svg class="comm-star-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                      {%- endfor -%}
+                    </div>
+                    <h3 class="comm-card-title">Great product!</h3>
+                    <p class="comm-card-text">This product exceeded my expectations. Highly recommended!</p>
+                  </div>
+                </article>
               </div>
             {%- endfor -%}
           {%- endfor -%}
@@ -1514,6 +1525,12 @@
       "name": "Testimonial Card",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review image",
+          "info": "Shown at the top of the card. Square photos work best."
+        },
+        {
           "type": "range",
           "id": "rating",
           "min": 1,
@@ -1523,38 +1540,59 @@
           "default": 5
         },
         {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review title",
+          "default": "Great product!"
+        },
+        {
           "type": "textarea",
           "id": "text",
           "label": "Review Text",
-          "default": "We carry the line at our store. Customers come back for refills, which says a lot."
+          "default": "This product exceeded my expectations. Highly recommended!"
         },
         {
           "type": "text",
           "id": "customer_name",
           "label": "Customer Name",
-          "default": "Priya K."
+          "default": "Sample Customer"
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "Date label",
+          "default": "Today",
+          "info": "Shown under the name (e.g. Today, 2 days ago, Mar 12)."
         },
         {
           "type": "text",
           "id": "customer_city",
-          "label": "Customer Location/City",
-          "default": "Denver"
+          "label": "Fallback date / location",
+          "default": "Today",
+          "info": "Used only if Date label is empty."
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_verified",
+          "label": "Hide Verified badge",
+          "default": false
         },
         {
           "type": "product",
           "id": "product",
-          "label": "Associated Product"
+          "label": "Associated Product (optional image fallback)"
         },
         {
           "type": "text",
           "id": "product_badge_text",
-          "label": "Fallback Product Name",
+          "label": "Legacy product name",
           "default": "Wholesale"
         },
         {
           "type": "image_picker",
           "id": "product_badge_image",
-          "label": "Fallback Product Image"
+          "label": "Legacy image fallback",
+          "info": "Used if Review image is empty."
         }
       ]
     }
@@ -1566,36 +1604,40 @@
         {
           "type": "testimonial",
           "settings": {
-            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "review_title": "Great product!",
+            "text": "This product exceeded my expectations. Highly recommended!",
             "customer_name": "Priya K.",
-            "customer_city": "Denver",
+            "review_date": "Today",
             "product_badge_text": "Wholesale"
           }
         },
         {
           "type": "testimonial",
           "settings": {
+            "review_title": "Does what it says",
             "text": "Does what it says. I use it weekly on white leather. No complaints.",
             "customer_name": "Jordan A.",
-            "customer_city": "Seattle",
+            "review_date": "2 days ago",
             "product_badge_text": "Signature Kit"
           }
         },
         {
           "type": "testimonial",
           "settings": {
+            "review_title": "Road trip saver",
             "text": "My white Air Force 1s took a beating on a road trip. Mud, grass, the whole thing. Spent a Sunday afternoon working through them with the In-Depth kit. They look fresh.",
             "customer_name": "Eli R.",
-            "customer_city": "Nashville",
+            "review_date": "3 days ago",
             "product_badge_text": "In-Depth Kit"
           }
         },
         {
           "type": "testimonial",
           "settings": {
+            "review_title": "Always in my bag",
             "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
             "customer_name": "Hannah W.",
-            "customer_city": "Boston",
+            "review_date": "1 week ago",
             "product_badge_text": "Signature Kit"
           }
         }
