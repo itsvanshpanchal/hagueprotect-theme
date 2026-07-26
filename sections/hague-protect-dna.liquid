@@ -181,22 +181,95 @@
     }
   }
 
-  @media screen and (max-width: 640px) {
+  /* Mobile only — horizontal swipe carousel */
+  @media screen and (max-width: 749px) {
     .hp-dna-{{ section.id }} {
       --hp-dna-badge: {{ section.settings.icon_badge_size | times: 0.92 | round }}px;
+      overflow: visible;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__container {
+      padding-right: 0;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__heading {
+      padding-right: var(--homepage-section-gutter, 16px);
+      margin-bottom: 28px;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__grid {
-      grid-template-columns: 1fr;
-      gap: 36px;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: var(--homepage-section-gutter, 16px);
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+      padding: 4px var(--homepage-section-gutter, 16px) 12px;
+      margin: 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      grid-template-columns: none;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__grid::-webkit-scrollbar {
+      display: none;
+      height: 0;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__item {
+      flex: 0 0 min(78vw, 300px);
+      width: min(78vw, 300px);
+      max-width: min(78vw, 300px);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      box-sizing: border-box;
+      padding: 20px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__item-text {
       max-width: none;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding-right: var(--homepage-section-gutter, 16px);
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.28);
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__dot.is-active {
+      background: var(--hp-dna-accent, #FF2B2B);
+      transform: scale(1.2);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .hp-dna-{{ section.id }} .hp-dna__dots {
+      display: none !important;
     }
   }
 
@@ -205,6 +278,10 @@
     .hp-dna-{{ section.id }} .hp-dna__icon-glow,
     .hp-dna-{{ section.id }} .hp-dna__svg-accent {
       animation: none !important;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__grid {
+      scroll-behavior: auto;
     }
   }
 {%- endstyle -%}
@@ -222,9 +299,9 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="hp-dna__grid">
+      <div class="hp-dna__grid" data-hp-dna-track role="list">
         {%- for block in section.blocks -%}
-          <div class="hp-dna__item" {{ block.shopify_attributes }}>
+          <div class="hp-dna__item" role="listitem" {{ block.shopify_attributes }}>
             <div class="hp-dna__icon-wrap">
               <div
                 class="hp-dna__icon-badge"
@@ -285,9 +362,87 @@
           </div>
         {%- endfor -%}
       </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="hp-dna__dots" data-hp-dna-dots aria-hidden="true">
+          {%- for block in section.blocks -%}
+            <button type="button" class="hp-dna__dot{% if forloop.first %} is-active{% endif %}" data-hp-dna-dot="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </section>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-hp-dna-section="{{ section.id }}"]');
+    if (!root) return;
+
+    var track = root.querySelector('[data-hp-dna-track]');
+    var dots = root.querySelectorAll('[data-hp-dna-dot]');
+    if (!track || !dots.length) return;
+
+    var mq = window.matchMedia('(max-width: 749px)');
+    var items = track.querySelectorAll('.hp-dna__item');
+    var ticking = false;
+
+    function setActive(index) {
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function updateFromScroll() {
+      if (!mq.matches || !items.length) return;
+      var trackRect = track.getBoundingClientRect();
+      var best = 0;
+      var bestDist = Infinity;
+      items.forEach(function (item, i) {
+        var rect = item.getBoundingClientRect();
+        var dist = Math.abs(rect.left - trackRect.left - 8);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      });
+      setActive(best);
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        updateFromScroll();
+        ticking = false;
+      });
+    }
+
+    track.addEventListener('scroll', onScroll, { passive: true });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        if (!mq.matches) return;
+        var index = Number(dot.getAttribute('data-hp-dna-dot') || 0);
+        var target = items[index];
+        if (!target) return;
+        track.scrollTo({
+          left: target.offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0),
+          behavior: 'smooth'
+        });
+        setActive(index);
+      });
+    });
+
+    if (mq.addEventListener) {
+      mq.addEventListener('change', updateFromScroll);
+    } else if (mq.addListener) {
+      mq.addListener(updateFromScroll);
+    }
+
+    updateFromScroll();
+  })();
+</script>
 
 {% schema %}
 {
