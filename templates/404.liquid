@@ -1,20 +1,31 @@
 {%- comment -%}
   Custom 404.
   Shopify serves this template for any URL with no matching resource.
-  We use it so key routes resolve even when no Shopify Page record exists yet:
-    /pages/vanrosector      -> renders snippets/brand-vanrosector
-    /pages/science-of-raw   -> renders snippets/brand-science-of-raw
-    /pages/faq              -> redirect to working FAQ route
-  Any other unmatched URL shows the normal not-found message below.
-
-  Note: these brand URLs still return an HTTP 404 status. That is fine for
-  visitors (the page looks and works like a home page), but for SEO the
-  proper long-term fix is to create the Pages in Admin and assign the
-  matching templates — the page route then takes over before this 404.
+  Brand homes still render here when no Admin page exists:
+    /pages/vanrosector      -> snippets/brand-vanrosector
+    /pages/science-of-raw   -> snippets/brand-science-of-raw
+  FAQ routes (/pages/faq, /pages/faqs) redirect to /search?view=faq.
+  Path matching uses JS because request.path is often empty/wrong on 404.
 {%- endcomment -%}
 
-{%- comment -%} Match against several URL signals — request.path can be empty on some 404 responses, so canonical_url / page_description are checked too. {%- endcomment -%}
-{%- capture req -%}{{ request.path }} {{ canonical_url }}{%- endcapture -%}
+<script>
+  (function () {
+    try {
+      var path = (window.location.pathname || '').toLowerCase().replace(/\/+$/, '');
+      if (
+        path === '/pages/faq' ||
+        path === '/pages/faqs' ||
+        path === '/faq' ||
+        path === '/faqs' ||
+        /\/pages\/faqs?$/.test(path)
+      ) {
+        window.location.replace('/search?view=faq' + (window.location.search || ''));
+      }
+    } catch (e) {}
+  })();
+</script>
+
+{%- capture req -%}{{ request.path }} {{ canonical_url }} {{ request.path | default: '' }}{%- endcapture -%}
 {%- assign req = req | downcase -%}
 
 {%- if req contains 'vanrosector' -%}
@@ -23,12 +34,8 @@
 {%- elsif req contains 'science-of-raw' -%}
   {%- render 'brand-science-of-raw' -%}
 
-{%- elsif req contains '/pages/faq' or req contains 'pages/faqs' or req == ' faq ' or req contains ' /faq ' or req contains '/faq?' or req contains '/faq/' -%}
-  {%- capture faq_redirect -%}{% render 'faq-url' %}{%- endcapture -%}
-  {%- assign faq_redirect = faq_redirect | strip -%}
-  {%- if faq_redirect == blank or faq_redirect contains '/pages/faq' -%}
-    {%- assign faq_redirect = '/search?view=faq' -%}
-  {%- endif -%}
+{%- elsif req contains 'pages/faq' or req contains 'pages/faqs' or req contains '/faq' -%}
+  {%- assign faq_redirect = '/search?view=faq' -%}
   <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#f7f7f8; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
     <div style="max-width:420px; width:100%; text-align:center;">
       <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF2B2B; margin:0 0 12px;">Hague Protect</p>
@@ -38,9 +45,7 @@
     </div>
   </section>
   <meta http-equiv="refresh" content="0;url={{ faq_redirect }}">
-  <script>
-    window.location.replace({{ faq_redirect | json }});
-  </script>
+  <script>window.location.replace({{ faq_redirect | json }});</script>
 
 {%- else -%}
   <section style="font-family:'Inter',sans-serif; background:#f4f4f5; padding:120px 20px; min-height:60vh; display:flex; align-items:center; justify-content:center;">
@@ -52,10 +57,15 @@
         <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search the store…" style="flex:1; min-width:0; font-family:inherit; font-size:15px; padding:13px 16px; border:1px solid rgba(0,0,0,0.15); border-radius:100px; outline:none;">
         <button type="submit" style="font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:#111; border:none; padding:13px 22px; border-radius:100px; cursor:pointer;">Search</button>
       </form>
-      <a href="/" style="display:inline-flex; align-items:center; gap:9px; font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:#FF2B2B; padding:14px 30px; border-radius:100px; text-decoration:none;">
-        Back to Home
-        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+        <a href="/search?view=faq" style="display:inline-flex; align-items:center; gap:9px; font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#111; background:#fff; border:1px solid rgba(0,0,0,0.15); padding:14px 26px; border-radius:100px; text-decoration:none;">
+          View FAQs
+        </a>
+        <a href="/" style="display:inline-flex; align-items:center; gap:9px; font-family:inherit; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:#FF2B2B; padding:14px 30px; border-radius:100px; text-decoration:none;">
+          Back to Home
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h11M8 1l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 {%- endif -%}

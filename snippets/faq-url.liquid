@@ -1,14 +1,7 @@
 {%- comment -%}
   Canonical FAQ URL for Hague Protect.
-  Prefers a real Online Store page (handle: faq or faqs) with the faq template.
-  Falls back to the search alternate template that ships with this theme.
+  Always use the theme search alternate template — it ships with full FAQ
+  content and does not depend on a Shopify Admin page existing.
+  (Create Pages → FAQ with template "faq" later for a cleaner /pages/faq URL.)
 {%- endcomment -%}
-{%- liquid
-  if pages['faq'] != blank
-    echo pages['faq'].url
-  elsif pages['faqs'] != blank
-    echo pages['faqs'].url
-  else
-    echo routes.search_url | append: '?view=faq'
-  endif
--%}
+{{- routes.search_url -}}?view=faq
