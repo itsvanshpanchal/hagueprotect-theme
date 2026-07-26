@@ -392,7 +392,7 @@
             elsif shop.privacy_policy != blank
               assign privacy_href = shop.privacy_policy.url
             else
-              assign privacy_href = '/pages/privacy-policy'
+              assign privacy_href = '/search?view=policies&tab=privacy'
             endif
 
             if section.settings.terms_policy_page != blank
@@ -404,7 +404,7 @@
             elsif shop.terms_of_service != blank
               assign terms_href = shop.terms_of_service.url
             else
-              assign terms_href = '/pages/terms-of-service'
+              assign terms_href = '/search?view=policies&tab=terms'
             endif
 
             if section.settings.refund_policy_page != blank
@@ -413,10 +413,12 @@
               assign refund_href = section.settings.refund_policy_url
             elsif pages['refund-policy'] != blank
               assign refund_href = pages['refund-policy'].url
+            elsif pages['return-policy'] != blank
+              assign refund_href = pages['return-policy'].url
             elsif shop.refund_policy != blank
               assign refund_href = shop.refund_policy.url
             else
-              assign refund_href = '/pages/refund-policy'
+              assign refund_href = '/search?view=policies&tab=refunds'
             endif
 
             if section.settings.shipping_policy_page != blank
@@ -425,16 +427,27 @@
               assign shipping_href = section.settings.shipping_policy_url
             elsif pages['shipping-policy'] != blank
               assign shipping_href = pages['shipping-policy'].url
+            elsif pages['shipping'] != blank
+              assign shipping_href = pages['shipping'].url
             elsif shop.shipping_policy != blank
               assign shipping_href = shop.shipping_policy.url
             else
-              assign shipping_href = '/pages/shipping-policy'
+              assign shipping_href = '/search?view=policies&tab=shipping'
+            endif
+
+            if pages['saferchoice'] != blank
+              assign safer_href = pages['saferchoice'].url
+            elsif pages['safer-choice'] != blank
+              assign safer_href = pages['safer-choice'].url
+            else
+              assign safer_href = '/search?view=policies&tab=saferchoice'
             endif
           -%}
           <a href="{{ privacy_href }}" class="footer__link">Privacy Policy</a>
           <a href="{{ terms_href }}" class="footer__link">Terms of Service</a>
           <a href="{{ refund_href }}" class="footer__link">Refund Policy</a>
           <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
+          <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
         </nav>
       </div>
 

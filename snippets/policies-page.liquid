@@ -1,0 +1,169 @@
+{%- liquid
+  assign active_tab = 'terms'
+  if request.query_string contains 'tab=privacy'
+    assign active_tab = 'privacy'
+  elsif request.query_string contains 'tab=shipping'
+    assign active_tab = 'shipping'
+  elsif request.query_string contains 'tab=refunds' or request.query_string contains 'tab=refund' or request.query_string contains 'tab=return'
+    assign active_tab = 'refunds'
+  elsif request.query_string contains 'tab=saferchoice' or request.query_string contains 'tab=safer'
+    assign active_tab = 'saferchoice'
+  elsif request.query_string contains 'tab=terms'
+    assign active_tab = 'terms'
+  endif
+-%}
+
+<div class="policies-page-wrapper" style="background-color: #fafafc; font-family: var(--font-family-sans, 'Inter', sans-serif); padding: 80px 0; min-height: 100vh;">
+  <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 24px;">
+
+    <div style="margin-bottom: 28px;">
+      <p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FF2B2B;">Hague Protect</p>
+      <h1 style="margin: 0; font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: #111;">Policies</h1>
+    </div>
+
+    <div style="display: flex; gap: 8px; border-bottom: 1px solid #e9e9eb; padding-bottom: 16px; margin-bottom: 40px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
+      <button type="button" onclick="switchPolicyTab('terms')" id="TabBtn-terms" class="policy-tab-btn{% if active_tab == 'terms' %} active{% endif %}" style="padding: 12px 20px; background: none; border: none; font-size: 13px; font-weight: {% if active_tab == 'terms' %}700{% else %}600{% endif %}; color: {% if active_tab == 'terms' %}#111{% else %}#777{% endif %}; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Terms of Service</button>
+      <button type="button" onclick="switchPolicyTab('shipping')" id="TabBtn-shipping" class="policy-tab-btn{% if active_tab == 'shipping' %} active{% endif %}" style="padding: 12px 20px; background: none; border: none; font-size: 13px; font-weight: {% if active_tab == 'shipping' %}700{% else %}600{% endif %}; color: {% if active_tab == 'shipping' %}#111{% else %}#777{% endif %}; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Shipping Policy</button>
+      <button type="button" onclick="switchPolicyTab('refunds')" id="TabBtn-refunds" class="policy-tab-btn{% if active_tab == 'refunds' %} active{% endif %}" style="padding: 12px 20px; background: none; border: none; font-size: 13px; font-weight: {% if active_tab == 'refunds' %}700{% else %}600{% endif %}; color: {% if active_tab == 'refunds' %}#111{% else %}#777{% endif %}; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Refunds &amp; Returns</button>
+      <button type="button" onclick="switchPolicyTab('privacy')" id="TabBtn-privacy" class="policy-tab-btn{% if active_tab == 'privacy' %} active{% endif %}" style="padding: 12px 20px; background: none; border: none; font-size: 13px; font-weight: {% if active_tab == 'privacy' %}700{% else %}600{% endif %}; color: {% if active_tab == 'privacy' %}#111{% else %}#777{% endif %}; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Privacy Policy</button>
+      <button type="button" onclick="switchPolicyTab('saferchoice')" id="TabBtn-saferchoice" class="policy-tab-btn{% if active_tab == 'saferchoice' %} active{% endif %}" style="padding: 12px 20px; background: none; border: none; font-size: 13px; font-weight: {% if active_tab == 'saferchoice' %}700{% else %}600{% endif %}; color: {% if active_tab == 'saferchoice' %}#111{% else %}#777{% endif %}; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;">Safer Choice</button>
+    </div>
+
+    <div style="background: #ffffff; border: 1px solid #e9e9eb; border-radius: 16px; padding: clamp(24px, 4vw, 48px); box-shadow: 0 4px 24px rgba(0,0,0,0.01);">
+
+      <div id="PolicyContent-terms" style="display: {% if active_tab == 'terms' %}block{% else %}none{% endif %};" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Terms of Service</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>Welcome to Hague Protect. These terms and conditions outline the rules and regulations for the use of Hague Protect's Website and its high-end care products.</p>
+          <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use Hague Protect if you do not agree to take all of the terms and conditions stated on this page.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">License</h3>
+          <p>Unless otherwise stated, Hague Protect and/or its licensors own the intellectual property rights for all material on Hague Protect. All intellectual property rights are reserved. You may access this from Hague Protect for your own personal use subjected to restrictions set in these terms and conditions.</p>
+          <p>You must not: republish, sell, rent, sub-license, reproduce, duplicate or redistribute content from Hague Protect.</p>
+        </div>
+      </div>
+
+      <div id="PolicyContent-shipping" style="display: {% if active_tab == 'shipping' %}block{% else %}none{% endif %};" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Shipping Policy</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>At Hague Protect, we aim to ensure your premium sneaker care products are processed and delivered as quickly as possible.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Processing Timeline</h3>
+          <p>Orders placed before 12pm IST on business days are usually shipped the same day. Weekend and holiday orders ship on the next working day.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Rates &amp; Times</h3>
+          <p>Delivery across India typically takes 2 to 5 business days depending on your location. Tracking details are shared once your order is dispatched. International shipping is available on eligible orders.</p>
+        </div>
+      </div>
+
+      <div id="PolicyContent-refunds" style="display: {% if active_tab == 'refunds' %}block{% else %}none{% endif %};" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Refunds &amp; Returns</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>We stand by our formulations and want you to be confident in your care kit. If a product does not meet your expectations, our returns process is designed to be straightforward.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Return Window</h3>
+          <p>Eligible unopened products can be returned within 30 days of purchase. Contact support with your order number to start a return. Opened or used products may not qualify unless defective or damaged in transit.</p>
+        </div>
+      </div>
+
+      <div id="PolicyContent-privacy" style="display: {% if active_tab == 'privacy' %}block{% else %}none{% endif %};" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Privacy Policy</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>We respect your privacy and are committed to protecting the personally identifiable information you may provide us through the Website. This policy explains what information may be collected, how we use it, and when we may share it with third parties.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Data Protection</h3>
+          <p>We implement security measures to help keep your personal data safe when you place an order or submit details through forms on our store. Payment information is processed through secure checkout providers.</p>
+        </div>
+      </div>
+
+      <div id="PolicyContent-saferchoice" style="display: {% if active_tab == 'saferchoice' %}block{% else %}none{% endif %};" class="policy-pane">
+        <h2 style="font-size: 28px; font-weight: 800; color: #111; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.02em;">Safer Choice</h2>
+        <div style="font-size: 15px; color: #555; line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+          <p>Hague Protect is built around safer, material-conscious care — formulas designed to clean and protect premium footwear without unnecessary harsh chemistry when used as directed.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Our commitment</h3>
+          <p>We prioritize pH-balanced systems that are suitable for leather, suede, nubuck, mesh, and canvas when used according to product instructions. Always patch-test delicate materials and follow the care steps on each product page.</p>
+          <h3 style="font-size: 18px; font-weight: 700; color: #111; margin-top: 16px; margin-bottom: 4px;">Questions</h3>
+          <p>For ingredient or safety questions about a specific kit, message us on WhatsApp or contact support and our team will help.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var policyTabIds = ['terms', 'shipping', 'refunds', 'privacy', 'saferchoice'];
+
+  function normalizePolicyTabId(id) {
+    if (!id) return 'terms';
+    var key = String(id).toLowerCase().replace(/^#/, '');
+    var aliases = {
+      'refund': 'refunds',
+      'refunds': 'refunds',
+      'refund-policy': 'refunds',
+      'return-policy': 'refunds',
+      'returns': 'refunds',
+      'return': 'refunds',
+      'shipping-policy': 'shipping',
+      'shipping': 'shipping',
+      'terms-of-service': 'terms',
+      'terms': 'terms',
+      'privacy-policy': 'privacy',
+      'privacy': 'privacy',
+      'saferchoice': 'saferchoice',
+      'safer-choice': 'saferchoice',
+      'safer': 'saferchoice'
+    };
+    if (aliases[key]) return aliases[key];
+    return policyTabIds.indexOf(key) !== -1 ? key : 'terms';
+  }
+
+  function switchPolicyTab(paneId, updateUrl) {
+    var tabId = normalizePolicyTabId(paneId);
+    var pane = document.getElementById('PolicyContent-' + tabId);
+    if (!pane) return;
+
+    document.querySelectorAll('.policy-pane').forEach(function(p) {
+      p.style.display = 'none';
+    });
+    pane.style.display = 'block';
+
+    document.querySelectorAll('.policy-tab-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+      btn.style.color = '#777';
+      btn.style.fontWeight = '600';
+    });
+
+    var activeBtn = document.getElementById('TabBtn-' + tabId);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      activeBtn.style.color = '#111';
+      activeBtn.style.fontWeight = '700';
+    }
+
+    if (updateUrl !== false && window.history && window.history.replaceState) {
+      var url = new URL(window.location.href);
+      url.searchParams.set('tab', tabId);
+      url.hash = '';
+      window.history.replaceState(null, '', url.pathname + url.search);
+    }
+  }
+
+  function getPolicyTabFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var tab = params.get('tab');
+    if (tab) return tab;
+    var hash = window.location.hash ? window.location.hash.replace('#', '') : '';
+    if (hash) return hash;
+    return {{ active_tab | json }};
+  }
+
+  function initPolicyTabsFromUrl() {
+    switchPolicyTab(getPolicyTabFromUrl(), false);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPolicyTabsFromUrl);
+  } else {
+    initPolicyTabsFromUrl();
+  }
+
+  window.addEventListener('hashchange', function() {
+    switchPolicyTab(getPolicyTabFromUrl(), false);
+  });
+</script>
