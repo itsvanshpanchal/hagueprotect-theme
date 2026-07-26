@@ -30,6 +30,7 @@
     font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
+    text-transform: none !important;
     color: #ffffff;
     margin: 0 0 32px 0;
     line-height: 1.05;
@@ -39,6 +40,10 @@
     transform: translateY(18px);
     transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
+  }
+
+  .hp-fam-sec__heading::first-letter {
+    text-transform: none !important;
   }
 
   .hp-fam-sec__heading.is-visible {

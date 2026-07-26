@@ -520,11 +520,19 @@ main h2.h2,
   -webkit-font-smoothing: antialiased;
 }
 
-/* Shop Our Premium Best — Bahnschrift Regular 400 only */
-.hp-fam-sec__heading {
+/* Shop Our Premium Best — Bahnschrift Regular 400, keep authored casing */
+.hp-fam-sec__heading,
+.hp-fam-sec__heading:not(:has(.hp-heading-line)),
+.hp-fam-sec__heading .hp-heading-line {
   font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-weight: 400 !important;
   font-style: normal !important;
+  text-transform: none !important;
+}
+
+.hp-fam-sec__heading:not(:has(.hp-heading-line))::first-letter,
+.hp-fam-sec__heading .hp-heading-line::first-letter {
+  text-transform: none !important;
 }
 
 /* Sentence case: first letter capital, rest lowercase — Hero excluded */
@@ -533,7 +541,6 @@ main h2.h2,
 .bs-coverflow__heading .hp-heading-line,
 .fb__title .hp-heading-line,
 .fc-heading .hp-heading-line,
-.hp-fam-sec__heading .hp-heading-line,
 .mat-headline .hp-heading-line,
 .feature-grid__heading .hp-heading-line,
 .trust-statement__heading .hp-heading-line,
@@ -567,7 +574,6 @@ main h2.h2,
 .bs-coverflow__heading .hp-heading-line::first-letter,
 .fb__title .hp-heading-line::first-letter,
 .fc-heading .hp-heading-line::first-letter,
-.hp-fam-sec__heading .hp-heading-line::first-letter,
 .mat-headline .hp-heading-line::first-letter,
 .feature-grid__heading .hp-heading-line::first-letter,
 .trust-statement__heading .hp-heading-line::first-letter,
@@ -615,7 +621,6 @@ main h2.h2,
 .bs-coverflow__heading:not(:has(.hp-heading-line)),
 .fb__title:not(:has(.hp-heading-line)),
 .fc-heading:not(:has(.hp-heading-line)),
-.hp-fam-sec__heading:not(:has(.hp-heading-line)),
 .mat-headline:not(:has(.hp-heading-line)),
 .feature-grid__heading:not(:has(.hp-heading-line)),
 .trust-statement__heading:not(:has(.hp-heading-line)),
@@ -641,7 +646,6 @@ main h2.h2,
 .bs-coverflow__heading:not(:has(.hp-heading-line))::first-letter,
 .fb__title:not(:has(.hp-heading-line))::first-letter,
 .fc-heading:not(:has(.hp-heading-line))::first-letter,
-.hp-fam-sec__heading:not(:has(.hp-heading-line))::first-letter,
 .mat-headline:not(:has(.hp-heading-line))::first-letter,
 .feature-grid__heading:not(:has(.hp-heading-line))::first-letter,
 .trust-statement__heading:not(:has(.hp-heading-line))::first-letter,
