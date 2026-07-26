@@ -248,22 +248,46 @@
       gap: 8px;
       margin-top: 18px;
       padding-right: var(--homepage-section-gutter, 16px);
+      line-height: 0;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      border: none;
-      padding: 0;
-      background: rgba(255, 255, 255, 0.28);
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      box-sizing: border-box;
+      width: 8px !important;
+      height: 8px !important;
+      min-width: 8px !important;
+      min-height: 8px !important;
+      max-width: 8px !important;
+      max-height: 8px !important;
+      margin: 0;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      flex: 0 0 8px;
+      aspect-ratio: 1 / 1;
+      line-height: 0;
+      font-size: 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.35);
       cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease;
+      transform: none;
+      transition: background-color 0.2s ease, width 0.2s ease, border-radius 0.2s ease, max-width 0.2s ease;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__dot.is-active {
+      width: 18px !important;
+      min-width: 18px !important;
+      max-width: 18px !important;
+      height: 8px !important;
+      min-height: 8px !important;
+      max-height: 8px !important;
+      flex: 0 0 18px;
+      border-radius: 999px !important;
       background: var(--hp-dna-accent, #FF2B2B);
-      transform: scale(1.2);
+      transform: none;
     }
   }
 
