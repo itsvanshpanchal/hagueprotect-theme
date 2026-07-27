@@ -109,7 +109,26 @@
     position: relative !important;
     transform-origin: left center !important;
     line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
     -webkit-font-smoothing: antialiased !important;
+  }
+
+  /* Force every material label (Soles, Deodrizer, Denim, etc.) to match */
+  .mat-menu-item.mat-font,
+  .mat-menu-item-text.mat-font,
+  .mat-menu-item[class*="mat-font--"],
+  .mat-menu-item-text[class*="mat-font--"] {
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-size: inherit !important;
+    font-weight: var(--font-weight-h2, 400) !important;
+    font-style: var(--font-style-h2, normal) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.1 !important;
+    text-transform: none !important;
+  }
+
+  .mat-menu-item .mat-menu-item-text {
+    font-size: inherit !important;
   }
 
   .mat-menu-item {

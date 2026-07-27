@@ -12,6 +12,14 @@
     assign mat_key = 'suede'
   elsif s contains 'leather'
     assign mat_key = 'leather'
+  elsif s contains 'deodrizer' or s contains 'deodorizer' or s contains 'deo'
+    assign mat_key = 'deodrizer'
+  elsif s contains 'denim'
+    assign mat_key = 'denim'
+  elsif s contains 'hat'
+    assign mat_key = 'hat'
+  else
+    assign mat_key = 'default'
   endif
 -%}
 {%- if mat_key != blank -%}mat-font mat-font--{{ mat_key }}{%- endif -%}

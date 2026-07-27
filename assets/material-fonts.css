@@ -1,22 +1,37 @@
-/* Material menu typography — unified across Suede, Leather, Nubuck, Fabrics, Soles */
-.mat-font,
-[class*="mat-font--"],
+/* Material menu typography — same handwriting/display look for every label */
+.mat-section .mat-menu-item,
+.mat-section .mat-menu-item-text,
+.mat-section .mat-menu-item.mat-font,
+.mat-section .mat-menu-item-text.mat-font,
 .mat-section .mat-menu-item[class*="mat-font--"],
 .mat-section .mat-menu-item-text[class*="mat-font--"] {
-  font-family: var(--font-family-sans) !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-weight: var(--font-weight-h2, 400) !important;
+  font-style: var(--font-style-h2, normal) !important;
   text-transform: none !important;
-  letter-spacing: -0.03em !important;
+  letter-spacing: -0.02em !important;
   line-height: 1.1 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Keep how-to-use / other mat-font labels consistent when outside the showcase */
+.mat-font,
+[class*="mat-font--"] {
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-weight: var(--font-weight-h2, 400) !important;
+  font-style: var(--font-style-h2, normal) !important;
+  text-transform: none !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+}
+
 @media screen and (max-width: 768px) {
+  .mat-section .mat-menu-item,
+  .mat-section .mat-menu-item-text,
   .mat-section .mat-menu-item[class*="mat-font--"],
   .mat-section .mat-menu-item-text[class*="mat-font--"] {
     text-transform: none !important;
-    letter-spacing: -0.03em !important;
+    letter-spacing: -0.02em !important;
   }
 }
