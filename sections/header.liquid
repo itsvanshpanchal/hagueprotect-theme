@@ -874,14 +874,13 @@
       border-bottom: none;
     }
 
-    /* Mobile: logo on top, action icons below, partner brands under that */
+    /* Mobile: three brand logos on top, action icons below */
     .header-top__inner {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       grid-template-areas:
-        "logo"
-        "actions"
-        "partners";
+        "logos"
+        "actions";
       align-items: center;
       justify-content: stretch;
       padding: 10px var(--site-padding, 16px) 8px;
@@ -889,43 +888,48 @@
     }
 
     .header__logo-group {
-      display: contents;
-      width: auto;
-      max-width: none;
-      min-width: 0;
-    }
-
-    .header__logo-link--primary {
-      grid-area: logo;
-      justify-self: start;
-      align-self: center;
-      height: 36px;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .header__logo-link--primary .header__logo-img {
-      height: 34px;
-      width: auto;
-      max-width: min(var(--logo-primary-max, 200px), 70vw) !important;
-      object-fit: contain;
-    }
-
-    .header__logo-partners {
-      grid-area: partners;
+      grid-area: logos;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 14px;
+      gap: 10px;
       width: 100%;
+      max-width: 100%;
       min-width: 0;
-      margin-top: 0;
-      padding: 8px 0 2px;
-      border-top: 1px solid #ececec;
-      border-left: none;
-      padding-left: 0;
+    }
+
+    .header__logo-link--primary {
+      justify-self: start;
+      align-self: center;
+      height: 34px;
+      max-width: none;
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+
+    .header__logo-link--primary .header__logo-img {
+      height: 32px;
+      width: auto;
+      max-width: min(var(--logo-primary-max, 200px), 42vw) !important;
+      object-fit: contain;
+    }
+
+    .header__logo-partners {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      width: auto;
+      min-width: 0;
+      margin: 0;
+      padding: 0 0 0 10px;
+      border-top: none;
+      border-left: 1px solid #e8e8e8;
+      flex: 1 1 auto;
     }
 
     .header__logo-partners .header__logo-link {
@@ -933,7 +937,7 @@
       align-items: center;
       justify-content: center;
       height: 28px;
-      max-width: calc(50% - 7px);
+      max-width: min(28vw, 110px);
       line-height: 0;
       flex: 0 1 auto;
     }
@@ -973,6 +977,8 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+      padding-top: 2px;
+      border-top: 1px solid #ececec;
     }
 
     .header__account-container {
@@ -1001,13 +1007,18 @@
   }
 
   @media screen and (min-width: 600px) and (max-width: 1024px) {
+    .header__logo-group {
+      gap: 14px;
+    }
+
     .header__logo-link--primary .header__logo-img {
       height: 36px;
-      max-width: min(var(--logo-primary-max, 200px), 50vw) !important;
+      max-width: min(var(--logo-primary-max, 200px), 36vw) !important;
     }
 
     .header__logo-partners {
-      gap: 18px;
+      gap: 14px;
+      padding-left: 14px;
     }
 
     .header__logo-partners .header__logo-img {
@@ -1026,32 +1037,36 @@
       gap: 6px 0;
     }
 
+    .header__logo-group {
+      gap: 8px;
+    }
+
     .header__logo-link--primary {
-      height: 32px;
+      height: 30px;
     }
 
     .header__logo-link--primary .header__logo-img {
-      height: 30px;
-      max-width: min(var(--logo-primary-max, 200px), 72vw) !important;
+      height: 28px;
+      max-width: min(var(--logo-primary-max, 200px), 40vw) !important;
     }
 
     .header__logo-partners {
-      margin-top: 0;
-      padding-top: 7px;
-      gap: 12px;
+      padding-left: 8px;
+      gap: 8px;
     }
 
     .header__logo-partners .header__logo-link {
-      height: 26px;
+      height: 24px;
+      max-width: min(30vw, 100px);
     }
 
     .header__logo-partners .header__logo-img {
-      height: 20px !important;
+      height: 18px !important;
     }
 
     .header__logo-partners .header__logo-link--sor .header__logo-img,
     .header__logo-partners .header__logo-link--sor-main .header__logo-img {
-      height: 22px !important;
+      height: 20px !important;
     }
   }
 
