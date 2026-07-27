@@ -435,10 +435,6 @@
 
     {% render 'theme-login-overlay' %}
     {% render 'theme-dashboard-overlay' %}
-    {% render 'floating-contact' %}
-
-      </div>
-    </div>
 
     <script>
       function checkView() {
@@ -506,5 +502,7 @@
       window.addEventListener('hashchange', checkView);
       window.addEventListener('load', checkView);
     </script>
+
+    {% render 'floating-contact' %}
   </body>
 </html>

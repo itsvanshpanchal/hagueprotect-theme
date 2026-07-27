@@ -1,20 +1,30 @@
-{%- if settings.floating_contact_enable -%}
+{%- if settings.floating_contact_enable != false -%}
   {%- liquid
     assign wa_raw = settings.floating_whatsapp | default: '918882683366' | strip
-    assign wa_digits = wa_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
-    assign wa_message = settings.floating_whatsapp_message | default: "Hi Hague Protect, I'd like to know more about your products and sneaker care kits." | strip
+    assign wa_digits = wa_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' | replace: '.', ''
+    if wa_digits == blank
+      assign wa_digits = '918882683366'
+    endif
+
+    assign wa_message = settings.floating_whatsapp_message | strip
+    if wa_message == blank
+      assign wa_message = 'Hi Hague Protect, I would like to know more about your products and sneaker care kits.'
+    endif
+
     assign phone_raw = settings.floating_phone | default: '8882683366' | strip
-    assign phone_digits = phone_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
+    assign phone_digits = phone_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', '' | replace: '.', ''
+    if phone_digits == blank
+      assign phone_digits = '8882683366'
+    endif
     if phone_digits.size == 10
       assign phone_href = '91' | append: phone_digits
     else
       assign phone_href = phone_digits
     endif
-    assign wa_href = 'https://wa.me/' | append: wa_digits
-    if wa_message != blank
-      assign wa_text_param = wa_message | url_encode
-      assign wa_href = wa_href | append: '?text=' | append: wa_text_param
-    endif
+
+    # api.whatsapp.com is more reliable than wa.me for prefilled messages on mobile
+    assign wa_text_param = wa_message | url_encode
+    assign wa_href = 'https://api.whatsapp.com/send?phone=' | append: wa_digits | append: '&text=' | append: wa_text_param
   -%}
 
   <nav class="hp-float-contact" aria-label="Quick contact">
@@ -52,31 +62,36 @@
 
   <style>
     .hp-float-contact {
-      position: fixed;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 9990;
-      display: flex;
+      position: fixed !important;
+      right: 0 !important;
+      top: 50% !important;
+      bottom: auto !important;
+      left: auto !important;
+      transform: translateY(-50%) !important;
+      z-index: 2147483000 !important;
+      display: flex !important;
       flex-direction: column;
       gap: 10px;
       pointer-events: none;
+      margin: 0;
+      padding: 0;
     }
 
     .hp-float-contact__btn {
-      pointer-events: auto;
-      display: flex;
+      pointer-events: auto !important;
+      display: flex !important;
       align-items: center;
       justify-content: center;
       width: 52px;
       height: 48px;
-      margin-right: 0;
+      margin: 0;
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.06);
       border-right: none;
       border-radius: 999px 0 0 999px;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
-      text-decoration: none;
+      text-decoration: none !important;
+      cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, width 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
@@ -95,6 +110,7 @@
       width: 28px;
       height: 28px;
       margin-left: 2px;
+      pointer-events: none;
     }
 
     .hp-float-contact__icon svg {
@@ -110,9 +126,9 @@
 
     @media screen and (max-width: 749px) {
       .hp-float-contact {
-        top: auto;
-        bottom: 110px;
-        transform: none;
+        top: auto !important;
+        bottom: 120px !important;
+        transform: none !important;
         gap: 8px;
       }
 
