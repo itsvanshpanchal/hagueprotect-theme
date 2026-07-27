@@ -1,29 +1,44 @@
-/* Material menu typography — same handwriting/display look for every label */
+/* Material menu typography — one handwriting/display style for every label */
+.mat-font,
+[class*="mat-font--"],
 .mat-section .mat-menu-item,
 .mat-section .mat-menu-item-text,
 .mat-section .mat-menu-item.mat-font,
 .mat-section .mat-menu-item-text.mat-font,
 .mat-section .mat-menu-item[class*="mat-font--"],
-.mat-section .mat-menu-item-text[class*="mat-font--"] {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 400) !important;
-  font-style: var(--font-style-h2, normal) !important;
+.mat-section .mat-menu-item-text[class*="mat-font--"],
+.mat-font--suede,
+.mat-font--leather,
+.mat-font--nubuck,
+.mat-font--fabrics,
+.mat-font--soles,
+.mat-font--deodrizer,
+.mat-font--denim,
+.mat-font--hat,
+.mat-font--default {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
   text-transform: none !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Keep how-to-use / other mat-font labels consistent when outside the showcase */
-.mat-font,
-[class*="mat-font--"] {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 400) !important;
-  font-style: var(--font-style-h2, normal) !important;
-  text-transform: none !important;
-  letter-spacing: -0.02em !important;
+/* Deodrizer + Denim must match Suede / Leather / Soles exactly */
+.mat-font--deodrizer,
+.mat-font--denim,
+.mat-section .mat-menu-item.mat-font--deodrizer,
+.mat-section .mat-menu-item.mat-font--denim,
+.mat-section .mat-menu-item-text.mat-font--deodrizer,
+.mat-section .mat-menu-item-text.mat-font--denim {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  letter-spacing: -0.03em !important;
   line-height: 1.1 !important;
+  text-transform: none !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -32,6 +47,6 @@
   .mat-section .mat-menu-item[class*="mat-font--"],
   .mat-section .mat-menu-item-text[class*="mat-font--"] {
     text-transform: none !important;
-    letter-spacing: -0.02em !important;
+    letter-spacing: -0.03em !important;
   }
 }

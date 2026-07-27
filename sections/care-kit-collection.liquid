@@ -81,9 +81,19 @@
   }
 
   .ckc-{{ section.id }}__heading:not(.mat-font) {
-    font-family: var(--font-family-heading);
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    text-transform: none;
+  }
+
+  .ckc-{{ section.id }}__heading.mat-font,
+  .ckc-{{ section.id }}__heading.mat-font--deodrizer,
+  .ckc-{{ section.id }}__heading.mat-font--denim {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.03em !important;
+    text-transform: none !important;
   }
 
   .ckc-{{ section.id }}__desc {

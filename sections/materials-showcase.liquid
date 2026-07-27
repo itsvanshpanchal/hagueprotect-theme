@@ -98,10 +98,10 @@
 
   .mat-menu-item,
   .mat-menu-item-text {
-    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     font-size: min({{ section.settings.menu_font_size | default: 52 }}px, 60px) !important;
-    font-weight: var(--font-weight-h2, 400) !important;
-    font-style: var(--font-style-h2, normal) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     text-transform: none !important;
     text-decoration: none !important;
     transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
@@ -109,20 +109,24 @@
     position: relative !important;
     transform-origin: left center !important;
     line-height: 1.1 !important;
-    letter-spacing: -0.02em !important;
+    letter-spacing: -0.03em !important;
     -webkit-font-smoothing: antialiased !important;
   }
 
-  /* Force every material label (Soles, Deodrizer, Denim, etc.) to match */
+  /* Deodrizer + Denim — same size/weight/font as every other material label */
+  .mat-menu-item.mat-font--deodrizer,
+  .mat-menu-item.mat-font--denim,
+  .mat-menu-item-text.mat-font--deodrizer,
+  .mat-menu-item-text.mat-font--denim,
   .mat-menu-item.mat-font,
   .mat-menu-item-text.mat-font,
   .mat-menu-item[class*="mat-font--"],
   .mat-menu-item-text[class*="mat-font--"] {
-    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-    font-size: inherit !important;
-    font-weight: var(--font-weight-h2, 400) !important;
-    font-style: var(--font-style-h2, normal) !important;
-    letter-spacing: -0.02em !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: min({{ section.settings.menu_font_size | default: 52 }}px, 60px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    letter-spacing: -0.03em !important;
     line-height: 1.1 !important;
     text-transform: none !important;
   }
