@@ -1,13 +1,19 @@
 {%- if settings.floating_contact_enable -%}
   {%- liquid
-    assign wa_raw = settings.floating_whatsapp | default: '917009205008' | strip
+    assign wa_raw = settings.floating_whatsapp | default: '918882683366' | strip
     assign wa_digits = wa_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
-    assign phone_raw = settings.floating_phone | default: '7009205008' | strip
+    assign wa_message = settings.floating_whatsapp_message | default: "Hi Hague Protect, I'd like to know more about your products and sneaker care kits." | strip
+    assign phone_raw = settings.floating_phone | default: '8882683366' | strip
     assign phone_digits = phone_raw | replace: '+', '' | replace: ' ', '' | replace: '-', '' | replace: '(', '' | replace: ')', ''
     if phone_digits.size == 10
       assign phone_href = '91' | append: phone_digits
     else
       assign phone_href = phone_digits
+    endif
+    assign wa_href = 'https://wa.me/' | append: wa_digits
+    if wa_message != blank
+      assign wa_text_param = wa_message | url_encode
+      assign wa_href = wa_href | append: '?text=' | append: wa_text_param
     endif
   -%}
 
@@ -15,7 +21,7 @@
     {%- if wa_digits != blank -%}
       <a
         class="hp-float-contact__btn hp-float-contact__btn--whatsapp"
-        href="https://wa.me/{{ wa_digits }}"
+        href="{{ wa_href }}"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"

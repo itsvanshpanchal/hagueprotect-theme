@@ -1173,14 +1173,21 @@
         "type": "text",
         "id": "floating_whatsapp",
         "label": "WhatsApp number",
-        "default": "917009205008",
-        "info": "Country code + number, digits only (e.g. 917009205008)."
+        "default": "918882683366",
+        "info": "Country code + number, digits only (e.g. 918882683366)."
+      },
+      {
+        "type": "textarea",
+        "id": "floating_whatsapp_message",
+        "label": "WhatsApp pre-filled message",
+        "default": "Hi Hague Protect, I'd like to know more about your products and sneaker care kits.",
+        "info": "Opens in WhatsApp when visitors tap the icon."
       },
       {
         "type": "text",
         "id": "floating_phone",
         "label": "Call number",
-        "default": "7009205008",
+        "default": "8882683366",
         "info": "Shown as a tel: link. 10-digit Indian numbers get +91 automatically."
       }
     ]
