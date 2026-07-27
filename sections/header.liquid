@@ -874,17 +874,18 @@
       border-bottom: none;
     }
 
-    /* Mobile: primary + actions on row 1, partner brands on their own row */
+    /* Mobile: logo on top, action icons below, partner brands under that */
     .header-top__inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr);
       grid-template-areas:
-        "logo actions"
-        "partners partners";
+        "logo"
+        "actions"
+        "partners";
       align-items: center;
       justify-content: stretch;
       padding: 10px var(--site-padding, 16px) 8px;
-      gap: 0 8px;
+      gap: 8px 0;
     }
 
     .header__logo-group {
@@ -906,7 +907,7 @@
     .header__logo-link--primary .header__logo-img {
       height: 34px;
       width: auto;
-      max-width: min(var(--logo-primary-max, 200px), 52vw) !important;
+      max-width: min(var(--logo-primary-max, 200px), 70vw) !important;
       object-fit: contain;
     }
 
@@ -920,7 +921,7 @@
       gap: 14px;
       width: 100%;
       min-width: 0;
-      margin-top: 8px;
+      margin-top: 0;
       padding: 8px 0 2px;
       border-top: 1px solid #ececec;
       border-left: none;
@@ -968,6 +969,10 @@
       flex-shrink: 0;
       justify-self: end;
       align-self: center;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     .header__account-container {
@@ -998,7 +1003,7 @@
   @media screen and (min-width: 600px) and (max-width: 1024px) {
     .header__logo-link--primary .header__logo-img {
       height: 36px;
-      max-width: min(var(--logo-primary-max, 200px), 40vw) !important;
+      max-width: min(var(--logo-primary-max, 200px), 50vw) !important;
     }
 
     .header__logo-partners {
@@ -1018,7 +1023,7 @@
   @media screen and (max-width: 480px) {
     .header-top__inner {
       padding: 8px var(--site-padding, 16px) 6px;
-      gap: 0 6px;
+      gap: 6px 0;
     }
 
     .header__logo-link--primary {
@@ -1027,11 +1032,11 @@
 
     .header__logo-link--primary .header__logo-img {
       height: 30px;
-      max-width: min(var(--logo-primary-max, 200px), 48vw) !important;
+      max-width: min(var(--logo-primary-max, 200px), 72vw) !important;
     }
 
     .header__logo-partners {
-      margin-top: 6px;
+      margin-top: 0;
       padding-top: 7px;
       gap: 12px;
     }
