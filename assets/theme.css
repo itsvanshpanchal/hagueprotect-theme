@@ -610,10 +610,14 @@ main h2.h2,
 /* Script accent — last word stays on the SAME line as the heading */
 #MainContent .shopify-section h2 .hp-heading-accent,
 #MainContent .shopify-section .hp-heading-accent,
+#MainContent .shopify-section .mat-headline .hp-heading-accent,
 .hp-heading-line .hp-heading-accent,
+.mat-section .mat-headline .hp-heading-accent,
+.mat-headline .hp-heading-accent,
 .hp-heading-accent {
   display: inline !important;
-  font-family: var(--font-family-heading-accent, 'Luthon Southard Script', 'Brush Script MT', cursive) !important;
+  font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+  font-family: var(--font-family-heading-accent) !important;
   font-weight: var(--font-weight-heading-accent, 400) !important;
   font-style: var(--font-style-heading-accent, normal) !important;
   color: var(--section-heading-accent-color, #c9a227) !important;
@@ -624,18 +628,7 @@ main h2.h2,
   margin: 0;
   padding: 0;
   vertical-align: baseline;
-}
-
-/* Materials heading must not force white Bahnschrift onto the script accent */
-#MainContent .shopify-section .mat-headline .hp-heading-accent,
-.mat-section .mat-headline .hp-heading-accent,
-.mat-headline .hp-heading-accent {
-  font-family: var(--font-family-heading-accent, 'Luthon Southard Script', 'Brush Script MT', cursive) !important;
-  font-weight: var(--font-weight-heading-accent, 400) !important;
-  font-style: var(--font-style-heading-accent, normal) !important;
-  color: var(--section-heading-accent-color, #c9a227) !important;
-  font-size: var(--heading-accent-size, 1.2em) !important;
-  text-transform: none !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 #MainContent .shopify-section h2 .hp-heading-accent::first-letter,

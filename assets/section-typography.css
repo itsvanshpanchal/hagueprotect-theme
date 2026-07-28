@@ -68,6 +68,22 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
+/* Accent last-word must keep script font — never inherit Bahnschrift/H2 from the heading */
+#MainContent .shopify-section .hp-heading-accent,
+#MainContent .shopify-section h2 .hp-heading-accent,
+#MainContent .shopify-section .mat-headline .hp-heading-accent,
+#MainContent .shopify-section .bs-coverflow__heading .hp-heading-accent,
+#MainContent .shopify-section .trending-social__heading .hp-heading-accent,
+#MainContent .shopify-section .hp-fam-sec__heading .hp-heading-accent {
+  font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+  font-family: var(--font-family-heading-accent) !important;
+  font-weight: var(--font-weight-heading-accent, 400) !important;
+  font-style: var(--font-style-heading-accent, normal) !important;
+  font-size: var(--heading-accent-size, 1.2em) !important;
+  color: var(--section-heading-accent-color, #c9a227) !important;
+  text-transform: none !important;
+}
+
 #MainContent .shopify-section h3:not([class*="ai-story-banner"]),
 #MainContent .shopify-section h4,
 #MainContent .shopify-section h5,
