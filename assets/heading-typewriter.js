@@ -28,18 +28,81 @@
   /* Headings built from styled line spans (e.g. section-heading-text renders
      .hp-heading-line, hero renders .hero-heading-line). Type INTO those spans
      so per-line styling — casing, colored/second line, line breaks — survives.
-     Nested .hp-heading-accent stays inside one line (inline, not a 2nd line). */
-  function typeStructuredHeading(element, lineEls) {
-    element.dataset.typewriterActive = 'true';
+     Nested .hp-heading-accent is typed WITH its script font (not swapped at the end). */
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
 
-    var data = Array.prototype.map.call(lineEls, function (el) {
+  function parseLine(el) {
+    var accent = el.querySelector('.hp-heading-accent');
+    if (!accent) {
       return {
         el: el,
         text: (el.textContent || '').replace(/\s+/g, ' ').trim(),
         html: el.innerHTML,
-        hasAccent: !!el.querySelector('.hp-heading-accent')
+        hasAccent: false
       };
-    });
+    }
+
+    var clone = el.cloneNode(true);
+    var accentClone = clone.querySelector('.hp-heading-accent');
+    if (accentClone) accentClone.parentNode.removeChild(accentClone);
+    var mainText = (clone.textContent || '').replace(/\s+/g, ' ');
+    mainText = mainText.replace(/^\s+/, '').replace(/\s+$/, ' ');
+    if (mainText && !/\s$/.test(mainText)) mainText += ' ';
+
+    var accentText = (accent.textContent || '').replace(/\s+/g, ' ').trim();
+
+    return {
+      el: el,
+      mainText: mainText,
+      accentText: accentText,
+      accentClass: accent.className || 'hp-heading-accent',
+      accentStyle: accent.getAttribute('style') || '',
+      text: (mainText + accentText).replace(/\s+/g, ' ').trim(),
+      html: el.innerHTML,
+      hasAccent: true
+    };
+  }
+
+  function lineCharCount(d) {
+    return d.hasAccent ? d.mainText.length + d.accentText.length : d.text.length;
+  }
+
+  function renderLineProgress(d, charIndex, cursor) {
+    if (!d.hasAccent) {
+      d.el.textContent = d.text.substring(0, charIndex);
+      d.el.appendChild(cursor);
+      return;
+    }
+
+    var mainLen = Math.min(charIndex, d.mainText.length);
+    var accentLen = Math.max(0, charIndex - d.mainText.length);
+    var html = escapeHtml(d.mainText.substring(0, mainLen));
+
+    if (charIndex >= d.mainText.length) {
+      html +=
+        '<span class="' +
+        escapeHtml(d.accentClass) +
+        '"' +
+        (d.accentStyle ? ' style="' + escapeHtml(d.accentStyle) + '"' : '') +
+        '>' +
+        escapeHtml(d.accentText.substring(0, accentLen)) +
+        '</span>';
+    }
+
+    d.el.innerHTML = html;
+    d.el.appendChild(cursor);
+  }
+
+  function typeStructuredHeading(element, lineEls) {
+    element.dataset.typewriterActive = 'true';
+
+    var data = Array.prototype.map.call(lineEls, parseLine);
 
     var full = data
       .map(function (d) { return d.text; })
@@ -62,17 +125,15 @@
     var ci = 0;
 
     function finishLine(d) {
-      if (d.hasAccent) {
-        d.el.innerHTML = d.html;
-      }
+      d.el.innerHTML = d.html;
     }
 
     function tick() {
       var d = data[li];
-      d.el.textContent = d.text.substring(0, ci);
-      d.el.appendChild(cursor);
+      var total = lineCharCount(d);
+      renderLineProgress(d, ci, cursor);
 
-      if (ci < d.text.length) {
+      if (ci < total) {
         ci += 1;
         window.setTimeout(tick, speed);
       } else if (li < data.length - 1) {
