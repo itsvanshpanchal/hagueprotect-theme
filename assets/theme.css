@@ -613,13 +613,13 @@ main h2.h2,
 .hp-heading-line .hp-heading-accent,
 .hp-heading-accent {
   display: inline !important;
-  font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+  font-family: var(--font-family-heading-accent, 'Luthon Southard Script', 'Brush Script MT', cursive) !important;
+  font-weight: var(--font-weight-heading-accent, 400) !important;
+  font-style: var(--font-style-heading-accent, normal) !important;
   color: var(--section-heading-accent-color, #c9a227) !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
+  font-size: var(--heading-accent-size, 1.2em) !important;
   text-transform: none !important;
   letter-spacing: 0.01em !important;
-  font-size: 1.2em;
   line-height: inherit;
   margin: 0;
   padding: 0;

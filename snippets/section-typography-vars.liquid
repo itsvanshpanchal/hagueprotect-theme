@@ -17,24 +17,35 @@
   assign h2_style = section.settings.h2_font_style | default: settings.font_h2_style | default: 'normal'
   assign paragraph_style = section.settings.paragraph_font_style | default: settings.font_paragraph_style | default: 'normal'
   assign eyebrow_style = section.settings.eyebrow_font_style | default: settings.font_eyebrow_style | default: 'normal'
+
+  assign accent_family = section.settings.heading_accent_font_family | default: settings.font_heading_accent_family | default: 'luthon_southard_script'
+  assign accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
+  assign accent_style = section.settings.heading_accent_font_style | default: settings.font_heading_accent_style | default: 'normal'
+  if accent_family == blank or accent_family == 'theme_default'
+    assign accent_family = settings.font_heading_accent_family | default: 'luthon_southard_script'
+  endif
 -%}
 {%- capture h1_implied_weight -%}{% render 'hp-font-weight', font_key: h1_family %}{%- endcapture -%}
 {%- capture h2_implied_weight -%}{% render 'hp-font-weight', font_key: h2_family %}{%- endcapture -%}
 {%- capture paragraph_implied_weight -%}{% render 'hp-font-weight', font_key: paragraph_family %}{%- endcapture -%}
 {%- capture eyebrow_implied_weight -%}{% render 'hp-font-weight', font_key: eyebrow_family %}{%- endcapture -%}
+{%- capture accent_implied_weight -%}{% render 'hp-font-weight', font_key: accent_family %}{%- endcapture -%}
 {%- capture h1_named -%}{% render 'hp-font-is-named-face', font_key: h1_family %}{%- endcapture -%}
 {%- capture h2_named -%}{% render 'hp-font-is-named-face', font_key: h2_family %}{%- endcapture -%}
 {%- capture paragraph_named -%}{% render 'hp-font-is-named-face', font_key: paragraph_family %}{%- endcapture -%}
 {%- capture eyebrow_named -%}{% render 'hp-font-is-named-face', font_key: eyebrow_family %}{%- endcapture -%}
+{%- capture accent_named -%}{% render 'hp-font-is-named-face', font_key: accent_family %}{%- endcapture -%}
 {%- liquid
   assign h1_implied_weight = h1_implied_weight | strip
   assign h2_implied_weight = h2_implied_weight | strip
   assign paragraph_implied_weight = paragraph_implied_weight | strip
   assign eyebrow_implied_weight = eyebrow_implied_weight | strip
+  assign accent_implied_weight = accent_implied_weight | strip
   assign h1_named = h1_named | strip
   assign h2_named = h2_named | strip
   assign paragraph_named = paragraph_named | strip
   assign eyebrow_named = eyebrow_named | strip
+  assign accent_named = accent_named | strip
 
   if h1_named != blank
     assign h1_weight = '400'
@@ -60,6 +71,12 @@
   elsif eyebrow_implied_weight != '400'
     assign eyebrow_weight = eyebrow_implied_weight
   endif
+  if accent_named != blank
+    assign accent_weight = '400'
+    assign accent_style = 'normal'
+  elsif accent_implied_weight != '400'
+    assign accent_weight = accent_implied_weight
+  endif
 
   assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
   assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44
@@ -71,6 +88,9 @@
   assign paragraph_mobile = section.settings.paragraph_font_size_mobile | default: settings.font_paragraph_size_mobile | default: 15
   assign eyebrow_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 12
   assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 12
+  assign accent_desktop = section.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62
+  assign accent_mobile = section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
+  assign accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
 
   case section.type
     when 'hero', 'corporate-gifting-hero', 'business-hero', 'premium-scrolling-hero'
@@ -152,16 +172,19 @@
   --font-family-subheading: {% render 'hp-font-stack', font_key: h2_family %};
   --font-family-sans: {% render 'hp-font-stack', font_key: paragraph_family %};
   --font-family-eyebrow: {% render 'hp-font-stack', font_key: eyebrow_family %};
+  --font-family-heading-accent: {% render 'hp-font-stack', font_key: accent_family %};
   --font-weight-heading: {{ h1_weight }};
   --heading-weight: {{ h1_weight }};
   --subheading-weight: {{ h2_weight }};
   --font-weight-h2: {{ h2_weight }};
   --font-weight-sans: {{ paragraph_weight }};
   --font-weight-eyebrow: {{ eyebrow_weight }};
+  --font-weight-heading-accent: {{ accent_weight }};
   --font-style-heading: {{ h1_style }};
   --font-style-h2: {{ h2_style }};
   --font-style-sans: {{ paragraph_style }};
   --font-style-eyebrow: {{ eyebrow_style }};
+  --font-style-heading-accent: {{ accent_style }};
   --heading-size-hero: clamp({{ hero_h1_desktop }}px, {{ hero_h1_desktop | divided_by: 16.0 }}vw, {{ hero_h1_desktop | times: 1.5 | round }}px);
   --heading-size-xl: clamp({{ h1_desktop }}px, {{ h1_desktop | divided_by: 16.0 }}vw, {{ h1_desktop | times: 1.5 | round }}px);
   --section-heading-size: {{ h2_desktop }}px;
@@ -169,6 +192,8 @@
   --section-subheading-size: {{ paragraph_desktop }}px;
   --section-label-size: {{ eyebrow_desktop }}px;
   --body-font-size: {{ paragraph_desktop }}px;
+  --heading-accent-size: {{ accent_desktop }}px;
+  --section-heading-accent-color: {{ accent_color }};
   --section-subheading-spacing-top: {{ title_desc_spacing_desktop }}px;
   --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
   --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
@@ -181,6 +206,7 @@
     --section-subheading-size: {{ paragraph_mobile }}px;
     --section-label-size: {{ eyebrow_mobile }}px;
     --body-font-size: {{ paragraph_mobile }}px;
+    --heading-accent-size: {{ accent_mobile }}px;
     --section-subheading-spacing-top: {{ title_desc_spacing_mobile }}px;
     --section-label-to-title-gap: {{ eyebrow_title_spacing_mobile }}px;
     --section-label-margin-bottom: {{ eyebrow_title_spacing_mobile }}px;

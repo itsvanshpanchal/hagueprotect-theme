@@ -67,6 +67,25 @@
   assign paragraph_mobile = settings.font_paragraph_size_mobile | default: 15
   assign eyebrow_desktop = settings.font_eyebrow_size_desktop | default: 12
   assign eyebrow_mobile = settings.font_eyebrow_size_mobile | default: 12
+
+  assign accent_family = settings.font_heading_accent_family | default: 'luthon_southard_script'
+  assign accent_weight = settings.font_heading_accent_weight | default: '400'
+  assign accent_style = settings.font_heading_accent_style | default: 'normal'
+  assign accent_desktop = settings.font_heading_accent_size_desktop | default: 62
+  assign accent_mobile = settings.font_heading_accent_size_mobile | default: 40
+  assign accent_color = settings.heading_accent_color | default: '#c9a227'
+-%}
+{%- capture accent_implied_weight -%}{% render 'hp-font-weight', font_key: accent_family %}{%- endcapture -%}
+{%- capture accent_named -%}{% render 'hp-font-is-named-face', font_key: accent_family %}{%- endcapture -%}
+{%- liquid
+  assign accent_implied_weight = accent_implied_weight | strip
+  assign accent_named = accent_named | strip
+  if accent_named != blank
+    assign accent_weight = '400'
+    assign accent_style = 'normal'
+  elsif accent_implied_weight != '400'
+    assign accent_weight = accent_implied_weight
+  endif
 -%}
 <style>
   :root {
@@ -75,16 +94,19 @@
     --font-family-subheading: {% render 'hp-font-stack', font_key: h2_family %};
     --font-family-sans: {% render 'hp-font-stack', font_key: paragraph_family %};
     --font-family-eyebrow: {% render 'hp-font-stack', font_key: eyebrow_family %};
+    --font-family-heading-accent: {% render 'hp-font-stack', font_key: accent_family %};
     --font-weight-heading: {{ h1_weight }};
   --heading-weight: {{ h1_weight }};
   --subheading-weight: {{ h2_weight }};
     --font-weight-h2: {{ h2_weight }};
     --font-weight-sans: {{ paragraph_weight }};
     --font-weight-eyebrow: {{ eyebrow_weight }};
+    --font-weight-heading-accent: {{ accent_weight }};
     --font-style-heading: {{ h1_style }};
     --font-style-h2: {{ h2_style }};
     --font-style-sans: {{ paragraph_style }};
     --font-style-eyebrow: {{ eyebrow_style }};
+    --font-style-heading-accent: {{ accent_style }};
     /* Floor = current desktop size (never smaller than today); grows with the
        viewport past ~1600px, capped at 1.5x so it stays sane on 4K/ultrawide. */
     --heading-size-hero: clamp({{ hero_h1_desktop }}px, {{ hero_h1_desktop | divided_by: 16.0 }}vw, {{ hero_h1_desktop | times: 1.5 | round }}px);
@@ -94,6 +116,8 @@
     --section-subheading-size: {{ paragraph_desktop }}px;
     --section-label-size: {{ eyebrow_desktop }}px;
     --body-font-size: {{ paragraph_desktop }}px;
+    --heading-accent-size: {{ accent_desktop }}px;
+    --section-heading-accent-color: {{ accent_color }};
   }
   @media screen and (max-width: 989px) {
     :root {
@@ -103,6 +127,7 @@
       --section-subheading-size: {{ paragraph_mobile }}px;
       --section-label-size: {{ eyebrow_mobile }}px;
       --body-font-size: {{ paragraph_mobile }}px;
+      --heading-accent-size: {{ accent_mobile }}px;
     }
   }
 </style>

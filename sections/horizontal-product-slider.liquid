@@ -66,9 +66,11 @@
 
   .hp-fam-sec__heading .hp-heading-accent {
     display: inline !important;
-    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    font-family: var(--font-family-heading-accent, 'Luthon Southard Script', 'Brush Script MT', cursive) !important;
+    font-weight: var(--font-weight-heading-accent, 400) !important;
+    font-style: var(--font-style-heading-accent, normal) !important;
     color: var(--section-heading-accent-color, #c9a227) !important;
-    font-size: 1.2em !important;
+    font-size: var(--heading-accent-size, 1.2em) !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
   }
@@ -626,7 +628,7 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true %}</h2>
+      <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -896,6 +898,148 @@
       "id": "heading_line2_color",
       "label": "Heading second line color",
       "default": "#6b6b6b"
+    },
+    {
+      "type": "header",
+      "content": "Heading accent word (script)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for the highlighted last word only (e.g. Care, Material, Story, Best, Media). Leave font on theme default to use Theme settings > Typography."
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_family",
+      "label": "Accent word font",
+      "options": [
+        {
+          "value": "theme_default",
+          "label": "Use theme Typography setting"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "darker_grotesque",
+          "label": "Darker Grotesque Regular"
+        },
+        {
+          "value": "darker_grotesque_semibold",
+          "label": "Darker Grotesque Semibold"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        }
+      ],
+      "default": "theme_default"
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_weight",
+      "label": "Accent word weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_style",
+      "label": "Accent word style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "heading_accent_font_size_desktop",
+      "label": "Accent word size — computer",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 62
+    },
+    {
+      "type": "range",
+      "id": "heading_accent_font_size_mobile",
+      "label": "Accent word size — phone",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Accent word color",
+      "default": "#c9a227"
     },
     {
       "type": "color",

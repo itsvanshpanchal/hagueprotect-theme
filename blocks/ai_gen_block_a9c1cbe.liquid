@@ -59,6 +59,28 @@
   elsif button_implied != '400'
     assign button_weight = button_implied
   endif
+
+  assign accent_family = block.settings.heading_accent_font_family | default: settings.font_heading_accent_family | default: 'luthon_southard_script'
+  if accent_family == blank or accent_family == 'theme_default'
+    assign accent_family = settings.font_heading_accent_family | default: 'luthon_southard_script'
+  endif
+  assign accent_weight = block.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
+  assign accent_style = block.settings.heading_accent_font_style | default: settings.font_heading_accent_style | default: 'normal'
+  assign accent_size = block.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62
+  assign accent_size_mobile = block.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
+  assign accent_color = block.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
+-%}
+{%- capture accent_implied -%}{% render 'hp-font-weight', font_key: accent_family %}{%- endcapture -%}
+{%- capture accent_named -%}{% render 'hp-font-is-named-face', font_key: accent_family %}{%- endcapture -%}
+{%- liquid
+  assign accent_implied = accent_implied | strip
+  assign accent_named = accent_named | strip
+  if accent_named != blank
+    assign accent_weight = '400'
+    assign accent_style = 'normal'
+  elsif accent_implied != '400'
+    assign accent_weight = accent_implied
+  endif
 -%}
 
 
@@ -66,11 +88,13 @@
 {%- capture subheading_stack -%}{% render 'hp-font-stack', font_key: subheading_family %}{%- endcapture -%}
 {%- capture text_stack -%}{% render 'hp-font-stack', font_key: text_family %}{%- endcapture -%}
 {%- capture button_stack -%}{% render 'hp-font-stack', font_key: button_family %}{%- endcapture -%}
+{%- capture accent_stack -%}{% render 'hp-font-stack', font_key: accent_family %}{%- endcapture -%}
 {%- liquid
   assign heading_stack = heading_stack | strip
   assign subheading_stack = subheading_stack | strip
   assign text_stack = text_stack | strip
   assign button_stack = button_stack | strip
+  assign accent_stack = accent_stack | strip
 -%}
 
 {% style %}
@@ -186,11 +210,19 @@
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
     display: inline !important;
-    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    color: var(--section-heading-accent-color, #c9a227) !important;
-    font-size: 1.2em !important;
+    font-family: {{ accent_stack }} !important;
+    font-weight: {{ accent_weight }} !important;
+    font-style: {{ accent_style }} !important;
+    color: {{ accent_color }} !important;
+    font-size: {{ accent_size }}px !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
+      font-size: {{ accent_size_mobile }}px !important;
+    }
   }
 
   #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
@@ -330,7 +362,7 @@
 
       {% if block.settings.heading != blank %}
         <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
-          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true %}
+          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true, accent_color: block.settings.heading_accent_color %}
         </div>
       {% endif %}
 
@@ -474,7 +506,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Edit overlay text here. Order on the banner: Subheading (eyebrow) \u2192 Heading \u2192 Body. Scroll down for Typography (font family / weight)."
+      "content": "Edit overlay text here. Order on the banner: Subheading (eyebrow) → Heading → Body. Scroll down for Typography (font family / weight)."
     },
     {
       "type": "header",
@@ -536,6 +568,148 @@
       "default": "#6b6b6b"
     },
     {
+      "type": "header",
+      "content": "Heading accent word (script)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font and size for the highlighted last word only (e.g. Care, Material, Story, Best, Media). Leave font on theme default to use Theme settings > Typography."
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_family",
+      "label": "Accent word font",
+      "options": [
+        {
+          "value": "theme_default",
+          "label": "Use theme Typography setting"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "darker_grotesque",
+          "label": "Darker Grotesque Regular"
+        },
+        {
+          "value": "darker_grotesque_semibold",
+          "label": "Darker Grotesque Semibold"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        }
+      ],
+      "default": "theme_default"
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_weight",
+      "label": "Accent word weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "heading_accent_font_style",
+      "label": "Accent word style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "heading_accent_font_size_desktop",
+      "label": "Accent word size — computer",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 62
+    },
+    {
+      "type": "range",
+      "id": "heading_accent_font_size_mobile",
+      "label": "Accent word size — phone",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Accent word color",
+      "default": "#c9a227"
+    },
+    {
       "type": "range",
       "id": "heading_size",
       "label": "Size",
@@ -593,7 +767,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Font controls for THIS banner only. Custom brand weights (Bahnschrift Bold, Inter 18pt Semibold, etc.) are at the TOP of each font family list. If text does not change, your background image may have text baked in \u2014 use a photo-only image and edit the text fields above."
+      "content": "Font controls for THIS banner only. Custom brand weights (Bahnschrift Bold, Inter 18pt Semibold, etc.) are at the TOP of each font family list. If text does not change, your background image may have text baked in — use a photo-only image and edit the text fields above."
     },
     {
       "type": "header",
