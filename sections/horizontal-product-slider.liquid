@@ -12,22 +12,81 @@
 
   .hp-fam-sec {
     position: relative;
-    padding: clamp(28px, 4.5vw, 48px) 0 0 0;
+    padding: 0;
+    margin: 0;
     width: 100%;
     box-sizing: border-box;
     overflow: visible;
   }
 
-  /* Stacked scroll slides — scoped architecture only; preserves existing card look */
-  #shopify-section-{{ section.id }} .hp-fam-stack {
+  /* Pinned animation stage — ~100vh visible, heading static, slides clip inside */
+  #shopify-section-{{ section.id }} .hp-fam-stage {
     position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 4.5vw, 48px) 0 0 0;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stage__layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stage__static {
+    position: relative;
+    z-index: 5;
+    flex: 0 0 auto;
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stage__viewport {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
     overflow: hidden;
     isolation: isolate;
     touch-action: pan-y;
   }
 
-  #shopify-section-{{ section.id }} .hp-fam-sec__slider-wrap {
+  #shopify-section-{{ section.id }} .hp-fam-sec__main-flex {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-sec__slider-left,
+  #shopify-section-{{ section.id }} .hp-fam-sec__slider-wrap,
+  #shopify-section-{{ section.id }} .hp-fam-sec__mobile-rail-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stack {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -38,8 +97,11 @@
 
   #shopify-section-{{ section.id }} .hp-fam-stack__panel {
     display: none;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    position: relative;
+    height: 100%;
+    overflow: hidden;
   }
 
   #shopify-section-{{ section.id }} .hp-fam-stack__panel.is-active {
@@ -47,31 +109,27 @@
   }
 
   #shopify-section-{{ section.id }} .hp-fam-stack__slide {
-    width: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  #shopify-section-{{ section.id }} .hp-fam-stack__slide--1 {
-    position: relative;
-    z-index: 1;
-    transform-origin: center center;
-    will-change: transform;
-  }
-
-  #shopify-section-{{ section.id }} .hp-fam-stack__slide--2 {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    transform: translate3d(0, 100%, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     will-change: transform;
-    background: transparent;
+    background-color: {{ section.settings.bg_color | default: '#ff1e43' }};
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stack__slide--1 {
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-stack__slide--2 {
+    z-index: 2;
+    transform: translate3d(0, 100%, 0);
   }
 
   #shopify-section-{{ section.id }} .hp-fam-stack__row {
@@ -79,6 +137,7 @@
     gap: clamp(20px, 4vw, 40px);
     align-items: flex-end;
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -95,8 +154,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--hp-fam-card-gap);
-    align-items: stretch;
+    align-items: end;
+    align-content: end;
     padding: 4px 0 12px;
+    height: 100%;
   }
 
   #shopify-section-{{ section.id }} .hp-fam-stack--mobile .hp-fam-stack__row .rail-card {
@@ -136,18 +197,32 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #shopify-section-{{ section.id }} .hp-fam-stack__slide--2 {
-      position: relative;
-      left: auto;
-      right: auto;
-      top: auto;
-      bottom: auto;
-      transform: none !important;
-      margin-top: 24px;
+    #shopify-section-{{ section.id }} .hp-fam-stage {
+      height: auto;
+      max-height: none;
+      overflow: visible;
     }
 
-    #shopify-section-{{ section.id }} .hp-fam-stack__slide--1 {
+    #shopify-section-{{ section.id }} .hp-fam-stage__viewport,
+    #shopify-section-{{ section.id }} .hp-fam-sec__main-flex,
+    #shopify-section-{{ section.id }} .hp-fam-stack,
+    #shopify-section-{{ section.id }} .hp-fam-stack__panel.is-active {
+      position: relative;
+      inset: auto;
+      height: auto;
+      overflow: visible;
+    }
+
+    #shopify-section-{{ section.id }} .hp-fam-stack__slide--1,
+    #shopify-section-{{ section.id }} .hp-fam-stack__slide--2 {
+      position: relative;
+      inset: auto;
+      height: auto;
       transform: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .hp-fam-stack__slide--2 {
+      margin-top: 24px;
     }
   }
 
@@ -631,7 +706,7 @@
 
     .hp-fam-sec__mobile-rail-wrap {
       display: block;
-      padding-bottom: 36px;
+      padding-bottom: 0;
       width: 100%;
       overflow: hidden;
     }
@@ -648,8 +723,12 @@
   }
 
   @media screen and (max-width: 767px) {
-    .hp-fam-sec {
+    #shopify-section-{{ section.id }} .hp-fam-stage {
       padding: 32px 0 0 0;
+    }
+
+    .hp-fam-sec {
+      padding: 0;
     }
 
     .hp-fam-sec__container {
@@ -761,228 +840,276 @@
 -%}
 
 <div class="hp-fam-sec" id="fam-{{ section.id }}">
-  {%- if section.settings.enable_video_bg -%}
-    <div class="hp-fam-sec__video-bg">
-      {%- if section.settings.video_bg != blank -%}
-        {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
-      {%- elsif section.settings.video_bg_filename != blank -%}
-        <video autoplay loop muted playsinline preload="auto" class="hp-fam-sec__video">
-          <source src="{{ section.settings.video_bg_filename | asset_url }}" type="video/mp4">
-        </video>
-      {%- endif -%}
-      <div class="hp-fam-sec__video-overlay"></div>
-    </div>
-  {%- endif -%}
-  <div class="hp-fam-sec__container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
-    {%- endif -%}
-
-    {%- if section.blocks.size > 0 -%}
-      <div class="hp-fam-sec__tabs">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'collection' or block.type == 'custom_images' -%}
-            <button
-              class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}"
-              type="button"
-              data-target="stack-desktop-{{ block.id }}"
-              data-mobile-target="stack-mobile-{{ block.id }}"
-            >
-              {%- if block.type == 'collection' -%}
-                {%- assign collection = block.settings.collection -%}
-                {{ block.settings.title | default: collection.title | default: 'Collection' | upcase }}
-              {%- else -%}
-                {{ block.settings.title | default: 'Custom' | upcase }}
-              {%- endif -%}
-            </button>
-          {%- endif -%}
-        {%- endfor -%}
+  <div class="hp-fam-stage" data-hp-fam-stage>
+    {%- if section.settings.enable_video_bg -%}
+      <div class="hp-fam-sec__video-bg">
+        {%- if section.settings.video_bg != blank -%}
+          {{ section.settings.video_bg | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
+        {%- elsif section.settings.video_bg_filename != blank -%}
+          <video autoplay loop muted playsinline preload="auto" class="hp-fam-sec__video">
+            <source src="{{ section.settings.video_bg_filename | asset_url }}" type="video/mp4">
+          </video>
+        {%- endif -%}
+        <div class="hp-fam-sec__video-overlay"></div>
       </div>
     {%- endif -%}
 
-    <div class="hp-fam-sec__main-flex">
-      {%- comment -%} DESKTOP: two-slide stacked overlay (same cards, scroll-scrubbed) {%- endcomment -%}
-      <div class="hp-fam-sec__slider-left hp-fam-sec__slider-left--desktop">
-        <div class="hp-fam-sec__slider-wrap">
-          <div class="hp-fam-stack hp-fam-stack--desktop" data-hp-fam-stack="desktop">
-            {%- if section.blocks.size > 0 -%}
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'collection' or block.type == 'custom_images' -%}
-                  {%- liquid
-                    assign stack_total = 0
-                    if block.type == 'custom_images'
-                      for i in (1..6)
-                        assign img_key = 'image_' | append: i
-                        if block.settings[img_key] != blank
-                          assign stack_total = stack_total | plus: 1
+    <div class="hp-fam-sec__container hp-fam-stage__layout">
+      <div class="hp-fam-stage__static">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="hp-fam-sec__tabs">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+                <button
+                  class="hp-fam-sec__tab {% if forloop.first %}is-active{% endif %}"
+                  type="button"
+                  data-target="stack-desktop-{{ block.id }}"
+                  data-mobile-target="stack-mobile-{{ block.id }}"
+                >
+                  {%- if block.type == 'collection' -%}
+                    {%- assign collection = block.settings.collection -%}
+                    {{ block.settings.title | default: collection.title | default: 'Collection' | upcase }}
+                  {%- else -%}
+                    {{ block.settings.title | default: 'Custom' | upcase }}
+                  {%- endif -%}
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="hp-fam-stage__viewport" data-hp-fam-viewport>
+        <div class="hp-fam-sec__main-flex">
+          {%- comment -%} DESKTOP: two absolute stacked slides {%- endcomment -%}
+          <div class="hp-fam-sec__slider-left hp-fam-sec__slider-left--desktop">
+            <div class="hp-fam-sec__slider-wrap">
+              <div class="hp-fam-stack hp-fam-stack--desktop" data-hp-fam-stack="desktop">
+                {%- if section.blocks.size > 0 -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+                      {%- liquid
+                        assign stack_total = 0
+                        if block.type == 'custom_images'
+                          for i in (1..6)
+                            assign img_key = 'image_' | append: i
+                            if block.settings[img_key] != blank
+                              assign stack_total = stack_total | plus: 1
+                            endif
+                          endfor
+                        else
+                          assign collection = block.settings.collection
+                          if collection != blank and collection.products.size > 0
+                            assign stack_total = collection.products.size
+                            if stack_total > section.settings.products_to_show
+                              assign stack_total = section.settings.products_to_show
+                            endif
+                          else
+                            assign stack_total = 4
+                          endif
                         endif
-                      endfor
-                    else
-                      assign collection = block.settings.collection
-                      if collection != blank and collection.products.size > 0
-                        assign stack_total = collection.products.size
-                        if stack_total > section.settings.products_to_show
-                          assign stack_total = section.settings.products_to_show
+                        assign slide1_count = stack_total | plus: 1 | divided_by: 2
+                        if slide1_count < 1
+                          assign slide1_count = 1
                         endif
-                      else
-                        assign stack_total = 4
-                      endif
-                    endif
-                    assign slide1_count = stack_total | plus: 1 | divided_by: 2
-                    if slide1_count < 1
-                      assign slide1_count = 1
-                    endif
-                  -%}
-                  <div
-                    class="hp-fam-stack__panel {% if forloop.first %}is-active{% endif %}"
-                    id="stack-desktop-{{ block.id }}"
-                    {{ block.shopify_attributes }}
-                  >
-                    <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
-                      <div class="hp-fam-stack__row">
-                        {%- if block.type == 'custom_images' -%}
-                          {%- assign img_idx = 0 -%}
-                          {%- for i in (1..6) -%}
-                            {%- assign img_key = 'image_' | append: i -%}
-                            {%- assign url_key = 'url_' | append: i -%}
-                            {%- if block.settings[img_key] != blank -%}
-                              {%- assign img_idx = img_idx | plus: 1 -%}
-                              {%- if img_idx <= slide1_count -%}
-                                <a href="{{ block.settings[url_key] | default: '#' }}" class="hp-fam-sec__card">
-                                  <img src="{{ block.settings[img_key] | image_url: width: 800 }}"
-                                       alt="Product"
-                                       class="hp-fam-sec__image"
-                                       loading="lazy"
-                                       draggable="false">
-                                </a>
+                      -%}
+                      <div
+                        class="hp-fam-stack__panel {% if forloop.first %}is-active{% endif %}"
+                        id="stack-desktop-{{ block.id }}"
+                        {{ block.shopify_attributes }}
+                      >
+                        <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
+                          <div class="hp-fam-stack__row">
+                            {%- if block.type == 'custom_images' -%}
+                              {%- assign img_idx = 0 -%}
+                              {%- for i in (1..6) -%}
+                                {%- assign img_key = 'image_' | append: i -%}
+                                {%- assign url_key = 'url_' | append: i -%}
+                                {%- if block.settings[img_key] != blank -%}
+                                  {%- assign img_idx = img_idx | plus: 1 -%}
+                                  {%- if img_idx <= slide1_count -%}
+                                    <a href="{{ block.settings[url_key] | default: '#' }}" class="hp-fam-sec__card">
+                                      <img src="{{ block.settings[img_key] | image_url: width: 800 }}"
+                                           alt="Product"
+                                           class="hp-fam-sec__image"
+                                           loading="lazy"
+                                           draggable="false">
+                                    </a>
+                                  {%- endif -%}
+                                {%- endif -%}
+                              {%- endfor -%}
+                            {%- elsif block.type == 'collection' -%}
+                              {%- assign collection = block.settings.collection -%}
+                              {%- if collection != blank and collection.products.size > 0 -%}
+                                {%- for product in collection.products limit: slide1_count -%}
+                                  <a href="{{ product.url }}" class="hp-fam-sec__card">
+                                    {%- if product.featured_media != blank -%}
+                                      <img src="{{ product.featured_media | image_url: width: 800 }}"
+                                           alt="{{ product.title | escape }}"
+                                           class="hp-fam-sec__image"
+                                           loading="lazy"
+                                           draggable="false">
+                                    {%- else -%}
+                                      {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                                    {%- endif -%}
+                                  </a>
+                                {%- endfor -%}
+                              {%- else -%}
+                                {%- for i in (1..slide1_count) -%}
+                                  <div class="hp-fam-sec__card">
+                                    {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                                    {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                                  </div>
+                                {%- endfor -%}
                               {%- endif -%}
                             {%- endif -%}
-                          {%- endfor -%}
-                        {%- elsif block.type == 'collection' -%}
-                          {%- assign collection = block.settings.collection -%}
-                          {%- if collection != blank and collection.products.size > 0 -%}
-                            {%- for product in collection.products limit: slide1_count -%}
-                              <a href="{{ product.url }}" class="hp-fam-sec__card">
-                                {%- if product.featured_media != blank -%}
-                                  <img src="{{ product.featured_media | image_url: width: 800 }}"
-                                       alt="{{ product.title | escape }}"
-                                       class="hp-fam-sec__image"
-                                       loading="lazy"
-                                       draggable="false">
-                                {%- else -%}
-                                  {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                          </div>
+                        </div>
+                        <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
+                          <div class="hp-fam-stack__row">
+                            {%- if block.type == 'custom_images' -%}
+                              {%- assign img_idx = 0 -%}
+                              {%- for i in (1..6) -%}
+                                {%- assign img_key = 'image_' | append: i -%}
+                                {%- assign url_key = 'url_' | append: i -%}
+                                {%- if block.settings[img_key] != blank -%}
+                                  {%- assign img_idx = img_idx | plus: 1 -%}
+                                  {%- if img_idx > slide1_count -%}
+                                    <a href="{{ block.settings[url_key] | default: '#' }}" class="hp-fam-sec__card">
+                                      <img src="{{ block.settings[img_key] | image_url: width: 800 }}"
+                                           alt="Product"
+                                           class="hp-fam-sec__image"
+                                           loading="lazy"
+                                           draggable="false">
+                                    </a>
+                                  {%- endif -%}
                                 {%- endif -%}
-                              </a>
-                            {%- endfor -%}
-                          {%- else -%}
-                            {%- for i in (1..slide1_count) -%}
-                              <div class="hp-fam-sec__card">
-                                {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-                                {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
-                              </div>
-                            {%- endfor -%}
-                          {%- endif -%}
-                        {%- endif -%}
+                              {%- endfor -%}
+                            {%- elsif block.type == 'collection' -%}
+                              {%- assign collection = block.settings.collection -%}
+                              {%- assign slide2_limit = stack_total | minus: slide1_count -%}
+                              {%- if collection != blank and collection.products.size > 0 and slide2_limit > 0 -%}
+                                {%- for product in collection.products offset: slide1_count limit: slide2_limit -%}
+                                  <a href="{{ product.url }}" class="hp-fam-sec__card">
+                                    {%- if product.featured_media != blank -%}
+                                      <img src="{{ product.featured_media | image_url: width: 800 }}"
+                                           alt="{{ product.title | escape }}"
+                                           class="hp-fam-sec__image"
+                                           loading="lazy"
+                                           draggable="false">
+                                    {%- else -%}
+                                      {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                                    {%- endif -%}
+                                  </a>
+                                {%- endfor -%}
+                              {%- elsif slide2_limit > 0 -%}
+                                {%- for i in (1..slide2_limit) -%}
+                                  <div class="hp-fam-sec__card">
+                                    {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                                    {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                                  </div>
+                                {%- endfor -%}
+                              {%- endif -%}
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  <div class="hp-fam-stack__panel is-active" id="stack-desktop-default-{{ section.id }}">
+                    <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
+                      <div class="hp-fam-stack__row">
+                        {%- for i in (1..2) -%}
+                          <div class="hp-fam-sec__card">
+                            {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                            {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                          </div>
+                        {%- endfor -%}
                       </div>
                     </div>
                     <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
                       <div class="hp-fam-stack__row">
-                        {%- if block.type == 'custom_images' -%}
-                          {%- assign img_idx = 0 -%}
-                          {%- for i in (1..6) -%}
-                            {%- assign img_key = 'image_' | append: i -%}
-                            {%- assign url_key = 'url_' | append: i -%}
-                            {%- if block.settings[img_key] != blank -%}
-                              {%- assign img_idx = img_idx | plus: 1 -%}
-                              {%- if img_idx > slide1_count -%}
-                                <a href="{{ block.settings[url_key] | default: '#' }}" class="hp-fam-sec__card">
-                                  <img src="{{ block.settings[img_key] | image_url: width: 800 }}"
-                                       alt="Product"
-                                       class="hp-fam-sec__image"
-                                       loading="lazy"
-                                       draggable="false">
-                                </a>
-                              {%- endif -%}
-                            {%- endif -%}
-                          {%- endfor -%}
-                        {%- elsif block.type == 'collection' -%}
-                          {%- assign collection = block.settings.collection -%}
-                          {%- assign slide2_limit = stack_total | minus: slide1_count -%}
-                          {%- if collection != blank and collection.products.size > 0 and slide2_limit > 0 -%}
-                            {%- for product in collection.products offset: slide1_count limit: slide2_limit -%}
-                              <a href="{{ product.url }}" class="hp-fam-sec__card">
-                                {%- if product.featured_media != blank -%}
-                                  <img src="{{ product.featured_media | image_url: width: 800 }}"
-                                       alt="{{ product.title | escape }}"
-                                       class="hp-fam-sec__image"
-                                       loading="lazy"
-                                       draggable="false">
-                                {%- else -%}
-                                  {{ 'product-1' | placeholder_svg_tag: 'hp-fam-sec__image' }}
-                                {%- endif -%}
-                              </a>
-                            {%- endfor -%}
-                          {%- elsif slide2_limit > 0 -%}
-                            {%- for i in (1..slide2_limit) -%}
-                              <div class="hp-fam-sec__card">
-                                {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-                                {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
-                              </div>
-                            {%- endfor -%}
-                          {%- endif -%}
-                        {%- endif -%}
+                        {%- for i in (1..2) -%}
+                          <div class="hp-fam-sec__card">
+                            {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+                            {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
+                          </div>
+                        {%- endfor -%}
                       </div>
                     </div>
                   </div>
                 {%- endif -%}
-              {%- endfor -%}
-            {%- else -%}
-              <div class="hp-fam-stack__panel is-active" id="stack-desktop-default-{{ section.id }}">
-                <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
-                  <div class="hp-fam-stack__row">
-                    {%- for i in (1..2) -%}
-                      <div class="hp-fam-sec__card">
-                        {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-                        {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
-                      </div>
-                    {%- endfor -%}
-                  </div>
-                </div>
-                <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
-                  <div class="hp-fam-stack__row">
-                    {%- for i in (1..2) -%}
-                      <div class="hp-fam-sec__card">
-                        {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
-                        {{ 'product-' | append: current | placeholder_svg_tag: 'hp-fam-sec__image' }}
-                      </div>
-                    {%- endfor -%}
-                  </div>
-                </div>
               </div>
-            {%- endif -%}
+            </div>
           </div>
-        </div>
-      </div>
 
-      {%- comment -%} MOBILE: same stacked concept with existing rail cards {%- endcomment -%}
-      <div class="hp-fam-sec__mobile-rail-wrap">
-        <div class="hp-fam-stack hp-fam-stack--mobile" data-hp-fam-stack="mobile">
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+          {%- comment -%} MOBILE: same absolute stack with existing rail cards {%- endcomment -%}
+          <div class="hp-fam-sec__mobile-rail-wrap">
+            <div class="hp-fam-stack hp-fam-stack--mobile" data-hp-fam-stack="mobile">
+              {%- if section.blocks.size > 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'collection' or block.type == 'custom_images' -%}
+                    {%- liquid
+                      assign mobile_products = default_rail_products
+                      if block.type == 'collection'
+                        assign tab_collection = block.settings.collection
+                        if tab_collection != blank and tab_collection.products.size > 0
+                          assign mobile_products = tab_collection.products
+                        endif
+                      endif
+                      assign mobile_total = mobile_products.size
+                      if mobile_total > section.settings.products_to_show
+                        assign mobile_total = section.settings.products_to_show
+                      endif
+                      if mobile_total > 4
+                        assign mobile_total = 4
+                      endif
+                      assign mobile_slide1 = mobile_total | plus: 1 | divided_by: 2
+                      if mobile_slide1 < 1
+                        assign mobile_slide1 = 1
+                      endif
+                      if mobile_slide1 > 2
+                        assign mobile_slide1 = 2
+                      endif
+                      assign mobile_slide2 = mobile_total | minus: mobile_slide1
+                      if mobile_slide2 > 2
+                        assign mobile_slide2 = 2
+                      endif
+                    -%}
+                    <div
+                      class="hp-fam-stack__panel {% if forloop.first %}is-active{% endif %}"
+                      id="stack-mobile-{{ block.id }}"
+                    >
+                      <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
+                        <div class="hp-fam-stack__row">
+                          {%- for product in mobile_products limit: mobile_slide1 -%}
+                            {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                      <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
+                        <div class="hp-fam-stack__row">
+                          {%- if mobile_slide2 > 0 -%}
+                            {%- for product in mobile_products offset: mobile_slide1 limit: mobile_slide2 -%}
+                              {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
+                            {%- endfor -%}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
                 {%- liquid
-                  assign mobile_products = default_rail_products
-                  if block.type == 'collection'
-                    assign tab_collection = block.settings.collection
-                    if tab_collection != blank and tab_collection.products.size > 0
-                      assign mobile_products = tab_collection.products
-                    endif
-                  endif
-                  assign mobile_total = mobile_products.size
+                  assign mobile_total = default_rail_products.size
                   if mobile_total > section.settings.products_to_show
                     assign mobile_total = section.settings.products_to_show
                   endif
-                  # Cap at 2 cards per slide so overlays share a stable height
                   if mobile_total > 4
                     assign mobile_total = 4
                   endif
@@ -998,13 +1125,10 @@
                     assign mobile_slide2 = 2
                   endif
                 -%}
-                <div
-                  class="hp-fam-stack__panel {% if forloop.first %}is-active{% endif %}"
-                  id="stack-mobile-{{ block.id }}"
-                >
+                <div class="hp-fam-stack__panel is-active" id="stack-mobile-default-{{ section.id }}">
                   <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
                     <div class="hp-fam-stack__row">
-                      {%- for product in mobile_products limit: mobile_slide1 -%}
+                      {%- for product in default_rail_products limit: mobile_slide1 -%}
                         {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
                       {%- endfor -%}
                     </div>
@@ -1012,7 +1136,7 @@
                   <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
                     <div class="hp-fam-stack__row">
                       {%- if mobile_slide2 > 0 -%}
-                        {%- for product in mobile_products offset: mobile_slide1 limit: mobile_slide2 -%}
+                        {%- for product in default_rail_products offset: mobile_slide1 limit: mobile_slide2 -%}
                           {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
                         {%- endfor -%}
                       {%- endif -%}
@@ -1020,59 +1144,20 @@
                   </div>
                 </div>
               {%- endif -%}
-            {%- endfor -%}
-          {%- else -%}
-            {%- liquid
-              assign mobile_total = default_rail_products.size
-              if mobile_total > section.settings.products_to_show
-                assign mobile_total = section.settings.products_to_show
-              endif
-              if mobile_total > 4
-                assign mobile_total = 4
-              endif
-              assign mobile_slide1 = mobile_total | plus: 1 | divided_by: 2
-              if mobile_slide1 < 1
-                assign mobile_slide1 = 1
-              endif
-              if mobile_slide1 > 2
-                assign mobile_slide1 = 2
-              endif
-              assign mobile_slide2 = mobile_total | minus: mobile_slide1
-              if mobile_slide2 > 2
-                assign mobile_slide2 = 2
-              endif
-            -%}
-            <div class="hp-fam-stack__panel is-active" id="stack-mobile-default-{{ section.id }}">
-              <div class="hp-fam-stack__slide hp-fam-stack__slide--1">
-                <div class="hp-fam-stack__row">
-                  {%- for product in default_rail_products limit: mobile_slide1 -%}
-                    {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
-                  {%- endfor -%}
-                </div>
-              </div>
-              <div class="hp-fam-stack__slide hp-fam-stack__slide--2">
-                <div class="hp-fam-stack__row">
-                  {%- if mobile_slide2 > 0 -%}
-                    {%- for product in default_rail_products offset: mobile_slide1 limit: mobile_slide2 -%}
-                      {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
-                    {%- endfor -%}
-                  {%- endif -%}
-                </div>
-              </div>
             </div>
-          {%- endif -%}
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  {%- comment -%} FLOATING RAIL LAYER (desktop only) {%- endcomment -%}
-  <div class="premium-floating-rail">
-    <div class="rail-mask">
-      <div class="rail-track" id="railTrack-{{ section.id }}">
-        {%- for product in default_rail_products limit: 10 -%}
-          {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
-        {%- endfor -%}
+    {%- comment -%} FLOATING RAIL LAYER (desktop only) — static inside pinned stage {%- endcomment -%}
+    <div class="premium-floating-rail">
+      <div class="rail-mask">
+        <div class="rail-track" id="railTrack-{{ section.id }}">
+          {%- for product in default_rail_products limit: 10 -%}
+            {% render 'hp-fam-rail-card', product: product, rating_value: section.settings.rating_value, rating_count: section.settings.rating_count %}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>
@@ -1083,7 +1168,7 @@
     const section = document.getElementById('fam-{{ section.id }}');
     if (!section) return;
 
-    const shopifySection = section.closest('.shopify-section') || section;
+    const stage = section.querySelector('[data-hp-fam-stage]');
     const STACK_NS = 'hpFamStack-{{ section.id }}';
 
     const bgVideo = section.querySelector('.hp-fam-sec__video-bg video');
@@ -1152,12 +1237,13 @@
         existing.kill(true);
       }
       if (typeof gsap === 'undefined') return;
-      section.querySelectorAll('.hp-fam-stack__slide--1, .hp-fam-stack__slide--2').forEach(function(el) {
+      section.querySelectorAll('.hp-fam-stack__slide--2').forEach(function(el) {
         gsap.set(el, { clearProps: 'transform' });
       });
     }
 
     function initStackScroll(force) {
+      if (!stage) return;
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       if (prefersReducedMotion()) {
         killStackScroll();
@@ -1170,49 +1256,45 @@
       const stack = getActiveStack();
       if (!stack) return;
 
+      // Slide 1 stays frozen underneath. Only Slide 2 moves.
       gsap.set(stack.slide2, { yPercent: 100, force3D: true });
-      gsap.set(stack.slide1, { scale: 1, y: 0, force3D: true });
-
-      const getScrollLength = function() {
-        const cardH = Math.max(stack.slide1.offsetHeight || 0, 320);
-        return Math.round(Math.max(window.innerHeight * 1.15, cardH * 1.75));
-      };
 
       const tl = gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
           id: STACK_NS,
-          trigger: shopifySection,
+          trigger: stage,
           start: 'top top',
-          end: function() { return '+=' + getScrollLength(); },
+          end: function() {
+            // ~175vh scrub distance + brief hold (~15vh)
+            return '+=' + Math.round(window.innerHeight * 1.9);
+          },
           pin: true,
           pinSpacing: true,
-          scrub: 0.65,
+          scrub: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           fastScrollEnd: true,
-          preventOverlaps: true,
-          onRefresh: function() {
-            // Keep slide 2 clipped to the measured stack viewport height
-            const h = stack.slide1.offsetHeight;
-            if (h) stack.root.style.minHeight = h + 'px';
-          }
+          preventOverlaps: true
         }
       });
 
-      // Overlap travel (scrubbed to scroll)
-      tl.to(stack.slide2, { yPercent: 0, duration: 1, force3D: true }, 0);
-      // Subtle depth on the covered slide
-      tl.to(stack.slide1, { scale: 0.97, y: -14, duration: 1, force3D: true }, 0);
-      // Brief hold at completed stack before unpin
-      tl.to({}, { duration: 0.22 });
+      // Overlay only: Slide 2 travels from below (100%) to cover Slide 1 (0%)
+      tl.to(stack.slide2, {
+        yPercent: 0,
+        ease: 'none',
+        duration: 1,
+        force3D: true
+      }, 0);
+      // Brief hold at fully covered state before unpin
+      tl.to({}, { duration: 0.08 });
 
       if (force) ScrollTrigger.refresh();
     }
 
     function boot() {
       initStackScroll(false);
-      ScrollTrigger && ScrollTrigger.refresh();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
     }
 
     if (document.readyState === 'loading') {
