@@ -1,11 +1,12 @@
 {%- comment -%}
   Section heading text — sentence case + optional second line color.
-  Does not change merchant copy; only wraps/styles it.
-  Params: text, line2 (optional), line2_color (optional)
+  Optional accent_last_word: last word in script handwriting (like hero "Sparkle?").
+  Params: text, line2 (optional), line2_color (optional), accent_last_word (optional)
 {%- endcomment -%}
 {%- liquid
   assign line1 = text | strip
   assign line2_raw = line2 | default: '' | strip
+  assign accent_last = accent_last_word | default: false
 
   if line2_raw == blank and line1 != blank
     assign tmp = line1 | replace: '<br />', '|||' | replace: '<br/>', '|||' | replace: '<br>', '|||'
@@ -13,14 +14,32 @@
     if parts.size > 1
       assign line1 = parts[0] | strip
       assign line2_raw = parts[1] | strip
+      assign accent_last = false
+    endif
+  endif
+
+  assign line1_main = line1
+  assign accent_word = ''
+
+  if accent_last and line2_raw == blank and line1 != blank
+    assign words = line1 | split: ' '
+    if words.size > 1
+      assign accent_word = words | last
+      assign main_count = words.size | minus: 1
+      assign main_words = words | slice: 0, main_count
+      assign line1_main = main_words | join: ' '
     endif
   endif
 
   assign c2 = line2_color | default: settings.heading_line2_color | default: '#6b6b6b'
+  assign accent_c = accent_color | default: settings.heading_accent_color | default: '#c9a227'
 -%}
 {%- if line2_raw != blank -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
   <span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
+{%- elsif accent_word != blank -%}
+  <span class="hp-heading-line hp-heading-line--1">{{ line1_main }}</span>
+  <span class="hp-heading-line hp-heading-accent" style="--section-heading-accent-color: {{ accent_c }};">{{ accent_word }}</span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}

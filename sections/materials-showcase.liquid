@@ -383,7 +383,7 @@
           {%- if section.settings.eyebrow != blank -%}
             <span class="mat-eyebrow">{{ section.settings.eyebrow }}</span>
           {%- endif -%}
-          <h2 class="mat-headline">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
+          <h2 class="mat-headline">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true %}</h2>
         </div>
         {%- if section.settings.description != blank -%}
           <p class="mat-desc">{{ section.settings.description }}</p>

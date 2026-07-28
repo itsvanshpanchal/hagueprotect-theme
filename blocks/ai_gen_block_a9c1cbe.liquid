@@ -180,6 +180,14 @@
     color: {{ block.settings.heading_line2_color | default: settings.heading_line2_color | default: '#6b6b6b' }} !important;
   }
 
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    color: var(--section-heading-accent-color, #c9a227) !important;
+    font-size: 1.35em !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+  }
+
   #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
   #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }} p,
   .ai-story-banner-text-{{ ai_gen_id }},
@@ -317,7 +325,7 @@
 
       {% if block.settings.heading != blank %}
         <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
-          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color %}
+          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true %}
         </div>
       {% endif %}
 

@@ -44,6 +44,30 @@
     text-transform: none !important;
   }
 
+  .hp-fam-sec__heading .hp-heading-line {
+    display: block;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    font-style: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    text-transform: none !important;
+    color: inherit !important;
+  }
+
+  .hp-fam-sec__heading .hp-heading-line--1::first-letter {
+    text-transform: none !important;
+  }
+
+  .hp-fam-sec__heading .hp-heading-accent {
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    color: var(--section-heading-accent-color, #c9a227) !important;
+    font-size: 1.35em !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+  }
+
   .hp-fam-sec__heading .hp-typewriter-text,
   .hp-fam-sec__heading > span[aria-hidden="true"] {
     font-family: inherit !important;
@@ -597,7 +621,7 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading">{{ section.settings.heading }}</h2>
+      <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true %}</h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}

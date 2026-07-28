@@ -303,7 +303,7 @@
         {%- if section.settings.eyebrow != blank -%}
           <span class="trending-social__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
-        <h2 class="trending-social__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Trending on Social Media', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
+        <h2 class="trending-social__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Trending on Social Media', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true %}</h2>
       </div>
 
       <div class="trending-social__nav">

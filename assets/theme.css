@@ -607,6 +607,26 @@ main h2.h2,
   color: var(--section-heading-line2-color, #6b6b6b) !important;
 }
 
+/* Script accent — last word on its own line (e.g. "Sparkle?") */
+.hp-heading-line.hp-heading-accent,
+.hp-heading-accent {
+  font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+  color: var(--section-heading-accent-color, #c9a227) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+  display: block;
+  font-size: 1.35em;
+  line-height: 0.95;
+  margin-top: 0.04em;
+}
+
+.hp-heading-line.hp-heading-accent::first-letter,
+.hp-heading-accent::first-letter {
+  text-transform: uppercase !important;
+}
+
 .premium-htu__title .hp-heading-line,
 .premium-htu__title:not(:has(.hp-heading-line)) {
   display: block;
