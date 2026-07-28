@@ -521,6 +521,11 @@ main h2.h2,
 }
 
 /* Shop Our Premium Best — Bahnschrift Regular 400, keep authored casing */
+#MainContent .shopify-section .hp-fam-sec__heading,
+#MainContent .shopify-section .hp-fam-sec__heading:not(:has(.hp-heading-line)),
+#MainContent .shopify-section .hp-fam-sec__heading .hp-heading-line,
+#MainContent .shopify-section .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+#MainContent .shopify-section .hp-fam-sec__heading .hp-typewriter-text,
 .hp-fam-sec__heading,
 .hp-fam-sec__heading:not(:has(.hp-heading-line)),
 .hp-fam-sec__heading .hp-heading-line,
