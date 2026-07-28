@@ -1,6 +1,6 @@
 {%- comment -%}
   Section heading text — sentence case + optional second line color.
-  Optional accent_last_word: last word in script handwriting (like hero "Sparkle?").
+  Optional accent_last_word: last word in script handwriting (inline, same line).
   Params: text, line2 (optional), line2_color (optional), accent_last_word (optional)
 {%- endcomment -%}
 {%- liquid
@@ -35,11 +35,9 @@
   assign accent_c = accent_color | default: settings.heading_accent_color | default: '#c9a227'
 -%}
 {%- if line2_raw != blank -%}
-  <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
-  <span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
+  <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span><span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
 {%- elsif accent_word != blank -%}
-  <span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span>
-  <span class="hp-heading-line hp-heading-accent" style="--section-heading-accent-color: {{ accent_c }};">{{ accent_word }}</span>
+  <span class="hp-heading-line hp-heading-line--1 hp-heading-line--with-accent">{{ line1_main }} <span class="hp-heading-accent" style="--section-heading-accent-color: {{ accent_c }};">{{ accent_word }}</span></span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}

@@ -172,9 +172,8 @@
     text-transform: lowercase !important;
   }
 
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--1:has(+ .hp-heading-accent),
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line.hp-heading-accent {
-    display: inline !important;
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--with-accent {
+    white-space: normal;
   }
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line::first-letter {
@@ -186,9 +185,10 @@
   }
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
+    display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     color: var(--section-heading-accent-color, #c9a227) !important;
-    font-size: 1.35em !important;
+    font-size: 1.2em !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
   }

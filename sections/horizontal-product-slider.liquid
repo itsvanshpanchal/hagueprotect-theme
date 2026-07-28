@@ -56,9 +56,8 @@
     color: inherit !important;
   }
 
-  .hp-fam-sec__heading .hp-heading-line--1:has(+ .hp-heading-accent),
-  .hp-fam-sec__heading .hp-heading-line.hp-heading-accent {
-    display: inline !important;
+  .hp-fam-sec__heading .hp-heading-line--with-accent {
+    white-space: normal;
   }
 
   .hp-fam-sec__heading .hp-heading-line--1::first-letter {
@@ -66,9 +65,10 @@
   }
 
   .hp-fam-sec__heading .hp-heading-accent {
+    display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     color: var(--section-heading-accent-color, #c9a227) !important;
-    font-size: 1.35em !important;
+    font-size: 1.2em !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
   }

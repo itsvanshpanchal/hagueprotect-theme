@@ -27,12 +27,18 @@
 
   /* Headings built from styled line spans (e.g. section-heading-text renders
      .hp-heading-line, hero renders .hero-heading-line). Type INTO those spans
-     so per-line styling — casing, colored/second line, line breaks — survives. */
+     so per-line styling — casing, colored/second line, line breaks — survives.
+     Nested .hp-heading-accent stays inside one line (inline, not a 2nd line). */
   function typeStructuredHeading(element, lineEls) {
     element.dataset.typewriterActive = 'true';
 
     var data = Array.prototype.map.call(lineEls, function (el) {
-      return { el: el, text: el.textContent || '' };
+      return {
+        el: el,
+        text: (el.textContent || '').replace(/\s+/g, ' ').trim(),
+        html: el.innerHTML,
+        hasAccent: !!el.querySelector('.hp-heading-accent')
+      };
     });
 
     var full = data
@@ -55,6 +61,12 @@
     var li = 0;
     var ci = 0;
 
+    function finishLine(d) {
+      if (d.hasAccent) {
+        d.el.innerHTML = d.html;
+      }
+    }
+
     function tick() {
       var d = data[li];
       d.el.textContent = d.text.substring(0, ci);
@@ -64,11 +76,13 @@
         ci += 1;
         window.setTimeout(tick, speed);
       } else if (li < data.length - 1) {
+        finishLine(d);
         li += 1;
         ci = 0;
         window.setTimeout(tick, linePause);
       } else {
         if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
+        finishLine(d);
         element.style.minHeight = originalMinHeight;
         element.dataset.typewriterDone = 'true';
         delete element.dataset.typewriterActive;
@@ -81,7 +95,13 @@
   function typeHeading(element) {
     if (!shouldType(element)) return;
 
-    var lineEls = element.querySelectorAll('.hp-heading-line, .hero-heading-line');
+    /* Top-level line spans only — nested .hp-heading-accent must not be typed as a 2nd line. */
+    var lineEls = Array.prototype.filter.call(
+      element.querySelectorAll('.hp-heading-line, .hero-heading-line'),
+      function (el) {
+        return el.parentElement === element;
+      }
+    );
     if (lineEls.length) {
       typeStructuredHeading(element, lineEls);
       return;
