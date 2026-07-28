@@ -626,6 +626,18 @@ main h2.h2,
   vertical-align: baseline;
 }
 
+/* Materials heading must not force white Bahnschrift onto the script accent */
+#MainContent .shopify-section .mat-headline .hp-heading-accent,
+.mat-section .mat-headline .hp-heading-accent,
+.mat-headline .hp-heading-accent {
+  font-family: var(--font-family-heading-accent, 'Luthon Southard Script', 'Brush Script MT', cursive) !important;
+  font-weight: var(--font-weight-heading-accent, 400) !important;
+  font-style: var(--font-style-heading-accent, normal) !important;
+  color: var(--section-heading-accent-color, #c9a227) !important;
+  font-size: var(--heading-accent-size, 1.2em) !important;
+  text-transform: none !important;
+}
+
 #MainContent .shopify-section h2 .hp-heading-accent::first-letter,
 #MainContent .shopify-section .hp-heading-accent::first-letter,
 .hp-heading-accent::first-letter {

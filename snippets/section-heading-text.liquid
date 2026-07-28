@@ -28,6 +28,11 @@
       assign main_count = words.size | minus: 1
       assign main_words = words | slice: 0, main_count
       assign line1_main = main_words | join: ' '
+      comment
+        Match other accent words (Care, Story, Best, Media): sentence case
+        so ALL-CAPS sources like MATERIAL still render as Material in script.
+      endcomment
+      assign accent_word = accent_word | downcase | capitalize
     endif
   endif
 
