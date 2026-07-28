@@ -1,7 +1,7 @@
 {%- comment -%}
   Section heading text — sentence case + optional second line color.
   Optional accent_last_word: last word in script handwriting (inline, same line).
-  Params: text, line2 (optional), line2_color (optional), accent_last_word (optional)
+  Params: text, line2 (optional), line2_color (optional), accent_last_word (optional), accent_color (optional)
 {%- endcomment -%}
 {%- liquid
   assign line1 = text | strip
@@ -24,18 +24,25 @@
   if accent_last and line2_raw == blank and line1 != blank
     assign words = line1 | split: ' '
     if words.size > 1
-      assign accent_word = words | last
+      assign accent_raw = words | last
       assign main_count = words.size | minus: 1
       assign main_words = words | slice: 0, main_count
       assign line1_main = main_words | join: ' '
+
       comment
-        Keep authored casing (MATERIAL stays MATERIAL, Care stays Care)
-        so all-caps script glyphs match the gold handwriting look.
+        Accent stays a SIBLING of the sentence-case line (not nested),
+        so parent text-transform: lowercase cannot reshape it.
+        Keep authored casing: MATERIAL stays MATERIAL, Care stays Care.
       endcomment
-      assign accent_letters = accent_word | replace: '.', '' | replace: '!', '' | replace: '?', '' | replace: ',', ''
+      assign accent_letters = accent_raw | replace: '.', '' | replace: '!', '' | replace: '?', '' | replace: ',', '' | replace: ';', ''
       assign accent_up = accent_letters | upcase
+      assign accent_down = accent_letters | downcase
       if accent_letters == accent_up and accent_letters != blank
-        assign accent_word = accent_word | upcase
+        assign accent_word = accent_raw | upcase
+      elsif accent_letters == accent_down and accent_letters != blank
+        assign accent_word = accent_raw | downcase | capitalize
+      else
+        assign accent_word = accent_raw
       endif
     endif
   endif
@@ -46,7 +53,7 @@
 {%- if line2_raw != blank -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span><span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
 {%- elsif accent_word != blank -%}
-  <span class="hp-heading-line hp-heading-line--1 hp-heading-line--with-accent">{{ line1_main }} <span class="hp-heading-accent" style="--section-heading-accent-color: {{ accent_c }};">{{ accent_word }}</span></span>
+  <span class="hp-heading-pair"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}

@@ -28,7 +28,7 @@
   /* Headings built from styled line spans (e.g. section-heading-text renders
      .hp-heading-line, hero renders .hero-heading-line). Type INTO those spans
      so per-line styling — casing, colored/second line, line breaks — survives.
-     Nested .hp-heading-accent is typed WITH its script font (not swapped at the end). */
+     .hp-heading-pair keeps main + accent as siblings; accent types in script font. */
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, '&amp;')
@@ -37,7 +37,30 @@
       .replace(/"/g, '&quot;');
   }
 
-  function parseLine(el) {
+  function parsePairOrLine(el) {
+    /* New markup: .hp-heading-pair > .hp-heading-line + .hp-heading-accent */
+    if (el.classList && el.classList.contains('hp-heading-pair')) {
+      var mainEl = el.querySelector(':scope > .hp-heading-line');
+      var accentEl = el.querySelector(':scope > .hp-heading-accent');
+      if (mainEl && accentEl) {
+        var mainText = (mainEl.textContent || '').replace(/\s+/g, ' ');
+        mainText = mainText.replace(/^\s+/, '').replace(/\s+$/, ' ');
+        if (mainText && !/\s$/.test(mainText)) mainText += ' ';
+        var accentText = (accentEl.textContent || '').replace(/\s+/g, ' ').trim();
+        return {
+          el: el,
+          mainText: mainText,
+          accentText: accentText,
+          accentClass: accentEl.className || 'hp-heading-accent',
+          accentStyle: accentEl.getAttribute('style') || '',
+          text: (mainText + accentText).replace(/\s+/g, ' ').trim(),
+          html: el.innerHTML,
+          hasAccent: true
+        };
+      }
+    }
+
+    /* Legacy: accent nested inside .hp-heading-line */
     var accent = el.querySelector('.hp-heading-accent');
     if (!accent) {
       return {
@@ -51,19 +74,17 @@
     var clone = el.cloneNode(true);
     var accentClone = clone.querySelector('.hp-heading-accent');
     if (accentClone) accentClone.parentNode.removeChild(accentClone);
-    var mainText = (clone.textContent || '').replace(/\s+/g, ' ');
-    mainText = mainText.replace(/^\s+/, '').replace(/\s+$/, ' ');
-    if (mainText && !/\s$/.test(mainText)) mainText += ' ';
-
-    var accentText = (accent.textContent || '').replace(/\s+/g, ' ').trim();
+    var nestedMain = (clone.textContent || '').replace(/\s+/g, ' ');
+    nestedMain = nestedMain.replace(/^\s+/, '').replace(/\s+$/, ' ');
+    if (nestedMain && !/\s$/.test(nestedMain)) nestedMain += ' ';
 
     return {
       el: el,
-      mainText: mainText,
-      accentText: accentText,
+      mainText: nestedMain,
+      accentText: (accent.textContent || '').replace(/\s+/g, ' ').trim(),
       accentClass: accent.className || 'hp-heading-accent',
       accentStyle: accent.getAttribute('style') || '',
-      text: (mainText + accentText).replace(/\s+/g, ' ').trim(),
+      text: (nestedMain + (accent.textContent || '')).replace(/\s+/g, ' ').trim(),
       html: el.innerHTML,
       hasAccent: true
     };
@@ -82,7 +103,10 @@
 
     var mainLen = Math.min(charIndex, d.mainText.length);
     var accentLen = Math.max(0, charIndex - d.mainText.length);
-    var html = escapeHtml(d.mainText.substring(0, mainLen));
+    var html =
+      '<span class="hp-heading-line hp-heading-line--1">' +
+      escapeHtml(d.mainText.substring(0, mainLen)) +
+      '</span>';
 
     if (charIndex >= d.mainText.length) {
       html +=
@@ -102,7 +126,7 @@
   function typeStructuredHeading(element, lineEls) {
     element.dataset.typewriterActive = 'true';
 
-    var data = Array.prototype.map.call(lineEls, parseLine);
+    var data = Array.prototype.map.call(lineEls, parsePairOrLine);
 
     var full = data
       .map(function (d) { return d.text; })
@@ -110,7 +134,6 @@
     var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
     var linePause = 180;
 
-    /* Reserve final height so content below doesn't jump while typing. */
     var originalMinHeight = element.style.minHeight;
     element.style.minHeight = element.offsetHeight + 'px';
     data.forEach(function (d) { d.el.textContent = ''; });
@@ -156,7 +179,18 @@
   function typeHeading(element) {
     if (!shouldType(element)) return;
 
-    /* Top-level line spans only — nested .hp-heading-accent must not be typed as a 2nd line. */
+    /* Prefer accent pairs (main + script sibling), then top-level line spans. */
+    var pairEls = Array.prototype.filter.call(
+      element.querySelectorAll('.hp-heading-pair'),
+      function (el) {
+        return el.parentElement === element;
+      }
+    );
+    if (pairEls.length) {
+      typeStructuredHeading(element, pairEls);
+      return;
+    }
+
     var lineEls = Array.prototype.filter.call(
       element.querySelectorAll('.hp-heading-line, .hero-heading-line'),
       function (el) {

@@ -607,20 +607,38 @@ main h2.h2,
   color: var(--section-heading-line2-color, #6b6b6b) !important;
 }
 
-/* Script accent — last word stays on the SAME line as the heading */
+/* Script accent — last word stays on the SAME line as the heading.
+   Accent is a SIBLING inside .hp-heading-pair (not nested in the lowercase line). */
+.hp-heading-pair {
+  display: block;
+}
+
+.trending-social__heading .hp-heading-pair .hp-heading-line,
+.bestsellers__heading-dtc .hp-heading-pair .hp-heading-line,
+.bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+.mat-headline .hp-heading-pair .hp-heading-line,
+.hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+[class*="ai-story-banner-heading-"] .hp-heading-pair .hp-heading-line,
+#MainContent .shopify-section h2 .hp-heading-pair .hp-heading-line {
+  display: inline !important;
+}
+
 #MainContent .shopify-section h2 .hp-heading-accent,
 #MainContent .shopify-section .hp-heading-accent,
 #MainContent .shopify-section .mat-headline .hp-heading-accent,
-.hp-heading-line .hp-heading-accent,
+#MainContent .shopify-section .bs-coverflow__heading .hp-heading-accent,
+#MainContent .shopify-section .trending-social__heading .hp-heading-accent,
+#MainContent .shopify-section .hp-fam-sec__heading .hp-heading-accent,
+.hp-heading-pair .hp-heading-accent,
 .mat-section .mat-headline .hp-heading-accent,
 .mat-headline .hp-heading-accent,
 .hp-heading-accent {
   display: inline !important;
   font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-  font-family: var(--font-family-heading-accent) !important;
   font-weight: var(--font-weight-heading-accent, 400) !important;
   font-style: var(--font-style-heading-accent, normal) !important;
   color: var(--section-heading-accent-color, #c9a227) !important;
+  -webkit-text-fill-color: var(--section-heading-accent-color, #c9a227) !important;
   font-size: var(--heading-accent-size, 1.2em) !important;
   text-transform: none !important;
   letter-spacing: 0.01em !important;
@@ -634,7 +652,8 @@ main h2.h2,
 #MainContent .shopify-section h2 .hp-heading-accent::first-letter,
 #MainContent .shopify-section .hp-heading-accent::first-letter,
 .hp-heading-accent::first-letter {
-  text-transform: uppercase !important;
+  /* Keep authored accent casing (MATERIAL / Care) — do not force transforms */
+  text-transform: inherit !important;
 }
 
 .premium-htu__title .hp-heading-line,

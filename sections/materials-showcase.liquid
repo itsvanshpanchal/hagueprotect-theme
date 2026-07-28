@@ -90,15 +90,21 @@
 
   .mat-section .mat-headline .hp-heading-accent,
   #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
-  #MainContent #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent {
+  #MainContent #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
+  #MainContent #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-accent {
+    display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    font-family: var(--font-family-heading-accent) !important;
-    font-weight: var(--font-weight-heading-accent, 400) !important;
-    font-style: var(--font-style-heading-accent, normal) !important;
-    color: var(--section-heading-accent-color, #c9a227) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
+    -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
     font-size: var(--heading-accent-size, 1.2em) !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
+  }
+
+  #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-line {
+    display: inline !important;
   }
 
   .mat-menu {
