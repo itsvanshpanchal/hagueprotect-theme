@@ -107,41 +107,45 @@
   }
 
   /*
-    Curtain reveal like jewelry reference:
-    - Banner freezes (sticky) underneath
-    - Section ABOVE stays on top and slides away OVER the banner
-    - Section BELOW slides up and covers the banner
+    Indriya-style curtain reveal (from reference recording):
+    1) Story section is pulled UNDER the previous section (negative margin)
+    2) Banner pins sticky underneath (z-index low)
+    3) Previous section (higher z) slides away OVER it = curtain opens
+    4) Next section is pulled UP over the pin = curtain closes from below
   */
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
     position: relative !important;
     z-index: 1 !important;
-    /* Extra height = longer freeze so neighbors can clearly slide over it */
-    height: 200vh !important;
-    margin: 0 !important;
+    /* 100vh overlap with prev + 100vh full view + 100vh overlap with next */
+    height: 300vh !important;
+    margin-top: -100vh !important;
+    margin-bottom: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
     background: transparent !important;
     isolation: auto !important;
+    pointer-events: none;
   }
 
-  /* Section ABOVE — solid curtain that slides over the banner */
+  /* Section ABOVE — opaque curtain that lifts away over the pinned banner */
   .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
   .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }} {
     position: relative !important;
-    z-index: 30 !important;
+    z-index: 40 !important;
     isolation: isolate !important;
     background-color: #ffffff !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
   }
 
-  /* Section BELOW — solid curtain that slides up over the banner */
+  /* Section BELOW — opaque curtain that slides up and covers the banner */
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
   .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
     position: relative !important;
-    z-index: 30 !important;
+    z-index: 40 !important;
     isolation: isolate !important;
+    margin-top: -100vh !important;
     background-color: #111111 !important;
-    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 -24px 48px rgba(0, 0, 0, 0.22);
   }
 
   .ai-story-sticky-track-{{ ai_gen_id }} {
@@ -152,6 +156,7 @@
     padding: 0;
     box-sizing: border-box;
     background: #0a0a0a;
+    pointer-events: none;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
@@ -166,6 +171,7 @@
     padding: 0;
     overflow: hidden;
     background: #0a0a0a;
+    pointer-events: auto;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
@@ -196,11 +202,14 @@
   @media (prefers-reduced-motion: reduce) {
     .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
       height: auto !important;
+      margin-top: 0 !important;
+      pointer-events: auto;
     }
 
     .ai-story-sticky-track-{{ ai_gen_id }} {
       height: auto;
       background: transparent;
+      pointer-events: auto;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} {
@@ -230,6 +239,7 @@
     .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }},
     .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
       box-shadow: none !important;
+      margin-top: 0 !important;
     }
   }
 
@@ -536,6 +546,10 @@
           node.style.setProperty('overflow-x', 'clip', 'important');
           node.style.setProperty('overflow-y', 'visible', 'important');
         }
+        // Avoid stacking-context traps that keep neighbors from painting over the pin
+        if (cs.isolation === 'isolate') {
+          node.style.setProperty('isolation', 'auto', 'important');
+        }
       }
       node = node.parentElement;
     }
@@ -543,23 +557,30 @@
     var prev = section.previousElementSibling;
     var next = section.nextElementSibling;
 
+    function paintOpaque(el, fallback) {
+      if (!el) return;
+      var bg = window.getComputedStyle(el).backgroundColor;
+      if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
+        el.style.setProperty('background-color', fallback, 'important');
+      }
+      // Also paint common inner wrappers so the curtain isn't see-through
+      var inners = el.querySelectorAll(':scope > section, :scope > div, .fc-section, .corp-marquee, [class*="__inner"]');
+      for (var i = 0; i < Math.min(inners.length, 6); i++) {
+        var ibg = window.getComputedStyle(inners[i]).backgroundColor;
+        if (!ibg || ibg === 'transparent' || ibg === 'rgba(0, 0, 0, 0)') {
+          inners[i].style.setProperty('background-color', fallback, 'important');
+        }
+      }
+    }
+
     if (prev && prev.classList && prev.classList.contains('shopify-section')) {
       prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
-      // Force opaque curtain so upper section visibly slides OVER the banner
-      prev.style.setProperty('background-color', '#ffffff', 'important');
-      var prevInner = prev.querySelector('.fc-section, [class*="section"]');
-      if (prevInner) {
-        prevInner.style.setProperty('background-color', '#ffffff', 'important');
-      }
+      paintOpaque(prev, '#ffffff');
     }
 
     if (next && next.classList && next.classList.contains('shopify-section')) {
       next.classList.add('hp-story-curtain-next-{{ ai_gen_id }}');
-      // Keep dark marquee look, but ensure solid cover
-      var nextBg = window.getComputedStyle(next).backgroundColor;
-      if (!nextBg || nextBg === 'transparent' || nextBg === 'rgba(0, 0, 0, 0)') {
-        next.style.setProperty('background-color', '#111111', 'important');
-      }
+      paintOpaque(next, '#111111');
     }
   })();
 </script>
@@ -579,7 +600,7 @@
       "id": "enable_sticky_scroll",
       "label": "Fixed reveal (sections scroll over banner)",
       "default": true,
-      "info": "Banner freezes in place. Section above slides away over it, then section below slides up and covers it — like a curtain reveal."
+      "info": "Indriya-style curtain: banner pins underneath. Section above lifts away over it, then section below slides up and covers it."
     },
     {
       "type": "range",
