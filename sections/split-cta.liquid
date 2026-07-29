@@ -1,0 +1,237 @@
+{%- style -%}
+  .split-cta-{{ section.id }} {
+    --split-cta-bg: {{ section.settings.background_color }};
+    --split-cta-heading: {{ section.settings.heading_color }};
+    --split-cta-text: {{ section.settings.text_color }};
+    --split-cta-btn-bg: {{ section.settings.button_background }};
+    --split-cta-btn-text: {{ section.settings.button_text_color }};
+    background: var(--split-cta-bg);
+    padding: {{ section.settings.padding_top }}px max(24px, var(--site-padding, 24px)) {{ section.settings.padding_bottom }}px;
+  }
+
+  .split-cta-{{ section.id }}__inner {
+    max-width: var(--site-max-width, 1320px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(28px, 5vw, 64px);
+  }
+
+  .split-cta-{{ section.id }}__copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 720px;
+  }
+
+  .split-cta-{{ section.id }}__heading {
+    margin: 0 0 14px;
+    color: var(--split-cta-heading);
+    font-family: 'Bahnschrift', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(28px, 3.6vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .split-cta-{{ section.id }}__text {
+    margin: 0;
+    color: var(--split-cta-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(14px, 1.35vw, 17px);
+    font-weight: 400;
+    line-height: 1.55;
+    max-width: 520px;
+  }
+
+  .split-cta-{{ section.id }}__actions {
+    flex: 0 0 auto;
+  }
+
+  .split-cta-{{ section.id }}__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    background: var(--split-cta-btn-bg);
+    color: var(--split-cta-btn-text) !important;
+    text-decoration: none !important;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .split-cta-{{ section.id }}__button:hover {
+    background: {{ section.settings.button_hover_background }};
+    color: var(--split-cta-btn-text) !important;
+    transform: translateY(-1px);
+  }
+
+  .split-cta-{{ section.id }}__arrow {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .split-cta-{{ section.id }}__button:hover .split-cta-{{ section.id }}__arrow {
+    transform: translateX(3px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .split-cta-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.65 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.65 | round }}px;
+    }
+
+    .split-cta-{{ section.id }}__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .split-cta-{{ section.id }}__heading {
+      font-size: clamp(26px, 7vw, 34px);
+      margin-bottom: 12px;
+    }
+
+    .split-cta-{{ section.id }}__button {
+      width: 100%;
+      justify-content: center;
+      padding: 15px 22px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="split-cta-{{ section.id }}" aria-label="{{ section.settings.heading | escape }}">
+  <div class="split-cta-{{ section.id }}__inner">
+    <div class="split-cta-{{ section.id }}__copy">
+      {% if section.settings.heading != blank %}
+        <h2 class="split-cta-{{ section.id }}__heading">{{ section.settings.heading | escape | newline_to_br }}</h2>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <p class="split-cta-{{ section.id }}__text">{{ section.settings.text | escape }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.settings.button_label != blank %}
+      <div class="split-cta-{{ section.id }}__actions">
+        <a
+          href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+          class="split-cta-{{ section.id }}__button"
+        >
+          <span>{{ section.settings.button_label | escape }}</span>
+          <span class="split-cta-{{ section.id }}__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Split CTA",
+  "tag": "section",
+  "class": "section-split-cta",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready to play the long game?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Supporting text",
+      "default": "The protocol starts with one kit. Tell us your concern and we will point you to the right one."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Find my kit"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#F7F6F2"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 24,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 24,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split CTA"
+    }
+  ]
+}
+{% endschema %}
