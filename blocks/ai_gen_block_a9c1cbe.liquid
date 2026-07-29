@@ -107,19 +107,20 @@
   }
 
   /*
-    Reveal effect (like fixed mid-page banner):
-    Banner stays frozen in the viewport; sections ABOVE and BELOW
-    scroll OVER it (higher z-index), covering it as curtains.
+    Fixed reveal (no empty gap):
+    One viewport-tall panel stays sticky. Neighbor sections (higher z-index)
+    scroll OVER it. Track height == pin height so there is no white space.
   */
   .ai-story-sticky-track-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    /* Extra runway so the banner stays frozen longer, then the next section covers it */
-    height: {{ block.settings.sticky_scroll_vh | default: 180 }}vh;
+    height: 100vh;
+    height: 100dvh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     z-index: 1;
+    background: {{ block.settings.background_color | default: '#111111' }};
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
@@ -127,12 +128,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    height: 100%;
     z-index: 1;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background: {{ block.settings.background_color | default: '#111111' }};
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
@@ -163,6 +164,7 @@
   @media (prefers-reduced-motion: reduce) {
     .ai-story-sticky-track-{{ ai_gen_id }} {
       height: auto;
+      background: transparent;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} {
@@ -482,10 +484,12 @@
     var section = track.closest('.shopify-section');
     if (!section) return;
 
-    // Banner section stays UNDER neighbors
+    // Banner stays UNDER neighbors — one viewport, no blank spacer
     section.style.position = 'relative';
     section.style.zIndex = '1';
     section.style.background = 'transparent';
+    section.style.margin = '0';
+    section.style.padding = '0';
     section.style.setProperty('overflow', 'visible', 'important');
 
     var el = track.parentElement;
@@ -494,6 +498,7 @@
       if (cs.overflow === 'hidden' || cs.overflowY === 'hidden' || cs.overflowX === 'hidden') {
         el.style.setProperty('overflow', 'visible', 'important');
       }
+      el.style.margin = el.style.margin || '0';
       el = el.parentElement;
     }
 
@@ -503,7 +508,6 @@
       node.style.position = 'relative';
       node.style.zIndex = '3';
       node.setAttribute('data-hp-story-overlay-neighbor', '{{ ai_gen_id }}');
-      // Opaque curtain so neighbors fully cover the frozen banner
       var bg = window.getComputedStyle(node).backgroundColor;
       if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
         node.style.backgroundColor = '#ffffff';
@@ -530,18 +534,7 @@
       "id": "enable_sticky_scroll",
       "label": "Fixed reveal (sections scroll over banner)",
       "default": true,
-      "info": "Banner stays still in the viewport. The section above slides away over it, then the section below slides up and covers it."
-    },
-    {
-      "type": "range",
-      "id": "sticky_scroll_vh",
-      "label": "Sticky scroll distance",
-      "min": 120,
-      "max": 260,
-      "step": 10,
-      "unit": "vh",
-      "default": 180,
-      "info": "How long the banner stays frozen before the next section covers it. Higher = longer hold."
+      "info": "Banner fills one screen and stays still. Sections above and below scroll over it. No extra blank space."
     },
     {
       "type": "range",
