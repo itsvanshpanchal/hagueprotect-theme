@@ -203,8 +203,16 @@
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-    top: 50%;
-    transform: translateY(-50%);
+    /* Upper position — was vertically centered (50%), which sat too low */
+    top: {% if block.settings.content_offset_top > 0 %}{{ block.settings.content_offset_top }}px{% else %}12%{% endif %};
+    transform: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
+      top: 48px;
+      transform: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
