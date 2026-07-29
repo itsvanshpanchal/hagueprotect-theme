@@ -107,11 +107,10 @@
   }
 
   /*
-    Indriya-style curtain reveal (from reference recording):
-    1) Story is pulled UNDER the previous section (negative margin)
-    2) Sticky pin sits BEHIND siblings (z-index: -1 inside #MainContent)
-    3) Previous section (higher z) slides away OVER it = curtain opens
-    4) Next section is pulled UP over the pin = curtain closes from below
+    Curtain reveal (gap-free):
+    - Previous section gets extra white padding that sits OVER the sticky banner (upper open)
+    - Banner pins in a transparent runway (no black bars)
+    - Following sections sit above and slide over to close (lower cover)
   */
   #MainContent {
     position: relative;
@@ -121,8 +120,7 @@
 
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
     position: relative !important;
-    z-index: 0 !important;
-    /* 100vh overlap with prev + 100vh full view + 100vh overlap with next */
+    z-index: 1 !important;
     height: 300vh !important;
     margin-top: -100vh !important;
     margin-bottom: 0 !important;
@@ -134,27 +132,28 @@
     pointer-events: none;
   }
 
-  /* Section ABOVE — opaque curtain that lifts away over the pinned banner */
+  /* Section ABOVE — opaque white curtain (padding extension applied in JS) */
   .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
   .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }} {
     position: relative !important;
-    z-index: 5 !important;
+    z-index: 3 !important;
     isolation: isolate !important;
     background-color: #ffffff !important;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
-    transform: translateZ(0);
   }
 
-  /* Section BELOW — opaque curtain that slides up and covers the banner */
-  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
-  .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
+  /* Immediate next section starts early so it can cover the pin */
+  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
     position: relative !important;
-    z-index: 5 !important;
+    z-index: 3 !important;
     isolation: isolate !important;
     margin-top: -100vh !important;
-    background-color: #111111 !important;
-    box-shadow: 0 -24px 48px rgba(0, 0, 0, 0.22);
-    transform: translateZ(0);
+  }
+
+  /* Later following sections also sit above the pin (no extra pull) */
+  .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
+    position: relative !important;
+    z-index: 3 !important;
+    isolation: isolate !important;
   }
 
   .ai-story-sticky-track-{{ ai_gen_id }} {
@@ -164,10 +163,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: #0a0a0a;
+    /* Transparent — black fill caused the visible bar/gap */
+    background: transparent;
     pointer-events: none;
-    /* Keep track behind neighbor curtains */
-    z-index: -1;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
@@ -177,8 +175,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    /* Critical for UPPER curtain: pin must paint UNDER previous sibling */
-    z-index: -1;
+    z-index: 1;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -252,6 +249,7 @@
     .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
       box-shadow: none !important;
       margin-top: 0 !important;
+      padding-bottom: 0 !important;
     }
   }
 
@@ -560,7 +558,7 @@
       }
     }
 
-    // Unblock sticky (overflow-x:hidden on ancestors breaks it)
+    // Unblock sticky (overflow hidden on ancestors breaks it)
     var node = track;
     while (node && node !== document.documentElement) {
       if (node.nodeType === 1) {
@@ -569,9 +567,6 @@
           node.style.setProperty('overflow-x', 'clip', 'important');
           node.style.setProperty('overflow-y', 'visible', 'important');
         }
-        if (node !== section && cs.isolation === 'isolate' && node.id !== 'MainContent') {
-          node.style.setProperty('isolation', 'auto', 'important');
-        }
       }
       node = node.parentElement;
     }
@@ -579,13 +574,18 @@
     var prev = section.previousElementSibling;
     var next = section.nextElementSibling;
 
+    function isTransparent(color) {
+      return !color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)';
+    }
+
     function paintOpaque(el, fallback) {
       if (!el) return;
-      el.style.setProperty('background-color', fallback, 'important');
+      if (isTransparent(window.getComputedStyle(el).backgroundColor)) {
+        el.style.setProperty('background-color', fallback, 'important');
+      }
       var inners = el.querySelectorAll(':scope > section, :scope > div, .fc-section, .corp-marquee');
       for (var i = 0; i < Math.min(inners.length, 8); i++) {
-        var ibg = window.getComputedStyle(inners[i]).backgroundColor;
-        if (!ibg || ibg === 'transparent' || ibg === 'rgba(0, 0, 0, 0)') {
+        if (isTransparent(window.getComputedStyle(inners[i]).backgroundColor)) {
           inners[i].style.setProperty('background-color', fallback, 'important');
         }
       }
@@ -593,38 +593,53 @@
 
     function layoutCurtain() {
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
-      // Full-viewport pull so the upper section clearly slides over the pin
-      var pull = vh;
 
       if (prev && prev.classList && prev.classList.contains('shopify-section')) {
         prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
         prev.style.setProperty('position', 'relative', 'important');
-        prev.style.setProperty('z-index', '5', 'important');
+        prev.style.setProperty('z-index', '3', 'important');
         prev.style.setProperty('isolation', 'isolate', 'important');
+        // Extra white pad = the UPPER curtain that lifts away over the banner
+        prev.style.setProperty('padding-bottom', vh + 'px', 'important');
+        prev.style.setProperty('background-color', '#ffffff', 'important');
         paintOpaque(prev, '#ffffff');
+        prevPadApplied = true;
       }
 
-      // Force story under previous section so upper curtain can slide over the pin
+      // Pull story under the prev padding; 3vh runway = open + hold + close
       section.style.setProperty('position', 'relative', 'important');
-      section.style.setProperty('z-index', '0', 'important');
-      section.style.setProperty('margin-top', -pull + 'px', 'important');
-      section.style.setProperty('height', (vh * 2 + pull) + 'px', 'important');
+      section.style.setProperty('z-index', '1', 'important');
+      section.style.setProperty('margin-top', -vh + 'px', 'important');
+      section.style.setProperty('height', vh * 3 + 'px', 'important');
       section.style.setProperty('overflow', 'visible', 'important');
       section.style.setProperty('background', 'transparent', 'important');
       section.style.setProperty('pointer-events', 'none', 'important');
 
-      track.style.setProperty('z-index', '-1', 'important');
-      pin.style.setProperty('z-index', '-1', 'important');
+      track.style.setProperty('background', 'transparent', 'important');
+      track.style.removeProperty('z-index');
+
+      pin.style.setProperty('z-index', '1', 'important');
       pin.style.setProperty('height', vh + 'px', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
 
-      if (next && next.classList && next.classList.contains('shopify-section')) {
-        next.classList.add('hp-story-curtain-next-{{ ai_gen_id }}');
-        next.style.setProperty('position', 'relative', 'important');
-        next.style.setProperty('z-index', '5', 'important');
-        next.style.setProperty('isolation', 'isolate', 'important');
-        next.style.setProperty('margin-top', -vh + 'px', 'important');
-        paintOpaque(next, '#111111');
+      // Raise the next few sections so short marquees don't leave a white hole
+      var sib = next;
+      var idx = 0;
+      while (sib && idx < 4) {
+        if (sib.classList && sib.classList.contains('shopify-section')) {
+          sib.classList.add('hp-story-curtain-next-{{ ai_gen_id }}');
+          sib.style.setProperty('position', 'relative', 'important');
+          sib.style.setProperty('z-index', '3', 'important');
+          sib.style.setProperty('isolation', 'isolate', 'important');
+          if (idx === 0) {
+            sib.style.setProperty('margin-top', -vh + 'px', 'important');
+          }
+          // Keep each section's own look — only fill if fully transparent
+          var fallback = idx === 0 ? '#111111' : '#ffffff';
+          paintOpaque(sib, fallback);
+          idx += 1;
+        }
+        sib = sib.nextElementSibling;
       }
     }
 
