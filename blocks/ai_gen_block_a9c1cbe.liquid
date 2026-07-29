@@ -107,10 +107,10 @@
   }
 
   /*
-    Curtain reveal (gap-free):
-    - Previous section gets extra white padding that sits OVER the sticky banner (upper open)
-    - Banner pins in a transparent runway (no black bars)
-    - Following sections sit above and slide over to close (lower cover)
+    Curtain reveal:
+    - Banner pins sticky
+    - Following sections slide up and cover it (lower curtain)
+    - No extra white padding / empty runway (that caused the blank white screen)
   */
   #MainContent {
     position: relative;
@@ -121,9 +121,8 @@
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
     position: relative !important;
     z-index: 1 !important;
-    height: 300vh !important;
-    margin-top: -100vh !important;
-    margin-bottom: 0 !important;
+    height: 200vh !important;
+    margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
     background: transparent !important;
@@ -132,13 +131,14 @@
     pointer-events: none;
   }
 
-  /* Section ABOVE — opaque white curtain (padding extension applied in JS) */
+  /* Section ABOVE — stays above the pin while it scrolls away */
   .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
   .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }} {
     position: relative !important;
     z-index: 3 !important;
     isolation: isolate !important;
     background-color: #ffffff !important;
+    padding-bottom: 0 !important;
   }
 
   /* Immediate next section starts early so it can cover the pin */
@@ -163,7 +163,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Transparent — black fill caused the visible bar/gap */
     background: transparent;
     pointer-events: none;
   }
@@ -599,18 +598,15 @@
         prev.style.setProperty('position', 'relative', 'important');
         prev.style.setProperty('z-index', '3', 'important');
         prev.style.setProperty('isolation', 'isolate', 'important');
-        // Extra white pad = the UPPER curtain that lifts away over the banner
-        prev.style.setProperty('padding-bottom', vh + 'px', 'important');
-        prev.style.setProperty('background-color', '#ffffff', 'important');
+        // Clear any leftover white padding from older curtain attempts
+        prev.style.setProperty('padding-bottom', '0px', 'important');
         paintOpaque(prev, '#ffffff');
-        prevPadApplied = true;
       }
 
-      // Pull story under the prev padding; 3vh runway = open + hold + close
       section.style.setProperty('position', 'relative', 'important');
       section.style.setProperty('z-index', '1', 'important');
-      section.style.setProperty('margin-top', -vh + 'px', 'important');
-      section.style.setProperty('height', vh * 3 + 'px', 'important');
+      section.style.setProperty('margin-top', '0px', 'important');
+      section.style.setProperty('height', vh * 2 + 'px', 'important');
       section.style.setProperty('overflow', 'visible', 'important');
       section.style.setProperty('background', 'transparent', 'important');
       section.style.setProperty('pointer-events', 'none', 'important');
@@ -622,7 +618,7 @@
       pin.style.setProperty('height', vh + 'px', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
 
-      // Raise the next few sections so short marquees don't leave a white hole
+      // Raise following sections so the lower curtain covers cleanly
       var sib = next;
       var idx = 0;
       while (sib && idx < 4) {
@@ -634,7 +630,6 @@
           if (idx === 0) {
             sib.style.setProperty('margin-top', -vh + 'px', 'important');
           }
-          // Keep each section's own look — only fill if fully transparent
           var fallback = idx === 0 ? '#111111' : '#ffffff';
           paintOpaque(sib, fallback);
           idx += 1;
