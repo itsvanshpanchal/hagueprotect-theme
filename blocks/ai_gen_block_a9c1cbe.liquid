@@ -106,6 +106,37 @@
     display: block;
   }
 
+  /* Sticky mid-scroll stage: banner freezes while neighbors scroll under it */
+  .ai-story-sticky-track-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.sticky_scroll_vh | default: 180 }}vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} {
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ai-story-sticky-track-{{ ai_gen_id }} {
+      height: auto;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} {
+      position: relative;
+      top: auto;
+      z-index: auto;
+    }
+  }
+
   .ai-story-banner-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
@@ -312,6 +343,10 @@
   }
 {% endstyle %}
 
+{%- if block.settings.enable_sticky_scroll -%}
+<div class="ai-story-sticky-track-{{ ai_gen_id }}" data-hp-story-sticky-track="{{ ai_gen_id }}">
+  <div class="ai-story-sticky-pin-{{ ai_gen_id }}">
+{%- endif -%}
 <div class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-story-banner-wrapper-{{ ai_gen_id }}">
     {% if block.settings.background_image %}
@@ -385,6 +420,30 @@
     </div>
   </div>
 </div>
+{%- if block.settings.enable_sticky_scroll -%}
+  </div>
+</div>
+<script>
+  (function() {
+    var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
+    if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var el = track.parentElement;
+    while (el && el !== document.body) {
+      var cs = window.getComputedStyle(el);
+      if (cs.overflow === 'hidden' || cs.overflowY === 'hidden' || cs.overflowX === 'hidden') {
+        el.style.setProperty('overflow', 'visible', 'important');
+      }
+      if (el.classList && el.classList.contains('shopify-section')) {
+        el.style.position = 'relative';
+        el.style.zIndex = '6';
+        el.style.background = 'transparent';
+        break;
+      }
+      el = el.parentElement;
+    }
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -394,6 +453,24 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_scroll",
+      "label": "Sticky scroll (pin between sections)",
+      "default": true,
+      "info": "Banner sticks while scrolling so the section above and below can pass under it. Creates scroll space between those sections."
+    },
+    {
+      "type": "range",
+      "id": "sticky_scroll_vh",
+      "label": "Sticky scroll distance",
+      "min": 120,
+      "max": 260,
+      "step": 10,
+      "unit": "vh",
+      "default": 180,
+      "info": "How long the banner stays pinned. Higher = more space between the sections above and below."
     },
     {
       "type": "range",
