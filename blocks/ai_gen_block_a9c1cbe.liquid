@@ -107,33 +107,54 @@
   }
 
   /*
-    Fixed reveal (no empty gap):
-    One viewport-tall panel stays sticky. Neighbor sections (higher z-index)
-    scroll OVER it. Track height == pin height so there is no white space.
+    Reveal effect:
+    - Track reserves scroll distance in the page
+    - Pin is fixed to the viewport while the track is active
+    - Neighbor sections (higher z-index) slide OVER the frozen banner
+    - Pin always covers the viewport, so no empty white gap appears
   */
   .ai-story-sticky-track-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    /* Scroll hold while banner stays fixed in the viewport (no empty white gap) */
+    height: 150vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     z-index: 1;
-    background: {{ block.settings.background_color | default: '#111111' }};
+    background: #0a0a0a;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
-    position: sticky;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: 1;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: {{ block.settings.background_color | default: '#111111' }};
+    background: #0a0a0a;
+    will-change: transform;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }}.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }}.is-ended {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
@@ -167,9 +188,12 @@
       background: transparent;
     }
 
-    .ai-story-sticky-pin-{{ ai_gen_id }} {
+    .ai-story-sticky-pin-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }}.is-fixed,
+    .ai-story-sticky-pin-{{ ai_gen_id }}.is-ended {
       position: relative;
       top: auto;
+      bottom: auto;
       height: auto;
       z-index: auto;
     }
@@ -398,7 +422,7 @@
 
 {%- if block.settings.enable_sticky_scroll -%}
 <div class="ai-story-sticky-track-{{ ai_gen_id }}" data-hp-story-sticky-track="{{ ai_gen_id }}">
-  <div class="ai-story-sticky-pin-{{ ai_gen_id }}">
+  <div class="ai-story-sticky-pin-{{ ai_gen_id }}" data-hp-story-sticky-pin="{{ ai_gen_id }}">
 {%- endif -%}
 <div class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-story-banner-wrapper-{{ ai_gen_id }}">
@@ -479,12 +503,12 @@
 <script>
   (function() {
     var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
-    if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var pin = document.querySelector('[data-hp-story-sticky-pin="{{ ai_gen_id }}"]');
+    if (!track || !pin || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var section = track.closest('.shopify-section');
     if (!section) return;
 
-    // Banner stays UNDER neighbors — one viewport, no blank spacer
     section.style.position = 'relative';
     section.style.zIndex = '1';
     section.style.background = 'transparent';
@@ -498,24 +522,57 @@
       if (cs.overflow === 'hidden' || cs.overflowY === 'hidden' || cs.overflowX === 'hidden') {
         el.style.setProperty('overflow', 'visible', 'important');
       }
-      el.style.margin = el.style.margin || '0';
       el = el.parentElement;
     }
 
-    // Sections above + below scroll OVER the frozen banner
+    // Neighbors scroll OVER the frozen banner (curtain effect)
     function liftNeighbor(node) {
       if (!node || !node.classList || !node.classList.contains('shopify-section')) return;
       node.style.position = 'relative';
-      node.style.zIndex = '3';
+      node.style.zIndex = '5';
       node.setAttribute('data-hp-story-overlay-neighbor', '{{ ai_gen_id }}');
       var bg = window.getComputedStyle(node).backgroundColor;
       if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
         node.style.backgroundColor = '#ffffff';
       }
     }
-
     liftNeighbor(section.previousElementSibling);
     liftNeighbor(section.nextElementSibling);
+
+    function syncReveal() {
+      var rect = track.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+
+      pin.classList.remove('is-fixed', 'is-ended');
+
+      if (rect.top > 0) {
+        // Not reached yet — pin sits at top of track
+        return;
+      }
+
+      if (rect.bottom < vh) {
+        // Track finished — park pin at end so next section can cover it
+        pin.classList.add('is-ended');
+        return;
+      }
+
+      // Active reveal window — freeze banner in the viewport
+      pin.classList.add('is-fixed');
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function() {
+        syncReveal();
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', syncReveal);
+    syncReveal();
   })();
 </script>
 {%- endif -%}
@@ -534,7 +591,7 @@
       "id": "enable_sticky_scroll",
       "label": "Fixed reveal (sections scroll over banner)",
       "default": true,
-      "info": "Banner fills one screen and stays still. Sections above and below scroll over it. No extra blank space."
+      "info": "Banner freezes in place. Section above slides away over it, then section below slides up and covers it — like a curtain reveal."
     },
     {
       "type": "range",
