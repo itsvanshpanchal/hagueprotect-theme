@@ -106,23 +106,58 @@
     display: block;
   }
 
-  /* Sticky mid-scroll stage: banner freezes while neighbors scroll under it */
+  /*
+    Reveal effect (like fixed mid-page banner):
+    Banner stays frozen in the viewport; sections ABOVE and BELOW
+    scroll OVER it (higher z-index), covering it as curtains.
+  */
   .ai-story-sticky-track-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
+    /* Extra runway so the banner stays frozen longer, then the next section covers it */
     height: {{ block.settings.sticky_scroll_vh | default: 180 }}vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    z-index: 1;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
     position: sticky;
     top: 0;
-    z-index: 8;
+    left: 0;
     width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-placeholder-{{ ai_gen_id }} {
+    min-height: 100%;
+    height: 100%;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -133,7 +168,23 @@
     .ai-story-sticky-pin-{{ ai_gen_id }} {
       position: relative;
       top: auto;
+      height: auto;
       z-index: auto;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
+      height: auto;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      height: auto;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
+      top: {{ block.settings.content_offset_top }}px;
+      transform: none;
     }
   }
 
@@ -427,20 +478,40 @@
   (function() {
     var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
     if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var section = track.closest('.shopify-section');
+    if (!section) return;
+
+    // Banner section stays UNDER neighbors
+    section.style.position = 'relative';
+    section.style.zIndex = '1';
+    section.style.background = 'transparent';
+    section.style.setProperty('overflow', 'visible', 'important');
+
     var el = track.parentElement;
-    while (el && el !== document.body) {
+    while (el && el !== section) {
       var cs = window.getComputedStyle(el);
       if (cs.overflow === 'hidden' || cs.overflowY === 'hidden' || cs.overflowX === 'hidden') {
         el.style.setProperty('overflow', 'visible', 'important');
       }
-      if (el.classList && el.classList.contains('shopify-section')) {
-        el.style.position = 'relative';
-        el.style.zIndex = '6';
-        el.style.background = 'transparent';
-        break;
-      }
       el = el.parentElement;
     }
+
+    // Sections above + below scroll OVER the frozen banner
+    function liftNeighbor(node) {
+      if (!node || !node.classList || !node.classList.contains('shopify-section')) return;
+      node.style.position = 'relative';
+      node.style.zIndex = '3';
+      node.setAttribute('data-hp-story-overlay-neighbor', '{{ ai_gen_id }}');
+      // Opaque curtain so neighbors fully cover the frozen banner
+      var bg = window.getComputedStyle(node).backgroundColor;
+      if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
+        node.style.backgroundColor = '#ffffff';
+      }
+    }
+
+    liftNeighbor(section.previousElementSibling);
+    liftNeighbor(section.nextElementSibling);
   })();
 </script>
 {%- endif -%}
@@ -457,9 +528,9 @@
     {
       "type": "checkbox",
       "id": "enable_sticky_scroll",
-      "label": "Sticky scroll (pin between sections)",
+      "label": "Fixed reveal (sections scroll over banner)",
       "default": true,
-      "info": "Banner sticks while scrolling so the section above and below can pass under it. Creates scroll space between those sections."
+      "info": "Banner stays still in the viewport. The section above slides away over it, then the section below slides up and covers it."
     },
     {
       "type": "range",
@@ -470,7 +541,7 @@
       "step": 10,
       "unit": "vh",
       "default": 180,
-      "info": "How long the banner stays pinned. Higher = more space between the sections above and below."
+      "info": "How long the banner stays frozen before the next section covers it. Higher = longer hold."
     },
     {
       "type": "range",
