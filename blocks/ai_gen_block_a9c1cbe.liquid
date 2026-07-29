@@ -107,26 +107,45 @@
   }
 
   /*
-    Reveal effect:
-    - Track reserves scroll distance in the page
-    - Pin is fixed to the viewport while the track is active
-    - Neighbor sections (higher z-index) slide OVER the frozen banner
-    - Pin always covers the viewport, so no empty white gap appears
+    Curtain reveal (CSS sticky sandwich):
+    Banner section sits UNDER neighbors. Sticky pin freezes one viewport.
+    Prev/next sections (higher z-index + solid bg) scroll OVER it.
   */
+  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
+    position: relative !important;
+    z-index: 1 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  /* Section ABOVE scrolls over the banner */
+  .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})) {
+    position: relative !important;
+    z-index: 4 !important;
+  }
+
+  /* Section BELOW scrolls over the banner */
+  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
+    position: relative !important;
+    z-index: 4 !important;
+  }
+
   .ai-story-sticky-track-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    /* Scroll hold while banner stays fixed in the viewport (no empty white gap) */
-    height: 150vh;
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    z-index: 1;
     background: #0a0a0a;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
@@ -137,24 +156,6 @@
     padding: 0;
     overflow: hidden;
     background: #0a0a0a;
-    will-change: transform;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }}.is-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }}.is-ended {
-    position: absolute;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    width: 100%;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
@@ -183,17 +184,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
+      height: auto !important;
+    }
+
     .ai-story-sticky-track-{{ ai_gen_id }} {
       height: auto;
       background: transparent;
     }
 
-    .ai-story-sticky-pin-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }}.is-fixed,
-    .ai-story-sticky-pin-{{ ai_gen_id }}.is-ended {
+    .ai-story-sticky-pin-{{ ai_gen_id }} {
       position: relative;
       top: auto;
-      bottom: auto;
       height: auto;
       z-index: auto;
     }
@@ -503,76 +505,36 @@
 <script>
   (function() {
     var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
-    var pin = document.querySelector('[data-hp-story-sticky-pin="{{ ai_gen_id }}"]');
-    if (!track || !pin || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var section = track.closest('.shopify-section');
     if (!section) return;
 
-    section.style.position = 'relative';
-    section.style.zIndex = '1';
-    section.style.background = 'transparent';
-    section.style.margin = '0';
-    section.style.padding = '0';
-    section.style.setProperty('overflow', 'visible', 'important');
-
-    var el = track.parentElement;
-    while (el && el !== section) {
-      var cs = window.getComputedStyle(el);
-      if (cs.overflow === 'hidden' || cs.overflowY === 'hidden' || cs.overflowX === 'hidden') {
-        el.style.setProperty('overflow', 'visible', 'important');
+    // Unblock sticky: overflow-x:hidden on ancestors breaks position:sticky
+    var node = track;
+    while (node && node !== document.documentElement) {
+      if (node.nodeType === 1) {
+        var cs = window.getComputedStyle(node);
+        if (cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.overflowY === 'hidden') {
+          node.style.setProperty('overflow-x', 'clip', 'important');
+          node.style.setProperty('overflow-y', 'visible', 'important');
+        }
       }
-      el = el.parentElement;
+      node = node.parentElement;
     }
 
-    // Neighbors scroll OVER the frozen banner (curtain effect)
-    function liftNeighbor(node) {
-      if (!node || !node.classList || !node.classList.contains('shopify-section')) return;
-      node.style.position = 'relative';
-      node.style.zIndex = '5';
-      node.setAttribute('data-hp-story-overlay-neighbor', '{{ ai_gen_id }}');
-      var bg = window.getComputedStyle(node).backgroundColor;
+    function paintNeighbor(el) {
+      if (!el || !el.classList || !el.classList.contains('shopify-section')) return;
+      el.style.position = 'relative';
+      el.style.zIndex = '4';
+      var bg = window.getComputedStyle(el).backgroundColor;
       if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
-        node.style.backgroundColor = '#ffffff';
+        el.style.backgroundColor = '#ffffff';
       }
     }
-    liftNeighbor(section.previousElementSibling);
-    liftNeighbor(section.nextElementSibling);
 
-    function syncReveal() {
-      var rect = track.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-
-      pin.classList.remove('is-fixed', 'is-ended');
-
-      if (rect.top > 0) {
-        // Not reached yet — pin sits at top of track
-        return;
-      }
-
-      if (rect.bottom < vh) {
-        // Track finished — park pin at end so next section can cover it
-        pin.classList.add('is-ended');
-        return;
-      }
-
-      // Active reveal window — freeze banner in the viewport
-      pin.classList.add('is-fixed');
-    }
-
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(function() {
-        syncReveal();
-        ticking = false;
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', syncReveal);
-    syncReveal();
+    paintNeighbor(section.previousElementSibling);
+    paintNeighbor(section.nextElementSibling);
   })();
 </script>
 {%- endif -%}
