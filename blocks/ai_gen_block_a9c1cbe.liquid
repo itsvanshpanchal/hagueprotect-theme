@@ -107,31 +107,41 @@
   }
 
   /*
-    Curtain reveal (CSS sticky sandwich):
-    Banner section sits UNDER neighbors. Sticky pin freezes one viewport.
-    Prev/next sections (higher z-index + solid bg) scroll OVER it.
+    Curtain reveal like jewelry reference:
+    - Banner freezes (sticky) underneath
+    - Section ABOVE stays on top and slides away OVER the banner
+    - Section BELOW slides up and covers the banner
   */
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
     position: relative !important;
     z-index: 1 !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+    /* Extra height = longer freeze so neighbors can clearly slide over it */
+    height: 200vh !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
     background: transparent !important;
+    isolation: auto !important;
   }
 
-  /* Section ABOVE scrolls over the banner */
-  .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})) {
+  /* Section ABOVE — solid curtain that slides over the banner */
+  .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
+  .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }} {
     position: relative !important;
-    z-index: 4 !important;
+    z-index: 30 !important;
+    isolation: isolate !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   }
 
-  /* Section BELOW scrolls over the banner */
-  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
+  /* Section BELOW — solid curtain that slides up over the banner */
+  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
+  .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
     position: relative !important;
-    z-index: 4 !important;
+    z-index: 30 !important;
+    isolation: isolate !important;
+    background-color: #111111 !important;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
   }
 
   .ai-story-sticky-track-{{ ai_gen_id }} {
@@ -151,7 +161,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    z-index: 1;
+    z-index: 0;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -213,6 +223,13 @@
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
       top: {{ block.settings.content_offset_top }}px;
       transform: none;
+    }
+
+    .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
+    .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }},
+    .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
+      box-shadow: none !important;
     }
   }
 
@@ -510,7 +527,7 @@
     var section = track.closest('.shopify-section');
     if (!section) return;
 
-    // Unblock sticky: overflow-x:hidden on ancestors breaks position:sticky
+    // Unblock sticky (overflow-x:hidden on ancestors breaks it)
     var node = track;
     while (node && node !== document.documentElement) {
       if (node.nodeType === 1) {
@@ -523,18 +540,27 @@
       node = node.parentElement;
     }
 
-    function paintNeighbor(el) {
-      if (!el || !el.classList || !el.classList.contains('shopify-section')) return;
-      el.style.position = 'relative';
-      el.style.zIndex = '4';
-      var bg = window.getComputedStyle(el).backgroundColor;
-      if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
-        el.style.backgroundColor = '#ffffff';
+    var prev = section.previousElementSibling;
+    var next = section.nextElementSibling;
+
+    if (prev && prev.classList && prev.classList.contains('shopify-section')) {
+      prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
+      // Force opaque curtain so upper section visibly slides OVER the banner
+      prev.style.setProperty('background-color', '#ffffff', 'important');
+      var prevInner = prev.querySelector('.fc-section, [class*="section"]');
+      if (prevInner) {
+        prevInner.style.setProperty('background-color', '#ffffff', 'important');
       }
     }
 
-    paintNeighbor(section.previousElementSibling);
-    paintNeighbor(section.nextElementSibling);
+    if (next && next.classList && next.classList.contains('shopify-section')) {
+      next.classList.add('hp-story-curtain-next-{{ ai_gen_id }}');
+      // Keep dark marquee look, but ensure solid cover
+      var nextBg = window.getComputedStyle(next).backgroundColor;
+      if (!nextBg || nextBg === 'transparent' || nextBg === 'rgba(0, 0, 0, 0)') {
+        next.style.setProperty('background-color', '#111111', 'important');
+      }
+    }
   })();
 </script>
 {%- endif -%}
