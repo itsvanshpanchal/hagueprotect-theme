@@ -55,7 +55,7 @@
     font-weight: var(--font-weight-eyebrow, 700) !important;
     font-style: var(--font-style-eyebrow, normal) !important;
     letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
+    text-transform: none !important;
     line-height: 1.4 !important;
     color: {{ section.settings.eyebrow_color | default: '#2563eb' }} !important;
   }
@@ -76,12 +76,12 @@
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line {
     display: block !important;
-    text-transform: lowercase !important;
+    text-transform: none !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line::first-letter,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line::first-letter {
-    text-transform: uppercase !important;
+    text-transform: none !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line--2,

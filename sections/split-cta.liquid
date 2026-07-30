@@ -146,7 +146,7 @@
     font-weight: {{ button_weight }} !important;
     font-style: {{ button_style }} !important;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+    text-transform: none;
     white-space: nowrap;
     transition: background-color 0.2s ease;
   }
@@ -204,7 +204,7 @@
 
     <div class="split-cta-{{ section.id }}__actions">
       <a href="{{ cta_link }}" class="split-cta-{{ section.id }}__button">
-        <span>{{ cta_label | escape | upcase }}</span>
+        <span>{{ cta_label | escape }}</span>
         <span class="split-cta-{{ section.id }}__arrow" aria-hidden="true">→</span>
       </a>
     </div>

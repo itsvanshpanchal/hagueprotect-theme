@@ -1,5 +1,5 @@
 {%- comment -%}
-  Section heading text — sentence case + optional second line color.
+  Section heading text — preserves Theme Editor casing.
   Optional accent_last_word: last word in script handwriting (inline, same line).
   Params: text, line2 (optional), line2_color (optional), accent_last_word (optional), accent_color (optional)
 {%- endcomment -%}
@@ -28,22 +28,7 @@
       assign main_count = words.size | minus: 1
       assign main_words = words | slice: 0, main_count
       assign line1_main = main_words | join: ' '
-
-      comment
-        Accent stays a SIBLING of the sentence-case line (not nested),
-        so parent text-transform: lowercase cannot reshape it.
-        Keep authored casing: MATERIAL stays MATERIAL, Care stays Care.
-      endcomment
-      assign accent_letters = accent_raw | replace: '.', '' | replace: '!', '' | replace: '?', '' | replace: ',', '' | replace: ';', ''
-      assign accent_up = accent_letters | upcase
-      assign accent_down = accent_letters | downcase
-      if accent_letters == accent_up and accent_letters != blank
-        assign accent_word = accent_raw | upcase
-      elsif accent_letters == accent_down and accent_letters != blank
-        assign accent_word = accent_raw | downcase | capitalize
-      else
-        assign accent_word = accent_raw
-      endif
+      assign accent_word = accent_raw
     endif
   endif
 

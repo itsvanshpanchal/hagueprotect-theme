@@ -122,7 +122,7 @@ h1 {
   font-weight: var(--font-weight-heading, var(--heading-weight));
   line-height: var(--heading-line-height);
   letter-spacing: var(--heading-letter-spacing);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
   font-size: var(--heading-size-xl);
@@ -134,7 +134,7 @@ h2 {
   font-weight: var(--font-weight-h2, var(--heading-weight));
   line-height: var(--heading-line-height);
   letter-spacing: var(--heading-letter-spacing);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
   font-size: var(--section-heading-size, var(--heading-size-xl));
@@ -152,7 +152,7 @@ h6 {
   font-weight: var(--font-weight-h2, var(--heading-weight));
   line-height: 1.1;
   letter-spacing: var(--heading-letter-spacing);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
 }
@@ -304,7 +304,7 @@ h6 {
   font-weight: 700;
   letter-spacing: -0.01em;
   font-size: 16px;
-  text-transform: uppercase;
+  text-transform: none;
   line-height: 1.2;
 }
 
@@ -475,12 +475,12 @@ main h1:not(.hero-fullscreen__heading),
   font-style: var(--font-style-heading, normal) !important;
   letter-spacing: var(--heading-letter-spacing) !important;
   line-height: var(--heading-line-height) !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
   font-size: var(--heading-size-xl) !important;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Section titles (H2) — sentence case (not Hero). Second line color via .hp-heading-line--2 */
+/* Section titles (H2) — preserve Theme Editor casing. Second line color via .hp-heading-line--2 */
 .trending-social__heading,
 .bestsellers__heading-dtc,
 .bs-coverflow__heading,
@@ -542,7 +542,7 @@ main h2.h2,
   text-transform: none !important;
 }
 
-/* Sentence case: first letter capital, rest lowercase — Hero excluded */
+/* Preserve authored casing from Theme Editor (CAPS stay CAPS, mixed stay mixed) */
 .trending-social__heading .hp-heading-line,
 .bestsellers__heading-dtc .hp-heading-line,
 .bs-coverflow__heading .hp-heading-line,
@@ -573,7 +573,7 @@ main h2.h2,
 #MainContent .shopify-section:not(.shopify-section-hero) h2 .hp-heading-line,
 #MainContent .shopify-section:not(.shopify-section-hero) .hp-heading-line {
   display: block;
-  text-transform: lowercase !important;
+  text-transform: none !important;
 }
 
 .trending-social__heading .hp-heading-line::first-letter,
@@ -605,7 +605,7 @@ main h2.h2,
 .skincare-builder__title .hp-heading-line::first-letter,
 #MainContent .shopify-section:not(.shopify-section-hero) h2 .hp-heading-line::first-letter,
 #MainContent .shopify-section:not(.shopify-section-hero) .hp-heading-line::first-letter {
-  text-transform: uppercase !important;
+  text-transform: none !important;
 }
 
 .hp-heading-line--2 {
@@ -664,14 +664,14 @@ main h2.h2,
 .premium-htu__title .hp-heading-line,
 .premium-htu__title:not(:has(.hp-heading-line)) {
   display: block;
-  text-transform: lowercase !important;
+  text-transform: none !important;
 }
 .premium-htu__title .hp-heading-line::first-letter,
 .premium-htu__title:not(:has(.hp-heading-line))::first-letter {
-  text-transform: uppercase !important;
+  text-transform: none !important;
 }
 
-/* Fallback sentence case when heading is plain text (no line wrapper yet) */
+/* Fallback: plain headings keep authored casing */
 .trending-social__heading:not(:has(.hp-heading-line)),
 .bestsellers__heading-dtc:not(:has(.hp-heading-line)),
 .bs-coverflow__heading:not(:has(.hp-heading-line)),
@@ -694,7 +694,7 @@ main h2.h2,
 .biz-advantages__heading:not(:has(.hp-heading-line)),
 .story-banner__heading:not(:has(.hp-heading-line)),
 .story-banner__subheading:not(:has(.hp-heading-line)) {
-  text-transform: lowercase !important;
+  text-transform: none !important;
 }
 
 .trending-social__heading:not(:has(.hp-heading-line))::first-letter,
@@ -719,7 +719,7 @@ main h2.h2,
 .biz-advantages__heading:not(:has(.hp-heading-line))::first-letter,
 .story-banner__heading:not(:has(.hp-heading-line))::first-letter,
 .story-banner__subheading:not(:has(.hp-heading-line))::first-letter {
-  text-transform: uppercase !important;
+  text-transform: none !important;
 }
 
 .hero-fullscreen__heading {
@@ -892,7 +892,7 @@ main h3 > span[aria-hidden="true"] {
   line-height: var(--section-label-line-height) !important;
   letter-spacing: var(--section-label-letter-spacing) !important;
   color: var(--section-label-color) !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
   text-align: inherit !important;
   display: block !important;
   margin: 0 0 var(--section-label-to-title-gap) 0 !important;
@@ -1183,7 +1183,7 @@ h4.mobile-accordion-category-heading,
   font-size: var(--section-subheading-size, 15px) !important;
   line-height: 1.3 !important;
   letter-spacing: 0.02em !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
 }
 
 #MainContent h3.hp-dna__item-title,
@@ -1194,7 +1194,7 @@ h4.mobile-accordion-category-heading,
   font-size: var(--section-subheading-size, 15px) !important;
   line-height: 1.35 !important;
   letter-spacing: 0.05em !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
 }
 
 .hp-dna__item-text,
