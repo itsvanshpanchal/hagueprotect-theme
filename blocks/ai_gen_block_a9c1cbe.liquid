@@ -203,14 +203,18 @@
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-    /* Upper position — was vertically centered (50%), which sat too low */
-    top: {% if block.settings.content_offset_top > 0 %}{{ block.settings.content_offset_top }}px{% else %}12%{% endif %};
+    /* Match other homepage sections (~28–48px), not a large % of the viewport */
+    top: {% if block.settings.content_offset_top > 0 %}{{ block.settings.content_offset_top }}px{% else %}clamp(28px, 4.5vw, 48px){% endif %};
+    left: max({{ block.settings.content_offset_left }}px, var(--homepage-section-gutter, 8px), 20px);
+    padding: {{ block.settings.content_padding | default: 20 }}px;
     transform: none;
   }
 
   @media screen and (max-width: 749px) {
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-      top: 48px;
+      top: clamp(20px, 4vw, 32px);
+      left: 16px;
+      padding: 16px;
       transform: none;
     }
   }
