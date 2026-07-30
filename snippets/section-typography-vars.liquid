@@ -24,59 +24,11 @@
   if accent_family == blank or accent_family == 'theme_default'
     assign accent_family = settings.font_heading_accent_family | default: 'luthon_southard_script'
   endif
--%}
-{%- capture h1_implied_weight -%}{% render 'hp-font-weight', font_key: h1_family %}{%- endcapture -%}
-{%- capture h2_implied_weight -%}{% render 'hp-font-weight', font_key: h2_family %}{%- endcapture -%}
-{%- capture paragraph_implied_weight -%}{% render 'hp-font-weight', font_key: paragraph_family %}{%- endcapture -%}
-{%- capture eyebrow_implied_weight -%}{% render 'hp-font-weight', font_key: eyebrow_family %}{%- endcapture -%}
-{%- capture accent_implied_weight -%}{% render 'hp-font-weight', font_key: accent_family %}{%- endcapture -%}
-{%- capture h1_named -%}{% render 'hp-font-is-named-face', font_key: h1_family %}{%- endcapture -%}
-{%- capture h2_named -%}{% render 'hp-font-is-named-face', font_key: h2_family %}{%- endcapture -%}
-{%- capture paragraph_named -%}{% render 'hp-font-is-named-face', font_key: paragraph_family %}{%- endcapture -%}
-{%- capture eyebrow_named -%}{% render 'hp-font-is-named-face', font_key: eyebrow_family %}{%- endcapture -%}
-{%- capture accent_named -%}{% render 'hp-font-is-named-face', font_key: accent_family %}{%- endcapture -%}
-{%- liquid
-  assign h1_implied_weight = h1_implied_weight | strip
-  assign h2_implied_weight = h2_implied_weight | strip
-  assign paragraph_implied_weight = paragraph_implied_weight | strip
-  assign eyebrow_implied_weight = eyebrow_implied_weight | strip
-  assign accent_implied_weight = accent_implied_weight | strip
-  assign h1_named = h1_named | strip
-  assign h2_named = h2_named | strip
-  assign paragraph_named = paragraph_named | strip
-  assign eyebrow_named = eyebrow_named | strip
-  assign accent_named = accent_named | strip
 
-  if h1_named != blank
-    assign h1_weight = '400'
-    assign h1_style = 'normal'
-  elsif h1_implied_weight != '400'
-    assign h1_weight = h1_implied_weight
-  endif
-  if h2_named != blank
-    assign h2_weight = '400'
-    assign h2_style = 'normal'
-  elsif h2_implied_weight != '400'
-    assign h2_weight = h2_implied_weight
-  endif
-  if paragraph_named != blank
-    assign paragraph_weight = '400'
-    assign paragraph_style = 'normal'
-  elsif paragraph_implied_weight != '400'
-    assign paragraph_weight = paragraph_implied_weight
-  endif
-  if eyebrow_named != blank
-    assign eyebrow_weight = '400'
-    assign eyebrow_style = 'normal'
-  elsif eyebrow_implied_weight != '400'
-    assign eyebrow_weight = eyebrow_implied_weight
-  endif
-  if accent_named != blank
-    assign accent_weight = '400'
-    assign accent_style = 'normal'
-  elsif accent_implied_weight != '400'
-    assign accent_weight = accent_implied_weight
-  endif
+  comment
+    Always honor Theme Editor Weight / Style — do not force named-face or
+    implied font-key weights (that made Weight controls appear broken).
+  endcomment
 
   assign hero_h1_desktop = settings.font_hero_h1_size_desktop | default: 72
   assign hero_h1_mobile = settings.font_hero_h1_size_mobile | default: 44
@@ -178,6 +130,7 @@
   --subheading-weight: {{ h2_weight }};
   --font-weight-h2: {{ h2_weight }};
   --font-weight-sans: {{ paragraph_weight }};
+  --section-subheading-weight: {{ paragraph_weight }};
   --font-weight-eyebrow: {{ eyebrow_weight }};
   --font-weight-heading-accent: {{ accent_weight }};
   --font-style-heading: {{ h1_style }};

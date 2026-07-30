@@ -61,7 +61,10 @@
   }
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading,
-  .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-typewriter-text {
     font-family: var(--font-family-heading) !important;
     font-size: var(--heading-size-xl) !important;
     font-weight: var(--font-weight-heading, 400) !important;
@@ -71,6 +74,11 @@
     text-transform: none !important;
     color: {{ section.settings.heading_color | default: '#111111' }} !important;
     margin: 0 !important;
+  }
+
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair {
+    font-size: inherit !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
@@ -90,7 +98,9 @@
   }
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__subheading,
-  .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading,
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line,
+  .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-pair {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: var(--section-heading-size) !important;
     font-weight: var(--font-weight-h2, 400) !important;

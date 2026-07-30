@@ -481,6 +481,33 @@ main h1:not(.hero-fullscreen__heading),
 }
 
 /* Section titles (H2) — preserve Theme Editor casing. Second line color via .hp-heading-line--2 */
+.story-banner__heading,
+.story-banner__subheading,
+[class*="ai-story-banner-heading-"] {
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-style: var(--font-style-h2, normal) !important;
+  letter-spacing: -0.02em !important;
+  line-height: var(--heading-line-height) !important;
+  text-transform: none !important;
+  font-size: var(--section-heading-size, var(--heading-size-xl)) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.skincare-intro__title,
+.skincare-explanation__title,
+.skincare-concerns__title,
+.skincare-builder__title {
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-weight: var(--font-weight-h2, var(--subheading-weight, 400)) !important;
+  font-style: var(--font-style-h2, normal) !important;
+  letter-spacing: -0.02em !important;
+  line-height: var(--heading-line-height) !important;
+  text-transform: none !important;
+  font-size: var(--section-heading-size, var(--heading-size-xl)) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shared section titles — Story Banner excluded (uses its own Weight settings) */
 .trending-social__heading,
 .bestsellers__heading-dtc,
 .bs-coverflow__heading,
@@ -502,14 +529,7 @@ main h2.h2,
 .brand-banner__title,
 .brandsel__heading,
 .biz-solutions__heading,
-.biz-advantages__heading,
-.story-banner__heading,
-.story-banner__subheading,
-[class*="ai-story-banner-heading-"],
-.skincare-intro__title,
-.skincare-explanation__title,
-.skincare-concerns__title,
-.skincare-builder__title {
+.biz-advantages__heading {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-weight: var(--font-weight-h2, var(--subheading-weight, 400)) !important;
   font-style: var(--font-style-h2, normal) !important;
@@ -883,11 +903,27 @@ main h3 > span[aria-hidden="true"] {
 .corp-hero__eyebrow,
 .story-banner__eyebrow,
 .feature-grid__eyebrow,
-.section-heading-stack__label,
-[class*="ai-story-banner-subheading-"] {
+.section-heading-stack__label {
   font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
   font-size: var(--section-label-size) !important;
   font-weight: var(--font-weight-eyebrow, var(--section-label-weight)) !important;
+  font-style: var(--font-style-eyebrow, normal) !important;
+  line-height: var(--section-label-line-height) !important;
+  letter-spacing: var(--section-label-letter-spacing) !important;
+  color: var(--section-label-color) !important;
+  text-transform: none !important;
+  text-align: inherit !important;
+  display: block !important;
+  margin: 0 0 var(--section-label-to-title-gap) 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Story Banner tiny text — Weight comes from its own block settings, not eyebrow vars */
+[class*="ai-story-banner-subheading-"] {
+  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+  font-size: var(--section-label-size) !important;
   font-style: var(--font-style-eyebrow, normal) !important;
   line-height: var(--section-label-line-height) !important;
   letter-spacing: var(--section-label-letter-spacing) !important;

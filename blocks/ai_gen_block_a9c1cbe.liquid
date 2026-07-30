@@ -9,6 +9,9 @@
   assign text_family = block.settings.text_font_family | default: 'inter'
   assign button_family = block.settings.button_font_family | default: 'inter'
 
+  comment
+    Always honor Theme Editor Weight / Style for Story Banner.
+  endcomment
   assign heading_weight = block.settings.heading_font_weight | default: '400'
   assign subheading_weight = block.settings.subheading_font_weight | default: '700'
   assign text_weight = block.settings.text_font_weight | default: '400'
@@ -17,48 +20,6 @@
   assign heading_style = block.settings.heading_font_style | default: 'normal'
   assign subheading_style = block.settings.subheading_font_style | default: 'normal'
   assign text_style = block.settings.text_font_style | default: 'normal'
--%}
-{%- capture heading_implied -%}{% render 'hp-font-weight', font_key: heading_family %}{%- endcapture -%}
-{%- capture subheading_implied -%}{% render 'hp-font-weight', font_key: subheading_family %}{%- endcapture -%}
-{%- capture text_implied -%}{% render 'hp-font-weight', font_key: text_family %}{%- endcapture -%}
-{%- capture button_implied -%}{% render 'hp-font-weight', font_key: button_family %}{%- endcapture -%}
-{%- capture heading_named -%}{% render 'hp-font-is-named-face', font_key: heading_family %}{%- endcapture -%}
-{%- capture subheading_named -%}{% render 'hp-font-is-named-face', font_key: subheading_family %}{%- endcapture -%}
-{%- capture text_named -%}{% render 'hp-font-is-named-face', font_key: text_family %}{%- endcapture -%}
-{%- capture button_named -%}{% render 'hp-font-is-named-face', font_key: button_family %}{%- endcapture -%}
-{%- liquid
-  assign heading_implied = heading_implied | strip
-  assign subheading_implied = subheading_implied | strip
-  assign text_implied = text_implied | strip
-  assign button_implied = button_implied | strip
-  assign heading_named = heading_named | strip
-  assign subheading_named = subheading_named | strip
-  assign text_named = text_named | strip
-  assign button_named = button_named | strip
-
-  if heading_named != blank
-    assign heading_weight = '400'
-    assign heading_style = 'normal'
-  elsif heading_implied != '400'
-    assign heading_weight = heading_implied
-  endif
-  if subheading_named != blank
-    assign subheading_weight = '400'
-    assign subheading_style = 'normal'
-  elsif subheading_implied != '400'
-    assign subheading_weight = subheading_implied
-  endif
-  if text_named != blank
-    assign text_weight = '400'
-    assign text_style = 'normal'
-  elsif text_implied != '400'
-    assign text_weight = text_implied
-  endif
-  if button_named != blank
-    assign button_weight = '400'
-  elsif button_implied != '400'
-    assign button_weight = button_implied
-  endif
 
   assign accent_family = block.settings.heading_accent_font_family | default: settings.font_heading_accent_family | default: 'luthon_southard_script'
   if accent_family == blank or accent_family == 'theme_default'
@@ -70,19 +31,6 @@
   assign accent_size_mobile = block.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
   assign accent_color = block.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
 -%}
-{%- capture accent_implied -%}{% render 'hp-font-weight', font_key: accent_family %}{%- endcapture -%}
-{%- capture accent_named -%}{% render 'hp-font-is-named-face', font_key: accent_family %}{%- endcapture -%}
-{%- liquid
-  assign accent_implied = accent_implied | strip
-  assign accent_named = accent_named | strip
-  if accent_named != blank
-    assign accent_weight = '400'
-    assign accent_style = 'normal'
-  elsif accent_implied != '400'
-    assign accent_weight = accent_implied
-  endif
--%}
-
 
 {%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
 {%- capture subheading_stack -%}{% render 'hp-font-stack', font_key: subheading_family %}{%- endcapture -%}
@@ -349,9 +297,25 @@
     text-transform: none !important;
   }
 
+  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
+  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
+  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text,
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: {{ heading_weight }} !important;
+    font-style: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+    margin: 0 !important;
+    text-transform: none !important;
+  }
+
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line {
     display: block;
-    text-transform: none !important;
   }
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--with-accent {
