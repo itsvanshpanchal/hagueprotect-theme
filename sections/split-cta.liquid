@@ -1,12 +1,31 @@
+{%- liquid
+  assign cta_heading = section.settings.heading | default: 'Ready to play the long game?'
+  assign cta_text = section.settings.text | default: 'The protocol starts with one kit. Tell us your concern and we will point you to the right one.'
+  assign cta_label = section.settings.button_label | default: 'Find my kit'
+  assign cta_link = section.settings.button_link
+  if cta_link == blank
+    assign cta_link = routes.all_products_collection_url
+  endif
+-%}
+
 {%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   .split-cta-{{ section.id }} {
-    --split-cta-bg: {{ section.settings.background_color }};
-    --split-cta-heading: {{ section.settings.heading_color }};
-    --split-cta-text: {{ section.settings.text_color }};
-    --split-cta-btn-bg: {{ section.settings.button_background }};
-    --split-cta-btn-text: {{ section.settings.button_text_color }};
+    --split-cta-bg: {{ section.settings.background_color | default: '#FDFCF7' }};
+    --split-cta-heading: {{ section.settings.heading_color | default: '#111111' }};
+    --split-cta-text: {{ section.settings.text_color | default: '#707070' }};
+    --split-cta-btn-bg: {{ section.settings.button_background | default: '#111111' }};
+    --split-cta-btn-text: {{ section.settings.button_text_color | default: '#FFFFFF' }};
     background: var(--split-cta-bg);
-    padding: {{ section.settings.padding_top }}px max(24px, var(--site-padding, 24px)) {{ section.settings.padding_bottom }}px;
+    border-top: 1px solid #111111;
+    border-bottom: 1px solid #111111;
+    padding: {{ section.settings.padding_top | default: 88 }}px max(28px, var(--site-padding, 28px)) {{ section.settings.padding_bottom | default: 88 }}px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .split-cta-{{ section.id }}__inner {
@@ -15,33 +34,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(28px, 5vw, 64px);
+    gap: clamp(32px, 6vw, 80px);
   }
 
   .split-cta-{{ section.id }}__copy {
     flex: 1 1 auto;
     min-width: 0;
-    max-width: 720px;
+    max-width: 640px;
   }
 
   .split-cta-{{ section.id }}__heading {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     color: var(--split-cta-heading);
-    font-family: 'Bahnschrift', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: clamp(28px, 3.6vw, 44px);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(32px, 4.2vw, 48px);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
   }
 
   .split-cta-{{ section.id }}__text {
     margin: 0;
     color: var(--split-cta-text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: clamp(14px, 1.35vw, 17px);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(14px, 1.25vw, 16px);
     font-weight: 400;
     line-height: 1.55;
-    max-width: 520px;
+    max-width: 480px;
   }
 
   .split-cta-{{ section.id }}__actions {
@@ -51,43 +70,43 @@
   .split-cta-{{ section.id }}__button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 16px 28px;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 32px;
     background: var(--split-cta-btn-bg);
     color: var(--split-cta-btn-text) !important;
     text-decoration: none !important;
     border: none;
-    border-radius: 2px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    border-radius: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     white-space: nowrap;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease;
   }
 
   .split-cta-{{ section.id }}__button:hover {
-    background: {{ section.settings.button_hover_background }};
+    background: {{ section.settings.button_hover_background | default: '#333333' }};
     color: var(--split-cta-btn-text) !important;
-    transform: translateY(-1px);
   }
 
   .split-cta-{{ section.id }}__arrow {
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1;
     transition: transform 0.2s ease;
   }
 
   .split-cta-{{ section.id }}__button:hover .split-cta-{{ section.id }}__arrow {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 
   @media screen and (max-width: 749px) {
     .split-cta-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top | times: 0.65 | round }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.65 | round }}px;
+      padding-top: {{ section.settings.padding_top | default: 88 | times: 0.6 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | default: 88 | times: 0.6 | round }}px;
     }
 
     .split-cta-{{ section.id }}__inner {
@@ -97,40 +116,30 @@
     }
 
     .split-cta-{{ section.id }}__heading {
-      font-size: clamp(26px, 7vw, 34px);
+      font-size: clamp(28px, 8vw, 36px);
       margin-bottom: 12px;
     }
 
     .split-cta-{{ section.id }}__button {
       width: 100%;
-      justify-content: center;
-      padding: 15px 22px;
+      padding: 16px 24px;
     }
   }
 {%- endstyle -%}
 
-<section class="split-cta-{{ section.id }}" aria-label="{{ section.settings.heading | escape }}">
+<section class="split-cta-{{ section.id }}" aria-label="{{ cta_heading | escape }}">
   <div class="split-cta-{{ section.id }}__inner">
     <div class="split-cta-{{ section.id }}__copy">
-      {% if section.settings.heading != blank %}
-        <h2 class="split-cta-{{ section.id }}__heading">{{ section.settings.heading | escape | newline_to_br }}</h2>
-      {% endif %}
-      {% if section.settings.text != blank %}
-        <p class="split-cta-{{ section.id }}__text">{{ section.settings.text | escape }}</p>
-      {% endif %}
+      <h2 class="split-cta-{{ section.id }}__heading">{{ cta_heading | escape | newline_to_br }}</h2>
+      <p class="split-cta-{{ section.id }}__text">{{ cta_text | escape }}</p>
     </div>
 
-    {% if section.settings.button_label != blank %}
-      <div class="split-cta-{{ section.id }}__actions">
-        <a
-          href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
-          class="split-cta-{{ section.id }}__button"
-        >
-          <span>{{ section.settings.button_label | escape }}</span>
-          <span class="split-cta-{{ section.id }}__arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    {% endif %}
+    <div class="split-cta-{{ section.id }}__actions">
+      <a href="{{ cta_link }}" class="split-cta-{{ section.id }}__button">
+        <span>{{ cta_label | escape | upcase }}</span>
+        <span class="split-cta-{{ section.id }}__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -171,7 +180,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background",
-      "default": "#F7F6F2"
+      "default": "#FDFCF7"
     },
     {
       "type": "color",
@@ -183,7 +192,7 @@
       "type": "color",
       "id": "text_color",
       "label": "Body text",
-      "default": "#6B6B6B"
+      "default": "#707070"
     },
     {
       "type": "color",
@@ -211,26 +220,39 @@
       "type": "range",
       "id": "padding_top",
       "label": "Padding top",
-      "min": 24,
-      "max": 140,
+      "min": 40,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 72
+      "default": 88
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "label": "Padding bottom",
-      "min": 24,
-      "max": 140,
+      "min": 40,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 72
+      "default": 88
     }
   ],
   "presets": [
     {
-      "name": "Split CTA"
+      "name": "Split CTA",
+      "settings": {
+        "heading": "Ready to play the long game?",
+        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
+        "button_label": "Find my kit",
+        "background_color": "#FDFCF7",
+        "heading_color": "#111111",
+        "text_color": "#707070",
+        "button_background": "#111111",
+        "button_hover_background": "#333333",
+        "button_text_color": "#FFFFFF",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
     }
   ]
 }
