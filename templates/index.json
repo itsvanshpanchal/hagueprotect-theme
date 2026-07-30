@@ -952,6 +952,24 @@
       "type": "apps",
       "settings": {}
     },
+    "split_cta_home": {
+      "type": "split-cta",
+      "name": "Split CTA",
+      "settings": {
+        "heading": "Ready to play\nthe long game?",
+        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
+        "button_label": "Find my kit",
+        "button_link": "shopify://collections/all",
+        "background_color": "#fdfcf7",
+        "heading_color": "#111111",
+        "text_color": "#707070",
+        "button_background": "#111111",
+        "button_hover_background": "#333333",
+        "button_text_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
     "hague-protect-dna": {
       "type": "hague-protect-dna",
       "blocks": {
@@ -1027,24 +1045,6 @@
         "paragraph_font_size_desktop": 20,
         "paragraph_font_size_mobile": 15
       }
-    },
-    "split_cta_home": {
-      "type": "split-cta",
-      "name": "Split CTA",
-      "settings": {
-        "heading": "Ready to play\nthe long game?",
-        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
-        "button_label": "Find my kit",
-        "button_link": "shopify://collections/all",
-        "background_color": "#FDFCF7",
-        "heading_color": "#111111",
-        "text_color": "#707070",
-        "button_background": "#111111",
-        "button_hover_background": "#333333",
-        "button_text_color": "#FFFFFF",
-        "padding_top": 88,
-        "padding_bottom": 88
-      }
     }
   },
   "order": [
@@ -1063,7 +1063,7 @@
     "blocks_dbdLjg",
     "17776122420bbcf27b",
     "17776085399dc5249c",
-    "hague-protect-dna",
-    "split_cta_home"
+    "split_cta_home",
+    "hague-protect-dna"
   ]
 }
