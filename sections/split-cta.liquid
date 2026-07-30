@@ -6,9 +6,70 @@
   if cta_link == blank
     assign cta_link = routes.all_products_collection_url
   endif
+
+  assign heading_family = section.settings.h2_font_family | default: 'inter_light'
+  assign text_family = section.settings.paragraph_font_family | default: 'inter'
+  assign button_family = section.settings.button_font_family | default: 'inter_semibold'
+
+  assign heading_weight = section.settings.h2_font_weight | default: '300'
+  assign text_weight = section.settings.paragraph_font_weight | default: '400'
+  assign button_weight = section.settings.button_font_weight | default: '600'
+
+  assign heading_style = section.settings.h2_font_style | default: 'normal'
+  assign text_style = section.settings.paragraph_font_style | default: 'normal'
+  assign button_style = section.settings.button_font_style | default: 'normal'
+
+  assign heading_size_desktop = section.settings.h2_font_size_desktop | default: 48
+  assign heading_size_mobile = section.settings.h2_font_size_mobile | default: 32
+  assign text_size_desktop = section.settings.paragraph_font_size_desktop | default: 16
+  assign text_size_mobile = section.settings.paragraph_font_size_mobile | default: 15
+  assign button_size = section.settings.button_font_size | default: 12
+-%}
+{%- capture heading_implied -%}{% render 'hp-font-weight', font_key: heading_family %}{%- endcapture -%}
+{%- capture text_implied -%}{% render 'hp-font-weight', font_key: text_family %}{%- endcapture -%}
+{%- capture button_implied -%}{% render 'hp-font-weight', font_key: button_family %}{%- endcapture -%}
+{%- capture heading_named -%}{% render 'hp-font-is-named-face', font_key: heading_family %}{%- endcapture -%}
+{%- capture text_named -%}{% render 'hp-font-is-named-face', font_key: text_family %}{%- endcapture -%}
+{%- capture button_named -%}{% render 'hp-font-is-named-face', font_key: button_family %}{%- endcapture -%}
+{%- liquid
+  assign heading_implied = heading_implied | strip
+  assign text_implied = text_implied | strip
+  assign button_implied = button_implied | strip
+  assign heading_named = heading_named | strip
+  assign text_named = text_named | strip
+  assign button_named = button_named | strip
+
+  if heading_named != blank
+    assign heading_weight = '400'
+    assign heading_style = 'normal'
+  elsif heading_implied != '400'
+    assign heading_weight = heading_implied
+  endif
+  if text_named != blank
+    assign text_weight = '400'
+    assign text_style = 'normal'
+  elsif text_implied != '400'
+    assign text_weight = text_implied
+  endif
+  if button_named != blank
+    assign button_weight = '400'
+    assign button_style = 'normal'
+  elsif button_implied != '400'
+    assign button_weight = button_implied
+  endif
+-%}
+{%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
+{%- capture text_stack -%}{% render 'hp-font-stack', font_key: text_family %}{%- endcapture -%}
+{%- capture button_stack -%}{% render 'hp-font-stack', font_key: button_family %}{%- endcapture -%}
+{%- liquid
+  assign heading_stack = heading_stack | strip
+  assign text_stack = text_stack | strip
+  assign button_stack = button_stack | strip
 -%}
 
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
   #shopify-section-{{ section.id }} {
     margin: 0 !important;
     padding: 0 !important;
@@ -46,9 +107,10 @@
   .split-cta-{{ section.id }}__heading {
     margin: 0 0 16px;
     color: var(--split-cta-heading);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(32px, 4.2vw, 48px);
-    font-weight: 300;
+    font-family: {{ heading_stack }} !important;
+    font-size: {{ heading_size_desktop }}px !important;
+    font-weight: {{ heading_weight }} !important;
+    font-style: {{ heading_style }} !important;
     line-height: 1.12;
     letter-spacing: -0.03em;
   }
@@ -56,9 +118,10 @@
   .split-cta-{{ section.id }}__text {
     margin: 0;
     color: var(--split-cta-text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(14px, 1.25vw, 16px);
-    font-weight: 400;
+    font-family: {{ text_stack }} !important;
+    font-size: {{ text_size_desktop }}px !important;
+    font-weight: {{ text_weight }} !important;
+    font-style: {{ text_style }} !important;
     line-height: 1.55;
     max-width: 480px;
   }
@@ -78,9 +141,10 @@
     text-decoration: none !important;
     border: none;
     border-radius: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
+    font-family: {{ button_stack }} !important;
+    font-size: {{ button_size }}px !important;
+    font-weight: {{ button_weight }} !important;
+    font-style: {{ button_style }} !important;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -94,7 +158,7 @@
 
   .split-cta-{{ section.id }}__arrow {
     display: inline-block;
-    font-size: 13px;
+    font-size: 1.08em;
     line-height: 1;
     transition: transform 0.2s ease;
   }
@@ -116,8 +180,12 @@
     }
 
     .split-cta-{{ section.id }}__heading {
-      font-size: clamp(28px, 8vw, 36px);
+      font-size: {{ heading_size_mobile }}px !important;
       margin-bottom: 12px;
+    }
+
+    .split-cta-{{ section.id }}__text {
+      font-size: {{ text_size_mobile }}px !important;
     }
 
     .split-cta-{{ section.id }}__button {
@@ -171,6 +239,275 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Fonts for THIS section only. Brand fonts (Bahnschrift, Inter Light, etc.) are at the top of each list."
+    },
+    {
+      "type": "header",
+      "content": "1. Heading"
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "Font",
+      "options": [
+        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
+        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
+        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
+        { "value": "calisto_mt", "label": "Calisto MT Regular" },
+        { "value": "calisto_mt_bold", "label": "Calisto MT Bold" },
+        { "value": "calisto_mt_italic", "label": "Calisto MT Italic" },
+        { "value": "calisto_mt_bold_italic", "label": "Calisto MT Bold Italic" },
+        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
+        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
+        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
+        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
+        { "value": "jacques_gilles", "label": "Jacques Gilles" },
+        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
+        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
+        { "value": "freight_text_pro", "label": "FreightText Pro Book" },
+        { "value": "darker_grotesque_light", "label": "Darker Grotesque Light" },
+        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
+        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
+        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
+        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
+        { "value": "darker_grotesque_extrabold", "label": "Darker Grotesque Extra Bold" },
+        { "value": "darker_grotesque_black", "label": "Darker Grotesque Black" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald Regular" },
+        { "value": "oswald_light", "label": "Oswald Light" },
+        { "value": "oswald_medium", "label": "Oswald Medium" },
+        { "value": "oswald_semibold", "label": "Oswald Semibold" },
+        { "value": "oswald_bold", "label": "Oswald Bold" },
+        { "value": "inter", "label": "Inter Regular" },
+        { "value": "inter_light", "label": "Inter Light" },
+        { "value": "inter_medium", "label": "Inter Medium" },
+        { "value": "inter_semibold", "label": "Inter Semibold" },
+        { "value": "inter_bold", "label": "Inter Bold" },
+        { "value": "inter_extrabold", "label": "Inter Extra Bold" },
+        { "value": "inter_black", "label": "Inter Black" },
+        { "value": "montserrat", "label": "Montserrat Regular" },
+        { "value": "montserrat_light", "label": "Montserrat Light" },
+        { "value": "montserrat_medium", "label": "Montserrat Medium" },
+        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
+        { "value": "montserrat_bold", "label": "Montserrat Bold" }
+      ],
+      "default": "inter_light"
+    },
+    {
+      "type": "select",
+      "id": "h2_font_weight",
+      "label": "Weight",
+      "info": "Ignored when the font already includes a weight (e.g. Inter Light).",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" },
+        { "value": "800", "label": "Extra Bold (800)" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "select",
+      "id": "h2_font_style",
+      "label": "Style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "Size on computer",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "Size on phone",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "2. Supporting text"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Font",
+      "options": [
+        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
+        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
+        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
+        { "value": "calisto_mt", "label": "Calisto MT Regular" },
+        { "value": "calisto_mt_bold", "label": "Calisto MT Bold" },
+        { "value": "calisto_mt_italic", "label": "Calisto MT Italic" },
+        { "value": "calisto_mt_bold_italic", "label": "Calisto MT Bold Italic" },
+        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
+        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
+        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
+        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
+        { "value": "jacques_gilles", "label": "Jacques Gilles" },
+        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
+        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
+        { "value": "freight_text_pro", "label": "FreightText Pro Book" },
+        { "value": "darker_grotesque_light", "label": "Darker Grotesque Light" },
+        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
+        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
+        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
+        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
+        { "value": "darker_grotesque_extrabold", "label": "Darker Grotesque Extra Bold" },
+        { "value": "darker_grotesque_black", "label": "Darker Grotesque Black" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "anton", "label": "Anton" },
+        { "value": "oswald", "label": "Oswald Regular" },
+        { "value": "oswald_light", "label": "Oswald Light" },
+        { "value": "oswald_medium", "label": "Oswald Medium" },
+        { "value": "oswald_semibold", "label": "Oswald Semibold" },
+        { "value": "oswald_bold", "label": "Oswald Bold" },
+        { "value": "inter", "label": "Inter Regular" },
+        { "value": "inter_light", "label": "Inter Light" },
+        { "value": "inter_medium", "label": "Inter Medium" },
+        { "value": "inter_semibold", "label": "Inter Semibold" },
+        { "value": "inter_bold", "label": "Inter Bold" },
+        { "value": "inter_extrabold", "label": "Inter Extra Bold" },
+        { "value": "inter_black", "label": "Inter Black" },
+        { "value": "montserrat", "label": "Montserrat Regular" },
+        { "value": "montserrat_light", "label": "Montserrat Light" },
+        { "value": "montserrat_medium", "label": "Montserrat Medium" },
+        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
+        { "value": "montserrat_bold", "label": "Montserrat Bold" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_weight",
+      "label": "Weight",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_style",
+      "label": "Style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Size on computer",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Size on phone",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "3. Button"
+    },
+    {
+      "type": "select",
+      "id": "button_font_family",
+      "label": "Font",
+      "options": [
+        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
+        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
+        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
+        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
+        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
+        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
+        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
+        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
+        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
+        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "oswald", "label": "Oswald Regular" },
+        { "value": "oswald_semibold", "label": "Oswald Semibold" },
+        { "value": "oswald_bold", "label": "Oswald Bold" },
+        { "value": "inter", "label": "Inter Regular" },
+        { "value": "inter_light", "label": "Inter Light" },
+        { "value": "inter_medium", "label": "Inter Medium" },
+        { "value": "inter_semibold", "label": "Inter Semibold" },
+        { "value": "inter_bold", "label": "Inter Bold" },
+        { "value": "montserrat", "label": "Montserrat Regular" },
+        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
+        { "value": "montserrat_bold", "label": "Montserrat Bold" }
+      ],
+      "default": "inter_semibold"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Weight",
+      "options": [
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" },
+        { "value": "800", "label": "Extra Bold (800)" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "select",
+      "id": "button_font_style",
+      "label": "Style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "header",
@@ -244,6 +581,17 @@
         "heading": "Ready to play the long game?",
         "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
         "button_label": "Find my kit",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_size_desktop": 48,
+        "h2_font_size_mobile": 32,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15,
+        "button_font_family": "inter_semibold",
+        "button_font_weight": "600",
+        "button_font_size": 12,
         "background_color": "#FDFCF7",
         "heading_color": "#111111",
         "text_color": "#707070",
