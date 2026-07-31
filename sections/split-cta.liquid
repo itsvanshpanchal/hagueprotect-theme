@@ -102,6 +102,7 @@
     flex: 1 1 auto;
     min-width: 0;
     max-width: 640px;
+    text-align: var(--section-heading-align, left);
   }
 
   .split-cta-{{ section.id }}__heading {
@@ -113,6 +114,7 @@
     font-style: {{ heading_style }} !important;
     line-height: 1.12;
     letter-spacing: -0.03em;
+    text-align: inherit;
   }
 
   .split-cta-{{ section.id }}__text {
@@ -124,6 +126,9 @@
     font-style: {{ text_style }} !important;
     line-height: 1.55;
     max-width: 480px;
+    text-align: inherit;
+    margin-left: var(--section-heading-margin-left, 0);
+    margin-right: var(--section-heading-margin-right, auto);
   }
 
   .split-cta-{{ section.id }}__actions {
@@ -239,6 +244,40 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Text position (laptop)"
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on laptop/desktop."
+    },
+    {
+      "type": "header",
+      "content": "Text position (mobile)"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on phones."
     },
     {
       "type": "header",

@@ -262,11 +262,12 @@
     z-index: 2;
     max-width: {{ block.settings.content_max_width }}px;
     padding: {{ block.settings.content_padding }}px;
-    text-align: left;
+    text-align: {{ block.settings.content_align | default: 'left' }};
     left: {{ block.settings.content_offset_left }}px;
     top: {{ block.settings.content_offset_top }}px;
     display: flex;
     flex-direction: column;
+    align-items: {% case block.settings.content_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
     gap: 0;
   }
 
@@ -409,15 +410,17 @@
     /* Keep copy in the left clear zone — avoid overlapping the photo collage */
     .ai-story-banner-content-{{ ai_gen_id }} {
       padding: 18px 12px 18px 16px;
-      left: 0;
+      left: {{ block.settings.content_offset_left_mobile | default: 16 }}px;
       right: auto;
-      top: 0;
-      bottom: 0;
+      top: {{ block.settings.content_offset_top_mobile | default: 24 }}px;
+      bottom: auto;
       transform: none;
-      max-width: min(48%, 200px);
-      width: min(48%, 200px);
+      max-width: {{ block.settings.content_max_width_mobile | default: 200 }}px;
+      width: {{ block.settings.content_max_width_mobile | default: 200 }}px;
       box-sizing: border-box;
-      justify-content: center;
+      justify-content: flex-start;
+      text-align: {{ block.settings.content_align_mobile | default: 'left' }};
+      align-items: {% case block.settings.content_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
       z-index: 3;
     }
 
@@ -477,14 +480,16 @@
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-      top: clamp(20px, 4vw, 32px);
-      left: 16px;
+      top: {{ block.settings.content_offset_top_mobile | default: 24 }}px;
+      left: {{ block.settings.content_offset_left_mobile | default: 16 }}px;
       bottom: auto;
       padding: 16px;
       transform: none;
-      max-width: min(88%, 320px);
+      max-width: min(88%, {{ block.settings.content_max_width_mobile | default: 200 | times: 1.6 | round }}px);
       width: auto;
       justify-content: flex-start;
+      text-align: {{ block.settings.content_align_mobile | default: 'left' }};
+      align-items: {% case block.settings.content_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
     }
   }
 {% endstyle %}
@@ -767,6 +772,10 @@
       "default": 600
     },
     {
+      "type": "header",
+      "content": "Content position (laptop)"
+    },
+    {
       "type": "range",
       "id": "content_padding",
       "label": "Content padding",
@@ -795,6 +804,63 @@
       "step": 10,
       "unit": "px",
       "default": 200
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Content position (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "content_offset_left_mobile",
+      "label": "Left position",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_offset_top_mobile",
+      "label": "Top position",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_mobile",
+      "label": "Text max width",
+      "min": 120,
+      "max": 360,
+      "step": 10,
+      "unit": "px",
+      "default": 200,
+      "info": "Keeps overlay text from covering the photo collage on phones."
+    },
+    {
+      "type": "select",
+      "id": "content_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
     },
     {
       "type": "header",

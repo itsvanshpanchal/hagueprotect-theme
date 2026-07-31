@@ -117,6 +117,43 @@
   assign title_desc_spacing_mobile = section.settings.heading_subheading_spacing_mobile | default: settings.heading_subheading_spacing_mobile | default: 10
   assign eyebrow_title_spacing_desktop = section.settings.eyebrow_title_spacing_desktop | default: settings.eyebrow_title_spacing_desktop | default: 12
   assign eyebrow_title_spacing_mobile = section.settings.eyebrow_title_spacing_mobile | default: settings.eyebrow_title_spacing_mobile | default: 10
+
+  assign align_desktop = section.settings.text_align_desktop | default: 'theme_default'
+  assign align_mobile = section.settings.text_align_mobile | default: 'theme_default'
+  if align_desktop == blank or align_desktop == 'theme_default'
+    assign align_desktop = settings.section_heading_align | default: 'left'
+  endif
+  if align_mobile == blank or align_mobile == 'theme_default'
+    assign align_mobile = settings.section_heading_align_mobile | default: settings.section_heading_align | default: 'left'
+  endif
+
+  if align_desktop == 'center'
+    assign align_items_desktop = 'center'
+    assign align_ml_desktop = 'auto'
+    assign align_mr_desktop = 'auto'
+  elsif align_desktop == 'right'
+    assign align_items_desktop = 'flex-end'
+    assign align_ml_desktop = 'auto'
+    assign align_mr_desktop = '0'
+  else
+    assign align_items_desktop = 'flex-start'
+    assign align_ml_desktop = '0'
+    assign align_mr_desktop = 'auto'
+  endif
+
+  if align_mobile == 'center'
+    assign align_items_mobile = 'center'
+    assign align_ml_mobile = 'auto'
+    assign align_mr_mobile = 'auto'
+  elsif align_mobile == 'right'
+    assign align_items_mobile = 'flex-end'
+    assign align_ml_mobile = 'auto'
+    assign align_mr_mobile = '0'
+  else
+    assign align_items_mobile = 'flex-start'
+    assign align_ml_mobile = '0'
+    assign align_mr_mobile = 'auto'
+  endif
 -%}
 #shopify-section-{{ section.id }} {
   --font-family-heading: {% render 'hp-font-stack', font_key: h1_family %};
@@ -150,6 +187,10 @@
   --section-subheading-spacing-top: {{ title_desc_spacing_desktop }}px;
   --section-label-to-title-gap: {{ eyebrow_title_spacing_desktop }}px;
   --section-label-margin-bottom: {{ eyebrow_title_spacing_desktop }}px;
+  --section-heading-align: {{ align_desktop }};
+  --section-heading-items: {{ align_items_desktop }};
+  --section-heading-margin-left: {{ align_ml_desktop }};
+  --section-heading-margin-right: {{ align_mr_desktop }};
 }
 @media screen and (max-width: 989px) {
   #shopify-section-{{ section.id }} {
@@ -163,5 +204,13 @@
     --section-subheading-spacing-top: {{ title_desc_spacing_mobile }}px;
     --section-label-to-title-gap: {{ eyebrow_title_spacing_mobile }}px;
     --section-label-margin-bottom: {{ eyebrow_title_spacing_mobile }}px;
+  }
+}
+@media screen and (max-width: 749px) {
+  #shopify-section-{{ section.id }} {
+    --section-heading-align: {{ align_mobile }};
+    --section-heading-items: {{ align_items_mobile }};
+    --section-heading-margin-left: {{ align_ml_mobile }};
+    --section-heading-margin-right: {{ align_mr_mobile }};
   }
 }

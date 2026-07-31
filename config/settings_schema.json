@@ -1250,12 +1250,12 @@
       },
       {
         "type": "paragraph",
-        "content": "How section titles, eyebrows, and descriptions align on every screen size (phone, tablet, and desktop). Matches the Hero heading/subheading alignment style. Does not force a different layout per breakpoint."
+        "content": "Default alignment for section titles, eyebrows, and descriptions. Each section can override this in its own settings. Laptop and mobile can differ."
       },
       {
         "type": "select",
         "id": "section_heading_align",
-        "label": "Default section heading alignment",
+        "label": "Default alignment (laptop)",
         "options": [
           {
             "value": "left",
@@ -1264,6 +1264,30 @@
           {
             "value": "center",
             "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
+        "type": "select",
+        "id": "section_heading_align_mobile",
+        "label": "Default alignment (mobile)",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
           }
         ],
         "default": "left"

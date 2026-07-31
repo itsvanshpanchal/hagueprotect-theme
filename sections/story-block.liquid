@@ -40,6 +40,18 @@
     {%- endif -%}
   }
 
+  {%- liquid
+    assign story_align_mobile = section.settings.text_align_mobile | default: section.settings.text_align | default: 'left'
+    assign story_vert_mobile = section.settings.text_vertical_position_mobile | default: section.settings.text_vertical_position | default: 'center'
+  -%}
+  @media screen and (max-width: 749px) {
+    .story-banner-wrapper-{{ section.id }} .story-banner__content {
+      justify-content: {{ story_vert_mobile }};
+      align-items: {% case story_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
+      text-align: {{ story_align_mobile }};
+    }
+  }
+
   .story-banner-wrapper-{{ section.id }} .story-banner__content > * {
     pointer-events: auto;
     max-width: {{ section.settings.text_max_width | default: 720 }}px;
@@ -338,7 +350,7 @@
     },
     {
       "type": "header",
-      "content": "Text style & position"
+      "content": "Text position (laptop)"
     },
     {
       "type": "select",
@@ -379,6 +391,54 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Text position (mobile)"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_vertical_position_mobile",
+      "label": "Vertical position",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Text style"
     },
     {
       "type": "range",
