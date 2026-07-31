@@ -745,21 +745,33 @@ main h2.h2,
 }
 
 .hero-fullscreen__heading {
+  font-family: var(--font-family-heading) !important;
   font-size: var(--heading-size-hero) !important;
-  line-height: 1.02 !important;
+  font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
+  font-style: var(--font-style-heading, normal) !important;
+  letter-spacing: -0.02em !important;
+  line-height: var(--heading-line-height, 1.05) !important;
+  text-transform: none !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Typewriter: same display heading style while typing and after */
 .hero-fullscreen__heading .hp-typewriter-text,
-.hero-fullscreen__heading > span[aria-hidden="true"] {
-  font-family: var(--font-family-heading) !important;
-  font-size: var(--heading-size-hero) !important;
-  font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
-  letter-spacing: -0.02em !important;
-  line-height: 1.05 !important;
+.hero-fullscreen__heading > span[aria-hidden="true"],
+.hero-fullscreen__heading .hero-heading-line {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
   text-transform: none !important;
-  color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
+}
+
+.hero-fullscreen__heading .hp-typewriter-text,
+.hero-fullscreen__heading > span[aria-hidden="true"] {
+  color: #ffffff !important;
 }
 
 main h1 .hp-typewriter-text,

@@ -106,9 +106,10 @@
   .hero-fullscreen__heading {
     font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', sans-serif) !important;
     font-size: var(--heading-size-hero) !important;
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
+    font-style: var(--font-style-heading, normal) !important;
+    line-height: var(--heading-line-height, 1.05) !important;
+    letter-spacing: -0.02em !important;
     color: #ffffff;
     margin: 0;
     width: 100%;
@@ -119,12 +120,19 @@
     text-transform: none !important;
     text-align: var(--hero-content-align, left) !important;
     align-self: stretch;
+    -webkit-font-smoothing: antialiased;
   }
 
   .hero-fullscreen__heading .hero-heading-line {
     display: block;
     text-transform: none !important;
     color: inherit;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    font-style: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
   }
 
   .hero-fullscreen__heading .hero-heading-line--1::first-letter {
@@ -255,9 +263,10 @@
     .hero-fullscreen__heading {
       font-family: var(--font-family-heading, 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif) !important;
       font-size: var(--heading-size-hero) !important;
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-weight: var(--font-weight-heading, var(--heading-weight, 400)) !important;
+      font-style: var(--font-style-heading, normal) !important;
+      line-height: var(--heading-line-height, 1.05) !important;
+      letter-spacing: -0.02em !important;
       text-transform: none !important;
       padding: 0;
       text-align: var(--hero-content-align-mobile, left) !important;
