@@ -959,8 +959,9 @@ main h3 > span[aria-hidden="true"] {
   line-height: 1.2 !important;
 }
 
-/* Unified section labels — eyebrows above headings */
+/* Unified section labels — eyebrows above headings (+ hero tagline under title) */
 .hero-fullscreen__eyebrow,
+.hero-fullscreen__subheading,
 .fb__eyebrow,
 .bs-coverflow__eyebrow,
 .trending-social__eyebrow,
@@ -1071,25 +1072,11 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   text-align: center !important;
 }
 
-/* Hero subheading — same label system as BEST SELLERS / section eyebrows */
+/* Hero tagline under title — same label type as BEST SELLERS; white on photo */
 .hero-fullscreen__subheading {
-  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
-  font-size: var(--section-label-size) !important;
-  font-weight: var(--font-weight-eyebrow, var(--section-label-weight)) !important;
-  font-style: var(--font-style-eyebrow, normal) !important;
-  line-height: var(--section-label-line-height) !important;
-  letter-spacing: var(--section-label-letter-spacing) !important;
   color: #ffffff !important;
-  text-transform: none !important;
-  text-align: inherit !important;
-  display: block !important;
-  margin-top: var(--section-subheading-spacing-top) !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding: 0 !important;
-  max-width: none !important;
+  margin: var(--section-subheading-spacing-top) 0 0 0 !important;
   width: 100% !important;
-  -webkit-font-smoothing: antialiased;
 }
 
 .story-banner__paragraph {

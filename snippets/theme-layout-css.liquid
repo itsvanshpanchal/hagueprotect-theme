@@ -279,6 +279,7 @@
   }
 
   .template-index .hero-fullscreen__eyebrow,
+  .template-index .hero-fullscreen__subheading,
   .template-index .fb__eyebrow,
   .template-index .bs-coverflow__eyebrow,
   .template-index .trending-social__eyebrow,
@@ -290,5 +291,10 @@
   .template-index .section-heading-stack__label,
   .template-index [class*="ai-story-banner-subheading-"] {
     color: {{ homepage_label_color }} !important;
+  }
+
+  /* Hero tagline stays white on the photo (same size/weight as BEST SELLERS) */
+  .template-index .hero-fullscreen__subheading {
+    color: #ffffff !important;
   }
 </style>
