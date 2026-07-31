@@ -1004,13 +1004,14 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   text-align: center !important;
 }
 
-/* Hero & story paragraphs — not eyebrow style */
+/* Hero subheading — same label system as BEST SELLERS / section eyebrows */
 .hero-fullscreen__subheading {
-  font-family: var(--font-family-sans) !important;
-  font-size: var(--section-subheading-size) !important;
-  font-weight: var(--section-subheading-weight) !important;
-  line-height: var(--section-subheading-line-height) !important;
-  letter-spacing: normal !important;
+  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+  font-size: var(--section-label-size) !important;
+  font-weight: var(--font-weight-eyebrow, var(--section-label-weight)) !important;
+  font-style: var(--font-style-eyebrow, normal) !important;
+  line-height: var(--section-label-line-height) !important;
+  letter-spacing: var(--section-label-letter-spacing) !important;
   color: #ffffff !important;
   text-transform: none !important;
   text-align: inherit !important;

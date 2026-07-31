@@ -146,8 +146,10 @@
   .hero-fullscreen__subheading {
     max-width: none;
     width: 100%;
-    font-family: var(--font-family-sans);
-    font-size: var(--section-subheading-size, 16px);
+    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-size: var(--section-label-size, 12px);
+    font-weight: var(--font-weight-eyebrow, 600);
+    letter-spacing: var(--section-label-letter-spacing, 0.14em);
     margin: var(--section-subheading-spacing-top, 12px) 0 0 0;
     padding: 0;
     text-align: var(--hero-content-align, left) !important;
@@ -695,7 +697,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Only fonts used in this section: 1. Biggest title, 2. Normal text, 3. Tiny text above title. Brand fonts are at the top of each list."
+      "content": "Only fonts used in this section: 1. Biggest title, 2. Normal text, 3. Tiny label text (eyebrow above title and short line under title, e.g. FROM BEAT TO HEAT). Brand fonts are at the top of each list."
     },
     {
       "type": "header",
@@ -1200,7 +1202,7 @@
     },
     {
       "type": "header",
-      "content": "3. Tiny text above title"
+      "content": "3. Tiny label text (eyebrow + tagline under title)"
     },
     {
       "type": "select",
