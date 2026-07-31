@@ -351,18 +351,32 @@
     }
 
     .mat-menu-item,
-    .mat-menu-item-text {
-      font-size: min({{ section.settings.menu_font_size | default: 36 }}px, 44px) !important;
-      line-height: 1.08 !important;
+    .mat-menu-item-text,
+    .mat-menu-item.mat-font--deodrizer,
+    .mat-menu-item.mat-font--denim,
+    .mat-menu-item-text.mat-font--deodrizer,
+    .mat-menu-item-text.mat-font--denim,
+    .mat-menu-item.mat-font,
+    .mat-menu-item-text.mat-font,
+    .mat-menu-item[class*="mat-font--"],
+    .mat-menu-item-text[class*="mat-font--"] {
+      font-size: clamp(26px, 7.2vw, 30px) !important;
+      line-height: 1.15 !important;
+      letter-spacing: -0.02em !important;
     }
 
     .mat-menu-item {
-      padding: 6px 0 !important;
-      min-height: 40px !important;
+      padding: 4px 0 !important;
+      min-height: 34px !important;
+    }
+
+    .mat-menu {
+      gap: 2px !important;
+      margin-top: 20px !important;
     }
 
     .mat-menu-arrow {
-      margin-left: 8px !important;
+      margin-left: 6px !important;
     }
   }
 
