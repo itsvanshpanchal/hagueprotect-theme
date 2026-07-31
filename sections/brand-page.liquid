@@ -335,6 +335,84 @@
       "unit": "px",
       "default": 10
     },
+        {
+      "type": "header",
+      "content": "Text position (laptop)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_desktop",
+      "label": "Horizontal",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (-) or right (+)."
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_desktop",
+      "label": "Vertical",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (-) or down (+)."
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on laptop/desktop."
+    },
+    {
+      "type": "header",
+      "content": "Text position (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_mobile",
+      "label": "Horizontal",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (-) or right (+)."
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_mobile",
+      "label": "Vertical",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (-) or down (+)."
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on phones."
+    },
     {
       "type": "header",
       "content": "Typography"

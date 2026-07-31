@@ -34,6 +34,8 @@
   --section-heading-items: flex-start;
   --section-heading-margin-left: 0;
   --section-heading-margin-right: auto;
+  --section-text-offset-x: 0px;
+  --section-text-offset-y: 0px;
   --section-label-weight: var(--font-weight-eyebrow, 700);
   --section-label-line-height: 1.5;
   --section-label-color: #e74c3c;
@@ -868,6 +870,59 @@ main h3 > span[aria-hidden="true"] {
   row-gap: var(--section-label-to-title-gap) !important;
   margin: 0 !important;
   padding: 0 !important;
+  transform: translate(var(--section-text-offset-x, 0px), var(--section-text-offset-y, 0px));
+}
+
+/* Heading wrappers without .section-heading-stack still honor text move sliders */
+.bs-coverflow__header,
+.fb__header,
+.fc-header,
+.trending-social__heading-group,
+.feature-grid__header,
+.brandsel__head,
+.faq-custom__header,
+.reviews-sec__header,
+.social-slider__header,
+.biz-solutions__header,
+.biz-advantages__header,
+.biz-process__header,
+.corp-features__header,
+.corp-packages__header,
+.corp-process__header,
+.premium-htu__header,
+.skincare-concerns__header,
+.brand-banner__content,
+.promo-banner__content,
+.trust-statement__inner,
+.trust-statement__heading,
+.product-family__header,
+.story-block__content,
+.dna-header,
+.hps__header,
+.hp-dna__heading,
+.hp-fam-sec__heading,
+.comm-intro,
+.community-testimonials__header,
+.community-header,
+.social-proof-header,
+.category-header,
+.video-demo-header,
+[class*="split-cta-"][class*="__copy"],
+[class*="ckc-"][class*="__header"] {
+  transform: translate(var(--section-text-offset-x, 0px), var(--section-text-offset-y, 0px));
+}
+
+/* Avoid double-offset when a header wraps a stack */
+.bs-coverflow__header .section-heading-stack,
+.fb__header.section-heading-stack,
+.fc-header .section-heading-stack,
+.trending-social__heading-group.section-heading-stack,
+.feature-grid__header.section-heading-stack,
+.brandsel__head.section-heading-stack,
+.promo-banner__content .section-heading-stack,
+.story-block__content .section-heading-stack,
+.brand-banner__content .section-heading-stack {
+  transform: none;
 }
 
 .section-heading-stack--center {

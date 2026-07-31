@@ -154,6 +154,11 @@
     assign align_ml_mobile = '0'
     assign align_mr_mobile = 'auto'
   endif
+
+  assign text_offset_x_desktop = section.settings.text_offset_x_desktop | default: 0
+  assign text_offset_y_desktop = section.settings.text_offset_y_desktop | default: 0
+  assign text_offset_x_mobile = section.settings.text_offset_x_mobile | default: 0
+  assign text_offset_y_mobile = section.settings.text_offset_y_mobile | default: 0
 -%}
 #shopify-section-{{ section.id }} {
   --font-family-heading: {% render 'hp-font-stack', font_key: h1_family %};
@@ -191,6 +196,8 @@
   --section-heading-items: {{ align_items_desktop }};
   --section-heading-margin-left: {{ align_ml_desktop }};
   --section-heading-margin-right: {{ align_mr_desktop }};
+  --section-text-offset-x: {{ text_offset_x_desktop }}px;
+  --section-text-offset-y: {{ text_offset_y_desktop }}px;
 }
 @media screen and (max-width: 989px) {
   #shopify-section-{{ section.id }} {
@@ -212,5 +219,7 @@
     --section-heading-items: {{ align_items_mobile }};
     --section-heading-margin-left: {{ align_ml_mobile }};
     --section-heading-margin-right: {{ align_mr_mobile }};
+    --section-text-offset-x: {{ text_offset_x_mobile }}px;
+    --section-text-offset-y: {{ text_offset_y_mobile }}px;
   }
 }
