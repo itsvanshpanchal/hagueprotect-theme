@@ -67,14 +67,14 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
-/* Shop Our Premium Best — Bahnschrift Regular (400); accent word keeps script */
+/* Shop Our Premium Best — same Inter Light weight as Tell Your Story */
 #MainContent .shopify-section .hp-fam-sec__heading,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-line,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-typewriter-text {
-  font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
+  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+  font-weight: var(--font-weight-h2, 300) !important;
+  font-style: var(--font-style-h2, normal) !important;
 }
 
 #MainContent .shopify-section .hp-heading-accent,
