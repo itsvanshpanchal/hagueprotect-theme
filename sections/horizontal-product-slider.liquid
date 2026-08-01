@@ -1,5 +1,64 @@
+{%- liquid
+  assign hp_heading_desktop = section.settings.h2_font_size_desktop | default: 52
+  assign hp_heading_mobile = section.settings.h2_font_size_mobile | default: 28
+  assign hp_accent_desktop = section.settings.heading_accent_font_size_desktop | default: 62
+  assign hp_accent_mobile = section.settings.heading_accent_font_size_mobile | default: 40
+  assign hp_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
+-%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
+
+  /* Match Tell Your Story: exact heading + accent sizes */
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-weight: var(--font-weight-h2, 300) !important;
+    font-style: var(--font-style-h2, normal) !important;
+    font-size: {{ hp_heading_desktop }}px !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.05 !important;
+    color: #f3f2f2 !important;
+    text-transform: none !important;
+  }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
+    display: inline !important;
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: {{ hp_accent_desktop }}px !important;
+    color: {{ hp_accent_color }} !important;
+    -webkit-text-fill-color: {{ hp_accent_color }} !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+    white-space: nowrap !important;
+  }
+
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
+      font-size: {{ hp_heading_mobile }}px !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
+      font-size: {{ hp_accent_mobile }}px !important;
+    }
+  }
 
 
   #shopify-section-{{ section.id }} {
@@ -56,7 +115,7 @@
     font-weight: var(--font-weight-h2, 300) !important;
     font-style: var(--font-style-h2, normal) !important;
     text-transform: none !important;
-    color: #ffffff;
+    color: #f3f2f2;
     margin: 0 0 32px 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -70,7 +129,7 @@
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-weight: var(--font-weight-h2, 300) !important;
     font-style: var(--font-style-h2, normal) !important;
-    font-size: var(--section-heading-size) !important;
+    font-size: inherit !important;
   }
 
   .hp-fam-sec__heading::first-letter,
@@ -80,7 +139,7 @@
   }
 
   .hp-fam-sec__heading .hp-heading-line {
-    display: block;
+    display: inline !important;
     font-family: inherit !important;
     font-size: inherit !important;
     font-weight: inherit !important;
@@ -92,7 +151,12 @@
   }
 
   .hp-fam-sec__heading .hp-heading-line--with-accent {
-    white-space: normal;
+    white-space: nowrap;
+  }
+
+  .hp-fam-sec__heading .hp-heading-pair {
+    display: inline !important;
+    white-space: nowrap !important;
   }
 
   .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
@@ -106,13 +170,14 @@
   .hp-fam-sec__heading .hp-heading-accent {
     display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    font-weight: var(--font-weight-heading-accent, 400) !important;
-    font-style: var(--font-style-heading-accent, normal) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     color: var(--section-heading-accent-color, #c9a227) !important;
     -webkit-text-fill-color: var(--section-heading-accent-color, #c9a227) !important;
-    font-size: var(--heading-accent-size, 1.2em) !important;
+    font-size: var(--heading-accent-size, 62px) !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
+    white-space: nowrap !important;
   }
 
   .hp-fam-sec__heading .hp-typewriter-text,
