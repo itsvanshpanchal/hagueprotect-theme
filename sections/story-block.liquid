@@ -198,22 +198,36 @@
     }
 
     .story-banner-wrapper-{{ section.id }} .story-banner__content {
-      justify-content: {{ story_vert_mobile }};
-      align-items: {% case story_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-      text-align: {{ story_align_mobile }};
-      padding-top: 20px;
-      padding-bottom: 24px;
-      gap: 8px;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      padding-top: 16px !important;
+      padding-bottom: 24px !important;
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      gap: 6px !important;
+      z-index: 3 !important;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .section-heading-stack {
+      transform: none !important;
+      max-width: 92% !important;
     }
 
     .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
-    /* Keep para text under the heading on mobile — not over the product */
+    /* Para under heading, clear of the bottle, readable contrast */
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-      margin-top: 6px !important;
+      margin-top: 4px !important;
+      max-width: 88% !important;
+      width: 88% !important;
+      color: {{ section.settings.paragraph_color | default: '#222222' }} !important;
+      position: relative !important;
+      z-index: 4 !important;
+      line-height: 1.35 !important;
     }
   }
 {%- endstyle -%}
