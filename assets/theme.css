@@ -654,6 +654,20 @@ main h2.h2,
   white-space: nowrap !important;
 }
 
+.hp-heading-pair--stack {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  white-space: normal !important;
+  gap: 0.02em;
+}
+
+.hp-heading-pair--stack .hp-heading-line,
+.hp-heading-pair--stack .hp-heading-accent {
+  display: block !important;
+  white-space: nowrap !important;
+}
+
 .trending-social__heading .hp-heading-pair .hp-heading-line,
 .bestsellers__heading-dtc .hp-heading-pair .hp-heading-line,
 .bs-coverflow__heading .hp-heading-pair .hp-heading-line,

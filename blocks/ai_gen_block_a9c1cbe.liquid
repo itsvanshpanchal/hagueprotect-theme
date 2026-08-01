@@ -342,6 +342,10 @@
     letter-spacing: 0.01em !important;
   }
 
+  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair--stack .hp-heading-accent {
+    display: block !important;
+  }
+
   @media screen and (max-width: 989px) {
     .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
       font-size: {{ accent_size_mobile }}px !important;
@@ -548,7 +552,7 @@
 
       {% if block.settings.heading != blank %}
         <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
-          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true, accent_color: block.settings.heading_accent_color %}
+          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true, accent_last_count: block.settings.heading_accent_word_count, accent_color: block.settings.heading_accent_color %}
         </div>
       {% endif %}
 
@@ -1064,6 +1068,16 @@
       "step": 2,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_accent_word_count",
+      "label": "Script accent last words",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1,
+      "info": "How many trailing words use the handwriting script (e.g. 2 for Cleaning Today)."
     },
     {
       "type": "color",

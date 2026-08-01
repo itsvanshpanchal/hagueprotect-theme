@@ -1,12 +1,16 @@
 {%- comment -%}
   Section heading text — preserves Theme Editor casing.
-  Optional accent_last_word: last word in script handwriting (inline, same line).
-  Params: text, line2 (optional), line2_color (optional), accent_last_word (optional), accent_color (optional)
+  Optional accent_last_word: last word(s) in script handwriting.
+  Params: text, line2, line2_color, accent_last_word, accent_last_count (default 1), accent_color
 {%- endcomment -%}
 {%- liquid
   assign line1 = text | strip
   assign line2_raw = line2 | default: '' | strip
   assign accent_last = accent_last_word | default: false
+  assign accent_count = accent_last_count | default: 1 | plus: 0
+  if accent_count < 1
+    assign accent_count = 1
+  endif
 
   if line2_raw == blank and line1 != blank
     assign tmp = line1 | replace: '<br />', '|||' | replace: '<br/>', '|||' | replace: '<br>', '|||'
@@ -23,26 +27,40 @@
 
   if accent_last and line2_raw == blank and line1 != blank
     assign words = line1 | split: ' '
-    if words.size > 1
+    if words.size > accent_count
+      assign main_count = words.size | minus: accent_count
+      assign main_words = words | slice: 0, main_count
+      assign accent_words = words | slice: main_count, accent_count
+      assign line1_main = main_words | join: ' '
+      assign accent_word = ''
+      for w in accent_words
+        assign cw = w | capitalize
+        if accent_word == blank
+          assign accent_word = cw
+        else
+          assign accent_word = accent_word | append: ' ' | append: cw
+        endif
+      endfor
+    elsif words.size > 1
       assign accent_raw = words | last
       assign main_count = words.size | minus: 1
       assign main_words = words | slice: 0, main_count
       assign line1_main = main_words | join: ' '
-      comment
-        Script accents look correct as Title case (Material, Best) —
-        force this so Theme Editor ALL CAPS still renders properly.
-      endcomment
       assign accent_word = accent_raw | capitalize
     endif
   endif
 
   assign c2 = line2_color | default: settings.heading_line2_color | default: '#6b6b6b'
   assign accent_c = accent_color | default: settings.heading_accent_color | default: '#c9a227'
+  assign accent_stack_class = ''
+  if accent_count > 1
+    assign accent_stack_class = ' hp-heading-pair--stack'
+  endif
 -%}
 {%- if line2_raw != blank -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span><span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
 {%- elsif accent_word != blank -%}
-  <span class="hp-heading-pair"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
+  <span class="hp-heading-pair{{ accent_stack_class }}"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}
