@@ -680,8 +680,7 @@ main h2.h2,
 #MainContent .shopify-section h2 .hp-heading-accent::first-letter,
 #MainContent .shopify-section .hp-heading-accent::first-letter,
 .hp-heading-accent::first-letter {
-  /* Keep authored accent casing (MATERIAL / Care) — do not force transforms */
-  text-transform: inherit !important;
+  text-transform: none !important;
 }
 
 .premium-htu__title .hp-heading-line,

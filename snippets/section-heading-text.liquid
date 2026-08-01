@@ -28,7 +28,11 @@
       assign main_count = words.size | minus: 1
       assign main_words = words | slice: 0, main_count
       assign line1_main = main_words | join: ' '
-      assign accent_word = accent_raw
+      comment
+        Script accents look correct as Title case (Material, Best) —
+        force this so Theme Editor ALL CAPS still renders properly.
+      endcomment
+      assign accent_word = accent_raw | capitalize
     endif
   endif
 
@@ -38,7 +42,7 @@
 {%- if line2_raw != blank -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span><span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
 {%- elsif accent_word != blank -%}
-  <span class="hp-heading-pair"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
+  <span class="hp-heading-pair"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}
