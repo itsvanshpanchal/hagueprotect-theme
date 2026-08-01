@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+{%- liquid
+  assign comm_bg = section.settings.bg_color | default: '#F7F7F7'
+  assign comm_text = section.settings.text_color | default: '#111111'
+-%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
@@ -8,6 +12,8 @@
   .comm-section {
     box-sizing: border-box !important;
     font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+    --comm-text-color: {{ comm_text }};
+    --section-subheading-color: {{ comm_text }};
   }
 
   .comm-section *,
@@ -18,7 +24,7 @@
 
   .comm-section {
     width: 100% !important;
-    background-color: {{ section.settings.bg_color | default: '#F7F7F7' }} !important;
+    background-color: {{ comm_bg }} !important;
     padding-top: {{ section.settings.padding_top | default: 100 }}px !important;
     padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px !important;
     overflow: hidden !important;
@@ -87,7 +93,7 @@
     font-size: var(--section-heading-size) !important;
     font-weight: var(--font-weight-h2, 900) !important;
     font-style: var(--font-style-h2, normal) !important;
-    color: #000000 !important;
+    color: var(--comm-text-color, #111111) !important;
     line-height: 1 !important;
     letter-spacing: -3px !important;
   }
@@ -97,7 +103,7 @@
     font-size: var(--section-heading-size) !important;
     font-weight: var(--font-weight-h2, 900) !important;
     font-style: var(--font-style-h2, normal) !important;
-    color: #000000 !important;
+    color: var(--comm-text-color, #111111) !important;
     line-height: 1 !important;
     letter-spacing: -2px !important;
   }
@@ -119,6 +125,11 @@
     font-weight: var(--font-weight-sans, 400) !important;
     font-style: var(--font-style-sans, normal) !important;
     line-height: 1.15 !important;
+    color: var(--comm-text-color, #111111) !important;
+  }
+
+  .comm-badge-desc {
+    color: var(--comm-text-color, #444444) !important;
   }
 
   .comm-reviews-badge {
@@ -639,6 +650,13 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#F7F7F7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#111111",
+      "info": "Headline and description color. Use white on a dark background."
     },
     {
       "type": "text",
