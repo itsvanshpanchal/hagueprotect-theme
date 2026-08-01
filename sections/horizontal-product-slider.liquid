@@ -4,6 +4,7 @@
   assign hp_accent_desktop = section.settings.heading_accent_font_size_desktop | default: 62
   assign hp_accent_mobile = section.settings.heading_accent_font_size_mobile | default: 40
   assign hp_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
+  assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
 -%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
@@ -29,11 +30,14 @@
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
     display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    font-weight: 400 !important;
+    font-weight: {{ hp_accent_weight }} !important;
     font-style: normal !important;
     font-size: {{ hp_accent_desktop }}px !important;
     color: {{ hp_accent_color }} !important;
     -webkit-text-fill-color: {{ hp_accent_color }} !important;
+    -webkit-text-stroke: 0;
+    paint-order: normal;
+    -webkit-font-smoothing: antialiased;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
     white-space: nowrap !important;
@@ -170,10 +174,13 @@
   .hp-fam-sec__heading .hp-heading-accent {
     display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    font-weight: 400 !important;
+    font-weight: {{ hp_accent_weight }} !important;
     font-style: normal !important;
     color: var(--section-heading-accent-color, #c9a227) !important;
     -webkit-text-fill-color: var(--section-heading-accent-color, #c9a227) !important;
+    -webkit-text-stroke: 0;
+    paint-order: normal;
+    -webkit-font-smoothing: antialiased;
     font-size: var(--heading-accent-size, 62px) !important;
     text-transform: none !important;
     letter-spacing: 0.01em !important;

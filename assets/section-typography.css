@@ -91,6 +91,9 @@
   font-size: var(--heading-accent-size, 1.2em) !important;
   color: var(--section-heading-accent-color, #c9a227) !important;
   -webkit-text-fill-color: var(--section-heading-accent-color, #c9a227) !important;
+  -webkit-text-stroke: 0;
+  paint-order: normal;
+  -webkit-font-smoothing: antialiased;
   text-transform: none !important;
 }
 
