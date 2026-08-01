@@ -51,10 +51,10 @@
   }
 
   .hp-fam-sec__heading {
-    font-size: var(--section-heading-size);
-    font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
+    font-size: var(--section-heading-size) !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-weight: var(--font-weight-h2, 300) !important;
+    font-style: var(--font-style-h2, normal) !important;
     text-transform: none !important;
     color: #ffffff;
     margin: 0 0 32px 0;
@@ -67,9 +67,10 @@
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-typewriter-text {
-    font-family: 'Bahnschrift', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-weight: var(--font-weight-h2, 300) !important;
+    font-style: var(--font-style-h2, normal) !important;
+    font-size: var(--section-heading-size) !important;
   }
 
   .hp-fam-sec__heading::first-letter,
@@ -584,7 +585,7 @@
 
     .hp-fam-sec__heading {
       margin-bottom: 20px;
-      font-size: var(--section-heading-size);
+      font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
     .hp-fam-sec__tabs {
