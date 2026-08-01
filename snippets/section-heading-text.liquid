@@ -1,6 +1,6 @@
 {%- comment -%}
   Section heading text — preserves Theme Editor casing.
-  Optional accent_last_word: last word(s) in script handwriting.
+  Optional accent_last_word: last word(s) OR the second line in script handwriting.
   Params: text, line2, line2_color, accent_last_word, accent_last_count (default 1), accent_color
 {%- endcomment -%}
 {%- liquid
@@ -18,14 +18,26 @@
     if parts.size > 1
       assign line1 = parts[0] | strip
       assign line2_raw = parts[1] | strip
-      assign accent_last = false
     endif
   endif
 
   assign line1_main = line1
   assign accent_word = ''
+  assign accent_from_line2 = false
 
-  if accent_last and line2_raw == blank and line1 != blank
+  if accent_last and line2_raw != blank
+    assign accent_from_line2 = true
+    assign accent_word = ''
+    assign line2_words = line2_raw | split: ' '
+    for w in line2_words
+      assign cw = w | capitalize
+      if accent_word == blank
+        assign accent_word = cw
+      else
+        assign accent_word = accent_word | append: ' ' | append: cw
+      endif
+    endfor
+  elsif accent_last and line2_raw == blank and line1 != blank
     assign words = line1 | split: ' '
     if words.size > accent_count
       assign main_count = words.size | minus: accent_count
@@ -53,14 +65,14 @@
   assign c2 = line2_color | default: settings.heading_line2_color | default: '#6b6b6b'
   assign accent_c = accent_color | default: settings.heading_accent_color | default: '#c9a227'
   assign accent_stack_class = ''
-  if accent_count > 1
+  if accent_from_line2 or accent_count > 1
     assign accent_stack_class = ' hp-heading-pair--stack'
   endif
 -%}
-{%- if line2_raw != blank -%}
+{%- if accent_word != blank -%}
+  <span class="hp-heading-pair{{ accent_stack_class }}"><span class="hp-heading-line hp-heading-line--1">{% if accent_from_line2 -%}{{ line1 }}{%- else -%}{{ line1_main }} {% endif %}</span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
+{%- elsif line2_raw != blank -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span><span class="hp-heading-line hp-heading-line--2" style="--section-heading-line2-color: {{ c2 }};">{{ line2_raw }}</span>
-{%- elsif accent_word != blank -%}
-  <span class="hp-heading-pair{{ accent_stack_class }}"><span class="hp-heading-line hp-heading-line--1">{{ line1_main }} </span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">{{ accent_word }}</span></span>
 {%- else -%}
   <span class="hp-heading-line hp-heading-line--1">{{ line1 }}</span>
 {%- endif -%}
