@@ -197,8 +197,23 @@
       min-height: 320px;
     }
 
+    .story-banner-wrapper-{{ section.id }} .story-banner__content {
+      justify-content: {{ story_vert_mobile }};
+      align-items: {% case story_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
+      text-align: {{ story_align_mobile }};
+      padding-top: 20px;
+      padding-bottom: 24px;
+      gap: 8px;
+    }
+
     .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
+    }
+
+    /* Keep para text under the heading on mobile — not over the product */
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
+    .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
+      margin-top: 6px !important;
     }
   }
 {%- endstyle -%}
