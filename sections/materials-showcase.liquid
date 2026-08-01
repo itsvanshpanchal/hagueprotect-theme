@@ -73,6 +73,18 @@
     line-height: 1.05 !important;
   }
 
+  .mat-section .mat-headline .hp-heading-pair,
+  #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
+  #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-line,
+  #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair .hp-heading-line {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+
   #MainContent #shopify-section-{{ section.id }} .mat-desc,
   #MainContent .shopify-section .mat-section .mat-desc,
   #shopify-section-{{ section.id }} .mat-desc,
@@ -93,6 +105,7 @@
   #MainContent #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
   #MainContent #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-accent {
     display: inline !important;
+    white-space: nowrap !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-weight: 400 !important;
     font-style: normal !important;

@@ -637,7 +637,8 @@ main h2.h2,
 /* Script accent — last word stays on the SAME line as the heading.
    Accent is a SIBLING inside .hp-heading-pair (not nested in the lowercase line). */
 .hp-heading-pair {
-  display: block;
+  display: inline !important;
+  white-space: nowrap !important;
 }
 
 .trending-social__heading .hp-heading-pair .hp-heading-line,
