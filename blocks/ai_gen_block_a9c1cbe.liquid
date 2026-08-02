@@ -160,26 +160,52 @@
 
   @media screen and (max-width: 749px) {
     /*
-      Mobile sticky: full 100dvh + cover crops landscape photos hard on the sides
-      and makes the banner feel endless. Use a shorter framed height instead.
+      Mobile: turn off sticky curtain. A pin shorter than the viewport left a
+      white MainContent gap under the image while the next section scrolled up.
+      Use a normal framed banner instead (no runway / no white flash).
     */
     .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-      height: calc(100vh + min(68dvh, 560px)) !important;
-      height: calc(100dvh + min(68dvh, 560px)) !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+      background: transparent !important;
+      pointer-events: auto !important;
+    }
+
+    .ai-story-sticky-track-{{ ai_gen_id }} {
+      height: auto;
+      pointer-events: auto;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} {
-      height: min(68dvh, 560px);
+      position: relative;
+      top: auto;
+      height: auto;
+      z-index: auto;
+      background: #0a0a0a;
+      pointer-events: auto;
     }
 
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
-      margin-top: calc(-1 * min(68dvh, 560px)) !important;
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
+      height: auto;
+      max-height: none;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
       object-fit: cover;
       object-position: 58% 38%;
+    }
+
+    .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
+    .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }},
+    .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
+      margin-top: 0 !important;
+      padding-bottom: 0 !important;
+      z-index: auto !important;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
@@ -498,17 +524,18 @@
       font-size: 13px;
     }
 
-    /* Sticky Tell Your Story — shorter mobile frame, balanced crop */
+    /* Sticky markup on mobile behaves as a normal framed banner */
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      min-height: 100%;
-      max-height: none;
+      min-height: min(72vw, 420px);
+      max-height: min(68dvh, 560px);
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
       position: absolute;
       inset: 0;
-      min-height: 100%;
+      width: 100%;
       height: 100%;
+      min-height: 0;
       object-fit: cover;
       object-position: 58% 38%;
     }
@@ -660,12 +687,61 @@
       }
     }
 
+    function clearInlineCurtain() {
+      section.style.removeProperty('position');
+      section.style.removeProperty('z-index');
+      section.style.removeProperty('margin-top');
+      section.style.removeProperty('height');
+      section.style.removeProperty('overflow');
+      section.style.removeProperty('background');
+      section.style.removeProperty('pointer-events');
+
+      track.style.removeProperty('background');
+      track.style.removeProperty('z-index');
+
+      pin.style.removeProperty('z-index');
+      pin.style.removeProperty('height');
+      pin.style.removeProperty('pointer-events');
+      pin.style.removeProperty('position');
+      pin.style.removeProperty('top');
+
+      if (prev && prev.classList) {
+        prev.classList.remove('hp-story-curtain-prev-{{ ai_gen_id }}');
+        prev.style.removeProperty('position');
+        prev.style.removeProperty('z-index');
+        prev.style.removeProperty('isolation');
+        prev.style.removeProperty('padding-bottom');
+        prev.style.removeProperty('background-color');
+      }
+
+      var sib = next;
+      var idx = 0;
+      while (sib && idx < 4) {
+        if (sib.classList && sib.classList.contains('shopify-section')) {
+          sib.classList.remove('hp-story-curtain-next-{{ ai_gen_id }}');
+          sib.style.removeProperty('position');
+          sib.style.removeProperty('z-index');
+          sib.style.removeProperty('isolation');
+          sib.style.removeProperty('margin-top');
+          sib.style.removeProperty('background-color');
+          idx += 1;
+        }
+        sib = sib.nextElementSibling;
+      }
+    }
+
     function layoutCurtain() {
-      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
       var isMobile = window.matchMedia('(max-width: 749px)').matches;
-      // Shorter mobile pin: less side-crop with object-fit:cover, less “endless” banner
-      var pinH = isMobile ? Math.min(Math.round(vh * 0.68), 560) : vh;
-      var trackH = isMobile ? vh + pinH : vh * 2;
+
+      // Mobile: no sticky runway — avoids white gap under a short pin
+      if (isMobile) {
+        clearInlineCurtain();
+        return;
+      }
+
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var pinH = vh;
+      var trackH = vh * 2;
 
       if (prev && prev.classList && prev.classList.contains('shopify-section')) {
         prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
@@ -688,6 +764,8 @@
       track.style.setProperty('background', 'transparent', 'important');
       track.style.removeProperty('z-index');
 
+      pin.style.setProperty('position', 'sticky', 'important');
+      pin.style.setProperty('top', '0px', 'important');
       pin.style.setProperty('z-index', '1', 'important');
       pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
