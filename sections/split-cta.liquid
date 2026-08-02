@@ -219,6 +219,8 @@
       padding-bottom: {{ section.settings.padding_bottom | default: 88 | times: 0.6 | round }}px;
       padding-left: var(--homepage-section-gutter, 16px) !important;
       padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 16px)) !important;
+      border-top: none !important;
+      border-bottom: none !important;
     }
 
     .split-cta-{{ section.id }}__inner {
