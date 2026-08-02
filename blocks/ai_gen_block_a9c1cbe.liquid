@@ -191,8 +191,9 @@
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: 58% 38%;
+      /* Show full photo on mobile — cover was cropping it to ~half the scene */
+      object-fit: contain;
+      object-position: center center;
     }
 
     .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
@@ -455,8 +456,8 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: 58% 38%;
+      object-fit: contain;
+      object-position: center center;
       opacity: {{ block.settings.image_opacity }};
     }
 
@@ -519,11 +520,12 @@
       font-size: 13px;
     }
 
-    /* Sticky Tell Your Story — full-bleed cover on mobile */
+    /* Sticky Tell Your Story — full photo on mobile (no side crop) */
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
       min-height: 100%;
       max-height: none;
       height: 100%;
+      background-color: #2a1a14;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
@@ -532,8 +534,8 @@
       width: 100%;
       height: 100%;
       min-height: 100%;
-      object-fit: cover;
-      object-position: 58% 38%;
+      object-fit: contain;
+      object-position: center center;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
