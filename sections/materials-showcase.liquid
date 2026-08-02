@@ -384,46 +384,41 @@
     }
 
     /*
-      Desktop keeps "For Every Material" on one line; on mobile nowrap clips the
-      script accent. Stack the accent under the main words so it fits.
+      Keep "For Every Material" on one line on mobile — scale type to fit.
     */
     .mat-section .mat-headline,
     #shopify-section-{{ section.id }} .mat-headline {
-      font-size: clamp(22px, 6.2vw, 28px) !important;
-      line-height: 1.12 !important;
+      font-size: clamp(18px, 5.2vw, 24px) !important;
+      line-height: 1.15 !important;
       max-width: 100% !important;
-      overflow-wrap: anywhere !important;
+      white-space: nowrap !important;
     }
 
     .mat-section .mat-headline .hp-heading-pair,
     #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair {
-      display: flex !important;
-      flex-direction: column !important;
-      flex-wrap: nowrap !important;
-      align-items: flex-start !important;
-      white-space: normal !important;
+      display: inline !important;
+      flex-direction: row !important;
+      white-space: nowrap !important;
       max-width: 100% !important;
-      gap: 0.05em !important;
     }
 
     #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-line,
     #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair .hp-heading-line,
     .mat-section .mat-headline .hp-heading-line--1 {
-      display: block !important;
-      white-space: normal !important;
-      max-width: 100% !important;
+      display: inline !important;
+      white-space: nowrap !important;
     }
 
     .mat-section .mat-headline .hp-heading-accent,
     #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
     #MainContent #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
     #MainContent #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-accent {
-      display: block !important;
-      white-space: normal !important;
-      max-width: 100% !important;
-      font-size: clamp(30px, 10vw, 40px) !important;
-      line-height: 1.05 !important;
-      margin-top: 0.02em !important;
+      display: inline !important;
+      white-space: nowrap !important;
+      font-size: clamp(26px, 8vw, 36px) !important;
+      line-height: 1 !important;
+      margin-top: 0 !important;
+      vertical-align: baseline !important;
     }
 
     .mat-menu-item,
