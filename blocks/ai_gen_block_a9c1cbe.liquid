@@ -159,6 +159,29 @@
   }
 
   @media screen and (max-width: 749px) {
+    /*
+      Mobile sticky: full 100dvh + cover crops landscape photos hard on the sides
+      and makes the banner feel endless. Use a shorter framed height instead.
+    */
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
+      height: calc(100vh + min(68dvh, 560px)) !important;
+      height: calc(100dvh + min(68dvh, 560px)) !important;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} {
+      height: min(68dvh, 560px);
+    }
+
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
+      margin-top: calc(-1 * min(68dvh, 560px)) !important;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      object-fit: cover;
+      object-position: 58% 38%;
+    }
+
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
       top: clamp(20px, 4vw, 32px);
       left: 16px;
@@ -400,7 +423,8 @@
     }
 
     .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      min-height: min(56vw, 340px);
+      min-height: min(72vw, 420px);
+      max-height: min(68dvh, 560px);
       overflow: hidden;
     }
 
@@ -411,7 +435,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: right center;
+      object-position: 58% 38%;
       opacity: {{ block.settings.image_opacity }};
     }
 
@@ -474,9 +498,10 @@
       font-size: 13px;
     }
 
-    /* Sticky Tell Your Story keeps full-bleed cover + its own content offsets */
+    /* Sticky Tell Your Story — shorter mobile frame, balanced crop */
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
       min-height: 100%;
+      max-height: none;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
@@ -484,7 +509,8 @@
       inset: 0;
       min-height: 100%;
       height: 100%;
-      object-position: center center;
+      object-fit: cover;
+      object-position: 58% 38%;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
@@ -636,6 +662,10 @@
 
     function layoutCurtain() {
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var isMobile = window.matchMedia('(max-width: 749px)').matches;
+      // Shorter mobile pin: less side-crop with object-fit:cover, less “endless” banner
+      var pinH = isMobile ? Math.min(Math.round(vh * 0.68), 560) : vh;
+      var trackH = isMobile ? vh + pinH : vh * 2;
 
       if (prev && prev.classList && prev.classList.contains('shopify-section')) {
         prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
@@ -650,7 +680,7 @@
       section.style.setProperty('position', 'relative', 'important');
       section.style.setProperty('z-index', '1', 'important');
       section.style.setProperty('margin-top', '0px', 'important');
-      section.style.setProperty('height', vh * 2 + 'px', 'important');
+      section.style.setProperty('height', trackH + 'px', 'important');
       section.style.setProperty('overflow', 'visible', 'important');
       section.style.setProperty('background', 'transparent', 'important');
       section.style.setProperty('pointer-events', 'none', 'important');
@@ -659,7 +689,7 @@
       track.style.removeProperty('z-index');
 
       pin.style.setProperty('z-index', '1', 'important');
-      pin.style.setProperty('height', vh + 'px', 'important');
+      pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
 
       // Raise following sections so the lower curtain covers cleanly
@@ -672,7 +702,7 @@
           sib.style.setProperty('z-index', '3', 'important');
           sib.style.setProperty('isolation', 'isolate', 'important');
           if (idx === 0) {
-            sib.style.setProperty('margin-top', -vh + 'px', 'important');
+            sib.style.setProperty('margin-top', -pinH + 'px', 'important');
           }
           var fallback = idx === 0 ? '#111111' : '#ffffff';
           paintOpaque(sib, fallback);
