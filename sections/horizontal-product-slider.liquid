@@ -546,6 +546,41 @@
   .hp-fam-sec__mobile-rail-wrap {
     display: none;
     width: 100%;
+    position: relative;
+  }
+
+  .hp-fam-sec__mobile-nav {
+    display: none;
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hp-fam-sec__mobile-nav svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  .hp-fam-sec__mobile-nav--prev {
+    left: 4px;
+  }
+
+  .hp-fam-sec__mobile-nav--next {
+    right: 4px;
   }
 
   .hp-fam-sec__mobile-slider {
@@ -554,14 +589,14 @@
     gap: var(--hp-fam-card-gap);
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    touch-action: auto;
+    touch-action: pan-x pan-y;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: auto;
     padding: 4px 0 12px;
-    padding-right: calc((100% - var(--hp-fam-card-gap)) / 3);
+    padding-right: 0;
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
@@ -585,12 +620,15 @@
     pointer-events: none;
   }
 
+  /* One full product card at a time on mobile/tablet */
   .hp-fam-sec__mobile-slider .rail-card {
-    flex: 0 0 calc((100% - var(--hp-fam-card-gap)) / 1.5);
-    min-width: 0;
-    max-width: none;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
   }
 
   .hp-fam-sec__mobile-slider .rail-card-img {
@@ -633,6 +671,10 @@
       padding-bottom: 36px;
       width: 100%;
       overflow: visible;
+    }
+
+    .hp-fam-sec__mobile-nav {
+      display: inline-flex;
     }
 
     .premium-floating-rail {
@@ -686,20 +728,43 @@
     }
 
     .hp-fam-sec__mobile-rail-wrap {
-      margin-right: calc(-1 * var(--homepage-section-gutter, 6px));
+      margin-right: 0;
       padding-bottom: 28px;
     }
 
     .hp-fam-sec__mobile-slider {
-      --hp-fam-card-gap: 12px;
-      gap: var(--hp-fam-card-gap);
+      --hp-fam-card-gap: 0px;
+      gap: 0;
       padding-bottom: 8px;
-      padding-right: var(--homepage-section-gutter, 6px);
+      padding-right: 0;
     }
 
     .hp-fam-sec__mobile-slider .rail-card {
-      flex: 0 0 calc((100% - var(--hp-fam-card-gap)) / 1.5);
-      scroll-snap-align: start;
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    .hp-fam-sec__mobile-nav {
+      width: 36px;
+      height: 36px;
+    }
+
+    .hp-fam-sec__mobile-nav--prev {
+      left: 2px;
+    }
+
+    .hp-fam-sec__mobile-nav--next {
+      right: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hp-fam-sec__mobile-slider {
+      scroll-behavior: auto;
     }
   }
 
@@ -860,8 +925,14 @@
         </div>
       </div>
 
-      {%- comment -%} MOBILE: horizontal product cards {%- endcomment -%}
-      <div class="hp-fam-sec__mobile-rail-wrap">
+      {%- comment -%} MOBILE: one product at a time + chevrons {%- endcomment -%}
+      <div class="hp-fam-sec__mobile-rail-wrap" data-hp-mobile-carousel>
+        <button type="button" class="hp-fam-sec__mobile-nav hp-fam-sec__mobile-nav--prev" data-hp-mobile-prev aria-label="Previous product">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button type="button" class="hp-fam-sec__mobile-nav hp-fam-sec__mobile-nav--next" data-hp-mobile-next aria-label="Next product">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
         {%- if section.blocks.size > 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'collection' or block.type == 'custom_images' -%}
@@ -1018,6 +1089,122 @@
 
     sliders.forEach((slider) => bindHorizontalDrag(slider, false));
     mobileSliders.forEach((slider) => bindHorizontalDrag(slider, true));
+
+    /* Mobile carousel: one card, chevrons, 3s auto-rotate + manual swipe */
+    (function initMobileCarousel() {
+      const wrap = section.querySelector('[data-hp-mobile-carousel]');
+      if (!wrap) return;
+
+      const prevBtn = wrap.querySelector('[data-hp-mobile-prev]');
+      const nextBtn = wrap.querySelector('[data-hp-mobile-next]');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobileLayout = function() {
+        return window.matchMedia('(max-width: 1199px)').matches;
+      };
+
+      function getActiveSlider() {
+        return wrap.querySelector('.hp-fam-sec__mobile-slider.is-active') || wrap.querySelector('.hp-fam-sec__mobile-slider');
+      }
+
+      function getCards(slider) {
+        return slider ? Array.prototype.slice.call(slider.querySelectorAll('.rail-card')) : [];
+      }
+
+      function getIndex(slider) {
+        const cards = getCards(slider);
+        if (!cards.length) return 0;
+        const left = slider.scrollLeft;
+        let best = 0;
+        let bestDist = Infinity;
+        cards.forEach(function(card, i) {
+          const dist = Math.abs(card.offsetLeft - left);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        return best;
+      }
+
+      function goTo(slider, index, behavior) {
+        const cards = getCards(slider);
+        if (!cards.length) return;
+        const i = ((index % cards.length) + cards.length) % cards.length;
+        const card = cards[i];
+        if (!card) return;
+        slider.scrollTo({ left: card.offsetLeft, behavior: behavior || 'smooth' });
+      }
+
+      function step(dir) {
+        const slider = getActiveSlider();
+        if (!slider) return;
+        goTo(slider, getIndex(slider) + dir, 'smooth');
+        bumpAuto();
+      }
+
+      let autoTimer = null;
+
+      function stopAuto() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function startAuto() {
+        stopAuto();
+        if (reduceMotion || !isMobileLayout()) return;
+        autoTimer = setInterval(function() {
+          const slider = getActiveSlider();
+          if (!slider || document.hidden) return;
+          goTo(slider, getIndex(slider) + 1, 'smooth');
+        }, 3000);
+      }
+
+      function bumpAuto() {
+        stopAuto();
+        startAuto();
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          step(-1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          step(1);
+        });
+      }
+
+      mobileSliders.forEach(function(slider) {
+        slider.addEventListener('pointerdown', function() { bumpAuto(); }, { passive: true });
+        slider.addEventListener('touchstart', function() { bumpAuto(); }, { passive: true });
+        slider.addEventListener('scroll', function() {
+          /* keep auto running; user swipe just resets cadence via touch */
+        }, { passive: true });
+      });
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          bumpAuto();
+        });
+      });
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) stopAuto();
+        else startAuto();
+      });
+
+      window.addEventListener('resize', function() {
+        if (isMobileLayout()) startAuto();
+        else stopAuto();
+      }, { passive: true });
+
+      startAuto();
+    })();
   })();
 </script>
 
