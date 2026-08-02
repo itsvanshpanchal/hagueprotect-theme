@@ -296,14 +296,6 @@
   }
 
   @media screen and (max-width: 768px) {
-    /* Keep Materials above sticky-curtain stacking from later sections */
-    #shopify-section-{{ section.id }} {
-      position: relative !important;
-      z-index: 5 !important;
-      isolation: isolate !important;
-      overflow-x: clip !important;
-    }
-
     .mat-section {
       --mat-mobile-gutter: max(var(--homepage-section-gutter, 6px), 16px);
       min-height: 0 !important;
@@ -325,13 +317,11 @@
     }
 
     .mat-container {
-      max-width: none !important;
-      width: 100% !important;
       max-width: 100% !important;
+      width: 100% !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       min-height: 0 !important;
-      overflow: hidden !important;
     }
 
     .mat-grid {
@@ -352,18 +342,19 @@
       min-height: 100% !important;
     }
 
-    /* Avoid scale > 1 on mobile — it bleeds sideways and can flash white gutters */
+    /* Restore ken-burns style switch; overflow:hidden on stage clips side bleed */
     .mat-bg-stage .mat-image-layer,
     .mat-bg-stage .mat-image-fallback {
-      transform: none !important;
+      transform: scale(1.14) !important;
       object-fit: cover !important;
       object-position: center center !important;
-      transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+      transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1),
+                  transform 850ms cubic-bezier(0.25, 1, 0.5, 1) !important;
     }
 
     .mat-bg-stage .mat-image-layer.active,
     .mat-bg-stage .mat-image-fallback.active {
-      transform: none !important;
+      transform: scale(1) !important;
     }
 
     .mat-left {
@@ -375,7 +366,6 @@
       max-width: 100% !important;
       padding: 28px var(--mat-mobile-gutter) 40px var(--mat-mobile-gutter) !important;
       box-sizing: border-box !important;
-      overflow: hidden !important;
     }
 
     .mat-eyebrow,
@@ -391,7 +381,6 @@
     .section-heading-stack {
       width: 100% !important;
       max-width: 100% !important;
-      overflow: hidden !important;
     }
 
     /*

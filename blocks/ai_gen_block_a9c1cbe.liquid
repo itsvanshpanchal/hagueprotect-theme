@@ -160,52 +160,47 @@
 
   @media screen and (max-width: 749px) {
     /*
-      Mobile: turn off sticky curtain. A pin shorter than the viewport left a
-      white MainContent gap under the image while the next section scrolled up.
-      Use a normal framed banner instead (no runway / no white flash).
+      Keep sticky curtain on mobile. Pin MUST be full viewport height —
+      a shorter pin leaves a white MainContent gap under the image.
+      Use a slightly shorter runway so the hold feels less endless.
     */
     .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-      height: auto !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: visible !important;
-      background: transparent !important;
-      pointer-events: auto !important;
-    }
-
-    .ai-story-sticky-track-{{ ai_gen_id }} {
-      height: auto;
-      pointer-events: auto;
+      height: 165vh !important;
+      height: 165dvh !important;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} {
-      position: relative;
-      top: auto;
-      height: auto;
-      z-index: auto;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 1;
       background: #0a0a0a;
       pointer-events: auto;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: auto;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
       max-height: none;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: 58% 38%;
     }
 
-    .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
-    .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }},
-    .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
-      margin-top: 0 !important;
-      padding-bottom: 0 !important;
-      z-index: auto !important;
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
+      margin-top: -100vh !important;
+      margin-top: -100dvh !important;
+      z-index: 3 !important;
+      isolation: isolate !important;
+      background-color: #111111 !important;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
@@ -524,10 +519,11 @@
       font-size: 13px;
     }
 
-    /* Sticky markup on mobile behaves as a normal framed banner */
+    /* Sticky Tell Your Story — full-bleed cover on mobile */
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      min-height: min(72vw, 420px);
-      max-height: min(68dvh, 560px);
+      min-height: 100%;
+      max-height: none;
+      height: 100%;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
@@ -535,7 +531,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      min-height: 0;
+      min-height: 100%;
       object-fit: cover;
       object-position: 58% 38%;
     }
@@ -687,61 +683,12 @@
       }
     }
 
-    function clearInlineCurtain() {
-      section.style.removeProperty('position');
-      section.style.removeProperty('z-index');
-      section.style.removeProperty('margin-top');
-      section.style.removeProperty('height');
-      section.style.removeProperty('overflow');
-      section.style.removeProperty('background');
-      section.style.removeProperty('pointer-events');
-
-      track.style.removeProperty('background');
-      track.style.removeProperty('z-index');
-
-      pin.style.removeProperty('z-index');
-      pin.style.removeProperty('height');
-      pin.style.removeProperty('pointer-events');
-      pin.style.removeProperty('position');
-      pin.style.removeProperty('top');
-
-      if (prev && prev.classList) {
-        prev.classList.remove('hp-story-curtain-prev-{{ ai_gen_id }}');
-        prev.style.removeProperty('position');
-        prev.style.removeProperty('z-index');
-        prev.style.removeProperty('isolation');
-        prev.style.removeProperty('padding-bottom');
-        prev.style.removeProperty('background-color');
-      }
-
-      var sib = next;
-      var idx = 0;
-      while (sib && idx < 4) {
-        if (sib.classList && sib.classList.contains('shopify-section')) {
-          sib.classList.remove('hp-story-curtain-next-{{ ai_gen_id }}');
-          sib.style.removeProperty('position');
-          sib.style.removeProperty('z-index');
-          sib.style.removeProperty('isolation');
-          sib.style.removeProperty('margin-top');
-          sib.style.removeProperty('background-color');
-          idx += 1;
-        }
-        sib = sib.nextElementSibling;
-      }
-    }
-
     function layoutCurtain() {
-      var isMobile = window.matchMedia('(max-width: 749px)').matches;
-
-      // Mobile: no sticky runway — avoids white gap under a short pin
-      if (isMobile) {
-        clearInlineCurtain();
-        return;
-      }
-
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      var isMobile = window.matchMedia('(max-width: 749px)').matches;
+      // Full-viewport pin on all breakpoints (avoids white gap). Shorter runway on mobile.
       var pinH = vh;
-      var trackH = vh * 2;
+      var trackH = isMobile ? Math.round(vh * 1.65) : vh * 2;
 
       if (prev && prev.classList && prev.classList.contains('shopify-section')) {
         prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
@@ -781,9 +728,11 @@
           sib.style.setProperty('isolation', 'isolate', 'important');
           if (idx === 0) {
             sib.style.setProperty('margin-top', -pinH + 'px', 'important');
+            // Corporate marquee (typical next section) — solid dark so no white flash
+            paintOpaque(sib, '#111111');
+          } else {
+            paintOpaque(sib, '#ffffff');
           }
-          var fallback = idx === 0 ? '#111111' : '#ffffff';
-          paintOpaque(sib, fallback);
           idx += 1;
         }
         sib = sib.nextElementSibling;
