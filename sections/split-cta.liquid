@@ -82,8 +82,8 @@
     --split-cta-btn-bg: {{ section.settings.button_background | default: '#111111' }};
     --split-cta-btn-text: {{ section.settings.button_text_color | default: '#FFFFFF' }};
     background: var(--split-cta-bg);
-    border-top: 1px solid #111111;
-    border-bottom: 1px solid #111111;
+    border-top: none;
+    border-bottom: none;
     /* Match other homepage sections: same left edge gutter on laptop + monitors */
     padding: {{ section.settings.padding_top | default: 88 }}px var(--homepage-section-gutter, 28px) {{ section.settings.padding_bottom | default: 88 }}px var(--homepage-section-gutter, 28px);
     width: 100%;
