@@ -157,6 +157,9 @@
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {%- if template.name == 'index' -%}
+      {{ 'hp-floating-cards.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     {{ 'material-fonts.css' | asset_url | stylesheet_tag }}
     {% render 'theme-layout-css' %}
 
@@ -427,6 +430,9 @@
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'heading-typewriter.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
+    {%- if template.name == 'index' -%}
+      <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     {%- if template.name == 'search' and template.suffix == 'business' -%}
       <script src="{{ 'business-page.js' | asset_url }}" defer="defer"></script>
     {%- elsif template.name == 'page' and page.handle == 'contact' -%}

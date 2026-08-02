@@ -1,0 +1,30 @@
+/* Floating card stack helpers (homepage) */
+body.template-index #MainContent {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+body.template-index #MainContent > .shopify-section.hp-float-card {
+  transform: none !important;
+  will-change: auto;
+}
+
+body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.template-index #MainContent > .shopify-section.hp-float-card {
+    height: auto !important;
+    margin-top: 0 !important;
+  }
+
+  body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
+    position: relative !important;
+    top: auto !important;
+    box-shadow: none !important;
+  }
+}
