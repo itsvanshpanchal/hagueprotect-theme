@@ -68,6 +68,36 @@
   .corp-marquee__item--accent {
     color: #ffffff;
   }
+
+  @media screen and (max-width: 749px) {
+    .corp-marquee {
+      padding: 18px 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .corp-marquee__label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      line-height: 1.45;
+      padding: 0 16px;
+      margin-bottom: 12px;
+    }
+
+    .corp-marquee__track {
+      gap: 28px;
+    }
+
+    .corp-marquee__item {
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      gap: 8px;
+    }
+
+    .corp-marquee__track--reverse {
+      margin-top: 8px;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid

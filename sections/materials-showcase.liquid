@@ -296,11 +296,23 @@
   }
 
   @media screen and (max-width: 768px) {
+    /* Keep Materials above sticky-curtain stacking from later sections */
+    #shopify-section-{{ section.id }} {
+      position: relative !important;
+      z-index: 5 !important;
+      isolation: isolate !important;
+      overflow-x: clip !important;
+    }
+
     .mat-section {
-      --mat-mobile-gutter: var(--homepage-section-gutter, 6px);
+      --mat-mobile-gutter: max(var(--homepage-section-gutter, 6px), 16px);
       min-height: 0 !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
+      overflow-x: clip !important;
+      overflow-y: hidden !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
 
     .mat-bg-overlay {
@@ -308,21 +320,30 @@
         180deg,
         rgba(0, 0, 0, 0.78) 0%,
         rgba(0, 0, 0, 0.42) 45%,
-        rgba(0, 0, 0, 0.62) 100%
+        rgba(0, 0, 0, 0.72) 100%
       ) !important;
     }
 
     .mat-container {
       max-width: none !important;
       width: 100% !important;
+      max-width: 100% !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       min-height: 0 !important;
+      overflow: hidden !important;
     }
 
     .mat-grid {
       display: block !important;
       min-height: 0 !important;
+      width: 100% !important;
+    }
+
+    .mat-bg-stage,
+    .mat-bg-stage .mat-image-container {
+      overflow: hidden !important;
+      max-width: 100% !important;
     }
 
     .mat-bg-stage .mat-image-container,
@@ -331,26 +352,30 @@
       min-height: 100% !important;
     }
 
+    /* Avoid scale > 1 on mobile — it bleeds sideways and can flash white gutters */
     .mat-bg-stage .mat-image-layer,
     .mat-bg-stage .mat-image-fallback {
-      transform: scale(1.14) !important;
-      transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1),
-                  transform 850ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+      transform: none !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1) !important;
     }
 
     .mat-bg-stage .mat-image-layer.active,
     .mat-bg-stage .mat-image-fallback.active {
-      transform: scale(1) !important;
+      transform: none !important;
     }
 
     .mat-left {
-      align-items: var(--section-heading-items, flex-start) !important;
-      text-align: var(--section-heading-align, left) !important;
+      align-items: flex-start !important;
+      text-align: left !important;
       justify-content: flex-start !important;
       min-height: 0 !important;
       width: 100% !important;
-      max-width: none !important;
-      padding: 24px var(--mat-mobile-gutter) 36px var(--mat-mobile-gutter) !important;
+      max-width: 100% !important;
+      padding: 28px var(--mat-mobile-gutter) 40px var(--mat-mobile-gutter) !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
     }
 
     .mat-eyebrow,
@@ -358,9 +383,58 @@
     .mat-desc,
     .mat-menu,
     .mat-menu-item {
-      align-self: var(--section-heading-items, flex-start) !important;
+      align-self: flex-start !important;
       width: 100% !important;
       max-width: 100% !important;
+    }
+
+    .section-heading-stack {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+    }
+
+    /*
+      Desktop keeps "For Every Material" on one line; on mobile nowrap clips the
+      script accent. Stack the accent under the main words so it fits.
+    */
+    .mat-section .mat-headline,
+    #shopify-section-{{ section.id }} .mat-headline {
+      font-size: clamp(22px, 6.2vw, 28px) !important;
+      line-height: 1.12 !important;
+      max-width: 100% !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    .mat-section .mat-headline .hp-heading-pair,
+    #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      white-space: normal !important;
+      max-width: 100% !important;
+      gap: 0.05em !important;
+    }
+
+    #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-line,
+    #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair .hp-heading-line,
+    .mat-section .mat-headline .hp-heading-line--1 {
+      display: block !important;
+      white-space: normal !important;
+      max-width: 100% !important;
+    }
+
+    .mat-section .mat-headline .hp-heading-accent,
+    #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
+    #MainContent #shopify-section-{{ section.id }} .mat-headline .hp-heading-accent,
+    #MainContent #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-accent {
+      display: block !important;
+      white-space: normal !important;
+      max-width: 100% !important;
+      font-size: clamp(30px, 10vw, 40px) !important;
+      line-height: 1.05 !important;
+      margin-top: 0.02em !important;
     }
 
     .mat-menu-item,
@@ -373,7 +447,7 @@
     .mat-menu-item-text.mat-font,
     .mat-menu-item[class*="mat-font--"],
     .mat-menu-item-text[class*="mat-font--"] {
-      font-size: clamp(26px, 7.2vw, 30px) !important;
+      font-size: clamp(24px, 6.8vw, 28px) !important;
       line-height: 1.15 !important;
       letter-spacing: -0.02em !important;
     }
