@@ -1,43 +1,86 @@
-/* Floating card stack — no flash gaps, smoother cover */
+/*
+  Smooth floating card stack (Filippo-style).
+  Sections sit as sticky siblings inside .hp-card-stack —
+  each card pins, the next slides up and covers it. No runways, no negative margins.
+*/
+
 body.template-index #MainContent {
   position: relative;
   isolation: isolate;
   overflow-x: clip;
   overflow-y: visible;
-  background-color: #0a0a0a;
 }
 
-body.template-index #MainContent > .shopify-section.hp-float-card {
+.hp-card-stack {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  isolation: isolate;
+  overflow: visible;
+  transform: none;
+}
+
+.hp-card-stack > .shopify-section.hp-float-card {
+  position: sticky !important;
+  top: 0 !important;
+  left: 0;
+  width: 100%;
+  z-index: var(--hp-z, 1) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   transform: none !important;
   will-change: auto;
-  backface-visibility: hidden;
-}
-
-body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
-  width: 100%;
-  box-sizing: border-box;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  box-shadow: 0 -28px 70px rgba(0, 0, 0, 0.28), 0 -1px 0 rgba(255, 255, 255, 0.04);
+  isolation: isolate;
 }
 
-/* Smooth the visual join as the next card rises */
-@media (prefers-reduced-motion: no-preference) {
-  body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
-    transition: box-shadow 0.4s ease;
-  }
+/* Flatten Tell Your Story curtain into one full-viewport card inside the stack */
+.hp-card-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  pointer-events: auto !important;
+  background: #0a0a0a !important;
+}
+
+.hp-card-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
+  margin-top: 0 !important;
+}
+
+.hp-card-stack [class*='ai-story-sticky-track'] {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  pointer-events: auto !important;
+}
+
+.hp-card-stack [class*='ai-story-sticky-pin'] {
+  position: relative !important;
+  top: auto !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+
+.hp-card-stack .shopify-section.hp-story-curtain-prev,
+.hp-card-stack .shopify-section[class*='hp-story-curtain-prev'],
+.hp-card-stack .shopify-section[class*='hp-story-curtain-next'] {
+  z-index: var(--hp-z, 1) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.template-index #MainContent > .shopify-section.hp-float-card {
-    height: auto !important;
-    margin-top: 0 !important;
-  }
-
-  body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
+  .hp-card-stack > .shopify-section.hp-float-card {
     position: relative !important;
     top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
     box-shadow: none !important;
+  }
+
+  .hp-card-stack [class*='ai-story-sticky-pin'] {
+    position: relative !important;
   }
 }

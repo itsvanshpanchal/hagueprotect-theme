@@ -21,15 +21,7 @@
     padding: 0;
   }
 
-  .fp-{{ section.id }}__track {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    margin: 0;
-    padding: 0;
-  }
-
+  /* Sibling sticky panels — each card is 100vh in flow; next covers previous */
   .fp-{{ section.id }}__panel {
     position: sticky;
     top: 0;
@@ -238,10 +230,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .fp-{{ section.id }}__track {
-      height: auto;
-    }
-
     .fp-{{ section.id }}__panel {
       position: relative;
       top: auto;
@@ -263,11 +251,11 @@
     {%- for block in section.blocks -%}
       {%- if block.type == 'panel' -%}
         {%- assign pos = block.settings.text_position | default: 'bottom-left' -%}
-        <div class="fp-{{ section.id }}__track" {{ block.shopify_attributes }}>
-          <article
+        <article
             class="fp-{{ section.id }}__panel"
             style="z-index: {{ forloop.index }};"
             data-fp-panel
+            {{ block.shopify_attributes }}
           >
             <div class="fp-{{ section.id }}__media">
               {%- if block.settings.image != blank -%}
@@ -323,15 +311,12 @@
               </div>
             {%- endif -%}
           </article>
-        </div>
       {%- endif -%}
     {%- endfor -%}
   {%- else -%}
-    <div class="fp-{{ section.id }}__track">
-      <article class="fp-{{ section.id }}__panel" data-fp-panel>
-        <div class="fp-{{ section.id }}__placeholder">Add Floating panel blocks in the theme editor</div>
-      </article>
-    </div>
+    <article class="fp-{{ section.id }}__panel" data-fp-panel>
+      <div class="fp-{{ section.id }}__placeholder">Add Floating panel blocks in the theme editor</div>
+    </article>
   {%- endif -%}
 </section>
 
