@@ -1,6 +1,6 @@
 /*
-  Homepage floating card stack — matches cinematic sticky panels:
-  each section pins, the next slides up and covers it like a card.
+  Homepage floating card stack — cinematic sticky panels.
+  Fixes: no empty runway gaps, pin always fills the viewport, smoother cover.
 */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -15,22 +15,59 @@
     return !color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)';
   }
 
-  function paintOpaque(el, fallback) {
-    if (!el) return;
-    var bg = window.getComputedStyle(el).backgroundColor;
-    if (isTransparent(bg)) {
-      el.style.setProperty('background-color', fallback, 'important');
+  function paintOpaque(el, color) {
+    if (!el || !color) return;
+    el.style.setProperty('background-color', color, 'important');
+  }
+
+  function detectBg(pin, sec) {
+    var fallback = '#0a0a0a';
+    var selectors = [
+      '.mat-section',
+      '.hp-fam-sec',
+      '.corp-marquee',
+      '.split-cta',
+      '[class*="split-cta"]',
+      '.story-banner-wrapper',
+      '.bs-coverflow',
+      '.trending-social-section',
+      '.comm-section',
+      '.hp-dna',
+      '.fc-section',
+      'section'
+    ];
+    for (var i = 0; i < selectors.length; i++) {
+      var el = pin.querySelector(selectors[i]);
+      if (!el) continue;
+      var c = window.getComputedStyle(el).backgroundColor;
+      if (!isTransparent(c)) return c;
     }
+    // Known dark homepage bands
+    if (sec.querySelector('.mat-section, .hp-fam-sec, .corp-marquee, .hero-fullscreen')) {
+      return '#0a0a0a';
+    }
+    // Split CTA cream
+    if (sec.querySelector('[class*="split-cta"]')) {
+      return '#FDFCF7';
+    }
+    var mainBg = window.getComputedStyle(pin).backgroundColor;
+    if (!isTransparent(mainBg)) return mainBg;
+    return fallback;
   }
 
   function shouldSkip(sec) {
     if (!sec || !sec.classList.contains('shopify-section')) return true;
-    // Already has its own sticky curtain / floating panel system
     if (sec.querySelector('[data-hp-story-sticky-track]')) return true;
     if (sec.querySelector('[data-fp-stack]')) return true;
     if (sec.classList.contains('section-floating-panels')) return true;
-    // Empty / essentially no content
     if (!sec.firstElementChild) return true;
+
+    // Short strips (marquees, thin banners) create empty color gaps — skip them
+    var h = sec.offsetHeight || sec.scrollHeight || 0;
+    var vh = window.innerHeight || 800;
+    if (h > 0 && h < vh * 0.42) return true;
+    if (sec.querySelector('.corp-marquee') && !sec.querySelector('.hp-fam-sec, .mat-section')) return true;
+
     return false;
   }
 
@@ -46,22 +83,17 @@
     sec.style.removeProperty('overflow');
     sec.style.removeProperty('pointer-events');
     sec.style.removeProperty('background');
+    sec.style.removeProperty('background-color');
     sec.style.removeProperty('box-shadow');
 
     var pin = sec.querySelector(':scope > .hp-float-pin');
     if (pin) {
-      pin.style.removeProperty('position');
-      pin.style.removeProperty('top');
-      pin.style.removeProperty('left');
-      pin.style.removeProperty('width');
-      pin.style.removeProperty('height');
-      pin.style.removeProperty('min-height');
-      pin.style.removeProperty('z-index');
-      pin.style.removeProperty('overflow');
-      pin.style.removeProperty('box-shadow');
-      pin.style.removeProperty('background-color');
-      pin.style.removeProperty('pointer-events');
-      // Unwrap pin
+      var child = pin.firstElementChild;
+      if (child) {
+        child.style.removeProperty('flex');
+        child.style.removeProperty('min-height');
+      }
+      pin.style.cssText = '';
       while (pin.firstChild) sec.insertBefore(pin.firstChild, pin);
       pin.remove();
     }
@@ -80,20 +112,17 @@
   function layout() {
     var sections = Array.prototype.slice.call(main.querySelectorAll(':scope > .shopify-section'));
     var vh = window.innerHeight || document.documentElement.clientHeight || 800;
-    // On small phones use full vh pin still (needed for no white gap)
-    var pinH = vh;
-    // Slightly shorter runway on mobile so scroll feels snappier
-    var runway = window.matchMedia('(max-width: ' + MOBILE_MAX + 'px)').matches
-      ? Math.round(vh * 0.85)
-      : vh;
+    var isMobile = window.matchMedia('(max-width: ' + MOBILE_MAX + 'px)').matches;
+    // Shorter runway = snappier, smoother cover + less empty track exposure
+    var runway = Math.round(vh * (isMobile ? 0.42 : 0.5));
 
-    // Reset first
     sections.forEach(clearSection);
 
     main.style.setProperty('position', 'relative');
     main.style.setProperty('isolation', 'isolate');
     main.style.setProperty('overflow-x', 'clip');
     main.style.setProperty('overflow-y', 'visible');
+    main.style.setProperty('background-color', '#0a0a0a');
 
     var active = sections.filter(function (sec) { return !shouldSkip(sec); });
     if (active.length < 2) return;
@@ -101,7 +130,13 @@
     active.forEach(function (sec, i) {
       var isLast = i === active.length - 1;
       var pin = ensurePin(sec);
-      var contentH = Math.max(pin.scrollHeight, pinH);
+
+      // Measure natural content, then force pin to at least full viewport (kills side/under gaps)
+      pin.style.minHeight = '0';
+      pin.style.height = 'auto';
+      var contentH = Math.max(pin.scrollHeight, 1);
+      var pinMin = Math.max(contentH, vh);
+      var bg = detectBg(pin, sec);
 
       sec.classList.add('hp-float-card');
       sec.style.setProperty('position', 'relative', 'important');
@@ -109,49 +144,55 @@
       sec.style.setProperty('isolation', 'isolate', 'important');
       sec.style.setProperty('overflow', 'visible', 'important');
       sec.style.setProperty('margin-bottom', '0px', 'important');
-      // Do NOT force margin-top:0 here — previous card sets -runway on this section
-
-      // Opaque card surface so the cover never flashes white
-      var fallbackBg = '#ffffff';
-      var sample = pin.querySelector('section, .mat-section, .hp-fam-sec, .corp-marquee, .split-cta, .footer-wrapper, .story-banner-wrapper, [class*="bg"]');
-      if (sample) {
-        var c = window.getComputedStyle(sample).backgroundColor;
-        if (!isTransparent(c)) fallbackBg = c;
-      }
-      // Dark sections commonly used on homepage
-      if (sec.querySelector('.mat-section, .hp-fam-sec, .corp-marquee, [data-hp-story-sticky-track]')) {
-        fallbackBg = '#111111';
-      }
-      paintOpaque(pin, fallbackBg);
-      paintOpaque(sec, fallbackBg);
+      paintOpaque(sec, bg);
 
       if (isLast) {
+        // No runway on last card — footer sits flush (no cream/dark gap above footer)
         sec.style.setProperty('height', 'auto', 'important');
+        sec.style.setProperty('min-height', '0', 'important');
         pin.style.setProperty('position', 'relative', 'important');
         pin.style.removeProperty('top');
-        pin.style.setProperty('width', '100%');
-        pin.style.setProperty('min-height', '0');
-        pin.style.setProperty('box-shadow', 'none');
+        pin.style.setProperty('width', '100%', 'important');
+        pin.style.setProperty('height', 'auto', 'important');
+        pin.style.setProperty('min-height', '0', 'important');
+        pin.style.setProperty('box-shadow', 'none', 'important');
+        pin.style.setProperty('overflow', 'visible', 'important');
+        paintOpaque(pin, bg);
         return;
       }
 
-      // Track = content + runway; pin sticks for the runway while next card covers
-      sec.style.setProperty('height', contentH + runway + 'px', 'important');
+      // Full-viewport opaque card + short runway; next card covers runway exactly
+      sec.style.setProperty('height', pinMin + runway + 'px', 'important');
       sec.style.setProperty('pointer-events', 'none', 'important');
+      paintOpaque(sec, bg);
 
       pin.style.setProperty('position', 'sticky', 'important');
       pin.style.setProperty('top', '0px', 'important');
       pin.style.setProperty('left', '0px', 'important');
       pin.style.setProperty('width', '100%', 'important');
-      pin.style.setProperty('min-height', Math.min(contentH, pinH) + 'px', 'important');
+      pin.style.setProperty('height', pinMin + 'px', 'important');
+      pin.style.setProperty('min-height', pinMin + 'px', 'important');
       pin.style.setProperty('z-index', '1', 'important');
-      pin.style.setProperty('overflow', 'hidden', 'important');
+      pin.style.setProperty('overflow', contentH > vh ? 'auto' : 'hidden', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
       pin.style.setProperty(
         'box-shadow',
-        '0 -28px 80px rgba(0,0,0,0.28), 0 -2px 0 rgba(0,0,0,0.06)',
+        '0 -24px 64px rgba(0,0,0,0.22)',
         'important'
       );
+      pin.style.setProperty('transition', 'box-shadow 0.35s ease', 'important');
+      paintOpaque(pin, bg);
+
+      // Fill short content inside a tall pin so the card never looks half-empty
+      if (contentH < vh) {
+        pin.style.setProperty('display', 'flex', 'important');
+        pin.style.setProperty('flex-direction', 'column', 'important');
+        var child = pin.firstElementChild;
+        if (child) {
+          child.style.setProperty('flex', '1 1 auto', 'important');
+          child.style.setProperty('min-height', '100%', 'important');
+        }
+      }
 
       var next = active[i + 1];
       if (next) {
@@ -164,9 +205,16 @@
   }
 
   var resizeTimer = null;
+  var layoutQueued = false;
+
   function schedule() {
+    if (layoutQueued) return;
+    layoutQueued = true;
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(layout, 80);
+    resizeTimer = setTimeout(function () {
+      layoutQueued = false;
+      layout();
+    }, 120);
   }
 
   if (document.readyState === 'loading') {
@@ -176,7 +224,5 @@
   }
   window.addEventListener('load', schedule, { passive: true });
   window.addEventListener('resize', schedule, { passive: true });
-  // Theme editor / late images
-  setTimeout(layout, 400);
-  setTimeout(layout, 1200);
+  setTimeout(schedule, 500);
 })();

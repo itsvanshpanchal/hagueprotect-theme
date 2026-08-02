@@ -1,19 +1,30 @@
-/* Floating card stack helpers (homepage) */
+/* Floating card stack — no flash gaps, smoother cover */
 body.template-index #MainContent {
   position: relative;
   isolation: isolate;
   overflow-x: clip;
   overflow-y: visible;
+  background-color: #0a0a0a;
 }
 
 body.template-index #MainContent > .shopify-section.hp-float-card {
   transform: none !important;
   will-change: auto;
+  backface-visibility: hidden;
 }
 
 body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
   width: 100%;
   box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Smooth the visual join as the next card rises */
+@media (prefers-reduced-motion: no-preference) {
+  body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
+    transition: box-shadow 0.4s ease;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -25,6 +36,8 @@ body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pi
   body.template-index #MainContent > .shopify-section.hp-float-card > .hp-float-pin {
     position: relative !important;
     top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
     box-shadow: none !important;
   }
 }
