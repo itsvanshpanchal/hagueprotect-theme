@@ -1,0 +1,471 @@
+{%- comment -%}
+  Floating panels — sticky stack animation (reference: full-bleed cinematic panels).
+  Each panel pins to the viewport; the next panel slides up and covers it.
+{%- endcomment -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    isolation: isolate;
+    margin: 0;
+    padding: 0;
+    background: #0a0a0a;
+  }
+
+  .fp-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fp-{{ section.id }}__panel {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #0a0a0a;
+  }
+
+  .fp-{{ section.id }}__media,
+  .fp-{{ section.id }}__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .fp-{{ section.id }}__media--mobile {
+    display: none;
+  }
+
+  .fp-{{ section.id }}__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: {{ section.settings.overlay_color | default: '#000000' }};
+    opacity: {{ section.settings.overlay_opacity | default: 25 | divided_by: 100.0 }};
+    z-index: 1;
+  }
+
+  .fp-{{ section.id }}__content {
+    position: absolute;
+    z-index: 2;
+    max-width: min(560px, 88vw);
+    padding: clamp(20px, 4vw, 40px);
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+
+  .fp-{{ section.id }}__content--left {
+    left: max(16px, var(--homepage-section-gutter, 20px));
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+
+  .fp-{{ section.id }}__content--right {
+    right: max(16px, var(--homepage-section-gutter, 20px));
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+
+  .fp-{{ section.id }}__content--center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .fp-{{ section.id }}__content--bottom-left {
+    left: max(16px, var(--homepage-section-gutter, 20px));
+    bottom: clamp(28px, 6vh, 64px);
+    top: auto;
+    transform: none;
+    text-align: left;
+  }
+
+  .fp-{{ section.id }}__eyebrow {
+    margin: 0 0 10px;
+    font-size: clamp(11px, 1.2vw, 13px);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .fp-{{ section.id }}__heading {
+    margin: 0 0 12px;
+    font-family: var(--font-family-heading, inherit);
+    font-size: clamp(28px, 4.2vw, 48px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-transform: none;
+  }
+
+  .fp-{{ section.id }}__text {
+    margin: 0;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .fp-{{ section.id }}__text p {
+    margin: 0 0 0.6em;
+  }
+
+  .fp-{{ section.id }}__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .fp-{{ section.id }}__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Soft float-in for copy when panel enters */
+  @media (prefers-reduced-motion: no-preference) {
+    .fp-{{ section.id }}__content {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fp-{{ section.id }}__content--left.is-inview,
+    .fp-{{ section.id }}__content--bottom-left.is-inview {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fp-{{ section.id }}__content--right.is-inview {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fp-{{ section.id }}__content--center {
+      transform: translate(-50%, calc(-50% + 18px));
+    }
+
+    .fp-{{ section.id }}__content--center.is-inview {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .fp-{{ section.id }}__media--desktop {
+      display: none;
+    }
+
+    .fp-{{ section.id }}__media--mobile {
+      display: block;
+    }
+
+    .fp-{{ section.id }}__content {
+      max-width: min(92vw, 420px);
+      padding: 20px 16px;
+    }
+
+    .fp-{{ section.id }}__heading {
+      font-size: clamp(22px, 7vw, 32px);
+    }
+
+    .fp-{{ section.id }}__text {
+      font-size: clamp(13px, 3.6vw, 15px);
+    }
+
+    .fp-{{ section.id }}__content--left,
+    .fp-{{ section.id }}__content--right {
+      left: 16px;
+      right: auto;
+      top: auto;
+      bottom: clamp(24px, 8vh, 48px);
+      transform: none;
+    }
+
+    .fp-{{ section.id }}__content--center {
+      left: 16px;
+      right: 16px;
+      width: auto;
+      max-width: none;
+      top: auto;
+      bottom: clamp(24px, 8vh, 48px);
+      transform: none;
+      text-align: left;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .fp-{{ section.id }}__content--center {
+        transform: translateY(18px);
+      }
+
+      .fp-{{ section.id }}__content--center.is-inview,
+      .fp-{{ section.id }}__content--left.is-inview,
+      .fp-{{ section.id }}__content--right.is-inview,
+      .fp-{{ section.id }}__content--bottom-left.is-inview {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fp-{{ section.id }}__panel {
+      position: relative;
+      top: auto;
+    }
+
+    .fp-{{ section.id }}__content {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<section class="fp-{{ section.id }}" data-fp-stack="{{ section.id }}" aria-label="{{ section.settings.accessibility_label | default: 'Floating story panels' }}">
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'panel' -%}
+        {%- assign pos = block.settings.text_position | default: 'bottom-left' -%}
+        <article
+          class="fp-{{ section.id }}__panel"
+          style="z-index: {{ forloop.index }};"
+          {{ block.shopify_attributes }}
+          data-fp-panel
+        >
+          <div class="fp-{{ section.id }}__media">
+            {%- if block.settings.image != blank -%}
+              <img
+                class="fp-{{ section.id }}__media--desktop"
+                src="{{ block.settings.image | image_url: width: 2400 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {% if forloop.first %}fetchpriority="high"{% endif %}
+              >
+            {%- endif -%}
+
+            {%- if block.settings.mobile_image != blank -%}
+              <img
+                class="fp-{{ section.id }}__media--mobile"
+                src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
+                alt="{{ block.settings.mobile_image.alt | default: block.settings.heading | escape }}"
+                width="{{ block.settings.mobile_image.width }}"
+                height="{{ block.settings.mobile_image.height }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {%- elsif block.settings.image != blank -%}
+              <img
+                class="fp-{{ section.id }}__media--mobile"
+                src="{{ block.settings.image | image_url: width: 1200 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {%- endif -%}
+
+            {%- if block.settings.image == blank and block.settings.mobile_image == blank -%}
+              <div class="fp-{{ section.id }}__placeholder">Add panel image</div>
+            {%- endif -%}
+          </div>
+
+          <div class="fp-{{ section.id }}__overlay" aria-hidden="true"></div>
+
+          {%- if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.text != blank -%}
+            <div class="fp-{{ section.id }}__content fp-{{ section.id }}__content--{{ pos }}" data-fp-content>
+              {%- if block.settings.eyebrow != blank -%}
+                <p class="fp-{{ section.id }}__eyebrow">{{ block.settings.eyebrow }}</p>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="fp-{{ section.id }}__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="fp-{{ section.id }}__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    <article class="fp-{{ section.id }}__panel" style="z-index: 1;" data-fp-panel>
+      <div class="fp-{{ section.id }}__placeholder">Add Floating panel blocks in the theme editor</div>
+    </article>
+  {%- endif -%}
+</section>
+
+<script>
+  (function() {
+    var root = document.querySelector('[data-fp-stack="{{ section.id }}"]');
+    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (root) {
+        root.querySelectorAll('[data-fp-content]').forEach(function(el) {
+          el.classList.add('is-inview');
+        });
+      }
+      return;
+    }
+
+    var panels = root.querySelectorAll('[data-fp-panel]');
+    if (!('IntersectionObserver' in window) || !panels.length) {
+      root.querySelectorAll('[data-fp-content]').forEach(function(el) {
+        el.classList.add('is-inview');
+      });
+      return;
+    }
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var content = entry.target.querySelector('[data-fp-content]');
+        if (!content) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          content.classList.add('is-inview');
+        }
+      });
+    }, { threshold: [0.45, 0.7] });
+
+    panels.forEach(function(panel) { io.observe(panel); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Floating panels",
+  "tag": "section",
+  "class": "section-floating-panels",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Floating story panels"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop image",
+          "info": "Full-bleed landscape image (recommended 1920×1080+)."
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image",
+          "info": "Optional portrait crop (1080×1920 / 9:16). Falls back to desktop image."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "HAGUE PROTECT"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Every material deserves specific care"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Craft a compelling narrative that connects with your audience.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "options": [
+            { "value": "left", "label": "Left center" },
+            { "value": "right", "label": "Right center" },
+            { "value": "center", "label": "Center" },
+            { "value": "bottom-left", "label": "Bottom left" }
+          ],
+          "default": "bottom-left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Floating panels",
+      "blocks": [
+        {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "STORY",
+            "heading": "Tell Your Story",
+            "text": "<p>Craft a compelling narrative that connects with your audience.</p>",
+            "text_position": "bottom-left"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "MATERIALS",
+            "heading": "For Every Material",
+            "text": "<p>Leather, suede, nubuck, fabric, soles — find yours.</p>",
+            "text_position": "right"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "eyebrow": "CARE",
+            "heading": "Premium protection",
+            "text": "<p>Professional-grade cleaning, protection, and restoration.</p>",
+            "text_position": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
