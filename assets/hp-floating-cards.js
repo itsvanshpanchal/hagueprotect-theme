@@ -1,10 +1,10 @@
 /*
   Homepage floating section animation (gap-safe).
 
-  Tall, nearly full-viewport sections stick and get covered by the next one.
-  Short strips stay in normal flow.
-  Never pad sections to 100vh with solid color (that created black/white voids).
-  Headings stay fully visible.
+  Desktop: tall sections stick at natural height; short strips stay in flow.
+  Mobile: cinematic full-viewport cover panels (100dvh) so each section
+  fills the screen before the next slides over — no half-screen stacking,
+  no white gaps, lighter paint for less lag.
 */
 (function () {
   'use strict';
@@ -16,8 +16,23 @@
   var main = document.getElementById('MainContent');
   if (!main) return;
 
-  /* Only cinematic full-bleed panels become sticky cards */
-  var CARD_VH = 0.88;
+  var MQ_MOBILE = window.matchMedia('(max-width: 749px)');
+  var STRIP_SEL =
+    '.corp-marquee, .corporate-gifting-marquee, [class*="marquee"], .announcement, .apps';
+
+  function isMobile() {
+    return MQ_MOBILE.matches;
+  }
+
+  function viewportH() {
+    /* Prefer visualViewport / svh-stable height; avoid URL-bar thrash mid-scroll */
+    var vv = window.visualViewport;
+    if (vv && vv.height > 0 && isMobile()) {
+      /* Use the larger of layout vs visual so panels stay full-screen when chrome hides */
+      return Math.round(Math.max(window.innerHeight || 0, vv.height));
+    }
+    return window.innerHeight || document.documentElement.clientHeight || 800;
+  }
 
   function isShopifySection(el) {
     return el && el.classList && el.classList.contains('shopify-section');
@@ -25,6 +40,10 @@
 
   function isTooThin(sec) {
     return sec.offsetHeight > 0 && sec.offsetHeight < 32;
+  }
+
+  function isKnownStrip(pin) {
+    return !!(pin.querySelector(STRIP_SEL) && pin.children.length <= 3);
   }
 
   function ensurePin(sec) {
@@ -70,7 +89,7 @@
   }
 
   function resetSectionStyles(sec, pin) {
-    sec.classList.remove('hp-float-card', 'hp-float-strip');
+    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile');
     [
       'height',
       'min-height',
@@ -85,11 +104,28 @@
       'background-color',
       'background',
       'transform',
-      'overflow'
+      'overflow',
+      'box-shadow'
     ].forEach(function (prop) {
       sec.style.removeProperty(prop);
     });
     pin.style.cssText = '';
+  }
+
+  function flattenStoryCurtains(pin) {
+    var tracks = pin.querySelectorAll('[class*="ai-story-sticky-track"]');
+    for (var i = 0; i < tracks.length; i++) {
+      tracks[i].style.setProperty('height', 'auto', 'important');
+      tracks[i].style.setProperty('min-height', '0', 'important');
+    }
+    var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
+    for (var j = 0; j < pins.length; j++) {
+      pins[j].style.setProperty('position', 'relative', 'important');
+      pins[j].style.setProperty('top', 'auto', 'important');
+      pins[j].style.setProperty('height', isMobile() ? '100%' : 'auto', 'important');
+      pins[j].style.setProperty('min-height', isMobile() ? '100%' : '0', 'important');
+      pins[j].style.setProperty('z-index', 'auto', 'important');
+    }
   }
 
   function asStrip(item, z) {
@@ -106,6 +142,7 @@
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', 'none', 'important');
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('height', 'auto', 'important');
     pin.style.setProperty('min-height', '0', 'important');
@@ -113,50 +150,45 @@
     pin.style.setProperty('overflow', 'visible', 'important');
   }
 
-  function asCard(item, z, contentH, bg) {
+  function asCard(item, z, contentH, bg, mobile) {
     var sec = item.sec;
     var pin = item.pin;
-    /* Height follows content only — never pad to 100vh (black empty panels) */
-    var pinH = Math.max(contentH, 1);
+    var vh = viewportH();
+    /* Mobile: always fill the screen. Desktop: natural content height. */
+    var pinH = mobile ? Math.max(contentH, vh) : Math.max(contentH, 1);
 
     item.isCard = true;
     sec.classList.add('hp-float-card');
+    if (mobile) sec.classList.add('hp-float-card--mobile');
     sec.style.setProperty('--hp-z', String(z));
     sec.style.setProperty('position', 'sticky', 'important');
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', pinH + 'px', 'important');
-    sec.style.setProperty('min-height', '0', 'important');
+    sec.style.setProperty('min-height', mobile ? vh + 'px' : '0', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', mobile ? 'none' : '0 -12px 32px rgba(0,0,0,0.14)', 'important');
     if (bg) sec.style.setProperty('background-color', bg, 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
-    pin.style.setProperty('height', 'auto', 'important');
-    pin.style.setProperty('min-height', '0', 'important');
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('opacity', '1', 'important');
-    pin.style.setProperty('overflow', 'visible', 'important');
+    if (mobile) {
+      pin.style.setProperty('height', pinH + 'px', 'important');
+      pin.style.setProperty('min-height', vh + 'px', 'important');
+      /* Clip to panel so next cover is clean; scroll inside if content is taller */
+      pin.style.setProperty('overflow', contentH > vh + 8 ? 'auto' : 'hidden', 'important');
+      pin.style.setProperty('-webkit-overflow-scrolling', 'touch');
+    } else {
+      pin.style.setProperty('height', 'auto', 'important');
+      pin.style.setProperty('min-height', '0', 'important');
+      pin.style.setProperty('overflow', 'visible', 'important');
+    }
     if (bg) pin.style.setProperty('background-color', bg, 'important');
-  }
-
-  function flattenStoryCurtains(pin) {
-    var tracks = pin.querySelectorAll('[class*="ai-story-sticky-track"]');
-    for (var i = 0; i < tracks.length; i++) {
-      tracks[i].style.setProperty('height', 'auto', 'important');
-      tracks[i].style.setProperty('min-height', '0', 'important');
-    }
-    var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
-    for (var j = 0; j < pins.length; j++) {
-      pins[j].style.setProperty('position', 'relative', 'important');
-      pins[j].style.setProperty('top', 'auto', 'important');
-      pins[j].style.setProperty('height', 'auto', 'important');
-      pins[j].style.setProperty('min-height', '0', 'important');
-      pins[j].style.setProperty('z-index', 'auto', 'important');
-    }
   }
 
   var sections = Array.prototype.filter.call(main.children, isShopifySection).filter(function (sec) {
@@ -170,20 +202,27 @@
   main.insertBefore(stack, sections[0]);
 
   var items = [];
-
   sections.forEach(function (sec) {
     stack.appendChild(sec);
-    var pin = ensurePin(sec);
-    items.push({ sec: sec, pin: pin, isCard: false });
+    items.push({ sec: sec, pin: ensurePin(sec), isCard: false });
   });
 
   document.body.classList.add('hp-float-active');
   document.body.classList.add('hp-floating-cards-active');
+  if (isMobile()) document.body.classList.add('hp-float-mobile');
   window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
 
+  var lastLayoutW = 0;
+  var layingOut = false;
+
   function layout() {
-    var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+    if (layingOut) return;
+    layingOut = true;
+
+    var mobile = isMobile();
+    var vh = viewportH();
     var cardIndex = 0;
+    document.body.classList.toggle('hp-float-mobile', mobile);
 
     items.forEach(function (item, index) {
       var sec = item.sec;
@@ -193,44 +232,68 @@
       resetSectionStyles(sec, pin);
       flattenStoryCurtains(pin);
 
-      /* Kill leftover 200vh story-curtain runway from block CSS */
       if (pin.querySelector('[class*="ai-story-sticky-track"]')) {
         sec.style.setProperty('height', 'auto', 'important');
         sec.style.setProperty('min-height', '0', 'important');
         sec.style.setProperty('pointer-events', 'auto', 'important');
       }
 
-      /* Measure natural content height after clearing forced sizes */
       var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, 1);
       var bg = detectBg(pin);
       item.bg = bg;
 
-      /*
-        Last section must never stick — sticky black panels above the footer
-        were leaving a full-screen void with only the footer peeking in.
-      */
-      if (isLast || contentH < vh * CARD_VH) {
+      /* Thin marquees / app blocks stay normal flow */
+      if (isKnownStrip(pin) || contentH < vh * 0.28) {
+        asStrip(item, 10 + index);
+        return;
+      }
+
+      if (mobile) {
+        /*
+          Mobile: every substantial section is a full-screen cover card.
+          Last section stays a card too so it fills the screen before footer.
+        */
+        cardIndex += 1;
+        asCard(item, cardIndex, contentH, bg || '#ffffff', true);
+        return;
+      }
+
+      /* Desktop: only near-full panels stick; last never sticks over footer */
+      if (isLast || contentH < vh * 0.88) {
         asStrip(item, 10 + index);
         return;
       }
 
       cardIndex += 1;
-      asCard(item, cardIndex, contentH, bg);
+      asCard(item, cardIndex, contentH, bg, false);
     });
+
+    lastLayoutW = window.innerWidth || 0;
+    layingOut = false;
   }
 
+  /* Resize: only re-layout on real width / orientation changes (not URL-bar height flicker) */
   var resizeTimer = null;
   function onResize() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(layout, 140);
+    resizeTimer = setTimeout(function () {
+      var w = window.innerWidth || 0;
+      if (Math.abs(w - lastLayoutW) < 40 && document.body.classList.contains('hp-float-mobile') === isMobile()) {
+        return;
+      }
+      layout();
+    }, 180);
   }
 
   layout();
   window.addEventListener('resize', onResize, { passive: true });
+  window.addEventListener('orientationchange', function () {
+    setTimeout(layout, 250);
+  }, { passive: true });
   window.addEventListener('load', function () {
     layout();
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });
-  setTimeout(layout, 400);
-  setTimeout(layout, 1200);
+  /* One post-image pass — avoid repeated layout storms that cause mobile lag */
+  setTimeout(layout, 600);
 })();
