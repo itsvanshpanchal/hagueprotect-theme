@@ -69,14 +69,15 @@
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
     position: relative !important;
     z-index: 1 !important;
-    height: 200vh !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
     background: transparent !important;
     isolation: auto !important;
     transform: none !important;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   /* Section ABOVE — stays above the pin while it scrolls away */
@@ -89,12 +90,12 @@
     padding-bottom: 0 !important;
   }
 
-  /* Immediate next section starts early so it can cover the pin */
+  /* Next section — no forced -100vh pull (that cropped the banner) */
   .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
     position: relative !important;
     z-index: 3 !important;
     isolation: isolate !important;
-    margin-top: -100vh !important;
+    margin-top: 0 !important;
   }
 
   /* Later following sections also sit above the pin (no extra pull) */
@@ -120,42 +121,43 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    height: auto;
+    min-height: 0;
     z-index: 1;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     background: #0a0a0a;
     pointer-events: auto;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    inset: auto;
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: none;
     display: block;
     background-color: #0a0a0a;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    inset: auto;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
     object-position: center center;
     display: block;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-placeholder-{{ ai_gen_id }} {
-    min-height: 100%;
-    height: 100%;
+    min-height: 400px;
+    height: auto;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
@@ -273,7 +275,9 @@
   .ai-story-banner-image-{{ ai_gen_id }} {
     width: 100%;
     height: auto;
+    max-height: none;
     display: block;
+    object-fit: contain;
     opacity: {{ block.settings.image_opacity }};
   }
 
@@ -764,8 +768,8 @@
       }
     }
 
-    /* Desktop + float stack: full-bleed cover panel (no light gap / white-on-white text) */
-    function fullBleedDesktop(vh) {
+    /* Desktop + float stack: full image, no cover-crop cutting the subject */
+    function fitDesktopNatural() {
       section.style.setProperty('height', 'auto', 'important');
       section.style.setProperty('min-height', '0px', 'important');
       section.style.setProperty('margin-top', '0px', 'important');
@@ -781,45 +785,46 @@
 
       pin.style.setProperty('position', 'relative', 'important');
       pin.style.setProperty('top', 'auto', 'important');
-      pin.style.setProperty('height', vh + 'px', 'important');
-      pin.style.setProperty('min-height', vh + 'px', 'important');
+      pin.style.setProperty('height', 'auto', 'important');
+      pin.style.setProperty('min-height', '0px', 'important');
       pin.style.setProperty('background', '#0a0a0a', 'important');
-      pin.style.setProperty('overflow', 'hidden', 'important');
+      pin.style.setProperty('overflow', 'visible', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
       pin.style.removeProperty('z-index');
 
       var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
       if (wrap) {
-        wrap.style.setProperty('position', 'absolute', 'important');
-        wrap.style.setProperty('inset', '0', 'important');
+        wrap.style.setProperty('position', 'relative', 'important');
+        wrap.style.setProperty('inset', 'auto', 'important');
+        wrap.style.setProperty('top', 'auto', 'important');
+        wrap.style.setProperty('left', 'auto', 'important');
+        wrap.style.setProperty('right', 'auto', 'important');
+        wrap.style.setProperty('bottom', 'auto', 'important');
         wrap.style.setProperty('width', '100%', 'important');
-        wrap.style.setProperty('height', '100%', 'important');
-        wrap.style.setProperty('min-height', '100%', 'important');
+        wrap.style.setProperty('height', 'auto', 'important');
+        wrap.style.setProperty('min-height', '0', 'important');
         wrap.style.setProperty('display', 'block', 'important');
-        wrap.style.setProperty('align-items', 'stretch', 'important');
         wrap.style.setProperty('background-color', '#0a0a0a', 'important');
-        wrap.style.setProperty('overflow', 'hidden', 'important');
-      }
-
-      var banner = pin.querySelector('[class*="ai-story-banner-"]:not([class*="wrapper"]):not([class*="content"]):not([class*="heading"]):not([class*="text"]):not([class*="button"]):not([class*="subheading"]):not([class*="overlay"])');
-      if (banner && banner.className && banner.className.indexOf('ai-story-banner-') === 0) {
-        banner.style.setProperty('height', '100%', 'important');
-        banner.style.setProperty('width', '100%', 'important');
+        wrap.style.setProperty('overflow', 'visible', 'important');
       }
 
       var img = pin.querySelector('[class*="ai-story-banner-image-"]');
       if (img) {
-        img.style.setProperty('position', 'absolute', 'important');
-        img.style.setProperty('inset', '0', 'important');
+        img.style.setProperty('position', 'relative', 'important');
+        img.style.setProperty('inset', 'auto', 'important');
+        img.style.setProperty('top', 'auto', 'important');
+        img.style.setProperty('left', 'auto', 'important');
         img.style.setProperty('width', '100%', 'important');
-        img.style.setProperty('height', '100%', 'important');
-        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('height', 'auto', 'important');
+        img.style.setProperty('max-height', 'none', 'important');
+        img.style.setProperty('object-fit', 'contain', 'important');
         img.style.setProperty('object-position', 'center center', 'important');
         img.style.setProperty('display', 'block', 'important');
       }
 
       var content = pin.querySelector('[class*="ai-story-banner-content"]');
       if (content) {
+        content.style.setProperty('position', 'absolute', 'important');
         content.style.setProperty('top', '56px', 'important');
         content.style.setProperty('padding-top', '12px', 'important');
         content.style.setProperty('overflow', 'visible', 'important');
@@ -842,14 +847,17 @@
         return;
       }
 
-      /* Desktop inside float stack: full-bleed cover (fixes white gap + clipped heading) */
+      /* Desktop: show the full photo (no 100vh cover crop) */
       if (isFloatingCardStack()) {
-        fullBleedDesktop(vh);
+        fitDesktopNatural();
         return;
       }
 
-      var pinH = vh;
-      var trackH = vh * 2;
+      /* Sticky curtain — pin to image height so cover does not cut the subject */
+      var imgEl = pin.querySelector('[class*="ai-story-banner-image-"]');
+      var imgH = imgEl ? Math.max(imgEl.naturalHeight ? (imgEl.clientWidth / (imgEl.naturalWidth || 1)) * imgEl.naturalHeight : 0, imgEl.offsetHeight || 0) : 0;
+      var pinH = Math.max(imgH, Math.round(vh * 0.72));
+      var trackH = pinH + Math.round(vh * 0.55);
 
       if (prev && prev.classList && prev.classList.contains('shopify-section')) {
         prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
@@ -874,31 +882,34 @@
       pin.style.setProperty('position', 'sticky', 'important');
       pin.style.setProperty('top', '0px', 'important');
       pin.style.setProperty('z-index', '1', 'important');
-      pin.style.setProperty('height', pinH + 'px', 'important');
-      pin.style.setProperty('min-height', pinH + 'px', 'important');
+      pin.style.setProperty('height', 'auto', 'important');
+      pin.style.setProperty('min-height', '0', 'important');
       pin.style.setProperty('background', '#0a0a0a', 'important');
-      pin.style.setProperty('overflow', 'hidden', 'important');
+      pin.style.setProperty('overflow', 'visible', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
 
       var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
       if (wrap) {
-        wrap.style.setProperty('position', 'absolute', 'important');
-        wrap.style.setProperty('inset', '0', 'important');
-        wrap.style.setProperty('height', '100%', 'important');
+        wrap.style.setProperty('position', 'relative', 'important');
+        wrap.style.setProperty('inset', 'auto', 'important');
+        wrap.style.setProperty('height', 'auto', 'important');
         wrap.style.setProperty('display', 'block', 'important');
         wrap.style.setProperty('background-color', '#0a0a0a', 'important');
+        wrap.style.setProperty('overflow', 'visible', 'important');
       }
       var img = pin.querySelector('[class*="ai-story-banner-image-"]');
       if (img) {
-        img.style.setProperty('position', 'absolute', 'important');
-        img.style.setProperty('inset', '0', 'important');
+        img.style.setProperty('position', 'relative', 'important');
+        img.style.setProperty('inset', 'auto', 'important');
         img.style.setProperty('width', '100%', 'important');
-        img.style.setProperty('height', '100%', 'important');
-        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('height', 'auto', 'important');
+        img.style.setProperty('max-height', 'none', 'important');
+        img.style.setProperty('object-fit', 'contain', 'important');
         img.style.setProperty('display', 'block', 'important');
       }
       var content = pin.querySelector('[class*="ai-story-banner-content"]');
       if (content) {
+        content.style.setProperty('position', 'absolute', 'important');
         content.style.setProperty('top', '56px', 'important');
         content.style.setProperty('overflow', 'visible', 'important');
       }

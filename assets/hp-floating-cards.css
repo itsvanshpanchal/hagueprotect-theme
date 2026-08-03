@@ -76,45 +76,43 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
   pointer-events: auto !important;
 }
 
-/* Desktop: full-bleed story panel inside float stack (image covers, text on photo) */
+/* Desktop: full uncropped story image inside float stack */
 @media screen and (min-width: 750px) {
   .hp-float-stack [class*='ai-story-sticky-pin'] {
     position: relative !important;
     top: auto !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
+    height: auto !important;
+    min-height: 0 !important;
     z-index: auto !important;
     pointer-events: auto !important;
     background: #0a0a0a !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-']:not([class*='content']):not([class*='heading']):not([class*='text']):not([class*='button']):not([class*='subheading']):not([class*='overlay']):not([class*='image']),
   .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-wrapper'] {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
     display: block !important;
     background-color: #0a0a0a !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-image-'] {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     max-height: none !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     object-position: center center !important;
     display: block !important;
   }
 
   .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-content'] {
+    position: absolute !important;
     top: 56px !important;
     overflow: visible !important;
     z-index: 3 !important;
