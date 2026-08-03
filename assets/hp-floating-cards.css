@@ -1,7 +1,6 @@
 /*
-  Homepage section crossfade — Sorcinelli-style.
-  Sticky full-viewport pins + opacity blend only (no rotate / 3D / cover-stack).
-  Captions: opacity 0→1 + translateY(20px→0) when section is active.
+  Homepage section crossfade — gap-proof.
+  Outgoing stays opaque until covered; incoming fades in on top.
 */
 
 body.template-index.hp-crossfade-active #MainContent {
@@ -20,6 +19,7 @@ body.template-index.hp-crossfade-active #MainContent {
   isolation: isolate;
   overflow: visible;
   transform: none;
+  background: #0a0a0a;
 }
 
 .hp-xfade-stack > .shopify-section.hp-xfade-section {
@@ -33,19 +33,17 @@ body.template-index.hp-crossfade-active #MainContent {
   transform: none !important;
   isolation: isolate;
   box-shadow: none !important;
-  /* height set in JS = pin + fade runway */
 }
 
 .hp-xfade-stack > .shopify-section.hp-xfade-section > .hp-xfade-pin {
-  position: sticky;
-  top: 0;
+  position: relative;
+  top: auto;
   left: 0;
   width: 100%;
   box-sizing: border-box;
   will-change: opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  /* opacity driven by JS — crossfade only */
   opacity: 1;
   transition: none;
 }
@@ -53,7 +51,6 @@ body.template-index.hp-crossfade-active #MainContent {
 /* Flatten Tell Your Story curtain inside crossfade */
 .hp-xfade-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
   pointer-events: auto !important;
-  background: #0a0a0a !important;
 }
 
 .hp-xfade-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
@@ -77,15 +74,17 @@ body.template-index.hp-crossfade-active #MainContent {
   pointer-events: auto !important;
 }
 
-/* Caption reveal — matches reference: fade + slight rise */
+/* Captions visible by default; pending only before first reveal */
 .hp-xfade-caption {
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: opacity, transform;
+}
+
+.hp-xfade-caption.hp-xfade-pending:not(.is-in) {
   opacity: 0 !important;
   transform: translateY(20px) !important;
-  filter: none;
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  will-change: opacity, transform;
 }
 
 .hp-xfade-caption.is-in {
@@ -105,7 +104,8 @@ body.template-index.hp-crossfade-active #MainContent {
     opacity: 1 !important;
   }
 
-  .hp-xfade-caption {
+  .hp-xfade-caption,
+  .hp-xfade-caption.hp-xfade-pending {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
