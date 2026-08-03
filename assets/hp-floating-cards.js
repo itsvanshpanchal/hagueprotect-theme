@@ -156,13 +156,24 @@
       banners[k].style.setProperty('height', 'auto', 'important');
       banners[k].style.setProperty('min-height', '0', 'important');
     }
-    var imgs = pin.querySelectorAll('[class*="ai-story-sticky-pin"] img');
+    var imgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
     for (var m = 0; m < imgs.length; m++) {
       imgs[m].style.setProperty('height', 'auto', 'important');
       imgs[m].style.setProperty('max-height', 'none', 'important');
       imgs[m].style.setProperty('width', '100%', 'important');
       imgs[m].style.setProperty('object-fit', 'cover', 'important');
       imgs[m].style.setProperty('display', 'block', 'important');
+      imgs[m].style.setProperty('position', 'relative', 'important');
+    }
+    /* Keep desktop banner image hidden on mobile */
+    if (isMobile()) {
+      var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
+      for (var d = 0; d < desk.length; d++) {
+        desk[d].style.setProperty('display', 'none', 'important');
+        desk[d].style.setProperty('visibility', 'hidden', 'important');
+        desk[d].style.setProperty('height', '0', 'important');
+        desk[d].style.setProperty('position', 'absolute', 'important');
+      }
     }
   }
 

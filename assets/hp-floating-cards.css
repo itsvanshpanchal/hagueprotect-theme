@@ -93,12 +93,18 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
   min-height: 0 !important;
 }
 
-.hp-float-stack [class*='ai-story-sticky-pin'] img {
+/* Only size mobile images in the stack — never force desktop img visible */
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-mobile-image'] {
   width: 100% !important;
   height: auto !important;
   max-height: none !important;
   object-fit: cover !important;
-  display: block !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-image-'] {
+  width: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
 }
 
 /* Headings always visible */
@@ -142,7 +148,16 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
     background: transparent !important;
   }
 
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] img,
+  /* Hide desktop story image on mobile — was double-rendering with mobile image */
+  body.hp-float-mobile .hp-float-stack [class*='ai-story-banner-image-'] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    position: absolute !important;
+    pointer-events: none !important;
+  }
+
   body.hp-float-mobile .hp-float-stack [class*='ai-story-banner-mobile-image'] {
     position: relative !important;
     inset: auto !important;

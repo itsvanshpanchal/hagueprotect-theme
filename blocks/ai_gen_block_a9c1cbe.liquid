@@ -437,8 +437,15 @@
   }
 
   @media screen and (max-width: 749px) {
-    .ai-story-banner-image-{{ ai_gen_id }} {
-      display: none;
+    .ai-story-banner-image-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+      position: absolute !important;
+      pointer-events: none !important;
     }
 
     .ai-story-banner-wrapper-{{ ai_gen_id }} {
@@ -451,9 +458,11 @@
       display: block;
     }
 
-    /* In-flow image so the full banner shows (absolute + 100% was cropping to half) */
-    .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    /* In-flow mobile image only — one full banner, no desktop duplicate */
+    .ai-story-banner-mobile-image-{{ ai_gen_id }},
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
       display: block !important;
+      visibility: visible !important;
       position: relative !important;
       inset: auto !important;
       width: 100% !important;
@@ -471,22 +480,35 @@
       height: 100%;
     }
 
-    /* Keep copy readable over the full mobile image */
+    /* Keep script accent from clipping off the left edge */
     .ai-story-banner-content-{{ ai_gen_id }} {
       position: absolute;
-      padding: 18px 16px;
-      left: {{ block.settings.content_offset_left_mobile | default: 16 }}px;
+      padding: 18px 16px 18px 20px;
+      left: max(16px, {{ block.settings.content_offset_left_mobile | default: 16 }}px);
       right: 16px;
       top: {{ block.settings.content_offset_top_mobile | default: 24 }}px;
       bottom: auto;
       transform: none;
-      max-width: min(92%, {{ block.settings.content_max_width_mobile | default: 280 }}px);
+      max-width: min(90%, {{ block.settings.content_max_width_mobile | default: 280 }}px);
       width: auto;
       box-sizing: border-box;
       justify-content: flex-start;
       text-align: {{ block.settings.content_align_mobile | default: 'left' }};
       align-items: {% case block.settings.content_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
       z-index: 3;
+      overflow: visible;
+    }
+
+    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent,
+    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair {
+      overflow: visible !important;
+    }
+
+    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair--stack .hp-heading-accent,
+    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
+      display: inline-block;
+      padding-left: 0.06em;
+      margin-left: 0;
     }
 
     #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }},
