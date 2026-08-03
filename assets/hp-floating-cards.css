@@ -136,14 +136,16 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
     max-height: none;
   }
 
-  /* Story banners: image at natural aspect, no black 100% shell */
   body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] {
     height: auto !important;
     min-height: 0 !important;
     background: transparent !important;
   }
 
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] img {
+  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] img,
+  body.hp-float-mobile .hp-float-stack [class*='ai-story-banner-mobile-image'] {
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
     height: auto !important;
     max-height: none !important;
