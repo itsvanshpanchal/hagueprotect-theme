@@ -31,13 +31,22 @@
     flex-direction: column;
     justify-content: {{ section.settings.text_vertical_position | default: 'center' }};
     align-items: {% case section.settings.text_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-    gap: 4px;
-    padding: clamp(12px, 2.5vw, 28px) var(--homepage-section-gutter, 8px) clamp(24px, 6vw, 72px);
+    gap: 6px;
+    padding: clamp(28px, 4.5vw, 48px) var(--homepage-section-gutter, 8px) clamp(24px, 5vw, 56px);
     text-align: {{ section.settings.text_align | default: 'left' }};
     pointer-events: none;
+    overflow: visible;
     {%- if section.settings.show_text_shadow -%}
       text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
     {%- endif -%}
+  }
+
+  /* Keep heading+para inside the banner — never clip with negative offset */
+  .story-banner-wrapper-{{ section.id }} .section-heading-stack {
+    transform: translate(
+      var(--section-text-offset-x, 0px),
+      max(-12px, var(--section-text-offset-y, 0px))
+    ) !important;
   }
 
   {%- liquid
@@ -87,11 +96,12 @@
     font-size: var(--heading-size-xl) !important;
     font-weight: var(--font-weight-heading, 400) !important;
     font-style: var(--font-style-heading, normal) !important;
-    line-height: 1.05 !important;
+    line-height: 1.2 !important;
     letter-spacing: -0.02em !important;
     text-transform: none !important;
     color: {{ section.settings.heading_color | default: '#111111' }} !important;
     margin: 0 !important;
+    overflow: visible !important;
   }
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
@@ -192,22 +202,22 @@
     margin-left: 0 !important;
   }
 
-  /* Laptop + large screens: heading + para tight together at the top */
+  /* Laptop + large screens: heading + para together at top, fully visible */
   @media screen and (min-width: 750px) {
     .story-banner-wrapper-{{ section.id }} .story-banner__content {
       justify-content: flex-start !important;
-      gap: 2px;
-      padding-top: clamp(10px, 1.8vw, 20px) !important;
+      gap: 6px;
+      padding-top: clamp(32px, 4vw, 52px) !important;
     }
 
     .story-banner-wrapper-{{ section.id }} .section-heading-stack {
-      gap: 2px !important;
-      row-gap: 2px !important;
+      gap: 6px !important;
+      row-gap: 6px !important;
     }
 
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-      margin-top: 2px !important;
+      margin-top: 4px !important;
       margin-bottom: 0 !important;
       max-width: min(560px, 48vw) !important;
       position: relative;
