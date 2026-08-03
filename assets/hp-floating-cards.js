@@ -1,7 +1,9 @@
 /*
-  Homepage section crossfade — no blank gaps.
-  Outgoing stays fully visible until covered; incoming fades in on top (opacity only).
-  Captions rise/fade once when a section first becomes active.
+  Homepage section scroll stack — gap-proof.
+  Video issues fixed:
+  - Never fade the pin/background (that caused white/black voids).
+  - Every sticky panel fills at least 100vh with its own opaque color.
+  - Only inner content crossfades; background is always solid.
 */
 (function () {
   'use strict';
@@ -53,10 +55,21 @@
 
   function ensurePin(sec) {
     var pin = sec.querySelector(':scope > .hp-xfade-pin');
-    if (pin) return pin;
+    if (pin) {
+      if (!pin.querySelector(':scope > .hp-xfade-content')) {
+        var wrap = document.createElement('div');
+        wrap.className = 'hp-xfade-content';
+        while (pin.firstChild) wrap.appendChild(pin.firstChild);
+        pin.appendChild(wrap);
+      }
+      return pin;
+    }
     pin = document.createElement('div');
     pin.className = 'hp-xfade-pin';
-    while (sec.firstChild) pin.appendChild(sec.firstChild);
+    var content = document.createElement('div');
+    content.className = 'hp-xfade-content';
+    while (sec.firstChild) content.appendChild(sec.firstChild);
+    pin.appendChild(content);
     sec.appendChild(pin);
     return pin;
   }
@@ -80,6 +93,7 @@
       '.corp-marquee',
       '.fc-section',
       '.comm-section',
+      '.community-testimonials',
       '.split-cta',
       '[class*="split-cta"]',
       '.story-banner',
@@ -89,6 +103,7 @@
       '.trending-social-section',
       '.trending-social',
       '.hp-dna',
+      '[class*="ai-story-banner"]',
       'section'
     ];
     for (var i = 0; i < selectors.length; i++) {
@@ -99,7 +114,8 @@
     }
     var own = window.getComputedStyle(pin).backgroundColor;
     if (own && own !== 'transparent' && own !== 'rgba(0, 0, 0, 0)') return own;
-    return '#0a0a0a';
+    /* Prefer dark over white so accidental holes match the cinematic stack */
+    return '#111111';
   }
 
   var sections = Array.prototype.filter.call(main.children, isShopifySection).filter(function (sec) {
@@ -121,7 +137,13 @@
 
     var pin = ensurePin(sec);
     markCaptions(pin);
-    items.push({ sec: sec, pin: pin, index: index, seen: false });
+    items.push({
+      sec: sec,
+      pin: pin,
+      content: pin.querySelector(':scope > .hp-xfade-content'),
+      index: index,
+      seen: false
+    });
   });
 
   document.body.classList.add('hp-crossfade-active');
@@ -134,37 +156,56 @@
     items.forEach(function (item, index) {
       var pin = item.pin;
       var sec = item.sec;
+      var content = item.content;
 
       sec.style.height = 'auto';
       pin.style.height = 'auto';
       pin.style.minHeight = '0';
       pin.style.opacity = '1';
+      if (content) {
+        content.style.height = 'auto';
+        content.style.opacity = '1';
+      }
 
-      var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, 1);
-      var pinH = contentH;
+      var contentH = Math.max(
+        content ? content.scrollHeight : 0,
+        pin.scrollHeight,
+        pin.offsetHeight,
+        1
+      );
+      /*
+        Fill the viewport with this section's opaque color.
+        Stops black/white bars when content is shorter than the screen.
+      */
+      var pinH = Math.max(contentH, vh);
       var bg = detectPinBg(pin);
       item.bg = bg;
 
-      /*
-        No fade runway. Sticky natural-height sections stack;
-        next scrolls over previous — opacity only fades the INCOMING pin in.
-      */
       sec.style.setProperty('position', 'sticky', 'important');
       sec.style.setProperty('top', '0px', 'important');
       sec.style.setProperty('z-index', String(index + 1), 'important');
       sec.style.setProperty('height', pinH + 'px', 'important');
+      sec.style.setProperty('min-height', vh + 'px', 'important');
       sec.style.setProperty('margin-top', '0px', 'important');
       sec.style.setProperty('margin-bottom', '0px', 'important');
       sec.style.setProperty('transform', 'none', 'important');
       sec.style.setProperty('background-color', bg, 'important');
+      sec.style.setProperty('opacity', '1', 'important');
 
       pin.style.setProperty('position', 'relative', 'important');
       pin.style.setProperty('top', 'auto', 'important');
       pin.style.setProperty('height', pinH + 'px', 'important');
-      pin.style.setProperty('min-height', pinH + 'px', 'important');
+      pin.style.setProperty('min-height', vh + 'px', 'important');
       pin.style.setProperty('width', '100%', 'important');
       pin.style.setProperty('background-color', bg, 'important');
-      pin.style.overflow = contentH > vh + 8 ? 'auto' : 'visible';
+      pin.style.setProperty('opacity', '1', 'important');
+      pin.style.overflow = 'hidden';
+
+      if (content) {
+        content.style.setProperty('min-height', Math.min(contentH, pinH) + 'px', 'important');
+        content.style.setProperty('width', '100%', 'important');
+        content.style.setProperty('opacity', '1', 'important');
+      }
     });
 
     update();
@@ -181,7 +222,6 @@
         caps[i].classList.remove('is-in');
         caps[i].classList.add('hp-xfade-pending');
       } else {
-        /* Already revealed — stay visible so scrolling back never blanks text */
         caps[i].classList.add('is-in');
         caps[i].classList.remove('hp-xfade-pending');
       }
@@ -191,51 +231,64 @@
   function update() {
     var vh = window.innerHeight || 800;
     var n = items.length;
-    var opacities = [];
+    var contentOp = [];
     var i;
 
-    for (i = 0; i < n; i++) opacities[i] = 0;
+    for (i = 0; i < n; i++) contentOp[i] = 0;
 
     /*
-      Gap-proof blend:
-      - Find the first section that is not yet fully covered.
-      - Keep it at opacity 1 (never a transparent hole).
-      - If the next section is rising through the viewport, fade it in on top.
+      Backgrounds never fade (always opaque via CSS/inline).
+      Only content opacity blends — and outgoing content stays at 1
+      until fully covered so nothing punches a hole through to stack bg.
     */
     for (i = 0; i < n; i++) {
       var next = items[i + 1];
 
       if (!next) {
-        opacities[i] = 1;
+        contentOp[i] = 1;
         break;
       }
 
       var nextTop = next.pin.getBoundingClientRect().top;
 
       if (nextTop >= vh) {
-        opacities[i] = 1;
+        contentOp[i] = 1;
         break;
       }
 
       if (nextTop <= 0) {
-        /* Fully covered — keep searching for the active top section */
         continue;
       }
 
       var t = clamp(1 - nextTop / vh, 0, 1);
       t = t * t * (3 - 2 * t);
-      opacities[i] = 1;
-      opacities[i + 1] = t;
+      contentOp[i] = 1;
+      contentOp[i + 1] = t;
       break;
     }
 
     var activeIdx = 0;
     var best = -1;
+
     for (i = 0; i < n; i++) {
-      items[i].pin.style.opacity = String(opacities[i]);
-      items[i].pin.style.pointerEvents = opacities[i] > 0.05 ? 'auto' : 'none';
-      if (opacities[i] > best) {
-        best = opacities[i];
+      /* Pin/section ALWAYS opaque — never create a see-through gap */
+      items[i].pin.style.opacity = '1';
+      items[i].sec.style.opacity = '1';
+
+      if (items[i].content) {
+        items[i].content.style.opacity = String(contentOp[i]);
+      }
+
+      /*
+        Hide fully-covered panels from hit-testing only after next has covered them.
+        Keep visibility so background still paints if needed; use visibility when covered.
+      */
+      var next = items[i + 1];
+      var covered = next && next.pin.getBoundingClientRect().top <= 0;
+      items[i].sec.style.visibility = covered ? 'hidden' : 'visible';
+
+      if (contentOp[i] > best) {
+        best = contentOp[i];
         activeIdx = i;
       }
     }
@@ -244,8 +297,8 @@
       for (i = n - 1; i >= 0; i--) {
         var r = items[i].pin.getBoundingClientRect();
         if (r.top < vh && r.bottom > 0) {
-          items[i].pin.style.opacity = '1';
-          opacities[i] = 1;
+          if (items[i].content) items[i].content.style.opacity = '1';
+          items[i].sec.style.visibility = 'visible';
           activeIdx = i;
           best = 1;
           break;
@@ -254,7 +307,8 @@
     }
 
     for (i = 0; i < n; i++) {
-      setCaptions(items[i], i === activeIdx && opacities[i] > 0.35);
+      var op = items[i].content ? parseFloat(items[i].content.style.opacity || '0') : 1;
+      setCaptions(items[i], i === activeIdx && op > 0.35);
     }
   }
 
@@ -275,7 +329,6 @@
   }
 
   layout();
-  /* First section captions in immediately */
   if (items[0]) setCaptions(items[0], true);
 
   window.addEventListener('scroll', onScroll, { passive: true });

@@ -1,6 +1,6 @@
 /*
-  Homepage section crossfade — gap-proof.
-  Outgoing stays opaque until covered; incoming fades in on top.
+  Homepage section scroll stack — gap-proof against white/black voids.
+  Pin/background always opaque and >= 100vh; only inner content fades.
 */
 
 body.template-index.hp-crossfade-active #MainContent {
@@ -8,7 +8,7 @@ body.template-index.hp-crossfade-active #MainContent {
   isolation: isolate;
   overflow-x: clip;
   overflow-y: visible;
-  background: #0a0a0a;
+  background: #111111;
 }
 
 .hp-xfade-stack {
@@ -19,7 +19,7 @@ body.template-index.hp-crossfade-active #MainContent {
   isolation: isolate;
   overflow: visible;
   transform: none;
-  background: #0a0a0a;
+  background: #111111;
 }
 
 .hp-xfade-stack > .shopify-section.hp-xfade-section {
@@ -33,6 +33,9 @@ body.template-index.hp-crossfade-active #MainContent {
   transform: none !important;
   isolation: isolate;
   box-shadow: none !important;
+  opacity: 1 !important;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .hp-xfade-stack > .shopify-section.hp-xfade-section > .hp-xfade-pin {
@@ -40,15 +43,22 @@ body.template-index.hp-crossfade-active #MainContent {
   top: auto;
   left: 0;
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   box-sizing: border-box;
-  will-change: opacity;
+  opacity: 1 !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  opacity: 1;
-  transition: none;
+  overflow: hidden;
 }
 
-/* Flatten Tell Your Story curtain inside crossfade */
+.hp-xfade-stack .hp-xfade-content {
+  width: 100%;
+  will-change: opacity;
+  /* content opacity driven by JS; background lives on pin/section */
+}
+
+/* Flatten Tell Your Story curtain inside stack */
 .hp-xfade-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
   pointer-events: auto !important;
 }
@@ -74,7 +84,6 @@ body.template-index.hp-crossfade-active #MainContent {
   pointer-events: auto !important;
 }
 
-/* Captions visible by default; pending only before first reveal */
 .hp-xfade-caption {
   transition:
     opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
@@ -97,10 +106,14 @@ body.template-index.hp-crossfade-active #MainContent {
     position: relative !important;
     top: auto !important;
     height: auto !important;
+    min-height: 0 !important;
   }
 
   .hp-xfade-stack > .shopify-section.hp-xfade-section > .hp-xfade-pin {
-    position: relative !important;
+    min-height: 0 !important;
+  }
+
+  .hp-xfade-stack .hp-xfade-content {
     opacity: 1 !important;
   }
 
