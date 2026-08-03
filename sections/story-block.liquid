@@ -31,8 +31,8 @@
     flex-direction: column;
     justify-content: {{ section.settings.text_vertical_position | default: 'center' }};
     align-items: {% case section.settings.text_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-    gap: 12px;
-    padding: clamp(24px, 6vw, 72px) var(--homepage-section-gutter, 8px);
+    gap: 4px;
+    padding: clamp(12px, 2.5vw, 28px) var(--homepage-section-gutter, 8px) clamp(24px, 6vw, 72px);
     text-align: {{ section.settings.text_align | default: 'left' }};
     pointer-events: none;
     {%- if section.settings.show_text_shadow -%}
@@ -182,31 +182,37 @@
     font-size: var(--section-subheading-size, var(--body-font-size)) !important;
     font-weight: var(--font-weight-sans, 400) !important;
     font-style: var(--font-style-sans, normal) !important;
-    line-height: 1.55 !important;
+    line-height: 1.35 !important;
     letter-spacing: normal !important;
     text-transform: none !important;
     color: {{ section.settings.paragraph_color | default: '#444444' }} !important;
-    margin-top: var(--section-subheading-spacing-top) !important;
+    margin-top: 2px !important;
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     margin-left: 0 !important;
   }
 
-  /* Laptop + large screens: heading + para stacked at top */
+  /* Laptop + large screens: heading + para tight together at the top */
   @media screen and (min-width: 750px) {
     .story-banner-wrapper-{{ section.id }} .story-banner__content {
       justify-content: flex-start !important;
-      gap: 10px;
+      gap: 2px;
+      padding-top: clamp(10px, 1.8vw, 20px) !important;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .section-heading-stack {
+      gap: 2px !important;
+      row-gap: 2px !important;
     }
 
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-      margin-top: 8px !important;
+      margin-top: 2px !important;
       margin-bottom: 0 !important;
-      max-width: min(520px, 46vw) !important;
+      max-width: min(560px, 48vw) !important;
       position: relative;
       z-index: 3;
-      line-height: 1.4 !important;
+      line-height: 1.35 !important;
     }
   }
 
@@ -257,16 +263,16 @@
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
-    /* Para under heading, clear of the bottle, readable contrast */
+    /* Para tight under heading at top */
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-      margin-top: 4px !important;
+      margin-top: 2px !important;
       max-width: 88% !important;
       width: 88% !important;
       color: {{ section.settings.paragraph_color | default: '#222222' }} !important;
       position: relative !important;
       z-index: 4 !important;
-      line-height: 1.35 !important;
+      line-height: 1.3 !important;
     }
   }
 {%- endstyle -%}
@@ -357,7 +363,7 @@
 
     {%- if has_text -%}
       <div class="story-banner__content">
-        {%- if banner_eyebrow != blank or banner_heading != blank -%}
+        {%- if banner_eyebrow != blank or banner_heading != blank or banner_paragraph != blank -%}
           <div class="section-heading-stack">
             {%- if banner_eyebrow != blank -%}
               <span class="story-banner__eyebrow">{{ banner_eyebrow }}</span>
@@ -377,13 +383,13 @@
               -%}
               <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: story_heading_full, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: section.settings.heading_accent_color %}</div>
             {%- endif -%}
+            {%- if banner_paragraph != blank -%}
+              <p class="story-banner__paragraph">{{ banner_paragraph }}</p>
+            {%- endif -%}
           </div>
         {%- endif -%}
         {%- if banner_subheading != blank -%}
           <div class="story-banner__subheading" role="heading" aria-level="3">{% render 'section-heading-text', text: banner_subheading, line2: '', line2_color: section.settings.heading_line2_color %}</div>
-        {%- endif -%}
-        {%- if banner_paragraph != blank -%}
-          <p class="story-banner__paragraph">{{ banner_paragraph }}</p>
         {%- endif -%}
       </div>
     {%- endif -%}
