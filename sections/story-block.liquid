@@ -95,7 +95,7 @@
 
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line {
-    display: block !important;
+    display: inline !important;
     text-transform: none !important;
   }
 
@@ -111,7 +111,7 @@
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
-    display: block !important;
+    display: inline !important;
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-weight: {{ section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400' }} !important;
     font-style: normal !important;
@@ -123,14 +123,37 @@
     letter-spacing: 0.01em !important;
     line-height: 1.05 !important;
     white-space: nowrap !important;
+    margin-left: 0.18em;
+    vertical-align: baseline;
   }
 
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    white-space: normal !important;
-    gap: 0.02em;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    white-space: nowrap !important;
+    gap: 0.18em;
+    max-width: 100%;
+  }
+
+  /* Keep story banner title on one line; script accent sits inline */
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+    white-space: nowrap !important;
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+      white-space: normal !important;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
+      flex-wrap: wrap !important;
+      white-space: normal !important;
+    }
   }
 
   @media screen and (max-width: 989px) {

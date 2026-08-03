@@ -65,7 +65,7 @@
   assign c2 = line2_color | default: settings.heading_line2_color | default: '#6b6b6b'
   assign accent_c = accent_color | default: settings.heading_accent_color | default: '#c9a227'
   assign accent_stack_class = ''
-  if accent_from_line2 or accent_count > 1
+  if accent_from_line2
     assign accent_stack_class = ' hp-heading-pair--stack'
   endif
 -%}
