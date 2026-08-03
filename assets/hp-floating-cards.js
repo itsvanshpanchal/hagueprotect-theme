@@ -136,6 +136,9 @@
   }
 
   function flattenStoryCurtains(pin) {
+    /* Mobile only — desktop uses full-bleed cover via story block JS/CSS */
+    if (!isMobile()) return;
+
     var tracks = pin.querySelectorAll('[class*="ai-story-sticky-track"]');
     for (var i = 0; i < tracks.length; i++) {
       tracks[i].style.setProperty('height', 'auto', 'important');
@@ -151,7 +154,7 @@
       pins[j].style.setProperty('background', 'transparent', 'important');
       pins[j].style.setProperty('overflow', 'visible', 'important');
     }
-    var banners = pin.querySelectorAll('[class*="ai-story-banner-"], [class*="ai-story-banner-wrapper"]');
+    var banners = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < banners.length; k++) {
       banners[k].style.setProperty('height', 'auto', 'important');
       banners[k].style.setProperty('min-height', '0', 'important');
@@ -165,15 +168,12 @@
       imgs[m].style.setProperty('display', 'block', 'important');
       imgs[m].style.setProperty('position', 'relative', 'important');
     }
-    /* Keep desktop banner image hidden on mobile */
-    if (isMobile()) {
-      var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
-      for (var d = 0; d < desk.length; d++) {
-        desk[d].style.setProperty('display', 'none', 'important');
-        desk[d].style.setProperty('visibility', 'hidden', 'important');
-        desk[d].style.setProperty('height', '0', 'important');
-        desk[d].style.setProperty('position', 'absolute', 'important');
-      }
+    var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
+    for (var d = 0; d < desk.length; d++) {
+      desk[d].style.setProperty('display', 'none', 'important');
+      desk[d].style.setProperty('visibility', 'hidden', 'important');
+      desk[d].style.setProperty('height', '0', 'important');
+      desk[d].style.setProperty('position', 'absolute', 'important');
     }
   }
 

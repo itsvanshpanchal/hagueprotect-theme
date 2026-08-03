@@ -132,17 +132,25 @@
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     max-width: none;
+    display: block;
+    background-color: #0a0a0a;
+    overflow: hidden;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center center;
+    display: block;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-placeholder-{{ ai_gen_id }} {
@@ -151,11 +159,12 @@
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-    /* Match other homepage sections (~28–48px), not a large % of the viewport */
-    top: {% if block.settings.content_offset_top > 0 %}{{ block.settings.content_offset_top }}px{% else %}clamp(28px, 4.5vw, 48px){% endif %};
+    top: max({{ block.settings.content_offset_top | default: 40 }}px, 56px);
     left: max({{ block.settings.content_offset_left }}px, var(--homepage-section-gutter, 8px), 20px);
     padding: {{ block.settings.content_padding | default: 20 }}px;
     transform: none;
+    overflow: visible;
+    z-index: 3;
   }
 
   @media screen and (max-width: 749px) {
@@ -257,9 +266,8 @@
   .ai-story-banner-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
-    background-color: {{ block.settings.background_color }};
+    display: block;
+    background-color: #0a0a0a;
   }
 
   .ai-story-banner-image-{{ ai_gen_id }} {
@@ -756,13 +764,87 @@
       }
     }
 
+    /* Desktop + float stack: full-bleed cover panel (no light gap / white-on-white text) */
+    function fullBleedDesktop(vh) {
+      section.style.setProperty('height', 'auto', 'important');
+      section.style.setProperty('min-height', '0px', 'important');
+      section.style.setProperty('margin-top', '0px', 'important');
+      section.style.setProperty('overflow', 'visible', 'important');
+      section.style.setProperty('background', 'transparent', 'important');
+      section.style.setProperty('pointer-events', 'auto', 'important');
+      section.style.removeProperty('z-index');
+
+      track.style.setProperty('height', 'auto', 'important');
+      track.style.setProperty('min-height', '0px', 'important');
+      track.style.setProperty('background', 'transparent', 'important');
+      track.style.removeProperty('z-index');
+
+      pin.style.setProperty('position', 'relative', 'important');
+      pin.style.setProperty('top', 'auto', 'important');
+      pin.style.setProperty('height', vh + 'px', 'important');
+      pin.style.setProperty('min-height', vh + 'px', 'important');
+      pin.style.setProperty('background', '#0a0a0a', 'important');
+      pin.style.setProperty('overflow', 'hidden', 'important');
+      pin.style.setProperty('pointer-events', 'auto', 'important');
+      pin.style.removeProperty('z-index');
+
+      var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
+      if (wrap) {
+        wrap.style.setProperty('position', 'absolute', 'important');
+        wrap.style.setProperty('inset', '0', 'important');
+        wrap.style.setProperty('width', '100%', 'important');
+        wrap.style.setProperty('height', '100%', 'important');
+        wrap.style.setProperty('min-height', '100%', 'important');
+        wrap.style.setProperty('display', 'block', 'important');
+        wrap.style.setProperty('align-items', 'stretch', 'important');
+        wrap.style.setProperty('background-color', '#0a0a0a', 'important');
+        wrap.style.setProperty('overflow', 'hidden', 'important');
+      }
+
+      var banner = pin.querySelector('[class*="ai-story-banner-"]:not([class*="wrapper"]):not([class*="content"]):not([class*="heading"]):not([class*="text"]):not([class*="button"]):not([class*="subheading"]):not([class*="overlay"])');
+      if (banner && banner.className && banner.className.indexOf('ai-story-banner-') === 0) {
+        banner.style.setProperty('height', '100%', 'important');
+        banner.style.setProperty('width', '100%', 'important');
+      }
+
+      var img = pin.querySelector('[class*="ai-story-banner-image-"]');
+      if (img) {
+        img.style.setProperty('position', 'absolute', 'important');
+        img.style.setProperty('inset', '0', 'important');
+        img.style.setProperty('width', '100%', 'important');
+        img.style.setProperty('height', '100%', 'important');
+        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('object-position', 'center center', 'important');
+        img.style.setProperty('display', 'block', 'important');
+      }
+
+      var content = pin.querySelector('[class*="ai-story-banner-content"]');
+      if (content) {
+        content.style.setProperty('top', '56px', 'important');
+        content.style.setProperty('padding-top', '12px', 'important');
+        content.style.setProperty('overflow', 'visible', 'important');
+        content.style.setProperty('z-index', '3', 'important');
+      }
+
+      if (next && next.classList && next.classList.contains('shopify-section')) {
+        next.style.setProperty('margin-top', '0px', 'important');
+        next.style.removeProperty('background-color');
+      }
+    }
+
     function layoutCurtain() {
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
       var isMobile = window.matchMedia('(max-width: 749px)').matches;
 
-      /* Mobile + float stack: always natural height (full image, no half crop / black void) */
-      if (isMobile || isFloatingCardStack()) {
+      /* Mobile: natural image height */
+      if (isMobile) {
         flattenToNatural();
+        return;
+      }
+
+      /* Desktop inside float stack: full-bleed cover (fixes white gap + clipped heading) */
+      if (isFloatingCardStack()) {
+        fullBleedDesktop(vh);
         return;
       }
 
@@ -793,7 +875,33 @@
       pin.style.setProperty('top', '0px', 'important');
       pin.style.setProperty('z-index', '1', 'important');
       pin.style.setProperty('height', pinH + 'px', 'important');
+      pin.style.setProperty('min-height', pinH + 'px', 'important');
+      pin.style.setProperty('background', '#0a0a0a', 'important');
+      pin.style.setProperty('overflow', 'hidden', 'important');
       pin.style.setProperty('pointer-events', 'auto', 'important');
+
+      var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
+      if (wrap) {
+        wrap.style.setProperty('position', 'absolute', 'important');
+        wrap.style.setProperty('inset', '0', 'important');
+        wrap.style.setProperty('height', '100%', 'important');
+        wrap.style.setProperty('display', 'block', 'important');
+        wrap.style.setProperty('background-color', '#0a0a0a', 'important');
+      }
+      var img = pin.querySelector('[class*="ai-story-banner-image-"]');
+      if (img) {
+        img.style.setProperty('position', 'absolute', 'important');
+        img.style.setProperty('inset', '0', 'important');
+        img.style.setProperty('width', '100%', 'important');
+        img.style.setProperty('height', '100%', 'important');
+        img.style.setProperty('object-fit', 'cover', 'important');
+        img.style.setProperty('display', 'block', 'important');
+      }
+      var content = pin.querySelector('[class*="ai-story-banner-content"]');
+      if (content) {
+        content.style.setProperty('top', '56px', 'important');
+        content.style.setProperty('overflow', 'visible', 'important');
+      }
 
       var sib = next;
       var idx = 0;
