@@ -58,6 +58,12 @@
     width: 100%;
   }
 
+  /* Heading can span wider so the full phrase fits on one line */
+  .story-banner-wrapper-{{ section.id }} .story-banner__content > .section-heading-stack {
+    max-width: min(92vw, 980px);
+    width: auto;
+  }
+
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow,
   .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow {
     display: block;
@@ -115,15 +121,15 @@
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-weight: {{ section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400' }} !important;
     font-style: normal !important;
-    font-size: {{ section.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62 }}px !important;
+    font-size: clamp(36px, 4.2vw, {{ section.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62 }}px) !important;
     color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
     -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
     -webkit-text-stroke: 0;
     text-transform: none !important;
     letter-spacing: 0.01em !important;
-    line-height: 1.05 !important;
+    line-height: 1 !important;
     white-space: nowrap !important;
-    margin-left: 0.18em;
+    margin-left: 0.12em;
     vertical-align: baseline;
   }
 
@@ -134,32 +140,24 @@
     flex-wrap: nowrap !important;
     align-items: baseline !important;
     white-space: nowrap !important;
-    gap: 0.18em;
-    max-width: 100%;
+    gap: 0.12em;
+    max-width: none;
   }
 
-  /* Keep story banner title on one line; script accent sits inline */
   .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
     white-space: nowrap !important;
-    max-width: 100%;
-  }
-
-  @media screen and (max-width: 749px) {
-    .story-banner-wrapper-{{ section.id }} .story-banner__heading {
-      white-space: normal !important;
-    }
-
-    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
-    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
-      flex-wrap: wrap !important;
-      white-space: normal !important;
-    }
+    max-width: none !important;
+    width: auto !important;
   }
 
   @media screen and (max-width: 989px) {
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
-      font-size: {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px !important;
+      font-size: clamp(28px, 7vw, {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px) !important;
     }
   }
 
@@ -364,7 +362,19 @@
               <span class="story-banner__eyebrow">{{ banner_eyebrow }}</span>
             {%- endif -%}
             {%- if banner_heading != blank -%}
-              <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: banner_heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: section.settings.heading_accent_word_count, accent_color: section.settings.heading_accent_color %}</div>
+              {%- liquid
+                assign story_heading_full = banner_heading
+                assign story_line2 = section.settings.heading_line2 | strip
+                if story_line2 != blank
+                  assign heading_check = banner_heading | strip | downcase
+                  assign line2_check = story_line2 | downcase
+                  unless heading_check contains line2_check
+                    assign story_heading_full = banner_heading | append: ' ' | append: story_line2
+                  endunless
+                endif
+                assign story_accent_count = section.settings.heading_accent_word_count | default: 2
+              -%}
+              <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: story_heading_full, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: section.settings.heading_accent_color %}</div>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -428,7 +438,7 @@
       "type": "text",
       "id": "heading_line2",
       "label": "Heading — second line",
-      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+      "info": "Appended on the same line as the main heading (script style). Leave blank if the full phrase is already in Heading."
     },
     {
       "type": "color",
