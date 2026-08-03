@@ -1,28 +1,106 @@
 /*
-  Homepage scroll polish — caption reveal only.
-  Sticky/crossfade stack removed: it caused blank white/black section gaps.
+  Homepage floating section cards — gap-safe sticky cover.
+  Tall sections pin and the next covers them. Short strips stay normal flow.
 */
 
-.hp-xfade-caption {
+body.template-index.hp-float-active #MainContent {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.hp-float-stack {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  isolation: isolate;
+  overflow: visible;
+  transform: none;
+}
+
+.hp-float-stack > .shopify-section.hp-float-card {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100%;
+  z-index: var(--hp-z, 1) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 -18px 48px rgba(0, 0, 0, 0.18);
+}
+
+.hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
+  width: 100%;
+  opacity: 1 !important;
+  box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hp-float-stack > .shopify-section.hp-float-strip {
+  position: relative !important;
+  width: 100%;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Flatten Tell Your Story curtain when stack owns scroll */
+.hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
+  pointer-events: auto !important;
+}
+
+.hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
+  margin-top: 0 !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-track'] {
+  height: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  pointer-events: auto !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-pin'] {
+  position: relative !important;
+  top: auto !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+
+.hp-float-caption {
   transition:
     opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
-.hp-xfade-caption.hp-xfade-pending:not(.is-in) {
+.hp-float-caption.hp-float-caption--pending:not(.is-in) {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.hp-xfade-caption.is-in {
+.hp-float-caption.is-in {
   opacity: 1;
   transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hp-xfade-caption,
-  .hp-xfade-caption.hp-xfade-pending {
+  .hp-float-stack > .shopify-section.hp-float-card {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .hp-float-caption,
+  .hp-float-caption.hp-float-caption--pending {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
