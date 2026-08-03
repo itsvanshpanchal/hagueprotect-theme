@@ -688,7 +688,8 @@
     function isFloatingCardStack() {
       return !!(
         document.body.classList.contains('hp-floating-cards-active') ||
-        (section.closest && section.closest('[data-hp-card-stack], .hp-card-stack'))
+        document.body.classList.contains('hp-crossfade-active') ||
+        (section.closest && section.closest('[data-hp-card-stack], .hp-card-stack, [data-hp-xfade-stack], .hp-xfade-stack'))
       );
     }
 

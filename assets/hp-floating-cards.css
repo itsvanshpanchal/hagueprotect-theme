@@ -1,17 +1,18 @@
 /*
-  Smooth floating card stack (Filippo-style).
-  Sections sit as sticky siblings inside .hp-card-stack —
-  each card pins, the next slides up and covers it. No runways, no negative margins.
+  Homepage section crossfade — Sorcinelli-style.
+  Sticky full-viewport pins + opacity blend only (no rotate / 3D / cover-stack).
+  Captions: opacity 0→1 + translateY(20px→0) when section is active.
 */
 
-body.template-index #MainContent {
+body.template-index.hp-crossfade-active #MainContent {
   position: relative;
   isolation: isolate;
   overflow-x: clip;
   overflow-y: visible;
+  background: #0a0a0a;
 }
 
-.hp-card-stack {
+.hp-xfade-stack {
   position: relative;
   width: 100%;
   margin: 0;
@@ -21,7 +22,7 @@ body.template-index #MainContent {
   transform: none;
 }
 
-.hp-card-stack > .shopify-section.hp-float-card {
+.hp-xfade-stack > .shopify-section.hp-xfade-section {
   position: sticky !important;
   top: 0 !important;
   left: 0;
@@ -30,57 +31,83 @@ body.template-index #MainContent {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   transform: none !important;
-  will-change: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  box-shadow: 0 -28px 70px rgba(0, 0, 0, 0.28), 0 -1px 0 rgba(255, 255, 255, 0.04);
   isolation: isolate;
+  box-shadow: none !important;
+  /* height set in JS = pin + fade runway */
 }
 
-/* Flatten Tell Your Story curtain into one full-viewport card inside the stack */
-.hp-card-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
-  height: auto !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
+.hp-xfade-stack > .shopify-section.hp-xfade-section > .hp-xfade-pin {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  will-change: opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* opacity driven by JS — crossfade only */
+  opacity: 1;
+  transition: none;
+}
+
+/* Flatten Tell Your Story curtain inside crossfade */
+.hp-xfade-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
   pointer-events: auto !important;
   background: #0a0a0a !important;
 }
 
-.hp-card-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
+.hp-xfade-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
   margin-top: 0 !important;
 }
 
-.hp-card-stack [class*='ai-story-sticky-track'] {
-  height: 100vh !important;
-  height: 100dvh !important;
+.hp-xfade-stack [class*='ai-story-sticky-track'] {
+  height: 100% !important;
   min-height: 100vh !important;
   min-height: 100dvh !important;
   pointer-events: auto !important;
 }
 
-.hp-card-stack [class*='ai-story-sticky-pin'] {
+.hp-xfade-stack [class*='ai-story-sticky-pin'] {
   position: relative !important;
   top: auto !important;
-  height: 100vh !important;
-  height: 100dvh !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
   z-index: auto !important;
   pointer-events: auto !important;
 }
 
-.hp-card-stack .shopify-section.hp-story-curtain-prev,
-.hp-card-stack .shopify-section[class*='hp-story-curtain-prev'],
-.hp-card-stack .shopify-section[class*='hp-story-curtain-next'] {
-  z-index: var(--hp-z, 1) !important;
+/* Caption reveal — matches reference: fade + slight rise */
+.hp-xfade-caption {
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  filter: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: opacity, transform;
+}
+
+.hp-xfade-caption.is-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hp-card-stack > .shopify-section.hp-float-card {
+  .hp-xfade-stack > .shopify-section.hp-xfade-section {
     position: relative !important;
     top: auto !important;
-    box-shadow: none !important;
+    height: auto !important;
   }
 
-  .hp-card-stack [class*='ai-story-sticky-pin'] {
+  .hp-xfade-stack > .shopify-section.hp-xfade-section > .hp-xfade-pin {
     position: relative !important;
+    opacity: 1 !important;
+  }
+
+  .hp-xfade-caption {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
