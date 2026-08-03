@@ -147,7 +147,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 20px;
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
@@ -157,11 +157,13 @@
   .header__logo-partners {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 18px;
     flex: 0 0 auto;
     flex-shrink: 0;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 18px;
+    border-left: 1px solid #e5e5e5;
+    min-height: 36px;
   }
 
   .header__logo-partners .header__logo-link {
@@ -170,7 +172,7 @@
     justify-content: center;
     flex: 0 0 auto;
     width: auto;
-    height: 40px;
+    height: 36px;
     line-height: 0;
   }
 
@@ -178,23 +180,25 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: 42px;
   }
 
   .header__logo-link--primary .header__logo-img,
   .header__logo-link--brand .header__logo-img,
   .header__logo-link--sor .header__logo-img,
   .header__logo-link--sor-main .header__logo-img {
-    height: 40px;
+    height: 36px;
     width: auto;
-    max-height: 40px;
-    max-width: 180px;
+    max-height: 36px;
+    max-width: 160px;
     object-fit: contain;
     object-position: center center;
     display: block;
   }
 
   .header__logo-link--primary .header__logo-img {
+    height: 42px;
+    max-height: 42px;
     max-width: min(var(--logo-primary-max, 200px), 200px);
   }
 
@@ -206,16 +210,18 @@
       max-width: calc(100% - 480px);
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 16px !important;
+      gap: 22px !important;
     }
 
-    /* Keep partners as one group with tighter space between VR and SOR */
+    /* Partner logos: clear separation so VR + SOR never mash into one word */
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners {
       display: inline-flex !important;
-      align-items: center;
-      gap: 4px !important;
+      align-items: center !important;
+      gap: 20px !important;
       margin: 0;
-      padding: 0;
+      padding: 0 0 0 20px !important;
+      border-left: 1px solid #e5e5e5 !important;
+      min-height: 40px;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link,
@@ -227,27 +233,33 @@
       justify-content: center;
     }
 
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link {
+      height: 36px;
+    }
+
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-img {
-      height: 42px !important;
-      max-height: 42px !important;
+      height: 36px !important;
+      max-height: 36px !important;
       width: auto !important;
-      max-width: 170px !important;
+      max-width: 150px !important;
       object-fit: contain !important;
       object-position: center center !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary .header__logo-img {
+      height: 42px !important;
+      max-height: 42px !important;
       max-width: min(var(--logo-primary-max, 200px), 200px) !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--brand .header__logo-img {
-      max-width: 150px !important;
-      object-position: right center !important;
+      max-width: 148px !important;
+      object-position: center center !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--sor .header__logo-img {
-      max-width: 140px !important;
-      object-position: left center !important;
+      max-width: 132px !important;
+      object-position: center center !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__search {
@@ -922,13 +934,13 @@
       flex-wrap: nowrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 10px;
+      gap: 14px;
       width: auto;
       min-width: 0;
       margin: 0;
-      padding: 0 0 0 10px;
+      padding: 0 0 0 12px;
       border-top: none;
-      border-left: 1px solid #e8e8e8;
+      border-left: 1px solid #e5e5e5;
       flex: 1 1 auto;
     }
 
