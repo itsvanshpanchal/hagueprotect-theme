@@ -192,17 +192,18 @@
     margin-left: 0 !important;
   }
 
-  /* Laptop + large screens: heading top, para pinned to bottom */
+  /* Laptop + large screens: heading + para stacked at top */
   @media screen and (min-width: 750px) {
     .story-banner-wrapper-{{ section.id }} .story-banner__content {
       justify-content: flex-start !important;
+      gap: 10px;
     }
 
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-      margin-top: auto !important;
+      margin-top: 8px !important;
       margin-bottom: 0 !important;
-      max-width: min(420px, 36vw) !important;
+      max-width: min(520px, 46vw) !important;
       position: relative;
       z-index: 3;
       line-height: 1.4 !important;
