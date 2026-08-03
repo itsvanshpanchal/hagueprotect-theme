@@ -9,7 +9,7 @@
   - Tall cinematic sections = sticky cover stack (next slides up over previous)
   - Short strips stay in normal flow (no forced 100vh blank color)
   - Never fade section/pin backgrounds (no see-through voids)
-  - Captions fade up when a section becomes active
+  - Headings stay fully visible (no caption opacity hide)
 */
 (function () {
   'use strict';
@@ -96,14 +96,17 @@
     }
     var own = window.getComputedStyle(pin).backgroundColor;
     if (own && own !== 'transparent' && own !== 'rgba(0, 0, 0, 0)') return own;
-    return '#111111';
+    var page = window.getComputedStyle(document.body).backgroundColor;
+    if (page && page !== 'transparent' && page !== 'rgba(0, 0, 0, 0)') return page;
+    return '#ffffff';
   }
 
   function markCaptions(pin) {
     var nodes = pin.querySelectorAll(CAPTION_SEL);
     for (var i = 0; i < nodes.length; i++) {
+      /* Always visible — do not start at opacity 0 (that hid headings sitewide) */
       nodes[i].classList.add('hp-float-caption');
-      nodes[i].classList.add('hp-float-caption--pending');
+      nodes[i].classList.add('is-in');
     }
   }
 
@@ -161,7 +164,7 @@
         sec.style.setProperty('z-index', String(20 + cardIndex), 'important');
         sec.style.setProperty('height', 'auto', 'important');
         sec.style.setProperty('min-height', '0', 'important');
-        sec.style.setProperty('background-color', bg, 'important');
+        if (bg) sec.style.setProperty('background-color', bg, 'important');
         pin.style.setProperty('position', 'relative', 'important');
         pin.style.setProperty('opacity', '1', 'important');
         return;
@@ -184,15 +187,16 @@
       sec.style.setProperty('transform', 'none', 'important');
       sec.style.setProperty('opacity', '1', 'important');
       sec.style.setProperty('visibility', 'visible', 'important');
-      sec.style.setProperty('background-color', bg, 'important');
+      if (bg) sec.style.setProperty('background-color', bg, 'important');
 
       pin.style.setProperty('position', 'relative', 'important');
       pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('min-height', vh + 'px', 'important');
       pin.style.setProperty('width', '100%', 'important');
       pin.style.setProperty('opacity', '1', 'important');
-      pin.style.setProperty('background-color', bg, 'important');
-      pin.style.overflow = contentH > vh + 20 ? 'auto' : 'hidden';
+      if (bg) pin.style.setProperty('background-color', bg, 'important');
+      /* Prefer visible so headings aren't clipped; scroll only when content is taller than the pin */
+      pin.style.overflow = contentH > vh + 20 ? 'auto' : 'visible';
     });
 
     updateCaptions();
@@ -201,37 +205,22 @@
   function setCaptions(item, on) {
     var caps = item.pin.querySelectorAll('.hp-float-caption');
     for (var i = 0; i < caps.length; i++) {
-      if (on) {
-        caps[i].classList.add('is-in');
-        caps[i].classList.remove('hp-float-caption--pending');
-        item.seen = true;
-      } else if (!item.seen) {
-        caps[i].classList.add('hp-float-caption--pending');
-        caps[i].classList.remove('is-in');
-      } else {
-        caps[i].classList.add('is-in');
-        caps[i].classList.remove('hp-float-caption--pending');
-      }
+      /* Keep headings/fonts always readable; only add entrance class when active */
+      caps[i].classList.add('is-in');
+      caps[i].classList.remove('hp-float-caption--pending');
+      if (on) item.seen = true;
     }
   }
 
   function updateCaptions() {
     var vh = window.innerHeight || 800;
-    var active = null;
-    var best = -1;
 
+    /* Reveal every section that intersects the viewport (not only the "best" one) */
     items.forEach(function (item) {
       var r = item.pin.getBoundingClientRect();
-      var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-      var score = visible / Math.max(r.height, 1);
-      if (r.top < vh * 0.65 && r.bottom > vh * 0.2 && score > best) {
-        best = score;
-        active = item;
-      }
-    });
-
-    items.forEach(function (item) {
-      setCaptions(item, item === active);
+      var inView = r.bottom > 0 && r.top < vh;
+      if (inView || item.seen) setCaptions(item, true);
+      else setCaptions(item, false);
     });
   }
 
@@ -252,14 +241,30 @@
   }
 
   layout();
-  if (items[0]) setCaptions(items[0], true);
+  /* Ensure every heading is visible immediately */
+  items.forEach(function (item) {
+    setCaptions(item, true);
+  });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
   window.addEventListener('load', function () {
     layout();
+    items.forEach(function (item) {
+      setCaptions(item, true);
+    });
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });
-  setTimeout(layout, 400);
-  setTimeout(layout, 1200);
+  setTimeout(function () {
+    layout();
+    items.forEach(function (item) {
+      setCaptions(item, true);
+    });
+  }, 400);
+  setTimeout(function () {
+    layout();
+    items.forEach(function (item) {
+      setCaptions(item, true);
+    });
+  }, 1200);
 })();
