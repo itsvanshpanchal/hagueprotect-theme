@@ -42,7 +42,67 @@
     return sec.offsetHeight > 0 && sec.offsetHeight < 32;
   }
 
+  function isHeroPin(pin) {
+    return !!pin.querySelector('.hero-fullscreen');
+  }
+
+  function seedFillMedia(pin, vh) {
+    /* Absolute-positioned hero/story media report ~0 height — seed before measure */
+    var hero = pin.querySelector('.hero-fullscreen');
+    if (hero) {
+      hero.style.setProperty('height', vh + 'px', 'important');
+      hero.style.setProperty('min-height', vh + 'px', 'important');
+      hero.style.setProperty('max-height', 'none', 'important');
+      hero.style.setProperty('aspect-ratio', 'auto', 'important');
+    }
+  }
+
+  function paintHero(pin, vh) {
+    var hero = pin.querySelector('.hero-fullscreen');
+    if (!hero) return;
+    hero.style.setProperty('position', 'relative', 'important');
+    hero.style.setProperty('height', vh + 'px', 'important');
+    hero.style.setProperty('min-height', vh + 'px', 'important');
+    hero.style.setProperty('max-height', 'none', 'important');
+    hero.style.setProperty('aspect-ratio', 'auto', 'important');
+    hero.style.setProperty('width', '100%', 'important');
+    hero.style.setProperty('overflow', 'hidden', 'important');
+    hero.style.setProperty('opacity', '1', 'important');
+    hero.style.setProperty('visibility', 'visible', 'important');
+
+    var bg = hero.querySelector('.hero-fullscreen__bg');
+    if (bg) {
+      bg.style.setProperty('position', 'absolute', 'important');
+      bg.style.setProperty('inset', '0', 'important');
+      bg.style.setProperty('width', '100%', 'important');
+      bg.style.setProperty('height', '100%', 'important');
+      bg.style.setProperty('z-index', '1', 'important');
+      bg.style.setProperty('opacity', '1', 'important');
+      bg.style.setProperty('visibility', 'visible', 'important');
+    }
+
+    var imgs = hero.querySelectorAll('.hero-fullscreen__bg-img, .hero-fullscreen__bg picture, .hero-fullscreen__bg img');
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].style.setProperty('position', 'absolute', 'important');
+      imgs[i].style.setProperty('inset', '0', 'important');
+      imgs[i].style.setProperty('width', '100%', 'important');
+      imgs[i].style.setProperty('height', '100%', 'important');
+      imgs[i].style.setProperty('object-fit', 'cover', 'important');
+      imgs[i].style.setProperty('opacity', '1', 'important');
+      imgs[i].style.setProperty('visibility', 'visible', 'important');
+      imgs[i].style.setProperty('display', 'block', 'important');
+    }
+
+    var content = hero.querySelector('.hero-fullscreen__content');
+    if (content) {
+      content.style.setProperty('z-index', '3', 'important');
+      content.style.setProperty('opacity', '1', 'important');
+      content.style.setProperty('visibility', 'visible', 'important');
+    }
+  }
+
   function isKnownStrip(pin) {
+    if (isHeroPin(pin)) return false;
     return !!(pin.querySelector(STRIP_SEL) && pin.children.length <= 3);
   }
 
@@ -228,6 +288,7 @@
       var sec = item.sec;
       var pin = item.pin;
       var isLast = index === items.length - 1;
+      var hero = isHeroPin(pin);
 
       resetSectionStyles(sec, pin);
       flattenStoryCurtains(pin);
@@ -238,23 +299,28 @@
         sec.style.setProperty('pointer-events', 'auto', 'important');
       }
 
-      var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, 1);
+      /* Seed absolute-fill sections so measure isn't ~0 */
+      if (mobile || hero) seedFillMedia(pin, vh);
+
+      var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, vh * (hero ? 1 : 0), 1);
+      if (hero) contentH = Math.max(contentH, vh);
       var bg = detectBg(pin);
+      if (hero && !bg) bg = '#111111';
       item.bg = bg;
 
-      /* Thin marquees / app blocks stay normal flow */
-      if (isKnownStrip(pin) || contentH < vh * 0.28) {
+      /* Thin marquees / app blocks stay normal flow — never the hero */
+      if (!hero && (isKnownStrip(pin) || contentH < vh * 0.28)) {
         asStrip(item, 10 + index);
         return;
       }
 
-      if (mobile) {
+      if (mobile || hero) {
         /*
-          Mobile: every substantial section is a full-screen cover card.
-          Last section stays a card too so it fills the screen before footer.
+          Mobile (and hero on all breakpoints in the stack): full-screen cover card.
         */
         cardIndex += 1;
-        asCard(item, cardIndex, contentH, bg || '#ffffff', true);
+        asCard(item, cardIndex, contentH, bg || '#ffffff', mobile || hero);
+        if (hero) paintHero(pin, vh);
         return;
       }
 

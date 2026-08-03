@@ -109,29 +109,59 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
   .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
     min-height: 100vh !important;
     min-height: 100dvh !important;
-    height: 100% !important;
+    /* Prefer explicit JS height; avoid 100% collapse when parent is auto */
     overflow: hidden !important;
   }
 
-  /* Hero must fill the panel — kills half-image + white gap */
+  /* Hero must fill the panel and stay visible (absolute media needs explicit height) */
   body.hp-float-mobile .hp-float-stack .hero-fullscreen,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art {
-    height: 100% !important;
-    min-height: 100% !important;
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art,
+  body.hp-float-active .hp-float-stack .hero-fullscreen,
+  body.hp-float-active .hp-float-stack .hero-fullscreen--mobile-art {
+    position: relative !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     max-height: none !important;
     width: 100% !important;
     aspect-ratio: auto !important;
     background: #111 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg,
+  body.hp-float-active .hp-float-stack .hero-fullscreen__bg,
   body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg picture,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg-img {
+  body.hp-float-active .hp-float-stack .hero-fullscreen__bg picture,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg-img,
+  body.hp-float-active .hp-float-stack .hero-fullscreen__bg-img,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg img,
+  body.hp-float-active .hp-float-stack .hero-fullscreen__bg img {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     min-height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__content,
+  body.hp-float-active .hp-float-stack .hero-fullscreen__content {
+    z-index: 3 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* First card (hero) stays above until the next section covers it */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:first-child {
+    z-index: 1 !important;
   }
 
   /* Story / cinematic images fill the panel */
