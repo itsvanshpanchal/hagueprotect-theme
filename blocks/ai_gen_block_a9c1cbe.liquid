@@ -697,28 +697,31 @@
     function layoutCurtain() {
       var vh = window.innerHeight || document.documentElement.clientHeight || 800;
 
-      /* Homepage floating card stack owns sticky — flatten this banner to one card */
+      /* Homepage floating card stack owns sticky — flatten to natural height (no black 100vh shell) */
       if (isFloatingCardStack()) {
         section.style.setProperty('height', 'auto', 'important');
-        section.style.setProperty('min-height', vh + 'px', 'important');
+        section.style.setProperty('min-height', '0px', 'important');
         section.style.setProperty('margin-top', '0px', 'important');
         section.style.setProperty('overflow', 'visible', 'important');
-        section.style.setProperty('background', '#0a0a0a', 'important');
+        section.style.setProperty('background', 'transparent', 'important');
         section.style.setProperty('pointer-events', 'auto', 'important');
         section.style.removeProperty('z-index');
 
-        track.style.setProperty('height', vh + 'px', 'important');
+        track.style.setProperty('height', 'auto', 'important');
+        track.style.setProperty('min-height', '0px', 'important');
         track.style.setProperty('background', 'transparent', 'important');
         track.style.removeProperty('z-index');
 
         pin.style.setProperty('position', 'relative', 'important');
         pin.style.setProperty('top', 'auto', 'important');
-        pin.style.setProperty('height', vh + 'px', 'important');
+        pin.style.setProperty('height', 'auto', 'important');
+        pin.style.setProperty('min-height', '0px', 'important');
         pin.style.setProperty('pointer-events', 'auto', 'important');
         pin.style.removeProperty('z-index');
 
         if (next && next.classList && next.classList.contains('shopify-section')) {
           next.style.setProperty('margin-top', '0px', 'important');
+          next.style.removeProperty('background-color');
         }
         return;
       }

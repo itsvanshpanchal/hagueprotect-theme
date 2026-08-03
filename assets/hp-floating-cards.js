@@ -1,15 +1,10 @@
 /*
-  Homepage floating section animation (restored, gap-safe).
+  Homepage floating section animation (gap-safe).
 
-  Why the last version removed motion:
-  - Full sticky + opacity on EVERY section forced short strips (marquee, etc.)
-    into empty white/black full-screen panels.
-
-  This version:
-  - Tall cinematic sections = sticky cover stack (next slides up over previous)
-  - Short strips stay in normal flow (no forced 100vh blank color)
-  - Never fade section/pin backgrounds (no see-through voids)
-  - Headings stay fully visible (no caption opacity hide)
+  Tall, nearly full-viewport sections stick and get covered by the next one.
+  Short strips stay in normal flow.
+  Never pad sections to 100vh with solid color (that created black/white voids).
+  Headings stay fully visible.
 */
 (function () {
   'use strict';
@@ -21,35 +16,8 @@
   var main = document.getElementById('MainContent');
   if (!main) return;
 
-  var SHORT_VH = 0.52; /* below this = interstitial, not a sticky card */
-  var CAPTION_SEL = [
-    'h1',
-    'h2',
-    '.hero-fullscreen__heading',
-    '.hero-fullscreen__subheading',
-    '.hero-fullscreen__eyebrow',
-    '.mat-headline',
-    '.mat-subhead',
-    '.bs-coverflow__heading',
-    '.bs-coverflow__eyebrow',
-    '.fb__title',
-    '.fb__subtitle',
-    '.fc-heading',
-    '.fc-subtitle',
-    '.hp-fam-sec__heading',
-    '.story-banner__heading',
-    '.story-banner__paragraph',
-    '.story-banner__subheading',
-    '.comm-intro h2',
-    '.comm-desc',
-    '.trending-social__heading',
-    '.hp-dna__heading',
-    '.split-cta__heading',
-    '.split-cta__text',
-    '[class*="ai-story-banner-heading-"]',
-    '[class*="ai-story-banner-subheading-"]',
-    '[class*="ai-story-banner-paragraph-"]'
-  ].join(',');
+  /* Only cinematic full-bleed panels become sticky cards */
+  var CARD_VH = 0.88;
 
   function isShopifySection(el) {
     return el && el.classList && el.classList.contains('shopify-section');
@@ -85,7 +53,9 @@
       '.trending-social-section',
       '.trending-social',
       '.hp-dna',
+      '[class*="hp-dna-"]',
       '[class*="ai-story-banner"]',
+      '[class*="ai-story-sticky-pin"]',
       'section'
     ];
     for (var i = 0; i < selectors.length; i++) {
@@ -96,17 +66,96 @@
     }
     var own = window.getComputedStyle(pin).backgroundColor;
     if (own && own !== 'transparent' && own !== 'rgba(0, 0, 0, 0)') return own;
-    var page = window.getComputedStyle(document.body).backgroundColor;
-    if (page && page !== 'transparent' && page !== 'rgba(0, 0, 0, 0)') return page;
-    return '#ffffff';
+    return '';
   }
 
-  function markCaptions(pin) {
-    var nodes = pin.querySelectorAll(CAPTION_SEL);
-    for (var i = 0; i < nodes.length; i++) {
-      /* Always visible — do not start at opacity 0 (that hid headings sitewide) */
-      nodes[i].classList.add('hp-float-caption');
-      nodes[i].classList.add('is-in');
+  function resetSectionStyles(sec, pin) {
+    sec.classList.remove('hp-float-card', 'hp-float-strip');
+    [
+      'height',
+      'min-height',
+      'max-height',
+      'position',
+      'top',
+      'z-index',
+      'visibility',
+      'opacity',
+      'margin-top',
+      'margin-bottom',
+      'background-color',
+      'background',
+      'transform',
+      'overflow'
+    ].forEach(function (prop) {
+      sec.style.removeProperty(prop);
+    });
+    pin.style.cssText = '';
+  }
+
+  function asStrip(item, z) {
+    var sec = item.sec;
+    var pin = item.pin;
+    item.isCard = false;
+    sec.classList.add('hp-float-strip');
+    sec.style.setProperty('position', 'relative', 'important');
+    sec.style.setProperty('top', 'auto', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', 'auto', 'important');
+    sec.style.setProperty('min-height', '0', 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('overflow', 'visible', 'important');
+  }
+
+  function asCard(item, z, contentH, bg) {
+    var sec = item.sec;
+    var pin = item.pin;
+    /* Height follows content only — never pad to 100vh (black empty panels) */
+    var pinH = Math.max(contentH, 1);
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', pinH + 'px', 'important');
+    sec.style.setProperty('min-height', '0', 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    if (bg) sec.style.setProperty('background-color', bg, 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('overflow', 'visible', 'important');
+    if (bg) pin.style.setProperty('background-color', bg, 'important');
+  }
+
+  function flattenStoryCurtains(pin) {
+    var tracks = pin.querySelectorAll('[class*="ai-story-sticky-track"]');
+    for (var i = 0; i < tracks.length; i++) {
+      tracks[i].style.setProperty('height', 'auto', 'important');
+      tracks[i].style.setProperty('min-height', '0', 'important');
+    }
+    var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
+    for (var j = 0; j < pins.length; j++) {
+      pins[j].style.setProperty('position', 'relative', 'important');
+      pins[j].style.setProperty('top', 'auto', 'important');
+      pins[j].style.setProperty('height', 'auto', 'important');
+      pins[j].style.setProperty('min-height', '0', 'important');
+      pins[j].style.setProperty('z-index', 'auto', 'important');
     }
   }
 
@@ -121,13 +170,11 @@
   main.insertBefore(stack, sections[0]);
 
   var items = [];
-  var cardIndex = 0;
 
   sections.forEach(function (sec) {
     stack.appendChild(sec);
     var pin = ensurePin(sec);
-    markCaptions(pin);
-    items.push({ sec: sec, pin: pin, seen: false, isCard: false });
+    items.push({ sec: sec, pin: pin, isCard: false });
   });
 
   document.body.classList.add('hp-float-active');
@@ -136,101 +183,39 @@
 
   function layout() {
     var vh = window.innerHeight || document.documentElement.clientHeight || 800;
-    cardIndex = 0;
+    var cardIndex = 0;
 
-    items.forEach(function (item) {
+    items.forEach(function (item, index) {
       var sec = item.sec;
       var pin = item.pin;
+      var isLast = index === items.length - 1;
 
-      sec.classList.remove('hp-float-card', 'hp-float-strip');
-      sec.style.removeProperty('height');
-      sec.style.removeProperty('min-height');
-      sec.style.removeProperty('position');
-      sec.style.removeProperty('top');
-      sec.style.removeProperty('z-index');
-      sec.style.removeProperty('visibility');
-      sec.style.removeProperty('opacity');
-      pin.style.cssText = '';
+      resetSectionStyles(sec, pin);
+      flattenStoryCurtains(pin);
 
+      /* Kill leftover 200vh story-curtain runway from block CSS */
+      if (pin.querySelector('[class*="ai-story-sticky-track"]')) {
+        sec.style.setProperty('height', 'auto', 'important');
+        sec.style.setProperty('min-height', '0', 'important');
+        sec.style.setProperty('pointer-events', 'auto', 'important');
+      }
+
+      /* Measure natural content height after clearing forced sizes */
       var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, 1);
       var bg = detectBg(pin);
       item.bg = bg;
 
-      /* Short interstitial — normal flow, never a blank full-screen color card */
-      if (contentH < vh * SHORT_VH) {
-        item.isCard = false;
-        sec.classList.add('hp-float-strip');
-        sec.style.setProperty('position', 'relative', 'important');
-        sec.style.setProperty('z-index', String(20 + cardIndex), 'important');
-        sec.style.setProperty('height', 'auto', 'important');
-        sec.style.setProperty('min-height', '0', 'important');
-        if (bg) sec.style.setProperty('background-color', bg, 'important');
-        pin.style.setProperty('position', 'relative', 'important');
-        pin.style.setProperty('opacity', '1', 'important');
+      /*
+        Last section must never stick — sticky black panels above the footer
+        were leaving a full-screen void with only the footer peeking in.
+      */
+      if (isLast || contentH < vh * CARD_VH) {
+        asStrip(item, 10 + index);
         return;
       }
 
-      /* Tall cinematic section — sticky cover card */
-      item.isCard = true;
       cardIndex += 1;
-      var pinH = Math.max(contentH, vh);
-
-      sec.classList.add('hp-float-card');
-      sec.style.setProperty('--hp-z', String(cardIndex));
-      sec.style.setProperty('position', 'sticky', 'important');
-      sec.style.setProperty('top', '0px', 'important');
-      sec.style.setProperty('z-index', String(cardIndex), 'important');
-      sec.style.setProperty('height', pinH + 'px', 'important');
-      sec.style.setProperty('min-height', vh + 'px', 'important');
-      sec.style.setProperty('margin-top', '0px', 'important');
-      sec.style.setProperty('margin-bottom', '0px', 'important');
-      sec.style.setProperty('transform', 'none', 'important');
-      sec.style.setProperty('opacity', '1', 'important');
-      sec.style.setProperty('visibility', 'visible', 'important');
-      if (bg) sec.style.setProperty('background-color', bg, 'important');
-
-      pin.style.setProperty('position', 'relative', 'important');
-      pin.style.setProperty('height', pinH + 'px', 'important');
-      pin.style.setProperty('min-height', vh + 'px', 'important');
-      pin.style.setProperty('width', '100%', 'important');
-      pin.style.setProperty('opacity', '1', 'important');
-      if (bg) pin.style.setProperty('background-color', bg, 'important');
-      /* Prefer visible so headings aren't clipped; scroll only when content is taller than the pin */
-      pin.style.overflow = contentH > vh + 20 ? 'auto' : 'visible';
-    });
-
-    updateCaptions();
-  }
-
-  function setCaptions(item, on) {
-    var caps = item.pin.querySelectorAll('.hp-float-caption');
-    for (var i = 0; i < caps.length; i++) {
-      /* Keep headings/fonts always readable; only add entrance class when active */
-      caps[i].classList.add('is-in');
-      caps[i].classList.remove('hp-float-caption--pending');
-      if (on) item.seen = true;
-    }
-  }
-
-  function updateCaptions() {
-    var vh = window.innerHeight || 800;
-
-    /* Reveal every section that intersects the viewport (not only the "best" one) */
-    items.forEach(function (item) {
-      var r = item.pin.getBoundingClientRect();
-      var inView = r.bottom > 0 && r.top < vh;
-      if (inView || item.seen) setCaptions(item, true);
-      else setCaptions(item, false);
-    });
-  }
-
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function () {
-      ticking = false;
-      updateCaptions();
+      asCard(item, cardIndex, contentH, bg);
     });
   }
 
@@ -241,30 +226,11 @@
   }
 
   layout();
-  /* Ensure every heading is visible immediately */
-  items.forEach(function (item) {
-    setCaptions(item, true);
-  });
-
-  window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
   window.addEventListener('load', function () {
     layout();
-    items.forEach(function (item) {
-      setCaptions(item, true);
-    });
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });
-  setTimeout(function () {
-    layout();
-    items.forEach(function (item) {
-      setCaptions(item, true);
-    });
-  }, 400);
-  setTimeout(function () {
-    layout();
-    items.forEach(function (item) {
-      setCaptions(item, true);
-    });
-  }, 1200);
+  setTimeout(layout, 400);
+  setTimeout(layout, 1200);
 })();

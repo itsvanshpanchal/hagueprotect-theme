@@ -1,6 +1,7 @@
 /*
   Homepage floating section cards — gap-safe sticky cover.
   Tall sections pin and the next covers them. Short strips stay normal flow.
+  Never force 100vh black/white empty panels.
 */
 
 body.template-index.hp-float-active #MainContent {
@@ -34,46 +35,70 @@ body.template-index.hp-float-active #MainContent {
 
 .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
   width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
   opacity: 1 !important;
   box-sizing: border-box;
+  overflow: visible !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .hp-float-stack > .shopify-section.hp-float-strip {
   position: relative !important;
+  top: auto !important;
   width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
   transform: none !important;
   opacity: 1 !important;
 }
 
-/* Flatten Tell Your Story curtain when stack owns scroll */
+/* Fully flatten Tell Your Story curtain — no 200vh runway / black 100vh shell */
+body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']),
 .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
   pointer-events: auto !important;
+  background: transparent !important;
 }
 
+body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section,
 .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
   margin-top: 0 !important;
 }
 
 .hp-float-stack [class*='ai-story-sticky-track'] {
-  height: 100% !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
+  height: auto !important;
+  min-height: 0 !important;
   pointer-events: auto !important;
 }
 
 .hp-float-stack [class*='ai-story-sticky-pin'] {
   position: relative !important;
   top: auto !important;
-  height: 100% !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
+  height: auto !important;
+  min-height: 0 !important;
   z-index: auto !important;
   pointer-events: auto !important;
 }
 
-/* Never hide section titles — previous pending/opacity:0 hid fonts sitewide */
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-'],
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-wrapper'] {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-pin'] img {
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* Headings always visible — never hide with caption opacity */
 .hp-float-caption,
 .hp-float-caption.hp-float-caption--pending,
 .hp-float-caption:not(.is-in),
@@ -81,7 +106,6 @@ body.template-index.hp-float-active #MainContent {
   opacity: 1 !important;
   transform: none !important;
   visibility: visible !important;
-  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,12 +115,5 @@ body.template-index.hp-float-active #MainContent {
     height: auto !important;
     min-height: 0 !important;
     box-shadow: none !important;
-  }
-
-  .hp-float-caption,
-  .hp-float-caption.hp-float-caption--pending,
-  .hp-float-caption:not(.is-in) {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
