@@ -1,7 +1,7 @@
 /*
   Homepage floating section cards — gap-safe sticky cover.
   Desktop: tall sections pin; short strips stay normal flow.
-  Mobile: full-viewport cover panels (no half-screen stacking / white gaps).
+  Mobile: natural section heights only (no forced 100vh empty voids).
 */
 
 body.template-index.hp-float-active #MainContent {
@@ -35,8 +35,11 @@ body.template-index.hp-float-active #MainContent {
 
 .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
   width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
   opacity: 1 !important;
   box-sizing: border-box;
+  overflow: visible !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -52,7 +55,7 @@ body.template-index.hp-float-active #MainContent {
   box-shadow: none !important;
 }
 
-/* Fully flatten Tell Your Story curtain — no 200vh runway */
+/* Fully flatten Tell Your Story curtain — no 200vh runway / black shells */
 body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']),
 .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
   height: auto !important;
@@ -76,8 +79,26 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
 .hp-float-stack [class*='ai-story-sticky-pin'] {
   position: relative !important;
   top: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
   z-index: auto !important;
   pointer-events: auto !important;
+  background: transparent !important;
+  overflow: visible !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-'],
+.hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-wrapper'] {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.hp-float-stack [class*='ai-story-sticky-pin'] img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 /* Headings always visible */
@@ -90,118 +111,51 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
   visibility: visible !important;
 }
 
-/* ========== MOBILE: full-screen cover panels ========== */
+/* ========== MOBILE: natural flow, no empty full-screen panels ========== */
 @media screen and (max-width: 749px) {
-  body.hp-float-mobile.hp-float-active #MainContent {
-    /* Reduce compositor cost while scrolling sticky stack */
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .hp-float-stack > .shopify-section.hp-float-card,
-  .hp-float-stack > .shopify-section.hp-float-card--mobile {
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card--mobile,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
     box-shadow: none !important;
-    /* Cheaper than multi-layer shadows while sticky */
     filter: none !important;
   }
 
-  .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    /* Prefer explicit JS height; avoid 100% collapse when parent is auto */
-    overflow: hidden !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section > .hp-float-pin {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
   }
 
-  /* Hero must fill the panel and stay visible (absolute media needs explicit height) */
+  /* Let theme control hero size on mobile — do not force 100dvh */
   body.hp-float-mobile .hp-float-stack .hero-fullscreen,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art,
-  body.hp-float-active .hp-float-stack .hero-fullscreen,
-  body.hp-float-active .hp-float-stack .hero-fullscreen--mobile-art {
-    position: relative !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
-    width: 100% !important;
-    aspect-ratio: auto !important;
-    background: #111 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    overflow: hidden !important;
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art {
+    max-height: none;
   }
 
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg,
-  body.hp-float-active .hp-float-stack .hero-fullscreen__bg,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg picture,
-  body.hp-float-active .hp-float-stack .hero-fullscreen__bg picture,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg-img,
-  body.hp-float-active .hp-float-stack .hero-fullscreen__bg-img,
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg img,
-  body.hp-float-active .hp-float-stack .hero-fullscreen__bg img {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hero-fullscreen__content,
-  body.hp-float-active .hp-float-stack .hero-fullscreen__content {
-    z-index: 3 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* First card (hero) stays above until the next section covers it */
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:first-child {
-    z-index: 1 !important;
-  }
-
-  /* Story / cinematic images fill the panel */
+  /* Story banners: image at natural aspect, no black 100% shell */
   body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] {
-    height: 100% !important;
-    min-height: 100% !important;
-    overflow: hidden !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-'],
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-wrapper'] {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: transparent !important;
   }
 
   body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] img {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     max-height: none !important;
     object-fit: cover !important;
-    object-position: center center !important;
     display: block !important;
   }
 
-  /* Common section roots fill mobile cards so bg never shows white voids */
-  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .split-cta,
-  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='split-cta'],
-  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'],
-  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
-    min-height: 100% !important;
-    box-sizing: border-box;
+  body.hp-float-mobile .hp-float-stack [class*='hp-dna-'],
+  body.hp-float-mobile .hp-float-stack .split-cta,
+  body.hp-float-mobile .hp-float-stack [class*='split-cta'] {
+    min-height: 0 !important;
+    height: auto !important;
   }
 }
 
