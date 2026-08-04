@@ -160,8 +160,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   height: 100% !important;
 }
 
-.hp-float-stack .hp-float-story [class*='ai-story-banner-image-'],
-.hp-float-stack .hp-float-story img[class*='ai-story-banner-image-'] {
+/* Banner image fills the full viewport panel */
+.hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
   position: absolute !important;
   inset: 0 !important;
   top: 0 !important;
@@ -177,32 +177,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   object-fit: cover !important;
   object-position: center center !important;
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  z-index: 1 !important;
-}
-
-/* Middle story-block banner ("What Are You Cleaning Today") */
-.hp-float-stack .hp-float-story .story-banner-wrapper,
-.hp-float-stack .hp-float-story .story-banner {
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100% !important;
-  overflow: hidden !important;
-}
-
-.hp-float-stack .hp-float-story .story-banner__image,
-.hp-float-stack .hp-float-story .story-banner img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 /* Desktop story: full-bleed cover, mobile image hidden */

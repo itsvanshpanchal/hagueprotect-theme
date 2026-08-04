@@ -46,27 +46,26 @@
   function isStoryPin(pin) {
     return !!(
       pin.querySelector('[class*="ai-story-sticky-track"]') ||
-      pin.querySelector('[class*="ai-story-banner-wrapper"]') ||
-      pin.querySelector('[class*="ai-story-banner-image-"]') ||
-      pin.querySelector('[class*="ai-story-banner-mobile-image"]')
+      pin.querySelector('[class*="ai-story-banner-"]')
     );
   }
 
-  function hasStoryImage(pin) {
-    var desk = pin.querySelector('[class*="ai-story-banner-image-"]');
-    var mob = pin.querySelector('[class*="ai-story-banner-mobile-image"]');
-    return !!(desk || mob);
-  }
-
-  function isStoryBlockPin(pin) {
-    return !!(pin.querySelector('.story-banner-wrapper, .story-banner'));
+  /* Empty image-only story blocks become solid black 100vh panels — skip full-screen */
+  function isEmptyStory(pin) {
+    if (!isStoryPin(pin)) return false;
+    var heading = pin.querySelector('[class*="ai-story-banner-heading"]');
+    var sub = pin.querySelector('[class*="ai-story-banner-subheading"]');
+    var text = pin.querySelector('[class*="ai-story-banner-text"]');
+    var hasCopy =
+      (heading && heading.textContent.replace(/\s+/g, '').length > 0) ||
+      (sub && sub.textContent.replace(/\s+/g, '').length > 0) ||
+      (text && text.textContent.replace(/\s+/g, '').length > 0);
+    return !hasCopy;
   }
 
   function isVisualFullscreen(pin) {
     if (pin.querySelector('.hero-fullscreen')) return true;
-    /* Any story banner with an image — including image-only near end */
-    if (isStoryPin(pin) && hasStoryImage(pin)) return true;
-    if (isStoryBlockPin(pin)) return true;
+    if (isStoryPin(pin) && !isEmptyStory(pin)) return true;
     if (pin.querySelector('.mat-section')) return true;
     if (pin.querySelector('.bs-coverflow')) return true;
     if (pin.querySelector('[class*="horizontal-product"], .hps-, [data-hps]')) return true;
@@ -181,6 +180,23 @@
     clearStoryOverrides(pin);
   }
 
+  /* Hide empty image-only story banners (were solid black full-screen panels) */
+  function hideEmptyStory(item) {
+    var sec = item.sec;
+    var pin = item.pin;
+    item.isCard = false;
+    sec.classList.add('hp-float-hidden');
+    sec.style.setProperty('display', 'none', 'important');
+    sec.style.setProperty('height', '0', 'important');
+    sec.style.setProperty('min-height', '0', 'important');
+    sec.style.setProperty('margin', '0', 'important');
+    sec.style.setProperty('padding', '0', 'important');
+    sec.style.setProperty('overflow', 'hidden', 'important');
+    sec.style.setProperty('visibility', 'hidden', 'important');
+    pin.style.setProperty('display', 'none', 'important');
+    pin.style.setProperty('height', '0', 'important');
+  }
+
   function prepareStoryFullscreen(pin, mobile) {
     var vh = viewportH();
     var fill = vh + 'px';
@@ -191,8 +207,6 @@
     for (var i = 0; i < chain.length; i++) {
       chain[i].style.setProperty('position', 'relative', 'important');
       chain[i].style.setProperty('display', 'block', 'important');
-      chain[i].style.setProperty('visibility', 'visible', 'important');
-      chain[i].style.setProperty('opacity', '1', 'important');
       chain[i].style.setProperty('width', '100%', 'important');
       chain[i].style.setProperty('max-width', 'none', 'important');
       chain[i].style.setProperty('height', fill, 'important');
@@ -207,7 +221,6 @@
     var intermediates = pin.children;
     for (var n = 0; n < intermediates.length; n++) {
       intermediates[n].style.setProperty('display', 'block', 'important');
-      intermediates[n].style.setProperty('visibility', 'visible', 'important');
       intermediates[n].style.setProperty('width', '100%', 'important');
       intermediates[n].style.setProperty('height', fill, 'important');
       intermediates[n].style.setProperty('min-height', fill, 'important');
@@ -221,24 +234,21 @@
     for (var j = 0; j < pins.length; j++) {
       pins[j].style.setProperty('top', 'auto', 'important');
       pins[j].style.setProperty('z-index', 'auto', 'important');
-      pins[j].style.setProperty('background', '#111111', 'important');
+      /* Match image — avoid visible black plate under/around banner */
+      pins[j].style.setProperty('background', 'transparent', 'important');
     }
 
     var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < wraps.length; k++) {
-      wraps[k].style.setProperty('background-color', '#111111', 'important');
+      wraps[k].style.setProperty('background-color', 'transparent', 'important');
     }
 
-    var desk = pin.querySelectorAll('img[class*="ai-story-banner-image-"]');
-    var mobileImgs = pin.querySelectorAll('img[class*="ai-story-banner-mobile-image"]');
+    var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
+    var mobileImgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
 
     function fillImage(el) {
-      el.removeAttribute('loading');
-      el.setAttribute('loading', 'eager');
-      el.setAttribute('fetchpriority', 'high');
       el.style.setProperty('display', 'block', 'important');
       el.style.setProperty('visibility', 'visible', 'important');
-      el.style.setProperty('opacity', '1', 'important');
       el.style.setProperty('position', 'absolute', 'important');
       el.style.setProperty('inset', '0', 'important');
       el.style.setProperty('top', '0', 'important');
@@ -253,43 +263,25 @@
       el.style.setProperty('max-height', 'none', 'important');
       el.style.setProperty('object-fit', 'cover', 'important');
       el.style.setProperty('object-position', 'center center', 'important');
-      el.style.setProperty('z-index', '1', 'important');
-      /* Force decode/paint if already in cache */
-      if (el.decode) {
-        try {
-          el.decode().catch(function () {});
-        } catch (e) {}
-      }
     }
 
     function hideImage(el) {
       el.style.setProperty('display', 'none', 'important');
       el.style.setProperty('visibility', 'hidden', 'important');
-      el.style.setProperty('opacity', '0', 'important');
       el.style.setProperty('height', '0', 'important');
       el.style.setProperty('width', '0', 'important');
       el.style.setProperty('min-height', '0', 'important');
       el.style.setProperty('min-width', '0', 'important');
       el.style.setProperty('position', 'absolute', 'important');
       el.style.setProperty('pointer-events', 'none', 'important');
-      el.style.setProperty('z-index', '0', 'important');
     }
 
     if (mobile) {
       for (var d = 0; d < desk.length; d++) hideImage(desk[d]);
-      if (mobileImgs.length) {
-        for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
-      } else {
-        /* Fallback: show desktop image if no mobile crop */
-        for (var d2 = 0; d2 < desk.length; d2++) fillImage(desk[d2]);
-      }
+      for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
     } else {
       for (var mi = 0; mi < mobileImgs.length; mi++) hideImage(mobileImgs[mi]);
-      if (desk.length) {
-        for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
-      } else {
-        for (var m2 = 0; m2 < mobileImgs.length; m2++) fillImage(mobileImgs[m2]);
-      }
+      for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
     }
 
     var content = pin.querySelectorAll('[class*="ai-story-banner-content"]');
@@ -297,46 +289,9 @@
       content[c].style.setProperty('position', 'absolute', 'important');
       content[c].style.setProperty('z-index', '3', 'important');
       content[c].style.setProperty('overflow', 'visible', 'important');
-      content[c].style.setProperty('visibility', 'visible', 'important');
-      content[c].style.setProperty('opacity', '1', 'important');
       if (!mobile) {
         content[c].style.setProperty('top', '56px', 'important');
       }
-    }
-  }
-
-  function prepareStoryBlockFullscreen(pin) {
-    var vh = viewportH();
-    var fill = vh + 'px';
-    var wrap = pin.querySelector('.story-banner-wrapper, [class*="story-banner-wrapper"]');
-    var banner = pin.querySelector('.story-banner');
-    if (wrap) {
-      wrap.style.setProperty('height', fill, 'important');
-      wrap.style.setProperty('min-height', fill, 'important');
-      wrap.style.setProperty('max-height', fill, 'important');
-      wrap.style.setProperty('overflow', 'hidden', 'important');
-      wrap.style.setProperty('display', 'block', 'important');
-      wrap.style.setProperty('visibility', 'visible', 'important');
-    }
-    if (banner) {
-      banner.style.setProperty('height', fill, 'important');
-      banner.style.setProperty('min-height', fill, 'important');
-      banner.style.setProperty('overflow', 'hidden', 'important');
-      banner.style.setProperty('position', 'relative', 'important');
-    }
-    var imgs = pin.querySelectorAll('.story-banner__image, .story-banner img');
-    for (var i = 0; i < imgs.length; i++) {
-      imgs[i].removeAttribute('loading');
-      imgs[i].setAttribute('loading', 'eager');
-      imgs[i].style.setProperty('display', 'block', 'important');
-      imgs[i].style.setProperty('visibility', 'visible', 'important');
-      imgs[i].style.setProperty('opacity', '1', 'important');
-      imgs[i].style.setProperty('position', 'absolute', 'important');
-      imgs[i].style.setProperty('inset', '0', 'important');
-      imgs[i].style.setProperty('width', '100%', 'important');
-      imgs[i].style.setProperty('height', '100%', 'important');
-      imgs[i].style.setProperty('object-fit', 'cover', 'important');
-      imgs[i].style.setProperty('object-position', 'center center', 'important');
     }
   }
 
@@ -466,15 +421,18 @@
       var sec = item.sec;
       var pin = item.pin;
       var story = isStoryPin(pin);
-      var storyBlock = isStoryBlockPin(pin);
+      var emptyStory = story && isEmptyStory(pin);
       var isLast = index === items.length - 1;
 
       resetSectionStyles(sec, pin);
 
-      if (story && hasStoryImage(pin)) {
+      if (emptyStory) {
+        hideEmptyStory(item);
+        return;
+      }
+
+      if (story) {
         prepareStoryFullscreen(pin, mobile);
-      } else if (storyBlock) {
-        prepareStoryBlockFullscreen(pin);
       } else if (pin.querySelector('.mat-section')) {
         prepareMaterialsFullscreen(pin);
       }
@@ -482,7 +440,11 @@
       var visual = isVisualFullscreen(pin);
       var contentH = visual ? vh : Math.max(pin.scrollHeight, pin.offsetHeight, 1);
       var bg = detectBg(pin);
-      if (!bg) bg = story || storyBlock ? '#111111' : '#ffffff';
+      if (!bg) bg = story ? '#111111' : '#ffffff';
+      /* Never paint pure black voids under non-image content */
+      if (!story && (bg === 'rgb(0, 0, 0)' || bg === '#000000' || bg === '#000')) {
+        bg = detectBg(pin) || '#111111';
+      }
       item.bg = bg;
 
       if (isKnownStrip(pin) || (!visual && contentH < vh * 0.55) || (!visual && isLast)) {
@@ -496,7 +458,7 @@
       }
 
       cardIndex += 1;
-      asCard(item, cardIndex, contentH, bg, mobile, story || storyBlock);
+      asCard(item, cardIndex, contentH, bg, mobile, story);
     });
 
     lastLayoutW = window.innerWidth || 0;
