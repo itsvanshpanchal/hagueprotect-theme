@@ -64,44 +64,58 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 .hp-float-stack > .shopify-section.hp-float-story {
   pointer-events: auto !important;
   background: #0a0a0a !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
 }
 
 .hp-float-stack > .shopify-section.hp-float-story + .shopify-section {
   margin-top: 0 !important;
 }
 
-.hp-float-stack .hp-float-story [class*='ai-story-sticky-track'] {
+/* Stretch every wrapper in the chain so % / absolute fill works */
+.hp-float-stack .hp-float-story > .hp-float-pin,
+.hp-float-stack .hp-float-story > .hp-float-pin > *,
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-track'],
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'],
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] > [class*='ai-story-banner-'],
+.hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
   height: 100% !important;
   min-height: 100% !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+}
+
+.hp-float-stack .hp-float-story > .hp-float-pin {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+  background: #0a0a0a !important;
+}
+
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-track'] {
   pointer-events: auto !important;
   background: transparent !important;
 }
 
 .hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] {
-  position: relative !important;
   top: auto !important;
-  height: 100% !important;
-  min-height: 100% !important;
   z-index: auto !important;
   pointer-events: auto !important;
   background: #0a0a0a !important;
   overflow: hidden !important;
 }
 
-.hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] > [class*='ai-story-banner-'] {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100% !important;
-}
-
 .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
-  position: relative !important;
   inset: auto !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100% !important;
-  display: block !important;
   background-color: #0a0a0a !important;
   overflow: hidden !important;
 }
@@ -117,21 +131,36 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   overflow: visible !important;
 }
 
+.hp-float-stack .hp-float-story [class*='ai-story-banner-overlay'] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Banner image fills the full viewport panel */
+.hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+}
+
 /* Desktop story: full-bleed cover, mobile image hidden */
 @media screen and (min-width: 750px) {
   .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
     top: 56px !important;
-  }
-
-  .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-height: none !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    display: block !important;
   }
 
   .hp-float-stack .hp-float-story [class*='ai-story-banner-mobile-image'] {
@@ -139,6 +168,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     visibility: hidden !important;
     height: 0 !important;
     width: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
     position: absolute !important;
     pointer-events: none !important;
   }
@@ -231,17 +262,15 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   /* Story: mobile image only, cover-fills the panel */
-  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] {
-    height: 100% !important;
-    min-height: 100% !important;
+  body.hp-float-mobile .hp-float-stack .hp-float-story > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     overflow: hidden !important;
     background: #0a0a0a !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
@@ -249,6 +278,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     visibility: hidden !important;
     height: 0 !important;
     width: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
     position: absolute !important;
     pointer-events: none !important;
   }
@@ -256,8 +287,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-mobile-image'] {
     position: absolute !important;
     inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     width: 100% !important;
     height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
     max-height: none !important;
     object-fit: cover !important;
     object-position: center center !important;

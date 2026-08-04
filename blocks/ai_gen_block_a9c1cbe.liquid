@@ -48,7 +48,7 @@
 {% style %}
   .ai-story-banner-{{ ai_gen_id }} {
     position: relative;
-    width: {{ block.settings.desktop_width_percent }}%;
+    width: 100%;
     max-width: 100%;
     overflow: hidden;
     display: block;
@@ -78,6 +78,17 @@
     isolation: auto !important;
     transform: none !important;
     pointer-events: auto;
+  }
+
+  /* Full-screen float card owns height — do not collapse story section */
+  .shopify-section.hp-float-story:has(.ai-story-sticky-track-{{ ai_gen_id }}),
+  .shopify-section.hp-float-card:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+    background: #0a0a0a !important;
   }
 
   /* Section ABOVE — stays above the pin while it scrolls away */
@@ -136,21 +147,22 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: auto;
+    height: 100%;
+    min-height: 100%;
     max-width: none;
     display: block;
     background-color: #0a0a0a;
-    overflow: visible;
+    overflow: hidden;
   }
 
-  /* Desktop: only the desktop image — never force mobile image visible (double banner) */
+  /* Desktop: only the desktop image — fill the sticky/full-screen pin */
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
-    position: relative;
-    inset: auto;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     max-height: none;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center;
     display: block;
   }
@@ -277,14 +289,16 @@
     width: 100%;
     display: block;
     background-color: #0a0a0a;
+    overflow: hidden;
   }
 
   .ai-story-banner-image-{{ ai_gen_id }} {
     width: 100%;
-    height: auto;
+    height: 100%;
     max-height: none;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center center;
     opacity: {{ block.settings.image_opacity }};
   }
 

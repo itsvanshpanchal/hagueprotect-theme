@@ -145,86 +145,85 @@
 
   /* Flatten story sticky runway; size for full-screen cover inside float card */
   function prepareStoryFullscreen(pin, mobile) {
-    var tracks = pin.querySelectorAll('[class*="ai-story-sticky-track"]');
-    for (var i = 0; i < tracks.length; i++) {
-      tracks[i].style.setProperty('height', '100%', 'important');
-      tracks[i].style.setProperty('min-height', '100%', 'important');
-      tracks[i].style.setProperty('background', 'transparent', 'important');
+    var vh = viewportH();
+    var fill = vh + 'px';
+
+    var chain = pin.querySelectorAll(
+      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], [class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"]'
+    );
+    for (var i = 0; i < chain.length; i++) {
+      chain[i].style.setProperty('position', 'relative', 'important');
+      chain[i].style.setProperty('display', 'block', 'important');
+      chain[i].style.setProperty('width', '100%', 'important');
+      chain[i].style.setProperty('max-width', 'none', 'important');
+      chain[i].style.setProperty('height', fill, 'important');
+      chain[i].style.setProperty('min-height', fill, 'important');
+      chain[i].style.setProperty('max-height', 'none', 'important');
+      chain[i].style.setProperty('overflow', 'hidden', 'important');
+      chain[i].style.setProperty('box-sizing', 'border-box', 'important');
+    }
+
+    var intermediates = pin.children;
+    for (var n = 0; n < intermediates.length; n++) {
+      intermediates[n].style.setProperty('display', 'block', 'important');
+      intermediates[n].style.setProperty('width', '100%', 'important');
+      intermediates[n].style.setProperty('height', fill, 'important');
+      intermediates[n].style.setProperty('min-height', fill, 'important');
+      intermediates[n].style.setProperty('max-width', 'none', 'important');
+      intermediates[n].style.setProperty('overflow', 'hidden', 'important');
     }
 
     var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
     for (var j = 0; j < pins.length; j++) {
-      pins[j].style.setProperty('position', 'relative', 'important');
       pins[j].style.setProperty('top', 'auto', 'important');
-      pins[j].style.setProperty('height', '100%', 'important');
-      pins[j].style.setProperty('min-height', '100%', 'important');
       pins[j].style.setProperty('z-index', 'auto', 'important');
       pins[j].style.setProperty('background', '#0a0a0a', 'important');
-      pins[j].style.setProperty('overflow', 'hidden', 'important');
     }
 
-    var banners = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
-    for (var k = 0; k < banners.length; k++) {
-      banners[k].style.setProperty('position', 'relative', 'important');
-      banners[k].style.setProperty('width', '100%', 'important');
-      banners[k].style.setProperty('height', '100%', 'important');
-      banners[k].style.setProperty('min-height', '100%', 'important');
-      banners[k].style.setProperty('overflow', 'hidden', 'important');
-      banners[k].style.setProperty('display', 'block', 'important');
-      banners[k].style.setProperty('background-color', '#0a0a0a', 'important');
-    }
-
-    var roots = pin.querySelectorAll('[class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"]');
-    for (var r = 0; r < roots.length; r++) {
-      roots[r].style.setProperty('display', 'block', 'important');
-      roots[r].style.setProperty('width', '100%', 'important');
-      roots[r].style.setProperty('height', '100%', 'important');
-      roots[r].style.setProperty('min-height', '100%', 'important');
+    var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
+    for (var k = 0; k < wraps.length; k++) {
+      wraps[k].style.setProperty('background-color', '#0a0a0a', 'important');
     }
 
     var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
     var mobileImgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
 
+    function fillImage(el) {
+      el.style.setProperty('display', 'block', 'important');
+      el.style.setProperty('visibility', 'visible', 'important');
+      el.style.setProperty('position', 'absolute', 'important');
+      el.style.setProperty('inset', '0', 'important');
+      el.style.setProperty('top', '0', 'important');
+      el.style.setProperty('left', '0', 'important');
+      el.style.setProperty('right', '0', 'important');
+      el.style.setProperty('bottom', '0', 'important');
+      el.style.setProperty('width', '100%', 'important');
+      el.style.setProperty('height', '100%', 'important');
+      el.style.setProperty('min-width', '100%', 'important');
+      el.style.setProperty('min-height', '100%', 'important');
+      el.style.setProperty('max-width', 'none', 'important');
+      el.style.setProperty('max-height', 'none', 'important');
+      el.style.setProperty('object-fit', 'cover', 'important');
+      el.style.setProperty('object-position', 'center center', 'important');
+    }
+
+    function hideImage(el) {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('height', '0', 'important');
+      el.style.setProperty('width', '0', 'important');
+      el.style.setProperty('min-height', '0', 'important');
+      el.style.setProperty('min-width', '0', 'important');
+      el.style.setProperty('position', 'absolute', 'important');
+      el.style.setProperty('pointer-events', 'none', 'important');
+    }
+
     if (mobile) {
-      for (var d = 0; d < desk.length; d++) {
-        desk[d].style.setProperty('display', 'none', 'important');
-        desk[d].style.setProperty('visibility', 'hidden', 'important');
-        desk[d].style.setProperty('height', '0', 'important');
-        desk[d].style.setProperty('width', '0', 'important');
-        desk[d].style.setProperty('position', 'absolute', 'important');
-        desk[d].style.setProperty('pointer-events', 'none', 'important');
-      }
-      for (var m = 0; m < mobileImgs.length; m++) {
-        mobileImgs[m].style.setProperty('display', 'block', 'important');
-        mobileImgs[m].style.setProperty('visibility', 'visible', 'important');
-        mobileImgs[m].style.setProperty('position', 'absolute', 'important');
-        mobileImgs[m].style.setProperty('inset', '0', 'important');
-        mobileImgs[m].style.setProperty('width', '100%', 'important');
-        mobileImgs[m].style.setProperty('height', '100%', 'important');
-        mobileImgs[m].style.setProperty('max-height', 'none', 'important');
-        mobileImgs[m].style.setProperty('object-fit', 'cover', 'important');
-        mobileImgs[m].style.setProperty('object-position', 'center center', 'important');
-      }
+      for (var d = 0; d < desk.length; d++) hideImage(desk[d]);
+      for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
     } else {
-      for (var mi = 0; mi < mobileImgs.length; mi++) {
-        mobileImgs[mi].style.setProperty('display', 'none', 'important');
-        mobileImgs[mi].style.setProperty('visibility', 'hidden', 'important');
-        mobileImgs[mi].style.setProperty('height', '0', 'important');
-        mobileImgs[mi].style.setProperty('width', '0', 'important');
-        mobileImgs[mi].style.setProperty('position', 'absolute', 'important');
-        mobileImgs[mi].style.setProperty('pointer-events', 'none', 'important');
-      }
-      for (var di = 0; di < desk.length; di++) {
-        desk[di].style.setProperty('display', 'block', 'important');
-        desk[di].style.setProperty('visibility', 'visible', 'important');
-        desk[di].style.setProperty('position', 'absolute', 'important');
-        desk[di].style.setProperty('inset', '0', 'important');
-        desk[di].style.setProperty('width', '100%', 'important');
-        desk[di].style.setProperty('height', '100%', 'important');
-        desk[di].style.setProperty('max-height', 'none', 'important');
-        desk[di].style.setProperty('object-fit', 'cover', 'important');
-        desk[di].style.setProperty('object-position', 'center center', 'important');
-      }
+      for (var mi = 0; mi < mobileImgs.length; mi++) hideImage(mobileImgs[mi]);
+      for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
     }
 
     var content = pin.querySelectorAll('[class*="ai-story-banner-content"]');
