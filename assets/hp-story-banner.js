@@ -26,6 +26,11 @@
       wrap.style.backgroundImage = 'url("' + String(url).replace(/"/g, '') + '")';
     }
 
+    if (mobile) {
+      wrap.style.minHeight = '100dvh';
+      wrap.style.height = '100dvh';
+    }
+
     var desk = wrap.querySelector('[data-hp-story-desk]');
     var mob = wrap.querySelector('[data-hp-story-mob]');
     if (desk) desk.style.display = mobile ? 'none' : 'block';

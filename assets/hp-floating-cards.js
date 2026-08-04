@@ -27,9 +27,15 @@
   function viewportH() {
     var vv = window.visualViewport;
     if (vv && vv.height > 0 && isMobile()) {
+      /* Prefer the larger value so sticky cards never leave a gap under the fold */
       return Math.round(Math.max(window.innerHeight || 0, vv.height));
     }
     return window.innerHeight || document.documentElement.clientHeight || 800;
+  }
+
+  function viewportFill(mobile) {
+    if (mobile) return '100dvh';
+    return viewportH() + 'px';
   }
 
   function isShopifySection(el) {
@@ -145,8 +151,7 @@
 
   /* Flatten story sticky runway; size for full-screen cover inside float card */
   function prepareStoryFullscreen(pin, mobile) {
-    var vh = viewportH();
-    var fill = vh + 'px';
+    var fill = viewportFill(mobile);
 
     var chain = pin.querySelectorAll(
       '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], [class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"]'
@@ -160,7 +165,7 @@
       chain[i].style.setProperty('max-width', 'none', 'important');
       chain[i].style.setProperty('height', fill, 'important');
       chain[i].style.setProperty('min-height', fill, 'important');
-      chain[i].style.setProperty('max-height', fill, 'important');
+      chain[i].style.setProperty('max-height', 'none', 'important');
       chain[i].style.setProperty('overflow', 'hidden', 'important');
       chain[i].style.setProperty('box-sizing', 'border-box', 'important');
       chain[i].style.setProperty('margin', '0', 'important');
@@ -174,7 +179,7 @@
       intermediates[n].style.setProperty('width', '100%', 'important');
       intermediates[n].style.setProperty('height', fill, 'important');
       intermediates[n].style.setProperty('min-height', fill, 'important');
-      intermediates[n].style.setProperty('max-height', fill, 'important');
+      intermediates[n].style.setProperty('max-height', 'none', 'important');
       intermediates[n].style.setProperty('max-width', 'none', 'important');
       intermediates[n].style.setProperty('overflow', 'hidden', 'important');
       intermediates[n].style.setProperty('margin', '0', 'important');
@@ -192,29 +197,37 @@
       Absolute imgs often collapse to 0px inside sticky overflow:hidden parents
       and leave a solid black panel — background-size:cover always paints.
     */
-    var desk = pin.querySelectorAll('img[class*="ai-story-banner-image-"]');
-    var mobileImgs = pin.querySelectorAll('img[class*="ai-story-banner-mobile-image"]');
+    var desk = pin.querySelectorAll('img[data-hp-story-desk], img[class*="ai-story-banner-image-"]');
+    var mobileImgs = pin.querySelectorAll('img[data-hp-story-mob], img[class*="ai-story-banner-mobile-image"]');
+    var wraps = pin.querySelectorAll('[data-hp-story-wrap], [class*="ai-story-banner-wrapper"]');
     var activeImg = null;
+    var src = '';
 
     if (mobile) {
       activeImg = mobileImgs[0] || desk[0] || null;
       for (var d = 0; d < desk.length; d++) {
         desk[d].style.setProperty('display', 'none', 'important');
       }
+      if (wraps[0]) {
+        src = wraps[0].getAttribute('data-mobile-bg') || wraps[0].getAttribute('data-desktop-bg') || '';
+      }
     } else {
       activeImg = desk[0] || mobileImgs[0] || null;
       for (var mi = 0; mi < mobileImgs.length; mi++) {
         mobileImgs[mi].style.setProperty('display', 'none', 'important');
       }
+      if (wraps[0]) {
+        src = wraps[0].getAttribute('data-desktop-bg') || wraps[0].getAttribute('data-mobile-bg') || '';
+      }
     }
 
-    var src = '';
     if (activeImg) {
-      src = activeImg.currentSrc || activeImg.src || activeImg.getAttribute('src') || '';
+      if (!src) {
+        src = activeImg.currentSrc || activeImg.src || activeImg.getAttribute('src') || '';
+      }
       activeImg.removeAttribute('loading');
       activeImg.setAttribute('loading', 'eager');
       activeImg.setAttribute('fetchpriority', 'high');
-      /* Keep img as a visible in-flow cover fallback (not absolute → no 0-height collapse) */
       activeImg.style.setProperty('display', 'block', 'important');
       activeImg.style.setProperty('visibility', 'visible', 'important');
       activeImg.style.setProperty('opacity', '1', 'important');
@@ -223,18 +236,16 @@
       activeImg.style.setProperty('width', '100%', 'important');
       activeImg.style.setProperty('height', '100%', 'important');
       activeImg.style.setProperty('min-width', '100%', 'important');
-      activeImg.style.setProperty('min-height', fill, 'important');
+      activeImg.style.setProperty('min-height', '100%', 'important');
       activeImg.style.setProperty('object-fit', 'cover', 'important');
       activeImg.style.setProperty('object-position', 'center center', 'important');
       activeImg.style.setProperty('z-index', '1', 'important');
-      /* Force network load if browser deferred it */
       if (!activeImg.complete && src) {
         var warm = new Image();
         warm.src = src;
       }
     }
 
-    var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < wraps.length; k++) {
       wraps[k].style.setProperty('background-color', '#111111', 'important');
       wraps[k].style.setProperty('background-size', 'cover', 'important');
@@ -262,7 +273,15 @@
       content[c].style.setProperty('overflow', 'visible', 'important');
       content[c].style.setProperty('visibility', 'visible', 'important');
       content[c].style.setProperty('opacity', '1', 'important');
-      if (!mobile) {
+      if (mobile) {
+        content[c].style.setProperty('top', (content[c].getAttribute('data-top-m') || '24') + 'px', 'important');
+        content[c].style.setProperty('left', (content[c].getAttribute('data-left-m') || '16') + 'px', 'important');
+        content[c].style.setProperty(
+          'max-width',
+          'min(90%, ' + (content[c].getAttribute('data-max-m') || '280') + 'px)',
+          'important'
+        );
+      } else {
         content[c].style.setProperty('top', '56px', 'important');
       }
     }
@@ -294,8 +313,10 @@
     var sec = item.sec;
     var pin = item.pin;
     var vh = viewportH();
-    /* Full-screen panel on every breakpoint — section fills the monitor/phone */
-    var pinH = Math.max(contentH, vh);
+    /* Story + near-viewport sections use CSS dvh on mobile; tall grids keep natural height */
+    var useDvh = mobile && (isStory || contentH <= vh * 1.12);
+    var pinH = useDvh ? null : Math.max(contentH, vh);
+    var fill = viewportFill(true);
 
     item.isCard = true;
     sec.classList.add('hp-float-card');
@@ -305,8 +326,13 @@
     sec.style.setProperty('position', 'sticky', 'important');
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
-    sec.style.setProperty('height', pinH + 'px', 'important');
-    sec.style.setProperty('min-height', vh + 'px', 'important');
+    if (useDvh) {
+      sec.style.setProperty('height', fill, 'important');
+      sec.style.setProperty('min-height', '100svh', 'important');
+    } else {
+      sec.style.setProperty('height', pinH + 'px', 'important');
+      sec.style.setProperty('min-height', vh + 'px', 'important');
+    }
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
@@ -321,12 +347,17 @@
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
-    pin.style.setProperty('height', pinH + 'px', 'important');
-    pin.style.setProperty('min-height', vh + 'px', 'important');
+    if (useDvh) {
+      pin.style.setProperty('height', fill, 'important');
+      pin.style.setProperty('min-height', '100svh', 'important');
+    } else {
+      pin.style.setProperty('height', pinH + 'px', 'important');
+      pin.style.setProperty('min-height', vh + 'px', 'important');
+    }
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty(
       'overflow',
-      isStory || contentH <= vh + 8 ? 'hidden' : 'auto',
+      isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
       'important'
     );
     if (mobile) pin.style.setProperty('-webkit-overflow-scrolling', 'touch');

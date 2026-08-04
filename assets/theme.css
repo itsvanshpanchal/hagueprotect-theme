@@ -1560,9 +1560,10 @@ body.template-index {
     padding-right: var(--homepage-mobile-gutter) !important;
   }
 
+  /* Hero stays edge-to-edge on mobile — gutters apply to text overlay only */
   body.template-index .hero-fullscreen {
-    padding-left: var(--homepage-mobile-gutter) !important;
-    padding-right: var(--homepage-mobile-gutter) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   body.template-index .hero-fullscreen__content {

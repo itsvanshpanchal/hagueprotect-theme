@@ -83,11 +83,45 @@
 }
 
 @media screen and (max-width: 749px) {
+  .ai-story-sticky-track,
+  .ai-story-sticky-pin,
+  .ai-story-banner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ai-story-banner-wrapper {
+    width: 100% !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
   .ai-story-banner-image {
     display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   .ai-story-banner-mobile-image {
     display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+
+  .ai-story-banner-content {
+    max-width: min(90%, 320px) !important;
   }
 }
