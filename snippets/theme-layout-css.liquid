@@ -285,12 +285,21 @@
   .template-index .trending-social__eyebrow,
   .template-index .mat-eyebrow,
   .template-index .fc-subtitle,
-  .template-index .comm-eyebrow,
   .template-index .story-banner__eyebrow,
   .template-index .feature-grid__eyebrow,
   .template-index .section-heading-stack__label,
   .template-index [class*="ai-story-banner-subheading-"] {
     color: {{ homepage_label_color }} !important;
+  }
+
+  /* Community eyebrow follows section text color (white on black), not blue label */
+  .template-index .comm-eyebrow,
+  .template-index .comm-headline,
+  .template-index .comm-headline-number,
+  .template-index .comm-headline-logo,
+  .template-index .comm-desc {
+    color: var(--comm-text-color, #ffffff) !important;
+    -webkit-text-fill-color: var(--comm-text-color, #ffffff) !important;
   }
 
   /* Hero tagline stays white on the photo (same size/weight as BEST SELLERS) */

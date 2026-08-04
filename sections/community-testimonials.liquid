@@ -14,6 +14,7 @@
     font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
     --comm-text-color: {{ comm_text }};
     --section-subheading-color: {{ comm_text }};
+    color: {{ comm_text }} !important;
   }
 
   .comm-section *,
@@ -77,34 +78,38 @@
 
   .comm-eyebrow {
     display: block !important;
+    color: {{ comm_text }} !important;
   }
 
-  .comm-headline {
+  .comm-headline,
+  .comm-headline .hp-typewriter-text,
+  .comm-headline > span[aria-hidden="true"] {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
     flex-wrap: wrap !important;
     gap: 30px !important;
     margin: 0 0 35px 0 !important;
+    color: {{ comm_text }} !important;
+    -webkit-text-fill-color: {{ comm_text }} !important;
   }
 
-  .comm-headline-number {
-    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-    font-size: var(--section-heading-size) !important;
-    font-weight: var(--font-weight-h2, 900) !important;
-    font-style: var(--font-style-h2, normal) !important;
-    color: var(--comm-text-color, #111111) !important;
-    line-height: 1 !important;
-    letter-spacing: -3px !important;
-  }
-
+  .comm-headline-number,
   .comm-headline-logo {
     font-family: var(--font-family-h2, var(--font-family-heading)) !important;
     font-size: var(--section-heading-size) !important;
     font-weight: var(--font-weight-h2, 900) !important;
     font-style: var(--font-style-h2, normal) !important;
-    color: var(--comm-text-color, #111111) !important;
+    color: {{ comm_text }} !important;
+    -webkit-text-fill-color: {{ comm_text }} !important;
     line-height: 1 !important;
+  }
+
+  .comm-headline-number {
+    letter-spacing: -3px !important;
+  }
+
+  .comm-headline-logo {
     letter-spacing: -2px !important;
   }
 
@@ -125,11 +130,12 @@
     font-weight: var(--font-weight-sans, 400) !important;
     font-style: var(--font-style-sans, normal) !important;
     line-height: 1.15 !important;
-    color: var(--comm-text-color, #111111) !important;
+    color: {{ comm_text }} !important;
+    -webkit-text-fill-color: {{ comm_text }} !important;
   }
 
   .comm-badge-desc {
-    color: var(--comm-text-color, #444444) !important;
+    color: {{ comm_text }} !important;
   }
 
   .comm-reviews-badge {
@@ -447,24 +453,24 @@
   }
 {%- endstyle -%}
 
-<section class="comm-section" aria-label="Community Reviews Slider">
+<section class="comm-section" aria-label="Community Reviews Slider" style="color: {{ comm_text }}; --comm-text-color: {{ comm_text }}; background-color: {{ comm_bg }};">
   <div class="comm-container">
     <div class="comm-top">
       <div class="comm-top-left">
         <div class="section-heading-stack">
           {%- if section.settings.eyebrow != blank -%}
-            <span class="comm-eyebrow">{{ section.settings.eyebrow }}</span>
+            <span class="comm-eyebrow" style="color: {{ comm_text }};">{{ section.settings.eyebrow }}</span>
           {%- endif -%}
-          <h2 class="comm-headline">
-            <span class="comm-headline-number">{{ section.settings.headline_count }}</span>
-            <svg class="comm-heart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <h2 class="comm-headline" data-no-typewriter style="color: {{ comm_text }}; -webkit-text-fill-color: {{ comm_text }};">
+            <span class="comm-headline-number" style="color: {{ comm_text }}; -webkit-text-fill-color: {{ comm_text }};">{{ section.settings.headline_count }}</span>
+            <svg class="comm-heart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-            <span class="comm-headline-logo">{{ section.settings.headline_brand }}</span>
+            <span class="comm-headline-logo" style="color: {{ comm_text }}; -webkit-text-fill-color: {{ comm_text }};">{{ section.settings.headline_brand }}</span>
           </h2>
         </div>
         {%- if section.settings.description != blank -%}
-          <p class="comm-desc">{{ section.settings.description }}</p>
+          <p class="comm-desc" style="color: {{ comm_text }};">{{ section.settings.description }}</p>
         {%- endif -%}
       </div>
       <div class="comm-top-right">
