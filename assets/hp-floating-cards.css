@@ -493,3 +493,22 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-shadow: none !important;
   }
 }
+
+/* Mobile snap: one swipe lands on the next full section quickly */
+@media screen and (max-width: 749px) {
+  html.hp-snap-ready,
+  body.hp-snap-mobile {
+    scroll-behavior: auto;
+  }
+
+  body.hp-float-mobile.hp-snapping {
+    overflow-x: hidden;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
