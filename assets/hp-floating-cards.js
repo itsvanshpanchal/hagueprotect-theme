@@ -18,7 +18,7 @@
 
   var MQ_MOBILE = window.matchMedia('(max-width: 749px)');
   var STRIP_SEL =
-    '.corp-marquee, .corporate-gifting-marquee, [class*="marquee"], .announcement, .apps';
+    '.corp-marquee, .corporate-gifting-marquee, [class*="marquee"], .announcement, .apps, [class*="split-cta"], .section-split-cta';
 
   function isMobile() {
     return MQ_MOBILE.matches;
@@ -47,7 +47,14 @@
   }
 
   function isKnownStrip(pin) {
-    return !!(pin.querySelector(STRIP_SEL) && pin.children.length <= 3);
+    return !!(pin.querySelector(STRIP_SEL));
+  }
+
+  function isSplitCtaPin(pin) {
+    return !!(
+      pin.querySelector('[class*="split-cta"]') ||
+      (pin.parentElement && pin.parentElement.classList.contains('section-split-cta'))
+    );
   }
 
   function isStoryPin(pin) {
@@ -684,8 +691,8 @@
         return;
       }
 
-      /* Thin marquees / app blocks stay normal flow — never strip the hero/story */
-      if (!story && !hero && (isKnownStrip(pin) || contentH < vh * 0.22)) {
+      /* Thin marquees / split CTA stay normal height — never full-screen cards */
+      if (!story && !hero && (isKnownStrip(pin) || isSplitCtaPin(pin) || contentH < vh * 0.35)) {
         asStrip(item, 10 + index);
         return;
       }

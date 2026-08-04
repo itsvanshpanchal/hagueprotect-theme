@@ -465,12 +465,21 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hp-float-stack > .shopify-section.hp-float-card {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    box-shadow: none !important;
-  }
+/* Split CTA + marquees: never stretch to full viewport inside the float stack */
+.hp-float-stack > .shopify-section.hp-float-strip .split-cta,
+.hp-float-stack > .shopify-section.hp-float-strip [class*='split-cta'],
+.hp-float-stack > .shopify-section.section-split-cta,
+.hp-float-stack > .shopify-section.section-split-cta > .hp-float-pin,
+.hp-float-stack > .shopify-section.section-split-cta [class*='split-cta'] {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+.hp-float-stack > .shopify-section.section-split-cta {
+  position: relative !important;
+  top: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  box-shadow: none !important;
 }
