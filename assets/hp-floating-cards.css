@@ -63,7 +63,7 @@ body.template-index.hp-float-active #MainContent {
 body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 .hp-float-stack > .shopify-section.hp-float-story {
   pointer-events: auto !important;
-  background: #0a0a0a !important;
+  background-color: #111111 !important;
   height: 100vh !important;
   height: 100dvh !important;
   min-height: 100vh !important;
@@ -98,7 +98,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   min-height: 100vh !important;
   min-height: 100dvh !important;
   overflow: hidden !important;
-  background: #0a0a0a !important;
+  background-color: #111111 !important;
 }
 
 .hp-float-stack .hp-float-story [class*='ai-story-sticky-track'] {
@@ -110,13 +110,17 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   top: auto !important;
   z-index: auto !important;
   pointer-events: auto !important;
-  background: #0a0a0a !important;
+  background-color: #111111 !important;
+  /* do not use `background` shorthand — it clears JS background-image */
   overflow: hidden !important;
 }
 
 .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
   inset: auto !important;
-  background-color: #0a0a0a !important;
+  background-color: #111111 !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
   overflow: hidden !important;
 }
 
@@ -274,7 +278,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 100vh !important;
     min-height: 100dvh !important;
     overflow: hidden !important;
-    background: #0a0a0a !important;
+    background-color: #111111 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {

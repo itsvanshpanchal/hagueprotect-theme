@@ -184,67 +184,74 @@
     for (var j = 0; j < pins.length; j++) {
       pins[j].style.setProperty('top', 'auto', 'important');
       pins[j].style.setProperty('z-index', 'auto', 'important');
-      pins[j].style.setProperty('background', '#111111', 'important');
+      pins[j].style.setProperty('background-color', '#111111', 'important');
+    }
+
+    /*
+      Use the real <img> src as a CSS background on the wrapper.
+      Absolute imgs often collapse to 0px inside sticky overflow:hidden parents
+      and leave a solid black panel — background-size:cover always paints.
+    */
+    var desk = pin.querySelectorAll('img[class*="ai-story-banner-image-"]');
+    var mobileImgs = pin.querySelectorAll('img[class*="ai-story-banner-mobile-image"]');
+    var activeImg = null;
+
+    if (mobile) {
+      activeImg = mobileImgs[0] || desk[0] || null;
+      for (var d = 0; d < desk.length; d++) {
+        desk[d].style.setProperty('display', 'none', 'important');
+      }
+    } else {
+      activeImg = desk[0] || mobileImgs[0] || null;
+      for (var mi = 0; mi < mobileImgs.length; mi++) {
+        mobileImgs[mi].style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    var src = '';
+    if (activeImg) {
+      src = activeImg.currentSrc || activeImg.src || activeImg.getAttribute('src') || '';
+      activeImg.removeAttribute('loading');
+      activeImg.setAttribute('loading', 'eager');
+      activeImg.setAttribute('fetchpriority', 'high');
+      /* Keep img as a visible in-flow cover fallback (not absolute → no 0-height collapse) */
+      activeImg.style.setProperty('display', 'block', 'important');
+      activeImg.style.setProperty('visibility', 'visible', 'important');
+      activeImg.style.setProperty('opacity', '1', 'important');
+      activeImg.style.setProperty('position', 'absolute', 'important');
+      activeImg.style.setProperty('inset', '0', 'important');
+      activeImg.style.setProperty('width', '100%', 'important');
+      activeImg.style.setProperty('height', '100%', 'important');
+      activeImg.style.setProperty('min-width', '100%', 'important');
+      activeImg.style.setProperty('min-height', fill, 'important');
+      activeImg.style.setProperty('object-fit', 'cover', 'important');
+      activeImg.style.setProperty('object-position', 'center center', 'important');
+      activeImg.style.setProperty('z-index', '1', 'important');
+      /* Force network load if browser deferred it */
+      if (!activeImg.complete && src) {
+        var warm = new Image();
+        warm.src = src;
+      }
     }
 
     var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < wraps.length; k++) {
       wraps[k].style.setProperty('background-color', '#111111', 'important');
-    }
-
-    var desk = pin.querySelectorAll('img[class*="ai-story-banner-image-"]');
-    var mobileImgs = pin.querySelectorAll('img[class*="ai-story-banner-mobile-image"]');
-
-    function fillImage(el) {
-      el.removeAttribute('loading');
-      el.setAttribute('loading', 'eager');
-      el.setAttribute('fetchpriority', 'high');
-      el.style.setProperty('display', 'block', 'important');
-      el.style.setProperty('visibility', 'visible', 'important');
-      el.style.setProperty('opacity', '1', 'important');
-      el.style.setProperty('position', 'absolute', 'important');
-      el.style.setProperty('inset', '0', 'important');
-      el.style.setProperty('top', '0', 'important');
-      el.style.setProperty('left', '0', 'important');
-      el.style.setProperty('right', '0', 'important');
-      el.style.setProperty('bottom', '0', 'important');
-      el.style.setProperty('width', '100%', 'important');
-      el.style.setProperty('height', '100%', 'important');
-      el.style.setProperty('min-width', '100%', 'important');
-      el.style.setProperty('min-height', '100%', 'important');
-      el.style.setProperty('max-width', 'none', 'important');
-      el.style.setProperty('max-height', 'none', 'important');
-      el.style.setProperty('object-fit', 'cover', 'important');
-      el.style.setProperty('object-position', 'center center', 'important');
-      el.style.setProperty('z-index', '1', 'important');
-    }
-
-    function hideImage(el) {
-      el.style.setProperty('display', 'none', 'important');
-      el.style.setProperty('visibility', 'hidden', 'important');
-      el.style.setProperty('opacity', '0', 'important');
-      el.style.setProperty('height', '0', 'important');
-      el.style.setProperty('width', '0', 'important');
-      el.style.setProperty('min-height', '0', 'important');
-      el.style.setProperty('min-width', '0', 'important');
-      el.style.setProperty('position', 'absolute', 'important');
-      el.style.setProperty('pointer-events', 'none', 'important');
-      el.style.setProperty('z-index', '0', 'important');
-    }
-
-    if (mobile) {
-      for (var d = 0; d < desk.length; d++) hideImage(desk[d]);
-      if (mobileImgs.length) {
-        for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
-      } else {
-        for (var d2 = 0; d2 < desk.length; d2++) fillImage(desk[d2]);
+      wraps[k].style.setProperty('background-size', 'cover', 'important');
+      wraps[k].style.setProperty('background-position', 'center center', 'important');
+      wraps[k].style.setProperty('background-repeat', 'no-repeat', 'important');
+      if (src) {
+        wraps[k].style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       }
-    } else {
-      for (var mi = 0; mi < mobileImgs.length; mi++) hideImage(mobileImgs[mi]);
-      if (desk.length) {
-        for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
-      } else {
-        for (var m2 = 0; m2 < mobileImgs.length; m2++) fillImage(mobileImgs[m2]);
+    }
+
+    /* Also paint the pin so even if wrapper fails, section is not empty black */
+    for (var p = 0; p < pins.length; p++) {
+      pins[p].style.setProperty('background-size', 'cover', 'important');
+      pins[p].style.setProperty('background-position', 'center center', 'important');
+      pins[p].style.setProperty('background-repeat', 'no-repeat', 'important');
+      if (src) {
+        pins[p].style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       }
     }
 
@@ -368,12 +375,28 @@
 
       if (story) {
         prepareStoryFullscreen(pin, mobile);
+        /* Re-paint when images finish loading (src may be empty until then) */
+        if (!item._storyImgBound) {
+          item._storyImgBound = true;
+          var imgs = pin.querySelectorAll(
+            'img[class*="ai-story-banner-image-"], img[class*="ai-story-banner-mobile-image"]'
+          );
+          for (var ii = 0; ii < imgs.length; ii++) {
+            imgs[ii].addEventListener(
+              'load',
+              function () {
+                prepareStoryFullscreen(pin, isMobile());
+              },
+              { once: true }
+            );
+          }
+        }
       }
 
       var contentH = story
         ? vh
         : Math.max(pin.scrollHeight, pin.offsetHeight, 1);
-      var bg = detectBg(pin) || (story ? '#0a0a0a' : '#ffffff');
+      var bg = detectBg(pin) || (story ? '#111111' : '#ffffff');
       item.bg = bg;
 
       /* Thin marquees / app blocks stay normal flow */
