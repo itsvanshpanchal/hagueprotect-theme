@@ -457,8 +457,7 @@
     pin.style.setProperty('overflow', 'visible', 'important');
   }
 
-  /* Mobile hero: paint once at full screen, then scroll away (not sticky).
-     Sticky stacking was covering/hiding the hero right after first paint. */
+  /* Mobile hero: sticky full-screen card so the next section floats over it */
   function asHeroOnce(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
@@ -467,8 +466,8 @@
     item.isCard = true;
     sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-hero');
     sec.style.setProperty('--hp-z', String(z));
-    sec.style.setProperty('position', 'relative', 'important');
-    sec.style.setProperty('top', 'auto', 'important');
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
     sec.style.setProperty('min-height', '100svh', 'important');
@@ -482,8 +481,9 @@
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
-    sec.style.setProperty('box-shadow', 'none', 'important');
+    sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
     sec.style.setProperty('background-color', bg || '#111111', 'important');
+    sec.style.setProperty('overflow', 'hidden', 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
@@ -497,7 +497,7 @@
     prepareHeroFullscreen(pin);
   }
 
-  /* Mobile story: same one-shot full-bleed paint — sticky left a black inset panel */
+  /* Mobile story: sticky full-bleed card — next section covers it */
   function asStoryOnce(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
@@ -506,8 +506,8 @@
     item.isCard = true;
     sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-story');
     sec.style.setProperty('--hp-z', String(z));
-    sec.style.setProperty('position', 'relative', 'important');
-    sec.style.setProperty('top', 'auto', 'important');
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
     sec.style.setProperty('min-height', '100svh', 'important');
@@ -520,7 +520,7 @@
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
-    sec.style.setProperty('box-shadow', 'none', 'important');
+    sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
     sec.style.setProperty('overflow', 'hidden', 'important');
     sec.style.setProperty('background-color', bg || '#111111', 'important');
 
@@ -543,7 +543,7 @@
     var sec = item.sec;
     var pin = item.pin;
     var vh = viewportH();
-    /* Story + near-viewport sections use CSS dvh on mobile; tall grids keep natural height */
+    /* Story + near-viewport sections use CSS dvh on mobile; tall grids keep measured height */
     var useDvh = mobile && (isStory || contentH <= vh * 1.12);
     var pinH = useDvh ? null : Math.max(contentH, vh);
     var fill = viewportFill(true);
@@ -553,25 +553,13 @@
     if (mobile) sec.classList.add('hp-float-card--mobile');
     if (isStory) sec.classList.add('hp-float-story');
     sec.style.setProperty('--hp-z', String(z));
-    /*
-      Mobile: use relative (not sticky). Many sticky full-screen cards cause
-      severe scroll lag on phones. Desktop keeps the sticky cover stack.
-    */
-    if (mobile) {
-      sec.style.setProperty('position', 'relative', 'important');
-      sec.style.setProperty('top', 'auto', 'important');
-    } else {
-      sec.style.setProperty('position', 'sticky', 'important');
-      sec.style.setProperty('top', '0px', 'important');
-    }
+    /* Sticky on all breakpoints — next card floats over the pinned one */
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     if (useDvh) {
       sec.style.setProperty('height', fill, 'important');
       sec.style.setProperty('min-height', '100svh', 'important');
-    } else if (mobile) {
-      /* Keep natural height on mobile — don't force every card to 100vh */
-      sec.style.setProperty('height', 'auto', 'important');
-      sec.style.setProperty('min-height', '0', 'important');
     } else {
       sec.style.setProperty('height', pinH + 'px', 'important');
       sec.style.setProperty('min-height', vh + 'px', 'important');
@@ -583,7 +571,7 @@
     sec.style.setProperty('visibility', 'visible', 'important');
     sec.style.setProperty(
       'box-shadow',
-      mobile ? 'none' : '0 -12px 32px rgba(0,0,0,0.14)',
+      mobile ? '0 -8px 24px rgba(0,0,0,0.12)' : '0 -12px 32px rgba(0,0,0,0.14)',
       'important'
     );
     if (bg) sec.style.setProperty('background-color', bg, 'important');
@@ -593,9 +581,6 @@
     if (useDvh) {
       pin.style.setProperty('height', fill, 'important');
       pin.style.setProperty('min-height', '100svh', 'important');
-    } else if (mobile) {
-      pin.style.setProperty('height', 'auto', 'important');
-      pin.style.setProperty('min-height', '0', 'important');
     } else {
       pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('min-height', vh + 'px', 'important');
@@ -603,7 +588,7 @@
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty(
       'overflow',
-      mobile ? 'visible' : isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
+      isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
       'important'
     );
     if (mobile) pin.style.setProperty('-webkit-overflow-scrolling', 'touch');
@@ -693,14 +678,14 @@
       var bg = detectBg(pin) || (story || hero ? '#111111' : '#ffffff');
       item.bg = bg;
 
-      /* Mobile hero: one full-screen paint, then hide by scrolling away */
+      /* Mobile hero: sticky full-screen — next card floats over */
       if (hero && mobile) {
         cardIndex += 1;
         asHeroOnce(item, cardIndex, bg);
         return;
       }
 
-      /* Mobile story: full-bleed image panel (not sticky black inset) */
+      /* Mobile story: sticky full-bleed — next card floats over */
       if (story && mobile) {
         cardIndex += 1;
         asStoryOnce(item, cardIndex, bg);
