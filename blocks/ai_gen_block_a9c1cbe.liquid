@@ -88,7 +88,14 @@
     min-height: 100vh !important;
     min-height: 100dvh !important;
     overflow: hidden !important;
-    background: #0a0a0a !important;
+    background: #111111 !important;
+    z-index: auto !important;
+  }
+
+  /* When float stack is active, do not force neighbors above the story (hides the banner) */
+  body.hp-float-active .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
+  body.hp-float-active .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
+    z-index: auto !important;
   }
 
   /* Section ABOVE — stays above the pin while it scrolls away */
@@ -190,21 +197,22 @@
       Mobile: disable sticky curtain entirely.
       100vh pin + absolute cover cropped the banner to "half" with black void below.
       Show the full mobile image at natural height instead.
+      EXCEPTION: homepage float story keeps full-viewport cover.
     */
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
+    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}):not(.hp-float-story):not(.hp-float-card) {
       height: auto !important;
       min-height: 0 !important;
       pointer-events: auto !important;
       background: transparent !important;
     }
 
-    .ai-story-sticky-track-{{ ai_gen_id }} {
+    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-track-{{ ai_gen_id }} {
       height: auto !important;
       min-height: 0 !important;
       pointer-events: auto !important;
     }
 
-    .ai-story-sticky-pin-{{ ai_gen_id }} {
+    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} {
       position: relative !important;
       top: auto !important;
       height: auto !important;
@@ -215,12 +223,37 @@
       pointer-events: auto !important;
     }
 
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      width: 100% !important;
+    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
+    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
       height: auto !important;
       min-height: 0 !important;
+    }
+
+    /* Float story on mobile: keep full-screen image cover */
+    .shopify-section.hp-float-story .ai-story-sticky-track-{{ ai_gen_id }},
+    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }},
+    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
+    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
+      height: 100% !important;
+      min-height: 100% !important;
       max-height: none !important;
+      overflow: hidden !important;
+      background: #111111 !important;
+    }
+
+    .shopify-section.hp-float-story .ai-story-banner-image-{{ ai_gen_id }} {
+      display: none !important;
+    }
+
+    .shopify-section.hp-float-story .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
     }
 
     .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
@@ -631,7 +664,9 @@
       <img
         src="{{ block.settings.background_image | image_url: width: 2400 }}"
         alt="{{ block.settings.background_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
         width="{{ block.settings.background_image.width }}"
         height="{{ block.settings.background_image.height }}"
         class="ai-story-banner-image-{{ ai_gen_id }}"
@@ -646,7 +681,8 @@
       <img
         src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
         alt="{{ block.settings.mobile_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
+        decoding="async"
         width="{{ block.settings.mobile_image.width }}"
         height="{{ block.settings.mobile_image.height }}"
         class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
@@ -655,7 +691,8 @@
       <img
         src="{{ block.settings.background_image | image_url: width: 1200 }}"
         alt="{{ block.settings.background_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
+        decoding="async"
         width="{{ block.settings.background_image.width }}"
         height="{{ block.settings.background_image.height }}"
         class="ai-story-banner-mobile-image-{{ ai_gen_id }}"

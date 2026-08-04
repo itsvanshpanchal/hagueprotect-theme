@@ -139,7 +139,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 }
 
 /* Banner image fills the full viewport panel */
-.hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
+.hp-float-stack .hp-float-story [class*='ai-story-banner-image-'],
+.hp-float-stack .hp-float-story img[class*='ai-story-banner-image-'] {
   position: absolute !important;
   inset: 0 !important;
   top: 0 !important;
@@ -155,6 +156,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   object-fit: cover !important;
   object-position: center center !important;
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
 }
 
 /* Desktop story: full-bleed cover, mobile image hidden */
@@ -300,6 +304,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     object-position: center center !important;
     display: block !important;
     visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,

@@ -154,43 +154,54 @@
     for (var i = 0; i < chain.length; i++) {
       chain[i].style.setProperty('position', 'relative', 'important');
       chain[i].style.setProperty('display', 'block', 'important');
+      chain[i].style.setProperty('visibility', 'visible', 'important');
+      chain[i].style.setProperty('opacity', '1', 'important');
       chain[i].style.setProperty('width', '100%', 'important');
       chain[i].style.setProperty('max-width', 'none', 'important');
       chain[i].style.setProperty('height', fill, 'important');
       chain[i].style.setProperty('min-height', fill, 'important');
-      chain[i].style.setProperty('max-height', 'none', 'important');
+      chain[i].style.setProperty('max-height', fill, 'important');
       chain[i].style.setProperty('overflow', 'hidden', 'important');
       chain[i].style.setProperty('box-sizing', 'border-box', 'important');
+      chain[i].style.setProperty('margin', '0', 'important');
+      chain[i].style.setProperty('padding', '0', 'important');
     }
 
     var intermediates = pin.children;
     for (var n = 0; n < intermediates.length; n++) {
       intermediates[n].style.setProperty('display', 'block', 'important');
+      intermediates[n].style.setProperty('visibility', 'visible', 'important');
       intermediates[n].style.setProperty('width', '100%', 'important');
       intermediates[n].style.setProperty('height', fill, 'important');
       intermediates[n].style.setProperty('min-height', fill, 'important');
+      intermediates[n].style.setProperty('max-height', fill, 'important');
       intermediates[n].style.setProperty('max-width', 'none', 'important');
       intermediates[n].style.setProperty('overflow', 'hidden', 'important');
+      intermediates[n].style.setProperty('margin', '0', 'important');
     }
 
     var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
     for (var j = 0; j < pins.length; j++) {
       pins[j].style.setProperty('top', 'auto', 'important');
       pins[j].style.setProperty('z-index', 'auto', 'important');
-      pins[j].style.setProperty('background', '#0a0a0a', 'important');
+      pins[j].style.setProperty('background', '#111111', 'important');
     }
 
     var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < wraps.length; k++) {
-      wraps[k].style.setProperty('background-color', '#0a0a0a', 'important');
+      wraps[k].style.setProperty('background-color', '#111111', 'important');
     }
 
-    var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
-    var mobileImgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
+    var desk = pin.querySelectorAll('img[class*="ai-story-banner-image-"]');
+    var mobileImgs = pin.querySelectorAll('img[class*="ai-story-banner-mobile-image"]');
 
     function fillImage(el) {
+      el.removeAttribute('loading');
+      el.setAttribute('loading', 'eager');
+      el.setAttribute('fetchpriority', 'high');
       el.style.setProperty('display', 'block', 'important');
       el.style.setProperty('visibility', 'visible', 'important');
+      el.style.setProperty('opacity', '1', 'important');
       el.style.setProperty('position', 'absolute', 'important');
       el.style.setProperty('inset', '0', 'important');
       el.style.setProperty('top', '0', 'important');
@@ -205,25 +216,36 @@
       el.style.setProperty('max-height', 'none', 'important');
       el.style.setProperty('object-fit', 'cover', 'important');
       el.style.setProperty('object-position', 'center center', 'important');
+      el.style.setProperty('z-index', '1', 'important');
     }
 
     function hideImage(el) {
       el.style.setProperty('display', 'none', 'important');
       el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('opacity', '0', 'important');
       el.style.setProperty('height', '0', 'important');
       el.style.setProperty('width', '0', 'important');
       el.style.setProperty('min-height', '0', 'important');
       el.style.setProperty('min-width', '0', 'important');
       el.style.setProperty('position', 'absolute', 'important');
       el.style.setProperty('pointer-events', 'none', 'important');
+      el.style.setProperty('z-index', '0', 'important');
     }
 
     if (mobile) {
       for (var d = 0; d < desk.length; d++) hideImage(desk[d]);
-      for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
+      if (mobileImgs.length) {
+        for (var m = 0; m < mobileImgs.length; m++) fillImage(mobileImgs[m]);
+      } else {
+        for (var d2 = 0; d2 < desk.length; d2++) fillImage(desk[d2]);
+      }
     } else {
       for (var mi = 0; mi < mobileImgs.length; mi++) hideImage(mobileImgs[mi]);
-      for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
+      if (desk.length) {
+        for (var di = 0; di < desk.length; di++) fillImage(desk[di]);
+      } else {
+        for (var m2 = 0; m2 < mobileImgs.length; m2++) fillImage(mobileImgs[m2]);
+      }
     }
 
     var content = pin.querySelectorAll('[class*="ai-story-banner-content"]');
@@ -231,6 +253,8 @@
       content[c].style.setProperty('position', 'absolute', 'important');
       content[c].style.setProperty('z-index', '3', 'important');
       content[c].style.setProperty('overflow', 'visible', 'important');
+      content[c].style.setProperty('visibility', 'visible', 'important');
+      content[c].style.setProperty('opacity', '1', 'important');
       if (!mobile) {
         content[c].style.setProperty('top', '56px', 'important');
       }
