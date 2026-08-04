@@ -425,7 +425,43 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
     min-height: 100% !important;
+    height: 100% !important;
     box-sizing: border-box;
+  }
+
+  /* "What Are You Cleaning Today" — fill viewport, no white dead space under square art */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100% !important;
+    background-color: #f6f6f6 !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner {
+    aspect-ratio: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner picture,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
   }
 }
 
