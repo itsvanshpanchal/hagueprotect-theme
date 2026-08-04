@@ -663,7 +663,8 @@
       <img
         src="{{ block.settings.background_image | image_url: width: 2400 }}"
         alt="{{ block.settings.background_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
+        fetchpriority="high"
         width="{{ block.settings.background_image.width }}"
         height="{{ block.settings.background_image.height }}"
         class="ai-story-banner-image-{{ ai_gen_id }}"
@@ -678,7 +679,7 @@
       <img
         src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
         alt="{{ block.settings.mobile_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
         width="{{ block.settings.mobile_image.width }}"
         height="{{ block.settings.mobile_image.height }}"
         class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
@@ -687,7 +688,7 @@
       <img
         src="{{ block.settings.background_image | image_url: width: 1200 }}"
         alt="{{ block.settings.background_image.alt | escape }}"
-        loading="lazy"
+        loading="eager"
         width="{{ block.settings.background_image.width }}"
         height="{{ block.settings.background_image.height }}"
         class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
