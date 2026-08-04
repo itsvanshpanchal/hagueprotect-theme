@@ -1,5 +1,6 @@
 {% doc %}
   Story banner with editable overlay text + per-block typography.
+  Simplified markup: image always paints via inline background + <img>.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -9,9 +10,6 @@
   assign text_family = block.settings.text_font_family | default: 'inter'
   assign button_family = block.settings.button_font_family | default: 'inter'
 
-  comment
-    Always honor Theme Editor Weight / Style for Story Banner.
-  endcomment
   assign heading_weight = block.settings.heading_font_weight | default: '400'
   assign subheading_weight = block.settings.subheading_font_weight | default: '700'
   assign text_weight = block.settings.text_font_weight | default: '400'
@@ -30,6 +28,17 @@
   assign accent_size = block.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62
   assign accent_size_mobile = block.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
   assign accent_color = block.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
+
+  assign desk_bg = ''
+  assign mobile_bg = ''
+  if block.settings.background_image != blank
+    assign desk_bg = block.settings.background_image | image_url: width: 2400
+  endif
+  if block.settings.mobile_image != blank
+    assign mobile_bg = block.settings.mobile_image | image_url: width: 1200
+  elsif block.settings.background_image != blank
+    assign mobile_bg = block.settings.background_image | image_url: width: 1200
+  endif
 -%}
 
 {%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
@@ -45,294 +54,46 @@
   assign accent_stack = accent_stack | strip
 -%}
 
-{% style %}
+<style>
+  .ai-story-sticky-track-{{ ai_gen_id }},
+  .ai-story-sticky-pin-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
   .ai-story-banner-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
     max-width: 100%;
+    display: block;
     overflow: hidden;
-    display: block;
-  }
-
-  /*
-    Curtain reveal:
-    - Banner pins sticky
-    - Following sections slide up and cover it (lower curtain)
-    - No extra white padding / empty runway (that caused the blank white screen)
-  */
-  #MainContent {
-    position: relative;
-    isolation: isolate;
-    background-color: #ffffff;
-  }
-
-  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-    position: relative !important;
-    z-index: 1 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    background: transparent !important;
-    isolation: auto !important;
-    transform: none !important;
-    pointer-events: auto;
-  }
-
-  /* Full-screen float card owns height — do not collapse story section */
-  .shopify-section.hp-float-story:has(.ai-story-sticky-track-{{ ai_gen_id }}),
-  .shopify-section.hp-float-card:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-    height: 100vh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    overflow: hidden !important;
-    background: #111111 !important;
-    z-index: auto !important;
-  }
-
-  /* When float stack is active, do not force neighbors above the story (hides the banner) */
-  body.hp-float-active .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
-  body.hp-float-active .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
-    z-index: auto !important;
-  }
-
-  /* Section ABOVE — stays above the pin while it scrolls away */
-  .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
-  .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }} {
-    position: relative !important;
-    z-index: 3 !important;
-    isolation: isolate !important;
-    background-color: #ffffff !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* Next section — no forced -100vh pull (that cropped the banner) */
-  .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
-    position: relative !important;
-    z-index: 3 !important;
-    isolation: isolate !important;
-    margin-top: 0 !important;
-  }
-
-  /* Later following sections also sit above the pin (no extra pull) */
-  .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
-    position: relative !important;
-    z-index: 3 !important;
-    isolation: isolate !important;
-  }
-
-  .ai-story-sticky-track-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: transparent;
-    pointer-events: none;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }} {
-    position: relative;
-    top: auto;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    z-index: auto;
-    margin: 0;
-    padding: 0;
-    overflow: visible;
-    background: #0a0a0a;
-    pointer-events: auto;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    max-width: none;
-    display: block;
-    background-color: #0a0a0a;
-    overflow: hidden;
-  }
-
-  /* Desktop: only the desktop image — fill the sticky/full-screen pin */
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    object-fit: cover;
-    object-position: center center;
-    display: block;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-    display: none !important;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-placeholder-{{ ai_gen_id }} {
-    min-height: 400px;
-    height: auto;
-  }
-
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-    top: max({{ block.settings.content_offset_top | default: 40 }}px, 56px);
-    left: max({{ block.settings.content_offset_left }}px, var(--homepage-section-gutter, 8px), 20px);
-    padding: {{ block.settings.content_padding | default: 20 }}px;
-    transform: none;
-    overflow: visible;
-    z-index: 3;
-  }
-
-  @media screen and (max-width: 749px) {
-    /*
-      Mobile: disable sticky curtain entirely.
-      100vh pin + absolute cover cropped the banner to "half" with black void below.
-      Show the full mobile image at natural height instead.
-      EXCEPTION: homepage float story keeps full-viewport cover.
-    */
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}):not(.hp-float-story):not(.hp-float-card) {
-      height: auto !important;
-      min-height: 0 !important;
-      pointer-events: auto !important;
-      background: transparent !important;
-    }
-
-    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-track-{{ ai_gen_id }} {
-      height: auto !important;
-      min-height: 0 !important;
-      pointer-events: auto !important;
-    }
-
-    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} {
-      position: relative !important;
-      top: auto !important;
-      height: auto !important;
-      min-height: 0 !important;
-      z-index: auto !important;
-      background: transparent !important;
-      overflow: visible !important;
-      pointer-events: auto !important;
-    }
-
-    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
-    .shopify-section:not(.hp-float-story):not(.hp-float-card) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: auto !important;
-      min-height: 0 !important;
-    }
-
-    /* Float story on mobile: keep full-screen image cover */
-    .shopify-section.hp-float-story .ai-story-sticky-track-{{ ai_gen_id }},
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }},
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: 100% !important;
-      min-height: 100% !important;
-      max-height: none !important;
-      overflow: hidden !important;
-      background: #111111 !important;
-    }
-
-    .shopify-section.hp-float-story .ai-story-banner-image-{{ ai_gen_id }} {
-      display: none !important;
-    }
-
-    .shopify-section.hp-float-story .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-    }
-
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section {
-      margin-top: 0 !important;
-      background-color: transparent !important;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-      top: clamp(20px, 4vw, 32px);
-      left: 16px;
-      padding: 16px;
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-      height: auto !important;
-      margin-top: 0 !important;
-      pointer-events: auto;
-    }
-
-    .ai-story-sticky-track-{{ ai_gen_id }} {
-      height: auto;
-      background: transparent;
-      pointer-events: auto;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} {
-      position: relative;
-      top: auto;
-      height: auto;
-      z-index: auto;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: auto;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
-      height: auto;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-      display: none !important;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-      top: {{ block.settings.content_offset_top }}px;
-      transform: none;
-    }
-
-    .shopify-section:has(+ .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }})),
-    .shopify-section:has(.ai-story-sticky-track-{{ ai_gen_id }}) + .shopify-section,
-    .shopify-section.hp-story-curtain-prev-{{ ai_gen_id }},
-    .shopify-section.hp-story-curtain-next-{{ ai_gen_id }} {
-      box-shadow: none !important;
-      margin-top: 0 !important;
-      padding-bottom: 0 !important;
-    }
   }
 
   .ai-story-banner-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: block;
-    background-color: #0a0a0a;
     overflow: hidden;
+    background-color: #111111;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
-  .ai-story-banner-image-{{ ai_gen_id }} {
+  .ai-story-banner-image-{{ ai_gen_id }},
+  .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    max-height: none;
-    display: block;
     object-fit: cover;
     object-position: center center;
-    opacity: {{ block.settings.image_opacity }};
+    z-index: 1;
   }
 
   .ai-story-banner-mobile-image-{{ ai_gen_id }} {
@@ -340,103 +101,26 @@
   }
 
   .ai-story-banner-placeholder-{{ ai_gen_id }} {
-    width: 100%;
-    background-color: #f4f4f4;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 500px;
-  }
-
-  .ai-story-banner-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
+    background: #f4f4f4;
   }
 
   .ai-story-banner-overlay-{{ ai_gen_id }} {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: {{ block.settings.overlay_color }};
-    opacity: {{ block.settings.overlay_opacity }};
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
   }
 
   .ai-story-banner-content-{{ ai_gen_id }} {
     position: absolute;
-    z-index: 2;
-    max-width: {{ block.settings.content_max_width }}px;
-    padding: {{ block.settings.content_padding }}px;
-    text-align: {{ block.settings.content_align | default: 'left' }};
-    left: {{ block.settings.content_offset_left }}px;
-    top: {{ block.settings.content_offset_top }}px;
+    z-index: 3;
     display: flex;
     flex-direction: column;
-    align-items: {% case block.settings.content_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-    gap: 0;
-  }
-
-  #MainContent .shopify-section .ai-story-banner-subheading-{{ ai_gen_id }},
-  .ai-story-banner-subheading-{{ ai_gen_id }} {
-    color: {{ block.settings.subheading_color }} !important;
-    font-family: {{ subheading_stack }} !important;
-    font-size: {{ block.settings.subheading_size }}px !important;
-    font-weight: {{ subheading_weight }} !important;
-    font-style: {{ subheading_style }} !important;
-    margin: 0 0 {{ block.settings.subheading_spacing }}px !important;
-    line-height: 1.4 !important;
-    letter-spacing: 0.14em !important;
-    text-transform: none !important;
-  }
-
-  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }},
-  #MainContent .shopify-section h2.ai-story-banner-heading-{{ ai_gen_id }},
-  .ai-story-banner-heading-{{ ai_gen_id }} {
-    color: {{ block.settings.heading_color }} !important;
-    font-family: {{ heading_stack }} !important;
-    font-size: {{ block.settings.heading_size }}px !important;
-    font-weight: {{ heading_weight }} !important;
-    font-style: {{ heading_style }} !important;
-    margin: 0 0 {{ block.settings.heading_spacing }}px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.02em !important;
-    text-transform: none !important;
-  }
-
-  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
-  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
-  #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text,
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text {
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: {{ heading_weight }} !important;
-    font-style: inherit !important;
-    letter-spacing: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
-    margin: 0 !important;
-    text-transform: none !important;
-  }
-
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line {
-    display: block;
-  }
-
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--with-accent {
-    white-space: normal;
-  }
-
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line::first-letter {
-    text-transform: none !important;
-  }
-
-  .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line--2 {
-    color: {{ block.settings.heading_line2_color | default: settings.heading_line2_color | default: '#6b6b6b' }} !important;
   }
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
@@ -446,488 +130,192 @@
     font-style: {{ accent_style }} !important;
     color: {{ accent_color }} !important;
     -webkit-text-fill-color: {{ accent_color }} !important;
-    -webkit-text-stroke: 0;
-    paint-order: normal;
-    -webkit-font-smoothing: antialiased;
     font-size: {{ accent_size }}px !important;
-    text-transform: none !important;
-    letter-spacing: 0.01em !important;
   }
 
   .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair--stack .hp-heading-accent {
     display: block !important;
   }
 
-  @media screen and (max-width: 989px) {
+  .ai-story-banner-button-{{ ai_gen_id }} {
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-story-banner-image-{{ ai_gen_id }} {
+      display: none !important;
+    }
+
+    .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      display: block !important;
+    }
+
     .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
       font-size: {{ accent_size_mobile }}px !important;
     }
   }
+</style>
 
-  #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
-  #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }} p,
-  .ai-story-banner-text-{{ ai_gen_id }},
-  .ai-story-banner-text-{{ ai_gen_id }} p {
-    color: {{ block.settings.text_color }} !important;
-    font-family: {{ text_stack }} !important;
-    font-size: {{ block.settings.text_size }}px !important;
-    font-weight: {{ text_weight }} !important;
-    font-style: {{ text_style }} !important;
-    line-height: 1.15 !important;
-    margin: 0 !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-  }
-
-  .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
-    margin-top: {{ block.settings.button_spacing }}px;
-  }
-
-  #MainContent .shopify-section .ai-story-banner-button-{{ ai_gen_id }},
-  .ai-story-banner-button-{{ ai_gen_id }} {
-    display: inline-block;
-    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
-    background-color: {{ block.settings.button_background_color }};
-    color: {{ block.settings.button_text_color }} !important;
-    text-decoration: none;
-    border-radius: {{ block.settings.button_border_radius }}px;
-    font-family: {{ button_stack }} !important;
-    font-size: {{ block.settings.button_text_size }}px !important;
-    font-weight: {{ button_weight }} !important;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  .ai-story-banner-button-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.button_hover_background_color }};
-    color: {{ block.settings.button_hover_text_color }};
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-story-banner-image-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
-      display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      width: 0 !important;
-      overflow: hidden !important;
-      position: absolute !important;
-      pointer-events: none !important;
-    }
-
-    .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      position: relative;
-      min-height: 0;
-      height: auto;
-      max-height: none;
-      overflow: hidden;
-      background-color: #0a0a0a;
-      display: block;
-    }
-
-    /* In-flow mobile image only — one full banner, no desktop duplicate */
-    .ai-story-banner-mobile-image-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-      display: block !important;
-      visibility: visible !important;
-      position: relative !important;
-      inset: auto !important;
-      width: 100% !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-      object-fit: cover;
-      object-position: center center;
-      opacity: {{ block.settings.image_opacity }};
-    }
-
-    .ai-story-banner-overlay-{{ ai_gen_id }} {
-      position: absolute;
-      inset: 0;
-      height: 100%;
-    }
-
-    /* Keep script accent from clipping off the left edge */
-    .ai-story-banner-content-{{ ai_gen_id }} {
-      position: absolute;
-      padding: 18px 16px 18px 20px;
-      left: max(16px, {{ block.settings.content_offset_left_mobile | default: 16 }}px);
-      right: 16px;
-      top: {{ block.settings.content_offset_top_mobile | default: 24 }}px;
-      bottom: auto;
-      transform: none;
-      max-width: min(90%, {{ block.settings.content_max_width_mobile | default: 280 }}px);
-      width: auto;
-      box-sizing: border-box;
-      justify-content: flex-start;
-      text-align: {{ block.settings.content_align_mobile | default: 'left' }};
-      align-items: {% case block.settings.content_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-      z-index: 3;
-      overflow: visible;
-    }
-
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent,
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair {
-      overflow: visible !important;
-    }
-
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair--stack .hp-heading-accent,
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-accent {
-      display: inline-block;
-      padding-left: 0.06em;
-      margin-left: 0;
-    }
-
-    #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }},
-    #MainContent .shopify-section h2.ai-story-banner-heading-{{ ai_gen_id }},
-    .ai-story-banner-heading-{{ ai_gen_id }} {
-      font-size: clamp(22px, 6.2vw, 32px) !important;
-      margin: 0 0 8px !important;
-      line-height: 1.1 !important;
-    }
-
-    #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
-    #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
-    #MainContent .shopify-section .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text,
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-line,
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-heading-pair,
-    .ai-story-banner-heading-{{ ai_gen_id }} .hp-typewriter-text {
-      font-size: inherit !important;
-    }
-
-    #MainContent .shopify-section .ai-story-banner-subheading-{{ ai_gen_id }},
-    .ai-story-banner-subheading-{{ ai_gen_id }} {
-      font-size: clamp(10px, 2.8vw, 12px) !important;
-      margin: 0 0 8px !important;
-      letter-spacing: 0.08em !important;
-      line-height: 1.25 !important;
-    }
-
-    #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }},
-    #MainContent .shopify-section .ai-story-banner-text-{{ ai_gen_id }} p,
-    .ai-story-banner-text-{{ ai_gen_id }},
-    .ai-story-banner-text-{{ ai_gen_id }} p {
-      font-size: clamp(12px, 3.2vw, 14px) !important;
-      line-height: 1.35 !important;
-    }
-
-    .ai-story-banner-button-wrapper-{{ ai_gen_id }} {
-      margin-top: 10px;
-    }
-
-    .ai-story-banner-button-{{ ai_gen_id }} {
-      padding: 8px 16px;
-      font-size: 13px;
-    }
-
-    /* Sticky wrappers on mobile — same natural-height rules (curtain disabled above) */
-    .shopify-section:not(.hp-float-story) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      min-height: 0 !important;
-      max-height: none !important;
-      height: auto !important;
-      background-color: #0a0a0a;
-    }
-
-    .shopify-section:not(.hp-float-story) .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-      position: relative !important;
-      inset: auto !important;
-      width: 100% !important;
-      height: auto !important;
-      min-height: 0 !important;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
-      top: {{ block.settings.content_offset_top_mobile | default: 24 }}px;
-      left: {{ block.settings.content_offset_left_mobile | default: 16 }}px;
-      bottom: auto;
-      padding: 16px;
-      transform: none;
-      max-width: min(92%, {{ block.settings.content_max_width_mobile | default: 280 }}px);
-      width: auto;
-      justify-content: flex-start;
-      text-align: {{ block.settings.content_align_mobile | default: 'left' }};
-      align-items: {% case block.settings.content_align_mobile %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
-    }
-  }
-{% endstyle %}
-
-{%- comment -%}
-  Always wrap in track/pin so homepage float stack can full-screen the banner.
-  Sticky scroll runway JS only runs when enable_sticky_scroll is on (not recommended).
-{%- endcomment -%}
-<div class="ai-story-sticky-track-{{ ai_gen_id }}" data-hp-story-sticky-track="{{ ai_gen_id }}">
-  <div class="ai-story-sticky-pin-{{ ai_gen_id }}" data-hp-story-sticky-pin="{{ ai_gen_id }}">
-<div class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-story-banner-wrapper-{{ ai_gen_id }}">
-    {% if block.settings.background_image %}
-      <img
-        src="{{ block.settings.background_image | image_url: width: 2400 }}"
-        alt="{{ block.settings.background_image.alt | escape }}"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        width="{{ block.settings.background_image.width }}"
-        height="{{ block.settings.background_image.height }}"
-        class="ai-story-banner-image-{{ ai_gen_id }}"
+<div
+  class="ai-story-sticky-track-{{ ai_gen_id }}"
+  data-hp-story-sticky-track="{{ ai_gen_id }}"
+>
+  <div
+    class="ai-story-sticky-pin-{{ ai_gen_id }}"
+    data-hp-story-sticky-pin="{{ ai_gen_id }}"
+  >
+    <div class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+      <div
+        class="ai-story-banner-wrapper-{{ ai_gen_id }}"
+        style="
+          position:relative;
+          width:100%;
+          min-height:100vh;
+          min-height:100dvh;
+          overflow:hidden;
+          background-color:#111111;
+          background-size:cover;
+          background-position:center center;
+          background-repeat:no-repeat;
+          {% if desk_bg != blank %}background-image:url({{ desk_bg | json }});{% endif %}
+        "
+        {% if mobile_bg != blank %}
+          data-mobile-bg="{{ mobile_bg | escape }}"
+        {% endif %}
+        {% if desk_bg != blank %}
+          data-desktop-bg="{{ desk_bg | escape }}"
+        {% endif %}
       >
-    {% else %}
-      <div class="ai-story-banner-placeholder-{{ ai_gen_id }}">
-        {{ 'hero-apparel-1' | placeholder_svg_tag }}
-      </div>
-    {% endif %}
-
-    {% if block.settings.mobile_image %}
-      <img
-        src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
-        alt="{{ block.settings.mobile_image.alt | escape }}"
-        loading="eager"
-        decoding="async"
-        width="{{ block.settings.mobile_image.width }}"
-        height="{{ block.settings.mobile_image.height }}"
-        class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
-      >
-    {% elsif block.settings.background_image %}
-      <img
-        src="{{ block.settings.background_image | image_url: width: 1200 }}"
-        alt="{{ block.settings.background_image.alt | escape }}"
-        loading="eager"
-        decoding="async"
-        width="{{ block.settings.background_image.width }}"
-        height="{{ block.settings.background_image.height }}"
-        class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
-      >
-    {% endif %}
-
-    {% if block.settings.show_overlay %}
-      <div class="ai-story-banner-overlay-{{ ai_gen_id }}"></div>
-    {% endif %}
-
-    <div class="ai-story-banner-content-{{ ai_gen_id }}">
-      {% if block.settings.subheading != blank %}
-        <div class="ai-story-banner-subheading-{{ ai_gen_id }}">
-          {{ block.settings.subheading }}
-        </div>
-      {% endif %}
-
-      {% if block.settings.heading != blank %}
-        <div class="ai-story-banner-heading-{{ ai_gen_id }}" role="heading" aria-level="2">
-          {% render 'section-heading-text', text: block.settings.heading, line2: block.settings.heading_line2, line2_color: block.settings.heading_line2_color, accent_last_word: true, accent_last_count: block.settings.heading_accent_word_count, accent_color: block.settings.heading_accent_color %}
-        </div>
-      {% endif %}
-
-      {% if block.settings.text != blank %}
-        <div class="ai-story-banner-text-{{ ai_gen_id }}">
-          {{ block.settings.text }}
-        </div>
-      {% endif %}
-
-      {% if block.settings.button_text != blank and block.settings.button_link != blank %}
-        <div class="ai-story-banner-button-wrapper-{{ ai_gen_id }}">
-          <a
-            href="{{ block.settings.button_link }}"
-            class="ai-story-banner-button-{{ ai_gen_id }}"
+        {% if block.settings.background_image %}
+          <img
+            src="{{ block.settings.background_image | image_url: width: 2400 }}"
+            alt="{{ block.settings.background_image.alt | escape }}"
+            width="{{ block.settings.background_image.width }}"
+            height="{{ block.settings.background_image.height }}"
+            class="ai-story-banner-image-{{ ai_gen_id }}"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1;opacity:{{ block.settings.image_opacity | default: 1 }};"
           >
-            {{ block.settings.button_text }}
-          </a>
+        {% else %}
+          <div class="ai-story-banner-placeholder-{{ ai_gen_id }}">
+            {{ 'hero-apparel-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.mobile_image %}
+          <img
+            src="{{ block.settings.mobile_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.mobile_image.alt | escape }}"
+            width="{{ block.settings.mobile_image.width }}"
+            height="{{ block.settings.mobile_image.height }}"
+            class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
+            loading="eager"
+            decoding="async"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1;opacity:{{ block.settings.image_opacity | default: 1 }};"
+          >
+        {% elsif block.settings.background_image %}
+          <img
+            src="{{ block.settings.background_image | image_url: width: 1200 }}"
+            alt="{{ block.settings.background_image.alt | escape }}"
+            width="{{ block.settings.background_image.width }}"
+            height="{{ block.settings.background_image.height }}"
+            class="ai-story-banner-mobile-image-{{ ai_gen_id }}"
+            loading="eager"
+            decoding="async"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1;opacity:{{ block.settings.image_opacity | default: 1 }};"
+          >
+        {% endif %}
+
+        {% if block.settings.show_overlay %}
+          <div
+            class="ai-story-banner-overlay-{{ ai_gen_id }}"
+            style="position:absolute;inset:0;z-index:2;pointer-events:none;background-color:{{ block.settings.overlay_color }};opacity:{{ block.settings.overlay_opacity }};"
+          ></div>
+        {% endif %}
+
+        <div
+          class="ai-story-banner-content-{{ ai_gen_id }}"
+          style="
+            position:absolute;
+            z-index:3;
+            max-width:{{ block.settings.content_max_width | default: 650 }}px;
+            padding:{{ block.settings.content_padding | default: 20 }}px;
+            text-align:{{ block.settings.content_align | default: 'left' }};
+            left:{{ block.settings.content_offset_left | default: 20 }}px;
+            top:{{ block.settings.content_offset_top | default: 56 }}px;
+            display:flex;
+            flex-direction:column;
+            align-items:{% case block.settings.content_align %}{% when 'center' %}center{% when 'right' %}flex-end{% else %}flex-start{% endcase %};
+          "
+        >
+          {% if block.settings.subheading != blank %}
+            <div
+              class="ai-story-banner-subheading-{{ ai_gen_id }}"
+              style="color:{{ block.settings.subheading_color }};font-family:{{ subheading_stack }};font-size:{{ block.settings.subheading_size }}px;font-weight:{{ subheading_weight }};font-style:{{ subheading_style }};margin:0 0 {{ block.settings.subheading_spacing }}px;letter-spacing:0.14em;"
+            >
+              {{ block.settings.subheading }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.heading != blank %}
+            <div
+              class="ai-story-banner-heading-{{ ai_gen_id }}"
+              role="heading"
+              aria-level="2"
+              style="color:{{ block.settings.heading_color }};font-family:{{ heading_stack }};font-size:{{ block.settings.heading_size }}px;font-weight:{{ heading_weight }};font-style:{{ heading_style }};margin:0 0 {{ block.settings.heading_spacing }}px;line-height:1.05;"
+            >
+              {% render 'section-heading-text',
+                text: block.settings.heading,
+                line2: block.settings.heading_line2,
+                line2_color: block.settings.heading_line2_color,
+                accent_last_word: true,
+                accent_last_count: block.settings.heading_accent_word_count,
+                accent_color: block.settings.heading_accent_color
+              %}
+            </div>
+          {% endif %}
+
+          {% if block.settings.text != blank %}
+            <div
+              class="ai-story-banner-text-{{ ai_gen_id }}"
+              style="color:{{ block.settings.text_color }};font-family:{{ text_stack }};font-size:{{ block.settings.text_size }}px;font-weight:{{ text_weight }};font-style:{{ text_style }};line-height:1.35;margin:0;"
+            >
+              {{ block.settings.text }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+            <div class="ai-story-banner-button-wrapper-{{ ai_gen_id }}" style="margin-top:{{ block.settings.button_spacing }}px;">
+              <a
+                href="{{ block.settings.button_link }}"
+                class="ai-story-banner-button-{{ ai_gen_id }}"
+                style="display:inline-block;padding:{{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;background-color:{{ block.settings.button_background_color }};color:{{ block.settings.button_text_color }};text-decoration:none;border-radius:{{ block.settings.button_border_radius }}px;font-family:{{ button_stack }};font-size:{{ block.settings.button_text_size }}px;font-weight:{{ button_weight }};"
+              >
+                {{ block.settings.button_text }}
+              </a>
+            </div>
+          {% endif %}
         </div>
-      {% endif %}
+      </div>
     </div>
   </div>
 </div>
-  </div>
-</div>
-{%- if block.settings.enable_sticky_scroll -%}
 <script>
-  (function() {
-    var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
-    if (!track || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var section = track.closest('.shopify-section');
-    var pin = section && section.querySelector('[data-hp-story-sticky-pin="{{ ai_gen_id }}"]');
-    if (!section || !pin) return;
-
-    var main = section.closest('#MainContent') || document.getElementById('MainContent');
-    if (main) {
-      main.style.setProperty('position', 'relative');
-      main.style.setProperty('isolation', 'isolate');
-      var mainBg = window.getComputedStyle(main).backgroundColor;
-      if (!mainBg || mainBg === 'transparent' || mainBg === 'rgba(0, 0, 0, 0)') {
-        main.style.setProperty('background-color', '#ffffff');
-      }
+  (function () {
+    var wrap = document.querySelector('.ai-story-banner-wrapper-{{ ai_gen_id }}');
+    if (!wrap) return;
+    function syncBg() {
+      var mobile = window.matchMedia('(max-width: 749px)').matches;
+      var url = mobile ? wrap.getAttribute('data-mobile-bg') : wrap.getAttribute('data-desktop-bg');
+      if (url) wrap.style.backgroundImage = 'url(\"' + url.replace(/\"/g, '') + '\")';
     }
-
-    // Unblock sticky (overflow hidden on ancestors breaks it)
-    var node = track;
-    while (node && node !== document.documentElement) {
-      if (node.nodeType === 1) {
-        var cs = window.getComputedStyle(node);
-        if (cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.overflowY === 'hidden') {
-          node.style.setProperty('overflow-x', 'clip', 'important');
-          node.style.setProperty('overflow-y', 'visible', 'important');
-        }
-      }
-      node = node.parentElement;
-    }
-
-    var prev = section.previousElementSibling;
-    var next = section.nextElementSibling;
-
-    function isTransparent(color) {
-      return !color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)';
-    }
-
-    function paintOpaque(el, fallback) {
-      if (!el) return;
-      if (isTransparent(window.getComputedStyle(el).backgroundColor)) {
-        el.style.setProperty('background-color', fallback, 'important');
-      }
-      var inners = el.querySelectorAll(':scope > section, :scope > div, .fc-section, .corp-marquee');
-      for (var i = 0; i < Math.min(inners.length, 8); i++) {
-        if (isTransparent(window.getComputedStyle(inners[i]).backgroundColor)) {
-          inners[i].style.setProperty('background-color', fallback, 'important');
-        }
-      }
-    }
-
-    function isFloatingCardStack() {
-      return !!(
-        document.body.classList.contains('hp-floating-cards-active') ||
-        document.body.classList.contains('hp-float-active') ||
-        document.body.classList.contains('hp-crossfade-active') ||
-        (section.closest && section.closest('[data-hp-card-stack], .hp-card-stack, [data-hp-xfade-stack], .hp-xfade-stack, [data-hp-float-stack], .hp-float-stack'))
-      );
-    }
-
-    function flattenToNatural() {
-      section.style.setProperty('height', 'auto', 'important');
-      section.style.setProperty('min-height', '0px', 'important');
-      section.style.setProperty('margin-top', '0px', 'important');
-      section.style.setProperty('overflow', 'visible', 'important');
-      section.style.setProperty('background', 'transparent', 'important');
-      section.style.setProperty('pointer-events', 'auto', 'important');
-      section.style.removeProperty('z-index');
-
-      track.style.setProperty('height', 'auto', 'important');
-      track.style.setProperty('min-height', '0px', 'important');
-      track.style.setProperty('background', 'transparent', 'important');
-      track.style.removeProperty('z-index');
-
-      pin.style.setProperty('position', 'relative', 'important');
-      pin.style.setProperty('top', 'auto', 'important');
-      pin.style.setProperty('height', 'auto', 'important');
-      pin.style.setProperty('min-height', '0px', 'important');
-      pin.style.setProperty('background', 'transparent', 'important');
-      pin.style.setProperty('overflow', 'visible', 'important');
-      pin.style.setProperty('pointer-events', 'auto', 'important');
-      pin.style.removeProperty('z-index');
-
-      if (next && next.classList && next.classList.contains('shopify-section')) {
-        next.style.setProperty('margin-top', '0px', 'important');
-        next.style.removeProperty('background-color');
-      }
-    }
-
-    /* Desktop + float stack: full image, no cover-crop cutting the subject */
-    function fitDesktopNatural() {
-      section.style.setProperty('height', 'auto', 'important');
-      section.style.setProperty('min-height', '0px', 'important');
-      section.style.setProperty('margin-top', '0px', 'important');
-      section.style.setProperty('overflow', 'visible', 'important');
-      section.style.setProperty('background', 'transparent', 'important');
-      section.style.setProperty('pointer-events', 'auto', 'important');
-      section.style.removeProperty('z-index');
-
-      track.style.setProperty('height', 'auto', 'important');
-      track.style.setProperty('min-height', '0px', 'important');
-      track.style.setProperty('background', 'transparent', 'important');
-      track.style.removeProperty('z-index');
-
-      pin.style.setProperty('position', 'relative', 'important');
-      pin.style.setProperty('top', 'auto', 'important');
-      pin.style.setProperty('height', 'auto', 'important');
-      pin.style.setProperty('min-height', '0px', 'important');
-      pin.style.setProperty('background', '#0a0a0a', 'important');
-      pin.style.setProperty('overflow', 'visible', 'important');
-      pin.style.setProperty('pointer-events', 'auto', 'important');
-      pin.style.removeProperty('z-index');
-
-      var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
-      if (wrap) {
-        wrap.style.setProperty('position', 'relative', 'important');
-        wrap.style.setProperty('inset', 'auto', 'important');
-        wrap.style.setProperty('top', 'auto', 'important');
-        wrap.style.setProperty('left', 'auto', 'important');
-        wrap.style.setProperty('right', 'auto', 'important');
-        wrap.style.setProperty('bottom', 'auto', 'important');
-        wrap.style.setProperty('width', '100%', 'important');
-        wrap.style.setProperty('height', 'auto', 'important');
-        wrap.style.setProperty('min-height', '0', 'important');
-        wrap.style.setProperty('display', 'block', 'important');
-        wrap.style.setProperty('background-color', '#0a0a0a', 'important');
-        wrap.style.setProperty('overflow', 'visible', 'important');
-      }
-
-      var img = pin.querySelector('[class*="ai-story-banner-image-"]');
-      if (img) {
-        img.style.setProperty('position', 'relative', 'important');
-        img.style.setProperty('inset', 'auto', 'important');
-        img.style.setProperty('top', 'auto', 'important');
-        img.style.setProperty('left', 'auto', 'important');
-        img.style.setProperty('width', '100%', 'important');
-        img.style.setProperty('height', 'auto', 'important');
-        img.style.setProperty('max-height', 'none', 'important');
-        img.style.setProperty('object-fit', 'contain', 'important');
-        img.style.setProperty('object-position', 'center center', 'important');
-        img.style.setProperty('display', 'block', 'important');
-      }
-
-      var mobileImgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
-      for (var mi = 0; mi < mobileImgs.length; mi++) {
-        mobileImgs[mi].style.setProperty('display', 'none', 'important');
-        mobileImgs[mi].style.setProperty('visibility', 'hidden', 'important');
-        mobileImgs[mi].style.setProperty('height', '0', 'important');
-        mobileImgs[mi].style.setProperty('position', 'absolute', 'important');
-      }
-
-      var content = pin.querySelector('[class*="ai-story-banner-content"]');
-      if (content) {
-        content.style.setProperty('position', 'absolute', 'important');
-        content.style.setProperty('top', '56px', 'important');
-        content.style.setProperty('padding-top', '12px', 'important');
-        content.style.setProperty('overflow', 'visible', 'important');
-        content.style.setProperty('z-index', '3', 'important');
-      }
-
-      if (next && next.classList && next.classList.contains('shopify-section')) {
-        next.style.setProperty('margin-top', '0px', 'important');
-        next.style.removeProperty('background-color');
-      }
-    }
-
-    function layoutCurtain() {
-      /*
-        Float stack owns full-screen cover — do not flatten over it.
-        Standalone (no float): natural height, never a 200vh sticky runway.
-      */
-      if (isFloatingCardStack() || (section && section.classList.contains('hp-float-story'))) {
-        return;
-      }
-      var isMobile = window.matchMedia('(max-width: 749px)').matches;
-      if (isMobile) {
-        flattenToNatural();
-      } else {
-        fitDesktopNatural();
-      }
-    }
-
-    layoutCurtain();
-    window.addEventListener('resize', layoutCurtain, { passive: true });
-    window.addEventListener('hp-floating-cards:ready', layoutCurtain);
-    window.addEventListener('load', layoutCurtain, { passive: true });
+    syncBg();
+    window.addEventListener('resize', syncBg, { passive: true });
   })();
 </script>
-{%- endif -%}
 
 {% schema %}
 {
