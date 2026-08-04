@@ -54,45 +54,25 @@ body.template-index.hp-float-active #MainContent {
   width: 100%;
   height: auto !important;
   min-height: 0 !important;
-  max-height: none !important;
   transform: none !important;
   opacity: 1 !important;
   box-shadow: none !important;
-  overflow: visible !important;
 }
 
-/* Empty duplicate story banners — fully collapsed */
-.hp-float-stack > .shopify-section.hp-float-hidden {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* Story: exactly one viewport, image cover — no black plate below */
+/* No 200vh story runway — float card owns full-screen */
 body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 .hp-float-stack > .shopify-section.hp-float-story {
   pointer-events: auto !important;
-  background: #111111 !important;
+  background: #0a0a0a !important;
   height: 100vh !important;
   height: 100dvh !important;
   min-height: 100vh !important;
   min-height: 100dvh !important;
-  max-height: 100vh !important;
-  max-height: 100dvh !important;
   overflow: hidden !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
 }
 
-/* Next section after story must be opaque so sticky story never leaves a black gap */
 .hp-float-stack > .shopify-section.hp-float-story + .shopify-section {
   margin-top: 0 !important;
-  background-color: #ffffff !important;
 }
 
 /* Stretch every wrapper in the chain so % / absolute fill works */
@@ -117,10 +97,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   height: 100dvh !important;
   min-height: 100vh !important;
   min-height: 100dvh !important;
-  max-height: 100vh !important;
-  max-height: 100dvh !important;
   overflow: hidden !important;
-  background: transparent !important;
+  background: #0a0a0a !important;
 }
 
 .hp-float-stack .hp-float-story [class*='ai-story-sticky-track'] {
@@ -132,13 +110,13 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   top: auto !important;
   z-index: auto !important;
   pointer-events: auto !important;
-  background: transparent !important;
+  background: #0a0a0a !important;
   overflow: hidden !important;
 }
 
 .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
   inset: auto !important;
-  background-color: transparent !important;
+  background-color: #0a0a0a !important;
   overflow: hidden !important;
 }
 
@@ -291,10 +269,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     height: 100dvh !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
-    max-height: 100vh !important;
-    max-height: 100dvh !important;
     overflow: hidden !important;
-    background: transparent !important;
+    background: #0a0a0a !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {

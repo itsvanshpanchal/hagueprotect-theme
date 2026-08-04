@@ -1,9 +1,10 @@
 /*
   Homepage floating section animation — full-viewport sticky cover.
 
-  Full-screen cards only for visual panels (hero, story, materials, video).
-  Short / text sections stay natural-height strips — no forced 100vh black voids.
-  Empty story banners (no heading/text) are stripped so they cannot become black panels.
+  All screen sizes (monitor → phone): substantial sections stick at least
+  100dvh so each fills the screen while the next slides over.
+  Story banner is included as a full-screen card (no 200vh sticky runway).
+  Thin marquees stay normal flow. One image only per breakpoint.
 */
 (function () {
   'use strict';
@@ -48,29 +49,6 @@
       pin.querySelector('[class*="ai-story-sticky-track"]') ||
       pin.querySelector('[class*="ai-story-banner-"]')
     );
-  }
-
-  /* Empty image-only story blocks become solid black 100vh panels — skip full-screen */
-  function isEmptyStory(pin) {
-    if (!isStoryPin(pin)) return false;
-    var heading = pin.querySelector('[class*="ai-story-banner-heading"]');
-    var sub = pin.querySelector('[class*="ai-story-banner-subheading"]');
-    var text = pin.querySelector('[class*="ai-story-banner-text"]');
-    var hasCopy =
-      (heading && heading.textContent.replace(/\s+/g, '').length > 0) ||
-      (sub && sub.textContent.replace(/\s+/g, '').length > 0) ||
-      (text && text.textContent.replace(/\s+/g, '').length > 0);
-    return !hasCopy;
-  }
-
-  function isVisualFullscreen(pin) {
-    if (pin.querySelector('.hero-fullscreen')) return true;
-    if (isStoryPin(pin) && !isEmptyStory(pin)) return true;
-    if (pin.querySelector('.mat-section')) return true;
-    if (pin.querySelector('.bs-coverflow')) return true;
-    if (pin.querySelector('[class*="horizontal-product"], .hps-, [data-hps]')) return true;
-    if (pin.querySelector('video')) return true;
-    return false;
   }
 
   function ensurePin(sec) {
@@ -140,21 +118,8 @@
     }
   }
 
-  function clearStoryOverrides(pin) {
-    var nodes = pin.querySelectorAll(
-      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-"], img'
-    );
-    for (var i = 0; i < nodes.length; i++) {
-      nodes[i].style.cssText = '';
-    }
-    var kids = pin.children;
-    for (var k = 0; k < kids.length; k++) {
-      kids[k].style.cssText = '';
-    }
-  }
-
   function resetSectionStyles(sec, pin) {
-    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hidden');
+    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story');
     [
       'height',
       'min-height',
@@ -170,33 +135,15 @@
       'background',
       'transform',
       'overflow',
-      'box-shadow',
-      'display'
+      'box-shadow'
     ].forEach(function (prop) {
       sec.style.removeProperty(prop);
     });
     pin.style.cssText = '';
     clearHeroOverrides(pin);
-    clearStoryOverrides(pin);
   }
 
-  /* Hide empty image-only story banners (were solid black full-screen panels) */
-  function hideEmptyStory(item) {
-    var sec = item.sec;
-    var pin = item.pin;
-    item.isCard = false;
-    sec.classList.add('hp-float-hidden');
-    sec.style.setProperty('display', 'none', 'important');
-    sec.style.setProperty('height', '0', 'important');
-    sec.style.setProperty('min-height', '0', 'important');
-    sec.style.setProperty('margin', '0', 'important');
-    sec.style.setProperty('padding', '0', 'important');
-    sec.style.setProperty('overflow', 'hidden', 'important');
-    sec.style.setProperty('visibility', 'hidden', 'important');
-    pin.style.setProperty('display', 'none', 'important');
-    pin.style.setProperty('height', '0', 'important');
-  }
-
+  /* Flatten story sticky runway; size for full-screen cover inside float card */
   function prepareStoryFullscreen(pin, mobile) {
     var vh = viewportH();
     var fill = vh + 'px';
@@ -211,11 +158,9 @@
       chain[i].style.setProperty('max-width', 'none', 'important');
       chain[i].style.setProperty('height', fill, 'important');
       chain[i].style.setProperty('min-height', fill, 'important');
-      chain[i].style.setProperty('max-height', fill, 'important');
+      chain[i].style.setProperty('max-height', 'none', 'important');
       chain[i].style.setProperty('overflow', 'hidden', 'important');
       chain[i].style.setProperty('box-sizing', 'border-box', 'important');
-      chain[i].style.setProperty('margin', '0', 'important');
-      chain[i].style.setProperty('padding', '0', 'important');
     }
 
     var intermediates = pin.children;
@@ -224,23 +169,20 @@
       intermediates[n].style.setProperty('width', '100%', 'important');
       intermediates[n].style.setProperty('height', fill, 'important');
       intermediates[n].style.setProperty('min-height', fill, 'important');
-      intermediates[n].style.setProperty('max-height', fill, 'important');
       intermediates[n].style.setProperty('max-width', 'none', 'important');
       intermediates[n].style.setProperty('overflow', 'hidden', 'important');
-      intermediates[n].style.setProperty('margin', '0', 'important');
     }
 
     var pins = pin.querySelectorAll('[class*="ai-story-sticky-pin"]');
     for (var j = 0; j < pins.length; j++) {
       pins[j].style.setProperty('top', 'auto', 'important');
       pins[j].style.setProperty('z-index', 'auto', 'important');
-      /* Match image — avoid visible black plate under/around banner */
-      pins[j].style.setProperty('background', 'transparent', 'important');
+      pins[j].style.setProperty('background', '#0a0a0a', 'important');
     }
 
     var wraps = pin.querySelectorAll('[class*="ai-story-banner-wrapper"]');
     for (var k = 0; k < wraps.length; k++) {
-      wraps[k].style.setProperty('background-color', 'transparent', 'important');
+      wraps[k].style.setProperty('background-color', '#0a0a0a', 'important');
     }
 
     var desk = pin.querySelectorAll('[class*="ai-story-banner-image-"]');
@@ -295,27 +237,7 @@
     }
   }
 
-  function prepareMaterialsFullscreen(pin) {
-    var vh = viewportH();
-    var fill = vh + 'px';
-    var mat = pin.querySelector('.mat-section');
-    if (!mat) return;
-    mat.style.setProperty('min-height', fill, 'important');
-    mat.style.setProperty('height', fill, 'important');
-    mat.style.setProperty('max-height', fill, 'important');
-    mat.style.setProperty('overflow', 'hidden', 'important');
-    var media = mat.querySelectorAll('img, picture, video, .mat-media, .mat-bg, [class*="mat-"] img');
-    for (var i = 0; i < media.length; i++) {
-      var el = media[i];
-      if (el.tagName === 'IMG' || el.tagName === 'VIDEO') {
-        el.style.setProperty('object-fit', 'cover', 'important');
-        el.style.setProperty('width', '100%', 'important');
-        el.style.setProperty('height', '100%', 'important');
-      }
-    }
-  }
-
-  function asStrip(item, z, bg) {
+  function asStrip(item, z) {
     var sec = item.sec;
     var pin = item.pin;
     item.isCard = false;
@@ -325,29 +247,24 @@
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', 'auto', 'important');
     sec.style.setProperty('min-height', '0', 'important');
-    sec.style.setProperty('max-height', 'none', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
-    sec.style.setProperty('margin-bottom', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
     sec.style.setProperty('box-shadow', 'none', 'important');
-    sec.style.setProperty('overflow', 'visible', 'important');
-    /* Opaque strip so sticky dark cards never flash black gaps underneath */
-    sec.style.setProperty('background-color', bg || '#ffffff', 'important');
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('height', 'auto', 'important');
     pin.style.setProperty('min-height', '0', 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('overflow', 'visible', 'important');
-    if (bg) pin.style.setProperty('background-color', bg, 'important');
   }
 
   function asCard(item, z, contentH, bg, mobile, isStory) {
     var sec = item.sec;
     var pin = item.pin;
     var vh = viewportH();
-    var pinH = Math.max(Math.min(contentH, vh * 1.05), vh);
+    /* Full-screen panel on every breakpoint — section fills the monitor/phone */
+    var pinH = Math.max(contentH, vh);
 
     item.isCard = true;
     sec.classList.add('hp-float-card');
@@ -359,7 +276,6 @@
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', pinH + 'px', 'important');
     sec.style.setProperty('min-height', vh + 'px', 'important');
-    sec.style.setProperty('max-height', pinH + 'px', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
@@ -370,16 +286,18 @@
       mobile ? 'none' : '0 -12px 32px rgba(0,0,0,0.14)',
       'important'
     );
-    sec.style.setProperty('overflow', 'hidden', 'important');
     if (bg) sec.style.setProperty('background-color', bg, 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('height', pinH + 'px', 'important');
     pin.style.setProperty('min-height', vh + 'px', 'important');
-    pin.style.setProperty('max-height', pinH + 'px', 'important');
     pin.style.setProperty('opacity', '1', 'important');
-    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty(
+      'overflow',
+      isStory || contentH <= vh + 8 ? 'hidden' : 'auto',
+      'important'
+    );
     if (mobile) pin.style.setProperty('-webkit-overflow-scrolling', 'touch');
     if (bg) pin.style.setProperty('background-color', bg, 'important');
   }
@@ -421,39 +339,22 @@
       var sec = item.sec;
       var pin = item.pin;
       var story = isStoryPin(pin);
-      var emptyStory = story && isEmptyStory(pin);
-      var isLast = index === items.length - 1;
 
       resetSectionStyles(sec, pin);
 
-      if (emptyStory) {
-        hideEmptyStory(item);
-        return;
-      }
-
       if (story) {
         prepareStoryFullscreen(pin, mobile);
-      } else if (pin.querySelector('.mat-section')) {
-        prepareMaterialsFullscreen(pin);
       }
 
-      var visual = isVisualFullscreen(pin);
-      var contentH = visual ? vh : Math.max(pin.scrollHeight, pin.offsetHeight, 1);
-      var bg = detectBg(pin);
-      if (!bg) bg = story ? '#111111' : '#ffffff';
-      /* Never paint pure black voids under non-image content */
-      if (!story && (bg === 'rgb(0, 0, 0)' || bg === '#000000' || bg === '#000')) {
-        bg = detectBg(pin) || '#111111';
-      }
+      var contentH = story
+        ? vh
+        : Math.max(pin.scrollHeight, pin.offsetHeight, 1);
+      var bg = detectBg(pin) || (story ? '#0a0a0a' : '#ffffff');
       item.bg = bg;
 
-      if (isKnownStrip(pin) || (!visual && contentH < vh * 0.55) || (!visual && isLast)) {
-        asStrip(item, 10 + index, bg === '#111111' && !visual ? '#ffffff' : bg);
-        return;
-      }
-
-      if (!visual && contentH < vh * 0.88) {
-        asStrip(item, 10 + index, bg);
+      /* Thin marquees / app blocks stay normal flow */
+      if (!story && (isKnownStrip(pin) || contentH < vh * 0.22)) {
+        asStrip(item, 10 + index);
         return;
       }
 

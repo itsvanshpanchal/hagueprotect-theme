@@ -87,18 +87,8 @@
     height: 100dvh !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
-    max-height: 100vh !important;
-    max-height: 100dvh !important;
     overflow: hidden !important;
-    background: #111111 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  .shopify-section.hp-float-hidden:has(.ai-story-sticky-track-{{ ai_gen_id }}) {
-    display: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
+    background: #0a0a0a !important;
   }
 
   /* Section ABOVE — stays above the pin while it scrolls away */
@@ -148,7 +138,7 @@
     margin: 0;
     padding: 0;
     overflow: visible;
-    background: transparent;
+    background: #0a0a0a;
     pointer-events: auto;
   }
 
@@ -161,7 +151,7 @@
     min-height: 100%;
     max-width: none;
     display: block;
-    background-color: transparent;
+    background-color: #0a0a0a;
     overflow: hidden;
   }
 
@@ -298,7 +288,7 @@
     position: relative;
     width: 100%;
     display: block;
-    background-color: transparent;
+    background-color: #0a0a0a;
     overflow: hidden;
   }
 
@@ -497,25 +487,8 @@
       height: auto;
       max-height: none;
       overflow: hidden;
-      background-color: transparent;
+      background-color: #0a0a0a;
       display: block;
-    }
-
-    /* Keep full-screen float story from collapsing on mobile */
-    .shopify-section.hp-float-story .ai-story-banner-wrapper-{{ ai_gen_id }},
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: 100% !important;
-      min-height: 100% !important;
-      max-height: none !important;
-    }
-
-    .shopify-section.hp-float-story .ai-story-banner-mobile-image-{{ ai_gen_id }},
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
     }
 
     /* In-flow mobile image only — one full banner, no desktop duplicate */
@@ -618,12 +591,7 @@
       min-height: 0 !important;
       max-height: none !important;
       height: auto !important;
-      background-color: transparent;
-    }
-
-    .shopify-section.hp-float-story .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-wrapper-{{ ai_gen_id }} {
-      height: 100% !important;
-      min-height: 100% !important;
+      background-color: #0a0a0a;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
