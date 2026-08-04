@@ -57,6 +57,10 @@
     );
   }
 
+  function isHeroPin(pin) {
+    return !!pin.querySelector('.hero-fullscreen');
+  }
+
   function ensurePin(sec) {
     var pin = sec.querySelector(':scope > .hp-float-pin');
     if (pin) return pin;
@@ -112,7 +116,12 @@
       'overflow',
       'opacity',
       'visibility',
-      'background'
+      'background',
+      'background-image',
+      'background-size',
+      'background-position',
+      'background-repeat',
+      'background-color'
     ].forEach(function (prop) {
       hero.style.removeProperty(prop);
     });
@@ -124,8 +133,104 @@
     }
   }
 
+  /* Keep mobile hero painted — sticky stacks were covering/collapsing it after first paint */
+  function prepareHeroFullscreen(pin) {
+    var fill = '100dvh';
+    var hero = pin.querySelector('.hero-fullscreen');
+    if (!hero) return;
+
+    pin.style.setProperty('height', fill, 'important');
+    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    pin.style.setProperty('background-color', '#111111', 'important');
+    pin.style.setProperty('background-size', 'cover', 'important');
+    pin.style.setProperty('background-position', 'center 22%', 'important');
+    pin.style.setProperty('background-repeat', 'no-repeat', 'important');
+
+    hero.style.setProperty('display', 'block', 'important');
+    hero.style.setProperty('position', 'relative', 'important');
+    hero.style.setProperty('width', '100%', 'important');
+    hero.style.setProperty('height', fill, 'important');
+    hero.style.setProperty('min-height', '100svh', 'important');
+    hero.style.setProperty('max-height', 'none', 'important');
+    hero.style.setProperty('aspect-ratio', 'auto', 'important');
+    hero.style.setProperty('margin', '0', 'important');
+    hero.style.setProperty('padding', '0', 'important');
+    hero.style.setProperty('overflow', 'hidden', 'important');
+    hero.style.setProperty('opacity', '1', 'important');
+    hero.style.setProperty('visibility', 'visible', 'important');
+    hero.style.setProperty('background-color', '#111111', 'important');
+    hero.style.setProperty('background-size', 'cover', 'important');
+    hero.style.setProperty('background-position', 'center 22%', 'important');
+    hero.style.setProperty('background-repeat', 'no-repeat', 'important');
+
+    var bg = pin.querySelector('.hero-fullscreen__bg');
+    if (bg) {
+      bg.style.setProperty('position', 'absolute', 'important');
+      bg.style.setProperty('inset', '0', 'important');
+      bg.style.setProperty('width', '100%', 'important');
+      bg.style.setProperty('height', '100%', 'important');
+      bg.style.setProperty('opacity', '1', 'important');
+      bg.style.setProperty('visibility', 'visible', 'important');
+      bg.style.setProperty('z-index', '1', 'important');
+    }
+
+    var picture = pin.querySelector('.hero-fullscreen__bg picture');
+    if (picture) {
+      picture.style.setProperty('position', 'absolute', 'important');
+      picture.style.setProperty('inset', '0', 'important');
+      picture.style.setProperty('width', '100%', 'important');
+      picture.style.setProperty('height', '100%', 'important');
+      picture.style.setProperty('display', 'block', 'important');
+      picture.style.setProperty('opacity', '1', 'important');
+      picture.style.setProperty('visibility', 'visible', 'important');
+    }
+
+    var img = pin.querySelector('.hero-fullscreen__bg-img, .hero-fullscreen__bg img');
+    var src = '';
+    if (img) {
+      src = img.currentSrc || img.src || img.getAttribute('src') || '';
+      img.removeAttribute('loading');
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+      img.style.setProperty('position', 'absolute', 'important');
+      img.style.setProperty('inset', '0', 'important');
+      img.style.setProperty('width', '100%', 'important');
+      img.style.setProperty('height', '100%', 'important');
+      img.style.setProperty('min-width', '100%', 'important');
+      img.style.setProperty('min-height', '100%', 'important');
+      img.style.setProperty('object-fit', 'cover', 'important');
+      img.style.setProperty('object-position', 'center 22%', 'important');
+      img.style.setProperty('display', 'block', 'important');
+      img.style.setProperty('opacity', '1', 'important');
+      img.style.setProperty('visibility', 'visible', 'important');
+      img.style.setProperty('z-index', '1', 'important');
+      if (!img.complete && src) {
+        var warm = new Image();
+        warm.src = src;
+      }
+    }
+
+    if (src) {
+      var url = 'url("' + String(src).replace(/"/g, '') + '")';
+      hero.style.setProperty('background-image', url, 'important');
+      pin.style.setProperty('background-image', url, 'important');
+    }
+
+    var content = pin.querySelector('.hero-fullscreen__content');
+    if (content) {
+      content.style.setProperty('position', 'absolute', 'important');
+      content.style.setProperty('z-index', '3', 'important');
+      content.style.setProperty('opacity', '1', 'important');
+      content.style.setProperty('visibility', 'visible', 'important');
+    }
+  }
+
   function resetSectionStyles(sec, pin) {
-    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story');
+    var hero = isHeroPin(pin);
+    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero');
     [
       'height',
       'min-height',
@@ -145,6 +250,26 @@
     ].forEach(function (prop) {
       sec.style.removeProperty(prop);
     });
+
+    /*
+      On mobile, wiping pin/hero inline styles causes a one-frame collapse
+      ("loads once then hides"). Keep the painted hero while float classes reset.
+    */
+    if (hero && isMobile()) {
+      [
+        'position',
+        'top',
+        'z-index',
+        'box-shadow',
+        'transform',
+        'margin-top',
+        'margin-bottom'
+      ].forEach(function (prop) {
+        pin.style.removeProperty(prop);
+      });
+      return;
+    }
+
     pin.style.cssText = '';
     clearHeroOverrides(pin);
   }
@@ -309,6 +434,41 @@
     pin.style.setProperty('overflow', 'visible', 'important');
   }
 
+  /* Mobile hero: paint once at full screen, then scroll away (not sticky).
+     Sticky stacking was covering/hiding the hero right after first paint. */
+  function asHeroOnce(item, z, bg) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var fill = '100dvh';
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-hero');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'relative', 'important');
+    sec.style.setProperty('top', 'auto', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', 'none', 'important');
+    sec.style.setProperty('background-color', bg || '#111111', 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('height', fill, 'important');
+    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('background-color', bg || '#111111', 'important');
+
+    prepareHeroFullscreen(pin);
+  }
+
   function asCard(item, z, contentH, bg, mobile, isStory) {
     var sec = item.sec;
     var pin = item.pin;
@@ -401,8 +561,26 @@
       var sec = item.sec;
       var pin = item.pin;
       var story = isStoryPin(pin);
+      var hero = isHeroPin(pin);
 
       resetSectionStyles(sec, pin);
+
+      if (hero) {
+        prepareHeroFullscreen(pin);
+        if (!item._heroImgBound) {
+          item._heroImgBound = true;
+          var himgs = pin.querySelectorAll('.hero-fullscreen__bg-img, .hero-fullscreen__bg img');
+          for (var hi = 0; hi < himgs.length; hi++) {
+            himgs[hi].addEventListener(
+              'load',
+              function () {
+                prepareHeroFullscreen(pin);
+              },
+              { once: false }
+            );
+          }
+        }
+      }
 
       if (story) {
         prepareStoryFullscreen(pin, mobile);
@@ -424,20 +602,28 @@
         }
       }
 
-      var contentH = story
+      var contentH = story || hero
         ? vh
         : Math.max(pin.scrollHeight, pin.offsetHeight, 1);
-      var bg = detectBg(pin) || (story ? '#111111' : '#ffffff');
+      var bg = detectBg(pin) || (story || hero ? '#111111' : '#ffffff');
       item.bg = bg;
 
-      /* Thin marquees / app blocks stay normal flow */
-      if (!story && (isKnownStrip(pin) || contentH < vh * 0.22)) {
+      /* Mobile hero: one full-screen paint, then hide by scrolling away */
+      if (hero && mobile) {
+        cardIndex += 1;
+        asHeroOnce(item, cardIndex, bg);
+        return;
+      }
+
+      /* Thin marquees / app blocks stay normal flow — never strip the hero */
+      if (!story && !hero && (isKnownStrip(pin) || contentH < vh * 0.22)) {
         asStrip(item, 10 + index);
         return;
       }
 
       cardIndex += 1;
       asCard(item, cardIndex, contentH, bg, mobile, story);
+      if (hero) prepareHeroFullscreen(pin);
     });
 
     lastLayoutW = window.innerWidth || 0;

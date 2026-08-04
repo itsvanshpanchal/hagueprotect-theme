@@ -231,6 +231,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 @media screen and (max-width: 749px) {
   body.hp-float-mobile.hp-float-active #MainContent {
     -webkit-overflow-scrolling: touch;
+    /* overflow-x:clip breaks sticky/paint on iOS — keep visible on mobile */
+    overflow-x: visible !important;
   }
 
   .hp-float-stack > .shopify-section.hp-float-card,
@@ -248,17 +250,65 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: hidden !important;
   }
 
+  /* Hero: one full-screen paint, then scrolls away (not sticky) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero {
+    position: relative !important;
+    top: auto !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
+    background-color: #111111 !important;
+    background-size: cover !important;
+    background-position: center 22% !important;
+    background-repeat: no-repeat !important;
+    transform: none !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero > .hp-float-pin {
+    position: relative !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: hidden !important;
+    background-color: #111111 !important;
+    background-size: cover !important;
+    background-position: center 22% !important;
+    background-repeat: no-repeat !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-hero .hero-fullscreen,
+  body.hp-float-mobile .hp-float-stack .hp-float-hero .hero-fullscreen--mobile-art,
   body.hp-float-mobile .hp-float-stack .hero-fullscreen,
   body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art {
-    height: 100% !important;
-    min-height: 100% !important;
+    display: block !important;
+    position: relative !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
     max-height: none !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     aspect-ratio: auto !important;
-    background: #111 !important;
+    background-color: #111111 !important;
+    background-size: cover !important;
+    background-position: center 22% !important;
+    background-repeat: no-repeat !important;
     overflow: hidden !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg,
@@ -274,8 +324,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-width: none !important;
     max-height: none !important;
     object-fit: cover !important;
-    /* Keep product/faces in frame on tall phones cropping 4:5 art */
     object-position: center 22% !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 3 !important;
   }
 
   /* Story: mobile image only, cover-fills the panel */
