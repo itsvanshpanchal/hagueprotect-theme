@@ -1,0 +1,93 @@
+/* Story banner (Tell Your Story) — loaded from theme.liquid
+   Do not put <style> inside the block; Shopify strips tags and leaks CSS as text. */
+
+.ai-story-sticky-track,
+.ai-story-sticky-pin {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.ai-story-banner {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.ai-story-banner-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: block;
+  overflow: hidden;
+  background-color: #111111;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.ai-story-banner-image,
+.ai-story-banner-mobile-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 1;
+}
+
+.ai-story-banner-mobile-image {
+  display: none;
+}
+
+.ai-story-banner-placeholder {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+}
+
+.ai-story-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ai-story-banner-content {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-story-banner-heading .hp-heading-accent {
+  display: inline !important;
+}
+
+.ai-story-banner-heading .hp-heading-pair--stack .hp-heading-accent {
+  display: block !important;
+}
+
+.ai-story-banner-button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 749px) {
+  .ai-story-banner-image {
+    display: none !important;
+  }
+
+  .ai-story-banner-mobile-image {
+    display: block !important;
+  }
+}

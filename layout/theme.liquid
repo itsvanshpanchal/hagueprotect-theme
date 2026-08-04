@@ -157,6 +157,7 @@
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'hp-story-banner.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'index' -%}
       {{ 'hp-floating-cards.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
@@ -430,6 +431,7 @@
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'heading-typewriter.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'hp-story-banner.js' | asset_url }}" defer="defer"></script>
     {%- if template.name == 'index' -%}
       <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
