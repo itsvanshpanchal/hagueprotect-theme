@@ -117,13 +117,13 @@
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} {
-    position: sticky;
-    top: 0;
+    position: relative;
+    top: auto;
     left: 0;
     width: 100%;
     height: auto;
     min-height: 0;
-    z-index: 1;
+    z-index: auto;
     margin: 0;
     padding: 0;
     overflow: visible;
@@ -838,105 +838,22 @@
     }
 
     function layoutCurtain() {
-      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      /*
+        Never use sticky scroll runway — it forced 2–3 scroll wheels to leave
+        the banner. Always natural-height flow.
+      */
       var isMobile = window.matchMedia('(max-width: 749px)').matches;
-
-      /* Mobile: natural image height */
       if (isMobile) {
         flattenToNatural();
-        return;
-      }
-
-      /* Desktop: show the full photo (no 100vh cover crop) */
-      if (isFloatingCardStack()) {
+      } else {
         fitDesktopNatural();
-        return;
-      }
-
-      /* Sticky curtain — pin to image height so cover does not cut the subject */
-      var imgEl = pin.querySelector('[class*="ai-story-banner-image-"]');
-      var imgH = imgEl ? Math.max(imgEl.naturalHeight ? (imgEl.clientWidth / (imgEl.naturalWidth || 1)) * imgEl.naturalHeight : 0, imgEl.offsetHeight || 0) : 0;
-      var pinH = Math.max(imgH, Math.round(vh * 0.72));
-      var trackH = pinH + Math.round(vh * 0.55);
-
-      if (prev && prev.classList && prev.classList.contains('shopify-section')) {
-        prev.classList.add('hp-story-curtain-prev-{{ ai_gen_id }}');
-        prev.style.setProperty('position', 'relative', 'important');
-        prev.style.setProperty('z-index', '3', 'important');
-        prev.style.setProperty('isolation', 'isolate', 'important');
-        prev.style.setProperty('padding-bottom', '0px', 'important');
-        paintOpaque(prev, '#ffffff');
-      }
-
-      section.style.setProperty('position', 'relative', 'important');
-      section.style.setProperty('z-index', '1', 'important');
-      section.style.setProperty('margin-top', '0px', 'important');
-      section.style.setProperty('height', trackH + 'px', 'important');
-      section.style.setProperty('overflow', 'visible', 'important');
-      section.style.setProperty('background', 'transparent', 'important');
-      section.style.setProperty('pointer-events', 'none', 'important');
-
-      track.style.setProperty('background', 'transparent', 'important');
-      track.style.removeProperty('z-index');
-
-      pin.style.setProperty('position', 'sticky', 'important');
-      pin.style.setProperty('top', '0px', 'important');
-      pin.style.setProperty('z-index', '1', 'important');
-      pin.style.setProperty('height', 'auto', 'important');
-      pin.style.setProperty('min-height', '0', 'important');
-      pin.style.setProperty('background', '#0a0a0a', 'important');
-      pin.style.setProperty('overflow', 'visible', 'important');
-      pin.style.setProperty('pointer-events', 'auto', 'important');
-
-      var wrap = pin.querySelector('[class*="ai-story-banner-wrapper"]');
-      if (wrap) {
-        wrap.style.setProperty('position', 'relative', 'important');
-        wrap.style.setProperty('inset', 'auto', 'important');
-        wrap.style.setProperty('height', 'auto', 'important');
-        wrap.style.setProperty('display', 'block', 'important');
-        wrap.style.setProperty('background-color', '#0a0a0a', 'important');
-        wrap.style.setProperty('overflow', 'visible', 'important');
-      }
-      var img = pin.querySelector('[class*="ai-story-banner-image-"]');
-      if (img) {
-        img.style.setProperty('position', 'relative', 'important');
-        img.style.setProperty('inset', 'auto', 'important');
-        img.style.setProperty('width', '100%', 'important');
-        img.style.setProperty('height', 'auto', 'important');
-        img.style.setProperty('max-height', 'none', 'important');
-        img.style.setProperty('object-fit', 'contain', 'important');
-        img.style.setProperty('display', 'block', 'important');
-      }
-      var content = pin.querySelector('[class*="ai-story-banner-content"]');
-      if (content) {
-        content.style.setProperty('position', 'absolute', 'important');
-        content.style.setProperty('top', '56px', 'important');
-        content.style.setProperty('overflow', 'visible', 'important');
-      }
-
-      var sib = next;
-      var idx = 0;
-      while (sib && idx < 4) {
-        if (sib.classList && sib.classList.contains('shopify-section')) {
-          sib.classList.add('hp-story-curtain-next-{{ ai_gen_id }}');
-          sib.style.setProperty('position', 'relative', 'important');
-          sib.style.setProperty('z-index', '3', 'important');
-          sib.style.setProperty('isolation', 'isolate', 'important');
-          if (idx === 0) {
-            sib.style.setProperty('margin-top', -pinH + 'px', 'important');
-            paintOpaque(sib, '#111111');
-          } else {
-            paintOpaque(sib, '#ffffff');
-          }
-          idx += 1;
-        }
-        sib = sib.nextElementSibling;
       }
     }
 
     layoutCurtain();
     window.addEventListener('resize', layoutCurtain, { passive: true });
     window.addEventListener('hp-floating-cards:ready', layoutCurtain);
+    window.addEventListener('load', layoutCurtain, { passive: true });
   })();
 </script>
 {%- endif -%}
@@ -953,9 +870,9 @@
     {
       "type": "checkbox",
       "id": "enable_sticky_scroll",
-      "label": "Fixed reveal (sections scroll over banner)",
-      "default": true,
-      "info": "Indriya-style curtain: banner pins underneath. Section above lifts away over it, then section below slides up and covers it."
+      "label": "Sticky scroll reveal (not recommended)",
+      "default": false,
+      "info": "Off by default — sticky runways make the banner feel stuck and require multiple scroll wheels to pass."
     },
     {
       "type": "range",

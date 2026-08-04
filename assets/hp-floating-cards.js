@@ -270,11 +270,14 @@
       resetSectionStyles(sec, pin);
       flattenStoryCurtains(pin);
 
-      if (pin.querySelector('[class*="ai-story-sticky-track"]')) {
+      if (pin.querySelector('[class*="ai-story-sticky-track"]') || pin.querySelector('[class*="ai-story-banner-"]')) {
         sec.style.setProperty('height', 'auto', 'important');
         sec.style.setProperty('min-height', '0', 'important');
         sec.style.setProperty('pointer-events', 'auto', 'important');
         sec.style.setProperty('background', 'transparent', 'important');
+        /* Never sticky-pin story banners — sticky runway made scroll feel stuck */
+        asStrip(item, 10 + index);
+        return;
       }
 
       /*
