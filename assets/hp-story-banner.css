@@ -31,7 +31,19 @@
   background-repeat: no-repeat;
 }
 
+.ai-story-banner-picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
 .ai-story-banner-image,
+.ai-story-banner-cover,
 .ai-story-banner-mobile-image {
   position: absolute;
   inset: 0;
@@ -40,10 +52,7 @@
   object-fit: cover;
   object-position: center center;
   z-index: 1;
-}
-
-.ai-story-banner-mobile-image {
-  display: none;
+  display: block;
 }
 
 .ai-story-banner-placeholder {
@@ -85,32 +94,29 @@
 @media screen and (max-width: 749px) {
   .ai-story-sticky-track,
   .ai-story-sticky-pin,
-  .ai-story-banner {
+  .ai-story-banner,
+  .ai-story-banner-wrapper {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
   }
 
   .ai-story-banner-wrapper {
-    width: 100% !important;
     min-height: 100svh !important;
     min-height: 100dvh !important;
     height: 100svh !important;
     height: 100dvh !important;
     background-size: cover !important;
     background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
 
+  .ai-story-banner-picture,
+  .ai-story-banner-cover,
   .ai-story-banner-image {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  .ai-story-banner-mobile-image {
-    display: block !important;
-    visibility: visible !important;
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
@@ -119,9 +125,21 @@
     min-height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .ai-story-banner-content {
     max-width: min(90%, 320px) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .ai-story-banner-subheading,
+  .ai-story-banner-heading,
+  .ai-story-banner-text {
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }

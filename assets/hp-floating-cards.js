@@ -230,6 +230,7 @@
 
   function resetSectionStyles(sec, pin) {
     var hero = isHeroPin(pin);
+    var story = isStoryPin(pin);
     sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero');
     [
       'height',
@@ -252,10 +253,10 @@
     });
 
     /*
-      On mobile, wiping pin/hero inline styles causes a one-frame collapse
-      ("loads once then hides"). Keep the painted hero while float classes reset.
+      On mobile, wiping pin/hero/story inline styles causes a one-frame collapse
+      ("loads once then hides" / black panel). Keep painted media while float classes reset.
     */
-    if (hero && isMobile()) {
+    if ((hero || story) && isMobile()) {
       [
         'position',
         'top',
@@ -279,7 +280,7 @@
     var fill = viewportFill(mobile);
 
     var chain = pin.querySelectorAll(
-      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], [class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"]'
+      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], [class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"], .ai-story-banner'
     );
     for (var i = 0; i < chain.length; i++) {
       chain[i].style.setProperty('position', 'relative', 'important');
@@ -295,6 +296,8 @@
       chain[i].style.setProperty('box-sizing', 'border-box', 'important');
       chain[i].style.setProperty('margin', '0', 'important');
       chain[i].style.setProperty('padding', '0', 'important');
+      chain[i].style.setProperty('left', '0', 'important');
+      chain[i].style.setProperty('right', '0', 'important');
     }
 
     var intermediates = pin.children;
@@ -317,58 +320,51 @@
       pins[j].style.setProperty('background-color', '#111111', 'important');
     }
 
-    /*
-      Use the real <img> src as a CSS background on the wrapper.
-      Absolute imgs often collapse to 0px inside sticky overflow:hidden parents
-      and leave a solid black panel — background-size:cover always paints.
-    */
-    var desk = pin.querySelectorAll('img[data-hp-story-desk], img[class*="ai-story-banner-image-"]');
-    var mobileImgs = pin.querySelectorAll('img[data-hp-story-mob], img[class*="ai-story-banner-mobile-image"]');
     var wraps = pin.querySelectorAll('[data-hp-story-wrap], [class*="ai-story-banner-wrapper"]');
-    var activeImg = null;
+    var cover = pin.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
     var src = '';
 
-    if (mobile) {
-      activeImg = mobileImgs[0] || desk[0] || null;
-      for (var d = 0; d < desk.length; d++) {
-        desk[d].style.setProperty('display', 'none', 'important');
-      }
-      if (wraps[0]) {
-        src = wraps[0].getAttribute('data-mobile-bg') || wraps[0].getAttribute('data-desktop-bg') || '';
-      }
-    } else {
-      activeImg = desk[0] || mobileImgs[0] || null;
-      for (var mi = 0; mi < mobileImgs.length; mi++) {
-        mobileImgs[mi].style.setProperty('display', 'none', 'important');
-      }
-      if (wraps[0]) {
-        src = wraps[0].getAttribute('data-desktop-bg') || wraps[0].getAttribute('data-mobile-bg') || '';
-      }
+    if (wraps[0]) {
+      src = mobile
+        ? wraps[0].getAttribute('data-mobile-bg') || wraps[0].getAttribute('data-desktop-bg') || ''
+        : wraps[0].getAttribute('data-desktop-bg') || wraps[0].getAttribute('data-mobile-bg') || '';
     }
 
-    if (activeImg) {
+    if (cover) {
       if (!src) {
-        src = activeImg.currentSrc || activeImg.src || activeImg.getAttribute('src') || '';
+        src = cover.currentSrc || cover.src || cover.getAttribute('src') || '';
       }
-      activeImg.removeAttribute('loading');
-      activeImg.setAttribute('loading', 'eager');
-      activeImg.setAttribute('fetchpriority', 'high');
-      activeImg.style.setProperty('display', 'block', 'important');
-      activeImg.style.setProperty('visibility', 'visible', 'important');
-      activeImg.style.setProperty('opacity', '1', 'important');
-      activeImg.style.setProperty('position', 'absolute', 'important');
-      activeImg.style.setProperty('inset', '0', 'important');
-      activeImg.style.setProperty('width', '100%', 'important');
-      activeImg.style.setProperty('height', '100%', 'important');
-      activeImg.style.setProperty('min-width', '100%', 'important');
-      activeImg.style.setProperty('min-height', '100%', 'important');
-      activeImg.style.setProperty('object-fit', 'cover', 'important');
-      activeImg.style.setProperty('object-position', 'center center', 'important');
-      activeImg.style.setProperty('z-index', '1', 'important');
-      if (!activeImg.complete && src) {
+      cover.removeAttribute('loading');
+      cover.setAttribute('loading', 'eager');
+      cover.setAttribute('fetchpriority', 'high');
+      cover.style.setProperty('display', 'block', 'important');
+      cover.style.setProperty('visibility', 'visible', 'important');
+      cover.style.setProperty('opacity', '1', 'important');
+      cover.style.setProperty('position', 'absolute', 'important');
+      cover.style.setProperty('inset', '0', 'important');
+      cover.style.setProperty('width', '100%', 'important');
+      cover.style.setProperty('height', '100%', 'important');
+      cover.style.setProperty('min-width', '100%', 'important');
+      cover.style.setProperty('min-height', '100%', 'important');
+      cover.style.setProperty('object-fit', 'cover', 'important');
+      cover.style.setProperty('object-position', 'center center', 'important');
+      cover.style.setProperty('z-index', '1', 'important');
+      if (!cover.complete && src) {
         var warm = new Image();
         warm.src = src;
       }
+    }
+
+    var pictures = pin.querySelectorAll('.ai-story-banner-picture, picture.ai-story-banner-picture');
+    for (var pi = 0; pi < pictures.length; pi++) {
+      pictures[pi].style.setProperty('position', 'absolute', 'important');
+      pictures[pi].style.setProperty('inset', '0', 'important');
+      pictures[pi].style.setProperty('width', '100%', 'important');
+      pictures[pi].style.setProperty('height', '100%', 'important');
+      pictures[pi].style.setProperty('display', 'block', 'important');
+      pictures[pi].style.setProperty('z-index', '1', 'important');
+      pictures[pi].style.setProperty('margin', '0', 'important');
+      pictures[pi].style.setProperty('padding', '0', 'important');
     }
 
     for (var k = 0; k < wraps.length; k++) {
@@ -381,7 +377,6 @@
       }
     }
 
-    /* Also paint the pin so even if wrapper fails, section is not empty black */
     for (var p = 0; p < pins.length; p++) {
       pins[p].style.setProperty('background-size', 'cover', 'important');
       pins[p].style.setProperty('background-position', 'center center', 'important');
@@ -391,6 +386,15 @@
       }
     }
 
+    /* Also paint the float pin itself so no black void if inner wrappers lag */
+    if (src) {
+      pin.style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
+      pin.style.setProperty('background-size', 'cover', 'important');
+      pin.style.setProperty('background-position', 'center center', 'important');
+      pin.style.setProperty('background-repeat', 'no-repeat', 'important');
+      pin.style.setProperty('background-color', '#111111', 'important');
+    }
+
     var content = pin.querySelectorAll('[class*="ai-story-banner-content"]');
     for (var c = 0; c < content.length; c++) {
       content[c].style.setProperty('position', 'absolute', 'important');
@@ -398,6 +402,8 @@
       content[c].style.setProperty('overflow', 'visible', 'important');
       content[c].style.setProperty('visibility', 'visible', 'important');
       content[c].style.setProperty('opacity', '1', 'important');
+      content[c].style.setProperty('display', 'flex', 'important');
+      content[c].style.setProperty('flex-direction', 'column', 'important');
       if (mobile) {
         content[c].style.setProperty('top', (content[c].getAttribute('data-top-m') || '24') + 'px', 'important');
         content[c].style.setProperty('left', (content[c].getAttribute('data-left-m') || '16') + 'px', 'important');
@@ -406,9 +412,19 @@
           'min(90%, ' + (content[c].getAttribute('data-max-m') || '280') + 'px)',
           'important'
         );
+        content[c].style.setProperty('padding', (content[c].getAttribute('data-pad-m') || '16') + 'px', 'important');
       } else {
         content[c].style.setProperty('top', '56px', 'important');
       }
+    }
+
+    var textNodes = pin.querySelectorAll(
+      '[class*="ai-story-banner-subheading"], [class*="ai-story-banner-heading"], [class*="ai-story-banner-text"]'
+    );
+    for (var t = 0; t < textNodes.length; t++) {
+      textNodes[t].style.setProperty('visibility', 'visible', 'important');
+      textNodes[t].style.setProperty('opacity', '1', 'important');
+      textNodes[t].style.setProperty('display', 'block', 'important');
     }
   }
 
@@ -449,8 +465,13 @@
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
     sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('width', '100%', 'important');
+    sec.style.setProperty('max-width', '100vw', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('margin-left', '0px', 'important');
+    sec.style.setProperty('margin-right', '0px', 'important');
+    sec.style.setProperty('padding', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
@@ -467,6 +488,48 @@
     pin.style.setProperty('background-color', bg || '#111111', 'important');
 
     prepareHeroFullscreen(pin);
+  }
+
+  /* Mobile story: same one-shot full-bleed paint — sticky left a black inset panel */
+  function asStoryOnce(item, z, bg) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var fill = '100dvh';
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-story');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'relative', 'important');
+    sec.style.setProperty('top', 'auto', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('width', '100%', 'important');
+    sec.style.setProperty('max-width', '100vw', 'important');
+    sec.style.setProperty('left', '0', 'important');
+    sec.style.setProperty('right', '0', 'important');
+    sec.style.setProperty('margin', '0', 'important');
+    sec.style.setProperty('padding', '0', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', 'none', 'important');
+    sec.style.setProperty('overflow', 'hidden', 'important');
+    sec.style.setProperty('background-color', bg || '#111111', 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('max-width', '100%', 'important');
+    pin.style.setProperty('height', fill, 'important');
+    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('margin', '0', 'important');
+    pin.style.setProperty('padding', '0', 'important');
+    pin.style.setProperty('background-color', bg || '#111111', 'important');
+
+    prepareStoryFullscreen(pin, true);
   }
 
   function asCard(item, z, contentH, bg, mobile, isStory) {
@@ -584,11 +647,10 @@
 
       if (story) {
         prepareStoryFullscreen(pin, mobile);
-        /* Re-paint when images finish loading (src may be empty until then) */
         if (!item._storyImgBound) {
           item._storyImgBound = true;
           var imgs = pin.querySelectorAll(
-            'img[class*="ai-story-banner-image-"], img[class*="ai-story-banner-mobile-image"]'
+            '[data-hp-story-cover], img[class*="ai-story-banner-image"], img[class*="ai-story-banner-mobile-image"]'
           );
           for (var ii = 0; ii < imgs.length; ii++) {
             imgs[ii].addEventListener(
@@ -596,7 +658,7 @@
               function () {
                 prepareStoryFullscreen(pin, isMobile());
               },
-              { once: true }
+              { once: false }
             );
           }
         }
@@ -615,7 +677,14 @@
         return;
       }
 
-      /* Thin marquees / app blocks stay normal flow — never strip the hero */
+      /* Mobile story: full-bleed image panel (not sticky black inset) */
+      if (story && mobile) {
+        cardIndex += 1;
+        asStoryOnce(item, cardIndex, bg);
+        return;
+      }
+
+      /* Thin marquees / app blocks stay normal flow — never strip the hero/story */
       if (!story && !hero && (isKnownStrip(pin) || contentH < vh * 0.22)) {
         asStrip(item, 10 + index);
         return;
@@ -624,6 +693,7 @@
       cardIndex += 1;
       asCard(item, cardIndex, contentH, bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);
+      if (story) prepareStoryFullscreen(pin, mobile);
     });
 
     lastLayoutW = window.innerWidth || 0;
@@ -648,8 +718,12 @@
     setTimeout(layout, 250);
   }, { passive: true });
   window.addEventListener('load', function () {
+    /* Soft re-layout after images — hero paint is preserved on mobile */
     layout();
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });
-  setTimeout(layout, 600);
+  /* Avoid an early second layout that flashes/hides the mobile hero */
+  if (!isMobile()) {
+    setTimeout(layout, 600);
+  }
 })();

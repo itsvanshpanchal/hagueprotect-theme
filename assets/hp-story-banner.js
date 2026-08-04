@@ -1,4 +1,4 @@
-/* Story banner: desktop/mobile image swap + accent typography (no Liquid). */
+/* Story banner: desktop/mobile bg sync + accent typography (no Liquid). */
 (function () {
   function applyAccent(heading, size) {
     if (!heading) return;
@@ -22,19 +22,33 @@
   function syncWrap(wrap) {
     var mobile = window.matchMedia('(max-width: 749px)').matches;
     var url = mobile ? wrap.getAttribute('data-mobile-bg') : wrap.getAttribute('data-desktop-bg');
+    if (!url) {
+      url = wrap.getAttribute('data-desktop-bg') || wrap.getAttribute('data-mobile-bg');
+    }
     if (url) {
       wrap.style.backgroundImage = 'url("' + String(url).replace(/"/g, '') + '")';
+      wrap.style.backgroundSize = 'cover';
+      wrap.style.backgroundPosition = 'center center';
+      wrap.style.backgroundRepeat = 'no-repeat';
     }
 
     if (mobile) {
       wrap.style.minHeight = '100dvh';
       wrap.style.height = '100dvh';
+      wrap.style.width = '100%';
     }
 
-    var desk = wrap.querySelector('[data-hp-story-desk]');
-    var mob = wrap.querySelector('[data-hp-story-mob]');
-    if (desk) desk.style.display = mobile ? 'none' : 'block';
-    if (mob) mob.style.display = mobile ? 'block' : 'none';
+    var cover = wrap.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
+    if (cover) {
+      cover.style.display = 'block';
+      cover.style.visibility = 'visible';
+      cover.style.opacity = '1';
+      cover.style.position = 'absolute';
+      cover.style.inset = '0';
+      cover.style.width = '100%';
+      cover.style.height = '100%';
+      cover.style.objectFit = 'cover';
+    }
 
     var content = wrap.querySelector('[data-hp-story-content]');
     if (content) {
@@ -49,6 +63,8 @@
         content.style.maxWidth = (content.getAttribute('data-max-d') || '650') + 'px';
         content.style.padding = '';
       }
+      content.style.visibility = 'visible';
+      content.style.opacity = '1';
     }
 
     var heading = wrap.querySelector('.ai-story-banner-heading');
