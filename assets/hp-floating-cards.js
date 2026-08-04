@@ -553,12 +553,25 @@
     if (mobile) sec.classList.add('hp-float-card--mobile');
     if (isStory) sec.classList.add('hp-float-story');
     sec.style.setProperty('--hp-z', String(z));
-    sec.style.setProperty('position', 'sticky', 'important');
-    sec.style.setProperty('top', '0px', 'important');
+    /*
+      Mobile: use relative (not sticky). Many sticky full-screen cards cause
+      severe scroll lag on phones. Desktop keeps the sticky cover stack.
+    */
+    if (mobile) {
+      sec.style.setProperty('position', 'relative', 'important');
+      sec.style.setProperty('top', 'auto', 'important');
+    } else {
+      sec.style.setProperty('position', 'sticky', 'important');
+      sec.style.setProperty('top', '0px', 'important');
+    }
     sec.style.setProperty('z-index', String(z), 'important');
     if (useDvh) {
       sec.style.setProperty('height', fill, 'important');
       sec.style.setProperty('min-height', '100svh', 'important');
+    } else if (mobile) {
+      /* Keep natural height on mobile — don't force every card to 100vh */
+      sec.style.setProperty('height', 'auto', 'important');
+      sec.style.setProperty('min-height', '0', 'important');
     } else {
       sec.style.setProperty('height', pinH + 'px', 'important');
       sec.style.setProperty('min-height', vh + 'px', 'important');
@@ -580,6 +593,9 @@
     if (useDvh) {
       pin.style.setProperty('height', fill, 'important');
       pin.style.setProperty('min-height', '100svh', 'important');
+    } else if (mobile) {
+      pin.style.setProperty('height', 'auto', 'important');
+      pin.style.setProperty('min-height', '0', 'important');
     } else {
       pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('min-height', vh + 'px', 'important');
@@ -587,7 +603,7 @@
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty(
       'overflow',
-      isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
+      mobile ? 'visible' : isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
       'important'
     );
     if (mobile) pin.style.setProperty('-webkit-overflow-scrolling', 'touch');
@@ -733,151 +749,4 @@
   if (!isMobile()) {
     setTimeout(layout, 600);
   }
-
-  /* ========== MOBILE: one-swipe → next section (fast smooth snap) ========== */
-  (function initMobileSectionSnap() {
-    var SNAP_MS = 240;
-    var SWIPE_PX = 40;
-    var SWIPE_VX = 0.32;
-    var snapping = false;
-    var touchY = 0;
-    var touchT = 0;
-    var touchScroll = 0;
-    var armed = false;
-
-    function headerOffset() {
-      var header =
-        document.querySelector('#shopify-section-header') ||
-        document.querySelector('header.header') ||
-        document.querySelector('sticky-header') ||
-        document.querySelector('header');
-      if (!header) return 0;
-      var h = header.getBoundingClientRect().height || 0;
-      return h > 120 ? 0 : Math.round(h);
-    }
-
-    function snapSections() {
-      return items
-        .map(function (item) {
-          return item.sec;
-        })
-        .filter(function (sec) {
-          if (!sec || !sec.isConnected) return false;
-          if (sec.classList.contains('hp-float-strip')) return false;
-          return (
-            sec.classList.contains('hp-float-card') ||
-            sec.classList.contains('hp-float-hero') ||
-            sec.classList.contains('hp-float-story')
-          );
-        });
-    }
-
-    function sectionTop(sec) {
-      var y =
-        sec.getBoundingClientRect().top +
-        (window.pageYOffset || document.documentElement.scrollTop || 0);
-      return Math.max(0, Math.round(y - headerOffset()));
-    }
-
-    function nearestIndex(y) {
-      var list = snapSections();
-      if (!list.length) return 0;
-      var best = 0;
-      var bestDist = Infinity;
-      for (var i = 0; i < list.length; i++) {
-        var d = Math.abs(sectionTop(list[i]) - y);
-        if (d < bestDist) {
-          bestDist = d;
-          best = i;
-        }
-      }
-      return best;
-    }
-
-    function animateTo(y) {
-      var start = window.pageYOffset || document.documentElement.scrollTop || 0;
-      var diff = y - start;
-      if (Math.abs(diff) < 2) return;
-      snapping = true;
-      document.body.classList.add('hp-snapping');
-      var t0 = null;
-
-      function frame(now) {
-        if (t0 == null) t0 = now;
-        var p = Math.min(1, (now - t0) / SNAP_MS);
-        var e = 1 - Math.pow(1 - p, 3);
-        window.scrollTo(0, start + diff * e);
-        if (p < 1) {
-          requestAnimationFrame(frame);
-        } else {
-          window.scrollTo(0, y);
-          snapping = false;
-          document.body.classList.remove('hp-snapping');
-        }
-      }
-      requestAnimationFrame(frame);
-    }
-
-    function goToIndex(index) {
-      var list = snapSections();
-      if (!list.length) return;
-      var i = Math.max(0, Math.min(list.length - 1, index));
-      animateTo(sectionTop(list[i]));
-    }
-
-    function onTouchStart(e) {
-      if (!isMobile() || snapping) return;
-      if (!e.touches || !e.touches.length) return;
-      var t = e.target;
-      if (
-        t &&
-        t.closest &&
-        t.closest('input, textarea, select, button, a, [data-no-snap], .swiper, .scroll-area')
-      ) {
-        armed = false;
-        return;
-      }
-      armed = true;
-      touchY = e.touches[0].clientY;
-      touchT = Date.now();
-      touchScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
-    }
-
-    function onTouchEnd(e) {
-      if (!isMobile() || !armed || snapping) return;
-      armed = false;
-      var endY =
-        e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientY : touchY;
-      var dy = touchY - endY; /* + = swipe up = next section */
-      var dt = Math.max(16, Date.now() - touchT);
-      var vx = Math.abs(dy) / dt;
-      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-      var idx = nearestIndex(touchScroll);
-      var list = snapSections();
-      if (!list.length) return;
-
-      if (dy > SWIPE_PX || (dy > 18 && vx > SWIPE_VX)) {
-        goToIndex(Math.min(list.length - 1, idx + 1));
-        return;
-      }
-      if (dy < -SWIPE_PX || (dy < -18 && vx > SWIPE_VX)) {
-        goToIndex(Math.max(0, idx - 1));
-        return;
-      }
-      goToIndex(nearestIndex(y));
-    }
-
-    document.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
-    document.addEventListener('touchend', onTouchEnd, { passive: true, capture: true });
-    document.addEventListener(
-      'touchcancel',
-      function () {
-        armed = false;
-      },
-      { passive: true }
-    );
-
-    document.documentElement.classList.add('hp-snap-ready');
-    document.body.classList.add('hp-snap-mobile');
-  })();
 })();

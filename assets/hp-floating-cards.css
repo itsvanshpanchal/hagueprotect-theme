@@ -228,16 +228,32 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   .hp-float-stack > .shopify-section.hp-float-card,
   .hp-float-stack > .shopify-section.hp-float-card--mobile {
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
+    min-height: 0 !important;
     box-shadow: none !important;
     filter: none !important;
+    position: relative !important;
+    top: auto !important;
   }
 
   .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
-    min-height: 100vh !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hero / story still fill one screen; other cards keep natural height for smooth scroll */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
+    min-height: 100svh !important;
     min-height: 100dvh !important;
-    height: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story > .hp-float-pin {
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
     overflow: hidden !important;
   }
 
@@ -494,21 +510,34 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 }
 
-/* Mobile snap: one swipe lands on the next full section quickly */
+/* Mobile: native smooth scroll — no JS snap, no sticky stack lag */
 @media screen and (max-width: 749px) {
-  html.hp-snap-ready,
-  body.hp-snap-mobile {
+  html,
+  body.hp-float-mobile {
     scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  body.hp-float-mobile.hp-snapping {
-    overflow-x: hidden;
+  body.hp-float-mobile .hp-float-stack {
+    transform: none !important;
+    perspective: none !important;
+    filter: none !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card--mobile {
+    position: relative !important;
+    top: auto !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: hidden;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
+    transform: none !important;
+    will-change: auto !important;
+    -webkit-overflow-scrolling: touch;
   }
 }
