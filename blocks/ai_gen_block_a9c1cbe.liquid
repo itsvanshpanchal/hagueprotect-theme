@@ -143,8 +143,8 @@
     overflow: visible;
   }
 
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
-  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+  /* Desktop: only the desktop image — never force mobile image visible (double banner) */
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
     position: relative;
     inset: auto;
     width: 100%;
@@ -153,6 +153,10 @@
     object-fit: contain;
     object-position: center center;
     display: block;
+  }
+
+  .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    display: none !important;
   }
 
   .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-placeholder-{{ ai_gen_id }} {
@@ -245,9 +249,12 @@
       height: auto;
     }
 
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }},
-    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-image-{{ ai_gen_id }} {
       height: auto;
+    }
+
+    .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-mobile-image-{{ ai_gen_id }} {
+      display: none !important;
     }
 
     .ai-story-sticky-pin-{{ ai_gen_id }} .ai-story-banner-content-{{ ai_gen_id }} {
@@ -820,6 +827,14 @@
         img.style.setProperty('object-fit', 'contain', 'important');
         img.style.setProperty('object-position', 'center center', 'important');
         img.style.setProperty('display', 'block', 'important');
+      }
+
+      var mobileImgs = pin.querySelectorAll('[class*="ai-story-banner-mobile-image"]');
+      for (var mi = 0; mi < mobileImgs.length; mi++) {
+        mobileImgs[mi].style.setProperty('display', 'none', 'important');
+        mobileImgs[mi].style.setProperty('visibility', 'hidden', 'important');
+        mobileImgs[mi].style.setProperty('height', '0', 'important');
+        mobileImgs[mi].style.setProperty('position', 'absolute', 'important');
       }
 
       var content = pin.querySelector('[class*="ai-story-banner-content"]');
