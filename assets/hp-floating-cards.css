@@ -1,7 +1,8 @@
 /*
-  Homepage floating section cards — gap-safe sticky cover.
-  Desktop: tall sections pin; short strips stay normal flow.
-  Mobile: natural section heights only (no forced 100vh empty voids).
+  Homepage floating section cards — full-viewport sticky cover.
+  All breakpoints: substantial sections pin at ≥100dvh; next slides over.
+  Story banner fills the panel with one image (desktop OR mobile).
+  Thin strips stay normal flow.
 */
 
 body.template-index.hp-float-active #MainContent {
@@ -28,6 +29,8 @@ body.template-index.hp-float-active #MainContent {
   z-index: var(--hp-z, 1) !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
   transform: none !important;
   opacity: 1 !important;
   box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.14);
@@ -35,11 +38,12 @@ body.template-index.hp-float-active #MainContent {
 
 .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
   width: 100%;
-  height: auto !important;
-  min-height: 0 !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  height: 100% !important;
   opacity: 1 !important;
   box-sizing: border-box;
-  overflow: visible !important;
+  overflow: hidden !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -55,64 +59,82 @@ body.template-index.hp-float-active #MainContent {
   box-shadow: none !important;
 }
 
-/* Story curtain: no 200vh runway inside float stack */
-body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']),
-.hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
+/* No 200vh story runway — float card owns full-screen */
+body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
+.hp-float-stack > .shopify-section.hp-float-story {
+  pointer-events: auto !important;
+  background: #0a0a0a !important;
+}
+
+.hp-float-stack > .shopify-section.hp-float-story + .shopify-section {
+  margin-top: 0 !important;
+}
+
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-track'] {
+  height: 100% !important;
+  min-height: 100% !important;
   pointer-events: auto !important;
   background: transparent !important;
 }
 
-body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section,
-.hp-float-stack > .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section {
-  margin-top: 0 !important;
-}
-
-.hp-float-stack [class*='ai-story-sticky-track'] {
-  height: auto !important;
-  min-height: 0 !important;
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] {
+  position: relative !important;
+  top: auto !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  z-index: auto !important;
   pointer-events: auto !important;
+  background: #0a0a0a !important;
+  overflow: hidden !important;
 }
 
-/* Desktop: full uncropped story image inside float stack */
+.hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] > [class*='ai-story-banner-'] {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  display: block !important;
+  background-color: #0a0a0a !important;
+  overflow: hidden !important;
+}
+
+.hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
+  position: absolute !important;
+  z-index: 3 !important;
+  overflow: visible !important;
+}
+
+.hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-accent,
+.hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair {
+  overflow: visible !important;
+}
+
+/* Desktop story: full-bleed cover, mobile image hidden */
 @media screen and (min-width: 750px) {
-  .hp-float-stack [class*='ai-story-sticky-pin'] {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
-    z-index: auto !important;
-    pointer-events: auto !important;
-    background: #0a0a0a !important;
-    overflow: visible !important;
+  .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
+    top: 56px !important;
   }
 
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-wrapper'] {
-    position: relative !important;
-    inset: auto !important;
+  .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-    display: block !important;
-    background-color: #0a0a0a !important;
-    overflow: visible !important;
-  }
-
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-image-'] {
-    position: relative !important;
-    inset: auto !important;
-    width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     max-height: none !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center center !important;
     display: block !important;
   }
 
-  /* Never show mobile crop on desktop — was stacking a second banner */
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-mobile-image'] {
+  .hp-float-stack .hp-float-story [class*='ai-story-banner-mobile-image'] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -121,16 +143,38 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
     pointer-events: none !important;
   }
 
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-content'] {
-    position: absolute !important;
-    top: 56px !important;
-    overflow: visible !important;
-    z-index: 3 !important;
+  /* Section roots fill desktop full-screen cards */
+  .hp-float-stack .hp-float-card .hero-fullscreen,
+  .hp-float-stack .hp-float-card .mat-section,
+  .hp-float-stack .hp-float-card .bs-coverflow,
+  .hp-float-stack .hp-float-card .fc-section,
+  .hp-float-stack .hp-float-card .comm-section,
+  .hp-float-stack .hp-float-card .hp-fam-sec,
+  .hp-float-stack .hp-float-card .trending-social,
+  .hp-float-stack .hp-float-card .trending-social-section,
+  .hp-float-stack .hp-float-card .split-cta,
+  .hp-float-stack .hp-float-card [class*='split-cta'],
+  .hp-float-stack .hp-float-card [class*='hp-dna-'],
+  .hp-float-stack .hp-float-card .story-banner,
+  .hp-float-stack .hp-float-card .story-banner-wrapper {
+    min-height: 100% !important;
+    box-sizing: border-box;
   }
 
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-heading'] .hp-heading-accent,
-  .hp-float-stack [class*='ai-story-sticky-pin'] [class*='ai-story-banner-heading'] .hp-heading-pair {
-    overflow: visible !important;
+  .hp-float-stack .hp-float-card .hero-fullscreen {
+    height: 100% !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+  }
+
+  .hp-float-stack .hp-float-card .hero-fullscreen__bg,
+  .hp-float-stack .hp-float-card .hero-fullscreen__bg picture,
+  .hp-float-stack .hp-float-card .hero-fullscreen__bg-img,
+  .hp-float-stack .hp-float-card .hero-fullscreen__bg img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 }
 
@@ -144,39 +188,63 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
   visibility: visible !important;
 }
 
-/* ========== MOBILE: natural flow, no empty full-screen panels ========== */
+/* ========== MOBILE: full-screen cover panels ========== */
 @media screen and (max-width: 749px) {
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card--mobile,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: 0 !important;
+  body.hp-float-mobile.hp-float-active #MainContent {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hp-float-stack > .shopify-section.hp-float-card,
+  .hp-float-stack > .shopify-section.hp-float-card--mobile {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     box-shadow: none !important;
     filter: none !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section > .hp-float-pin {
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
+  .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    height: 100% !important;
+    overflow: hidden !important;
   }
 
-  /* Let theme control hero size on mobile — do not force 100dvh */
   body.hp-float-mobile .hp-float-stack .hero-fullscreen,
   body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art {
-    max-height: none;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    width: 100% !important;
+    aspect-ratio: auto !important;
+    background: #111 !important;
   }
 
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-sticky-pin'] {
-    height: auto !important;
-    min-height: 0 !important;
-    background: transparent !important;
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg picture,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg-img,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen__bg img {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 
-  /* Hide desktop story image on mobile — was double-rendering with mobile image */
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-banner-image-'] {
+  /* Story: mobile image only, cover-fills the panel */
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] {
+    height: 100% !important;
+    min-height: 100% !important;
+    overflow: hidden !important;
+    background: #0a0a0a !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-image-'] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -185,21 +253,32 @@ body.hp-float-active .hp-float-stack > .shopify-section:has([class*='ai-story-st
     pointer-events: none !important;
   }
 
-  body.hp-float-mobile .hp-float-stack [class*='ai-story-banner-mobile-image'] {
-    position: relative !important;
-    inset: auto !important;
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-mobile-image'] {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     max-height: none !important;
     object-fit: cover !important;
+    object-position: center center !important;
     display: block !important;
+    visibility: visible !important;
   }
 
-  body.hp-float-mobile .hp-float-stack [class*='hp-dna-'],
-  body.hp-float-mobile .hp-float-stack .split-cta,
-  body.hp-float-mobile .hp-float-stack [class*='split-cta'] {
-    min-height: 0 !important;
-    height: auto !important;
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .split-cta,
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='split-cta'],
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'],
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
+    min-height: 100% !important;
+    box-sizing: border-box;
   }
 }
 

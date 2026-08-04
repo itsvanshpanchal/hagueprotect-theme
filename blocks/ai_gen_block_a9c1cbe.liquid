@@ -605,10 +605,12 @@
   }
 {% endstyle %}
 
-{%- if block.settings.enable_sticky_scroll -%}
+{%- comment -%}
+  Always wrap in track/pin so homepage float stack can full-screen the banner.
+  Sticky scroll runway JS only runs when enable_sticky_scroll is on (not recommended).
+{%- endcomment -%}
 <div class="ai-story-sticky-track-{{ ai_gen_id }}" data-hp-story-sticky-track="{{ ai_gen_id }}">
   <div class="ai-story-sticky-pin-{{ ai_gen_id }}" data-hp-story-sticky-pin="{{ ai_gen_id }}">
-{%- endif -%}
 <div class="ai-story-banner-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   <div class="ai-story-banner-wrapper-{{ ai_gen_id }}">
     {% if block.settings.background_image %}
@@ -682,9 +684,9 @@
     </div>
   </div>
 </div>
-{%- if block.settings.enable_sticky_scroll -%}
   </div>
 </div>
+{%- if block.settings.enable_sticky_scroll -%}
 <script>
   (function() {
     var track = document.querySelector('[data-hp-story-sticky-track="{{ ai_gen_id }}"]');
@@ -854,9 +856,12 @@
 
     function layoutCurtain() {
       /*
-        Never use sticky scroll runway — it forced 2–3 scroll wheels to leave
-        the banner. Always natural-height flow.
+        Float stack owns full-screen cover — do not flatten over it.
+        Standalone (no float): natural height, never a 200vh sticky runway.
       */
+      if (isFloatingCardStack() || (section && section.classList.contains('hp-float-story'))) {
+        return;
+      }
       var isMobile = window.matchMedia('(max-width: 749px)').matches;
       if (isMobile) {
         flattenToNatural();
