@@ -75,6 +75,13 @@
       content.style.opacity = '1';
     }
 
+    var hideWraps = wrap.querySelectorAll('.ai-story-banner-button-wrapper--hide-mobile');
+    for (var hi = 0; hi < hideWraps.length; hi++) {
+      hideWraps[hi].style.setProperty('display', 'none', 'important');
+      hideWraps[hi].setAttribute('hidden', '');
+      hideWraps[hi].setAttribute('aria-hidden', 'true');
+    }
+
     var heading = wrap.querySelector('.ai-story-banner-heading');
     if (heading) {
       var size = mobile

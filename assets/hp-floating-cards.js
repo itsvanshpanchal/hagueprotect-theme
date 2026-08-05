@@ -446,16 +446,32 @@
     }
 
     var textNodes = pin.querySelectorAll(
-      '[class*="ai-story-banner-subheading"], [class*="ai-story-banner-heading"], [class*="ai-story-banner-text"], [class*="ai-story-banner-button"]'
+      '[class*="ai-story-banner-subheading"], [class*="ai-story-banner-heading"], [class*="ai-story-banner-text"]'
     );
     for (var t = 0; t < textNodes.length; t++) {
       textNodes[t].style.setProperty('visibility', 'visible', 'important');
       textNodes[t].style.setProperty('opacity', '1', 'important');
       textNodes[t].style.setProperty('display', 'block', 'important');
     }
-    var btns = pin.querySelectorAll('[class*="ai-story-banner-button"]:not(.ai-story-banner-button-wrapper--hide-mobile *)');
+
+    /* Hide Learn More (and any hide-mobile story buttons) — must use inline !important
+       so it wins over other float visibility rules. */
+    var hideWraps = pin.querySelectorAll('.ai-story-banner-button-wrapper--hide-mobile');
+    for (var h = 0; h < hideWraps.length; h++) {
+      hideWraps[h].style.setProperty('display', 'none', 'important');
+      hideWraps[h].style.setProperty('visibility', 'hidden', 'important');
+      hideWraps[h].style.setProperty('opacity', '0', 'important');
+      hideWraps[h].style.setProperty('pointer-events', 'none', 'important');
+      hideWraps[h].setAttribute('hidden', '');
+      hideWraps[h].setAttribute('aria-hidden', 'true');
+    }
+
+    var btns = pin.querySelectorAll('a[class*="ai-story-banner-button"]');
     for (var b = 0; b < btns.length; b++) {
-      if (btns[b].closest && btns[b].closest('.ai-story-banner-button-wrapper--hide-mobile')) continue;
+      if (btns[b].closest && btns[b].closest('.ai-story-banner-button-wrapper--hide-mobile')) {
+        btns[b].style.setProperty('display', 'none', 'important');
+        continue;
+      }
       btns[b].style.setProperty('display', 'inline-block', 'important');
     }
   }
