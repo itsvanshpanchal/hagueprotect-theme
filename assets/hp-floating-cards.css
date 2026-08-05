@@ -752,12 +752,15 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 }
 
-/* Mobile: native scroll + sticky float cards (no JS snap hijack) */
+/* Mobile: native scroll + sticky float cards
+   Soft proximity snap helps one swipe land on the next card smoothly.
+   Sticky cover animation is unchanged. */
 @media screen and (max-width: 749px) {
-  html,
-  body.hp-float-mobile {
+  html.hp-float-snap,
+  body.hp-float-mobile.hp-float-snap {
     scroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
   }
 
   body.hp-float-mobile .hp-float-stack {
@@ -769,19 +772,23 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card--mobile,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
     position: sticky !important;
     top: 0 !important;
     filter: none !important;
     transform: none !important;
     will-change: auto !important;
     backface-visibility: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip {
     position: relative !important;
     top: auto !important;
     box-shadow: none !important;
+    scroll-snap-align: none;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {

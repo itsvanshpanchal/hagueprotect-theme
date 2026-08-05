@@ -815,4 +815,109 @@
   if (!isMobile()) {
     setTimeout(layout, 600);
   }
+
+  /*
+    Mobile only: one clear swipe → next/prev float section via native smooth
+    scroll. Sticky cover animation stays untouched (no custom rAF hijack).
+  */
+  (function initMobileFastScroll() {
+    if (!isMobile()) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.documentElement.classList.add('hp-float-snap');
+    document.body.classList.add('hp-float-snap');
+
+    var touchY = 0;
+    var touchT = 0;
+    var armed = false;
+    var coolUntil = 0;
+    var SWIPE_PX = 36;
+    var SWIPE_V = 0.28;
+
+    function snapList() {
+      return items
+        .map(function (item) {
+          return item.sec;
+        })
+        .filter(function (sec) {
+          if (!sec || !sec.isConnected) return false;
+          if (sec.classList.contains('hp-float-strip')) return false;
+          return (
+            sec.classList.contains('hp-float-card') ||
+            sec.classList.contains('hp-float-hero') ||
+            sec.classList.contains('hp-float-story') ||
+            sec.classList.contains('hp-float-dna')
+          );
+        });
+    }
+
+    function sectionDocTop(sec) {
+      var y =
+        sec.getBoundingClientRect().top +
+        (window.pageYOffset || document.documentElement.scrollTop || 0);
+      return Math.max(0, Math.round(y));
+    }
+
+    function nearestIndex(y) {
+      var list = snapList();
+      if (!list.length) return 0;
+      var best = 0;
+      var bestDist = Infinity;
+      for (var i = 0; i < list.length; i++) {
+        var d = Math.abs(sectionDocTop(list[i]) - y);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      }
+      return best;
+    }
+
+    function goTo(index) {
+      var list = snapList();
+      if (!list.length) return;
+      var i = Math.max(0, Math.min(list.length - 1, index));
+      var top = sectionDocTop(list[i]);
+      coolUntil = Date.now() + 380;
+      window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener(
+      'touchstart',
+      function (e) {
+        if (!isMobile() || !e.touches || !e.touches.length) return;
+        if (Date.now() < coolUntil) return;
+        touchY = e.touches[0].clientY;
+        touchT = Date.now();
+        armed = true;
+      },
+      { passive: true }
+    );
+
+    document.addEventListener(
+      'touchend',
+      function (e) {
+        if (!armed || !isMobile()) return;
+        armed = false;
+        if (Date.now() < coolUntil) return;
+        if (!e.changedTouches || !e.changedTouches.length) return;
+
+        var y = e.changedTouches[0].clientY;
+        var dy = touchY - y;
+        var dt = Math.max(16, Date.now() - touchT);
+        var v = dy / dt;
+        var intentional = Math.abs(dy) >= SWIPE_PX || Math.abs(v) >= SWIPE_V;
+        if (!intentional) return;
+
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var idx = nearestIndex(scrollY + 8);
+        if (dy > 0) {
+          goTo(idx + 1);
+        } else {
+          goTo(idx - 1);
+        }
+      },
+      { passive: true }
+    );
+  })();
 })();
