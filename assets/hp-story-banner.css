@@ -131,7 +131,10 @@
   }
 
   .ai-story-banner-content {
-    max-width: min(90%, 320px) !important;
+    max-width: min(92%, 320px) !important;
+    max-height: calc(100dvh - 56px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
     visibility: visible !important;
     opacity: 1 !important;
     top: var(--homepage-section-gutter, 28px) !important;
@@ -141,8 +144,12 @@
 
   .ai-story-banner-subheading,
   .ai-story-banner-heading,
-  .ai-story-banner-text {
+  .ai-story-banner-text,
+  .ai-story-banner-text p {
     visibility: visible !important;
     opacity: 1 !important;
+    overflow: visible !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
   }
 }

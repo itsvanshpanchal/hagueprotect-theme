@@ -565,11 +565,17 @@
     prepareStoryFullscreen(pin, true);
   }
 
-  /* Mobile DNA: sticky full-screen; content top-aligned via CSS */
+  /* Mobile DNA: sticky cover; size to content so footer isn't preceded by a tall black void */
   function asDnaMobileCard(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
-    var fill = '100dvh';
+    var vh = viewportH();
+    var paint = bg || '#121111';
+    var contentH = Math.max(pin.scrollHeight, pin.offsetHeight, 1);
+    /* Keep sticky cover feel, but don't force a full empty viewport when content is short */
+    var fillPx = Math.max(contentH + 36, Math.round(vh * 0.78));
+    if (fillPx > vh) fillPx = vh;
+    var fill = fillPx + 'px';
 
     item.isCard = true;
     sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-dna');
@@ -578,7 +584,7 @@
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
-    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('min-height', fill, 'important');
     sec.style.setProperty('max-height', fill, 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
@@ -586,20 +592,22 @@
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
     sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
+    /* Clip lifestyle bleed; carousel still scrolls inside pin */
     sec.style.setProperty('overflow', 'hidden', 'important');
-    sec.style.setProperty('background-color', bg || '#121111', 'important');
+    sec.style.setProperty('background-color', paint, 'important');
+    sec.style.setProperty('isolation', 'isolate', 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('min-height', fill, 'important');
     pin.style.setProperty('max-height', fill, 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
-    /* visible so horizontal DNA carousel can scroll */
-    pin.style.setProperty('overflow', 'visible', 'important');
+    pin.style.setProperty('overflow-x', 'auto', 'important');
+    pin.style.setProperty('overflow-y', 'hidden', 'important');
     pin.style.setProperty('touch-action', 'pan-y', 'important');
-    pin.style.setProperty('background-color', bg || '#121111', 'important');
+    pin.style.setProperty('background-color', paint, 'important');
   }
 
   function asCard(item, z, contentH, bg, mobile, isStory) {
@@ -704,9 +712,9 @@
 
       resetSectionStyles(sec, pin);
 
-      /* Split CTA always strip — never stretch into a black full-screen void */
+      /* Split CTA always strip — z below sticky cards so it never paints over DNA */
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
-        asStrip(item, 10 + index);
+        asStrip(item, 1);
         return;
       }
 

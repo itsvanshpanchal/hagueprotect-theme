@@ -596,7 +596,21 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-right: 0 !important;
   }
 
-  /* DNA: top-align — avoid tall empty black above the heading */
+  /* DNA: opaque full-panel cover + readable stacked cards (no media/text collision) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
+    background-color: #121111 !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    /* Height comes from JS (content-sized) — don't force full viewport void */
+    min-height: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin {
+    background-color: #121111 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
     display: flex !important;
     flex-direction: column !important;
@@ -608,6 +622,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-sizing: border-box !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
+    background-color: #121111 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__container'] {
@@ -626,11 +641,43 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     flex: 0 0 auto !important;
+    align-items: flex-start !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__item'] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
     background: rgba(255, 255, 255, 0.09) !important;
     border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-wrap'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-badge'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-float'] {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    transform: none !important;
+    animation: none !important;
+    margin-bottom: 12px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__item-title'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__item-text'] {
+    position: relative !important;
+    z-index: 2 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  /* Split CTA strip must stay under sticky DNA/lifestyle covers */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.section-split-cta,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta {
+    z-index: 1 !important;
+    isolation: auto !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
@@ -648,14 +695,36 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: hidden !important;
   }
 
-  /* Horizontal product slider: keep cards inset, not oversized full-bleed */
+  /* Horizontal product slider: keep cards inset; overflow visible so tabs/nav aren't clipped */
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     padding-top: 20px !important;
-    padding-bottom: 20px !important;
+    padding-bottom: 40px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-nav--next {
+    right: 52px !important;
+    z-index: 35 !important;
+  }
+
+  /* Tell Your Story: keep overlay copy fully readable inside sticky cover */
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
+    max-width: min(92vw, 320px) !important;
+    max-height: calc(100dvh - 56px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-text'],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-text'] p {
+    overflow: visible !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
