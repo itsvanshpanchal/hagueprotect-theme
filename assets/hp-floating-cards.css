@@ -416,9 +416,11 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
-    top: max(16px, env(safe-area-inset-top, 0px)) !important;
-    left: 16px !important;
+    top: var(--homepage-section-gutter, 28px) !important;
+    left: var(--homepage-section-gutter, 28px) !important;
+    right: auto !important;
     max-width: min(90%, 300px) !important;
+    padding: 0 !important;
     z-index: 3 !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -552,12 +554,13 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     word-break: break-word !important;
   }
 
-  /* Materials: fill panel + keep headline readable (no mid-word clip) */
+  /* Materials: top-align like Best Sellers — no huge empty band above the heading */
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     overflow: hidden !important;
+    padding-top: 0 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
@@ -581,10 +584,13 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-container {
     padding-left: var(--homepage-section-gutter, 28px) !important;
     padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 28px)) !important;
+    padding-top: 16px !important;
     box-sizing: border-box !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-left {
+    padding-top: 8px !important;
+    padding-bottom: 24px !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }

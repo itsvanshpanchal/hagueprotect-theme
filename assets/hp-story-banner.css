@@ -134,6 +134,9 @@
     max-width: min(90%, 320px) !important;
     visibility: visible !important;
     opacity: 1 !important;
+    top: var(--homepage-section-gutter, 28px) !important;
+    left: var(--homepage-section-gutter, 28px) !important;
+    padding: 0 !important;
   }
 
   .ai-story-banner-subheading,

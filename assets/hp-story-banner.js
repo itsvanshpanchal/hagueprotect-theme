@@ -53,10 +53,18 @@
     var content = wrap.querySelector('[data-hp-story-content]');
     if (content) {
       if (mobile) {
-        content.style.left = (content.getAttribute('data-left-m') || '16') + 'px';
-        content.style.top = (content.getAttribute('data-top-m') || '24') + 'px';
-        content.style.maxWidth = 'min(90%, ' + (content.getAttribute('data-max-m') || '280') + 'px)';
-        content.style.padding = (content.getAttribute('data-pad-m') || '16') + 'px';
+        var gutter = 28;
+        try {
+          var g = getComputedStyle(document.body).getPropertyValue('--homepage-section-gutter').trim();
+          if (g) gutter = parseFloat(g) || 28;
+        } catch (e) {}
+        var topM = parseFloat(content.getAttribute('data-top-m') || '28');
+        var leftM = parseFloat(content.getAttribute('data-left-m') || '28');
+        /* Keep Tell Your Story text near the top — match other section gutters */
+        content.style.setProperty('left', Math.max(gutter, leftM) + 'px', 'important');
+        content.style.setProperty('top', Math.min(Math.max(gutter, topM), 32) + 'px', 'important');
+        content.style.setProperty('max-width', 'min(90%, ' + (content.getAttribute('data-max-m') || '280') + 'px)', 'important');
+        content.style.setProperty('padding', '0', 'important');
       } else {
         content.style.left = (content.getAttribute('data-left-d') || '20') + 'px';
         content.style.top = (content.getAttribute('data-top-d') || '56') + 'px';
