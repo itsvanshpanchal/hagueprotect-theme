@@ -434,6 +434,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     opacity: 1 !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner-button-wrapper--hide-mobile,
+  body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner-button-wrapper--hide-mobile [class*='ai-story-banner-button'] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
   body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
