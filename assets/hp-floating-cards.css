@@ -577,6 +577,18 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: none !important;
   }
 
+  /* Materials: same side gutter as Best Sellers / homepage column */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-container {
+    padding-left: var(--homepage-section-gutter, 28px) !important;
+    padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 28px)) !important;
+    box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-left {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   /* DNA: only the section root fills the sticky panel — not grid/items */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
     display: flex !important;
