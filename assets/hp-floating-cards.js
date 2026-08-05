@@ -453,8 +453,9 @@
       textNodes[t].style.setProperty('opacity', '1', 'important');
       textNodes[t].style.setProperty('display', 'block', 'important');
     }
-    var btns = pin.querySelectorAll('[class*="ai-story-banner-button"]');
+    var btns = pin.querySelectorAll('[class*="ai-story-banner-button"]:not(.ai-story-banner-button-wrapper--hide-mobile *)');
     for (var b = 0; b < btns.length; b++) {
+      if (btns[b].closest && btns[b].closest('.ai-story-banner-button-wrapper--hide-mobile')) continue;
       btns[b].style.setProperty('display', 'inline-block', 'important');
     }
   }

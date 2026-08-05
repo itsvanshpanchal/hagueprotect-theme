@@ -201,7 +201,10 @@
           {% endif %}
 
           {% if block.settings.button_text != blank %}
-            <div class="ai-story-banner-button-wrapper ai-story-banner-button-wrapper-{{ ai_gen_id }}" style="margin-top:{{ block.settings.button_spacing }}px;">
+            <div
+              class="ai-story-banner-button-wrapper ai-story-banner-button-wrapper-{{ ai_gen_id }}{% if block.settings.hide_button_mobile %} ai-story-banner-button-wrapper--hide-mobile{% endif %}"
+              style="margin-top:{{ block.settings.button_spacing }}px;"
+            >
               <a
                 href="{% if block.settings.button_link != blank %}{{ block.settings.button_link }}{% else %}{{ routes.all_products_collection_url }}{% endif %}"
                 class="ai-story-banner-button ai-story-banner-button-{{ ai_gen_id }}"
@@ -1574,6 +1577,12 @@
       "id": "button_text",
       "label": "Button text",
       "default": "Learn More"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_button_mobile",
+      "label": "Hide button on mobile",
+      "default": false
     },
     {
       "type": "url",

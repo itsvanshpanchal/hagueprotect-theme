@@ -92,6 +92,12 @@
 }
 
 @media screen and (max-width: 749px) {
+  .ai-story-banner-button-wrapper--hide-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
   .ai-story-sticky-track,
   .ai-story-sticky-pin,
   .ai-story-banner,
