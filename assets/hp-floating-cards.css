@@ -596,37 +596,45 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-right: 0 !important;
   }
 
-  /* DNA: opaque full-panel cover + readable stacked cards (no media/text collision) */
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
+  /* DNA on mobile: normal-flow strip — no sticky 100vh black void before footer */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
     background-color: #121111 !important;
     isolation: isolate !important;
-    overflow: hidden !important;
-    /* Height comes from JS (content-sized) — don't force full viewport void */
+    box-shadow: none !important;
+    margin-top: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin {
+    position: relative !important;
+    height: auto !important;
     min-height: 0 !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin {
+    max-height: none !important;
+    overflow: visible !important;
     background-color: #121111 !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    min-height: 100% !important;
-    height: 100% !important;
-    max-height: 100% !important;
-    overflow: hidden !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']),
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-top: 28px !important;
+    padding-bottom: 36px !important;
+    background-color: #121111 !important;
     box-sizing: border-box !important;
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-    background-color: #121111 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__container'] {
-    flex: 0 1 auto !important;
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
@@ -640,7 +648,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow-x: auto !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
-    flex: 0 0 auto !important;
     align-items: flex-start !important;
   }
 
@@ -651,6 +658,17 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     background: rgba(255, 255, 255, 0.09) !important;
     border: 1px solid rgba(255, 255, 255, 0.16) !important;
     overflow: visible !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__item-copy'] {
+    display: block !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-wrap'],
@@ -664,6 +682,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-glow'] {
+    display: none !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__icon-badge'] img,
@@ -682,14 +704,24 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     z-index: 2 !important;
     background: transparent !important;
     border: 0 !important;
+    outline: none !important;
     box-shadow: none !important;
     max-width: 100% !important;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    padding: 0 !important;
   }
 
-  /* Split CTA: sit between lifestyle and DNA in the sticky cover stack */
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-accent {
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+
+  /* Split CTA: sit between lifestyle and DNA */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.section-split-cta,
   body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta {
     position: relative !important;
@@ -703,7 +735,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: visible !important;
     background-color: #fdfcf7 !important;
     isolation: isolate !important;
-    /* z-index set inline by JS between prior story and DNA */
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta > .hp-float-pin,
@@ -716,12 +747,19 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: visible !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
-  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
-  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-line,
-  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-accent {
-    overflow: visible !important;
-    white-space: normal !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='__button'] {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    gap: 12px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='__arrow'] {
+    display: inline-block !important;
+    line-height: 1 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
@@ -872,8 +910,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card--mobile,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-hero,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
     position: sticky !important;
     top: 0 !important;
     filter: none !important;
@@ -944,8 +981,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   /* Kill 1px white seams between sticky covers (Trending → lifestyle, etc.) */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
     margin-top: -1px !important;
   }
 }

@@ -789,10 +789,15 @@
         return;
       }
 
-      /* Mobile DNA: sticky cover with centered content (keeps float animation) */
+      /* Mobile DNA: normal flow strip (not sticky) so no tall black void before footer.
+         Still z-stacked above Split CTA so it covers cleanly while scrolling. */
       if ((isDnaPin(pin) || isDnaSection(sec)) && mobile) {
         cardIndex += 1;
-        asDnaMobileCard(item, cardIndex, bg || '#121111');
+        asStrip(item, cardIndex);
+        sec.classList.add('hp-float-dna');
+        sec.style.setProperty('background-color', '#121111', 'important');
+        pin.style.setProperty('background-color', '#121111', 'important');
+        pin.style.setProperty('overflow', 'visible', 'important');
         return;
       }
 
@@ -866,9 +871,9 @@
         })
         .filter(function (sec) {
           if (!sec || !sec.isConnected) return false;
-          /* Include Split CTA so one-swipe does not jump lifestyle → DNA */
+          /* Include Split CTA + DNA strips so one-swipe does not skip them */
           if (sec.classList.contains('hp-float-strip')) {
-            return isSplitCtaSection(sec);
+            return isSplitCtaSection(sec) || isDnaSection(sec);
           }
           return (
             sec.classList.contains('hp-float-card') ||

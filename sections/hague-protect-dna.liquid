@@ -272,9 +272,25 @@
     .hp-dna-{{ section.id }} .hp-dna__item-text {
       position: relative;
       z-index: 2;
-      background: transparent;
-      border: 0;
+      background: transparent !important;
+      border: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
       max-width: 100%;
+      padding: 0 !important;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__item-copy {
+      background: transparent !important;
+      border: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-glow {
+      display: none !important;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__item-text {

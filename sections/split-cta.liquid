@@ -260,6 +260,18 @@
     .split-cta-{{ section.id }}__button {
       width: 100%;
       padding: 16px 24px;
+      display: inline-flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: center !important;
+      white-space: nowrap !important;
+      gap: 12px !important;
+    }
+
+    .split-cta-{{ section.id }}__arrow {
+      display: inline-block !important;
+      line-height: 1 !important;
     }
   }
 {%- endstyle -%}
