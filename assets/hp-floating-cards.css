@@ -428,7 +428,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-subheading'],
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'],
-  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-text'] {
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-text'],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-button'] {
     visibility: visible !important;
     opacity: 1 !important;
   }
@@ -595,18 +596,18 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-right: 0 !important;
   }
 
-  /* DNA: only the section root fills the sticky panel — not grid/items */
+  /* DNA: top-align — avoid tall empty black above the heading */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     min-height: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
-    padding-top: 28px !important;
-    padding-bottom: 28px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__container'] {
@@ -647,19 +648,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: hidden !important;
   }
 
-  /* Community: softer handoff from story-block above */
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
-    padding-top: 36px !important;
-  }
-
   /* Horizontal product slider: keep cards inset, not oversized full-bleed */
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     overflow: hidden !important;
-    padding-top: 24px !important;
-    padding-bottom: 24px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
@@ -794,19 +790,57 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Community: top-align like other sections — less empty black above heading */
+  /* Community: pack header + slider into the sticky panel (less empty black) */
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    padding-top: 20px !important;
-    padding-bottom: 24px !important;
+    padding-top: 16px !important;
+    padding-bottom: 12px !important;
     box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-container {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
+    margin-bottom: 0 !important;
+    gap: 16px !important;
+    flex: 0 0 auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: flex-end !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section {
+    display: flex !important;
+    flex-direction: column !important;
     justify-content: flex-start !important;
-    padding-top: 20px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section .container {
+    padding-top: 0 !important;
+  }
+
+  /* Kill 1px white seams between sticky covers (Trending → lifestyle, etc.) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna {
+    margin-top: -1px !important;
   }
 }

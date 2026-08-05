@@ -565,7 +565,7 @@
     prepareStoryFullscreen(pin, true);
   }
 
-  /* Mobile DNA: sticky full-screen but keep carousel usable and content centered */
+  /* Mobile DNA: sticky full-screen; content top-aligned via CSS */
   function asDnaMobileCard(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
