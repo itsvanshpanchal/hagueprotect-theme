@@ -446,12 +446,16 @@
     }
 
     var textNodes = pin.querySelectorAll(
-      '[class*="ai-story-banner-subheading"], [class*="ai-story-banner-heading"], [class*="ai-story-banner-text"]'
+      '[class*="ai-story-banner-subheading"], [class*="ai-story-banner-heading"], [class*="ai-story-banner-text"], [class*="ai-story-banner-button"]'
     );
     for (var t = 0; t < textNodes.length; t++) {
       textNodes[t].style.setProperty('visibility', 'visible', 'important');
       textNodes[t].style.setProperty('opacity', '1', 'important');
       textNodes[t].style.setProperty('display', 'block', 'important');
+    }
+    var btns = pin.querySelectorAll('[class*="ai-story-banner-button"]');
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].style.setProperty('display', 'inline-block', 'important');
     }
   }
 
@@ -465,16 +469,23 @@
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', 'auto', 'important');
     sec.style.setProperty('min-height', '0', 'important');
+    sec.style.setProperty('max-height', 'none', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
     sec.style.setProperty('transform', 'none', 'important');
     sec.style.setProperty('opacity', '1', 'important');
     sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('display', 'block', 'important');
     sec.style.setProperty('box-shadow', 'none', 'important');
+    sec.style.setProperty('overflow', 'visible', 'important');
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('height', 'auto', 'important');
     pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
     pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
     pin.style.setProperty('overflow', 'visible', 'important');
+    pin.style.setProperty('display', 'block', 'important');
   }
 
   /* Mobile hero: sticky full-screen card so the next section floats over it */
@@ -712,9 +723,13 @@
 
       resetSectionStyles(sec, pin);
 
-      /* Split CTA always strip — z below sticky cards so it never paints over DNA */
+      /* Split CTA strip: z ABOVE previous sticky story so it becomes visible,
+         then DNA increments again and covers it — never hide under lifestyle. */
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
-        asStrip(item, 1);
+        cardIndex += 1;
+        asStrip(item, cardIndex);
+        sec.style.setProperty('background-color', '#fdfcf7', 'important');
+        pin.style.setProperty('background-color', '#fdfcf7', 'important');
         return;
       }
 
@@ -851,7 +866,10 @@
         })
         .filter(function (sec) {
           if (!sec || !sec.isConnected) return false;
-          if (sec.classList.contains('hp-float-strip')) return false;
+          /* Include Split CTA so one-swipe does not jump lifestyle → DNA */
+          if (sec.classList.contains('hp-float-strip')) {
+            return isSplitCtaSection(sec);
+          }
           return (
             sec.classList.contains('hp-float-card') ||
             sec.classList.contains('hp-float-hero') ||

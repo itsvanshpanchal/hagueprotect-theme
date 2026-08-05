@@ -235,12 +235,32 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 16px;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-      overflow: hidden;
+      overflow: visible;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
       margin-bottom: 12px;
       flex: 0 0 auto;
+      display: flex;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge,
+    .hp-dna-{{ section.id }} .hp-dna__icon-float {
+      display: flex;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__icon-badge img,
+    .hp-dna-{{ section.id }} .hp-dna__icon-custom,
+    .hp-dna-{{ section.id }} .hp-dna__svg {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+      max-width: 100%;
+      height: auto;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__icon-float {
