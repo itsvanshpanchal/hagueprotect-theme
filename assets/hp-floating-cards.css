@@ -438,9 +438,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .split-cta,
-  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='split-cta'],
-  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'],
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper,
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
@@ -530,12 +527,49 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: none !important;
   }
 
-  /* DNA / end cards: center content so no tall black void before footer */
-  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'] {
+  /* DNA: only the section root fills the sticky panel — not grid/items */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
     overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__container'] {
+    flex: 0 1 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__grid'] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    flex: 0 0 auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__item'] {
+    background: rgba(255, 255, 255, 0.09) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-accent {
+    overflow: visible !important;
+    white-space: normal !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
@@ -543,6 +577,28 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     flex-direction: column !important;
     justify-content: center !important;
     overflow: hidden !important;
+  }
+
+  /* Community: softer handoff from story-block above */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
+    padding-top: 36px !important;
+  }
+
+  /* Horizontal product slider: keep cards inset, not oversized full-bleed */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
+    flex: 0 0 min(86vw, 340px) !important;
+    width: min(86vw, 340px) !important;
+    min-width: min(86vw, 340px) !important;
+    max-width: min(86vw, 340px) !important;
   }
 
   /* Headings must not clip during sticky cover overlap / typewriter */
@@ -605,7 +661,17 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   top: auto !important;
   height: auto !important;
   min-height: 0 !important;
+  max-height: none !important;
   box-shadow: none !important;
+  background-color: #fdfcf7 !important;
+  isolation: isolate;
+}
+
+.hp-float-stack > .shopify-section.hp-float-strip.section-split-cta,
+.hp-float-stack > .shopify-section.hp-float-strip [class*='split-cta'] {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

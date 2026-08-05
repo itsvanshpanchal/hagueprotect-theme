@@ -595,8 +595,8 @@
     touch-action: pan-x pan-y;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: auto;
-    padding: 4px 0 12px;
-    padding-right: 0;
+    padding: 4px max(16px, var(--homepage-section-gutter, 16px)) 12px;
+    padding-right: max(16px, var(--homepage-section-gutter, 16px));
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
@@ -620,19 +620,19 @@
     pointer-events: none;
   }
 
-  /* One full product card at a time on mobile/tablet */
+  /* One inset product card at a time on mobile/tablet — not edge-to-edge oversized */
   .hp-fam-sec__mobile-slider .rail-card {
-    flex: 0 0 100%;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
+    flex: 0 0 min(86vw, 340px);
+    width: min(86vw, 340px);
+    min-width: min(86vw, 340px);
+    max-width: min(86vw, 340px);
     scroll-snap-align: center;
     scroll-snap-stop: always;
     box-sizing: border-box;
   }
 
   .hp-fam-sec__mobile-slider .rail-card-img {
-    height: 200px;
+    height: 180px;
   }
 
   .hp-fam-sec__mobile-slider .rail-card-title {

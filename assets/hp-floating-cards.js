@@ -57,6 +57,26 @@
     );
   }
 
+  function isSplitCtaSection(sec) {
+    return !!(
+      sec &&
+      (sec.classList.contains('section-split-cta') ||
+        sec.querySelector('[class*="split-cta"]'))
+    );
+  }
+
+  function isDnaPin(pin) {
+    return !!(
+      pin.querySelector('[data-hp-dna-section]') ||
+      pin.querySelector('[class*="hp-dna-"]') ||
+      (pin.parentElement && pin.parentElement.classList.contains('section-hague-protect-dna'))
+    );
+  }
+
+  function isDnaSection(sec) {
+    return !!(sec && sec.classList.contains('section-hague-protect-dna'));
+  }
+
   function isStoryPin(pin) {
     return !!(
       pin.querySelector('[class*="ai-story-sticky-track"]') ||
@@ -238,7 +258,7 @@
   function resetSectionStyles(sec, pin) {
     var hero = isHeroPin(pin);
     var story = isStoryPin(pin);
-    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero');
+    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero', 'hp-float-dna');
     [
       'height',
       'min-height',
@@ -545,6 +565,43 @@
     prepareStoryFullscreen(pin, true);
   }
 
+  /* Mobile DNA: sticky full-screen but keep carousel usable and content centered */
+  function asDnaMobileCard(item, z, bg) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var fill = '100dvh';
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-dna');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('max-height', fill, 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
+    sec.style.setProperty('overflow', 'hidden', 'important');
+    sec.style.setProperty('background-color', bg || '#121111', 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('height', fill, 'important');
+    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('max-height', fill, 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    /* visible so horizontal DNA carousel can scroll */
+    pin.style.setProperty('overflow', 'visible', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
+    pin.style.setProperty('background-color', bg || '#121111', 'important');
+  }
+
   function asCard(item, z, contentH, bg, mobile, isStory) {
     var sec = item.sec;
     var pin = item.pin;
@@ -647,6 +704,12 @@
 
       resetSectionStyles(sec, pin);
 
+      /* Split CTA always strip — never stretch into a black full-screen void */
+      if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
+        asStrip(item, 10 + index);
+        return;
+      }
+
       if (hero) {
         prepareHeroFullscreen(pin);
         if (!item._heroImgBound) {
@@ -703,8 +766,15 @@
         return;
       }
 
-      /* Thin marquees / split CTA stay normal height — never full-screen cards */
-      if (!story && !hero && (isKnownStrip(pin) || isSplitCtaPin(pin) || contentH < vh * 0.35)) {
+      /* Mobile DNA: sticky cover with centered content (keeps float animation) */
+      if ((isDnaPin(pin) || isDnaSection(sec)) && mobile) {
+        cardIndex += 1;
+        asDnaMobileCard(item, cardIndex, bg || '#121111');
+        return;
+      }
+
+      /* Thin marquees stay normal height — never full-screen cards */
+      if (!story && !hero && (isKnownStrip(pin) || contentH < vh * 0.35)) {
         asStrip(item, 10 + index);
         return;
       }
