@@ -455,17 +455,17 @@
 
   @media (max-width: 767px) {
     #shopify-section-{{ section.id }} .bs-coverflow {
-      --bs-card-w: min(72vw, 252px);
-      --bs-media-h: 156px;
-      --bs-spacing: 152px;
-      --bs-perspective: 900px;
-      --bs-duration: 0.72s;
-      padding: 40px 0;
-      overflow: visible;
+      --bs-card-w: min(78vw, 300px);
+      --bs-media-h: 168px;
+      --bs-spacing: 0px;
+      --bs-perspective: none;
+      --bs-duration: 0.42s;
+      padding: 28px 0 24px;
+      overflow: hidden;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__container {
-      padding: 0 var(--homepage-section-gutter, 6px);
+      padding: 0 max(16px, var(--homepage-section-gutter, 16px));
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__header {
@@ -497,32 +497,35 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__stage {
-      grid-template-columns: 1fr;
+      position: relative;
+      display: block;
+      grid-template-columns: none;
       gap: 0;
       min-height: 0;
+      padding: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 30;
-      width: 44px;
-      height: 44px;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(17, 17, 17, 0.1);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      z-index: 40;
+      width: 40px;
+      height: 40px;
+      background: #ffffff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
       animation: none;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav--prev {
-      left: max(6px, env(safe-area-inset-left, 0px));
+      left: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav--next {
-      right: max(6px, env(safe-area-inset-right, 0px));
+      right: 0;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav:active {
@@ -532,27 +535,45 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: clamp(340px, 92vw, 390px);
-      grid-column: 1;
-      padding-bottom: 8px;
-      perspective-origin: 50% 48%;
-      touch-action: pan-x pan-y;
+      height: 360px;
+      min-height: 360px;
+      max-height: 360px;
+      grid-column: auto;
+      padding: 8px 0 12px;
+      perspective: none;
+      perspective-origin: 50% 50%;
+      overflow: hidden;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__track {
+      height: 100%;
+      transform-style: flat;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport.is-transitioning .bs-coverflow-card:not(.is-active) {
-      /* filter: none; */
+      /* no blur */
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card {
       height: auto;
       min-height: 0;
-      will-change: transform;
+      width: var(--bs-card-w);
+      max-width: calc(100% - 88px);
+      will-change: transform, opacity;
       background: transparent;
+      left: 50%;
+      top: 50%;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow-card:not(.is-active) {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card:not(.is-active) .bs-coverflow-card__inner {
-      opacity: 0.88;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+      opacity: 1;
       filter: none;
     }
 
@@ -561,31 +582,37 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__media::after {
-      opacity: 0.28;
+      opacity: 0.22;
       filter: none;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__inner {
       min-height: 0;
       height: auto;
+      width: 100%;
       border-radius: var(--homepage-corner, 20px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+      overflow: hidden;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card.is-active .bs-coverflow-card__inner {
       animation: none;
-      transform: translateY(-4px);
+      transform: none;
       box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.14),
-        0 0 0 1px color-mix(in srgb, var(--bs-accent) 45%, #ffffff),
-        0 0 24px var(--bs-accent-soft);
+        0 16px 32px rgba(0, 0, 0, 0.16),
+        0 0 0 1px color-mix(in srgb, var(--bs-accent) 35%, #ffffff);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__badge {
       top: 10px;
       right: 10px;
+      left: auto;
       font-size: 9px;
       padding: 5px 10px;
+      max-width: calc(100% - 20px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__media {
@@ -695,13 +722,19 @@
 
   @media (max-width: 380px) {
     #shopify-section-{{ section.id }} .bs-coverflow {
-      --bs-card-w: min(74vw, 236px);
-      --bs-media-h: 146px;
-      --bs-spacing: 138px;
+      --bs-card-w: min(76vw, 260px);
+      --bs-media-h: 150px;
+      --bs-spacing: 0px;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
-      height: 330px;
+      height: 340px;
+      min-height: 340px;
+      max-height: 340px;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow-card {
+      max-width: calc(100% - 80px);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card,
@@ -710,8 +743,8 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-nav {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
     }
   }
 
@@ -931,10 +964,10 @@
       return {
         rotateStep: 0,
         zDepth: 0,
-        minScale: 0.9,
-        maxVisible: 1,
+        minScale: 1,
+        maxVisible: 0,
         swipeThreshold: 28,
-        duration: 520
+        duration: 420
       };
     }
 
@@ -1023,10 +1056,10 @@
         var abs = Math.abs(offset);
         var isActive = offset === 0;
 
-        /* Mobile: flat peek carousel — no 3D glass stack */
+        /* Mobile: one centered card only — no side peek / clip mess */
         if (mobile) {
-          if (abs > 1) {
-            card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.88)';
+          if (!isActive) {
+            card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.94)';
             card.style.opacity = '0';
             card.style.visibility = 'hidden';
             card.style.pointerEvents = 'none';
@@ -1036,17 +1069,14 @@
             return;
           }
 
-          var peekX = offset * Math.min(window.innerWidth * 0.72, 270);
-          var peekScale = isActive ? 1 : 0.9;
           card.style.visibility = 'visible';
-          card.style.transform =
-            'translate3d(calc(-50% + ' + peekX + 'px), -50%, 0) scale(' + peekScale + ')';
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(1)';
           card.style.opacity = '1';
-          card.style.zIndex = String(100 - abs);
-          card.style.pointerEvents = isActive ? 'auto' : 'none';
-          card.classList.toggle('is-active', isActive);
-          card.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-          card.tabIndex = isActive ? 0 : -1;
+          card.style.zIndex = '100';
+          card.style.pointerEvents = 'auto';
+          card.classList.add('is-active');
+          card.setAttribute('aria-hidden', 'false');
+          card.tabIndex = 0;
           return;
         }
 

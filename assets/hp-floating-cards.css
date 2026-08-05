@@ -491,8 +491,21 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__viewport {
-    height: min(390px, 58vh) !important;
-    max-height: 58vh !important;
+    height: 360px !important;
+    min-height: 360px !important;
+    max-height: 360px !important;
+    overflow: hidden !important;
+    perspective: none !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card {
+    max-width: calc(100% - 88px) !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card:not(.is-active) {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card__title {
