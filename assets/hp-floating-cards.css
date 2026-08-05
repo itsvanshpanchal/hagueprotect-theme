@@ -235,7 +235,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12) !important;
     filter: none !important;
     transform: none !important;
-    will-change: auto;
+    /* Promote each sticky card to its own GPU layer — scroll composites
+       instead of repainting full-screen images/shadows every frame */
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
@@ -923,7 +926,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     top: 0 !important;
     filter: none !important;
     transform: none !important;
-    will-change: auto !important;
+    /* GPU layer per card: sticky-cover scroll stays compositor-only (no jank) */
+    will-change: transform !important;
     backface-visibility: hidden;
     scroll-snap-align: none;
   }
