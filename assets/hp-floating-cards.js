@@ -817,8 +817,9 @@
   }
 
   /*
-    Mobile only: one clear swipe → next/prev float section via native smooth
-    scroll. Sticky cover animation stays untouched (no custom rAF hijack).
+    Mobile only: one clear swipe → exactly ONE next/prev float section.
+    Sticky cover animation stays untouched. Uses layout offsetTop (not sticky
+    getBoundingClientRect) so we never skip middle cards.
   */
   (function initMobileFastScroll() {
     if (!isMobile()) return;
@@ -829,10 +830,11 @@
 
     var touchY = 0;
     var touchT = 0;
+    var touchTarget = null;
     var armed = false;
     var coolUntil = 0;
-    var SWIPE_PX = 36;
-    var SWIPE_V = 0.28;
+    var SWIPE_PX = 48;
+    var SWIPE_V = 0.42;
 
     function snapList() {
       return items
@@ -851,26 +853,49 @@
         });
     }
 
+    /* Document Y from layout flow — correct even while position:sticky */
     function sectionDocTop(sec) {
-      var y =
-        sec.getBoundingClientRect().top +
-        (window.pageYOffset || document.documentElement.scrollTop || 0);
-      return Math.max(0, Math.round(y));
+      var top = 0;
+      var node = sec;
+      while (node) {
+        top += node.offsetTop || 0;
+        node = node.offsetParent;
+      }
+      return Math.max(0, Math.round(top));
     }
 
-    function nearestIndex(y) {
+    /* Which float card currently covers the viewport mid-line (topmost in stack) */
+    function currentIndex() {
       var list = snapList();
       if (!list.length) return 0;
+      var mid = (window.innerHeight || 800) * 0.42;
       var best = 0;
-      var bestDist = Infinity;
       for (var i = 0; i < list.length; i++) {
-        var d = Math.abs(sectionDocTop(list[i]) - y);
-        if (d < bestDist) {
-          bestDist = d;
+        var r = list[i].getBoundingClientRect();
+        if (r.top <= mid && r.bottom > mid) {
           best = i;
         }
       }
       return best;
+    }
+
+    function isCarouselTouch(target) {
+      if (!target || !target.closest) return false;
+      return !!target.closest(
+        [
+          '[data-bs-coverflow]',
+          '[data-coverflow-viewport]',
+          '[data-coverflow-card]',
+          '.bs-coverflow',
+          '.hp-fam-sec__mobile-slider',
+          '.trending-social',
+          '.trending-social-section',
+          '[class*="hp-dna__grid"]',
+          '.comm-slider',
+          '.comm-carousel',
+          '.hp-float-contact'
+        ].join(',')
+      );
     }
 
     function goTo(index) {
@@ -878,7 +903,7 @@
       if (!list.length) return;
       var i = Math.max(0, Math.min(list.length - 1, index));
       var top = sectionDocTop(list[i]);
-      coolUntil = Date.now() + 380;
+      coolUntil = Date.now() + 420;
       window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
     }
 
@@ -886,9 +911,13 @@
       'touchstart',
       function (e) {
         if (!isMobile() || !e.touches || !e.touches.length) return;
-        if (Date.now() < coolUntil) return;
+        if (Date.now() < coolUntil) {
+          armed = false;
+          return;
+        }
         touchY = e.touches[0].clientY;
         touchT = Date.now();
+        touchTarget = e.target;
         armed = true;
       },
       { passive: true }
@@ -901,16 +930,17 @@
         armed = false;
         if (Date.now() < coolUntil) return;
         if (!e.changedTouches || !e.changedTouches.length) return;
+        if (isCarouselTouch(touchTarget) || isCarouselTouch(e.target)) return;
 
         var y = e.changedTouches[0].clientY;
         var dy = touchY - y;
         var dt = Math.max(16, Date.now() - touchT);
         var v = dy / dt;
-        var intentional = Math.abs(dy) >= SWIPE_PX || Math.abs(v) >= SWIPE_V;
-        if (!intentional) return;
+        /* Require a clear vertical swipe — ignore light flicks that skip */
+        if (Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
+        if (Math.abs(dy) < 28) return;
 
-        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var idx = nearestIndex(scrollY + 8);
+        var idx = currentIndex();
         if (dy > 0) {
           goTo(idx + 1);
         } else {

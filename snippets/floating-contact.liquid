@@ -127,14 +127,16 @@
     @media screen and (max-width: 749px) {
       .hp-float-contact {
         top: auto !important;
-        bottom: 120px !important;
+        /* Keep clear of Best Sellers / carousel mid-card arrows */
+        bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 64px)) !important;
         transform: none !important;
         gap: 8px;
+        z-index: 40 !important;
       }
 
       .hp-float-contact__btn {
-        width: 48px;
-        height: 44px;
+        width: 44px;
+        height: 40px;
       }
     }
 

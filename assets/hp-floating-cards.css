@@ -752,15 +752,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 }
 
-/* Mobile: native scroll + sticky float cards
-   Soft proximity snap helps one swipe land on the next card smoothly.
-   Sticky cover animation is unchanged. */
+/* Mobile: sticky float cards + light one-swipe assist (JS).
+   No CSS scroll-snap — it fights sticky and skipped middle sections. */
 @media screen and (max-width: 749px) {
   html.hp-float-snap,
   body.hp-float-mobile.hp-float-snap {
     scroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y proximity;
+    scroll-snap-type: none;
   }
 
   body.hp-float-mobile .hp-float-stack {
@@ -780,20 +779,34 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     transform: none !important;
     will-change: auto !important;
     backface-visibility: hidden;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-align: none;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip {
     position: relative !important;
     top: auto !important;
     box-shadow: none !important;
-    scroll-snap-align: none;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card > .hp-float-pin {
     transform: none !important;
     will-change: auto !important;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Community: top-align like other sections — less empty black above heading */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding-top: 20px !important;
+    padding-bottom: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section {
+    justify-content: flex-start !important;
+    padding-top: 20px !important;
   }
 }
