@@ -2,7 +2,9 @@
   'use strict';
 
   var EXCLUDE_ANCESTORS =
-    '.cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, .faq-custom, .corp-hero, .corp-process, .corp-features, .corp-packages, .corp-form, .corp-marquee, .biz-hero, .biz-solutions, .biz-advantages, .biz-process, .biz-form, .biz-marquee, .comm-section, .comm-headline, [data-no-typewriter]';
+    '.cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, .faq-custom, .corp-hero, .corp-process, .corp-features, .corp-packages, .corp-form, .corp-marquee, .biz-hero, .biz-solutions, .biz-advantages, .biz-process, .biz-form, .biz-marquee, .comm-section, .comm-headline, .bs-coverflow-card, .bs-coverflow-card__title, [data-no-typewriter]';
+
+  var MOBILE_MQ = window.matchMedia('(max-width: 749px)');
 
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
@@ -131,6 +133,17 @@
     var full = data
       .map(function (d) { return d.text; })
       .join(' ');
+
+    /* Mobile + float stack: show full heading immediately so scroll never
+       catches mid-word clips like "Bestselling Sneaker Ca" / "Fol". */
+    if (MOBILE_MQ.matches) {
+      data.forEach(function (d) { d.el.innerHTML = d.html; });
+      element.setAttribute('aria-label', full);
+      element.dataset.typewriterDone = 'true';
+      delete element.dataset.typewriterActive;
+      return;
+    }
+
     var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
     var linePause = 180;
 
@@ -211,6 +224,15 @@
       .replace(/\s+/g, ' ')
       .replace(/\s*\[\[BR\]\]\s*/g, '\n')
       .trim();
+
+    if (MOBILE_MQ.matches) {
+      element.innerHTML = originalHTML;
+      element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
+      element.dataset.typewriterDone = 'true';
+      delete element.dataset.typewriterActive;
+      return;
+    }
+
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
 
     var originalPosition = window.getComputedStyle(element).position;

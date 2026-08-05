@@ -442,10 +442,115 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='split-cta'],
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'],
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper,
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
     min-height: 100% !important;
     height: 100% !important;
+    max-height: 100% !important;
     box-sizing: border-box;
+  }
+
+  /* Best Sellers: fill the sticky panel — no black void under the heading */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    overflow: hidden !important;
+    background-color: #111111 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__container {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    gap: 12px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__header {
+    flex: 0 0 auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-accent {
+    max-width: none !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__stage {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__viewport {
+    height: min(390px, 58vh) !important;
+    max-height: 58vh !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card__title {
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* Materials: fill panel + keep headline readable (no mid-word clip) */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-accent {
+    white-space: normal !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-container,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-grid,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-left {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  /* DNA / end cards: center content so no tall black void before footer */
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='hp-dna-'] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  /* Headings must not clip during sticky cover overlap / typewriter */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-typewriter-text {
+    overflow: visible !important;
   }
 
   /* "What Are You Cleaning Today" — fill viewport, no white dead space under square art */

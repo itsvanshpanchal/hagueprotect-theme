@@ -484,14 +484,17 @@
     sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
     sec.style.setProperty('background-color', bg || '#111111', 'important');
     sec.style.setProperty('overflow', 'hidden', 'important');
+    sec.style.setProperty('max-height', fill, 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('height', fill, 'important');
     pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('max-height', fill, 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
     pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
     pin.style.setProperty('background-color', bg || '#111111', 'important');
 
     prepareHeroFullscreen(pin);
@@ -511,6 +514,7 @@
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
     sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('max-height', fill, 'important');
     sec.style.setProperty('width', '100%', 'important');
     sec.style.setProperty('max-width', '100vw', 'important');
     sec.style.setProperty('left', '0', 'important');
@@ -529,9 +533,11 @@
     pin.style.setProperty('max-width', '100%', 'important');
     pin.style.setProperty('height', fill, 'important');
     pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('max-height', fill, 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
     pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
     pin.style.setProperty('margin', '0', 'important');
     pin.style.setProperty('padding', '0', 'important');
     pin.style.setProperty('background-color', bg || '#111111', 'important');
@@ -543,8 +549,12 @@
     var sec = item.sec;
     var pin = item.pin;
     var vh = viewportH();
-    /* Story + near-viewport sections use CSS dvh on mobile; tall grids keep measured height */
-    var useDvh = mobile && (isStory || contentH <= vh * 1.12);
+    /*
+      Mobile: always one viewport tall. Tall measured heights created multi-screen
+      sticky runways that looked frozen (Materials) and trapped touch in overflow:auto.
+      Desktop keeps measured height for tall grids.
+    */
+    var useDvh = mobile || isStory || contentH <= vh * 1.12;
     var pinH = useDvh ? null : Math.max(contentH, vh);
     var fill = viewportFill(true);
 
@@ -557,12 +567,14 @@
     sec.style.setProperty('position', 'sticky', 'important');
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
-    if (useDvh) {
+    if (mobile || useDvh) {
       sec.style.setProperty('height', fill, 'important');
       sec.style.setProperty('min-height', '100svh', 'important');
+      sec.style.setProperty('max-height', fill, 'important');
     } else {
       sec.style.setProperty('height', pinH + 'px', 'important');
       sec.style.setProperty('min-height', vh + 'px', 'important');
+      sec.style.removeProperty('max-height');
     }
     sec.style.setProperty('margin-top', '0px', 'important');
     sec.style.setProperty('margin-bottom', '0px', 'important');
@@ -578,20 +590,19 @@
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
-    if (useDvh) {
+    if (mobile || useDvh) {
       pin.style.setProperty('height', fill, 'important');
       pin.style.setProperty('min-height', '100svh', 'important');
+      pin.style.setProperty('max-height', fill, 'important');
     } else {
       pin.style.setProperty('height', pinH + 'px', 'important');
       pin.style.setProperty('min-height', vh + 'px', 'important');
+      pin.style.removeProperty('max-height');
     }
     pin.style.setProperty('opacity', '1', 'important');
-    pin.style.setProperty(
-      'overflow',
-      isStory || useDvh || contentH <= vh + 8 ? 'hidden' : 'auto',
-      'important'
-    );
-    if (mobile) pin.style.setProperty('-webkit-overflow-scrolling', 'touch');
+    /* Never overflow:auto on mobile — it steals page scroll and freezes the UI */
+    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
     if (bg) pin.style.setProperty('background-color', bg, 'important');
   }
 

@@ -384,29 +384,34 @@
     }
 
     /*
-      Keep "For Every Material" on one line on mobile — scale type to fit.
+      Keep "For Every Material" readable on mobile — allow wrap so typewriter
+      / sticky overlap never clips mid-word ("Fol").
     */
     .mat-section .mat-headline,
     #shopify-section-{{ section.id }} .mat-headline {
       font-size: clamp(18px, 5.2vw, 24px) !important;
       line-height: 1.15 !important;
       max-width: 100% !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow: visible !important;
     }
 
     .mat-section .mat-headline .hp-heading-pair,
     #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair {
       display: inline !important;
       flex-direction: row !important;
-      white-space: nowrap !important;
+      flex-wrap: wrap !important;
+      white-space: normal !important;
       max-width: 100% !important;
+      overflow: visible !important;
     }
 
     #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-line,
     #shopify-section-{{ section.id }} .mat-headline .hp-heading-pair .hp-heading-line,
     .mat-section .mat-headline .hp-heading-line--1 {
       display: inline !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow: visible !important;
     }
 
     .mat-section .mat-headline .hp-heading-accent,
@@ -419,6 +424,7 @@
       line-height: 1 !important;
       margin-top: 0 !important;
       vertical-align: baseline !important;
+      overflow: visible !important;
     }
 
     .mat-menu-item,
@@ -573,6 +579,17 @@
 
     menuItems.forEach(item => {
       item.addEventListener('mouseenter', function() {
+        if (mobileQuery.matches) return;
+        switchActiveMaterial(this);
+      });
+      item.addEventListener('click', function(e) {
+        if (!mobileQuery.matches) return;
+        e.preventDefault();
+        switchActiveMaterial(this);
+      });
+      item.addEventListener('keydown', function(e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
         switchActiveMaterial(this);
       });
     });

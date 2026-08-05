@@ -476,9 +476,19 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__heading {
-      max-width: 18ch;
+      max-width: none;
       margin-inline: 0;
       text-align: var(--section-heading-align, left);
+      overflow: visible;
+      white-space: normal;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-line,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-accent {
+      white-space: normal;
+      overflow: visible;
+      max-width: none;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__view-all {
