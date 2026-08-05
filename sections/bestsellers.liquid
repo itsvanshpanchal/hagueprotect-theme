@@ -499,9 +499,11 @@
     #shopify-section-{{ section.id }} .bs-coverflow__stage {
       position: relative;
       display: block;
+      width: 100%;
       grid-template-columns: none;
       gap: 0;
-      min-height: 0;
+      min-height: 360px;
+      height: auto;
       padding: 0;
     }
 
@@ -535,6 +537,9 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__viewport {
+      display: block;
+      position: relative;
+      width: 100%;
       height: 360px;
       min-height: 360px;
       max-height: 360px;
@@ -547,7 +552,10 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__track {
+      position: relative;
+      width: 100%;
       height: 100%;
+      transform: none;
       transform-style: flat;
     }
 
@@ -564,6 +572,15 @@
       background: transparent;
       left: 50%;
       top: 50%;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow-card.is-active {
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      z-index: 20;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card:not(.is-active) {
@@ -578,7 +595,15 @@
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card.is-active .bs-coverflow-card__inner {
-      opacity: 1;
+      opacity: 1 !important;
+      visibility: visible !important;
+      background: #ffffff;
+      display: flex;
+      animation: none;
+      transform: none;
+      box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.16),
+        0 0 0 1px color-mix(in srgb, var(--bs-accent) 35%, #ffffff);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__media::after {
@@ -593,14 +618,6 @@
       border-radius: var(--homepage-corner, 20px);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
       overflow: hidden;
-    }
-
-    #shopify-section-{{ section.id }} .bs-coverflow-card.is-active .bs-coverflow-card__inner {
-      animation: none;
-      transform: none;
-      box-shadow:
-        0 16px 32px rgba(0, 0, 0, 0.16),
-        0 0 0 1px color-mix(in srgb, var(--bs-accent) 35%, #ffffff);
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card__badge {
@@ -1069,12 +1086,18 @@
             return;
           }
 
+          card.classList.add('is-active');
           card.style.visibility = 'visible';
-          card.style.transform = 'translate3d(-50%, -50%, 0) scale(1)';
           card.style.opacity = '1';
           card.style.zIndex = '100';
           card.style.pointerEvents = 'auto';
-          card.classList.add('is-active');
+          card.style.left = '50%';
+          card.style.top = '50%';
+          card.style.right = 'auto';
+          card.style.bottom = 'auto';
+          card.style.width = '';
+          card.style.maxWidth = '';
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(1)';
           card.setAttribute('aria-hidden', 'false');
           card.tabIndex = 0;
           return;
@@ -1221,6 +1244,17 @@
 
     layout();
     restartAutoplay();
+
+    /* Float stack rewraps the section — re-center the active card after that */
+    function relayoutSoon() {
+      layout();
+      window.requestAnimationFrame(layout);
+    }
+    window.addEventListener('hp-floating-cards:ready', relayoutSoon);
+    window.addEventListener('load', function () {
+      window.setTimeout(relayoutSoon, 80);
+      window.setTimeout(relayoutSoon, 400);
+    });
 
     document.addEventListener('shopify:section:load', function (e) {
       if (e.target && e.target.contains(section)) {

@@ -451,21 +451,23 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     padding-top: 20px !important;
     padding-bottom: 20px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background-color: #111111 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__container {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     flex: 1 1 auto !important;
     width: 100% !important;
     min-height: 0 !important;
+    max-width: 100% !important;
     gap: 12px !important;
+    overflow: visible !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__header {
@@ -484,13 +486,19 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__stage {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    display: flex !important;
-    align-items: center !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 360px !important;
+    height: auto !important;
+    display: block !important;
+    position: relative !important;
+    align-items: stretch !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__viewport {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
     height: 360px !important;
     min-height: 360px !important;
     max-height: 360px !important;
@@ -498,14 +506,43 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     perspective: none !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__track {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card {
     max-width: calc(100% - 88px) !important;
+    width: min(78vw, 300px) !important;
+    left: 50% !important;
+    top: 50% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card.is-active {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 20 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card.is-active .bs-coverflow-card__inner {
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #ffffff !important;
+    display: flex !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card:not(.is-active) {
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-nav {
+    z-index: 40 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card__title {
