@@ -874,12 +874,16 @@
     document.body.classList.add('hp-float-snap');
 
     var touchY = 0;
+    var touchX = 0;
     var touchT = 0;
     var touchTarget = null;
+    var startIdx = 0;
     var armed = false;
     var coolUntil = 0;
-    var SWIPE_PX = 48;
-    var SWIPE_V = 0.42;
+    var settleTimer = null;
+    /* Low thresholds: any deliberate vertical swipe pages exactly one section */
+    var SWIPE_PX = 18;
+    var SWIPE_V = 0.15;
 
     function snapList() {
       return items
@@ -948,24 +952,40 @@
 
     function goTo(index) {
       var list = snapList();
-      if (!list.length) return;
-      var i = Math.max(0, Math.min(list.length - 1, index));
-      var top = sectionDocTop(list[i]);
-      coolUntil = Date.now() + 420;
+      if (!list.length) return false;
+      /* Clamped at either end: let native scroll continue (e.g. down to footer) */
+      if (index < 0 || index > list.length - 1) return false;
+      var top = sectionDocTop(list[index]);
+      coolUntil = Date.now() + 520;
       window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+      /* Settle correction: if smooth scroll under/overshot (momentum fighting),
+         nudge precisely onto the section top once the animation is done */
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(function () {
+        if (armed) return; /* a new gesture started — don't fight the user */
+        var drift = Math.abs((window.pageYOffset || 0) - top);
+        if (drift > 8 && drift < (window.innerHeight || 800) * 0.5) {
+          window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+        }
+      }, 560);
+      return true;
     }
 
     document.addEventListener(
       'touchstart',
       function (e) {
         if (!isMobile() || !e.touches || !e.touches.length) return;
+        clearTimeout(settleTimer);
         if (Date.now() < coolUntil) {
           armed = false;
           return;
         }
         touchY = e.touches[0].clientY;
+        touchX = e.touches[0].clientX;
         touchT = Date.now();
         touchTarget = e.target;
+        /* Lock the section the gesture started on — paging is always ±1 from here */
+        startIdx = currentIndex();
         armed = true;
       },
       { passive: true }
@@ -981,19 +1001,18 @@
         if (isCarouselTouch(touchTarget) || isCarouselTouch(e.target)) return;
 
         var y = e.changedTouches[0].clientY;
+        var x = e.changedTouches[0].clientX;
         var dy = touchY - y;
+        var dx = touchX - x;
         var dt = Math.max(16, Date.now() - touchT);
         var v = dy / dt;
-        /* Require a clear vertical swipe — ignore light flicks that skip */
+        /* Mostly-horizontal gestures belong to carousels/side content */
+        if (Math.abs(dx) > Math.abs(dy)) return;
+        /* Any deliberate vertical swipe pages exactly one section */
         if (Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
-        if (Math.abs(dy) < 28) return;
+        if (Math.abs(dy) < 12) return;
 
-        var idx = currentIndex();
-        if (dy > 0) {
-          goTo(idx + 1);
-        } else {
-          goTo(idx - 1);
-        }
+        goTo(dy > 0 ? startIdx + 1 : startIdx - 1);
       },
       { passive: true }
     );
