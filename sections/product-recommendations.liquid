@@ -149,7 +149,8 @@
 
 <div class="product-rec">
   <div class="product-rec__container">
-    <h2 class="product-rec__heading">{{ section.settings.heading | default: 'You may also like' }}</h2>
+    {%- assign rec_heading = section.settings.heading | default: 'You may also like' -%}
+    <h2 class="product-rec__heading">{% render 'section-heading-text', text: rec_heading, accent_last_word: true, accent_last_count: 1, accent_color: '#c9a227' %}</h2>
 
     <div class="product-rec__grid">
       {%- assign collection = collections[section.settings.collection] -%}
