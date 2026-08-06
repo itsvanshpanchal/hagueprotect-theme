@@ -376,13 +376,48 @@
       }
       body,
       p,
-      span,
+      span:not(.hp-heading-line):not(.hp-heading-pair):not(.hp-heading-accent):not(.hp-typewriter-text):not(.hp-typewriter-cursor),
       li,
       label,
       input,
       select,
       textarea {
         font-weight: var(--font-weight-sans, 400);
+      }
+
+      /* Homepage section titles — force Inter Light regardless of span defaults */
+      .bs-coverflow__heading,
+      .bs-coverflow__heading .hp-heading-line,
+      .bs-coverflow__heading .hp-heading-pair,
+      .bs-coverflow__heading .hp-typewriter-text,
+      .mat-headline,
+      .mat-headline .hp-heading-line,
+      .mat-headline .hp-heading-pair,
+      .mat-headline .hp-typewriter-text,
+      .trending-social__heading,
+      .trending-social__heading .hp-heading-line,
+      .trending-social__heading .hp-heading-pair,
+      .trending-social__heading .hp-typewriter-text,
+      .hp-fam-sec__heading,
+      .hp-fam-sec__heading .hp-heading-line,
+      .hp-fam-sec__heading .hp-heading-pair,
+      .hp-fam-sec__heading .hp-typewriter-text,
+      [class*="ai-story-banner-heading"],
+      [class*="ai-story-banner-heading"] .hp-heading-line,
+      [class*="ai-story-banner-heading"] .hp-heading-pair,
+      [class*="split-cta-"][class*="__heading"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+        font-weight: 300 !important;
+        font-style: normal !important;
+        font-synthesis: none !important;
+      }
+      .bs-coverflow__heading .hp-heading-accent,
+      .mat-headline .hp-heading-accent,
+      .trending-social__heading .hp-heading-accent,
+      .hp-fam-sec__heading .hp-heading-accent,
+      [class*="ai-story-banner-heading"] .hp-heading-accent {
+        font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+        font-weight: 400 !important;
       }
 
       .hp-typewriter-text,
