@@ -63,8 +63,19 @@
 #MainContent .shopify-section [class*="ckc-"][class*="__heading"] {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
   font-size: var(--section-heading-size) !important;
-  font-weight: var(--font-weight-h2, 400) !important;
+  font-weight: var(--font-weight-h2, 300) !important;
   font-style: var(--font-style-h2, normal) !important;
+}
+
+/* Non-accent heading words must inherit the light H2 weight (not Regular 400) */
+#MainContent .shopify-section .mat-headline .hp-heading-line,
+#MainContent .shopify-section .bs-coverflow__heading .hp-heading-line,
+#MainContent .shopify-section .trending-social__heading .hp-heading-line,
+#MainContent .shopify-section .hp-fam-sec__heading .hp-heading-line,
+#MainContent .shopify-section h2 .hp-heading-line:not(.hp-heading-accent) {
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  font-style: inherit !important;
 }
 
 /* Shop Our Premium Best — same Inter Light weight as other homepage headings */
@@ -73,7 +84,7 @@
 #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-typewriter-text {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 400) !important;
+  font-weight: var(--font-weight-h2, 300) !important;
   font-style: var(--font-style-h2, normal) !important;
   font-size: var(--section-heading-size) !important;
 }
