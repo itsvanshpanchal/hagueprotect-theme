@@ -881,6 +881,7 @@
     var armed = false;
     var coolUntil = 0;
     var settleTimer = null;
+    var lastScrollT = 0;
     /* Low thresholds: any deliberate vertical swipe pages exactly one section */
     var SWIPE_PX = 18;
     var SWIPE_V = 0.15;
@@ -921,12 +922,21 @@
       var list = snapList();
       if (!list.length) return 0;
       var mid = (window.innerHeight || 800) * 0.42;
-      var best = 0;
+      var best = -1;
       for (var i = 0; i < list.length; i++) {
         var r = list[i].getBoundingClientRect();
         if (r.top <= mid && r.bottom > mid) {
           best = i;
         }
+      }
+      if (best >= 0) return best;
+      /* Nothing covers the midline (footer / thin strip region):
+         fall back to document position so upward paging from the
+         footer starts at the LAST section, not the first */
+      var line = (window.pageYOffset || 0) + mid;
+      best = 0;
+      for (var j = 0; j < list.length; j++) {
+        if (sectionDocTop(list[j]) <= line) best = j;
       }
       return best;
     }
@@ -958,17 +968,24 @@
       var top = sectionDocTop(list[index]);
       coolUntil = Date.now() + 520;
       window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
-      /* Settle correction: if smooth scroll under/overshot (momentum fighting),
-         nudge precisely onto the section top once the animation is done */
+      /* Settle correction: nudge onto the section top only AFTER the smooth
+         scroll has finished — long upward scrolls can outlast a fixed timer,
+         and restarting them mid-flight causes a visible hitch */
       clearTimeout(settleTimer);
-      settleTimer = setTimeout(function () {
+      var settleCheck = function () {
         if (armed) return; /* a new gesture started — don't fight the user */
+        if (Date.now() - lastScrollT < 140) {
+          /* Still animating/moving — check again shortly */
+          settleTimer = setTimeout(settleCheck, 180);
+          return;
+        }
         var drift = Math.abs((window.pageYOffset || 0) - top);
         if (drift > 8 && drift < (window.innerHeight || 800) * 0.5) {
           coolUntil = Date.now() + 420;
           window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
         }
-      }, 560);
+      };
+      settleTimer = setTimeout(settleCheck, 560);
       return true;
     }
 
@@ -982,6 +999,7 @@
       'scroll',
       function () {
         if (!isMobile()) return;
+        lastScrollT = Date.now();
         clearTimeout(idleTimer);
         idleTimer = setTimeout(function () {
           if (armed) return;
