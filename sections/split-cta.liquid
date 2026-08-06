@@ -11,7 +11,7 @@
   assign text_family = section.settings.paragraph_font_family | default: 'inter'
   assign button_family = section.settings.button_font_family | default: 'inter_semibold'
 
-  assign heading_weight = section.settings.h2_font_weight | default: '300'
+  assign heading_weight = section.settings.h2_font_weight | default: '400'
   assign text_weight = section.settings.paragraph_font_weight | default: '400'
   assign button_weight = section.settings.button_font_weight | default: '600'
 
@@ -39,23 +39,18 @@
   assign text_named = text_named | strip
   assign button_named = button_named | strip
 
+  comment
+    Honor Theme Editor Weight / Style. Do not overwrite with implied
+    font-key weights (inter_light used to force 300 and ignore settings).
+  endcomment
   if heading_named != blank
-    assign heading_weight = '400'
     assign heading_style = 'normal'
-  elsif heading_implied != '400'
-    assign heading_weight = heading_implied
   endif
   if text_named != blank
-    assign text_weight = '400'
     assign text_style = 'normal'
-  elsif text_implied != '400'
-    assign text_weight = text_implied
   endif
   if button_named != blank
-    assign button_weight = '400'
     assign button_style = 'normal'
-  elsif button_implied != '400'
-    assign button_weight = button_implied
   endif
 -%}
 {%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}

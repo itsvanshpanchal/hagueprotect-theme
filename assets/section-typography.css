@@ -67,14 +67,15 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
-/* Shop Our Premium Best — same Inter Light weight as Tell Your Story */
+/* Shop Our Premium Best — same Inter Light weight as other homepage headings */
 #MainContent .shopify-section .hp-fam-sec__heading,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-line,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
 #MainContent .shopify-section .hp-fam-sec__heading .hp-typewriter-text {
   font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 300) !important;
+  font-weight: var(--font-weight-h2, 400) !important;
   font-style: var(--font-style-h2, normal) !important;
+  font-size: var(--section-heading-size) !important;
 }
 
 #MainContent .shopify-section .hp-heading-accent,
