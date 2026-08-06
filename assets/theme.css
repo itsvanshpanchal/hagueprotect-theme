@@ -920,6 +920,28 @@ main h3 > span[aria-hidden="true"] {
   .fc-header {
     margin-bottom: var(--section-header-spacing-mobile) !important;
   }
+
+  /* Same Darker Grotesque Regular label style on mobile */
+  .hero-fullscreen__eyebrow,
+  .fb__eyebrow,
+  .bs-coverflow__eyebrow,
+  .trending-social__eyebrow,
+  .mat-eyebrow,
+  .fc-subtitle,
+  .comm-eyebrow,
+  .corp-hero__eyebrow,
+  .story-banner__eyebrow,
+  .feature-grid__eyebrow,
+  .section-heading-stack__label,
+  [class*="ai-story-banner-subheading-"] {
+    font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+    font-size: var(--section-label-size, 18px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
 }
 
 /*

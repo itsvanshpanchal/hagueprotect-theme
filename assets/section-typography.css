@@ -327,7 +327,14 @@
   #MainContent .shopify-section .feature-grid__eyebrow,
   #MainContent .shopify-section .promo-banner__eyebrow,
   #MainContent .shopify-section .brandsel__eyebrow,
-  #MainContent .shopify-section .section-heading-stack__label {
-    font-size: var(--section-label-size) !important;
+  #MainContent .shopify-section .section-heading-stack__label,
+  #MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
+    font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+    font-size: var(--section-label-size, 18px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
   }
 }
