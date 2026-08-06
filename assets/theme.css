@@ -36,7 +36,7 @@
   --section-heading-margin-right: auto;
   --section-text-offset-x: 0px;
   --section-text-offset-y: 0px;
-  --section-label-weight: var(--font-weight-eyebrow, 700);
+  --section-label-weight: var(--font-weight-eyebrow, 400);
   --section-label-line-height: 1.5;
   --section-label-color: #e74c3c;
   --section-label-letter-spacing: 0.14em;
@@ -1024,14 +1024,15 @@ main h3 > span[aria-hidden="true"] {
 .story-banner__eyebrow,
 .feature-grid__eyebrow,
 .section-heading-stack__label {
-  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
-  font-size: var(--section-label-size) !important;
-  font-weight: var(--font-weight-eyebrow, var(--section-label-weight)) !important;
+  font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+  font-size: var(--section-label-size, 18px) !important;
+  font-weight: var(--font-weight-eyebrow, 400) !important;
   font-style: var(--font-style-eyebrow, normal) !important;
+  font-synthesis: none !important;
   line-height: var(--section-label-line-height) !important;
   letter-spacing: var(--section-label-letter-spacing) !important;
   color: var(--section-label-color) !important;
-  text-transform: none !important;
+  text-transform: uppercase !important;
   text-align: inherit !important;
   display: block !important;
   margin: 0 0 var(--section-label-to-title-gap) 0 !important;
@@ -1040,20 +1041,18 @@ main h3 > span[aria-hidden="true"] {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Story Banner tiny text — Weight comes from its own block settings, not eyebrow vars */
+/* Story Banner subheadings — match eyebrows: Darker Grotesque Regular */
 [class*="ai-story-banner-subheading-"] {
-  font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
-  font-size: var(--section-label-size) !important;
-  font-style: var(--font-style-eyebrow, normal) !important;
+  font-family: 'Darker Grotesque', sans-serif !important;
+  font-size: var(--section-label-size, 18px) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
   line-height: var(--section-label-line-height) !important;
   letter-spacing: var(--section-label-letter-spacing) !important;
-  color: var(--section-label-color) !important;
-  text-transform: none !important;
+  text-transform: uppercase !important;
   text-align: inherit !important;
   display: block !important;
-  margin: 0 0 var(--section-label-to-title-gap) 0 !important;
-  padding: 0 !important;
-  max-width: none !important;
   -webkit-font-smoothing: antialiased;
 }
 

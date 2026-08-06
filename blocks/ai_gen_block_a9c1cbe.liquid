@@ -6,12 +6,12 @@
 
 {%- liquid
   assign heading_family = block.settings.heading_font_family | default: 'bebas_neue'
-  assign subheading_family = block.settings.subheading_font_family | default: 'inter'
+  assign subheading_family = block.settings.subheading_font_family | default: 'darker_grotesque'
   assign text_family = block.settings.text_font_family | default: 'inter'
   assign button_family = block.settings.button_font_family | default: 'inter'
 
   assign heading_weight = block.settings.heading_font_weight | default: '400'
-  assign subheading_weight = block.settings.subheading_font_weight | default: '700'
+  assign subheading_weight = block.settings.subheading_font_weight | default: '400'
   assign text_weight = block.settings.text_font_weight | default: '400'
   assign button_weight = block.settings.button_font_weight | default: '600'
 
@@ -1118,7 +1118,7 @@
           "label": "Black (900)"
         }
       ],
-      "default": "700"
+      "default": "400"
     },
     {
       "type": "select",
