@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "story_banner_1": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "image": "shopify://shop_images/ChatGPT_Image_Apr_30_2026_11_26_32_PM.png",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "border_radius": 0
+      }
+    },
+    "products": {
+      "type": "care-kit-collection",
+      "settings": {
+        "enable_filters": true,
+        "eyebrow": "SHOP THE RANGE",
+        "heading": "",
+        "description": "",
+        "section_id": "care-kit-products",
+        "collection": "",
+        "products_limit": 24,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#ffffff"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq_power_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the difference between foam cleaner and shoe cleaning liquid?",
+            "answer": "<p>Foam cleaner sits on the surface for quick, mess-free touch-ups and is ideal for white sneakers and delicate uppers. Shoe cleaning liquid is a concentrate you mix with water for a deeper clean on heavily soiled pairs. Both are safe on most materials.</p>"
+          }
+        },
+        "faq_power_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I remove yellowing from white sneakers?",
+            "answer": "<p>To remove yellowing, apply an anti-yellow shoe cleaner or power cleaner to the yellowed area, work it in with a soft brush, then wipe clean and air-dry away from direct sunlight. Repeat for deep yellowing. Avoid bleach, which can worsen the tint.</p>"
+          }
+        },
+        "faq_power_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many pairs can one bottle clean?",
+            "answer": "<p>A concentrated shoe cleaning liquid can clean 100+ pairs, because you mix a small amount with water each time. This makes it the most economical option for anyone with a rotation of sneakers.</p>"
+          }
+        },
+        "faq_gen_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Hague Protect safe for premium sneakers?",
+            "answer": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
+          }
+        },
+        "faq_gen_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the formula alter the color or texture of my shoes?",
+            "answer": "No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials."
+          }
+        }
+      },
+      "block_order": [
+        "faq_power_1",
+        "faq_power_2",
+        "faq_power_3",
+        "faq_gen_1",
+        "faq_gen_2"
+      ],
+      "settings": {
+        "heading": "Things people often wonder"
+      }
+    }
+  },
+  "order": [
+    "story_banner_1",
+    "products",
+    "faq"
+  ]
+}

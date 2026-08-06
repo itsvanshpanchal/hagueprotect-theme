@@ -349,10 +349,10 @@
 
     <div class="faq-custom__items">
       {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
-          <div class="faq-custom__item" {{ block.shopify_attributes }}>
+      {%- for block in section.blocks -%}
+        <div class="faq-custom__item" {{ block.shopify_attributes }}>
             <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
-              <h3 class="faq-custom__question">{{ block.settings.question }}</h3>
+            <h3 class="faq-custom__question">{{ block.settings.question }}</h3>
               <div class="faq-custom__icon-wrapper" aria-hidden="true">
                 <span>+</span>
               </div>
@@ -373,7 +373,7 @@
             <div class="faq-custom__answer"><p>Yes. Our formulas are pH-balanced and made for premium footwear materials including leather, suede, nubuck, mesh, canvas, and rubber. Always follow the care steps on the product page.</p></div>
           </div>
         </div>
-        <div class="faq-custom__item">
+          <div class="faq-custom__item">
           <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
             <h3 class="faq-custom__question">Will this change the color or finish?</h3>
             <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
@@ -381,16 +381,16 @@
           <div class="faq-custom__panel" data-faq-panel hidden>
             <div class="faq-custom__answer"><p>No. Hague Protect systems are designed to clean and protect without stripping color or damaging finishes when used as directed.</p></div>
           </div>
-        </div>
+              </div>
         <div class="faq-custom__item">
           <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
             <h3 class="faq-custom__question">How long does delivery take in India?</h3>
             <div class="faq-custom__icon-wrapper" aria-hidden="true"><span>+</span></div>
-          </button>
+            </button>
           <div class="faq-custom__panel" data-faq-panel hidden>
             <div class="faq-custom__answer"><p>Orders placed before 12pm IST on business days usually ship the same day. Delivery across India typically takes 2 to 5 business days depending on your location.</p></div>
           </div>
-        </div>
+            </div>
         <div class="faq-custom__item">
           <button type="button" class="faq-custom__trigger" data-faq-trigger aria-expanded="false">
             <h3 class="faq-custom__question">What if I need help choosing a kit?</h3>
@@ -430,6 +430,28 @@
   </div>
 </div>
 
+{%- if section.blocks.size > 0 -%}
+  {%- comment -%} FAQPage schema — Q&As must match the visible on-page content {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in section.blocks -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | strip_html | strip | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ block.settings.answer | strip_html | strip | json }}
+            }
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
 <script>
   (function () {
     const root = document.querySelector('[data-faq-section="{{ section.id }}"]');
@@ -439,8 +461,8 @@
       btn.addEventListener('click', function () {
         const item = btn.closest('.faq-custom__item');
         const panel = item.querySelector('[data-faq-panel]');
-        const isActive = item.classList.contains('active');
-
+    const isActive = item.classList.contains('active');
+    
         root.querySelectorAll('.faq-custom__item').forEach(function (entry) {
           entry.classList.remove('active');
           const entryPanel = entry.querySelector('[data-faq-panel]');
@@ -453,7 +475,7 @@
         });
 
         if (!isActive && panel) {
-          item.classList.add('active');
+      item.classList.add('active');
           panel.hidden = false;
           panel.style.maxHeight = 'none';
           var height = panel.scrollHeight;

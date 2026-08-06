@@ -61,6 +61,44 @@
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "faq_suede_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I clean suede shoes without damaging them?",
+            "answer": "<p>Let any mud dry first, then brush the surface with a suede brush to lift dirt from the nap. Treat stains with a dedicated suede cleaner, brushing gently in one direction. Avoid soaking suede in water, and always patch-test first.</p>"
+          }
+        },
+        "faq_suede_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use a suede cleaner on nubuck?",
+            "answer": "<p>Yes. Suede and nubuck are similar napped materials, and the Hague Protect suede cleaner is safe on both. Use a suede brush to lift dirt from the nap, and patch-test a hidden area first on delicate or dyed materials.</p>"
+          }
+        },
+        "faq_suede_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will a suede cleaner change the colour of my shoes?",
+            "answer": "<p>No. Our suede products are formulated to clean without altering the colour or texture. We still recommend testing on a small, hidden area first, especially on delicate or dyed suede.</p>"
+          }
+        },
+        "faq_gen_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take in India?",
+            "answer": "<p>Orders placed before 12pm IST on business days usually ship the same day. Delivery across India typically takes 2 to 5 business days depending on your location.</p>"
+          }
+        },
+        "faq_gen_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I need help choosing a kit?",
+            "answer": "<p>Match the kit to your material, or message us on WhatsApp with a photo of your shoes and we\u2019ll recommend the right care system.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_suede_1", "faq_suede_2", "faq_suede_3", "faq_gen_1", "faq_gen_2"],
       "settings": {}
     }
   },

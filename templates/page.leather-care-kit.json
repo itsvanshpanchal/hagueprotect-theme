@@ -61,6 +61,37 @@
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "faq_leather_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use the leather care kit on bags and sofas too?",
+            "answer": "<p>Yes. The Hague Protect leather care kit uses gentle, cosmetic-grade ingredients that are safe on shoes, bags, wallets, car seats and sofas. It cleans and conditions leather in one step, leaving no residue.</p>"
+          }
+        },
+        "faq_gen_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this change the color or finish?",
+            "answer": "<p>No. Hague Protect systems are designed to clean and protect without stripping color or damaging finishes when used as directed.</p>"
+          }
+        },
+        "faq_gen_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take in India?",
+            "answer": "<p>Orders placed before 12pm IST on business days usually ship the same day. Delivery across India typically takes 2 to 5 business days depending on your location.</p>"
+          }
+        },
+        "faq_gen_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I need help choosing a kit?",
+            "answer": "<p>Match the kit to your material, or message us on WhatsApp with a photo of your shoes and we\u2019ll recommend the right care system.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_leather_1", "faq_gen_1", "faq_gen_2", "faq_gen_3"],
       "settings": {}
     }
   },

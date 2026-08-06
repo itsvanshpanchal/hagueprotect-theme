@@ -61,6 +61,37 @@
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "faq_soles_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I whiten yellowed midsoles?",
+            "answer": "<p>Apply sole cleaner to the midsole, scrub gently with a brush, then wipe away the lifted dirt and yellowing. For PU and rubber soles, a second pass restores the original white. Finish by air-drying out of direct sunlight.</p>"
+          }
+        },
+        "faq_gen_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Hague Protect formulas safe for my sneakers?",
+            "answer": "<p>Yes. Our formulas are pH-balanced and made for premium footwear materials including leather, suede, nubuck, mesh, canvas, and rubber. Always follow the care steps on the product page.</p>"
+          }
+        },
+        "faq_gen_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does delivery take in India?",
+            "answer": "<p>Orders placed before 12pm IST on business days usually ship the same day. Delivery across India typically takes 2 to 5 business days depending on your location.</p>"
+          }
+        },
+        "faq_gen_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if I need help choosing a kit?",
+            "answer": "<p>Match the kit to your material, or message us on WhatsApp with a photo of your shoes and we\u2019ll recommend the right care system.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_soles_1", "faq_gen_1", "faq_gen_2", "faq_gen_3"],
       "settings": {}
     }
   },
