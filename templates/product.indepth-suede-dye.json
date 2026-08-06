@@ -39,12 +39,31 @@
         "prod_2"
       ],
       "settings": {}
+    },
+    "story-block": {
+      "type": "story-block",
+      "settings": {}
+    },
+    "reviews-grid": {
+      "type": "reviews-grid",
+      "settings": {
+        "heading": "Loved by shoe lovers"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like"
+      }
     }
   },
   "order": [
     "product-hero",
     "bundle-upsell",
     "feature-grid",
-    "faq"
+    "story-block",
+    "faq",
+    "reviews-grid",
+    "product-recommendations"
   ]
 }

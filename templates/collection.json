@@ -9,21 +9,11 @@
  */
 {
   "sections": {
-    "story_banner_1": {
-      "type": "story-block",
-      "settings": {
-        "assigned_product": "",
-        "image": "shopify://shop_images/ChatGPT_Image_Apr_30_2026_11_26_32_PM.png",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "border_radius": 0
-      }
-    },
     "products": {
       "type": "care-kit-collection",
       "settings": {
-        "enable_filters": true,
-        "eyebrow": "SHOP THE RANGE",
+        "enable_filters": false,
+        "eyebrow": "",
         "heading": "",
         "description": "",
         "section_id": "care-kit-products",
@@ -86,7 +76,6 @@
     }
   },
   "order": [
-    "story_banner_1",
     "products",
     "faq"
   ]

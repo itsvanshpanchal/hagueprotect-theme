@@ -1,6 +1,13 @@
 {%- liquid
+  assign is_editorial = false
+  if template.name == 'collection'
+    assign is_editorial = true
+  elsif template.name == 'page'
+    assign is_editorial = true
+  endif
+
   assign use_collection_filters = false
-  if section.settings.enable_filters and template.name == 'collection' and collection != blank
+  if is_editorial == false and section.settings.enable_filters and template.name == 'collection' and collection != blank
     assign use_collection_filters = true
   endif
 
@@ -36,6 +43,13 @@
     assign ckc_accent = '#8a6a3b'
   elsif template.suffix == 'science-of-raw-category' or request.query_string contains 'brand=science-of-raw'
     assign ckc_accent = '#1b365d'
+  endif
+
+  assign editorial_heading = ''
+  if collection != blank and collection.title != blank
+    assign editorial_heading = collection.title
+  elsif section.settings.heading != blank
+    assign editorial_heading = section.settings.heading
   endif
 -%}
 
@@ -690,15 +704,242 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* ——— Editorial collection layout (collection templates only) ——— */
+  .ckc-{{ section.id }}--editorial {
+    padding: clamp(56px, 10vw, 96px) 0 clamp(72px, 12vw, 120px);
+    background: #ffffff;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__container {
+    max-width: 1280px;
+    padding: 0 clamp(20px, 4vw, 48px);
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__header {
+    max-width: none;
+    text-align: center;
+    margin: 0 auto clamp(48px, 8vw, 88px);
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__eyebrow,
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__desc {
+    display: none !important;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading,
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading.mat-font,
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading.mat-font--deodrizer,
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading.mat-font--denim {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: clamp(22px, 3.2vw, 34px) !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid,
+  .ckc-{{ section.id }}--editorial.ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(20px, 3vw, 40px);
+    row-gap: clamp(48px, 7vw, 88px);
+    align-items: start;
+  }
+
+  /* 6-item broken-grid cycle */
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 1) {
+    grid-column: 2 / span 4;
+  }
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 2) {
+    grid-column: 6 / span 4;
+  }
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 3) {
+    grid-column: 7 / span 6;
+  }
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 4) {
+    grid-column: 1 / span 6;
+  }
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 5) {
+    grid-column: 5 / span 4;
+  }
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 6) {
+    grid-column: 9 / span 4;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__card--editorial {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    transition: opacity 0.25s ease;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__card--editorial:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+    opacity: 0.82;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__image-wrap {
+    aspect-ratio: 1 / 1.05;
+    background: #f3f3f3;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__image {
+    object-fit: cover;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__body {
+    padding: 18px 0 0;
+    gap: 6px;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__title {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(13px, 1.15vw, 15px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.35;
+    color: #111111;
+    margin: 0;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__subtitle {
+    margin: 0;
+    font-size: clamp(12px, 1.05vw, 14px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: #6a6a6a;
+    line-height: 1.4;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__price-row {
+    margin-top: 4px;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__price {
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 500;
+    color: #111111;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__compare {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__pagination {
+    margin-top: clamp(56px, 9vw, 96px);
+    gap: 18px;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__pagination a,
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__pagination span {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #111111;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__pagination a:hover {
+    border: none;
+    color: #111111;
+    opacity: 0.55;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__pagination .current {
+    background: #111111;
+    color: #ffffff;
+    border: none;
+    min-width: 28px;
+    height: 28px;
+  }
+
+  .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__empty {
+    grid-column: 1 / -1;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid,
+    .ckc-{{ section.id }}--editorial.ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      column-gap: 20px;
+      row-gap: 48px;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 1),
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 2),
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 5),
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 6) {
+      grid-column: span 3;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 3),
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 4) {
+      grid-column: span 4;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 3) {
+      grid-column: 3 / span 4;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(6n + 4) {
+      grid-column: 1 / span 4;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid,
+    .ckc-{{ section.id }}--editorial.ckc-{{ section.id }}--no-filters .ckc-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+      row-gap: 40px;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__grid > .ckc-{{ section.id }}__card:nth-child(n) {
+      grid-column: 1 / -1;
+    }
+
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading,
+    .ckc-{{ section.id }}--editorial .ckc-{{ section.id }}__heading.mat-font {
+      font-size: 18px !important;
+      letter-spacing: 0.14em !important;
+    }
+  }
 {%- endstyle -%}
 
 <section
-  class="ckc-{{ section.id }}{% unless use_collection_filters %} ckc-{{ section.id }}--no-filters{% endunless %}"
+  class="ckc-{{ section.id }}{% unless use_collection_filters %} ckc-{{ section.id }}--no-filters{% endunless %}{% if is_editorial %} ckc-{{ section.id }}--editorial{% endif %}"
   id="{% if section.settings.section_id != blank %}{{ section.settings.section_id }}{% else %}care-kit-products{% endif %}"
-  aria-label="{{ section.settings.heading | default: 'Care kit products' | escape }}"
+  aria-label="{{ editorial_heading | default: section.settings.heading | default: 'Care kit products' | escape }}"
 >
   <div class="ckc-{{ section.id }}__container">
-    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank or collection.title != blank -%}
+    {%- if is_editorial -%}
+      {%- if editorial_heading != blank -%}
+        <div class="ckc-{{ section.id }}__header">
+          <h1 class="ckc-{{ section.id }}__heading">{{ editorial_heading }}</h1>
+        </div>
+      {%- endif -%}
+    {%- elsif section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank or collection.title != blank -%}
       <div class="ckc-{{ section.id }}__header">
         {%- if section.settings.eyebrow != blank -%}
           <p class="ckc-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -768,7 +1009,8 @@
                       product: product,
                       section_id: section.id,
                       rating_value: section.settings.rating_value,
-                      rating_count: section.settings.rating_count
+                      rating_count: section.settings.rating_count,
+                      editorial: is_editorial
                     -%}
                   {%- endfor -%}
                 {%- else -%}
@@ -779,7 +1021,7 @@
               {%- if paginate.pages > 1 -%}
                 <nav class="ckc-{{ section.id }}__pagination" aria-label="Pagination">
                   {%- if paginate.previous -%}
-                    <a href="{{ paginate.previous.url }}">Ã¢â€ Â</a>
+                    <a href="{{ paginate.previous.url }}">←</a>
                   {%- endif -%}
                   {%- for part in paginate.parts -%}
                     {%- if part.is_link -%}
@@ -793,7 +1035,7 @@
                     {%- endif -%}
                   {%- endfor -%}
                   {%- if paginate.next -%}
-                    <a href="{{ paginate.next.url }}">Ã¢â€ â€™</a>
+                    <a href="{{ paginate.next.url }}">→</a>
                   {%- endif -%}
                 </nav>
               {%- endif -%}
@@ -803,6 +1045,46 @@
       </div>
 
       <script src="{{ 'collection-facets.js' | asset_url }}" defer="defer"></script>
+    {%- elsif is_editorial and has_global_collection -%}
+      {%- paginate collection.products by products_per_page -%}
+        <div class="ckc-{{ section.id }}__grid">
+          {%- if collection.products.size > 0 -%}
+            {%- for product in collection.products -%}
+              {%- render 'care-kit-product-card',
+                product: product,
+                section_id: section.id,
+                rating_value: section.settings.rating_value,
+                rating_count: section.settings.rating_count,
+                editorial: true
+              -%}
+            {%- endfor -%}
+          {%- else -%}
+            <p class="ckc-{{ section.id }}__empty">No products found in this collection.</p>
+          {%- endif -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="ckc-{{ section.id }}__pagination" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}">←</a>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}">{{ part.title }}</a>
+              {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                  <span class="current" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span>{{ part.title }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}">→</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
     {%- else -%}
       <div class="ckc-{{ section.id }}__grid">
         {%- if has_global_collection -%}
@@ -811,7 +1093,8 @@
               product: product,
               section_id: section.id,
               rating_value: section.settings.rating_value,
-              rating_count: section.settings.rating_count
+              rating_count: section.settings.rating_count,
+              editorial: is_editorial
             -%}
           {%- endfor -%}
         {%- elsif has_collection_products -%}
@@ -820,7 +1103,8 @@
               product: product,
               section_id: section.id,
               rating_value: section.settings.rating_value,
-              rating_count: section.settings.rating_count
+              rating_count: section.settings.rating_count,
+              editorial: is_editorial
             -%}
           {%- endfor -%}
         {%- elsif has_block_products -%}
@@ -830,7 +1114,8 @@
                 product: block.settings.product,
                 section_id: section.id,
                 rating_value: section.settings.rating_value,
-                rating_count: section.settings.rating_count
+                rating_count: section.settings.rating_count,
+                editorial: is_editorial
               -%}
             {%- endif -%}
           {%- endfor -%}
