@@ -508,13 +508,13 @@
 .d2c-pdp-badge-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   background: #F1F3F5;
   color: #1A1A1A;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
   border: 1px solid transparent;
   transition: all 0.2s ease;
 }
@@ -529,12 +529,24 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  width: 32px;
+  height: 32px;
+}
+
+.d2c-pdp-badge-emoji img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.d2c-pdp-badge-emoji svg {
+  width: 22px;
+  height: 22px;
 }
 
 .d2c-pdp-badge-text {
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 /* KEY FEATURES LIST */
@@ -1095,7 +1107,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_1_icon != blank -%}
-                <img src="{{ section.settings.pill_1_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_1_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
+                <img src="{{ section.settings.pill_1_icon | image_url: width: 96, height: 96 }}" alt="{{ section.settings.pill_1_text | escape }}" width="32" height="32" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               {%- endif -%}
@@ -1107,7 +1119,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_2_icon != blank -%}
-                <img src="{{ section.settings.pill_2_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_2_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
+                <img src="{{ section.settings.pill_2_icon | image_url: width: 96, height: 96 }}" alt="{{ section.settings.pill_2_text | escape }}" width="32" height="32" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.912 3.874 4.276.622-3.094 3.016.73 4.258L12 14.75l-3.824 2.02.73-4.258-3.094-3.016 4.276-.622z"></path></svg>
               {%- endif -%}
@@ -1119,7 +1131,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_3_icon != blank -%}
-                <img src="{{ section.settings.pill_3_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_3_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
+                <img src="{{ section.settings.pill_3_icon | image_url: width: 96, height: 96 }}" alt="{{ section.settings.pill_3_text | escape }}" width="32" height="32" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               {%- endif -%}
@@ -1131,7 +1143,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_4_icon != blank -%}
-                <img src="{{ section.settings.pill_4_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_4_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
+                <img src="{{ section.settings.pill_4_icon | image_url: width: 96, height: 96 }}" alt="{{ section.settings.pill_4_text | escape }}" width="32" height="32" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 21 3c-1.5 4-2 5.5-3.1 11.2A7 7 0 0 1 11 20z"></path><path d="M11 20v-5"></path></svg>
               {%- endif -%}
@@ -1143,7 +1155,7 @@
           <div class="d2c-pdp-badge-item">
             <span class="d2c-pdp-badge-emoji">
               {%- if section.settings.pill_5_icon != blank -%}
-                <img src="{{ section.settings.pill_5_icon | image_url: width: 32, height: 32 }}" alt="{{ section.settings.pill_5_text | escape }}" style="width: 16px; height: 16px; object-fit: contain;" loading="lazy" decoding="async">
+                <img src="{{ section.settings.pill_5_icon | image_url: width: 96, height: 96 }}" alt="{{ section.settings.pill_5_text | escape }}" width="32" height="32" loading="lazy" decoding="async">
               {%- else -%}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
               {%- endif -%}
