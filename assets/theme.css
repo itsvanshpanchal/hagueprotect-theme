@@ -942,6 +942,41 @@ main h3 > span[aria-hidden="true"] {
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
   }
+
+  /* Same Inter Light heading style on mobile */
+  .fb__title,
+  .bs-coverflow__heading,
+  .mat-headline,
+  .trending-social__heading,
+  .fc-heading,
+  .comm-headline,
+  .hp-fam-sec__heading,
+  .hp-dna__heading,
+  .story-banner__heading,
+  [class*="ai-story-banner-heading"],
+  [class*="ai-story-banner-heading"] .hp-heading-line,
+  [class*="ai-story-banner-heading"] .hp-heading-pair,
+  [class*="ai-story-banner-heading"] .hp-typewriter-text,
+  [class*="split-cta-"][class*="__heading"],
+  .bs-coverflow__heading .hp-heading-line,
+  .mat-headline .hp-heading-line,
+  .trending-social__heading .hp-heading-line,
+  .hp-fam-sec__heading .hp-heading-line {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: var(--section-heading-size-mobile, 28px) !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+  }
+
+  .bs-coverflow__heading .hp-heading-accent,
+  .mat-headline .hp-heading-accent,
+  .trending-social__heading .hp-heading-accent,
+  .hp-fam-sec__heading .hp-heading-accent,
+  [class*="ai-story-banner-heading"] .hp-heading-accent {
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    font-weight: 400 !important;
+  }
 }
 
 /*
