@@ -436,6 +436,9 @@
     {%- if template.name == 'index' -%}
       <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {%- if template.name == 'product' -%}
+      <script src="{{ 'hp-hide-bulk-offers.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
     {%- if template.name == 'search' and template.suffix == 'business' -%}
       <script src="{{ 'business-page.js' | asset_url }}" defer="defer"></script>
     {%- elsif template.name == 'page' and page.handle == 'contact' -%}
