@@ -965,11 +965,50 @@
         if (armed) return; /* a new gesture started — don't fight the user */
         var drift = Math.abs((window.pageYOffset || 0) - top);
         if (drift > 8 && drift < (window.innerHeight || 800) * 0.5) {
+          coolUntil = Date.now() + 420;
           window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
         }
       }, 560);
       return true;
     }
+
+    /*
+      Guarantee layer: whenever scrolling comes to rest between sections
+      (light drags, flings through carousels, etc.), snap onto the nearest
+      section top so the view always shows exactly one full section.
+    */
+    var idleTimer = null;
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (!isMobile()) return;
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(function () {
+          if (armed) return;
+          if (Date.now() < coolUntil) return;
+          var list = snapList();
+          if (!list.length) return;
+          var yNow = window.pageYOffset || 0;
+          /* Below the last section (footer area): leave native scroll alone */
+          if (yNow > sectionDocTop(list[list.length - 1]) + 40) return;
+          var bestTop = 0;
+          var bestD = Infinity;
+          for (var i = 0; i < list.length; i++) {
+            var t = sectionDocTop(list[i]);
+            var d = Math.abs(t - yNow);
+            if (d < bestD) {
+              bestD = d;
+              bestTop = t;
+            }
+          }
+          if (bestD > 24) {
+            coolUntil = Date.now() + 520;
+            window.scrollTo({ top: bestTop, left: 0, behavior: 'smooth' });
+          }
+        }, 160);
+      },
+      { passive: true }
+    );
 
     document.addEventListener(
       'touchstart',
