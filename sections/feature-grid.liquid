@@ -26,15 +26,26 @@
   }
 
   .feature-grid__eyebrow {
-    font-family: var(--font-family-eyebrow, var(--font-family-sans));
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-size: var(--section-label-size);
-    font-weight: var(--font-weight-eyebrow, 700);
-    font-style: var(--font-style-eyebrow, normal);
+    font-weight: 400;
+    font-style: normal;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: #FF2B2B;
     margin: 0;
     display: block;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .feature-grid__eyebrow,
+    #shopify-section-{{ section.id }} .feature-grid__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   .feature-grid__heading {

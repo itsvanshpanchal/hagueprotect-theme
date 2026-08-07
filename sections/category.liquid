@@ -18,11 +18,23 @@
   }
 
   .category__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     color: var(--color-primary);
-    font-size: 13px;
-    font-weight: 700;
+    font-size: var(--section-label-size, 14px);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .category__eyebrow,
+    #shopify-section-{{ section.id }} .category__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   /* Desktop grid */

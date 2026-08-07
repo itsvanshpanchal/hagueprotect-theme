@@ -39,12 +39,24 @@
   }
 
   .promo-banner__eyebrow {
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 700;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--section-label-size, 14px);
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .promo-banner__eyebrow,
+    #shopify-section-{{ section.id }} .promo-banner__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   .promo-banner__heading {

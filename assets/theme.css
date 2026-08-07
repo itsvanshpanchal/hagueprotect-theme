@@ -926,15 +926,29 @@ main h3 > span[aria-hidden="true"] {
   .hero-fullscreen__subheading,
   .fb__eyebrow,
   .bs-coverflow__eyebrow,
+  .bestsellers__eyebrow-dtc,
   .trending-social__eyebrow,
   .mat-eyebrow,
   .fc-subtitle,
   .comm-eyebrow,
   .corp-hero__eyebrow,
+  .corp-features__eyebrow,
+  .corp-process__eyebrow,
+  .biz-hero__eyebrow,
+  .biz-solutions__eyebrow,
+  .biz-advantages__eyebrow,
+  .htu-v2__opener-label,
   .story-banner__eyebrow,
   .feature-grid__eyebrow,
+  .promo-banner__eyebrow,
+  .brandsel__eyebrow,
+  .product-family__eyebrow,
+  .category__eyebrow,
+  .video-demo__eyebrow,
   .section-heading-stack__label,
-  [class*="ai-story-banner-subheading-"] {
+  [class*="ai-story-banner-subheading-"],
+  [class*="__eyebrow"],
+  [class*="ckc-"][class*="__eyebrow"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
     font-weight: 400 !important;
@@ -1083,13 +1097,25 @@ main h3 > span[aria-hidden="true"] {
 .hero-fullscreen__subheading,
 .fb__eyebrow,
 .bs-coverflow__eyebrow,
+.bestsellers__eyebrow-dtc,
 .trending-social__eyebrow,
 .mat-eyebrow,
 .fc-subtitle,
 .comm-eyebrow,
 .corp-hero__eyebrow,
+.corp-features__eyebrow,
+.corp-process__eyebrow,
+.biz-hero__eyebrow,
+.biz-solutions__eyebrow,
+.biz-advantages__eyebrow,
+.htu-v2__opener-label,
 .story-banner__eyebrow,
 .feature-grid__eyebrow,
+.promo-banner__eyebrow,
+.brandsel__eyebrow,
+.product-family__eyebrow,
+.category__eyebrow,
+.video-demo__eyebrow,
 .section-heading-stack__label {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: var(--section-label-size, 19.8px) !important;
@@ -1665,19 +1691,39 @@ body.template-index {
   }
 }
 
-/* Final mobile eyebrow size — half the heading below for clear hierarchy */
+/* Final mobile eyebrow size — half the heading below for clear hierarchy (all sections) */
 @media screen and (max-width: 989px) {
-  body.template-index #MainContent .bs-coverflow__eyebrow,
-  body.template-index #MainContent .mat-eyebrow,
-  body.template-index #MainContent .trending-social__eyebrow,
-  body.template-index #MainContent .fb__eyebrow,
-  body.template-index #MainContent .fc-subtitle,
-  body.template-index #MainContent .comm-eyebrow,
-  body.template-index #MainContent .section-heading-stack__label,
-  body.template-index #MainContent [class*="ai-story-banner-subheading-"] {
+  #MainContent .hero-fullscreen__eyebrow,
+  #MainContent .hero-fullscreen__subheading,
+  #MainContent .fb__eyebrow,
+  #MainContent .bs-coverflow__eyebrow,
+  #MainContent .bestsellers__eyebrow-dtc,
+  #MainContent .trending-social__eyebrow,
+  #MainContent .mat-eyebrow,
+  #MainContent .fc-subtitle,
+  #MainContent .comm-eyebrow,
+  #MainContent .corp-hero__eyebrow,
+  #MainContent .corp-features__eyebrow,
+  #MainContent .corp-process__eyebrow,
+  #MainContent .biz-hero__eyebrow,
+  #MainContent .biz-solutions__eyebrow,
+  #MainContent .biz-advantages__eyebrow,
+  #MainContent .htu-v2__opener-label,
+  #MainContent .story-banner__eyebrow,
+  #MainContent .feature-grid__eyebrow,
+  #MainContent .promo-banner__eyebrow,
+  #MainContent .brandsel__eyebrow,
+  #MainContent .product-family__eyebrow,
+  #MainContent .category__eyebrow,
+  #MainContent .video-demo__eyebrow,
+  #MainContent .section-heading-stack__label,
+  #MainContent [class*="ai-story-banner-subheading-"],
+  #MainContent [class*="__eyebrow"],
+  #MainContent [class*="ckc-"][class*="__eyebrow"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
     font-weight: 400 !important;
+    font-style: normal !important;
     font-synthesis: none !important;
     -webkit-text-stroke: 0 !important;
     text-shadow: none !important;
@@ -1685,15 +1731,8 @@ body.template-index {
     text-transform: uppercase !important;
   }
 
-  body.template-index #MainContent .hero-fullscreen__subheading,
-  body.template-index #MainContent .hero-fullscreen__eyebrow {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  #MainContent .hero-fullscreen__subheading,
+  #MainContent .hero-fullscreen__eyebrow {
     font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
-    font-weight: 400 !important;
-    font-synthesis: none !important;
-    -webkit-text-stroke: 0 !important;
-    text-shadow: none !important;
-    letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
   }
 }

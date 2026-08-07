@@ -77,14 +77,24 @@
   .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow {
     display: block;
     margin: 0;
-    font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-label-size) !important;
-    font-weight: var(--font-weight-eyebrow, 400) !important;
-    font-style: var(--font-style-eyebrow, normal) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
     letter-spacing: 0.14em !important;
-    text-transform: none !important;
+    text-transform: uppercase !important;
     line-height: 1.4 !important;
     color: {{ section.settings.eyebrow_color | default: '#2563eb' }} !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow,
+    .story-banner-wrapper-{{ section.id }} .story-banner__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+    }
   }
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading,

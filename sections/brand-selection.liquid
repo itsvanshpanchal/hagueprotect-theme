@@ -50,13 +50,24 @@
   }
 
   #shopify-section-{{ section.id }} .brandsel__eyebrow {
-    font-family: var(--font-family-sans);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.22em;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--section-label-size, 14px);
+    font-weight: 400;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color | default: '#b08d57' }};
     margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .brandsel__eyebrow,
+    #shopify-section-{{ section.id }} .brandsel__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   #shopify-section-{{ section.id }} .brandsel__heading {

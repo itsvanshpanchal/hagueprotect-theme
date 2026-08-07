@@ -76,12 +76,24 @@
   }
 
   .ckc-{{ section.id }}__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     color: {{ ckc_accent }};
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--section-label-size, 14px);
+    font-weight: 400;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     margin: 0 0 10px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .ckc-{{ section.id }}__eyebrow,
+    #shopify-section-{{ section.id }} .ckc-{{ section.id }}__eyebrow {
+      font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   .ckc-{{ section.id }}__heading {

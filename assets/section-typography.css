@@ -223,11 +223,14 @@
 #MainContent .shopify-section .hero-fullscreen__subheading,
 #MainContent .shopify-section .fb__eyebrow,
 #MainContent .shopify-section .bs-coverflow__eyebrow,
+#MainContent .shopify-section .bestsellers__eyebrow-dtc,
 #MainContent .shopify-section .trending-social__eyebrow,
 #MainContent .shopify-section .mat-eyebrow,
 #MainContent .shopify-section .fc-subtitle,
 #MainContent .shopify-section .comm-eyebrow,
 #MainContent .shopify-section .corp-hero__eyebrow,
+#MainContent .shopify-section .corp-features__eyebrow,
+#MainContent .shopify-section .corp-process__eyebrow,
 #MainContent .shopify-section .biz-hero__eyebrow,
 #MainContent .shopify-section .biz-solutions__eyebrow,
 #MainContent .shopify-section .biz-advantages__eyebrow,
@@ -236,8 +239,12 @@
 #MainContent .shopify-section .feature-grid__eyebrow,
 #MainContent .shopify-section .promo-banner__eyebrow,
 #MainContent .shopify-section .brandsel__eyebrow,
+#MainContent .shopify-section .product-family__eyebrow,
+#MainContent .shopify-section .category__eyebrow,
+#MainContent .shopify-section .video-demo__eyebrow,
 #MainContent .shopify-section .section-heading-stack__label,
-#MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
+#MainContent .shopify-section [class*="ai-story-banner-subheading-"],
+#MainContent .shopify-section [class*="__eyebrow"] {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: var(--section-label-size, 19.8px) !important;
   font-weight: 400 !important;
@@ -335,17 +342,29 @@
   #MainContent .shopify-section .hero-fullscreen__subheading,
   #MainContent .shopify-section .fb__eyebrow,
   #MainContent .shopify-section .bs-coverflow__eyebrow,
+  #MainContent .shopify-section .bestsellers__eyebrow-dtc,
   #MainContent .shopify-section .trending-social__eyebrow,
   #MainContent .shopify-section .mat-eyebrow,
   #MainContent .shopify-section .fc-subtitle,
   #MainContent .shopify-section .comm-eyebrow,
   #MainContent .shopify-section .corp-hero__eyebrow,
+  #MainContent .shopify-section .corp-features__eyebrow,
+  #MainContent .shopify-section .corp-process__eyebrow,
+  #MainContent .shopify-section .biz-hero__eyebrow,
+  #MainContent .shopify-section .biz-solutions__eyebrow,
+  #MainContent .shopify-section .biz-advantages__eyebrow,
+  #MainContent .shopify-section .htu-v2__opener-label,
   #MainContent .shopify-section .story-banner__eyebrow,
   #MainContent .shopify-section .feature-grid__eyebrow,
   #MainContent .shopify-section .promo-banner__eyebrow,
   #MainContent .shopify-section .brandsel__eyebrow,
+  #MainContent .shopify-section .product-family__eyebrow,
+  #MainContent .shopify-section .category__eyebrow,
+  #MainContent .shopify-section .video-demo__eyebrow,
   #MainContent .shopify-section .section-heading-stack__label,
-  #MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
+  #MainContent .shopify-section [class*="ai-story-banner-subheading-"],
+  #MainContent .shopify-section [class*="__eyebrow"],
+  #MainContent .shopify-section [class*="ckc-"][class*="__eyebrow"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
     font-weight: 400 !important;
