@@ -921,7 +921,7 @@ main h3 > span[aria-hidden="true"] {
     margin-bottom: var(--section-header-spacing-mobile) !important;
   }
 
-  /* Same Darker Grotesque Regular label style on mobile — half the heading below */
+  /* Same Darker Grotesque Regular label style on mobile — size from Theme Editor */
   .hero-fullscreen__eyebrow,
   .hero-fullscreen__subheading,
   .fb__eyebrow,
@@ -946,11 +946,10 @@ main h3 > span[aria-hidden="true"] {
   .category__eyebrow,
   .video-demo__eyebrow,
   .section-heading-stack__label,
-  [class*="ai-story-banner-subheading-"],
   [class*="__eyebrow"],
   [class*="ckc-"][class*="__eyebrow"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+    font-size: var(--section-label-size, 14px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -962,9 +961,21 @@ main h3 > span[aria-hidden="true"] {
     text-transform: uppercase !important;
   }
 
+  /* Story banner subheading size comes from its own block setting */
+  [class*="ai-story-banner-subheading-"] {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
   .hero-fullscreen__eyebrow,
   .hero-fullscreen__subheading {
-    font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
+    font-size: var(--section-label-size, 17px) !important;
   }
 
   /* Same Inter Light heading style on mobile */
@@ -1118,7 +1129,7 @@ main h3 > span[aria-hidden="true"] {
 .video-demo__eyebrow,
 .section-heading-stack__label {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-  font-size: var(--section-label-size, 19.8px) !important;
+  font-size: var(--section-label-size, 18px) !important;
   font-weight: 400 !important;
   font-style: normal !important;
   font-synthesis: none !important;
@@ -1137,10 +1148,9 @@ main h3 > span[aria-hidden="true"] {
   max-width: none !important;
 }
 
-/* Story Banner subheadings — match eyebrows: Darker Grotesque Regular */
+/* Story Banner subheadings — Darker Grotesque Regular; size from block setting */
 [class*="ai-story-banner-subheading-"] {
   font-family: 'Darker Grotesque', sans-serif !important;
-  font-size: var(--section-label-size, 19.8px) !important;
   font-weight: 400 !important;
   font-style: normal !important;
   font-synthesis: none !important;
@@ -1691,7 +1701,7 @@ body.template-index {
   }
 }
 
-/* Final mobile eyebrow size — half the heading below for clear hierarchy (all sections) */
+/* Final mobile eyebrow size — Theme Editor Size on phone (--section-label-size) */
 @media screen and (max-width: 989px) {
   #MainContent .hero-fullscreen__eyebrow,
   #MainContent .hero-fullscreen__subheading,
@@ -1717,11 +1727,21 @@ body.template-index {
   #MainContent .category__eyebrow,
   #MainContent .video-demo__eyebrow,
   #MainContent .section-heading-stack__label,
-  #MainContent [class*="ai-story-banner-subheading-"],
   #MainContent [class*="__eyebrow"],
   #MainContent [class*="ckc-"][class*="__eyebrow"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+    font-size: var(--section-label-size, 14px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
+  #MainContent [class*="ai-story-banner-subheading-"] {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -1733,6 +1753,6 @@ body.template-index {
 
   #MainContent .hero-fullscreen__subheading,
   #MainContent .hero-fullscreen__eyebrow {
-    font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
+    font-size: var(--section-label-size, 17px) !important;
   }
 }

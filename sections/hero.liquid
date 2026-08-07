@@ -28,7 +28,7 @@
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
   #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: {{ hero_label_desktop | times: 1.1 }}px !important;
+    font-size: {{ hero_label_desktop }}px !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -197,7 +197,7 @@
     max-width: none;
     width: 100%;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--section-label-size, 19.8px) !important;
+    font-size: var(--section-label-size, 18px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -359,14 +359,14 @@
     }
   }
 
-  /* Mobile eyebrow — half the heading size below */
+  /* Mobile eyebrow — honor Theme Editor Size on phone */
   @media screen and (max-width: 989px) {
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
     #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
     #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: calc(var(--heading-size-hero, {{ hero_title_mobile }}px) * 0.5) !important;
+      font-size: {{ hero_label_mobile }}px !important;
       font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
