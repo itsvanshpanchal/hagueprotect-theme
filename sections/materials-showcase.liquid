@@ -64,6 +64,19 @@
 
   .mat-eyebrow {
     display: block !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-label-size, 19.8px) !important;
+    font-weight: 400 !important;
+    font-synthesis: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .mat-eyebrow,
+    #shopify-section-{{ section.id }} .mat-eyebrow {
+      font-size: var(--section-label-size, 25.2px) !important;
+    }
   }
 
   .mat-headline {
