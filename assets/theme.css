@@ -1014,6 +1014,13 @@ main h3 > span[aria-hidden="true"] {
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-weight: 400 !important;
   }
+
+  /* Materials script accent — keep prominent on phone */
+  body.template-index #MainContent .mat-headline .hp-heading-accent,
+  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent {
+    font-size: var(--heading-accent-size, 40px) !important;
+    line-height: 1 !important;
+  }
 }
 
 /*
