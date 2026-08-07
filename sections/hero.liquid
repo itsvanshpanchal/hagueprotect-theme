@@ -22,7 +22,7 @@
     font-size: {{ hero_title_desktop }}px !important;
   }
 
-  /* Tagline (FROM BEAT TO HEAT) — match BEST SELLERS exactly: Darker Grotesque Regular, no stroke */
+  /* Tagline (FROM BEAT TO HEAT) — Darker Grotesque Regular; stroke on mobile only */
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
@@ -65,7 +65,8 @@
       font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
-      -webkit-text-stroke: 0 !important;
+      -webkit-text-stroke: 0.45px currentColor !important;
+      paint-order: stroke fill !important;
       text-shadow: none !important;
       -webkit-font-smoothing: antialiased !important;
       -moz-osx-font-smoothing: grayscale !important;
@@ -370,7 +371,8 @@
       font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
-      -webkit-text-stroke: 0 !important;
+      -webkit-text-stroke: 0.45px currentColor !important;
+      paint-order: stroke fill !important;
       text-shadow: none !important;
       letter-spacing: 0.14em !important;
       text-transform: uppercase !important;
