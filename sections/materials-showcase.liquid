@@ -111,7 +111,7 @@
   .mat-section .mat-desc {
     color: rgba(255, 255, 255, 0.88) !important;
     line-height: 1.05 !important;
-    margin-top: var(--section-subheading-spacing-top, 12px) !important;
+    margin-top: var(--section-label-to-title-gap, var(--section-subheading-spacing-top, 10px)) !important;
     margin-bottom: 0 !important;
   }
 
@@ -448,11 +448,26 @@
     #MainContent #shopify-section-{{ section.id }} .hp-heading-pair .hp-heading-accent {
       display: inline !important;
       white-space: nowrap !important;
-      font-size: clamp(26px, 8vw, 36px) !important;
+      font-size: clamp(22px, 6vw, 28px) !important;
       line-height: 1 !important;
       margin-top: 0 !important;
+      margin-bottom: 0 !important;
       vertical-align: baseline !important;
       overflow: visible !important;
+    }
+
+    /* Keep eyebrow → title → desc gaps equal on mobile */
+    #shopify-section-{{ section.id }} .section-heading-stack,
+    .mat-section .section-heading-stack {
+      gap: var(--section-label-to-title-gap, 10px) !important;
+      row-gap: var(--section-label-to-title-gap, 10px) !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .mat-desc,
+    #shopify-section-{{ section.id }} .mat-desc,
+    .mat-section .mat-desc {
+      margin-top: var(--section-label-to-title-gap, 10px) !important;
+      margin-bottom: 0 !important;
     }
 
     .mat-menu-item,

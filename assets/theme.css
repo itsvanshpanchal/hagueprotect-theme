@@ -1800,4 +1800,25 @@ body.template-index {
     -webkit-text-stroke: 0.45px currentColor !important;
     paint-order: stroke fill !important;
   }
+
+  /* Equal eyebrow → title → desc gaps (Best Sellers + Materials) */
+  body.template-index #MainContent .bs-coverflow .section-heading-stack,
+  body.template-index #MainContent .mat-section .section-heading-stack {
+    gap: var(--section-label-to-title-gap, 10px) !important;
+    row-gap: var(--section-label-to-title-gap, 10px) !important;
+  }
+
+  body.template-index #MainContent .bs-coverflow .section-heading-stack > .bs-coverflow__eyebrow,
+  body.template-index #MainContent .bs-coverflow .section-heading-stack > .bs-coverflow__heading,
+  body.template-index #MainContent .mat-section .section-heading-stack > .mat-eyebrow,
+  body.template-index #MainContent .mat-section .section-heading-stack > .mat-headline {
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  body.template-index #MainContent .mat-desc {
+    margin-top: var(--section-label-to-title-gap, 10px) !important;
+    margin-bottom: 0 !important;
+  }
 }
