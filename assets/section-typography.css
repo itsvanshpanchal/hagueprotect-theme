@@ -347,7 +347,7 @@
   #MainContent .shopify-section .section-heading-stack__label,
   #MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 24px !important;
+    font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -357,5 +357,10 @@
     -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
+  }
+
+  #MainContent .shopify-section .hero-fullscreen__eyebrow,
+  #MainContent .shopify-section .hero-fullscreen__subheading {
+    font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
   }
 }

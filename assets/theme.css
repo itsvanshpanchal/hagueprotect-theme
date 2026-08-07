@@ -921,7 +921,7 @@ main h3 > span[aria-hidden="true"] {
     margin-bottom: var(--section-header-spacing-mobile) !important;
   }
 
-  /* Same Darker Grotesque Regular label style on mobile — fixed readable size */
+  /* Same Darker Grotesque Regular label style on mobile — half the heading below */
   .hero-fullscreen__eyebrow,
   .hero-fullscreen__subheading,
   .fb__eyebrow,
@@ -936,7 +936,7 @@ main h3 > span[aria-hidden="true"] {
   .section-heading-stack__label,
   [class*="ai-story-banner-subheading-"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 24px !important;
+    font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -946,6 +946,11 @@ main h3 > span[aria-hidden="true"] {
     -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
+  }
+
+  .hero-fullscreen__eyebrow,
+  .hero-fullscreen__subheading {
+    font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
   }
 
   /* Same Inter Light heading style on mobile */
@@ -1660,14 +1665,30 @@ body.template-index {
   }
 }
 
-/* Final mobile eyebrow size — hard 24px so live phones always show the bump */
+/* Final mobile eyebrow size — half the heading below for clear hierarchy */
 @media screen and (max-width: 989px) {
-  body.template-index #MainContent .hero-fullscreen__subheading,
-  body.template-index #MainContent .hero-fullscreen__eyebrow,
   body.template-index #MainContent .bs-coverflow__eyebrow,
-  body.template-index #MainContent .mat-eyebrow {
+  body.template-index #MainContent .mat-eyebrow,
+  body.template-index #MainContent .trending-social__eyebrow,
+  body.template-index #MainContent .fb__eyebrow,
+  body.template-index #MainContent .fc-subtitle,
+  body.template-index #MainContent .comm-eyebrow,
+  body.template-index #MainContent .section-heading-stack__label,
+  body.template-index #MainContent [class*="ai-story-banner-subheading-"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 24px !important;
+    font-size: calc(var(--section-heading-size, 28px) * 0.5) !important;
+    font-weight: 400 !important;
+    font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
+  body.template-index #MainContent .hero-fullscreen__subheading,
+  body.template-index #MainContent .hero-fullscreen__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: calc(var(--heading-size-hero, 34px) * 0.5) !important;
     font-weight: 400 !important;
     font-synthesis: none !important;
     -webkit-text-stroke: 0 !important;
