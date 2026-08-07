@@ -2,7 +2,7 @@
   assign hero_title_desktop = section.settings.h1_font_size_desktop | default: settings.font_hero_h1_size_desktop | default: settings.font_h1_size_desktop | default: 72
   assign hero_title_mobile = section.settings.h1_font_size_mobile | default: settings.font_hero_h1_size_mobile | default: settings.font_h1_size_mobile | default: 44
   assign hero_label_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 18
-  assign hero_label_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 18
+  assign hero_label_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 24
   assign hero_label_weight = section.settings.eyebrow_font_weight | default: settings.font_eyebrow_weight | default: '400'
 -%}
 {%- style -%}
@@ -61,7 +61,7 @@
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
     #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: {{ hero_label_mobile | times: 1.4 }}px !important;
+      font-size: {{ hero_label_mobile }}px !important;
       font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
@@ -356,6 +356,24 @@
 
     .hero-fullscreen__bg-img {
       object-position: center 18%;
+    }
+  }
+
+  /* Mobile eyebrow — hard size so FROM BEAT TO HEAT matches BEST SELLERS / MATERIALS */
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
+    #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
+    #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 24px !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
     }
   }
 {%- endstyle -%}
@@ -1517,7 +1535,7 @@
       "label": "Size on phone",
       "info": "Text size for the small label above the title on mobile.",
       "min": 9,
-      "max": 20,
+      "max": 32,
       "step": 1,
       "unit": "px",
       "default": 12

@@ -66,7 +66,7 @@
   assign paragraph_desktop = settings.font_paragraph_size_desktop | default: 16
   assign paragraph_mobile = settings.font_paragraph_size_mobile | default: 15
   assign eyebrow_desktop = settings.font_eyebrow_size_desktop | default: 18
-  assign eyebrow_mobile = settings.font_eyebrow_size_mobile | default: 18
+  assign eyebrow_mobile = settings.font_eyebrow_size_mobile | default: 24
 
   assign accent_family = settings.font_heading_accent_family | default: 'luthon_southard_script'
   assign accent_weight = settings.font_heading_accent_weight | default: '400'
@@ -125,7 +125,7 @@
       --heading-size-xl: {{ h1_mobile }}px;
       --section-heading-size: {{ h2_mobile }}px;
       --section-subheading-size: {{ paragraph_mobile }}px;
-      --section-label-size: {{ eyebrow_mobile | times: 1.4 }}px;
+      --section-label-size: {{ eyebrow_mobile }}px;
       --body-font-size: {{ paragraph_mobile }}px;
       --heading-accent-size: {{ accent_mobile }}px;
     }

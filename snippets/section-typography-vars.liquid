@@ -39,7 +39,7 @@
   assign paragraph_desktop = section.settings.paragraph_font_size_desktop | default: settings.font_paragraph_size_desktop | default: 16
   assign paragraph_mobile = section.settings.paragraph_font_size_mobile | default: settings.font_paragraph_size_mobile | default: 15
   assign eyebrow_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 18
-  assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 18
+  assign eyebrow_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 24
   assign accent_desktop = section.settings.heading_accent_font_size_desktop | default: settings.font_heading_accent_size_desktop | default: 62
   assign accent_mobile = section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
   assign accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
@@ -205,7 +205,7 @@
     --heading-size-xl: {{ h1_mobile }}px;
     --section-heading-size: {{ h2_mobile }}px;
     --section-subheading-size: {{ paragraph_mobile }}px;
-    --section-label-size: {{ eyebrow_mobile | times: 1.4 }}px;
+    --section-label-size: {{ eyebrow_mobile }}px;
     --body-font-size: {{ paragraph_mobile }}px;
     --heading-accent-size: {{ accent_mobile }}px;
     --section-subheading-spacing-top: {{ title_desc_spacing_mobile }}px;
