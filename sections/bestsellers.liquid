@@ -66,12 +66,18 @@
 
   #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
     display: block;
-    color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     text-align: var(--section-heading-align, left);
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-label-size, 18px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
   }
@@ -84,8 +90,14 @@
       font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
       letter-spacing: 0.14em !important;
       text-transform: uppercase !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
   }
 

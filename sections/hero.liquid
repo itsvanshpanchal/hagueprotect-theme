@@ -22,18 +22,24 @@
     font-size: {{ hero_title_desktop }}px !important;
   }
 
-  /* Tagline (FROM BEAT TO HEAT) — same Darker Grotesque Regular as BEST SELLERS */
+  /* Tagline (FROM BEAT TO HEAT) — match BEST SELLERS exactly: Darker Grotesque Regular, no stroke */
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
   #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: {{ hero_label_desktop }}px !important;
-    font-weight: {{ hero_label_weight }} !important;
+    font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
   }
 
   @media screen and (max-width: 989px) {
@@ -56,11 +62,17 @@
     #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
       font-size: {{ hero_label_mobile }}px !important;
-      font-weight: {{ hero_label_weight }} !important;
+      font-weight: 400 !important;
       font-style: normal !important;
       font-synthesis: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
       letter-spacing: 0.14em !important;
       text-transform: uppercase !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
   }
 
@@ -186,12 +198,18 @@
     width: 100%;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-label-size, 18px) !important;
-    font-weight: var(--font-weight-eyebrow, 400) !important;
+    font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    letter-spacing: var(--section-label-letter-spacing, 0.14em) !important;
-    line-height: var(--section-label-line-height, 1.5) !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    letter-spacing: 0.14em !important;
+    line-height: 1.5 !important;
     text-transform: uppercase !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     margin: var(--section-subheading-spacing-top, 12px) 0 0 0 !important;
     padding: 0;
     text-align: var(--hero-content-align, left) !important;

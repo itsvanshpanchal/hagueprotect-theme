@@ -238,13 +238,17 @@
 #MainContent .shopify-section .brandsel__eyebrow,
 #MainContent .shopify-section .section-heading-stack__label,
 #MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
-  font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: var(--section-label-size, 18px) !important;
   font-weight: 400 !important;
-  font-style: var(--font-style-eyebrow, normal) !important;
+  font-style: normal !important;
   font-synthesis: none !important;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
 }
 
 /* ========== Mobile / tablet (matches Shopify editor + phones) ========== */
@@ -342,11 +346,15 @@
   #MainContent .shopify-section .brandsel__eyebrow,
   #MainContent .shopify-section .section-heading-stack__label,
   #MainContent .shopify-section [class*="ai-story-banner-subheading-"] {
-    font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-label-size, 18px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
   }

@@ -921,7 +921,7 @@ main h3 > span[aria-hidden="true"] {
     margin-bottom: var(--section-header-spacing-mobile) !important;
   }
 
-  /* Same Darker Grotesque Regular label style on mobile */
+  /* Same Darker Grotesque Regular label style on mobile — no stroke / faux bold */
   .hero-fullscreen__eyebrow,
   .hero-fullscreen__subheading,
   .fb__eyebrow,
@@ -935,11 +935,15 @@ main h3 > span[aria-hidden="true"] {
   .feature-grid__eyebrow,
   .section-heading-stack__label,
   [class*="ai-story-banner-subheading-"] {
-    font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-label-size, 18px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
   }
@@ -1082,13 +1086,17 @@ main h3 > span[aria-hidden="true"] {
 .story-banner__eyebrow,
 .feature-grid__eyebrow,
 .section-heading-stack__label {
-  font-family: var(--font-family-eyebrow, 'Darker Grotesque', sans-serif) !important;
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: var(--section-label-size, 18px) !important;
-  font-weight: var(--font-weight-eyebrow, 400) !important;
-  font-style: var(--font-style-eyebrow, normal) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
   font-synthesis: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   line-height: var(--section-label-line-height) !important;
-  letter-spacing: var(--section-label-letter-spacing) !important;
+  letter-spacing: 0.14em !important;
   color: var(--section-label-color) !important;
   text-transform: uppercase !important;
   text-align: inherit !important;
@@ -1096,7 +1104,6 @@ main h3 > span[aria-hidden="true"] {
   margin: 0 0 var(--section-label-to-title-gap) 0 !important;
   padding: 0 !important;
   max-width: none !important;
-  -webkit-font-smoothing: antialiased;
 }
 
 /* Story Banner subheadings — match eyebrows: Darker Grotesque Regular */
