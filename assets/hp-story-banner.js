@@ -20,7 +20,7 @@
   }
 
   function syncWrap(wrap) {
-    var mobile = window.matchMedia('(max-width: 749px)').matches;
+    var mobile = window.matchMedia('(max-width: 989px)').matches;
     var url = mobile ? wrap.getAttribute('data-mobile-bg') : wrap.getAttribute('data-desktop-bg');
     if (!url) {
       url = wrap.getAttribute('data-desktop-bg') || wrap.getAttribute('data-mobile-bg');

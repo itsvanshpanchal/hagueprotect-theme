@@ -173,15 +173,31 @@
   }
 
   [class*="ai-story-banner-heading"],
-  [class*="ai-story-banner-heading"] .hp-heading-line,
+  [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   [class*="ai-story-banner-heading"] .hp-heading-pair,
   [class*="ai-story-banner-heading"] .hp-typewriter-text {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 24px !important;
+    font-size: clamp(18px, 5.2vw, 24px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    line-height: 1.05 !important;
+    line-height: 1.15 !important;
+  }
+
+  [class*="ai-story-banner-heading"] .hp-heading-accent,
+  [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-accent {
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    font-size: 40px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+    letter-spacing: 0.01em !important;
+    color: #c9a227 !important;
+    -webkit-text-fill-color: #c9a227 !important;
+    display: inline !important;
+    white-space: nowrap !important;
+    vertical-align: baseline !important;
   }
 
   [class*="ai-story-banner-subheading"] {
