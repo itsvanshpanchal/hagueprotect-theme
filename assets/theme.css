@@ -991,7 +991,7 @@ main h3 > span[aria-hidden="true"] {
   .hp-dna__heading,
   .story-banner__heading,
   [class*="ai-story-banner-heading"],
-  [class*="ai-story-banner-heading"] .hp-heading-line,
+  [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   [class*="ai-story-banner-heading"] .hp-heading-pair,
   [class*="ai-story-banner-heading"] .hp-typewriter-text,
   [class*="split-cta-"][class*="__heading"],
@@ -1767,13 +1767,13 @@ body.template-index {
     font-size: var(--section-label-size, 17px) !important;
   }
 
-  /* Tell Your Story — match Materials "For Every Material" on mobile */
+  /* Tell Your Story — mobile: Inter 29px + gold script accent */
   #MainContent [class*="ai-story-banner-heading"],
   #MainContent [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair,
   #MainContent [class*="ai-story-banner-heading"] .hp-typewriter-text {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 26px !important;
+    font-size: 29px !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;

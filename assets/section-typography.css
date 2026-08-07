@@ -322,7 +322,7 @@
   #MainContent .shopify-section .biz-advantages__heading,
   #MainContent .shopify-section .htu-v2__opener-title,
   #MainContent .shopify-section [class*="ai-story-banner-heading"],
-  #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-line,
+  #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-pair,
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-typewriter-text,
   #MainContent .shopify-section [class*="split-cta-"][class*="__heading"],
@@ -352,13 +352,13 @@
     font-size: var(--section-subheading-size, var(--body-font-size)) !important;
   }
 
-  /* Tell Your Story — same mobile type as Materials "For Every Material" */
+  /* Tell Your Story — mobile: Inter 29px + gold script accent */
   #MainContent .shopify-section [class*="ai-story-banner-heading"],
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-pair,
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-typewriter-text {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 26px !important;
+    font-size: 29px !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;
