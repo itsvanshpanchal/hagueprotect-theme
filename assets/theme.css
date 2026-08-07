@@ -1791,4 +1791,13 @@ body.template-index {
     text-transform: none !important;
     -webkit-font-smoothing: antialiased !important;
   }
+
+  /* Materials menu labels — same light stroke as eyebrows on mobile */
+  #MainContent .mat-menu-item,
+  #MainContent .mat-menu-item-text,
+  #MainContent .mat-menu-item[class*="mat-font--"],
+  #MainContent .mat-menu-item-text[class*="mat-font--"] {
+    -webkit-text-stroke: 0.45px currentColor !important;
+    paint-order: stroke fill !important;
+  }
 }

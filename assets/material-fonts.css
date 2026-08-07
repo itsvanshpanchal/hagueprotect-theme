@@ -48,5 +48,7 @@
   .mat-section .mat-menu-item-text[class*="mat-font--"] {
     text-transform: none !important;
     letter-spacing: -0.03em !important;
+    -webkit-text-stroke: 0.45px currentColor !important;
+    paint-order: stroke fill !important;
   }
 }
