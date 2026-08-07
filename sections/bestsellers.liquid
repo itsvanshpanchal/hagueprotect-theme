@@ -68,6 +68,25 @@
     display: block;
     color: {{ settings.homepage_label_color | default: '#2563eb' }} !important;
     text-align: var(--section-heading-align, left);
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .bs-coverflow__eyebrow,
+    #shopify-section-{{ section.id }} .bs-coverflow__eyebrow {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: var(--section-label-size, 18px) !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
+    }
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading {

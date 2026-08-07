@@ -1,9 +1,9 @@
 {%- liquid
   assign hero_title_desktop = section.settings.h1_font_size_desktop | default: settings.font_hero_h1_size_desktop | default: settings.font_h1_size_desktop | default: 72
   assign hero_title_mobile = section.settings.h1_font_size_mobile | default: settings.font_hero_h1_size_mobile | default: settings.font_h1_size_mobile | default: 44
-  assign hero_label_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 12
-  assign hero_label_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 12
-  assign hero_label_weight = section.settings.eyebrow_font_weight | default: settings.font_eyebrow_weight | default: '600'
+  assign hero_label_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 18
+  assign hero_label_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 18
+  assign hero_label_weight = section.settings.eyebrow_font_weight | default: settings.font_eyebrow_weight | default: '400'
 -%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
@@ -22,13 +22,18 @@
     font-size: {{ hero_title_desktop }}px !important;
   }
 
-  /* Tagline (FROM BEAT TO HEAT) — same exact size/weight as BEST SELLERS label */
+  /* Tagline (FROM BEAT TO HEAT) — same Darker Grotesque Regular as BEST SELLERS */
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
   #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: {{ hero_label_desktop }}px !important;
     font-weight: {{ hero_label_weight }} !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
   }
 
   @media screen and (max-width: 989px) {
@@ -49,8 +54,13 @@
     #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow,
     #shopify-section-{{ section.id }} .hero-fullscreen__eyebrow {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
       font-size: {{ hero_label_mobile }}px !important;
       font-weight: {{ hero_label_weight }} !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
     }
   }
 
@@ -174,12 +184,14 @@
   .hero-fullscreen__subheading {
     max-width: none;
     width: 100%;
-    font-family: var(--font-family-eyebrow, var(--font-family-sans)) !important;
-    font-size: var(--section-label-size, 12px) !important;
-    font-weight: var(--font-weight-eyebrow, 600) !important;
-    font-style: var(--font-style-eyebrow, normal) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-label-size, 18px) !important;
+    font-weight: var(--font-weight-eyebrow, 400) !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
     letter-spacing: var(--section-label-letter-spacing, 0.14em) !important;
     line-height: var(--section-label-line-height, 1.5) !important;
+    text-transform: uppercase !important;
     margin: var(--section-subheading-spacing-top, 12px) 0 0 0 !important;
     padding: 0;
     text-align: var(--hero-content-align, left) !important;
