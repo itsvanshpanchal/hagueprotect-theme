@@ -505,6 +505,172 @@
     "corporate_gifting_marquee_pCHxwt": {
       "type": "corporate-gifting-marquee",
       "name": "Corporate Marquee",
+      "blocks": {
+        "marquee_top_empwelcome": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Employee Welcome Kits",
+            "row": "top",
+            "outline": false
+          }
+        },
+        "marquee_top_client": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Client Appreciation",
+            "row": "top",
+            "outline": true
+          }
+        },
+        "marquee_top_festival": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Festival Hampers",
+            "row": "top",
+            "outline": false
+          }
+        },
+        "marquee_top_conference": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Conference Swag",
+            "row": "top",
+            "outline": true
+          }
+        },
+        "marquee_top_ceo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "CEO Gifts",
+            "row": "top",
+            "outline": false
+          }
+        },
+        "marquee_top_team": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Team Milestones",
+            "row": "top",
+            "outline": true
+          }
+        },
+        "marquee_mid_retail": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Retail Partners",
+            "row": "middle",
+            "outline": true
+          }
+        },
+        "marquee_mid_custom": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Custom Inserts",
+            "row": "middle",
+            "outline": false
+          }
+        },
+        "marquee_mid_logo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Logo Embossing",
+            "row": "middle",
+            "outline": true
+          }
+        },
+        "marquee_mid_gift": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Gift Wrapping",
+            "row": "middle",
+            "outline": false
+          }
+        },
+        "marquee_mid_delivery": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Pan-India Delivery",
+            "row": "middle",
+            "outline": true
+          }
+        },
+        "marquee_mid_invoice": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Invoice & GST",
+            "row": "middle",
+            "outline": false
+          }
+        },
+        "marquee_bot_cobrand": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Co-Branded Packaging",
+            "row": "bottom",
+            "outline": false
+          }
+        },
+        "marquee_bot_bulk": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Bulk Pricing",
+            "row": "bottom",
+            "outline": true
+          }
+        },
+        "marquee_bot_manager": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Dedicated Manager",
+            "row": "bottom",
+            "outline": false
+          }
+        },
+        "marquee_bot_sample": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Sample Kits",
+            "row": "bottom",
+            "outline": true
+          }
+        },
+        "marquee_bot_volume": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Volume Discounts",
+            "row": "bottom",
+            "outline": false
+          }
+        },
+        "marquee_bot_onboard": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Onboarding Packs",
+            "row": "bottom",
+            "outline": true
+          }
+        }
+      },
+      "block_order": [
+        "marquee_top_empwelcome",
+        "marquee_top_client",
+        "marquee_top_festival",
+        "marquee_top_conference",
+        "marquee_top_ceo",
+        "marquee_top_team",
+        "marquee_mid_retail",
+        "marquee_mid_custom",
+        "marquee_mid_logo",
+        "marquee_mid_gift",
+        "marquee_mid_delivery",
+        "marquee_mid_invoice",
+        "marquee_bot_cobrand",
+        "marquee_bot_bulk",
+        "marquee_bot_manager",
+        "marquee_bot_sample",
+        "marquee_bot_volume",
+        "marquee_bot_onboard"
+      ],
       "settings": {
         "label": "Trusted for employee onboarding, client appreciation, festival hampers & more",
         "show_label": false,

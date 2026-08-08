@@ -832,6 +832,11 @@
       /* Thin marquees stay normal height — never full-screen cards */
       if (!story && !hero && (isKnownStrip(pin) || contentH < vh * 0.35)) {
         asStrip(item, 10 + index);
+        if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
+          item.bg = '#ffffff';
+          sec.style.setProperty('background-color', '#ffffff', 'important');
+          pin.style.setProperty('background-color', '#ffffff', 'important');
+        }
         return;
       }
 

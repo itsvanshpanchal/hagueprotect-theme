@@ -56,7 +56,11 @@
         {%- for i in (1..2) -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'top' and block.settings.text != blank -%}
-              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
+              {%- assign item_outline = block.settings.outline -%}
+              {%- if item_outline != true and block.settings.accent -%}
+                {%- assign item_outline = true -%}
+              {%- endif -%}
+              <span class="corp-marquee__item{% if item_outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
@@ -83,7 +87,11 @@
         {%- for i in (1..2) -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'middle' and block.settings.text != blank -%}
-              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
+              {%- assign item_outline = block.settings.outline -%}
+              {%- if item_outline != true and block.settings.accent -%}
+                {%- assign item_outline = true -%}
+              {%- endif -%}
+              <span class="corp-marquee__item{% if item_outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
@@ -110,7 +118,11 @@
         {%- for i in (1..2) -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'bottom' and block.settings.text != blank -%}
-              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
+              {%- assign item_outline = block.settings.outline -%}
+              {%- if item_outline != true and block.settings.accent -%}
+                {%- assign item_outline = true -%}
+              {%- endif -%}
+              <span class="corp-marquee__item{% if item_outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
