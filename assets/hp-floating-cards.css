@@ -977,7 +977,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Community: pack header + slider into the sticky panel (less empty black) */
+  /* Community: stack header then slider — never overlap intro copy */
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
     display: flex !important;
     flex-direction: column !important;
@@ -985,6 +985,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-top: 16px !important;
     padding-bottom: 12px !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-container {
@@ -993,21 +994,50 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     flex: 1 1 auto !important;
     height: 100% !important;
     min-height: 0 !important;
-    justify-content: space-between !important;
-    gap: 12px !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
     margin-bottom: 0 !important;
-    gap: 16px !important;
+    gap: 12px !important;
     flex: 0 0 auto !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-desc,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .hp-body-para {
+    position: relative !important;
+    z-index: 2 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
     flex: 1 1 auto !important;
     min-height: 0 !important;
+    margin-top: 4px !important;
     display: flex !important;
-    align-items: flex-end !important;
+    align-items: flex-start !important;
+    overflow: hidden !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper {
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Keep review cards shorter so header + carousel fit one mobile panel */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-media {
+    aspect-ratio: 1 / 1 !important;
+    max-height: min(42vw, 180px) !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-body {
+    padding: 12px 14px 14px !important;
+    gap: 6px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
