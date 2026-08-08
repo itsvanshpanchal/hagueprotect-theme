@@ -1339,9 +1339,12 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   -webkit-font-smoothing: antialiased;
 }
 
-/* Community intro copy — match Materials / Tell Your Story leading */
+/* Community intro copy — Darker Grotesque needs tighter leading */
 .comm-desc,
-.comm-badge-desc,
+.comm-badge-desc {
+  line-height: 1.15 !important;
+}
+
 .story-banner__paragraph,
 .hp-body-para {
   line-height: 1.05 !important;
@@ -1836,11 +1839,9 @@ body.template-index {
     -webkit-font-smoothing: antialiased !important;
   }
 
-  /* Story banner + Community paras — same as Tell Your Story on mobile */
+  /* Story banner paras — same as Tell Your Story on mobile */
   body.template-index #MainContent .shopify-section .story-banner__paragraph,
   body.template-index #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__paragraph,
-  body.template-index #MainContent .shopify-section .comm-desc,
-  body.template-index #MainContent .shopify-section .comm-section .comm-desc,
   body.template-index #MainContent .shopify-section .hp-body-para,
   body.template-index #MainContent [class*="ai-story-banner-text"],
   body.template-index #MainContent [class*="ai-story-banner-text"] p {

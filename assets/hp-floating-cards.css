@@ -448,6 +448,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
   body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
@@ -457,14 +458,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Community keeps natural height so review cards are not clipped */
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
-    min-height: 100% !important;
-    height: auto !important;
-    max-height: none !important;
     box-sizing: border-box;
   }
 
@@ -984,105 +977,37 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Community (mobile + desktop): never clip review card bottoms */
-  .hp-float-stack > .shopify-section.hp-float-community,
-  .hp-float-stack > .shopify-section.hp-float-community > .hp-float-pin,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section),
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section) > .hp-float-pin {
-    max-height: none !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-  }
-
-  .hp-float-stack .hp-float-community .comm-section,
+  /* Community: pack header + slider into the sticky panel (less empty black) */
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
+    padding-top: 16px !important;
+    padding-bottom: 12px !important;
     box-sizing: border-box !important;
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
-    padding-top: 28px !important;
-    padding-bottom: 28px !important;
-  }
-
-  .hp-float-stack .hp-float-community .comm-section .comm-container,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-container {
     display: flex !important;
     flex-direction: column !important;
-    flex: 0 0 auto !important;
-    height: auto !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
     min-height: 0 !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     gap: 12px !important;
-    overflow: visible !important;
   }
 
-  .hp-float-stack .hp-float-community .comm-section .comm-top,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
     margin-bottom: 0 !important;
-    gap: 12px !important;
+    gap: 16px !important;
     flex: 0 0 auto !important;
-    position: relative !important;
-    z-index: 2 !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-desc,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .hp-body-para {
-    position: relative !important;
-    z-index: 2 !important;
-  }
-
-  .hp-float-stack .hp-float-community .comm-section .comm-slider-container,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
-    flex: 0 0 auto !important;
+    flex: 1 1 auto !important;
     min-height: 0 !important;
-    margin-top: 4px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    position: relative !important;
-    z-index: 1 !important;
-  }
-
-  .hp-float-stack .hp-float-community .comm-section .comm-swiper,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper {
-    overflow: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-media {
-    aspect-ratio: 1 / 1 !important;
-    max-height: min(48vw, 200px) !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-body {
-    padding: 12px 14px 14px !important;
-    gap: 5px !important;
-    flex: 0 0 auto !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-text {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 3 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    font-size: 14px !important;
-    line-height: 1.25 !important;
+    display: flex !important;
+    align-items: flex-end !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
