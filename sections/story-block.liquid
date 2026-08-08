@@ -200,11 +200,12 @@
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
   .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
-    font-family: var(--font-family-sans) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-subheading-size, var(--body-font-size)) !important;
-    font-weight: var(--font-weight-sans, 400) !important;
-    font-style: var(--font-style-sans, normal) !important;
-    line-height: 1.35 !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.05 !important;
     letter-spacing: normal !important;
     text-transform: none !important;
     color: {{ section.settings.paragraph_color | default: '#444444' }} !important;
@@ -347,7 +348,7 @@
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
-    /* Para tight under heading at top */
+    /* Para tight under heading — match Tell Your Story / Community on mobile */
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
     .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
       margin-top: 2px !important;
@@ -356,7 +357,11 @@
       color: {{ section.settings.paragraph_color | default: '#222222' }} !important;
       position: relative !important;
       z-index: 4 !important;
-      line-height: 1.3 !important;
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      line-height: 1.05 !important;
     }
   }
 {%- endstyle -%}

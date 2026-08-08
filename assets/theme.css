@@ -1834,6 +1834,21 @@ body.template-index {
     -webkit-font-smoothing: antialiased !important;
   }
 
+  /* Story banner + Community paras — same as Tell Your Story on mobile */
+  #MainContent .story-banner__paragraph,
+  #MainContent .comm-desc {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.05 !important;
+    letter-spacing: normal !important;
+    text-transform: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -webkit-text-stroke: 0 !important;
+  }
+
   /* Materials menu labels — same light stroke as eyebrows on mobile */
   #MainContent .mat-menu-item,
   #MainContent .mat-menu-item-text,
