@@ -235,21 +235,27 @@
     fill: currentColor !important;
   }
 
-  /* Carousel */
+  /* Carousel — full cards only (no half peeks) */
   .comm-slider-container {
     width: 100% !important;
     position: relative !important;
+    overflow: visible !important;
   }
 
   .comm-swiper {
     width: 100% !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    padding-bottom: 4px !important;
+  }
+
+  .comm-swiper .swiper-wrapper {
+    align-items: stretch !important;
   }
 
   /* Cards — image on top, review text below */
   .comm-card {
-    width: 320px !important;
-    height: auto !important;
+    width: 100% !important;
+    height: 100% !important;
     min-height: 0 !important;
     background-color: #F3F3F3 !important;
     border: 1px solid #E8E8E8 !important;
@@ -397,9 +403,13 @@
   }
 
   .comm-slide {
-    width: 320px !important;
+    width: auto !important;
     height: auto !important;
-    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .comm-slide .comm-card {
+    width: 100% !important;
   }
 
   /* Responsive Adjustments */
@@ -476,19 +486,21 @@
     }
     .comm-slider-container {
       margin-top: 0 !important;
-      overflow: hidden !important;
+      overflow: visible !important;
     }
     .comm-swiper {
       overflow: hidden !important;
+      width: 100% !important;
     }
     .comm-slide,
     .comm-card {
-      width: min(82vw, 300px) !important;
+      width: 100% !important;
       height: auto !important;
       padding: 0 !important;
     }
     .comm-card-media {
-      max-height: 180px !important;
+      max-height: 200px !important;
+      aspect-ratio: 1 / 1 !important;
     }
     .comm-card-body {
       padding: 14px 14px 16px !important;
@@ -683,14 +695,24 @@
     function initSwiper() {
       if (typeof Swiper !== 'undefined') {
         new Swiper('#swiper-{{ section.id }}', {
-          slidesPerView: 'auto',
+          slidesPerView: 1,
           spaceBetween: 16,
           centeredSlides: true,
           loop: true,
           breakpoints: {
-            480: {
-              slidesPerView: 'auto',
-              spaceBetween: 28,
+            750: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+              centeredSlides: false
+            },
+            1100: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+              centeredSlides: false
+            },
+            1400: {
+              slidesPerView: 4,
+              spaceBetween: 24,
               centeredSlides: false
             }
           },

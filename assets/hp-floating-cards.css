@@ -448,7 +448,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
   body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
@@ -458,6 +457,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Community keeps natural height so review cards are not clipped */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
+    min-height: 100% !important;
+    height: auto !important;
+    max-height: none !important;
     box-sizing: border-box;
   }
 
@@ -977,26 +984,38 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Community: stack header then slider — never overlap intro copy */
+  /* Community: full review cards visible — section grows instead of clipping */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section),
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section) > .hp-float-pin {
+    height: auto !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     padding-top: 16px !important;
-    padding-bottom: 12px !important;
+    padding-bottom: 24px !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-container {
     display: flex !important;
     flex-direction: column !important;
-    flex: 1 1 auto !important;
-    height: 100% !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
     min-height: 0 !important;
     justify-content: flex-start !important;
-    gap: 20px !important;
-    overflow: hidden !important;
+    gap: 16px !important;
+    overflow: visible !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
@@ -1014,12 +1033,12 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
-    flex: 1 1 auto !important;
+    flex: 0 0 auto !important;
     min-height: 0 !important;
     margin-top: 4px !important;
-    display: flex !important;
-    align-items: flex-start !important;
-    overflow: hidden !important;
+    width: 100% !important;
+    display: block !important;
+    overflow: visible !important;
     position: relative !important;
     z-index: 1 !important;
   }
@@ -1029,10 +1048,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     width: 100% !important;
   }
 
-  /* Keep review cards shorter so header + carousel fit one mobile panel */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slide,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-media {
     aspect-ratio: 1 / 1 !important;
-    max-height: min(42vw, 180px) !important;
+    max-height: min(48vw, 220px) !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-body {
