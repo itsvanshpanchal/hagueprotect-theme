@@ -433,8 +433,8 @@
           "settings": {
             "enable_sticky_scroll": true,
             "desktop_width_percent": 100,
-            "background_image": "shopify://shop_images/1920-x1080-part-2.png",
-            "mobile_image": "shopify://shop_images/ChatGPT_Image_Jul_3_2026_09_59_01_PM.png",
+            "background_image": "shopify://shop_images/1920x1080-Final-Exported-in-Low-jpeg.jpg",
+            "mobile_image": "shopify://shop_images/1080x1920-Final-Export-in-Low-jpeg.jpg",
             "image_opacity": 1,
             "background_color": "#f5f5f5",
             "show_overlay": false,
@@ -504,14 +504,13 @@
     },
     "corporate_gifting_marquee_pCHxwt": {
       "type": "corporate-gifting-marquee",
-      "name": "Corporate Marquee",
       "blocks": {
         "marquee_top_empwelcome": {
           "type": "marquee_text",
           "settings": {
             "text": "Employee Welcome Kits",
             "row": "top",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_top_client": {
@@ -519,7 +518,7 @@
           "settings": {
             "text": "Client Appreciation",
             "row": "top",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_top_festival": {
@@ -527,7 +526,7 @@
           "settings": {
             "text": "Festival Hampers",
             "row": "top",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_top_conference": {
@@ -535,7 +534,7 @@
           "settings": {
             "text": "Conference Swag",
             "row": "top",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_top_ceo": {
@@ -543,7 +542,7 @@
           "settings": {
             "text": "CEO Gifts",
             "row": "top",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_top_team": {
@@ -551,7 +550,7 @@
           "settings": {
             "text": "Team Milestones",
             "row": "top",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_mid_retail": {
@@ -559,7 +558,7 @@
           "settings": {
             "text": "Retail Partners",
             "row": "middle",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_mid_custom": {
@@ -567,7 +566,7 @@
           "settings": {
             "text": "Custom Inserts",
             "row": "middle",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_mid_logo": {
@@ -575,7 +574,7 @@
           "settings": {
             "text": "Logo Embossing",
             "row": "middle",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_mid_gift": {
@@ -583,7 +582,7 @@
           "settings": {
             "text": "Gift Wrapping",
             "row": "middle",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_mid_delivery": {
@@ -591,7 +590,7 @@
           "settings": {
             "text": "Pan-India Delivery",
             "row": "middle",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_mid_invoice": {
@@ -599,7 +598,7 @@
           "settings": {
             "text": "Invoice & GST",
             "row": "middle",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_bot_cobrand": {
@@ -607,7 +606,7 @@
           "settings": {
             "text": "Co-Branded Packaging",
             "row": "bottom",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_bot_bulk": {
@@ -615,7 +614,7 @@
           "settings": {
             "text": "Bulk Pricing",
             "row": "bottom",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_bot_manager": {
@@ -623,7 +622,7 @@
           "settings": {
             "text": "Dedicated Manager",
             "row": "bottom",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_bot_sample": {
@@ -631,7 +630,7 @@
           "settings": {
             "text": "Sample Kits",
             "row": "bottom",
-            "outline": true
+            "accent": false
           }
         },
         "marquee_bot_volume": {
@@ -639,7 +638,7 @@
           "settings": {
             "text": "Volume Discounts",
             "row": "bottom",
-            "outline": false
+            "accent": false
           }
         },
         "marquee_bot_onboard": {
@@ -647,7 +646,7 @@
           "settings": {
             "text": "Onboarding Packs",
             "row": "bottom",
-            "outline": true
+            "accent": false
           }
         }
       },
@@ -671,14 +670,9 @@
         "marquee_bot_volume",
         "marquee_bot_onboard"
       ],
+      "name": "Corporate Marquee",
       "settings": {
-        "label": "Trusted for employee onboarding, client appreciation, festival hampers & more",
-        "show_label": false,
-        "background_color": "#ffffff",
-        "text_color": "#111111",
-        "row_gap": 0,
-        "h1_font_family": "bebas_neue",
-        "h1_font_weight": "400"
+        "label": "Trusted for employee onboarding, client appreciation, festival hampers & more"
       }
     },
     "horizontal-product-slider": {
@@ -688,15 +682,10 @@
           "type": "custom_images",
           "settings": {
             "title": "",
-            "image_1": "shopify://shop_images/1_2.png",
             "url_1": "",
-            "image_2": "shopify://shop_images/Foot-deo.png",
             "url_2": "",
-            "image_3": "shopify://shop_images/PEN-MARKER.png",
             "url_3": "",
-            "image_4": "shopify://shop_images/bundle_4e26d8bc-3869-4bde-a762-c8e3f512eb89.png",
             "url_4": "",
-            "image_5": "shopify://shop_images/PROFESSIONAL-CLEANER.png",
             "url_5": "",
             "url_6": ""
           }
