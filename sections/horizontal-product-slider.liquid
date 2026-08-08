@@ -43,9 +43,20 @@
     white-space: nowrap !important;
   }
 
-  #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair {
-    display: inline !important;
-    white-space: nowrap !important;
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack {
+      display: inline !important;
+      flex-direction: row !important;
+      white-space: nowrap !important;
+    }
+
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+      display: inline !important;
+    }
   }
 
   @media screen and (max-width: 989px) {
@@ -158,13 +169,24 @@
     white-space: nowrap;
   }
 
-  .hp-fam-sec__heading .hp-heading-pair {
-    display: inline !important;
-    white-space: nowrap !important;
-  }
+  @media screen and (min-width: 750px) {
+    .hp-fam-sec__heading .hp-heading-pair,
+    .hp-fam-sec__heading .hp-heading-pair--stack {
+      display: inline !important;
+      flex-direction: row !important;
+      white-space: nowrap !important;
+    }
 
-  .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
-    display: inline !important;
+    .hp-fam-sec__heading > .hp-heading-line--1,
+    .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+    .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line {
+      display: inline !important;
+    }
+
+    .hp-fam-sec__heading .hp-heading-accent,
+    .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+      display: inline !important;
+    }
   }
 
   .hp-fam-sec__heading .hp-heading-line--1::first-letter {
@@ -690,7 +712,7 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 749px) {
     .hp-fam-sec {
       padding: 32px 0 0 0;
     }
@@ -702,33 +724,34 @@
     .hp-fam-sec__heading {
       margin-bottom: 20px;
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
-    }
-
-    /* Mobile: "Best" on its own line under "Shop Our Premium" */
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading,
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair {
       display: flex !important;
       flex-direction: column !important;
-      flex-wrap: nowrap !important;
       align-items: flex-start !important;
-      white-space: normal !important;
-      gap: 0.02em !important;
-      max-width: 100% !important;
     }
 
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
+    /* Mobile only: line 1 "Shop Our", line 2 "Premium Best" (Best = script accent) */
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1 {
       display: block !important;
       white-space: nowrap !important;
     }
 
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
-      display: block !important;
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: baseline !important;
+      white-space: nowrap !important;
+      gap: 0 !important;
+      max-width: 100% !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+      display: inline !important;
       white-space: nowrap !important;
       margin-left: 0 !important;
     }
@@ -870,7 +893,18 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      <h2 class="hp-fam-sec__heading">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
+      {%- liquid
+        assign hp_h1 = section.settings.heading | strip
+        assign hp_h2 = section.settings.heading_line2 | default: 'Premium' | strip
+        assign hp_accent_text = section.settings.heading_accent_word | default: 'Best' | strip
+      -%}
+      <h2 class="hp-fam-sec__heading">
+        <span class="hp-heading-line hp-heading-line--1">{{ hp_h1 }}</span>
+        <span class="hp-heading-pair hp-heading-pair--stack">
+          <span class="hp-heading-line hp-heading-line--1">{{ hp_h2 }} </span>
+          <span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ hp_accent_color }};text-transform:none !important;-webkit-text-fill-color:{{ hp_accent_color }};">{{ hp_accent_text }}</span>
+        </span>
+      </h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -1248,14 +1282,21 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Shop Our Premium Best"
+      "label": "Heading — first line",
+      "default": "Shop Our"
     },
     {
       "type": "text",
       "id": "heading_line2",
-      "label": "Heading — second line",
-      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+      "label": "Heading — second line (before accent)",
+      "default": "Premium",
+      "info": "On mobile, shown on line 2 before the script accent word (e.g. Premium Best)."
+    },
+    {
+      "type": "text",
+      "id": "heading_accent_word",
+      "label": "Heading accent word (script)",
+      "default": "Best"
     },
     {
       "type": "color",
