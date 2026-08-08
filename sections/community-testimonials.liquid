@@ -139,14 +139,20 @@
   }
 
   #MainContent .shopify-section .comm-desc,
-  .comm-desc {
+  #MainContent .shopify-section .comm-desc.hp-body-para,
+  .comm-desc,
+  .comm-desc.hp-body-para {
     max-width: 600px !important;
     margin-top: var(--section-subheading-spacing-top) !important;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-subheading-size, 20px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
     line-height: 1.05 !important;
+    letter-spacing: 0 !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
     color: {{ comm_text }} !important;
     -webkit-text-fill-color: {{ comm_text }} !important;
   }
@@ -430,13 +436,17 @@
       justify-content: var(--section-heading-items, flex-start) !important;
       gap: 20px !important;
     }
-    .comm-desc {
+    .comm-desc,
+    .comm-desc.hp-body-para {
       text-align: var(--section-heading-align, left) !important;
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
       font-size: 20px !important;
       font-weight: 400 !important;
       font-synthesis: none !important;
       line-height: 1.05 !important;
+      letter-spacing: 0 !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
     }
   }
 
@@ -492,7 +502,7 @@
           </h2>
         </div>
         {%- if section.settings.description != blank -%}
-          <p class="comm-desc" style="color: {{ comm_text }};">{{ section.settings.description }}</p>
+          <p class="comm-desc hp-body-para" style="color: {{ comm_text }};">{{ section.settings.description }}</p>
         {%- endif -%}
       </div>
       <div class="comm-top-right">

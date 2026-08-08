@@ -185,7 +185,6 @@
 
 #MainContent .shopify-section .corp-hero__sub,
 #MainContent .shopify-section .fb__subtitle,
-#MainContent .shopify-section .story-banner__paragraph,
 #MainContent .shopify-section .brand-banner__subtitle,
 #MainContent .shopify-section .d2c-subtitle-text,
 #MainContent .shopify-section .vr-info__subtitle,
@@ -207,12 +206,20 @@
   line-height: 1.55 !important;
 }
 
+/* Story banner + Community intro — same metrics as Tell Your Story / Materials */
+#MainContent .shopify-section .story-banner__paragraph,
 #MainContent .shopify-section .comm-desc,
+#MainContent .shopify-section .hp-body-para,
 #MainContent .shopify-section .comm-badge-desc {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
   text-transform: none !important;
   letter-spacing: normal !important;
-  line-height: 1.15 !important;
+  line-height: 1.05 !important;
+  -webkit-text-stroke: 0 !important;
 }
 
 #MainContent .shopify-section .mat-desc {
@@ -393,16 +400,18 @@
   }
 
   #MainContent .shopify-section .story-banner__paragraph,
-  #MainContent .shopify-section .comm-desc {
+  #MainContent .shopify-section .comm-desc,
+  #MainContent .shopify-section .hp-body-para {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 20px !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
     line-height: 1.05 !important;
-    letter-spacing: normal !important;
+    letter-spacing: 0 !important;
     text-transform: none !important;
     -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
   }
 
   #MainContent .shopify-section .hero-fullscreen__eyebrow,

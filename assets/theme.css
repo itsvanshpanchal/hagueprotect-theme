@@ -1339,10 +1339,12 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   -webkit-font-smoothing: antialiased;
 }
 
-/* Community intro copy — Darker Grotesque needs tighter leading */
+/* Community intro copy — match Materials / Tell Your Story leading */
 .comm-desc,
-.comm-badge-desc {
-  line-height: 1.15 !important;
+.comm-badge-desc,
+.story-banner__paragraph,
+.hp-body-para {
+  line-height: 1.05 !important;
 }
 
 /* Subheadings on dark/image backgrounds */
@@ -1835,18 +1837,25 @@ body.template-index {
   }
 
   /* Story banner + Community paras — same as Tell Your Story on mobile */
-  #MainContent .story-banner__paragraph,
-  #MainContent .comm-desc {
+  body.template-index #MainContent .shopify-section .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section .comm-desc,
+  body.template-index #MainContent .shopify-section .comm-section .comm-desc,
+  body.template-index #MainContent .shopify-section .hp-body-para,
+  body.template-index #MainContent [class*="ai-story-banner-text"],
+  body.template-index #MainContent [class*="ai-story-banner-text"] p {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 20px !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
     line-height: 1.05 !important;
-    letter-spacing: normal !important;
+    letter-spacing: 0 !important;
     text-transform: none !important;
     -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
   }
 
   /* Materials menu labels — same light stroke as eyebrows on mobile */

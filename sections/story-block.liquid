@@ -199,15 +199,19 @@
   }
 
   #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
-  .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
+  #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .hp-body-para,
+  .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
+  .story-banner-wrapper-{{ section.id }} .hp-body-para {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+    font-size: var(--section-subheading-size, 20px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
     line-height: 1.05 !important;
-    letter-spacing: normal !important;
+    letter-spacing: 0 !important;
     text-transform: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
     color: {{ section.settings.paragraph_color | default: '#444444' }} !important;
     margin-top: 2px !important;
     margin-right: 0 !important;
@@ -348,12 +352,14 @@
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
-    /* Para tight under heading — match Tell Your Story / Community on mobile */
+    /* Para — identical to Tell Your Story / Community on mobile */
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
-    .story-banner-wrapper-{{ section.id }} .story-banner__paragraph {
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .hp-body-para,
+    .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
+    .story-banner-wrapper-{{ section.id }} .hp-body-para {
       margin-top: 2px !important;
-      max-width: 88% !important;
-      width: 88% !important;
+      max-width: 100% !important;
+      width: 100% !important;
       color: {{ section.settings.paragraph_color | default: '#222222' }} !important;
       position: relative !important;
       z-index: 4 !important;
@@ -362,6 +368,9 @@
       font-weight: 400 !important;
       font-synthesis: none !important;
       line-height: 1.05 !important;
+      letter-spacing: 0 !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
     }
   }
 {%- endstyle -%}
@@ -473,7 +482,7 @@
               <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: story_heading_full, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: section.settings.heading_accent_color %}</div>
             {%- endif -%}
             {%- if banner_paragraph != blank -%}
-              <p class="story-banner__paragraph">{{ banner_paragraph }}</p>
+              <p class="story-banner__paragraph hp-body-para">{{ banner_paragraph }}</p>
             {%- endif -%}
           </div>
         {%- endif -%}
