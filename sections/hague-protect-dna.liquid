@@ -294,6 +294,12 @@
     }
 
     .hp-dna-{{ section.id }} .hp-dna__item-text {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0 !important;
       max-width: none;
     }
 
@@ -437,7 +443,7 @@
               {%- endif -%}
 
               {%- if block.settings.description != blank -%}
-                <p class="hp-dna__item-text">{{ block.settings.description }}</p>
+                <p class="hp-dna__item-text hp-body-para">{{ block.settings.description }}</p>
               {%- endif -%}
             </div>
           </div>

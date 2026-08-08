@@ -608,7 +608,7 @@
           </h2>
         </div>
         {%- if section.settings.description != blank -%}
-          <p class="comm-desc" style="color: {{ comm_text }};">{{ section.settings.description }}</p>
+          <p class="comm-desc hp-body-para" style="color: {{ comm_text }};">{{ section.settings.description }}</p>
         {%- endif -%}
       </div>
       <div class="comm-top-right">
@@ -623,7 +623,7 @@
           <span class="comm-badge-text">{{ section.settings.rating_text }} &middot; {{ section.settings.review_count_text }}</span>
         </div>
         {%- if section.settings.review_description != blank -%}
-          <p class="comm-badge-desc">{{ section.settings.review_description }}</p>
+          <p class="comm-badge-desc hp-body-para">{{ section.settings.review_description }}</p>
         {%- endif -%}
         <div class="comm-nav">
           <button class="comm-nav-btn comm-prev" id="comm-prev-{{ section.id }}" aria-label="Previous slide">

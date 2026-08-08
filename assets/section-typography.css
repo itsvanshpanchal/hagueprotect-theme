@@ -404,8 +404,16 @@
     text-transform: none !important;
   }
 
-  #MainContent .shopify-section .story-banner__paragraph,
-  #MainContent .shopify-section .hp-body-para {
+  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] .mat-desc,
+  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+  body.template-index #MainContent .shopify-section[id] .comm-desc,
+  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 20px !important;
     font-weight: 400 !important;

@@ -243,7 +243,12 @@
     }
 
     .split-cta-{{ section.id }}__text {
-      font-size: {{ text_size_mobile }}px !important;
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0 !important;
       max-width: 100%;
     }
 
@@ -275,7 +280,7 @@
   <div class="split-cta-{{ section.id }}__inner">
     <div class="split-cta-{{ section.id }}__copy">
       <h2 class="split-cta-{{ section.id }}__heading">{{ cta_heading | escape | newline_to_br }}</h2>
-      <p class="split-cta-{{ section.id }}__text">{{ cta_text | escape }}</p>
+      <p class="split-cta-{{ section.id }}__text hp-body-para">{{ cta_text | escape }}</p>
     </div>
 
     <div class="split-cta-{{ section.id }}__actions">

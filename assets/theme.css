@@ -1339,11 +1339,18 @@ body.template-index .section-heading-stack--center > [class*="ai-story-banner-su
   -webkit-font-smoothing: antialiased;
 }
 
-/* Community intro copy — Darker Grotesque needs tighter leading */
-.comm-desc,
-.comm-badge-desc {
-  line-height: 1.15 !important;
-}
+  /* Community intro copy — match unified mobile paragraph leading on small screens */
+  .comm-desc,
+  .comm-badge-desc {
+    line-height: 1.05 !important;
+  }
+
+  @media screen and (min-width: 768px) {
+    .comm-desc,
+    .comm-badge-desc {
+      line-height: 1.15 !important;
+    }
+  }
 
 .story-banner__paragraph,
 .hp-body-para {
@@ -1827,36 +1834,36 @@ body.template-index {
     vertical-align: baseline !important;
   }
 
-  #MainContent [class*="ai-story-banner-text"],
-  #MainContent [class*="ai-story-banner-text"] p {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    line-height: 1.05 !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-    -webkit-font-smoothing: antialiased !important;
+  /* Homepage mobile — one shared paragraph style across all sections */
+  body.template-index {
+    --hp-home-mobile-para-size: 20px;
+    --hp-home-mobile-para-weight: 400;
+    --hp-home-mobile-para-lh: 1.05;
   }
 
-  /* Story banner paras — same as Tell Your Story on mobile */
-  body.template-index #MainContent .shopify-section .story-banner__paragraph,
-  body.template-index #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__paragraph,
-  body.template-index #MainContent .shopify-section .hp-body-para,
-  body.template-index #MainContent [class*="ai-story-banner-text"],
-  body.template-index #MainContent [class*="ai-story-banner-text"] p {
+  body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] .mat-desc,
+  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] [class*="story-banner-wrapper"] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] .comm-desc,
+  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 400 !important;
+    font-size: var(--hp-home-mobile-para-size) !important;
+    font-weight: var(--hp-home-mobile-para-weight) !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    line-height: 1.05 !important;
+    line-height: var(--hp-home-mobile-para-lh) !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
     -webkit-text-stroke: 0 !important;
     text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
   }
 
   /* Materials menu labels — same light stroke as eyebrows on mobile */
