@@ -28,7 +28,9 @@
     background-color: {{ comm_bg }} !important;
     padding-top: {{ section.settings.padding_top | default: 100 }}px !important;
     padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px !important;
-    overflow: hidden !important;
+    /* Clip only horizontal carousel bleed — never cut card bottoms */
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
   }
 
   .comm-container {
@@ -235,7 +237,7 @@
     fill: currentColor !important;
   }
 
-  /* Carousel — Swiper owns slide widths; never force .swiper-slide width */
+  /* Carousel — whole cards only (no edge peeks); Swiper owns slide widths */
   .comm-slider-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -248,13 +250,16 @@
     max-width: 100% !important;
     overflow: hidden !important;
     padding-bottom: 8px !important;
+    box-sizing: border-box !important;
   }
 
   .comm-swiper .swiper-wrapper {
     align-items: stretch !important;
   }
 
-  .comm-swiper .swiper-slide {
+  .comm-swiper .swiper-slide,
+  .comm-swiper .comm-slide {
+    /* Never set width here — Swiper writes slide widths inline */
     height: auto !important;
     box-sizing: border-box !important;
   }
@@ -435,11 +440,16 @@
   }
 
   @media screen and (max-width: 991px) {
+    .comm-section {
+      padding-top: 48px !important;
+      padding-bottom: 40px !important;
+    }
     .comm-top {
       flex-direction: column !important;
       align-items: var(--section-heading-items, flex-start) !important;
       text-align: var(--section-heading-align, left) !important;
-      gap: 40px !important;
+      gap: 20px !important;
+      margin-bottom: 20px !important;
     }
     .comm-top-left {
       width: 100% !important;
@@ -448,10 +458,15 @@
     .comm-top-right {
       width: 100% !important;
       align-items: center !important;
+      gap: 12px !important;
     }
     .comm-headline {
       justify-content: var(--section-heading-items, flex-start) !important;
       gap: 20px !important;
+      margin: 0 0 16px 0 !important;
+    }
+    .comm-nav {
+      margin-top: 4px !important;
     }
     .comm-desc,
     .comm-desc.hp-body-para {
@@ -468,6 +483,10 @@
   }
 
   @media screen and (max-width: 768px) {
+    .comm-section {
+      padding-top: 36px !important;
+      padding-bottom: 28px !important;
+    }
     .comm-headline-number {
       font-size: var(--section-heading-size) !important;
       letter-spacing: -1.5px !important;
@@ -482,10 +501,19 @@
     }
     .comm-headline {
       gap: 12px !important;
-      margin-bottom: 12px !important;
+      margin-bottom: 10px !important;
     }
     .comm-top {
-      margin-bottom: 16px !important;
+      margin-bottom: 12px !important;
+      gap: 14px !important;
+    }
+    .comm-reviews-badge {
+      width: min(100%, 360px) !important;
+      height: 48px !important;
+    }
+    .comm-nav-btn {
+      width: 44px !important;
+      height: 44px !important;
     }
     .comm-slider-container {
       margin-top: 0 !important;
@@ -502,24 +530,30 @@
       padding: 0 !important;
     }
     .comm-card-media {
-      max-height: 210px !important;
+      max-height: 200px !important;
       aspect-ratio: 1 / 1 !important;
     }
     .comm-card-body {
-      padding: 14px 14px 16px !important;
-      gap: 6px !important;
+      padding: 12px 14px 14px !important;
+      gap: 5px !important;
+      flex: 0 0 auto !important;
     }
+    /* Card body stays compact — intro para keeps 20px elsewhere */
     .comm-card-text,
     #MainContent .shopify-section .comm-card-text {
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: 20px !important;
+      font-size: 14px !important;
       font-weight: 400 !important;
       font-synthesis: none !important;
-      line-height: 1.05 !important;
+      line-height: 1.25 !important;
       letter-spacing: 0 !important;
       -webkit-text-stroke: 0 !important;
       text-shadow: none !important;
       color: #4A4A4A !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
     }
     .comm-card-title {
       font-size: 14px !important;
@@ -704,7 +738,7 @@
       var el = document.querySelector('#swiper-{{ section.id }}');
       if (!el || el.swiper) return;
 
-      new Swiper(el, {
+      var swiper = new Swiper(el, {
         slidesPerView: 1,
         slidesPerGroup: 1,
         spaceBetween: 16,
@@ -715,6 +749,7 @@
         watchOverflow: true,
         observer: true,
         observeParents: true,
+        /* Cap at 3 so laptop never shows clipped edge peeks */
         breakpoints: {
           750: {
             slidesPerView: 2,
@@ -722,16 +757,10 @@
             spaceBetween: 20,
             centeredSlides: false
           },
-          1100: {
+          1024: {
             slidesPerView: 3,
             slidesPerGroup: 1,
-            spaceBetween: 24,
-            centeredSlides: false
-          },
-          1400: {
-            slidesPerView: 4,
-            slidesPerGroup: 1,
-            spaceBetween: 24,
+            spaceBetween: 22,
             centeredSlides: false
           }
         },
@@ -745,7 +774,16 @@
           prevEl: '#comm-prev-{{ section.id }}'
         },
         grabCursor: true,
-        threshold: 5
+        threshold: 5,
+        on: {
+          init: function () {
+            window.dispatchEvent(new CustomEvent('hp-community-swiper:ready'));
+          }
+        }
+      });
+
+      requestAnimationFrame(function () {
+        if (swiper && swiper.update) swiper.update();
       });
     }
     initSwiper();

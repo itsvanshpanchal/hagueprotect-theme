@@ -88,6 +88,18 @@
     return !!pin.querySelector('.hero-fullscreen');
   }
 
+  function isCommunityPin(pin) {
+    return !!(pin && pin.querySelector('.comm-section, .comm-swiper, .comm-slider-container'));
+  }
+
+  function isCommunitySection(sec) {
+    return !!(
+      sec &&
+      (sec.classList.contains('section-community-testimonials') ||
+        sec.querySelector(':scope > .hp-float-pin .comm-section, :scope > .comm-section'))
+    );
+  }
+
   function ensurePin(sec) {
     var pin = sec.querySelector(':scope > .hp-float-pin');
     if (pin) return pin;
@@ -258,7 +270,15 @@
   function resetSectionStyles(sec, pin) {
     var hero = isHeroPin(pin);
     var story = isStoryPin(pin);
-    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero', 'hp-float-dna');
+    sec.classList.remove(
+      'hp-float-card',
+      'hp-float-strip',
+      'hp-float-card--mobile',
+      'hp-float-story',
+      'hp-float-hero',
+      'hp-float-dna',
+      'hp-float-community'
+    );
     [
       'height',
       'min-height',
@@ -274,7 +294,10 @@
       'background',
       'transform',
       'overflow',
-      'box-shadow'
+      'overflow-x',
+      'overflow-y',
+      'box-shadow',
+      'isolation'
     ].forEach(function (prop) {
       sec.style.removeProperty(prop);
     });
@@ -638,6 +661,64 @@
     pin.style.setProperty('background-color', paint, 'important');
   }
 
+  /* Community: never lock to 100dvh + overflow:hidden — that clips review cards.
+     Size the sticky panel to the full section so media + author + stars + text show. */
+  function asCommunityCard(item, z, bg, mobile) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var vh = viewportH();
+    var paint = bg || '#111111';
+    var comm = pin.querySelector('.comm-section') || pin;
+    var measured = Math.max(
+      pin.scrollHeight,
+      pin.offsetHeight,
+      comm.scrollHeight,
+      comm.offsetHeight,
+      1
+    );
+    /* Sticky cover needs at least one viewport; grow when cards need more room */
+    var fillPx = Math.max(measured + (mobile ? 24 : 12), vh);
+    var fill = fillPx + 'px';
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card', 'hp-float-community');
+    if (mobile) sec.classList.add('hp-float-card--mobile');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('min-height', fill, 'important');
+    sec.style.setProperty('max-height', 'none', 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty(
+      'box-shadow',
+      mobile ? '0 -8px 24px rgba(0,0,0,0.12)' : '0 -12px 32px rgba(0,0,0,0.14)',
+      'important'
+    );
+    sec.style.setProperty('overflow', 'visible', 'important');
+    sec.style.setProperty('background-color', paint, 'important');
+    sec.style.setProperty('isolation', 'isolate', 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('max-width', '100%', 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', fill, 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    /* Clip horizontal carousel bleed only; never clip card bottoms */
+    pin.style.setProperty('overflow-x', 'hidden', 'important');
+    pin.style.setProperty('overflow-y', 'visible', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
+    pin.style.setProperty('background-color', paint, 'important');
+  }
+
   function asCard(item, z, contentH, bg, mobile, isStory) {
     var sec = item.sec;
     var pin = item.pin;
@@ -824,6 +905,26 @@
         return;
       }
 
+      /* Community reviews: grow to full card height (mobile + laptop) */
+      if (isCommunityPin(pin) || isCommunitySection(sec)) {
+        cardIndex += 1;
+        asCommunityCard(item, cardIndex, bg, mobile);
+        if (!item._commImgBound) {
+          item._commImgBound = true;
+          var cImgs = pin.querySelectorAll('.comm-card-media img');
+          for (var ci = 0; ci < cImgs.length; ci++) {
+            cImgs[ci].addEventListener(
+              'load',
+              function () {
+                layout();
+              },
+              { once: true }
+            );
+          }
+        }
+        return;
+      }
+
       cardIndex += 1;
       asCard(item, cardIndex, contentH, bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);
@@ -856,10 +957,12 @@
     layout();
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });
-  /* Avoid an early second layout that flashes/hides the mobile hero */
-  if (!isMobile()) {
-    setTimeout(layout, 600);
-  }
+  window.addEventListener('hp-community-swiper:ready', function () {
+    setTimeout(layout, 40);
+  });
+  /* Re-measure after Swiper/fonts — community cards need true content height */
+  setTimeout(layout, 600);
+  setTimeout(layout, 1400);
 
   /*
     Mobile only: one clear swipe → exactly ONE next/prev float section.
@@ -955,6 +1058,10 @@
           '[class*="hp-dna__grid"]',
           '.comm-slider',
           '.comm-carousel',
+          '.comm-swiper',
+          '.comm-slider-container',
+          '.comm-slide',
+          '.comm-card',
           '.hp-float-contact'
         ].join(',')
       );

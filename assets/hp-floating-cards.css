@@ -984,29 +984,35 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Community: full review cards visible — section grows instead of clipping */
+  /* Community (mobile + desktop): never clip review card bottoms */
+  .hp-float-stack > .shopify-section.hp-float-community,
+  .hp-float-stack > .shopify-section.hp-float-community > .hp-float-pin,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section),
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section) > .hp-float-pin {
-    height: auto !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
     max-height: none !important;
-    overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
   }
 
+  .hp-float-stack .hp-float-community .comm-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    padding-top: 16px !important;
-    padding-bottom: 24px !important;
     box-sizing: border-box !important;
     height: auto !important;
-    min-height: 100% !important;
+    min-height: 0 !important;
     max-height: none !important;
-    overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  .hp-float-stack .hp-float-community .comm-section .comm-container,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-container {
     display: flex !important;
     flex-direction: column !important;
@@ -1014,10 +1020,11 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     height: auto !important;
     min-height: 0 !important;
     justify-content: flex-start !important;
-    gap: 16px !important;
+    gap: 12px !important;
     overflow: visible !important;
   }
 
+  .hp-float-stack .hp-float-community .comm-section .comm-top,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
     margin-bottom: 0 !important;
     gap: 12px !important;
@@ -1032,6 +1039,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     z-index: 2 !important;
   }
 
+  .hp-float-stack .hp-float-community .comm-section .comm-slider-container,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
     flex: 0 0 auto !important;
     min-height: 0 !important;
@@ -1044,6 +1052,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     z-index: 1 !important;
   }
 
+  .hp-float-stack .hp-float-community .comm-section .comm-swiper,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper {
     overflow: hidden !important;
     width: 100% !important;
@@ -1058,20 +1067,22 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-media {
     aspect-ratio: 1 / 1 !important;
-    max-height: min(52vw, 240px) !important;
+    max-height: min(48vw, 200px) !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-body {
-    padding: 12px 14px 16px !important;
-    gap: 6px !important;
+    padding: 12px 14px 14px !important;
+    gap: 5px !important;
     flex: 0 0 auto !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-text {
     display: -webkit-box !important;
-    -webkit-line-clamp: 4 !important;
+    -webkit-line-clamp: 3 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
+    font-size: 14px !important;
+    line-height: 1.25 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
