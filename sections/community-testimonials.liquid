@@ -231,17 +231,32 @@
   /* Carousel */
   .comm-slider-container {
     width: 100% !important;
+    max-width: 100% !important;
     position: relative !important;
+    overflow: hidden !important;
   }
 
   .comm-swiper {
     width: 100% !important;
-    overflow: visible !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding-bottom: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .comm-swiper .swiper-wrapper {
+    align-items: stretch !important;
+  }
+
+  .comm-swiper .swiper-slide {
+    height: auto !important;
+    box-sizing: border-box !important;
   }
 
   /* Cards — image on top, review text below */
   .comm-card {
-    width: 320px !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
     background-color: #F3F3F3 !important;
@@ -385,10 +400,20 @@
     content: none !important;
   }
 
-  .comm-slide {
-    width: 320px !important;
-    height: auto !important;
-    flex-shrink: 0 !important;
+  .comm-slide .comm-card {
+    width: 100% !important;
+  }
+
+  /* Desktop / laptop — whole cards with gutters, no edge peeks */
+  @media screen and (min-width: 769px) {
+    .comm-section {
+      overflow-x: hidden !important;
+      overflow-y: visible !important;
+    }
+
+    .comm-top {
+      margin-bottom: 48px !important;
+    }
   }
 
   /* Responsive Adjustments */
@@ -435,6 +460,23 @@
   }
 
   @media screen and (max-width: 768px) {
+    .comm-swiper {
+      overflow: visible !important;
+    }
+
+    .comm-slider-container {
+      overflow: visible !important;
+    }
+
+    .comm-swiper .swiper-slide,
+    .comm-slide,
+    .comm-card {
+      width: min(82vw, 300px) !important;
+      max-width: min(82vw, 300px) !important;
+      height: auto !important;
+      flex-shrink: 0 !important;
+    }
+
     .comm-headline-number {
       font-size: var(--section-heading-size) !important;
       letter-spacing: -1.5px !important;
@@ -451,10 +493,7 @@
       gap: 12px !important;
       margin-bottom: 20px !important;
     }
-    .comm-slide,
     .comm-card {
-      width: min(82vw, 300px) !important;
-      height: auto !important;
       padding: 0 !important;
     }
     .comm-card-body {
@@ -637,35 +676,65 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     function initSwiper() {
-      if (typeof Swiper !== 'undefined') {
-        new Swiper('#swiper-{{ section.id }}', {
-          slidesPerView: 'auto',
-          spaceBetween: 16,
-          centeredSlides: true,
-          loop: true,
-          breakpoints: {
-            480: {
-              slidesPerView: 'auto',
-              spaceBetween: 28,
-              centeredSlides: false
-            }
-          },
-          autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true
-          },
-          navigation: {
-            nextEl: '#comm-next-{{ section.id }}',
-            prevEl: '#comm-prev-{{ section.id }}',
-          },
-          grabCursor: true,
-          watchSlidesProgress: true,
-          threshold: 5
-        });
-      } else {
+      if (typeof Swiper === 'undefined') {
         setTimeout(initSwiper, 50);
+        return;
       }
+
+      var el = document.querySelector('#swiper-{{ section.id }}');
+      if (!el || el.swiper) return;
+
+      var swiper = new Swiper(el, {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+        centeredSlides: true,
+        loop: true,
+        loopAdditionalSlides: 2,
+        roundLengths: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+          769: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            spaceBetween: 24,
+            centeredSlides: false
+          },
+          1100: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+            spaceBetween: 24,
+            centeredSlides: false
+          },
+          1400: {
+            slidesPerView: 4,
+            slidesPerGroup: 1,
+            spaceBetween: 24,
+            centeredSlides: false
+          }
+        },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        },
+        navigation: {
+          nextEl: '#comm-next-{{ section.id }}',
+          prevEl: '#comm-prev-{{ section.id }}'
+        },
+        grabCursor: true,
+        threshold: 5,
+        on: {
+          init: function () {
+            window.dispatchEvent(new CustomEvent('hp-community-swiper:ready'));
+          }
+        }
+      });
+
+      requestAnimationFrame(function () {
+        if (swiper && swiper.update) swiper.update();
+      });
     }
     initSwiper();
   });

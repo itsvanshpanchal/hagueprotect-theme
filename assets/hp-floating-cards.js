@@ -88,6 +88,10 @@
     return !!pin.querySelector('.hero-fullscreen');
   }
 
+  function isCommunityPin(pin) {
+    return !!(pin && pin.querySelector('.comm-section, .comm-swiper, .comm-slider-container'));
+  }
+
   function ensurePin(sec) {
     var pin = sec.querySelector(':scope > .hp-float-pin');
     if (pin) return pin;
@@ -258,7 +262,15 @@
   function resetSectionStyles(sec, pin) {
     var hero = isHeroPin(pin);
     var story = isStoryPin(pin);
-    sec.classList.remove('hp-float-card', 'hp-float-strip', 'hp-float-card--mobile', 'hp-float-story', 'hp-float-hero', 'hp-float-dna');
+    sec.classList.remove(
+      'hp-float-card',
+      'hp-float-strip',
+      'hp-float-card--mobile',
+      'hp-float-story',
+      'hp-float-hero',
+      'hp-float-dna',
+      'hp-float-community'
+    );
     [
       'height',
       'min-height',
@@ -638,6 +650,54 @@
     pin.style.setProperty('background-color', paint, 'important');
   }
 
+  /* Desktop community: grow sticky panel to full card height — never clip review tiles */
+  function asCommunityDesktopCard(item, z, bg) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var vh = viewportH();
+    var paint = bg || '#111111';
+    var comm = pin.querySelector('.comm-section') || pin;
+    var measured = Math.max(
+      pin.scrollHeight,
+      pin.offsetHeight,
+      comm.scrollHeight,
+      comm.offsetHeight,
+      1
+    );
+    var fillPx = Math.max(measured + 24, vh);
+    var fill = fillPx + 'px';
+
+    item.isCard = true;
+    sec.classList.add('hp-float-card', 'hp-float-community');
+    sec.style.setProperty('--hp-z', String(z));
+    sec.style.setProperty('position', 'sticky', 'important');
+    sec.style.setProperty('top', '0px', 'important');
+    sec.style.setProperty('z-index', String(z), 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('min-height', fill, 'important');
+    sec.style.setProperty('max-height', 'none', 'important');
+    sec.style.setProperty('margin-top', '0px', 'important');
+    sec.style.setProperty('margin-bottom', '0px', 'important');
+    sec.style.setProperty('transform', 'none', 'important');
+    sec.style.setProperty('opacity', '1', 'important');
+    sec.style.setProperty('visibility', 'visible', 'important');
+    sec.style.setProperty('box-shadow', '0 -12px 32px rgba(0,0,0,0.14)', 'important');
+    sec.style.setProperty('overflow', 'visible', 'important');
+    sec.style.setProperty('background-color', paint, 'important');
+
+    pin.style.setProperty('position', 'relative', 'important');
+    pin.style.setProperty('width', '100%', 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', fill, 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('opacity', '1', 'important');
+    pin.style.setProperty('visibility', 'visible', 'important');
+    pin.style.setProperty('overflow-x', 'hidden', 'important');
+    pin.style.setProperty('overflow-y', 'visible', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
+    pin.style.setProperty('background-color', paint, 'important');
+  }
+
   function asCard(item, z, contentH, bg, mobile, isStory) {
     var sec = item.sec;
     var pin = item.pin;
@@ -824,6 +884,26 @@
         return;
       }
 
+      /* Desktop/laptop only — full review tiles, no bottom clip */
+      if (!mobile && isCommunityPin(pin)) {
+        cardIndex += 1;
+        asCommunityDesktopCard(item, cardIndex, bg);
+        if (!item._commImgBound) {
+          item._commImgBound = true;
+          var cImgs = pin.querySelectorAll('.comm-card-media img');
+          for (var ci = 0; ci < cImgs.length; ci++) {
+            cImgs[ci].addEventListener(
+              'load',
+              function () {
+                layout();
+              },
+              { once: true }
+            );
+          }
+        }
+        return;
+      }
+
       cardIndex += 1;
       asCard(item, cardIndex, contentH, bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);
@@ -855,6 +935,9 @@
     /* Soft re-layout after images — hero paint is preserved on mobile */
     layout();
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
+  });
+  window.addEventListener('hp-community-swiper:ready', function () {
+    if (!isMobile()) setTimeout(layout, 40);
   });
   /* Avoid an early second layout that flashes/hides the mobile hero */
   if (!isMobile()) {
@@ -955,6 +1038,10 @@
           '[class*="hp-dna__grid"]',
           '.comm-slider',
           '.comm-carousel',
+          '.comm-swiper',
+          '.comm-slider-container',
+          '.comm-slide',
+          '.comm-card',
           '.hp-float-contact'
         ].join(',')
       );
