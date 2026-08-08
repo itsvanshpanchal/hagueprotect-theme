@@ -622,8 +622,67 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-right: 0 !important;
   }
 
-  /* DNA on mobile: normal-flow strip — no sticky 100vh black void before footer */
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna,
+  /* Split CTA + DNA: full-viewport sticky cards on mobile (same rhythm as hero/materials) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background-color: #fdfcf7 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta > .hp-float-pin {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    height: 100% !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta [class*='split-cta'],
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='split-cta'] {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-height: 100% !important;
+    box-sizing: border-box !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background-color: #121111 !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna > .hp-float-pin {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    height: 100% !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+    background-color: #121111 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* DNA on mobile: normal-flow strip — legacy strip fallback only */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna {
     position: relative !important;
     top: auto !important;
@@ -747,9 +806,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     white-space: normal !important;
   }
 
-  /* Split CTA: sit between lifestyle and DNA */
+  /* Split CTA: legacy strip fallback on desktop-only themes */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.section-split-cta,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta:not(.hp-float-card) {
     position: relative !important;
     top: auto !important;
     display: block !important;
@@ -1050,5 +1109,13 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
     margin-top: -1px !important;
+  }
+
+  body.hp-float-mobile.hp-float-active .footer-wrapper {
+    position: relative !important;
+    z-index: 2 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }

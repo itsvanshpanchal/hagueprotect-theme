@@ -751,13 +751,20 @@
 
       resetSectionStyles(sec, pin);
 
-      /* Split CTA strip: z ABOVE previous sticky story so it becomes visible,
-         then DNA increments again and covers it — never hide under lifestyle. */
+      /* Split CTA: full-viewport sticky card on mobile (matches sections above) */
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
         cardIndex += 1;
-        asStrip(item, cardIndex);
-        sec.style.setProperty('background-color', '#fdfcf7', 'important');
-        pin.style.setProperty('background-color', '#fdfcf7', 'important');
+        var ctaBg = '#fdfcf7';
+        if (mobile) {
+          sec.classList.add('hp-float-split-cta');
+          asCard(item, cardIndex, vh, ctaBg, mobile, false);
+          pin.style.setProperty('overflow', 'hidden', 'important');
+        } else {
+          asStrip(item, cardIndex);
+          pin.style.setProperty('overflow', 'visible', 'important');
+        }
+        sec.style.setProperty('background-color', ctaBg, 'important');
+        pin.style.setProperty('background-color', ctaBg, 'important');
         return;
       }
 
@@ -817,15 +824,14 @@
         return;
       }
 
-      /* Mobile DNA: normal flow strip (not sticky) so no tall black void before footer.
-         Still z-stacked above Split CTA so it covers cleanly while scrolling. */
+      /* Mobile DNA: full-viewport sticky card — same scroll rhythm as upper sections */
       if ((isDnaPin(pin) || isDnaSection(sec)) && mobile) {
         cardIndex += 1;
-        asStrip(item, cardIndex);
+        asCard(item, cardIndex, vh, bg || '#121111', mobile, false);
         sec.classList.add('hp-float-dna');
         sec.style.setProperty('background-color', '#121111', 'important');
         pin.style.setProperty('background-color', '#121111', 'important');
-        pin.style.setProperty('overflow', 'visible', 'important');
+        pin.style.setProperty('overflow', 'hidden', 'important');
         return;
       }
 
@@ -931,17 +937,22 @@
         })
         .filter(function (sec) {
           if (!sec || !sec.isConnected) return false;
-          /* Include Split CTA + DNA strips so one-swipe does not skip them */
-          if (sec.classList.contains('hp-float-strip')) {
-            return isSplitCtaSection(sec) || isDnaSection(sec);
-          }
+          /* Only full-viewport cards — thin marquees/apps stay native scroll */
           return (
             sec.classList.contains('hp-float-card') ||
             sec.classList.contains('hp-float-hero') ||
-            sec.classList.contains('hp-float-story') ||
-            sec.classList.contains('hp-float-dna')
+            sec.classList.contains('hp-float-story')
           );
         });
+    }
+
+    function inFooterZone() {
+      var list = snapList();
+      if (!list.length) return false;
+      var yNow = window.pageYOffset || 0;
+      var lastTop = sectionDocTop(list[list.length - 1]);
+      var vh = window.innerHeight || 800;
+      return yNow > lastTop + Math.round(vh * 0.5);
     }
 
     /* Document Y from layout flow — correct even while position:sticky */
@@ -1057,22 +1068,11 @@
         if (!isMobile()) return;
         lastScrollT = Date.now();
 
-        /* During cooldown, stop momentum overshoot (but allow smooth goTo animation) */
-        if (Date.now() < coolUntil && !animating && LOCK_NATIVE) {
-          var listLock = snapList();
-          if (listLock.length) {
-            var lockTop = sectionDocTop(listLock[settledIdx]);
-            var yLock = window.pageYOffset || 0;
-            if (Math.abs(yLock - lockTop) > 24) {
-              window.scrollTo(0, lockTop);
-            }
-          }
-        }
-
         clearTimeout(idleTimer);
         idleTimer = setTimeout(function () {
           if (armed || animating) return;
           if (Date.now() < coolUntil) return;
+          if (inFooterZone()) return;
           var list = snapList();
           if (!list.length) return;
           var yNow = window.pageYOffset || 0;
@@ -1108,9 +1108,13 @@
           if (!isMobile() || !scrollLock || !armed) return;
           if (!e.touches || !e.touches.length) return;
           if (isCarouselTouch(e.target) || isCarouselTouch(touchTarget)) return;
-          var dy = e.touches[0].clientY - touchY;
-          var dx = e.touches[0].clientX - touchX;
-          if (Math.abs(dy) > Math.abs(dx) + 6) {
+          if (inFooterZone()) return;
+          var moveDy = touchY - e.touches[0].clientY;
+          var moveDx = touchX - e.touches[0].clientX;
+          /* Last section: allow native scroll down into footer */
+          if (settledIdx >= snapList().length - 1 && moveDy > 8) return;
+          if (Math.abs(moveDx) > Math.abs(moveDy) + 6) return;
+          if (Math.abs(moveDy) > Math.abs(moveDx) + 6) {
             verticalIntent = true;
             e.preventDefault();
           }
@@ -1132,6 +1136,11 @@
           return;
         }
         if (isCarouselTouch(e.target)) {
+          armed = false;
+          scrollLock = false;
+          return;
+        }
+        if (e.target && e.target.closest && e.target.closest('footer, .footer-wrapper')) {
           armed = false;
           scrollLock = false;
           return;
@@ -1175,6 +1184,17 @@
         if (Math.abs(dx) > Math.abs(dy)) return;
         if (!verticalIntent && Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
         if (Math.abs(dy) < 24) return;
+
+        var list = snapList();
+        /* Swipe down on last section → native scroll to footer */
+        if (dy > 0 && startIdx >= list.length - 1) {
+          verticalIntent = false;
+          return;
+        }
+        if (inFooterZone()) {
+          verticalIntent = false;
+          return;
+        }
 
         var yNow = window.pageYOffset || document.documentElement.scrollTop || 0;
         window.scrollTo(0, yNow);
