@@ -714,6 +714,27 @@ main h2.h2,
     white-space: nowrap !important;
     margin-left: 0 !important;
   }
+
+  /* Shop Our Premium / Best — stack script accent on second line (mobile only) */
+  .hp-fam-sec__heading,
+  .hp-fam-sec__heading .hp-heading-pair {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    white-space: normal !important;
+    gap: 0.02em !important;
+    max-width: 100% !important;
+  }
+
+  .hp-fam-sec__heading .hp-heading-line,
+  .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+  .hp-fam-sec__heading .hp-heading-accent,
+  .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent {
+    display: block !important;
+    white-space: nowrap !important;
+    margin-left: 0 !important;
+  }
 }
 
 .trending-social__heading .hp-heading-pair .hp-heading-line,

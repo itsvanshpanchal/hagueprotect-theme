@@ -704,6 +704,35 @@
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
 
+    /* Mobile: "Best" on its own line under "Shop Our Premium" */
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading,
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      white-space: normal !important;
+      gap: 0.02em !important;
+      max-width: 100% !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
+      display: block !important;
+      white-space: nowrap !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
+    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
+      display: block !important;
+      white-space: nowrap !important;
+      margin-left: 0 !important;
+    }
+
     .hp-fam-sec__tabs {
       flex-wrap: nowrap;
       overflow-x: auto;
