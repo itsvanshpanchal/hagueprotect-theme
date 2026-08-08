@@ -20,6 +20,25 @@
   }
 
   function syncWrap(wrap) {
+    if (wrap.closest('.ai-story-sticky-track--flow, .hp-float-bottom-strip, .hp-story-banner-lite')) {
+      wrap.style.setProperty('background-image', 'none', 'important');
+      wrap.style.setProperty('min-height', '0', 'important');
+      wrap.style.setProperty('height', 'auto', 'important');
+      wrap.style.setProperty('max-height', '85vh', 'important');
+      wrap.style.setProperty('aspect-ratio', '9 / 16', 'important');
+      var liteCover = wrap.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
+      if (liteCover) {
+        liteCover.style.setProperty('position', 'relative', 'important');
+        liteCover.style.setProperty('display', 'block', 'important');
+        liteCover.style.setProperty('width', '100%', 'important');
+        liteCover.style.setProperty('height', 'auto', 'important');
+        liteCover.style.setProperty('max-height', '85vh', 'important');
+        liteCover.style.setProperty('aspect-ratio', '9 / 16', 'important');
+        liteCover.style.setProperty('object-fit', 'cover', 'important');
+      }
+      return;
+    }
+
     var mobile = window.matchMedia('(max-width: 989px)').matches;
     var url = mobile ? wrap.getAttribute('data-mobile-bg') : wrap.getAttribute('data-desktop-bg');
     if (!url) {
@@ -109,5 +128,6 @@
     syncAll();
   }
   window.addEventListener('resize', syncAll, { passive: true });
+  window.addEventListener('hp-floating-cards:ready', syncAll);
   document.addEventListener('shopify:section:load', syncAll);
 })();

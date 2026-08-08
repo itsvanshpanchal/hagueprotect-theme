@@ -211,4 +211,72 @@
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
   }
+
+  /* Flow / lifestyle banner above Split CTA — no full-screen trap, smooth native scroll */
+  .ai-story-sticky-track--flow,
+  .hp-float-bottom-strip .ai-story-sticky-track,
+  .hp-story-banner-lite .ai-story-sticky-track {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    touch-action: pan-y !important;
+  }
+
+  .ai-story-sticky-track--flow .ai-story-sticky-pin,
+  .hp-float-bottom-strip .ai-story-sticky-pin,
+  .hp-story-banner-lite .ai-story-sticky-pin {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .ai-story-sticky-track--flow .ai-story-banner-wrapper,
+  .hp-float-bottom-strip .ai-story-banner-wrapper,
+  .hp-story-banner-lite .ai-story-banner-wrapper {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    aspect-ratio: 9 / 16 !important;
+    background-image: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .ai-story-sticky-track--flow .ai-story-banner-picture,
+  .ai-story-sticky-track--flow .ai-story-banner-cover,
+  .ai-story-sticky-track--flow .ai-story-banner-image,
+  .hp-float-bottom-strip .ai-story-banner-picture,
+  .hp-float-bottom-strip .ai-story-banner-cover,
+  .hp-float-bottom-strip .ai-story-banner-image,
+  .hp-story-banner-lite .ai-story-banner-picture,
+  .hp-story-banner-lite .ai-story-banner-cover,
+  .hp-story-banner-lite .ai-story-banner-image {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    max-height: 85vh !important;
+    aspect-ratio: 9 / 16 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .ai-story-sticky-track--flow .ai-story-banner-content,
+  .hp-float-bottom-strip .ai-story-banner-content {
+    max-height: none !important;
+    overflow: visible !important;
+  }
 }

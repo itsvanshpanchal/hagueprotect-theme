@@ -729,16 +729,20 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     will-change: auto !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip > .hp-float-pin {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip.hp-story-banner-lite > .hp-float-pin {
     height: auto !important;
-    min-height: calc(var(--hp-mobile-vh, 100vh) * 0.72) !important;
+    min-height: 0 !important;
     max-height: none !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    touch-action: pan-y !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip [class*='ai-story-banner-wrapper'] {
-    min-height: calc(var(--hp-mobile-vh, 100vh) * 0.72) !important;
+    min-height: 0 !important;
     height: auto !important;
+    max-height: 85vh !important;
+    aspect-ratio: 9 / 16 !important;
   }
 
   /* Split CTA + DNA: full-viewport sticky cards — upper homepage only (legacy; bottom uses strip) */

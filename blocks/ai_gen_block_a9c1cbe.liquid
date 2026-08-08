@@ -58,9 +58,13 @@
   No <style> tags here — Shopify was stripping them and dumping CSS as visible page text.
   All paint uses inline styles + assets/hp-story-banner.css.
 {%- endcomment -%}
+{%- liquid
+  assign story_sticky = block.settings.enable_sticky_scroll
+-%}
 <div
-  class="ai-story-sticky-track ai-story-sticky-track-{{ ai_gen_id }}"
+  class="ai-story-sticky-track ai-story-sticky-track-{{ ai_gen_id }}{% unless story_sticky %} ai-story-sticky-track--flow{% endunless %}"
   data-hp-story-sticky-track="{{ ai_gen_id }}"
+  data-hp-story-flow="{% if story_sticky %}false{% else %}true{% endif %}"
   style="display:block;width:100%;margin:0;padding:0;position:relative;"
 >
   <div
@@ -79,17 +83,26 @@
         style="
           position:relative;
           width:100%;
+          {% if story_sticky %}
           min-height:100vh;
           min-height:100dvh;
+          {% else %}
+          height:auto;
+          min-height:0;
+          aspect-ratio:9/16;
+          max-height:85vh;
+          {% endif %}
           overflow:hidden;
           background-color:#111111;
           background-size:cover;
           background-position:center center;
           background-repeat:no-repeat;
-          {% if mobile_bg != blank %}
-            background-image:url({{ mobile_bg | json }});
-          {% elsif desk_bg != blank %}
-            background-image:url({{ desk_bg | json }});
+          {% if story_sticky %}
+            {% if mobile_bg != blank %}
+              background-image:url({{ mobile_bg | json }});
+            {% elsif desk_bg != blank %}
+              background-image:url({{ desk_bg | json }});
+            {% endif %}
           {% endif %}
         "
         {% if mobile_bg != blank %}data-mobile-bg="{{ mobile_bg | escape }}"{% endif %}
@@ -98,7 +111,7 @@
         {% if block.settings.background_image or block.settings.mobile_image %}
           <picture
             class="ai-story-banner-picture ai-story-banner-picture-{{ ai_gen_id }}"
-            style="position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;margin:0;padding:0;"
+            style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;{% endif %}display:block;z-index:1;margin:0;padding:0;"
           >
             {% if mobile_bg != blank %}
               <source media="(max-width: 749px)" srcset="{{ mobile_bg }}">
@@ -114,7 +127,7 @@
               loading="eager"
               fetchpriority="high"
               decoding="async"
-              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:1;display:block;opacity:{{ block.settings.image_opacity | default: 1 }};"
+              style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;object-fit:cover;object-position:center center;{% endif %}z-index:1;display:block;opacity:{{ block.settings.image_opacity | default: 1 }};"
             >
           </picture>
         {% else %}

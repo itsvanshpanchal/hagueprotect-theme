@@ -501,37 +501,50 @@
     }
   }
 
-  /* Lifestyle / bottom story banners: natural height strip (not sticky 100dvh trap) */
+  /* Lifestyle banner above Split CTA: lightweight flow layout only (no fullscreen prep) */
   function prepareStoryMobileStrip(pin) {
-    prepareStoryFullscreen(pin, true);
-    var minH = Math.round(viewportH() * 0.72) + 'px';
+    pin.classList.add('hp-story-banner-lite');
+    var track = pin.querySelector('[class*="ai-story-sticky-track"]');
+    if (track) track.classList.add('ai-story-sticky-track--flow');
+
     var chain = pin.querySelectorAll(
-      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], .ai-story-banner, .ai-story-banner-picture'
+      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner"], [class*="ai-story-banner-wrapper"]'
     );
     for (var i = 0; i < chain.length; i++) {
       chain[i].style.setProperty('position', 'relative', 'important');
-      chain[i].style.setProperty('display', 'block', 'important');
+      chain[i].style.setProperty('top', 'auto', 'important');
       chain[i].style.setProperty('height', 'auto', 'important');
-      chain[i].style.setProperty('min-height', minH, 'important');
+      chain[i].style.setProperty('min-height', '0', 'important');
       chain[i].style.setProperty('max-height', 'none', 'important');
-      chain[i].style.setProperty('overflow', 'hidden', 'important');
+      chain[i].style.setProperty('overflow', 'visible', 'important');
+      chain[i].style.setProperty('transform', 'none', 'important');
+      chain[i].style.setProperty('will-change', 'auto', 'important');
     }
 
-    var cover = pin.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
-    if (cover) {
-      cover.style.setProperty('position', 'absolute', 'important');
-      cover.style.setProperty('inset', '0', 'important');
-      cover.style.setProperty('width', '100%', 'important');
-      cover.style.setProperty('height', '100%', 'important');
-      cover.style.setProperty('min-height', minH, 'important');
+    var wraps = pin.querySelectorAll('[data-hp-story-wrap], [class*="ai-story-banner-wrapper"]');
+    for (var w = 0; w < wraps.length; w++) {
+      wraps[w].style.setProperty('background-image', 'none', 'important');
+      wraps[w].style.setProperty('aspect-ratio', '9 / 16', 'important');
+      wraps[w].style.setProperty('max-height', '85vh', 'important');
+      wraps[w].style.setProperty('overflow', 'hidden', 'important');
     }
 
-    pin.style.removeProperty('height');
-    pin.style.removeProperty('min-height');
-    pin.style.removeProperty('max-height');
+    var covers = pin.querySelectorAll('[data-hp-story-cover], .ai-story-banner-cover, .ai-story-banner-image');
+    for (var c = 0; c < covers.length; c++) {
+      covers[c].style.setProperty('position', 'relative', 'important');
+      covers[c].style.setProperty('display', 'block', 'important');
+      covers[c].style.setProperty('width', '100%', 'important');
+      covers[c].style.setProperty('height', 'auto', 'important');
+      covers[c].style.setProperty('aspect-ratio', '9 / 16', 'important');
+      covers[c].style.setProperty('max-height', '85vh', 'important');
+      covers[c].style.setProperty('object-fit', 'cover', 'important');
+    }
+
     pin.style.setProperty('height', 'auto', 'important');
-    pin.style.setProperty('min-height', minH, 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
     pin.style.setProperty('overflow', 'visible', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
   }
 
   function asStrip(item, z) {
@@ -811,7 +824,11 @@
       /* Mobile bottom: lifestyle banner, Split CTA, DNA — normal flow into footer */
       if (isBottomMobileStrip(index, items.length)) {
         sec.classList.add('hp-float-bottom-strip');
-        if (story) prepareStoryMobileStrip(pin);
+        if (story) {
+          sec.classList.add('hp-story-banner-lite');
+          pin.style.cssText = '';
+          prepareStoryMobileStrip(pin);
+        }
         asStrip(item, 10 + index);
         if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
           sec.classList.add('hp-float-split-cta');
