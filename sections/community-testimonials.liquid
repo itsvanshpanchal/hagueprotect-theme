@@ -237,26 +237,12 @@
     fill: currentColor !important;
   }
 
-  /* Carousel — whole cards only; overflow:clip doesn't trigger CSS axis-cascade */
-  .comm-slider-clip {
-    overflow: clip !important;
-    overflow-clip-margin: 0 !important;
-    width: 100% !important;
-  }
-
+  /* Carousel — Swiper must have overflow:hidden to hide loop clones */
   .comm-slider-container {
     width: 100% !important;
     max-width: 100% !important;
     position: relative !important;
-    overflow: visible !important;
-  }
-
-  .comm-swiper {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-    padding-bottom: 12px !important;
-    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   .comm-swiper .swiper-wrapper {
@@ -265,28 +251,16 @@
 
   .comm-swiper .swiper-slide,
   .comm-swiper .comm-slide {
-    /* Never set width here — Swiper writes slide widths inline */
     height: auto !important;
     box-sizing: border-box !important;
   }
 
-  /* Slide widths — CSS controls card sizes, Swiper uses auto */
-  .comm-swiper .swiper-slide.comm-slide {
-    width: calc(33.333% - 15px) !important;
+  .comm-swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding-bottom: 12px !important;
     box-sizing: border-box !important;
-    height: auto !important;
-  }
-
-  @media screen and (max-width: 1023px) {
-    .comm-swiper .swiper-slide.comm-slide {
-      width: calc(50% - 10px) !important;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    .comm-swiper .swiper-slide.comm-slide {
-      width: calc(100% - 0px) !important;
-    }
   }
 
   /* Cards — image on top, review text below */
@@ -543,11 +517,11 @@
     }
     .comm-slider-container {
       margin-top: 0 !important;
-      overflow: visible !important;
+      overflow: hidden !important;
       width: 100% !important;
     }
     .comm-swiper {
-      overflow: visible !important;
+      overflow: hidden !important;
       width: 100% !important;
     }
     .comm-card {
@@ -634,9 +608,8 @@
       </div>
     </div>
 
-    <div class="comm-slider-clip">
-      <div class="comm-slider-container">
-        <div class="swiper comm-swiper" id="swiper-{{ section.id }}">
+    <div class="comm-slider-container">
+      <div class="swiper comm-swiper" id="swiper-{{ section.id }}">
           <div class="swiper-wrapper">
             {%- for block in section.blocks -%}
               {%- if block.type == 'testimonial' -%}
@@ -751,7 +724,6 @@
             {%- endfor -%}
           </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -768,23 +740,26 @@
       if (!el || el.swiper) return;
 
       var swiper = new Swiper(el, {
-        slidesPerView: 'auto',
+        slidesPerView: 1,
         slidesPerGroup: 1,
         spaceBetween: 16,
         centeredSlides: false,
         loop: true,
-        loopAdditionalSlides: 3,
-        roundLengths: false,
+        loopAdditionalSlides: 2,
+        roundLengths: true,
         watchOverflow: true,
         observer: true,
         observeParents: true,
-        /* Slide widths are set via CSS — only spaceBetween changes per breakpoint */
         breakpoints: {
           750: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
             spaceBetween: 20
           },
           1024: {
-            spaceBetween: 22
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+            spaceBetween: 24
           }
         },
         autoplay: {
