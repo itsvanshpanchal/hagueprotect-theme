@@ -715,9 +715,11 @@ main h2.h2,
     margin-left: 0 !important;
   }
 
-  /* Shop Our Premium / Best — stack script accent on second line (mobile only) */
+  /* Stack script accent on second line (mobile only) */
   .hp-fam-sec__heading,
-  .hp-fam-sec__heading .hp-heading-pair {
+  .hp-fam-sec__heading .hp-heading-pair,
+  .trending-social__heading,
+  .trending-social__heading .hp-heading-pair {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: nowrap !important;
@@ -730,7 +732,11 @@ main h2.h2,
   .hp-fam-sec__heading .hp-heading-line,
   .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
   .hp-fam-sec__heading .hp-heading-accent,
-  .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent {
+  .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
+  .trending-social__heading .hp-heading-line,
+  .trending-social__heading .hp-heading-pair .hp-heading-line,
+  .trending-social__heading .hp-heading-accent,
+  .trending-social__heading .hp-heading-pair .hp-heading-accent {
     display: block !important;
     white-space: nowrap !important;
     margin-left: 0 !important;
