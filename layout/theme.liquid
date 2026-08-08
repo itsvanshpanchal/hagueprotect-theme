@@ -529,6 +529,16 @@
     <script src="{{ 'corporate-gifting.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'hp-story-banner.js' | asset_url }}" defer="defer"></script>
     {%- if template.name == 'index' -%}
+      <script>
+        window.hpMobileFloatConfig = {
+          enabled: {{ settings.mobile_float_snap_enable | default: true | json }},
+          swipePx: {{ settings.mobile_float_swipe_px | default: 52 }},
+          swipeVelocity: 0.38,
+          coolMs: {{ settings.mobile_float_cool_ms | default: 1100 }},
+          idleMs: 300,
+          lockNativeScroll: {{ settings.mobile_float_lock_scroll | default: true | json }}
+        };
+      </script>
       <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
     {%- if template.name == 'product' -%}

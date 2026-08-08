@@ -958,6 +958,13 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     scroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: none;
+    overscroll-behavior-y: none;
+  }
+
+  body.hp-float-mobile.hp-float-snap #MainContent,
+  body.hp-float-mobile.hp-float-snap .hp-float-stack {
+    overscroll-behavior-y: none;
+    touch-action: pan-y;
   }
 
   body.hp-float-mobile .hp-float-stack {

@@ -1396,5 +1396,47 @@
         "info": "Shown as a tel: link. 10-digit Indian numbers get +91 automatically."
       }
     ]
+  },
+  {
+    "name": "Homepage mobile scroll",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Controls one-section-at-a-time scrolling on the homepage (phone only). Syncs from theme JSON on GitHub deploy."
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_float_snap_enable",
+        "label": "Enable one-section mobile scroll",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "mobile_float_swipe_px",
+        "label": "Swipe distance before changing section",
+        "min": 32,
+        "max": 80,
+        "step": 4,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "mobile_float_cool_ms",
+        "label": "Pause between section changes",
+        "min": 600,
+        "max": 1600,
+        "step": 100,
+        "unit": "ms",
+        "default": 1100
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_float_lock_scroll",
+        "label": "Block fast multi-section flings",
+        "default": true,
+        "info": "Stops the browser from skipping 2–3 sections on a quick swipe."
+      }
+    ]
   }
 ]
