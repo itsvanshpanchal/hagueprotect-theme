@@ -1949,13 +1949,13 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-bg: #ffffff;
   --corp-marquee-text: #111111;
   --corp-marquee-row-gap: 4px;
-  --corp-marquee-word-gap: clamp(32px, 5vw, 64px);
-  --corp-marquee-font-size: clamp(44px, 7.2vw, 86px);
+  --corp-marquee-word-gap: clamp(20px, 3.5vw, 40px);
+  --corp-marquee-font-size: clamp(28px, 4.2vw, 52px);
   background: #ffffff !important;
   background-color: #ffffff !important;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(24px, 3.5vw, 40px) 0;
+  padding: clamp(16px, 2.5vw, 28px) 0;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
@@ -2034,15 +2034,15 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item {
 body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  -webkit-text-stroke: 1.75px #111111 !important;
+  -webkit-text-stroke: 1.25px #111111 !important;
   paint-order: stroke fill;
 }
 
 @media screen and (max-width: 749px) {
   body.template-index .corp-marquee--outline-style {
-    --corp-marquee-font-size: clamp(30px, 10vw, 44px);
-    --corp-marquee-word-gap: 24px;
-    padding: 20px 0;
+    --corp-marquee-font-size: clamp(22px, 6.5vw, 34px);
+    --corp-marquee-word-gap: 18px;
+    padding: 14px 0;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
