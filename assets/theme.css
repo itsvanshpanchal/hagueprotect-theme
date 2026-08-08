@@ -1955,8 +1955,9 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   background-color: #ffffff !important;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(8px, 1.2vw, 12px) 0;
-  overflow: hidden;
+  padding: clamp(12px, 1.5vw, 16px) 0 clamp(8px, 1.2vw, 12px);
+  overflow-x: clip;
+  overflow-y: visible;
   width: 100%;
   max-width: 100%;
 }
@@ -1984,8 +1985,14 @@ body.template-index .corp-marquee--outline-style .corp-marquee__label {
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap {
   display: flex;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   width: 100%;
+  padding-block: 3px 1px;
+}
+
+body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap:first-child {
+  padding-top: 4px;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap + .corp-marquee__track-wrap {
@@ -2025,7 +2032,8 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item {
   font-family: 'Bebas Neue', 'Anton', 'Arial Narrow', sans-serif !important;
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
-  line-height: 0.82 !important;
+  line-height: 1 !important;
+  padding-block: 1px;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: #111111 !important;
@@ -2042,7 +2050,7 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   body.template-index .corp-marquee--outline-style {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
-    padding: 8px 0;
+    padding: 10px 0 8px;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {

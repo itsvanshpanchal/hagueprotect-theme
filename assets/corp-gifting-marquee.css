@@ -13,8 +13,9 @@
   background: var(--corp-marquee-bg) !important;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(8px, 1.2vw, 12px) 0;
-  overflow: hidden;
+  padding: clamp(12px, 1.5vw, 16px) 0 clamp(8px, 1.2vw, 12px);
+  overflow-x: clip;
+  overflow-y: visible;
   position: relative;
   z-index: 3;
   width: 100%;
@@ -40,8 +41,14 @@
 
 .corp-marquee__track-wrap {
   display: flex;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   width: 100%;
+  padding-block: 3px 1px;
+}
+
+.corp-marquee__track-wrap:first-child {
+  padding-top: 4px;
 }
 
 .corp-marquee__track-wrap + .corp-marquee__track-wrap {
@@ -83,7 +90,8 @@
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
   font-style: normal !important;
-  line-height: 0.82 !important;
+  line-height: 1 !important;
+  padding-block: 1px;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: var(--corp-marquee-text) !important;
@@ -101,6 +109,7 @@
 .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee),
 .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee) > .hp-float-pin {
   background-color: #ffffff !important;
+  overflow: visible !important;
 }
 
 @media screen and (max-width: 749px) {
@@ -108,7 +117,7 @@
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     --corp-marquee-row-gap: 0px;
-    padding: 8px 0;
+    padding: 10px 0 8px;
   }
 
   .corp-marquee__track {
