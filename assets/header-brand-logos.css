@@ -10,7 +10,7 @@
 .header__logo-divider {
   flex: 0 0 1px !important;
   width: 1px !important;
-  height: calc(var(--header-brand-logo-h, 44px) * 0.72) !important;
+  height: calc(var(--header-brand-logo-h, 40px) * 0.72) !important;
   min-height: 22px !important;
   background: #e5e5e5 !important;
   margin: 0 !important;
@@ -22,8 +22,8 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: var(--header-brand-logo-h, 44px) !important;
-  min-height: var(--header-brand-logo-h, 44px) !important;
+  height: var(--header-brand-logo-h, 40px) !important;
+  min-height: var(--header-brand-logo-h, 40px) !important;
   flex: 0 0 auto !important;
   padding: 0 !important;
   line-height: 0 !important;
@@ -35,8 +35,8 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
-  min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
+  min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
   flex: 0 0 auto !important;
   padding: 0 !important;
   line-height: 0 !important;
@@ -44,8 +44,8 @@
 }
 
 .header__logo-link--primary .header__logo-img {
-  height: var(--header-brand-logo-h, 44px) !important;
-  max-height: var(--header-brand-logo-h, 44px) !important;
+  height: var(--header-brand-logo-h, 40px) !important;
+  max-height: var(--header-brand-logo-h, 40px) !important;
   width: auto !important;
   max-width: min(var(--logo-primary-max, 200px), 200px) !important;
   object-fit: contain !important;
@@ -58,8 +58,8 @@
 .header__logo-link--brand .header__logo-img,
 .header__logo-link--sor .header__logo-img,
 .header__logo-link--sor-main .header__logo-img {
-  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
-  max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
+  max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
   width: auto !important;
   max-width: none !important;
   object-fit: contain !important;

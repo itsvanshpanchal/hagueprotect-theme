@@ -3,10 +3,10 @@
   if section.settings.logo_group_gap != blank
     assign header_logo_gap = section.settings.logo_group_gap
   endif
-  assign header_brand_logo_h_desktop = section.settings.partner_logo_height_desktop | default: 44
-  assign header_brand_logo_h_mobile = section.settings.partner_logo_height_mobile | default: 34
-  assign header_partner_logo_h_desktop = header_brand_logo_h_desktop | times: 112 | divided_by: 100
-  assign header_partner_logo_h_mobile = header_brand_logo_h_mobile | times: 112 | divided_by: 100
+  assign header_brand_logo_h_desktop = section.settings.partner_logo_height_desktop | default: 40
+  assign header_brand_logo_h_mobile = section.settings.partner_logo_height_mobile | default: 32
+  assign header_partner_logo_h_desktop = header_brand_logo_h_desktop
+  assign header_partner_logo_h_mobile = header_brand_logo_h_mobile
 -%}
 
 {{ 'header-brand-logos.css' | asset_url | stylesheet_tag }}
@@ -170,7 +170,7 @@
   .header__logo-divider {
     flex: 0 0 1px;
     width: 1px;
-    height: calc(var(--header-brand-logo-h, 44px) * 0.75);
+    height: calc(var(--header-brand-logo-h, 40px) * 0.75);
     min-height: 24px;
     background: #e5e5e5;
     margin: 0;
@@ -189,8 +189,8 @@
     flex: 0 0 auto;
     width: auto;
     min-width: 0;
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
-    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
     padding: 0;
     line-height: 0;
     box-sizing: border-box;
@@ -200,16 +200,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: var(--header-brand-logo-h, 44px);
-    min-height: var(--header-brand-logo-h, 44px);
+    height: var(--header-brand-logo-h, 40px);
+    min-height: var(--header-brand-logo-h, 40px);
     padding: 0;
     box-sizing: border-box;
   }
 
   .header__logo-link--primary .header__logo-img {
-    height: var(--header-brand-logo-h, 44px);
+    height: var(--header-brand-logo-h, 40px);
     width: auto;
-    max-height: var(--header-brand-logo-h, 44px);
+    max-height: var(--header-brand-logo-h, 40px);
     max-width: min(var(--logo-primary-max, 200px), 200px);
     object-fit: contain;
     object-position: center center;
@@ -221,9 +221,9 @@
   .header__logo-link--sor .header__logo-img,
   .header__logo-link--sor-main .header__logo-img,
   .header__logo-partners .header__logo-img {
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
     width: auto;
-    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
     max-width: none;
     object-fit: contain;
     object-position: center center;
@@ -249,16 +249,16 @@
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary {
       flex: 0 0 auto;
       margin: 0 !important;
-      height: var(--header-brand-logo-h, 44px);
-      min-height: var(--header-brand-logo-h, 44px);
+      height: var(--header-brand-logo-h, 40px);
+      min-height: var(--header-brand-logo-h, 40px);
       align-items: center;
       justify-content: center;
       padding: 0 !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
-      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px));
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
+      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px));
       width: auto !important;
       min-width: 0 !important;
       max-width: none !important;
@@ -267,8 +267,8 @@
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-img,
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--partner .header__logo-img {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
-      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
+      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 40px)) !important;
       width: auto !important;
       max-width: none !important;
       object-fit: contain !important;
@@ -276,8 +276,8 @@
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--primary .header__logo-img {
-      height: var(--header-brand-logo-h, 44px) !important;
-      max-height: var(--header-brand-logo-h, 44px) !important;
+      height: var(--header-brand-logo-h, 40px) !important;
+      max-height: var(--header-brand-logo-h, 40px) !important;
       max-width: min(var(--logo-primary-max, 200px), 200px) !important;
     }
 
@@ -2107,7 +2107,7 @@
     },
     {
       "type": "paragraph",
-      "content": "All three header logos share equal spacing. Vanrosector and Science of Raw render slightly taller (112%) so they visually match Hague Protect."
+      "content": "All three header logos share equal spacing and the same row height for a balanced medium size."
     },
     {
       "type": "range",
@@ -2137,7 +2137,7 @@
       "step": 2,
       "unit": "px",
       "label": "Hague Protect logo height — computer",
-      "default": 44
+      "default": 40
     },
     {
       "type": "range",
@@ -2147,7 +2147,7 @@
       "step": 2,
       "unit": "px",
       "label": "Hague Protect logo height — phone",
-      "default": 34
+      "default": 32
     },
     {
       "type": "image_picker",
