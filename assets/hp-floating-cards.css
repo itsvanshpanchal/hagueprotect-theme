@@ -682,7 +682,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-sizing: border-box !important;
   }
 
-  /* DNA on mobile: normal-flow strip — legacy strip fallback only */
+  /* DNA strip fallback only — do NOT apply to full-viewport hp-float-card */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna {
     position: relative !important;
     top: auto !important;
@@ -696,7 +696,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     margin-top: 0 !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin {
     position: relative !important;
     height: auto !important;
@@ -706,7 +705,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     background-color: #121111 !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']),
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
     display: block !important;
     height: auto !important;
@@ -719,7 +717,25 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-sizing: border-box !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__container'] {
+  /* Bottom sticky cards — must stay pinned like hero/materials (wins over legacy dna rules) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta {
+    position: sticky !important;
+    top: 0 !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta > .hp-float-pin {
+    position: relative !important;
+    height: 100% !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card.hp-float-dna [class*='hp-dna__container'] {
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;

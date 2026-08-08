@@ -864,6 +864,22 @@
 
     lastLayoutW = window.innerWidth || 0;
     layingOut = false;
+    ensureFooterRunway(mobile);
+  }
+
+  function ensureFooterRunway(mobile) {
+    if (!mobile || !stack) return;
+    var runway = stack.querySelector('.hp-float-footer-runway');
+    if (!runway) {
+      runway = document.createElement('div');
+      runway.className = 'hp-float-footer-runway';
+      runway.setAttribute('aria-hidden', 'true');
+      stack.appendChild(runway);
+    }
+    runway.style.cssText =
+      'display:block;width:100%;height:' +
+      Math.round(viewportH() * 0.75) +
+      'px;pointer-events:none;margin:0;padding:0;border:0;';
   }
 
   var resizeTimer = null;
@@ -926,9 +942,9 @@
     var lastScrollT = 0;
     var SWIPE_PX = cfg.swipePx || 52;
     var SWIPE_V = cfg.swipeVelocity || 0.38;
-    var COOL_MS = cfg.coolMs || 1100;
-    var IDLE_MS = cfg.idleMs || 300;
-    var LOCK_NATIVE = cfg.lockNativeScroll !== false;
+    var COOL_MS = cfg.coolMs || 480;
+    var IDLE_MS = cfg.idleMs || 220;
+    var LOCK_NATIVE = cfg.lockNativeScroll === true;
 
     function snapList() {
       return items
@@ -1071,7 +1087,6 @@
         clearTimeout(idleTimer);
         idleTimer = setTimeout(function () {
           if (armed || animating) return;
-          if (Date.now() < coolUntil) return;
           if (inFooterZone()) return;
           var list = snapList();
           if (!list.length) return;
@@ -1080,13 +1095,12 @@
             markSettled(list.length - 1);
             return;
           }
+          /* Soft settle only — never force scroll on idle (was halting bottom sections) */
           var seen = currentIndex();
           var target = clampTargetIndex(settledIdx, seen, list.length);
           var targetTop = sectionDocTop(list[target]);
           var drift = Math.abs(targetTop - yNow);
-          if (drift > 32) {
-            goTo(target);
-          } else {
+          if (drift <= 48) {
             markSettled(target);
           }
         }, IDLE_MS);
@@ -1130,11 +1144,6 @@
         clearTimeout(settleTimer);
         verticalIntent = false;
         scrollLock = LOCK_NATIVE;
-        if (Date.now() < coolUntil) {
-          armed = false;
-          scrollLock = false;
-          return;
-        }
         if (isCarouselTouch(e.target)) {
           armed = false;
           scrollLock = false;
@@ -1171,7 +1180,6 @@
         scrollLock = false;
         if (!armed || !isMobile()) return;
         armed = false;
-        if (Date.now() < coolUntil) return;
         if (!e.changedTouches || !e.changedTouches.length) return;
         if (isCarouselTouch(touchTarget) || isCarouselTouch(e.target)) return;
 
@@ -1181,6 +1189,7 @@
         var dx = touchX - x;
         var dt = Math.max(16, Date.now() - touchT);
         var v = dy / dt;
+        if (Date.now() < coolUntil && Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
         if (Math.abs(dx) > Math.abs(dy)) return;
         if (!verticalIntent && Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
         if (Math.abs(dy) < 24) return;

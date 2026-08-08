@@ -536,7 +536,7 @@
           swipeVelocity: 0.38,
           coolMs: {{ settings.mobile_float_cool_ms | default: 1100 }},
           idleMs: 300,
-          lockNativeScroll: {{ settings.mobile_float_lock_scroll | default: true | json }}
+          lockNativeScroll: {{ settings.mobile_float_lock_scroll | default: false | json }}
         };
       </script>
       <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
