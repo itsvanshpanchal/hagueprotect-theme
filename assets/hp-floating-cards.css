@@ -250,9 +250,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12) !important;
     filter: none !important;
     transform: none !important;
-    /* Promote each sticky card to its own GPU layer — scroll composites
-       instead of repainting full-screen images/shadows every frame */
-    will-change: transform;
+    /* Avoid GPU layer hoarding on long sticky stacks — smoother scroll on mid/low-end phones */
+    will-change: auto;
     backface-visibility: hidden;
   }
 
@@ -622,7 +621,70 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-right: 0 !important;
   }
 
-  /* Split CTA + DNA: full-viewport sticky cards on mobile (same rhythm as hero/materials) */
+  /* Split CTA + DNA: native-flow strips on mobile (bottom of homepage) */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-split-cta,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.section-split-cta {
+    position: relative !important;
+    top: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background-color: #fdfcf7 !important;
+    box-shadow: none !important;
+    will-change: auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-split-cta > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.section-split-cta > .hp-float-pin {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-split-cta [class*='split-cta'],
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='split-cta'] {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-top: 36px !important;
+    padding-bottom: 36px !important;
+  }
+
+  /* Lifestyle story banner strip above Split CTA */
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip:has([class*='ai-story-banner-']) {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    will-change: auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip > .hp-float-pin,
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip:has([class*='ai-story-banner-']) > .hp-float-pin {
+    height: auto !important;
+    min-height: 72dvh !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip.hp-float-bottom-strip [class*='ai-story-banner-wrapper'],
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-strip:has([class*='ai-story-banner-']) [class*='ai-story-banner-wrapper'] {
+    min-height: 72dvh !important;
+    height: auto !important;
+  }
+
+  /* Split CTA + DNA: full-viewport sticky cards — upper homepage only (legacy; bottom uses strip) */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta {
     display: flex !important;
@@ -1056,8 +1118,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     top: 0 !important;
     filter: none !important;
     transform: none !important;
-    /* GPU layer per card: sticky-cover scroll stays compositor-only (no jank) */
-    will-change: transform !important;
+    will-change: auto !important;
     backface-visibility: hidden;
     scroll-snap-align: none;
   }

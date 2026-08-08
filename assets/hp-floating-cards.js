@@ -92,6 +92,11 @@
     return !!(pin && pin.querySelector('.comm-section, .comm-swiper, .comm-slider-container'));
   }
 
+  /* Last 3 homepage sections: native scroll on mobile (no sticky trap before footer) */
+  function isBottomMobileStrip(index, total) {
+    return isMobile() && total >= 3 && index >= total - 3;
+  }
+
   function ensurePin(sec) {
     var pin = sec.querySelector(':scope > .hp-float-pin');
     if (pin) return pin;
@@ -487,6 +492,39 @@
     }
   }
 
+  /* Lifestyle / bottom story banners: natural height strip (not sticky 100dvh trap) */
+  function prepareStoryMobileStrip(pin) {
+    prepareStoryFullscreen(pin, true);
+    var minH = '72dvh';
+    var chain = pin.querySelectorAll(
+      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], .ai-story-banner, .ai-story-banner-picture'
+    );
+    for (var i = 0; i < chain.length; i++) {
+      chain[i].style.setProperty('position', 'relative', 'important');
+      chain[i].style.setProperty('display', 'block', 'important');
+      chain[i].style.setProperty('height', 'auto', 'important');
+      chain[i].style.setProperty('min-height', minH, 'important');
+      chain[i].style.setProperty('max-height', 'none', 'important');
+      chain[i].style.setProperty('overflow', 'hidden', 'important');
+    }
+
+    var cover = pin.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
+    if (cover) {
+      cover.style.setProperty('position', 'absolute', 'important');
+      cover.style.setProperty('inset', '0', 'important');
+      cover.style.setProperty('width', '100%', 'important');
+      cover.style.setProperty('height', '100%', 'important');
+      cover.style.setProperty('min-height', minH, 'important');
+    }
+
+    pin.style.removeProperty('height');
+    pin.style.removeProperty('min-height');
+    pin.style.removeProperty('max-height');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', minH, 'important');
+    pin.style.setProperty('overflow', 'visible', 'important');
+  }
+
   function asStrip(item, z) {
     var sec = item.sec;
     var pin = item.pin;
@@ -751,6 +789,24 @@
 
       resetSectionStyles(sec, pin);
 
+      /* Mobile bottom: lifestyle banner, Split CTA, DNA — normal flow into footer */
+      if (isBottomMobileStrip(index, items.length)) {
+        sec.classList.add('hp-float-bottom-strip');
+        if (story) prepareStoryMobileStrip(pin);
+        asStrip(item, 10 + index);
+        if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
+          sec.classList.add('hp-float-split-cta');
+          sec.style.setProperty('background-color', '#fdfcf7', 'important');
+          pin.style.setProperty('background-color', '#fdfcf7', 'important');
+        }
+        if (isDnaPin(pin) || isDnaSection(sec)) {
+          sec.classList.add('hp-float-dna');
+          sec.style.setProperty('background-color', '#121111', 'important');
+          pin.style.setProperty('background-color', '#121111', 'important');
+        }
+        return;
+      }
+
       /* Split CTA: full-viewport sticky card on mobile (matches sections above) */
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
         cardIndex += 1;
@@ -876,9 +932,10 @@
       runway.setAttribute('aria-hidden', 'true');
       stack.appendChild(runway);
     }
+    /* Short spacer only — bottom sections are native strips, not sticky traps */
     runway.style.cssText =
       'display:block;width:100%;height:' +
-      Math.round(viewportH() * 0.75) +
+      Math.round(viewportH() * 0.12) +
       'px;pointer-events:none;margin:0;padding:0;border:0;';
   }
 
@@ -968,7 +1025,12 @@
       var yNow = window.pageYOffset || 0;
       var lastTop = sectionDocTop(list[list.length - 1]);
       var vh = window.innerHeight || 800;
-      return yNow > lastTop + Math.round(vh * 0.5);
+      /* Native-scroll bottom zone starts before the last card fully clears */
+      return yNow > lastTop + Math.round(vh * 0.28);
+    }
+
+    function inNativeBottomZone() {
+      return inFooterZone();
     }
 
     /* Document Y from layout flow — correct even while position:sticky */
@@ -1053,27 +1115,13 @@
       markSettled(index);
       animating = true;
       coolUntil = Date.now() + COOL_MS;
-      window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+      /* Instant scroll — smooth fights touch and feels stuck on iOS/Android */
+      window.scrollTo({ top: top, left: 0, behavior: 'auto' });
       clearTimeout(settleTimer);
-      var settleCheck = function () {
-        if (armed) {
-          animating = false;
-          return;
-        }
-        if (Date.now() - lastScrollT < 140) {
-          settleTimer = setTimeout(settleCheck, 180);
-          return;
-        }
-        var drift = Math.abs((window.pageYOffset || 0) - top);
-        if (drift > 8 && drift < (window.innerHeight || 800) * 0.5) {
-          coolUntil = Date.now() + COOL_MS - 200;
-          window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
-        } else {
-          markSettled(index);
-        }
+      settleTimer = setTimeout(function () {
         animating = false;
-      };
-      settleTimer = setTimeout(settleCheck, 680);
+        markSettled(index);
+      }, Math.min(COOL_MS, 320));
       return true;
     }
 
@@ -1154,6 +1202,11 @@
           scrollLock = false;
           return;
         }
+        if (inNativeBottomZone()) {
+          armed = false;
+          scrollLock = false;
+          return;
+        }
         touchY = e.touches[0].clientY;
         touchX = e.touches[0].clientX;
         touchT = Date.now();
@@ -1200,13 +1253,10 @@
           verticalIntent = false;
           return;
         }
-        if (inFooterZone()) {
+        if (inFooterZone() || inNativeBottomZone()) {
           verticalIntent = false;
           return;
         }
-
-        var yNow = window.pageYOffset || document.documentElement.scrollTop || 0;
-        window.scrollTo(0, yNow);
 
         var nextIdx = dy > 0 ? startIdx + 1 : startIdx - 1;
         requestAnimationFrame(function () {
