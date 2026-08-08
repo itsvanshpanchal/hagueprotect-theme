@@ -1,12 +1,21 @@
+{%- liquid
+  assign bg_color = section.settings.background_color | default: '#ffffff'
+  assign text_color = section.settings.text_color | default: '#111111'
+  assign show_label = section.settings.show_label
+  assign row_gap = section.settings.row_gap | default: 6
+-%}
+
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
-
-  .corp-marquee {
-    background: #111111;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 20px 0;
+  #shopify-section-{{ section.id }} .corp-marquee {
+    --corp-marquee-bg: {{ bg_color }};
+    --corp-marquee-text: {{ text_color }};
+    --corp-marquee-row-gap: {{ row_gap }}px;
+    background: var(--corp-marquee-bg);
+    border-top: 1px solid rgba(17, 17, 17, 0.06);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.06);
+    padding: clamp(28px, 4vw, 44px) 0;
     overflow: hidden;
     position: relative;
     z-index: 3;
@@ -14,113 +23,111 @@
     max-width: 100%;
   }
 
-  .corp-marquee__label {
+  #shopify-section-{{ section.id }} .corp-marquee__label {
     text-align: center;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.16em;
-    text-transform: none;
-    color: rgba(255, 255, 255, 0.35);
-    margin-bottom: 16px;
+    text-transform: uppercase;
+    color: rgba(17, 17, 17, 0.45);
+    margin: 0 0 18px;
     padding: 0 20px;
   }
 
-  .corp-marquee__track-wrap {
-    display: flex;
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  #shopify-section-{{ section.id }} .corp-marquee__label--hidden {
+    display: none;
   }
 
-  .corp-marquee__track {
+  #shopify-section-{{ section.id }} .corp-marquee__track-wrap {
     display: flex;
-    gap: 48px;
-    animation: corpMarqueeScroll 35s linear infinite;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__track-wrap + .corp-marquee__track-wrap {
+    margin-top: var(--corp-marquee-row-gap);
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__track {
+    display: flex;
+    align-items: center;
+    gap: clamp(28px, 4vw, 56px);
+    animation: corpMarqueeScroll-{{ section.id }} 38s linear infinite;
     flex-shrink: 0;
     will-change: transform;
   }
 
-  .corp-marquee__track--reverse {
+  #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
     animation-direction: reverse;
-    animation-duration: 40s;
-    margin-top: 12px;
+    animation-duration: 44s;
   }
 
-  @keyframes corpMarqueeScroll {
+  @keyframes corpMarqueeScroll-{{ section.id }} {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
 
-  .corp-marquee__item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  #shopify-section-{{ section.id }} .corp-marquee__item {
+    display: inline-block;
     white-space: nowrap;
-    font-family: var(--font-family-heading);
-    font-size: 22px;
-    letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.55);
-    text-transform: none;
+    font-family: var(--font-family-heading, 'Bebas Neue', 'Anton', 'Arial Narrow', sans-serif);
+    font-size: clamp(42px, 6.4vw, 78px);
+    font-weight: 900;
+    font-style: normal;
+    line-height: 0.92;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    color: var(--corp-marquee-text);
+    -webkit-text-stroke: 0 transparent;
   }
 
-  .corp-marquee__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #ff2b2b;
-    flex-shrink: 0;
-  }
-
-  .corp-marquee__item--accent {
-    color: #ffffff;
+  #shopify-section-{{ section.id }} .corp-marquee__item--outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--corp-marquee-text);
+    paint-order: stroke fill;
   }
 
   @media screen and (max-width: 749px) {
-    .corp-marquee {
+    #shopify-section-{{ section.id }} .corp-marquee {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
-      padding: 18px 0;
+      padding: 22px 0;
       overflow: hidden;
       max-width: 100%;
-      background: #111111 !important;
+      background: var(--corp-marquee-bg) !important;
     }
 
-    .corp-marquee__label {
+    #shopify-section-{{ section.id }} .corp-marquee__label {
       font-size: 10px;
       letter-spacing: 0.12em;
       line-height: 1.45;
       padding: 0 16px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .corp-marquee__track-wrap {
-      display: flex !important;
-      overflow: hidden;
+    #shopify-section-{{ section.id }} .corp-marquee__track {
+      gap: 22px;
+      animation-duration: 30s !important;
     }
 
-    .corp-marquee__track {
-      display: flex !important;
-      gap: 28px;
-      animation: corpMarqueeScroll 28s linear infinite !important;
+    #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
+      animation-duration: 34s !important;
     }
 
-    .corp-marquee__track--reverse {
-      animation-direction: reverse !important;
-      animation-duration: 32s !important;
-      margin-top: 8px;
+    #shopify-section-{{ section.id }} .corp-marquee__item {
+      font-size: clamp(28px, 9vw, 42px);
+      line-height: 0.94;
     }
 
-    .corp-marquee__item {
-      font-size: 15px;
-      letter-spacing: 0.04em;
-      gap: 8px;
+    #shopify-section-{{ section.id }} .corp-marquee__item--outline {
+      -webkit-text-stroke-width: 1px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .corp-marquee__track,
-    .corp-marquee__track--reverse {
+    #shopify-section-{{ section.id }} .corp-marquee__track,
+    #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
       animation: none !important;
     }
   }
@@ -136,8 +143,12 @@
   endfor
 -%}
 
-<section class="corp-marquee" aria-label="Use cases">
-  <p class="corp-marquee__label">{{ section.settings.label | default: 'Trusted for employee onboarding, client appreciation, festival hampers & more' }}</p>
+<section class="corp-marquee" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
+  {%- if section.settings.label != blank -%}
+    <p class="corp-marquee__label{% unless show_label %} corp-marquee__label--hidden{% endunless %}">
+      {{ section.settings.label }}
+    </p>
+  {%- endif -%}
 
   <div class="corp-marquee__track-wrap">
     <div class="corp-marquee__track">
@@ -145,9 +156,13 @@
         {%- assign items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones,Retail Partners,Influencer PR,Anniversary Boxes,Onboarding Packs' | split: ',' -%}
         {%- for i in (1..2) -%}
           {%- for item in items -%}
-            <span class="corp-marquee__item{% if forloop.index == 3 or forloop.index == 7 %} corp-marquee__item--accent{% endif %}">
-              <span class="corp-marquee__dot"></span>
-              {{ item }}
+            {%- assign use_outline = false -%}
+            {%- assign mod = forloop.index0 | modulo: 2 -%}
+            {%- if mod == 1 -%}
+              {%- assign use_outline = true -%}
+            {%- endif -%}
+            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">
+              {{ item | strip | upcase }}
             </span>
           {%- endfor -%}
         {%- endfor -%}
@@ -156,11 +171,10 @@
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'top' and block.settings.text != blank -%}
               <span
-                class="corp-marquee__item{% if block.settings.accent %} corp-marquee__item--accent{% endif %}"
+                class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                <span class="corp-marquee__dot"></span>
-                {{ block.settings.text }}
+                {{ block.settings.text | upcase }}
               </span>
             {%- endif -%}
           {%- endfor -%}
@@ -175,9 +189,13 @@
         {%- assign items2 = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST,Sample Kits,Volume Discounts' | split: ',' -%}
         {%- for i in (1..2) -%}
           {%- for item in items2 -%}
-            <span class="corp-marquee__item">
-              <span class="corp-marquee__dot"></span>
-              {{ item }}
+            {%- assign use_outline = false -%}
+            {%- assign mod = forloop.index0 | modulo: 2 -%}
+            {%- if mod == 0 -%}
+              {%- assign use_outline = true -%}
+            {%- endif -%}
+            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">
+              {{ item | strip | upcase }}
             </span>
           {%- endfor -%}
         {%- endfor -%}
@@ -186,11 +204,10 @@
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'bottom' and block.settings.text != blank -%}
               <span
-                class="corp-marquee__item{% if block.settings.accent %} corp-marquee__item--accent{% endif %}"
+                class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}"
                 {{ block.shopify_attributes }}
               >
-                <span class="corp-marquee__dot"></span>
-                {{ block.settings.text }}
+                {{ block.settings.text | upcase }}
               </span>
             {%- endif -%}
           {%- endfor -%}
@@ -206,6 +223,7 @@
   "max_blocks": 30,
   "enabled_on": {
     "templates": [
+      "index",
       "search.corporate-gifting",
       "page.corporate"
     ]
@@ -217,7 +235,35 @@
       "label": "Label above marquee",
       "default": "Trusted for employee onboarding, client appreciation, festival hampers & more"
     },
-        {
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label above marquee",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Gap between rows",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
       "type": "header",
       "content": "Text position (laptop)"
     },
@@ -301,7 +347,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Only fonts used in this section: 1. Biggest title. Brand fonts are at the top of each list."
+      "content": "Marquee words use the biggest title font below — Bebas Neue works best for the bold outline look."
     },
     {
       "type": "header",
@@ -586,8 +632,8 @@
         },
         {
           "type": "checkbox",
-          "id": "accent",
-          "label": "Highlight in white",
+          "id": "outline",
+          "label": "Outline style (hollow text)",
           "default": false
         }
       ]
@@ -596,6 +642,11 @@
   "presets": [
     {
       "name": "Corporate Marquee",
+      "settings": {
+        "background_color": "#ffffff",
+        "text_color": "#111111",
+        "show_label": false
+      },
       "blocks": [
         {
           "type": "marquee_text",
@@ -608,22 +659,23 @@
           "type": "marquee_text",
           "settings": {
             "text": "Client Appreciation",
-            "row": "top"
+            "row": "top",
+            "outline": true
           }
         },
         {
           "type": "marquee_text",
           "settings": {
             "text": "Festival Hampers",
-            "row": "top",
-            "accent": true
+            "row": "top"
           }
         },
         {
           "type": "marquee_text",
           "settings": {
             "text": "Conference Swag",
-            "row": "top"
+            "row": "top",
+            "outline": true
           }
         },
         {
@@ -637,22 +689,23 @@
           "type": "marquee_text",
           "settings": {
             "text": "Team Milestones",
-            "row": "top"
+            "row": "top",
+            "outline": true
           }
         },
         {
           "type": "marquee_text",
           "settings": {
             "text": "Retail Partners",
-            "row": "top",
-            "accent": true
+            "row": "top"
           }
         },
         {
           "type": "marquee_text",
           "settings": {
             "text": "Influencer PR",
-            "row": "top"
+            "row": "top",
+            "outline": true
           }
         },
         {
@@ -666,14 +719,16 @@
           "type": "marquee_text",
           "settings": {
             "text": "Onboarding Packs",
-            "row": "top"
+            "row": "top",
+            "outline": true
           }
         },
         {
           "type": "marquee_text",
           "settings": {
             "text": "Co-Branded Packaging",
-            "row": "bottom"
+            "row": "bottom",
+            "outline": true
           }
         },
         {
@@ -687,7 +742,8 @@
           "type": "marquee_text",
           "settings": {
             "text": "Dedicated Manager",
-            "row": "bottom"
+            "row": "bottom",
+            "outline": true
           }
         },
         {
@@ -701,7 +757,8 @@
           "type": "marquee_text",
           "settings": {
             "text": "Logo Embossing",
-            "row": "bottom"
+            "row": "bottom",
+            "outline": true
           }
         },
         {
@@ -715,7 +772,8 @@
           "type": "marquee_text",
           "settings": {
             "text": "Pan-India Delivery",
-            "row": "bottom"
+            "row": "bottom",
+            "outline": true
           }
         },
         {
@@ -729,7 +787,8 @@
           "type": "marquee_text",
           "settings": {
             "text": "Sample Kits",
-            "row": "bottom"
+            "row": "bottom",
+            "outline": true
           }
         },
         {
