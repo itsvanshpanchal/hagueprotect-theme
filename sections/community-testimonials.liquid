@@ -532,19 +532,34 @@
   }
 
   @media screen and (max-width: 768px) {
-    .comm-swiper {
-      overflow: visible !important;
+    .comm-slider-container {
+      overflow: hidden !important;
+      width: 100% !important;
     }
 
-    .comm-slider-container {
-      overflow: visible !important;
+    .comm-swiper {
+      overflow: hidden !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .comm-swiper .swiper-wrapper {
+      align-items: stretch !important;
     }
 
     .comm-swiper .swiper-slide,
-    .comm-slide,
+    .comm-slide {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      flex-shrink: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    .comm-slide .comm-card,
     .comm-card {
-      width: min(82vw, 300px) !important;
-      max-width: min(82vw, 300px) !important;
+      width: 100% !important;
+      max-width: 100% !important;
       height: auto !important;
       flex-shrink: 0 !important;
     }
@@ -822,11 +837,11 @@
       }
 
       return Object.assign(base, {
-        slidesPerView: 'auto',
+        slidesPerView: 1,
         spaceBetween: 16,
-        centeredSlides: true,
-        loop: total > 1,
-        loopAdditionalSlides: 2
+        centeredSlides: false,
+        loop: false,
+        slidesPerGroup: 1
       });
     }
 

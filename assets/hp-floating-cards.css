@@ -1226,7 +1226,26 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     flex: 1 1 auto !important;
     min-height: 0 !important;
     display: flex !important;
-    align-items: flex-end !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper .swiper-slide {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
