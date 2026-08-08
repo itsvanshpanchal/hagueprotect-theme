@@ -907,13 +907,16 @@
     var touchT = 0;
     var touchTarget = null;
     var startIdx = 0;
+    var settledIdx = 0;
     var armed = false;
     var coolUntil = 0;
     var settleTimer = null;
     var lastScrollT = 0;
-    /* Low thresholds: any deliberate vertical swipe pages exactly one section */
-    var SWIPE_PX = 18;
-    var SWIPE_V = 0.15;
+    /* Deliberate swipe only — avoids light flicks paging multiple sections */
+    var SWIPE_PX = 44;
+    var SWIPE_V = 0.32;
+    var COOL_MS = 820;
+    var IDLE_MS = 240;
 
     function snapList() {
       return items
@@ -970,6 +973,21 @@
       return best;
     }
 
+    /* Never jump more than one section away from the last settled card */
+    function clampTargetIndex(fromIdx, candidateIdx, listLen) {
+      if (!listLen) return 0;
+      var c = Math.max(0, Math.min(listLen - 1, candidateIdx));
+      if (c > fromIdx + 1) return fromIdx + 1;
+      if (c < fromIdx - 1) return fromIdx - 1;
+      return c;
+    }
+
+    function markSettled(index) {
+      var list = snapList();
+      if (!list.length) return;
+      settledIdx = Math.max(0, Math.min(list.length - 1, index));
+    }
+
     function isCarouselTouch(target) {
       if (!target || !target.closest) return false;
       return !!target.closest(
@@ -997,9 +1015,11 @@
       var list = snapList();
       if (!list.length) return false;
       /* Clamped at either end: let native scroll continue (e.g. down to footer) */
+      index = clampTargetIndex(settledIdx, index, list.length);
       if (index < 0 || index > list.length - 1) return false;
       var top = sectionDocTop(list[index]);
-      coolUntil = Date.now() + 520;
+      markSettled(index);
+      coolUntil = Date.now() + COOL_MS;
       window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
       /* Settle correction: nudge onto the section top only AFTER the smooth
          scroll has finished — long upward scrolls can outlast a fixed timer,
@@ -1014,18 +1034,19 @@
         }
         var drift = Math.abs((window.pageYOffset || 0) - top);
         if (drift > 8 && drift < (window.innerHeight || 800) * 0.5) {
-          coolUntil = Date.now() + 420;
+          coolUntil = Date.now() + COOL_MS - 180;
           window.scrollTo({ top: top, left: 0, behavior: 'smooth' });
+        } else if (drift <= 8) {
+          markSettled(index);
         }
       };
-      settleTimer = setTimeout(settleCheck, 560);
+      settleTimer = setTimeout(settleCheck, 620);
       return true;
     }
 
     /*
-      Guarantee layer: whenever scrolling comes to rest between sections
-      (light drags, flings through carousels, etc.), snap onto the nearest
-      section top so the view always shows exactly one full section.
+      When scrolling stops, snap at most ±1 from settledIdx so momentum
+      cannot skip two or three full-screen cards in one gesture.
     */
     var idleTimer = null;
     window.addEventListener(
@@ -1041,25 +1062,30 @@
           if (!list.length) return;
           var yNow = window.pageYOffset || 0;
           /* Below the last section (footer area): leave native scroll alone */
-          if (yNow > sectionDocTop(list[list.length - 1]) + 40) return;
-          var bestTop = 0;
-          var bestD = Infinity;
-          for (var i = 0; i < list.length; i++) {
-            var t = sectionDocTop(list[i]);
-            var d = Math.abs(t - yNow);
-            if (d < bestD) {
-              bestD = d;
-              bestTop = t;
-            }
+          if (yNow > sectionDocTop(list[list.length - 1]) + 40) {
+            markSettled(list.length - 1);
+            return;
           }
-          if (bestD > 24) {
-            coolUntil = Date.now() + 520;
-            window.scrollTo({ top: bestTop, left: 0, behavior: 'smooth' });
+          var seen = currentIndex();
+          var target = clampTargetIndex(settledIdx, seen, list.length);
+          var targetTop = sectionDocTop(list[target]);
+          var drift = Math.abs(targetTop - yNow);
+          if (drift > 28) {
+            goTo(target);
+          } else {
+            markSettled(target);
           }
-        }, 160);
+        }, IDLE_MS);
       },
       { passive: true }
     );
+
+    markSettled(currentIndex());
+
+    window.addEventListener('hp-floating-cards:ready', function () {
+      if (!isMobile()) return;
+      markSettled(currentIndex());
+    });
 
     document.addEventListener(
       'touchstart',
@@ -1074,8 +1100,8 @@
         touchX = e.touches[0].clientX;
         touchT = Date.now();
         touchTarget = e.target;
-        /* Lock the section the gesture started on — paging is always ±1 from here */
-        startIdx = currentIndex();
+        /* Lock paging to the settled section — always ±1 from here */
+        startIdx = settledIdx;
         armed = true;
       },
       { passive: true }
@@ -1098,11 +1124,18 @@
         var v = dy / dt;
         /* Mostly-horizontal gestures belong to carousels/side content */
         if (Math.abs(dx) > Math.abs(dy)) return;
-        /* Any deliberate vertical swipe pages exactly one section */
+        /* Deliberate vertical swipe only */
         if (Math.abs(dy) < SWIPE_PX && Math.abs(v) < SWIPE_V) return;
-        if (Math.abs(dy) < 12) return;
+        if (Math.abs(dy) < 20) return;
 
-        goTo(dy > 0 ? startIdx + 1 : startIdx - 1);
+        /* Kill iOS momentum before programmatic page — stops multi-section flings */
+        var yNow = window.pageYOffset || document.documentElement.scrollTop || 0;
+        window.scrollTo(0, yNow);
+
+        var nextIdx = dy > 0 ? startIdx + 1 : startIdx - 1;
+        requestAnimationFrame(function () {
+          goTo(nextIdx);
+        });
       },
       { passive: true }
     );
