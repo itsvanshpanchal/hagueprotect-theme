@@ -74,38 +74,112 @@
 
 @media screen and (max-width: 1024px) {
   .header__logo-group {
-    gap: var(--header-logo-gap, 14px) !important;
+    display: flex !important;
+    flex: 1 1 0 !important;
+    gap: var(--header-logo-gap, 8px) !important;
+    max-width: calc(100% - 118px) !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .header__logo-link--primary {
-    height: var(--header-brand-logo-h, 34px) !important;
-    min-height: var(--header-brand-logo-h, 34px) !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 36% !important;
+    height: var(--header-brand-logo-h, 24px) !important;
+    min-height: var(--header-brand-logo-h, 24px) !important;
   }
 
   .header__logo-link--partner,
   .header__logo-partners .header__logo-link {
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
-    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 30% !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
   }
 
   .header__logo-link--primary .header__logo-img {
-    height: var(--header-brand-logo-h, 34px) !important;
-    max-height: var(--header-brand-logo-h, 34px) !important;
+    height: var(--header-brand-logo-h, 24px) !important;
+    max-height: var(--header-brand-logo-h, 24px) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-position: left center !important;
   }
 
   .header__logo-link--partner .header__logo-img,
   .header__logo-partners .header__logo-img {
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
-    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
+    max-width: 100% !important;
+    width: auto !important;
   }
 
   .header__logo-divider {
-    height: calc(var(--header-brand-logo-h, 34px) * 0.72) !important;
+    flex: 0 0 1px !important;
+    height: calc(var(--header-brand-logo-h, 24px) * 0.7) !important;
+    min-height: 14px !important;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+  .header__logo-group {
+    max-width: calc(100% - 128px) !important;
+    gap: var(--header-logo-gap, 10px) !important;
+  }
+
+  .header__logo-link--primary {
+    max-width: 34% !important;
+    height: var(--header-brand-logo-h, 28px) !important;
+    min-height: var(--header-brand-logo-h, 28px) !important;
+  }
+
+  .header__logo-link--partner,
+  .header__logo-partners .header__logo-link {
+    max-width: 28% !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+  }
+
+  .header__logo-link--primary .header__logo-img {
+    height: var(--header-brand-logo-h, 28px) !important;
+    max-height: var(--header-brand-logo-h, 28px) !important;
+  }
+
+  .header__logo-link--partner .header__logo-img,
+  .header__logo-partners .header__logo-img {
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
   }
 }
 
 @media screen and (max-width: 480px) {
   .header__logo-group {
-    gap: var(--header-logo-gap, 10px) !important;
+    gap: var(--header-logo-gap, 6px) !important;
+    max-width: calc(100% - 108px) !important;
+  }
+
+  .header__logo-link--primary {
+    max-width: 34% !important;
+    height: var(--header-brand-logo-h, 20px) !important;
+    min-height: var(--header-brand-logo-h, 20px) !important;
+  }
+
+  .header__logo-link--partner,
+  .header__logo-partners .header__logo-link {
+    max-width: 28% !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+  }
+
+  .header__logo-link--primary .header__logo-img {
+    height: var(--header-brand-logo-h, 20px) !important;
+    max-height: var(--header-brand-logo-h, 20px) !important;
+  }
+
+  .header__logo-link--partner .header__logo-img,
+  .header__logo-partners .header__logo-img {
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
   }
 }

@@ -4,7 +4,7 @@
     assign header_logo_gap = section.settings.logo_group_gap
   endif
   assign header_brand_logo_h_desktop = section.settings.partner_logo_height_desktop | default: 40
-  assign header_brand_logo_h_mobile = section.settings.partner_logo_height_mobile | default: 32
+  assign header_brand_logo_h_mobile = section.settings.partner_logo_height_mobile | default: 24
   assign header_partner_logo_h_desktop = header_brand_logo_h_desktop
   assign header_partner_logo_h_mobile = header_brand_logo_h_mobile
 -%}
@@ -897,7 +897,7 @@
 
   @media screen and (max-width: 1024px) {
     #shopify-section-{{ section.id }} .header__logo-group {
-      --header-logo-gap: {{ header_logo_gap | at_most: 14 }}px;
+      --header-logo-gap: {{ header_logo_gap | at_most: 8 }}px;
       --header-brand-logo-h: {{ header_brand_logo_h_mobile }}px;
       --header-partner-logo-h: {{ header_partner_logo_h_mobile }}px;
     }
@@ -911,48 +911,53 @@
       border-bottom: none;
     }
 
-    /* Mobile: three brand logos on top, action icons below */
+    /* Mobile: compact single row — logos left, icons right */
     .header-top__inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-areas:
-        "logos"
-        "actions";
-      align-items: center;
-      justify-content: stretch;
-      padding: 10px var(--site-padding, 16px) 8px;
-      gap: 8px 0;
-    }
-
-    .header__logo-group {
-      grid-area: logos;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px var(--site-padding, 12px);
+    }
+
+    .header__logo-group {
+      display: flex;
+      flex: 1 1 0;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
       justify-content: flex-start;
-      gap: var(--header-logo-gap, 14px);
-      width: 100%;
-      max-width: 100%;
+      gap: var(--header-logo-gap, 8px);
+      width: auto;
+      max-width: calc(100% - 118px);
       min-width: 0;
+      overflow: hidden;
     }
 
     .header__logo-link--primary {
-      justify-self: start;
-      align-self: center;
-      height: var(--header-brand-logo-h, 32px);
-      min-height: var(--header-brand-logo-h, 32px);
-      max-width: none;
-      min-width: 0;
       flex: 0 1 auto;
-      padding: 0 2px;
+      min-width: 0;
+      height: var(--header-brand-logo-h, 24px);
+      min-height: var(--header-brand-logo-h, 24px);
+      max-width: 36%;
+      padding: 0;
     }
 
     .header__logo-link--primary .header__logo-img {
-      height: var(--header-brand-logo-h, 32px);
-      max-height: var(--header-brand-logo-h, 32px);
-      max-width: min(var(--logo-primary-max, 200px), 42vw) !important;
+      height: var(--header-brand-logo-h, 24px);
+      max-height: var(--header-brand-logo-h, 24px);
+      max-width: 100% !important;
+      width: auto !important;
       object-fit: contain;
+      object-position: left center;
+    }
+
+    .header__logo-divider {
+      flex: 0 0 1px;
+      height: calc(var(--header-brand-logo-h, 24px) * 0.7);
+      min-height: 14px;
     }
 
     .header__logo-partners {
@@ -961,52 +966,51 @@
 
     .header__logo-partners .header__logo-link {
       display: inline-flex;
+      flex: 0 1 auto;
       align-items: center;
       justify-content: center;
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px));
-      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px));
-      width: auto;
       min-width: 0;
-      max-width: none;
+      max-width: 30%;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px));
+      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px));
       padding: 0;
       line-height: 0;
-      flex: 0 1 auto;
       box-sizing: border-box;
     }
 
     .header__logo-partners .header__logo-img {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
-      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
+      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
       width: auto !important;
-      max-width: none !important;
+      max-width: 100% !important;
       object-fit: contain;
       object-position: center center;
     }
 
     .header__logo-text {
-      font-size: clamp(14px, 3.6vw, 18px);
-      letter-spacing: 0.03em;
+      font-size: clamp(12px, 3.2vw, 16px);
+      letter-spacing: 0.02em;
       max-width: 100%;
     }
 
     .header__logo-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
     .header__actions {
-      grid-area: actions;
+      flex: 0 0 auto;
       margin-left: 0;
-      gap: 4px;
+      gap: 2px;
       flex-shrink: 0;
-      justify-self: end;
+      justify-self: auto;
       align-self: center;
-      width: 100%;
+      width: auto;
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      padding-top: 2px;
-      border-top: 1px solid #ececec;
+      padding-top: 0;
+      border-top: none;
     }
 
     .header__account-container {
@@ -1017,104 +1021,141 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 38px;
-      min-height: 38px;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
       padding: 6px;
       flex-shrink: 0;
     }
 
     .header__cart-link,
     .header__account-btn {
-      width: 38px;
-      height: 38px;
-      min-width: 38px;
-      min-height: 38px;
-      padding: 7px;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      padding: 6px;
       flex-shrink: 0;
     }
   }
 
   @media screen and (min-width: 600px) and (max-width: 1024px) {
     .header__logo-group {
-      gap: var(--header-logo-gap, 14px);
+      max-width: calc(100% - 128px);
+      gap: var(--header-logo-gap, 10px);
+    }
+
+    .header__logo-link--primary {
+      max-width: 34%;
+      height: var(--header-brand-logo-h, 28px);
+      min-height: var(--header-brand-logo-h, 28px);
     }
 
     .header__logo-link--primary .header__logo-img {
-      height: var(--header-brand-logo-h, 36px);
-      max-height: var(--header-brand-logo-h, 36px);
-      max-width: min(var(--logo-primary-max, 200px), 36vw) !important;
+      height: var(--header-brand-logo-h, 28px);
+      max-height: var(--header-brand-logo-h, 28px);
+      max-width: 100% !important;
     }
 
     .header__logo-partners .header__logo-link {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 36px));
-      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 36px));
+      max-width: 28%;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px));
+      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px));
     }
 
     .header__logo-partners .header__logo-img {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 36px)) !important;
-      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 36px)) !important;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+      max-width: 100% !important;
     }
   }
 
   @media screen and (max-width: 480px) {
     .header-top__inner {
-      padding: 8px var(--site-padding, 16px) 6px;
-      gap: 6px 0;
+      padding: 7px var(--site-padding, 10px);
+      gap: 6px;
     }
 
     .header__logo-group {
-      gap: var(--header-logo-gap, 10px);
+      gap: var(--header-logo-gap, 6px);
+      max-width: calc(100% - 108px);
     }
 
     .header__logo-link--primary {
-      height: var(--header-brand-logo-h, 32px);
-      min-height: var(--header-brand-logo-h, 32px);
+      max-width: 34%;
+      height: var(--header-brand-logo-h, 20px);
+      min-height: var(--header-brand-logo-h, 20px);
     }
 
     .header__logo-link--primary .header__logo-img {
-      height: var(--header-brand-logo-h, 32px);
-      max-height: var(--header-brand-logo-h, 32px);
-      max-width: min(var(--logo-primary-max, 200px), 40vw) !important;
+      height: var(--header-brand-logo-h, 20px);
+      max-height: var(--header-brand-logo-h, 20px);
     }
 
     .header__logo-partners .header__logo-link {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px));
-      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px));
+      max-width: 28%;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px));
+      min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px));
     }
 
     .header__logo-partners .header__logo-img {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px)) !important;
-      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px)) !important;
+      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+    }
+
+    .header__mobile-toggle,
+    .header__cart-link,
+    .header__account-btn {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      min-height: 34px;
+      padding: 5px;
     }
   }
 
   @media screen and (max-width: 380px) {
+    .header__logo-group {
+      max-width: calc(100% - 102px);
+      gap: 5px;
+    }
+
+    .header__logo-link--primary,
+    .header__logo-link--primary .header__logo-img {
+      height: 18px;
+      min-height: 18px;
+      max-height: 18px;
+    }
+
+    .header__logo-partners .header__logo-link,
+    .header__logo-partners .header__logo-img {
+      height: 18px !important;
+      min-height: 18px;
+      max-height: 18px !important;
+    }
+
     .header__logo-text {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .header__logo-icon {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
     .header__actions {
-      gap: 2px;
+      gap: 1px;
     }
 
     .header__cart-link,
     .header__account-btn,
     .header__mobile-toggle {
-      width: 34px;
-      height: 34px;
-      min-width: 34px;
-      min-height: 34px;
-      padding: 6px;
-    }
-
-    .header__logo-partners .header__logo-img {
-      height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px)) !important;
-      max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 32px)) !important;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+      padding: 5px;
     }
   }
 
@@ -2147,7 +2188,7 @@
       "step": 2,
       "unit": "px",
       "label": "Hague Protect logo height — phone",
-      "default": 32
+      "default": 24
     },
     {
       "type": "image_picker",
