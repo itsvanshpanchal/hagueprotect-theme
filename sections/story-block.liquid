@@ -219,12 +219,52 @@
     margin-left: 0 !important;
   }
 
-  /* Laptop + large screens: heading + para together at top, fully visible */
+  /* Desktop + laptop: full viewport banner (matches mobile), text at top */
   @media screen and (min-width: 750px) {
+    .story-banner-wrapper-{{ section.id }} {
+      min-height: 100svh;
+      min-height: 100dvh;
+      height: 100svh;
+      height: 100dvh;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      background-color: #f6f6f6;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner {
+      aspect-ratio: auto;
+      width: 100%;
+      height: 100%;
+      min-height: 100svh;
+      min-height: 100dvh;
+      border-radius: {{ section.settings.border_radius | default: 0 }}px;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner picture {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
     .story-banner-wrapper-{{ section.id }} .story-banner__content {
       justify-content: flex-start !important;
       gap: 6px;
       padding-top: clamp(32px, 4vw, 52px) !important;
+      z-index: 3;
     }
 
     .story-banner-wrapper-{{ section.id }} .section-heading-stack {
@@ -446,8 +486,8 @@
           <source media="(max-width: 749px)" srcset="{{ mobile_img | image_url: width: 800 }}">
         {%- endif -%}
         <img
-          src="{{ banner_img | image_url: width: 1440 }}"
-          srcset="{{ banner_img | image_url: width: 1000 }} 1000w, {{ banner_img | image_url: width: 1440 }} 1440w, {{ banner_img | image_url: width: 1920 }} 1920w"
+          src="{{ banner_img | image_url: width: 1920 }}"
+          srcset="{{ banner_img | image_url: width: 1000 }} 1000w, {{ banner_img | image_url: width: 1440 }} 1440w, {{ banner_img | image_url: width: 1920 }} 1920w, {{ banner_img | image_url: width: 2560 }} 2560w"
           sizes="100vw"
           alt="{{ banner_img.alt | default: banner_heading | default: product.title | default: shop.name | escape }} story banner"
           class="story-banner__image"
@@ -512,7 +552,7 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Desktop Banner Image (1440x560px)"
+      "label": "Desktop Banner Image (2560×1440px recommended, full-screen)"
     },
     {
       "type": "image_picker",
