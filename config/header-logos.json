@@ -1,19 +1,8 @@
 {
-  "description": "Default header brand logo layout values for sections/header.liquid. All three logos share the same row height; partner logos use equal-width slots.",
-  "defaults": {
-    "logo_width": 200,
-    "logo_group_gap": 24,
-    "partner_divider_padding": 22,
-    "partner_logo_gap": 18,
-    "partner_link_padding_x": 4,
-    "partner_logo_height_desktop": 42,
-    "partner_logo_slot_width_desktop": 150,
-    "partner_logo_height_mobile": 32,
-    "partner_logo_slot_width_mobile": 108
-  },
-  "assets": {
-    "hague": "logo-hagueprotect.png",
-    "vanrosector": "logo-vanrosector.svg",
-    "science_of_raw": "logo-science-of-raw.svg"
+  "header_brand_logos": {
+    "logo_gap": 20,
+    "logo_group_gap": 20,
+    "partner_logo_height_desktop": 44,
+    "partner_logo_height_mobile": 34
   }
 }

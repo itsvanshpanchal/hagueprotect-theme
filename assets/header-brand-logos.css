@@ -1,88 +1,111 @@
-/* Header brand row — Hague Protect, Vanrosector, Science of Raw (same height, slot, alignment) */
+/* Header brand row — equal gap between all logos, partner logos scaled to match Hague Protect */
 .header__logo-group {
+  display: inline-flex !important;
   align-items: center !important;
+  justify-content: flex-start !important;
+  gap: var(--header-logo-gap, 20px) !important;
+  flex: 0 0 auto !important;
 }
 
-.header__logo-link--primary,
-.header__logo-partners .header__logo-link,
-.header__logo-partners .header__logo-link--partner {
+.header__logo-divider {
+  flex: 0 0 1px !important;
+  width: 1px !important;
+  height: calc(var(--header-brand-logo-h, 44px) * 0.72) !important;
+  min-height: 22px !important;
+  background: #e5e5e5 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-self: center !important;
+}
+
+.header__logo-link--primary {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: var(--header-brand-logo-h, 42px) !important;
-  min-height: var(--header-brand-logo-h, 42px) !important;
-  box-sizing: border-box !important;
+  height: var(--header-brand-logo-h, 44px) !important;
+  min-height: var(--header-brand-logo-h, 44px) !important;
   flex: 0 0 auto !important;
+  padding: 0 !important;
   line-height: 0 !important;
+  box-sizing: border-box !important;
 }
 
-.header__logo-partners .header__logo-link,
-.header__logo-partners .header__logo-link--partner {
-  width: var(--header-partner-slot-w, 150px) !important;
-  min-width: var(--header-partner-slot-w, 150px) !important;
-  max-width: var(--header-partner-slot-w, 150px) !important;
-  padding: 0 4px !important;
+.header__logo-link--partner,
+.header__logo-partners .header__logo-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  flex: 0 0 auto !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  box-sizing: border-box !important;
 }
 
-.header__logo-link--primary .header__logo-img,
-.header__logo-partners .header__logo-img,
-.header__logo-partners .header__logo-link--brand .header__logo-img,
-.header__logo-partners .header__logo-link--sor .header__logo-img,
-.header__logo-link--sor-main .header__logo-img {
-  height: var(--header-brand-logo-h, 42px) !important;
-  max-height: var(--header-brand-logo-h, 42px) !important;
+.header__logo-link--primary .header__logo-img {
+  height: var(--header-brand-logo-h, 44px) !important;
+  max-height: var(--header-brand-logo-h, 44px) !important;
   width: auto !important;
-  max-width: 100% !important;
+  max-width: min(var(--logo-primary-max, 200px), 200px) !important;
   object-fit: contain !important;
   object-position: center center !important;
   display: block !important;
 }
 
-.header__logo-link--primary .header__logo-img {
-  max-width: min(var(--logo-primary-max, 200px), 200px) !important;
+.header__logo-link--partner .header__logo-img,
+.header__logo-partners .header__logo-img,
+.header__logo-link--brand .header__logo-img,
+.header__logo-link--sor .header__logo-img,
+.header__logo-link--sor-main .header__logo-img {
+  height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 44px)) !important;
+  width: auto !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  display: block !important;
 }
 
+/* Legacy wrapper — flat row via display:contents */
 .header__logo-partners {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: var(--header-partner-gap, 18px) !important;
-  padding: 0 0 0 var(--header-partner-divider-pad, 22px) !important;
-  border-left: 1px solid #e5e5e5 !important;
-  min-height: var(--header-brand-logo-h, 42px) !important;
+  display: contents !important;
 }
 
 @media screen and (max-width: 1024px) {
-  .header__logo-link--primary,
-  .header__logo-partners .header__logo-link,
-  .header__logo-partners .header__logo-link--partner {
-    height: var(--header-brand-logo-h, 32px) !important;
-    min-height: var(--header-brand-logo-h, 32px) !important;
+  .header__logo-group {
+    gap: var(--header-logo-gap, 14px) !important;
   }
 
-  .header__logo-partners .header__logo-link,
-  .header__logo-partners .header__logo-link--partner {
-    width: var(--header-partner-slot-w, 108px) !important;
-    min-width: var(--header-partner-slot-w, 108px) !important;
-    max-width: var(--header-partner-slot-w, 108px) !important;
-    padding: 0 2px !important;
+  .header__logo-link--primary {
+    height: var(--header-brand-logo-h, 34px) !important;
+    min-height: var(--header-brand-logo-h, 34px) !important;
   }
 
-  .header__logo-link--primary .header__logo-img,
+  .header__logo-link--partner,
+  .header__logo-partners .header__logo-link {
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+  }
+
+  .header__logo-link--primary .header__logo-img {
+    height: var(--header-brand-logo-h, 34px) !important;
+    max-height: var(--header-brand-logo-h, 34px) !important;
+  }
+
+  .header__logo-link--partner .header__logo-img,
   .header__logo-partners .header__logo-img {
-    height: var(--header-brand-logo-h, 32px) !important;
-    max-height: var(--header-brand-logo-h, 32px) !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 34px)) !important;
   }
 
-  .header__logo-partners {
-    min-height: var(--header-brand-logo-h, 32px) !important;
+  .header__logo-divider {
+    height: calc(var(--header-brand-logo-h, 34px) * 0.72) !important;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .header__logo-partners .header__logo-link,
-  .header__logo-partners .header__logo-link--partner {
-    width: var(--header-partner-slot-w, 92px) !important;
-    min-width: var(--header-partner-slot-w, 92px) !important;
-    max-width: var(--header-partner-slot-w, 92px) !important;
+  .header__logo-group {
+    gap: var(--header-logo-gap, 10px) !important;
   }
 }
