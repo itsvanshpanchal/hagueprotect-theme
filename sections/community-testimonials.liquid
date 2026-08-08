@@ -235,27 +235,35 @@
     fill: currentColor !important;
   }
 
-  /* Carousel — full cards only (no half peeks) */
+  /* Carousel — Swiper owns slide widths; never force .swiper-slide width */
   .comm-slider-container {
     width: 100% !important;
+    max-width: 100% !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
   .comm-swiper {
     width: 100% !important;
+    max-width: 100% !important;
     overflow: hidden !important;
-    padding-bottom: 4px !important;
+    padding-bottom: 8px !important;
   }
 
   .comm-swiper .swiper-wrapper {
     align-items: stretch !important;
   }
 
+  .comm-swiper .swiper-slide {
+    height: auto !important;
+    box-sizing: border-box !important;
+  }
+
   /* Cards — image on top, review text below */
   .comm-card {
     width: 100% !important;
-    height: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
     min-height: 0 !important;
     background-color: #F3F3F3 !important;
     border: 1px solid #E8E8E8 !important;
@@ -402,12 +410,7 @@
     content: none !important;
   }
 
-  .comm-slide {
-    width: auto !important;
-    height: auto !important;
-    box-sizing: border-box !important;
-  }
-
+  /* Do not set width on slides — Swiper calculates it from slidesPerView */
   .comm-slide .comm-card {
     width: 100% !important;
   }
@@ -482,24 +485,24 @@
       margin-bottom: 12px !important;
     }
     .comm-top {
-      margin-bottom: 20px !important;
+      margin-bottom: 16px !important;
     }
     .comm-slider-container {
       margin-top: 0 !important;
-      overflow: visible !important;
+      overflow: hidden !important;
+      width: 100% !important;
     }
     .comm-swiper {
       overflow: hidden !important;
       width: 100% !important;
     }
-    .comm-slide,
     .comm-card {
       width: 100% !important;
       height: auto !important;
       padding: 0 !important;
     }
     .comm-card-media {
-      max-height: 200px !important;
+      max-height: 210px !important;
       aspect-ratio: 1 / 1 !important;
     }
     .comm-card-body {
@@ -693,45 +696,57 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     function initSwiper() {
-      if (typeof Swiper !== 'undefined') {
-        new Swiper('#swiper-{{ section.id }}', {
-          slidesPerView: 1,
-          spaceBetween: 16,
-          centeredSlides: true,
-          loop: true,
-          breakpoints: {
-            750: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-              centeredSlides: false
-            },
-            1100: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-              centeredSlides: false
-            },
-            1400: {
-              slidesPerView: 4,
-              spaceBetween: 24,
-              centeredSlides: false
-            }
-          },
-          autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true
-          },
-          navigation: {
-            nextEl: '#comm-next-{{ section.id }}',
-            prevEl: '#comm-prev-{{ section.id }}',
-          },
-          grabCursor: true,
-          watchSlidesProgress: true,
-          threshold: 5
-        });
-      } else {
+      if (typeof Swiper === 'undefined') {
         setTimeout(initSwiper, 50);
+        return;
       }
+
+      var el = document.querySelector('#swiper-{{ section.id }}');
+      if (!el || el.swiper) return;
+
+      new Swiper(el, {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 16,
+        centeredSlides: false,
+        loop: true,
+        loopAdditionalSlides: 2,
+        roundLengths: true,
+        watchOverflow: true,
+        observer: true,
+        observeParents: true,
+        breakpoints: {
+          750: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            spaceBetween: 20,
+            centeredSlides: false
+          },
+          1100: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+            spaceBetween: 24,
+            centeredSlides: false
+          },
+          1400: {
+            slidesPerView: 4,
+            slidesPerGroup: 1,
+            spaceBetween: 24,
+            centeredSlides: false
+          }
+        },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        },
+        navigation: {
+          nextEl: '#comm-next-{{ section.id }}',
+          prevEl: '#comm-prev-{{ section.id }}'
+        },
+        grabCursor: true,
+        threshold: 5
+      });
     }
     initSwiper();
   });

@@ -1037,8 +1037,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 0 !important;
     margin-top: 4px !important;
     width: 100% !important;
+    max-width: 100% !important;
     display: block !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     position: relative !important;
     z-index: 1 !important;
   }
@@ -1046,9 +1047,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-swiper {
     overflow: hidden !important;
     width: 100% !important;
+    max-width: 100% !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slide,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card {
     width: 100% !important;
     max-width: 100% !important;
@@ -1057,12 +1058,20 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-media {
     aspect-ratio: 1 / 1 !important;
-    max-height: min(48vw, 220px) !important;
+    max-height: min(52vw, 240px) !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-body {
-    padding: 12px 14px 14px !important;
+    padding: 12px 14px 16px !important;
     gap: 6px !important;
+    flex: 0 0 auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-card-text {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
