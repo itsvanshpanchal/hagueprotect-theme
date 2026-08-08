@@ -2,134 +2,21 @@
   assign bg_color = section.settings.background_color | default: '#ffffff'
   assign text_color = section.settings.text_color | default: '#111111'
   assign show_label = section.settings.show_label
-  assign row_gap = section.settings.row_gap | default: 6
+  assign row_gap = section.settings.row_gap | default: 4
 -%}
 
+{{ 'corp-gifting-marquee.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
-  {% render 'section-typography-vars', section: section %}
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }} > .hp-float-pin {
+    background-color: {{ bg_color }} !important;
+  }
 
   #shopify-section-{{ section.id }} .corp-marquee {
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
-    background: var(--corp-marquee-bg);
-    border-top: 1px solid rgba(17, 17, 17, 0.06);
-    border-bottom: 1px solid rgba(17, 17, 17, 0.06);
-    padding: clamp(28px, 4vw, 44px) 0;
-    overflow: hidden;
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__label {
-    text-align: center;
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(17, 17, 17, 0.45);
-    margin: 0 0 18px;
-    padding: 0 20px;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__label--hidden {
-    display: none;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__track-wrap {
-    display: flex;
-    overflow: hidden;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__track-wrap + .corp-marquee__track-wrap {
-    margin-top: var(--corp-marquee-row-gap);
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__track {
-    display: flex;
-    align-items: center;
-    gap: clamp(28px, 4vw, 56px);
-    animation: corpMarqueeScroll-{{ section.id }} 38s linear infinite;
-    flex-shrink: 0;
-    will-change: transform;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
-    animation-direction: reverse;
-    animation-duration: 44s;
-  }
-
-  @keyframes corpMarqueeScroll-{{ section.id }} {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__item {
-    display: inline-block;
-    white-space: nowrap;
-    font-family: var(--font-family-heading, 'Bebas Neue', 'Anton', 'Arial Narrow', sans-serif);
-    font-size: clamp(42px, 6.4vw, 78px);
-    font-weight: 900;
-    font-style: normal;
-    line-height: 0.92;
-    letter-spacing: 0.015em;
-    text-transform: uppercase;
-    color: var(--corp-marquee-text);
-    -webkit-text-stroke: 0 transparent;
-  }
-
-  #shopify-section-{{ section.id }} .corp-marquee__item--outline {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--corp-marquee-text);
-    paint-order: stroke fill;
-  }
-
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .corp-marquee {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      padding: 22px 0;
-      overflow: hidden;
-      max-width: 100%;
-      background: var(--corp-marquee-bg) !important;
-    }
-
-    #shopify-section-{{ section.id }} .corp-marquee__label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      line-height: 1.45;
-      padding: 0 16px;
-      margin-bottom: 14px;
-    }
-
-    #shopify-section-{{ section.id }} .corp-marquee__track {
-      gap: 22px;
-      animation-duration: 30s !important;
-    }
-
-    #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
-      animation-duration: 34s !important;
-    }
-
-    #shopify-section-{{ section.id }} .corp-marquee__item {
-      font-size: clamp(28px, 9vw, 42px);
-      line-height: 0.94;
-    }
-
-    #shopify-section-{{ section.id }} .corp-marquee__item--outline {
-      -webkit-text-stroke-width: 1px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #shopify-section-{{ section.id }} .corp-marquee__track,
-    #shopify-section-{{ section.id }} .corp-marquee__track--reverse {
-      animation: none !important;
-    }
   }
 {%- endstyle -%}
 
@@ -143,39 +30,33 @@
   endfor
 -%}
 
-<section class="corp-marquee" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
+<section class="corp-marquee corp-marquee--outline-style" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
   {%- if section.settings.label != blank -%}
     <p class="corp-marquee__label{% unless show_label %} corp-marquee__label--hidden{% endunless %}">
       {{ section.settings.label }}
     </p>
   {%- endif -%}
 
+  {%- comment -%} Row 1 — scrolls left {%- endcomment -%}
   <div class="corp-marquee__track-wrap">
     <div class="corp-marquee__track">
       {%- if has_marquee_blocks == false -%}
-        {%- assign items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones,Retail Partners,Influencer PR,Anniversary Boxes,Onboarding Packs' | split: ',' -%}
+        {%- assign row1_items = 'Employee Welcome Kits,Client Appreciation,Festival Hampers,Conference Swag,CEO Gifts,Team Milestones' | split: ',' -%}
         {%- for i in (1..2) -%}
-          {%- for item in items -%}
+          {%- for item in row1_items -%}
             {%- assign use_outline = false -%}
             {%- assign mod = forloop.index0 | modulo: 2 -%}
             {%- if mod == 1 -%}
               {%- assign use_outline = true -%}
             {%- endif -%}
-            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">
-              {{ item | strip | upcase }}
-            </span>
+            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">{{ item | strip | upcase }}</span>
           {%- endfor -%}
         {%- endfor -%}
       {%- else -%}
         {%- for i in (1..2) -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'top' and block.settings.text != blank -%}
-              <span
-                class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}"
-                {{ block.shopify_attributes }}
-              >
-                {{ block.settings.text | upcase }}
-              </span>
+              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
@@ -183,32 +64,53 @@
     </div>
   </div>
 
+  {%- comment -%} Row 2 — scrolls right {%- endcomment -%}
   <div class="corp-marquee__track-wrap">
     <div class="corp-marquee__track corp-marquee__track--reverse">
       {%- if has_marquee_blocks == false -%}
-        {%- assign items2 = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST,Sample Kits,Volume Discounts' | split: ',' -%}
+        {%- assign row2_items = 'Retail Partners,Custom Inserts,Logo Embossing,Gift Wrapping,Pan-India Delivery,Invoice & GST' | split: ',' -%}
         {%- for i in (1..2) -%}
-          {%- for item in items2 -%}
+          {%- for item in row2_items -%}
             {%- assign use_outline = false -%}
             {%- assign mod = forloop.index0 | modulo: 2 -%}
             {%- if mod == 0 -%}
               {%- assign use_outline = true -%}
             {%- endif -%}
-            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">
-              {{ item | strip | upcase }}
-            </span>
+            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">{{ item | strip | upcase }}</span>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'marquee_text' and block.settings.row == 'middle' and block.settings.text != blank -%}
+              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Row 3 — scrolls left {%- endcomment -%}
+  <div class="corp-marquee__track-wrap">
+    <div class="corp-marquee__track">
+      {%- if has_marquee_blocks == false -%}
+        {%- assign row3_items = 'Co-Branded Packaging,Bulk Pricing,Dedicated Manager,Sample Kits,Volume Discounts,Onboarding Packs' | split: ',' -%}
+        {%- for i in (1..2) -%}
+          {%- for item in row3_items -%}
+            {%- assign use_outline = false -%}
+            {%- assign mod = forloop.index0 | modulo: 2 -%}
+            {%- if mod == 1 -%}
+              {%- assign use_outline = true -%}
+            {%- endif -%}
+            <span class="corp-marquee__item{% if use_outline %} corp-marquee__item--outline{% endif %}">{{ item | strip | upcase }}</span>
           {%- endfor -%}
         {%- endfor -%}
       {%- else -%}
         {%- for i in (1..2) -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'marquee_text' and block.settings.row == 'bottom' and block.settings.text != blank -%}
-              <span
-                class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}"
-                {{ block.shopify_attributes }}
-              >
-                {{ block.settings.text | upcase }}
-              </span>
+              <span class="corp-marquee__item{% if block.settings.outline %} corp-marquee__item--outline{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text | upcase }}</span>
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
@@ -261,7 +163,7 @@
       "max": 24,
       "step": 2,
       "unit": "px",
-      "default": 6
+      "default": 4
     },
     {
       "type": "header",
@@ -624,8 +526,12 @@
               "label": "Top row (scrolls left)"
             },
             {
+              "value": "middle",
+              "label": "Middle row (scrolls right)"
+            },
+            {
               "value": "bottom",
-              "label": "Bottom row (scrolls right)"
+              "label": "Bottom row (scrolls left)"
             }
           ],
           "default": "top"
