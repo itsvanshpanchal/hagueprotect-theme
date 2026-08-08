@@ -178,7 +178,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   .hp-float-stack .hp-float-card .mat-section,
   .hp-float-stack .hp-float-card .bs-coverflow,
   .hp-float-stack .hp-float-card .fc-section,
-  .hp-float-stack .hp-float-card .comm-section,
   .hp-float-stack .hp-float-card .hp-fam-sec,
   .hp-float-stack .hp-float-card .trending-social,
   .hp-float-stack .hp-float-card .trending-social-section,
@@ -207,27 +206,18 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     object-position: center center !important;
   }
 
-  /* Desktop community: show full review cards (no bottom clip) */
-  .hp-float-stack > .shopify-section.hp-float-community,
-  .hp-float-stack > .shopify-section.hp-float-community > .hp-float-pin,
-  .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section),
-  .hp-float-stack > .shopify-section.hp-float-card:has(.comm-section) > .hp-float-pin {
-    max-height: none !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-  }
-
-  .hp-float-stack .hp-float-community .comm-section,
-  .hp-float-stack .hp-float-card .comm-section {
+  /* Desktop community: natural height — not a viewport-locked sticky card */
+  .hp-float-stack .hp-float-strip .comm-section,
+  .hp-float-stack > .shopify-section.hp-float-strip:has(.comm-section),
+  .hp-float-stack > .shopify-section.hp-float-strip:has(.comm-section) > .hp-float-pin {
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
+    overflow: visible !important;
   }
 
-  .hp-float-stack .hp-float-card .comm-section .comm-slider-container,
-  .hp-float-stack .hp-float-card .comm-section .comm-swiper {
+  .hp-float-stack .hp-float-strip .comm-section .comm-slider-container,
+  .hp-float-stack .hp-float-strip .comm-section .comm-swiper {
     overflow: hidden !important;
     width: 100% !important;
   }

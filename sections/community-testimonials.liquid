@@ -28,7 +28,8 @@
     background-color: {{ comm_bg }} !important;
     padding-top: {{ section.settings.padding_top | default: 100 }}px !important;
     padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px !important;
-    overflow: hidden !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
   }
 
   .comm-container {
@@ -404,15 +405,68 @@
     width: 100% !important;
   }
 
-  /* Desktop / laptop — whole cards with gutters, no edge peeks */
+  /* Desktop / laptop — whole spaced cards, full tile height visible */
   @media screen and (min-width: 769px) {
-    .comm-section {
-      overflow-x: hidden !important;
+    #shopify-section-{{ section.id }} .comm-section {
+      overflow-x: clip !important;
       overflow-y: visible !important;
+      padding-bottom: 72px !important;
     }
 
-    .comm-top {
-      margin-bottom: 48px !important;
+    #shopify-section-{{ section.id }} .comm-top {
+      margin-bottom: 40px !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-slider-container {
+      overflow: hidden !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      contain: layout style !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-swiper {
+      overflow: hidden !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding-bottom: 12px !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-swiper .swiper-wrapper {
+      align-items: stretch !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-swiper .swiper-slide {
+      height: auto !important;
+      box-sizing: border-box !important;
+      /* Swiper sets width inline when slidesPerView is numeric — never override */
+    }
+
+    #shopify-section-{{ section.id }} .comm-card {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-card-media {
+      aspect-ratio: 1 / 1 !important;
+      max-height: 190px !important;
+      width: 100% !important;
+      flex-shrink: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-card-body {
+      flex: 0 0 auto !important;
+      padding: 14px 16px 18px !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-card-text {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
     }
   }
 
@@ -675,68 +729,104 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    function initSwiper() {
-      if (typeof Swiper === 'undefined') {
-        setTimeout(initSwiper, 50);
-        return;
-      }
+    var sectionId = '{{ section.id }}';
 
-      var el = document.querySelector('#swiper-{{ section.id }}');
-      if (!el || el.swiper) return;
+    function slideCount(root) {
+      return root ? root.querySelectorAll('.swiper-slide').length : 0;
+    }
 
-      var swiper = new Swiper(el, {
-        slidesPerView: 'auto',
-        spaceBetween: 16,
-        centeredSlides: true,
-        loop: true,
-        loopAdditionalSlides: 2,
+    function buildConfig(el) {
+      var desktop = window.matchMedia('(min-width: 769px)').matches;
+      var total = slideCount(el);
+      var base = {
+        slidesPerGroup: 1,
         roundLengths: true,
         watchOverflow: true,
         observer: true,
         observeParents: true,
-        breakpoints: {
-          769: {
-            slidesPerView: 2,
-            slidesPerGroup: 1,
-            spaceBetween: 24,
-            centeredSlides: false
-          },
-          1100: {
-            slidesPerView: 3,
-            slidesPerGroup: 1,
-            spaceBetween: 24,
-            centeredSlides: false
-          },
-          1400: {
-            slidesPerView: 4,
-            slidesPerGroup: 1,
-            spaceBetween: 24,
-            centeredSlides: false
-          }
-        },
         autoplay: {
           delay: 4000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true
         },
         navigation: {
-          nextEl: '#comm-next-{{ section.id }}',
-          prevEl: '#comm-prev-{{ section.id }}'
+          nextEl: '#comm-next-' + sectionId,
+          prevEl: '#comm-prev-' + sectionId
         },
         grabCursor: true,
         threshold: 5,
         on: {
-          init: function () {
+          init: function (swiper) {
             window.dispatchEvent(new CustomEvent('hp-community-swiper:ready'));
+            requestAnimationFrame(function () {
+              if (swiper && swiper.update) swiper.update();
+            });
+          },
+          resize: function (swiper) {
+            if (swiper && swiper.update) swiper.update();
           }
         }
-      });
+      };
 
-      requestAnimationFrame(function () {
-        if (swiper && swiper.update) swiper.update();
+      if (desktop) {
+        return Object.assign(base, {
+          slidesPerView: 2,
+          spaceBetween: 20,
+          centeredSlides: false,
+          loop: total > 2,
+          loopAdditionalSlides: 2,
+          breakpoints: {
+            1024: {
+              slidesPerView: 3,
+              slidesPerGroup: 1,
+              spaceBetween: 20,
+              centeredSlides: false
+            },
+            1440: {
+              slidesPerView: 3,
+              slidesPerGroup: 1,
+              spaceBetween: 24,
+              centeredSlides: false
+            }
+          }
+        });
+      }
+
+      return Object.assign(base, {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+        centeredSlides: true,
+        loop: total > 1,
+        loopAdditionalSlides: 2
       });
     }
+
+    function initSwiper() {
+      if (typeof Swiper === 'undefined') {
+        setTimeout(initSwiper, 50);
+        return;
+      }
+
+      var el = document.querySelector('#swiper-' + sectionId);
+      if (!el) return;
+
+      if (el.swiper) {
+        el.swiper.destroy(true, true);
+      }
+
+      new Swiper(el, buildConfig(el));
+    }
+
     initSwiper();
+    window.addEventListener('hp-floating-cards:ready', function () {
+      setTimeout(initSwiper, 60);
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initSwiper, 180);
+    });
   });
 </script>
 
