@@ -378,12 +378,16 @@
   }
 
   .comm-card-text {
-    font-family: var(--font-family-sans) !important;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 14px !important;
-    line-height: 1.5 !important;
+    line-height: 1.05 !important;
     color: #4A4A4A !important;
-    font-weight: var(--font-weight-sans, 400) !important;
-    font-style: var(--font-style-sans, normal) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    letter-spacing: 0 !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
     margin: 0 !important;
   }
 
@@ -476,11 +480,21 @@
     .comm-card-body {
       padding: 16px 16px 18px !important;
     }
-    .comm-card-text {
-      font-size: 13px !important;
+    .comm-card-text,
+    #MainContent .shopify-section .comm-card-text {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      font-synthesis: none !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0 !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+      color: #4A4A4A !important;
     }
     .comm-card-title {
-      font-size: 13px !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
     }
   }
 {%- endstyle -%}

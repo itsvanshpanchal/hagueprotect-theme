@@ -196,7 +196,6 @@
 #MainContent .shopify-section .biz-advantages__sub,
 #MainContent .shopify-section .htu-v2__opener-text,
 #MainContent .shopify-section .how-to-banner__subtitle,
-#MainContent .shopify-section .comm-card-text,
 #MainContent .shopify-section .trust-card__desc,
 #MainContent .shopify-section [class*="ai-story-banner-text"],
 #MainContent .shopify-section [class*="ai-story-banner-text"] p {
@@ -217,7 +216,7 @@
   font-style: normal !important;
   font-synthesis: none !important;
   text-transform: none !important;
-  letter-spacing: normal !important;
+  letter-spacing: 0 !important;
   line-height: 1.05 !important;
   -webkit-text-stroke: 0 !important;
 }
@@ -401,7 +400,8 @@
 
   #MainContent .shopify-section .story-banner__paragraph,
   #MainContent .shopify-section .comm-desc,
-  #MainContent .shopify-section .hp-body-para {
+  #MainContent .shopify-section .hp-body-para,
+  #MainContent .shopify-section .comm-card-text {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 20px !important;
     font-weight: 400 !important;
