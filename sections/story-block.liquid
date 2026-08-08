@@ -318,6 +318,31 @@
       max-width: 92% !important;
     }
 
+    /* Mobile only: "Cleaning Today" on its own line under "What Are You" */
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      white-space: normal !important;
+      gap: 0.02em !important;
+      max-width: 100% !important;
+      width: auto !important;
+    }
+
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-line,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
+      display: block !important;
+      white-space: nowrap !important;
+      margin-left: 0 !important;
+    }
+
     .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
       font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
     }
