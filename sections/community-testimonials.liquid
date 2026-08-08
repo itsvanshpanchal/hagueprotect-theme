@@ -282,16 +282,23 @@
   .comm-card-media {
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 1 / 1 !important;
-    background: #e8e8e8 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: #ffffff !important;
     overflow: hidden !important;
     flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px 14px !important;
   }
 
   .comm-card-media img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
     display: block !important;
   }
 
@@ -432,7 +439,7 @@
     }
 
     #shopify-section-{{ section.id }} .comm-swiper .swiper-wrapper {
-      align-items: stretch !important;
+      align-items: flex-start !important;
     }
 
     #shopify-section-{{ section.id }} .comm-swiper .swiper-slide {
@@ -451,10 +458,21 @@
     }
 
     #shopify-section-{{ section.id }} .comm-card-media {
-      aspect-ratio: 1 / 1 !important;
-      max-height: 190px !important;
+      aspect-ratio: auto !important;
+      height: auto !important;
+      max-height: none !important;
       width: 100% !important;
       flex-shrink: 0 !important;
+      padding: 14px 16px 10px !important;
+      background: #ffffff !important;
+    }
+
+    #shopify-section-{{ section.id }} .comm-card-media img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 240px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
     }
 
     #shopify-section-{{ section.id }} .comm-card-body {
@@ -550,6 +568,17 @@
     .comm-card {
       padding: 0 !important;
     }
+    .comm-card-media {
+      padding: 10px 12px !important;
+      background: #ffffff !important;
+    }
+    .comm-card-media img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 220px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+    }
     .comm-card-body {
       padding: 16px 16px 18px !important;
     }
@@ -629,7 +658,7 @@
                       <img
                         src="{{ card_image | image_url: width: 800 }}"
                         srcset="{{ card_image | image_url: width: 400 }} 400w, {{ card_image | image_url: width: 800 }} 800w"
-                        sizes="320px"
+                        sizes="(min-width: 1024px) 28vw, (min-width: 769px) 42vw, 300px"
                         alt="{{ block.settings.customer_name | default: 'Customer review' | escape }}"
                         loading="lazy"
                         width="{{ card_image.width | default: 800 }}"
