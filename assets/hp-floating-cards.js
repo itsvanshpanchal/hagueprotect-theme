@@ -30,12 +30,20 @@
       /* Prefer the larger value so sticky cards never leave a gap under the fold */
       return Math.round(Math.max(window.innerHeight || 0, vv.height));
     }
-    return window.innerHeight || document.documentElement.clientHeight || 800;
+    return Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
   }
 
+  /* Pixel heights work on every mobile browser; dvh/svh break on older WebViews */
   function viewportFill(mobile) {
-    if (mobile) return '100dvh';
+    if (mobile) return viewportH() + 'px';
     return viewportH() + 'px';
+  }
+
+  function syncMobileViewportVar() {
+    if (!isMobile()) return;
+    var h = viewportH();
+    document.documentElement.style.setProperty('--hp-mobile-vh', h + 'px');
+    document.documentElement.style.setProperty('--hp-mobile-vh-num', String(h));
   }
 
   function isShopifySection(el) {
@@ -171,12 +179,13 @@
 
   /* Keep mobile hero painted — sticky stacks were covering/collapsing it after first paint */
   function prepareHeroFullscreen(pin) {
-    var fill = '100dvh';
+    var fill = viewportFill(true);
+    var vhPx = viewportH() + 'px';
     var hero = pin.querySelector('.hero-fullscreen');
     if (!hero) return;
 
     pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('min-height', vhPx, 'important');
     pin.style.setProperty('overflow', 'hidden', 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
@@ -189,7 +198,7 @@
     hero.style.setProperty('position', 'relative', 'important');
     hero.style.setProperty('width', '100%', 'important');
     hero.style.setProperty('height', fill, 'important');
-    hero.style.setProperty('min-height', '100svh', 'important');
+    hero.style.setProperty('min-height', vhPx, 'important');
     hero.style.setProperty('max-height', 'none', 'important');
     hero.style.setProperty('aspect-ratio', 'auto', 'important');
     hero.style.setProperty('margin', '0', 'important');
@@ -495,7 +504,7 @@
   /* Lifestyle / bottom story banners: natural height strip (not sticky 100dvh trap) */
   function prepareStoryMobileStrip(pin) {
     prepareStoryFullscreen(pin, true);
-    var minH = '72dvh';
+    var minH = Math.round(viewportH() * 0.72) + 'px';
     var chain = pin.querySelectorAll(
       '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], .ai-story-banner, .ai-story-banner-picture'
     );
@@ -558,7 +567,8 @@
   function asHeroOnce(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
-    var fill = '100dvh';
+    var fill = viewportFill(true);
+    var vhPx = viewportH() + 'px';
 
     item.isCard = true;
     sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-hero');
@@ -567,7 +577,7 @@
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
-    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('min-height', vhPx, 'important');
     sec.style.setProperty('width', '100%', 'important');
     sec.style.setProperty('max-width', '100vw', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
@@ -586,7 +596,7 @@
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('min-height', vhPx, 'important');
     pin.style.setProperty('max-height', fill, 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
@@ -601,7 +611,8 @@
   function asStoryOnce(item, z, bg) {
     var sec = item.sec;
     var pin = item.pin;
-    var fill = '100dvh';
+    var fill = viewportFill(true);
+    var vhPx = viewportH() + 'px';
 
     item.isCard = true;
     sec.classList.add('hp-float-card', 'hp-float-card--mobile', 'hp-float-story');
@@ -610,7 +621,7 @@
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
     sec.style.setProperty('height', fill, 'important');
-    sec.style.setProperty('min-height', '100svh', 'important');
+    sec.style.setProperty('min-height', vhPx, 'important');
     sec.style.setProperty('max-height', fill, 'important');
     sec.style.setProperty('width', '100%', 'important');
     sec.style.setProperty('max-width', '100vw', 'important');
@@ -629,7 +640,7 @@
     pin.style.setProperty('width', '100%', 'important');
     pin.style.setProperty('max-width', '100%', 'important');
     pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', '100svh', 'important');
+    pin.style.setProperty('min-height', vhPx, 'important');
     pin.style.setProperty('max-height', fill, 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
@@ -698,7 +709,8 @@
     */
     var useDvh = mobile || isStory || contentH <= vh * 1.12;
     var pinH = useDvh ? null : Math.max(contentH, vh);
-    var fill = viewportFill(true);
+    var fill = viewportFill(mobile);
+    var vhPx = vh + 'px';
 
     item.isCard = true;
     sec.classList.add('hp-float-card');
@@ -711,7 +723,7 @@
     sec.style.setProperty('z-index', String(z), 'important');
     if (mobile || useDvh) {
       sec.style.setProperty('height', fill, 'important');
-      sec.style.setProperty('min-height', '100svh', 'important');
+      sec.style.setProperty('min-height', vhPx, 'important');
       sec.style.setProperty('max-height', fill, 'important');
     } else {
       sec.style.setProperty('height', pinH + 'px', 'important');
@@ -734,7 +746,7 @@
     pin.style.setProperty('width', '100%', 'important');
     if (mobile || useDvh) {
       pin.style.setProperty('height', fill, 'important');
-      pin.style.setProperty('min-height', '100svh', 'important');
+      pin.style.setProperty('min-height', vhPx, 'important');
       pin.style.setProperty('max-height', fill, 'important');
     } else {
       pin.style.setProperty('height', pinH + 'px', 'important');
@@ -766,7 +778,11 @@
 
   document.body.classList.add('hp-float-active');
   document.body.classList.add('hp-floating-cards-active');
-  if (isMobile()) document.body.classList.add('hp-float-mobile');
+  if (isMobile()) {
+    document.body.classList.add('hp-float-mobile');
+    document.documentElement.classList.add('hp-float-mobile');
+    syncMobileViewportVar();
+  }
   window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
 
   var lastLayoutW = 0;
@@ -777,9 +793,12 @@
     layingOut = true;
 
     var mobile = isMobile();
+    if (mobile) syncMobileViewportVar();
     var vh = viewportH();
     var cardIndex = 0;
     document.body.classList.toggle('hp-float-mobile', mobile);
+    document.documentElement.classList.toggle('hp-float-mobile', mobile);
+    if (mobile) syncMobileViewportVar();
 
     items.forEach(function (item, index) {
       var sec = item.sec;
@@ -926,17 +945,9 @@
   function ensureFooterRunway(mobile) {
     if (!mobile || !stack) return;
     var runway = stack.querySelector('.hp-float-footer-runway');
-    if (!runway) {
-      runway = document.createElement('div');
-      runway.className = 'hp-float-footer-runway';
-      runway.setAttribute('aria-hidden', 'true');
-      stack.appendChild(runway);
+    if (runway) {
+      runway.parentNode.removeChild(runway);
     }
-    /* Short spacer only — bottom sections are native strips, not sticky traps */
-    runway.style.cssText =
-      'display:block;width:100%;height:' +
-      Math.round(viewportH() * 0.12) +
-      'px;pointer-events:none;margin:0;padding:0;border:0;';
   }
 
   var resizeTimer = null;
@@ -953,8 +964,21 @@
 
   layout();
   window.addEventListener('resize', onResize, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener(
+      'resize',
+      function () {
+        if (!isMobile()) return;
+        syncMobileViewportVar();
+      },
+      { passive: true }
+    );
+  }
   window.addEventListener('orientationchange', function () {
-    setTimeout(layout, 250);
+    setTimeout(function () {
+      syncMobileViewportVar();
+      layout();
+    }, 250);
   }, { passive: true });
   window.addEventListener('load', function () {
     /* Soft re-layout after images — hero paint is preserved on mobile */
@@ -979,7 +1003,11 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var cfg = window.hpMobileFloatConfig || {};
-    if (cfg.enabled === false) return;
+    /* Native finger scroll is the universal default — snap assist is opt-in only */
+    if (cfg.enabled !== true) {
+      document.body.classList.add('hp-float-native-scroll');
+      return;
+    }
 
     document.documentElement.classList.add('hp-float-snap');
     document.body.classList.add('hp-float-snap');

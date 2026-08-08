@@ -1408,7 +1408,8 @@
         "type": "checkbox",
         "id": "mobile_float_snap_enable",
         "label": "Enable one-section mobile scroll",
-        "default": true
+        "default": false,
+        "info": "Off by default for universal phone compatibility. Uses native finger scroll."
       },
       {
         "type": "range",
@@ -1434,8 +1435,8 @@
         "type": "checkbox",
         "id": "mobile_float_lock_scroll",
         "label": "Block fast multi-section flings",
-        "default": true,
-        "info": "Stops the browser from skipping 2–3 sections on a quick swipe."
+        "default": false,
+        "info": "When enabled, blocks fast multi-section flings. Keep off for widest phone support."
       }
     ]
   }

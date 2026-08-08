@@ -531,7 +531,7 @@
     {%- if template.name == 'index' -%}
       <script>
         window.hpMobileFloatConfig = {
-          enabled: {{ settings.mobile_float_snap_enable | default: true | json }},
+          enabled: {{ settings.mobile_float_snap_enable | default: false | json }},
           swipePx: {{ settings.mobile_float_swipe_px | default: 52 }},
           swipeVelocity: 0.38,
           coolMs: {{ settings.mobile_float_cool_ms | default: 520 }},

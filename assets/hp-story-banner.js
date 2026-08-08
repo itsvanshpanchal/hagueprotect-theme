@@ -33,8 +33,15 @@
     }
 
     if (mobile) {
-      wrap.style.minHeight = '100dvh';
-      wrap.style.height = '100dvh';
+      var bottomStrip = wrap.closest('.hp-float-bottom-strip');
+      var vh = Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
+      if (bottomStrip) {
+        wrap.style.minHeight = Math.round(vh * 0.72) + 'px';
+        wrap.style.height = 'auto';
+      } else {
+        wrap.style.minHeight = vh + 'px';
+        wrap.style.height = vh + 'px';
+      }
       wrap.style.width = '100%';
     }
 
