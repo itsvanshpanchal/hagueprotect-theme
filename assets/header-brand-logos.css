@@ -72,6 +72,16 @@
   display: contents !important;
 }
 
+@media screen and (min-width: 1025px) {
+  .header__logo-group {
+    gap: var(--header-logo-gap, 20px) !important;
+  }
+
+  .header__logo-divider {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .header__logo-group {
     display: flex !important;

@@ -241,6 +241,10 @@
       gap: var(--header-logo-gap, 20px) !important;
     }
 
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-divider {
+      display: none !important;
+    }
+
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners {
       display: contents !important;
     }
@@ -887,7 +891,7 @@
     }
 
     .header__logo-group {
-      gap: clamp(10px, 1.5vw, 20px);
+      gap: var(--header-logo-gap, 20px);
     }
 
     .header-nav-bar .header__navigation {
