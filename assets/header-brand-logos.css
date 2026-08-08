@@ -75,68 +75,31 @@
 @media screen and (max-width: 1024px) {
   .header__logo-group {
     display: flex !important;
-    flex: 1 1 0 !important;
-    gap: var(--header-logo-gap, 8px) !important;
-    max-width: calc(100% - 118px) !important;
+    flex: none !important;
+    gap: var(--header-logo-gap, 14px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     overflow: hidden !important;
   }
 
-  .header__logo-link--primary {
-    flex: 0 1 auto !important;
-    min-width: 0 !important;
-    max-width: 36% !important;
-    height: var(--header-brand-logo-h, 24px) !important;
-    min-height: var(--header-brand-logo-h, 24px) !important;
-  }
-
-  .header__logo-link--partner,
-  .header__logo-partners .header__logo-link {
-    flex: 0 1 auto !important;
-    min-width: 0 !important;
-    max-width: 30% !important;
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
-    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
-  }
-
-  .header__logo-link--primary .header__logo-img {
-    height: var(--header-brand-logo-h, 24px) !important;
-    max-height: var(--header-brand-logo-h, 24px) !important;
-    max-width: 100% !important;
-    width: auto !important;
-    object-position: left center !important;
-  }
-
-  .header__logo-link--partner .header__logo-img,
-  .header__logo-partners .header__logo-img {
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
-    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 24px)) !important;
-    max-width: 100% !important;
-    width: auto !important;
-  }
-
   .header__logo-divider {
-    flex: 0 0 1px !important;
-    height: calc(var(--header-brand-logo-h, 24px) * 0.7) !important;
-    min-height: 14px !important;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-width: 1024px) {
-  .header__logo-group {
-    max-width: calc(100% - 128px) !important;
-    gap: var(--header-logo-gap, 10px) !important;
+    display: none !important;
   }
 
   .header__logo-link--primary {
-    max-width: 34% !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 38% !important;
     height: var(--header-brand-logo-h, 28px) !important;
     min-height: var(--header-brand-logo-h, 28px) !important;
   }
 
   .header__logo-link--partner,
   .header__logo-partners .header__logo-link {
-    max-width: 28% !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 32% !important;
     height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
     min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
   }
@@ -144,42 +107,98 @@
   .header__logo-link--primary .header__logo-img {
     height: var(--header-brand-logo-h, 28px) !important;
     max-height: var(--header-brand-logo-h, 28px) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-position: left center !important;
   }
 
   .header__logo-link--partner .header__logo-img,
   .header__logo-partners .header__logo-img {
     height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
     max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 28px)) !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+  .header__logo-group {
+    gap: var(--header-logo-gap, 16px) !important;
+  }
+
+  .header__logo-link--primary {
+    max-width: 36% !important;
+    height: var(--header-brand-logo-h, 30px) !important;
+    min-height: var(--header-brand-logo-h, 30px) !important;
+  }
+
+  .header__logo-link--partner,
+  .header__logo-partners .header__logo-link {
+    max-width: 30% !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 30px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 30px)) !important;
+  }
+
+  .header__logo-link--primary .header__logo-img {
+    height: var(--header-brand-logo-h, 30px) !important;
+    max-height: var(--header-brand-logo-h, 30px) !important;
+  }
+
+  .header__logo-link--partner .header__logo-img,
+  .header__logo-partners .header__logo-img {
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 30px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 30px)) !important;
   }
 }
 
 @media screen and (max-width: 480px) {
   .header__logo-group {
-    gap: var(--header-logo-gap, 6px) !important;
-    max-width: calc(100% - 108px) !important;
+    gap: var(--header-logo-gap, 12px) !important;
   }
 
   .header__logo-link--primary {
-    max-width: 34% !important;
-    height: var(--header-brand-logo-h, 20px) !important;
-    min-height: var(--header-brand-logo-h, 20px) !important;
+    max-width: 36% !important;
+    height: var(--header-brand-logo-h, 26px) !important;
+    min-height: var(--header-brand-logo-h, 26px) !important;
   }
 
   .header__logo-link--partner,
   .header__logo-partners .header__logo-link {
-    max-width: 28% !important;
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
-    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+    max-width: 30% !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 26px)) !important;
+    min-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 26px)) !important;
   }
 
   .header__logo-link--primary .header__logo-img {
-    height: var(--header-brand-logo-h, 20px) !important;
-    max-height: var(--header-brand-logo-h, 20px) !important;
+    height: var(--header-brand-logo-h, 26px) !important;
+    max-height: var(--header-brand-logo-h, 26px) !important;
   }
 
   .header__logo-link--partner .header__logo-img,
   .header__logo-partners .header__logo-img {
-    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
-    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 20px)) !important;
+    height: var(--header-partner-logo-h, var(--header-brand-logo-h, 26px)) !important;
+    max-height: var(--header-partner-logo-h, var(--header-brand-logo-h, 26px)) !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .header__logo-group {
+    gap: 10px !important;
+  }
+
+  .header__logo-link--primary,
+  .header__logo-link--primary .header__logo-img {
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
+  }
+
+  .header__logo-link--partner,
+  .header__logo-partners .header__logo-link,
+  .header__logo-link--partner .header__logo-img,
+  .header__logo-partners .header__logo-img {
+    height: 24px !important;
+    min-height: 24px !important;
+    max-height: 24px !important;
   }
 }
