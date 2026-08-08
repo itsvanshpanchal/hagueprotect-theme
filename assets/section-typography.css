@@ -404,26 +404,28 @@
     text-transform: none !important;
   }
 
-  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
-  body.template-index #MainContent .shopify-section[id] .hp-body-para,
-  body.template-index #MainContent .shopify-section[id] .mat-desc,
-  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
-  body.template-index #MainContent .shopify-section[id] .comm-desc,
-  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
-  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
-  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
-  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
-  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
-    line-height: 1.05 !important;
-    letter-spacing: 0 !important;
-    text-transform: none !important;
-    -webkit-text-stroke: 0 !important;
-    text-shadow: none !important;
+  @media screen and (max-width: 767px) {
+    body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+    body.template-index #MainContent .shopify-section[id] .hp-body-para,
+    body.template-index #MainContent .shopify-section[id] .mat-desc,
+    body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+    body.template-index #MainContent .shopify-section[id] .comm-desc,
+    body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+    body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+    body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+    body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+    body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      -webkit-text-stroke: 0 !important;
+      text-shadow: none !important;
+    }
   }
 
   #MainContent .shopify-section .hero-fullscreen__eyebrow,
@@ -481,5 +483,46 @@
   #MainContent .shopify-section .hero-fullscreen__eyebrow,
   #MainContent .shopify-section .hero-fullscreen__subheading {
     font-size: var(--section-label-size, 17px) !important;
+  }
+}
+
+/* Homepage laptop + desktop — unified paragraph typography (phones unchanged) */
+@media screen and (min-width: 768px) {
+  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] .mat-desc,
+  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+  body.template-index #MainContent .shopify-section[id] .comm-desc,
+  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.38 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] .mat-desc,
+  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+  body.template-index #MainContent .shopify-section[id] .comm-desc,
+  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
+    font-size: 22px !important;
+    line-height: 1.42 !important;
   }
 }

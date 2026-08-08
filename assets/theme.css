@@ -1896,3 +1896,44 @@ body.template-index {
     margin-bottom: 0 !important;
   }
 }
+
+/* Homepage laptop + desktop — unified paragraph typography (mobile unchanged above) */
+@media screen and (min-width: 768px) {
+  body.template-index {
+    --hp-home-desktop-para-size: 21px;
+    --hp-home-desktop-para-weight: 400;
+    --hp-home-desktop-para-lh: 1.38;
+  }
+
+  body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] .mat-desc,
+  body.template-index #MainContent .shopify-section[id] .fb__subtitle,
+  body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] [class*="story-banner-wrapper"] .story-banner__paragraph,
+  body.template-index #MainContent .shopify-section[id] .comm-desc,
+  body.template-index #MainContent .shopify-section[id] .comm-badge-desc,
+  body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
+  body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--hp-home-desktop-para-size) !important;
+    font-weight: var(--hp-home-desktop-para-weight) !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: var(--hp-home-desktop-para-lh) !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body.template-index {
+    --hp-home-desktop-para-size: 22px;
+    --hp-home-desktop-para-lh: 1.42;
+  }
+}
