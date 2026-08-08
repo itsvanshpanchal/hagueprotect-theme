@@ -380,7 +380,7 @@
       transform: scale(1) !important;
     }
 
-    /* Horizontal inset comes from .mat-container — keep left column flush to that gutter */
+    /* Horizontal inset comes from .mat-container only — no nested gutter on .mat-left */
     #shopify-section-{{ section.id }} .mat-left,
     .mat-left {
       align-items: flex-start !important;
@@ -389,11 +389,25 @@
       min-height: 0 !important;
       width: 100% !important;
       max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
       padding-top: 8px !important;
       padding-bottom: 24px !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       box-sizing: border-box !important;
+      --section-text-offset-x: 0px !important;
+      transform: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .mat-left .section-heading-stack,
+    .mat-left .section-heading-stack {
+      align-items: flex-start !important;
+      text-align: left !important;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      transform: none !important;
     }
 
     .mat-eyebrow,
@@ -402,8 +416,12 @@
     .mat-menu,
     .mat-menu-item {
       align-self: flex-start !important;
+      text-align: left !important;
       width: 100% !important;
       max-width: 100% !important;
+      margin-left: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
 
     .section-heading-stack {
