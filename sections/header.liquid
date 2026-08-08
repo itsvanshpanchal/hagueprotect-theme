@@ -1,3 +1,14 @@
+{%- liquid
+  assign header_logo_group_gap = section.settings.logo_group_gap | default: 24
+  assign header_partner_divider_pad = section.settings.partner_divider_padding | default: 22
+  assign header_partner_gap = section.settings.partner_logo_gap | default: 18
+  assign header_partner_h_desktop = section.settings.partner_logo_height_desktop | default: 36
+  assign header_partner_h_mobile = section.settings.partner_logo_height_mobile | default: 26
+  assign header_partner_max_w_desktop = section.settings.partner_logo_max_width_desktop | default: 128
+  assign header_partner_max_w_mobile = section.settings.partner_logo_max_width_mobile | default: 96
+  assign header_partner_pad_x = section.settings.partner_link_padding_x | default: 6
+-%}
+
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
@@ -147,7 +158,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 20px;
+    gap: var(--header-logo-group-gap, 24px);
     flex: 0 0 auto;
     width: max-content;
     max-width: 100%;
@@ -157,13 +168,14 @@
   .header__logo-partners {
     display: inline-flex;
     align-items: center;
-    gap: 18px;
+    gap: var(--header-partner-gap, 18px);
     flex: 0 0 auto;
     flex-shrink: 0;
     margin: 0;
-    padding: 0 0 0 18px;
+    padding: 0 0 0 var(--header-partner-divider-pad, 22px);
     border-left: 1px solid #e5e5e5;
-    min-height: 36px;
+    min-height: 42px;
+    box-sizing: border-box;
   }
 
   .header__logo-partners .header__logo-link {
@@ -172,8 +184,11 @@
     justify-content: center;
     flex: 0 0 auto;
     width: auto;
-    height: 36px;
+    height: 42px;
+    min-height: 42px;
+    padding: 0 var(--header-partner-link-pad-x, 6px);
     line-height: 0;
+    box-sizing: border-box;
   }
 
   .header__logo-link--primary {
@@ -181,16 +196,19 @@
     align-items: center;
     justify-content: center;
     height: 42px;
+    min-height: 42px;
+    padding: 0 2px;
+    box-sizing: border-box;
   }
 
   .header__logo-link--primary .header__logo-img,
   .header__logo-link--brand .header__logo-img,
   .header__logo-link--sor .header__logo-img,
   .header__logo-link--sor-main .header__logo-img {
-    height: 36px;
+    height: var(--header-partner-logo-h, 36px);
     width: auto;
-    max-height: 36px;
-    max-width: 160px;
+    max-height: var(--header-partner-logo-h, 36px);
+    max-width: var(--header-partner-logo-max-w, 128px);
     object-fit: contain;
     object-position: center center;
     display: block;
@@ -210,18 +228,17 @@
       max-width: calc(100% - 480px);
       align-items: center !important;
       justify-content: flex-start !important;
-      gap: 22px !important;
+      gap: var(--header-logo-group-gap, 24px) !important;
     }
 
-    /* Partner logos: clear separation so VR + SOR never mash into one word */
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners {
       display: inline-flex !important;
       align-items: center !important;
-      gap: 20px !important;
+      gap: var(--header-partner-gap, 18px) !important;
       margin: 0;
-      padding: 0 0 0 20px !important;
+      padding: 0 0 0 var(--header-partner-divider-pad, 22px) !important;
       border-left: 1px solid #e5e5e5 !important;
-      min-height: 40px;
+      min-height: 42px;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-link,
@@ -229,19 +246,22 @@
       flex: 0 0 auto;
       margin: 0 !important;
       height: 42px;
+      min-height: 42px;
       align-items: center;
       justify-content: center;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-link {
-      height: 36px;
+      height: 42px;
+      min-height: 42px;
+      padding: 0 var(--header-partner-link-pad-x, 6px) !important;
     }
 
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-img {
-      height: 36px !important;
-      max-height: 36px !important;
+    #shopify-section-{{ section.id }} .header-top__inner .header__logo-partners .header__logo-img {
+      height: var(--header-partner-logo-h, 36px) !important;
+      max-height: var(--header-partner-logo-h, 36px) !important;
       width: auto !important;
-      max-width: 150px !important;
+      max-width: var(--header-partner-logo-max-w, 128px) !important;
       object-fit: contain !important;
       object-position: center center !important;
     }
@@ -250,16 +270,6 @@
       height: 42px !important;
       max-height: 42px !important;
       max-width: min(var(--logo-primary-max, 200px), 200px) !important;
-    }
-
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--brand .header__logo-img {
-      max-width: 148px !important;
-      object-position: center center !important;
-    }
-
-    #shopify-section-{{ section.id }} .header-top__inner .header__logo-link--sor .header__logo-img {
-      max-width: 132px !important;
-      object-position: center center !important;
     }
 
     #shopify-section-{{ section.id }} .header-top__inner .header__search {
@@ -877,6 +887,15 @@
   }
 
   @media screen and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .header__logo-group {
+      --header-logo-group-gap: {{ header_logo_group_gap | at_most: 16 }}px;
+      --header-partner-divider-pad: {{ header_partner_divider_pad | at_most: 14 }}px;
+      --header-partner-gap: {{ header_partner_gap | at_most: 14 }}px;
+      --header-partner-logo-h: {{ header_partner_h_mobile }}px;
+      --header-partner-logo-max-w: {{ header_partner_max_w_mobile }}px;
+      --header-partner-link-pad-x: {{ header_partner_pad_x | at_most: 4 }}px;
+    }
+
     .header-wrapper {
       padding-top: 0;
       padding-bottom: 0;
@@ -906,7 +925,7 @@
       flex-wrap: nowrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 10px;
+      gap: var(--header-logo-group-gap, 16px);
       width: 100%;
       max-width: 100%;
       min-width: 0;
@@ -916,14 +935,17 @@
       justify-self: start;
       align-self: center;
       height: 34px;
+      min-height: 34px;
       max-width: none;
       min-width: 0;
       flex: 0 1 auto;
+      padding: 0 2px;
     }
 
     .header__logo-link--primary .header__logo-img {
       height: 32px;
       width: auto;
+      max-height: 32px;
       max-width: min(var(--logo-primary-max, 200px), 42vw) !important;
       object-fit: contain;
     }
@@ -934,37 +956,37 @@
       flex-wrap: nowrap;
       align-items: center;
       justify-content: flex-start;
-      gap: 14px;
+      gap: var(--header-partner-gap, 14px);
       width: auto;
       min-width: 0;
       margin: 0;
-      padding: 0 0 0 12px;
+      padding: 0 0 0 var(--header-partner-divider-pad, 14px);
       border-top: none;
       border-left: 1px solid #e5e5e5;
       flex: 1 1 auto;
+      min-height: 34px;
     }
 
     .header__logo-partners .header__logo-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 28px;
-      max-width: min(28vw, 110px);
+      height: 34px;
+      min-height: 34px;
+      max-width: min(32vw, var(--header-partner-logo-max-w, 96px));
+      padding: 0 var(--header-partner-link-pad-x, 4px);
       line-height: 0;
       flex: 0 1 auto;
+      box-sizing: border-box;
     }
 
     .header__logo-partners .header__logo-img {
-      height: 22px !important;
+      height: var(--header-partner-logo-h, 26px) !important;
+      max-height: var(--header-partner-logo-h, 26px) !important;
       width: auto !important;
       max-width: 100% !important;
       object-fit: contain;
-      object-position: left center;
-    }
-
-    .header__logo-partners .header__logo-link--sor .header__logo-img,
-    .header__logo-partners .header__logo-link--sor-main .header__logo-img {
-      height: 24px !important;
+      object-position: center center;
     }
 
     .header__logo-text {
@@ -1020,26 +1042,29 @@
 
   @media screen and (min-width: 600px) and (max-width: 1024px) {
     .header__logo-group {
-      gap: 14px;
+      gap: var(--header-logo-group-gap, 18px);
     }
 
     .header__logo-link--primary .header__logo-img {
       height: 36px;
+      max-height: 36px;
       max-width: min(var(--logo-primary-max, 200px), 36vw) !important;
     }
 
     .header__logo-partners {
-      gap: 14px;
-      padding-left: 14px;
+      gap: var(--header-partner-gap, 16px);
+      padding-left: var(--header-partner-divider-pad, 16px);
+      min-height: 36px;
+    }
+
+    .header__logo-partners .header__logo-link {
+      height: 36px;
+      min-height: 36px;
     }
 
     .header__logo-partners .header__logo-img {
-      height: 24px !important;
-    }
-
-    .header__logo-partners .header__logo-link--sor .header__logo-img,
-    .header__logo-partners .header__logo-link--sor-main .header__logo-img {
-      height: 26px !important;
+      height: var(--header-partner-logo-h, 28px) !important;
+      max-height: var(--header-partner-logo-h, 28px) !important;
     }
   }
 
@@ -1050,35 +1075,36 @@
     }
 
     .header__logo-group {
-      gap: 8px;
+      gap: var(--header-logo-group-gap, 12px);
     }
 
     .header__logo-link--primary {
       height: 30px;
+      min-height: 30px;
     }
 
     .header__logo-link--primary .header__logo-img {
       height: 28px;
+      max-height: 28px;
       max-width: min(var(--logo-primary-max, 200px), 40vw) !important;
     }
 
     .header__logo-partners {
-      padding-left: 8px;
-      gap: 8px;
+      padding-left: var(--header-partner-divider-pad, 10px);
+      gap: var(--header-partner-gap, 10px);
+      min-height: 30px;
     }
 
     .header__logo-partners .header__logo-link {
-      height: 24px;
-      max-width: min(30vw, 100px);
+      height: 30px;
+      min-height: 30px;
+      max-width: min(30vw, var(--header-partner-logo-max-w, 88px));
+      padding: 0 var(--header-partner-link-pad-x, 3px);
     }
 
     .header__logo-partners .header__logo-img {
-      height: 18px !important;
-    }
-
-    .header__logo-partners .header__logo-link--sor .header__logo-img,
-    .header__logo-partners .header__logo-link--sor-main .header__logo-img {
-      height: 20px !important;
+      height: var(--header-partner-logo-h, 22px) !important;
+      max-height: var(--header-partner-logo-h, 22px) !important;
     }
   }
 
@@ -1107,16 +1133,12 @@
     }
 
     .header__logo-partners {
-      gap: 10px;
+      gap: var(--header-partner-gap, 10px);
     }
 
     .header__logo-partners .header__logo-img {
-      height: 18px !important;
-    }
-
-    .header__logo-partners .header__logo-link--sor .header__logo-img,
-    .header__logo-partners .header__logo-link--sor-main .header__logo-img {
-      height: 20px !important;
+      height: var(--header-partner-logo-h, 20px) !important;
+      max-height: var(--header-partner-logo-h, 20px) !important;
     }
   }
 
@@ -1416,7 +1438,7 @@
   <!-- Top tier: logos | search | utility icons -->
   <div class="header-top">
     <div class="header-top__inner">
-      <div class="header__logo-group" style="--logo-primary-max: {{ logo_one_width }}px;">
+      <div class="header__logo-group" style="--logo-primary-max: {{ logo_one_width }}px; --header-logo-group-gap: {{ header_logo_group_gap }}px; --header-partner-divider-pad: {{ header_partner_divider_pad }}px; --header-partner-gap: {{ header_partner_gap }}px; --header-partner-logo-h: {{ header_partner_h_desktop }}px; --header-partner-logo-max-w: {{ header_partner_max_w_desktop }}px; --header-partner-link-pad-x: {{ header_partner_pad_x }}px;">
         <a href="{{ logo_one_link }}" class="{{ logo_one_link_class }} header__logo-link--primary" aria-label="{{ logo_one_alt }} home" data-mega-brand="{{ logo_one_brand }}">
           <img
             src="{{ logo_one_url }}"
@@ -2106,6 +2128,90 @@
       "content": "Brand logos (left side)"
     },
     {
+      "type": "paragraph",
+      "content": "Vanrosector and Science of Raw logos share the same height, padding, and spacing as the Hague Protect row. Adjust below in Theme Editor → Header."
+    },
+    {
+      "type": "range",
+      "id": "logo_group_gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap — Hague logo to partner divider",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "partner_divider_padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding — left of partner divider line",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "partner_logo_gap",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between Vanrosector and SOR logos",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "partner_link_padding_x",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Horizontal padding on each partner logo",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "partner_logo_height_desktop",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Partner logo height — computer",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "partner_logo_max_width_desktop",
+      "min": 80,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Partner logo max width — computer",
+      "default": 128
+    },
+    {
+      "type": "range",
+      "id": "partner_logo_height_mobile",
+      "min": 16,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Partner logo height — phone",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "partner_logo_max_width_mobile",
+      "min": 64,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Partner logo max width — phone",
+      "default": 96
+    },
+    {
       "type": "image_picker",
       "id": "logo_vr",
       "label": "Vanrosector (VNR) logo"
@@ -2124,16 +2230,6 @@
       "type": "url",
       "id": "sor_link",
       "label": "Science of Raw (SOR) link"
-    },
-    {
-      "type": "range",
-      "id": "partner_logo_gap",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "label": "Gap between Vanrosector and SOR logos",
-      "default": 8
     },
     {
       "type": "header",
