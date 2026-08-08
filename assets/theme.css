@@ -1948,14 +1948,14 @@ body.template-index .corp-marquee--outline-style,
 body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-bg: #ffffff;
   --corp-marquee-text: #111111;
-  --corp-marquee-row-gap: 4px;
-  --corp-marquee-word-gap: clamp(20px, 3.5vw, 40px);
-  --corp-marquee-font-size: clamp(28px, 4.2vw, 52px);
+  --corp-marquee-row-gap: 0px;
+  --corp-marquee-word-gap: clamp(12px, 2vw, 24px);
+  --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: #ffffff !important;
   background-color: #ffffff !important;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(16px, 2.5vw, 28px) 0;
+  padding: clamp(8px, 1.2vw, 12px) 0;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
@@ -2025,7 +2025,7 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item {
   font-family: 'Bebas Neue', 'Anton', 'Arial Narrow', sans-serif !important;
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
-  line-height: 0.9 !important;
+  line-height: 0.82 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: #111111 !important;
@@ -2034,18 +2034,18 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item {
 body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
-  -webkit-text-stroke: 1.25px #111111 !important;
+  -webkit-text-stroke: 1px #111111 !important;
   paint-order: stroke fill;
 }
 
 @media screen and (max-width: 749px) {
   body.template-index .corp-marquee--outline-style {
-    --corp-marquee-font-size: clamp(22px, 6.5vw, 34px);
-    --corp-marquee-word-gap: 18px;
-    padding: 14px 0;
+    --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
+    --corp-marquee-word-gap: 12px;
+    padding: 8px 0;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
-    -webkit-text-stroke-width: 1.25px !important;
+    -webkit-text-stroke-width: 1px !important;
   }
 }
