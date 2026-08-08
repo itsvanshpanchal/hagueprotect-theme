@@ -96,13 +96,6 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
-    body.template-index {
-      --homepage-section-gutter: 28px;
-      --homepage-section-gutter-right: 28px;
-    }
-  }
-
   /* Full width, flush-left with the gutter on big monitors — content stays on
      the left, every section shares the same left edge (one vertical line). */
   body.template-index #MainContent .bs-coverflow__container,
@@ -271,10 +264,57 @@
   }
 
   @media screen and (max-width: 767px) {
+    body.template-index {
+      --homepage-section-gutter: 28px;
+      --homepage-section-gutter-right: 28px;
+      --homepage-mobile-gutter: 28px;
+      --homepage-edge: 28px;
+      --homepage-edge-right: 28px;
+    }
+
     body.template-index .fc-heading,
     body.template-index .fc-subtitle {
       padding-left: 0 !important;
       padding-right: 0 !important;
+    }
+
+    /* One shared left/right inset for every homepage heading column */
+    body.template-index #MainContent .bs-coverflow__container,
+    body.template-index #MainContent .mat-container,
+    body.template-index #MainContent .mat-left,
+    body.template-index #MainContent .fc-container,
+    body.template-index #MainContent .hp-fam-sec__container,
+    body.template-index #MainContent .hp-dna__container,
+    body.template-index #MainContent .comm-container,
+    body.template-index #MainContent .trending-social-section .container,
+    body.template-index #MainContent .feature-grid__container,
+    body.template-index #MainContent .promo-banner__container,
+    body.template-index #MainContent .fb__header,
+    body.template-index #MainContent section[class*="split-cta-"] {
+      padding-left: var(--homepage-section-gutter) !important;
+      padding-right: var(--homepage-section-gutter-right) !important;
+      box-sizing: border-box !important;
+    }
+
+    body.template-index #MainContent .story-banner__content {
+      padding-left: var(--homepage-section-gutter) !important;
+      padding-right: var(--homepage-section-gutter-right) !important;
+    }
+
+    /* Headings sit flush inside the shared column — no extra horizontal inset */
+    body.template-index #MainContent .hp-dna__heading,
+    body.template-index #MainContent .section-heading-stack,
+    body.template-index #MainContent .hp-fam-sec__heading,
+    body.template-index #MainContent .fc-header,
+    body.template-index #MainContent .trending-social-header,
+    body.template-index #MainContent .bs-coverflow__header,
+    body.template-index #MainContent .comm-top,
+    body.template-index #MainContent .mat-left .section-heading-stack,
+    body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      --section-text-offset-x: 0px !important;
+      transform: translate(0, var(--section-text-offset-y, 0px)) !important;
     }
   }
 

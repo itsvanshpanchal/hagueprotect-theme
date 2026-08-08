@@ -1727,16 +1727,23 @@ body.template-index {
   --section-label-color: #2563eb;
 }
 
-/* Homepage mobile — gutters only; alignment comes from Layout setting on all sizes */
+/* Homepage mobile — unified heading column gutter (matches theme-layout-css.liquid) */
 @media screen and (max-width: 767px) {
   body.template-index .bs-coverflow__container,
   body.template-index .trending-social-section .container,
   body.template-index .fc-container,
   body.template-index .hp-fam-sec__container,
   body.template-index .hp-dna__container,
-  body.template-index [class*="featured-brands-"] {
-    padding-left: var(--homepage-mobile-gutter) !important;
-    padding-right: var(--homepage-mobile-gutter) !important;
+  body.template-index .comm-container,
+  body.template-index .mat-container,
+  body.template-index .mat-left,
+  body.template-index .feature-grid__container,
+  body.template-index .promo-banner__container,
+  body.template-index .fb__header,
+  body.template-index [class*="featured-brands-"],
+  body.template-index #MainContent section[class*="split-cta-"] {
+    padding-left: var(--homepage-section-gutter, 28px) !important;
+    padding-right: var(--homepage-section-gutter-right, 28px) !important;
   }
 
   /* Hero stays edge-to-edge on mobile — gutters apply to text overlay only */
@@ -1748,12 +1755,7 @@ body.template-index {
   body.template-index .hero-fullscreen__content {
     padding-left: 0 !important;
     padding-right: 0 !important;
-    width: 100% !important;
-  }
-
-  body.template-index .mat-left {
-    padding-left: max(6px, var(--homepage-section-gutter, 6px)) !important;
-    padding-right: max(6px, var(--homepage-section-gutter, 6px)) !important;
+    width: calc(100% - var(--homepage-edge) - var(--homepage-edge-right)) !important;
   }
 
   body.template-index .mat-eyebrow,
@@ -1770,8 +1772,11 @@ body.template-index {
     width: 100% !important;
   }
 
-  body.template-index .hp-fam-sec__heading {
+  body.template-index .hp-fam-sec__heading,
+  body.template-index .hp-dna__heading {
     max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 
