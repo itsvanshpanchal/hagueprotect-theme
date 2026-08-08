@@ -158,6 +158,7 @@
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'header-brand-logos.css' | asset_url | stylesheet_tag }}
     {{ 'hp-story-banner.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'index' -%}
       {{ 'hp-floating-cards.css' | asset_url | stylesheet_tag }}

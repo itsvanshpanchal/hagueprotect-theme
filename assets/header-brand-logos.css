@@ -1,0 +1,88 @@
+/* Header brand row — Hague Protect, Vanrosector, Science of Raw (same height, slot, alignment) */
+.header__logo-group {
+  align-items: center !important;
+}
+
+.header__logo-link--primary,
+.header__logo-partners .header__logo-link,
+.header__logo-partners .header__logo-link--partner {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: var(--header-brand-logo-h, 42px) !important;
+  min-height: var(--header-brand-logo-h, 42px) !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  line-height: 0 !important;
+}
+
+.header__logo-partners .header__logo-link,
+.header__logo-partners .header__logo-link--partner {
+  width: var(--header-partner-slot-w, 150px) !important;
+  min-width: var(--header-partner-slot-w, 150px) !important;
+  max-width: var(--header-partner-slot-w, 150px) !important;
+  padding: 0 4px !important;
+}
+
+.header__logo-link--primary .header__logo-img,
+.header__logo-partners .header__logo-img,
+.header__logo-partners .header__logo-link--brand .header__logo-img,
+.header__logo-partners .header__logo-link--sor .header__logo-img,
+.header__logo-link--sor-main .header__logo-img {
+  height: var(--header-brand-logo-h, 42px) !important;
+  max-height: var(--header-brand-logo-h, 42px) !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  display: block !important;
+}
+
+.header__logo-link--primary .header__logo-img {
+  max-width: min(var(--logo-primary-max, 200px), 200px) !important;
+}
+
+.header__logo-partners {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--header-partner-gap, 18px) !important;
+  padding: 0 0 0 var(--header-partner-divider-pad, 22px) !important;
+  border-left: 1px solid #e5e5e5 !important;
+  min-height: var(--header-brand-logo-h, 42px) !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .header__logo-link--primary,
+  .header__logo-partners .header__logo-link,
+  .header__logo-partners .header__logo-link--partner {
+    height: var(--header-brand-logo-h, 32px) !important;
+    min-height: var(--header-brand-logo-h, 32px) !important;
+  }
+
+  .header__logo-partners .header__logo-link,
+  .header__logo-partners .header__logo-link--partner {
+    width: var(--header-partner-slot-w, 108px) !important;
+    min-width: var(--header-partner-slot-w, 108px) !important;
+    max-width: var(--header-partner-slot-w, 108px) !important;
+    padding: 0 2px !important;
+  }
+
+  .header__logo-link--primary .header__logo-img,
+  .header__logo-partners .header__logo-img {
+    height: var(--header-brand-logo-h, 32px) !important;
+    max-height: var(--header-brand-logo-h, 32px) !important;
+  }
+
+  .header__logo-partners {
+    min-height: var(--header-brand-logo-h, 32px) !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header__logo-partners .header__logo-link,
+  .header__logo-partners .header__logo-link--partner {
+    width: var(--header-partner-slot-w, 92px) !important;
+    min-width: var(--header-partner-slot-w, 92px) !important;
+    max-width: var(--header-partner-slot-w, 92px) !important;
+  }
+}
