@@ -897,8 +897,22 @@
         assign hp_h1 = section.settings.heading | strip
         assign hp_h2 = section.settings.heading_line2 | default: 'Premium' | strip
         assign hp_accent_text = section.settings.heading_accent_word | default: 'Best' | strip
+
+        if hp_h2 != blank
+          assign hp_tail_phrase = hp_h2 | append: ' ' | append: hp_accent_text
+          if hp_h1 contains hp_tail_phrase
+            assign hp_h1 = hp_h1 | replace: hp_tail_phrase, '' | strip
+          elsif hp_h1 contains hp_h2
+            assign hp_h1 = hp_h1 | replace: hp_h2, '' | strip
+            if hp_accent_text != blank and hp_h1 contains hp_accent_text
+              assign hp_h1 = hp_h1 | replace: hp_accent_text, '' | strip
+            endif
+          elsif hp_accent_text != blank and hp_h1 contains hp_accent_text
+            assign hp_h1 = hp_h1 | replace: hp_accent_text, '' | strip
+          endif
+        endif
       -%}
-      <h2 class="hp-fam-sec__heading">
+      <h2 class="hp-fam-sec__heading" data-no-typewriter>
         <span class="hp-heading-line hp-heading-line--1">{{ hp_h1 }}</span>
         <span class="hp-heading-pair hp-heading-pair--stack">
           <span class="hp-heading-line hp-heading-line--1">{{ hp_h2 }} </span>

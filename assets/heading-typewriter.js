@@ -199,17 +199,30 @@
         return el.parentElement === element;
       }
     );
-    if (pairEls.length) {
-      typeStructuredHeading(element, pairEls);
-      return;
-    }
-
     var lineEls = Array.prototype.filter.call(
       element.querySelectorAll('.hp-heading-line, .hero-heading-line'),
       function (el) {
         return el.parentElement === element;
       }
     );
+
+    if (pairEls.length && lineEls.length) {
+      var structuredEls = Array.prototype.filter.call(element.children, function (el) {
+        return (
+          el.classList.contains('hp-heading-line') ||
+          el.classList.contains('hp-heading-pair') ||
+          el.classList.contains('hero-heading-line')
+        );
+      });
+      typeStructuredHeading(element, structuredEls);
+      return;
+    }
+
+    if (pairEls.length) {
+      typeStructuredHeading(element, pairEls);
+      return;
+    }
+
     if (lineEls.length) {
       typeStructuredHeading(element, lineEls);
       return;
