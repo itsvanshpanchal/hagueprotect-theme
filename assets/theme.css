@@ -2026,22 +2026,24 @@ body.template-index .corp-marquee--outline-style .corp-marquee__label--hidden {
 
 body.template-index .corp-marquee--outline-style .corp-marquee__label {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: clamp(12px, 1.15vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(17, 17, 17, 0.45);
+  color: rgba(17, 17, 17, 0.72);
   margin: 0;
-  padding: 10px 20px 6px;
+  padding: 14px 24px 8px;
   text-align: center;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 body.template-index .corp-marquee--outline-style.corp-marquee--compact .corp-marquee__label,
 body.template-index .corp-marquee--flush-seam .corp-marquee__label {
   display: block !important;
   margin: 0 !important;
-  padding: 10px 20px 6px !important;
+  padding: 14px 24px 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap {
@@ -2174,6 +2176,13 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
     padding-inline: 0 !important;
     margin: 0 !important;
     border: none !important;
+  }
+
+  body.template-index .corp-marquee--outline-style.corp-marquee--compact .corp-marquee__label,
+  body.template-index .corp-marquee--flush-seam .corp-marquee__label {
+    padding: 12px 16px 6px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.18em !important;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
