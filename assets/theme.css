@@ -1872,6 +1872,7 @@ body.template-index {
   }
 
   body.template-index #MainContent .shopify-section[id] .hp-body-para,
+  body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"],
   body.template-index #MainContent .shopify-section[id] .mat-desc,
   body.template-index #MainContent .shopify-section[id] .fb__subtitle,
   body.template-index #MainContent .shopify-section[id] .story-banner__paragraph,
@@ -1904,25 +1905,82 @@ body.template-index {
     paint-order: stroke fill !important;
   }
 
-  /* Equal eyebrow → title → desc gaps (Best Sellers + Materials) */
+  /* Equal eyebrow → title → desc gaps across homepage sections */
+  body.template-index #MainContent .section-heading-stack,
+  body.template-index #MainContent .fc-header.section-heading-stack,
+  body.template-index #MainContent .trending-social__heading-group.section-heading-stack,
+  body.template-index #MainContent .feature-grid__header.section-heading-stack,
+  body.template-index #MainContent .brandsel__head.section-heading-stack,
+  body.template-index #MainContent .promo-banner__content .section-heading-stack,
+  body.template-index #MainContent .fb__header.section-heading-stack,
   body.template-index #MainContent .bs-coverflow .section-heading-stack,
-  body.template-index #MainContent .mat-section .section-heading-stack {
+  body.template-index #MainContent .mat-section .section-heading-stack,
+  body.template-index #MainContent .comm-top-left .section-heading-stack {
     gap: var(--section-label-to-title-gap, 10px) !important;
     row-gap: var(--section-label-to-title-gap, 10px) !important;
   }
 
-  body.template-index #MainContent .bs-coverflow .section-heading-stack > .bs-coverflow__eyebrow,
-  body.template-index #MainContent .bs-coverflow .section-heading-stack > .bs-coverflow__heading,
-  body.template-index #MainContent .mat-section .section-heading-stack > .mat-eyebrow,
-  body.template-index #MainContent .mat-section .section-heading-stack > .mat-headline {
+  body.template-index #MainContent .section-heading-stack > [class*="__eyebrow"],
+  body.template-index #MainContent .section-heading-stack > .fc-subtitle,
+  body.template-index #MainContent .section-heading-stack > .section-heading-stack__label,
+  body.template-index #MainContent .section-heading-stack > [class*="ai-story-banner-subheading-"],
+  body.template-index #MainContent .section-heading-stack > [class*="__heading"],
+  body.template-index #MainContent .section-heading-stack > h1,
+  body.template-index #MainContent .section-heading-stack > h2,
+  body.template-index #MainContent .section-heading-stack > .fb__title,
+  body.template-index #MainContent .section-heading-stack > .mat-headline,
+  body.template-index #MainContent .section-heading-stack > .bs-coverflow__heading,
+  body.template-index #MainContent .section-heading-stack > .trending-social__heading,
+  body.template-index #MainContent .section-heading-stack > .fc-heading,
+  body.template-index #MainContent .section-heading-stack > .feature-grid__heading,
+  body.template-index #MainContent .section-heading-stack > .promo-banner__heading,
+  body.template-index #MainContent .section-heading-stack > .brandsel__heading,
+  body.template-index #MainContent .section-heading-stack > .comm-headline {
     margin: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
 
-  body.template-index #MainContent .mat-desc {
-    margin-top: var(--section-label-to-title-gap, 10px) !important;
+  /* Title → body copy: same gap when paragraph sits inside the stack */
+  body.template-index #MainContent .section-heading-stack > .hp-body-para,
+  body.template-index #MainContent .section-heading-stack > .fb__subtitle,
+  body.template-index #MainContent .section-heading-stack > .brandsel__sub {
+    margin-top: calc(var(--section-subheading-spacing-top, 10px) - var(--section-label-to-title-gap, 10px)) !important;
     margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Title → body copy: same gap when paragraph sits below the stack */
+  body.template-index #MainContent .mat-desc,
+  body.template-index #MainContent .comm-desc,
+  body.template-index #MainContent .comm-badge-desc,
+  body.template-index #MainContent .trending-social__desc,
+  body.template-index #MainContent .feature-grid__desc {
+    margin-top: var(--section-subheading-spacing-top, 10px) !important;
+    margin-bottom: 0 !important;
+  }
+
+  body.template-index #MainContent .mat-left > .section-heading-stack + .mat-desc,
+  body.template-index #MainContent .comm-top-left > .section-heading-stack + .comm-desc {
+    margin-top: var(--section-subheading-spacing-top, 10px) !important;
+  }
+
+  /* Split CTA copy block follows the same title/body rhythm */
+  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
+    gap: var(--section-subheading-spacing-top, 10px) !important;
+    row-gap: var(--section-subheading-spacing-top, 10px) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+  }
+
+  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__heading"],
+  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__text"] {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 
