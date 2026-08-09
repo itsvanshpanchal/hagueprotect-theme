@@ -6,17 +6,23 @@
 -%}
 
 <style>
-  /* Force zero padding and margins on the outer section container for this marquee, 
-     overriding global theme layouts and floating cards padding */
+  /* Homepage corporate marquee only — pull up over sticky-card seam (does not change story banner) */
   #shopify-section-{{ section.id }} {
     padding: 0 !important;
     margin: 0 !important;
+    margin-top: -14px !important;
     border: none !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 25 !important;
   }
+
   #shopify-section-{{ section.id }} > .hp-float-pin {
     padding: 0 !important;
     margin: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
   }
 </style>
 
@@ -46,11 +52,18 @@
 
   #shopify-section-{{ section.id }} .corp-marquee__track-wrap {
     padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__track-wrap:first-child {
+    padding-top: 0 !important;
     margin-top: 0 !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee__item {
-    padding-block: 4px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 0.85 !important;
   }
 {%- endstyle -%}
 
@@ -64,7 +77,7 @@
   endfor
 -%}
 
-<section class="corp-marquee corp-marquee--outline-style corp-marquee--compact" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
+<section class="corp-marquee corp-marquee--outline-style corp-marquee--compact corp-marquee--flush-seam" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
   {%- if show_label and section.settings.label != blank -%}
     <p class="corp-marquee__label">
       {{ section.settings.label }}

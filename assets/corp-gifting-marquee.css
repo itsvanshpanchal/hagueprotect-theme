@@ -19,6 +19,20 @@
   display: block !important;
 }
 
+/* Homepage: close white seam above marquee after sticky story card */
+body.template-index .shopify-section:has(.corp-marquee--flush-seam),
+body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
+  margin-top: -14px !important;
+  position: relative !important;
+  z-index: 25 !important;
+  overflow: visible !important;
+}
+
+body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) > .hp-float-pin {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .corp-marquee {
   --corp-marquee-bg: #ffffff;
   --corp-marquee-text: #111111;
@@ -26,9 +40,10 @@
   --corp-marquee-word-gap: clamp(12px, 2vw, 24px);
   --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: var(--corp-marquee-bg) !important;
-  border-top: 1px solid rgba(17, 17, 17, 0.08);
-  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  border-top: none;
+  border-bottom: none;
   padding: 0 !important;
+  margin: 0 !important;
   overflow-x: clip;
   overflow-y: visible;
   position: relative;
@@ -59,12 +74,13 @@
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .corp-marquee__track-wrap:first-child {
-  padding-top: 0;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .corp-marquee__track-wrap + .corp-marquee__track-wrap {
@@ -81,6 +97,8 @@
   animation: corpMarqueeScrollLeft 42s linear infinite;
   flex-shrink: 0;
   will-change: transform;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .corp-marquee__track--reverse {
@@ -106,8 +124,9 @@
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
   font-style: normal !important;
-  line-height: 0.8 !important;
+  line-height: 0.85 !important;
   padding: 0 !important;
+  margin: 0 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: var(--corp-marquee-text) !important;
@@ -133,28 +152,35 @@
   padding: 0 !important;
 }
 
-/* Compact — no extra white space on any side */
+/* Compact — no extra white space inside the band */
 body.template-index .corp-marquee.corp-marquee--compact,
 body.template-index .corp-marquee--compact.corp-marquee--outline-style,
 .corp-marquee.corp-marquee--compact,
-.corp-marquee--compact.corp-marquee--outline-style {
+.corp-marquee--compact.corp-marquee--outline-style,
+.corp-marquee--flush-seam {
   margin: 0 !important;
   padding: 0 !important;
-  border-top: none !important;
-  border-bottom: none !important;
+  border: none !important;
 }
 
-.corp-marquee--compact .corp-marquee__track-wrap:first-child {
+.corp-marquee--compact .corp-marquee__track-wrap,
+.corp-marquee--flush-seam .corp-marquee__track-wrap {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.corp-marquee--compact .corp-marquee__track-wrap:first-child,
+.corp-marquee--flush-seam .corp-marquee__track-wrap:first-child {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
 
-.corp-marquee--compact .corp-marquee__track-wrap {
-  padding: 0 !important;
-  margin-top: 0 !important;
-}
-
 @media screen and (max-width: 749px) {
+  body.template-index .shopify-section:has(.corp-marquee--flush-seam),
+  body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
+    margin-top: -16px !important;
+  }
+
   .corp-marquee {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
@@ -165,8 +191,7 @@ body.template-index .corp-marquee--compact.corp-marquee--outline-style,
   body.template-index .corp-marquee.corp-marquee--compact,
   .corp-marquee.corp-marquee--compact {
     padding: 0 !important;
-    border-top: none !important;
-    border-bottom: none !important;
+    border: none !important;
   }
 
   .corp-marquee__track {

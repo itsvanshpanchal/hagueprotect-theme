@@ -844,14 +844,20 @@
         }
         if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
           item.bg = '#ffffff';
+          sec.classList.add('hp-corp-marquee-strip');
           sec.style.setProperty('background-color', '#ffffff', 'important');
           sec.style.setProperty('padding', '0', 'important');
           sec.style.setProperty('margin', '0', 'important');
+          sec.style.setProperty('margin-top', '-14px', 'important');
+          sec.style.setProperty('position', 'relative', 'important');
+          sec.style.setProperty('z-index', '25', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
           pin.style.setProperty('padding', '0', 'important');
           pin.style.setProperty('margin', '0', 'important');
           pin.style.setProperty('min-height', '0', 'important');
           pin.style.setProperty('height', 'auto', 'important');
+          var marqueeEl = pin.querySelector('.corp-marquee');
+          if (marqueeEl) marqueeEl.classList.add('corp-marquee--flush-seam');
         }
         return;
       }
@@ -942,14 +948,20 @@
         asStrip(item, 10 + index);
         if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
           item.bg = '#ffffff';
+          sec.classList.add('hp-corp-marquee-strip');
           sec.style.setProperty('background-color', '#ffffff', 'important');
           sec.style.setProperty('padding', '0', 'important');
           sec.style.setProperty('margin', '0', 'important');
+          sec.style.setProperty('margin-top', '-14px', 'important');
+          sec.style.setProperty('position', 'relative', 'important');
+          sec.style.setProperty('z-index', '25', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
           pin.style.setProperty('padding', '0', 'important');
           pin.style.setProperty('margin', '0', 'important');
           pin.style.setProperty('min-height', '0', 'important');
           pin.style.setProperty('height', 'auto', 'important');
+          var marqueeEl = pin.querySelector('.corp-marquee');
+          if (marqueeEl) marqueeEl.classList.add('corp-marquee--flush-seam');
         }
         return;
       }

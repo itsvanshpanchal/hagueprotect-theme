@@ -1978,6 +1978,13 @@ body.template-index #MainContent .shopify-section:has(.corp-marquee--outline-sty
   max-height: none !important;
 }
 
+body.template-index .shopify-section:has(.corp-marquee--flush-seam),
+body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
+  margin-top: -14px !important;
+  position: relative !important;
+  z-index: 25 !important;
+}
+
 body.template-index .corp-marquee--outline-style,
 body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-bg: #ffffff;
@@ -1987,9 +1994,9 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: #ffffff !important;
   background-color: #ffffff !important;
-  border-top: none;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: 0 0 clamp(8px, 1.2vw, 12px);
+  border: none;
+  padding: 0 !important;
+  margin: 0 !important;
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
@@ -2022,7 +2029,8 @@ body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap {
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
-  padding-block: 0 1px;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap:first-child {
@@ -2074,8 +2082,9 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item {
   font-family: 'Bebas Neue', 'Anton', 'Arial Narrow', sans-serif !important;
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
-  line-height: 1 !important;
-  padding-block: 1px;
+  line-height: 0.85 !important;
+  padding: 0 !important;
+  margin: 0 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: #111111 !important;
@@ -2092,7 +2101,12 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   body.template-index .corp-marquee--outline-style {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
-    padding: 0 0 8px;
+    padding: 0 !important;
+  }
+
+  body.template-index .shopify-section:has(.corp-marquee--flush-seam),
+  body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
+    margin-top: -16px !important;
   }
 
   body.template-index .corp-marquee--outline-style.corp-marquee--compact,
