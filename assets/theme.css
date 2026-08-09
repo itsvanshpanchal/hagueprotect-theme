@@ -2031,9 +2031,17 @@ body.template-index .corp-marquee--outline-style .corp-marquee__label {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(17, 17, 17, 0.45);
-  margin: 0 0 16px;
-  padding: 0 20px;
+  margin: 0;
+  padding: 10px 20px 6px;
   text-align: center;
+  line-height: 1.35;
+}
+
+body.template-index .corp-marquee--outline-style.corp-marquee--compact .corp-marquee__label,
+body.template-index .corp-marquee--flush-seam .corp-marquee__label {
+  display: block !important;
+  margin: 0 !important;
+  padding: 10px 20px 6px !important;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap {

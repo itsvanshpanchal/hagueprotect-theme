@@ -81,6 +81,23 @@ body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-
   display: none !important;
 }
 
+/* Homepage gap bridge — label sits in the band between story and scrolling rows */
+body.template-index .corp-marquee--flush-seam .corp-marquee__label,
+body.template-index .corp-marquee.corp-marquee--compact .corp-marquee__label {
+  display: block !important;
+  margin: 0 !important;
+  padding: 10px 20px 6px !important;
+  line-height: 1.35 !important;
+  text-align: center;
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.45);
+  flex: 0 0 auto;
+}
+
 .corp-marquee__track-wrap {
   display: flex;
   overflow-x: clip;

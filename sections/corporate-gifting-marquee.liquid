@@ -2,6 +2,9 @@
   assign bg_color = section.settings.background_color | default: '#ffffff'
   assign text_color = section.settings.text_color | default: '#111111'
   assign show_label = section.settings.show_label
+  if request.page_type == 'index' and section.settings.label != blank
+    assign show_label = true
+  endif
   assign row_gap = section.settings.row_gap | default: 0
 -%}
 
@@ -78,10 +81,10 @@
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
-    --corp-marquee-pad-top: 8px;
+    --corp-marquee-pad-top: 0px;
     --corp-marquee-pad-bottom: 8px;
     margin: 0 !important;
-    padding-top: 8px !important;
+    padding-top: 0 !important;
     padding-bottom: 8px !important;
     padding-inline: 0 !important;
     border-top: none !important;
@@ -110,6 +113,19 @@
 
   #shopify-section-{{ section.id }} .corp-marquee__track {
     align-items: flex-end;
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__label {
+    display: block !important;
+    margin: 0 !important;
+    padding: 10px 20px 6px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: rgba(17, 17, 17, 0.45) !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee__item {
@@ -218,7 +234,7 @@
       "type": "text",
       "id": "label",
       "label": "Label above marquee",
-      "default": "Trusted for employee onboarding, client appreciation, festival hampers & more"
+      "default": "Trusted for every shoe"
     },
     {
       "type": "checkbox",
