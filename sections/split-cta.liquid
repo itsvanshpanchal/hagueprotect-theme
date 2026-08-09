@@ -215,7 +215,9 @@
   }
 
   @media screen and (max-width: 749px) {
-    .split-cta-{{ section.id }} {
+    body .split-cta-{{ section.id }},
+    body #MainContent .split-cta-{{ section.id }},
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile | default: 44 }}px !important;
       padding-bottom: {{ section.settings.padding_bottom_mobile | default: 44 }}px !important;
       padding-left: var(--homepage-section-gutter, 24px) !important;
@@ -229,7 +231,10 @@
       background: var(--split-cta-bg) !important;
     }
 
-    .split-cta-{{ section.id }}__inner {
+    body .split-cta-{{ section.id }}__inner,
+    body #MainContent .split-cta-{{ section.id }}__inner,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__inner {
+      display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       justify-content: flex-start !important;
@@ -239,7 +244,9 @@
       min-height: 0 !important;
     }
 
-    .split-cta-{{ section.id }}__copy {
+    body .split-cta-{{ section.id }}__copy,
+    body #MainContent .split-cta-{{ section.id }}__copy,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__copy {
       max-width: 100% !important;
       margin: 0 0 28px 0 !important;
       height: auto !important;
@@ -247,7 +254,9 @@
       flex: 0 0 auto !important;
     }
 
-    .split-cta-{{ section.id }}__heading {
+    body .split-cta-{{ section.id }}__heading,
+    body #MainContent .split-cta-{{ section.id }}__heading,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__heading {
       font-family: {{ heading_stack }} !important;
       font-size: 32px !important;
       font-weight: 300 !important;
@@ -259,7 +268,10 @@
       text-align: left !important;
     }
 
-    .split-cta-{{ section.id }}__text {
+    body .split-cta-{{ section.id }}__text,
+    body #MainContent .split-cta-{{ section.id }}__text,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__text,
+    body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"] {
       font-family: {{ text_stack }} !important;
       font-size: 15px !important;
       font-weight: 300 !important;
@@ -272,7 +284,9 @@
       text-align: left !important;
     }
 
-    .split-cta-{{ section.id }}__actions {
+    body .split-cta-{{ section.id }}__actions,
+    body #MainContent .split-cta-{{ section.id }}__actions,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__actions {
       margin-left: 0 !important;
       margin-top: 0 !important;
       width: 100% !important;
@@ -281,7 +295,9 @@
       flex: 0 0 auto !important;
     }
 
-    .split-cta-{{ section.id }}__button {
+    body .split-cta-{{ section.id }}__button,
+    body #MainContent .split-cta-{{ section.id }}__button,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__button {
       width: 100% !important;
       height: 52px !important;
       min-height: 52px !important;
@@ -306,7 +322,9 @@
       align-self: stretch !important;
     }
 
-    .split-cta-{{ section.id }}__arrow {
+    body .split-cta-{{ section.id }}__arrow,
+    body #MainContent .split-cta-{{ section.id }}__arrow,
+    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__arrow {
       display: inline-block !important;
       font-size: 1.1em !important;
       line-height: 1 !important;
