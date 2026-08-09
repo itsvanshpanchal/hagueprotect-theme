@@ -845,18 +845,15 @@
         return;
       }
 
-      /* Split CTA: full-viewport sticky card on mobile (matches sections above) */
+      /* Split CTA: native strip on mobile and desktop (auto height, tight clean gaps, no 100dvh card stretching) */
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
         cardIndex += 1;
         var ctaBg = '#fdfcf7';
-        if (mobile) {
-          sec.classList.add('hp-float-split-cta');
-          asCard(item, cardIndex, vh, ctaBg, mobile, false);
-          pin.style.setProperty('overflow', 'hidden', 'important');
-        } else {
-          asStrip(item, cardIndex);
-          pin.style.setProperty('overflow', 'visible', 'important');
-        }
+        sec.classList.add('hp-float-split-cta');
+        asStrip(item, cardIndex);
+        pin.style.setProperty('overflow', 'visible', 'important');
+        pin.style.setProperty('height', 'auto', 'important');
+        pin.style.setProperty('min-height', '0', 'important');
         sec.style.setProperty('background-color', ctaBg, 'important');
         pin.style.setProperty('background-color', ctaBg, 'important');
         return;

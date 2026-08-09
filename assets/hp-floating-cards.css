@@ -634,6 +634,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card__title {
     -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
     overflow: hidden !important;
     white-space: normal !important;
     word-break: break-word !important;
@@ -745,34 +746,37 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     aspect-ratio: 9 / 16 !important;
   }
 
-  /* Split CTA + DNA: full-viewport sticky cards — upper homepage only (legacy; bottom uses strip) */
+  /* Split CTA: native strip on mobile (auto height, tight clean gaps) */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta {
+    display: block !important;
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     background-color: #fdfcf7 !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta > .hp-float-pin,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta > .hp-float-pin {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    height: 100% !important;
-    min-height: 100dvh !important;
-    overflow: hidden !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta > .hp-float-pin {
+    display: block !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-split-cta [class*='split-cta'],
   body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='split-cta'] {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    min-height: 100% !important;
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     box-sizing: border-box !important;
-    padding-top: 28px !important;
-    padding-bottom: 28px !important;
+    padding-top: 36px !important;
+    padding-bottom: 36px !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna {
@@ -841,8 +845,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   /* Bottom sticky cards — must stay pinned like hero/materials (wins over legacy dna rules) */
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna {
     position: sticky !important;
     top: 0 !important;
     height: 100dvh !important;
@@ -850,8 +853,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: 100dvh !important;
   }
 
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna > .hp-float-pin,
-  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-split-cta > .hp-float-pin {
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card.hp-float-dna > .hp-float-pin {
     position: relative !important;
     height: 100% !important;
     min-height: 100dvh !important;
@@ -1021,6 +1023,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: visible !important;
     display: block !important;
     -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: 20px !important;
     font-weight: 400 !important;
