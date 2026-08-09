@@ -874,26 +874,122 @@
   color: var(--d2c-primary);
 }
 
+/* PDP primary + secondary CTA stack */
+.d2c-pdp-cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
 .d2c-atc-btn {
   width: 100%;
-  height: 50px;
+  height: 52px;
   background: var(--d2c-primary);
-  color: #FFFFFF;
+  color: #ffffff;
+  font-family: var(--d2c-font);
   font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--d2c-radius-md);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--d2c-primary);
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-.d2c-atc-btn:hover {
-  opacity: 0.9;
+.d2c-atc-btn:hover:not(:disabled) {
+  background: #222222;
+  border-color: #222222;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.d2c-atc-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.d2c-atc-btn:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+.d2c-atc-btn:disabled {
+  background: #bdbdbd;
+  border-color: #bdbdbd;
+  color: #ffffff;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.d2c-buy-now-wrapper {
+  width: 100%;
+  margin: 0;
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button__more-options {
+  display: none;
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button__button {
+  width: 100% !important;
+  min-height: 52px !important;
+  height: 52px !important;
+  border-radius: 12px !important;
+  font-family: var(--d2c-font) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.2 !important;
+  padding: 0 24px !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button__button--unbranded {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.d2c-buy-now-wrapper .shopify-payment-button__button--unbranded:active:not([disabled]) {
+  transform: translateY(0);
+}
+
+@media screen and (min-width: 992px) {
+  .d2c-pdp-cta-stack {
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .d2c-atc-btn,
+  .d2c-buy-now-wrapper .shopify-payment-button__button {
+    height: 48px !important;
+    min-height: 48px !important;
+    font-size: 15px !important;
+  }
+
+  .d2c-pdp-cta-stack {
+    gap: 10px;
+  }
 }
 
 /* TRUST BADGES ROW */
@@ -1077,18 +1173,23 @@
 .d2c-floating-atc-btn {
   background-color: #000000;
   color: #ffffff;
-  border: none;
+  border: 2px solid #000000;
   border-radius: 12px;
   padding: 12px 28px;
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: opacity 0.2s, background-color 0.2s;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-.d2c-floating-atc-btn:hover {
+.d2c-floating-atc-btn:hover:not(:disabled) {
   background-color: #222222;
+  border-color: #222222;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .d2c-floating-atc-btn:disabled {
@@ -1318,18 +1419,18 @@
 
 
 
-          <!-- Add to Cart Button -->
-          <button type="submit" name="add" id="AddToCartBtn-Submit" class="d2c-atc-btn" {% unless product.available %}disabled{% endunless %}>
-            {%- if product.available -%}
-              Add to Cart
-            {%- else -%}
-              Sold Out
-            {%- endif -%}
-          </button>
+          <div class="d2c-pdp-cta-stack">
+            <button type="submit" name="add" id="AddToCartBtn-Submit" class="d2c-atc-btn" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}
+                Add to Cart
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </button>
 
-          <!-- Dynamic Checkout Button (Buy it Now) -->
-          <div class="d2c-buy-now-wrapper" style="margin-top: 12px;">
-            {{ form | payment_button }}
+            <div class="d2c-buy-now-wrapper">
+              {{ form | payment_button }}
+            </div>
           </div>
         </div>
       {%- endform -%}
