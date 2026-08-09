@@ -216,8 +216,8 @@
 
   @media screen and (max-width: 749px) {
     .split-cta-{{ section.id }} {
-      padding-top: 36px !important;
-      padding-bottom: 36px !important;
+      padding-top: {{ section.settings.padding_top_mobile | default: 36 }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 36 }}px !important;
       padding-left: var(--homepage-section-gutter, 16px) !important;
       padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 16px)) !important;
       border-top: none !important;
@@ -770,6 +770,26 @@
       "step": 4,
       "unit": "px",
       "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 16,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "default": 36
     }
   ],
   "presets": [
@@ -797,7 +817,9 @@
         "button_hover_background": "#333333",
         "button_text_color": "#FFFFFF",
         "padding_top": 88,
-        "padding_bottom": 88
+        "padding_bottom": 88,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 36
       }
     }
   ]
