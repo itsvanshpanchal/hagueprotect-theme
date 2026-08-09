@@ -92,6 +92,15 @@
     );
   }
 
+  function isCorpMarqueePin(pin) {
+    return !!(pin && pin.querySelector('.corp-marquee--outline-style, .corp-marquee'));
+  }
+
+  function nextItemIsCorpMarquee(index, items) {
+    if (index >= items.length - 1) return false;
+    return isCorpMarqueePin(items[index + 1].pin);
+  }
+
   function isHeroPin(pin) {
     return !!pin.querySelector('.hero-fullscreen');
   }
@@ -547,6 +556,77 @@
     pin.style.setProperty('touch-action', 'pan-y', 'important');
   }
 
+  /* Tell Your Story → corporate marquee: content-height banner, no full-viewport void */
+  function prepareStoryBeforeMarquee(pin) {
+    var chain = pin.querySelectorAll(
+      '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-"]'
+    );
+    for (var i = 0; i < chain.length; i++) {
+      chain[i].style.setProperty('position', 'relative', 'important');
+      chain[i].style.setProperty('top', 'auto', 'important');
+      chain[i].style.setProperty('height', 'auto', 'important');
+      chain[i].style.setProperty('min-height', '0', 'important');
+      chain[i].style.setProperty('max-height', 'none', 'important');
+      chain[i].style.setProperty('margin', '0', 'important');
+      chain[i].style.setProperty('padding', '0', 'important');
+      chain[i].style.setProperty('transform', 'none', 'important');
+      chain[i].style.setProperty('will-change', 'auto', 'important');
+      chain[i].style.setProperty('background-color', '#111111', 'important');
+    }
+
+    var wraps = pin.querySelectorAll('[data-hp-story-wrap], [class*="ai-story-banner-wrapper"]');
+    for (var w = 0; w < wraps.length; w++) {
+      wraps[w].style.setProperty('position', 'relative', 'important');
+      wraps[w].style.setProperty('display', 'block', 'important');
+      wraps[w].style.setProperty('width', '100%', 'important');
+      wraps[w].style.setProperty('height', 'auto', 'important');
+      wraps[w].style.setProperty('min-height', '0', 'important');
+      wraps[w].style.setProperty('max-height', 'none', 'important');
+      wraps[w].style.setProperty('aspect-ratio', '9 / 16', 'important');
+      wraps[w].style.setProperty('overflow', 'hidden', 'important');
+      wraps[w].style.setProperty('background-size', 'cover', 'important');
+      wraps[w].style.setProperty('background-position', 'center center', 'important');
+      wraps[w].style.setProperty('background-repeat', 'no-repeat', 'important');
+    }
+
+    var pictures = pin.querySelectorAll('.ai-story-banner-picture, picture[class*="ai-story-banner-picture"]');
+    for (var p = 0; p < pictures.length; p++) {
+      pictures[p].style.setProperty('position', 'absolute', 'important');
+      pictures[p].style.setProperty('inset', '0', 'important');
+      pictures[p].style.setProperty('width', '100%', 'important');
+      pictures[p].style.setProperty('height', '100%', 'important');
+      pictures[p].style.setProperty('display', 'block', 'important');
+      pictures[p].style.setProperty('margin', '0', 'important');
+      pictures[p].style.setProperty('padding', '0', 'important');
+    }
+
+    var covers = pin.querySelectorAll('[data-hp-story-cover], .ai-story-banner-cover, img[class*="ai-story-banner-image"]');
+    for (var c = 0; c < covers.length; c++) {
+      covers[c].style.setProperty('position', 'absolute', 'important');
+      covers[c].style.setProperty('inset', '0', 'important');
+      covers[c].style.setProperty('width', '100%', 'important');
+      covers[c].style.setProperty('height', '100%', 'important');
+      covers[c].style.setProperty('object-fit', 'cover', 'important');
+      covers[c].style.setProperty('object-position', 'center center', 'important');
+      covers[c].style.setProperty('display', 'block', 'important');
+    }
+
+    var contents = pin.querySelectorAll('[class*="ai-story-banner-content"]');
+    for (var t = 0; t < contents.length; t++) {
+      contents[t].style.setProperty('position', 'absolute', 'important');
+      contents[t].style.setProperty('z-index', '3', 'important');
+      contents[t].style.setProperty('visibility', 'visible', 'important');
+      contents[t].style.setProperty('opacity', '1', 'important');
+    }
+
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('overflow', 'visible', 'important');
+    pin.style.setProperty('touch-action', 'pan-y', 'important');
+    pin.style.setProperty('background-color', '#111111', 'important');
+  }
+
   function asStrip(item, z) {
     var sec = item.sec;
     var pin = item.pin;
@@ -877,7 +957,9 @@
         }
       }
 
-      if (story) {
+      var followedByMarquee = story && nextItemIsCorpMarquee(index, items);
+
+      if (story && !followedByMarquee) {
         prepareStoryFullscreen(pin, mobile);
         if (!item._storyImgBound) {
           item._storyImgBound = true;
@@ -909,6 +991,16 @@
         return;
       }
 
+      /* Tell Your Story directly above corporate marquee — content height, flush seam */
+      if (story && followedByMarquee) {
+        sec.classList.add('hp-story-before-marquee');
+        prepareStoryBeforeMarquee(pin);
+        asStrip(item, 10 + index);
+        sec.style.setProperty('background-color', '#111111', 'important');
+        pin.style.setProperty('background-color', '#111111', 'important');
+        return;
+      }
+
       /* Mobile story: sticky full-bleed — next card floats over */
       if (story && mobile) {
         cardIndex += 1;
@@ -935,7 +1027,12 @@
           sec.style.setProperty('background-color', '#ffffff', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
           var prevItem = index > 0 ? items[index - 1] : null;
-          if (prevItem && (prevItem.sec.classList.contains('hp-float-story') || isStoryPin(prevItem.pin))) {
+          if (
+            prevItem &&
+            (prevItem.sec.classList.contains('hp-float-story') ||
+              prevItem.sec.classList.contains('hp-story-before-marquee') ||
+              isStoryPin(prevItem.pin))
+          ) {
             sec.classList.add('hp-marquee-after-story');
             var marquee = pin.querySelector('.corp-marquee');
             if (marquee) marquee.classList.add('corp-marquee--flush-top');

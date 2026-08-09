@@ -147,6 +147,76 @@ body.template-index .shopify-section:has([class*='ai-story-sticky-track']) {
   background-color: #111111 !important;
 }
 
+/* No full-viewport trap when story sits directly above corporate marquee (JS-off safe) */
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)),
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee {
+  position: relative !important;
+  top: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) > .hp-float-pin,
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee > .hp-float-pin {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-sticky-track'],
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-sticky-pin'],
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-banner-'],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [class*='ai-story-sticky-track'],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [class*='ai-story-sticky-pin'],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [class*='ai-story-banner-'] {
+  position: relative !important;
+  top: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-banner-wrapper'],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [class*='ai-story-banner-wrapper'] {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 9 / 16 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background-color: #111111 !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-banner-content'],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [class*='ai-story-banner-content'] {
+  position: absolute !important;
+  z-index: 3 !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) .ai-story-banner-picture,
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [data-hp-story-cover],
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee .ai-story-banner-picture,
+body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee [data-hp-story-cover] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 @media screen and (max-width: 749px) {
   .corp-marquee {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
