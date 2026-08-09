@@ -216,23 +216,24 @@
 
   @media screen and (max-width: 749px) {
     .split-cta-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile | default: 36 }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 36 }}px !important;
-      padding-left: var(--homepage-section-gutter, 16px) !important;
-      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 16px)) !important;
+      padding-top: {{ section.settings.padding_top_mobile | default: 44 }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 44 }}px !important;
+      padding-left: var(--homepage-section-gutter, 24px) !important;
+      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 24px)) !important;
       border-top: none !important;
       border-bottom: none !important;
       min-height: 0 !important;
       height: auto !important;
       max-height: none !important;
       display: block !important;
+      background: var(--split-cta-bg) !important;
     }
 
     .split-cta-{{ section.id }}__inner {
       flex-direction: column !important;
       align-items: flex-start !important;
       justify-content: flex-start !important;
-      gap: 14px !important;
+      gap: 0 !important;
       max-width: 100% !important;
       height: auto !important;
       min-height: 0 !important;
@@ -240,32 +241,40 @@
 
     .split-cta-{{ section.id }}__copy {
       max-width: 100% !important;
-      margin: 0 !important;
+      margin: 0 0 28px 0 !important;
       height: auto !important;
       min-height: 0 !important;
       flex: 0 0 auto !important;
     }
 
     .split-cta-{{ section.id }}__heading {
-      font-size: {{ heading_size_mobile }}px !important;
-      margin: 0 0 8px 0 !important;
+      font-family: {{ heading_stack }} !important;
+      font-size: 32px !important;
+      font-weight: 300 !important;
+      font-style: normal !important;
       line-height: 1.15 !important;
+      letter-spacing: -0.02em !important;
+      color: var(--split-cta-heading) !important;
+      margin: 0 0 16px 0 !important;
+      text-align: left !important;
     }
 
     .split-cta-{{ section.id }}__text {
-      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: 19px !important;
-      font-weight: 400 !important;
+      font-family: {{ text_stack }} !important;
+      font-size: 15px !important;
+      font-weight: 300 !important;
       font-style: normal !important;
-      line-height: 1.25 !important;
-      letter-spacing: 0 !important;
+      line-height: 1.45 !important;
+      letter-spacing: 0.01em !important;
+      color: var(--split-cta-text) !important;
       max-width: 100% !important;
       margin: 0 !important;
+      text-align: left !important;
     }
 
     .split-cta-{{ section.id }}__actions {
       margin-left: 0 !important;
-      margin-top: 6px !important;
+      margin-top: 0 !important;
       width: 100% !important;
       height: auto !important;
       min-height: 0 !important;
@@ -274,11 +283,11 @@
 
     .split-cta-{{ section.id }}__button {
       width: 100% !important;
-      height: auto !important;
-      min-height: 48px !important;
-      max-height: 54px !important;
-      padding: 14px 24px !important;
-      display: inline-flex !important;
+      height: 52px !important;
+      min-height: 52px !important;
+      max-height: 52px !important;
+      padding: 0 24px !important;
+      display: flex !important;
       flex-direction: row !important;
       flex-wrap: nowrap !important;
       align-items: center !important;
@@ -286,12 +295,20 @@
       white-space: nowrap !important;
       gap: 10px !important;
       box-sizing: border-box !important;
+      background: var(--split-cta-btn-bg) !important;
+      color: var(--split-cta-btn-text) !important;
+      font-family: {{ button_stack }} !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.12em !important;
+      border-radius: 0 !important;
       flex: 0 0 auto !important;
-      align-self: flex-start !important;
+      align-self: stretch !important;
     }
 
     .split-cta-{{ section.id }}__arrow {
       display: inline-block !important;
+      font-size: 1.1em !important;
       line-height: 1 !important;
     }
   }
