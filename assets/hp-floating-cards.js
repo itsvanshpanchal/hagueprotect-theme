@@ -1,10 +1,9 @@
 /*
   Homepage floating section animation — full-viewport sticky cover.
 
-  All screen sizes (monitor → phone): substantial sections stick at least
-  100dvh so each fills the screen while the next slides over.
-  Story banner is included as a full-screen card (no 200vh sticky runway).
-  Thin marquees stay normal flow. One image only per breakpoint.
+  Desktop/laptop: substantial sections stick at least 100dvh so each fills the
+  screen while the next slides over.
+  Mobile: native page scroll (no sticky cover cards) unless hpMobileFloatConfig.stickyCards is true.
 */
 (function () {
   'use strict';
@@ -134,9 +133,16 @@
     return !!(pin && pin.querySelector('.comm-section, .comm-swiper, .comm-slider-container'));
   }
 
-  /* Last 3 homepage sections: native scroll on mobile (no sticky trap before footer) */
   function isBottomMobileStrip(index, total) {
+    if (useMobileNativeScroll()) return false;
     return isMobile() && total >= 3 && index >= total - 3;
+  }
+
+  /* Mobile: normal page scroll — no sticky cover cards (desktop keeps float animation) */
+  function useMobileNativeScroll() {
+    if (!isMobile()) return false;
+    var cfg = window.hpMobileFloatConfig || {};
+    return cfg.stickyCards !== true;
   }
 
   function ensurePin(sec) {
@@ -307,7 +313,7 @@
     }
   }
 
-  function resetSectionStyles(sec, pin) {
+  function resetSectionStyles(sec, pin, fullPinReset) {
     var hero = isHeroPin(pin);
     var story = isStoryPin(pin);
     sec.classList.remove(
@@ -342,7 +348,7 @@
       On mobile, wiping pin/hero/story inline styles causes a one-frame collapse
       ("loads once then hides" / black panel). Keep painted media while float classes reset.
     */
-    if ((hero || story) && isMobile()) {
+    if ((hero || story) && isMobile() && !fullPinReset) {
       [
         'position',
         'top',
@@ -809,6 +815,83 @@
     if (bg) pin.style.setProperty('background-color', bg, 'important');
   }
 
+  function layoutMobileNative(items) {
+    items.forEach(function (item, index) {
+      var sec = item.sec;
+      var pin = item.pin;
+      var story = isStoryPin(pin);
+      var hero = isHeroPin(pin);
+      var bg = detectBg(pin) || (story || hero ? '#111111' : '#ffffff');
+
+      item.bg = bg;
+      item.isCard = false;
+
+      resetSectionStyles(sec, pin, true);
+      sec.classList.remove(
+        'hp-float-bottom-strip',
+        'hp-float-split-cta',
+        'hp-float-dna',
+        'hp-story-banner-lite',
+        'hp-corp-marquee-strip'
+      );
+
+      if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
+        sec.classList.add('hp-float-split-cta');
+        asStrip(item, 10 + index);
+        sec.style.setProperty('background-color', '#fdfcf7', 'important');
+        pin.style.setProperty('background-color', '#fdfcf7', 'important');
+        pin.style.setProperty('overflow', 'visible', 'important');
+        pin.style.setProperty('height', 'auto', 'important');
+        pin.style.setProperty('min-height', '0', 'important');
+        return;
+      }
+
+      if (story) {
+        sec.classList.add('hp-story-banner-lite');
+        pin.style.cssText = '';
+        prepareStoryMobileStrip(pin);
+        asStrip(item, 10 + index);
+        if (bg) {
+          sec.style.setProperty('background-color', bg, 'important');
+          pin.style.setProperty('background-color', bg, 'important');
+        }
+        return;
+      }
+
+      if (hero) {
+        prepareHeroFullscreen(pin);
+        asStrip(item, 10 + index);
+        if (bg) {
+          sec.style.setProperty('background-color', bg, 'important');
+          pin.style.setProperty('background-color', bg, 'important');
+        }
+        return;
+      }
+
+      if (isDnaPin(pin) || isDnaSection(sec)) {
+        sec.classList.add('hp-float-dna');
+        asStrip(item, 10 + index);
+        sec.style.setProperty('background-color', '#121111', 'important');
+        pin.style.setProperty('background-color', '#121111', 'important');
+        pin.style.setProperty('overflow', 'visible', 'important');
+        return;
+      }
+
+      asStrip(item, 10 + index);
+
+      if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
+        item.bg = '#ffffff';
+        applyCorpMarqueeStrip(sec, pin);
+        return;
+      }
+
+      if (bg) {
+        sec.style.setProperty('background-color', bg, 'important');
+        pin.style.setProperty('background-color', bg, 'important');
+      }
+    });
+  }
+
   var sections = Array.prototype.filter.call(main.children, isShopifySection).filter(function (sec) {
     return !isTooThin(sec);
   });
@@ -831,6 +914,10 @@
     document.body.classList.add('hp-float-mobile');
     document.documentElement.classList.add('hp-float-mobile');
     syncMobileViewportVar();
+    if (useMobileNativeScroll()) {
+      document.body.classList.add('hp-float-native-scroll');
+      document.documentElement.classList.add('hp-float-native-scroll');
+    }
   }
   window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
 
@@ -842,12 +929,23 @@
     layingOut = true;
 
     var mobile = isMobile();
+    var mobileNative = useMobileNativeScroll();
     if (mobile) syncMobileViewportVar();
     var vh = viewportH();
     var cardIndex = 0;
     document.body.classList.toggle('hp-float-mobile', mobile);
     document.documentElement.classList.toggle('hp-float-mobile', mobile);
+    document.body.classList.toggle('hp-float-native-scroll', mobileNative);
+    document.documentElement.classList.toggle('hp-float-native-scroll', mobileNative);
     if (mobile) syncMobileViewportVar();
+
+    if (mobileNative) {
+      layoutMobileNative(items);
+      lastLayoutW = window.innerWidth || 0;
+      layingOut = false;
+      ensureFooterRunway(false);
+      return;
+    }
 
     items.forEach(function (item, index) {
       var sec = item.sec;
@@ -855,7 +953,7 @@
       var story = isStoryPin(pin);
       var hero = isHeroPin(pin);
 
-      resetSectionStyles(sec, pin);
+      resetSectionStyles(sec, pin, false);
 
       /* Mobile bottom: lifestyle banner, Split CTA, DNA — normal flow into footer */
       if (isBottomMobileStrip(index, items.length)) {
@@ -1053,6 +1151,7 @@
   */
   (function initMobileFastScroll() {
     if (!isMobile()) return;
+    if (useMobileNativeScroll()) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var cfg = window.hpMobileFloatConfig || {};
