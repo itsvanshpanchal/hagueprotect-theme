@@ -24,6 +24,10 @@
     return MQ_MOBILE.matches;
   }
 
+  function corpMarqueeSeamPull() {
+    return isMobile() ? '-24px' : '-22px';
+  }
+
   function viewportH() {
     var vv = window.visualViewport;
     if (vv && vv.height > 0 && isMobile()) {
@@ -848,7 +852,7 @@
           sec.style.setProperty('background-color', '#ffffff', 'important');
           sec.style.setProperty('padding', '0', 'important');
           sec.style.setProperty('margin', '0', 'important');
-          sec.style.setProperty('margin-top', '-14px', 'important');
+          sec.style.setProperty('margin-top', corpMarqueeSeamPull(), 'important');
           sec.style.setProperty('position', 'relative', 'important');
           sec.style.setProperty('z-index', '25', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
@@ -952,7 +956,7 @@
           sec.style.setProperty('background-color', '#ffffff', 'important');
           sec.style.setProperty('padding', '0', 'important');
           sec.style.setProperty('margin', '0', 'important');
-          sec.style.setProperty('margin-top', '-14px', 'important');
+          sec.style.setProperty('margin-top', corpMarqueeSeamPull(), 'important');
           sec.style.setProperty('position', 'relative', 'important');
           sec.style.setProperty('z-index', '25', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');

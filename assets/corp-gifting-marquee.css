@@ -22,7 +22,7 @@
 /* Homepage: close white seam above marquee after sticky story card */
 body.template-index .shopify-section:has(.corp-marquee--flush-seam),
 body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
-  margin-top: -14px !important;
+  margin-top: -22px !important;
   position: relative !important;
   z-index: 25 !important;
   overflow: visible !important;
@@ -156,22 +156,22 @@ body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-
   padding: 0 !important;
 }
 
-/* Compact — tighter top padding so rows sit visually centered */
+/* Compact — zero top padding, clip font ascender gap, equal visual balance */
 body.template-index .corp-marquee.corp-marquee--compact,
 body.template-index .corp-marquee--compact.corp-marquee--outline-style,
 .corp-marquee.corp-marquee--compact,
 .corp-marquee--compact.corp-marquee--outline-style,
 .corp-marquee--flush-seam {
-  --corp-marquee-pad-top: clamp(2px, 0.5vw, 6px);
-  --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
+  --corp-marquee-pad-top: 0px;
+  --corp-marquee-pad-bottom: 10px;
   margin: 0 !important;
-  padding-top: var(--corp-marquee-pad-top) !important;
+  padding-top: 0 !important;
   padding-bottom: var(--corp-marquee-pad-bottom) !important;
   padding-inline: 0 !important;
   border: none !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
   gap: var(--corp-marquee-row-gap, 4px) !important;
 }
 
@@ -179,6 +179,20 @@ body.template-index .corp-marquee--compact.corp-marquee--outline-style,
 .corp-marquee--flush-seam .corp-marquee__track-wrap {
   padding: 0 !important;
   margin: 0 !important;
+  height: var(--corp-marquee-font-size);
+  max-height: var(--corp-marquee-font-size);
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.corp-marquee--compact .corp-marquee__track,
+.corp-marquee--flush-seam .corp-marquee__track {
+  align-items: flex-end;
+}
+
+.corp-marquee--compact .corp-marquee__item,
+.corp-marquee--flush-seam .corp-marquee__item {
+  line-height: 0.85 !important;
 }
 
 .corp-marquee--compact .corp-marquee__track-wrap:first-child,
@@ -195,23 +209,23 @@ body.template-index .corp-marquee--compact.corp-marquee--outline-style,
 @media screen and (max-width: 749px) {
   body.template-index .shopify-section:has(.corp-marquee--flush-seam),
   body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
-    margin-top: -16px !important;
+    margin-top: -24px !important;
   }
 
   .corp-marquee {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     --corp-marquee-row-gap: 4px;
-    --corp-marquee-pad-top: clamp(3px, 1.2vw, 6px);
-    --corp-marquee-pad-bottom: clamp(8px, 2vw, 12px);
+    --corp-marquee-pad-top: 0px;
+    --corp-marquee-pad-bottom: 8px;
   }
 
   body.template-index .corp-marquee.corp-marquee--compact,
   .corp-marquee.corp-marquee--compact,
   .corp-marquee--flush-seam {
-    --corp-marquee-pad-top: clamp(2px, 1vw, 5px);
-    --corp-marquee-pad-bottom: clamp(8px, 2vw, 12px);
-    padding-top: var(--corp-marquee-pad-top) !important;
+    --corp-marquee-pad-top: 0px;
+    --corp-marquee-pad-bottom: 8px;
+    padding-top: 0 !important;
     padding-bottom: var(--corp-marquee-pad-bottom) !important;
     border: none !important;
   }

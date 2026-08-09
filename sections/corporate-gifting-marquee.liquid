@@ -6,16 +6,26 @@
 -%}
 
 <style>
-  /* Homepage corporate marquee only — pull up over sticky-card seam (does not change story banner) */
+  /* Homepage only — pull marquee up over sticky-card seam (does not change story banner) */
+  {% if request.page_type == 'index' %}
   #shopify-section-{{ section.id }} {
     padding: 0 !important;
-    margin: 0 !important;
-    margin-top: -14px !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-top: -22px !important;
     border: none !important;
     overflow: visible !important;
     position: relative !important;
     z-index: 25 !important;
   }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: -24px !important;
+    }
+  }
+  {% endif %}
 
   #shopify-section-{{ section.id }} > .hp-float-pin {
     padding: 0 !important;
@@ -32,7 +42,6 @@
   #shopify-section-{{ section.id }},
   #shopify-section-{{ section.id }} > .hp-float-pin {
     background-color: {{ bg_color }} !important;
-    margin: 0 !important;
     padding: 0 !important;
     min-height: 0 !important;
     height: auto !important;
@@ -40,14 +49,38 @@
     display: block !important;
   }
 
+  {% if request.page_type == 'index' %}
+  #shopify-section-{{ section.id }} {
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-top: -22px !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: -24px !important;
+    }
+  }
+  {% else %}
+  #shopify-section-{{ section.id }},
+  #shopify-section-{{ section.id }} > .hp-float-pin {
+    margin: 0 !important;
+  }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} > .hp-float-pin {
+    margin: 0 !important;
+  }
+
   #shopify-section-{{ section.id }} .corp-marquee {
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
-    --corp-marquee-pad-top: clamp(2px, 0.5vw, 6px);
-    --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
+    --corp-marquee-pad-top: 0px;
+    --corp-marquee-pad-bottom: 10px;
     margin: 0 !important;
-    padding-top: var(--corp-marquee-pad-top) !important;
+    padding-top: 0 !important;
     padding-bottom: var(--corp-marquee-pad-bottom) !important;
     padding-inline: 0 !important;
     border-top: none !important;
@@ -61,6 +94,10 @@
   #shopify-section-{{ section.id }} .corp-marquee__track-wrap {
     padding: 0 !important;
     margin: 0 !important;
+    height: var(--corp-marquee-font-size, 22px);
+    max-height: var(--corp-marquee-font-size, 22px);
+    align-items: flex-end;
+    overflow: hidden;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee__track-wrap:first-child {
@@ -68,10 +105,14 @@
     margin-top: 0 !important;
   }
 
+  #shopify-section-{{ section.id }} .corp-marquee__track {
+    align-items: flex-end;
+  }
+
   #shopify-section-{{ section.id }} .corp-marquee__item {
     padding: 0 !important;
     margin: 0 !important;
-    line-height: 1 !important;
+    line-height: 0.85 !important;
   }
 {%- endstyle -%}
 
