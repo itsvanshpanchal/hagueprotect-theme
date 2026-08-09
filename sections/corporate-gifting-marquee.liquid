@@ -13,7 +13,7 @@
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     margin-left: 0 !important;
-    margin-top: -22px !important;
+    margin-top: -32px !important;
     border: none !important;
     overflow: visible !important;
     position: relative !important;
@@ -22,7 +22,7 @@
 
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} {
-      margin-top: -24px !important;
+      margin-top: -36px !important;
     }
   }
   {% endif %}
@@ -54,12 +54,12 @@
     margin-right: 0 !important;
     margin-bottom: 0 !important;
     margin-left: 0 !important;
-    margin-top: -22px !important;
+    margin-top: -32px !important;
   }
 
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} {
-      margin-top: -24px !important;
+      margin-top: -36px !important;
     }
   }
   {% else %}
@@ -71,24 +71,27 @@
 
   #shopify-section-{{ section.id }} > .hp-float-pin {
     margin: 0 !important;
+    line-height: 0 !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee {
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
-    --corp-marquee-pad-top: 0px;
-    --corp-marquee-pad-bottom: 10px;
+    --corp-marquee-pad-top: 8px;
+    --corp-marquee-pad-bottom: 8px;
     margin: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: var(--corp-marquee-pad-bottom) !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     padding-inline: 0 !important;
     border-top: none !important;
     border-bottom: none !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
+    align-content: flex-start !important;
     gap: var(--corp-marquee-row-gap, 4px) !important;
+    line-height: 1 !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee__track-wrap {

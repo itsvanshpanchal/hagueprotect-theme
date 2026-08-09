@@ -25,7 +25,37 @@
   }
 
   function corpMarqueeSeamPull() {
-    return isMobile() ? '-24px' : '-22px';
+    return isMobile() ? '-36px' : '-32px';
+  }
+
+  function applyCorpMarqueeStrip(sec, pin) {
+    var marqueeEl = pin.querySelector('.corp-marquee');
+    if (!marqueeEl) return;
+
+    sec.classList.add('hp-corp-marquee-strip');
+    sec.style.setProperty('background-color', '#ffffff', 'important');
+    sec.style.setProperty('padding', '0', 'important');
+    sec.style.setProperty('margin-right', '0', 'important');
+    sec.style.setProperty('margin-bottom', '0', 'important');
+    sec.style.setProperty('margin-left', '0', 'important');
+    sec.style.setProperty('margin-top', corpMarqueeSeamPull(), 'important');
+    sec.style.setProperty('position', 'relative', 'important');
+    sec.style.setProperty('z-index', '25', 'important');
+
+    pin.style.setProperty('background-color', '#ffffff', 'important');
+    pin.style.setProperty('padding', '0', 'important');
+    pin.style.setProperty('margin', '0', 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('line-height', '0', 'important');
+
+    marqueeEl.classList.add('corp-marquee--flush-seam');
+    marqueeEl.style.setProperty('padding-top', '8px', 'important');
+    marqueeEl.style.setProperty('padding-bottom', '8px', 'important');
+    marqueeEl.style.setProperty('margin', '0', 'important');
+    marqueeEl.style.setProperty('justify-content', 'flex-start', 'important');
+    marqueeEl.style.setProperty('line-height', '1', 'important');
   }
 
   function viewportH() {
@@ -848,20 +878,7 @@
         }
         if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
           item.bg = '#ffffff';
-          sec.classList.add('hp-corp-marquee-strip');
-          sec.style.setProperty('background-color', '#ffffff', 'important');
-          sec.style.setProperty('padding', '0', 'important');
-          sec.style.setProperty('margin', '0', 'important');
-          sec.style.setProperty('margin-top', corpMarqueeSeamPull(), 'important');
-          sec.style.setProperty('position', 'relative', 'important');
-          sec.style.setProperty('z-index', '25', 'important');
-          pin.style.setProperty('background-color', '#ffffff', 'important');
-          pin.style.setProperty('padding', '0', 'important');
-          pin.style.setProperty('margin', '0', 'important');
-          pin.style.setProperty('min-height', '0', 'important');
-          pin.style.setProperty('height', 'auto', 'important');
-          var marqueeEl = pin.querySelector('.corp-marquee');
-          if (marqueeEl) marqueeEl.classList.add('corp-marquee--flush-seam');
+          applyCorpMarqueeStrip(sec, pin);
         }
         return;
       }
@@ -952,20 +969,7 @@
         asStrip(item, 10 + index);
         if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
           item.bg = '#ffffff';
-          sec.classList.add('hp-corp-marquee-strip');
-          sec.style.setProperty('background-color', '#ffffff', 'important');
-          sec.style.setProperty('padding', '0', 'important');
-          sec.style.setProperty('margin', '0', 'important');
-          sec.style.setProperty('margin-top', corpMarqueeSeamPull(), 'important');
-          sec.style.setProperty('position', 'relative', 'important');
-          sec.style.setProperty('z-index', '25', 'important');
-          pin.style.setProperty('background-color', '#ffffff', 'important');
-          pin.style.setProperty('padding', '0', 'important');
-          pin.style.setProperty('margin', '0', 'important');
-          pin.style.setProperty('min-height', '0', 'important');
-          pin.style.setProperty('height', 'auto', 'important');
-          var marqueeEl = pin.querySelector('.corp-marquee');
-          if (marqueeEl) marqueeEl.classList.add('corp-marquee--flush-seam');
+          applyCorpMarqueeStrip(sec, pin);
         }
         return;
       }

@@ -1979,8 +1979,11 @@ body.template-index #MainContent .shopify-section:has(.corp-marquee--outline-sty
 }
 
 body.template-index .shopify-section:has(.corp-marquee--flush-seam),
-body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
-  margin-top: -22px !important;
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section:has(.corp-marquee),
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-corp-marquee-strip,
+body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam),
+body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip {
+  margin-top: -32px !important;
   position: relative !important;
   z-index: 25 !important;
 }
@@ -1990,15 +1993,15 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-bg: #ffffff;
   --corp-marquee-text: #111111;
   --corp-marquee-row-gap: 4px;
-  --corp-marquee-pad-top: clamp(4px, 0.7vw, 8px);
-  --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
+  --corp-marquee-pad-top: 8px;
+  --corp-marquee-pad-bottom: 8px;
   --corp-marquee-word-gap: clamp(12px, 2vw, 24px);
   --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: #ffffff !important;
   background-color: #ffffff !important;
   border: none;
-  padding-top: var(--corp-marquee-pad-top) !important;
-  padding-bottom: var(--corp-marquee-pad-bottom) !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
   padding-inline: 0 !important;
   margin: 0 !important;
   overflow-x: clip;
@@ -2007,7 +2010,8 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-content: flex-start;
   gap: var(--corp-marquee-row-gap);
 }
 
@@ -2048,14 +2052,15 @@ body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap:first
 body.template-index .corp-marquee--outline-style.corp-marquee--compact,
 body.template-index .corp-marquee.corp-marquee--compact,
 body.template-index .corp-marquee--flush-seam {
-  --corp-marquee-pad-top: 0px;
-  --corp-marquee-pad-bottom: 10px;
-  padding-top: 0 !important;
-  padding-bottom: var(--corp-marquee-pad-bottom) !important;
+  --corp-marquee-pad-top: 8px;
+  --corp-marquee-pad-bottom: 8px;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
   padding-inline: 0 !important;
   margin: 0 !important;
   border: none !important;
   justify-content: flex-start !important;
+  align-content: flex-start !important;
 }
 
 body.template-index .corp-marquee--outline-style.corp-marquee--compact .corp-marquee__track-wrap,
@@ -2136,24 +2141,28 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     --corp-marquee-row-gap: 4px;
-    --corp-marquee-pad-top: clamp(3px, 1.2vw, 6px);
-    --corp-marquee-pad-bottom: clamp(8px, 2vw, 12px);
-    padding-top: var(--corp-marquee-pad-top) !important;
-    padding-bottom: var(--corp-marquee-pad-bottom) !important;
+    --corp-marquee-pad-top: 8px;
+    --corp-marquee-pad-bottom: 8px;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    justify-content: flex-start !important;
   }
 
+  body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section:has(.corp-marquee),
+  body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-corp-marquee-strip,
   body.template-index .shopify-section:has(.corp-marquee--flush-seam),
-  body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam) {
-    margin-top: -24px !important;
+  body.template-index .hp-float-stack > .shopify-section.hp-float-strip:has(.corp-marquee--flush-seam),
+  body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip {
+    margin-top: -36px !important;
   }
 
   body.template-index .corp-marquee--outline-style.corp-marquee--compact,
   body.template-index .corp-marquee.corp-marquee--compact,
   body.template-index .corp-marquee--flush-seam {
-    --corp-marquee-pad-top: 0px;
+    --corp-marquee-pad-top: 8px;
     --corp-marquee-pad-bottom: 8px;
-    padding-top: 0 !important;
-    padding-bottom: var(--corp-marquee-pad-bottom) !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     padding-inline: 0 !important;
     margin: 0 !important;
     border: none !important;

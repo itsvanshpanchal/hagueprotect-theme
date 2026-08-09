@@ -1280,3 +1280,36 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     touch-action: pan-y !important;
   }
 }
+
+/* Corporate marquee after story — kill top seam and inline strut gap */
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-corp-marquee-strip,
+body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip {
+  margin-top: -32px !important;
+  padding: 0 !important;
+  background-color: #ffffff !important;
+}
+
+body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip > .hp-float-pin {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  line-height: 0 !important;
+}
+
+body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip .corp-marquee {
+  margin: 0 !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  justify-content: flex-start !important;
+  align-content: flex-start !important;
+  line-height: 1 !important;
+}
+
+@media screen and (max-width: 749px) {
+  body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-corp-marquee-strip,
+  body.template-index .hp-float-stack > .shopify-section.hp-corp-marquee-strip {
+    margin-top: -36px !important;
+  }
+}
