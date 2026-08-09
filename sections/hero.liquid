@@ -315,12 +315,17 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      min-width: 100%;
-      min-height: 100%;
+      min-width: 0;
+      min-height: 0;
       object-fit: cover;
       /* Tall phones crop 4:5 art — keep subject toward upper third */
       object-position: center 22%;
       display: block;
+    }
+
+    .hero-fullscreen--mobile-art .hero-fullscreen__bg-img {
+      object-fit: contain;
+      object-position: center center;
     }
 
     .hero-fullscreen__heading {
@@ -357,6 +362,11 @@
 
     .hero-fullscreen__bg-img {
       object-position: center 18%;
+    }
+
+    .hero-fullscreen--mobile-art .hero-fullscreen__bg-img {
+      object-fit: contain;
+      object-position: center center;
     }
   }
 

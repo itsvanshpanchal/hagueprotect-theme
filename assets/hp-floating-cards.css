@@ -457,8 +457,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    min-width: 100% !important;
-    min-height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
     max-width: none !important;
     max-height: none !important;
     object-fit: cover !important;
@@ -466,6 +466,12 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art .hero-fullscreen__bg-img,
+  body.hp-float-mobile .hp-float-stack .hero-fullscreen--mobile-art .hero-fullscreen__bg img {
+    object-fit: contain !important;
+    object-position: center center !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hero-fullscreen__content {
