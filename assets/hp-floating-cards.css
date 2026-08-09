@@ -1065,6 +1065,45 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     z-index: 35 !important;
   }
 
+  @media screen and (max-width: 749px) {
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-rail-wrap {
+      overflow: hidden !important;
+    }
+
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider {
+      gap: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      scroll-snap-type: x mandatory !important;
+    }
+
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      scroll-snap-align: center !important;
+      scroll-snap-stop: always !important;
+    }
+
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-nav--prev {
+      left: 4px !important;
+    }
+
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-nav--next {
+      right: 4px !important;
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 1199px) {
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
+      flex: 0 0 min(86vw, 340px) !important;
+      width: min(86vw, 340px) !important;
+      min-width: min(86vw, 340px) !important;
+      max-width: min(86vw, 340px) !important;
+    }
+  }
+
   /* Tell Your Story: keep overlay copy fully readable inside sticky cover */
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
     max-width: min(92vw, 320px) !important;
@@ -1114,13 +1153,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     display: inline !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
-    flex: 0 0 min(86vw, 340px) !important;
-    width: min(86vw, 340px) !important;
-    min-width: min(86vw, 340px) !important;
-    max-width: min(86vw, 340px) !important;
   }
 
   /* Headings must not clip during sticky cover overlap / typewriter */

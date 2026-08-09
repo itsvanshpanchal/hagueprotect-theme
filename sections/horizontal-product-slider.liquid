@@ -785,15 +785,18 @@
     .hp-fam-sec__mobile-rail-wrap {
       margin-right: 0;
       padding-bottom: 28px;
+      overflow: hidden;
     }
 
     .hp-fam-sec__mobile-slider {
       --hp-fam-card-gap: 0px;
       gap: 0;
-      padding-bottom: 8px;
-      padding-right: 0;
+      padding: 4px 0 8px;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
     }
 
+    #shopify-section-{{ section.id }} .hp-fam-sec__mobile-slider .rail-card,
     .hp-fam-sec__mobile-slider .rail-card {
       flex: 0 0 100%;
       width: 100%;
@@ -806,15 +809,16 @@
     .hp-fam-sec__mobile-nav {
       width: 36px;
       height: 36px;
+      z-index: 10;
     }
 
     .hp-fam-sec__mobile-nav--prev {
-      left: 2px;
+      left: 4px;
     }
 
     .hp-fam-sec__mobile-nav--next {
-      right: 52px;
-      z-index: 35;
+      right: 4px;
+      z-index: 10;
     }
   }
 
