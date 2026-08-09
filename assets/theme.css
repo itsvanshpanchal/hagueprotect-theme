@@ -1905,25 +1905,52 @@ body.template-index {
     paint-order: stroke fill !important;
   }
 
-  /* Equal eyebrow → title → desc gaps across homepage sections */
-  body.template-index #MainContent .section-heading-stack,
-  body.template-index #MainContent .fc-header.section-heading-stack,
-  body.template-index #MainContent .trending-social__heading-group.section-heading-stack,
-  body.template-index #MainContent .feature-grid__header.section-heading-stack,
-  body.template-index #MainContent .brandsel__head.section-heading-stack,
-  body.template-index #MainContent .promo-banner__content .section-heading-stack,
-  body.template-index #MainContent .fb__header.section-heading-stack,
-  body.template-index #MainContent .bs-coverflow .section-heading-stack,
-  body.template-index #MainContent .mat-section .section-heading-stack,
-  body.template-index #MainContent .comm-top-left .section-heading-stack {
-    gap: var(--section-label-to-title-gap, 10px) !important;
-    row-gap: var(--section-label-to-title-gap, 10px) !important;
+  /*
+    Best Sellers mobile rhythm — lock eyebrow/title/paragraph spacing + section
+    padding across every homepage content section (not hero / story banners).
+  */
+  body.template-index {
+    --hp-bs-mobile-eyebrow-title-gap: 10px;
+    --hp-bs-mobile-title-para-gap: 10px;
+    --hp-bs-mobile-section-pt: 28px;
+    --hp-bs-mobile-section-pb: 24px;
+  }
+
+  body.template-index #MainContent .shopify-section[id] {
+    --section-label-to-title-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
+    --section-label-margin-bottom: var(--hp-bs-mobile-eyebrow-title-gap) !important;
+    --section-subheading-spacing-top: var(--hp-bs-mobile-title-para-gap) !important;
+  }
+
+  /* Section shell padding — matches .bs-coverflow mobile (28px top / 24px bottom) */
+  body.template-index #MainContent .bs-coverflow,
+  body.template-index #MainContent .fc-section,
+  body.template-index #MainContent .mat-section,
+  body.template-index #MainContent .hp-fam-sec,
+  body.template-index #MainContent .trending-social-section,
+  body.template-index #MainContent .comm-section,
+  body.template-index #MainContent [class*="featured-brands-"],
+  body.template-index #MainContent [class*="hp-dna-"]:not([class*="__"]),
+  body.template-index #MainContent section[class*="split-cta-"] {
+    padding-top: var(--hp-bs-mobile-section-pt) !important;
+    padding-bottom: var(--hp-bs-mobile-section-pb) !important;
+  }
+
+  /* Heading column sits inside section padding — no double top inset */
+  body.template-index #MainContent .mat-left {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Eyebrow → title — 10px flex gap (Best Sellers) */
+  body.template-index #MainContent .section-heading-stack {
+    gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
+    row-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
   }
 
   body.template-index #MainContent .section-heading-stack > [class*="__eyebrow"],
   body.template-index #MainContent .section-heading-stack > .fc-subtitle,
   body.template-index #MainContent .section-heading-stack > .section-heading-stack__label,
-  body.template-index #MainContent .section-heading-stack > [class*="ai-story-banner-subheading-"],
   body.template-index #MainContent .section-heading-stack > [class*="__heading"],
   body.template-index #MainContent .section-heading-stack > h1,
   body.template-index #MainContent .section-heading-stack > h2,
@@ -1941,35 +1968,38 @@ body.template-index {
     padding-bottom: 0 !important;
   }
 
-  /* Title → body copy: same gap when paragraph sits inside the stack */
+  /* Title → paragraph inside stack — flex gap owns spacing */
   body.template-index #MainContent .section-heading-stack > .hp-body-para,
   body.template-index #MainContent .section-heading-stack > .fb__subtitle,
   body.template-index #MainContent .section-heading-stack > .brandsel__sub {
-    margin-top: calc(var(--section-subheading-spacing-top, 10px) - var(--section-label-to-title-gap, 10px)) !important;
+    margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
 
-  /* Title → body copy: same gap when paragraph sits below the stack */
+  /* Title → paragraph below stack — 10px */
   body.template-index #MainContent .mat-desc,
   body.template-index #MainContent .comm-desc,
   body.template-index #MainContent .comm-badge-desc,
   body.template-index #MainContent .trending-social__desc,
-  body.template-index #MainContent .feature-grid__desc {
-    margin-top: var(--section-subheading-spacing-top, 10px) !important;
+  body.template-index #MainContent .feature-grid__desc,
+  body.template-index #MainContent .mat-left > .section-heading-stack + .mat-desc,
+  body.template-index #MainContent .comm-top-left > .section-heading-stack + .comm-desc {
+    margin-top: var(--hp-bs-mobile-title-para-gap) !important;
     margin-bottom: 0 !important;
   }
 
-  body.template-index #MainContent .mat-left > .section-heading-stack + .mat-desc,
-  body.template-index #MainContent .comm-top-left > .section-heading-stack + .comm-desc {
-    margin-top: var(--section-subheading-spacing-top, 10px) !important;
+  /* Premium Best / headings without .section-heading-stack */
+  body.template-index #MainContent .hp-fam-sec__heading {
+    gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
+    row-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
   }
 
-  /* Split CTA copy block follows the same title/body rhythm */
+  /* Split CTA copy block — same title/body rhythm */
   body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
-    gap: var(--section-subheading-spacing-top, 10px) !important;
-    row-gap: var(--section-subheading-spacing-top, 10px) !important;
+    gap: var(--hp-bs-mobile-title-para-gap) !important;
+    row-gap: var(--hp-bs-mobile-title-para-gap) !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin-left: 0 !important;

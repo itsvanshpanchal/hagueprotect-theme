@@ -391,8 +391,8 @@
       max-width: 100% !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
-      padding-top: 28px !important;
-      padding-bottom: 24px !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       box-sizing: border-box !important;
@@ -474,17 +474,17 @@
       overflow: visible !important;
     }
 
-    /* Keep eyebrow → title → desc gaps equal on mobile */
+    /* Keep eyebrow → title → desc gaps equal on mobile (Best Sellers rhythm) */
     #shopify-section-{{ section.id }} .section-heading-stack,
     .mat-section .section-heading-stack {
-      gap: var(--section-label-to-title-gap, 10px) !important;
-      row-gap: var(--section-label-to-title-gap, 10px) !important;
+      gap: 10px !important;
+      row-gap: 10px !important;
     }
 
     #MainContent #shopify-section-{{ section.id }} .mat-desc,
     #shopify-section-{{ section.id }} .mat-desc,
     .mat-section .mat-desc {
-      margin-top: var(--section-label-to-title-gap, 10px) !important;
+      margin-top: 10px !important;
       margin-bottom: 0 !important;
     }
 
