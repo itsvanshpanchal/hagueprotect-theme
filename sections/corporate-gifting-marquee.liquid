@@ -5,6 +5,21 @@
   assign row_gap = section.settings.row_gap | default: 0
 -%}
 
+<style>
+  /* Force zero padding and margins on the outer section container for this marquee, 
+     overriding global theme layouts and floating cards padding */
+  #shopify-section-{{ section.id }} {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+  }
+  #shopify-section-{{ section.id }} > .hp-float-pin {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+</style>
+
 {{ 'corp-gifting-marquee.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}

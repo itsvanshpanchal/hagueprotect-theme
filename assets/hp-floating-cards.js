@@ -842,6 +842,17 @@
           sec.style.setProperty('background-color', '#121111', 'important');
           pin.style.setProperty('background-color', '#121111', 'important');
         }
+        if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
+          item.bg = '#ffffff';
+          sec.style.setProperty('background-color', '#ffffff', 'important');
+          sec.style.setProperty('padding', '0', 'important');
+          sec.style.setProperty('margin', '0', 'important');
+          pin.style.setProperty('background-color', '#ffffff', 'important');
+          pin.style.setProperty('padding', '0', 'important');
+          pin.style.setProperty('margin', '0', 'important');
+          pin.style.setProperty('min-height', '0', 'important');
+          pin.style.setProperty('height', 'auto', 'important');
+        }
         return;
       }
 
