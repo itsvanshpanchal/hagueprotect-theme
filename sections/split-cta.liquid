@@ -218,10 +218,10 @@
     body .split-cta-{{ section.id }},
     body #MainContent .split-cta-{{ section.id }},
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }} {
-      padding-top: 32px !important;
-      padding-bottom: 32px !important;
-      padding-left: var(--homepage-section-gutter, 24px) !important;
-      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 24px)) !important;
+      padding-top: {{ section.settings.padding_top_mobile | default: 48 }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 48 }}px !important;
+      padding-left: var(--homepage-section-gutter, 28px) !important;
+      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 28px)) !important;
       border-top: none !important;
       border-bottom: none !important;
       min-height: 0 !important;
@@ -236,7 +236,7 @@
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__inner {
       display: flex !important;
       flex-direction: column !important;
-      align-items: flex-start !important;
+      align-items: stretch !important;
       justify-content: flex-start !important;
       gap: 0 !important;
       max-width: 100% !important;
@@ -248,36 +248,39 @@
     body #MainContent .split-cta-{{ section.id }}__copy,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__copy {
       max-width: 100% !important;
-      margin: 0 0 20px 0 !important;
+      margin: 0 0 28px 0 !important;
       height: auto !important;
       min-height: 0 !important;
       flex: 0 0 auto !important;
     }
 
+    body.template-index #MainContent .split-cta-{{ section.id }}__heading,
     body .split-cta-{{ section.id }}__heading,
     body #MainContent .split-cta-{{ section.id }}__heading,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__heading {
-      font-family: {{ heading_stack }} !important;
-      font-size: 32px !important;
-      font-weight: 300 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: {{ heading_size_mobile }}px !important;
+      font-weight: 600 !important;
       font-style: normal !important;
-      line-height: 1.15 !important;
-      letter-spacing: -0.02em !important;
+      line-height: 1.1 !important;
+      letter-spacing: -0.03em !important;
       color: var(--split-cta-heading) !important;
-      margin: 0 0 10px 0 !important;
+      margin: 0 0 14px 0 !important;
       text-align: left !important;
+      font-synthesis: none !important;
     }
 
+    body.template-index #MainContent .split-cta-{{ section.id }}__text,
     body .split-cta-{{ section.id }}__text,
     body #MainContent .split-cta-{{ section.id }}__text,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__text,
     body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"] {
-      font-family: {{ text_stack }} !important;
-      font-size: 15px !important;
-      font-weight: 300 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: {{ text_size_mobile }}px !important;
+      font-weight: 400 !important;
       font-style: normal !important;
-      line-height: 1.45 !important;
-      letter-spacing: 0.01em !important;
+      line-height: 1.5 !important;
+      letter-spacing: 0 !important;
       color: var(--split-cta-text) !important;
       max-width: 100% !important;
       margin: 0 !important;
@@ -293,16 +296,18 @@
       height: auto !important;
       min-height: 0 !important;
       flex: 0 0 auto !important;
+      align-self: stretch !important;
     }
 
+    body.template-index #MainContent .split-cta-{{ section.id }}__button,
     body .split-cta-{{ section.id }}__button,
     body #MainContent .split-cta-{{ section.id }}__button,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__button {
       width: 100% !important;
-      height: 52px !important;
-      min-height: 52px !important;
-      max-height: 52px !important;
-      padding: 0 24px !important;
+      height: 56px !important;
+      min-height: 56px !important;
+      max-height: 56px !important;
+      padding: 0 20px !important;
       display: flex !important;
       flex-direction: row !important;
       flex-wrap: nowrap !important;
@@ -313,10 +318,11 @@
       box-sizing: border-box !important;
       background: var(--split-cta-btn-bg) !important;
       color: var(--split-cta-btn-text) !important;
-      font-family: {{ button_stack }} !important;
-      font-size: 13px !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.12em !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
       border-radius: 0 !important;
       flex: 0 0 auto !important;
       align-self: stretch !important;
@@ -326,7 +332,7 @@
     body #MainContent .split-cta-{{ section.id }}__arrow,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__arrow {
       display: inline-block !important;
-      font-size: 1.1em !important;
+      font-size: 1.05em !important;
       line-height: 1 !important;
     }
   }

@@ -1023,13 +1023,15 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='__button'] {
-    display: inline-flex !important;
+    display: flex !important;
+    width: 100% !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: center !important;
     white-space: nowrap !important;
     gap: 12px !important;
+    text-transform: uppercase !important;
   }
 
   body.hp-float-mobile .hp-float-stack > .shopify-section.section-split-cta [class*='__arrow'] {
