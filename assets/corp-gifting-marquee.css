@@ -28,7 +28,7 @@
   background: var(--corp-marquee-bg) !important;
   border-top: 1px solid rgba(17, 17, 17, 0.08);
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(12px, 1.5vw, 16px) 0 clamp(8px, 1.2vw, 12px);
+  padding: 0 !important;
   overflow-x: clip;
   overflow-y: visible;
   position: relative;
@@ -106,8 +106,8 @@
   font-size: var(--corp-marquee-font-size) !important;
   font-weight: 400 !important;
   font-style: normal !important;
-  line-height: 1 !important;
-  padding-block: 1px;
+  line-height: 0.8 !important;
+  padding: 0 !important;
   letter-spacing: 0.02em !important;
   text-transform: uppercase !important;
   color: var(--corp-marquee-text) !important;
