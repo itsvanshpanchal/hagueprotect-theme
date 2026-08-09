@@ -570,6 +570,8 @@
     pin.style.setProperty('height', 'auto', 'important');
     pin.style.setProperty('min-height', '0', 'important');
     pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('margin', '0', 'important');
+    pin.style.setProperty('padding', '0', 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
     pin.style.setProperty('overflow', 'visible', 'important');
@@ -933,7 +935,13 @@
         if (pin.querySelector('.corp-marquee--outline-style, .corp-marquee')) {
           item.bg = '#ffffff';
           sec.style.setProperty('background-color', '#ffffff', 'important');
+          sec.style.setProperty('padding', '0', 'important');
+          sec.style.setProperty('margin', '0', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
+          pin.style.setProperty('padding', '0', 'important');
+          pin.style.setProperty('margin', '0', 'important');
+          pin.style.setProperty('min-height', '0', 'important');
+          pin.style.setProperty('height', 'auto', 'important');
         }
         return;
       }
