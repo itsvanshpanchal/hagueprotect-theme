@@ -29,7 +29,7 @@
 }
 
 /* ========== H2 / Section heading ========== */
-#MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
+#MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]),
 #MainContent .shopify-section .skincare-builder__title,
 #MainContent .shopify-section .skincare-concerns__title,
 #MainContent .shopify-section .skincare-explanation__title,
@@ -75,7 +75,6 @@
 #MainContent .shopify-section .hp-fam-sec__heading,
 #MainContent .shopify-section .story-banner__heading,
 #MainContent .shopify-section [class*="ai-story-banner-heading"],
-#MainContent .shopify-section [class*="split-cta-"][class*="__heading"],
 #MainContent .shopify-section .mat-headline .hp-heading-line,
 #MainContent .shopify-section .bs-coverflow__heading .hp-heading-line,
 #MainContent .shopify-section .trending-social__heading .hp-heading-line,
@@ -304,7 +303,7 @@
     font-size: var(--heading-size-hero) !important;
   }
 
-  #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]),
+  #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]),
   #MainContent .shopify-section .bestsellers__heading-dtc,
   #MainContent .shopify-section .bundle-title,
   #MainContent .shopify-section .fb__title,
@@ -337,7 +336,6 @@
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-heading-pair,
   #MainContent .shopify-section [class*="ai-story-banner-heading"] .hp-typewriter-text,
-  #MainContent .shopify-section [class*="split-cta-"][class*="__heading"],
   #MainContent .shopify-section .mat-headline .hp-heading-line,
   #MainContent .shopify-section .bs-coverflow__heading .hp-heading-line,
   #MainContent .shopify-section .trending-social__heading .hp-heading-line,

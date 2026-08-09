@@ -215,11 +215,12 @@
   }
 
   @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }},
     body .split-cta-{{ section.id }},
     body #MainContent .split-cta-{{ section.id }},
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile | default: 48 }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 48 }}px !important;
+      padding-top: {{ section.settings.padding_top_mobile | default: 32 }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 32 }}px !important;
       padding-left: var(--homepage-section-gutter, 28px) !important;
       padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 28px)) !important;
       border-top: none !important;
@@ -231,6 +232,7 @@
       background: var(--split-cta-bg) !important;
     }
 
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__inner,
     body .split-cta-{{ section.id }}__inner,
     body #MainContent .split-cta-{{ section.id }}__inner,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__inner {
@@ -238,22 +240,27 @@
       flex-direction: column !important;
       align-items: stretch !important;
       justify-content: flex-start !important;
-      gap: 0 !important;
+      gap: 24px !important;
       max-width: 100% !important;
       height: auto !important;
       min-height: 0 !important;
     }
 
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__copy,
     body .split-cta-{{ section.id }}__copy,
     body #MainContent .split-cta-{{ section.id }}__copy,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__copy {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
       max-width: 100% !important;
-      margin: 0 0 28px 0 !important;
+      margin: 0 !important;
       height: auto !important;
       min-height: 0 !important;
       flex: 0 0 auto !important;
     }
 
+    #shopify-section-{{ section.id }} h2.split-cta-{{ section.id }}__heading,
     body.template-index #MainContent .split-cta-{{ section.id }}__heading,
     body .split-cta-{{ section.id }}__heading,
     body #MainContent .split-cta-{{ section.id }}__heading,
@@ -262,14 +269,15 @@
       font-size: {{ heading_size_mobile }}px !important;
       font-weight: 600 !important;
       font-style: normal !important;
-      line-height: 1.1 !important;
+      line-height: 1.08 !important;
       letter-spacing: -0.03em !important;
       color: var(--split-cta-heading) !important;
-      margin: 0 0 14px 0 !important;
+      margin: 0 !important;
       text-align: left !important;
       font-synthesis: none !important;
     }
 
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__text,
     body.template-index #MainContent .split-cta-{{ section.id }}__text,
     body .split-cta-{{ section.id }}__text,
     body #MainContent .split-cta-{{ section.id }}__text,
@@ -279,7 +287,7 @@
       font-size: {{ text_size_mobile }}px !important;
       font-weight: 400 !important;
       font-style: normal !important;
-      line-height: 1.5 !important;
+      line-height: 1.45 !important;
       letter-spacing: 0 !important;
       color: var(--split-cta-text) !important;
       max-width: 100% !important;
@@ -287,11 +295,11 @@
       text-align: left !important;
     }
 
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__actions,
     body .split-cta-{{ section.id }}__actions,
     body #MainContent .split-cta-{{ section.id }}__actions,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__actions {
-      margin-left: 0 !important;
-      margin-top: 0 !important;
+      margin: 0 !important;
       width: 100% !important;
       height: auto !important;
       min-height: 0 !important;
@@ -299,14 +307,15 @@
       align-self: stretch !important;
     }
 
+    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__button,
     body.template-index #MainContent .split-cta-{{ section.id }}__button,
     body .split-cta-{{ section.id }}__button,
     body #MainContent .split-cta-{{ section.id }}__button,
     body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__button {
       width: 100% !important;
-      height: 56px !important;
-      min-height: 56px !important;
-      max-height: 56px !important;
+      height: 52px !important;
+      min-height: 52px !important;
+      max-height: 52px !important;
       padding: 0 20px !important;
       display: flex !important;
       flex-direction: row !important;
@@ -360,7 +369,7 @@
   <div class="split-cta-{{ section.id }}__inner">
     <div class="split-cta-{{ section.id }}__copy">
       <h2 class="split-cta-{{ section.id }}__heading">{{ cta_heading | escape | newline_to_br }}</h2>
-      <p class="split-cta-{{ section.id }}__text hp-body-para">{{ cta_text | escape }}</p>
+      <p class="split-cta-{{ section.id }}__text">{{ cta_text | escape }}</p>
     </div>
 
     <div class="split-cta-{{ section.id }}__actions">
