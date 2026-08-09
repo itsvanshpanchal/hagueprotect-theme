@@ -11,12 +11,25 @@
   #shopify-section-{{ section.id }},
   #shopify-section-{{ section.id }} > .hp-float-pin {
     background-color: {{ bg_color }} !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee {
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__track-wrap:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
 {%- endstyle -%}
 
@@ -30,9 +43,9 @@
   endfor
 -%}
 
-<section class="corp-marquee corp-marquee--outline-style" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
-  {%- if section.settings.label != blank -%}
-    <p class="corp-marquee__label{% unless show_label %} corp-marquee__label--hidden{% endunless %}">
+<section class="corp-marquee corp-marquee--outline-style corp-marquee--compact" aria-label="{{ section.settings.label | default: 'Corporate gifting services' | escape }}">
+  {%- if show_label and section.settings.label != blank -%}
+    <p class="corp-marquee__label">
       {{ section.settings.label }}
     </p>
   {%- endif -%}

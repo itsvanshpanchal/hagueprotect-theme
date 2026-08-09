@@ -1973,6 +1973,11 @@ body.template-index {
 body.template-index #MainContent .shopify-section:has(.corp-marquee--outline-style),
 body.template-index #MainContent .shopify-section:has(.corp-marquee--outline-style) > .hp-float-pin {
   background-color: #ffffff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
 }
 
 body.template-index .corp-marquee--outline-style,
@@ -1984,9 +1989,9 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: #ffffff !important;
   background-color: #ffffff !important;
-  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  border-top: none;
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
-  padding: clamp(12px, 1.5vw, 16px) 0 clamp(8px, 1.2vw, 12px);
+  padding: 0 0 clamp(8px, 1.2vw, 12px);
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
@@ -2019,11 +2024,17 @@ body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap {
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
-  padding-block: 3px 1px;
+  padding-block: 0 1px;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap:first-child {
-  padding-top: 4px;
+  padding-top: 0;
+}
+
+body.template-index .corp-marquee--outline-style.corp-marquee--compact {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  border-top: none !important;
 }
 
 body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap + .corp-marquee__track-wrap {
@@ -2081,7 +2092,11 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   body.template-index .corp-marquee--outline-style {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
-    padding: 10px 0 8px;
+    padding: 0 0 8px;
+  }
+
+  body.template-index .corp-marquee--outline-style.corp-marquee--compact {
+    padding-top: 0 !important;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
