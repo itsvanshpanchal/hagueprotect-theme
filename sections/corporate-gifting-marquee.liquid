@@ -16,8 +16,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    line-height: 0;
-    font-size: 0;
+    display: block !important;
   }
 
   #shopify-section-{{ section.id }} .corp-marquee {
@@ -33,6 +32,10 @@
   #shopify-section-{{ section.id }} .corp-marquee__track-wrap {
     padding: 0 !important;
     margin-top: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-marquee__item {
+    padding-block: 4px !important;
   }
 {%- endstyle -%}
 

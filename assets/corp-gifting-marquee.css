@@ -7,6 +7,7 @@
   min-height: 0 !important;
   height: auto !important;
   max-height: none !important;
+  display: block !important;
 }
 
 .shopify-section:has(.corp-marquee) > .hp-float-pin {
@@ -15,6 +16,7 @@
   min-height: 0 !important;
   height: auto !important;
   max-height: none !important;
+  display: block !important;
 }
 
 .corp-marquee {
@@ -57,7 +59,8 @@
   overflow-x: clip;
   overflow-y: visible;
   width: 100%;
-  padding-block: 0 1px;
+  padding: 0;
+  margin: 0;
 }
 
 .corp-marquee__track-wrap:first-child {
