@@ -329,6 +329,21 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     touch-action: pan-y !important;
   }
 
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) > .hp-float-pin {
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    line-height: normal !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) {
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-hero,
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-hero > .hp-float-pin {
     min-height: var(--hp-mobile-vh, 100vh) !important;

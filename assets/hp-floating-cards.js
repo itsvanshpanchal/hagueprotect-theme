@@ -138,6 +138,11 @@
     return isMobile() && total >= 3 && index >= total - 3;
   }
 
+  /* Last 3 homepage sections (lifestyle story, split CTA, DNA) */
+  function isBottomHomeStrip(index, total) {
+    return total >= 3 && index >= total - 3;
+  }
+
   /* Mobile: normal page scroll — no sticky cover cards (desktop keeps float animation) */
   function useMobileNativeScroll() {
     if (!isMobile()) return false;
@@ -847,9 +852,25 @@
       }
 
       if (story) {
-        sec.classList.add('hp-story-banner-lite');
-        pin.style.cssText = '';
-        prepareStoryMobileStrip(pin);
+        if (isBottomHomeStrip(index, items.length)) {
+          sec.classList.add('hp-story-banner-lite');
+          pin.style.cssText = '';
+          prepareStoryMobileStrip(pin);
+        } else {
+          sec.classList.add('hp-float-story');
+          prepareStoryFullscreen(pin, true);
+          var storyFill = viewportFill(true);
+          var storyVh = viewportH() + 'px';
+          sec.style.setProperty('height', storyFill, 'important');
+          sec.style.setProperty('min-height', storyVh, 'important');
+          sec.style.setProperty('max-height', 'none', 'important');
+          sec.style.setProperty('overflow', 'hidden', 'important');
+          pin.style.setProperty('height', storyFill, 'important');
+          pin.style.setProperty('min-height', storyVh, 'important');
+          pin.style.setProperty('max-height', 'none', 'important');
+          pin.style.setProperty('overflow', 'hidden', 'important');
+          pin.style.setProperty('line-height', 'normal', 'important');
+        }
         asStrip(item, 10 + index);
         if (bg) {
           sec.style.setProperty('background-color', bg, 'important');
