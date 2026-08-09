@@ -912,7 +912,7 @@
       /* Mobile story: sticky full-bleed — next card floats over */
       if (story && mobile) {
         cardIndex += 1;
-        asStoryOnce(item, cardIndex, bg);
+        asStoryOnce(item, cardIndex, '#111111');
         return;
       }
 
@@ -934,6 +934,12 @@
           item.bg = '#ffffff';
           sec.style.setProperty('background-color', '#ffffff', 'important');
           pin.style.setProperty('background-color', '#ffffff', 'important');
+          var prevItem = index > 0 ? items[index - 1] : null;
+          if (prevItem && (prevItem.sec.classList.contains('hp-float-story') || isStoryPin(prevItem.pin))) {
+            sec.classList.add('hp-marquee-after-story');
+            var marquee = pin.querySelector('.corp-marquee');
+            if (marquee) marquee.classList.add('corp-marquee--flush-top');
+          }
         }
         return;
       }
@@ -949,7 +955,7 @@
       }
 
       cardIndex += 1;
-      asCard(item, cardIndex, contentH, bg, mobile, story);
+      asCard(item, cardIndex, contentH, story ? '#111111' : bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);
       if (story) prepareStoryFullscreen(pin, mobile);
     });

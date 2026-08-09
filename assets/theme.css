@@ -1993,6 +1993,20 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   max-width: 100%;
 }
 
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section .corp-marquee--outline-style,
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section .corp-marquee--outline-style,
+body.template-index .corp-marquee.corp-marquee--flush-top.corp-marquee--outline-style {
+  border-top: none !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body.template-index .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section .corp-marquee--outline-style .corp-marquee__track-wrap:first-child,
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section .corp-marquee--outline-style .corp-marquee__track-wrap:first-child,
+body.template-index .corp-marquee.corp-marquee--flush-top .corp-marquee__track-wrap:first-child {
+  padding-top: 0 !important;
+}
+
 body.template-index .corp-marquee--outline-style .corp-marquee__dot,
 body.template-index .corp-marquee--outline-style .corp-marquee__item--accent {
   display: none !important;
@@ -2082,6 +2096,12 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     padding: 10px 0 8px;
+  }
+
+  body.template-index .shopify-section:has([class*='ai-story-sticky-track']) + .shopify-section .corp-marquee--outline-style,
+  body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section .corp-marquee--outline-style,
+  body.template-index .corp-marquee.corp-marquee--flush-top.corp-marquee--outline-style {
+    padding-top: 0 !important;
   }
 
   body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {

@@ -111,13 +111,12 @@
   }
 
   .ai-story-banner-wrapper {
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    height: 100svh !important;
-    height: 100dvh !important;
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
+    background-color: #111111 !important;
   }
 
   .ai-story-banner-picture,

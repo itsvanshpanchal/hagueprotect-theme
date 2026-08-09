@@ -75,6 +75,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   margin-top: 0 !important;
 }
 
+/* Kill white seam between Tell Your Story and corporate marquee (all breakpoints) */
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee) {
+  margin-top: -1px !important;
+}
+
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee),
+body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee) > .hp-float-pin {
+  padding-top: 0 !important;
+}
+
 /* Stretch every wrapper in the chain so % / absolute fill works */
 .hp-float-stack .hp-float-story > .hp-float-pin,
 .hp-float-stack .hp-float-story > .hp-float-pin > *,
@@ -433,11 +443,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     right: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    height: 100svh !important;
-    height: 100dvh !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: var(--hp-mobile-vh, 100vh) !important;
     overflow: hidden !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -454,11 +462,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
     position: relative !important;
-    height: 100svh !important;
-    height: 100dvh !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    max-height: none !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: var(--hp-mobile-vh, 100vh) !important;
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;
