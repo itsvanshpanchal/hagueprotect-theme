@@ -216,6 +216,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: visible !important;
   }
 
+  /* Desktop DNA: natural height — no empty black band below the icon grid */
+  .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna,
+  .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin,
+  .hp-float-stack > .shopify-section.hp-float-strip.hp-float-dna > .hp-float-pin > [class*='hp-dna-']:not([class*='__']) {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
   .hp-float-stack .hp-float-strip .comm-section .comm-slider-container,
   .hp-float-stack .hp-float-strip .comm-section .comm-swiper {
     overflow: hidden !important;

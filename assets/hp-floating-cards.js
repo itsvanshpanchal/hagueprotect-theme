@@ -1103,6 +1103,18 @@
         return;
       }
 
+      /* Desktop/laptop — DNA hugs content; no full-viewport black void below the grid */
+      if (!mobile && (isDnaPin(pin) || isDnaSection(sec))) {
+        cardIndex += 1;
+        asStrip(item, cardIndex);
+        sec.classList.add('hp-float-dna');
+        var dnaBg = bg || '#121111';
+        sec.style.setProperty('background-color', dnaBg, 'important');
+        pin.style.setProperty('background-color', dnaBg, 'important');
+        pin.style.setProperty('overflow', 'visible', 'important');
+        return;
+      }
+
       cardIndex += 1;
       asCard(item, cardIndex, contentH, bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);

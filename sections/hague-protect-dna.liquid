@@ -199,6 +199,18 @@
     }
   }
 
+  /* Large screens — tighten vertical padding so the section doesn't feel empty */
+  @media screen and (min-width: 1024px) {
+    .hp-dna-{{ section.id }} {
+      padding-top: clamp(48px, 4.5vw, 64px);
+      padding-bottom: clamp(40px, 4vw, 56px);
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__heading {
+      margin-bottom: clamp(32px, 3.5vw, 48px);
+    }
+  }
+
   /* Mobile only — horizontal swipe carousel */
   @media screen and (max-width: 749px) {
     .hp-dna-{{ section.id }} {
