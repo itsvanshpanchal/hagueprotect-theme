@@ -111,21 +111,13 @@
   }
 
   .ai-story-banner-wrapper {
-    min-height: var(--hp-mobile-vh, 100vh) !important;
-    height: var(--hp-mobile-vh, 100vh) !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
     background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
-    background-color: #111111 !important;
-  }
-
-  /* Story directly above corporate marquee — image height only, no viewport void */
-  body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) .ai-story-banner-wrapper,
-  body.template-index .hp-story-before-marquee .ai-story-banner-wrapper {
-    min-height: 0 !important;
-    height: auto !important;
-    max-height: none !important;
-    aspect-ratio: 9 / 16 !important;
   }
 
   .ai-story-banner-picture,
@@ -258,13 +250,6 @@
     will-change: auto !important;
   }
 
-  /* Keep cover image when story sits above corporate marquee */
-  body.template-index .hp-story-before-marquee [class*='ai-story-banner-wrapper'],
-  body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [class*='ai-story-banner-wrapper'] {
-    max-height: none !important;
-    background-image: none !important;
-  }
-
   .ai-story-sticky-track--flow .ai-story-banner-picture,
   .ai-story-sticky-track--flow .ai-story-banner-cover,
   .ai-story-sticky-track--flow .ai-story-banner-image,
@@ -294,28 +279,4 @@
     max-height: none !important;
     overflow: visible !important;
   }
-
-  body.template-index .hp-story-before-marquee .ai-story-banner-picture,
-  body.template-index .hp-story-before-marquee [data-hp-story-cover],
-  body.template-index .hp-story-before-marquee .ai-story-banner-image,
-  body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) .ai-story-banner-picture,
-  body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) [data-hp-story-cover],
-  body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) .ai-story-banner-image {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    max-height: none !important;
-    aspect-ratio: auto !important;
-  }
-}
-
-/* Desktop + mobile: story above corporate marquee — content height, flush seam */
-body.template-index .shopify-section:has([class*='ai-story-sticky-track']):has(+ .shopify-section:has(.corp-marquee)) .ai-story-banner-wrapper,
-body.template-index .hp-story-before-marquee .ai-story-banner-wrapper {
-  min-height: 0 !important;
-  height: auto !important;
-  max-height: none !important;
-  aspect-ratio: 9 / 16 !important;
 }

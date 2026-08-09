@@ -75,33 +75,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   margin-top: 0 !important;
 }
 
-/* Kill white seam between Tell Your Story and corporate marquee (all breakpoints) */
-body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee) {
-  margin-top: -1px !important;
-}
-
-body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee),
-body.template-index .hp-float-stack > .shopify-section.hp-float-story + .shopify-section.hp-float-strip:has(.corp-marquee) > .hp-float-pin {
-  padding-top: 0 !important;
-}
-
-/* Tell Your Story → marquee: content-height strip (not a full-viewport sticky card) */
-body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee,
-body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee > .hp-float-pin {
-  position: relative !important;
-  top: auto !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-  box-shadow: none !important;
-  background-color: #111111 !important;
-}
-
-body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee + .shopify-section.hp-float-strip:has(.corp-marquee) {
-  margin-top: 0 !important;
-}
-
 /* Stretch every wrapper in the chain so % / absolute fill works */
 .hp-float-stack .hp-float-story > .hp-float-pin,
 .hp-float-stack .hp-float-story > .hp-float-pin > *,
@@ -460,9 +433,11 @@ body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee +
     right: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    height: var(--hp-mobile-vh, 100vh) !important;
-    min-height: var(--hp-mobile-vh, 100vh) !important;
-    max-height: var(--hp-mobile-vh, 100vh) !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
     overflow: hidden !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -479,9 +454,11 @@ body.template-index .hp-float-stack > .shopify-section.hp-story-before-marquee +
   body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'] {
     position: relative !important;
-    height: var(--hp-mobile-vh, 100vh) !important;
-    min-height: var(--hp-mobile-vh, 100vh) !important;
-    max-height: var(--hp-mobile-vh, 100vh) !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
     width: 100% !important;
     max-width: none !important;
     margin: 0 !important;

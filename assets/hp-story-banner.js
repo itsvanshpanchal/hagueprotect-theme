@@ -20,26 +20,6 @@
   }
 
   function syncWrap(wrap) {
-    if (wrap.closest('.hp-story-before-marquee')) {
-      wrap.style.setProperty('min-height', '0', 'important');
-      wrap.style.setProperty('height', 'auto', 'important');
-      wrap.style.setProperty('max-height', 'none', 'important');
-      wrap.style.setProperty('aspect-ratio', '9 / 16', 'important');
-      wrap.style.setProperty('position', 'relative', 'important');
-      wrap.style.setProperty('overflow', 'hidden', 'important');
-      wrap.style.setProperty('background-image', 'none', 'important');
-      var flushCover = wrap.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
-      if (flushCover) {
-        flushCover.style.setProperty('position', 'absolute', 'important');
-        flushCover.style.setProperty('inset', '0', 'important');
-        flushCover.style.setProperty('width', '100%', 'important');
-        flushCover.style.setProperty('height', '100%', 'important');
-        flushCover.style.setProperty('object-fit', 'cover', 'important');
-        flushCover.style.setProperty('display', 'block', 'important');
-      }
-      return;
-    }
-
     if (wrap.closest('.ai-story-sticky-track--flow, .hp-float-bottom-strip, .hp-story-banner-lite')) {
       wrap.style.setProperty('background-image', 'none', 'important');
       wrap.style.setProperty('min-height', '0', 'important');
