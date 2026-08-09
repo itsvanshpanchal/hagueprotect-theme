@@ -1990,13 +1990,15 @@ body.template-index .corp-marquee.corp-marquee--outline-style {
   --corp-marquee-bg: #ffffff;
   --corp-marquee-text: #111111;
   --corp-marquee-row-gap: 4px;
-  --corp-marquee-pad-y: clamp(10px, 1.4vw, 14px);
+  --corp-marquee-pad-top: clamp(4px, 0.7vw, 8px);
+  --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
   --corp-marquee-word-gap: clamp(12px, 2vw, 24px);
   --corp-marquee-font-size: clamp(20px, 2.6vw, 34px);
   background: #ffffff !important;
   background-color: #ffffff !important;
   border: none;
-  padding-block: var(--corp-marquee-pad-y) !important;
+  padding-top: var(--corp-marquee-pad-top) !important;
+  padding-bottom: var(--corp-marquee-pad-bottom) !important;
   padding-inline: 0 !important;
   margin: 0 !important;
   overflow-x: clip;
@@ -2046,7 +2048,10 @@ body.template-index .corp-marquee--outline-style .corp-marquee__track-wrap:first
 body.template-index .corp-marquee--outline-style.corp-marquee--compact,
 body.template-index .corp-marquee.corp-marquee--compact,
 body.template-index .corp-marquee--flush-seam {
-  padding-block: var(--corp-marquee-pad-y, clamp(10px, 1.4vw, 14px)) !important;
+  --corp-marquee-pad-top: clamp(2px, 0.5vw, 6px);
+  --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
+  padding-top: var(--corp-marquee-pad-top) !important;
+  padding-bottom: var(--corp-marquee-pad-bottom) !important;
   padding-inline: 0 !important;
   margin: 0 !important;
   border: none !important;
@@ -2109,8 +2114,10 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     --corp-marquee-row-gap: 4px;
-    --corp-marquee-pad-y: clamp(8px, 2vw, 12px);
-    padding-block: var(--corp-marquee-pad-y) !important;
+    --corp-marquee-pad-top: clamp(3px, 1.2vw, 6px);
+    --corp-marquee-pad-bottom: clamp(8px, 2vw, 12px);
+    padding-top: var(--corp-marquee-pad-top) !important;
+    padding-bottom: var(--corp-marquee-pad-bottom) !important;
   }
 
   body.template-index .shopify-section:has(.corp-marquee--flush-seam),
@@ -2121,7 +2128,10 @@ body.template-index .corp-marquee--outline-style .corp-marquee__item--outline {
   body.template-index .corp-marquee--outline-style.corp-marquee--compact,
   body.template-index .corp-marquee.corp-marquee--compact,
   body.template-index .corp-marquee--flush-seam {
-    padding-block: var(--corp-marquee-pad-y, clamp(8px, 2vw, 12px)) !important;
+    --corp-marquee-pad-top: clamp(2px, 1vw, 5px);
+    --corp-marquee-pad-bottom: clamp(8px, 2vw, 12px);
+    padding-top: var(--corp-marquee-pad-top) !important;
+    padding-bottom: var(--corp-marquee-pad-bottom) !important;
     padding-inline: 0 !important;
     margin: 0 !important;
     border: none !important;

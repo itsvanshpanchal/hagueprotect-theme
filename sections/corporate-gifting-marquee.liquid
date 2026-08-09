@@ -44,9 +44,11 @@
     --corp-marquee-bg: {{ bg_color }};
     --corp-marquee-text: {{ text_color }};
     --corp-marquee-row-gap: {{ row_gap }}px;
-    --corp-marquee-pad-y: clamp(10px, 1.4vw, 14px);
+    --corp-marquee-pad-top: clamp(2px, 0.5vw, 6px);
+    --corp-marquee-pad-bottom: clamp(10px, 1.4vw, 14px);
     margin: 0 !important;
-    padding-block: var(--corp-marquee-pad-y) !important;
+    padding-top: var(--corp-marquee-pad-top) !important;
+    padding-bottom: var(--corp-marquee-pad-bottom) !important;
     padding-inline: 0 !important;
     border-top: none !important;
     border-bottom: none !important;
