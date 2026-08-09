@@ -134,6 +134,8 @@
 }
 
 /* Compact — no extra white space on any side */
+body.template-index .corp-marquee.corp-marquee--compact,
+body.template-index .corp-marquee--compact.corp-marquee--outline-style,
 .corp-marquee.corp-marquee--compact,
 .corp-marquee--compact.corp-marquee--outline-style {
   margin: 0 !important;
@@ -157,9 +159,10 @@
     --corp-marquee-font-size: clamp(16px, 4.2vw, 22px);
     --corp-marquee-word-gap: 12px;
     --corp-marquee-row-gap: 0px;
-    padding: 10px 0 8px;
+    padding: 0 !important;
   }
 
+  body.template-index .corp-marquee.corp-marquee--compact,
   .corp-marquee.corp-marquee--compact {
     padding: 0 !important;
     border-top: none !important;
