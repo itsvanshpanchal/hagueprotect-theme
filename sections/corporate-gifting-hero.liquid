@@ -322,7 +322,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+      justify-content: center;
     flex-direction: column;
     gap: 8px;
     color: rgba(255, 255, 255, 0.25);
@@ -508,7 +508,7 @@
         {%- if section.settings.btn2_link != blank -%}
           <a href="{{ section.settings.btn2_link }}" class="corp-hero__btn corp-hero__btn--ghost">{{ section.settings.btn2_label | default: 'Download Catalog' }}</a>
         {%- endif -%}
-      </div>
+    </div>
 
       {%- liquid
         assign stat1_num = section.settings.stat1_num | strip
@@ -543,8 +543,8 @@
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
         </div>
-      </div>
-    </div>
+  </div>
+</div>
 
     <div class="corp-hero__showcase{% if section.settings.showcase_mode == 'single' %} corp-hero__showcase--single{% endif %}">
       {%- if section.settings.showcase_mode == 'single' and section.settings.single_showcase_image != blank -%}
