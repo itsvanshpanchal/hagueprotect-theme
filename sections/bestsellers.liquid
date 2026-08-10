@@ -714,6 +714,73 @@ text-shadow: none !important;
       padding-bottom: env(safe-area-inset-bottom, 0px);
     }
 
+    /* Float stack: one full viewport — flex-fill stage so Materials does not peek */
+    body.hp-float-mobile #shopify-section-{{ section.id }} > .hp-float-pin {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 100%;
+      overflow: hidden;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+      height: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__container {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      height: 100%;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__header {
+      flex: 0 0 auto;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__stage {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      min-height: 0;
+      height: auto;
+      overflow: hidden;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__viewport {
+      flex: 1 1 auto;
+      height: 100%;
+      min-height: 0;
+      max-height: none;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow-card.is-active .bs-coverflow-card__inner {
+      min-height: min(52vh, 420px);
+      max-height: calc(100% - 12px);
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow-card__media {
+      flex: 1 1 auto;
+      min-height: 160px;
+      height: auto;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__footer {
+      flex: 0 0 auto;
+      margin-top: auto;
+    }
+
     #shopify-section-{{ section.id }} .bs-coverflow__dots-row {
       display: none;
     }
@@ -784,6 +851,12 @@ text-shadow: none !important;
       height: 340px;
       min-height: 340px;
       max-height: 340px;
+    }
+
+    body.hp-float-mobile #shopify-section-{{ section.id }} .bs-coverflow__viewport {
+      height: 100%;
+      min-height: 0;
+      max-height: none;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow-card {

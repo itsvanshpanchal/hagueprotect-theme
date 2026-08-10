@@ -606,17 +606,18 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
     padding-top: 28px !important;
-    padding-bottom: 24px !important;
-    overflow: visible !important;
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 0px)) !important;
+    overflow: hidden !important;
     background-color: #111111 !important;
+    box-sizing: border-box !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section {
-    padding-top: 28px !important;
-    padding-bottom: 24px !important;
-    box-sizing: border-box !important;
+  body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card:has(.bs-coverflow) {
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__container {
@@ -626,9 +627,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     flex: 1 1 auto !important;
     width: 100% !important;
     min-height: 0 !important;
+    height: 100% !important;
     max-width: 100% !important;
-    gap: 12px !important;
-    overflow: visible !important;
+    gap: 10px !important;
+    overflow: hidden !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__header {
@@ -647,24 +649,32 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__stage {
-    flex: 0 0 auto !important;
+    flex: 1 1 auto !important;
     width: 100% !important;
-    min-height: 360px !important;
+    min-height: 0 !important;
     height: auto !important;
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
     position: relative !important;
-    align-items: stretch !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__viewport {
     display: block !important;
     position: relative !important;
     width: 100% !important;
-    height: 360px !important;
-    min-height: 360px !important;
-    max-height: 360px !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 260px !important;
+    max-height: none !important;
     overflow: hidden !important;
     perspective: none !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card {
+    max-width: calc(100% - 88px) !important;
+    width: min(78vw, 300px) !important;
+    left: 50% !important;
+    top: 50% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__track {
@@ -673,13 +683,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     height: 100% !important;
     transform: none !important;
     transform-style: flat !important;
-  }
-
-  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card {
-    max-width: calc(100% - 88px) !important;
-    width: min(78vw, 300px) !important;
-    left: 50% !important;
-    top: 50% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card.is-active {
@@ -694,6 +697,29 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     opacity: 1 !important;
     background: #ffffff !important;
     display: flex !important;
+    flex-direction: column !important;
+    min-height: min(52vh, 420px) !important;
+    max-height: calc(100% - 12px) !important;
+    height: auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card__media {
+    flex: 1 1 auto !important;
+    min-height: 160px !important;
+    height: auto !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__footer {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+    padding-bottom: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section {
+    padding-top: 28px !important;
+    padding-bottom: 24px !important;
+    box-sizing: border-box !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow-card:not(.is-active) {
