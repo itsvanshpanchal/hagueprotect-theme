@@ -291,8 +291,7 @@
   #MainContent .shopify-section .biz-hero__title,
   #MainContent .shopify-section .how-to-banner__title,
   #MainContent .shopify-section .d2c-product-title,
-  #MainContent .shopify-section .skincare-hero__title,
-  #MainContent .shopify-section .story-banner__heading {
+  #MainContent .shopify-section .skincare-hero__title {
     font-size: var(--heading-size-xl) !important;
   }
 
@@ -312,6 +311,7 @@
   #MainContent .shopify-section .bs-coverflow__heading,
   #MainContent .shopify-section .trending-social__heading,
   #MainContent .shopify-section .comm-headline,
+  #MainContent .shopify-section .story-banner__heading,
   #MainContent .shopify-section .story-banner__subheading,
   #MainContent .shopify-section .feature-grid__heading,
   #MainContent .shopify-section .hp-dna__heading,
@@ -336,9 +336,11 @@
   #MainContent .shopify-section .bs-coverflow__heading .hp-heading-line,
   #MainContent .shopify-section .trending-social__heading .hp-heading-line,
   #MainContent .shopify-section .hp-fam-sec__heading .hp-heading-line,
+  #MainContent .shopify-section .story-banner__heading .hp-heading-line--1,
+  #MainContent .shopify-section .story-banner__heading .hp-heading-pair .hp-heading-line--1,
   #MainContent .shopify-section h2 .hp-heading-line:not(.hp-heading-accent) {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: var(--section-heading-size-mobile, 28px) !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;

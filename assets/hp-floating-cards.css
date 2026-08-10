@@ -1467,8 +1467,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-pair .hp-heading-line,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-pair--stack .hp-heading-line {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: var(--section-heading-size-mobile, 28px) !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
     font-weight: 300 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
     color: inherit !important;
     -webkit-text-fill-color: currentColor !important;
   }
