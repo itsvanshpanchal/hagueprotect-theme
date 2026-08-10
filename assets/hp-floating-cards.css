@@ -1180,8 +1180,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__heading,
@@ -1193,6 +1191,30 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     align-items: flex-start !important;
     gap: var(--hp-mobile-heading-stack-gap, 0.02em) !important;
     max-width: 100% !important;
+  }
+
+  /* Materials + Tell Your Story — one line on mobile float stack */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair {
+    display: inline !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-line:not(.hp-heading-accent),
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair .hp-heading-accent {
+    display: inline !important;
+    white-space: nowrap !important;
+    vertical-align: baseline !important;
+    margin: 0 !important;
   }
 
   /* Headings must not clip during sticky cover overlap / typewriter */

@@ -702,12 +702,8 @@ main h2.h2,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair,
   body.template-index #MainContent .bs-coverflow__heading,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
-  body.template-index #MainContent .mat-headline,
-  body.template-index #MainContent .mat-headline .hp-heading-pair,
   body.template-index #MainContent .hp-dna__heading,
-  body.template-index #MainContent .hp-dna__heading .hp-heading-pair,
-  body.template-index #MainContent [class*="ai-story-banner-heading"],
-  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair {
+  body.template-index #MainContent .hp-dna__heading .hp-heading-pair {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: nowrap !important;
@@ -717,7 +713,35 @@ main h2.h2,
     max-width: 100% !important;
   }
 
-  body.template-index #MainContent .story-banner__heading .hp-heading-line,
+  /* Materials + Tell Your Story — keep base line + script accent on one row */
+  body.template-index #MainContent .mat-headline,
+  body.template-index #MainContent .mat-headline .hp-heading-pair,
+  body.template-index #MainContent .mat-headline .hp-heading-pair--stack,
+  body.template-index #MainContent [class*="ai-story-banner-heading"],
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair--stack {
+    display: inline !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+
+  body.template-index #MainContent .mat-headline .hp-heading-line,
+  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .mat-headline .hp-heading-accent,
+  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-accent,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair--stack .hp-heading-accent {
+    display: inline !important;
+    white-space: nowrap !important;
+    margin-left: 0 !important;
+    vertical-align: baseline !important;
+  }
   body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
   body.template-index #MainContent .story-banner__heading .hp-heading-accent,
@@ -735,18 +759,10 @@ main h2.h2,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
-  body.template-index #MainContent .mat-headline .hp-heading-line,
-  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent .mat-headline .hp-heading-accent,
-  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .hp-dna__heading .hp-heading-line,
   body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
-  body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-accent,
-  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
-  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
-  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-accent {
+  body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-accent {
     display: block !important;
     white-space: nowrap !important;
     margin-left: 0 !important;
@@ -1938,9 +1954,7 @@ body.template-index {
     body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
     body.template-index #MainContent .trending-social__heading .hp-heading-accent,
     body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
-    body.template-index #MainContent .mat-headline .hp-heading-accent,
     body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
-    body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
     body.template-index #MainContent .hp-heading-pair .hp-heading-accent {
       font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
       font-size: var(--hp-mobile-accent-size) !important;
@@ -1958,6 +1972,25 @@ body.template-index {
       padding: 0 !important;
       vertical-align: baseline !important;
       -webkit-font-smoothing: antialiased !important;
+    }
+
+    body.template-index #MainContent .mat-headline .hp-heading-accent,
+    body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-accent,
+    body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
+    body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair--stack .hp-heading-accent {
+      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+      font-size: var(--hp-mobile-accent-size) !important;
+      font-weight: var(--hp-mobile-accent-weight) !important;
+      font-style: normal !important;
+      line-height: var(--hp-mobile-accent-lh) !important;
+      letter-spacing: var(--hp-mobile-accent-ls) !important;
+      color: var(--hp-mobile-accent-color) !important;
+      -webkit-text-fill-color: var(--hp-mobile-accent-color) !important;
+      display: inline !important;
+      white-space: nowrap !important;
+      vertical-align: baseline !important;
     }
   }
 
