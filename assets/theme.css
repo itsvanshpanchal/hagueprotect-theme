@@ -708,13 +708,10 @@ main h2.h2,
     max-width: 100% !important;
   }
 
-  /* Best Sellers, Materials, Premium Best + Tell Your Story — one row on mobile */
+  /* Best Sellers, Materials + Tell Your Story — one row on mobile */
   body.template-index #MainContent .bs-coverflow__heading,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack,
-  body.template-index #MainContent .hp-fam-sec__heading,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack,
   body.template-index #MainContent .mat-headline,
   body.template-index #MainContent .mat-headline .hp-heading-pair,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack,
@@ -732,12 +729,6 @@ main h2.h2,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack .hp-heading-accent,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent,
   body.template-index #MainContent .mat-headline .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-line,
@@ -796,9 +787,48 @@ main h2.h2,
     row-gap: 8px !important;
   }
 
-  /* Premium Best — match Best Sellers single-line heading on mobile */
+  /* Premium Best — line 1 "Shop Our", line 2 "Premium Best" */
   body.template-index #MainContent .hp-fam-sec__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    row-gap: 2px !important;
+    white-space: normal !important;
+    max-width: 100% !important;
     margin-bottom: 8px !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading > .hp-heading-line--1 {
+    display: block !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+    row-gap: 0 !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+    display: inline !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: baseline !important;
   }
 }
 
