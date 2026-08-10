@@ -874,7 +874,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 0 !important;
     height: 100% !important;
     overflow: hidden !important;
-    padding-top: 24px !important;
+    padding-top: 28px !important;
     padding-bottom: 24px !important;
     box-sizing: border-box !important;
   }
@@ -909,7 +909,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: none !important;
     overflow: visible !important;
     padding-top: 28px !important;
-    padding-bottom: 36px !important;
+    padding-bottom: 24px !important;
     background-color: #121111 !important;
     box-sizing: border-box !important;
   }
@@ -1374,8 +1374,33 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-top {
     margin-bottom: 0 !important;
-    gap: 16px !important;
+    gap: 12px !important;
     flex: 0 0 auto !important;
+  }
+
+  /* Best Sellers rhythm — eyebrow/title stacks inside float cards */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .section-heading-stack {
+    gap: 10px !important;
+    row-gap: 10px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__heading {
+    margin-bottom: 12px !important;
+    gap: 10px !important;
+    row-gap: 10px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-dna__heading {
+    margin-bottom: 12px !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-desc {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-desc + .mat-menu {
+    margin-top: 12px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section .comm-slider-container {
