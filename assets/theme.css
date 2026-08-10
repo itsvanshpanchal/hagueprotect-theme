@@ -2111,8 +2111,8 @@ body.template-index {
 
   /* Premium Best / headings without .section-heading-stack */
   body.template-index #MainContent .hp-fam-sec__heading {
-    gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
-    row-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
+    gap: 4px !important;
+    row-gap: 4px !important;
   }
 
   /*
@@ -2178,6 +2178,25 @@ body.template-index {
 
     body.template-index #MainContent .hp-fam-sec__heading {
       margin-bottom: var(--hp-bs-mobile-header-content-gap) !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__tabs {
+      margin-bottom: var(--hp-bs-mobile-header-content-gap) !important;
+      padding-bottom: 0 !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-rail-wrap {
+      padding-bottom: 0 !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider {
+      padding: 0 !important;
+      align-items: flex-start !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card {
+      height: auto !important;
+      align-self: flex-start !important;
     }
 
     body.template-index #MainContent .hp-dna__heading {
