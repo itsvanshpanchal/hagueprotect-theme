@@ -770,6 +770,17 @@ main h2.h2,
     white-space: nowrap !important;
     margin-left: 0 !important;
   }
+
+  /* Story banner — extra line gap so script ascenders don't touch line above */
+  body.template-index #MainContent .story-banner__heading,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack {
+    gap: 8px !important;
+    row-gap: 8px !important;
+  }
 }
 
 .trending-social__heading .hp-heading-pair .hp-heading-line,
@@ -1953,12 +1964,6 @@ body.template-index {
 
   /* Homepage mobile — one shared handwriting accent across every section title */
   @media screen and (max-width: 749px) {
-    body.template-index #MainContent .story-banner__heading .hp-heading-accent,
-    body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
     body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
     body.template-index #MainContent .trending-social__heading .hp-heading-accent,
     body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
@@ -1977,6 +1982,32 @@ body.template-index {
       white-space: nowrap !important;
       margin: 0 !important;
       padding: 0 !important;
+      vertical-align: baseline !important;
+      -webkit-font-smoothing: antialiased !important;
+    }
+
+    /* Story banner — slightly bolder script + breathing room under line 1 */
+    body.template-index #MainContent .story-banner__heading .hp-heading-accent,
+    body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
+      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+      font-size: var(--hp-mobile-accent-size) !important;
+      font-weight: 500 !important;
+      font-style: normal !important;
+      line-height: 1.05 !important;
+      letter-spacing: var(--hp-mobile-accent-ls) !important;
+      color: var(--hp-mobile-accent-color) !important;
+      -webkit-text-fill-color: var(--hp-mobile-accent-color) !important;
+      -webkit-text-stroke: 0.45px var(--hp-mobile-accent-color) !important;
+      paint-order: stroke fill !important;
+      text-transform: none !important;
+      display: block !important;
+      white-space: nowrap !important;
+      margin: 2px 0 0 !important;
+      padding: 2px 0 0 !important;
       vertical-align: baseline !important;
       -webkit-font-smoothing: antialiased !important;
     }
