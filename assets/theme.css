@@ -695,9 +695,6 @@ main h2.h2,
   body.template-index #MainContent .story-banner__heading,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack,
-  body.template-index #MainContent .hp-fam-sec__heading,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack,
   body.template-index #MainContent .trending-social__heading,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair,
   body.template-index #MainContent .hp-dna__heading,
@@ -754,10 +751,6 @@ main h2.h2,
   body.template-index #MainContent .story-banner__heading .hp-heading-accent,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .trending-social__heading .hp-heading-line,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .trending-social__heading .hp-heading-accent,
@@ -780,6 +773,46 @@ main h2.h2,
   body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack {
     gap: 8px !important;
     row-gap: 8px !important;
+  }
+
+  /* Premium Best — line 1 / line 2 only; "Premium Best" stays one row */
+  body.template-index #MainContent .hp-fam-sec__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    row-gap: 2px !important;
+    max-width: 100% !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading > .hp-heading-line--1 {
+    display: block !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 0 !important;
+    row-gap: 0 !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+    display: inline !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: baseline !important;
   }
 }
 
@@ -2111,8 +2144,8 @@ body.template-index {
 
   /* Premium Best / headings without .section-heading-stack */
   body.template-index #MainContent .hp-fam-sec__heading {
-    gap: 4px !important;
-    row-gap: 4px !important;
+    gap: 2px !important;
+    row-gap: 2px !important;
   }
 
   /*
@@ -2177,26 +2210,62 @@ body.template-index {
     }
 
     body.template-index #MainContent .hp-fam-sec__heading {
-      margin-bottom: var(--hp-bs-mobile-header-content-gap) !important;
+      margin-bottom: 8px !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__tabs {
-      margin-bottom: var(--hp-bs-mobile-header-content-gap) !important;
+      margin-bottom: 8px !important;
       padding-bottom: 0 !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-rail-wrap {
       padding-bottom: 0 !important;
+      margin-top: 0 !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider {
       padding: 0 !important;
       align-items: flex-start !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card {
       height: auto !important;
       align-self: flex-start !important;
+      min-height: 0 !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-img {
+      height: 130px !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-info {
+      padding: 12px 14px 14px !important;
+      gap: 4px !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-elite-care {
+      display: none !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-rating-row {
+      margin-bottom: 0 !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-price-row {
+      margin: 2px 0 0 !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-atc {
+      margin-top: 2px !important;
+      padding: 11px !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-nav {
+      top: 32% !important;
     }
 
     body.template-index #MainContent .hp-dna__heading {
