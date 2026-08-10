@@ -54,7 +54,8 @@
       flex-wrap: nowrap !important;
       align-items: flex-start !important;
       white-space: normal !important;
-      gap: 0.02em !important;
+      gap: 6px !important;
+      row-gap: 6px !important;
       max-width: 100% !important;
     }
 
@@ -144,16 +145,25 @@
   }
 
   @media screen and (max-width: 768px) {
-    .trending-social__slide {
-      flex: 0 0 calc(60% - 12px);
-      scroll-snap-align: center;
+    .trending-social__slider-wrapper {
+      overflow: hidden;
     }
-  }
 
-  @media screen and (max-width: 480px) {
+    .trending-social__slider-container {
+      gap: 0;
+      padding-left: max(16px, var(--homepage-section-gutter, 16px));
+      padding-right: max(16px, var(--homepage-section-gutter, 16px));
+      scroll-padding-inline: max(16px, var(--homepage-section-gutter, 16px));
+    }
+
     .trending-social__slide {
-      flex: 0 0 85%;
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
       scroll-snap-align: center;
+      scroll-snap-stop: always;
+      box-sizing: border-box;
     }
   }
 

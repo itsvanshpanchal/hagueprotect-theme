@@ -734,41 +734,16 @@
     .hp-fam-sec__heading {
       margin-bottom: 8px !important;
       font-size: var(--hp-bs-mobile-heading-size, {{ hp_heading_mobile }}px) !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 2px !important;
-      row-gap: 2px !important;
       line-height: 1.05 !important;
       letter-spacing: 0.03em !important;
     }
 
-    /* Mobile only: line 1 "Shop Our", line 2 "Premium Best" (Best = script accent) */
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1 {
-      display: block !important;
-      white-space: nowrap !important;
-    }
-
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack {
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap !important;
-      align-items: baseline !important;
-      white-space: nowrap !important;
-      gap: 6px !important;
-      row-gap: 0 !important;
-      max-width: 100% !important;
-    }
-
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
-    #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent,
-    #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
+    .hp-fam-sec__heading .hp-heading-pair,
+    .hp-fam-sec__heading .hp-heading-line,
+    .hp-fam-sec__heading .hp-heading-accent {
       display: inline !important;
       white-space: nowrap !important;
-      margin-left: 0 !important;
+      vertical-align: baseline !important;
     }
 
     .hp-fam-sec__tabs {
@@ -779,7 +754,7 @@
       margin-right: 0;
       padding-bottom: 0 !important;
       margin-top: 0;
-      overflow: visible;
+      overflow: hidden;
       flex: 0 0 auto;
       min-height: 360px;
       height: auto;
@@ -792,12 +767,12 @@
     }
 
     .hp-fam-sec__mobile-slider {
-      --hp-fam-card-gap: 12px;
-      gap: var(--hp-fam-card-gap);
-      padding: 0 max(16px, var(--homepage-section-gutter, 16px)) 0 !important;
+      --hp-fam-card-gap: 0px;
+      gap: 0;
+      padding: 0 !important;
       scroll-snap-type: x mandatory;
       overflow-x: auto;
-      overflow-y: visible;
+      overflow-y: hidden;
       align-items: stretch;
       flex: 0 0 auto;
       min-height: 360px;
@@ -811,6 +786,14 @@
       align-self: stretch;
       display: flex;
       flex-direction: column;
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      padding: 0 max(16px, var(--homepage-section-gutter, 16px));
+      box-sizing: border-box;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-img {
@@ -849,10 +832,10 @@
 
     #shopify-section-{{ section.id }} .hp-fam-sec__mobile-slider .rail-card,
     .hp-fam-sec__mobile-slider .rail-card {
-      flex: 0 0 min(calc(100% - 88px), 340px);
-      width: min(calc(100% - 88px), 340px);
-      min-width: min(calc(100% - 88px), 340px);
-      max-width: min(calc(100% - 88px), 340px);
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
       scroll-snap-align: center;
       scroll-snap-stop: always;
     }
@@ -949,31 +932,14 @@
   {%- endif -%}
   <div class="hp-fam-sec__container">
     {%- if section.settings.heading != blank -%}
-      {%- liquid
-        assign hp_h1 = section.settings.heading | strip
-        assign hp_h2 = section.settings.heading_line2 | default: 'Premium' | strip
-        assign hp_accent_text = section.settings.heading_accent_word | default: 'Best' | strip
-
-        if hp_h2 != blank
-          assign hp_tail_phrase = hp_h2 | append: ' ' | append: hp_accent_text
-          if hp_h1 contains hp_tail_phrase
-            assign hp_h1 = hp_h1 | replace: hp_tail_phrase, '' | strip
-          elsif hp_h1 contains hp_h2
-            assign hp_h1 = hp_h1 | replace: hp_h2, '' | strip
-            if hp_accent_text != blank and hp_h1 contains hp_accent_text
-              assign hp_h1 = hp_h1 | replace: hp_accent_text, '' | strip
-            endif
-          elsif hp_accent_text != blank and hp_h1 contains hp_accent_text
-            assign hp_h1 = hp_h1 | replace: hp_accent_text, '' | strip
-          endif
-        endif
-      -%}
       <h2 class="hp-fam-sec__heading" data-no-typewriter>
-        <span class="hp-heading-line hp-heading-line--1">{{ hp_h1 }}</span>
-        <span class="hp-heading-pair hp-heading-pair--stack">
-          <span class="hp-heading-line hp-heading-line--1">{{ hp_h2 }} </span>
-          <span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ hp_accent_color }};text-transform:none !important;-webkit-text-fill-color:{{ hp_accent_color }};">{{ hp_accent_text }}</span>
-        </span>
+        {% render 'section-heading-text',
+          text: section.settings.heading | default: 'Shop Our Premium Best',
+          line2: section.settings.heading_line2,
+          line2_color: section.settings.heading_line2_color,
+          accent_last_word: true,
+          accent_color: hp_accent_color
+        %}
       </h2>
     {%- endif -%}
 

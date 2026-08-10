@@ -708,10 +708,13 @@ main h2.h2,
     max-width: 100% !important;
   }
 
-  /* Best Sellers, Materials + Tell Your Story — one row on mobile */
+  /* Best Sellers, Materials, Premium Best + Tell Your Story — one row on mobile */
   body.template-index #MainContent .bs-coverflow__heading,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack,
+  body.template-index #MainContent .hp-fam-sec__heading,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack,
   body.template-index #MainContent .mat-headline,
   body.template-index #MainContent .mat-headline .hp-heading-pair,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack,
@@ -729,6 +732,12 @@ main h2.h2,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack .hp-heading-accent,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent,
   body.template-index #MainContent .mat-headline .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-line,
@@ -746,6 +755,18 @@ main h2.h2,
     margin-left: 0 !important;
     vertical-align: baseline !important;
   }
+  /* Trending Social — stacked lines with breathing room between rows */
+  body.template-index #MainContent .trending-social__heading,
+  body.template-index #MainContent .trending-social__heading .hp-heading-pair,
+  body.template-index #MainContent .trending-social__heading .hp-heading-pair--stack {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    row-gap: 6px !important;
+    max-width: 100% !important;
+  }
+
   body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
   body.template-index #MainContent .story-banner__heading .hp-heading-accent,
@@ -775,44 +796,9 @@ main h2.h2,
     row-gap: 8px !important;
   }
 
-  /* Premium Best — line 1 / line 2 only; "Premium Best" stays one row */
+  /* Premium Best — match Best Sellers single-line heading on mobile */
   body.template-index #MainContent .hp-fam-sec__heading {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    align-items: flex-start !important;
-    gap: 2px !important;
-    row-gap: 2px !important;
-    max-width: 100% !important;
-  }
-
-  body.template-index #MainContent .hp-fam-sec__heading > .hp-heading-line--1 {
-    display: block !important;
-    white-space: nowrap !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: baseline !important;
-    gap: 6px !important;
-    row-gap: 0 !important;
-    white-space: nowrap !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-line,
-  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack .hp-heading-accent {
-    display: inline !important;
-    white-space: nowrap !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    vertical-align: baseline !important;
+    margin-bottom: 8px !important;
   }
 }
 
@@ -1092,7 +1078,7 @@ main h3 > span[aria-hidden="true"] {
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
     letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
+  text-transform: uppercase !important;
   }
 
   /* Story banner subheading size comes from its own block setting */
