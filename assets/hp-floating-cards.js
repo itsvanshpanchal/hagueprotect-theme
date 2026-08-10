@@ -374,7 +374,7 @@
 
   /* Flatten story sticky runway; size for full-screen cover inside float card */
   function prepareStoryFullscreen(pin, mobile) {
-    var fill = viewportFill(mobile);
+    var fill = mobile ? '100%' : viewportFill(mobile);
 
     var chain = pin.querySelectorAll(
       '[class*="ai-story-sticky-track"], [class*="ai-story-sticky-pin"], [class*="ai-story-banner-wrapper"], [class*="ai-story-sticky-pin"] > [class*="ai-story-banner-"], .ai-story-banner'
@@ -464,12 +464,16 @@
       pictures[pi].style.setProperty('padding', '0', 'important');
     }
 
+    var useCoverOnly = !!(cover && src);
+
     for (var k = 0; k < wraps.length; k++) {
       wraps[k].style.setProperty('background-color', '#111111', 'important');
       wraps[k].style.setProperty('background-size', 'cover', 'important');
       wraps[k].style.setProperty('background-position', 'center center', 'important');
       wraps[k].style.setProperty('background-repeat', 'no-repeat', 'important');
-      if (src) {
+      if (useCoverOnly) {
+        wraps[k].style.setProperty('background-image', 'none', 'important');
+      } else if (src) {
         wraps[k].style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       }
     }
@@ -478,13 +482,18 @@
       pins[p].style.setProperty('background-size', 'cover', 'important');
       pins[p].style.setProperty('background-position', 'center center', 'important');
       pins[p].style.setProperty('background-repeat', 'no-repeat', 'important');
-      if (src) {
+      if (useCoverOnly) {
+        pins[p].style.setProperty('background-image', 'none', 'important');
+      } else if (src) {
         pins[p].style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       }
     }
 
     /* Also paint the float pin itself so no black void if inner wrappers lag */
-    if (src) {
+    if (useCoverOnly) {
+      pin.style.setProperty('background-image', 'none', 'important');
+      pin.style.setProperty('background-color', '#111111', 'important');
+    } else if (src) {
       pin.style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       pin.style.setProperty('background-size', 'cover', 'important');
       pin.style.setProperty('background-position', 'center center', 'important');

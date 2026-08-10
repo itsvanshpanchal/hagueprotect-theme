@@ -1160,7 +1160,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-typewriter-text {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 29px !important;
+    font-size: var(--section-heading-size-mobile, 28px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -1180,10 +1180,26 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
     color: var(--hp-mobile-accent-color, #c9a227) !important;
     -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
-    display: block !important;
+    display: inline !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
     margin: 0 !important;
+  }
+
+  /* Tell Your Story cover — single paint layer, no duplicate bg flicker */
+  body.hp-float-mobile .hp-float-stack .hp-float-story [data-hp-story-wrap],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'],
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-sticky-pin'] {
+    background-image: none !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-story [data-hp-story-cover],
+  body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner-cover,
+  body.hp-float-mobile .hp-float-stack .hp-float-story img[class*='ai-story-banner-image'] {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
@@ -1297,7 +1313,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-pair .hp-heading-line,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-pair--stack .hp-heading-line {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 29px !important;
+    font-size: var(--section-heading-size-mobile, 28px) !important;
     font-weight: 300 !important;
     color: inherit !important;
     -webkit-text-fill-color: currentColor !important;

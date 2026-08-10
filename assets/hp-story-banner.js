@@ -19,6 +19,13 @@
     }
   }
 
+  function isFloatStackStory(wrap) {
+    return !!(
+      document.body.classList.contains('hp-float-mobile') &&
+      wrap.closest('.hp-float-stack .hp-float-story')
+    );
+  }
+
   function syncWrap(wrap) {
     if (wrap.closest('.ai-story-sticky-track--flow, .hp-float-bottom-strip, .hp-story-banner-lite')) {
       wrap.style.setProperty('background-image', 'none', 'important');
@@ -40,18 +47,21 @@
     }
 
     var mobile = window.matchMedia('(max-width: 989px)').matches;
+    var floatStory = mobile && isFloatStackStory(wrap);
     var url = mobile ? wrap.getAttribute('data-mobile-bg') : wrap.getAttribute('data-desktop-bg');
     if (!url) {
       url = wrap.getAttribute('data-desktop-bg') || wrap.getAttribute('data-mobile-bg');
     }
-    if (url) {
+    if (!floatStory && url) {
       wrap.style.backgroundImage = 'url("' + String(url).replace(/"/g, '') + '")';
       wrap.style.backgroundSize = 'cover';
       wrap.style.backgroundPosition = 'center center';
       wrap.style.backgroundRepeat = 'no-repeat';
+    } else if (floatStory) {
+      wrap.style.setProperty('background-image', 'none', 'important');
     }
 
-    if (mobile) {
+    if (mobile && !floatStory) {
       var bottomStrip = wrap.closest('.hp-float-bottom-strip');
       var vh = Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
       if (bottomStrip) {
@@ -62,6 +72,9 @@
         wrap.style.height = vh + 'px';
       }
       wrap.style.width = '100%';
+    } else if (floatStory) {
+      wrap.style.removeProperty('min-height');
+      wrap.style.removeProperty('height');
     }
 
     var cover = wrap.querySelector('[data-hp-story-cover], .ai-story-banner-cover');
@@ -77,7 +90,7 @@
     }
 
     var content = wrap.querySelector('[data-hp-story-content]');
-    if (content) {
+    if (content && !floatStory) {
       if (mobile) {
         var gutter = 28;
         try {
@@ -109,7 +122,7 @@
     }
 
     var heading = wrap.querySelector('.ai-story-banner-heading');
-    if (heading) {
+    if (heading && !floatStory) {
       var size = mobile
         ? heading.getAttribute('data-accent-size-m') || '40'
         : heading.getAttribute('data-accent-size') || '62';
@@ -127,7 +140,11 @@
   } else {
     syncAll();
   }
-  window.addEventListener('resize', syncAll, { passive: true });
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncAll, 150);
+  }, { passive: true });
   window.addEventListener('hp-floating-cards:ready', syncAll);
   document.addEventListener('shopify:section:load', syncAll);
 })();
