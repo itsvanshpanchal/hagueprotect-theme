@@ -181,11 +181,12 @@
   [class*="ai-story-banner-heading"] .hp-heading-pair,
   [class*="ai-story-banner-heading"] .hp-typewriter-text {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: var(--section-heading-size-mobile, 28px) !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    line-height: 1.15 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
   }
 
   [class*="ai-story-banner-heading"] .hp-heading-accent,

@@ -1040,6 +1040,13 @@ main h3 > span[aria-hidden="true"] {
     letter-spacing: 0.03em !important;
   }
 
+  [class*="ai-story-banner-heading"],
+  [class*="ai-story-banner-heading-"] {
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+  }
+
   .bs-coverflow__header,
   .fb__header,
   .trending-social-header,
@@ -1116,10 +1123,6 @@ main h3 > span[aria-hidden="true"] {
   .hp-fam-sec__heading,
   .hp-dna__heading,
   .story-banner__heading,
-  [class*="ai-story-banner-heading"],
-  [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
-  [class*="ai-story-banner-heading"] .hp-heading-pair,
-  [class*="ai-story-banner-heading"] .hp-typewriter-text,
   .bs-coverflow__heading .hp-heading-line,
   .mat-headline .hp-heading-line,
   .trending-social__heading .hp-heading-line,
@@ -1129,6 +1132,22 @@ main h3 > span[aria-hidden="true"] {
     font-weight: 300 !important;
     font-style: normal !important;
     font-synthesis: none !important;
+  }
+
+  /* Tell Your Story — match Best Sellers mobile (24px / 40px accent) */
+  [class*="ai-story-banner-heading"],
+  [class*="ai-story-banner-heading-"],
+  [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
+  [class*="ai-story-banner-heading"] .hp-heading-pair,
+  [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-line,
+  [class*="ai-story-banner-heading"] .hp-typewriter-text {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
   }
 
   .bs-coverflow__heading .hp-heading-accent,
@@ -1958,6 +1977,7 @@ body.template-index {
     --hp-bs-mobile-title-para-gap: 10px;
     --hp-bs-mobile-section-pt: 28px;
     --hp-bs-mobile-section-pb: 24px;
+    --hp-bs-mobile-heading-size: 24px;
     --hp-mobile-accent-size: 40px;
     --hp-mobile-accent-weight: 400;
     --hp-mobile-accent-lh: 1;
