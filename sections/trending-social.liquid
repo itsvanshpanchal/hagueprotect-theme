@@ -25,7 +25,7 @@
     width: 100%;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 749px) {
     .trending-social-section {
       padding: 24px 0 0;
     }
@@ -72,6 +72,69 @@
       display: block !important;
       white-space: nowrap !important;
       margin-left: 0 !important;
+    }
+
+    /* One full video card per swipe — padding on slides, not the track */
+    #shopify-section-{{ section.id }} .trending-social__slider-wrapper {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slider-container {
+      display: flex;
+      gap: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      padding-bottom: 12px;
+      scroll-padding-inline: 0;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slide {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+      padding-left: max(16px, var(--homepage-section-gutter, 16px));
+      padding-right: max(16px, var(--homepage-section-gutter, 16px));
+      box-sizing: border-box;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__media {
+      width: 100%;
+      max-height: min(58dvh, 500px);
+      aspect-ratio: 9 / 16;
+      margin: 0 auto;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slider-nav {
+      display: block;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow {
+      pointer-events: auto;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 36px;
+      height: 36px;
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow--prev {
+      left: max(4px, var(--homepage-section-gutter, 4px));
+    }
+
+    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow--next {
+      right: max(4px, var(--homepage-section-gutter, 4px));
     }
   }
 
@@ -144,26 +207,10 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
-    .trending-social__slider-wrapper {
-      overflow: hidden;
-    }
-
-    .trending-social__slider-container {
-      gap: 0;
-      padding-left: max(16px, var(--homepage-section-gutter, 16px));
-      padding-right: max(16px, var(--homepage-section-gutter, 16px));
-      scroll-padding-inline: max(16px, var(--homepage-section-gutter, 16px));
-    }
-
+  /* Tablet — two cards visible */
+  @media screen and (min-width: 750px) and (max-width: 1199px) {
     .trending-social__slide {
-      flex: 0 0 100%;
-      width: 100%;
-      min-width: 100%;
-      max-width: 100%;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-      box-sizing: border-box;
+      flex: 0 0 calc(50% - 12px);
     }
   }
 
@@ -319,7 +366,8 @@
   }
 
   /* Navigation Arrows */
-  .trending-social__nav {
+  .trending-social__nav,
+  .trending-social__slider-nav {
     display: none;
   }
 
@@ -372,6 +420,14 @@
     </div>
 
     <div class="trending-social__slider-wrapper">
+      <div class="trending-social__slider-nav" aria-label="Slide navigation">
+        <button type="button" class="trending-social__arrow trending-social__arrow--prev" data-trending-prev aria-label="Previous Slide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button type="button" class="trending-social__arrow trending-social__arrow--next" data-trending-next aria-label="Next Slide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+        </button>
+      </div>
       <div class="trending-social__slider-container" id="trending-social-slider-{{ section.id }}">
         {%- for block in section.blocks -%}
           <div class="trending-social__slide" {{ block.shopify_attributes }}>
@@ -497,6 +553,7 @@
 
   function initSocialSliderVideos() {
     const slider = document.getElementById('trending-social-slider-{{ section.id }}');
+    const sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
 
     if (slider) {
       let isHovered = false;
@@ -504,10 +561,37 @@
       let startX;
       let scrollLeft;
 
+      function slideStep() {
+        return slider.clientWidth || slider.offsetWidth || 1;
+      }
+
+      function scrollToNearestSlide(direction) {
+        const step = slideStep();
+        slider.scrollTo({
+          left: slider.scrollLeft + direction * step,
+          behavior: 'smooth'
+        });
+      }
+
+      if (sectionRoot) {
+        const prevBtn = sectionRoot.querySelector('[data-trending-prev]');
+        const nextBtn = sectionRoot.querySelector('[data-trending-next]');
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function () {
+            scrollToNearestSlide(-1);
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function () {
+            scrollToNearestSlide(1);
+          });
+        }
+      }
+
       // Smooth continuous scrolling ticker function
       function smoothScroll() {
         // Disable auto-scroll on mobile for better touch UX
-        if (window.innerWidth >= 768 && !isHovered && !isDragging) {
+        if (window.innerWidth >= 750 && !isHovered && !isDragging) {
           slider.scrollLeft += 1;
           if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
             slider.scrollLeft = 0;

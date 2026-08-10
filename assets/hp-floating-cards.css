@@ -1787,6 +1787,41 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     padding-top: 0 !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__slider-wrapper {
+    overflow: hidden !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__slider-container {
+    display: flex !important;
+    gap: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    scroll-snap-type: x mandatory !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__slide {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    padding-left: max(16px, var(--homepage-section-gutter, 16px)) !important;
+    padding-right: max(16px, var(--homepage-section-gutter, 16px)) !important;
+    box-sizing: border-box !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__media {
+    width: 100% !important;
+    max-height: min(58dvh, 500px) !important;
+    aspect-ratio: 9 / 16 !important;
+    margin: 0 auto !important;
+  }
+
   /* Kill 1px white seams between sticky covers (Trending → lifestyle, etc.) */
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-card,
   body.hp-float-mobile .hp-float-stack > .shopify-section.hp-float-story {
