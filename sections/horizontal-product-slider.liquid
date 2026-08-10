@@ -1,6 +1,6 @@
 {%- liquid
   assign hp_heading_desktop = section.settings.h2_font_size_desktop | default: 52
-  assign hp_heading_mobile = section.settings.h2_font_size_mobile | default: 28
+  assign hp_heading_mobile = section.settings.h2_font_size_mobile | default: 24
   assign hp_accent_desktop = section.settings.heading_accent_font_size_desktop | default: 62
   assign hp_accent_mobile = section.settings.heading_accent_font_size_mobile | default: 40
   assign hp_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
@@ -715,36 +715,32 @@
   @media screen and (max-width: 749px) {
     .hp-fam-sec {
       padding: 28px 0 24px;
-      min-height: 100dvh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
+      min-height: 0;
+      display: block;
       box-sizing: border-box;
     }
 
     .hp-fam-sec__container {
       padding: 0 var(--homepage-section-gutter, 6px);
-      flex: 1 1 auto;
       min-height: 0;
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
     .hp-fam-sec__main-flex {
-      flex: 1 1 auto;
       min-height: 0;
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
     .hp-fam-sec__heading {
       margin-bottom: 8px !important;
-      font-size: var(--section-heading-size-mobile, var(--section-heading-size)) !important;
+      font-size: var(--hp-bs-mobile-heading-size, {{ hp_heading_mobile }}px) !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       gap: 2px !important;
       row-gap: 2px !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0.03em !important;
     }
 
     /* Mobile only: line 1 "Shop Our", line 2 "Premium Best" (Best = script accent) */
@@ -776,39 +772,18 @@
     }
 
     .hp-fam-sec__tabs {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-bottom: 0 !important;
-      margin-bottom: 8px !important;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      touch-action: auto;
-      overscroll-behavior-x: contain;
-      gap: 8px;
-      scroll-snap-type: x proximity;
-    }
-
-    .hp-fam-sec__tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hp-fam-sec__tab {
-      flex: 0 0 auto;
-      padding: 8px 16px;
-      font-size: 12px;
-      scroll-snap-align: start;
+      display: none !important;
     }
 
     .hp-fam-sec__mobile-rail-wrap {
       margin-right: 0;
       padding-bottom: 0 !important;
       margin-top: 0;
-      overflow: hidden;
-      flex: 1 1 auto;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
+      overflow: visible;
+      flex: 0 0 auto;
+      min-height: 360px;
+      height: auto;
+      display: block;
       position: relative;
     }
 
@@ -817,30 +792,32 @@
     }
 
     .hp-fam-sec__mobile-slider {
-      --hp-fam-card-gap: 0px;
-      gap: 0;
-      padding: 0 !important;
+      --hp-fam-card-gap: 12px;
+      gap: var(--hp-fam-card-gap);
+      padding: 0 max(16px, var(--homepage-section-gutter, 16px)) 0 !important;
       scroll-snap-type: x mandatory;
       overflow-x: auto;
+      overflow-y: visible;
       align-items: stretch;
-      flex: 1 1 auto;
-      min-height: calc(100dvh - 200px);
-      height: 100%;
+      flex: 0 0 auto;
+      min-height: 360px;
+      height: auto;
+      max-height: none;
     }
 
     .hp-fam-sec__mobile-slider .rail-card {
-      height: 100%;
-      min-height: calc(100dvh - 200px);
+      height: auto;
+      min-height: 0;
       align-self: stretch;
       display: flex;
       flex-direction: column;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-img {
-      flex: 1 1 auto;
-      height: auto;
+      flex: 0 0 auto;
+      height: 200px;
       min-height: 200px;
-      max-height: none;
+      max-height: 200px;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-info {
@@ -867,15 +844,15 @@
     }
 
     .hp-fam-sec__mobile-nav {
-      top: 50%;
+      top: 42%;
     }
 
     #shopify-section-{{ section.id }} .hp-fam-sec__mobile-slider .rail-card,
     .hp-fam-sec__mobile-slider .rail-card {
-      flex: 1 0 100%;
-      width: 100%;
-      min-width: 100%;
-      max-width: 100%;
+      flex: 0 0 min(calc(100% - 88px), 340px);
+      width: min(calc(100% - 88px), 340px);
+      min-width: min(calc(100% - 88px), 340px);
+      max-width: min(calc(100% - 88px), 340px);
       scroll-snap-align: center;
       scroll-snap-stop: always;
     }
