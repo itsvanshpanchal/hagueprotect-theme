@@ -2209,42 +2209,82 @@ body.template-index {
       row-gap: var(--hp-bs-mobile-header-content-gap) !important;
     }
 
+    body.template-index #MainContent .hp-fam-sec {
+      min-height: 100dvh !important;
+      min-height: 100svh !important;
+      display: flex !important;
+      flex-direction: column !important;
+      box-sizing: border-box !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__container {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__main-flex {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
     body.template-index #MainContent .hp-fam-sec__heading {
       margin-bottom: 8px !important;
+      flex: 0 0 auto !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__tabs {
       margin-bottom: 8px !important;
       padding-bottom: 0 !important;
+      flex: 0 0 auto !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-rail-wrap {
       padding-bottom: 0 !important;
       margin-top: 0 !important;
-      height: auto !important;
+      flex: 1 1 auto !important;
       min-height: 0 !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      position: relative !important;
+    }
+
+    body.template-index #MainContent .hp-fam-sec__mobile-slider.is-active {
+      display: flex !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider {
       padding: 0 !important;
-      align-items: flex-start !important;
-      min-height: 0 !important;
-      height: auto !important;
+      align-items: stretch !important;
+      flex: 1 1 auto !important;
+      min-height: calc(100dvh - 200px) !important;
+      height: 100% !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card {
-      height: auto !important;
-      align-self: flex-start !important;
-      min-height: 0 !important;
+      height: 100% !important;
+      min-height: calc(100dvh - 200px) !important;
+      align-self: stretch !important;
+      display: flex !important;
+      flex-direction: column !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-img {
-      height: 130px !important;
+      flex: 1 1 auto !important;
+      height: auto !important;
+      min-height: 200px !important;
+      max-height: none !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-info {
-      padding: 12px 14px 14px !important;
-      gap: 4px !important;
+      flex: 0 0 auto !important;
+      padding: 14px 16px 16px !important;
+      gap: 6px !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-elite-care {
@@ -2256,16 +2296,16 @@ body.template-index {
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-price-row {
-      margin: 2px 0 0 !important;
+      margin: 4px 0 0 !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-atc {
-      margin-top: 2px !important;
-      padding: 11px !important;
+      margin-top: 4px !important;
+      padding: 12px !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-nav {
-      top: 32% !important;
+      top: 50% !important;
     }
 
     body.template-index #MainContent .hp-dna__heading {

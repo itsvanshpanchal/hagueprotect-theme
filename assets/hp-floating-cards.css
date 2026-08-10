@@ -1070,14 +1070,17 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     box-sizing: border-box !important;
   }
 
-  /* Horizontal product slider: keep cards inset; overflow visible so tabs/nav aren't clipped */
+  /* Horizontal product slider: full-viewport sticky panel on mobile */
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    min-height: 100% !important;
+    height: 100% !important;
     padding-top: 28px !important;
     padding-bottom: 24px !important;
+    box-sizing: border-box !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-nav--next {
@@ -1090,16 +1093,20 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
       overflow: hidden !important;
     }
 
+    body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider.is-active {
+      display: flex !important;
+    }
+
     body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider {
       gap: 0 !important;
       padding-left: 0 !important;
       padding-right: 0 !important;
       scroll-snap-type: x mandatory !important;
-      align-items: flex-start !important;
+      align-items: stretch !important;
     }
 
     body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
-      flex: 0 0 100% !important;
+      flex: 1 0 100% !important;
       width: 100% !important;
       min-width: 100% !important;
       max-width: 100% !important;
@@ -1476,42 +1483,56 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     justify-content: flex-start !important;
     align-items: stretch !important;
     gap: 0 !important;
-    flex: 0 1 auto !important;
+    flex: 1 1 auto !important;
     min-height: 0 !important;
-    height: auto !important;
+    height: 100% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__main-flex {
-    flex: 0 1 auto !important;
+    flex: 1 1 auto !important;
     min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-rail-wrap {
-    flex: 0 0 auto !important;
+    flex: 1 1 auto !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
-    height: auto !important;
     min-height: 0 !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: stretch !important;
+    position: relative !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider {
-    min-height: 0 !important;
-    height: auto !important;
+    flex: 1 1 auto !important;
+    min-height: calc(var(--hp-mobile-vh, 100dvh) - 200px) !important;
+    height: 100% !important;
+    align-items: stretch !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card {
-    height: auto !important;
-    align-self: flex-start !important;
-    min-height: 0 !important;
+    height: 100% !important;
+    min-height: calc(var(--hp-mobile-vh, 100dvh) - 200px) !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card-img {
-    height: 130px !important;
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 200px !important;
+    max-height: none !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card-info {
-    padding: 12px 14px 14px !important;
-    gap: 4px !important;
+    flex: 0 0 auto !important;
+    padding: 14px 16px 16px !important;
+    gap: 6px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-elite-care {
@@ -1519,16 +1540,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-price-row {
-    margin: 2px 0 0 !important;
+    margin: 4px 0 0 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-slider .rail-card-atc {
-    margin-top: 2px !important;
-    padding: 11px !important;
+    margin-top: 4px !important;
+    padding: 12px !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__mobile-nav {
-    top: 32% !important;
+    top: 50% !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-dna__heading {

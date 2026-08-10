@@ -715,10 +715,26 @@
   @media screen and (max-width: 749px) {
     .hp-fam-sec {
       padding: 28px 0 24px;
+      min-height: 100dvh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
 
     .hp-fam-sec__container {
       padding: 0 var(--homepage-section-gutter, 6px);
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hp-fam-sec__main-flex {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .hp-fam-sec__heading {
@@ -789,8 +805,15 @@
       padding-bottom: 0 !important;
       margin-top: 0;
       overflow: hidden;
-      height: auto;
+      flex: 1 1 auto;
       min-height: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .hp-fam-sec__mobile-slider.is-active {
+      display: flex;
     }
 
     .hp-fam-sec__mobile-slider {
@@ -799,24 +822,31 @@
       padding: 0 !important;
       scroll-snap-type: x mandatory;
       overflow-x: auto;
-      align-items: flex-start;
-      min-height: 0;
-      height: auto;
+      align-items: stretch;
+      flex: 1 1 auto;
+      min-height: calc(100dvh - 200px);
+      height: 100%;
     }
 
     .hp-fam-sec__mobile-slider .rail-card {
-      height: auto;
-      align-self: flex-start;
-      min-height: 0;
+      height: 100%;
+      min-height: calc(100dvh - 200px);
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-img {
-      height: 130px;
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 200px;
+      max-height: none;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-info {
-      padding: 12px 14px 14px;
-      gap: 4px;
+      flex: 0 0 auto;
+      padding: 14px 16px 16px;
+      gap: 6px;
     }
 
     .hp-fam-sec__mobile-slider .rail-rating-row {
@@ -828,21 +858,21 @@
     }
 
     .hp-fam-sec__mobile-slider .rail-price-row {
-      margin: 2px 0 0;
+      margin: 4px 0 0;
     }
 
     .hp-fam-sec__mobile-slider .rail-card-atc {
-      margin-top: 2px;
-      padding: 11px;
+      margin-top: 4px;
+      padding: 12px;
     }
 
     .hp-fam-sec__mobile-nav {
-      top: 32%;
+      top: 50%;
     }
 
     #shopify-section-{{ section.id }} .hp-fam-sec__mobile-slider .rail-card,
     .hp-fam-sec__mobile-slider .rail-card {
-      flex: 0 0 100%;
+      flex: 1 0 100%;
       width: 100%;
       min-width: 100%;
       max-width: 100%;
