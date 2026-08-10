@@ -1178,8 +1178,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     margin: 0 !important;
   }
 
-  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
   body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__heading,
@@ -1193,7 +1191,9 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-width: 100% !important;
   }
 
-  /* Materials + Tell Your Story — one line on mobile float stack */
+  /* Best Sellers, Materials + Tell Your Story — one line on mobile float stack */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair,
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'],
@@ -1203,6 +1203,10 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-width: 100% !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-line,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-accent,
   body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair .hp-heading-line,

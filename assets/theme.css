@@ -700,8 +700,6 @@ main h2.h2,
   body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack,
   body.template-index #MainContent .trending-social__heading,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair,
-  body.template-index #MainContent .bs-coverflow__heading,
-  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
   body.template-index #MainContent .hp-dna__heading,
   body.template-index #MainContent .hp-dna__heading .hp-heading-pair {
     display: flex !important;
@@ -713,7 +711,10 @@ main h2.h2,
     max-width: 100% !important;
   }
 
-  /* Materials + Tell Your Story — keep base line + script accent on one row */
+  /* Best Sellers, Materials + Tell Your Story — one row on mobile */
+  body.template-index #MainContent .bs-coverflow__heading,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack,
   body.template-index #MainContent .mat-headline,
   body.template-index #MainContent .mat-headline .hp-heading-pair,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack,
@@ -725,6 +726,12 @@ main h2.h2,
     max-width: 100% !important;
   }
 
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-line,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack .hp-heading-accent,
   body.template-index #MainContent .mat-headline .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-line,
@@ -755,10 +762,6 @@ main h2.h2,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .trending-social__heading .hp-heading-accent,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-accent,
-  body.template-index #MainContent .bs-coverflow__heading .hp-heading-line,
-  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
-  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
   body.template-index #MainContent .hp-dna__heading .hp-heading-line,
   body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
@@ -1953,7 +1956,6 @@ body.template-index {
     body.template-index #MainContent .story-banner__heading .hp-heading-accent,
     body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
     body.template-index #MainContent .trending-social__heading .hp-heading-accent,
-    body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
     body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
     body.template-index #MainContent .hp-heading-pair .hp-heading-accent {
       font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
@@ -1974,6 +1976,9 @@ body.template-index {
       -webkit-font-smoothing: antialiased !important;
     }
 
+    body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
+    body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair--stack .hp-heading-accent,
     body.template-index #MainContent .mat-headline .hp-heading-accent,
     body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent,
     body.template-index #MainContent .mat-headline .hp-heading-pair--stack .hp-heading-accent,
