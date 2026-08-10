@@ -691,52 +691,62 @@ main h2.h2,
 }
 
 @media screen and (max-width: 749px) {
-  /* Story banner mobile: stack script line under the Inter base line */
-  .story-banner__heading,
-  .story-banner__heading .hp-heading-pair,
-  .story-banner__heading .hp-heading-pair--stack {
+  /* Homepage mobile — stack script accent on its own line under Inter base line */
+  body.template-index #MainContent .story-banner__heading,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack,
+  body.template-index #MainContent .hp-fam-sec__heading,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair--stack,
+  body.template-index #MainContent .trending-social__heading,
+  body.template-index #MainContent .trending-social__heading .hp-heading-pair,
+  body.template-index #MainContent .bs-coverflow__heading,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair,
+  body.template-index #MainContent .mat-headline,
+  body.template-index #MainContent .mat-headline .hp-heading-pair,
+  body.template-index #MainContent .hp-dna__heading,
+  body.template-index #MainContent .hp-dna__heading .hp-heading-pair,
+  body.template-index #MainContent [class*="ai-story-banner-heading"],
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: nowrap !important;
     align-items: flex-start !important;
     white-space: normal !important;
-    gap: 0.02em !important;
+    gap: var(--hp-mobile-heading-stack-gap, 0.02em) !important;
     max-width: 100% !important;
   }
 
-  .story-banner__heading .hp-heading-line,
-  .story-banner__heading .hp-heading-pair .hp-heading-line,
-  .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
-  .story-banner__heading .hp-heading-accent,
-  .story-banner__heading .hp-heading-pair .hp-heading-accent,
-  .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
-    display: block !important;
-    white-space: nowrap !important;
-    margin-left: 0 !important;
-  }
-
-  /* Stack script accent on second line (mobile only) */
-  .hp-fam-sec__heading,
-  .hp-fam-sec__heading .hp-heading-pair,
-  .trending-social__heading,
-  .trending-social__heading .hp-heading-pair {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    align-items: flex-start !important;
-    white-space: normal !important;
-    gap: 0.02em !important;
-    max-width: 100% !important;
-  }
-
-  .hp-fam-sec__heading .hp-heading-line,
-  .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
-  .hp-fam-sec__heading .hp-heading-accent,
-  .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
-  .trending-social__heading .hp-heading-line,
-  .trending-social__heading .hp-heading-pair .hp-heading-line,
-  .trending-social__heading .hp-heading-accent,
-  .trending-social__heading .hp-heading-pair .hp-heading-accent {
+  body.template-index #MainContent .story-banner__heading .hp-heading-line,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
+  body.template-index #MainContent .story-banner__heading .hp-heading-accent,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
+  body.template-index #MainContent .hp-fam-sec__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .trending-social__heading .hp-heading-line,
+  body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .trending-social__heading .hp-heading-accent,
+  body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-line,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
+  body.template-index #MainContent .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .mat-headline .hp-heading-line,
+  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .mat-headline .hp-heading-accent,
+  body.template-index #MainContent .mat-headline .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent .hp-dna__heading .hp-heading-line,
+  body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
+  body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-accent,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-line:not(.hp-heading-accent),
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-line,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
+  body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-pair .hp-heading-accent {
     display: block !important;
     white-space: nowrap !important;
     margin-left: 0 !important;
@@ -1914,6 +1924,41 @@ body.template-index {
     --hp-bs-mobile-title-para-gap: 10px;
     --hp-bs-mobile-section-pt: 28px;
     --hp-bs-mobile-section-pb: 24px;
+    --hp-mobile-accent-size: 40px;
+    --hp-mobile-accent-weight: 400;
+    --hp-mobile-accent-lh: 1;
+    --hp-mobile-accent-ls: 0.01em;
+    --hp-mobile-accent-color: #c9a227;
+    --hp-mobile-heading-stack-gap: 0.02em;
+  }
+
+  /* Homepage mobile — one shared handwriting accent across every section title */
+  @media screen and (max-width: 749px) {
+    body.template-index #MainContent .story-banner__heading .hp-heading-accent,
+    body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
+    body.template-index #MainContent .trending-social__heading .hp-heading-accent,
+    body.template-index #MainContent .bs-coverflow__heading .hp-heading-accent,
+    body.template-index #MainContent .mat-headline .hp-heading-accent,
+    body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
+    body.template-index #MainContent [class*="ai-story-banner-heading"] .hp-heading-accent,
+    body.template-index #MainContent .hp-heading-pair .hp-heading-accent {
+      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+      font-size: var(--hp-mobile-accent-size) !important;
+      font-weight: var(--hp-mobile-accent-weight) !important;
+      font-style: normal !important;
+      line-height: var(--hp-mobile-accent-lh) !important;
+      letter-spacing: var(--hp-mobile-accent-ls) !important;
+      color: var(--hp-mobile-accent-color) !important;
+      -webkit-text-fill-color: var(--hp-mobile-accent-color) !important;
+      -webkit-text-stroke: 0 !important;
+      text-transform: none !important;
+      display: block !important;
+      white-space: nowrap !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      vertical-align: baseline !important;
+      -webkit-font-smoothing: antialiased !important;
+    }
   }
 
   body.template-index #MainContent .shopify-section[id] {

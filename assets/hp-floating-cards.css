@@ -1160,19 +1160,39 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-accent,
-  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair .hp-heading-accent {
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-heading'] .hp-heading-pair .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-heading-accent,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-heading-pair .hp-heading-accent {
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-    font-size: 40px !important;
-    font-weight: 400 !important;
+    font-size: var(--hp-mobile-accent-size, 40px) !important;
+    font-weight: var(--hp-mobile-accent-weight, 400) !important;
     font-style: normal !important;
-    line-height: 1 !important;
+    line-height: var(--hp-mobile-accent-lh, 1) !important;
     text-transform: none !important;
-    letter-spacing: 0.01em !important;
-    color: #c9a227 !important;
-    -webkit-text-fill-color: #c9a227 !important;
-    display: inline !important;
+    letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
+    color: var(--hp-mobile-accent-color, #c9a227) !important;
+    -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
+    display: block !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
+    margin: 0 !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .mat-section .mat-headline .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'],
+  body.hp-float-mobile .hp-float-stack .hp-float-dna [class*='hp-dna__heading'] .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__heading,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec__heading .hp-heading-pair,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__heading,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social__heading .hp-heading-pair {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: var(--hp-mobile-heading-stack-gap, 0.02em) !important;
+    max-width: 100% !important;
   }
 
   /* Headings must not clip during sticky cover overlap / typewriter */
