@@ -129,6 +129,10 @@
     return !!pin.querySelector('.hero-fullscreen');
   }
 
+  function isBestsellersPin(pin) {
+    return !!(pin && pin.querySelector('.bs-coverflow, [data-bs-coverflow]'));
+  }
+
   function isCommunityPin(pin) {
     return !!(pin && pin.querySelector('.comm-section, .comm-swiper, .comm-slider-container'));
   }
@@ -220,6 +224,58 @@
     for (var i = 0; i < nodes.length; i++) {
       nodes[i].style.cssText = '';
     }
+  }
+
+  function prepareBestsellersFullscreen(pin) {
+    var fill = viewportFill(true);
+    var root = pin.querySelector('.bs-coverflow');
+    if (!root) return;
+
+    root.style.setProperty('display', 'flex', 'important');
+    root.style.setProperty('flex-direction', 'column', 'important');
+    root.style.setProperty('justify-content', 'flex-start', 'important');
+    root.style.setProperty('width', '100%', 'important');
+    root.style.setProperty('height', '100%', 'important');
+    root.style.setProperty('min-height', fill, 'important');
+    root.style.setProperty('box-sizing', 'border-box', 'important');
+    root.style.setProperty('overflow', 'hidden', 'important');
+
+    var container = root.querySelector('.bs-coverflow__container');
+    if (container) {
+      container.style.setProperty('display', 'flex', 'important');
+      container.style.setProperty('flex-direction', 'column', 'important');
+      container.style.setProperty('flex', '1 1 auto', 'important');
+      container.style.setProperty('height', '100%', 'important');
+      container.style.setProperty('min-height', '0', 'important');
+      container.style.setProperty('overflow', 'hidden', 'important');
+    }
+  }
+
+  function applyBestsellersMobileViewport(item, z) {
+    var sec = item.sec;
+    var pin = item.pin;
+    var fill = viewportFill(true);
+    var vhPx = viewportH() + 'px';
+    var bg = detectBg(pin) || '#111111';
+
+    item.isCard = false;
+    item.bg = bg;
+    sec.classList.add('hp-float-bestsellers');
+    asStrip(item, z);
+
+    sec.style.setProperty('min-height', vhPx, 'important');
+    sec.style.setProperty('height', fill, 'important');
+    sec.style.setProperty('max-height', 'none', 'important');
+    sec.style.setProperty('overflow', 'hidden', 'important');
+    sec.style.setProperty('background-color', bg, 'important');
+
+    pin.style.setProperty('min-height', vhPx, 'important');
+    pin.style.setProperty('height', fill, 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
+    pin.style.setProperty('overflow', 'hidden', 'important');
+    pin.style.setProperty('background-color', bg, 'important');
+
+    prepareBestsellersFullscreen(pin);
   }
 
   /* Keep mobile hero painted — sticky stacks were covering/collapsing it after first paint */
@@ -327,7 +383,8 @@
       'hp-float-card--mobile',
       'hp-float-story',
       'hp-float-hero',
-      'hp-float-dna'
+      'hp-float-dna',
+      'hp-float-bestsellers'
     );
     [
       'height',
@@ -846,7 +903,8 @@
         'hp-float-split-cta',
         'hp-float-dna',
         'hp-story-banner-lite',
-        'hp-corp-marquee-strip'
+        'hp-corp-marquee-strip',
+        'hp-float-bestsellers'
       );
 
       if (isSplitCtaSection(sec) || isSplitCtaPin(pin)) {
@@ -895,6 +953,11 @@
           sec.style.setProperty('background-color', bg, 'important');
           pin.style.setProperty('background-color', bg, 'important');
         }
+        return;
+      }
+
+      if (isBestsellersPin(pin)) {
+        applyBestsellersMobileViewport(item, 10 + index);
         return;
       }
 
@@ -1128,6 +1191,10 @@
       asCard(item, cardIndex, contentH, bg, mobile, story);
       if (hero) prepareHeroFullscreen(pin);
       if (story) prepareStoryFullscreen(pin, mobile);
+      if (mobile && isBestsellersPin(pin)) {
+        sec.classList.add('hp-float-bestsellers');
+        prepareBestsellersFullscreen(pin);
+      }
     });
 
     lastLayoutW = window.innerWidth || 0;

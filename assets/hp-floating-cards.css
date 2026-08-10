@@ -362,6 +362,101 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: hidden !important;
   }
 
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-bestsellers,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-bestsellers > .hp-float-pin {
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers,
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers > .hp-float-pin {
+    min-height: var(--hp-mobile-vh, 100vh) !important;
+    height: var(--hp-mobile-vh, 100vh) !important;
+    max-height: var(--hp-mobile-vh, 100vh) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    padding-top: 28px !important;
+    padding-bottom: max(24px, env(safe-area-inset-bottom, 0px)) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    background-color: #111111 !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__container {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__header {
+    flex: 0 0 auto !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__stage {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    height: auto !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__viewport {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 280px !important;
+    max-height: none !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__track {
+    min-height: 100% !important;
+    height: 100% !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow__footer {
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+    padding-bottom: 0 !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow-card {
+    max-width: calc(100% - 88px) !important;
+    width: min(78vw, 300px) !important;
+    left: 50% !important;
+    top: 50% !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow-card.is-active {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 20 !important;
+  }
+
+  body.hp-float-mobile #MainContent .shopify-section.hp-float-bestsellers .bs-coverflow-card:not(.is-active) {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
   .hp-float-stack > .shopify-section.hp-float-card:not(.hp-float-bottom-strip),
   .hp-float-stack > .shopify-section.hp-float-card--mobile:not(.hp-float-bottom-strip) {
     position: -webkit-sticky !important;
