@@ -189,17 +189,19 @@
     body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
     body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
       font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-      font-size: {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px !important;
-      font-weight: 500 !important;
+      font-size: var(--hp-mobile-accent-size, {{ section.settings.heading_accent_font_size_mobile | default: 40 }}px) !important;
+      font-weight: var(--hp-mobile-accent-weight, {{ section.settings.heading_accent_font_weight | default: 400 }}) !important;
       font-style: normal !important;
-      line-height: 1.05 !important;
-      letter-spacing: 0.01em !important;
-      color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
-      -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
-      -webkit-text-stroke: 0.45px {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
-      paint-order: stroke fill !important;
+      line-height: var(--hp-mobile-accent-lh, 1) !important;
+      letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
+      color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
+      -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
+      -webkit-text-stroke: 0 !important;
+      paint-order: normal !important;
       font-synthesis: none !important;
       -webkit-font-smoothing: antialiased !important;
+      display: block !important;
+      white-space: nowrap !important;
     }
   }
 

@@ -1353,16 +1353,19 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-size: var(--hp-mobile-accent-size, 40px) !important;
-    font-weight: 500 !important;
-    line-height: 1.05 !important;
+    font-weight: var(--hp-mobile-accent-weight, 400) !important;
+    font-style: normal !important;
+    line-height: var(--hp-mobile-accent-lh, 1) !important;
     letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
     color: var(--hp-mobile-accent-color, #c9a227) !important;
     -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
-    -webkit-text-stroke: 0.45px var(--hp-mobile-accent-color, #c9a227) !important;
-    paint-order: stroke fill !important;
+    -webkit-text-stroke: 0 !important;
+    paint-order: normal !important;
     font-synthesis: none !important;
-    margin-top: 2px !important;
-    padding-top: 2px !important;
+    display: block !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner__heading .hp-heading-line,
