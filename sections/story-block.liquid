@@ -179,7 +179,26 @@
   @media screen and (max-width: 989px) {
     #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
-      font-size: clamp(28px, 7vw, {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px) !important;
+      font-size: {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    body.template-index #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
+      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+      font-size: {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px !important;
+      font-weight: {{ section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400' }} !important;
+      font-style: normal !important;
+      line-height: 1 !important;
+      letter-spacing: 0.01em !important;
+      color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
+      -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227' }} !important;
+      -webkit-text-stroke: 0 !important;
+      font-synthesis: none !important;
+      -webkit-font-smoothing: antialiased !important;
     }
   }
 

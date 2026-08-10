@@ -1954,6 +1954,11 @@ body.template-index {
   /* Homepage mobile — one shared handwriting accent across every section title */
   @media screen and (max-width: 749px) {
     body.template-index #MainContent .story-banner__heading .hp-heading-accent,
+    body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
     body.template-index #MainContent .hp-fam-sec__heading .hp-heading-accent,
     body.template-index #MainContent .trending-social__heading .hp-heading-accent,
     body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
@@ -2079,23 +2084,6 @@ body.template-index {
     row-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
   }
 
-  /* Split CTA copy block — same title/body rhythm */
-  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
-    gap: var(--hp-bs-mobile-title-para-gap) !important;
-    row-gap: var(--hp-bs-mobile-title-para-gap) !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    transform: none !important;
-  }
-
-  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__heading"],
-  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__text"] {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
   /*
    * Phone — lock every homepage section to Best Sellers spacing rhythm
    * (28px top / 24px bottom, 10px eyebrow→title, 10px title→para, 12px header→content)
@@ -2181,6 +2169,25 @@ body.template-index {
     body.template-index #MainContent [class*="ai-story-banner-text-"] {
       margin-top: var(--hp-bs-mobile-title-para-gap) !important;
     }
+
+    /* Split CTA copy block — same title/body rhythm (mobile only) */
+    body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
+      gap: var(--hp-bs-mobile-title-para-gap) !important;
+      row-gap: var(--hp-bs-mobile-title-para-gap) !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      transform: none !important;
+      text-align: left !important;
+    }
+
+    body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__heading"],
+    body.template-index #MainContent [class*="split-cta-"][class*="__copy"] > [class*="__text"] {
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: left !important;
+    }
   }
 }
 
@@ -2190,6 +2197,37 @@ body.template-index {
     --hp-home-desktop-para-size: 21px;
     --hp-home-desktop-para-weight: 400;
     --hp-home-desktop-para-lh: 1.38;
+  }
+
+  /* Split CTA — copy right-aligned, button flush on the right */
+  body.template-index #MainContent [class*="split-cta-"][class*="__inner"] {
+    max-width: var(--site-max-width, 1440px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+  }
+
+  body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
+    text-align: right !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    transform: none !important;
+  }
+
+  body.template-index #MainContent [class*="split-cta-"][class*="__heading"],
+  body.template-index #MainContent [class*="split-cta-"][class*="__text"] {
+    text-align: right !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  body.template-index #MainContent [class*="split-cta-"][class*="__actions"] {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    align-self: center !important;
+    width: auto !important;
   }
 
   body.template-index #MainContent .shopify-section[id] .hp-body-para,
