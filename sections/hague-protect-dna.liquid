@@ -248,6 +248,19 @@
       max-width: 100% !important;
     }
 
+    .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: 24px !important;
+      font-weight: 300 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0.03em !important;
+      color: {{ section.settings.heading_line2_color | default: '#6b6b6b' }} !important;
+      -webkit-text-fill-color: {{ section.settings.heading_line2_color | default: '#6b6b6b' }} !important;
+      margin-top: 4px !important;
+    }
+
     .hp-dna-{{ section.id }} .hp-dna__grid {
       display: flex;
       flex-wrap: nowrap;

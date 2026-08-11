@@ -780,6 +780,21 @@ main h2.h2,
     text-align: left !important;
   }
 
+  body.template-index #MainContent .hp-dna__heading .hp-heading-line--2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+    color: var(--section-heading-line2-color, #6b6b6b) !important;
+    -webkit-text-fill-color: var(--section-heading-line2-color, #6b6b6b) !important;
+    -webkit-text-stroke: 0 !important;
+    text-transform: none !important;
+    margin-top: 4px !important;
+  }
+
   body.template-index #MainContent .trending-social__heading .hp-heading-accent,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-accent {
     margin-top: 2px !important;
