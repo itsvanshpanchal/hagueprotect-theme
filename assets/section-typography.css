@@ -121,7 +121,6 @@
   font-size: var(--section-heading-size) !important;
 }
 
-#MainContent .shopify-section .hp-heading-accent,
 #MainContent .shopify-section h2 .hp-heading-accent,
 #MainContent .shopify-section .hp-heading-pair .hp-heading-accent,
 #MainContent .shopify-section .mat-headline .hp-heading-accent,
@@ -139,6 +138,20 @@
   paint-order: normal;
   -webkit-font-smoothing: antialiased;
   text-transform: none !important;
+}
+
+/* Story banner script — never inherit desktop 62px --heading-accent-size from .hp-heading-pair rule */
+#MainContent .shopify-section .story-banner__heading .hp-heading-pair .hp-heading-accent,
+#MainContent .shopify-section .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+#MainContent .shopify-section .story-banner__heading > .hp-heading-accent,
+#MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent {
+  font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+  font-weight: var(--font-weight-heading-accent, 400) !important;
+  font-style: normal !important;
+  font-size: var(--heading-accent-size, 40px) !important;
+  display: inline !important;
+  white-space: nowrap !important;
+  vertical-align: baseline !important;
 }
 
 #MainContent .shopify-section .hp-heading-pair .hp-heading-line {
@@ -348,6 +361,7 @@
   }
 
   #MainContent .shopify-section .story-banner__heading .hp-heading-line--1,
+  #MainContent .shopify-section .story-banner__heading > .hp-heading-line--1,
   #MainContent .shopify-section .story-banner__heading .hp-heading-pair .hp-heading-line--1,
   #MainContent .shopify-section h2 .hp-heading-line:not(.hp-heading-accent) {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
@@ -388,9 +402,25 @@
     vertical-align: baseline !important;
   }
 
+  #MainContent .shopify-section .story-banner__heading,
+  #MainContent .shopify-section .story-banner__heading .hp-heading-pair,
+  #MainContent .shopify-section .story-banner__heading .hp-heading-pair--stack,
+  #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    row-gap: 2px !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  #MainContent .shopify-section .story-banner__heading > .hp-heading-accent,
   #MainContent .shopify-section .story-banner__heading .hp-heading-accent,
   #MainContent .shopify-section .story-banner__heading .hp-heading-pair .hp-heading-accent,
   #MainContent .shopify-section .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+  #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__heading > .hp-heading-accent,
   #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent {
     font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
     font-size: var(--hp-mobile-accent-size, 40px) !important;
@@ -402,9 +432,23 @@
     -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
     -webkit-text-stroke: 0 !important;
     paint-order: normal !important;
-    display: block !important;
+    display: inline !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
+  }
+
+  #MainContent .shopify-section .story-banner__heading .hp-heading-pair--stack,
+  #MainContent .shopify-section [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 0 !important;
+    row-gap: 0 !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   #MainContent .shopify-section .corp-hero__sub,

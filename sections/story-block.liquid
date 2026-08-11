@@ -1,3 +1,9 @@
+{%- liquid
+  assign story_heading_mobile = 24
+  assign story_accent_mobile = section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
+  assign story_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
+  assign story_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
+-%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
@@ -179,53 +185,134 @@
     }
   }
 
-  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
-  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: baseline !important;
-    white-space: nowrap !important;
-    gap: 0.12em;
-    max-width: none;
-  }
+  @media screen and (min-width: 750px) {
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: baseline !important;
+      white-space: nowrap !important;
+      gap: 0.12em;
+      max-width: none;
+    }
 
-  .story-banner-wrapper-{{ section.id }} .story-banner__heading {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: baseline !important;
-    white-space: nowrap !important;
-    max-width: none !important;
-    width: auto !important;
-  }
-
-  @media screen and (max-width: 989px) {
-    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
-    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
-      font-size: {{ section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40 }}px !important;
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: baseline !important;
+      white-space: nowrap !important;
+      max-width: none !important;
+      width: auto !important;
     }
   }
 
-  @media screen and (max-width: 749px) {
-    body.template-index #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
       font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-      font-size: var(--hp-mobile-accent-size, {{ section.settings.heading_accent_font_size_mobile | default: 40 }}px) !important;
-      font-weight: var(--hp-mobile-accent-weight, {{ section.settings.heading_accent_font_weight | default: 400 }}) !important;
+      font-size: {{ story_accent_mobile }}px !important;
+      font-weight: {{ story_accent_weight }} !important;
       font-style: normal !important;
-      line-height: var(--hp-mobile-accent-lh, 1) !important;
-      letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
-      color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
-      -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
+      line-height: 1 !important;
+      letter-spacing: 0.01em !important;
+      color: {{ story_accent_color }} !important;
+      -webkit-text-fill-color: {{ story_accent_color }} !important;
       -webkit-text-stroke: 0 !important;
       paint-order: normal !important;
       font-synthesis: none !important;
       -webkit-font-smoothing: antialiased !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading,
+    #shopify-section-{{ section.id }} .story-banner__heading,
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;
+      white-space: normal !important;
+      gap: 2px !important;
+      row-gap: 2px !important;
+      max-width: 100% !important;
+      width: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      font-size: {{ story_heading_mobile }}px !important;
+      font-weight: 300 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      line-height: 1.05 !important;
+      letter-spacing: 0.03em !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading > .hp-heading-line--1,
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-line--1,
+    #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-line--1 {
       display: block !important;
+      width: auto !important;
+      max-width: 100% !important;
       white-space: nowrap !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: {{ story_heading_mobile }}px !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-accent,
+    #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-accent,
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+    #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent {
+      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+      font-size: {{ story_accent_mobile }}px !important;
+      font-weight: {{ story_accent_weight }} !important;
+      font-style: normal !important;
+      line-height: 1 !important;
+      letter-spacing: 0.01em !important;
+      color: {{ story_accent_color }} !important;
+      -webkit-text-fill-color: {{ story_accent_color }} !important;
+      -webkit-text-stroke: 0 !important;
+      paint-order: normal !important;
+      font-synthesis: none !important;
+      -webkit-font-smoothing: antialiased !important;
+      display: inline !important;
+      width: auto !important;
+      max-width: 100% !important;
+      white-space: nowrap !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      vertical-align: baseline !important;
+    }
+
+    #MainContent #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair--stack,
+    #shopify-section-{{ section.id }} .story-banner__heading .hp-heading-pair--stack,
+    #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack,
+    .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      align-items: baseline !important;
+      gap: 0 !important;
+      row-gap: 0 !important;
+      white-space: nowrap !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
   }
 
@@ -396,8 +483,8 @@
       justify-content: flex-start !important;
       align-items: flex-start !important;
       text-align: left !important;
-      padding-top: max(12px, env(safe-area-inset-top, 0px)) !important;
-      padding-bottom: 24px !important;
+      padding-top: var(--hp-bs-mobile-section-pt, 28px) !important;
+      padding-bottom: var(--hp-bs-mobile-section-pb, 24px) !important;
       padding-left: var(--homepage-section-gutter, 28px) !important;
       padding-right: var(--homepage-section-gutter-right, 28px) !important;
       gap: 6px !important;
@@ -407,63 +494,10 @@
     body.template-index .story-banner-wrapper-{{ section.id }} .section-heading-stack {
       transform: none !important;
       max-width: 92% !important;
-      gap: 4px !important;
-      row-gap: 4px !important;
+      gap: 2px !important;
+      row-gap: 2px !important;
       margin-top: 0 !important;
-    }
-
-    /* Mobile only: "Cleaning Today" on its own line under "What Are You" */
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-      font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
-      font-weight: 300 !important;
-      font-style: normal !important;
-      font-synthesis: none !important;
-      line-height: 1.05 !important;
-      letter-spacing: 0.03em !important;
-    }
-
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack {
-      display: flex !important;
-      flex-direction: column !important;
-      flex-wrap: nowrap !important;
-      align-items: flex-start !important;
-      white-space: normal !important;
-      gap: 4px !important;
-      row-gap: 4px !important;
-      max-width: 100% !important;
-      width: auto !important;
-    }
-
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-line,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
-      display: block !important;
-      white-space: nowrap !important;
-      margin-left: 0 !important;
-    }
-
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
-      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-      font-size: var(--hp-mobile-accent-size, 40px) !important;
-      font-weight: var(--hp-mobile-accent-weight, 400) !important;
-      font-style: normal !important;
-      line-height: var(--hp-mobile-accent-lh, 1) !important;
-      letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
-      color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
-      -webkit-text-fill-color: {{ section.settings.heading_accent_color | default: '#c9a227' }} !important;
-      -webkit-text-stroke: 0 !important;
-      paint-order: normal !important;
-      font-synthesis: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
+      margin-bottom: 0 !important;
     }
 
     body.template-index .story-banner-wrapper-{{ section.id }} .story-banner__subheading {
@@ -563,12 +597,12 @@
         {%- if mobile_img != blank -%}
           <source media="(max-width: 749px)" srcset="{{ mobile_img | image_url: width: 800 }}">
         {%- endif -%}
-        <img
+        <img 
           src="{{ banner_img | image_url: width: 1920 }}"
           srcset="{{ banner_img | image_url: width: 1000 }} 1000w, {{ banner_img | image_url: width: 1440 }} 1440w, {{ banner_img | image_url: width: 1920 }} 1920w, {{ banner_img | image_url: width: 2560 }} 2560w"
           sizes="100vw"
           alt="{{ banner_img.alt | default: banner_heading | default: product.title | default: shop.name | escape }} story banner"
-          class="story-banner__image"
+          class="story-banner__image" 
           loading="eager"
           fetchpriority="high"
         >
@@ -586,18 +620,38 @@
             {%- endif -%}
             {%- if banner_heading != blank -%}
               {%- liquid
-                assign story_heading_full = banner_heading
+                assign story_line1 = banner_heading | strip
                 assign story_line2 = section.settings.heading_line2 | strip
-                if story_line2 != blank
-                  assign heading_check = banner_heading | strip | downcase
-                  assign line2_check = story_line2 | downcase
-                  unless heading_check contains line2_check
-                    assign story_heading_full = banner_heading | append: ' ' | append: story_line2
-                  endunless
-                endif
                 assign story_accent_count = section.settings.heading_accent_word_count | default: 2
+                assign story_accent_text = ''
+                assign story_use_split_markup = false
+
+                if story_line2 != blank
+                  assign story_use_split_markup = true
+                  assign story_accent_text = story_line2
+                else
+                  assign story_heading_full = story_line1
+                  assign story_words = story_line1 | split: ' '
+                  if story_words.size > story_accent_count
+                    assign story_main_count = story_words.size | minus: story_accent_count
+                    assign story_main_words = story_words | slice: 0, story_main_count
+                    assign story_accent_words = story_words | slice: story_main_count, story_accent_count
+                    assign story_line1 = story_main_words | join: ' '
+                    assign story_accent_text = story_accent_words | join: ' '
+                    assign story_use_split_markup = true
+                  endif
+                endif
               -%}
-              <div class="story-banner__heading" role="heading" aria-level="2">{% render 'section-heading-text', text: story_heading_full, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: section.settings.heading_accent_color %}</div>
+              <div class="story-banner__heading" role="heading" aria-level="2">
+                {%- if story_use_split_markup and story_accent_text != blank -%}
+                  <span class="hp-heading-line hp-heading-line--1">{{ story_line1 }}</span>
+                  <span class="hp-heading-pair hp-heading-pair--stack">
+                    <span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ story_accent_color }};text-transform:none !important;-webkit-text-fill-color:{{ story_accent_color }};">{{ story_accent_text }}</span>
+                  </span>
+                {%- else -%}
+                  {% render 'section-heading-text', text: story_line1, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: story_accent_color %}
+                {%- endif -%}
+              </div>
             {%- endif -%}
             {%- if banner_paragraph != blank -%}
               <p class="story-banner__paragraph hp-body-para">{{ banner_paragraph }}</p>

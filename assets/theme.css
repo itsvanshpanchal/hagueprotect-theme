@@ -667,34 +667,33 @@ main h2.h2,
   white-space: nowrap !important;
 }
 
-/* Story banner: always one horizontal line (script accent stays inline) */
-.story-banner__heading,
-.story-banner__heading .hp-heading-pair,
-.story-banner__heading .hp-heading-pair--stack {
-  display: inline-flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: baseline !important;
-  white-space: nowrap !important;
-  gap: 0.18em;
-  max-width: none;
-}
+/* Story banner: desktop — one horizontal line (script accent stays inline) */
+@media screen and (min-width: 750px) {
+  .story-banner__heading,
+  .story-banner__heading .hp-heading-pair,
+  .story-banner__heading .hp-heading-pair--stack {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    white-space: nowrap !important;
+    gap: 0.18em;
+    max-width: none;
+  }
 
-.story-banner__heading .hp-heading-line,
-.story-banner__heading .hp-heading-pair .hp-heading-line,
-.story-banner__heading .hp-heading-pair--stack .hp-heading-line,
-.story-banner__heading .hp-heading-accent,
-.story-banner__heading .hp-heading-pair .hp-heading-accent,
-.story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
-  display: inline !important;
-  white-space: nowrap !important;
+  .story-banner__heading .hp-heading-line,
+  .story-banner__heading .hp-heading-pair .hp-heading-line,
+  .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
+  .story-banner__heading .hp-heading-accent,
+  .story-banner__heading .hp-heading-pair .hp-heading-accent,
+  .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
 }
 
 @media screen and (max-width: 749px) {
   /* Homepage mobile — stack script accent on its own line under Inter base line */
-  body.template-index #MainContent .story-banner__heading,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack,
   body.template-index #MainContent .trending-social__heading,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair,
   body.template-index #MainContent .hp-dna__heading,
@@ -758,11 +757,6 @@ main h2.h2,
     max-width: 100% !important;
   }
 
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-line,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-line,
-  body.template-index #MainContent .story-banner__heading .hp-heading-accent,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
   body.template-index #MainContent .trending-social__heading .hp-heading-line,
   body.template-index #MainContent .trending-social__heading .hp-heading-pair .hp-heading-line,
   body.template-index #MainContent .trending-social__heading .hp-heading-accent,
@@ -776,15 +770,75 @@ main h2.h2,
     margin-left: 0 !important;
   }
 
-  /* Story banner — extra line gap so script ascenders don't touch line above */
+  /* Story banner — match Premium Best mobile heading (24px / 40px script, inline accent) */
   body.template-index #MainContent .story-banner__heading,
-  body.template-index #MainContent .story-banner__heading .hp-heading-pair,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    row-gap: 2px !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
+    font-weight: 300 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  body.template-index #MainContent .story-banner__heading > .hp-heading-line--1,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading > .hp-heading-line--1 {
+    display: block !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
+    font-weight: 300 !important;
+    line-height: 1.05 !important;
+    letter-spacing: 0.03em !important;
+  }
+
   body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack,
-  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading,
-  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair,
   body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack {
-    gap: 4px !important;
-    row-gap: 4px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 0 !important;
+    row-gap: 0 !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+  body.template-index #MainContent .story-banner__heading > .hp-heading-accent,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading > .hp-heading-accent {
+    display: inline !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: baseline !important;
+    font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
+    font-size: var(--hp-mobile-accent-size, 40px) !important;
+    font-weight: var(--hp-mobile-accent-weight, 400) !important;
+    font-style: normal !important;
+    line-height: 1 !important;
+    letter-spacing: 0.01em !important;
+    color: var(--hp-mobile-accent-color, #c9a227) !important;
+    -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
+    -webkit-text-stroke: 0 !important;
+    paint-order: normal !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
   }
 
   /* Premium Best — line 1 "Shop Our", line 2 "Premium Best" */
@@ -1170,7 +1224,6 @@ main h3 > span[aria-hidden="true"] {
     letter-spacing: 0.03em !important;
   }
 
-  .story-banner__heading .hp-heading-accent,
   .story-banner__heading .hp-heading-pair .hp-heading-accent,
   .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
   .bs-coverflow__heading .hp-heading-accent,
@@ -2026,31 +2079,6 @@ body.template-index {
       color: var(--hp-mobile-accent-color) !important;
       -webkit-text-fill-color: var(--hp-mobile-accent-color) !important;
       -webkit-text-stroke: 0 !important;
-      text-transform: none !important;
-      display: block !important;
-      white-space: nowrap !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      vertical-align: baseline !important;
-      -webkit-font-smoothing: antialiased !important;
-    }
-
-    body.template-index #MainContent .story-banner__heading .hp-heading-accent,
-    body.template-index #MainContent .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index #MainContent .story-banner__heading .hp-heading-pair--stack .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair .hp-heading-accent,
-    body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__heading .hp-heading-pair--stack .hp-heading-accent {
-      font-family: 'Luthon Southard Script', 'Brush Script MT', cursive !important;
-      font-size: var(--hp-mobile-accent-size, 40px) !important;
-      font-weight: var(--hp-mobile-accent-weight, 400) !important;
-      font-style: normal !important;
-      line-height: var(--hp-mobile-accent-lh, 1) !important;
-      letter-spacing: var(--hp-mobile-accent-ls, 0.01em) !important;
-      color: var(--hp-mobile-accent-color, #c9a227) !important;
-      -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
-      -webkit-text-stroke: 0 !important;
-      paint-order: normal !important;
       text-transform: none !important;
       display: block !important;
       white-space: nowrap !important;
