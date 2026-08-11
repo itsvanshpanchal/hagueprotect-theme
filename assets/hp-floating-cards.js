@@ -16,6 +16,7 @@
   if (!main) return;
 
   var MQ_MOBILE = window.matchMedia('(max-width: 749px)');
+  var mobileVhLocked = false;
   var STRIP_SEL =
     '.corp-marquee, .corporate-gifting-marquee, [class*="marquee"], .announcement, .apps, [class*="split-cta"], .section-split-cta';
 
@@ -72,11 +73,18 @@
     return viewportH() + 'px';
   }
 
-  function syncMobileViewportVar() {
+  function syncMobileViewportVar(force) {
     if (!isMobile()) return;
+    if (mobileVhLocked && !force) return;
+    if (typeof window.hpSyncMobileVh === 'function') {
+      window.hpSyncMobileVh(!!force);
+      mobileVhLocked = true;
+      return;
+    }
     var h = viewportH();
     document.documentElement.style.setProperty('--hp-mobile-vh', h + 'px');
     document.documentElement.style.setProperty('--hp-mobile-vh-num', String(h));
+    mobileVhLocked = true;
   }
 
   function isShopifySection(el) {
@@ -897,7 +905,8 @@
       item.bg = bg;
       item.isCard = false;
 
-      resetSectionStyles(sec, pin, true);
+      /* Keep hero/story painted — full pin reset causes half-banner flash */
+      resetSectionStyles(sec, pin, false);
       sec.classList.remove(
         'hp-float-bottom-strip',
         'hp-float-split-cta',
@@ -947,7 +956,9 @@
       }
 
       if (hero) {
-        prepareHeroFullscreen(pin);
+        sec.classList.add('hp-float-hero');
+        pin.style.setProperty('opacity', '1', 'important');
+        pin.style.setProperty('visibility', 'visible', 'important');
         asStrip(item, 10 + index);
         if (bg) {
           sec.style.setProperty('background-color', bg, 'important');
@@ -957,7 +968,12 @@
       }
 
       if (isBestsellersPin(pin)) {
-        applyBestsellersMobileViewport(item, 10 + index);
+        asStrip(item, 10 + index);
+        if (bg) {
+          sec.style.setProperty('background-color', bg, 'important');
+          pin.style.setProperty('background-color', bg, 'important');
+        }
+        pin.style.setProperty('overflow', 'visible', 'important');
         return;
       }
 
@@ -1016,6 +1032,7 @@
 
   var lastLayoutW = 0;
   var layingOut = false;
+  var mobileNativeLaidOut = false;
 
   function layout() {
     if (layingOut) return;
@@ -1023,20 +1040,27 @@
 
     var mobile = isMobile();
     var mobileNative = useMobileNativeScroll();
-    if (mobile) syncMobileViewportVar();
+    if (mobile) syncMobileViewportVar(false);
     var vh = viewportH();
     var cardIndex = 0;
     document.body.classList.toggle('hp-float-mobile', mobile);
     document.documentElement.classList.toggle('hp-float-mobile', mobile);
     document.body.classList.toggle('hp-float-native-scroll', mobileNative);
     document.documentElement.classList.toggle('hp-float-native-scroll', mobileNative);
-    if (mobile) syncMobileViewportVar();
 
     if (mobileNative) {
+      var w = window.innerWidth || 0;
+      if (mobileNativeLaidOut && Math.abs(w - lastLayoutW) < 40) {
+        layingOut = false;
+        return;
+      }
       layoutMobileNative(items);
-      lastLayoutW = window.innerWidth || 0;
+      mobileNativeLaidOut = true;
+      lastLayoutW = w;
       layingOut = false;
       ensureFooterRunway(false);
+      document.documentElement.classList.add('hp-float-layout-ready');
+      document.body.classList.add('hp-float-layout-ready');
       return;
     }
 
@@ -1200,6 +1224,8 @@
     lastLayoutW = window.innerWidth || 0;
     layingOut = false;
     ensureFooterRunway(mobile);
+    document.documentElement.classList.add('hp-float-layout-ready');
+    document.body.classList.add('hp-float-layout-ready');
   }
 
   function ensureFooterRunway(mobile) {
@@ -1224,24 +1250,22 @@
 
   layout();
   window.addEventListener('resize', onResize, { passive: true });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener(
-      'resize',
-      function () {
-        if (!isMobile()) return;
-        syncMobileViewportVar();
-      },
-      { passive: true }
-    );
-  }
   window.addEventListener('orientationchange', function () {
+    mobileVhLocked = false;
+    mobileNativeLaidOut = false;
     setTimeout(function () {
-      syncMobileViewportVar();
+      syncMobileViewportVar(true);
       layout();
     }, 250);
   }, { passive: true });
   window.addEventListener('load', function () {
-    /* Soft re-layout after images — hero paint is preserved on mobile */
+    /* Native mobile scroll: CSS owns hero height — skip second layout flash */
+    if (isMobile() && useMobileNativeScroll()) {
+      document.documentElement.classList.add('hp-float-layout-ready');
+      document.body.classList.add('hp-float-layout-ready');
+      window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
+      return;
+    }
     layout();
     window.dispatchEvent(new CustomEvent('hp-floating-cards:ready'));
   });

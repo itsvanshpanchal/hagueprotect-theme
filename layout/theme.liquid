@@ -7,6 +7,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    {%- if template.name == 'index' -%}
+    <script>
+      (function () {
+        var lock = false;
+        function setMobileVh(force) {
+          if (lock && !force) return;
+          var h = Math.round(window.innerHeight || document.documentElement.clientHeight || 0);
+          if (h < 320) return;
+          document.documentElement.style.setProperty('--hp-mobile-vh', h + 'px');
+          document.documentElement.style.setProperty('--hp-mobile-vh-num', String(h));
+          lock = true;
+        }
+        setMobileVh(true);
+        if (window.matchMedia('(max-width: 749px)').matches) {
+          document.documentElement.classList.add('hp-float-mobile', 'hp-float-native-scroll');
+        }
+        window.addEventListener('orientationchange', function () {
+          lock = false;
+          setTimeout(function () { setMobileVh(true); }, 120);
+        }, { passive: true });
+        window.hpSyncMobileVh = setMobileVh;
+      })();
+    </script>
+    {%- endif -%}
     <meta name="theme-color" content="#FF2B2B">
     
     <!-- Security Headers -->

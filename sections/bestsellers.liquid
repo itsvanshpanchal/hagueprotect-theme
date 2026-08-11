@@ -103,8 +103,10 @@ text-shadow: none !important;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-heading-pair {
-      visibility: hidden;
+    @media screen and (min-width: 750px) {
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-heading-pair {
+        visibility: hidden;
+      }
     }
   }
 
