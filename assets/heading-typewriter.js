@@ -6,6 +6,10 @@
 
   var MOBILE_MQ = window.matchMedia('(max-width: 749px)');
 
+  function isBestsellersHeading(element) {
+    return element && element.classList && element.classList.contains('bs-coverflow__heading');
+  }
+
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
       return false;
@@ -127,6 +131,7 @@
 
   function typeStructuredHeading(element, lineEls) {
     element.dataset.typewriterActive = 'true';
+    element.classList.add('is-typewriting');
 
     var data = Array.prototype.map.call(lineEls, parsePairOrLine);
 
@@ -134,17 +139,21 @@
       .map(function (d) { return d.text; })
       .join(' ');
 
-    /* Mobile + float stack: show full heading immediately so scroll never
-       catches mid-word clips like "Bestselling Sneaker Ca" / "Fol". */
-    if (MOBILE_MQ.matches) {
+    /* Mobile: skip most headings to avoid sticky-scroll clipping — except
+       Bestsellers, which keeps main + script accent on one line. */
+    if (MOBILE_MQ.matches && !isBestsellersHeading(element)) {
       data.forEach(function (d) { d.el.innerHTML = d.html; });
       element.setAttribute('aria-label', full);
       element.dataset.typewriterDone = 'true';
       delete element.dataset.typewriterActive;
+      element.classList.remove('is-typewriting');
       return;
     }
 
     var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
+    if (MOBILE_MQ.matches && isBestsellersHeading(element)) {
+      speed = 38;
+    }
     var linePause = 180;
 
     var originalMinHeight = element.style.minHeight;
@@ -183,6 +192,7 @@
         element.style.minHeight = originalMinHeight;
         element.dataset.typewriterDone = 'true';
         delete element.dataset.typewriterActive;
+        element.classList.remove('is-typewriting');
       }
     }
 
@@ -229,6 +239,7 @@
     }
 
     element.dataset.typewriterActive = 'true';
+    element.classList.add('is-typewriting');
 
     var originalHTML = element.innerHTML;
     var fullText = element.innerHTML
@@ -238,15 +249,19 @@
       .replace(/\s*\[\[BR\]\]\s*/g, '\n')
       .trim();
 
-    if (MOBILE_MQ.matches) {
+    if (MOBILE_MQ.matches && !isBestsellersHeading(element)) {
       element.innerHTML = originalHTML;
       element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
       element.dataset.typewriterDone = 'true';
       delete element.dataset.typewriterActive;
+      element.classList.remove('is-typewriting');
       return;
     }
 
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
+    if (MOBILE_MQ.matches && isBestsellersHeading(element)) {
+      speed = 38;
+    }
 
     var originalPosition = window.getComputedStyle(element).position;
     if (originalPosition === 'static') {
@@ -271,6 +286,7 @@
         element.style.position = '';
         element.dataset.typewriterDone = 'true';
         delete element.dataset.typewriterActive;
+        element.classList.remove('is-typewriting');
       }
     }
 
@@ -316,6 +332,9 @@
   }
 
   function onReady() {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('hp-typewriter-capable');
+    }
     initTypewriter();
   }
 
