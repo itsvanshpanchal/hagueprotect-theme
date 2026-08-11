@@ -390,6 +390,7 @@
       'hp-float-strip',
       'hp-float-card--mobile',
       'hp-float-story',
+      'hp-story-native',
       'hp-float-hero',
       'hp-float-dna',
       'hp-float-bestsellers'
@@ -930,17 +931,17 @@
       if (story) {
         if (isBottomHomeStrip(index, items.length)) {
           sec.classList.add('hp-story-banner-lite');
+          sec.classList.remove('hp-float-story', 'hp-story-native');
           pin.style.cssText = '';
           prepareStoryMobileStrip(pin);
         } else {
-          /* Native scroll: leave CSS heights alone — forcing px causes flicker */
-          sec.classList.add('hp-float-story');
+          /* Native scroll: avoid hp-float-story sticky/dvh rules that flicker on scroll */
+          sec.classList.remove('hp-float-story');
+          sec.classList.add('hp-story-native');
         }
         asStrip(item, 10 + index);
-        if (bg) {
-          sec.style.setProperty('background-color', bg, 'important');
-          pin.style.setProperty('background-color', bg, 'important');
-        }
+        sec.style.setProperty('background-color', bg || '#111111', 'important');
+        pin.style.setProperty('background-color', bg || '#111111', 'important');
         return;
       }
 

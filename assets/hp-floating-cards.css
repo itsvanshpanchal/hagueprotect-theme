@@ -339,21 +339,63 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     touch-action: pan-y !important;
   }
 
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) > .hp-float-pin {
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    height: auto !important;
-    max-height: none !important;
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) > .hp-float-pin,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native > .hp-float-pin {
+    position: relative !important;
+    top: auto !important;
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     overflow: hidden !important;
     line-height: normal !important;
+    transform: none !important;
+    will-change: auto !important;
   }
 
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) {
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    height: auto !important;
-    max-height: none !important;
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite),
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native {
+    position: relative !important;
+    top: auto !important;
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     overflow: hidden !important;
+    transform: none !important;
+    will-change: auto !important;
+    box-shadow: none !important;
+    background-color: #111111 !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*='ai-story-sticky-track'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*='ai-story-sticky-pin'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native .ai-story-banner,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*='ai-story-banner-wrapper'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*='ai-story-sticky-track'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*='ai-story-sticky-pin'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) .ai-story-banner,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*='ai-story-banner-wrapper'] {
+    position: relative !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    transform: none !important;
+    background-color: #111111 !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [data-hp-story-cover],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native .ai-story-banner-cover,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native img[class*='ai-story-banner-image'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [data-hp-story-cover],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) .ai-story-banner-cover,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) img[class*='ai-story-banner-image'] {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: none !important;
   }
 
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-hero,

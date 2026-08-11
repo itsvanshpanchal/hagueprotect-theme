@@ -22,13 +22,21 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   display: block;
   overflow: hidden;
   background-color: #111111;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 749px) {
+  .ai-story-banner-wrapper {
+    min-height: var(--hp-mobile-vh, 100svh);
+    height: var(--hp-mobile-vh, 100svh);
+    max-height: var(--hp-mobile-vh, 100svh);
+  }
 }
 
 .ai-story-banner-picture {
@@ -286,21 +294,26 @@
     overflow: visible !important;
   }
 
-  /* Mobile native scroll — main Tell Your Story banner keeps fullscreen text overlay */
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) {
-    min-height: var(--hp-mobile-vh, 100vh) !important;
-    height: var(--hp-mobile-vh, 100vh) !important;
+  /* Mobile native scroll — Tell Your Story stays locked to --hp-mobile-vh */
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite),
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native {
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     overflow: hidden !important;
   }
 
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) > .hp-float-pin {
-    min-height: var(--hp-mobile-vh, 100vh) !important;
-    height: var(--hp-mobile-vh, 100vh) !important;
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) > .hp-float-pin,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native > .hp-float-pin {
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     overflow: hidden !important;
     line-height: normal !important;
   }
 
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-content"] {
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-content"],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*="ai-story-banner-content"] {
     position: absolute !important;
     z-index: 3 !important;
     visibility: visible !important;
@@ -312,7 +325,11 @@
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-subheading"],
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-heading"],
   body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-text"],
-  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-text"] p {
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-float-story:not(.hp-story-banner-lite) [class*="ai-story-banner-text"] p,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*="ai-story-banner-subheading"],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*="ai-story-banner-heading"],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*="ai-story-banner-text"],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-native [class*="ai-story-banner-text"] p {
     visibility: visible !important;
     opacity: 1 !important;
     display: block !important;
