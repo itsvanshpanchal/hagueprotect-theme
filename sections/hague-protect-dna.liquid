@@ -219,12 +219,33 @@
     }
 
     .hp-dna-{{ section.id }} .hp-dna__container {
+      padding-left: var(--homepage-section-gutter, 16px);
       padding-right: 0;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__heading {
       padding-right: var(--homepage-section-gutter, 16px);
       margin-bottom: 28px;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      white-space: normal !important;
+      overflow: visible !important;
+      transform: none !important;
+      text-align: left !important;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-line,
+    .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-pair,
+    .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-pair .hp-heading-line,
+    .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-accent {
+      display: block !important;
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      max-width: 100% !important;
     }
 
     .hp-dna-{{ section.id }} .hp-dna__grid {
