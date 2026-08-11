@@ -6,15 +6,15 @@
 
   var MOBILE_MQ = window.matchMedia('(max-width: 749px)');
 
-  function isBestsellersHeading(element) {
-    return element && element.classList && element.classList.contains('bs-coverflow__heading');
-  }
-
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
       return false;
     }
     if (element.hasAttribute('data-no-typewriter')) {
+      return false;
+    }
+    /* Mobile: never type — clearing + retyping looks like a double load / flicker */
+    if (MOBILE_MQ.matches) {
       return false;
     }
     if (element.closest(EXCLUDE_ANCESTORS)) {
@@ -139,9 +139,8 @@
       .map(function (d) { return d.text; })
       .join(' ');
 
-    /* Mobile: skip most headings to avoid sticky-scroll clipping — except
-       Bestsellers, which keeps main + script accent on one line. */
-    if (MOBILE_MQ.matches && !isBestsellersHeading(element)) {
+    /* Mobile is handled in shouldType — keep structured path desktop-only */
+    if (MOBILE_MQ.matches) {
       data.forEach(function (d) { d.el.innerHTML = d.html; });
       element.setAttribute('aria-label', full);
       element.dataset.typewriterDone = 'true';
@@ -151,9 +150,6 @@
     }
 
     var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
-    if (MOBILE_MQ.matches && isBestsellersHeading(element)) {
-      speed = 38;
-    }
     var linePause = 180;
 
     var originalMinHeight = element.style.minHeight;
@@ -249,7 +245,7 @@
       .replace(/\s*\[\[BR\]\]\s*/g, '\n')
       .trim();
 
-    if (MOBILE_MQ.matches && !isBestsellersHeading(element)) {
+    if (MOBILE_MQ.matches) {
       element.innerHTML = originalHTML;
       element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
       element.dataset.typewriterDone = 'true';
@@ -259,9 +255,6 @@
     }
 
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
-    if (MOBILE_MQ.matches && isBestsellersHeading(element)) {
-      speed = 38;
-    }
 
     var originalPosition = window.getComputedStyle(element).position;
     if (originalPosition === 'static') {

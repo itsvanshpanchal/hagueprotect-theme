@@ -933,19 +933,8 @@
           pin.style.cssText = '';
           prepareStoryMobileStrip(pin);
         } else {
+          /* Native scroll: leave CSS heights alone — forcing px causes flicker */
           sec.classList.add('hp-float-story');
-          prepareStoryFullscreen(pin, true);
-          var storyFill = viewportFill(true);
-          var storyVh = viewportH() + 'px';
-          sec.style.setProperty('height', storyFill, 'important');
-          sec.style.setProperty('min-height', storyVh, 'important');
-          sec.style.setProperty('max-height', 'none', 'important');
-          sec.style.setProperty('overflow', 'hidden', 'important');
-          pin.style.setProperty('height', storyFill, 'important');
-          pin.style.setProperty('min-height', storyVh, 'important');
-          pin.style.setProperty('max-height', 'none', 'important');
-          pin.style.setProperty('overflow', 'hidden', 'important');
-          pin.style.setProperty('line-height', 'normal', 'important');
         }
         asStrip(item, 10 + index);
         if (bg) {
@@ -957,13 +946,11 @@
 
       if (hero) {
         sec.classList.add('hp-float-hero');
+        sec.style.setProperty('background-color', '#111111', 'important');
+        pin.style.setProperty('background-color', '#111111', 'important');
         pin.style.setProperty('opacity', '1', 'important');
         pin.style.setProperty('visibility', 'visible', 'important');
         asStrip(item, 10 + index);
-        if (bg) {
-          sec.style.setProperty('background-color', bg, 'important');
-          pin.style.setProperty('background-color', bg, 'important');
-        }
         return;
       }
 

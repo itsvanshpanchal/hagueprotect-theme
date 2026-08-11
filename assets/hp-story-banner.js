@@ -63,13 +63,21 @@
 
     if (mobile && !floatStory) {
       var bottomStrip = wrap.closest('.hp-float-bottom-strip');
-      var vh = Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
+      /* Prefer locked CSS var — window.innerHeight changes while scrolling (address bar) */
+      var locked = getComputedStyle(document.documentElement).getPropertyValue('--hp-mobile-vh').trim();
+      var vh = locked
+        ? parseInt(locked, 10)
+        : Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
+      if (!vh || vh < 320) {
+        vh = Math.round(window.innerHeight || document.documentElement.clientHeight || 800);
+      }
       if (bottomStrip) {
         wrap.style.minHeight = Math.round(vh * 0.72) + 'px';
         wrap.style.height = 'auto';
-      } else {
+      } else if (!wrap.dataset.hpStoryHeightLocked) {
         wrap.style.minHeight = vh + 'px';
         wrap.style.height = vh + 'px';
+        wrap.dataset.hpStoryHeightLocked = '1';
       }
       wrap.style.width = '100%';
     } else if (floatStory) {
@@ -144,6 +152,13 @@
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(syncAll, 150);
+  }, { passive: true });
+  window.addEventListener('orientationchange', function () {
+    var wraps = document.querySelectorAll('[data-hp-story-wrap]');
+    for (var i = 0; i < wraps.length; i++) {
+      delete wraps[i].dataset.hpStoryHeightLocked;
+    }
+    setTimeout(syncAll, 280);
   }, { passive: true });
   window.addEventListener('hp-floating-cards:ready', syncAll);
   document.addEventListener('shopify:section:load', syncAll);

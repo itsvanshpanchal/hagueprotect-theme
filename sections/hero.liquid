@@ -253,27 +253,32 @@
   }
 
   @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }},
+    #shopify-section-{{ section.id }} > .hp-float-pin {
+      background-color: #111111 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
     .hero-fullscreen {
       position: relative;
       width: 100%;
       max-width: 100vw;
-      height: 100svh;
-      height: 100dvh;
-      min-height: 100svh;
-      min-height: 100dvh;
+      height: var(--hp-mobile-vh, 100svh);
+      min-height: var(--hp-mobile-vh, 100svh);
       max-height: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #111;
+      background: #111111;
       aspect-ratio: auto;
     }
 
     .hero-fullscreen--mobile-art {
-      min-height: 100svh;
-      min-height: 100dvh;
+      min-height: var(--hp-mobile-vh, 100svh);
       max-height: none;
       aspect-ratio: auto;
+      background: #111111;
     }
 
     .hero-fullscreen__content {
@@ -323,9 +328,10 @@
       display: block;
     }
 
+    /* Cover fills the screen — contain left white letterbox gaps */
     .hero-fullscreen--mobile-art .hero-fullscreen__bg-img {
-      object-fit: contain;
-      object-position: center center;
+      object-fit: cover;
+      object-position: center 22%;
     }
 
     .hero-fullscreen__heading {
@@ -360,13 +366,10 @@
       font-size: var(--heading-size-hero) !important;
     }
 
-    .hero-fullscreen__bg-img {
-      object-position: center 18%;
-    }
-
+    .hero-fullscreen__bg-img,
     .hero-fullscreen--mobile-art .hero-fullscreen__bg-img {
-      object-fit: contain;
-      object-position: center center;
+      object-fit: cover;
+      object-position: center 18%;
     }
   }
 
