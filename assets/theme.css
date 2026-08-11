@@ -777,8 +777,8 @@ main h2.h2,
     flex-direction: column !important;
     flex-wrap: nowrap !important;
     align-items: flex-start !important;
-    gap: 2px !important;
-    row-gap: 2px !important;
+    gap: 8px !important;
+    row-gap: 8px !important;
     white-space: normal !important;
     max-width: 100% !important;
     margin: 0 !important;
@@ -813,7 +813,10 @@ main h2.h2,
     row-gap: 0 !important;
     white-space: nowrap !important;
     max-width: 100% !important;
-    margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 2px !important;
     padding: 0 !important;
   }
 
@@ -835,8 +838,8 @@ main h2.h2,
     letter-spacing: 0.01em !important;
     color: var(--hp-mobile-accent-color, #c9a227) !important;
     -webkit-text-fill-color: var(--hp-mobile-accent-color, #c9a227) !important;
-    -webkit-text-stroke: 0 !important;
-    paint-order: normal !important;
+    -webkit-text-stroke: 0.45px currentColor !important;
+    paint-order: stroke fill !important;
     font-synthesis: none !important;
     -webkit-font-smoothing: antialiased !important;
   }
@@ -2115,6 +2118,11 @@ body.template-index {
     --section-label-to-title-gap: var(--hp-bs-mobile-eyebrow-title-gap) !important;
     --section-label-margin-bottom: var(--hp-bs-mobile-eyebrow-title-gap) !important;
     --section-subheading-spacing-top: var(--hp-bs-mobile-title-para-gap) !important;
+  }
+
+  body.template-index #MainContent .story-banner__content,
+  body.template-index #MainContent [class*="story-banner-wrapper"] .story-banner__content {
+    padding-top: max(40px, calc(var(--hp-bs-mobile-section-pt, 28px) + 12px), env(safe-area-inset-top, 0px)) !important;
   }
 
   /* Section shell padding — matches .bs-coverflow mobile (28px top / 24px bottom) */

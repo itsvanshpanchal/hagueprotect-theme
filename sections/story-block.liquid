@@ -221,8 +221,8 @@
       letter-spacing: 0.01em !important;
       color: {{ story_accent_color }} !important;
       -webkit-text-fill-color: {{ story_accent_color }} !important;
-      -webkit-text-stroke: 0 !important;
-      paint-order: normal !important;
+      -webkit-text-stroke: 0.45px currentColor !important;
+      paint-order: stroke fill !important;
       font-synthesis: none !important;
       -webkit-font-smoothing: antialiased !important;
     }
@@ -240,8 +240,8 @@
       flex-wrap: nowrap !important;
       align-items: flex-start !important;
       white-space: normal !important;
-      gap: 2px !important;
-      row-gap: 2px !important;
+      gap: 8px !important;
+      row-gap: 8px !important;
       max-width: 100% !important;
       width: auto !important;
       margin: 0 !important;
@@ -286,10 +286,9 @@
       letter-spacing: 0.01em !important;
       color: {{ story_accent_color }} !important;
       -webkit-text-fill-color: {{ story_accent_color }} !important;
-      -webkit-text-stroke: 0 !important;
-      paint-order: normal !important;
-      font-synthesis: none !important;
-      -webkit-font-smoothing: antialiased !important;
+      -webkit-text-stroke: 0.45px currentColor !important;
+      paint-order: stroke fill !important;
+      text-shadow: none !important;
       display: inline !important;
       width: auto !important;
       max-width: 100% !important;
@@ -309,6 +308,7 @@
       align-items: baseline !important;
       gap: 0 !important;
       row-gap: 0 !important;
+      margin-top: 2px !important;
       white-space: nowrap !important;
       max-width: 100% !important;
       margin: 0 !important;
@@ -401,8 +401,8 @@
     }
 
     body.template-index .story-banner-wrapper-{{ section.id }} .section-heading-stack {
-      gap: 6px !important;
-      row-gap: 6px !important;
+      gap: 8px !important;
+      row-gap: 8px !important;
     }
 
     body.template-index #MainContent .shopify-section .story-banner-wrapper-{{ section.id }} .story-banner__paragraph,
@@ -483,7 +483,7 @@
       justify-content: flex-start !important;
       align-items: flex-start !important;
       text-align: left !important;
-      padding-top: var(--hp-bs-mobile-section-pt, 28px) !important;
+      padding-top: max(40px, calc(var(--hp-bs-mobile-section-pt, 28px) + 12px), env(safe-area-inset-top, 0px)) !important;
       padding-bottom: var(--hp-bs-mobile-section-pb, 24px) !important;
       padding-left: var(--homepage-section-gutter, 28px) !important;
       padding-right: var(--homepage-section-gutter-right, 28px) !important;
@@ -494,8 +494,8 @@
     body.template-index .story-banner-wrapper-{{ section.id }} .section-heading-stack {
       transform: none !important;
       max-width: 92% !important;
-      gap: 2px !important;
-      row-gap: 2px !important;
+      gap: 8px !important;
+      row-gap: 8px !important;
       margin-top: 0 !important;
       margin-bottom: 0 !important;
     }
