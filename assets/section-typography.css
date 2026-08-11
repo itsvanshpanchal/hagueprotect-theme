@@ -66,6 +66,18 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
+/* Split CTA — Inter Light on every breakpoint (section uses its own font-size settings) */
+#MainContent .shopify-section [class*="split-cta-"][class*="__heading"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+}
+
 /* Non-accent heading words must use Inter Light 300 — global `span` rules
    otherwise force --font-weight-sans (400/Regular) and look bold. */
 #MainContent .shopify-section .mat-headline,
