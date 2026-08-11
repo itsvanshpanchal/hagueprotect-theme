@@ -2438,32 +2438,35 @@ body.template-index {
     --hp-home-desktop-para-lh: 1.38;
   }
 
-  /* Split CTA — copy right-aligned, button flush on the right */
+  /* Split CTA — text left, button right on laptop/desktop */
   body.template-index #MainContent [class*="split-cta-"][class*="__inner"] {
     max-width: var(--site-max-width, 1440px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    justify-content: flex-end !important;
+    justify-content: space-between !important;
     align-items: center !important;
+    gap: clamp(24px, 4vw, 80px) !important;
   }
 
   body.template-index #MainContent [class*="split-cta-"][class*="__copy"] {
-    text-align: right !important;
-    margin-left: auto !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
     transform: none !important;
+    flex: 0 1 auto !important;
+    max-width: min(680px, 52vw) !important;
   }
 
   body.template-index #MainContent [class*="split-cta-"][class*="__heading"],
   body.template-index #MainContent [class*="split-cta-"][class*="__text"] {
-    text-align: right !important;
-    margin-left: auto !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
   body.template-index #MainContent [class*="split-cta-"][class*="__actions"] {
     flex: 0 0 auto !important;
-    margin-left: 0 !important;
+    margin-left: auto !important;
     margin-right: 0 !important;
     align-self: center !important;
     width: auto !important;

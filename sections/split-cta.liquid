@@ -95,16 +95,16 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: clamp(32px, 4vw, 72px);
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 72px);
   }
 
   .split-cta-{{ section.id }}__copy {
     flex: 0 1 auto;
     min-width: 0;
     max-width: min(680px, 52vw);
-    text-align: right !important;
-    margin-left: auto !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -120,8 +120,8 @@
     font-style: {{ heading_style }} !important;
     line-height: 1.12;
     letter-spacing: -0.03em;
-    text-align: right !important;
-    margin-left: auto !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
@@ -134,15 +134,15 @@
     font-style: {{ text_style }} !important;
     line-height: 1.55;
     max-width: 520px;
-    text-align: right !important;
-    margin-left: auto !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
   .split-cta-{{ section.id }}__actions {
     flex: 0 0 auto;
     align-self: center;
-    margin-left: 0;
+    margin-left: auto;
     margin-right: 0;
   }
 
@@ -183,7 +183,7 @@
     transform: translateX(4px);
   }
 
-  /* Laptop + monitors: right-aligned copy + button anchored to the content edge */
+  /* Laptop + monitors: text left, button right */
   @media screen and (min-width: 750px) {
     .split-cta-{{ section.id }} {
       padding-top: {{ section.settings.padding_top | default: 56 }}px !important;
@@ -199,29 +199,30 @@
       width: 100% !important;
       margin-left: auto !important;
       margin-right: auto !important;
-      justify-content: flex-end !important;
+      justify-content: space-between !important;
       align-items: center !important;
-      gap: clamp(40px, 5vw, 80px) !important;
+      gap: clamp(24px, 4vw, 80px) !important;
     }
 
     .split-cta-{{ section.id }}__copy {
-      text-align: right !important;
-      margin-left: auto !important;
+      text-align: left !important;
+      margin-left: 0 !important;
       margin-right: 0 !important;
       transform: none !important;
       flex: 0 1 auto !important;
+      max-width: min(680px, 52vw) !important;
     }
 
     .split-cta-{{ section.id }}__heading,
     .split-cta-{{ section.id }}__text {
-      text-align: right !important;
-      margin-left: auto !important;
+      text-align: left !important;
+      margin-left: 0 !important;
       margin-right: 0 !important;
     }
 
     .split-cta-{{ section.id }}__actions {
       flex: 0 0 auto !important;
-      margin-left: 0 !important;
+      margin-left: auto !important;
       margin-right: 0 !important;
       align-self: center !important;
     }
