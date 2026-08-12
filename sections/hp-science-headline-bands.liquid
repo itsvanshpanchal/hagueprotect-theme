@@ -69,6 +69,12 @@
     background: {{ section.settings.formula_bg }};
     color: {{ section.settings.formula_heading_color }};
     padding: {{ section.settings.formula_padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.formula_padding_bottom }}px;
+    min-height: clamp(420px, 52vh, 620px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    box-sizing: border-box;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-inner {
@@ -77,44 +83,67 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: {{ section.settings.formula_eyebrow_size }}px;
+    font-size: clamp(11px, 1.2vw, {{ section.settings.formula_eyebrow_size }}px);
     font-weight: 400;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: {{ section.settings.formula_eyebrow_color }};
-    margin: 0 0 clamp(28px, 4vw, 40px);
+    margin: 0 0 clamp(32px, 4.5vw, 48px);
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: clamp(36px, 5.5vw, {{ section.settings.formula_title_size }}px);
-    line-height: 1.06;
-    letter-spacing: -0.03em;
-    margin: 0 0 clamp(28px, 4vw, 40px);
-    color: inherit;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    font-size: clamp(42px, 6.5vw, {{ section.settings.formula_title_size }}px) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.035em !important;
+    text-transform: none !important;
+    margin: 0 0 clamp(32px, 4.5vw, 48px) !important;
+    color: inherit !important;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-title-line {
     display: block;
   }
 
+  .hp-sci-headlines-{{ section.id }}__formula-title-line + .hp-sci-headlines-{{ section.id }}__formula-title-line {
+    margin-top: 0.06em;
+  }
+
   .hp-sci-headlines-{{ section.id }}__formula-accent {
     color: {{ section.settings.formula_accent_color }};
+    font-weight: 500;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-subtext {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(16px, 1.6vw, {{ section.settings.formula_subtext_size }}px);
-    line-height: 1.65;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: clamp(16px, 1.55vw, {{ section.settings.formula_subtext_size }}px);
+    line-height: 1.7;
     color: {{ section.settings.formula_subtext_color }};
-    opacity: {{ section.settings.formula_subtext_opacity | default: 100 | times: 0.01 }};
+    opacity: {{ section.settings.formula_subtext_opacity | default: 92 | times: 0.01 }};
     margin: 0;
-    max-width: 38ch;
+    max-width: min(44ch, 92%);
+  }
+
+  @media screen and (max-width: 749px) {
+    .hp-sci-headlines-{{ section.id }}__formula {
+      min-height: 0;
+      padding-top: clamp(72px, 14vw, 96px);
+      padding-bottom: clamp(72px, 14vw, 96px);
+    }
+
+    .hp-sci-headlines-{{ section.id }}__formula-subtext {
+      max-width: 34ch;
+    }
   }
 {%- endstyle -%}
 
@@ -160,7 +189,7 @@
         {%- endif -%}
 
         {%- if section.settings.formula_title_line_1 != blank or section.settings.formula_title_line_2 != blank or section.settings.formula_title_accent != blank -%}
-          <h3 class="hp-sci-headlines-{{ section.id }}__formula-title">
+          <h2 class="hp-sci-headlines-{{ section.id }}__formula-title">
             {%- if section.settings.formula_title_line_1 != blank -%}
               <span class="hp-sci-headlines-{{ section.id }}__formula-title-line">{{ section.settings.formula_title_line_1 }}</span>
             {%- endif -%}
@@ -172,7 +201,7 @@
                 {%- endif -%}
               </span>
             {%- endif -%}
-          </h3>
+          </h2>
         {%- endif -%}
 
         {%- if section.settings.formula_subtext != blank -%}
@@ -325,19 +354,19 @@
       "type": "color",
       "id": "formula_eyebrow_color",
       "label": "Formula eyebrow color",
-      "default": "#cccccc"
+      "default": "#a8894a"
     },
     {
       "type": "color",
       "id": "formula_accent_color",
       "label": "Formula accent color (number)",
-      "default": "#a67c52"
+      "default": "#a8894a"
     },
     {
       "type": "color",
       "id": "formula_subtext_color",
       "label": "Formula subtext color",
-      "default": "#cccccc"
+      "default": "#e8e8e8"
     },
     {
       "type": "header",
@@ -451,7 +480,7 @@
       "max": 72,
       "step": 2,
       "unit": "px",
-      "default": 56
+      "default": 68
     },
     {
       "type": "range",
@@ -461,7 +490,7 @@
       "max": 16,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 13
     },
     {
       "type": "range",
@@ -471,7 +500,7 @@
       "max": 22,
       "step": 1,
       "unit": "px",
-      "default": 18
+      "default": 19
     },
     {
       "type": "range",
@@ -481,7 +510,7 @@
       "max": 100,
       "step": 1,
       "unit": "%",
-      "default": 100
+      "default": 92
     },
     {
       "type": "range",
@@ -491,7 +520,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 96
+      "default": 112
     },
     {
       "type": "range",
@@ -501,7 +530,7 @@
       "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 96
+      "default": 112
     },
   ],
   "presets": [
