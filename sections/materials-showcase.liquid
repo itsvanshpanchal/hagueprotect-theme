@@ -146,6 +146,7 @@
     width: 100% !important;
     gap: 4px !important;
     margin-top: 28px !important;
+    --mat-active-color: {{ section.settings.active_color | default: '#D60000' }};
   }
 
   .mat-menu-item,
@@ -156,13 +157,65 @@
     font-style: normal !important;
     text-transform: none !important;
     text-decoration: none !important;
-    transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
     cursor: pointer !important;
     position: relative !important;
-    transform-origin: left center !important;
     line-height: 1.1 !important;
     letter-spacing: -0.03em !important;
     -webkit-font-smoothing: antialiased !important;
+  }
+
+  .mat-menu-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    padding: 2px 0 !important;
+    transition: color 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  .mat-menu-item-text {
+    display: inline-block !important;
+    color: inherit !important;
+    transform-origin: left center !important;
+    transition:
+      color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      text-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      filter 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: transform;
+  }
+
+  .mat-menu-item:hover,
+  .mat-menu-item.active,
+  .mat-menu-item:focus-visible {
+    color: var(--mat-active-color) !important;
+  }
+
+  .mat-menu-item:hover .mat-menu-item-text,
+  .mat-menu-item.active .mat-menu-item-text,
+  .mat-menu-item:focus-visible .mat-menu-item-text {
+    color: var(--mat-active-color) !important;
+    transform: scale(1.06) translateX(6px) !important;
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--mat-active-color) 45%, transparent),
+      0 0 36px color-mix(in srgb, var(--mat-active-color) 22%, transparent) !important;
+    filter: brightness(1.08) !important;
+  }
+
+  .mat-menu-item:active .mat-menu-item-text {
+    transform: scale(1.03) translateX(4px) !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .mat-menu:has(.mat-menu-item:hover) .mat-menu-item:not(:hover) {
+      opacity: 0.42 !important;
+    }
+  }
+
+  .mat-menu-item:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--mat-active-color) 55%, transparent) !important;
+    outline-offset: 4px !important;
+    border-radius: 2px !important;
   }
 
   /* Deodrizer + Denim — same size/weight/font as every other material label */
@@ -187,39 +240,27 @@
     font-size: inherit !important;
   }
 
-  .mat-menu-item {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    color: rgba(255, 255, 255, 0.55) !important;
-  }
-
   .mat-menu-item-text {
     color: inherit !important;
-  }
-
-  .mat-menu-item:hover,
-  .mat-menu-item.active,
-  .mat-menu-item:hover .mat-menu-item-text,
-  .mat-menu-item.active .mat-menu-item-text {
-    color: {{ section.settings.active_color | default: '#D60000' }} !important;
-    transform: scale(1.01) !important;
   }
 
   .mat-menu-arrow {
     display: inline-flex !important;
     align-items: center !important;
     opacity: 0 !important;
-    transform: translateX(-8px) !important;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transform: translateX(-10px) scale(0.85) !important;
+    transition:
+      opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
     margin-left: 10px !important;
-    color: {{ section.settings.active_color | default: '#D60000' }} !important;
+    color: var(--mat-active-color, {{ section.settings.active_color | default: '#D60000' }}) !important;
   }
 
   .mat-menu-item:hover .mat-menu-arrow,
-  .mat-menu-item.active .mat-menu-arrow {
+  .mat-menu-item.active .mat-menu-arrow,
+  .mat-menu-item:focus-visible .mat-menu-arrow {
     opacity: 1 !important;
-    transform: translateX(0) !important;
+    transform: translateX(0) scale(1) !important;
   }
 
   .mat-menu-arrow svg {
@@ -295,6 +336,23 @@
     opacity: 1 !important;
     transform: scale(1) !important;
     z-index: 2 !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mat-menu-item,
+    .mat-menu-item-text,
+    .mat-menu-arrow {
+      transition: color 0.2s ease !important;
+    }
+
+    .mat-menu-item:hover .mat-menu-item-text,
+    .mat-menu-item.active .mat-menu-item-text,
+    .mat-menu-item:focus-visible .mat-menu-item-text,
+    .mat-menu-item:active .mat-menu-item-text {
+      transform: none !important;
+      filter: none !important;
+      text-shadow: none !important;
+    }
   }
 
   @media screen and (max-width: 1200px) {
@@ -510,6 +568,22 @@
       min-height: 34px !important;
     }
 
+    .mat-menu-item:hover .mat-menu-item-text,
+    .mat-menu-item.active .mat-menu-item-text,
+    .mat-menu-item:focus-visible .mat-menu-item-text {
+      transform: scale(1.045) translateX(4px) !important;
+    }
+
+    .mat-menu-item:active .mat-menu-item-text {
+      transform: scale(1.02) translateX(2px) !important;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .mat-menu:has(.mat-menu-item:hover) .mat-menu-item:not(:hover) {
+        opacity: 0.5 !important;
+      }
+    }
+
     .mat-menu {
       gap: 2px !important;
       margin-top: 20px !important;
@@ -645,6 +719,10 @@
         if (mobileQuery.matches) return;
         switchActiveMaterial(this);
       });
+      item.addEventListener('touchstart', function() {
+        if (!mobileQuery.matches) return;
+        switchActiveMaterial(this);
+      }, { passive: true });
       item.addEventListener('click', function(e) {
         if (!mobileQuery.matches) return;
         e.preventDefault();
