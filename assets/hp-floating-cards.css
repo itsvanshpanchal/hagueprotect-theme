@@ -465,6 +465,32 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: 200px !important;
   }
 
+  /* What Are You Cleaning Today — lock banner height on native scroll */
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has([class*='story-banner-wrapper']),
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-block-native,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has([class*='story-banner-wrapper']) > .hp-float-pin,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-block-native > .hp-float-pin {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has([class*='story-banner-wrapper']) [class*='story-banner-wrapper'],
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-block-native [class*='story-banner-wrapper'] {
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
+    overflow: hidden !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has([class*='story-banner-wrapper']) .story-banner,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section.hp-story-block-native .story-banner {
+    min-height: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+  }
+
   /* Prevent paint flash while float stack initializes */
   body.template-index.hp-float-mobile:not(.hp-float-layout-ready) #MainContent .hero-fullscreen,
   body.template-index.hp-float-mobile:not(.hp-float-layout-ready) #MainContent .hero-fullscreen--mobile-art {
@@ -790,11 +816,19 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper,
   body.hp-float-mobile .hp-float-stack .hp-float-card [class*='featured-brands'] {
     min-height: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Cleaning Today story banner — fixed locked height, not dvh stretch */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper,
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='story-banner-wrapper'] {
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     box-sizing: border-box;
   }
 
@@ -1659,15 +1693,16 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     overflow: visible !important;
   }
 
-  /* "What Are You Cleaning Today" — fill viewport, no white dead space under square art */
-  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper {
+  /* "What Are You Cleaning Today" — locked viewport height (no dvh flicker on scroll) */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner-wrapper,
+  body.hp-float-mobile .hp-float-stack .hp-float-card [class*='story-banner-wrapper'] {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    height: 100% !important;
+    min-height: var(--hp-mobile-vh, 100svh) !important;
+    height: var(--hp-mobile-vh, 100svh) !important;
+    max-height: var(--hp-mobile-vh, 100svh) !important;
     background-color: #f6f6f6 !important;
     overflow: hidden !important;
   }
@@ -1677,6 +1712,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     width: 100% !important;
     height: 100% !important;
     min-height: 100% !important;
+    max-height: 100% !important;
     border-radius: 0 !important;
     overflow: hidden !important;
   }

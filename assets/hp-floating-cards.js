@@ -126,6 +126,15 @@
     return !!(sec && sec.classList.contains('section-hague-protect-dna'));
   }
 
+  function isStoryBlockPin(pin) {
+    return !!(
+      pin &&
+      pin.querySelector('[class*="story-banner-wrapper"]') &&
+      !pin.querySelector('[class*="ai-story-sticky-track"]') &&
+      !pin.querySelector('[class*="ai-story-banner-"]')
+    );
+  }
+
   function isStoryPin(pin) {
     return !!(
       pin.querySelector('[class*="ai-story-sticky-track"]') ||
@@ -962,6 +971,15 @@
           pin.style.setProperty('background-color', bg, 'important');
         }
         pin.style.setProperty('overflow', 'visible', 'important');
+        return;
+      }
+
+      if (isStoryBlockPin(pin)) {
+        sec.classList.add('hp-story-block-native');
+        asStrip(item, 10 + index);
+        sec.style.setProperty('background-color', bg || '#f6f6f6', 'important');
+        pin.style.setProperty('background-color', bg || '#f6f6f6', 'important');
+        pin.style.setProperty('overflow', 'hidden', 'important');
         return;
       }
 
