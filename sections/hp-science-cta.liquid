@@ -5,6 +5,10 @@
   if cta_link == blank
     assign cta_link = routes.all_products_collection_url
   endif
+  assign secondary_link = section.settings.secondary_link
+  if secondary_link == blank
+    assign secondary_link = routes.all_products_collection_url
+  endif
 -%}
 
 {%- style -%}
@@ -16,43 +20,68 @@
   .hp-sci-cta-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.padding_bottom }}px;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
-  .hp-sci-cta-{{ section.id }}__inner {
-    max-width: var(--hp-sci-max, 1440px);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(24px, 4vw, 48px);
+  .hp-sci-cta-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
   }
 
-  .hp-sci-cta-{{ section.id }}__heading {
+  .hp-sci-cta-{{ section.id }}__title-main {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin: 0 0 4px;
+    color: #ffffff !important;
+  }
+
+  .hp-sci-cta-{{ section.id }}__title-sub {
+    display: block;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(24px, 3vw, {{ section.settings.heading_size }}px);
+    font-style: italic;
+    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
     margin: 0;
-    max-width: 20ch;
-    line-height: 1.12;
+    color: #ffffff !important;
+  }
+
+  .hp-sci-cta-{{ section.id }}__panel {
+    max-width: 42ch;
+    padding-top: clamp(8px, 1vw, 16px);
+  }
+
+  .hp-sci-cta-{{ section.id }}__body {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(16px, 1.45vw, 18px);
+    line-height: 1.65;
+    margin: 0 0 clamp(24px, 3vw, 32px);
+    color: {{ section.settings.body_color }} !important;
   }
 
   .hp-sci-cta-{{ section.id }}__btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 140px;
+    min-width: 168px;
     padding: 14px 28px;
     background: {{ section.settings.button_background }};
-    color: {{ section.settings.button_text_color }};
+    color: {{ section.settings.button_text_color }} !important;
     font-family: 'Darker Grotesque', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
-    flex-shrink: 0;
+    margin-bottom: 16px;
     transition: opacity 0.2s ease;
   }
 
@@ -60,22 +89,55 @@
     opacity: 0.88;
   }
 
-  @media screen and (max-width: 767px) {
-    .hp-sci-cta-{{ section.id }}__inner {
-      flex-direction: column;
-      align-items: flex-start;
+  .hp-sci-cta-{{ section.id }}__secondary {
+    display: inline-block;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    color: #ffffff !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .hp-sci-cta-{{ section.id }}__secondary:hover {
+    opacity: 0.82;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-cta-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hp-sci-cta-{{ section.id }}__panel {
+      max-width: none;
+      padding-top: 0;
     }
   }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-cta-{{ section.id }}">
-  <div class="hp-sci-cta-{{ section.id }}__inner">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-sci-cta-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.button_label != blank -%}
-      <a class="hp-sci-cta-{{ section.id }}__btn" href="{{ cta_link }}">{{ section.settings.button_label }}</a>
-    {%- endif -%}
+  <div class="hp-sci__inner">
+    <div class="hp-sci-cta-{{ section.id }}__grid">
+      <div class="hp-sci-cta-{{ section.id }}__headline">
+        {%- if section.settings.heading_line_1 != blank -%}
+          <span class="hp-sci-cta-{{ section.id }}__title-main">{{ section.settings.heading_line_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_line_2 != blank -%}
+          <span class="hp-sci-cta-{{ section.id }}__title-sub">{{ section.settings.heading_line_2 }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="hp-sci-cta-{{ section.id }}__panel">
+        {%- if section.settings.body != blank -%}
+          <p class="hp-sci-cta-{{ section.id }}__body">{{ section.settings.body }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a class="hp-sci-cta-{{ section.id }}__btn" href="{{ cta_link }}">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank -%}
+          <a class="hp-sci-cta-{{ section.id }}__secondary" href="{{ secondary_link }}">{{ section.settings.secondary_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -86,21 +148,44 @@
   "class": "hp-science-section",
   "settings": [
     {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "The science earns the timeline."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2 (italic)",
+      "default": "75 days is enough."
+    },
+    {
       "type": "textarea",
-      "id": "heading",
-      "label": "Heading",
-      "default": "The science earns the timeline. 75 days is enough."
+      "id": "body",
+      "label": "Body text",
+      "default": "You've read the argument. The biology is not complicated. Your skin knows how to do this. It just needs the right live signals, at clinically meaningful concentrations, for long enough to matter."
     },
     {
       "type": "text",
       "id": "button_label",
       "label": "Button label",
-      "default": "Discover"
+      "default": "FIND MY SERUM"
     },
     {
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary link label",
+      "default": "See the three serums"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary link URL"
     },
     {
       "type": "color",
@@ -111,8 +196,14 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text",
+      "label": "Heading text",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text color",
+      "default": "#888888"
     },
     {
       "type": "color",
@@ -130,11 +221,11 @@
       "type": "range",
       "id": "heading_size",
       "label": "Heading size",
-      "min": 22,
-      "max": 40,
+      "min": 32,
+      "max": 56,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 48
     },
     {
       "type": "range",
@@ -144,7 +235,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 72
+      "default": 96
     },
     {
       "type": "range",
@@ -154,7 +245,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 72
+      "default": 96
     }
   ],
   "presets": [
