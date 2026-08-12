@@ -24,12 +24,41 @@
     min-height: clamp(460px, 52vh, 680px);
   }
 
+  .hp-sci-results-{{ section.id }}__pillar--dark {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    background: #0a0a0a;
+  }
+
   .hp-sci-results-{{ section.id }}__pillar--reverse {
     direction: rtl;
   }
 
   .hp-sci-results-{{ section.id }}__pillar--reverse > * {
     direction: ltr;
+  }
+
+  .hp-sci-results-{{ section.id }}__panel--dark {
+    background: #0a0a0a !important;
+    color: #ffffff;
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__pillar-num,
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__stat-label {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__pillar-title,
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__stat-value {
+    color: #ffffff !important;
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__footnote {
+    color: rgba(255, 255, 255, 0.42);
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__rule {
+    background: #ffffff;
+    opacity: 0.18;
   }
 
   .hp-sci-results-{{ section.id }}__media {
@@ -150,8 +179,27 @@
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'pillar' -%}
+            {%- liquid
+              assign pillar_style = block.settings.panel_style | default: 'light'
+              assign pillar_panel_bg = block.settings.panel_background
+              if pillar_panel_bg == blank
+                if pillar_style == 'dark'
+                  assign pillar_panel_bg = '#0a0a0a'
+                else
+                  assign pillar_panel_bg = section.settings.panel_background
+                endif
+              endif
+              assign pillar_accent = block.settings.accent_color
+              if pillar_style == 'dark'
+                if pillar_accent == blank or pillar_accent == '#008667'
+                  assign pillar_accent = '#ffffff'
+                endif
+              elsif pillar_accent == blank
+                assign pillar_accent = '#008667'
+              endif
+            -%}
             <article
-              class="hp-sci-results-{{ section.id }}__pillar{% if block.settings.reverse_layout %} hp-sci-results-{{ section.id }}__pillar--reverse{% endif %}"
+              class="hp-sci-results-{{ section.id }}__pillar{% if pillar_style == 'dark' %} hp-sci-results-{{ section.id }}__pillar--dark{% endif %}{% if block.settings.reverse_layout %} hp-sci-results-{{ section.id }}__pillar--reverse{% endif %}"
               {{ block.shopify_attributes }}
             >
               <div class="hp-sci-results-{{ section.id }}__media">
@@ -165,13 +213,13 @@
                 %}
               </div>
 
-              <div class="hp-sci-results-{{ section.id }}__panel" style="background: {{ block.settings.panel_background | default: section.settings.panel_background }};">
+              <div class="hp-sci-results-{{ section.id }}__panel{% if pillar_style == 'dark' %} hp-sci-results-{{ section.id }}__panel--dark{% endif %}" style="background: {{ pillar_panel_bg }};{% if block.settings.panel_text_color != blank %} color: {{ block.settings.panel_text_color }};{% endif %}">
                 {%- if block.settings.pillar_number != blank -%}
                   <p class="hp-sci-results-{{ section.id }}__pillar-num">{{ block.settings.pillar_number }}</p>
                 {%- endif -%}
 
                 {%- if block.settings.title != blank -%}
-                  <h3 class="hp-sci-results-{{ section.id }}__pillar-title" style="color: {{ block.settings.accent_color }};">{{ block.settings.title }}</h3>
+                  <h3 class="hp-sci-results-{{ section.id }}__pillar-title" style="color: {{ pillar_accent }};">{{ block.settings.title }}</h3>
                 {%- endif -%}
 
                 {%- if block.settings.paragraph_1 != blank -%}
@@ -189,7 +237,7 @@
                 {%- if block.settings.stat_value != blank or block.settings.stat_label != blank -%}
                   <div class="hp-sci-results-{{ section.id }}__stat-wrap">
                     {%- if block.settings.stat_value != blank -%}
-                      <p class="hp-sci-results-{{ section.id }}__stat-value" style="color: {{ block.settings.accent_color }};">{{ block.settings.stat_value }}</p>
+                      <p class="hp-sci-results-{{ section.id }}__stat-value" style="color: {{ pillar_accent }};">{{ block.settings.stat_value }}</p>
                     {%- endif -%}
                     {%- if block.settings.stat_label != blank -%}
                       <p class="hp-sci-results-{{ section.id }}__stat-label">{{ block.settings.stat_label }}</p>
@@ -206,6 +254,7 @@
         {%- endfor -%}
       {%- else -%}
         {% render 'hp-science-pillar-default', section_id: section.id, panel_bg: section.settings.panel_background, accent: '#008667', num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
+        {% render 'hp-science-pillar-recovery-default', section_id: section.id %}
       {%- endif -%}
     </div>
   </div>
@@ -414,9 +463,24 @@
           "default": "#008667"
         },
         {
+          "type": "select",
+          "id": "panel_style",
+          "label": "Panel style",
+          "options": [
+            { "value": "light", "label": "Light (cream)" },
+            { "value": "dark", "label": "Dark (black)" }
+          ],
+          "default": "light"
+        },
+        {
           "type": "color",
           "id": "panel_background",
           "label": "Panel background override"
+        },
+        {
+          "type": "color",
+          "id": "panel_text_color",
+          "label": "Panel text color override"
         },
         {
           "type": "checkbox",
@@ -467,7 +531,24 @@
           "settings": {
             "pillar_number": "Pillar 01",
             "title": "Vitality",
+            "panel_style": "light",
             "accent_color": "#008667"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "pillar_number": "Pillar 02",
+            "title": "Recovery",
+            "panel_style": "dark",
+            "reverse_layout": true,
+            "paragraph_1": "Skin is always healing something. A breakout, a barrier stripped by actives, the small daily damage you never notice. Recovery is how fast skin closes those gaps and repairs itself before they show.",
+            "paragraph_2": "The serum speeds up how quickly cells move in to close a wound. Faster migration means less time spent visibly healing, and damage that resolves before it leaves a mark.",
+            "stat_value": "+74.7%*",
+            "stat_label": "Cell Migration · In 24 Hours",
+            "footnote": "* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.",
+            "accent_color": "#ffffff",
+            "placeholder_label": "Recovery scratch assay image / animation"
           }
         }
       ]

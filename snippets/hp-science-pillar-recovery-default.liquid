@@ -1,0 +1,26 @@
+{%- comment -%}
+  Default Recovery pillar (dark layout) when no blocks configured.
+{%- endcomment -%}
+
+<article class="hp-sci-results-{{ section_id }}__pillar hp-sci-results-{{ section_id }}__pillar--dark hp-sci-results-{{ section_id }}__pillar--reverse">
+  <div class="hp-sci-results-{{ section_id }}__media">
+    {% render 'hp-science-media',
+      show_placeholder: true,
+      placeholder_label: 'Recovery scratch assay image / animation',
+      min_height: 520
+    %}
+  </div>
+
+  <div class="hp-sci-results-{{ section_id }}__panel hp-sci-results-{{ section_id }}__panel--dark" style="background: #0a0a0a;">
+    <p class="hp-sci-results-{{ section_id }}__pillar-num">Pillar 02</p>
+    <h3 class="hp-sci-results-{{ section_id }}__pillar-title" style="color: #ffffff;">Recovery</h3>
+    <p class="hp-sci-results-{{ section_id }}__para">Skin is always healing something. A breakout, a barrier stripped by actives, the small daily damage you never notice. Recovery is how fast skin closes those gaps and repairs itself before they show.</p>
+    <hr class="hp-sci-results-{{ section_id }}__rule" aria-hidden="true">
+    <p class="hp-sci-results-{{ section_id }}__para">The serum speeds up how quickly cells move in to close a wound. Faster migration means less time spent visibly healing, and damage that resolves before it leaves a mark.</p>
+    <div class="hp-sci-results-{{ section_id }}__stat-wrap">
+      <p class="hp-sci-results-{{ section_id }}__stat-value" style="color: #ffffff;">+74.7%*</p>
+      <p class="hp-sci-results-{{ section_id }}__stat-label">Cell Migration · In 24 Hours</p>
+    </div>
+    <p class="hp-sci-results-{{ section_id }}__footnote">* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.</p>
+  </div>
+</article>
