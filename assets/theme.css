@@ -1200,9 +1200,10 @@ main h3 > span[aria-hidden="true"] {
   text-transform: uppercase !important;
   }
 
-  /* Story banner subheading size comes from its own block setting */
-  [class*="ai-story-banner-subheading-"] {
+  /* Story banner eyebrow — same unified label style as Best Sellers */
+  [class*="ai-story-banner-subheading"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-label-size, 14px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
@@ -1414,18 +1415,24 @@ main h3 > span[aria-hidden="true"] {
   max-width: none !important;
 }
 
-/* Story Banner subheadings — Darker Grotesque Regular; size from block setting */
-[class*="ai-story-banner-subheading-"] {
-  font-family: 'Darker Grotesque', sans-serif !important;
+[class*="ai-story-banner-subheading"] {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: var(--section-label-size, 18px) !important;
   font-weight: 400 !important;
   font-style: normal !important;
   font-synthesis: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   line-height: var(--section-label-line-height) !important;
-  letter-spacing: var(--section-label-letter-spacing) !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   text-align: inherit !important;
   display: block !important;
-  -webkit-font-smoothing: antialiased;
+  margin: 0 0 var(--section-label-to-title-gap) 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
 }
 
 /* Inside a stack, gap owns the spacing — kill every competing margin */
@@ -1442,6 +1449,7 @@ main h3 > span[aria-hidden="true"] {
 .section-heading-stack > .promo-banner__eyebrow,
 .section-heading-stack > .brandsel__eyebrow,
 .section-heading-stack > .section-heading-stack__label,
+.section-heading-stack > [class*="ai-story-banner-subheading"],
 .section-heading-stack > [class*="ai-story-banner-subheading-"],
 body.template-index .section-heading-stack > .hero-fullscreen__eyebrow,
 body.template-index .section-heading-stack > .fb__eyebrow,
@@ -2010,21 +2018,10 @@ body.template-index {
   #MainContent .video-demo__eyebrow,
   #MainContent .section-heading-stack__label,
   #MainContent [class*="__eyebrow"],
-  #MainContent [class*="ckc-"][class*="__eyebrow"] {
+  #MainContent [class*="ckc-"][class*="__eyebrow"],
+  #MainContent [class*="ai-story-banner-subheading"] {
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--section-label-size, 14px) !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
-    -webkit-text-stroke: 0.45px currentColor !important;
-    paint-order: stroke fill !important;
-    text-shadow: none !important;
-    letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
-  }
-
-  #MainContent [class*="ai-story-banner-subheading-"] {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;

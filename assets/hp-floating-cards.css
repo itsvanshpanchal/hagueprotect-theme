@@ -824,6 +824,32 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     opacity: 1 !important;
   }
 
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] .section-heading-stack,
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__header .section-heading-stack {
+    gap: 10px !important;
+    row-gap: 10px !important;
+    align-items: flex-start !important;
+  }
+
+  body.hp-float-mobile .hp-float-stack .hp-float-story [class*='ai-story-banner-subheading'],
+  body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: var(--section-label-size, 14px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-text-stroke: 0.45px currentColor !important;
+    paint-order: stroke fill !important;
+    text-shadow: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+  }
+
   body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner-button-wrapper--hide-mobile,
   body.hp-float-mobile .hp-float-stack .hp-float-story .ai-story-banner-button-wrapper--hide-mobile [class*='ai-story-banner-button'] {
     display: none !important;
