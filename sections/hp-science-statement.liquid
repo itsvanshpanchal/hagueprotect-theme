@@ -14,32 +14,82 @@
 
   .hp-sci-statement-{{ section.id }}__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    gap: clamp(32px, 5vw, 80px);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
   }
 
   .hp-sci-statement-{{ section.id }}__title {
-    font-size: clamp(28px, 3.8vw, {{ section.settings.title_size }}px);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(30px, 4.2vw, {{ section.settings.title_size }}px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    margin: 0;
+    max-width: 14ch;
     color: inherit;
   }
 
-  .hp-sci-statement-{{ section.id }}__body {
+  .hp-sci-statement-{{ section.id }}__title-accent {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hp-sci-statement-{{ section.id }}__copy {
+    max-width: 42rem;
+  }
+
+  .hp-sci-statement-{{ section.id }}__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.eyebrow_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0 0 20px;
+  }
+
+  .hp-sci-statement-{{ section.id }}__para {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(15px, 1.45vw, {{ section.settings.body_size }}px);
+    line-height: 1.65;
     color: {{ section.settings.body_color }};
-    opacity: {{ section.settings.body_opacity | default: 72 | times: 0.01 }};
+    opacity: {{ section.settings.body_opacity | default: 88 | times: 0.01 }};
+    margin: 0 0 18px;
   }
 
-  .hp-sci-statement-{{ section.id }}__body p {
-    margin: 0 0 16px;
-  }
-
-  .hp-sci-statement-{{ section.id }}__body p:last-child {
+  .hp-sci-statement-{{ section.id }}__para:last-child {
     margin-bottom: 0;
+  }
+
+  .hp-sci-statement-{{ section.id }}__rule {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    margin: clamp(24px, 3vw, 32px) 0;
+    background: {{ section.settings.rule_color }};
+    opacity: {{ section.settings.rule_opacity | default: 35 | times: 0.01 }};
+  }
+
+  .hp-sci-statement-{{ section.id }}__closing {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(15px, 1.45vw, {{ section.settings.body_size }}px);
+    line-height: 1.65;
+    color: {{ section.settings.closing_color }};
+    opacity: {{ section.settings.closing_opacity | default: 100 | times: 0.01 }};
+    margin: 0;
   }
 
   @media screen and (max-width: 989px) {
     .hp-sci-statement-{{ section.id }}__grid {
       grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .hp-sci-statement-{{ section.id }}__title {
+      max-width: none;
+      margin-bottom: 8px;
     }
   }
 {%- endstyle -%}
@@ -47,14 +97,40 @@
 <section class="hp-sci hp-sci-statement-{{ section.id }}">
   <div class="hp-sci__inner">
     <div class="hp-sci-statement-{{ section.id }}__grid">
-      <div>
-        {%- if section.settings.heading != blank -%}
-          <h2 class="hp-sci__title hp-sci-statement-{{ section.id }}__title">{{ section.settings.heading }}</h2>
+      <div class="hp-sci-statement-{{ section.id }}__headline">
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_accent != blank -%}
+          <h2 class="hp-sci-statement-{{ section.id }}__title">
+            {%- if section.settings.heading_line_1 != blank -%}
+              <span>{{ section.settings.heading_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_accent != blank -%}
+              <span class="hp-sci-statement-{{ section.id }}__title-accent">{{ section.settings.heading_accent }}</span>
+            {%- endif -%}
+          </h2>
         {%- endif -%}
       </div>
-      {%- if section.settings.body != blank -%}
-        <div class="hp-sci__body hp-sci-statement-{{ section.id }}__body">{{ section.settings.body }}</div>
-      {%- endif -%}
+
+      <div class="hp-sci-statement-{{ section.id }}__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.paragraph_1 != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_1 }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.paragraph_2 != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_2 }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.show_rule -%}
+          <hr class="hp-sci-statement-{{ section.id }}__rule" aria-hidden="true">
+        {%- endif -%}
+
+        {%- if section.settings.closing_paragraph != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__closing">{{ section.settings.closing_paragraph }}</p>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -66,16 +142,58 @@
   "class": "hp-science-section",
   "settings": [
     {
-      "type": "textarea",
-      "id": "heading",
-      "label": "Heading",
-      "default": "We've spent ten years tracing the epigenetic pathways to longevity."
+      "type": "header",
+      "content": "Left headline"
     },
     {
-      "type": "richtext",
-      "id": "body",
-      "label": "Body text",
-      "default": "<p>Skin longevity is not anti-aging marketing. It is measurable biology — renewal, barrier integrity, recovery, density, and texture working as one system.</p><p>Our protocol targets five processes your skin already runs. We remove the noise so those processes can run again.</p>"
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Headline (regular)",
+      "default": "The industry has been treating the symptom,"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Headline accent (italic)",
+      "default": "never the real problem."
+    },
+    {
+      "type": "header",
+      "content": "Right column"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY THE CATEGORY KEEPS FAILING"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "A spot treatment clears the breakout before the barrier rebuilds. A hydration serum deposits moisture without activating the skin's own production. A brightening product suppresses melanin without addressing why it's being overproduced. Each product solves for the visible sign. None of them address the underlying biology that produced it."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "The result is a maintenance loop. The products work while you use them. The moment you stop, the original condition returns. Not because your skin is broken. Because nothing was ever rebuilt."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show divider line",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "closing_paragraph",
+      "label": "Closing paragraph (below line)",
+      "default": "The real problem was never the spot or the dryness. It was the skin's own ability to repair itself, and nobody was rebuilding that."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
     },
     {
       "type": "color",
@@ -86,34 +204,96 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Heading color",
+      "label": "Headline color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "body_color",
-      "label": "Body color",
+      "label": "Body text color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "closing_color",
+      "label": "Closing paragraph color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "rule_color",
+      "label": "Divider color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography & spacing"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Headline size",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Body size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 17
     },
     {
       "type": "range",
       "id": "body_opacity",
       "label": "Body opacity",
-      "min": 40,
+      "min": 60,
       "max": 100,
       "step": 1,
       "unit": "%",
-      "default": 72
+      "default": 88
     },
     {
       "type": "range",
-      "id": "title_size",
-      "label": "Title size",
-      "min": 28,
-      "max": 56,
-      "step": 2,
-      "unit": "px",
-      "default": 40
+      "id": "closing_opacity",
+      "label": "Closing opacity",
+      "min": 60,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "rule_opacity",
+      "label": "Divider opacity",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "default": 35
     },
     {
       "type": "range",
@@ -138,7 +318,12 @@
   ],
   "presets": [
     {
-      "name": "Science — Statement"
+      "name": "Science — Statement",
+      "settings": {
+        "heading_line_1": "The industry has been treating the symptom,",
+        "heading_accent": "never the real problem.",
+        "eyebrow": "WHY THE CATEGORY KEEPS FAILING"
+      }
     }
   ]
 }
