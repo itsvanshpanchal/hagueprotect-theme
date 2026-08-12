@@ -312,42 +312,53 @@
       "type": "hp-science-commitment",
       "blocks": {
         "phase_1": {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 1–21",
-            "text": "Skin adapts to the protocol. Barrier function stabilizes."
+            "day_range": "Day 1 – 14",
+            "title": "Calibration",
+            "text": "<p>Your skin is adjusting, and you start to feel a surface-level softness. The least any serum should do is make skin soft. We treat this as the starting line, not the finish.</p>"
           }
         },
         "phase_2": {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 22–45",
-            "text": "Renewal signals strengthen. Texture and tone begin to shift."
+            "day_range": "Day 14 – 28",
+            "title": "First signals",
+            "text": "<p>Texture begins to change. <strong>Hydration</strong> holds longer and skin starts to look plumper, the foundation of glass skin. The people around you may notice before you do.</p>"
           }
         },
         "phase_3": {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 46–75",
-            "text": "Longevity markers compound. Results become the new baseline."
+            "day_range": "Day 28 – 60",
+            "title": "The shift",
+            "text": "<p>Pigmentation lifts. Breakout frequency reduces. Barrier resilience improves. The change is happening below the surface, in the <strong>structure</strong> itself.</p>"
+          }
+        },
+        "phase_4": {
+          "type": "phase",
+          "settings": {
+            "day_range": "Day 60 – 75",
+            "title": "Longevity",
+            "text": "<p>This is not the end. It's the baseline. Skin that functions as designed, maintaining from a structurally different starting point. The goal of regenerative science: a result that holds.</p>"
           }
         }
       },
-      "block_order": ["phase_1", "phase_2", "phase_3"],
+      "block_order": ["phase_1", "phase_2", "phase_3", "phase_4"],
       "settings": {
         "heading": "75 days is the commitment we ask for.",
-        "graph_heading": "Slow start. Permanent gain.",
-        "graph_subheading": "Results compound as your skin adapts to the protocol.",
-        "show_graph_placeholder": true,
-        "graph_placeholder_label": "Upload results graph or animation",
-        "graph_min_height": 320,
-        "background_color": "#ffffff",
-        "text_color": "#111111",
-        "graph_background": "#0a0a0a",
-        "graph_text_color": "#ffffff",
+        "subtext": "It is the time the biology needs for the change to become structural instead of temporary. Not a round marketing number, the point at which results start to hold on their own. Here is what happens along the way.",
+        "background_color": "#242424",
+        "text_color": "#ffffff",
+        "subtext_color": "#b5b5b5",
+        "card_background": "#333333",
+        "card_text_color": "#ffffff",
+        "card_body_color": "#adadad",
+        "day_label_color": "#888888",
+        "show_graph_section": false,
         "heading_size": 40,
         "padding_top": 96,
-        "padding_bottom": 0
+        "padding_bottom": 96
       }
     },
     "ingredients": {

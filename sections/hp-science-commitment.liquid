@@ -12,40 +12,97 @@
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
+  .hp-sci-commit-{{ section.id }}__intro {
+    max-width: 52ch;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+
   .hp-sci-commit-{{ section.id }}__heading {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: clamp(28px, 3.5vw, {{ section.settings.heading_size }}px);
-    max-width: 20ch;
-    margin: 0 0 clamp(32px, 5vw, 56px);
-    line-height: 1.1;
+    margin: 0 0 clamp(20px, 3vw, 28px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
   }
 
-  .hp-sci-commit-{{ section.id }}__cols {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, 3vw, 40px);
-    margin-bottom: clamp(40px, 6vw, 72px);
-  }
-
-  .hp-sci-commit-{{ section.id }}__col-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    margin: 0 0 8px;
-  }
-
-  .hp-sci-commit-{{ section.id }}__col-text {
-    font-size: 16px;
-    line-height: 1.55;
-    opacity: 0.8;
+  .hp-sci-commit-{{ section.id }}__subtext {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(16px, 1.45vw, 18px);
+    line-height: 1.65;
     margin: 0;
+    color: {{ section.settings.subtext_color }};
+  }
+
+  .hp-sci-commit-{{ section.id }}__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 1.2vw, 14px);
+    align-items: end;
+  }
+
+  .hp-sci-commit-{{ section.id }}__card {
+    background: {{ section.settings.card_background }};
+    color: {{ section.settings.card_text_color }};
+    padding: clamp(24px, 3vw, 32px) clamp(18px, 2vw, 24px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .hp-sci-commit-{{ section.id }}__card:nth-child(1) {
+    min-height: clamp(260px, 28vw, 320px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__card:nth-child(2) {
+    min-height: clamp(300px, 32vw, 360px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__card:nth-child(3) {
+    min-height: clamp(340px, 36vw, 400px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__card:nth-child(4) {
+    min-height: clamp(380px, 40vw, 440px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__day {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: {{ section.settings.day_label_color }};
+    margin: 0 0 14px;
+  }
+
+  .hp-sci-commit-{{ section.id }}__card-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .hp-sci-commit-{{ section.id }}__card-text {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(15px, 1.35vw, 17px);
+    line-height: 1.6;
+    margin: 0;
+    color: {{ section.settings.card_body_color }};
+  }
+
+  .hp-sci-commit-{{ section.id }}__card-text strong,
+  .hp-sci-commit-{{ section.id }}__card-text b {
+    color: {{ section.settings.text_color }};
+    font-weight: 600;
   }
 
   .hp-sci-commit-{{ section.id }}__graph-wrap {
     background: {{ section.settings.graph_background }};
     color: {{ section.settings.graph_text_color }};
     padding: clamp(32px, 5vw, 56px);
+    margin-top: clamp(48px, 6vw, 72px);
   }
 
   .hp-sci-commit-{{ section.id }}__graph-title {
@@ -66,7 +123,18 @@
   }
 
   @media screen and (max-width: 989px) {
-    .hp-sci-commit-{{ section.id }}__cols {
+    .hp-sci-commit-{{ section.id }}__cards {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .hp-sci-commit-{{ section.id }}__card:nth-child(n) {
+      min-height: 240px;
+    }
+  }
+
+  @media screen and (max-width: 599px) {
+    .hp-sci-commit-{{ section.id }}__cards {
       grid-template-columns: 1fr;
     }
   }
@@ -74,61 +142,88 @@
 
 <section class="hp-sci hp-sci-commit-{{ section.id }}">
   <div class="hp-sci__inner">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-sci-commit-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
+    <div class="hp-sci-commit-{{ section.id }}__intro">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hp-sci-commit-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtext != blank -%}
+        <p class="hp-sci-commit-{{ section.id }}__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
 
-    <div class="hp-sci-commit-{{ section.id }}__cols">
+    <div class="hp-sci-commit-{{ section.id }}__cards">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
-          {%- if block.type == 'column' -%}
-            <div {{ block.shopify_attributes }}>
+          {%- if block.type == 'phase' -%}
+            <article class="hp-sci-commit-{{ section.id }}__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.day_range != blank -%}
+                <p class="hp-sci-commit-{{ section.id }}__day">{{ block.settings.day_range }}</p>
+              {%- endif -%}
               {%- if block.settings.title != blank -%}
-                <h3 class="hp-sci-commit-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+                <h3 class="hp-sci-commit-{{ section.id }}__card-title">{{ block.settings.title }}</h3>
               {%- endif -%}
               {%- if block.settings.text != blank -%}
-                <p class="hp-sci-commit-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+                <div class="hp-sci-commit-{{ section.id }}__card-text">{{ block.settings.text }}</div>
               {%- endif -%}
-            </div>
+            </article>
+          {%- elsif block.type == 'column' -%}
+            <article class="hp-sci-commit-{{ section.id }}__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <p class="hp-sci-commit-{{ section.id }}__day">{{ block.settings.title }}</p>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="hp-sci-commit-{{ section.id }}__card-text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </article>
           {%- endif -%}
         {%- endfor -%}
       {%- else -%}
-        <div>
-          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 1–21</h3>
-          <p class="hp-sci-commit-{{ section.id }}__col-text">Skin adapts to the protocol. Barrier function stabilizes.</p>
-        </div>
-        <div>
-          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 22–45</h3>
-          <p class="hp-sci-commit-{{ section.id }}__col-text">Renewal signals strengthen. Texture and tone begin to shift.</p>
-        </div>
-        <div>
-          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 46–75</h3>
-          <p class="hp-sci-commit-{{ section.id }}__col-text">Longevity markers compound. Results become the new baseline.</p>
-        </div>
+        <article class="hp-sci-commit-{{ section.id }}__card">
+          <p class="hp-sci-commit-{{ section.id }}__day">Day 1 – 14</p>
+          <h3 class="hp-sci-commit-{{ section.id }}__card-title">Calibration</h3>
+          <div class="hp-sci-commit-{{ section.id }}__card-text"><p>Your skin is adjusting, and you start to feel a surface-level softness. The least any serum should do is make skin soft. We treat this as the starting line, not the finish.</p></div>
+        </article>
+        <article class="hp-sci-commit-{{ section.id }}__card">
+          <p class="hp-sci-commit-{{ section.id }}__day">Day 14 – 28</p>
+          <h3 class="hp-sci-commit-{{ section.id }}__card-title">First signals</h3>
+          <div class="hp-sci-commit-{{ section.id }}__card-text"><p>Texture begins to change. <strong>Hydration</strong> holds longer and skin starts to look plumper, the foundation of glass skin. The people around you may notice before you do.</p></div>
+        </article>
+        <article class="hp-sci-commit-{{ section.id }}__card">
+          <p class="hp-sci-commit-{{ section.id }}__day">Day 28 – 60</p>
+          <h3 class="hp-sci-commit-{{ section.id }}__card-title">The shift</h3>
+          <div class="hp-sci-commit-{{ section.id }}__card-text"><p>Pigmentation lifts. Breakout frequency reduces. Barrier resilience improves. The change is happening below the surface, in the <strong>structure</strong> itself.</p></div>
+        </article>
+        <article class="hp-sci-commit-{{ section.id }}__card">
+          <p class="hp-sci-commit-{{ section.id }}__day">Day 60 – 75</p>
+          <h3 class="hp-sci-commit-{{ section.id }}__card-title">Longevity</h3>
+          <div class="hp-sci-commit-{{ section.id }}__card-text"><p>This is not the end. It's the baseline. Skin that functions as designed, maintaining from a structurally different starting point. The goal of regenerative science: a result that holds.</p></div>
+        </article>
       {%- endif -%}
     </div>
   </div>
 
-  <div class="hp-sci-commit-{{ section.id }}__graph-wrap">
-    <div class="hp-sci__inner">
-      {%- if section.settings.graph_heading != blank -%}
-        <h3 class="hp-sci-commit-{{ section.id }}__graph-title">{{ section.settings.graph_heading }}</h3>
-      {%- endif -%}
-      {%- if section.settings.graph_subheading != blank -%}
-        <p class="hp-sci-commit-{{ section.id }}__graph-sub">{{ section.settings.graph_subheading }}</p>
-      {%- endif -%}
-      <div class="hp-sci-commit-{{ section.id }}__graph-media">
-        {% render 'hp-science-media',
-          image: section.settings.graph_image,
-          video: section.settings.graph_video,
-          animation_url: section.settings.graph_animation_url,
-          show_placeholder: section.settings.show_graph_placeholder,
-          placeholder_label: section.settings.graph_placeholder_label,
-          min_height: section.settings.graph_min_height
-        %}
+  {%- if section.settings.show_graph_section -%}
+    <div class="hp-sci-commit-{{ section.id }}__graph-wrap">
+      <div class="hp-sci__inner">
+        {%- if section.settings.graph_heading != blank -%}
+          <h3 class="hp-sci-commit-{{ section.id }}__graph-title">{{ section.settings.graph_heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.graph_subheading != blank -%}
+          <p class="hp-sci-commit-{{ section.id }}__graph-sub">{{ section.settings.graph_subheading }}</p>
+        {%- endif -%}
+        <div class="hp-sci-commit-{{ section.id }}__graph-media">
+          {% render 'hp-science-media',
+            image: section.settings.graph_image,
+            video: section.settings.graph_video,
+            animation_url: section.settings.graph_animation_url,
+            show_placeholder: section.settings.show_graph_placeholder,
+            placeholder_label: section.settings.graph_placeholder_label,
+            min_height: section.settings.graph_min_height
+          %}
+        </div>
       </div>
     </div>
-  </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -144,8 +239,92 @@
       "default": "75 days is the commitment we ask for."
     },
     {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Intro text",
+      "default": "It is the time the biology needs for the change to become structural instead of temporary. Not a round marketing number, the point at which results start to hold on their own. Here is what happens along the way."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#242424"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Intro text color",
+      "default": "#b5b5b5"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_body_color",
+      "label": "Card body color",
+      "default": "#adadad"
+    },
+    {
+      "type": "color",
+      "id": "day_label_color",
+      "label": "Day label color",
+      "default": "#888888"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
       "type": "header",
-      "content": "Graph section"
+      "content": "Optional graph"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_graph_section",
+      "label": "Show graph section",
+      "default": false
     },
     {
       "type": "text",
@@ -198,18 +377,6 @@
     },
     {
       "type": "color",
-      "id": "background_color",
-      "label": "Top background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Top text",
-      "default": "#111111"
-    },
-    {
-      "type": "color",
       "id": "graph_background",
       "label": "Graph section background",
       "default": "#0a0a0a"
@@ -219,54 +386,30 @@
       "id": "graph_text_color",
       "label": "Graph section text",
       "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "heading_size",
-      "label": "Heading size",
-      "min": 24,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 40,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 96
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 80,
-      "step": 4,
-      "unit": "px",
-      "default": 0
     }
   ],
   "blocks": [
     {
-      "type": "column",
-      "name": "Timeline column",
+      "type": "phase",
+      "name": "Timeline phase",
       "settings": [
         {
           "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Days 1–21"
+          "id": "day_range",
+          "label": "Day range",
+          "default": "Day 1 – 14"
         },
         {
-          "type": "textarea",
+          "type": "text",
+          "id": "title",
+          "label": "Phase title",
+          "default": "Calibration"
+        },
+        {
+          "type": "richtext",
           "id": "text",
-          "label": "Text",
-          "default": "Skin adapts to the protocol. Barrier function stabilizes."
+          "label": "Body text",
+          "default": "<p>Your skin is adjusting, and you start to feel a surface-level softness. The least any serum should do is make skin soft. We treat this as the starting line, not the finish.</p>"
         }
       ]
     }
@@ -276,24 +419,34 @@
       "name": "Science — Commitment",
       "blocks": [
         {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 1–21",
-            "text": "Skin adapts to the protocol. Barrier function stabilizes."
+            "day_range": "Day 1 – 14",
+            "title": "Calibration"
           }
         },
         {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 22–45",
-            "text": "Renewal signals strengthen. Texture and tone begin to shift."
+            "day_range": "Day 14 – 28",
+            "title": "First signals",
+            "text": "<p>Texture begins to change. <strong>Hydration</strong> holds longer and skin starts to look plumper, the foundation of glass skin. The people around you may notice before you do.</p>"
           }
         },
         {
-          "type": "column",
+          "type": "phase",
           "settings": {
-            "title": "Days 46–75",
-            "text": "Longevity markers compound. Results become the new baseline."
+            "day_range": "Day 28 – 60",
+            "title": "The shift",
+            "text": "<p>Pigmentation lifts. Breakout frequency reduces. Barrier resilience improves. The change is happening below the surface, in the <strong>structure</strong> itself.</p>"
+          }
+        },
+        {
+          "type": "phase",
+          "settings": {
+            "day_range": "Day 60 – 75",
+            "title": "Longevity",
+            "text": "<p>This is not the end. It's the baseline. Skin that functions as designed, maintaining from a structurally different starting point. The goal of regenerative science: a result that holds.</p>"
           }
         }
       ]
