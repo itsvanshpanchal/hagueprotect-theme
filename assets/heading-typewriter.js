@@ -10,6 +10,23 @@
     return !!(element && element.hasAttribute('data-typewriter-mobile-only'));
   }
 
+  function reserveTypewriterHeight(element) {
+    if (!element || !isMobileOnlyTypewriter(element) || !MOBILE_MQ.matches) return;
+    if (element.dataset.typewriterHeightReserved === '1') return;
+    var h = element.offsetHeight;
+    if (h > 0) {
+      element.style.minHeight = h + 'px';
+      element.dataset.typewriterHeightReserved = '1';
+    }
+  }
+
+  function lockTypewriterHeight(element) {
+    var h = element.offsetHeight;
+    if (h > 0) {
+      element.style.minHeight = h + 'px';
+    }
+  }
+
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
       return false;
@@ -132,6 +149,16 @@
         '>' +
         escapeHtml(d.accentText.substring(0, accentLen)) +
         '</span>';
+    } else if (d.accentText) {
+      /* Reserve script accent line box before accent starts typing */
+      html +=
+        '<span class="' +
+        escapeHtml(d.accentClass) +
+        '" aria-hidden="true" style="visibility:hidden;' +
+        (d.accentStyle ? escapeHtml(d.accentStyle) : '') +
+        '">' +
+        escapeHtml(d.accentText) +
+        '</span>';
     }
 
     d.el.innerHTML = html;
@@ -143,6 +170,7 @@
     element.classList.add('is-typewriting');
 
     var data = Array.prototype.map.call(lineEls, parsePairOrLine);
+    var mobileOnly = isMobileOnlyTypewriter(element);
 
     var full = data
       .map(function (d) { return d.text; })
@@ -155,8 +183,6 @@
     var linePause = 180;
 
     var originalMinHeight = element.style.minHeight;
-    element.style.minHeight = element.offsetHeight + 'px';
-    data.forEach(function (d) { d.el.textContent = ''; });
 
     var cursor = document.createElement('span');
     cursor.className = 'hp-typewriter-cursor';
@@ -187,14 +213,28 @@
       } else {
         if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
         finishLine(d);
-        element.style.minHeight = originalMinHeight;
+        if (mobileOnly && MOBILE_MQ.matches) {
+          lockTypewriterHeight(element);
+        } else {
+          element.style.minHeight = originalMinHeight;
+        }
         element.dataset.typewriterDone = 'true';
         delete element.dataset.typewriterActive;
         element.classList.remove('is-typewriting');
       }
     }
 
-    tick();
+    function beginTyping() {
+      lockTypewriterHeight(element);
+      data.forEach(function (d) { d.el.textContent = ''; });
+      tick();
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(beginTyping);
+    } else {
+      beginTyping();
+    }
   }
 
   function typeHeading(element) {
@@ -288,6 +328,7 @@
     }
 
     var headings = collectHeadings(root);
+    headings.forEach(reserveTypewriterHeight);
 
     if (!('IntersectionObserver' in window)) {
       headings.forEach(typeHeading);
@@ -324,7 +365,16 @@
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('hp-typewriter-capable');
     }
-    initTypewriter();
+
+    function start() {
+      initTypewriter();
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(start);
+    } else {
+      start();
+    }
   }
 
   if (document.readyState === 'loading') {

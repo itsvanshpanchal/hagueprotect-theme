@@ -105,7 +105,12 @@ text-shadow: none !important;
   @media (prefers-reduced-motion: no-preference) {
     @media screen and (max-width: 749px) {
       html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-heading-pair {
-        visibility: hidden;
+        opacity: 0;
+      }
+
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-pair,
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-heading-pair {
+        opacity: 1;
       }
     }
   }
@@ -117,22 +122,28 @@ text-shadow: none !important;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading.is-typewriting,
-  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] {
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active],
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] {
     overflow: visible !important;
-    min-height: 1.05em;
   }
 
+  #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair,
   #shopify-section-{{ section.id }} .bs-coverflow__heading.is-typewriting .hp-heading-pair,
-  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-pair {
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-pair,
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-heading-pair {
     display: inline !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
   }
 
+  #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+  #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-accent,
   #shopify-section-{{ section.id }} .bs-coverflow__heading.is-typewriting .hp-heading-line,
   #shopify-section-{{ section.id }} .bs-coverflow__heading.is-typewriting .hp-heading-accent,
   #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-line,
-  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-accent {
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-accent,
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-heading-line,
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-heading-accent {
     display: inline !important;
     white-space: nowrap !important;
     vertical-align: baseline !important;
@@ -550,9 +561,9 @@ text-shadow: none !important;
     }
 
     #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair,
-    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-line,
-    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-accent {
-      white-space: normal;
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-accent {
+      white-space: nowrap !important;
       overflow: visible;
       max-width: none;
     }
