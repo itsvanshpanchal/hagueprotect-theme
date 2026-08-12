@@ -2292,27 +2292,25 @@ body.template-index {
       row-gap: var(--hp-bs-mobile-header-content-gap) !important;
     }
 
+    /* Premium Best: content height only — dvh/svh resize cards while scrolling on mobile */
     body.template-index #MainContent .hp-fam-sec {
-      min-height: 100dvh !important;
-      min-height: 100svh !important;
-      display: flex !important;
-      flex-direction: column !important;
+      min-height: 0 !important;
+      height: auto !important;
+      display: block !important;
       box-sizing: border-box !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__container {
-      flex: 1 1 auto !important;
+      flex: none !important;
       min-height: 0 !important;
-      height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
+      height: auto !important;
+      display: block !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__main-flex {
-      flex: 1 1 auto !important;
+      flex: none !important;
       min-height: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
+      display: block !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__heading {
@@ -2329,12 +2327,12 @@ body.template-index {
     body.template-index #MainContent .hp-fam-sec__mobile-rail-wrap {
       padding-bottom: 0 !important;
       margin-top: 0 !important;
-      flex: 1 1 auto !important;
-      min-height: 0 !important;
+      flex: 0 0 auto !important;
+      min-height: 360px !important;
       height: auto !important;
-      display: flex !important;
-      flex-direction: column !important;
+      display: block !important;
       position: relative !important;
+      overflow: hidden !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider.is-active {
@@ -2344,24 +2342,32 @@ body.template-index {
     body.template-index #MainContent .hp-fam-sec__mobile-slider {
       padding: 0 !important;
       align-items: stretch !important;
-      flex: 1 1 auto !important;
-      min-height: calc(100dvh - 200px) !important;
-      height: 100% !important;
+      flex: 0 0 auto !important;
+      min-height: 360px !important;
+      height: auto !important;
+      max-height: none !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card {
-      height: 100% !important;
-      min-height: calc(100dvh - 200px) !important;
+      height: auto !important;
+      min-height: 0 !important;
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
       align-self: stretch !important;
       display: flex !important;
       flex-direction: column !important;
+      box-sizing: border-box !important;
+      scroll-snap-align: center !important;
+      scroll-snap-stop: always !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-img {
-      flex: 1 1 auto !important;
-      height: auto !important;
+      flex: 0 0 auto !important;
+      height: 200px !important;
       min-height: 200px !important;
-      max-height: none !important;
+      max-height: 200px !important;
     }
 
     body.template-index #MainContent .hp-fam-sec__mobile-slider .rail-card-info {

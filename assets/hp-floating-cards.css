@@ -424,6 +424,47 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     max-height: none !important;
   }
 
+  /* Shop Our Premium Best — stable card size on native scroll (no dvh stretch) */
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec),
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) > .hp-float-pin {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) .hp-fam-sec {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) .hp-fam-sec__mobile-rail-wrap,
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) .hp-fam-sec__mobile-slider {
+    flex: 0 0 auto !important;
+    min-height: 360px !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) .hp-fam-sec__mobile-slider .rail-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  body.hp-float-mobile.hp-float-native-scroll .hp-float-stack > .shopify-section:has(.hp-fam-sec) .hp-fam-sec__mobile-slider .rail-card-img {
+    flex: 0 0 auto !important;
+    height: 200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+  }
+
   /* Prevent paint flash while float stack initializes */
   body.template-index.hp-float-mobile:not(.hp-float-layout-ready) #MainContent .hero-fullscreen,
   body.template-index.hp-float-mobile:not(.hp-float-layout-ready) #MainContent .hero-fullscreen--mobile-art {
@@ -746,7 +787,6 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow,
   body.hp-float-mobile .hp-float-stack .hp-float-card .fc-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .comm-section,
-  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social,
   body.hp-float-mobile .hp-float-stack .hp-float-card .trending-social-section,
   body.hp-float-mobile .hp-float-stack .hp-float-card .story-banner,
@@ -755,6 +795,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
     min-height: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Premium Best uses fixed card height — do not stretch with viewport panel */
+  body.hp-float-mobile .hp-float-stack .hp-float-card .hp-fam-sec {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
     box-sizing: border-box;
   }
 
