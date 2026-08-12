@@ -28,66 +28,58 @@
     }
   }
 
-  function teardownMobileTypewriterShell(element) {
-    if (!element || element.dataset.typewriterShell !== '1') return;
-
-    var sizer = element.querySelector(':scope > .hp-typewriter-sizer');
-    if (sizer) sizer.parentNode.removeChild(sizer);
-
-    var pair = element.querySelector(':scope > .hp-heading-pair');
-    if (pair) {
-      pair.style.position = '';
-      pair.style.left = '';
-      pair.style.top = '';
-      pair.style.right = '';
-      pair.style.margin = '';
-      pair.style.padding = '';
-      pair.style.maxWidth = '';
-      pair.style.width = '';
-    }
-
-    element.style.position = '';
-    element.style.minHeight = '';
-    element.style.height = '';
-    element.style.boxSizing = '';
-    delete element.dataset.typewriterShell;
+  function hasMarkupMobileShell(element) {
+    return !!(element && element.querySelector(':scope .hp-typewriter-mobile-shell .hp-typewriter-live'));
   }
 
-  /* Mobile-only: hidden in-flow sizer holds final height; pair types in absolute overlay */
   function prepareMobileTypewriterShell(element) {
     if (!element || !isMobileOnlyTypewriter(element) || !MOBILE_MQ.matches) return false;
     if (element.dataset.typewriterShell === '1') return true;
-
-    var pair = element.querySelector(':scope > .hp-heading-pair');
-    if (!pair) return false;
-
-    var shellHeight = element.offsetHeight;
-    if (shellHeight < 1) return false;
-
-    var sizer = document.createElement('span');
-    sizer.className = 'hp-typewriter-sizer';
-    sizer.setAttribute('aria-hidden', 'true');
-    sizer.innerHTML = pair.outerHTML;
-
-    element.style.position = 'relative';
-    element.style.minHeight = shellHeight + 'px';
-    element.style.height = shellHeight + 'px';
-    element.style.boxSizing = 'border-box';
-    element.style.overflow = 'visible';
-
-    element.insertBefore(sizer, pair);
-
-    pair.style.position = 'absolute';
-    pair.style.left = '0';
-    pair.style.top = '0';
-    pair.style.right = 'auto';
-    pair.style.margin = '0';
-    pair.style.padding = '0';
-    pair.style.maxWidth = '100%';
-    pair.style.width = 'max-content';
+    if (!hasMarkupMobileShell(element)) return false;
 
     element.dataset.typewriterShell = '1';
     return true;
+  }
+
+  function teardownMobileTypewriterShell(element) {
+    if (!element || element.dataset.typewriterShell !== '1') return;
+    delete element.dataset.typewriterShell;
+  }
+
+  function getMobileTypewriterLiveRoot(element) {
+    if (!element || !isMobileOnlyTypewriter(element) || !MOBILE_MQ.matches) return null;
+    return element.querySelector(':scope .hp-typewriter-live');
+  }
+
+  function getStructuredTypewriterElements(element) {
+    var liveRoot = getMobileTypewriterLiveRoot(element);
+    var searchRoot = liveRoot || element;
+    var parentCheck = liveRoot
+      ? function (el) { return el.parentElement === liveRoot; }
+      : function (el) { return el.parentElement === element; };
+
+    var pairEls = Array.prototype.filter.call(
+      searchRoot.querySelectorAll('.hp-heading-pair'),
+      parentCheck
+    );
+    var lineEls = Array.prototype.filter.call(
+      searchRoot.querySelectorAll('.hp-heading-line, .hero-heading-line'),
+      parentCheck
+    );
+
+    if (pairEls.length && lineEls.length) {
+      return Array.prototype.filter.call(searchRoot.children, function (el) {
+        return (
+          el.classList.contains('hp-heading-line') ||
+          el.classList.contains('hp-heading-pair') ||
+          el.classList.contains('hero-heading-line')
+        );
+      });
+    }
+
+    if (pairEls.length) return pairEls;
+    if (lineEls.length) return lineEls;
+    return [];
   }
 
   function runWhenFontsReady(fn, fallbackMs) {
@@ -110,11 +102,19 @@
   function resetMobileOnlyTypewriter(heading) {
     if (!heading || !isMobileOnlyTypewriter(heading) || !MOBILE_MQ.matches) return;
     if (heading.dataset.typewriterActive === 'true') return;
+
+    var live = heading.querySelector(':scope .hp-typewriter-live');
+    var sizer = heading.querySelector(':scope .hp-typewriter-sizer');
+    if (live && sizer) {
+      live.innerHTML = sizer.innerHTML;
+    }
+
     teardownMobileTypewriterShell(heading);
     delete heading.dataset.typewriterDone;
     delete heading.dataset.typewriterHeightReserved;
     heading.style.minHeight = '';
     heading.style.height = '';
+    heading.style.position = '';
     heading.classList.remove('is-typewriting');
   }
 
@@ -248,18 +248,14 @@
     var html =
       '<span class="hp-heading-line hp-heading-line--1">' +
       escapeHtml(d.mainText.substring(0, mainLen)) +
+      '</span>' +
+      '<span class="' +
+      escapeHtml(d.accentClass) +
+      '"' +
+      (d.accentStyle ? ' style="' + escapeHtml(d.accentStyle) + '"' : '') +
+      '>' +
+      escapeHtml(d.accentText.substring(0, accentLen)) +
       '</span>';
-
-    if (charIndex >= d.mainText.length) {
-      html +=
-        '<span class="' +
-        escapeHtml(d.accentClass) +
-        '"' +
-        (d.accentStyle ? ' style="' + escapeHtml(d.accentStyle) + '"' : '') +
-        '>' +
-        escapeHtml(d.accentText.substring(0, accentLen)) +
-        '</span>';
-    }
 
     d.el.innerHTML = html;
     d.el.appendChild(cursor);
@@ -348,39 +344,9 @@
       element.dataset.typewriterPlayedVisible = '1';
     }
 
-    /* Prefer accent pairs (main + script sibling), then top-level line spans. */
-    var pairEls = Array.prototype.filter.call(
-      element.querySelectorAll('.hp-heading-pair'),
-      function (el) {
-        return el.parentElement === element;
-      }
-    );
-    var lineEls = Array.prototype.filter.call(
-      element.querySelectorAll('.hp-heading-line, .hero-heading-line'),
-      function (el) {
-        return el.parentElement === element;
-      }
-    );
-
-    if (pairEls.length && lineEls.length) {
-      var structuredEls = Array.prototype.filter.call(element.children, function (el) {
-        return (
-          el.classList.contains('hp-heading-line') ||
-          el.classList.contains('hp-heading-pair') ||
-          el.classList.contains('hero-heading-line')
-        );
-      });
+    var structuredEls = getStructuredTypewriterElements(element);
+    if (structuredEls.length) {
       typeStructuredHeading(element, structuredEls);
-      return;
-    }
-
-    if (pairEls.length) {
-      typeStructuredHeading(element, pairEls);
-      return;
-    }
-
-    if (lineEls.length) {
-      typeStructuredHeading(element, lineEls);
       return;
     }
 

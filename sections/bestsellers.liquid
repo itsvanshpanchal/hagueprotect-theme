@@ -102,39 +102,52 @@ text-shadow: none !important;
     }
   }
 
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-mobile-shell {
+      display: grid;
+      grid-template: 1fr / 1fr;
+      width: 100%;
+      max-width: 100%;
+      align-items: end;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-sizer,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-live {
+      grid-area: 1 / 1;
+      max-width: 100%;
+      white-space: nowrap !important;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-sizer {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-live {
+      align-self: end;
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     @media screen and (max-width: 749px) {
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-shell] {
-        position: relative !important;
-        overflow: visible !important;
-        box-sizing: border-box !important;
-      }
-
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-shell] > .hp-typewriter-sizer {
-        visibility: hidden !important;
-        display: inline-block !important;
-        white-space: nowrap !important;
-        pointer-events: none !important;
-        max-width: 100% !important;
-      }
-
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-shell] > .hp-heading-pair {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        max-width: 100% !important;
-      }
-
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-heading-pair {
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-typewriter-live .hp-heading-pair {
         opacity: 0;
       }
 
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-pair,
-      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-heading-pair {
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-typewriter-live .hp-heading-pair,
+      html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-done] .hp-typewriter-live .hp-heading-pair {
         opacity: 1;
       }
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-sizer {
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-mobile-shell {
+      display: inline;
     }
   }
 
@@ -586,10 +599,10 @@ text-shadow: none !important;
       margin-inline: 0;
       text-align: var(--section-heading-align, left);
       overflow: visible;
-      white-space: normal;
     }
 
-    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-mobile-shell,
+    #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-live,
     #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-line,
     #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-heading-pair .hp-heading-accent {
       white-space: nowrap !important;
@@ -997,7 +1010,15 @@ text-shadow: none !important;
         {%- if section.settings.eyebrow != blank -%}
           <span class="bs-coverflow__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
-        <h2 class="bs-coverflow__heading" data-typewriter-mobile-only>{% render 'section-heading-text', text: section.settings.heading | default: 'Bestselling Sneaker Care', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
+        {%- capture bs_heading_typewriter_markup -%}
+          {%- render 'section-heading-text', text: section.settings.heading | default: 'Bestselling Sneaker Care', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color -%}
+        {%- endcapture -%}
+        <h2 class="bs-coverflow__heading" data-typewriter-mobile-only>
+          <span class="hp-typewriter-mobile-shell">
+            <span class="hp-typewriter-sizer" aria-hidden="true">{{ bs_heading_typewriter_markup }}</span>
+            <span class="hp-typewriter-live">{{ bs_heading_typewriter_markup }}</span>
+          </span>
+        </h2>
       </div>
       {%- if section.settings.view_all_link != blank -%}
         <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All' }}</a>
