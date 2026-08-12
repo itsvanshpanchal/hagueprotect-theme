@@ -13,11 +13,81 @@
   function reserveTypewriterHeight(element) {
     if (!element || !isMobileOnlyTypewriter(element) || !MOBILE_MQ.matches) return;
     if (element.dataset.typewriterHeightReserved === '1') return;
-    var h = element.offsetHeight;
-    if (h > 0) {
-      element.style.minHeight = h + 'px';
-      element.dataset.typewriterHeightReserved = '1';
+
+    function apply() {
+      if (element.dataset.typewriterHeightReserved === '1') return;
+      if (prepareMobileTypewriterShell(element)) {
+        element.dataset.typewriterHeightReserved = '1';
+      }
     }
+
+    if (document.fonts && document.fonts.status === 'loaded') {
+      apply();
+    } else {
+      runWhenFontsReady(apply, 600);
+    }
+  }
+
+  function teardownMobileTypewriterShell(element) {
+    if (!element || element.dataset.typewriterShell !== '1') return;
+
+    var sizer = element.querySelector(':scope > .hp-typewriter-sizer');
+    if (sizer) sizer.parentNode.removeChild(sizer);
+
+    var pair = element.querySelector(':scope > .hp-heading-pair');
+    if (pair) {
+      pair.style.position = '';
+      pair.style.left = '';
+      pair.style.top = '';
+      pair.style.right = '';
+      pair.style.margin = '';
+      pair.style.padding = '';
+      pair.style.maxWidth = '';
+      pair.style.width = '';
+    }
+
+    element.style.position = '';
+    element.style.minHeight = '';
+    element.style.height = '';
+    element.style.boxSizing = '';
+    delete element.dataset.typewriterShell;
+  }
+
+  /* Mobile-only: hidden in-flow sizer holds final height; pair types in absolute overlay */
+  function prepareMobileTypewriterShell(element) {
+    if (!element || !isMobileOnlyTypewriter(element) || !MOBILE_MQ.matches) return false;
+    if (element.dataset.typewriterShell === '1') return true;
+
+    var pair = element.querySelector(':scope > .hp-heading-pair');
+    if (!pair) return false;
+
+    var shellHeight = element.offsetHeight;
+    if (shellHeight < 1) return false;
+
+    var sizer = document.createElement('span');
+    sizer.className = 'hp-typewriter-sizer';
+    sizer.setAttribute('aria-hidden', 'true');
+    sizer.innerHTML = pair.outerHTML;
+
+    element.style.position = 'relative';
+    element.style.minHeight = shellHeight + 'px';
+    element.style.height = shellHeight + 'px';
+    element.style.boxSizing = 'border-box';
+    element.style.overflow = 'visible';
+
+    element.insertBefore(sizer, pair);
+
+    pair.style.position = 'absolute';
+    pair.style.left = '0';
+    pair.style.top = '0';
+    pair.style.right = 'auto';
+    pair.style.margin = '0';
+    pair.style.padding = '0';
+    pair.style.maxWidth = '100%';
+    pair.style.width = 'max-content';
+
+    element.dataset.typewriterShell = '1';
+    return true;
   }
 
   function runWhenFontsReady(fn, fallbackMs) {
@@ -40,9 +110,11 @@
   function resetMobileOnlyTypewriter(heading) {
     if (!heading || !isMobileOnlyTypewriter(heading) || !MOBILE_MQ.matches) return;
     if (heading.dataset.typewriterActive === 'true') return;
+    teardownMobileTypewriterShell(heading);
     delete heading.dataset.typewriterDone;
     delete heading.dataset.typewriterHeightReserved;
     heading.style.minHeight = '';
+    heading.style.height = '';
     heading.classList.remove('is-typewriting');
   }
 
@@ -194,6 +266,11 @@
   }
 
   function typeStructuredHeading(element, lineEls) {
+    var mobileShell = isMobileOnlyTypewriter(element) && MOBILE_MQ.matches;
+    if (mobileShell) {
+      prepareMobileTypewriterShell(element);
+    }
+
     element.dataset.typewriterActive = 'true';
     element.classList.add('is-typewriting');
 
@@ -241,7 +318,9 @@
       } else {
         if (cursor.parentNode) cursor.parentNode.removeChild(cursor);
         finishLine(d);
-        if (mobileOnly && MOBILE_MQ.matches) {
+        if (mobileOnly && MOBILE_MQ.matches && element.dataset.typewriterShell === '1') {
+          /* Height stays locked by the hidden sizer shell */
+        } else if (mobileOnly && MOBILE_MQ.matches) {
           lockTypewriterHeight(element);
         } else {
           element.style.minHeight = originalMinHeight;
@@ -253,7 +332,9 @@
     }
 
     function beginTyping() {
-      lockTypewriterHeight(element);
+      if (!(mobileOnly && MOBILE_MQ.matches && element.dataset.typewriterShell === '1')) {
+        lockTypewriterHeight(element);
+      }
       data.forEach(function (d) { d.el.textContent = ''; });
       tick();
     }
