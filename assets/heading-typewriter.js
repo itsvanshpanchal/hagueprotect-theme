@@ -6,6 +6,10 @@
 
   var MOBILE_MQ = window.matchMedia('(max-width: 749px)');
 
+  function isMobileOnlyTypewriter(element) {
+    return !!(element && element.hasAttribute('data-typewriter-mobile-only'));
+  }
+
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
       return false;
@@ -13,8 +17,13 @@
     if (element.hasAttribute('data-no-typewriter')) {
       return false;
     }
-    /* Mobile: never type — clearing + retyping looks like a double load / flicker */
+    var mobileOnly = isMobileOnlyTypewriter(element);
     if (MOBILE_MQ.matches) {
+      /* Mobile: only headings marked mobile-only (e.g. Bestselling Sneaker Care) */
+      if (!mobileOnly) {
+        return false;
+      }
+    } else if (mobileOnly) {
       return false;
     }
     if (element.closest(EXCLUDE_ANCESTORS)) {
@@ -139,17 +148,10 @@
       .map(function (d) { return d.text; })
       .join(' ');
 
-    /* Mobile is handled in shouldType — keep structured path desktop-only */
-    if (MOBILE_MQ.matches) {
-      data.forEach(function (d) { d.el.innerHTML = d.html; });
-      element.setAttribute('aria-label', full);
-      element.dataset.typewriterDone = 'true';
-      delete element.dataset.typewriterActive;
-      element.classList.remove('is-typewriting');
-      return;
-    }
-
     var speed = full.length > 90 ? 32 : full.length > 50 ? 42 : 55;
+    if (MOBILE_MQ.matches) {
+      speed = full.length > 90 ? 26 : full.length > 50 ? 34 : 44;
+    }
     var linePause = 180;
 
     var originalMinHeight = element.style.minHeight;
@@ -245,16 +247,10 @@
       .replace(/\s*\[\[BR\]\]\s*/g, '\n')
       .trim();
 
-    if (MOBILE_MQ.matches) {
-      element.innerHTML = originalHTML;
-      element.setAttribute('aria-label', fullText.replace(/\n/g, ' '));
-      element.dataset.typewriterDone = 'true';
-      delete element.dataset.typewriterActive;
-      element.classList.remove('is-typewriting');
-      return;
-    }
-
     var speed = fullText.length > 90 ? 32 : fullText.length > 50 ? 42 : 55;
+    if (MOBILE_MQ.matches) {
+      speed = fullText.length > 90 ? 26 : fullText.length > 50 ? 34 : 44;
+    }
 
     var originalPosition = window.getComputedStyle(element).position;
     if (originalPosition === 'static') {

@@ -103,7 +103,7 @@ text-shadow: none !important;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @media screen and (min-width: 750px) {
+    @media screen and (max-width: 749px) {
       html.hp-typewriter-capable #shopify-section-{{ section.id }} .bs-coverflow__heading:not([data-typewriter-done]):not([data-typewriter-active]) .hp-heading-pair {
         visibility: hidden;
       }
@@ -957,7 +957,7 @@ text-shadow: none !important;
         {%- if section.settings.eyebrow != blank -%}
           <span class="bs-coverflow__eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
-        <h2 class="bs-coverflow__heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Bestselling Sneaker Care', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
+        <h2 class="bs-coverflow__heading" data-typewriter-mobile-only>{% render 'section-heading-text', text: section.settings.heading | default: 'Bestselling Sneaker Care', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_color: section.settings.heading_accent_color %}</h2>
       </div>
       {%- if section.settings.view_all_link != blank -%}
         <a href="{{ section.settings.view_all_link }}" class="bs-coverflow__view-all">{{ section.settings.view_all_label | default: 'View All' }}</a>
