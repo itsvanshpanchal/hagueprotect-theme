@@ -1,0 +1,213 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-grid-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-grid-{{ section.id }}__heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, {{ section.settings.heading_size }}px);
+    max-width: 18ch;
+    margin: 0 0 clamp(40px, 6vw, 72px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .hp-sci-grid-{{ section.id }}__cols {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 48px);
+  }
+
+  .hp-sci-grid-{{ section.id }}__num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+    margin: 0 0 16px;
+  }
+
+  .hp-sci-grid-{{ section.id }}__col-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(22px, 2.2vw, 28px);
+    margin: 0 0 12px;
+    line-height: 1.15;
+  }
+
+  .hp-sci-grid-{{ section.id }}__col-text {
+    font-size: 17px;
+    line-height: 1.55;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-grid-{{ section.id }}__cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .hp-sci-grid-{{ section.id }}__cols {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-grid-{{ section.id }}">
+  <div class="hp-sci__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-sci-grid-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hp-sci-grid-{{ section.id }}__cols">
+      {%- for block in section.blocks -%}
+        <article class="hp-sci-grid-{{ section.id }}__col" {{ block.shopify_attributes }}>
+          {%- if block.settings.number != blank -%}
+            <p class="hp-sci-grid-{{ section.id }}__num">{{ block.settings.number }}</p>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="hp-sci-grid-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <p class="hp-sci-grid-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Info grid",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Skin doesn't fail. The routine does."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Column title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Short supporting paragraph for this point."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Info grid",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "number": "01",
+            "title": "Renewal slows with age",
+            "text": "Cell turnover drops. Most routines chase symptoms instead of the biology."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "number": "02",
+            "title": "Barrier stress compounds",
+            "text": "Harsh actives and inconsistent care weaken the skin's first line of defense."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "number": "03",
+            "title": "Recovery gets interrupted",
+            "text": "Your skin knows how to repair. Most products disrupt the signal."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "number": "04",
+            "title": "Longevity needs a system",
+            "text": "Five biological processes. One coordinated protocol over 75 days."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

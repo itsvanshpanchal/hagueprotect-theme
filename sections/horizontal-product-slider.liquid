@@ -319,6 +319,23 @@
     box-sizing: border-box;
   }
 
+  .hp-fam-sec__glass-panel--linked {
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .hp-fam-sec__glass-panel--linked:hover {
+    box-shadow:
+      0 20px 56px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    transform: translateY(-1px);
+  }
+
+  .hp-fam-sec__glass-panel--linked .hp-fam-sec__glass-link {
+    position: relative;
+    z-index: 1;
+  }
+
   .hp-fam-sec__glass-col {
     min-width: 0;
   }
@@ -1158,7 +1175,15 @@
     {%- endif -%}
 
     {%- if section.settings.show_glass_panel -%}
-      <div class="hp-fam-sec__glass-panel" id="hp-glass-panel-{{ section.id }}">
+      <div
+        class="hp-fam-sec__glass-panel{% if section.settings.glass_link_url != blank %} hp-fam-sec__glass-panel--linked{% endif %}"
+        id="hp-glass-panel-{{ section.id }}"
+        {% if section.settings.glass_link_url != blank %}
+          data-hp-glass-link="{{ section.settings.glass_link_url }}"
+          role="link"
+          tabindex="0"
+        {% endif %}
+      >
         <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
           {%- if section.settings.glass_eyebrow_left != blank -%}
             <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
@@ -1348,6 +1373,22 @@
       bgVideo.addEventListener('loadeddata', tryPlay, { once: true });
       document.addEventListener('visibilitychange', function() {
         if (!document.hidden) tryPlay();
+      });
+    }
+
+    const glassPanel = section.querySelector('.hp-fam-sec__glass-panel--linked[data-hp-glass-link]');
+    if (glassPanel) {
+      const glassUrl = glassPanel.getAttribute('data-hp-glass-link');
+      const goToScience = function(event) {
+        if (event.target.closest('a')) return;
+        if (glassUrl) window.location.href = glassUrl;
+      };
+      glassPanel.addEventListener('click', goToScience);
+      glassPanel.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          if (glassUrl) window.location.href = glassUrl;
+        }
       });
     }
 
@@ -1783,7 +1824,8 @@
     {
       "type": "url",
       "id": "glass_link_url",
-      "label": "Link URL"
+      "label": "Link URL",
+      "info": "Used by the glass panel and “The science behind this” link. Create a page with handle science-longevity and template page.science-longevity."
     },
     {
       "type": "color",

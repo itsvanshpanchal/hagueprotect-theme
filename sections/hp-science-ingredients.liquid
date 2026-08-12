@@ -1,0 +1,199 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-ing-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-ing-{{ section.id }}__heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(26px, 3.2vw, {{ section.settings.heading_size }}px);
+    max-width: 22ch;
+    margin: 0 0 clamp(40px, 5vw, 64px);
+    line-height: 1.12;
+  }
+
+  .hp-sci-ing-{{ section.id }}__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hp-sci-ing-{{ section.id }}__row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .hp-sci-ing-{{ section.id }}__row:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .hp-sci-ing-{{ section.id }}__cell {
+    padding: 20px 0;
+    vertical-align: top;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .hp-sci-ing-{{ section.id }}__cell--name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    width: 38%;
+    padding-right: 24px;
+  }
+
+  .hp-sci-ing-{{ section.id }}__cell--role {
+    opacity: 0.82;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hp-sci-ing-{{ section.id }}__row {
+      display: block;
+      padding: 16px 0;
+    }
+
+    .hp-sci-ing-{{ section.id }}__cell {
+      display: block;
+      width: 100%;
+      padding: 4px 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-ing-{{ section.id }}">
+  <div class="hp-sci__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-sci-ing-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <table class="hp-sci-ing-{{ section.id }}__table" role="presentation">
+      <tbody>
+        {%- for block in section.blocks -%}
+          <tr class="hp-sci-ing-{{ section.id }}__row" {{ block.shopify_attributes }}>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">{{ block.settings.name }}</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">{{ block.settings.role }}</td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Ingredients table",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Smarter skincare. Named on pack, not hidden in a blend."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "OS-01 Peptide"
+        },
+        {
+          "type": "textarea",
+          "id": "role",
+          "label": "Function",
+          "default": "Targets senescent cell signaling to support skin longevity."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Ingredients table",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "OS-01 Peptide",
+            "role": "Targets senescent cell signaling to support skin longevity."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Niacinamide",
+            "role": "Supports barrier integrity and even tone."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Ceramide Complex",
+            "role": "Replenishes lipids essential to barrier recovery."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Adaptogenic Botanicals",
+            "role": "Helps skin respond to environmental stress."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

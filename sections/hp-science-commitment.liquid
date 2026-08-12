@@ -1,0 +1,288 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-commit-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-commit-{{ section.id }}__heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, {{ section.settings.heading_size }}px);
+    max-width: 20ch;
+    margin: 0 0 clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+  }
+
+  .hp-sci-commit-{{ section.id }}__cols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 40px);
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__col-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  .hp-sci-commit-{{ section.id }}__col-text {
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .hp-sci-commit-{{ section.id }}__graph-wrap {
+    background: {{ section.settings.graph_background }};
+    color: {{ section.settings.graph_text_color }};
+    padding: clamp(32px, 5vw, 56px);
+  }
+
+  .hp-sci-commit-{{ section.id }}__graph-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 8px;
+  }
+
+  .hp-sci-commit-{{ section.id }}__graph-sub {
+    font-size: 16px;
+    opacity: 0.75;
+    margin: 0 0 24px;
+  }
+
+  .hp-sci-commit-{{ section.id }}__graph-media {
+    min-height: {{ section.settings.graph_min_height }}px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-commit-{{ section.id }}__cols {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-commit-{{ section.id }}">
+  <div class="hp-sci__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-sci-commit-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hp-sci-commit-{{ section.id }}__cols">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          <div {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h3 class="hp-sci-commit-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="hp-sci-commit-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="hp-sci-commit-{{ section.id }}__graph-wrap">
+    <div class="hp-sci__inner">
+      {%- if section.settings.graph_heading != blank -%}
+        <h3 class="hp-sci-commit-{{ section.id }}__graph-title">{{ section.settings.graph_heading }}</h3>
+      {%- endif -%}
+      {%- if section.settings.graph_subheading != blank -%}
+        <p class="hp-sci-commit-{{ section.id }}__graph-sub">{{ section.settings.graph_subheading }}</p>
+      {%- endif -%}
+      <div class="hp-sci-commit-{{ section.id }}__graph-media">
+        {% render 'hp-science-media',
+          image: section.settings.graph_image,
+          video: section.settings.graph_video,
+          animation_url: section.settings.graph_animation_url,
+          show_placeholder: section.settings.show_graph_placeholder,
+          placeholder_label: section.settings.graph_placeholder_label,
+          min_height: section.settings.graph_min_height
+        %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — 75 day commitment",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "75 days is the commitment we ask for."
+    },
+    {
+      "type": "header",
+      "content": "Graph section"
+    },
+    {
+      "type": "text",
+      "id": "graph_heading",
+      "label": "Graph heading",
+      "default": "Slow start. Permanent gain."
+    },
+    {
+      "type": "text",
+      "id": "graph_subheading",
+      "label": "Graph subheading",
+      "default": "Results compound as your skin adapts to the protocol."
+    },
+    {
+      "type": "image_picker",
+      "id": "graph_image",
+      "label": "Graph image"
+    },
+    {
+      "type": "video",
+      "id": "graph_video",
+      "label": "Graph video / animation"
+    },
+    {
+      "type": "url",
+      "id": "graph_animation_url",
+      "label": "Graph animation URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_graph_placeholder",
+      "label": "Show graph placeholder when empty",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "graph_placeholder_label",
+      "label": "Graph placeholder label",
+      "default": "Upload results graph or animation"
+    },
+    {
+      "type": "range",
+      "id": "graph_min_height",
+      "label": "Graph min height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 320
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Top background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Top text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "graph_background",
+      "label": "Graph section background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "graph_text_color",
+      "label": "Graph section text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Timeline column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Days 1–21"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Skin adapts to the protocol. Barrier function stabilizes."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — 75 day commitment",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "Days 1–21",
+            "text": "Skin adapts to the protocol. Barrier function stabilizes."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Days 22–45",
+            "text": "Renewal signals strengthen. Texture and tone begin to shift."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Days 46–75",
+            "text": "Longevity markers compound. Results become the new baseline."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

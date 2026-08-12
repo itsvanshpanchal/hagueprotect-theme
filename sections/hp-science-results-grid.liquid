@@ -1,0 +1,288 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-results-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-results-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .hp-sci-results-{{ section.id }}__tile {
+    aspect-ratio: 1;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hp-sci-results-{{ section.id }}__tile .hp-sci-media {
+    height: 100%;
+  }
+
+  .hp-sci-results-{{ section.id }}__stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 48px);
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .hp-sci-results-{{ section.id }}__label {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+
+  .hp-sci-results-{{ section.id }}__value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1;
+    margin: 0 0 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .hp-sci-results-{{ section.id }}__desc {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 28ch;
+    opacity: 0.85;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hp-sci-results-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hp-sci-results-{{ section.id }}__tile {
+      aspect-ratio: auto;
+      min-height: 260px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-results-{{ section.id }}">
+  <div class="hp-sci__inner" style="padding-left: 0; padding-right: 0; max-width: none;">
+    <div class="hp-sci-results-{{ section.id }}__grid">
+      {%- for block in section.blocks -%}
+        <div class="hp-sci-results-{{ section.id }}__tile" {{ block.shopify_attributes }}>
+          {%- if block.type == 'image' -%}
+            {% render 'hp-science-media',
+              image: block.settings.image,
+              video: block.settings.video,
+              animation_url: block.settings.animation_url,
+              show_placeholder: block.settings.show_media_placeholder,
+              placeholder_label: block.settings.placeholder_label,
+              min_height: 280,
+              light_placeholder: block.settings.light_placeholder
+            %}
+          {%- else -%}
+            <div
+              class="hp-sci-results-{{ section.id }}__stat"
+              style="background: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};"
+            >
+              {%- if block.settings.label != blank -%}
+                <p class="hp-sci-results-{{ section.id }}__label" style="color: {{ block.settings.accent_color }};">{{ block.settings.label }}</p>
+              {%- endif -%}
+              {%- if block.settings.value != blank -%}
+                <p class="hp-sci-results-{{ section.id }}__value" style="color: {{ block.settings.accent_color }};">{{ block.settings.value }}</p>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="hp-sci-results-{{ section.id }}__desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Results grid",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image / animation tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "url",
+          "id": "animation_url",
+          "label": "Animation URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_media_placeholder",
+          "label": "Show placeholder when empty",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "placeholder_label",
+          "label": "Placeholder label",
+          "default": "Upload result image or animation"
+        },
+        {
+          "type": "checkbox",
+          "id": "light_placeholder",
+          "label": "Light placeholder",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "VITALITY"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "+120%"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Measured improvement in skin vitality markers over 75 days."
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#111111"
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent (label + value)",
+          "default": "#2d8a4e"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Results grid",
+      "blocks": [
+        { "type": "image" },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "VITALITY",
+            "value": "+120%",
+            "accent_color": "#2d8a4e"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "RECOVERY",
+            "value": "+54.5%",
+            "background_color": "#0a0a0a",
+            "text_color": "#ffffff",
+            "accent_color": "#ffffff"
+          }
+        },
+        { "type": "image" },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "BARRIER",
+            "value": "+38%",
+            "background_color": "#f5f0e8",
+            "accent_color": "#111111"
+          }
+        },
+        { "type": "image" },
+        { "type": "image" },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "DENSITY",
+            "value": "+45%",
+            "accent_color": "#c45c2a"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "TEXTURE",
+            "value": "+32%",
+            "background_color": "#0a0a0a",
+            "text_color": "#ffffff",
+            "accent_color": "#ffffff"
+          }
+        },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

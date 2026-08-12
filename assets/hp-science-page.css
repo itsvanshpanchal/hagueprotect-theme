@@ -1,0 +1,116 @@
+/* Skin Longevity Science page — shared layout */
+.hp-sci {
+  --hp-sci-gutter: var(--homepage-section-gutter, 28px);
+  --hp-sci-max: var(--site-max-width, 1440px);
+  --hp-sci-cream: #f5f0e8;
+  --hp-sci-black: #0a0a0a;
+  --hp-sci-white: #ffffff;
+  --hp-sci-muted: rgba(255, 255, 255, 0.72);
+  --hp-sci-gold: #a8894a;
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+#MainContent .hp-sci {
+  margin: 0;
+}
+
+.hp-sci__title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.hp-sci__eyebrow {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.hp-sci__body {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.hp-sci__inner {
+  max-width: var(--hp-sci-max);
+  margin: 0 auto;
+  padding-left: var(--hp-sci-gutter);
+  padding-right: var(--hp-sci-gutter);
+  box-sizing: border-box;
+}
+
+.hp-sci-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hp-sci-media__img,
+.hp-sci-media__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hp-sci-media__video {
+  background: #111;
+}
+
+.hp-sci-media__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--hp-sci-media-min, 320px);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.04) 10px,
+    rgba(255, 255, 255, 0.08) 10px,
+    rgba(255, 255, 255, 0.08) 20px
+  );
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.hp-sci-media--light .hp-sci-media__placeholder {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.02) 10px,
+    rgba(0, 0, 0, 0.05) 10px,
+    rgba(0, 0, 0, 0.05) 20px
+  );
+  border-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.hp-sci-media__placeholder-label {
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  max-width: 28ch;
+  line-height: 1.4;
+}
+
+.hp-sci-media__lottie {
+  width: 100%;
+  min-height: var(--hp-sci-media-min, 320px);
+}
+
+@media screen and (max-width: 989px) {
+  .hp-sci__body {
+    font-size: 16px;
+  }
+}

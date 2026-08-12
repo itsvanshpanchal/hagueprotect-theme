@@ -1,0 +1,54 @@
+{%- comment -%}
+  Renders image, video, Lottie URL, or editor placeholder.
+  Accepts: image, video, animation_url, show_placeholder, placeholder_label, min_height, aspect_ratio, light_placeholder
+{%- endcomment -%}
+{%- liquid
+  assign media_image = image | default: blank
+  assign media_video = video | default: blank
+  assign media_animation = animation_url | default: blank
+  assign media_show_placeholder = show_placeholder | default: true
+  assign media_label = placeholder_label | default: 'Upload image, video, or animation'
+  assign media_min = min_height | default: 320
+  assign media_ratio = aspect_ratio | default: ''
+  assign media_light = light_placeholder | default: false
+-%}
+
+<div
+  class="hp-sci-media{% if media_light %} hp-sci-media--light{% endif %}"
+  style="--hp-sci-media-min: {{ media_min }}px;{% if media_ratio != blank %} aspect-ratio: {{ media_ratio }};{% endif %}"
+>
+  {%- if media_video != blank -%}
+    {{
+      media_video
+      | video_tag:
+        autoplay: true,
+        loop: true,
+        muted: true,
+        playsinline: true,
+        controls: false,
+        class: 'hp-sci-media__video'
+    }}
+  {%- elsif media_image != blank -%}
+    {{
+      media_image
+      | image_url: width: 2400
+      | image_tag:
+        loading: 'lazy',
+        widths: '480, 720, 960, 1200, 1600, 2000, 2400',
+        sizes: '100vw',
+        class: 'hp-sci-media__img',
+        alt: media_image.alt | default: placeholder_label | escape
+    }}
+  {%- elsif media_animation != blank -%}
+    <div
+      class="hp-sci-media__lottie"
+      data-hp-lottie-src="{{ media_animation | escape }}"
+      role="img"
+      aria-label="{{ media_label | escape }}"
+    ></div>
+  {%- elsif media_show_placeholder -%}
+    <div class="hp-sci-media__placeholder">
+      <span class="hp-sci-media__placeholder-label">{{ media_label }}</span>
+    </div>
+  {%- endif -%}
+</div>

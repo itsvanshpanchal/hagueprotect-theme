@@ -1,0 +1,94 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-banner-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+  }
+
+  .hp-sci-banner-{{ section.id }}__media {
+    min-height: {{ section.settings.min_height }}px;
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-banner-{{ section.id }}">
+  <div class="hp-sci-banner-{{ section.id }}__media">
+    {% render 'hp-science-media',
+      image: section.settings.image,
+      video: section.settings.video,
+      animation_url: section.settings.animation_url,
+      show_placeholder: section.settings.show_media_placeholder,
+      placeholder_label: section.settings.placeholder_label,
+      min_height: section.settings.min_height,
+      light_placeholder: section.settings.light_placeholder
+    %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Media banner",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (overrides image)"
+    },
+    {
+      "type": "url",
+      "id": "animation_url",
+      "label": "Animation file URL (Lottie JSON)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_placeholder",
+      "label": "Show placeholder when media is empty",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "placeholder_label",
+      "label": "Placeholder label",
+      "default": "Upload full-width transition image or animation"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Min height",
+      "min": 200,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "checkbox",
+      "id": "light_placeholder",
+      "label": "Light placeholder style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background (behind media)",
+      "default": "#0a0a0a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Media banner"
+    }
+  ]
+}
+{% endschema %}

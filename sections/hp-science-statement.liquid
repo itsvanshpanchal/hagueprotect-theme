@@ -1,0 +1,134 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-statement-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-statement-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .hp-sci-statement-{{ section.id }}__title {
+    font-size: clamp(28px, 3.8vw, {{ section.settings.title_size }}px);
+    color: inherit;
+  }
+
+  .hp-sci-statement-{{ section.id }}__body {
+    color: {{ section.settings.body_color }};
+  }
+
+  .hp-sci-statement-{{ section.id }}__body p {
+    margin: 0 0 16px;
+  }
+
+  .hp-sci-statement-{{ section.id }}__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-statement-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-statement-{{ section.id }}">
+  <div class="hp-sci__inner">
+    <div class="hp-sci-statement-{{ section.id }}__grid">
+      <div>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hp-sci__title hp-sci-statement-{{ section.id }}__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.body != blank -%}
+        <div class="hp-sci__body hp-sci-statement-{{ section.id }}__body">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Statement",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We've spent ten years tracing the epigenetic pathways to longevity."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>Skin longevity is not anti-aging marketing. It is measurable biology — renewal, barrier integrity, recovery, density, and texture working as one system.</p><p>Our protocol targets five processes your skin already runs. We remove the noise so those processes can run again.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body color",
+      "default": "rgba(255,255,255,0.72)"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Statement"
+    }
+  ]
+}
+{% endschema %}

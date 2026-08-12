@@ -1,0 +1,166 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign cta_link = section.settings.button_link
+  if cta_link == blank
+    assign cta_link = routes.all_products_collection_url
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-cta-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-cta-{{ section.id }}__inner {
+    max-width: var(--hp-sci-max, 1440px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(24px, 4vw, 48px);
+  }
+
+  .hp-sci-cta-{{ section.id }}__heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, {{ section.settings.heading_size }}px);
+    margin: 0;
+    max-width: 20ch;
+    line-height: 1.12;
+  }
+
+  .hp-sci-cta-{{ section.id }}__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    padding: 14px 28px;
+    background: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .hp-sci-cta-{{ section.id }}__btn:hover {
+    opacity: 0.88;
+  }
+
+  @media screen and (max-width: 767px) {
+    .hp-sci-cta-{{ section.id }}__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-cta-{{ section.id }}">
+  <div class="hp-sci-cta-{{ section.id }}__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-sci-cta-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="hp-sci-cta-{{ section.id }}__btn" href="{{ cta_link }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — CTA bar",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The science earns the timeline. 75 days is enough."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Discover"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#a8894a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 22,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — CTA bar"
+    }
+  ]
+}
+{% endschema %}

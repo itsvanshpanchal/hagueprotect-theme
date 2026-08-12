@@ -1,0 +1,224 @@
+{{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hp-sci-hero-{{ section.id }} {
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .hp-sci-hero-{{ section.id }}__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
+    align-items: center;
+    min-height: clamp(420px, 58vh, 720px);
+  }
+
+  .hp-sci-hero-{{ section.id }}__title {
+    font-size: clamp(32px, 4.2vw, {{ section.settings.title_size_desktop }}px);
+    color: inherit;
+  }
+
+  .hp-sci-hero-{{ section.id }}__media {
+    min-height: clamp(280px, 42vh, 560px);
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-hero-{{ section.id }}__grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .hp-sci-hero-{{ section.id }}__title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+
+    .hp-sci-hero-{{ section.id }}__copy {
+      order: 1;
+    }
+
+    .hp-sci-hero-{{ section.id }}__media {
+      order: 2;
+      min-height: {{ section.settings.media_min_height_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-sci hp-sci-hero-{{ section.id }}">
+  <div class="hp-sci__inner">
+    <div class="hp-sci-hero-{{ section.id }}__grid">
+      <div class="hp-sci-hero-{{ section.id }}__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h1 class="hp-sci__title hp-sci-hero-{{ section.id }}__title">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+      </div>
+      <div class="hp-sci-hero-{{ section.id }}__media">
+        {% render 'hp-science-media',
+          image: section.settings.image,
+          video: section.settings.video,
+          animation_url: section.settings.animation_url,
+          show_placeholder: section.settings.show_media_placeholder,
+          placeholder_label: section.settings.placeholder_label,
+          min_height: section.settings.media_min_height_desktop
+        %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science — Hero",
+  "tag": "section",
+  "class": "hp-science-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Skin longevity"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your skin knows how to fix itself. Most products interrupt it."
+    },
+    {
+      "type": "header",
+      "content": "Hero media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (overrides image)"
+    },
+    {
+      "type": "url",
+      "id": "animation_url",
+      "label": "Animation file URL (Lottie JSON)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media_placeholder",
+      "label": "Show placeholder when media is empty",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "placeholder_label",
+      "label": "Placeholder label",
+      "default": "Upload hero animation or image"
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_desktop",
+      "label": "Media min height (desktop)",
+      "min": 240,
+      "max": 720,
+      "step": 20,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_mobile",
+      "label": "Media min height (mobile)",
+      "min": 180,
+      "max": 480,
+      "step": 20,
+      "unit": "px",
+      "default": 280
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#a8894a"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title size (desktop)",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science — Hero"
+    }
+  ]
+}
+{% endschema %}
