@@ -4,11 +4,11 @@
 
   .hp-dna-{{ section.id }} {
     --hp-dna-accent: {{ section.settings.accent_color }};
-    --hp-dna-text: {{ section.settings.text_color }};
+    --hp-dna-text: #ffffff;
     --hp-dna-badge: {{ section.settings.icon_badge_size }}px;
     --hp-dna-glow: {{ section.settings.glow_intensity | divided_by: 100.0 }};
-    background-color: {{ section.settings.bg_color }};
-    color: var(--hp-dna-text);
+    background-color: #000000;
+    color: #ffffff;
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     font-family: var(--font-family-sans, 'Inter', system-ui, -apple-system, sans-serif);
@@ -60,6 +60,15 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+    background-color: #000000;
+    padding: clamp(24px, 2.2vw, 32px) clamp(18px, 1.8vw, 24px);
+  }
+
+  .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
   }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
@@ -168,8 +177,8 @@
     font-style: var(--font-style-sans, normal) !important;
     line-height: 1.55 !important;
     margin: 0;
-    color: var(--hp-dna-text);
-    opacity: 0.92;
+    color: #ffffff;
+    opacity: 1;
     max-width: 280px;
     text-transform: none !important;
   }
@@ -256,8 +265,8 @@
       font-synthesis: none !important;
       line-height: 1.05 !important;
       letter-spacing: 0.03em !important;
-      color: {{ section.settings.heading_line2_color | default: '#6b6b6b' }} !important;
-      -webkit-text-fill-color: {{ section.settings.heading_line2_color | default: '#6b6b6b' }} !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
       margin-top: 4px !important;
     }
 
@@ -295,10 +304,10 @@
       flex-direction: column;
       align-items: flex-start;
       padding: 20px 18px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background-color: #000000;
+      border: 1px solid #ffffff;
       border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      box-shadow: none;
       overflow: visible;
     }
 
