@@ -1,0 +1,307 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hp-science-hero",
+      "settings": {
+        "eyebrow": "Skin longevity",
+        "heading": "Your skin knows how to fix itself. Most products interrupt it.",
+        "show_media_placeholder": true,
+        "placeholder_label": "Upload hero animation or image",
+        "media_min_height_desktop": 480,
+        "media_min_height_mobile": 280,
+        "background_color": "#0a0a0a",
+        "text_color": "#ffffff",
+        "eyebrow_color": "#a8894a",
+        "title_size_desktop": 48,
+        "title_size_mobile": 32,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "info_grid": {
+      "type": "hp-science-info-grid",
+      "blocks": {
+        "col_1": {
+          "type": "column",
+          "settings": {
+            "number": "01",
+            "title": "Renewal slows with age",
+            "text": "Cell turnover drops. Most routines chase symptoms instead of the biology."
+          }
+        },
+        "col_2": {
+          "type": "column",
+          "settings": {
+            "number": "02",
+            "title": "Barrier stress compounds",
+            "text": "Harsh actives and inconsistent care weaken the skin's first line of defense."
+          }
+        },
+        "col_3": {
+          "type": "column",
+          "settings": {
+            "number": "03",
+            "title": "Recovery gets interrupted",
+            "text": "Your skin knows how to repair. Most products disrupt the signal."
+          }
+        },
+        "col_4": {
+          "type": "column",
+          "settings": {
+            "number": "04",
+            "title": "Longevity needs a system",
+            "text": "Five biological processes. One coordinated protocol over 75 days."
+          }
+        }
+      },
+      "block_order": ["col_1", "col_2", "col_3", "col_4"],
+      "settings": {
+        "heading": "Skin doesn't fail. The routine does.",
+        "background_color": "#ffffff",
+        "text_color": "#111111",
+        "heading_size": 40,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "media_banner": {
+      "type": "hp-science-media-banner",
+      "settings": {
+        "show_media_placeholder": true,
+        "placeholder_label": "Upload full-width transition image or animation",
+        "min_height": 480,
+        "light_placeholder": false,
+        "background_color": "#0a0a0a"
+      }
+    },
+    "statement": {
+      "type": "hp-science-statement",
+      "settings": {
+        "heading": "We've spent ten years tracing the epigenetic pathways to longevity.",
+        "body": "<p>Skin longevity is not anti-aging marketing. It is measurable biology — renewal, barrier integrity, recovery, density, and texture working as one system.</p><p>Our protocol targets five processes your skin already runs. We remove the noise so those processes can run again.</p>",
+        "background_color": "#0a0a0a",
+        "text_color": "#ffffff",
+        "body_color": "rgba(255,255,255,0.72)",
+        "title_size": 40,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "feature_split": {
+      "type": "hp-science-feature-split",
+      "settings": {
+        "heading": "Precise responsive science in results.",
+        "text": "Each step in Skin Longevity System 5 is calibrated to a biological process — not a trend cycle.",
+        "reverse_layout": false,
+        "show_media_placeholder": true,
+        "placeholder_label": "Upload feature image or animation",
+        "media_min_height": 420,
+        "background_color": "#f5f0e8",
+        "card_background": "#ffffff",
+        "text_color": "#111111",
+        "eyebrow_color": "#a8894a",
+        "title_size": 36,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "headline_bands": {
+      "type": "hp-science-headline-bands",
+      "settings": {
+        "statement": "We didn't build another product. We built a skin longevity formula.",
+        "system_title": "Skin Longevity System 5",
+        "band1_bg": "#0a0a0a",
+        "band1_color": "#ffffff",
+        "band1_size": 28,
+        "band1_padding": 72,
+        "band2_bg": "#ffffff",
+        "band2_color": "#111111",
+        "band2_size": 56,
+        "band2_padding_top": 80,
+        "band2_padding_bottom": 80
+      }
+    },
+    "results_grid": {
+      "type": "hp-science-results-grid",
+      "blocks": {
+        "tile_1": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Vitality image / animation" } },
+        "tile_2": {
+          "type": "stat",
+          "settings": {
+            "label": "VITALITY",
+            "value": "+120%",
+            "description": "Measured improvement in skin vitality markers over 75 days.",
+            "background_color": "#ffffff",
+            "text_color": "#111111",
+            "accent_color": "#2d8a4e"
+          }
+        },
+        "tile_3": {
+          "type": "stat",
+          "settings": {
+            "label": "RECOVERY",
+            "value": "+54.5%",
+            "description": "Faster recovery from daily environmental stress.",
+            "background_color": "#0a0a0a",
+            "text_color": "#ffffff",
+            "accent_color": "#ffffff"
+          }
+        },
+        "tile_4": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Recovery image / animation" } },
+        "tile_5": {
+          "type": "stat",
+          "settings": {
+            "label": "BARRIER",
+            "value": "+38%",
+            "description": "Stronger barrier integrity with consistent protocol use.",
+            "background_color": "#f5f0e8",
+            "text_color": "#111111",
+            "accent_color": "#111111"
+          }
+        },
+        "tile_6": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Barrier image / animation" } },
+        "tile_7": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Density image / animation" } },
+        "tile_8": {
+          "type": "stat",
+          "settings": {
+            "label": "DENSITY",
+            "value": "+45%",
+            "description": "Improved dermal density and structural resilience.",
+            "background_color": "#ffffff",
+            "text_color": "#111111",
+            "accent_color": "#c45c2a"
+          }
+        },
+        "tile_9": {
+          "type": "stat",
+          "settings": {
+            "label": "TEXTURE",
+            "value": "+32%",
+            "description": "Smoother surface texture and refined tone.",
+            "background_color": "#0a0a0a",
+            "text_color": "#ffffff",
+            "accent_color": "#ffffff"
+          }
+        },
+        "tile_10": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Texture / molecular animation" } }
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9", "tile_10"],
+      "settings": {
+        "background_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "commitment": {
+      "type": "hp-science-commitment",
+      "blocks": {
+        "phase_1": {
+          "type": "column",
+          "settings": {
+            "title": "Days 1–21",
+            "text": "Skin adapts to the protocol. Barrier function stabilizes."
+          }
+        },
+        "phase_2": {
+          "type": "column",
+          "settings": {
+            "title": "Days 22–45",
+            "text": "Renewal signals strengthen. Texture and tone begin to shift."
+          }
+        },
+        "phase_3": {
+          "type": "column",
+          "settings": {
+            "title": "Days 46–75",
+            "text": "Longevity markers compound. Results become the new baseline."
+          }
+        }
+      },
+      "block_order": ["phase_1", "phase_2", "phase_3"],
+      "settings": {
+        "heading": "75 days is the commitment we ask for.",
+        "graph_heading": "Slow start. Permanent gain.",
+        "graph_subheading": "Results compound as your skin adapts to the protocol.",
+        "show_graph_placeholder": true,
+        "graph_placeholder_label": "Upload results graph or animation",
+        "graph_min_height": 320,
+        "background_color": "#ffffff",
+        "text_color": "#111111",
+        "graph_background": "#0a0a0a",
+        "graph_text_color": "#ffffff",
+        "heading_size": 40,
+        "padding_top": 96,
+        "padding_bottom": 0
+      }
+    },
+    "ingredients": {
+      "type": "hp-science-ingredients",
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "OS-01 Peptide",
+            "role": "Targets senescent cell signaling to support skin longevity."
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Niacinamide",
+            "role": "Supports barrier integrity and even tone."
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Ceramide Complex",
+            "role": "Replenishes lipids essential to barrier recovery."
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Adaptogenic Botanicals",
+            "role": "Helps skin respond to environmental stress."
+          }
+        }
+      },
+      "block_order": ["ing_1", "ing_2", "ing_3", "ing_4"],
+      "settings": {
+        "heading": "Smarter skincare. Named on pack, not hidden in a blend.",
+        "background_color": "#f5f0e8",
+        "text_color": "#111111",
+        "heading_size": 36,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "cta": {
+      "type": "hp-science-cta",
+      "settings": {
+        "heading": "The science earns the timeline. 75 days is enough.",
+        "button_label": "Discover",
+        "button_link": "shopify://collections/all",
+        "background_color": "#0a0a0a",
+        "text_color": "#ffffff",
+        "button_background": "#a8894a",
+        "button_text_color": "#ffffff",
+        "heading_size": 32,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "info_grid",
+    "media_banner",
+    "statement",
+    "feature_split",
+    "headline_bands",
+    "results_grid",
+    "commitment",
+    "ingredients",
+    "cta"
+  ]
+}
