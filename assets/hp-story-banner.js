@@ -115,7 +115,18 @@
         content.style.setProperty('max-width', 'min(90%, ' + (content.getAttribute('data-max-m') || '280') + 'px)', 'important');
         content.style.setProperty('padding', '0', 'important');
       } else {
-        content.style.left = (content.getAttribute('data-left-d') || '20') + 'px';
+        var gutter = 48;
+        try {
+          var g = getComputedStyle(document.body).getPropertyValue('--homepage-section-gutter').trim();
+          if (g) gutter = parseFloat(g) || 48;
+        } catch (e) {}
+        content.style.setProperty('left', '0', 'important');
+        content.style.setProperty('right', '0', 'important');
+        content.style.setProperty('padding-left', gutter + 'px', 'important');
+        content.style.setProperty('padding-right', gutter + 'px', 'important');
+        content.style.setProperty('padding-top', '0', 'important');
+        content.style.setProperty('padding-bottom', '0', 'important');
+        content.style.left = '';
         content.style.top = (content.getAttribute('data-top-d') || '56') + 'px';
         content.style.maxWidth = (content.getAttribute('data-max-d') || '650') + 'px';
         content.style.padding = '';

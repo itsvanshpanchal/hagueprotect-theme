@@ -170,7 +170,21 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
 /* Desktop story: full-bleed cover */
 @media screen and (min-width: 750px) {
   .hp-float-stack .hp-float-story [class*='ai-story-banner-content'] {
+    left: 0 !important;
+    right: 0 !important;
     top: 56px !important;
+    padding-left: var(--homepage-section-gutter, 48px) !important;
+    padding-right: var(--homepage-section-gutter-right, 48px) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+  }
+
+  body.template-index .hp-float-stack .hp-float-story img[class*='ai-story-banner-image'],
+  body.template-index .hp-float-stack .hp-float-story [data-hp-story-cover],
+  body.template-index .hp-float-stack .hp-float-story .ai-story-banner-cover {
+    object-position: 42% center !important;
   }
 
   /* Section roots fill desktop full-screen cards */

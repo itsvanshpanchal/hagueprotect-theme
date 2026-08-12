@@ -595,7 +595,18 @@
         );
         content[c].style.setProperty('padding', (content[c].getAttribute('data-pad-m') || '16') + 'px', 'important');
       } else {
-        content[c].style.setProperty('top', '56px', 'important');
+        content[c].style.setProperty('left', '0', 'important');
+        content[c].style.setProperty('right', '0', 'important');
+        content[c].style.setProperty('padding-left', 'var(--homepage-section-gutter, 48px)', 'important');
+        content[c].style.setProperty('padding-right', 'var(--homepage-section-gutter-right, 48px)', 'important');
+        content[c].style.setProperty('padding-top', '0', 'important');
+        content[c].style.setProperty('padding-bottom', '0', 'important');
+        content[c].style.setProperty('top', (content[c].getAttribute('data-top-d') || '56') + 'px', 'important');
+        content[c].style.setProperty(
+          'max-width',
+          (content[c].getAttribute('data-max-d') || '650') + 'px',
+          'important'
+        );
       }
     }
 

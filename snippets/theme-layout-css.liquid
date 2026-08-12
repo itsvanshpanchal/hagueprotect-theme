@@ -255,10 +255,15 @@
   }
 
   body.template-index [class*="ai-story-banner-content-"] {
-    left: var(--homepage-edge) !important;
+    left: 0 !important;
+    right: 0 !important;
     margin-left: 0 !important;
-    padding-left: 0 !important;
+    padding-left: var(--homepage-edge) !important;
+    padding-right: var(--homepage-edge-right) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     text-align: left !important;
+    align-items: flex-start !important;
     box-sizing: border-box !important;
   }
 
