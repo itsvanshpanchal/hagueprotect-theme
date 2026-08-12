@@ -64,20 +64,57 @@
     max-width: 36ch;
   }
 
-  .hp-sci-headlines-{{ section.id }}__band--light {
+  .hp-sci-headlines-{{ section.id }}__formula {
     text-align: center;
-    background: {{ section.settings.system_bg }};
-    color: {{ section.settings.system_color }};
-    padding: {{ section.settings.system_padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.system_padding_bottom }}px;
+    background: {{ section.settings.formula_bg }};
+    color: {{ section.settings.formula_heading_color }};
+    padding: {{ section.settings.formula_padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.formula_padding_bottom }}px;
   }
 
-  .hp-sci-headlines-{{ section.id }}__system-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(36px, 6vw, {{ section.settings.system_title_size }}px);
-    line-height: 1.05;
-    margin: 0;
+  .hp-sci-headlines-{{ section.id }}__formula-inner {
+    max-width: {{ section.settings.formula_content_max_width }}px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.formula_eyebrow_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: {{ section.settings.formula_eyebrow_color }};
+    margin: 0 0 clamp(28px, 4vw, 40px);
+  }
+
+  .hp-sci-headlines-{{ section.id }}__formula-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5.5vw, {{ section.settings.formula_title_size }}px);
+    line-height: 1.06;
     letter-spacing: -0.03em;
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    color: inherit;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__formula-title-line {
+    display: block;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__formula-accent {
+    color: {{ section.settings.formula_accent_color }};
+  }
+
+  .hp-sci-headlines-{{ section.id }}__formula-subtext {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.6vw, {{ section.settings.formula_subtext_size }}px);
+    line-height: 1.65;
+    color: {{ section.settings.formula_subtext_color }};
+    opacity: {{ section.settings.formula_subtext_opacity | default: 100 | times: 0.01 }};
+    margin: 0;
+    max-width: 38ch;
   }
 {%- endstyle -%}
 
@@ -115,9 +152,33 @@
     </div>
   </div>
 
-  {%- if section.settings.show_system_band and section.settings.system_title != blank -%}
-    <div class="hp-sci-headlines-{{ section.id }}__band--light">
-      <h3 class="hp-sci-headlines-{{ section.id }}__system-title">{{ section.settings.system_title }}</h3>
+  {%- if section.settings.show_formula_band -%}
+    <div class="hp-sci-headlines-{{ section.id }}__formula">
+      <div class="hp-sci-headlines-{{ section.id }}__formula-inner">
+        {%- if section.settings.formula_eyebrow != blank -%}
+          <p class="hp-sci-headlines-{{ section.id }}__formula-eyebrow">{{ section.settings.formula_eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.formula_title_line_1 != blank or section.settings.formula_title_line_2 != blank or section.settings.formula_title_accent != blank -%}
+          <h3 class="hp-sci-headlines-{{ section.id }}__formula-title">
+            {%- if section.settings.formula_title_line_1 != blank -%}
+              <span class="hp-sci-headlines-{{ section.id }}__formula-title-line">{{ section.settings.formula_title_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.formula_title_line_2 != blank or section.settings.formula_title_accent != blank -%}
+              <span class="hp-sci-headlines-{{ section.id }}__formula-title-line">
+                {{- section.settings.formula_title_line_2 -}}
+                {%- if section.settings.formula_title_accent != blank -%}
+                  <span class="hp-sci-headlines-{{ section.id }}__formula-accent">{{ section.settings.formula_title_accent }}</span>
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+          </h3>
+        {%- endif -%}
+
+        {%- if section.settings.formula_subtext != blank -%}
+          <p class="hp-sci-headlines-{{ section.id }}__formula-subtext">{{ section.settings.formula_subtext }}</p>
+        {%- endif -%}
+      </div>
     </div>
   {%- endif -%}
 </section>
@@ -176,19 +237,43 @@
     },
     {
       "type": "header",
-      "content": "Optional light band"
+      "content": "THE FORMULA band"
     },
     {
       "type": "checkbox",
-      "id": "show_system_band",
-      "label": "Show Skin Longevity System title band",
+      "id": "show_formula_band",
+      "label": "Show THE FORMULA band",
       "default": true
     },
     {
       "type": "text",
-      "id": "system_title",
-      "label": "System title",
-      "default": "Skin Longevity System 5"
+      "id": "formula_eyebrow",
+      "label": "Formula eyebrow",
+      "default": "THE FORMULA"
+    },
+    {
+      "type": "text",
+      "id": "formula_title_line_1",
+      "label": "Formula title line 1",
+      "default": "Skin Longevity"
+    },
+    {
+      "type": "text",
+      "id": "formula_title_line_2",
+      "label": "Formula title line 2 (before accent)",
+      "default": "System "
+    },
+    {
+      "type": "text",
+      "id": "formula_title_accent",
+      "label": "Formula title accent",
+      "default": "5"
+    },
+    {
+      "type": "textarea",
+      "id": "formula_subtext",
+      "label": "Formula subtext",
+      "default": "Five biological processes, supported at once. This is what holds the result after the bottle is empty."
     },
     {
       "type": "header",
@@ -226,15 +311,33 @@
     },
     {
       "type": "color",
-      "id": "system_bg",
-      "label": "Light band background",
+      "id": "formula_bg",
+      "label": "Formula band background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "formula_heading_color",
+      "label": "Formula title color",
       "default": "#ffffff"
     },
     {
       "type": "color",
-      "id": "system_color",
-      "label": "Light band text",
-      "default": "#111111"
+      "id": "formula_eyebrow_color",
+      "label": "Formula eyebrow color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "formula_accent_color",
+      "label": "Formula accent color (number)",
+      "default": "#a67c52"
+    },
+    {
+      "type": "color",
+      "id": "formula_subtext_color",
+      "label": "Formula subtext color",
+      "default": "#cccccc"
     },
     {
       "type": "header",
@@ -312,18 +415,8 @@
     },
     {
       "type": "range",
-      "id": "system_title_size",
-      "label": "System title size",
-      "min": 32,
-      "max": 80,
-      "step": 2,
-      "unit": "px",
-      "default": 56
-    },
-    {
-      "type": "range",
       "id": "padding_top",
-      "label": "Dark band padding top",
+      "label": "THE SYSTEM padding top",
       "min": 48,
       "max": 160,
       "step": 4,
@@ -333,7 +426,7 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Dark band padding bottom",
+      "label": "THE SYSTEM padding bottom",
       "min": 48,
       "max": 160,
       "step": 4,
@@ -342,24 +435,74 @@
     },
     {
       "type": "range",
-      "id": "system_padding_top",
-      "label": "Light band padding top",
-      "min": 40,
-      "max": 120,
-      "step": 4,
+      "id": "formula_content_max_width",
+      "label": "Formula content max width",
+      "min": 480,
+      "max": 920,
+      "step": 20,
       "unit": "px",
-      "default": 80
+      "default": 760
     },
     {
       "type": "range",
-      "id": "system_padding_bottom",
-      "label": "Light band padding bottom",
-      "min": 40,
-      "max": 120,
+      "id": "formula_title_size",
+      "label": "Formula title size",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "formula_eyebrow_size",
+      "label": "Formula eyebrow size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "formula_subtext_size",
+      "label": "Formula subtext size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "formula_subtext_opacity",
+      "label": "Formula subtext opacity",
+      "min": 60,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "formula_padding_top",
+      "label": "Formula band padding top",
+      "min": 48,
+      "max": 160,
       "step": 4,
       "unit": "px",
-      "default": 80
-    }
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "formula_padding_bottom",
+      "label": "Formula band padding bottom",
+      "min": 48,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
   ],
   "presets": [
     {
@@ -370,7 +513,13 @@
         "heading_line_2": "product.",
         "heading_line_3": "We built a skin longevity",
         "heading_line_4": "formula.",
-        "subtext": "Most skincare treats one concern at a time. This works on the biology underneath all of them, at the same time."
+        "subtext": "Most skincare treats one concern at a time. This works on the biology underneath all of them, at the same time.",
+        "show_formula_band": true,
+        "formula_eyebrow": "THE FORMULA",
+        "formula_title_line_1": "Skin Longevity",
+        "formula_title_line_2": "System ",
+        "formula_title_accent": "5",
+        "formula_subtext": "Five biological processes, supported at once. This is what holds the result after the bottle is empty."
       }
     }
   ]
