@@ -1,0 +1,26 @@
+{%- comment -%}
+  Default Hydration pillar (light, image left) when no blocks configured.
+{%- endcomment -%}
+
+<article class="hp-sci-results-{{ section_id }}__pillar hp-sci-results-{{ section_id }}__pillar--equal">
+  <div class="hp-sci-results-{{ section_id }}__media">
+    {% render 'hp-science-media',
+      show_placeholder: true,
+      placeholder_label: 'Hydration / HA cells image / animation',
+      min_height: 520
+    %}
+  </div>
+
+  <div class="hp-sci-results-{{ section_id }}__panel" style="background: {{ panel_bg | default: '#fcfaf2' }};">
+    <p class="hp-sci-results-{{ section_id }}__pillar-num">Pillar 04</p>
+    <h3 class="hp-sci-results-{{ section_id }}__pillar-title" style="color: #c07a38;">Hydration</h3>
+    <p class="hp-sci-results-{{ section_id }}__para">Not topical hydration. Biological hydration. The difference between skin that holds moisture because it's producing its own hyaluronic acid, and skin that's borrowing moisture from the air.</p>
+    <hr class="hp-sci-results-{{ section_id }}__rule" aria-hidden="true">
+    <p class="hp-sci-results-{{ section_id }}__para">High and low molecular weight HA working together. High MW seals the surface. Low MW penetrates deep to signal production. The serum teaches the skin to do what the serum is doing.</p>
+    <div class="hp-sci-results-{{ section_id }}__stat-wrap">
+      <p class="hp-sci-results-{{ section_id }}__stat-value" style="color: #c07a38;">+254%*</p>
+      <p class="hp-sci-results-{{ section_id }}__stat-label">Hyaluronic Acid Production</p>
+    </div>
+    <p class="hp-sci-results-{{ section_id }}__footnote" style="color: {{ footnote_color | default: '#888888' }};">* Hyaluronan Synthase - 2 Promotion in NHDF Cells After 48-Hour Exposure to SKIN LONGEVITY SYSTEM S.</p>
+  </div>
+</article>
