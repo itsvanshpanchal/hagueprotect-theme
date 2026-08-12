@@ -105,7 +105,7 @@
 
     #shopify-section-{{ section.id }} .hp-fam-sec__heading,
     .hp-fam-sec__heading {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
   }
 
@@ -275,6 +275,136 @@
   .hp-fam-sec__tab.is-active {
     background: #000000;
     color: #ffffff;
+  }
+
+  /* Glass intro panel — fills space below Premium Best heading */
+  .hp-fam-sec__glass-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+    width: 100%;
+    max-width: min(920px, 100%);
+    margin: 0 0 clamp(24px, 3vw, 36px);
+    padding: clamp(22px, 2.8vw, 34px) clamp(22px, 3vw, 38px);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-sizing: border-box;
+  }
+
+  .hp-fam-sec__glass-col {
+    min-width: 0;
+  }
+
+  .hp-fam-sec__glass-eyebrow {
+    margin: 0 0 14px;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: #a8894a !important;
+  }
+
+  .hp-fam-sec__glass-title {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #111111 !important;
+  }
+
+  .hp-fam-sec__glass-para {
+    margin: 0;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(16px, 1.35vw, 18px) !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #111111 !important;
+  }
+
+  .hp-fam-sec__glass-rule {
+    display: block;
+    width: 100%;
+    height: 0;
+    margin: 18px 0;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid rgba(17, 17, 17, 0.12);
+  }
+
+  .hp-fam-sec__glass-col--detail .hp-fam-sec__glass-eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .hp-fam-sec__glass-link {
+    display: inline-block;
+    margin: 0;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #111111 !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hp-fam-sec__glass-link:hover {
+    color: #000000 !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-fam-sec__glass-panel {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      max-width: 100%;
+      margin-bottom: 20px;
+      padding: 20px 18px;
+    }
+
+    .hp-fam-sec__glass-title {
+      font-size: 24px !important;
+    }
+
+    .hp-fam-sec__glass-para {
+      font-size: 16px !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .hp-fam-sec__glass-panel {
+      gap: 18px;
+      margin-bottom: 16px;
+      padding: 18px 16px;
+      border-radius: 14px;
+    }
+
+    .hp-fam-sec__glass-eyebrow {
+      margin-bottom: 10px;
+      font-size: 11px !important;
+    }
+
+    .hp-fam-sec__glass-rule {
+      margin: 14px 0;
+    }
   }
 
   /* LAYOUT */
@@ -1006,6 +1136,40 @@
       </h2>
     {%- endif -%}
 
+    {%- if section.settings.show_glass_panel -%}
+      <div class="hp-fam-sec__glass-panel">
+        <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
+          {%- if section.settings.glass_eyebrow_left != blank -%}
+            <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
+          {%- endif -%}
+          {%- if section.settings.glass_title != blank -%}
+            <h3 class="hp-fam-sec__glass-title">{{ section.settings.glass_title }}</h3>
+          {%- endif -%}
+        </div>
+        <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--detail">
+          {%- if section.settings.glass_para_top != blank -%}
+            <p class="hp-fam-sec__glass-para">{{ section.settings.glass_para_top }}</p>
+          {%- endif -%}
+          <span class="hp-fam-sec__glass-rule" aria-hidden="true"></span>
+          {%- if section.settings.glass_eyebrow_right != blank -%}
+            <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_right }}</p>
+          {%- endif -%}
+          {%- if section.settings.glass_para_bottom != blank -%}
+            <p class="hp-fam-sec__glass-para">{{ section.settings.glass_para_bottom }}</p>
+          {%- endif -%}
+          <span class="hp-fam-sec__glass-rule" aria-hidden="true"></span>
+          {%- if section.settings.glass_link_label != blank -%}
+            <a
+              class="hp-fam-sec__glass-link"
+              href="{{ section.settings.glass_link_url | default: '#' }}"
+            >
+              {{ section.settings.glass_link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
     {%- if section.blocks.size > 0 -%}
       <div class="hp-fam-sec__tabs">
         {%- for block in section.blocks -%}
@@ -1544,6 +1708,57 @@
       "id": "heading_accent_color",
       "label": "Accent word color",
       "default": "#c9a227"
+    },
+    {
+      "type": "header",
+      "content": "Glass intro panel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_glass_panel",
+      "label": "Show glass intro panel",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "glass_eyebrow_left",
+      "label": "Left eyebrow",
+      "default": "INTRODUCING"
+    },
+    {
+      "type": "text",
+      "id": "glass_title",
+      "label": "Panel title",
+      "default": "India's first skin longevity brand"
+    },
+    {
+      "type": "textarea",
+      "id": "glass_para_top",
+      "label": "Top paragraph",
+      "default": "Your skin already knows how to renew, repair, and rebuild itself. Most skincare leaves that biology untouched."
+    },
+    {
+      "type": "text",
+      "id": "glass_eyebrow_right",
+      "label": "Right eyebrow",
+      "default": "SKIN LONGEVITY SYSTEM 5"
+    },
+    {
+      "type": "text",
+      "id": "glass_para_bottom",
+      "label": "Bottom paragraph",
+      "default": "Five biological processes. One protocol. 75 days."
+    },
+    {
+      "type": "text",
+      "id": "glass_link_label",
+      "label": "Link label",
+      "default": "The science behind this →"
+    },
+    {
+      "type": "url",
+      "id": "glass_link_url",
+      "label": "Link URL"
     },
     {
       "type": "color",
