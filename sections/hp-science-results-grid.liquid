@@ -29,6 +29,10 @@
     background: #0a0a0a;
   }
 
+  .hp-sci-results-{{ section.id }}__pillar--equal {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
   .hp-sci-results-{{ section.id }}__pillar--reverse {
     direction: rtl;
   }
@@ -200,7 +204,7 @@
               endif
             -%}
             <article
-              class="hp-sci-results-{{ section.id }}__pillar{% if pillar_style == 'dark' %} hp-sci-results-{{ section.id }}__pillar--dark{% endif %}{% if block.settings.reverse_layout %} hp-sci-results-{{ section.id }}__pillar--reverse{% endif %}"
+              class="hp-sci-results-{{ section.id }}__pillar{% if pillar_style == 'dark' %} hp-sci-results-{{ section.id }}__pillar--dark{% endif %}{% if block.settings.equal_columns %} hp-sci-results-{{ section.id }}__pillar--equal{% endif %}{% if block.settings.reverse_layout %} hp-sci-results-{{ section.id }}__pillar--reverse{% endif %}"
               {{ block.shopify_attributes }}
             >
               <div class="hp-sci-results-{{ section.id }}__media">
@@ -256,6 +260,7 @@
       {%- else -%}
         {% render 'hp-science-pillar-default', section_id: section.id, panel_bg: section.settings.panel_background, accent: '#008667', num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
         {% render 'hp-science-pillar-recovery-default', section_id: section.id %}
+        {% render 'hp-science-pillar-structure-default', section_id: section.id, panel_bg: section.settings.panel_background, num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
       {%- endif -%}
     </div>
   </div>
@@ -490,6 +495,12 @@
           "default": false
         },
         {
+          "type": "checkbox",
+          "id": "equal_columns",
+          "label": "Equal 50/50 columns",
+          "default": false
+        },
+        {
           "type": "header",
           "content": "Media"
         },
@@ -550,6 +561,23 @@
             "footnote": "* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.",
             "accent_color": "#ffffff",
             "placeholder_label": "Recovery scratch assay image / animation"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "pillar_number": "Pillar 03",
+            "title": "Structure",
+            "panel_style": "light",
+            "reverse_layout": true,
+            "equal_columns": true,
+            "paragraph_1": "Collagen. The protein that makes skin bounce back. Production declines from 25 onwards. A peptide complex signals the biology to support what's slowing.",
+            "paragraph_2": "Each peptide targets a specific biological function: synthesis, repair, inflammation control, moisture signalling. Simultaneously. Because the signals are interconnected.",
+            "stat_value": "+132.4%*",
+            "stat_label": "Collagen Production",
+            "footnote": "* Increase in Collagen 1 Levels in NHDF Cells Treated with SKIN LONGEVITY SYSTEM 3.",
+            "accent_color": "#a8724a",
+            "placeholder_label": "Structure / collagen image / animation"
           }
         }
       ]

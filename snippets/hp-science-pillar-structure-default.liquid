@@ -1,0 +1,26 @@
+{%- comment -%}
+  Default Structure pillar (light, text left) when no blocks configured.
+{%- endcomment -%}
+
+<article class="hp-sci-results-{{ section_id }}__pillar hp-sci-results-{{ section_id }}__pillar--equal hp-sci-results-{{ section_id }}__pillar--reverse">
+  <div class="hp-sci-results-{{ section_id }}__media">
+    {% render 'hp-science-media',
+      show_placeholder: true,
+      placeholder_label: 'Structure / collagen image / animation',
+      min_height: 520
+    %}
+  </div>
+
+  <div class="hp-sci-results-{{ section_id }}__panel" style="background: {{ panel_bg | default: '#fcfaf2' }};">
+    <p class="hp-sci-results-{{ section_id }}__pillar-num">Pillar 03</p>
+    <h3 class="hp-sci-results-{{ section_id }}__pillar-title" style="color: #a8724a;">Structure</h3>
+    <p class="hp-sci-results-{{ section_id }}__para">Collagen. The protein that makes skin bounce back. Production declines from 25 onwards. A peptide complex signals the biology to support what's slowing.</p>
+    <hr class="hp-sci-results-{{ section_id }}__rule" aria-hidden="true">
+    <p class="hp-sci-results-{{ section_id }}__para">Each peptide targets a specific biological function: synthesis, repair, inflammation control, moisture signalling. Simultaneously. Because the signals are interconnected.</p>
+    <div class="hp-sci-results-{{ section_id }}__stat-wrap">
+      <p class="hp-sci-results-{{ section_id }}__stat-value" style="color: #a8724a;">+132.4%*</p>
+      <p class="hp-sci-results-{{ section_id }}__stat-label">Collagen Production</p>
+    </div>
+    <p class="hp-sci-results-{{ section_id }}__footnote" style="color: {{ footnote_color | default: '#888888' }};">* Increase in Collagen 1 Levels in NHDF Cells Treated with SKIN LONGEVITY SYSTEM 3.</p>
+  </div>
+</article>
