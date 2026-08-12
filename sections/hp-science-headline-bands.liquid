@@ -6,38 +6,75 @@
     padding: 0 !important;
   }
 
-  .hp-sci-headlines-{{ section.id }}__band {
+  .hp-sci-headlines-{{ section.id }}__system {
     text-align: center;
-    padding: {{ section.settings.band1_padding }}px var(--hp-sci-gutter, 28px);
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.heading_color }};
+    padding: {{ section.settings.padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.padding_bottom }}px;
   }
 
-  .hp-sci-headlines-{{ section.id }}__band--dark {
-    background: {{ section.settings.band1_bg }};
-    color: {{ section.settings.band1_color }};
+  .hp-sci-headlines-{{ section.id }}__inner {
+    max-width: {{ section.settings.content_max_width }}px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.eyebrow_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0 0 18px;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__rule {
+    display: block;
+    width: 1px;
+    height: {{ section.settings.rule_height }}px;
+    background: {{ section.settings.rule_color }};
+    opacity: {{ section.settings.rule_opacity | default: 100 | times: 0.01 }};
+    margin: 0 auto clamp(28px, 4vw, 40px);
+  }
+
+  .hp-sci-headlines-{{ section.id }}__heading {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, {{ section.settings.heading_size }}px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    color: inherit;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__heading-line {
+    display: block;
+  }
+
+  .hp-sci-headlines-{{ section.id }}__subtext {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.6vw, {{ section.settings.subtext_size }}px);
+    line-height: 1.65;
+    color: {{ section.settings.subtext_color }};
+    opacity: {{ section.settings.subtext_opacity | default: 88 | times: 0.01 }};
+    margin: 0;
+    max-width: 36ch;
   }
 
   .hp-sci-headlines-{{ section.id }}__band--light {
-    background: {{ section.settings.band2_bg }};
-    color: {{ section.settings.band2_color }};
-    padding-top: {{ section.settings.band2_padding_top }}px;
-    padding-bottom: {{ section.settings.band2_padding_bottom }}px;
+    text-align: center;
+    background: {{ section.settings.system_bg }};
+    color: {{ section.settings.system_color }};
+    padding: {{ section.settings.system_padding_top }}px var(--hp-sci-gutter, 28px) {{ section.settings.system_padding_bottom }}px;
   }
 
-  .hp-sci-headlines-{{ section.id }}__line1 {
+  .hp-sci-headlines-{{ section.id }}__system-title {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(22px, 3vw, {{ section.settings.band1_size }}px);
-    line-height: 1.2;
-    margin: 0;
-    max-width: 24ch;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hp-sci-headlines-{{ section.id }}__line2 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(36px, 6vw, {{ section.settings.band2_size }}px);
+    font-size: clamp(36px, 6vw, {{ section.settings.system_title_size }}px);
     line-height: 1.05;
     margin: 0;
     letter-spacing: -0.03em;
@@ -45,15 +82,42 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-headlines-{{ section.id }}">
-  {%- if section.settings.statement != blank -%}
-    <div class="hp-sci-headlines-{{ section.id }}__band hp-sci-headlines-{{ section.id }}__band--dark">
-      <p class="hp-sci-headlines-{{ section.id }}__line1">{{ section.settings.statement }}</p>
-    </div>
-  {%- endif -%}
+  <div class="hp-sci-headlines-{{ section.id }}__system">
+    <div class="hp-sci-headlines-{{ section.id }}__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hp-sci-headlines-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
 
-  {%- if section.settings.system_title != blank -%}
-    <div class="hp-sci-headlines-{{ section.id }}__band hp-sci-headlines-{{ section.id }}__band--light">
-      <h2 class="hp-sci-headlines-{{ section.id }}__line2">{{ section.settings.system_title }}</h2>
+      {%- if section.settings.show_rule -%}
+        <span class="hp-sci-headlines-{{ section.id }}__rule" aria-hidden="true"></span>
+      {%- endif -%}
+
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank or section.settings.heading_line_4 != blank -%}
+        <h2 class="hp-sci-headlines-{{ section.id }}__heading">
+          {%- if section.settings.heading_line_1 != blank -%}
+            <span class="hp-sci-headlines-{{ section.id }}__heading-line">{{ section.settings.heading_line_1 }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading_line_2 != blank -%}
+            <span class="hp-sci-headlines-{{ section.id }}__heading-line">{{ section.settings.heading_line_2 }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading_line_3 != blank -%}
+            <span class="hp-sci-headlines-{{ section.id }}__heading-line">{{ section.settings.heading_line_3 }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading_line_4 != blank -%}
+            <span class="hp-sci-headlines-{{ section.id }}__heading-line">{{ section.settings.heading_line_4 }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="hp-sci-headlines-{{ section.id }}__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_system_band and section.settings.system_title != blank -%}
+    <div class="hp-sci-headlines-{{ section.id }}__band--light">
+      <h3 class="hp-sci-headlines-{{ section.id }}__system-title">{{ section.settings.system_title }}</h3>
     </div>
   {%- endif -%}
 </section>
@@ -65,64 +129,190 @@
   "class": "hp-science-section",
   "settings": [
     {
+      "type": "header",
+      "content": "THE SYSTEM band"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE SYSTEM"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rule",
+      "label": "Show vertical line under eyebrow",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "We didn't build another"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "product."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading line 3",
+      "default": "We built a skin longevity"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_4",
+      "label": "Heading line 4",
+      "default": "formula."
+    },
+    {
       "type": "textarea",
-      "id": "statement",
-      "label": "Statement (dark band)",
-      "default": "We didn't build another product. We built a skin longevity formula."
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Most skincare treats one concern at a time. This works on the biology underneath all of them, at the same time."
+    },
+    {
+      "type": "header",
+      "content": "Optional light band"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_system_band",
+      "label": "Show Skin Longevity System title band",
+      "default": true
     },
     {
       "type": "text",
       "id": "system_title",
-      "label": "System title (light band)",
+      "label": "System title",
       "default": "Skin Longevity System 5"
     },
     {
-      "type": "color",
-      "id": "band1_bg",
-      "label": "Dark band background",
-      "default": "#0a0a0a"
+      "type": "header",
+      "content": "Colors"
     },
     {
       "type": "color",
-      "id": "band1_color",
-      "label": "Dark band text",
+      "id": "background_color",
+      "label": "Dark band background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
       "default": "#ffffff"
     },
     {
-      "type": "range",
-      "id": "band1_size",
-      "label": "Dark band text size",
-      "min": 20,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "band1_padding",
-      "label": "Dark band padding",
-      "min": 40,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 72
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#a8894a"
     },
     {
       "type": "color",
-      "id": "band2_bg",
+      "id": "rule_color",
+      "label": "Vertical line color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#d1d1d1"
+    },
+    {
+      "type": "color",
+      "id": "system_bg",
       "label": "Light band background",
       "default": "#ffffff"
     },
     {
       "type": "color",
-      "id": "band2_color",
+      "id": "system_color",
       "label": "Light band text",
       "default": "#111111"
     },
     {
+      "type": "header",
+      "content": "Typography & layout"
+    },
+    {
       "type": "range",
-      "id": "band2_size",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 480,
+      "max": 920,
+      "step": 20,
+      "unit": "px",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Subtext size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "rule_height",
+      "label": "Vertical line height",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "rule_opacity",
+      "label": "Vertical line opacity",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "subtext_opacity",
+      "label": "Subtext opacity",
+      "min": 60,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "system_title_size",
       "label": "System title size",
       "min": 32,
       "max": 80,
@@ -132,7 +322,27 @@
     },
     {
       "type": "range",
-      "id": "band2_padding_top",
+      "id": "padding_top",
+      "label": "Dark band padding top",
+      "min": 48,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Dark band padding bottom",
+      "min": 48,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "system_padding_top",
       "label": "Light band padding top",
       "min": 40,
       "max": 120,
@@ -142,7 +352,7 @@
     },
     {
       "type": "range",
-      "id": "band2_padding_bottom",
+      "id": "system_padding_bottom",
       "label": "Light band padding bottom",
       "min": 40,
       "max": 120,
@@ -153,7 +363,15 @@
   ],
   "presets": [
     {
-      "name": "Science — Headline bands"
+      "name": "Science — Headline bands",
+      "settings": {
+        "eyebrow": "THE SYSTEM",
+        "heading_line_1": "We didn't build another",
+        "heading_line_2": "product.",
+        "heading_line_3": "We built a skin longevity",
+        "heading_line_4": "formula.",
+        "subtext": "Most skincare treats one concern at a time. This works on the biology underneath all of them, at the same time."
+      }
     }
   ]
 }
