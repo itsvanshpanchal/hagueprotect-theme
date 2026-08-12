@@ -391,41 +391,77 @@
     "ingredients": {
       "type": "hp-science-ingredients",
       "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": { "title": "THE BREAKTHROUGHS" }
+        },
         "ing_1": {
           "type": "ingredient",
           "settings": {
-            "name": "OS-01 Peptide",
-            "role": "Targets senescent cell signaling to support skin longevity."
+            "name": "Peptides",
+            "role": "Short amino acid chains that tell your skin cells to renew, repair, and protect. More collagen built, less destroyed."
           }
         },
         "ing_2": {
           "type": "ingredient",
           "settings": {
-            "name": "Niacinamide",
-            "role": "Supports barrier integrity and even tone."
+            "name": "Stem Cell Conditioned Media",
+            "role": "Captures the exosomes and growth factors stem cells produce and delivers them to your skin. Korean clinic-grade."
           }
         },
         "ing_3": {
           "type": "ingredient",
           "settings": {
-            "name": "Ceramide Complex",
-            "role": "Replenishes lipids essential to barrier recovery."
+            "name": "Sun-safe Bio-Retinoids",
+            "role": "The same cell renewal as retinol. AM and PM, no sun sensitivity, no irritation. A better ingredient."
           }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": { "title": "THE FOUNDATION" }
         },
         "ing_4": {
           "type": "ingredient",
           "settings": {
-            "name": "Adaptogenic Botanicals",
-            "role": "Helps skin respond to environmental stress."
+            "name": "Niacinamide",
+            "role": "The most studied skin ingredient. Pores, brightness, barrier. Earns its place every time."
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Ceramides",
+            "role": "Five types, the exact ratio in healthy skin. The mortar between bricks. Without them, everything leaks."
+          }
+        },
+        "ing_6": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Cica",
+            "role": "If you have reactive skin, you already know. We didn't explain it. We just put it in."
+          }
+        },
+        "ing_7": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Xylitol",
+            "role": "Feeds the good bacteria on your skin. The ingredient most formulas forget to include."
           }
         }
       },
-      "block_order": ["ing_1", "ing_2", "ing_3", "ing_4"],
+      "block_order": ["cat_1", "ing_1", "ing_2", "ing_3", "cat_2", "ing_4", "ing_5", "ing_6", "ing_7"],
       "settings": {
-        "heading": "Smarter skincare. Named on pack, not hidden in a blend.",
-        "background_color": "#f5f0e8",
+        "heading_line_1": "Smarter skincare.",
+        "heading_line_2": "Named on pack,",
+        "heading_line_3": "not hidden in a",
+        "heading_accent": "blend.",
+        "footer_text": "Legacy heroes. New science. One system. Every active is named on the pack, not buried in a 'proprietary blend.' That's the smarter choice.",
+        "background_color": "#fdfcf5",
         "text_color": "#111111",
-        "heading_size": 36,
+        "body_color": "#333333",
+        "category_color": "#a8894a",
+        "divider_color": "#d8d2c8",
+        "heading_size": 48,
         "padding_top": 96,
         "padding_bottom": 96
       }

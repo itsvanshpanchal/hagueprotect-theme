@@ -15,10 +15,40 @@
   .hp-sci-ing-{{ section.id }}__heading {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(26px, 3.2vw, {{ section.settings.heading_size }}px);
-    max-width: 22ch;
-    margin: 0 0 clamp(40px, 5vw, 64px);
-    line-height: 1.12;
+    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    max-width: 14ch;
+    margin: 0 0 clamp(48px, 6vw, 72px);
+  }
+
+  .hp-sci-ing-{{ section.id }}__heading-line {
+    display: block;
+  }
+
+  .hp-sci-ing-{{ section.id }}__heading-accent {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hp-sci-ing-{{ section.id }}__group {
+    margin-bottom: clamp(40px, 5vw, 56px);
+  }
+
+  .hp-sci-ing-{{ section.id }}__group:last-of-type {
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+
+  .hp-sci-ing-{{ section.id }}__category {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: {{ section.settings.category_color }};
+    margin: 0 0 0;
+    padding: 16px 0 14px;
+    border-top: 1px solid {{ section.settings.divider_color }};
   }
 
   .hp-sci-ing-{{ section.id }}__table {
@@ -27,35 +57,42 @@
   }
 
   .hp-sci-ing-{{ section.id }}__row {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  }
-
-  .hp-sci-ing-{{ section.id }}__row:first-child {
-    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid {{ section.settings.divider_color }};
   }
 
   .hp-sci-ing-{{ section.id }}__cell {
-    padding: 20px 0;
+    padding: 18px 0;
     vertical-align: top;
-    font-size: 17px;
-    line-height: 1.5;
+    font-size: clamp(16px, 1.4vw, 17px);
+    line-height: 1.55;
   }
 
   .hp-sci-ing-{{ section.id }}__cell--name {
     font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    width: 38%;
-    padding-right: 24px;
+    font-weight: 500;
+    width: 34%;
+    padding-right: clamp(20px, 4vw, 48px);
   }
 
   .hp-sci-ing-{{ section.id }}__cell--role {
-    opacity: 0.82;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-weight: 400;
+    color: {{ section.settings.body_color }};
+  }
+
+  .hp-sci-ing-{{ section.id }}__footer {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(16px, 1.4vw, 17px);
+    line-height: 1.6;
+    max-width: 52ch;
+    margin: 0;
+    color: {{ section.settings.body_color }};
   }
 
   @media screen and (max-width: 767px) {
     .hp-sci-ing-{{ section.id }}__row {
       display: block;
-      padding: 16px 0;
+      padding: 14px 0;
     }
 
     .hp-sci-ing-{{ section.id }}__cell {
@@ -63,44 +100,119 @@
       width: 100%;
       padding: 4px 0;
     }
+
+    .hp-sci-ing-{{ section.id }}__cell--name {
+      padding-right: 0;
+      margin-bottom: 6px;
+    }
   }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-ing-{{ section.id }}">
   <div class="hp-sci__inner">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-sci-ing-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+      <h2 class="hp-sci-ing-{{ section.id }}__heading">
+        {%- if section.settings.heading_line_1 != blank -%}
+          <span class="hp-sci-ing-{{ section.id }}__heading-line">{{ section.settings.heading_line_1 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_line_2 != blank -%}
+          <span class="hp-sci-ing-{{ section.id }}__heading-line">{{ section.settings.heading_line_2 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_line_3 != blank -%}
+          <span class="hp-sci-ing-{{ section.id }}__heading-line">{{ section.settings.heading_line_3 }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_accent != blank -%}
+          <span class="hp-sci-ing-{{ section.id }}__heading-line"><span class="hp-sci-ing-{{ section.id }}__heading-accent">{{ section.settings.heading_accent }}</span></span>
+        {%- endif -%}
+      </h2>
     {%- endif -%}
 
-    <table class="hp-sci-ing-{{ section.id }}__table" role="presentation">
-      <tbody>
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            <tr class="hp-sci-ing-{{ section.id }}__row" {{ block.shopify_attributes }}>
-              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">{{ block.settings.name }}</td>
-              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">{{ block.settings.role }}</td>
-            </tr>
-          {%- endfor -%}
-        {%- else -%}
-          <tr class="hp-sci-ing-{{ section.id }}__row">
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">OS-01 Peptide</td>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Targets senescent cell signaling to support skin longevity.</td>
-          </tr>
-          <tr class="hp-sci-ing-{{ section.id }}__row">
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Niacinamide</td>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Supports barrier integrity and even tone.</td>
-          </tr>
-          <tr class="hp-sci-ing-{{ section.id }}__row">
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Ceramide Complex</td>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Replenishes lipids essential to barrier recovery.</td>
-          </tr>
-          <tr class="hp-sci-ing-{{ section.id }}__row">
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Adaptogenic Botanicals</td>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Helps skin respond to environmental stress.</td>
+    {%- if section.blocks.size > 0 -%}
+      {%- assign in_table = false -%}
+      {%- assign group_open = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          {%- if in_table -%}
+            </tbody></table>
+            {%- assign in_table = false -%}
+          {%- endif -%}
+          {%- if group_open -%}
+            </div>
+          {%- endif -%}
+          <div class="hp-sci-ing-{{ section.id }}__group" {{ block.shopify_attributes }}>
+          {%- assign group_open = true -%}
+          {%- if block.settings.title != blank -%}
+            <p class="hp-sci-ing-{{ section.id }}__category">{{ block.settings.title }}</p>
+          {%- endif -%}
+          <table class="hp-sci-ing-{{ section.id }}__table" role="presentation"><tbody>
+          {%- assign in_table = true -%}
+        {%- elsif block.type == 'ingredient' -%}
+          {%- unless in_table -%}
+            <div class="hp-sci-ing-{{ section.id }}__group">
+            <table class="hp-sci-ing-{{ section.id }}__table" role="presentation"><tbody>
+            {%- assign in_table = true -%}
+            {%- assign group_open = true -%}
+          {%- endunless -%}
+          <tr class="hp-sci-ing-{{ section.id }}__row" {{ block.shopify_attributes }}>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">{{ block.settings.name }}</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">{{ block.settings.role }}</td>
           </tr>
         {%- endif -%}
-      </tbody>
-    </table>
+      {%- endfor -%}
+      {%- if in_table -%}
+        </tbody></table>
+      {%- endif -%}
+      {%- if group_open -%}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="hp-sci-ing-{{ section.id }}__group">
+        <p class="hp-sci-ing-{{ section.id }}__category">THE BREAKTHROUGHS</p>
+        <table class="hp-sci-ing-{{ section.id }}__table" role="presentation">
+          <tbody>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Peptides</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Short amino acid chains that tell your skin cells to renew, repair, and protect. More collagen built, less destroyed.</td>
+            </tr>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Stem Cell Conditioned Media</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Captures the exosomes and growth factors stem cells produce and delivers them to your skin. Korean clinic-grade.</td>
+            </tr>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Sun-safe Bio-Retinoids</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">The same cell renewal as retinol. AM and PM, no sun sensitivity, no irritation. A better ingredient.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hp-sci-ing-{{ section.id }}__group">
+        <p class="hp-sci-ing-{{ section.id }}__category">THE FOUNDATION</p>
+        <table class="hp-sci-ing-{{ section.id }}__table" role="presentation">
+          <tbody>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Niacinamide</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">The most studied skin ingredient. Pores, brightness, barrier. Earns its place every time.</td>
+            </tr>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Ceramides</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Five types, the exact ratio in healthy skin. The mortar between bricks. Without them, everything leaks.</td>
+            </tr>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Cica</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">If you have reactive skin, you already know. We didn't explain it. We just put it in.</td>
+            </tr>
+            <tr class="hp-sci-ing-{{ section.id }}__row">
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Xylitol</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Feeds the good bacteria on your skin. The ingredient most formulas forget to include.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.footer_text != blank -%}
+      <p class="hp-sci-ing-{{ section.id }}__footer">{{ section.settings.footer_text }}</p>
+    {%- endif -%}
   </div>
 </section>
 
@@ -111,32 +223,74 @@
   "class": "hp-science-section",
   "settings": [
     {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Smarter skincare."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "Named on pack,"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading line 3",
+      "default": "not hidden in a"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent (italic)",
+      "default": "blend."
+    },
+    {
       "type": "textarea",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Smarter skincare. Named on pack, not hidden in a blend."
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "Legacy heroes. New science. One system. Every active is named on the pack, not buried in a 'proprietary blend.' That's the smarter choice."
     },
     {
       "type": "color",
       "id": "background_color",
       "label": "Background",
-      "default": "#f5f0e8"
+      "default": "#fdfcf5"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text",
+      "label": "Heading text",
       "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "category_color",
+      "label": "Category label color",
+      "default": "#a8894a"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#d8d2c8"
     },
     {
       "type": "range",
       "id": "heading_size",
       "label": "Heading size",
-      "min": 24,
-      "max": 44,
+      "min": 32,
+      "max": 56,
       "step": 2,
       "unit": "px",
-      "default": 36
+      "default": 48
     },
     {
       "type": "range",
@@ -161,6 +315,18 @@
   ],
   "blocks": [
     {
+      "type": "category",
+      "name": "Category header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category title",
+          "default": "THE BREAKTHROUGHS"
+        }
+      ]
+    },
+    {
       "type": "ingredient",
       "name": "Ingredient row",
       "settings": [
@@ -168,13 +334,13 @@
           "type": "text",
           "id": "name",
           "label": "Ingredient name",
-          "default": "OS-01 Peptide"
+          "default": "Peptides"
         },
         {
           "type": "textarea",
           "id": "role",
-          "label": "Function",
-          "default": "Targets senescent cell signaling to support skin longevity."
+          "label": "Description",
+          "default": "Short amino acid chains that tell your skin cells to renew, repair, and protect."
         }
       ]
     }
@@ -183,32 +349,55 @@
     {
       "name": "Science — Ingredients",
       "blocks": [
+        { "type": "category", "settings": { "title": "THE BREAKTHROUGHS" } },
         {
           "type": "ingredient",
           "settings": {
-            "name": "OS-01 Peptide",
-            "role": "Targets senescent cell signaling to support skin longevity."
+            "name": "Peptides",
+            "role": "Short amino acid chains that tell your skin cells to renew, repair, and protect. More collagen built, less destroyed."
           }
         },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Stem Cell Conditioned Media",
+            "role": "Captures the exosomes and growth factors stem cells produce and delivers them to your skin. Korean clinic-grade."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Sun-safe Bio-Retinoids",
+            "role": "The same cell renewal as retinol. AM and PM, no sun sensitivity, no irritation. A better ingredient."
+          }
+        },
+        { "type": "category", "settings": { "title": "THE FOUNDATION" } },
         {
           "type": "ingredient",
           "settings": {
             "name": "Niacinamide",
-            "role": "Supports barrier integrity and even tone."
+            "role": "The most studied skin ingredient. Pores, brightness, barrier. Earns its place every time."
           }
         },
         {
           "type": "ingredient",
           "settings": {
-            "name": "Ceramide Complex",
-            "role": "Replenishes lipids essential to barrier recovery."
+            "name": "Ceramides",
+            "role": "Five types, the exact ratio in healthy skin. The mortar between bricks. Without them, everything leaks."
           }
         },
         {
           "type": "ingredient",
           "settings": {
-            "name": "Adaptogenic Botanicals",
-            "role": "Helps skin respond to environmental stress."
+            "name": "Cica",
+            "role": "If you have reactive skin, you already know. We didn't explain it. We just put it in."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Xylitol",
+            "role": "Feeds the good bacteria on your skin. The ingredient most formulas forget to include."
           }
         }
       ]
