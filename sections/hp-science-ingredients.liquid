@@ -74,12 +74,31 @@
 
     <table class="hp-sci-ing-{{ section.id }}__table" role="presentation">
       <tbody>
-        {%- for block in section.blocks -%}
-          <tr class="hp-sci-ing-{{ section.id }}__row" {{ block.shopify_attributes }}>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">{{ block.settings.name }}</td>
-            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">{{ block.settings.role }}</td>
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <tr class="hp-sci-ing-{{ section.id }}__row" {{ block.shopify_attributes }}>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">{{ block.settings.name }}</td>
+              <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">{{ block.settings.role }}</td>
+            </tr>
+          {%- endfor -%}
+        {%- else -%}
+          <tr class="hp-sci-ing-{{ section.id }}__row">
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">OS-01 Peptide</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Targets senescent cell signaling to support skin longevity.</td>
           </tr>
-        {%- endfor -%}
+          <tr class="hp-sci-ing-{{ section.id }}__row">
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Niacinamide</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Supports barrier integrity and even tone.</td>
+          </tr>
+          <tr class="hp-sci-ing-{{ section.id }}__row">
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Ceramide Complex</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Replenishes lipids essential to barrier recovery.</td>
+          </tr>
+          <tr class="hp-sci-ing-{{ section.id }}__row">
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--name">Adaptogenic Botanicals</td>
+            <td class="hp-sci-ing-{{ section.id }}__cell hp-sci-ing-{{ section.id }}__cell--role">Helps skin respond to environmental stress.</td>
+          </tr>
+        {%- endif -%}
       </tbody>
     </table>
   </div>

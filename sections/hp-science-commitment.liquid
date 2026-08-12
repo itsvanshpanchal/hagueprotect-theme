@@ -79,18 +79,33 @@
     {%- endif -%}
 
     <div class="hp-sci-commit-{{ section.id }}__cols">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'column' -%}
-          <div {{ block.shopify_attributes }}>
-            {%- if block.settings.title != blank -%}
-              <h3 class="hp-sci-commit-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="hp-sci-commit-{{ section.id }}__col-text">{{ block.settings.text }}</p>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'column' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h3 class="hp-sci-commit-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="hp-sci-commit-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <div>
+          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 1–21</h3>
+          <p class="hp-sci-commit-{{ section.id }}__col-text">Skin adapts to the protocol. Barrier function stabilizes.</p>
+        </div>
+        <div>
+          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 22–45</h3>
+          <p class="hp-sci-commit-{{ section.id }}__col-text">Renewal signals strengthen. Texture and tone begin to shift.</p>
+        </div>
+        <div>
+          <h3 class="hp-sci-commit-{{ section.id }}__col-title">Days 46–75</h3>
+          <p class="hp-sci-commit-{{ section.id }}__col-text">Longevity markers compound. Results become the new baseline.</p>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 

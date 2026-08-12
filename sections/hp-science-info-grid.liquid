@@ -72,19 +72,42 @@
     {%- endif -%}
 
     <div class="hp-sci-grid-{{ section.id }}__cols">
-      {%- for block in section.blocks -%}
-        <article class="hp-sci-grid-{{ section.id }}__col" {{ block.shopify_attributes }}>
-          {%- if block.settings.number != blank -%}
-            <p class="hp-sci-grid-{{ section.id }}__num">{{ block.settings.number }}</p>
-          {%- endif -%}
-          {%- if block.settings.title != blank -%}
-            <h3 class="hp-sci-grid-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
-          {%- endif -%}
-          {%- if block.settings.text != blank -%}
-            <p class="hp-sci-grid-{{ section.id }}__col-text">{{ block.settings.text }}</p>
-          {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <article class="hp-sci-grid-{{ section.id }}__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.number != blank -%}
+              <p class="hp-sci-grid-{{ section.id }}__num">{{ block.settings.number }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="hp-sci-grid-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="hp-sci-grid-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <article class="hp-sci-grid-{{ section.id }}__col">
+          <p class="hp-sci-grid-{{ section.id }}__num">01</p>
+          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Renewal slows with age</h3>
+          <p class="hp-sci-grid-{{ section.id }}__col-text">Cell turnover drops. Most routines chase symptoms instead of the biology.</p>
         </article>
-      {%- endfor -%}
+        <article class="hp-sci-grid-{{ section.id }}__col">
+          <p class="hp-sci-grid-{{ section.id }}__num">02</p>
+          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Barrier stress compounds</h3>
+          <p class="hp-sci-grid-{{ section.id }}__col-text">Harsh actives and inconsistent care weaken the skin's first line of defense.</p>
+        </article>
+        <article class="hp-sci-grid-{{ section.id }}__col">
+          <p class="hp-sci-grid-{{ section.id }}__num">03</p>
+          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Recovery gets interrupted</h3>
+          <p class="hp-sci-grid-{{ section.id }}__col-text">Your skin knows how to repair. Most products disrupt the signal.</p>
+        </article>
+        <article class="hp-sci-grid-{{ section.id }}__col">
+          <p class="hp-sci-grid-{{ section.id }}__num">04</p>
+          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Longevity needs a system</h3>
+          <p class="hp-sci-grid-{{ section.id }}__col-text">Five biological processes. One coordinated protocol over 75 days.</p>
+        </article>
+      {%- endif -%}
     </div>
   </div>
 </section>

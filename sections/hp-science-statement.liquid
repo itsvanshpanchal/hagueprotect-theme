@@ -26,6 +26,7 @@
 
   .hp-sci-statement-{{ section.id }}__body {
     color: {{ section.settings.body_color }};
+    opacity: {{ section.settings.body_opacity | default: 72 | times: 0.01 }};
   }
 
   .hp-sci-statement-{{ section.id }}__body p {
@@ -92,7 +93,17 @@
       "type": "color",
       "id": "body_color",
       "label": "Body color",
-      "default": "rgba(255,255,255,0.72)"
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "body_opacity",
+      "label": "Body opacity",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 72
     },
     {
       "type": "range",
