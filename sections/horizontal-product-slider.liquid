@@ -5,9 +5,30 @@
   assign hp_accent_mobile = section.settings.heading_accent_font_size_mobile | default: 40
   assign hp_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
   assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
+  assign glass_max_w = section.settings.glass_panel_max_width | default: 1100
+  assign glass_pad = section.settings.glass_panel_padding | default: 40
+  assign glass_title_d = section.settings.glass_title_size_desktop | default: 32
+  assign glass_title_m = section.settings.glass_title_size_mobile | default: 26
+  assign glass_para_d = section.settings.glass_para_size_desktop | default: 20
+  assign glass_para_m = section.settings.glass_para_size_mobile | default: 17
+  assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 14
+  assign glass_link_sz = section.settings.glass_link_size | default: 16
+  assign glass_eyebrow_color = section.settings.glass_eyebrow_color | default: '#a8894a'
 -%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
+
+  #shopify-section-{{ section.id }} {
+    --hp-glass-max-width: {{ glass_max_w }}px;
+    --hp-glass-pad: {{ glass_pad }}px;
+    --hp-glass-title-size: {{ glass_title_d }}px;
+    --hp-glass-title-size-mobile: {{ glass_title_m }}px;
+    --hp-glass-para-size: {{ glass_para_d }}px;
+    --hp-glass-para-size-mobile: {{ glass_para_m }}px;
+    --hp-glass-eyebrow-size: {{ glass_eyebrow_sz }}px;
+    --hp-glass-link-size: {{ glass_link_sz }}px;
+    --hp-glass-eyebrow-color: {{ glass_eyebrow_color }};
+  }
 
   /* Match Tell Your Story: exact heading + accent sizes */
   #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading,
@@ -281,20 +302,20 @@
   .hp-fam-sec__glass-panel {
     display: grid;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    gap: clamp(28px, 4vw, 56px);
+    gap: clamp(32px, 5vw, 64px);
     align-items: start;
     width: 100%;
-    max-width: min(920px, 100%);
-    margin: 0 0 clamp(24px, 3vw, 36px);
-    padding: clamp(22px, 2.8vw, 34px) clamp(22px, 3vw, 38px);
-    border-radius: 18px;
+    max-width: min(var(--hp-glass-max-width, 1100px), 100%);
+    margin: 0 0 clamp(28px, 3.5vw, 44px);
+    padding: var(--hp-glass-pad, 40px) clamp(28px, 3.5vw, calc(var(--hp-glass-pad, 40px) + 8px));
+    border-radius: 22px;
     background: rgba(255, 255, 255, 0.72);
     border: 1px solid rgba(255, 255, 255, 0.55);
     box-shadow:
-      0 12px 40px rgba(0, 0, 0, 0.14),
+      0 16px 48px rgba(0, 0, 0, 0.16),
       inset 0 1px 0 rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
     box-sizing: border-box;
   }
 
@@ -303,24 +324,24 @@
   }
 
   .hp-fam-sec__glass-eyebrow {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 12px !important;
+    font-size: var(--hp-glass-eyebrow-size, 14px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    line-height: 1.3 !important;
+    line-height: 1.35 !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
-    color: #a8894a !important;
+    color: var(--hp-glass-eyebrow-color, #a8894a) !important;
   }
 
   .hp-fam-sec__glass-title {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: 24px !important;
+    font-size: var(--hp-glass-title-size, 32px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
-    line-height: 1.25 !important;
+    line-height: 1.28 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #111111 !important;
@@ -329,10 +350,10 @@
   .hp-fam-sec__glass-para {
     margin: 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: clamp(16px, 1.35vw, 18px) !important;
+    font-size: var(--hp-glass-para-size, 20px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    line-height: 1.45 !important;
+    line-height: 1.5 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #111111 !important;
@@ -342,21 +363,21 @@
     display: block;
     width: 100%;
     height: 0;
-    margin: 18px 0;
+    margin: 22px 0;
     padding: 0;
     border: 0;
     border-top: 1px solid rgba(17, 17, 17, 0.12);
   }
 
   .hp-fam-sec__glass-col--detail .hp-fam-sec__glass-eyebrow {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .hp-fam-sec__glass-link {
     display: inline-block;
     margin: 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: 14px !important;
+    font-size: var(--hp-glass-link-size, 16px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     line-height: 1.4 !important;
@@ -374,36 +395,36 @@
   @media screen and (max-width: 989px) {
     .hp-fam-sec__glass-panel {
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 24px;
       max-width: 100%;
-      margin-bottom: 20px;
-      padding: 20px 18px;
+      margin-bottom: 22px;
+      padding: calc(var(--hp-glass-pad, 40px) * 0.72) 20px;
     }
 
     .hp-fam-sec__glass-title {
-      font-size: 24px !important;
+      font-size: var(--hp-glass-title-size-mobile, 26px) !important;
     }
 
     .hp-fam-sec__glass-para {
-      font-size: 16px !important;
+      font-size: var(--hp-glass-para-size-mobile, 17px) !important;
     }
   }
 
   @media screen and (max-width: 749px) {
     .hp-fam-sec__glass-panel {
-      gap: 18px;
-      margin-bottom: 16px;
-      padding: 18px 16px;
-      border-radius: 14px;
+      gap: 20px;
+      margin-bottom: 18px;
+      padding: calc(var(--hp-glass-pad, 40px) * 0.55) 16px;
+      border-radius: 16px;
     }
 
     .hp-fam-sec__glass-eyebrow {
-      margin-bottom: 10px;
-      font-size: 11px !important;
+      margin-bottom: 12px;
+      font-size: calc(var(--hp-glass-eyebrow-size, 14px) * 0.92) !important;
     }
 
     .hp-fam-sec__glass-rule {
-      margin: 14px 0;
+      margin: 16px 0;
     }
   }
 
@@ -1137,7 +1158,7 @@
     {%- endif -%}
 
     {%- if section.settings.show_glass_panel -%}
-      <div class="hp-fam-sec__glass-panel">
+      <div class="hp-fam-sec__glass-panel" id="hp-glass-panel-{{ section.id }}">
         <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
           {%- if section.settings.glass_eyebrow_left != blank -%}
             <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
@@ -1714,6 +1735,10 @@
       "content": "Glass intro panel"
     },
     {
+      "type": "paragraph",
+      "content": "Edit all glass panel copy below. Sizes can be adjusted with the sliders."
+    },
+    {
       "type": "checkbox",
       "id": "show_glass_panel",
       "label": "Show glass intro panel",
@@ -1722,43 +1747,129 @@
     {
       "type": "text",
       "id": "glass_eyebrow_left",
-      "label": "Left eyebrow",
+      "label": "Left eyebrow text",
       "default": "INTRODUCING"
     },
     {
       "type": "text",
       "id": "glass_title",
-      "label": "Panel title",
+      "label": "Panel title text",
       "default": "India's first skin longevity brand"
     },
     {
       "type": "textarea",
       "id": "glass_para_top",
-      "label": "Top paragraph",
+      "label": "Top paragraph text",
       "default": "Your skin already knows how to renew, repair, and rebuild itself. Most skincare leaves that biology untouched."
     },
     {
       "type": "text",
       "id": "glass_eyebrow_right",
-      "label": "Right eyebrow",
+      "label": "Right eyebrow text",
       "default": "SKIN LONGEVITY SYSTEM 5"
     },
     {
       "type": "text",
       "id": "glass_para_bottom",
-      "label": "Bottom paragraph",
+      "label": "Bottom paragraph text",
       "default": "Five biological processes. One protocol. 75 days."
     },
     {
       "type": "text",
       "id": "glass_link_label",
-      "label": "Link label",
+      "label": "Link text",
       "default": "The science behind this →"
     },
     {
       "type": "url",
       "id": "glass_link_url",
       "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "glass_eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#a8894a"
+    },
+    {
+      "type": "range",
+      "id": "glass_panel_max_width",
+      "label": "Panel max width (desktop)",
+      "min": 720,
+      "max": 1280,
+      "step": 20,
+      "unit": "px",
+      "default": 1100
+    },
+    {
+      "type": "range",
+      "id": "glass_panel_padding",
+      "label": "Panel padding",
+      "min": 20,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "glass_title_size_desktop",
+      "label": "Title size — desktop",
+      "min": 20,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "glass_title_size_mobile",
+      "label": "Title size — mobile",
+      "min": 18,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "glass_para_size_desktop",
+      "label": "Paragraph size — desktop",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "glass_para_size_mobile",
+      "label": "Paragraph size — mobile",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "glass_eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "glass_link_size",
+      "label": "Link size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "color",
