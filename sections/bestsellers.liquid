@@ -151,6 +151,12 @@ text-shadow: none !important;
 
   #shopify-section-{{ section.id }} .bs-coverflow__heading .hp-typewriter-cursor {
     background-color: {{ bs_text }};
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+  #shopify-section-{{ section.id }} .bs-coverflow__heading[data-typewriter-active] .hp-heading-accent {
+    display: inline !important;
   }
 
   #shopify-section-{{ section.id }} .bs-coverflow__view-all {

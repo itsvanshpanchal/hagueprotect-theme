@@ -20,11 +20,49 @@
     }
   }
 
+  function runWhenFontsReady(fn, fallbackMs) {
+    var done = false;
+    function go() {
+      if (done) return;
+      done = true;
+      fn();
+    }
+    if (fallbackMs) {
+      window.setTimeout(go, fallbackMs);
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(go).catch(go);
+    } else {
+      go();
+    }
+  }
+
+  function resetMobileOnlyTypewriter(heading) {
+    if (!heading || !isMobileOnlyTypewriter(heading) || !MOBILE_MQ.matches) return;
+    if (heading.dataset.typewriterActive === 'true') return;
+    delete heading.dataset.typewriterDone;
+    delete heading.dataset.typewriterHeightReserved;
+    heading.style.minHeight = '';
+    heading.classList.remove('is-typewriting');
+  }
+
+  function observeMobileOnlyHeading(heading, observer) {
+    if (!heading || !isMobileOnlyTypewriter(heading) || !MOBILE_MQ.matches) return false;
+    if (heading.dataset.typewriterObserved === '1') return true;
+    observer.observe(heading);
+    heading.dataset.typewriterObserved = '1';
+    return true;
+  }
+
   function lockTypewriterHeight(element) {
     var h = element.offsetHeight;
     if (h > 0) {
       element.style.minHeight = h + 'px';
     }
+  }
+
+  function mobileTypewriterObserverOptions() {
+    return { threshold: 0.2, rootMargin: '0px' };
   }
 
   function shouldType(element) {
@@ -149,16 +187,6 @@
         '>' +
         escapeHtml(d.accentText.substring(0, accentLen)) +
         '</span>';
-    } else if (d.accentText) {
-      /* Reserve script accent line box before accent starts typing */
-      html +=
-        '<span class="' +
-        escapeHtml(d.accentClass) +
-        '" aria-hidden="true" style="visibility:hidden;' +
-        (d.accentStyle ? escapeHtml(d.accentStyle) : '') +
-        '">' +
-        escapeHtml(d.accentText) +
-        '</span>';
     }
 
     d.el.innerHTML = html;
@@ -230,15 +258,14 @@
       tick();
     }
 
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(beginTyping);
-    } else {
-      beginTyping();
-    }
+    runWhenFontsReady(beginTyping, 600);
   }
 
   function typeHeading(element) {
     if (!shouldType(element)) return;
+    if (isMobileOnlyTypewriter(element)) {
+      element.dataset.typewriterPlayedVisible = '1';
+    }
 
     /* Prefer accent pairs (main + script sibling), then top-level line spans. */
     var pairEls = Array.prototype.filter.call(
@@ -327,7 +354,8 @@
       return;
     }
 
-    var headings = collectHeadings(root);
+    var scope = root || document;
+    var headings = collectHeadings(scope);
     headings.forEach(reserveTypewriterHeight);
 
     if (!('IntersectionObserver' in window)) {
@@ -344,10 +372,14 @@
           }
         });
       },
-      { threshold: 0.35, rootMargin: '0px 0px -8% 0px' }
+      MOBILE_MQ.matches ? mobileTypewriterObserverOptions() : { threshold: 0.35, rootMargin: '0px 0px -8% 0px' }
     );
 
     headings.forEach(function (heading) {
+      if (observeMobileOnlyHeading(heading, observer)) {
+        return;
+      }
+
       var rect = heading.getBoundingClientRect();
       var inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
 
@@ -370,11 +402,7 @@
       initTypewriter();
     }
 
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(start);
-    } else {
-      start();
-    }
+    runWhenFontsReady(start, 600);
   }
 
   if (document.readyState === 'loading') {
@@ -382,6 +410,20 @@
   } else {
     onReady();
   }
+
+  window.addEventListener('hp-floating-cards:ready', function () {
+    if (!MOBILE_MQ.matches) return;
+    var mobileHeadings = document.querySelectorAll(
+      'main h1[data-typewriter-mobile-only], main h2[data-typewriter-mobile-only], main h3[data-typewriter-mobile-only]'
+    );
+    mobileHeadings.forEach(function (heading) {
+      delete heading.dataset.typewriterObserved;
+      if (heading.dataset.typewriterDone === 'true' && heading.dataset.typewriterPlayedVisible !== '1') {
+        resetMobileOnlyTypewriter(heading);
+      }
+    });
+    initTypewriter(document);
+  });
 
   document.addEventListener('shopify:section:load', function (event) {
     if (event.detail && event.detail.sectionId) {

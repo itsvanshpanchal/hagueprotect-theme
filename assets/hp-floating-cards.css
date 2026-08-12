@@ -905,7 +905,7 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-line,
   body.hp-float-mobile .hp-float-stack .hp-float-card .bs-coverflow__heading .hp-heading-accent {
     max-width: none !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
   }
