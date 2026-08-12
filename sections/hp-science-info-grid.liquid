@@ -12,53 +12,102 @@
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
+  .hp-sci-grid-{{ section.id }}__layout {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+
+  .hp-sci-grid-{{ section.id }}__rail {
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  .hp-sci-grid-{{ section.id }}__rail-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.rail_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: {{ section.settings.rail_color }};
+    white-space: nowrap;
+    margin: 0;
+  }
+
   .hp-sci-grid-{{ section.id }}__heading {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(28px, 3.5vw, {{ section.settings.heading_size }}px);
-    max-width: 18ch;
-    margin: 0 0 clamp(40px, 6vw, 72px);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.5vw, {{ section.settings.heading_size }}px);
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+    margin: 0 0 clamp(48px, 7vw, 88px);
+    max-width: 14ch;
+  }
+
+  .hp-sci-grid-{{ section.id }}__heading-line {
+    display: block;
+  }
+
+  .hp-sci-grid-{{ section.id }}__heading-accent {
+    font-style: italic;
+    font-weight: 400;
   }
 
   .hp-sci-grid-{{ section.id }}__cols {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(24px, 3vw, 48px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(40px, 5vw, 72px) clamp(32px, 4vw, 56px);
   }
 
   .hp-sci-grid-{{ section.id }}__num {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    opacity: 0.55;
-    margin: 0 0 16px;
+    font-size: clamp(36px, 4vw, {{ section.settings.number_size }}px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0 0 clamp(18px, 2.5vw, 28px);
+    color: inherit;
   }
 
   .hp-sci-grid-{{ section.id }}__col-title {
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(22px, 2.2vw, 28px);
-    margin: 0 0 12px;
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, {{ section.settings.column_title_size }}px);
+    margin: 0 0 14px;
     line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .hp-sci-grid-{{ section.id }}__col-text {
-    font-size: 17px;
-    line-height: 1.55;
-    opacity: 0.85;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.5vw, {{ section.settings.column_text_size }}px);
+    line-height: 1.6;
     margin: 0;
+    max-width: 42ch;
+    color: {{ section.settings.body_color }};
   }
 
   @media screen and (max-width: 989px) {
-    .hp-sci-grid-{{ section.id }}__cols {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .hp-sci-grid-{{ section.id }}__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .hp-sci-grid-{{ section.id }}__rail {
+      justify-content: flex-start;
+    }
+
+    .hp-sci-grid-{{ section.id }}__rail-text {
+      writing-mode: horizontal-tb;
+      transform: none;
+      letter-spacing: 0.14em;
     }
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 640px) {
     .hp-sci-grid-{{ section.id }}__cols {
       grid-template-columns: 1fr;
     }
@@ -67,47 +116,69 @@
 
 <section class="hp-sci hp-sci-grid-{{ section.id }}">
   <div class="hp-sci__inner">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-sci-grid-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-
-    <div class="hp-sci-grid-{{ section.id }}__cols">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
-          <article class="hp-sci-grid-{{ section.id }}__col" {{ block.shopify_attributes }}>
-            {%- if block.settings.number != blank -%}
-              <p class="hp-sci-grid-{{ section.id }}__num">{{ block.settings.number }}</p>
-            {%- endif -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="hp-sci-grid-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="hp-sci-grid-{{ section.id }}__col-text">{{ block.settings.text }}</p>
-            {%- endif -%}
-          </article>
-        {%- endfor -%}
-      {%- else -%}
-        <article class="hp-sci-grid-{{ section.id }}__col">
-          <p class="hp-sci-grid-{{ section.id }}__num">01</p>
-          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Renewal slows with age</h3>
-          <p class="hp-sci-grid-{{ section.id }}__col-text">Cell turnover drops. Most routines chase symptoms instead of the biology.</p>
-        </article>
-        <article class="hp-sci-grid-{{ section.id }}__col">
-          <p class="hp-sci-grid-{{ section.id }}__num">02</p>
-          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Barrier stress compounds</h3>
-          <p class="hp-sci-grid-{{ section.id }}__col-text">Harsh actives and inconsistent care weaken the skin's first line of defense.</p>
-        </article>
-        <article class="hp-sci-grid-{{ section.id }}__col">
-          <p class="hp-sci-grid-{{ section.id }}__num">03</p>
-          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Recovery gets interrupted</h3>
-          <p class="hp-sci-grid-{{ section.id }}__col-text">Your skin knows how to repair. Most products disrupt the signal.</p>
-        </article>
-        <article class="hp-sci-grid-{{ section.id }}__col">
-          <p class="hp-sci-grid-{{ section.id }}__num">04</p>
-          <h3 class="hp-sci-grid-{{ section.id }}__col-title">Longevity needs a system</h3>
-          <p class="hp-sci-grid-{{ section.id }}__col-text">Five biological processes. One coordinated protocol over 75 days.</p>
-        </article>
+    <div class="hp-sci-grid-{{ section.id }}__layout">
+      {%- if section.settings.sidebar_label != blank -%}
+        <div class="hp-sci-grid-{{ section.id }}__rail" aria-hidden="true">
+          <p class="hp-sci-grid-{{ section.id }}__rail-text">{{ section.settings.sidebar_label }}</p>
+        </div>
       {%- endif -%}
+
+      <div class="hp-sci-grid-{{ section.id }}__main">
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+          <h2 class="hp-sci-grid-{{ section.id }}__heading">
+            {%- if section.settings.heading_line_1 != blank -%}
+              <span class="hp-sci-grid-{{ section.id }}__heading-line">{{ section.settings.heading_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_2 != blank or section.settings.heading_accent != blank -%}
+              <span class="hp-sci-grid-{{ section.id }}__heading-line">
+                {{- section.settings.heading_line_2 -}}
+                {%- if section.settings.heading_accent != blank -%}
+                  <span class="hp-sci-grid-{{ section.id }}__heading-accent">{{ section.settings.heading_accent }}</span>
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+
+        <div class="hp-sci-grid-{{ section.id }}__cols">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <article class="hp-sci-grid-{{ section.id }}__col" {{ block.shopify_attributes }}>
+                {%- if block.settings.number != blank -%}
+                  <p class="hp-sci-grid-{{ section.id }}__num">{{ block.settings.number }}</p>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="hp-sci-grid-{{ section.id }}__col-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="hp-sci-grid-{{ section.id }}__col-text">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </article>
+            {%- endfor -%}
+          {%- else -%}
+            <article class="hp-sci-grid-{{ section.id }}__col">
+              <p class="hp-sci-grid-{{ section.id }}__num">01</p>
+              <h3 class="hp-sci-grid-{{ section.id }}__col-title">Cell renewal slows</h3>
+              <p class="hp-sci-grid-{{ section.id }}__col-text">At 25, skin renews itself every 28 days. By 40, that cycle has stretched to 45–60 days. The same biology is there. It just needs fewer interruptions and more support to keep pace.</p>
+            </article>
+            <article class="hp-sci-grid-{{ section.id }}__col">
+              <p class="hp-sci-grid-{{ section.id }}__num">02</p>
+              <h3 class="hp-sci-grid-{{ section.id }}__col-title">Collagen production drops</h3>
+              <p class="hp-sci-grid-{{ section.id }}__col-text">After 25, collagen production falls by roughly 1% per year. The structural protein that keeps skin firm isn't disappearing. Your body is producing less of it. That's a signal problem, not a structural one.</p>
+            </article>
+            <article class="hp-sci-grid-{{ section.id }}__col">
+              <p class="hp-sci-grid-{{ section.id }}__num">03</p>
+              <h3 class="hp-sci-grid-{{ section.id }}__col-title">The barrier weakens</h3>
+              <p class="hp-sci-grid-{{ section.id }}__col-text">Your skin barrier is a lipid matrix: ceramides, fatty acids, cholesterol in specific ratios. When that matrix is disrupted by over-actives, the skin loses water faster than it produces it. Most actives make this worse.</p>
+            </article>
+            <article class="hp-sci-grid-{{ section.id }}__col">
+              <p class="hp-sci-grid-{{ section.id }}__num">04</p>
+              <h3 class="hp-sci-grid-{{ section.id }}__col-title">Chronic inflammation builds</h3>
+              <p class="hp-sci-grid-{{ section.id }}__col-text">Low-grade, invisible inflammation is the root of almost every visible skin concern: spots, uneven tone, sensitivity, premature ageing. The industry addresses the symptoms. Longevity science addresses the source.</p>
+            </article>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -119,10 +190,28 @@
   "class": "hp-science-section",
   "settings": [
     {
-      "type": "textarea",
-      "id": "heading",
-      "label": "Section heading",
-      "default": "Skin doesn't fail. The routine does."
+      "type": "text",
+      "id": "sidebar_label",
+      "label": "Sidebar label (vertical)",
+      "default": "HOW SKIN AGES"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Skin doesn't fail."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2 (before accent)",
+      "default": "The routine "
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent (italic)",
+      "default": "does."
     },
     {
       "type": "color",
@@ -133,18 +222,70 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text",
+      "label": "Heading & titles",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "rail_color",
+      "label": "Sidebar label color",
       "default": "#111111"
     },
     {
       "type": "range",
       "id": "heading_size",
       "label": "Heading size",
-      "min": 24,
-      "max": 56,
+      "min": 32,
+      "max": 72,
       "step": 2,
       "unit": "px",
-      "default": 40
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "rail_size",
+      "label": "Sidebar label size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "number_size",
+      "label": "Column number size",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "column_title_size",
+      "label": "Column title size",
+      "min": 18,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "column_text_size",
+      "label": "Column text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 17
     },
     {
       "type": "range",
@@ -196,37 +337,43 @@
   "presets": [
     {
       "name": "Science — Info grid",
+      "settings": {
+        "sidebar_label": "HOW SKIN AGES",
+        "heading_line_1": "Skin doesn't fail.",
+        "heading_line_2": "The routine ",
+        "heading_accent": "does."
+      },
       "blocks": [
         {
           "type": "column",
           "settings": {
             "number": "01",
-            "title": "Renewal slows with age",
-            "text": "Cell turnover drops. Most routines chase symptoms instead of the biology."
+            "title": "Cell renewal slows",
+            "text": "At 25, skin renews itself every 28 days. By 40, that cycle has stretched to 45–60 days. The same biology is there. It just needs fewer interruptions and more support to keep pace."
           }
         },
         {
           "type": "column",
           "settings": {
             "number": "02",
-            "title": "Barrier stress compounds",
-            "text": "Harsh actives and inconsistent care weaken the skin's first line of defense."
+            "title": "Collagen production drops",
+            "text": "After 25, collagen production falls by roughly 1% per year. The structural protein that keeps skin firm isn't disappearing. Your body is producing less of it. That's a signal problem, not a structural one."
           }
         },
         {
           "type": "column",
           "settings": {
             "number": "03",
-            "title": "Recovery gets interrupted",
-            "text": "Your skin knows how to repair. Most products disrupt the signal."
+            "title": "The barrier weakens",
+            "text": "Your skin barrier is a lipid matrix: ceramides, fatty acids, cholesterol in specific ratios. When that matrix is disrupted by over-actives, the skin loses water faster than it produces it. Most actives make this worse."
           }
         },
         {
           "type": "column",
           "settings": {
             "number": "04",
-            "title": "Longevity needs a system",
-            "text": "Five biological processes. One coordinated protocol over 75 days."
+            "title": "Chronic inflammation builds",
+            "text": "Low-grade, invisible inflammation is the root of almost every visible skin concern: spots, uneven tone, sensitivity, premature ageing. The industry addresses the symptoms. Longevity science addresses the source."
           }
         }
       ]
