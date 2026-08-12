@@ -34,6 +34,15 @@
     color: {{ section.settings.subtext_color }};
   }
 
+  .hp-sci-commit-{{ section.id }}__heading,
+  .hp-sci-commit-{{ section.id }}__subtext,
+  .hp-sci-commit-{{ section.id }}__day,
+  .hp-sci-commit-{{ section.id }}__card-title,
+  .hp-sci-commit-{{ section.id }}__card-text,
+  .hp-sci-commit-{{ section.id }}__card-text p {
+    color: #ffffff !important;
+  }
+
   .hp-sci-commit-{{ section.id }}__cards {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -71,7 +80,6 @@
     font-family: 'Darker Grotesque', sans-serif;
     font-size: 13px;
     letter-spacing: 0.04em;
-    color: {{ section.settings.day_label_color }};
     margin: 0 0 14px;
   }
 
