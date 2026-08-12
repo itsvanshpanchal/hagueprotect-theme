@@ -16,6 +16,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 0;
     align-items: stretch;
+    min-height: clamp(520px, 62vh, 760px);
   }
 
   .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__copy {
@@ -29,38 +30,113 @@
   .hp-sci-feature-{{ section.id }}__copy {
     background: {{ section.settings.card_background }};
     color: {{ section.settings.text_color }};
-    padding: clamp(32px, 5vw, 64px);
+    padding: clamp(40px, 6vw, 88px) clamp(28px, 5vw, 72px);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .hp-sci-feature-{{ section.id }}__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.eyebrow_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: {{ section.settings.eyebrow_color }};
+    margin: 0 0 clamp(20px, 3vw, 28px);
   }
 
   .hp-sci-feature-{{ section.id }}__title {
-    font-size: clamp(26px, 3vw, {{ section.settings.title_size }}px);
-    margin-bottom: 16px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(30px, 3.8vw, {{ section.settings.title_size }}px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 clamp(20px, 3vw, 28px);
+    max-width: 14ch;
     color: inherit;
   }
 
   .hp-sci-feature-{{ section.id }}__text {
-    font-size: 18px;
-    line-height: 1.55;
-    opacity: 0.85;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.5vw, {{ section.settings.text_size }}px);
+    line-height: 1.65;
+    margin: 0 0 clamp(36px, 5vw, 52px);
+    max-width: 38ch;
+    color: {{ section.settings.body_color }};
+  }
+
+  .hp-sci-feature-{{ section.id }}__compare {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2.5vw, 24px);
+    max-width: 46ch;
+  }
+
+  .hp-sci-feature-{{ section.id }}__compare-row {
+    display: grid;
+    grid-template-columns: minmax(88px, 112px) minmax(0, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+    align-items: start;
+  }
+
+  .hp-sci-feature-{{ section.id }}__compare-label {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.compare_label_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: {{ section.settings.compare_label_color }};
     margin: 0;
+    padding-top: 2px;
+  }
+
+  .hp-sci-feature-{{ section.id }}__compare-text {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(15px, 1.35vw, {{ section.settings.compare_text_size }}px);
+    line-height: 1.55;
+    margin: 0;
+    color: {{ section.settings.text_color }};
   }
 
   .hp-sci-feature-{{ section.id }}__media {
-    min-height: {{ section.settings.media_min_height }}px;
+    min-height: clamp(320px, 50vh, 760px);
+    height: 100%;
+  }
+
+  .hp-sci-feature-{{ section.id }}__media .hp-sci-media,
+  .hp-sci-feature-{{ section.id }}__media .hp-sci-media__img,
+  .hp-sci-feature-{{ section.id }}__media .hp-sci-media__video {
+    height: 100%;
+    min-height: inherit;
   }
 
   @media screen and (max-width: 989px) {
     .hp-sci-feature-{{ section.id }}__grid,
     .hp-sci-feature-{{ section.id }}__grid--reverse {
       grid-template-columns: 1fr;
+      min-height: 0;
     }
 
     .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__copy,
     .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__media {
       order: unset;
+    }
+
+    .hp-sci-feature-{{ section.id }}__title {
+      max-width: none;
+    }
+
+    .hp-sci-feature-{{ section.id }}__media {
+      min-height: {{ section.settings.media_min_height_mobile }}px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .hp-sci-feature-{{ section.id }}__compare-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
   }
 {%- endstyle -%}
@@ -70,15 +146,42 @@
     <div class="hp-sci-feature-{{ section.id }}__grid{% if section.settings.reverse_layout %} hp-sci-feature-{{ section.id }}__grid--reverse{% endif %}">
       <div class="hp-sci-feature-{{ section.id }}__copy">
         {%- if section.settings.eyebrow != blank -%}
-          <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
+          <p class="hp-sci-feature-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="hp-sci__title hp-sci-feature-{{ section.id }}__title">{{ section.settings.heading }}</h2>
+          <h2 class="hp-sci-feature-{{ section.id }}__title">{{ section.settings.heading }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
           <p class="hp-sci-feature-{{ section.id }}__text">{{ section.settings.text }}</p>
         {%- endif -%}
+
+        <div class="hp-sci-feature-{{ section.id }}__compare">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'compare_row' -%}
+                <div class="hp-sci-feature-{{ section.id }}__compare-row" {{ block.shopify_attributes }}>
+                  {%- if block.settings.label != blank -%}
+                    <p class="hp-sci-feature-{{ section.id }}__compare-label">{{ block.settings.label }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="hp-sci-feature-{{ section.id }}__compare-text">{{ block.settings.text }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <div class="hp-sci-feature-{{ section.id }}__compare-row">
+              <p class="hp-sci-feature-{{ section.id }}__compare-label">ANTI-AGEING</p>
+              <p class="hp-sci-feature-{{ section.id }}__compare-text">Reacts to visible signs. Temporary result.</p>
+            </div>
+            <div class="hp-sci-feature-{{ section.id }}__compare-row">
+              <p class="hp-sci-feature-{{ section.id }}__compare-label">REGENERATIVE</p>
+              <p class="hp-sci-feature-{{ section.id }}__compare-text">Restores biological function. Result compounds. Skin maintains independently.</p>
+            </div>
+          {%- endif -%}
+        </div>
       </div>
+
       <div class="hp-sci-feature-{{ section.id }}__media">
         {% render 'hp-science-media',
           image: section.settings.image,
@@ -86,7 +189,7 @@
           animation_url: section.settings.animation_url,
           show_placeholder: section.settings.show_media_placeholder,
           placeholder_label: section.settings.placeholder_label,
-          min_height: section.settings.media_min_height,
+          min_height: section.settings.media_min_height_desktop,
           light_placeholder: true
         %}
       </div>
@@ -103,19 +206,20 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow"
+      "label": "Eyebrow",
+      "default": "OUR APPROACH"
     },
     {
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
-      "default": "Precise responsive science in results."
+      "default": "We use regenerative science in beauty."
     },
     {
       "type": "textarea",
       "id": "text",
-      "label": "Text",
-      "default": "Each step in Skin Longevity System 5 is calibrated to a biological process — not a trend cycle."
+      "label": "Description",
+      "default": "Most beauty reacts to what you can see. We work a layer beneath, restoring the conditions under which skin repairs itself."
     },
     {
       "type": "checkbox",
@@ -152,17 +256,27 @@
       "type": "text",
       "id": "placeholder_label",
       "label": "Placeholder label",
-      "default": "Upload feature image or animation"
+      "default": "Upload approach image or animation"
     },
     {
       "type": "range",
-      "id": "media_min_height",
-      "label": "Media min height",
-      "min": 240,
-      "max": 720,
+      "id": "media_min_height_desktop",
+      "label": "Media min height (desktop)",
+      "min": 400,
+      "max": 900,
       "step": 20,
       "unit": "px",
-      "default": 420
+      "default": 620
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_mobile",
+      "label": "Media min height (mobile)",
+      "min": 240,
+      "max": 560,
+      "step": 20,
+      "unit": "px",
+      "default": 360
     },
     {
       "type": "header",
@@ -172,42 +286,102 @@
       "type": "color",
       "id": "background_color",
       "label": "Section background",
-      "default": "#f5f0e8"
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "card_background",
-      "label": "Card background",
+      "label": "Text panel background",
       "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "text_color",
-      "label": "Text",
+      "label": "Heading & compare text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Description color",
       "default": "#111111"
     },
     {
       "type": "color",
       "id": "eyebrow_color",
-      "label": "Eyebrow",
-      "default": "#a8894a"
+      "label": "Eyebrow color",
+      "default": "#9a9a9a"
+    },
+    {
+      "type": "color",
+      "id": "compare_label_color",
+      "label": "Compare label color",
+      "default": "#9a9a9a"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
     },
     {
       "type": "range",
       "id": "title_size",
-      "label": "Title size",
-      "min": 24,
-      "max": 48,
+      "label": "Heading size",
+      "min": 28,
+      "max": 56,
       "step": 2,
       "unit": "px",
-      "default": 36
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Description size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "compare_label_size",
+      "label": "Compare label size",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "compare_text_size",
+      "label": "Compare text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
     },
     {
       "type": "range",
       "id": "padding_top",
       "label": "Padding top",
       "min": 0,
-      "max": 120,
+      "max": 80,
       "step": 4,
       "unit": "px",
       "default": 0
@@ -217,15 +391,56 @@
       "id": "padding_bottom",
       "label": "Padding bottom",
       "min": 0,
-      "max": 120,
+      "max": 80,
       "step": 4,
       "unit": "px",
       "default": 0
     }
   ],
+  "blocks": [
+    {
+      "type": "compare_row",
+      "name": "Compare row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "LABEL"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Comparison description."
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Science — Feature split"
+      "name": "Science — Feature split",
+      "settings": {
+        "eyebrow": "OUR APPROACH",
+        "heading": "We use regenerative science in beauty.",
+        "text": "Most beauty reacts to what you can see. We work a layer beneath, restoring the conditions under which skin repairs itself."
+      },
+      "blocks": [
+        {
+          "type": "compare_row",
+          "settings": {
+            "label": "ANTI-AGEING",
+            "text": "Reacts to visible signs. Temporary result."
+          }
+        },
+        {
+          "type": "compare_row",
+          "settings": {
+            "label": "REGENERATIVE",
+            "text": "Restores biological function. Result compounds. Skin maintains independently."
+          }
+        }
+      ]
     }
   ]
 }

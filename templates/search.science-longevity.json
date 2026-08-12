@@ -111,18 +111,43 @@
     },
     "feature_split": {
       "type": "hp-science-feature-split",
+      "blocks": {
+        "compare_1": {
+          "type": "compare_row",
+          "settings": {
+            "label": "ANTI-AGEING",
+            "text": "Reacts to visible signs. Temporary result."
+          }
+        },
+        "compare_2": {
+          "type": "compare_row",
+          "settings": {
+            "label": "REGENERATIVE",
+            "text": "Restores biological function. Result compounds. Skin maintains independently."
+          }
+        }
+      },
+      "block_order": ["compare_1", "compare_2"],
       "settings": {
-        "heading": "Precise responsive science in results.",
-        "text": "Each step in Skin Longevity System 5 is calibrated to a biological process — not a trend cycle.",
+        "eyebrow": "OUR APPROACH",
+        "heading": "We use regenerative science in beauty.",
+        "text": "Most beauty reacts to what you can see. We work a layer beneath, restoring the conditions under which skin repairs itself.",
         "reverse_layout": false,
         "show_media_placeholder": true,
-        "placeholder_label": "Upload feature image or animation",
-        "media_min_height": 420,
-        "background_color": "#f5f0e8",
+        "placeholder_label": "Upload approach image or animation",
+        "media_min_height_desktop": 620,
+        "media_min_height_mobile": 360,
+        "background_color": "#ffffff",
         "card_background": "#ffffff",
         "text_color": "#111111",
-        "eyebrow_color": "#a8894a",
-        "title_size": 36,
+        "body_color": "#111111",
+        "eyebrow_color": "#9a9a9a",
+        "compare_label_color": "#9a9a9a",
+        "title_size": 44,
+        "text_size": 18,
+        "eyebrow_size": 12,
+        "compare_label_size": 11,
+        "compare_text_size": 16,
         "padding_top": 0,
         "padding_bottom": 0
       }
