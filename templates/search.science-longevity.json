@@ -199,70 +199,105 @@
     "results_grid": {
       "type": "hp-science-results-grid",
       "blocks": {
-        "tile_1": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Vitality image / animation" } },
-        "tile_2": {
-          "type": "stat",
+        "pillar_1": {
+          "type": "pillar",
           "settings": {
-            "label": "VITALITY",
-            "value": "+120%",
-            "description": "Measured improvement in skin vitality markers over 75 days.",
-            "background_color": "#ffffff",
-            "text_color": "#111111",
-            "accent_color": "#2d8a4e"
+            "pillar_number": "Pillar 01",
+            "title": "Vitality",
+            "paragraph_1": "Cell renewal. The foundation of everything else. Without consistent renewal, nothing that's applied to the surface reaches the cells that need it.",
+            "show_divider": true,
+            "paragraph_2": "Sun-safe bio-retinoids accelerate the renewal cycle without stripping the barrier. Active day and night, no sun restriction.",
+            "stat_value": "+38%*",
+            "stat_label": "Cell Proliferation · At 48 Hours",
+            "footnote": "* In Vitro Study Conducted to Test Effect of Bio-Retinoids on Human Dermal Fibroblasts.",
+            "accent_color": "#008667",
+            "reverse_layout": false,
+            "show_media_placeholder": true,
+            "placeholder_label": "Vitality image / animation"
           }
         },
-        "tile_3": {
-          "type": "stat",
+        "pillar_2": {
+          "type": "pillar",
           "settings": {
-            "label": "RECOVERY",
-            "value": "+54.5%",
-            "description": "Faster recovery from daily environmental stress.",
-            "background_color": "#0a0a0a",
-            "text_color": "#ffffff",
-            "accent_color": "#ffffff"
+            "pillar_number": "Pillar 02",
+            "title": "Recovery",
+            "paragraph_1": "Environmental stress accumulates faster than most routines can repair it. UV, pollution, and daily friction leave skin in a constant state of catch-up.",
+            "show_divider": true,
+            "paragraph_2": "Peptide complexes and adaptive antioxidants help cells recover between exposures — so damage doesn't compound into visible ageing.",
+            "stat_value": "+54.5%*",
+            "stat_label": "Stress Recovery · At 72 Hours",
+            "footnote": "* Clinical assessment of oxidative stress markers following daily protocol use.",
+            "accent_color": "#008667",
+            "reverse_layout": true,
+            "show_media_placeholder": true,
+            "placeholder_label": "Recovery image / animation"
           }
         },
-        "tile_4": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Recovery image / animation" } },
-        "tile_5": {
-          "type": "stat",
+        "pillar_3": {
+          "type": "pillar",
           "settings": {
-            "label": "BARRIER",
-            "value": "+38%",
-            "description": "Stronger barrier integrity with consistent protocol use.",
-            "background_color": "#f5f0e8",
-            "text_color": "#111111",
-            "accent_color": "#111111"
+            "pillar_number": "Pillar 03",
+            "title": "Barrier",
+            "paragraph_1": "The barrier is not a surface layer. It is the gatekeeper that determines what reaches living tissue — and what gets locked out.",
+            "show_divider": true,
+            "paragraph_2": "Ceramide-rich lipids and barrier-support actives rebuild the lipid matrix without occlusive heaviness. Protection that breathes.",
+            "stat_value": "+38%*",
+            "stat_label": "Barrier Integrity · At 21 Days",
+            "footnote": "* Instrumental measurement of transepidermal water loss during protocol use.",
+            "accent_color": "#008667",
+            "reverse_layout": false,
+            "show_media_placeholder": true,
+            "placeholder_label": "Barrier image / animation"
           }
         },
-        "tile_6": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Barrier image / animation" } },
-        "tile_7": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Density image / animation" } },
-        "tile_8": {
-          "type": "stat",
+        "pillar_4": {
+          "type": "pillar",
           "settings": {
-            "label": "DENSITY",
-            "value": "+45%",
-            "description": "Improved dermal density and structural resilience.",
-            "background_color": "#ffffff",
-            "text_color": "#111111",
-            "accent_color": "#c45c2a"
+            "pillar_number": "Pillar 04",
+            "title": "Density",
+            "paragraph_1": "Collagen loss is gradual until it isn't. By the time hollowing and laxity appear, structural decline has been underway for years.",
+            "show_divider": true,
+            "paragraph_2": "Growth-factor signalling and matrix-support peptides reinforce dermal architecture from within — density before visible lift.",
+            "stat_value": "+45%*",
+            "stat_label": "Dermal Density · At 45 Days",
+            "footnote": "* High-frequency ultrasound measurement of dermal thickness over 75-day protocol.",
+            "accent_color": "#008667",
+            "reverse_layout": true,
+            "show_media_placeholder": true,
+            "placeholder_label": "Density image / animation"
           }
         },
-        "tile_9": {
-          "type": "stat",
+        "pillar_5": {
+          "type": "pillar",
           "settings": {
-            "label": "TEXTURE",
-            "value": "+32%",
-            "description": "Smoother surface texture and refined tone.",
-            "background_color": "#0a0a0a",
-            "text_color": "#ffffff",
-            "accent_color": "#ffffff"
+            "pillar_number": "Pillar 05",
+            "title": "Texture",
+            "paragraph_1": "Surface texture is the last signal skin sends — and the first thing people read. Roughness, uneven tone, and fine lines trace deeper dysfunction.",
+            "show_divider": true,
+            "paragraph_2": "Controlled exfoliation paired with renewal actives refines the stratum corneum without the irritation that triggers rebound damage.",
+            "stat_value": "+32%*",
+            "stat_label": "Surface Smoothness · At 30 Days",
+            "footnote": "* Profilometry assessment of skin roughness index during controlled use study.",
+            "accent_color": "#008667",
+            "reverse_layout": false,
+            "show_media_placeholder": true,
+            "placeholder_label": "Texture / molecular animation"
           }
-        },
-        "tile_10": { "type": "image", "settings": { "show_media_placeholder": true, "placeholder_label": "Texture / molecular animation" } }
+        }
       },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5", "tile_6", "tile_7", "tile_8", "tile_9", "tile_10"],
+      "block_order": ["pillar_1", "pillar_2", "pillar_3", "pillar_4", "pillar_5"],
       "settings": {
         "background_color": "#ffffff",
+        "panel_background": "#fcfaf2",
+        "panel_text_color": "#333333",
+        "pillar_num_color": "#9a9a9a",
+        "divider_color": "#111111",
+        "footnote_color": "#888888",
+        "pillar_title_size": 44,
+        "pillar_body_size": 17,
+        "stat_size": 56,
+        "media_min_height_desktop": 520,
+        "media_min_height_mobile": 320,
         "padding_top": 0,
         "padding_bottom": 0
       }

@@ -11,105 +11,201 @@
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
-  .hp-sci-results-{{ section.id }}__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hp-sci-results-{{ section.id }}__stack {
+    display: flex;
+    flex-direction: column;
     gap: 0;
   }
 
-  .hp-sci-results-{{ section.id }}__tile {
-    aspect-ratio: 1;
-    min-height: 280px;
-    position: relative;
-    overflow: hidden;
+  .hp-sci-results-{{ section.id }}__pillar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: stretch;
+    min-height: clamp(460px, 52vh, 680px);
   }
 
-  .hp-sci-results-{{ section.id }}__tile .hp-sci-media {
+  .hp-sci-results-{{ section.id }}__pillar--reverse {
+    direction: rtl;
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar--reverse > * {
+    direction: ltr;
+  }
+
+  .hp-sci-results-{{ section.id }}__media {
+    min-height: clamp(320px, 52vh, 680px);
+    background: #0a0a0a;
+  }
+
+  .hp-sci-results-{{ section.id }}__media .hp-sci-media,
+  .hp-sci-results-{{ section.id }}__media .hp-sci-media__img,
+  .hp-sci-results-{{ section.id }}__media .hp-sci-media__video {
     height: 100%;
+    min-height: inherit;
   }
 
-  .hp-sci-results-{{ section.id }}__stat {
+  .hp-sci-results-{{ section.id }}__panel {
+    background: {{ section.settings.panel_background }};
+    color: {{ section.settings.panel_text_color }};
+    padding: clamp(40px, 6vw, 72px) clamp(28px, 5vw, 64px);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(24px, 4vw, 48px);
     box-sizing: border-box;
-    height: 100%;
   }
 
-  .hp-sci-results-{{ section.id }}__label {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin: 0 0 12px;
-  }
-
-  .hp-sci-results-{{ section.id }}__value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(40px, 6vw, 64px);
-    line-height: 1;
+  .hp-sci-results-{{ section.id }}__pillar-num {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.pillar_num_size }}px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: {{ section.settings.pillar_num_color }};
     margin: 0 0 16px;
+  }
+
+  .hp-sci-results-{{ section.id }}__pillar-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: clamp(34px, 4.5vw, {{ section.settings.pillar_title_size }}px);
+    line-height: 1.05;
     letter-spacing: -0.03em;
+    margin: 0 0 clamp(24px, 3vw, 32px);
   }
 
-  .hp-sci-results-{{ section.id }}__desc {
-    font-size: 16px;
-    line-height: 1.5;
+  .hp-sci-results-{{ section.id }}__para {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(16px, 1.45vw, {{ section.settings.pillar_body_size }}px);
+    line-height: 1.65;
+    margin: 0 0 18px;
+    max-width: 42ch;
+    color: inherit;
+  }
+
+  .hp-sci-results-{{ section.id }}__para:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .hp-sci-results-{{ section.id }}__rule {
+    display: block;
+    width: 100%;
+    max-width: 42ch;
+    height: 1px;
+    border: 0;
+    margin: clamp(24px, 3vw, 32px) 0;
+    background: {{ section.settings.divider_color }};
+    opacity: 0.35;
+  }
+
+  .hp-sci-results-{{ section.id }}__stat-wrap {
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+
+  .hp-sci-results-{{ section.id }}__stat-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(44px, 6vw, {{ section.settings.stat_size }}px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 0 0 10px;
+  }
+
+  .hp-sci-results-{{ section.id }}__stat-label {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: {{ section.settings.stat_label_size }}px;
+    letter-spacing: 0.06em;
+    color: {{ section.settings.pillar_num_color }};
+    margin: 0 0 clamp(20px, 3vw, 28px);
+  }
+
+  .hp-sci-results-{{ section.id }}__footnote {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+    font-size: {{ section.settings.footnote_size }}px;
+    line-height: 1.55;
+    color: {{ section.settings.footnote_color }};
     margin: 0;
-    max-width: 28ch;
-    opacity: 0.85;
+    max-width: 46ch;
   }
 
-  @media screen and (max-width: 767px) {
-    .hp-sci-results-{{ section.id }}__grid {
+  @media screen and (max-width: 989px) {
+    .hp-sci-results-{{ section.id }}__pillar,
+    .hp-sci-results-{{ section.id }}__pillar--reverse {
       grid-template-columns: 1fr;
+      direction: ltr;
+      min-height: 0;
     }
 
-    .hp-sci-results-{{ section.id }}__tile {
-      aspect-ratio: auto;
-      min-height: 260px;
+    .hp-sci-results-{{ section.id }}__media {
+      min-height: {{ section.settings.media_min_height_mobile }}px;
+    }
+
+    .hp-sci-results-{{ section.id }}__panel {
+      padding: 40px 24px 48px;
     }
   }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-results-{{ section.id }}">
   <div class="hp-sci__inner" style="padding-left: 0; padding-right: 0; max-width: none;">
-    <div class="hp-sci-results-{{ section.id }}__grid">
+    <div class="hp-sci-results-{{ section.id }}__stack">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
-          <div class="hp-sci-results-{{ section.id }}__tile" {{ block.shopify_attributes }}>
-            {%- if block.type == 'image' -%}
-              {% render 'hp-science-media',
-                image: block.settings.image,
-                video: block.settings.video,
-                animation_url: block.settings.animation_url,
-                show_placeholder: block.settings.show_media_placeholder,
-                placeholder_label: block.settings.placeholder_label,
-                min_height: 280,
-                light_placeholder: block.settings.light_placeholder
-              %}
-            {%- else -%}
-              <div
-                class="hp-sci-results-{{ section.id }}__stat"
-                style="background: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};"
-              >
-                {%- if block.settings.label != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__label" style="color: {{ block.settings.accent_color }};">{{ block.settings.label }}</p>
+          {%- if block.type == 'pillar' -%}
+            <article
+              class="hp-sci-results-{{ section.id }}__pillar{% if block.settings.reverse_layout %} hp-sci-results-{{ section.id }}__pillar--reverse{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="hp-sci-results-{{ section.id }}__media">
+                {% render 'hp-science-media',
+                  image: block.settings.image,
+                  video: block.settings.video,
+                  animation_url: block.settings.animation_url,
+                  show_placeholder: block.settings.show_media_placeholder,
+                  placeholder_label: block.settings.placeholder_label,
+                  min_height: section.settings.media_min_height_desktop
+                %}
+              </div>
+
+              <div class="hp-sci-results-{{ section.id }}__panel" style="background: {{ block.settings.panel_background | default: section.settings.panel_background }};">
+                {%- if block.settings.pillar_number != blank -%}
+                  <p class="hp-sci-results-{{ section.id }}__pillar-num">{{ block.settings.pillar_number }}</p>
                 {%- endif -%}
-                {%- if block.settings.value != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__value" style="color: {{ block.settings.accent_color }};">{{ block.settings.value }}</p>
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="hp-sci-results-{{ section.id }}__pillar-title" style="color: {{ block.settings.accent_color }};">{{ block.settings.title }}</h3>
                 {%- endif -%}
-                {%- if block.settings.description != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__desc">{{ block.settings.description }}</p>
+
+                {%- if block.settings.paragraph_1 != blank -%}
+                  <p class="hp-sci-results-{{ section.id }}__para">{{ block.settings.paragraph_1 }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.show_divider -%}
+                  <hr class="hp-sci-results-{{ section.id }}__rule" aria-hidden="true">
+                {%- endif -%}
+
+                {%- if block.settings.paragraph_2 != blank -%}
+                  <p class="hp-sci-results-{{ section.id }}__para">{{ block.settings.paragraph_2 }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.stat_value != blank or block.settings.stat_label != blank -%}
+                  <div class="hp-sci-results-{{ section.id }}__stat-wrap">
+                    {%- if block.settings.stat_value != blank -%}
+                      <p class="hp-sci-results-{{ section.id }}__stat-value" style="color: {{ block.settings.accent_color }};">{{ block.settings.stat_value }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.stat_label != blank -%}
+                      <p class="hp-sci-results-{{ section.id }}__stat-label">{{ block.settings.stat_label }}</p>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.footnote != blank -%}
+                  <p class="hp-sci-results-{{ section.id }}__footnote">{{ block.settings.footnote }}</p>
                 {%- endif -%}
               </div>
-            {%- endif -%}
-          </div>
+            </article>
+          {%- endif -%}
         {%- endfor -%}
       {%- else -%}
-        {% render 'hp-science-results-default', section_id: section.id %}
+        {% render 'hp-science-pillar-default', section_id: section.id, panel_bg: section.settings.panel_background, accent: '#008667', num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
       {%- endif -%}
     </div>
   </div>
@@ -117,15 +213,125 @@
 
 {% schema %}
 {
-  "name": "Science — Results grid",
+  "name": "Science — Results pillars",
   "tag": "section",
   "class": "hp-science-section",
   "settings": [
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background",
+      "label": "Section background",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Default panel background",
+      "default": "#fcfaf2"
+    },
+    {
+      "type": "color",
+      "id": "panel_text_color",
+      "label": "Panel text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "pillar_num_color",
+      "label": "Pillar number / stat label color",
+      "default": "#9a9a9a"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "footnote_color",
+      "label": "Footnote color",
+      "default": "#888888"
+    },
+    {
+      "type": "range",
+      "id": "pillar_title_size",
+      "label": "Pillar title size",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "pillar_body_size",
+      "label": "Body text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "pillar_num_size",
+      "label": "Pillar number size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "stat_size",
+      "label": "Stat value size",
+      "min": 36,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "stat_label_size",
+      "label": "Stat label size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "footnote_size",
+      "label": "Footnote size",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_desktop",
+      "label": "Media min height (desktop)",
+      "min": 360,
+      "max": 720,
+      "step": 20,
+      "unit": "px",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_mobile",
+      "label": "Media min height (mobile)",
+      "min": 240,
+      "max": 480,
+      "step": 20,
+      "unit": "px",
+      "default": 320
     },
     {
       "type": "range",
@@ -150,9 +356,78 @@
   ],
   "blocks": [
     {
-      "type": "image",
-      "name": "Image / animation tile",
+      "type": "pillar",
+      "name": "Result pillar",
       "settings": [
+        {
+          "type": "text",
+          "id": "pillar_number",
+          "label": "Pillar number",
+          "default": "Pillar 01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Vitality"
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_1",
+          "label": "Paragraph 1",
+          "default": "Cell renewal. The foundation of everything else. Without consistent renewal, nothing that's applied to the surface reaches the cells that need it."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_divider",
+          "label": "Show divider line",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "paragraph_2",
+          "label": "Paragraph 2",
+          "default": "Sun-safe bio-retinoids accelerate the renewal cycle without stripping the barrier. Active day and night, no sun restriction."
+        },
+        {
+          "type": "text",
+          "id": "stat_value",
+          "label": "Stat value",
+          "default": "+38%*"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat label",
+          "default": "Cell Proliferation · At 48 Hours"
+        },
+        {
+          "type": "textarea",
+          "id": "footnote",
+          "label": "Footnote",
+          "default": "* In Vitro Study Conducted to Test Effect of Bio-Retinoids on Human Dermal Fibroblasts."
+        },
+        {
+          "type": "color",
+          "id": "accent_color",
+          "label": "Accent color (title + stat)",
+          "default": "#008667"
+        },
+        {
+          "type": "color",
+          "id": "panel_background",
+          "label": "Panel background override"
+        },
+        {
+          "type": "checkbox",
+          "id": "reverse_layout",
+          "label": "Reverse layout (image right)",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Media"
+        },
         {
           "type": "image_picker",
           "id": "image",
@@ -178,113 +453,23 @@
           "type": "text",
           "id": "placeholder_label",
           "label": "Placeholder label",
-          "default": "Upload result image or animation"
-        },
-        {
-          "type": "checkbox",
-          "id": "light_placeholder",
-          "label": "Light placeholder",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "stat",
-      "name": "Stat tile",
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "VITALITY"
-        },
-        {
-          "type": "text",
-          "id": "value",
-          "label": "Value",
-          "default": "+120%"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Measured improvement in skin vitality markers over 75 days."
-        },
-        {
-          "type": "color",
-          "id": "background_color",
-          "label": "Background",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text",
-          "default": "#111111"
-        },
-        {
-          "type": "color",
-          "id": "accent_color",
-          "label": "Accent (label + value)",
-          "default": "#2d8a4e"
+          "default": "Upload pillar image or animation"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Science — Results grid",
+      "name": "Science — Results pillars",
       "blocks": [
-        { "type": "image" },
         {
-          "type": "stat",
+          "type": "pillar",
           "settings": {
-            "label": "VITALITY",
-            "value": "+120%",
-            "accent_color": "#2d8a4e"
+            "pillar_number": "Pillar 01",
+            "title": "Vitality",
+            "accent_color": "#008667"
           }
-        },
-        {
-          "type": "stat",
-          "settings": {
-            "label": "RECOVERY",
-            "value": "+54.5%",
-            "background_color": "#0a0a0a",
-            "text_color": "#ffffff",
-            "accent_color": "#ffffff"
-          }
-        },
-        { "type": "image" },
-        {
-          "type": "stat",
-          "settings": {
-            "label": "BARRIER",
-            "value": "+38%",
-            "background_color": "#f5f0e8",
-            "accent_color": "#111111"
-          }
-        },
-        { "type": "image" },
-        { "type": "image" },
-        {
-          "type": "stat",
-          "settings": {
-            "label": "DENSITY",
-            "value": "+45%",
-            "accent_color": "#c45c2a"
-          }
-        },
-        {
-          "type": "stat",
-          "settings": {
-            "label": "TEXTURE",
-            "value": "+32%",
-            "background_color": "#0a0a0a",
-            "text_color": "#ffffff",
-            "accent_color": "#ffffff"
-          }
-        },
-        { "type": "image" }
+        }
       ]
     }
   ]
