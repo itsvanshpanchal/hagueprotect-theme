@@ -65,12 +65,17 @@
       url = wrap.getAttribute('data-desktop-bg') || wrap.getAttribute('data-mobile-bg');
     }
 
+    var storyDesktop = window.matchMedia('(min-width: 750px)').matches;
+    var storyFocal = storyDesktop ? '62% center' : 'center center';
+
     if (url && wrap.dataset.hpStoryBg !== url) {
       wrap.style.backgroundImage = 'url("' + String(url).replace(/"/g, '') + '")';
       wrap.style.backgroundSize = 'cover';
-      wrap.style.backgroundPosition = 'center center';
+      wrap.style.backgroundPosition = storyFocal;
       wrap.style.backgroundRepeat = 'no-repeat';
       wrap.dataset.hpStoryBg = url;
+    } else if (!mobile) {
+      wrap.style.backgroundPosition = storyFocal;
     }
 
     if (mobile) {
@@ -97,7 +102,19 @@
       cover.style.width = '100%';
       cover.style.height = '100%';
       cover.style.objectFit = 'cover';
+      cover.style.objectPosition = storyFocal;
+      if (storyDesktop) {
+        cover.style.transform = 'scale(1.12)';
+        cover.style.transformOrigin = storyFocal;
+      } else {
+        cover.style.transform = '';
+        cover.style.transformOrigin = '';
+      }
       cover.dataset.hpCoverReady = '1';
+    } else if (cover && storyDesktop) {
+      cover.style.objectPosition = storyFocal;
+      cover.style.transform = 'scale(1.12)';
+      cover.style.transformOrigin = storyFocal;
     }
 
     var content = wrap.querySelector('[data-hp-story-content]');

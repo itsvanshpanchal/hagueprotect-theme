@@ -24,6 +24,27 @@
     return MQ_MOBILE.matches;
   }
 
+  /* Desktop art has a baked-in left letterbox — crop toward product side */
+  var STORY_DESKTOP_FOCAL = '62% center';
+  var STORY_DESKTOP_SCALE = '1.12';
+
+  function storyBannerFocal(mobile) {
+    return mobile ? 'center center' : STORY_DESKTOP_FOCAL;
+  }
+
+  function applyStoryCoverCrop(el, mobile) {
+    if (!el) return;
+    var focal = storyBannerFocal(mobile);
+    el.style.setProperty('object-position', focal, 'important');
+    if (mobile) {
+      el.style.removeProperty('transform');
+      el.style.removeProperty('transform-origin');
+    } else {
+      el.style.setProperty('transform', 'scale(' + STORY_DESKTOP_SCALE + ')', 'important');
+      el.style.setProperty('transform-origin', focal, 'important');
+    }
+  }
+
   function corpMarqueeSeamPull() {
     return isMobile() ? '-36px' : '-32px';
   }
@@ -519,7 +540,7 @@
       cover.style.setProperty('min-width', '100%', 'important');
       cover.style.setProperty('min-height', '100%', 'important');
       cover.style.setProperty('object-fit', 'cover', 'important');
-      cover.style.setProperty('object-position', 'center center', 'important');
+      applyStoryCoverCrop(cover, mobile);
       cover.style.setProperty('z-index', '1', 'important');
       if (!cover.complete && src) {
         var warm = new Image();
@@ -541,10 +562,12 @@
 
     var useCoverOnly = !!(cover && src);
 
+    var storyFocal = storyBannerFocal(mobile);
+
     for (var k = 0; k < wraps.length; k++) {
       wraps[k].style.setProperty('background-color', '#111111', 'important');
       wraps[k].style.setProperty('background-size', 'cover', 'important');
-      wraps[k].style.setProperty('background-position', 'center center', 'important');
+      wraps[k].style.setProperty('background-position', storyFocal, 'important');
       wraps[k].style.setProperty('background-repeat', 'no-repeat', 'important');
       if (useCoverOnly) {
         wraps[k].style.setProperty('background-image', 'none', 'important');
@@ -555,7 +578,7 @@
 
     for (var p = 0; p < pins.length; p++) {
       pins[p].style.setProperty('background-size', 'cover', 'important');
-      pins[p].style.setProperty('background-position', 'center center', 'important');
+      pins[p].style.setProperty('background-position', storyFocal, 'important');
       pins[p].style.setProperty('background-repeat', 'no-repeat', 'important');
       if (useCoverOnly) {
         pins[p].style.setProperty('background-image', 'none', 'important');
@@ -571,9 +594,16 @@
     } else if (src) {
       pin.style.setProperty('background-image', 'url("' + src.replace(/"/g, '\\"') + '")', 'important');
       pin.style.setProperty('background-size', 'cover', 'important');
-      pin.style.setProperty('background-position', 'center center', 'important');
+      pin.style.setProperty('background-position', storyFocal, 'important');
       pin.style.setProperty('background-repeat', 'no-repeat', 'important');
       pin.style.setProperty('background-color', '#111111', 'important');
+    }
+
+    var storyImgs = pin.querySelectorAll(
+      '[data-hp-story-cover], .ai-story-banner-cover, img[class*="ai-story-banner-image"]'
+    );
+    for (var si = 0; si < storyImgs.length; si++) {
+      applyStoryCoverCrop(storyImgs[si], mobile);
     }
 
     var content = pin.querySelectorAll('[class*="ai-story-banner-content"]');

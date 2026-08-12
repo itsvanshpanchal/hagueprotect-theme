@@ -101,7 +101,14 @@
   body.template-index .ai-story-banner-image,
   body.template-index .ai-story-banner-cover,
   body.template-index [data-hp-story-cover] {
-    object-position: 42% center !important;
+    object-position: 62% center !important;
+    transform: scale(1.12) !important;
+    transform-origin: 62% center !important;
+  }
+
+  body.template-index [data-hp-story-wrap],
+  body.template-index [class*='ai-story-banner-wrapper'] {
+    background-position: 62% center !important;
   }
 }
 

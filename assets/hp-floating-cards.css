@@ -161,6 +161,8 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   max-height: none !important;
   object-fit: cover !important;
   object-position: center center !important;
+  transform: none !important;
+  transform-origin: center center !important;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -184,7 +186,14 @@ body.hp-float-active .hp-float-stack > .shopify-section.hp-float-story,
   body.template-index .hp-float-stack .hp-float-story img[class*='ai-story-banner-image'],
   body.template-index .hp-float-stack .hp-float-story [data-hp-story-cover],
   body.template-index .hp-float-stack .hp-float-story .ai-story-banner-cover {
-    object-position: 42% center !important;
+    object-position: 62% center !important;
+    transform: scale(1.12) !important;
+    transform-origin: 62% center !important;
+  }
+
+  body.template-index .hp-float-stack .hp-float-story [class*='ai-story-banner-wrapper'],
+  body.template-index .hp-float-stack .hp-float-story [data-hp-story-wrap] {
+    background-position: 62% center !important;
   }
 
   /* Section roots fill desktop full-screen cards */
