@@ -202,6 +202,55 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const statObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.dataset.animated) return;
+          el.dataset.animated = 'true';
+          
+          const text = el.textContent.trim();
+          const match = text.match(/^([^0-9.-]*)([0-9,.]+)(.*)$/);
+          if (match) {
+            const prefix = match[1];
+            const numberStr = match[2].replace(/,/g, '');
+            const suffix = match[3];
+            const targetNum = parseFloat(numberStr);
+            if (isNaN(targetNum)) return;
+            const isFloat = numberStr.includes('.');
+            const decimals = isFloat ? numberStr.split('.')[1].length : 0;
+            
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            const animate = (currentTime) => {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              
+              const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+              const currentNum = targetNum * easeOutQuart;
+              
+              el.textContent = prefix + currentNum.toFixed(decimals) + suffix;
+              
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                el.textContent = text;
+              }
+            };
+            
+            requestAnimationFrame(animate);
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    document.querySelectorAll('.hp-sci-proto-{{ section.id }}__stat-value').forEach(el => statObserver.observe(el));
+  });
+</script>
+
 {% schema %}
 {
   "name": "Science — Protocol",
