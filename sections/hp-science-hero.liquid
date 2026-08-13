@@ -21,7 +21,9 @@
   }
 
   .hp-sci-hero-{{ section.id }}__title {
-    font-size: {{ section.settings.title_size_desktop }}px;
+    font-size: clamp(32px, 4.5vw, {{ section.settings.title_size_desktop }}px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
     color: inherit;
   }
 
@@ -44,7 +46,7 @@
     }
 
     .hp-sci-hero-{{ section.id }}__title {
-      font-size: {{ section.settings.title_size_mobile }}px;
+      font-size: clamp(32px, 4.5vw, {{ section.settings.title_size_mobile }}px);
     }
 
     .hp-sci-hero-{{ section.id }}__copy {
@@ -217,7 +219,7 @@
       "max": 72,
       "step": 2,
       "unit": "px",
-      "default": 36
+      "default": 56
     },
     {
       "type": "range",
@@ -227,7 +229,7 @@
       "max": 48,
       "step": 2,
       "unit": "px",
-      "default": 36
+      "default": 56
     },
     {
       "type": "header",
