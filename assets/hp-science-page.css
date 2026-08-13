@@ -21,7 +21,7 @@
   font-size: 52px;
   letter-spacing: -0.02em;
   line-height: 1.12;
-  margin: 0 0 24px;
+  margin: 0;
 }
 
 .hp-sci__eyebrow {
@@ -30,7 +30,7 @@
   font-weight: 300;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin: 0 0 12px;
+  margin: 0;
 }
 
 .hp-sci__body {
@@ -39,7 +39,7 @@
   font-weight: 300;
   line-height: 1.55;
   color: inherit;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 .hp-sci__inner {
@@ -115,17 +115,14 @@
 @media screen and (max-width: 989px) {
   .hp-sci__title {
     font-size: 24px;
-    margin-bottom: 16px;
   }
 
   .hp-sci__eyebrow {
     font-size: 12px;
-    margin-bottom: 10px;
   }
 
   .hp-sci__body {
     font-size: 17px;
-    margin-bottom: 12px;
   }
 }
 
@@ -152,11 +149,9 @@ body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__h
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
-body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__col-title"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__card-title"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__graph-title"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"],
-body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__num"],
 body.template-search-science-longevity #MainContent .hp-sci h1,
 body.template-search-science-longevity #MainContent .hp-sci h2,
 body.template-search-science-longevity #MainContent .hp-sci h3,
@@ -165,11 +160,9 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="_
 body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
-body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__col-title"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__card-title"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__graph-title"],
-body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"],
-body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__num"] {
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"] {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
   font-weight: 300 !important;
   font-style: normal !important;
@@ -195,6 +188,24 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="_
   font-size: 19px !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
+}
+
+body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__num"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__num"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 19px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+}
+
+body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__col-title"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__col-title"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
 }
 
 body.template-page-science-longevity #MainContent .hp-sci__body,
@@ -228,11 +239,9 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="_
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title"],
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
-  body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__col-title"],
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__card-title"],
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__graph-title"],
   body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"],
-  body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__num"],
   body.template-search-science-longevity #MainContent .hp-sci h1,
   body.template-search-science-longevity #MainContent .hp-sci h2,
   body.template-search-science-longevity #MainContent .hp-sci h3,
@@ -241,12 +250,20 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="_
   body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title"],
   body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
   body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
-  body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__col-title"],
   body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__card-title"],
   body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__graph-title"],
-  body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"],
-  body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__num"] {
+  body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__stat-value"] {
     font-size: 24px !important;
+  }
+
+  body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__num"],
+  body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__num"] {
+    font-size: 12px !important;
+  }
+
+  body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__col-title"],
+  body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__col-title"] {
+    font-size: 20px !important;
   }
 
   body.template-page-science-longevity #MainContent .hp-sci .hp-sci__eyebrow,

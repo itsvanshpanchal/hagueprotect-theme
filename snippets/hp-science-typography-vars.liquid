@@ -1,6 +1,6 @@
 {%- comment -%}
-  Page-wide typography + spacing variables for Science Longevity templates.
-  Fixed standards — editor controls are kept for compatibility but sizes are locked in CSS.
+  Page-wide typography variables for Science Longevity templates.
+  Fixed font sizes/weights — spacing is controlled per section in the theme editor.
 {%- endcomment -%}
 {% style %}
   body.template-page-science-longevity,
@@ -21,15 +21,6 @@
     --hp-sci-lead-heading-line-height: 1.12;
     --hp-sci-base-heading-line-height: 1.12;
     --hp-sci-body-line-height: 1.55;
-    --hp-sci-page-gutter: 28px;
-    --hp-sci-section-padding-top: 96px;
-    --hp-sci-section-padding-bottom: 96px;
-    --hp-sci-eyebrow-title-gap: 12px;
-  }
-
-  body.template-page-science-longevity #MainContent .hp-sci .hp-sci__eyebrow,
-  body.template-search-science-longevity #MainContent .hp-sci .hp-sci__eyebrow {
-    margin-bottom: 12px;
   }
 
   @media screen and (max-width: 989px) {
@@ -41,10 +32,6 @@
       --hp-sci-body-size: 17px;
       --hp-sci-eyebrow-size: 12px;
       --hp-sci-stat-number-size: 24px;
-      --hp-sci-page-gutter: 20px;
-      --hp-sci-section-padding-top: 56px;
-      --hp-sci-section-padding-bottom: 56px;
-      --hp-sci-eyebrow-title-gap: 10px;
     }
   }
 {% endstyle %}

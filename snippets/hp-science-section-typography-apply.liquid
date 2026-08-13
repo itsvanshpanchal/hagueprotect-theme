@@ -2,17 +2,6 @@
   Apply per-section typography — high specificity so editor settings beat global hp-science-page.css.
 {%- endcomment -%}
 {%- assign sec = '#shopify-section-' | append: section.id -%}
-body.template-page-science-longevity {{ sec }} .hp-sci,
-body.template-search-science-longevity {{ sec }} .hp-sci {
-  padding-top: var(--hp-sci-sec-pad-top) !important;
-  padding-bottom: var(--hp-sci-sec-pad-bottom) !important;
-}
-
-body.template-page-science-longevity {{ sec }} .hp-sci__inner,
-body.template-search-science-longevity {{ sec }} .hp-sci__inner {
-  padding-left: var(--hp-sci-sec-gutter) !important;
-  padding-right: var(--hp-sci-sec-gutter) !important;
-}
 
 body.template-page-science-longevity {{ sec }} .hp-sci .hp-sci__eyebrow,
 body.template-search-science-longevity {{ sec }} .hp-sci .hp-sci__eyebrow,
@@ -30,7 +19,6 @@ body.template-search-science-longevity {{ sec }} .hp-sci [class*="__formula-eyeb
   font-size: var(--hp-sci-sec-eyebrow-size) !important;
   font-weight: var(--hp-sci-sec-eyebrow-weight) !important;
   letter-spacing: var(--hp-sci-sec-eyebrow-letter-spacing) !important;
-  margin-bottom: var(--hp-sci-sec-eyebrow-gap) !important;
   text-transform: uppercase !important;
 }
 

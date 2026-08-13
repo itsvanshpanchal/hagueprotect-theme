@@ -1,5 +1,5 @@
 {%- comment -%}
-  Science Longevity — fixed typography + spacing (do not vary per legacy section settings).
+  Science Longevity — fixed typography (fonts, sizes, weights). Spacing is controlled per section.
   Render once at the END of each section {%- style -%} block.
 {%- endcomment -%}
 {%- liquid
@@ -52,10 +52,6 @@
   --hp-sci-sec-eyebrow-letter-spacing: 0.12em;
   --hp-sci-sec-heading-line-height: 1.12;
   --hp-sci-sec-body-line-height: 1.55;
-  --hp-sci-sec-pad-top: 96px;
-  --hp-sci-sec-pad-bottom: 96px;
-  --hp-sci-sec-gutter: 28px;
-  --hp-sci-sec-eyebrow-gap: 12px;
   {%- if body_color != blank -%}
   --hp-sci-sec-body-color: {{ body_color }};
   {%- endif -%}
@@ -63,46 +59,13 @@
 
 #MainContent {{ sec }} .hp-sci,
 {{ sec }} .hp-sci {
-  padding-top: 96px !important;
-  padding-bottom: 96px !important;
   text-align: left;
-}
-
-#MainContent {{ sec }} .hp-sci[class*="hp-sci-banner-"],
-#MainContent {{ sec }} .hp-sci[class*="hp-sci-headlines-"],
-{{ sec }} .hp-sci[class*="hp-sci-banner-"],
-{{ sec }} .hp-sci[class*="hp-sci-headlines-"] {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-#MainContent {{ sec }} .hp-sci[class*="hp-sci-feature-"] .hp-sci__inner,
-#MainContent {{ sec }} .hp-sci[class*="hp-sci-results-"] .hp-sci__inner,
-{{ sec }} .hp-sci[class*="hp-sci-feature-"] .hp-sci__inner,
-{{ sec }} .hp-sci[class*="hp-sci-results-"] .hp-sci__inner {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  max-width: none !important;
-}
-
-#MainContent {{ sec }} .hp-sci__inner,
-{{ sec }} .hp-sci__inner {
-  padding-left: 28px !important;
-  padding-right: 28px !important;
-  max-width: var(--hp-sci-max, 1440px);
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
 }
 
 #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
 #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"],
 {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
 {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"] {
-  padding-top: 96px !important;
-  padding-bottom: 96px !important;
-  padding-left: 28px !important;
-  padding-right: 28px !important;
   text-align: center;
 }
 
@@ -129,7 +92,6 @@
   line-height: 1.35 !important;
   letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  margin: 0 0 12px !important;
   text-align: inherit;
 }
 
@@ -147,11 +109,9 @@
 #MainContent {{ sec }} .hp-sci [class*="__title-main"],
 #MainContent {{ sec }} .hp-sci [class*="__title-sub"],
 #MainContent {{ sec }} .hp-sci [class*="__pillar-title"],
-#MainContent {{ sec }} .hp-sci [class*="__col-title"],
 #MainContent {{ sec }} .hp-sci [class*="__card-title"],
 #MainContent {{ sec }} .hp-sci [class*="__graph-title"],
 #MainContent {{ sec }} .hp-sci [class*="__stat-value"],
-#MainContent {{ sec }} .hp-sci [class*="__num"],
 {{ sec }} .hp-sci h1,
 {{ sec }} .hp-sci h2,
 {{ sec }} .hp-sci h3,
@@ -166,20 +126,37 @@
 {{ sec }} .hp-sci [class*="__title-main"],
 {{ sec }} .hp-sci [class*="__title-sub"],
 {{ sec }} .hp-sci [class*="__pillar-title"],
-{{ sec }} .hp-sci [class*="__col-title"],
 {{ sec }} .hp-sci [class*="__card-title"],
 {{ sec }} .hp-sci [class*="__graph-title"],
-{{ sec }} .hp-sci [class*="__stat-value"],
-{{ sec }} .hp-sci [class*="__num"] {
+{{ sec }} .hp-sci [class*="__stat-value"] {
   font-family: {{ inter_stack }} !important;
   font-size: 52px !important;
   font-weight: 300 !important;
   font-style: normal !important;
   line-height: 1.12 !important;
   letter-spacing: -0.02em !important;
-  margin-top: 0 !important;
-  margin-bottom: 24px !important;
   text-align: inherit;
+}
+
+#MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"],
+{{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"] {
+  font-family: {{ inter_stack }} !important;
+  font-size: 19px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+}
+
+#MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"],
+{{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"] {
+  font-family: {{ inter_stack }} !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
 }
 
 #MainContent {{ sec }} .hp-sci .hp-sci__body,
@@ -229,8 +206,6 @@
   line-height: 1.55 !important;
   letter-spacing: normal !important;
   text-transform: none !important;
-  margin-top: 0 !important;
-  margin-bottom: 16px !important;
   text-align: inherit;
   {%- if body_color != blank -%}
   color: {{ body_color }} !important;
@@ -243,40 +218,6 @@
     --hp-sci-sec-subheading-size: 24px;
     --hp-sci-sec-body-size: 17px;
     --hp-sci-sec-eyebrow-size: 12px;
-    --hp-sci-sec-pad-top: 56px;
-    --hp-sci-sec-pad-bottom: 56px;
-    --hp-sci-sec-gutter: 20px;
-    --hp-sci-sec-eyebrow-gap: 10px;
-  }
-
-  #MainContent {{ sec }} .hp-sci,
-  {{ sec }} .hp-sci {
-    padding-top: 56px !important;
-    padding-bottom: 56px !important;
-  }
-
-  #MainContent {{ sec }} .hp-sci[class*="hp-sci-banner-"],
-  #MainContent {{ sec }} .hp-sci[class*="hp-sci-headlines-"],
-  {{ sec }} .hp-sci[class*="hp-sci-banner-"],
-  {{ sec }} .hp-sci[class*="hp-sci-headlines-"] {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  #MainContent {{ sec }} .hp-sci__inner,
-  {{ sec }} .hp-sci__inner {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-
-  #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
-  #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"],
-  {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
-  {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"] {
-    padding-top: 56px !important;
-    padding-bottom: 56px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__eyebrow,
@@ -296,7 +237,6 @@
   {{ sec }} .hp-sci [class*="__compare-label"],
   {{ sec }} .hp-sci [class*="__day"] {
     font-size: 12px !important;
-    margin-bottom: 10px !important;
   }
 
   #MainContent {{ sec }} .hp-sci h1,
@@ -313,11 +253,9 @@
   #MainContent {{ sec }} .hp-sci [class*="__title-main"],
   #MainContent {{ sec }} .hp-sci [class*="__title-sub"],
   #MainContent {{ sec }} .hp-sci [class*="__pillar-title"],
-  #MainContent {{ sec }} .hp-sci [class*="__col-title"],
   #MainContent {{ sec }} .hp-sci [class*="__card-title"],
   #MainContent {{ sec }} .hp-sci [class*="__graph-title"],
   #MainContent {{ sec }} .hp-sci [class*="__stat-value"],
-  #MainContent {{ sec }} .hp-sci [class*="__num"],
   {{ sec }} .hp-sci h1,
   {{ sec }} .hp-sci h2,
   {{ sec }} .hp-sci h3,
@@ -332,13 +270,20 @@
   {{ sec }} .hp-sci [class*="__title-main"],
   {{ sec }} .hp-sci [class*="__title-sub"],
   {{ sec }} .hp-sci [class*="__pillar-title"],
-  {{ sec }} .hp-sci [class*="__col-title"],
   {{ sec }} .hp-sci [class*="__card-title"],
   {{ sec }} .hp-sci [class*="__graph-title"],
-  {{ sec }} .hp-sci [class*="__stat-value"],
-  {{ sec }} .hp-sci [class*="__num"] {
+  {{ sec }} .hp-sci [class*="__stat-value"] {
     font-size: 24px !important;
-    margin-bottom: 16px !important;
+  }
+
+  #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"],
+  {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"] {
+    font-size: 12px !important;
+  }
+
+  #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"],
+  {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"] {
+    font-size: 20px !important;
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__body,
@@ -382,6 +327,5 @@
   {{ sec }} .hp-sci [class*="__btn"],
   {{ sec }} .hp-sci [class*="__secondary"] {
     font-size: 17px !important;
-    margin-bottom: 12px !important;
   }
 }
