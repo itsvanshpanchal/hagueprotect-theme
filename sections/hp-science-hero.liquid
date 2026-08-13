@@ -21,8 +21,12 @@
   }
 
   .hp-sci-hero-{{ section.id }}__title {
-    font-size: clamp(32px, 4.2vw, {{ section.settings.title_size_desktop }}px);
+    font-size: {{ section.settings.title_size_desktop }}px;
     color: inherit;
+  }
+
+  .hp-sci-hero-{{ section.id }}__title-line {
+    display: block;
   }
 
   .hp-sci-hero-{{ section.id }}__media {
@@ -57,8 +61,21 @@
         {%- if section.settings.eyebrow != blank -%}
           <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h1 class="hp-sci__title hp-sci-hero-{{ section.id }}__title">{{ section.settings.heading }}</h1>
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank or section.settings.heading_line_4 != blank -%}
+          <h1 class="hp-sci__title hp-sci-hero-{{ section.id }}__title">
+            {%- if section.settings.heading_line_1 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_2 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_2 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_3 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_3 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_4 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_4 }}</span>
+            {%- endif -%}
+          </h1>
         {%- endif -%}
       </div>
       <div class="hp-sci-hero-{{ section.id }}__media">
@@ -88,10 +105,28 @@
       "default": "Skin longevity"
     },
     {
-      "type": "textarea",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Your skin knows how to fix itself. Most products interrupt it."
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Your skin knows"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "how to fix itself."
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading line 3",
+      "default": "Most products"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_4",
+      "label": "Heading line 4",
+      "default": "interrupt it."
     },
     {
       "type": "header",
@@ -178,7 +213,7 @@
       "max": 72,
       "step": 2,
       "unit": "px",
-      "default": 48
+      "default": 36
     },
     {
       "type": "range",
@@ -188,7 +223,7 @@
       "max": 48,
       "step": 2,
       "unit": "px",
-      "default": 32
+      "default": 36
     },
     {
       "type": "header",

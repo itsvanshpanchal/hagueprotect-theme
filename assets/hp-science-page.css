@@ -161,8 +161,6 @@ body.template-search-science-longevity {
 /*
   Primary section headings — same size as hero + info grid (44px).
 */
-body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
-body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-line"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-accent"],
@@ -183,8 +181,6 @@ body.template-page-science-longevity #MainContent [class*="hp-sci-ing-"][class*=
 body.template-page-science-longevity #MainContent [class*="hp-sci-ing-"][class*="__heading-accent"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-cta-"][class*="__title-main"],
 body.template-page-science-longevity #MainContent [class*="hp-sci-cta-"][class*="__title-sub"],
-body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
-body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-line"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-accent"],
@@ -206,6 +202,19 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-ing-"][class
 body.template-search-science-longevity #MainContent [class*="hp-sci-cta-"][class*="__title-main"],
 body.template-search-science-longevity #MainContent [class*="hp-sci-cta-"][class*="__title-sub"] {
   font-size: var(--hp-sci-lead-heading-size, 44px) !important;
+  line-height: 1.12 !important;
+}
+
+/*
+  Hero heading — 36px, four stacked lines (page templates only).
+*/
+body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
+body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title-line"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
+body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title-line"] {
+  font-size: 36px !important;
   line-height: 1.12 !important;
 }
 
