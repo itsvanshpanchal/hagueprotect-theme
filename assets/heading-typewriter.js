@@ -137,11 +137,21 @@
     return { threshold: 0.2, rootMargin: '0px' };
   }
 
+  function isScienceLongevityPage() {
+    return (
+      document.body.classList.contains('template-page-science-longevity') ||
+      document.body.classList.contains('template-search-science-longevity')
+    );
+  }
+
   function shouldType(element) {
     if (!element || element.dataset.typewriterDone || element.dataset.typewriterActive) {
       return false;
     }
     if (element.hasAttribute('data-no-typewriter')) {
+      return false;
+    }
+    if (isScienceLongevityPage() && element.closest('.hp-sci')) {
       return false;
     }
     var mobileOnly = isMobileOnlyTypewriter(element);
