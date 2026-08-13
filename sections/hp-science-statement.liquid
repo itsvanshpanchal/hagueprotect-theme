@@ -9,7 +9,6 @@
   .hp-sci-statement-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-statement-{{ section.id }}__grid {
@@ -20,19 +19,13 @@
   }
 
   .hp-sci-statement-{{ section.id }}__title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: clamp(30px, 4.2vw, {{ section.settings.title_size }}px);
     line-height: 1.12;
-    letter-spacing: -0.03em;
     margin: 0;
     max-width: 14ch;
     color: inherit;
   }
 
   .hp-sci-statement-{{ section.id }}__title-accent {
-    font-style: italic;
-    font-weight: 400;
   }
 
   .hp-sci-statement-{{ section.id }}__copy {
@@ -40,18 +33,12 @@
   }
 
   .hp-sci-statement-{{ section.id }}__eyebrow {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: {{ section.settings.eyebrow_size }}px;
-    font-weight: 400;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color }};
     margin: 0 0 20px;
   }
 
   .hp-sci-statement-{{ section.id }}__para {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(15px, 1.45vw, {{ section.settings.body_size }}px);
     line-height: 1.65;
     color: {{ section.settings.body_color }};
     opacity: {{ section.settings.body_opacity | default: 88 | times: 0.01 }};
@@ -73,8 +60,6 @@
   }
 
   .hp-sci-statement-{{ section.id }}__closing {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(15px, 1.45vw, {{ section.settings.body_size }}px);
     line-height: 1.65;
     color: {{ section.settings.closing_color }};
     opacity: {{ section.settings.closing_opacity | default: 100 | times: 0.01 }};

@@ -9,7 +9,6 @@
   .hp-sci-grid-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-grid-{{ section.id }}__layout {
@@ -28,10 +27,6 @@
   .hp-sci-grid-{{ section.id }}__rail-text {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: {{ section.settings.rail_size }}px;
-    font-weight: 400;
-    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: {{ section.settings.rail_color }};
     white-space: nowrap;
@@ -39,10 +34,6 @@
   }
 
   .hp-sci-grid-{{ section.id }}__heading {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: clamp(32px, 4.5vw, {{ section.settings.heading_size }}px);
-    letter-spacing: -0.03em;
     line-height: 1.06;
     margin: 0 0 clamp(48px, 7vw, 88px);
     max-width: 14ch;
@@ -53,8 +44,6 @@
   }
 
   .hp-sci-grid-{{ section.id }}__heading-accent {
-    font-style: italic;
-    font-weight: 400;
   }
 
   .hp-sci-grid-{{ section.id }}__cols {
@@ -64,27 +53,17 @@
   }
 
   .hp-sci-grid-{{ section.id }}__num {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(36px, 4vw, {{ section.settings.number_size }}px);
-    letter-spacing: -0.02em;
     line-height: 1;
     margin: 0 0 clamp(18px, 2.5vw, 28px);
     color: inherit;
   }
 
   .hp-sci-grid-{{ section.id }}__col-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: clamp(20px, 2.2vw, {{ section.settings.column_title_size }}px);
     margin: 0 0 14px;
     line-height: 1.15;
-    letter-spacing: -0.02em;
   }
 
   .hp-sci-grid-{{ section.id }}__col-text {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(16px, 1.5vw, {{ section.settings.column_text_size }}px);
     line-height: 1.6;
     margin: 0;
     max-width: 42ch;
@@ -103,7 +82,6 @@
     .hp-sci-grid-{{ section.id }}__rail-text {
       writing-mode: horizontal-tb;
       transform: none;
-      letter-spacing: 0.14em;
     }
   }
 

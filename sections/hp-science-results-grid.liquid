@@ -8,7 +8,6 @@
 
   .hp-sci-results-{{ section.id }} {
     background: {{ section.settings.background_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-results-{{ section.id }}__stack {
@@ -89,26 +88,16 @@
   }
 
   .hp-sci-results-{{ section.id }}__pillar-num {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: {{ section.settings.pillar_num_size }}px;
-    font-weight: 400;
-    letter-spacing: 0.08em;
     color: {{ section.settings.pillar_num_color }};
     margin: 0 0 16px;
   }
 
   .hp-sci-results-{{ section.id }}__pillar-title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-weight: 500;
-    font-size: clamp(34px, 4.5vw, {{ section.settings.pillar_title_size }}px);
     line-height: 1.05;
-    letter-spacing: -0.03em;
     margin: 0 0 clamp(24px, 3vw, 32px);
   }
 
   .hp-sci-results-{{ section.id }}__para {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: clamp(16px, 1.45vw, {{ section.settings.pillar_body_size }}px);
     line-height: 1.65;
     margin: 0 0 18px;
     max-width: 42ch;
@@ -135,25 +124,16 @@
   }
 
   .hp-sci-results-{{ section.id }}__stat-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: clamp(44px, 6vw, {{ section.settings.stat_size }}px);
     line-height: 1;
-    letter-spacing: -0.04em;
     margin: 0 0 10px;
   }
 
   .hp-sci-results-{{ section.id }}__stat-label {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: {{ section.settings.stat_label_size }}px;
-    letter-spacing: 0.06em;
     color: {{ section.settings.pillar_num_color }};
     margin: 0 0 clamp(20px, 3vw, 28px);
   }
 
   .hp-sci-results-{{ section.id }}__footnote {
-    font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
-    font-size: {{ section.settings.footnote_size }}px;
     line-height: 1.55;
     color: {{ section.settings.footnote_color }};
     margin: 0;
@@ -180,7 +160,7 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-results-{{ section.id }}">
-  <div class="hp-sci__inner" style="padding-left: 0; padding-right: 0; max-width: none;">
+  <div class="hp-sci__inner">
     <div class="hp-sci-results-{{ section.id }}__stack">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}

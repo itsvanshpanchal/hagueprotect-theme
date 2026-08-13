@@ -9,15 +9,10 @@
   .hp-sci-ing-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-ing-{{ section.id }}__heading {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
     line-height: 1.08;
-    letter-spacing: -0.03em;
     max-width: 14ch;
     margin: 0 0 clamp(48px, 6vw, 72px);
   }
@@ -27,9 +22,6 @@
   }
 
   .hp-sci-ing-{{ section.id }}__heading-accent {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-style: italic;
-    font-weight: 400;
   }
 
   .hp-sci-ing-{{ section.id }}__group {
@@ -41,9 +33,6 @@
   }
 
   .hp-sci-ing-{{ section.id }}__category {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: {{ section.settings.category_color }};
     margin: 0 0 0;
@@ -63,26 +52,19 @@
   .hp-sci-ing-{{ section.id }}__cell {
     padding: 18px 0;
     vertical-align: top;
-    font-size: clamp(16px, 1.4vw, 17px);
     line-height: 1.55;
   }
 
   .hp-sci-ing-{{ section.id }}__cell--name {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
     width: 34%;
     padding-right: clamp(20px, 4vw, 48px);
   }
 
   .hp-sci-ing-{{ section.id }}__cell--role {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-weight: 400;
     color: {{ section.settings.body_color }};
   }
 
   .hp-sci-ing-{{ section.id }}__footer {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(16px, 1.4vw, 17px);
     line-height: 1.6;
     max-width: 52ch;
     margin: 0;

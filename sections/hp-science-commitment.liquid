@@ -9,7 +9,6 @@
   .hp-sci-commit-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-commit-{{ section.id }}__intro {
@@ -18,17 +17,11 @@
   }
 
   .hp-sci-commit-{{ section.id }}__heading {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(28px, 3.5vw, {{ section.settings.heading_size }}px);
     margin: 0 0 clamp(20px, 3vw, 28px);
     line-height: 1.12;
-    letter-spacing: -0.02em;
   }
 
   .hp-sci-commit-{{ section.id }}__subtext {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(16px, 1.45vw, 18px);
     line-height: 1.65;
     margin: 0;
     color: {{ section.settings.subtext_color }};
@@ -77,31 +70,21 @@
   }
 
   .hp-sci-commit-{{ section.id }}__day {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.04em;
     margin: 0 0 14px;
   }
 
   .hp-sci-commit-{{ section.id }}__card-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: clamp(22px, 2.2vw, 28px);
     line-height: 1.15;
     margin: 0 0 16px;
-    letter-spacing: -0.02em;
   }
 
   .hp-sci-commit-{{ section.id }}__card-text {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(15px, 1.35vw, 17px);
     line-height: 1.6;
     margin: 0;
   }
 
   .hp-sci-commit-{{ section.id }}__card-text strong,
   .hp-sci-commit-{{ section.id }}__card-text b {
-    font-weight: 600;
   }
 
   .hp-sci-commit-{{ section.id }}__graph-wrap {
@@ -112,14 +95,10 @@
   }
 
   .hp-sci-commit-{{ section.id }}__graph-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(24px, 3vw, 32px);
     margin: 0 0 8px;
   }
 
   .hp-sci-commit-{{ section.id }}__graph-sub {
-    font-size: 16px;
     opacity: 0.75;
     margin: 0 0 24px;
   }

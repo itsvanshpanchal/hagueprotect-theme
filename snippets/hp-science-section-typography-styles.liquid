@@ -1,35 +1,12 @@
 {%- comment -%}
-  Per-section typography: CSS variables + direct apply rules (theme editor settings).
+  Science Longevity — fixed typography + spacing (do not vary per legacy section settings).
   Render once at the END of each section {%- style -%} block.
 {%- endcomment -%}
 {%- liquid
-  assign heading_desktop = section.settings.sci_typo_heading_desktop | default: section.settings.title_size_desktop | default: section.settings.heading_size | default: section.settings.title_size | default: 44
-  assign heading_mobile = section.settings.sci_typo_heading_mobile | default: section.settings.title_size_mobile | default: 32
-  assign sub_desktop = section.settings.sci_typo_subheading_desktop | default: section.settings.column_title_size | default: section.settings.subheading_size | default: 24
-  assign sub_mobile = section.settings.sci_typo_subheading_mobile | default: 20
-  assign body_desktop = section.settings.sci_typo_body_desktop | default: section.settings.column_text_size | default: section.settings.body_size | default: 18
-  assign body_mobile = section.settings.sci_typo_body_mobile | default: 16
-  assign eyebrow_desktop = section.settings.sci_typo_eyebrow_desktop | default: section.settings.eyebrow_size | default: section.settings.rail_size | default: 16
-  assign eyebrow_mobile = section.settings.sci_typo_eyebrow_mobile | default: 14
+  assign sec = '#shopify-section-' | append: section.id
 
-  assign pad_top_desktop = section.settings.sci_typo_padding_top_desktop | default: section.settings.padding_top | default: 80
-  assign pad_top_mobile = section.settings.sci_typo_padding_top_mobile | default: 56
-  assign pad_bottom_desktop = section.settings.sci_typo_padding_bottom_desktop | default: section.settings.padding_bottom | default: 80
-  assign pad_bottom_mobile = section.settings.sci_typo_padding_bottom_mobile | default: 56
-  assign gutter_desktop = section.settings.sci_typo_gutter_desktop | default: 28
-  assign gutter_mobile = section.settings.sci_typo_gutter_mobile | default: 20
-  assign eyebrow_gap_desktop = section.settings.sci_typo_eyebrow_gap_desktop | default: 12
-  assign eyebrow_gap_mobile = section.settings.sci_typo_eyebrow_gap_mobile | default: 10
-
-  assign heading_weight = section.settings.sci_typo_heading_weight | default: '300'
-  assign subheading_weight = section.settings.sci_typo_subheading_weight | default: '400'
-  assign eyebrow_weight = section.settings.sci_typo_eyebrow_weight | default: '500'
-  assign body_weight = section.settings.sci_typo_body_weight | default: '400'
-  assign heading_style = section.settings.sci_typo_heading_style | default: 'normal'
-  assign heading_font = section.settings.sci_typo_heading_font | default: 'inter_light'
-  assign subheading_font = section.settings.sci_typo_subheading_font | default: 'inter'
-  assign eyebrow_font = section.settings.sci_typo_eyebrow_font | default: 'darker_grotesque_medium'
-  assign body_font = section.settings.sci_typo_body_font | default: 'darker_grotesque'
+  assign inter_stack = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  assign dg_stack = "'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
 
   assign typo_body_color = section.settings.sci_typo_body_color | strip
   if typo_body_color == 'rgba(0,0,0,0)' or typo_body_color == 'rgba(0, 0, 0, 0)' or typo_body_color == 'transparent'
@@ -39,9 +16,6 @@
   assign body_color = typo_body_color
   if body_color == blank
     assign body_color = section.settings.body_color
-  endif
-  if body_color == blank
-    assign body_color = section.settings.column_text_color
   endif
   if body_color == blank
     assign body_color = section.settings.subtext_color
@@ -58,56 +32,78 @@
   if body_color == blank
     assign body_color = section.settings.text_color
   endif
-
-  assign heading_ls = section.settings.sci_typo_heading_letter_spacing | default: -2 | times: 0.01
-  assign eyebrow_ls = section.settings.sci_typo_eyebrow_letter_spacing | default: 12 | times: 0.01
-  assign heading_lh = section.settings.sci_typo_heading_line_height | default: 112 | times: 0.01
-  assign body_lh = section.settings.sci_typo_body_line_height | default: 155 | times: 0.01
-
-  assign sec = '#shopify-section-' | append: section.id
 -%}
-{%- capture heading_font_stack -%}{% render 'hp-font-stack', font_key: heading_font %}{%- endcapture -%}
-{%- capture subheading_font_stack -%}{% render 'hp-font-stack', font_key: subheading_font %}{%- endcapture -%}
-{%- capture eyebrow_font_stack -%}{% render 'hp-font-stack', font_key: eyebrow_font %}{%- endcapture -%}
-{%- capture body_font_stack -%}{% render 'hp-font-stack', font_key: body_font %}{%- endcapture -%}
 
 {{ sec }} {
-  --hp-sci-sec-heading-size: {{ heading_desktop }}px;
-  --hp-sci-sec-subheading-size: {{ sub_desktop }}px;
-  --hp-sci-sec-body-size: {{ body_desktop }}px;
-  --hp-sci-sec-eyebrow-size: {{ eyebrow_desktop }}px;
-  --hp-sci-sec-heading-weight: {{ heading_weight }};
-  --hp-sci-sec-subheading-weight: {{ subheading_weight }};
-  --hp-sci-sec-eyebrow-weight: {{ eyebrow_weight }};
-  --hp-sci-sec-body-weight: {{ body_weight }};
-  --hp-sci-sec-heading-font: {{ heading_font_stack | strip }};
-  --hp-sci-sec-subheading-font: {{ subheading_font_stack | strip }};
-  --hp-sci-sec-eyebrow-font: {{ eyebrow_font_stack | strip }};
-  --hp-sci-sec-body-font: {{ body_font_stack | strip }};
+  --hp-sci-sec-heading-size: 52px;
+  --hp-sci-sec-subheading-size: 52px;
+  --hp-sci-sec-body-size: 23px;
+  --hp-sci-sec-eyebrow-size: 19px;
+  --hp-sci-sec-heading-weight: 300;
+  --hp-sci-sec-subheading-weight: 300;
+  --hp-sci-sec-eyebrow-weight: 300;
+  --hp-sci-sec-body-weight: 300;
+  --hp-sci-sec-heading-font: {{ inter_stack }};
+  --hp-sci-sec-subheading-font: {{ inter_stack }};
+  --hp-sci-sec-eyebrow-font: {{ dg_stack }};
+  --hp-sci-sec-body-font: {{ dg_stack }};
+  --hp-sci-sec-heading-style: normal;
+  --hp-sci-sec-heading-letter-spacing: -0.02em;
+  --hp-sci-sec-eyebrow-letter-spacing: 0.12em;
+  --hp-sci-sec-heading-line-height: 1.12;
+  --hp-sci-sec-body-line-height: 1.55;
+  --hp-sci-sec-pad-top: 96px;
+  --hp-sci-sec-pad-bottom: 96px;
+  --hp-sci-sec-gutter: 28px;
+  --hp-sci-sec-eyebrow-gap: 12px;
   {%- if body_color != blank -%}
   --hp-sci-sec-body-color: {{ body_color }};
   {%- endif -%}
-  --hp-sci-sec-heading-style: {{ heading_style }};
-  --hp-sci-sec-heading-letter-spacing: {{ heading_ls }}em;
-  --hp-sci-sec-eyebrow-letter-spacing: {{ eyebrow_ls }}em;
-  --hp-sci-sec-heading-line-height: {{ heading_lh }};
-  --hp-sci-sec-body-line-height: {{ body_lh }};
-  --hp-sci-sec-pad-top: {{ pad_top_desktop }}px;
-  --hp-sci-sec-pad-bottom: {{ pad_bottom_desktop }}px;
-  --hp-sci-sec-gutter: {{ gutter_desktop }}px;
-  --hp-sci-sec-eyebrow-gap: {{ eyebrow_gap_desktop }}px;
 }
 
 #MainContent {{ sec }} .hp-sci,
 {{ sec }} .hp-sci {
-  padding-top: {{ pad_top_desktop }}px !important;
-  padding-bottom: {{ pad_bottom_desktop }}px !important;
+  padding-top: 96px !important;
+  padding-bottom: 96px !important;
+  text-align: left;
+}
+
+#MainContent {{ sec }} .hp-sci[class*="hp-sci-banner-"],
+#MainContent {{ sec }} .hp-sci[class*="hp-sci-headlines-"],
+{{ sec }} .hp-sci[class*="hp-sci-banner-"],
+{{ sec }} .hp-sci[class*="hp-sci-headlines-"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#MainContent {{ sec }} .hp-sci[class*="hp-sci-feature-"] .hp-sci__inner,
+#MainContent {{ sec }} .hp-sci[class*="hp-sci-results-"] .hp-sci__inner,
+{{ sec }} .hp-sci[class*="hp-sci-feature-"] .hp-sci__inner,
+{{ sec }} .hp-sci[class*="hp-sci-results-"] .hp-sci__inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: none !important;
 }
 
 #MainContent {{ sec }} .hp-sci__inner,
 {{ sec }} .hp-sci__inner {
-  padding-left: {{ gutter_desktop }}px !important;
-  padding-right: {{ gutter_desktop }}px !important;
+  padding-left: 28px !important;
+  padding-right: 28px !important;
+  max-width: var(--hp-sci-max, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+#MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
+#MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"],
+{{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
+{{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"] {
+  padding-top: 96px !important;
+  padding-bottom: 96px !important;
+  padding-left: 28px !important;
+  padding-right: 28px !important;
+  text-align: center;
 }
 
 #MainContent {{ sec }} .hp-sci .hp-sci__eyebrow,
@@ -116,18 +112,25 @@
 #MainContent {{ sec }} .hp-sci [class*="__category"],
 #MainContent {{ sec }} .hp-sci [class*="__pillar-num"],
 #MainContent {{ sec }} .hp-sci [class*="__formula-eyebrow"],
+#MainContent {{ sec }} .hp-sci [class*="__compare-label"],
+#MainContent {{ sec }} .hp-sci [class*="__day"],
 {{ sec }} .hp-sci .hp-sci__eyebrow,
 {{ sec }} .hp-sci [class*="__eyebrow"],
 {{ sec }} .hp-sci [class*="__rail-text"],
 {{ sec }} .hp-sci [class*="__category"],
 {{ sec }} .hp-sci [class*="__pillar-num"],
-{{ sec }} .hp-sci [class*="__formula-eyebrow"] {
-  font-family: {{ eyebrow_font_stack | strip }} !important;
-  font-size: {{ eyebrow_desktop }}px !important;
-  font-weight: {{ eyebrow_weight }} !important;
-  letter-spacing: {{ eyebrow_ls }}em !important;
-  margin-bottom: {{ eyebrow_gap_desktop }}px !important;
+{{ sec }} .hp-sci [class*="__formula-eyebrow"],
+{{ sec }} .hp-sci [class*="__compare-label"],
+{{ sec }} .hp-sci [class*="__day"] {
+  font-family: {{ dg_stack }} !important;
+  font-size: 19px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
+  margin: 0 0 12px !important;
+  text-align: inherit;
 }
 
 #MainContent {{ sec }} .hp-sci h1,
@@ -140,8 +143,15 @@
 #MainContent {{ sec }} .hp-sci [class*="__formula-title"],
 #MainContent {{ sec }} .hp-sci [class*="__formula-title-line"],
 #MainContent {{ sec }} .hp-sci [class*="__formula-accent"],
+#MainContent {{ sec }} .hp-sci [class*="__title"],
 #MainContent {{ sec }} .hp-sci [class*="__title-main"],
+#MainContent {{ sec }} .hp-sci [class*="__title-sub"],
 #MainContent {{ sec }} .hp-sci [class*="__pillar-title"],
+#MainContent {{ sec }} .hp-sci [class*="__col-title"],
+#MainContent {{ sec }} .hp-sci [class*="__card-title"],
+#MainContent {{ sec }} .hp-sci [class*="__graph-title"],
+#MainContent {{ sec }} .hp-sci [class*="__stat-value"],
+#MainContent {{ sec }} .hp-sci [class*="__num"],
 {{ sec }} .hp-sci h1,
 {{ sec }} .hp-sci h2,
 {{ sec }} .hp-sci h3,
@@ -152,35 +162,24 @@
 {{ sec }} .hp-sci [class*="__formula-title"],
 {{ sec }} .hp-sci [class*="__formula-title-line"],
 {{ sec }} .hp-sci [class*="__formula-accent"],
+{{ sec }} .hp-sci [class*="__title"],
 {{ sec }} .hp-sci [class*="__title-main"],
-{{ sec }} .hp-sci [class*="__pillar-title"] {
-  font-family: {{ heading_font_stack | strip }} !important;
-  font-size: {{ heading_desktop }}px !important;
-  font-weight: {{ heading_weight }} !important;
-  font-style: {{ heading_style }} !important;
-  line-height: {{ heading_lh }} !important;
-  letter-spacing: {{ heading_ls }}em !important;
-}
-
-#MainContent {{ sec }} .hp-sci [class*="__title-sub"],
-{{ sec }} .hp-sci [class*="__title-sub"] {
-  font-family: {{ subheading_font_stack | strip }} !important;
-  font-size: {{ sub_desktop }}px !important;
-  font-weight: {{ subheading_weight }} !important;
-  line-height: {{ heading_lh }} !important;
-  letter-spacing: {{ heading_ls }}em !important;
-}
-
-#MainContent {{ sec }} .hp-sci [class*="__col-title"],
-#MainContent {{ sec }} .hp-sci [class*="__card-title"],
-#MainContent {{ sec }} .hp-sci [class*="__num"],
+{{ sec }} .hp-sci [class*="__title-sub"],
+{{ sec }} .hp-sci [class*="__pillar-title"],
 {{ sec }} .hp-sci [class*="__col-title"],
 {{ sec }} .hp-sci [class*="__card-title"],
+{{ sec }} .hp-sci [class*="__graph-title"],
+{{ sec }} .hp-sci [class*="__stat-value"],
 {{ sec }} .hp-sci [class*="__num"] {
-  font-family: {{ subheading_font_stack | strip }} !important;
-  font-size: {{ sub_desktop }}px !important;
-  font-weight: {{ subheading_weight }} !important;
-  line-height: {{ heading_lh }} !important;
+  font-family: {{ inter_stack }} !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+  margin-top: 0 !important;
+  margin-bottom: 24px !important;
+  text-align: inherit;
 }
 
 #MainContent {{ sec }} .hp-sci .hp-sci__body,
@@ -193,6 +192,16 @@
 #MainContent {{ sec }} .hp-sci [class*="-cta-"][class*="__body"],
 #MainContent {{ sec }} .hp-sci [class*="__card-text"],
 #MainContent {{ sec }} .hp-sci [class*="__card-text"] p,
+#MainContent {{ sec }} .hp-sci [class*="__para"],
+#MainContent {{ sec }} .hp-sci [class*="__closing"],
+#MainContent {{ sec }} .hp-sci [class*="__compare-text"],
+#MainContent {{ sec }} .hp-sci [class*="__formula-subtext"],
+#MainContent {{ sec }} .hp-sci [class*="__stat-label"],
+#MainContent {{ sec }} .hp-sci [class*="__cell"],
+#MainContent {{ sec }} .hp-sci [class*="__footer"],
+#MainContent {{ sec }} .hp-sci [class*="__link"],
+#MainContent {{ sec }} .hp-sci [class*="__btn"],
+#MainContent {{ sec }} .hp-sci [class*="__secondary"],
 {{ sec }} .hp-sci .hp-sci__body,
 {{ sec }} .hp-sci [class*="__col-text"],
 {{ sec }} .hp-sci [class*="__subtext"],
@@ -202,11 +211,27 @@
 {{ sec }} .hp-sci [class*="-proto-"][class*="__body"],
 {{ sec }} .hp-sci [class*="-cta-"][class*="__body"],
 {{ sec }} .hp-sci [class*="__card-text"],
-{{ sec }} .hp-sci [class*="__card-text"] p {
-  font-family: {{ body_font_stack | strip }} !important;
-  font-size: {{ body_desktop }}px !important;
-  font-weight: {{ body_weight }} !important;
-  line-height: {{ body_lh }} !important;
+{{ sec }} .hp-sci [class*="__card-text"] p,
+{{ sec }} .hp-sci [class*="__para"],
+{{ sec }} .hp-sci [class*="__closing"],
+{{ sec }} .hp-sci [class*="__compare-text"],
+{{ sec }} .hp-sci [class*="__formula-subtext"],
+{{ sec }} .hp-sci [class*="__stat-label"],
+{{ sec }} .hp-sci [class*="__cell"],
+{{ sec }} .hp-sci [class*="__footer"],
+{{ sec }} .hp-sci [class*="__link"],
+{{ sec }} .hp-sci [class*="__btn"],
+{{ sec }} .hp-sci [class*="__secondary"] {
+  font-family: {{ dg_stack }} !important;
+  font-size: 23px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
+  text-align: inherit;
   {%- if body_color != blank -%}
   color: {{ body_color }} !important;
   {%- endif -%}
@@ -214,26 +239,44 @@
 
 @media screen and (max-width: 989px) {
   {{ sec }} {
-    --hp-sci-sec-heading-size: {{ heading_mobile }}px;
-    --hp-sci-sec-subheading-size: {{ sub_mobile }}px;
-    --hp-sci-sec-body-size: {{ body_mobile }}px;
-    --hp-sci-sec-eyebrow-size: {{ eyebrow_mobile }}px;
-    --hp-sci-sec-pad-top: {{ pad_top_mobile }}px;
-    --hp-sci-sec-pad-bottom: {{ pad_bottom_mobile }}px;
-    --hp-sci-sec-gutter: {{ gutter_mobile }}px;
-    --hp-sci-sec-eyebrow-gap: {{ eyebrow_gap_mobile }}px;
+    --hp-sci-sec-heading-size: 24px;
+    --hp-sci-sec-subheading-size: 24px;
+    --hp-sci-sec-body-size: 17px;
+    --hp-sci-sec-eyebrow-size: 12px;
+    --hp-sci-sec-pad-top: 56px;
+    --hp-sci-sec-pad-bottom: 56px;
+    --hp-sci-sec-gutter: 20px;
+    --hp-sci-sec-eyebrow-gap: 10px;
   }
 
   #MainContent {{ sec }} .hp-sci,
   {{ sec }} .hp-sci {
-    padding-top: {{ pad_top_mobile }}px !important;
-    padding-bottom: {{ pad_bottom_mobile }}px !important;
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+
+  #MainContent {{ sec }} .hp-sci[class*="hp-sci-banner-"],
+  #MainContent {{ sec }} .hp-sci[class*="hp-sci-headlines-"],
+  {{ sec }} .hp-sci[class*="hp-sci-banner-"],
+  {{ sec }} .hp-sci[class*="hp-sci-headlines-"] {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   #MainContent {{ sec }} .hp-sci__inner,
   {{ sec }} .hp-sci__inner {
-    padding-left: {{ gutter_mobile }}px !important;
-    padding-right: {{ gutter_mobile }}px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
+  #MainContent {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"],
+  {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__system"],
+  {{ sec }} .hp-sci [class*="hp-sci-headlines-"][class*="__formula"] {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__eyebrow,
@@ -242,14 +285,18 @@
   #MainContent {{ sec }} .hp-sci [class*="__category"],
   #MainContent {{ sec }} .hp-sci [class*="__pillar-num"],
   #MainContent {{ sec }} .hp-sci [class*="__formula-eyebrow"],
+  #MainContent {{ sec }} .hp-sci [class*="__compare-label"],
+  #MainContent {{ sec }} .hp-sci [class*="__day"],
   {{ sec }} .hp-sci .hp-sci__eyebrow,
   {{ sec }} .hp-sci [class*="__eyebrow"],
   {{ sec }} .hp-sci [class*="__rail-text"],
   {{ sec }} .hp-sci [class*="__category"],
   {{ sec }} .hp-sci [class*="__pillar-num"],
-  {{ sec }} .hp-sci [class*="__formula-eyebrow"] {
-    font-size: {{ eyebrow_mobile }}px !important;
-    margin-bottom: {{ eyebrow_gap_mobile }}px !important;
+  {{ sec }} .hp-sci [class*="__formula-eyebrow"],
+  {{ sec }} .hp-sci [class*="__compare-label"],
+  {{ sec }} .hp-sci [class*="__day"] {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   #MainContent {{ sec }} .hp-sci h1,
@@ -262,8 +309,15 @@
   #MainContent {{ sec }} .hp-sci [class*="__formula-title"],
   #MainContent {{ sec }} .hp-sci [class*="__formula-title-line"],
   #MainContent {{ sec }} .hp-sci [class*="__formula-accent"],
+  #MainContent {{ sec }} .hp-sci [class*="__title"],
   #MainContent {{ sec }} .hp-sci [class*="__title-main"],
+  #MainContent {{ sec }} .hp-sci [class*="__title-sub"],
   #MainContent {{ sec }} .hp-sci [class*="__pillar-title"],
+  #MainContent {{ sec }} .hp-sci [class*="__col-title"],
+  #MainContent {{ sec }} .hp-sci [class*="__card-title"],
+  #MainContent {{ sec }} .hp-sci [class*="__graph-title"],
+  #MainContent {{ sec }} .hp-sci [class*="__stat-value"],
+  #MainContent {{ sec }} .hp-sci [class*="__num"],
   {{ sec }} .hp-sci h1,
   {{ sec }} .hp-sci h2,
   {{ sec }} .hp-sci h3,
@@ -274,20 +328,17 @@
   {{ sec }} .hp-sci [class*="__formula-title"],
   {{ sec }} .hp-sci [class*="__formula-title-line"],
   {{ sec }} .hp-sci [class*="__formula-accent"],
+  {{ sec }} .hp-sci [class*="__title"],
   {{ sec }} .hp-sci [class*="__title-main"],
-  {{ sec }} .hp-sci [class*="__pillar-title"] {
-    font-size: {{ heading_mobile }}px !important;
-  }
-
-  #MainContent {{ sec }} .hp-sci [class*="__title-sub"],
   {{ sec }} .hp-sci [class*="__title-sub"],
-  #MainContent {{ sec }} .hp-sci [class*="__col-title"],
-  #MainContent {{ sec }} .hp-sci [class*="__card-title"],
-  #MainContent {{ sec }} .hp-sci [class*="__num"],
+  {{ sec }} .hp-sci [class*="__pillar-title"],
   {{ sec }} .hp-sci [class*="__col-title"],
   {{ sec }} .hp-sci [class*="__card-title"],
+  {{ sec }} .hp-sci [class*="__graph-title"],
+  {{ sec }} .hp-sci [class*="__stat-value"],
   {{ sec }} .hp-sci [class*="__num"] {
-    font-size: {{ sub_mobile }}px !important;
+    font-size: 24px !important;
+    margin-bottom: 16px !important;
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__body,
@@ -300,6 +351,16 @@
   #MainContent {{ sec }} .hp-sci [class*="-cta-"][class*="__body"],
   #MainContent {{ sec }} .hp-sci [class*="__card-text"],
   #MainContent {{ sec }} .hp-sci [class*="__card-text"] p,
+  #MainContent {{ sec }} .hp-sci [class*="__para"],
+  #MainContent {{ sec }} .hp-sci [class*="__closing"],
+  #MainContent {{ sec }} .hp-sci [class*="__compare-text"],
+  #MainContent {{ sec }} .hp-sci [class*="__formula-subtext"],
+  #MainContent {{ sec }} .hp-sci [class*="__stat-label"],
+  #MainContent {{ sec }} .hp-sci [class*="__cell"],
+  #MainContent {{ sec }} .hp-sci [class*="__footer"],
+  #MainContent {{ sec }} .hp-sci [class*="__link"],
+  #MainContent {{ sec }} .hp-sci [class*="__btn"],
+  #MainContent {{ sec }} .hp-sci [class*="__secondary"],
   {{ sec }} .hp-sci .hp-sci__body,
   {{ sec }} .hp-sci [class*="__col-text"],
   {{ sec }} .hp-sci [class*="__subtext"],
@@ -309,7 +370,18 @@
   {{ sec }} .hp-sci [class*="-proto-"][class*="__body"],
   {{ sec }} .hp-sci [class*="-cta-"][class*="__body"],
   {{ sec }} .hp-sci [class*="__card-text"],
-  {{ sec }} .hp-sci [class*="__card-text"] p {
-    font-size: {{ body_mobile }}px !important;
+  {{ sec }} .hp-sci [class*="__card-text"] p,
+  {{ sec }} .hp-sci [class*="__para"],
+  {{ sec }} .hp-sci [class*="__closing"],
+  {{ sec }} .hp-sci [class*="__compare-text"],
+  {{ sec }} .hp-sci [class*="__formula-subtext"],
+  {{ sec }} .hp-sci [class*="__stat-label"],
+  {{ sec }} .hp-sci [class*="__cell"],
+  {{ sec }} .hp-sci [class*="__footer"],
+  {{ sec }} .hp-sci [class*="__link"],
+  {{ sec }} .hp-sci [class*="__btn"],
+  {{ sec }} .hp-sci [class*="__secondary"] {
+    font-size: 17px !important;
+    margin-bottom: 12px !important;
   }
 }

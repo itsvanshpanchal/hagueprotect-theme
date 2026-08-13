@@ -20,7 +20,6 @@
   .hp-sci-cta-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-cta-{{ section.id }}__grid {
@@ -32,23 +31,14 @@
 
   .hp-sci-cta-{{ section.id }}__title-main {
     display: block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
     line-height: 1.08;
-    letter-spacing: -0.03em;
     margin: 0 0 4px;
     color: #ffffff !important;
   }
 
   .hp-sci-cta-{{ section.id }}__title-sub {
     display: block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(32px, 4vw, {{ section.settings.heading_size }}px);
     line-height: 1.08;
-    letter-spacing: -0.03em;
     margin: 0;
     color: #ffffff !important;
   }
@@ -59,8 +49,6 @@
   }
 
   .hp-sci-cta-{{ section.id }}__body {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(16px, 1.45vw, 18px);
     line-height: 1.65;
     margin: 0 0 clamp(24px, 3vw, 32px);
     color: {{ section.settings.body_color }} !important;
@@ -74,10 +62,6 @@
     padding: 14px 28px;
     background: {{ section.settings.button_background }};
     color: {{ section.settings.button_text_color }} !important;
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
@@ -91,8 +75,6 @@
 
   .hp-sci-cta-{{ section.id }}__secondary {
     display: inline-block;
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 13px;
     color: #ffffff !important;
     text-decoration: underline;
     text-underline-offset: 4px;

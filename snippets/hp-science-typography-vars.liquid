@@ -1,93 +1,50 @@
 {%- comment -%}
   Page-wide typography + spacing variables for Science Longevity templates.
-  Rendered from the Science — Typography section only.
+  Fixed standards — editor controls are kept for compatibility but sizes are locked in CSS.
 {%- endcomment -%}
-{%- liquid
-  assign lead_desktop = section.settings.lead_heading_size_desktop | default: 44
-  assign lead_mobile = section.settings.lead_heading_size_mobile | default: 32
-  assign base_desktop = section.settings.base_heading_size_desktop | default: 24
-  assign base_mobile = section.settings.base_heading_size_mobile | default: 22
-  assign sub_desktop = section.settings.subheading_size_desktop | default: 24
-  assign sub_mobile = section.settings.subheading_size_mobile | default: 20
-  assign body_desktop = section.settings.body_size_desktop | default: 18
-  assign body_mobile = section.settings.body_size_mobile | default: 16
-  assign eyebrow_desktop = section.settings.eyebrow_size_desktop | default: 16
-  assign eyebrow_mobile = section.settings.eyebrow_size_mobile | default: 14
-  assign stat_desktop = section.settings.stat_number_size_desktop | default: 48
-  assign stat_mobile = section.settings.stat_number_size_mobile | default: 36
-
-  assign heading_weight = section.settings.heading_font_weight | default: '300'
-  assign subheading_weight = section.settings.subheading_font_weight | default: '400'
-  assign eyebrow_weight = section.settings.eyebrow_font_weight | default: '500'
-  assign body_weight = section.settings.body_font_weight | default: '400'
-
-  assign heading_style = section.settings.heading_font_style | default: 'normal'
-  assign heading_ls = section.settings.heading_letter_spacing | default: -2 | times: 0.01
-  assign eyebrow_ls = section.settings.eyebrow_letter_spacing | default: 12 | times: 0.01
-  assign lead_lh = section.settings.lead_heading_line_height | default: 112 | times: 0.01
-  assign base_lh = section.settings.base_heading_line_height | default: 120 | times: 0.01
-  assign body_lh = section.settings.body_line_height | default: 155 | times: 0.01
-
-  assign gutter_desktop = section.settings.horizontal_gutter_desktop | default: 28
-  assign gutter_mobile = section.settings.horizontal_gutter_mobile | default: 20
-  assign pad_top_desktop = section.settings.section_padding_top_desktop | default: 80
-  assign pad_top_mobile = section.settings.section_padding_top_mobile | default: 56
-  assign pad_bottom_desktop = section.settings.section_padding_bottom_desktop | default: 80
-  assign pad_bottom_mobile = section.settings.section_padding_bottom_mobile | default: 56
-  assign eyebrow_gap_desktop = section.settings.eyebrow_title_gap_desktop | default: 12
-  assign eyebrow_gap_mobile = section.settings.eyebrow_title_gap_mobile | default: 10
--%}
 {% style %}
   body.template-page-science-longevity,
   body.template-search-science-longevity {
-    --hp-sci-lead-heading-size: {{ lead_desktop }}px;
-    --hp-sci-base-heading-size: {{ base_desktop }}px;
-    --hp-sci-subheading-size: {{ sub_desktop }}px;
-    --hp-sci-body-size: {{ body_desktop }}px;
-    --hp-sci-eyebrow-size: {{ eyebrow_desktop }}px;
-    --hp-sci-stat-number-size: {{ stat_desktop }}px;
-    --hp-sci-heading-weight: {{ heading_weight }};
-    --hp-sci-subheading-weight: {{ subheading_weight }};
-    --hp-sci-eyebrow-weight: {{ eyebrow_weight }};
-    --hp-sci-body-weight: {{ body_weight }};
-    --hp-sci-heading-style: {{ heading_style }};
-    --hp-sci-heading-letter-spacing: {{ heading_ls }}em;
-    --hp-sci-eyebrow-letter-spacing: {{ eyebrow_ls }}em;
-    --hp-sci-lead-heading-line-height: {{ lead_lh }};
-    --hp-sci-base-heading-line-height: {{ base_lh }};
-    --hp-sci-body-line-height: {{ body_lh }};
-    --hp-sci-page-gutter: {{ gutter_desktop }}px;
-    --hp-sci-section-padding-top: {{ pad_top_desktop }}px;
-    --hp-sci-section-padding-bottom: {{ pad_bottom_desktop }}px;
-    --hp-sci-eyebrow-title-gap: {{ eyebrow_gap_desktop }}px;
+    --hp-sci-lead-heading-size: 52px;
+    --hp-sci-base-heading-size: 52px;
+    --hp-sci-subheading-size: 52px;
+    --hp-sci-body-size: 23px;
+    --hp-sci-eyebrow-size: 19px;
+    --hp-sci-stat-number-size: 52px;
+    --hp-sci-heading-weight: 300;
+    --hp-sci-subheading-weight: 300;
+    --hp-sci-eyebrow-weight: 300;
+    --hp-sci-body-weight: 300;
+    --hp-sci-heading-style: normal;
+    --hp-sci-heading-letter-spacing: -0.02em;
+    --hp-sci-eyebrow-letter-spacing: 0.12em;
+    --hp-sci-lead-heading-line-height: 1.12;
+    --hp-sci-base-heading-line-height: 1.12;
+    --hp-sci-body-line-height: 1.55;
+    --hp-sci-page-gutter: 28px;
+    --hp-sci-section-padding-top: 96px;
+    --hp-sci-section-padding-bottom: 96px;
+    --hp-sci-eyebrow-title-gap: 12px;
   }
-
-  {%- if section.settings.override_section_padding -%}
-  body.template-page-science-longevity #MainContent section.hp-sci,
-  body.template-search-science-longevity #MainContent section.hp-sci {
-    padding-top: var(--hp-sci-section-padding-top) !important;
-    padding-bottom: var(--hp-sci-section-padding-bottom) !important;
-  }
-  {%- endif -%}
 
   body.template-page-science-longevity #MainContent .hp-sci .hp-sci__eyebrow,
   body.template-search-science-longevity #MainContent .hp-sci .hp-sci__eyebrow {
-    margin-bottom: var(--hp-sci-eyebrow-title-gap, 12px);
+    margin-bottom: 12px;
   }
 
   @media screen and (max-width: 989px) {
     body.template-page-science-longevity,
     body.template-search-science-longevity {
-      --hp-sci-lead-heading-size: {{ lead_mobile }}px;
-      --hp-sci-base-heading-size: {{ base_mobile }}px;
-      --hp-sci-subheading-size: {{ sub_mobile }}px;
-      --hp-sci-body-size: {{ body_mobile }}px;
-      --hp-sci-eyebrow-size: {{ eyebrow_mobile }}px;
-      --hp-sci-stat-number-size: {{ stat_mobile }}px;
-      --hp-sci-page-gutter: {{ gutter_mobile }}px;
-      --hp-sci-section-padding-top: {{ pad_top_mobile }}px;
-      --hp-sci-section-padding-bottom: {{ pad_bottom_mobile }}px;
-      --hp-sci-eyebrow-title-gap: {{ eyebrow_gap_mobile }}px;
+      --hp-sci-lead-heading-size: 24px;
+      --hp-sci-base-heading-size: 24px;
+      --hp-sci-subheading-size: 24px;
+      --hp-sci-body-size: 17px;
+      --hp-sci-eyebrow-size: 12px;
+      --hp-sci-stat-number-size: 24px;
+      --hp-sci-page-gutter: 20px;
+      --hp-sci-section-padding-top: 56px;
+      --hp-sci-section-padding-bottom: 56px;
+      --hp-sci-eyebrow-title-gap: 10px;
     }
   }
 {% endstyle %}

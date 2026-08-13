@@ -16,7 +16,6 @@
   .hp-sci-proto-{{ section.id }} {
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-proto-{{ section.id }}__grid {
@@ -27,38 +26,24 @@
   }
 
   .hp-sci-proto-{{ section.id }}__eyebrow {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color }};
     margin: 0 0 20px;
   }
 
   .hp-sci-proto-{{ section.id }}__title-main {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: clamp(36px, 4.5vw, {{ section.settings.title_size }}px);
     line-height: 1.05;
-    letter-spacing: -0.03em;
     margin: 0;
     color: #ffffff !important;
   }
 
   .hp-sci-proto-{{ section.id }}__title-sub {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(36px, 4.5vw, {{ section.settings.title_size }}px);
     line-height: 1.05;
-    letter-spacing: -0.03em;
     margin: 0 0 clamp(24px, 3vw, 32px);
     color: {{ section.settings.title_accent_color }} !important;
   }
 
   .hp-sci-proto-{{ section.id }}__body {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(16px, 1.45vw, 18px);
     line-height: 1.65;
     max-width: 38ch;
     margin: 0 0 clamp(28px, 4vw, 40px);
@@ -74,18 +59,12 @@
   }
 
   .hp-sci-proto-{{ section.id }}__stat-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: clamp(40px, 5vw, 56px);
     line-height: 1;
-    letter-spacing: -0.04em;
     margin: 0 0 8px;
     color: {{ section.settings.accent_color }} !important;
   }
 
   .hp-sci-proto-{{ section.id }}__stat-label {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 15px;
     line-height: 1.4;
     margin: 0;
     color: #ffffff !important;
@@ -93,8 +72,6 @@
 
   .hp-sci-proto-{{ section.id }}__link {
     display: inline-block;
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 15px;
     color: #ffffff !important;
     text-decoration: underline;
     text-underline-offset: 4px;
