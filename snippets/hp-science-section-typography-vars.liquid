@@ -26,6 +26,10 @@
   assign eyebrow_weight = section.settings.sci_typo_eyebrow_weight | default: '500'
   assign body_weight = section.settings.sci_typo_body_weight | default: '400'
   assign heading_style = section.settings.sci_typo_heading_style | default: 'normal'
+  assign heading_font = section.settings.sci_typo_heading_font | default: 'inter_light'
+  assign subheading_font = section.settings.sci_typo_subheading_font | default: 'inter'
+  assign eyebrow_font = section.settings.sci_typo_eyebrow_font | default: 'darker_grotesque_medium'
+  assign body_font = section.settings.sci_typo_body_font | default: 'darker_grotesque'
 
   assign heading_ls = section.settings.sci_typo_heading_letter_spacing | default: -2 | times: 0.01
   assign eyebrow_ls = section.settings.sci_typo_eyebrow_letter_spacing | default: 12 | times: 0.01
@@ -41,6 +45,10 @@
   --hp-sci-sec-subheading-weight: {{ subheading_weight }};
   --hp-sci-sec-eyebrow-weight: {{ eyebrow_weight }};
   --hp-sci-sec-body-weight: {{ body_weight }};
+  --hp-sci-sec-heading-font: {% render 'hp-font-stack', font_key: heading_font %};
+  --hp-sci-sec-subheading-font: {% render 'hp-font-stack', font_key: subheading_font %};
+  --hp-sci-sec-eyebrow-font: {% render 'hp-font-stack', font_key: eyebrow_font %};
+  --hp-sci-sec-body-font: {% render 'hp-font-stack', font_key: body_font %};
   --hp-sci-sec-heading-style: {{ heading_style }};
   --hp-sci-sec-heading-letter-spacing: {{ heading_ls }}em;
   --hp-sci-sec-eyebrow-letter-spacing: {{ eyebrow_ls }}em;
