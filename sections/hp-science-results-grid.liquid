@@ -8,12 +8,18 @@
 
   .hp-sci-results-{{ section.id }} {
     background: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
   }
 
   .hp-sci-results-{{ section.id }}__stack {
     display: flex;
     flex-direction: column;
     gap: 0;
+    width: 100%;
+    max-width: none;
   }
 
   .hp-sci-results-{{ section.id }}__pillar {
@@ -21,6 +27,7 @@
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     align-items: stretch;
     min-height: clamp(460px, 52vh, 680px);
+    width: 100%;
   }
 
   .hp-sci-results-{{ section.id }}__pillar--dark {
@@ -160,8 +167,7 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-results-{{ section.id }}">
-  <div class="hp-sci__inner">
-    <div class="hp-sci-results-{{ section.id }}__stack">
+  <div class="hp-sci-results-{{ section.id }}__stack">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'pillar' -%}
@@ -244,7 +250,6 @@
         {% render 'hp-science-pillar-structure-default', section_id: section.id, panel_bg: section.settings.panel_background, num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
         {% render 'hp-science-pillar-hydration-default', section_id: section.id, panel_bg: section.settings.panel_background, num_color: section.settings.pillar_num_color, footnote_color: section.settings.footnote_color %}
       {%- endif -%}
-    </div>
   </div>
 </section>
 
