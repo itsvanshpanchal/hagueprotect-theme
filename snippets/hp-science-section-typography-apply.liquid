@@ -1,0 +1,64 @@
+{%- comment -%}
+  Apply per-section typography inside #shopify-section-{{ section.id }}.
+{%- endcomment -%}
+#shopify-section-{{ section.id }} .hp-sci {
+  padding-top: var(--hp-sci-sec-pad-top) !important;
+  padding-bottom: var(--hp-sci-sec-pad-bottom) !important;
+}
+
+#shopify-section-{{ section.id }} .hp-sci__inner {
+  padding-left: var(--hp-sci-sec-gutter) !important;
+  padding-right: var(--hp-sci-sec-gutter) !important;
+}
+
+#shopify-section-{{ section.id }} .hp-sci .hp-sci__eyebrow,
+#shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__rail-text"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__category"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__pillar-num"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__formula-eyebrow"] {
+  font-size: var(--hp-sci-sec-eyebrow-size) !important;
+  font-weight: var(--hp-sci-sec-eyebrow-weight) !important;
+  letter-spacing: var(--hp-sci-sec-eyebrow-letter-spacing) !important;
+  margin-bottom: var(--hp-sci-sec-eyebrow-gap) !important;
+}
+
+#shopify-section-{{ section.id }} .hp-sci h1,
+#shopify-section-{{ section.id }} .hp-sci h2,
+#shopify-section-{{ section.id }} .hp-sci h3,
+#shopify-section-{{ section.id }} .hp-sci .hp-sci__title,
+#shopify-section-{{ section.id }} .hp-sci [class*="__title"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__heading"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__heading-line"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__heading-accent"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__formula-title"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__formula-title-line"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__formula-accent"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__title-main"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__title-sub"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__pillar-title"] {
+  font-size: var(--hp-sci-sec-heading-size) !important;
+  font-weight: var(--hp-sci-sec-heading-weight) !important;
+  font-style: var(--hp-sci-sec-heading-style) !important;
+  line-height: var(--hp-sci-sec-heading-line-height) !important;
+  letter-spacing: var(--hp-sci-sec-heading-letter-spacing) !important;
+}
+
+#shopify-section-{{ section.id }} .hp-sci [class*="__col-title"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__card-title"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__num"] {
+  font-size: var(--hp-sci-sec-subheading-size) !important;
+  font-weight: var(--hp-sci-sec-subheading-weight) !important;
+  line-height: var(--hp-sci-sec-heading-line-height) !important;
+}
+
+#shopify-section-{{ section.id }} .hp-sci .hp-sci__body,
+#shopify-section-{{ section.id }} .hp-sci [class*="__col-text"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__subtext"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__text"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__body"],
+#shopify-section-{{ section.id }} .hp-sci [class*="__card-text"] {
+  font-size: var(--hp-sci-sec-body-size) !important;
+  font-weight: var(--hp-sci-sec-body-weight) !important;
+  line-height: var(--hp-sci-sec-body-line-height) !important;
+}

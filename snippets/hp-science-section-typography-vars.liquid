@@ -1,0 +1,65 @@
+{%- comment -%}
+  Per-section typography CSS variables for Science Longevity sections.
+  Setting IDs are shared across all hp-science-* sections (except global typography).
+{%- endcomment -%}
+{%- liquid
+  assign heading_desktop = section.settings.sci_typo_heading_desktop | default: section.settings.title_size_desktop | default: section.settings.heading_size | default: section.settings.title_size | default: 44
+  assign heading_mobile = section.settings.sci_typo_heading_mobile | default: section.settings.title_size_mobile | default: 32
+  assign sub_desktop = section.settings.sci_typo_subheading_desktop | default: section.settings.column_title_size | default: section.settings.subheading_size | default: 24
+  assign sub_mobile = section.settings.sci_typo_subheading_mobile | default: 20
+  assign body_desktop = section.settings.sci_typo_body_desktop | default: section.settings.column_text_size | default: section.settings.body_size | default: 18
+  assign body_mobile = section.settings.sci_typo_body_mobile | default: 16
+  assign eyebrow_desktop = section.settings.sci_typo_eyebrow_desktop | default: section.settings.eyebrow_size | default: section.settings.rail_size | default: 16
+  assign eyebrow_mobile = section.settings.sci_typo_eyebrow_mobile | default: 14
+
+  assign pad_top_desktop = section.settings.sci_typo_padding_top_desktop | default: section.settings.padding_top | default: 80
+  assign pad_top_mobile = section.settings.sci_typo_padding_top_mobile | default: 56
+  assign pad_bottom_desktop = section.settings.sci_typo_padding_bottom_desktop | default: section.settings.padding_bottom | default: 80
+  assign pad_bottom_mobile = section.settings.sci_typo_padding_bottom_mobile | default: 56
+  assign gutter_desktop = section.settings.sci_typo_gutter_desktop | default: 28
+  assign gutter_mobile = section.settings.sci_typo_gutter_mobile | default: 20
+  assign eyebrow_gap_desktop = section.settings.sci_typo_eyebrow_gap_desktop | default: 12
+  assign eyebrow_gap_mobile = section.settings.sci_typo_eyebrow_gap_mobile | default: 10
+
+  assign heading_weight = section.settings.sci_typo_heading_weight | default: '300'
+  assign subheading_weight = section.settings.sci_typo_subheading_weight | default: '400'
+  assign eyebrow_weight = section.settings.sci_typo_eyebrow_weight | default: '500'
+  assign body_weight = section.settings.sci_typo_body_weight | default: '400'
+  assign heading_style = section.settings.sci_typo_heading_style | default: 'normal'
+
+  assign heading_ls = section.settings.sci_typo_heading_letter_spacing | default: -2 | times: 0.01
+  assign eyebrow_ls = section.settings.sci_typo_eyebrow_letter_spacing | default: 12 | times: 0.01
+  assign heading_lh = section.settings.sci_typo_heading_line_height | default: 112 | times: 0.01
+  assign body_lh = section.settings.sci_typo_body_line_height | default: 155 | times: 0.01
+-%}
+#shopify-section-{{ section.id }} {
+  --hp-sci-sec-heading-size: {{ heading_desktop }}px;
+  --hp-sci-sec-subheading-size: {{ sub_desktop }}px;
+  --hp-sci-sec-body-size: {{ body_desktop }}px;
+  --hp-sci-sec-eyebrow-size: {{ eyebrow_desktop }}px;
+  --hp-sci-sec-heading-weight: {{ heading_weight }};
+  --hp-sci-sec-subheading-weight: {{ subheading_weight }};
+  --hp-sci-sec-eyebrow-weight: {{ eyebrow_weight }};
+  --hp-sci-sec-body-weight: {{ body_weight }};
+  --hp-sci-sec-heading-style: {{ heading_style }};
+  --hp-sci-sec-heading-letter-spacing: {{ heading_ls }}em;
+  --hp-sci-sec-eyebrow-letter-spacing: {{ eyebrow_ls }}em;
+  --hp-sci-sec-heading-line-height: {{ heading_lh }};
+  --hp-sci-sec-body-line-height: {{ body_lh }};
+  --hp-sci-sec-pad-top: {{ pad_top_desktop }}px;
+  --hp-sci-sec-pad-bottom: {{ pad_bottom_desktop }}px;
+  --hp-sci-sec-gutter: {{ gutter_desktop }}px;
+  --hp-sci-sec-eyebrow-gap: {{ eyebrow_gap_desktop }}px;
+}
+@media screen and (max-width: 989px) {
+  #shopify-section-{{ section.id }} {
+    --hp-sci-sec-heading-size: {{ heading_mobile }}px;
+    --hp-sci-sec-subheading-size: {{ sub_mobile }}px;
+    --hp-sci-sec-body-size: {{ body_mobile }}px;
+    --hp-sci-sec-eyebrow-size: {{ eyebrow_mobile }}px;
+    --hp-sci-sec-pad-top: {{ pad_top_mobile }}px;
+    --hp-sci-sec-pad-bottom: {{ pad_bottom_mobile }}px;
+    --hp-sci-sec-gutter: {{ gutter_mobile }}px;
+    --hp-sci-sec-eyebrow-gap: {{ eyebrow_gap_mobile }}px;
+  }
+}

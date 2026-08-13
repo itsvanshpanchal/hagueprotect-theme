@@ -16,6 +16,7 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+  {% render 'hp-science-section-typography', section: section %}
 
   .hp-sci-cta-{{ section.id }} {
     background: {{ section.settings.background_color }};
@@ -246,6 +247,286 @@
       "step": 4,
       "unit": "px",
       "default": 96
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Control this section's text sizes, font weights, spacing, and gutters for desktop and mobile."
+    },
+    {
+      "type": "header",
+      "content": "Typography — headings"
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_heading_desktop",
+      "label": "Heading size — desktop",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_heading_mobile",
+      "label": "Heading size — mobile",
+      "min": 18,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_subheading_desktop",
+      "label": "Subheading size — desktop",
+      "min": 14,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_subheading_mobile",
+      "label": "Subheading size — mobile",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_heading_weight",
+      "label": "Heading font weight",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_subheading_weight",
+      "label": "Subheading font weight",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_heading_style",
+      "label": "Heading style",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_heading_line_height",
+      "label": "Heading line height",
+      "min": 100,
+      "max": 150,
+      "step": 2,
+      "unit": "%",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_heading_letter_spacing",
+      "label": "Heading letter spacing",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "default": -2,
+      "info": "Value × 0.01em (-2 = -0.02em)."
+    },
+    {
+      "type": "header",
+      "content": "Typography — body & eyebrows"
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_body_desktop",
+      "label": "Body text size — desktop",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_body_mobile",
+      "label": "Body text size — mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_eyebrow_desktop",
+      "label": "Eyebrow size — desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_eyebrow_mobile",
+      "label": "Eyebrow size — mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_body_weight",
+      "label": "Body font weight",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_eyebrow_weight",
+      "label": "Eyebrow font weight",
+      "options": [
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semibold (600)" },
+        { "value": "700", "label": "Bold (700)" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_body_line_height",
+      "label": "Body line height",
+      "min": 130,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 155
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_eyebrow_letter_spacing",
+      "label": "Eyebrow letter spacing",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 12,
+      "info": "Value × 0.01em (12 = 0.12em)."
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_eyebrow_gap_desktop",
+      "label": "Space below eyebrow — desktop",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_eyebrow_gap_mobile",
+      "label": "Space below eyebrow — mobile",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Typography — spacing"
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_padding_top_desktop",
+      "label": "Section padding top — desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_padding_top_mobile",
+      "label": "Section padding top — mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_padding_bottom_desktop",
+      "label": "Section padding bottom — desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_padding_bottom_mobile",
+      "label": "Section padding bottom — mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_gutter_desktop",
+      "label": "Horizontal gutter — desktop",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sci_typo_gutter_mobile",
+      "label": "Horizontal gutter — mobile",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     }
   ],
   "presets": [
