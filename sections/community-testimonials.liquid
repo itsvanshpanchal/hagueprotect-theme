@@ -628,9 +628,10 @@
       </div>
       <div class="comm-top-right">
         <div class="comm-reviews-badge">
-          <div class="comm-badge-stars">
-            {%- for i in (1..5) -%}
-              <svg class="comm-star-icon" viewBox="0 0 24 24">
+          <div class="comm-badge-stars" aria-label="{{ section.settings.badge_star_rating | default: 5 }} out of 5 stars">
+            {%- assign badge_star_rating = section.settings.badge_star_rating | default: 5 -%}
+            {%- for i in (1..badge_star_rating) -%}
+              <svg class="comm-star-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
               </svg>
             {%- endfor -%}
