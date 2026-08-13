@@ -148,3 +148,26 @@ body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="_
   text-transform: none !important;
   font-synthesis: none !important;
 }
+
+/*
+  Science Longevity — hero + info grid lead headings share one larger size.
+  Headings only; body/eyebrow/column copy unchanged.
+*/
+body.template-page-science-longevity,
+body.template-search-science-longevity {
+  --hp-sci-lead-heading-size: 44px;
+}
+
+body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
+body.template-page-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-line"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-accent"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"] .hp-sci__title,
+body.template-search-science-longevity #MainContent [class*="hp-sci-hero-"][class*="__title"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-line"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-grid-"][class*="__heading-accent"] {
+  font-size: var(--hp-sci-lead-heading-size, 44px) !important;
+  line-height: 1.12 !important;
+}
