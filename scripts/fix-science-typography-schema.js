@@ -34,9 +34,7 @@ for (const file of files) {
     return true;
   });
 
-  if (!schema.settings.some((s) => s.id === 'sci_typo_heading_desktop')) {
-    schema.settings.push(...(moved.length ? moved : typoSettings));
-  }
+  schema.settings.push(...(moved.length ? moved : typoSettings));
 
   const newSchema = JSON.stringify(schema, null, 2);
   content = content.replace(/\{% schema %\}[\s\S]*\{% endschema %\}/, `{% schema %}\n${newSchema}\n{% endschema %}`);
