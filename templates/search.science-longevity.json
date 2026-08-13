@@ -1,5 +1,41 @@
 {
   "sections": {
+    "typography": {
+      "type": "hp-science-typography",
+      "settings": {
+        "lead_heading_size_desktop": 44,
+        "lead_heading_size_mobile": 32,
+        "base_heading_size_desktop": 24,
+        "base_heading_size_mobile": 22,
+        "subheading_size_desktop": 24,
+        "subheading_size_mobile": 20,
+        "body_size_desktop": 18,
+        "body_size_mobile": 16,
+        "eyebrow_size_desktop": 16,
+        "eyebrow_size_mobile": 14,
+        "stat_number_size_desktop": 48,
+        "stat_number_size_mobile": 36,
+        "heading_font_weight": "300",
+        "subheading_font_weight": "400",
+        "eyebrow_font_weight": "500",
+        "body_font_weight": "400",
+        "heading_font_style": "normal",
+        "heading_letter_spacing": -2,
+        "lead_heading_line_height": 112,
+        "base_heading_line_height": 120,
+        "body_line_height": 155,
+        "eyebrow_letter_spacing": 12,
+        "horizontal_gutter_desktop": 28,
+        "horizontal_gutter_mobile": 20,
+        "override_section_padding": false,
+        "section_padding_top_desktop": 80,
+        "section_padding_top_mobile": 56,
+        "section_padding_bottom_desktop": 80,
+        "section_padding_bottom_mobile": 56,
+        "eyebrow_title_gap_desktop": 12,
+        "eyebrow_title_gap_mobile": 10
+      }
+    },
     "hero": {
       "type": "hp-science-hero",
       "settings": {
@@ -491,6 +527,7 @@
     }
   },
   "order": [
+    "typography",
     "hero",
     "info_grid",
     "media_banner",
