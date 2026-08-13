@@ -8,9 +8,8 @@
   }
 
   .hp-sci-typography-{{ section.id }}__note {
-    display: none;
     margin: 0;
-    padding: 14px var(--hp-sci-gutter, 28px);
+    padding: 16px var(--hp-sci-gutter, 28px);
     background: rgba(168, 137, 74, 0.12);
     border-bottom: 1px solid rgba(168, 137, 74, 0.35);
     color: #a8894a;
@@ -20,15 +19,22 @@
     text-align: center;
   }
 
-  .shopify-design-mode .hp-sci-typography-{{ section.id }}__note {
-    display: block;
+  .hp-sci-typography-{{ section.id }}__panel {
+    min-height: 0;
+  }
+
+  .shopify-design-mode .hp-sci-typography-{{ section.id }}__panel {
+    min-height: 52px;
+    cursor: pointer;
   }
 {%- endstyle -%}
 
-<section class="hp-sci hp-sci-typography-{{ section.id }}" aria-hidden="true">
-  <p class="hp-sci-typography-{{ section.id }}__note">
-    Typography &amp; spacing settings here apply to the whole Science Longevity page (desktop + mobile). Other sections keep their content settings.
-  </p>
+<section class="hp-sci hp-sci-typography-{{ section.id }} hp-sci-typography-{{ section.id }}__panel">
+  {%- if request.design_mode -%}
+    <p class="hp-sci-typography-{{ section.id }}__note">
+      <strong>Science — Typography</strong> — page-wide text sizes, weights, spacing, and gutters (desktop + mobile). Edit settings in the sidebar.
+    </p>
+  {%- endif -%}
 </section>
 
 {% schema %}
