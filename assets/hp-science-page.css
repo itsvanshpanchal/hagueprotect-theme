@@ -114,3 +114,37 @@
     font-size: 16px;
   }
 }
+
+/*
+  Science Longevity page only — unified heading typography.
+  Templates: page.science-longevity, search.science-longevity
+*/
+body.template-page-science-longevity #MainContent .hp-sci h1,
+body.template-page-science-longevity #MainContent .hp-sci h2,
+body.template-page-science-longevity #MainContent .hp-sci h3,
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__heading-line"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__heading-accent"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-title"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-title-line"],
+body.template-page-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-accent"],
+body.template-search-science-longevity #MainContent .hp-sci h1,
+body.template-search-science-longevity #MainContent .hp-sci h2,
+body.template-search-science-longevity #MainContent .hp-sci h3,
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-main"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__title-sub"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__heading-line"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__heading-accent"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-title"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-title-line"],
+body.template-search-science-longevity #MainContent [class*="hp-sci-"][class*="__formula-accent"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+  font-synthesis: none !important;
+}
