@@ -77,28 +77,6 @@
       "default": "darker_grotesque_medium"
     },
     {
-      "type": "select",
-      "id": "sci_typo_body_font",
-      "label": "Paragraph font",
-      "options": [
-        { "value": "inter_light", "label": "Inter Light" },
-        { "value": "inter", "label": "Inter Regular" },
-        { "value": "inter_medium", "label": "Inter Medium" },
-        { "value": "inter_semibold", "label": "Inter Semibold" },
-        { "value": "inter_bold", "label": "Inter Bold" },
-        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
-        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
-        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "montserrat", "label": "Montserrat" },
-        { "value": "montserrat_light", "label": "Montserrat Light" },
-        { "value": "oswald", "label": "Oswald" },
-        { "value": "calisto_mt", "label": "Calisto MT" },
-        { "value": "freight_text_pro", "label": "FreightText Pro" }
-      ],
-      "default": "darker_grotesque"
-    },
-    {
       "type": "header",
       "content": "Typography — headings"
     },
@@ -197,6 +175,36 @@
       "step": 1,
       "default": -2,
       "info": "Value × 0.01em (-2 = -0.02em)."
+    },
+    {
+      "type": "header",
+      "content": "Typography — paragraphs"
+    },
+    {
+      "type": "paragraph",
+      "content": "Font, size, weight, line height, and color for body copy, column text, card text, and subtext."
+    },
+    {
+      "type": "select",
+      "id": "sci_typo_body_font",
+      "label": "Paragraph font",
+      "options": [
+        { "value": "inter_light", "label": "Inter Light" },
+        { "value": "inter", "label": "Inter Regular" },
+        { "value": "inter_medium", "label": "Inter Medium" },
+        { "value": "inter_semibold", "label": "Inter Semibold" },
+        { "value": "inter_bold", "label": "Inter Bold" },
+        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
+        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
+        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
+        { "value": "bebas_neue", "label": "Bebas Neue" },
+        { "value": "montserrat", "label": "Montserrat" },
+        { "value": "montserrat_light", "label": "Montserrat Light" },
+        { "value": "oswald", "label": "Oswald" },
+        { "value": "calisto_mt", "label": "Calisto MT" },
+        { "value": "freight_text_pro", "label": "FreightText Pro" }
+      ],
+      "default": "darker_grotesque"
     },
     {
       "type": "header",
