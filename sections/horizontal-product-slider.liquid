@@ -161,6 +161,16 @@
       /* Keep product row clear of the floating ATC rail on the right */
       padding-right: max(var(--homepage-section-gutter, 8px), 400px);
     }
+
+    /* Extra clearance when the longevity glass panel sits beside the floating rail */
+    .hp-fam-sec--has-glass .hp-fam-sec__container {
+      padding-right: max(var(--homepage-section-gutter, 8px), 456px);
+    }
+
+    .hp-fam-sec--has-glass .hp-fam-sec__glass-panel {
+      max-width: min(var(--hp-glass-max-width, 1100px), calc(100% - 48px));
+      margin-right: auto;
+    }
   }
 
   .hp-fam-sec__heading {
@@ -574,6 +584,14 @@
 
     .hp-fam-sec__container {
       padding-right: 340px;
+    }
+
+    .hp-fam-sec--has-glass .hp-fam-sec__container {
+      padding-right: 396px;
+    }
+
+    .hp-fam-sec--has-glass .hp-fam-sec__glass-panel {
+      max-width: min(var(--hp-glass-max-width, 1100px), calc(100% - 40px));
     }
   }
 
@@ -1131,7 +1149,7 @@
   endif
 -%}
 
-<div class="hp-fam-sec" id="fam-{{ section.id }}">
+<div class="hp-fam-sec{% if section.settings.show_glass_panel %} hp-fam-sec--has-glass{% endif %}" id="fam-{{ section.id }}">
   {%- if section.settings.enable_video_bg -%}
     <div class="hp-fam-sec__video-bg">
       {%- if section.settings.video_bg != blank -%}
