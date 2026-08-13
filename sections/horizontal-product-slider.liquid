@@ -319,7 +319,7 @@
     color: #ffffff;
   }
 
-  /* Intro panel — fills space below Premium Best heading */
+  /* Intro panel — transparent, no card box */
   .hp-fam-sec__glass-panel {
     display: grid;
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -329,10 +329,10 @@
     max-width: min(var(--hp-glass-max-width, 1100px), 100%);
     margin: 0 0 clamp(28px, 3.5vw, 44px);
     padding: var(--hp-glass-pad, 40px) clamp(28px, 3.5vw, calc(var(--hp-glass-pad, 40px) + 8px));
-    border-radius: 22px;
-    background: #ffffff;
-    border: 1px solid rgba(17, 17, 17, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-sizing: border-box;
@@ -340,12 +340,13 @@
 
   .hp-fam-sec__glass-panel--linked {
     cursor: pointer;
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transition: opacity 0.25s ease;
   }
 
   .hp-fam-sec__glass-panel--linked:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
-    transform: translateY(-1px);
+    box-shadow: none;
+    transform: none;
+    opacity: 0.92;
   }
 
   .hp-fam-sec__glass-panel--linked .hp-fam-sec__glass-link {
@@ -449,7 +450,6 @@
       gap: 20px;
       margin-bottom: 18px;
       padding: calc(var(--hp-glass-pad, 40px) * 0.55) 16px;
-      border-radius: 16px;
     }
 
     .hp-fam-sec__glass-eyebrow {

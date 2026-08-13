@@ -1099,43 +1099,43 @@
         {%- endif -%}
       {%- endpaginate -%}
     {%- else -%}
-      <div class="ckc-{{ section.id }}__grid">
-        {%- if has_global_collection -%}
-          {%- for product in collection.products limit: section.settings.products_limit -%}
-            {%- render 'care-kit-product-card',
-              product: product,
-              section_id: section.id,
-              rating_value: section.settings.rating_value,
+    <div class="ckc-{{ section.id }}__grid">
+      {%- if has_global_collection -%}
+        {%- for product in collection.products limit: section.settings.products_limit -%}
+          {%- render 'care-kit-product-card',
+            product: product,
+            section_id: section.id,
+            rating_value: section.settings.rating_value,
               rating_count: section.settings.rating_count,
               editorial: is_editorial
-            -%}
-          {%- endfor -%}
-        {%- elsif has_collection_products -%}
-          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
-            {%- render 'care-kit-product-card',
-              product: product,
-              section_id: section.id,
-              rating_value: section.settings.rating_value,
+          -%}
+        {%- endfor -%}
+      {%- elsif has_collection_products -%}
+        {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+          {%- render 'care-kit-product-card',
+            product: product,
+            section_id: section.id,
+            rating_value: section.settings.rating_value,
               rating_count: section.settings.rating_count,
               editorial: is_editorial
-            -%}
-          {%- endfor -%}
-        {%- elsif has_block_products -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'product' and block.settings.product != blank -%}
-              {%- render 'care-kit-product-card',
-                product: block.settings.product,
-                section_id: section.id,
-                rating_value: section.settings.rating_value,
+          -%}
+        {%- endfor -%}
+      {%- elsif has_block_products -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'product' and block.settings.product != blank -%}
+            {%- render 'care-kit-product-card',
+              product: block.settings.product,
+              section_id: section.id,
+              rating_value: section.settings.rating_value,
                 rating_count: section.settings.rating_count,
                 editorial: is_editorial
-              -%}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
-        {%- endif -%}
-      </div>
+            -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <p class="ckc-{{ section.id }}__empty">Add a collection or products in the theme editor to show items here.</p>
+      {%- endif -%}
+    </div>
     {%- endif -%}
   </div>
 </section>
