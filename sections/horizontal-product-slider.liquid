@@ -1212,14 +1212,16 @@
           tabindex="0"
         {% endif %}
       >
-        <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
-          {%- if section.settings.glass_eyebrow_left != blank -%}
-            <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
-          {%- endif -%}
-          {%- if section.settings.glass_title != blank -%}
-            <h3 class="hp-fam-sec__glass-title">{{ section.settings.glass_title }}</h3>
-          {%- endif -%}
-        </div>
+        {%- if section.settings.glass_eyebrow_left != blank or section.settings.glass_title != blank -%}
+          <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
+            {%- if section.settings.glass_eyebrow_left != blank -%}
+              <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
+            {%- endif -%}
+            {%- if section.settings.glass_title != blank -%}
+              <h3 class="hp-fam-sec__glass-title">{{ section.settings.glass_title }}</h3>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
         <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--detail">
           {%- if section.settings.glass_para_top != blank -%}
             <p class="hp-fam-sec__glass-para">{{ section.settings.glass_para_top }}</p>
