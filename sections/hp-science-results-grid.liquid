@@ -52,22 +52,8 @@
     color: #ffffff !important;
   }
 
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__pillar-num,
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__stat-label {
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__pillar-title,
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__stat-value,
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__para {
-    color: #ffffff !important;
-  }
-
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__footnote {
-    color: rgba(255, 255, 255, 0.42);
-  }
-
-  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__rule {
+  .hp-sci-results-{{ section.id }}__pillar--dark .hp-sci-results-{{ section.id }}__rule,
+  .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__rule {
     background: #ffffff;
     opacity: 0.18;
   }
@@ -164,6 +150,26 @@
     }
   }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Dark pillar panels only — must come after typography (which sets section body color). */
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark {
+    color: #ffffff !important;
+  }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-num,
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-label {
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-title,
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__para,
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-value {
+    color: #ffffff !important;
+  }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__footnote {
+    color: rgba(255, 255, 255, 0.42) !important;
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-results-{{ section.id }}">
