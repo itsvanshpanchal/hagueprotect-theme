@@ -14,6 +14,7 @@
   .hp-sci-banner-{{ section.id }}__media {
     min-height: {{ section.settings.min_height }}px;
   }
+  {% render 'hp-science-section-typography-apply-only', section: section %}
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-banner-{{ section.id }}">
