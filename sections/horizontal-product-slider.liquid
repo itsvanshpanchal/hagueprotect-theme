@@ -19,6 +19,9 @@
   {% render 'section-typography-vars', section: section %}
 
   #shopify-section-{{ section.id }} {
+    --hp-fam-rail-width: 340px;
+    --hp-fam-rail-gap: 72px;
+    --hp-fam-rail-clearance: calc(var(--hp-fam-rail-width) + var(--hp-fam-rail-gap));
     --hp-glass-max-width: {{ glass_max_w }}px;
     --hp-glass-pad: {{ glass_pad }}px;
     --hp-glass-title-size: {{ glass_title_d }}px;
@@ -157,19 +160,27 @@
   }
 
   @media screen and (min-width: 1200px) {
-    .hp-fam-sec__container {
-      /* Keep product row clear of the floating ATC rail on the right */
-      padding-right: max(var(--homepage-section-gutter, 8px), 400px);
+    /* Beat homepage layout gutter rules (theme-layout-css uses !important) */
+    body.template-index #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__container,
+    #shopify-section-{{ section.id }} .hp-fam-sec__container {
+      padding-right: max(var(--homepage-section-gutter-right, var(--homepage-section-gutter, 48px)), 400px) !important;
     }
 
-    /* Extra clearance when the longevity glass panel sits beside the floating rail */
-    .hp-fam-sec--has-glass .hp-fam-sec__container {
-      padding-right: max(var(--homepage-section-gutter, 8px), 456px);
+    body.template-index #MainContent #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__container,
+    #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__container {
+      padding-right: max(var(--homepage-section-gutter-right, var(--homepage-section-gutter, 48px)), var(--hp-fam-rail-clearance, 412px)) !important;
     }
 
-    .hp-fam-sec--has-glass .hp-fam-sec__glass-panel {
-      max-width: min(var(--hp-glass-max-width, 1100px), calc(100% - 48px));
-      margin-right: auto;
+    body.template-index #MainContent #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__glass-panel,
+    #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__glass-panel {
+      width: 100%;
+      max-width: min(
+        var(--hp-glass-max-width, 1100px),
+        100%,
+        calc(100vw - var(--homepage-section-gutter, 48px) - var(--hp-fam-rail-clearance, 412px))
+      ) !important;
+      margin-right: 0;
+      box-sizing: border-box;
     }
   }
 
@@ -577,21 +588,24 @@
   }
 
   @media screen and (min-width: 1200px) and (max-width: 1399px) {
+    #shopify-section-{{ section.id }} {
+      --hp-fam-rail-width: 300px;
+      --hp-fam-rail-clearance: calc(var(--hp-fam-rail-width) + var(--hp-fam-rail-gap));
+    }
+
     .premium-floating-rail {
       right: 16px;
       width: 300px;
     }
 
-    .hp-fam-sec__container {
-      padding-right: 340px;
+    body.template-index #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__container,
+    #shopify-section-{{ section.id }} .hp-fam-sec__container {
+      padding-right: max(var(--homepage-section-gutter-right, var(--homepage-section-gutter, 48px)), 340px) !important;
     }
 
-    .hp-fam-sec--has-glass .hp-fam-sec__container {
-      padding-right: 396px;
-    }
-
-    .hp-fam-sec--has-glass .hp-fam-sec__glass-panel {
-      max-width: min(var(--hp-glass-max-width, 1100px), calc(100% - 40px));
+    body.template-index #MainContent #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__container,
+    #shopify-section-{{ section.id }} .hp-fam-sec--has-glass .hp-fam-sec__container {
+      padding-right: max(var(--homepage-section-gutter-right, var(--homepage-section-gutter, 48px)), var(--hp-fam-rail-clearance, 372px)) !important;
     }
   }
 
