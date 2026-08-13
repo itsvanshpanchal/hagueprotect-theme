@@ -29,6 +29,10 @@
     display: block;
   }
 
+  .hp-sci-hero-{{ section.id }}__title-line--muted {
+    color: #c8c8c8;
+  }
+
   .hp-sci-hero-{{ section.id }}__media {
     min-height: clamp(280px, 42vh, 560px);
   }
@@ -70,10 +74,10 @@
               <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_2 }}</span>
             {%- endif -%}
             {%- if section.settings.heading_line_3 != blank -%}
-              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_3 }}</span>
+              <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_3 }}</span>
             {%- endif -%}
             {%- if section.settings.heading_line_4 != blank -%}
-              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_4 }}</span>
+              <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_4 }}</span>
             {%- endif -%}
           </h1>
         {%- endif -%}
