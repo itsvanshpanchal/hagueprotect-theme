@@ -1233,6 +1233,16 @@
             </a>
           {%- endif -%}
         </div>
+        {%- if section.settings.glass_eyebrow_left != blank or section.settings.glass_title != blank -%}
+          <div class="hp-fam-sec__glass-col hp-fam-sec__glass-col--intro">
+            {%- if section.settings.glass_eyebrow_left != blank -%}
+              <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_left }}</p>
+            {%- endif -%}
+            {%- if section.settings.glass_title != blank -%}
+              <h3 class="hp-fam-sec__glass-title">{{ section.settings.glass_title }}</h3>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -1804,6 +1814,19 @@
       "id": "show_glass_panel",
       "label": "Show glass intro panel",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "glass_eyebrow_left",
+      "label": "Left eyebrow text",
+      "default": "INTRODUCING"
+    },
+    {
+      "type": "text",
+      "id": "glass_title",
+      "label": "Panel title text",
+      "default": "India's first skin longevity brand"
+    },
     {
       "type": "textarea",
       "id": "glass_para_top",
