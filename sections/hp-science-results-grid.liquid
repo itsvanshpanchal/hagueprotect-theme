@@ -135,6 +135,11 @@
     max-width: 46ch;
   }
 
+
+  .hp-sci-results-{{ section.id }}__text-position {
+    transform: translate({{ section.settings.text_offset_x_desktop | default: 0 }}px, {{ section.settings.text_offset_y_desktop | default: 0 }}px);
+  }
+
   @media screen and (max-width: 989px) {
     .hp-sci-results-{{ section.id }}__pillar,
     .hp-sci-results-{{ section.id }}__pillar--reverse {
@@ -150,7 +155,11 @@
     .hp-sci-results-{{ section.id }}__panel {
       padding: 40px 24px 48px;
     }
-  }
+  
+    .hp-sci-results-{{ section.id }}__text-position {
+      transform: translate({{ section.settings.text_offset_x_mobile | default: 0 }}px, {{ section.settings.text_offset_y_mobile | default: 0 }}px);
+    }
+}
   {% render 'hp-science-section-typography-styles', section: section %}
 
   /* Dark pillar panels only — must come after typography (which sets section body color). */
@@ -175,7 +184,7 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-results-{{ section.id }}">
-  <div class="hp-sci-results-{{ section.id }}__stack">
+  <div class="hp-sci-results-{{ section.id }}__stack hp-sci-results-{{ section.id }}__text-position">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'pillar' -%}
@@ -316,28 +325,55 @@
   "tag": "section",
   "class": "hp-science-section",
   "settings": [
-        {
-      "type": "select",
-      "id": "text_position_horizontal",
-      "label": "Text position (horizontal)",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
+    {
+      "type": "header",
+      "content": "Text position"
     },
     {
-      "type": "select",
-      "id": "text_position_vertical",
-      "label": "Text position (vertical)",
-      "options": [
-        { "value": "start", "label": "Top" },
-        { "value": "center", "label": "Middle" },
-        { "value": "end", "label": "Bottom" }
-      ],
-      "default": "center"
-    },{
+      "type": "range",
+      "id": "text_offset_x_desktop",
+      "label": "Horizontal offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_desktop",
+      "label": "Vertical offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_mobile",
+      "label": "Horizontal offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_mobile",
+      "label": "Vertical offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+{
       "type": "color",
       "id": "background_color",
       "label": "Section background",

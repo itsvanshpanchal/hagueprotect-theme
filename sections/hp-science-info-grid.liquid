@@ -72,6 +72,11 @@
     color: {{ section.settings.body_color }};
   }
 
+
+  .hp-sci-grid-{{ section.id }}__text-position {
+    transform: translate({{ section.settings.text_offset_x_desktop | default: 0 }}px, {{ section.settings.text_offset_y_desktop | default: 0 }}px);
+  }
+
   @media screen and (max-width: 989px) {
     .hp-sci-grid-{{ section.id }}__layout {
       grid-template-columns: 1fr;
@@ -85,7 +90,11 @@
       writing-mode: horizontal-tb;
       transform: none;
     }
-  }
+  
+    .hp-sci-grid-{{ section.id }}__text-position {
+      transform: translate({{ section.settings.text_offset_x_mobile | default: 0 }}px, {{ section.settings.text_offset_y_mobile | default: 0 }}px);
+    }
+}
 
   @media screen and (max-width: 640px) {
     .hp-sci-grid-{{ section.id }}__cols {
@@ -104,7 +113,7 @@
         </div>
       {%- endif -%}
 
-      <div class="hp-sci-grid-{{ section.id }}__main">
+      <div class="hp-sci-grid-{{ section.id }}__main hp-sci-grid-{{ section.id }}__text-position">
         {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
           <h2 class="hp-sci-grid-{{ section.id }}__heading">
             {%- if section.settings.heading_line_1 != blank -%}
@@ -170,28 +179,55 @@
   "tag": "section",
   "class": "hp-science-section",
   "settings": [
-        {
-      "type": "select",
-      "id": "text_position_horizontal",
-      "label": "Text position (horizontal)",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
+    {
+      "type": "header",
+      "content": "Text position"
     },
     {
-      "type": "select",
-      "id": "text_position_vertical",
-      "label": "Text position (vertical)",
-      "options": [
-        { "value": "start", "label": "Top" },
-        { "value": "center", "label": "Middle" },
-        { "value": "end", "label": "Bottom" }
-      ],
-      "default": "center"
-    },{
+      "type": "range",
+      "id": "text_offset_x_desktop",
+      "label": "Horizontal offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_desktop",
+      "label": "Vertical offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_mobile",
+      "label": "Horizontal offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_mobile",
+      "label": "Vertical offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+{
       "type": "text",
       "id": "sidebar_label",
       "label": "Sidebar label (vertical)",

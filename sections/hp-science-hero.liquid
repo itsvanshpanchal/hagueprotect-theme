@@ -12,9 +12,9 @@
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
   }
-  .hp-sci-hero-{{ section.id }}__copy {
+
+  .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'center' }};
-    align-self: {{ section.settings.text_position_vertical | default: 'center' }};
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
@@ -42,6 +42,11 @@
     min-height: clamp(280px, 42vh, 560px);
   }
 
+
+  .hp-sci-hero-{{ section.id }}__text-position {
+    transform: translate({{ section.settings.text_offset_x_desktop | default: 0 }}px, {{ section.settings.text_offset_y_desktop | default: 0 }}px);
+  }
+
   @media screen and (max-width: 989px) {
     .hp-sci-hero-{{ section.id }}__grid {
       grid-template-columns: 1fr;
@@ -55,6 +60,10 @@
       order: 1;
     }
 
+    .hp-sci-hero-{{ section.id }}__text-position {
+      transform: translate({{ section.settings.text_offset_x_mobile | default: 0 }}px, {{ section.settings.text_offset_y_mobile | default: 0 }}px);
+    }
+
     .hp-sci-hero-{{ section.id }}__media {
       order: 2;
       min-height: {{ section.settings.media_min_height_mobile }}px;
@@ -66,7 +75,7 @@
 <section class="hp-sci hp-sci-hero-{{ section.id }}">
   <div class="hp-sci__inner">
     <div class="hp-sci-hero-{{ section.id }}__grid">
-      <div class="hp-sci-hero-{{ section.id }}__copy">
+      <div class="hp-sci-hero-{{ section.id }}__copy hp-sci-hero-{{ section.id }}__text-position">
         {%- if section.settings.eyebrow != blank -%}
           <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
@@ -107,6 +116,55 @@
   "tag": "section",
   "class": "hp-science-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Text position"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_desktop",
+      "label": "Horizontal offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_desktop",
+      "label": "Vertical offset — desktop",
+      "min": -300,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_mobile",
+      "label": "Horizontal offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (negative) or right (positive)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_mobile",
+      "label": "Vertical offset — mobile",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (negative) or down (positive)"
+    },
+
     {
       "type": "text",
       "id": "eyebrow",
@@ -233,28 +291,6 @@
     {
       "type": "header",
       "content": "Spacing"
-    },
-    {
-      "type": "select",
-      "id": "text_alignment",
-      "label": "Text position (horizontal)",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "text_position_vertical",
-      "label": "Text position (vertical)",
-      "options": [
-        { "value": "start", "label": "Top" },
-        { "value": "center", "label": "Middle" },
-        { "value": "end", "label": "Bottom" }
-      ],
-      "default": "center"
     },
     {
       "type": "range",
