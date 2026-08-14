@@ -129,7 +129,28 @@
   "tag": "section",
   "class": "hp-science-section",
   "settings": [
+        {
+      "type": "select",
+      "id": "text_position_horizontal",
+      "label": "Text position (horizontal)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
     {
+      "type": "select",
+      "id": "text_position_vertical",
+      "label": "Text position (vertical)",
+      "options": [
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },{
       "type": "header",
       "content": "Left headline"
     },
