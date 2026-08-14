@@ -1,4 +1,14 @@
-{%- comment -%}
+{%- comment 
+  assign typo_heading_color = section.settings.sci_typo_heading_color | strip
+  if typo_heading_color == 'rgba(0,0,0,0)' or typo_heading_color == 'rgba(0, 0, 0, 0)' or typo_heading_color == 'transparent'
+    assign typo_heading_color = blank
+  endif
+
+  assign typo_eyebrow_color = section.settings.sci_typo_eyebrow_color | strip
+  if typo_eyebrow_color == 'rgba(0,0,0,0)' or typo_eyebrow_color == 'rgba(0, 0, 0, 0)' or typo_eyebrow_color == 'transparent'
+    assign typo_eyebrow_color = blank
+  endif
+-%}
   Science Longevity — fixed typography (fonts, sizes, weights). Spacing is controlled per section.
   Render once at the END of each section {%- style -%} block.
 {%- endcomment -%}
@@ -35,10 +45,10 @@
 -%}
 
 {{ sec }} {
-  --hp-sci-sec-heading-size: 52px;
-  --hp-sci-sec-subheading-size: 52px;
-  --hp-sci-sec-body-size: 23px;
-  --hp-sci-sec-eyebrow-size: 19px;
+  --hp-sci-sec-heading-size: {{ section.settings.sci_typo_heading_desktop | default: 52 }}px;
+  --hp-sci-sec-subheading-size: {{ section.settings.sci_typo_subheading_desktop | default: 52 }}px;
+  --hp-sci-sec-body-size: {{ section.settings.sci_typo_body_desktop | default: 23 }}px;
+  --hp-sci-sec-eyebrow-size: {{ section.settings.sci_typo_eyebrow_desktop | default: 19 }}px;
   --hp-sci-sec-heading-weight: 300;
   --hp-sci-sec-subheading-weight: 300;
   --hp-sci-sec-eyebrow-weight: 700;
@@ -52,6 +62,14 @@
   --hp-sci-sec-eyebrow-letter-spacing: 0.12em;
   --hp-sci-sec-heading-line-height: 1.12;
   --hp-sci-sec-body-line-height: 1.55;
+  
+  {%- if typo_heading_color != blank -%}
+  --hp-sci-sec-heading-color: {{ typo_heading_color }};
+  {%- endif -%}
+  {%- if typo_eyebrow_color != blank -%}
+  --hp-sci-sec-eyebrow-color: {{ typo_eyebrow_color }};
+  {%- endif -%}
+
   {%- if body_color != blank -%}
   --hp-sci-sec-body-color: {{ body_color }};
   {%- endif -%}
@@ -86,7 +104,7 @@
 {{ sec }} .hp-sci [class*="__compare-label"],
 {{ sec }} .hp-sci [class*="__day"] {
   font-family: {{ dg_stack }} !important;
-  font-size: 19px !important;
+  font-size: var(--hp-sci-sec-eyebrow-size) !important;
   font-weight: 700 !important;
   font-style: normal !important;
   line-height: 1.35 !important;
@@ -94,6 +112,9 @@
   text-transform: uppercase !important;
   text-align: inherit;
   margin-bottom: 12px !important;
+  {%- if typo_eyebrow_color != blank -%}
+  color: var(--hp-sci-sec-eyebrow-color) !important;
+  {%- endif -%}
 }
 
 #MainContent {{ sec }} .hp-sci h1,
@@ -131,7 +152,7 @@
 {{ sec }} .hp-sci [class*="__graph-title"],
 {{ sec }} .hp-sci [class*="__stat-value"] {
   font-family: {{ inter_stack }} !important;
-  font-size: 52px !important;
+  font-size: var(--hp-sci-sec-heading-size) !important;
   font-weight: 300 !important;
   font-style: normal !important;
   line-height: 1.12 !important;
@@ -142,7 +163,7 @@
 #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"],
 {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"] {
   font-family: {{ inter_stack }} !important;
-  font-size: 19px !important;
+  font-size: var(--hp-sci-sec-eyebrow-size) !important;
   font-weight: 300 !important;
   font-style: normal !important;
   line-height: 1.2 !important;
@@ -153,7 +174,7 @@
 #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"],
 {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"] {
   font-family: {{ inter_stack }} !important;
-  font-size: 24px !important;
+  font-size: var(--hp-sci-sec-heading-size) !important;
   font-weight: 300 !important;
   font-style: normal !important;
   line-height: 1.2 !important;
@@ -201,7 +222,7 @@
 {{ sec }} .hp-sci [class*="__btn"],
 {{ sec }} .hp-sci [class*="__secondary"] {
   font-family: {{ dg_stack }} !important;
-  font-size: 23px !important;
+  font-size: var(--hp-sci-sec-body-size) !important;
   font-weight: 300 !important;
   font-style: normal !important;
   line-height: 1.55 !important;
@@ -215,10 +236,10 @@
 
 @media screen and (max-width: 989px) {
   {{ sec }} {
-    --hp-sci-sec-heading-size: 24px;
-    --hp-sci-sec-subheading-size: 24px;
-    --hp-sci-sec-body-size: 17px;
-    --hp-sci-sec-eyebrow-size: 12px;
+    --hp-sci-sec-heading-size: {{ section.settings.sci_typo_heading_mobile | default: 24 }}px;
+    --hp-sci-sec-subheading-size: {{ section.settings.sci_typo_subheading_mobile | default: 24 }}px;
+    --hp-sci-sec-body-size: {{ section.settings.sci_typo_body_mobile | default: 17 }}px;
+    --hp-sci-sec-eyebrow-size: {{ section.settings.sci_typo_eyebrow_mobile | default: 12 }}px;
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__eyebrow,
@@ -237,8 +258,11 @@
   {{ sec }} .hp-sci [class*="__formula-eyebrow"],
   {{ sec }} .hp-sci [class*="__compare-label"],
   {{ sec }} .hp-sci [class*="__day"] {
-    font-size: 12px !important;
+    font-size: var(--hp-sci-sec-eyebrow-size) !important;
     margin-bottom: 10px !important;
+  {%- if typo_eyebrow_color != blank -%}
+  color: var(--hp-sci-sec-eyebrow-color) !important;
+  {%- endif -%}
   }
 
   #MainContent {{ sec }} .hp-sci h1,
@@ -275,12 +299,12 @@
   {{ sec }} .hp-sci [class*="__card-title"],
   {{ sec }} .hp-sci [class*="__graph-title"],
   {{ sec }} .hp-sci [class*="__stat-value"] {
-    font-size: 24px !important;
+    font-size: var(--hp-sci-sec-heading-size) !important;
   }
 
   #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"],
   {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__num"] {
-    font-size: 12px !important;
+    font-size: var(--hp-sci-sec-eyebrow-size) !important;
   }
 
   #MainContent {{ sec }} .hp-sci [class*="hp-sci-grid-"][class*="__col-title"],
@@ -328,6 +352,42 @@
   {{ sec }} .hp-sci [class*="__link"],
   {{ sec }} .hp-sci [class*="__btn"],
   {{ sec }} .hp-sci [class*="__secondary"] {
-    font-size: 17px !important;
+    font-size: var(--hp-sci-sec-body-size) !important;
+  }
+}
+
+
+{{ sec }} > .hp-sci,
+{{ sec }} > div > .hp-sci,
+{{ sec }} {
+  {% if section.settings.sci_typo_padding_top_desktop != blank %}
+  padding-top: {{ section.settings.sci_typo_padding_top_desktop }}px !important;
+  {% endif %}
+  {% if section.settings.sci_typo_padding_bottom_desktop != blank %}
+  padding-bottom: {{ section.settings.sci_typo_padding_bottom_desktop }}px !important;
+  {% endif %}
+}
+{{ sec }} .hp-sci__inner {
+  {% if section.settings.sci_typo_gutter_desktop != blank %}
+  padding-left: {{ section.settings.sci_typo_gutter_desktop }}px !important;
+  padding-right: {{ section.settings.sci_typo_gutter_desktop }}px !important;
+  {% endif %}
+}
+@media screen and (max-width: 989px) {
+  {{ sec }} > .hp-sci,
+  {{ sec }} > div > .hp-sci,
+  {{ sec }} {
+    {% if section.settings.sci_typo_padding_top_mobile != blank %}
+    padding-top: {{ section.settings.sci_typo_padding_top_mobile }}px !important;
+    {% endif %}
+    {% if section.settings.sci_typo_padding_bottom_mobile != blank %}
+    padding-bottom: {{ section.settings.sci_typo_padding_bottom_mobile }}px !important;
+    {% endif %}
+  }
+  {{ sec }} .hp-sci__inner {
+    {% if section.settings.sci_typo_gutter_mobile != blank %}
+    padding-left: {{ section.settings.sci_typo_gutter_mobile }}px !important;
+    padding-right: {{ section.settings.sci_typo_gutter_mobile }}px !important;
+    {% endif %}
   }
 }
