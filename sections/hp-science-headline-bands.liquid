@@ -143,6 +143,13 @@
     {%- endif -%}
 }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Force remove bottom gap even if set in typography settings */
+  #shopify-section-{{ section.id }},
+  .hp-sci-headlines-{{ section.id }} {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-headlines-{{ section.id }}">

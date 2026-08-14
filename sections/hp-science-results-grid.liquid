@@ -15,10 +15,10 @@
 
   .hp-sci-results-{{ section.id }} {
     margin: 0 !important;
-    padding-top: {{ section.settings.padding_top }}px;
+    padding-top: 0 !important;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background: {{ bg_color }};
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    padding: 0 0 {{ section.settings.padding_bottom }}px;
     width: 100%;
     max-width: none;
     box-sizing: border-box;
@@ -173,6 +173,13 @@
     {%- endif -%}
 }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Force remove top gap even if set in typography settings */
+  #shopify-section-{{ section.id }},
+  .hp-sci-results-{{ section.id }} {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 
   /* Dark pillar panels only — must come after typography (which sets section body color). */
   #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark {
