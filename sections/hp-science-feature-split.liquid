@@ -87,13 +87,25 @@
   .hp-sci-feature-{{ section.id }}__media {
     width: 100%;
     height: 100%;
+    min-height: {{ section.settings.media_min_height_desktop | default: 520 }}px;
   }
 
   .hp-sci-feature-{{ section.id }}__media .hp-sci-media,
   .hp-sci-feature-{{ section.id }}__media .hp-sci-media__img,
-  .hp-sci-feature-{{ section.id }}__media .hp-sci-media__video {
+  .hp-sci-feature-{{ section.id }}__media .hp-sci-media__video,
+  .hp-sci-feature-{{ section.id }}__media .hp-sci-media__placeholder {
     height: 100%;
-    min-height: inherit;
+    min-height: {{ section.settings.media_min_height_desktop | default: 520 }}px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-feature-{{ section.id }}__media,
+    .hp-sci-feature-{{ section.id }}__media .hp-sci-media,
+    .hp-sci-feature-{{ section.id }}__media .hp-sci-media__img,
+    .hp-sci-feature-{{ section.id }}__media .hp-sci-media__video,
+    .hp-sci-feature-{{ section.id }}__media .hp-sci-media__placeholder {
+      min-height: {{ section.settings.media_min_height_mobile | default: 320 }}px;
+    }
   }
   {%- if section.settings.text_offset_x_desktop != 0 or section.settings.text_offset_y_desktop != 0 -%}
 
@@ -132,6 +144,13 @@
     }
   }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Preserve this section's own padding settings — prevent external override */
+  #shopify-section-{{ section.id }} {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-feature-{{ section.id }}">
@@ -182,8 +201,8 @@
           animation_url: section.settings.animation_url,
           show_placeholder: section.settings.show_media_placeholder,
           placeholder_label: section.settings.placeholder_label,
-          min_height: 0,
-          aspect_ratio: '1 / 1',
+          min_height: section.settings.media_min_height_desktop | default: 520,
+          aspect_ratio: '',
           light_placeholder: true
         %}
       </div>

@@ -72,7 +72,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     box-sizing: border-box;
     padding-top: {{ section.settings.formula_padding_top }}px;
-    padding-bottom: clamp(32px, 4vw, 56px) !important;
+    padding-bottom: {{ section.settings.formula_padding_bottom | default: 112 }}px;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-inner {

@@ -7,15 +7,33 @@
   }
 
   .hp-sci-banner-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding: 0;
     background: {{ section.settings.background_color }};
   }
 
   .hp-sci-banner-{{ section.id }}__media {
     width: 100%;
+    min-height: {{ section.settings.min_height }}px;
+    display: block;
+  }
+
+  .hp-sci-banner-{{ section.id }}__media .hp-sci-media {
+    min-height: {{ section.settings.min_height }}px;
+  }
+
+  .hp-sci-banner-{{ section.id }}__media .hp-sci-media__placeholder {
+    min-height: {{ section.settings.min_height }}px;
   }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Hard lock: no top/bottom gap on this full-width transition banner */
+  #shopify-section-{{ section.id }},
+  .hp-sci-banner-{{ section.id }} {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-banner-{{ section.id }}">

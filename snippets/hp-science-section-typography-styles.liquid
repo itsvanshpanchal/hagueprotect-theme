@@ -364,6 +364,7 @@
 }
 
 
+{% if section.settings.override_section_padding %}
 {{ sec }} > .hp-sci,
 {{ sec }} > div > .hp-sci,
 {{ sec }} {
@@ -372,12 +373,6 @@
   {% endif %}
   {% if section.settings.sci_typo_padding_bottom_desktop != blank %}
   padding-bottom: {{ section.settings.sci_typo_padding_bottom_desktop }}px !important;
-  {% endif %}
-}
-{{ sec }} .hp-sci__inner {
-  {% if section.settings.sci_typo_gutter_desktop != blank %}
-  padding-left: {{ section.settings.sci_typo_gutter_desktop }}px !important;
-  padding-right: {{ section.settings.sci_typo_gutter_desktop }}px !important;
   {% endif %}
 }
 @media screen and (max-width: 989px) {
@@ -391,6 +386,15 @@
     padding-bottom: {{ section.settings.sci_typo_padding_bottom_mobile }}px !important;
     {% endif %}
   }
+}
+{% endif %}
+{{ sec }} .hp-sci__inner {
+  {% if section.settings.sci_typo_gutter_desktop != blank %}
+  padding-left: {{ section.settings.sci_typo_gutter_desktop }}px !important;
+  padding-right: {{ section.settings.sci_typo_gutter_desktop }}px !important;
+  {% endif %}
+}
+@media screen and (max-width: 989px) {
   {{ sec }} .hp-sci__inner {
     {% if section.settings.sci_typo_gutter_mobile != blank %}
     padding-left: {{ section.settings.sci_typo_gutter_mobile }}px !important;
