@@ -260,7 +260,7 @@
 
               <div class="hp-sci-results-{{ section.id }}__panel{% if pillar_style == 'dark' %} hp-sci-results-{{ section.id }}__panel--dark{% endif %}" style="background: {{ pillar_panel_bg }};{% if block.settings.panel_text_color != blank %} color: {{ block.settings.panel_text_color }};{% endif %}">
                 {%- if block.settings.pillar_number != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__pillar-num">{{ block.settings.pillar_number }}</p>
+                  <p class="hp-sci-results-{{ section.id }}__pillar-num"{% if pillar_style == 'dark' %} style="color: #ffffff !important;"{% endif %}>{{ block.settings.pillar_number }}</p>
                 {%- endif -%}
 
                 {%- if block.settings.title != blank -%}
@@ -268,7 +268,7 @@
                 {%- endif -%}
 
                 {%- if block.settings.paragraph_1 != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__para">{{ block.settings.paragraph_1 }}</p>
+                  <p class="hp-sci-results-{{ section.id }}__para"{% if pillar_style == 'dark' %} style="color: #ffffff !important;"{% endif %}>{{ block.settings.paragraph_1 }}</p>
                 {%- endif -%}
 
                 {%- if block.settings.show_divider -%}
@@ -276,7 +276,7 @@
                 {%- endif -%}
 
                 {%- if block.settings.paragraph_2 != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__para">{{ block.settings.paragraph_2 }}</p>
+                  <p class="hp-sci-results-{{ section.id }}__para"{% if pillar_style == 'dark' %} style="color: #ffffff !important;"{% endif %}>{{ block.settings.paragraph_2 }}</p>
                 {%- endif -%}
 
                 {%- if block.settings.stat_value != blank or block.settings.stat_label != blank -%}
@@ -285,13 +285,13 @@
                       <p class="hp-sci-results-{{ section.id }}__stat-value" style="color: {{ pillar_accent }};">{{ block.settings.stat_value }}</p>
                     {%- endif -%}
                     {%- if block.settings.stat_label != blank -%}
-                      <p class="hp-sci-results-{{ section.id }}__stat-label">{{ block.settings.stat_label }}</p>
+                      <p class="hp-sci-results-{{ section.id }}__stat-label"{% if pillar_style == 'dark' %} style="color: #ffffff !important;"{% endif %}>{{ block.settings.stat_label }}</p>
                     {%- endif -%}
                   </div>
                 {%- endif -%}
 
                 {%- if block.settings.footnote != blank -%}
-                  <p class="hp-sci-results-{{ section.id }}__footnote">{{ block.settings.footnote }}</p>
+                  <p class="hp-sci-results-{{ section.id }}__footnote"{% if pillar_style == 'dark' %} style="color: #ffffff !important;"{% endif %}>{{ block.settings.footnote }}</p>
                 {%- endif -%}
               </div>
             </article>
