@@ -52,23 +52,23 @@
 }
 
 {{ sec }} {
-  --hp-sci-sec-heading-size: {{ section.settings.sci_typo_heading_desktop | default: 52 }}px;
-  --hp-sci-sec-subheading-size: {{ section.settings.sci_typo_subheading_desktop | default: 52 }}px;
-  --hp-sci-sec-body-size: {{ section.settings.sci_typo_body_desktop | default: 23 }}px;
-  --hp-sci-sec-eyebrow-size: {{ section.settings.sci_typo_eyebrow_desktop | default: 19 }}px;
-  --hp-sci-sec-heading-weight: 300;
-  --hp-sci-sec-subheading-weight: 300;
-  --hp-sci-sec-eyebrow-weight: 700;
-  --hp-sci-sec-body-weight: 300;
+  --hp-sci-sec-heading-size: var(--hp-sci-lead-heading-size);
+  --hp-sci-sec-subheading-size: var(--hp-sci-subheading-size);
+  --hp-sci-sec-body-size: var(--hp-sci-body-size);
+  --hp-sci-sec-eyebrow-size: var(--hp-sci-eyebrow-size);
+  --hp-sci-sec-heading-weight: var(--hp-sci-heading-weight);
+  --hp-sci-sec-subheading-weight: var(--hp-sci-subheading-weight);
+  --hp-sci-sec-eyebrow-weight: var(--hp-sci-eyebrow-weight);
+  --hp-sci-sec-body-weight: var(--hp-sci-body-weight);
   --hp-sci-sec-heading-font: {{ inter_stack }};
   --hp-sci-sec-subheading-font: {{ inter_stack }};
   --hp-sci-sec-eyebrow-font: {{ dg_stack }};
   --hp-sci-sec-body-font: {{ dg_stack }};
-  --hp-sci-sec-heading-style: normal;
-  --hp-sci-sec-heading-letter-spacing: -0.02em;
-  --hp-sci-sec-eyebrow-letter-spacing: 0.12em;
-  --hp-sci-sec-heading-line-height: 1.12;
-  --hp-sci-sec-body-line-height: 1.55;
+  --hp-sci-sec-heading-style: var(--hp-sci-heading-style);
+  --hp-sci-sec-heading-letter-spacing: var(--hp-sci-heading-letter-spacing);
+  --hp-sci-sec-eyebrow-letter-spacing: var(--hp-sci-eyebrow-letter-spacing);
+  --hp-sci-sec-heading-line-height: var(--hp-sci-lead-heading-line-height);
+  --hp-sci-sec-body-line-height: var(--hp-sci-body-line-height);
   
   {%- if typo_heading_color != blank -%}
   --hp-sci-sec-heading-color: {{ typo_heading_color }};
@@ -243,10 +243,10 @@
 
 @media screen and (max-width: 989px) {
   {{ sec }} {
-    --hp-sci-sec-heading-size: {{ section.settings.sci_typo_heading_mobile | default: 24 }}px;
-    --hp-sci-sec-subheading-size: {{ section.settings.sci_typo_subheading_mobile | default: 24 }}px;
-    --hp-sci-sec-body-size: {{ section.settings.sci_typo_body_mobile | default: 17 }}px;
-    --hp-sci-sec-eyebrow-size: {{ section.settings.sci_typo_eyebrow_mobile | default: 12 }}px;
+    --hp-sci-sec-heading-size: var(--hp-sci-lead-heading-size);
+    --hp-sci-sec-subheading-size: var(--hp-sci-subheading-size);
+    --hp-sci-sec-body-size: var(--hp-sci-body-size);
+    --hp-sci-sec-eyebrow-size: var(--hp-sci-eyebrow-size);
   }
 
   #MainContent {{ sec }} .hp-sci .hp-sci__eyebrow,
