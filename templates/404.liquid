@@ -10,7 +10,7 @@
     /pages/collabs               -> /search?view=collabs
     /pages/certified-corporation -> /search?view=certified-corporation
     /pages/student-offer         -> /search?view=student-offer
-    /pages/science-longevity     -> /search?view=science-longevity
+    /pages/hague     -> /search?view=hague
   Path matching uses JS because request.path is often empty/wrong on 404.
 {%- endcomment -%}
 
@@ -39,7 +39,7 @@
         '/pages/certified-corp': '/search?view=certified-corporation',
         '/pages/student-offer': '/search?view=student-offer',
         '/pages/student-offers': '/search?view=student-offer',
-        '/pages/science-longevity': '/search?view=science-longevity'
+        '/pages/hague': '/search?view=hague'
       };
 
       if (pageMap[path]) {
@@ -79,8 +79,8 @@
 {%- elsif req contains 'science-of-raw' -%}
   {%- render 'brand-science-of-raw' -%}
 
-{%- elsif req contains 'science-longevity' -%}
-  {%- assign science_redirect = '/search?view=science-longevity' -%}
+{%- elsif req contains 'hague' -%}
+  {%- assign science_redirect = '/search?view=hague' -%}
   <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#0a0a0a; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
     <div style="max-width:420px; width:100%; text-align:center;">
       <p style="font-size:13px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#a8894a; margin:0 0 12px;">Skin Longevity</p>
