@@ -39,7 +39,10 @@
         '/pages/certified-corp': '/search?view=certified-corporation',
         '/pages/student-offer': '/search?view=student-offer',
         '/pages/student-offers': '/search?view=student-offer',
-        '/pages/hague': '/search?view=hague'
+        '/pages/hague': '/search?view=hague',
+        '/pages/science-and-longevity': '/search?view=hague',
+        '/pages/science-longevity': '/search?view=hague',
+        '/pages/skin-longevity': '/search?view=hague'
       };
 
       if (pageMap[path]) {
@@ -79,7 +82,7 @@
 {%- elsif req contains 'science-of-raw' -%}
   {%- render 'brand-science-of-raw' -%}
 
-{%- elsif req contains 'hague' -%}
+{%- elsif req contains 'hague' or req contains 'science-and-longevity' or req contains 'science-longevity' or req contains 'skin-longevity' -%}
   {%- assign science_redirect = '/search?view=hague' -%}
   <section style="font-family:var(--font-family-sans, 'Inter', sans-serif); background:#0a0a0a; padding:80px 20px; min-height:50vh; display:flex; align-items:center; justify-content:center;">
     <div style="max-width:420px; width:100%; text-align:center;">
