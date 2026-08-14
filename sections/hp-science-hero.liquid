@@ -14,6 +14,7 @@
   }
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'center' }};
+    align-self: {{ section.settings.text_position_vertical | default: 'center' }};
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
@@ -236,11 +237,22 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Text alignment",
+      "label": "Text position (horizontal)",
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
         { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_position_vertical",
+      "label": "Text position (vertical)",
+      "options": [
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "end", "label": "Bottom" }
       ],
       "default": "center"
     },

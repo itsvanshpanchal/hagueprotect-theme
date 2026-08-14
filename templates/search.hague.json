@@ -54,7 +54,9 @@
         "title_size_desktop": 56,
         "title_size_mobile": 56,
         "padding_top": 80,
-        "padding_bottom": 80
+        "padding_bottom": 80,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "info_grid": {
@@ -65,7 +67,7 @@
           "settings": {
             "number": "01",
             "title": "Cell renewal slows",
-            "text": "At 25, skin renews itself every 28 days. By 40, that cycle has stretched to 45–60 days. The same biology is there. It just needs fewer interruptions and more support to keep pace."
+            "text": "At 25, skin renews itself every 28 days. By 40, that cycle has stretched to 45\u201360 days. The same biology is there. It just needs fewer interruptions and more support to keep pace."
           }
         },
         "col_2": {
@@ -93,7 +95,12 @@
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3", "col_4"],
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3",
+        "col_4"
+      ],
       "settings": {
         "sidebar_label": "HOW SKIN AGES",
         "heading_line_1": "Skin doesn't fail.",
@@ -109,7 +116,9 @@
         "column_title_size": 24,
         "column_text_size": 17,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "media_banner": {
@@ -119,7 +128,9 @@
         "placeholder_label": "Upload full-width transition image or animation",
         "min_height": 480,
         "light_placeholder": false,
-        "background_color": "#0a0a0a"
+        "background_color": "#0a0a0a",
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "statement": {
@@ -145,7 +156,9 @@
         "closing_opacity": 100,
         "rule_opacity": 35,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "feature_split": {
@@ -166,7 +179,10 @@
           }
         }
       },
-      "block_order": ["compare_1", "compare_2"],
+      "block_order": [
+        "compare_1",
+        "compare_2"
+      ],
       "settings": {
         "eyebrow": "OUR APPROACH",
         "heading": "We use regenerative science in beauty.",
@@ -188,7 +204,9 @@
         "compare_label_size": 11,
         "compare_text_size": 16,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "headline_bands": {
@@ -232,7 +250,9 @@
         "padding_top": 96,
         "padding_bottom": 80,
         "formula_padding_top": 112,
-        "formula_padding_bottom": 112
+        "formula_padding_bottom": 112,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "results_grid": {
@@ -247,7 +267,7 @@
             "show_divider": true,
             "paragraph_2": "Sun-safe bio-retinoids accelerate the renewal cycle without stripping the barrier. Active day and night, no sun restriction.",
             "stat_value": "+38%*",
-            "stat_label": "Cell Proliferation · At 48 Hours",
+            "stat_label": "Cell Proliferation \u00b7 At 48 Hours",
             "footnote": "* In Vitro Study Conducted to Test Effect of Bio-Retinoids on Human Dermal Fibroblasts.",
             "accent_color": "#008667",
             "reverse_layout": false,
@@ -264,7 +284,7 @@
             "show_divider": true,
             "paragraph_2": "The serum speeds up how quickly cells move in to close a wound. Faster migration means less time spent visibly healing, and damage that resolves before it leaves a mark.",
             "stat_value": "+74.7%*",
-            "stat_label": "Cell Migration · In 24 Hours",
+            "stat_label": "Cell Migration \u00b7 In 24 Hours",
             "footnote": "* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.",
             "panel_style": "dark",
             "accent_color": "#ffffff",
@@ -317,11 +337,11 @@
           "settings": {
             "pillar_number": "Pillar 05",
             "title": "Texture",
-            "paragraph_1": "Surface texture is the last signal skin sends — and the first thing people read. Roughness, uneven tone, and fine lines trace deeper dysfunction.",
+            "paragraph_1": "Surface texture is the last signal skin sends \u2014 and the first thing people read. Roughness, uneven tone, and fine lines trace deeper dysfunction.",
             "show_divider": true,
             "paragraph_2": "Controlled exfoliation paired with renewal actives refines the stratum corneum without the irritation that triggers rebound damage.",
             "stat_value": "+32%*",
-            "stat_label": "Surface Smoothness · At 30 Days",
+            "stat_label": "Surface Smoothness \u00b7 At 30 Days",
             "footnote": "* Profilometry assessment of skin roughness index during controlled use study.",
             "accent_color": "#008667",
             "reverse_layout": false,
@@ -330,7 +350,13 @@
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3", "pillar_4", "pillar_5"],
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "pillar_4",
+        "pillar_5"
+      ],
       "settings": {
         "background_color": "#ffffff",
         "panel_background": "#fcfaf2",
@@ -344,7 +370,9 @@
         "media_min_height_desktop": 520,
         "media_min_height_mobile": 320,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "commitment": {
@@ -353,7 +381,7 @@
         "phase_1": {
           "type": "phase",
           "settings": {
-            "day_range": "Day 1 – 14",
+            "day_range": "Day 1 \u2013 14",
             "title": "Calibration",
             "text": "<p>Your skin is adjusting, and you start to feel a surface-level softness. The least any serum should do is make skin soft. We treat this as the starting line, not the finish.</p>"
           }
@@ -361,7 +389,7 @@
         "phase_2": {
           "type": "phase",
           "settings": {
-            "day_range": "Day 14 – 28",
+            "day_range": "Day 14 \u2013 28",
             "title": "First signals",
             "text": "<p>Texture begins to change. <strong>Hydration</strong> holds longer and skin starts to look plumper, the foundation of glass skin. The people around you may notice before you do.</p>"
           }
@@ -369,7 +397,7 @@
         "phase_3": {
           "type": "phase",
           "settings": {
-            "day_range": "Day 28 – 60",
+            "day_range": "Day 28 \u2013 60",
             "title": "The shift",
             "text": "<p>Pigmentation lifts. Breakout frequency reduces. Barrier resilience improves. The change is happening below the surface, in the <strong>structure</strong> itself.</p>"
           }
@@ -377,13 +405,18 @@
         "phase_4": {
           "type": "phase",
           "settings": {
-            "day_range": "Day 60 – 75",
+            "day_range": "Day 60 \u2013 75",
             "title": "Longevity",
             "text": "<p>This is not the end. It's the baseline. Skin that functions as designed, maintaining from a structurally different starting point. The goal of regenerative science: a result that holds.</p>"
           }
         }
       },
-      "block_order": ["phase_1", "phase_2", "phase_3", "phase_4"],
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ],
       "settings": {
         "heading": "75 days is the commitment we ask for.",
         "subtext": "It is the time the biology needs for the change to become structural instead of temporary. Not a round marketing number, the point at which results start to hold on their own. Here is what happens along the way.",
@@ -397,7 +430,9 @@
         "show_graph_section": false,
         "heading_size": 40,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "protocol": {
@@ -411,7 +446,7 @@
         "stat_1_label": "Days per skin cycle",
         "stat_2_value": "3",
         "stat_2_label": "Full cycles in 75 days",
-        "button_label": "Start the protocol →",
+        "button_label": "Start the protocol \u2192",
         "button_link": "shopify://collections/all",
         "primary_line_label": "Structural change",
         "secondary_line_label": "Typical serum",
@@ -424,7 +459,9 @@
         "accent_color": "#e8842c",
         "title_size": 48,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "ingredients": {
@@ -432,7 +469,9 @@
       "blocks": {
         "cat_1": {
           "type": "category",
-          "settings": { "title": "THE BREAKTHROUGHS" }
+          "settings": {
+            "title": "THE BREAKTHROUGHS"
+          }
         },
         "ing_1": {
           "type": "ingredient",
@@ -457,7 +496,9 @@
         },
         "cat_2": {
           "type": "category",
-          "settings": { "title": "THE FOUNDATION" }
+          "settings": {
+            "title": "THE FOUNDATION"
+          }
         },
         "ing_4": {
           "type": "ingredient",
@@ -488,7 +529,17 @@
           }
         }
       },
-      "block_order": ["cat_1", "ing_1", "ing_2", "ing_3", "cat_2", "ing_4", "ing_5", "ing_6", "ing_7"],
+      "block_order": [
+        "cat_1",
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "cat_2",
+        "ing_4",
+        "ing_5",
+        "ing_6",
+        "ing_7"
+      ],
       "settings": {
         "heading_line_1": "Smarter skincare.",
         "heading_line_2": "Named on pack,",
@@ -502,7 +553,9 @@
         "divider_color": "#d8d2c8",
         "heading_size": 48,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     },
     "cta": {
@@ -522,7 +575,9 @@
         "button_text_color": "#ffffff",
         "heading_size": 48,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "text_position_horizontal": "center",
+        "text_position_vertical": "center"
       }
     }
   },
