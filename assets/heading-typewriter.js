@@ -139,8 +139,8 @@
 
   function isScienceLongevityPage() {
     return (
-      document.body.classList.contains('template-page-science-longevity') ||
-      document.body.classList.contains('template-search-science-longevity')
+      document.body.classList.contains('template-page-hague') ||
+      document.body.classList.contains('template-search-hague')
     );
   }
 
