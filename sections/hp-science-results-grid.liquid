@@ -1,16 +1,23 @@
 {{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign bg_color = section.settings.background_color
+  if bg_color == '#ffffff' or bg_color == '#fff' or bg_color == blank or bg_color == 'rgba(0,0,0,0)'
+    assign bg_color = '#242424'
+  endif
+-%}
 {%- style -%}
   #shopify-section-{{ section.id }} {
     margin: 0 !important;
     padding: 0 !important;
-    background: {{ section.settings.background_color }};
+    background: {{ bg_color }};
   }
 
   .hp-sci-results-{{ section.id }} {
+    margin: 0 !important;
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-    background: {{ section.settings.background_color }};
+    background: {{ bg_color }};
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
     width: 100%;
     max-width: none;
@@ -378,11 +385,11 @@
       "default": 0,
       "info": "Move text up (negative) or down (positive)"
     },
-{
+    {
       "type": "color",
       "id": "background_color",
       "label": "Section background",
-      "default": "#ffffff"
+      "default": "#242424"
     },
     {
       "type": "color",

@@ -1,15 +1,21 @@
 {{ 'hp-science-page.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign bg_color = section.settings.background_color
+  if bg_color == '#ffffff' or bg_color == '#fff' or bg_color == blank or bg_color == 'rgba(0,0,0,0)'
+    assign bg_color = '#1a1a1a'
+  endif
+-%}
 {%- style -%}
   #shopify-section-{{ section.id }} {
     margin: 0 !important;
     padding: 0 !important;
-    background: {{ section.settings.background_color }};
+    background: {{ bg_color }};
   }
 
   .hp-sci-headlines-{{ section.id }}__system {
     text-align: center;
-    background: {{ section.settings.background_color }};
+    background: {{ bg_color }};
     color: {{ section.settings.heading_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
