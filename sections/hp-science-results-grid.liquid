@@ -191,29 +191,18 @@
     margin-top: 0 !important;
   }
 
-  /* Dark pillar panels only — must come after typography (which sets section body color). */
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark {
-    color: #ffffff !important;
-  }
-
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-num,
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-label,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-num,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-label {
-    color: #ffffff !important;
-  }
-
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-title,
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__para,
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-value,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__pillar-title,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__para,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__stat-value {
-    color: #ffffff !important;
-  }
-
-  #MainContent #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__footnote,
-  #shopify-section-{{ section.id }} .hp-sci-results-{{ section.id }}__panel--dark .hp-sci-results-{{ section.id }}__footnote {
+  /* Dark pillar panels only — must come after typography (which sets section body color).
+     Triple-ID specificity to guarantee override of typography snippet's body-color rule. */
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__pillar-num"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__stat-label"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__pillar-title"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__para"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__stat-value"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__footnote"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__closing"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__subtext"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__col-text"],
+  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__panel--dark"] [class*="__card-text"] {
     color: #ffffff !important;
   }
 {%- endstyle -%}
