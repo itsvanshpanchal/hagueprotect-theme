@@ -27,8 +27,7 @@
         "title_size_desktop": 36,
         "title_size_mobile": 36,
         "padding_top": 80,
-        "padding_bottom": 80,
-        "text_alignment": "center"
+        "padding_bottom": 80
       }
     },
     "info_grid": {
@@ -67,7 +66,12 @@
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3", "col_4"],
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3",
+        "col_4"
+      ],
       "settings": {
         "sidebar_label": "HOW SKIN AGES",
         "heading_line_1": "Skin doesn't fail.",
@@ -140,7 +144,10 @@
           }
         }
       },
-      "block_order": ["compare_1", "compare_2"],
+      "block_order": [
+        "compare_1",
+        "compare_2"
+      ],
       "settings": {
         "eyebrow": "OUR APPROACH",
         "heading": "We use regenerative science in beauty.",
@@ -198,13 +205,13 @@
         "rule_height": 44,
         "rule_opacity": 100,
         "subtext_opacity": 100,
+        "padding_top": 96,
+        "padding_bottom": 80,
         "formula_content_max_width": 760,
         "formula_title_size": 68,
         "formula_eyebrow_size": 13,
         "formula_subtext_size": 19,
         "formula_subtext_opacity": 92,
-        "padding_top": 96,
-        "padding_bottom": 80,
         "formula_padding_top": 112,
         "formula_padding_bottom": 112
       }
@@ -240,8 +247,8 @@
             "stat_value": "+74.7%*",
             "stat_label": "Cell Migration · In 24 Hours",
             "footnote": "* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.",
-            "panel_style": "dark",
             "accent_color": "#ffffff",
+            "panel_style": "dark",
             "panel_background": "#0a0a0a",
             "reverse_layout": true,
             "show_media_placeholder": true,
@@ -259,8 +266,8 @@
             "stat_value": "+132.4%*",
             "stat_label": "Collagen Production",
             "footnote": "* Increase in Collagen 1 Levels in NHDF Cells Treated with SKIN LONGEVITY SYSTEM 3.",
-            "panel_style": "light",
             "accent_color": "#a8724a",
+            "panel_style": "light",
             "reverse_layout": true,
             "equal_columns": true,
             "show_media_placeholder": true,
@@ -278,8 +285,8 @@
             "stat_value": "+254%*",
             "stat_label": "Hyaluronic Acid Production",
             "footnote": "* Hyaluronan Synthase - 2 Promotion in NHDF Cells After 48-Hour Exposure to SKIN LONGEVITY SYSTEM S.",
-            "panel_style": "light",
             "accent_color": "#c07a38",
+            "panel_style": "light",
             "reverse_layout": false,
             "equal_columns": true,
             "show_media_placeholder": true,
@@ -304,7 +311,13 @@
           }
         }
       },
-      "block_order": ["pillar_1", "pillar_2", "pillar_3", "pillar_4", "pillar_5"],
+      "block_order": [
+        "pillar_1",
+        "pillar_2",
+        "pillar_3",
+        "pillar_4",
+        "pillar_5"
+      ],
       "settings": {
         "background_color": "#ffffff",
         "panel_background": "#fcfaf2",
@@ -357,7 +370,12 @@
           }
         }
       },
-      "block_order": ["phase_1", "phase_2", "phase_3", "phase_4"],
+      "block_order": [
+        "phase_1",
+        "phase_2",
+        "phase_3",
+        "phase_4"
+      ],
       "settings": {
         "heading": "75 days is the commitment we ask for.",
         "subtext": "It is the time the biology needs for the change to become structural instead of temporary. Not a round marketing number, the point at which results start to hold on their own. Here is what happens along the way.",
@@ -368,10 +386,10 @@
         "card_text_color": "#ffffff",
         "card_body_color": "#ffffff",
         "day_label_color": "#ffffff",
-        "show_graph_section": false,
         "heading_size": 40,
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "show_graph_section": false
       }
     },
     "protocol": {
@@ -406,7 +424,9 @@
       "blocks": {
         "cat_1": {
           "type": "category",
-          "settings": { "title": "THE BREAKTHROUGHS" }
+          "settings": {
+            "title": "THE BREAKTHROUGHS"
+          }
         },
         "ing_1": {
           "type": "ingredient",
@@ -431,7 +451,9 @@
         },
         "cat_2": {
           "type": "category",
-          "settings": { "title": "THE FOUNDATION" }
+          "settings": {
+            "title": "THE FOUNDATION"
+          }
         },
         "ing_4": {
           "type": "ingredient",
@@ -462,7 +484,17 @@
           }
         }
       },
-      "block_order": ["cat_1", "ing_1", "ing_2", "ing_3", "cat_2", "ing_4", "ing_5", "ing_6", "ing_7"],
+      "block_order": [
+        "cat_1",
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "cat_2",
+        "ing_4",
+        "ing_5",
+        "ing_6",
+        "ing_7"
+      ],
       "settings": {
         "heading_line_1": "Smarter skincare.",
         "heading_line_2": "Named on pack,",
