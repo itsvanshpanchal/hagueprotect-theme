@@ -22,7 +22,6 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(24px, 4vw, 64px);
     align-items: center;
-    min-height: clamp(420px, 58vh, 720px);
   }
 
   .hp-sci-hero-{{ section.id }}__title {
@@ -39,7 +38,7 @@
   }
 
   .hp-sci-hero-{{ section.id }}__media {
-    min-height: clamp(280px, 42vh, 560px);
+    width: 100%;
   }
   {%- if section.settings.text_offset_x_desktop != 0 or section.settings.text_offset_y_desktop != 0 -%}
 
@@ -52,7 +51,6 @@
   @media screen and (max-width: 989px) {
     .hp-sci-hero-{{ section.id }}__grid {
       grid-template-columns: 1fr;
-      min-height: 0;
     }
 
     .hp-sci-hero-{{ section.id }}__title {
@@ -70,7 +68,6 @@
 
     .hp-sci-hero-{{ section.id }}__media {
       order: 2;
-      min-height: {{ section.settings.media_min_height_mobile }}px;
     }
   }
   {% render 'hp-science-section-typography-styles', section: section %}
@@ -107,7 +104,8 @@
           animation_url: section.settings.animation_url,
           show_placeholder: section.settings.show_media_placeholder,
           placeholder_label: section.settings.placeholder_label,
-          min_height: section.settings.media_min_height_desktop
+          min_height: 0,
+          aspect_ratio: '1 / 1'
         %}
       </div>
     </div>

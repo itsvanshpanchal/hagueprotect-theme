@@ -17,7 +17,6 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 0;
     align-items: stretch;
-    min-height: clamp(520px, 62vh, 760px);
   }
 
   .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__copy {
@@ -86,7 +85,7 @@
   }
 
   .hp-sci-feature-{{ section.id }}__media {
-    min-height: clamp(320px, 50vh, 760px);
+    width: 100%;
     height: 100%;
   }
 
@@ -108,7 +107,6 @@
     .hp-sci-feature-{{ section.id }}__grid,
     .hp-sci-feature-{{ section.id }}__grid--reverse {
       grid-template-columns: 1fr;
-      min-height: 0;
     }
 
     .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__copy,
@@ -118,10 +116,6 @@
 
     .hp-sci-feature-{{ section.id }}__title {
       max-width: none;
-    }
-
-    .hp-sci-feature-{{ section.id }}__media {
-      min-height: {{ section.settings.media_min_height_mobile }}px;
     }
     {%- if section.settings.text_offset_x_mobile != 0 or section.settings.text_offset_y_mobile != 0 -%}
   
@@ -188,7 +182,8 @@
           animation_url: section.settings.animation_url,
           show_placeholder: section.settings.show_media_placeholder,
           placeholder_label: section.settings.placeholder_label,
-          min_height: section.settings.media_min_height_desktop,
+          min_height: 0,
+          aspect_ratio: '1 / 1',
           light_placeholder: true
         %}
       </div>

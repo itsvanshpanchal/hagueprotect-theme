@@ -13,7 +13,7 @@
   }
 
   .hp-sci-banner-{{ section.id }}__media {
-    min-height: {{ section.settings.min_height }}px;
+    width: 100%;
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 {%- endstyle -%}
@@ -26,7 +26,8 @@
       animation_url: section.settings.animation_url,
       show_placeholder: section.settings.show_media_placeholder,
       placeholder_label: section.settings.placeholder_label,
-      min_height: section.settings.min_height,
+      min_height: 0,
+      aspect_ratio: '16 / 9',
       light_placeholder: section.settings.light_placeholder
     %}
   </div>

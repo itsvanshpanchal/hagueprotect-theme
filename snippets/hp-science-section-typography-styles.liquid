@@ -44,6 +44,13 @@
   endif
 -%}
 
+/* Force Shopify Section wrappers to zero to prevent gap bleeding from theme.css */
+{{ sec }} {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
 {{ sec }} {
   --hp-sci-sec-heading-size: {{ section.settings.sci_typo_heading_desktop | default: 52 }}px;
   --hp-sci-sec-subheading-size: {{ section.settings.sci_typo_subheading_desktop | default: 52 }}px;
