@@ -15,7 +15,7 @@
 
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'left' }};
-    padding-left: calc(38px + clamp(28px, 4vw, 56px));
+    padding-left: clamp(66px, calc(38px + 4vw), 94px) !important;
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
