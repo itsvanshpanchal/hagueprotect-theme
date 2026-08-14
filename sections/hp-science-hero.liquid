@@ -16,7 +16,7 @@
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'left' }};
     display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
+    grid-template-columns: var(--hp-sci-rail-w) minmax(0, 1fr);
     gap: clamp(28px, 4vw, 56px);
     align-items: start;
   }
