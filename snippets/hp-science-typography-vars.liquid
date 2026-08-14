@@ -5,33 +5,41 @@
 {% style %}
   body.template-page-hague,
   body.template-search-hague {
-    --hp-sci-lead-heading-size: 52px;
-    --hp-sci-base-heading-size: 52px;
-    --hp-sci-subheading-size: 52px;
-    --hp-sci-body-size: 23px;
-    --hp-sci-eyebrow-size: 19px;
-    --hp-sci-stat-number-size: 52px;
-    --hp-sci-heading-weight: 300;
-    --hp-sci-subheading-weight: 300;
-    --hp-sci-eyebrow-weight: 300;
-    --hp-sci-body-weight: 300;
-    --hp-sci-heading-style: normal;
-    --hp-sci-heading-letter-spacing: -0.02em;
-    --hp-sci-eyebrow-letter-spacing: 0.12em;
-    --hp-sci-lead-heading-line-height: 1.12;
-    --hp-sci-base-heading-line-height: 1.12;
-    --hp-sci-body-line-height: 1.55;
+    --hp-sci-lead-heading-size: {{ section.settings.lead_heading_size_desktop | default: 44 }}px;
+    --hp-sci-base-heading-size: {{ section.settings.base_heading_size_desktop | default: 24 }}px;
+    --hp-sci-subheading-size: {{ section.settings.subheading_size_desktop | default: 24 }}px;
+    --hp-sci-body-size: {{ section.settings.body_size_desktop | default: 18 }}px;
+    --hp-sci-eyebrow-size: {{ section.settings.eyebrow_size_desktop | default: 16 }}px;
+    --hp-sci-stat-number-size: {{ section.settings.stat_number_size_desktop | default: 48 }}px;
+    
+    --hp-sci-heading-weight: {{ section.settings.heading_weight | default: 300 }};
+    --hp-sci-subheading-weight: {{ section.settings.subheading_weight | default: 400 }};
+    --hp-sci-eyebrow-weight: {{ section.settings.eyebrow_weight | default: 500 }};
+    --hp-sci-body-weight: {{ section.settings.body_weight | default: 400 }};
+    
+    --hp-sci-heading-style: {{ section.settings.heading_style | default: 'normal' }};
+    
+    --hp-sci-heading-letter-spacing: {{ section.settings.heading_letter_spacing | default: -2 | divided_by: 100.0 }}em;
+    --hp-sci-eyebrow-letter-spacing: {{ section.settings.eyebrow_letter_spacing | default: 12 | divided_by: 100.0 }}em;
+    
+    --hp-sci-lead-heading-line-height: {{ section.settings.lead_heading_line_height | default: 112 | divided_by: 100.0 }};
+    --hp-sci-base-heading-line-height: {{ section.settings.base_heading_line_height | default: 120 | divided_by: 100.0 }};
+    --hp-sci-body-line-height: {{ section.settings.body_line_height | default: 155 | divided_by: 100.0 }};
+    
+    --hp-sci-gutter: {{ section.settings.horizontal_gutter_desktop | default: 28 }}px;
   }
 
   @media screen and (max-width: 989px) {
     body.template-page-hague,
     body.template-search-hague {
-      --hp-sci-lead-heading-size: 24px;
-      --hp-sci-base-heading-size: 24px;
-      --hp-sci-subheading-size: 24px;
-      --hp-sci-body-size: 17px;
-      --hp-sci-eyebrow-size: 12px;
-      --hp-sci-stat-number-size: 24px;
+      --hp-sci-lead-heading-size: {{ section.settings.lead_heading_size_mobile | default: 32 }}px;
+      --hp-sci-base-heading-size: {{ section.settings.base_heading_size_mobile | default: 22 }}px;
+      --hp-sci-subheading-size: {{ section.settings.subheading_size_mobile | default: 20 }}px;
+      --hp-sci-body-size: {{ section.settings.body_size_mobile | default: 16 }}px;
+      --hp-sci-eyebrow-size: {{ section.settings.eyebrow_size_mobile | default: 14 }}px;
+      --hp-sci-stat-number-size: {{ section.settings.stat_number_size_mobile | default: 36 }}px;
+      
+      --hp-sci-gutter: {{ section.settings.horizontal_gutter_mobile | default: 20 }}px;
     }
   }
 {% endstyle %}
