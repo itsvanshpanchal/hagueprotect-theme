@@ -12,6 +12,9 @@
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
   }
+  .hp-sci-hero-{{ section.id }}__copy {
+    text-align: {{ section.settings.text_alignment | default: 'left' }};
+  }
 
   .hp-sci-hero-{{ section.id }}__grid {
     display: grid;
@@ -229,6 +232,17 @@
     {
       "type": "header",
       "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
     },
     {
       "type": "range",
