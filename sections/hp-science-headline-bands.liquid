@@ -66,14 +66,13 @@
     text-align: center;
     background: {{ section.settings.formula_bg }};
     color: {{ section.settings.formula_heading_color }};
-    min-height: clamp(420px, 52vh, 620px);
     display: flex;
     align-items: center;
     justify-content: center;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     box-sizing: border-box;
     padding-top: {{ section.settings.formula_padding_top }}px;
-    padding-bottom: {{ section.settings.formula_padding_bottom }}px;
+    padding-bottom: clamp(32px, 4vw, 56px) !important;
   }
 
   .hp-sci-headlines-{{ section.id }}__formula-inner {
