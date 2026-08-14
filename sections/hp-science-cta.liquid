@@ -31,7 +31,7 @@
     align-items: start;
   }
 
-  #shopify-section-{{ section.id }} .hp-sci-cta-{{ section.id }}__title-main {
+  body #MainContent #shopify-section-{{ section.id }} .hp-sci-cta-{{ section.id }}__title-main {
     display: block;
     line-height: 1.08;
     margin: 0 0 4px;
@@ -40,7 +40,7 @@
     font-style: normal !important;
   }
 
-  #shopify-section-{{ section.id }} .hp-sci-cta-{{ section.id }}__title-sub {
+  body #MainContent #shopify-section-{{ section.id }} .hp-sci-cta-{{ section.id }}__title-sub {
     display: block;
     line-height: 1.08;
     margin: 0;
@@ -80,7 +80,8 @@
   }
 
   .hp-sci-cta-{{ section.id }}__secondary {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     color: #ffffff !important;
     text-decoration: underline;
     text-underline-offset: 4px;
