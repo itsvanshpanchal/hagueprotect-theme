@@ -16,13 +16,20 @@
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'left' }};
     display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     gap: clamp(28px, 4vw, 56px);
     align-items: start;
   }
 
+  .hp-sci-hero-{{ section.id }}__copy-spacer {
+    /* Invisible column that matches the info-grid sidebar width so
+       the hero heading aligns pixel-perfectly with the info-grid heading. */
+    display: block;
+    width: 14px; /* matches writing-mode: vertical-rl eyebrow text width */
+  }
+
   .hp-sci-hero-{{ section.id }}__copy-inner {
-    grid-column: 2;
+    /* Sits in the second (1fr) column – same position as info-grid __main */
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
@@ -70,8 +77,12 @@
       gap: 0;
     }
 
+    .hp-sci-hero-{{ section.id }}__copy-spacer {
+      display: none;
+    }
+
     .hp-sci-hero-{{ section.id }}__copy-inner {
-      grid-column: 1;
+      /* full-width on mobile */
     }
     {%- if section.settings.text_offset_x_mobile != 0 or section.settings.text_offset_y_mobile != 0 -%}
 
@@ -91,6 +102,7 @@
   <div class="hp-sci__inner">
     <div class="hp-sci-hero-{{ section.id }}__grid">
       <div class="hp-sci-hero-{{ section.id }}__copy hp-sci-hero-{{ section.id }}__text-position">
+        <div class="hp-sci-hero-{{ section.id }}__copy-spacer" aria-hidden="true"></div>
         <div class="hp-sci-hero-{{ section.id }}__copy-inner">
           {%- if section.settings.eyebrow != blank -%}
             <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
