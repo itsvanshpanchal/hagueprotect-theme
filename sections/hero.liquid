@@ -106,7 +106,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: {{ section.settings.desktop_image_position | default: 'center center' }};
     display: block;
     filter: brightness(1.18) contrast(1.04) saturate(1.08);
   }
@@ -743,6 +743,19 @@
       "id": "image",
       "label": "Desktop banner image",
       "info": "Displayed on tablets, laptops, and desktops. Wide landscape images work best."
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "Desktop image position",
+      "options": [
+        { "value": "left center", "label": "Left" },
+        { "value": "35% center", "label": "Center Left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "65% center", "label": "Center Right" },
+        { "value": "right center", "label": "Right" }
+      ],
+      "default": "center center"
     },
     {
       "type": "image_picker",
