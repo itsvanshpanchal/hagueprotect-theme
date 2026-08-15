@@ -89,8 +89,7 @@
       {%- else -%}
         <span class="hp-heading-main-part">{{ line1_main }}</span>
       {%- endif -%}
-    </span>
-    <span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">
+    </span><span class="hp-mobile-nbsp" style="display: none;">&nbsp;</span><span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ accent_c }};text-transform:none !important;-webkit-text-fill-color:{{ accent_c }};">
       {%- if accent_from_line2 == false -%}&nbsp;{%- endif -%}{{ accent_word }}
     </span>
   </span>
