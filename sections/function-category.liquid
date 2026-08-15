@@ -489,7 +489,7 @@
       {%- if section.settings.subtitle != blank -%}
         <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
-      <h2 class="fc-heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Shop by Function and Category', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
+      <h2 class="fc-heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Shop by Function and Category', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
     </div>
 
     <div class="fc-slider-wrapper">
@@ -739,6 +739,12 @@
       "id": "heading_line2_color",
       "label": "Heading second line color",
       "default": "#6b6b6b"
+    },
+    {
+      "type": "checkbox",
+      "id": "accent_line2",
+      "label": "Use handwriting font for second line",
+      "default": false
     },
     {
       "type": "text",
