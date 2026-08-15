@@ -19,6 +19,7 @@
     grid-template-columns: var(--hp-sci-rail-w) minmax(0, 1fr);
     gap: clamp(28px, 4vw, 56px);
     align-items: start;
+    padding-left: calc(38px + clamp(24px, 4vw, 64px));
   }
 
   .hp-sci-hero-{{ section.id }}__copy-inner {
@@ -68,6 +69,7 @@
       order: 1;
       grid-template-columns: 1fr;
       gap: 0;
+      padding-left: 0;
     }
 
     .hp-sci-hero-{{ section.id }}__copy-inner {
