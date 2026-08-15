@@ -143,6 +143,15 @@
       gap: 8px;
     }
   }
+
+  #shopify-section-{{ section.id }} .hp-sci .hp-sci-feature-{{ section.id }}__title {
+    font-size: {{ section.settings.heading_size_desktop | default: 52 }}px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .hp-sci .hp-sci-feature-{{ section.id }}__title {
+      font-size: {{ section.settings.heading_size_mobile | default: 24 }}px !important;
+    }
+  }
   {% render 'hp-science-section-typography-styles', section: section %}
 
   /* Preserve this section's own padding settings — prevent external override */
@@ -381,13 +390,23 @@
     },
     {
       "type": "range",
-      "id": "title_size",
-      "label": "Heading size",
-      "min": 28,
-      "max": 56,
+      "id": "heading_size_desktop",
+      "label": "Heading size (Desktop)",
+      "min": 24,
+      "max": 80,
       "step": 2,
       "unit": "px",
       "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 16,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "range",
