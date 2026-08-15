@@ -15,15 +15,7 @@
 
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'left' }};
-    display: grid;
-    grid-template-columns: var(--hp-sci-rail-w) minmax(0, 1fr);
-    gap: clamp(28px, 4vw, 56px);
-    align-items: start;
-    padding-left: calc(38px + clamp(24px, 4vw, 64px));
-  }
-
-  .hp-sci-hero-{{ section.id }}__copy-inner {
-    grid-column: 2;
+    padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
@@ -67,13 +59,7 @@
 
     .hp-sci-hero-{{ section.id }}__copy {
       order: 1;
-      grid-template-columns: 1fr;
-      gap: 0;
       padding-left: 0;
-    }
-
-    .hp-sci-hero-{{ section.id }}__copy-inner {
-      grid-column: 1;
     }
     {%- if section.settings.text_offset_x_mobile != 0 or section.settings.text_offset_y_mobile != 0 -%}
 
