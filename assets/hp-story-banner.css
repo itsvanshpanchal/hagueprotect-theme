@@ -366,3 +366,10 @@
     display: block !important;
   }
 }
+
+@media (max-width: 767px) {
+  body.template-index #MainContent .ai-story-banner-wrapper .section-heading-stack {
+    gap: 4px !important;
+    row-gap: 4px !important;
+  }
+}
