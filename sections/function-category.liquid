@@ -333,11 +333,14 @@
     }
   }
   @media (min-width: 768px) {
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-last-word,
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack,
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-line,
     #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
-      display: inline-block !important;
-      white-space: nowrap !important;
+      display: inline !important;
+    }
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
       margin-left: 0.15em !important;
+      white-space: nowrap !important;
     }
   }
 
