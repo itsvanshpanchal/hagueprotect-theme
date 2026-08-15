@@ -74,10 +74,14 @@
     <span class="hp-heading-line hp-heading-line--1">
       {%- if accent_from_line2 -%}
         {%- assign l1_words = line1 | split: ' ' -%}
-        {%- if l1_words.size > 1 -%}
-          {%- assign l1_last = l1_words | last -%}
-          {%- assign l1_count = l1_words.size | minus: 1 -%}
+        {%- if l1_words.size > 2 -%}
+          {%- assign l1_count = l1_words.size | minus: 2 -%}
           {%- assign l1_main = l1_words | slice: 0, l1_count | join: ' ' -%}
+          {%- assign l1_last = l1_words | slice: l1_count, 2 | join: ' ' -%}
+          <span class="hp-heading-main-part">{{ l1_main }}</span><br class="hp-mobile-break"> <span class="hp-heading-last-word">{{ l1_last }}</span>
+        {%- elsif l1_words.size == 2 -%}
+          {%- assign l1_last = l1_words | last -%}
+          {%- assign l1_main = l1_words | first -%}
           <span class="hp-heading-main-part">{{ l1_main }}</span><br class="hp-mobile-break"> <span class="hp-heading-last-word">{{ l1_last }}</span>
         {%- else -%}
           <span class="hp-heading-main-part">{{ line1 }}</span>
