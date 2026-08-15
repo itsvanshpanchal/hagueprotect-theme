@@ -259,12 +259,12 @@
 
     {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
       <div class="brandsel__head section-heading-stack">
-            {%- if section.settings.eyebrow != blank -%}
-              <p class="brandsel__eyebrow">{{ section.settings.eyebrow }}</p>
-            {%- endif -%}
-            {%- if section.settings.heading != blank -%}
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="brandsel__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
               <h2 class="brandsel__heading" id="brandsel-heading-{{ section.id }}">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
-            {%- endif -%}
+        {%- endif -%}
         {%- if section.settings.subheading != blank -%}
           <p class="brandsel__sub">{{ section.settings.subheading }}</p>
         {%- endif -%}

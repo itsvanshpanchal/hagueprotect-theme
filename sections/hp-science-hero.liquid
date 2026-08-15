@@ -25,6 +25,19 @@
     align-items: center;
   }
 
+  {%- if section.settings.desktop_layout == 'image_first' -%}
+  @media screen and (min-width: 990px) {
+    .hp-sci-hero-{{ section.id }}__copy {
+      order: 2;
+      padding-left: 0;
+      padding-right: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    }
+    .hp-sci-hero-{{ section.id }}__media {
+      order: 1;
+    }
+  }
+  {%- endif -%}
+
   .hp-sci-hero-{{ section.id }}__title {
     line-height: 1.06;
     color: inherit;
@@ -125,6 +138,42 @@
     {
       "type": "header",
       "content": "Text position"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "text_first",
+          "label": "Text first"
+        },
+        {
+          "value": "image_first",
+          "label": "Image first"
+        }
+      ],
+      "default": "text_first"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "range",
