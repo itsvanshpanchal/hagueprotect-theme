@@ -78,7 +78,7 @@
           {%- assign l1_last = l1_words | last -%}
           {%- assign l1_count = l1_words.size | minus: 1 -%}
           {%- assign l1_main = l1_words | slice: 0, l1_count | join: ' ' -%}
-          <span class="hp-heading-main-part">{{ l1_main }}</span> <span class="hp-heading-last-word">{{ l1_last }}</span>
+          <span class="hp-heading-main-part">{{ l1_main }}</span><br class="hp-mobile-break"> <span class="hp-heading-last-word">{{ l1_last }}</span>
         {%- else -%}
           <span class="hp-heading-main-part">{{ line1 }}</span>
         {%- endif -%}
