@@ -20,10 +20,6 @@
     align-items: center;
   }
 
-  .hp-sci-statement-{{ section.id }}__headline {
-    padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
-  }
-
   .hp-sci-statement-{{ section.id }}__title {
     line-height: 1.12;
     margin: 0;
@@ -35,7 +31,6 @@
   }
 
   .hp-sci-statement-{{ section.id }}__copy {
-    padding-right: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
   }
 
   .hp-sci-statement-{{ section.id }}__eyebrow {
@@ -85,16 +80,6 @@
       align-items: start;
     }
 
-    .hp-sci-statement-{{ section.id }}__headline {
-      padding-left: clamp(28px, 4vw, 56px);
-      padding-right: clamp(28px, 4vw, 56px);
-    }
-
-    .hp-sci-statement-{{ section.id }}__copy {
-      padding-left: clamp(28px, 4vw, 56px);
-      padding-right: clamp(28px, 4vw, 56px);
-    }
-
     .hp-sci-statement-{{ section.id }}__title {
       max-width: none;
       margin-bottom: 8px;
@@ -119,40 +104,42 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-statement-{{ section.id }}">
-  <div class="hp-sci-statement-{{ section.id }}__grid hp-sci-statement-{{ section.id }}__text-position">
-    <div class="hp-sci-statement-{{ section.id }}__headline">
-      {%- if section.settings.heading_line_1 != blank or section.settings.heading_accent != blank -%}
-        <h2 class="hp-sci-statement-{{ section.id }}__title">
-          {%- if section.settings.heading_line_1 != blank -%}
-            <span>{{ section.settings.heading_line_1 }}</span>
-          {%- endif -%}
-          {%- if section.settings.heading_accent != blank -%}
-            <span class="hp-sci-statement-{{ section.id }}__title-accent">{{ section.settings.heading_accent }}</span>
-          {%- endif -%}
-        </h2>
-      {%- endif -%}
-    </div>
+  <div class="hp-sci__inner">
+    <div class="hp-sci-statement-{{ section.id }}__grid hp-sci-statement-{{ section.id }}__text-position">
+      <div class="hp-sci-statement-{{ section.id }}__headline">
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_accent != blank -%}
+          <h2 class="hp-sci-statement-{{ section.id }}__title">
+            {%- if section.settings.heading_line_1 != blank -%}
+              <span>{{ section.settings.heading_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_accent != blank -%}
+              <span class="hp-sci-statement-{{ section.id }}__title-accent">{{ section.settings.heading_accent }}</span>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+      </div>
 
-    <div class="hp-sci-statement-{{ section.id }}__copy">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="hp-sci-statement-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
-      {%- endif -%}
+      <div class="hp-sci-statement-{{ section.id }}__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
 
-      {%- if section.settings.paragraph_1 != blank -%}
-        <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_1 }}</p>
-      {%- endif -%}
+        {%- if section.settings.paragraph_1 != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_1 }}</p>
+        {%- endif -%}
 
-      {%- if section.settings.paragraph_2 != blank -%}
-        <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_2 }}</p>
-      {%- endif -%}
+        {%- if section.settings.paragraph_2 != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__para">{{ section.settings.paragraph_2 }}</p>
+        {%- endif -%}
 
-      {%- if section.settings.show_rule -%}
-        <hr class="hp-sci-statement-{{ section.id }}__rule" aria-hidden="true">
-      {%- endif -%}
+        {%- if section.settings.show_rule -%}
+          <hr class="hp-sci-statement-{{ section.id }}__rule" aria-hidden="true">
+        {%- endif -%}
 
-      {%- if section.settings.closing_paragraph != blank -%}
-        <p class="hp-sci-statement-{{ section.id }}__closing">{{ section.settings.closing_paragraph }}</p>
-      {%- endif -%}
+        {%- if section.settings.closing_paragraph != blank -%}
+          <p class="hp-sci-statement-{{ section.id }}__closing">{{ section.settings.closing_paragraph }}</p>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
