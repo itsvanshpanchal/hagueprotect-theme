@@ -88,13 +88,6 @@
     width: 100%;
     height: 100%;
     min-height: {{ section.settings.media_min_height_desktop | default: 520 }}px;
-    padding-right: clamp(28px, 5vw, 72px);
-    box-sizing: border-box;
-  }
-
-  .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__media {
-    padding-right: 0;
-    padding-left: clamp(28px, 5vw, 72px);
   }
 
   .hp-sci-feature-{{ section.id }}__media .hp-sci-media,
@@ -106,11 +99,6 @@
   }
 
   @media screen and (max-width: 989px) {
-    .hp-sci-feature-{{ section.id }}__media,
-    .hp-sci-feature-{{ section.id }}__grid--reverse .hp-sci-feature-{{ section.id }}__media {
-      padding-left: 0;
-      padding-right: 0;
-    }
     .hp-sci-feature-{{ section.id }}__media,
     .hp-sci-feature-{{ section.id }}__media .hp-sci-media,
     .hp-sci-feature-{{ section.id }}__media .hp-sci-media__img,
@@ -175,58 +163,56 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-feature-{{ section.id }}">
-  <div class="hp-sci__inner">
-    <div class="hp-sci-feature-{{ section.id }}__grid{% if section.settings.reverse_layout %} hp-sci-feature-{{ section.id }}__grid--reverse{% endif %}">
-      <div class="hp-sci-feature-{{ section.id }}__copy hp-sci-feature-{{ section.id }}__text-position">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="hp-sci-feature-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="hp-sci-feature-{{ section.id }}__title">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-        {%- if section.settings.text != blank -%}
-          <p class="hp-sci-feature-{{ section.id }}__text">{{ section.settings.text }}</p>
-        {%- endif -%}
+  <div class="hp-sci-feature-{{ section.id }}__grid{% if section.settings.reverse_layout %} hp-sci-feature-{{ section.id }}__grid--reverse{% endif %}">
+    <div class="hp-sci-feature-{{ section.id }}__copy hp-sci-feature-{{ section.id }}__text-position">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hp-sci-feature-{{ section.id }}__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hp-sci-feature-{{ section.id }}__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="hp-sci-feature-{{ section.id }}__text">{{ section.settings.text }}</p>
+      {%- endif -%}
 
-        <div class="hp-sci-feature-{{ section.id }}__compare">
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'compare_row' -%}
-                <div class="hp-sci-feature-{{ section.id }}__compare-row" {{ block.shopify_attributes }}>
-                  {%- if block.settings.label != blank -%}
-                    <p class="hp-sci-feature-{{ section.id }}__compare-label">{{ block.settings.label }}</p>
-                  {%- endif -%}
-                  {%- if block.settings.text != blank -%}
-                    <p class="hp-sci-feature-{{ section.id }}__compare-text">{{ block.settings.text }}</p>
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- else -%}
-            <div class="hp-sci-feature-{{ section.id }}__compare-row">
-              <p class="hp-sci-feature-{{ section.id }}__compare-label">ANTI-AGEING</p>
-              <p class="hp-sci-feature-{{ section.id }}__compare-text">Reacts to visible signs. Temporary result.</p>
-            </div>
-            <div class="hp-sci-feature-{{ section.id }}__compare-row">
-              <p class="hp-sci-feature-{{ section.id }}__compare-label">REGENERATIVE</p>
-              <p class="hp-sci-feature-{{ section.id }}__compare-text">Restores biological function. Result compounds. Skin maintains independently.</p>
-            </div>
-          {%- endif -%}
-        </div>
+      <div class="hp-sci-feature-{{ section.id }}__compare">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'compare_row' -%}
+              <div class="hp-sci-feature-{{ section.id }}__compare-row" {{ block.shopify_attributes }}>
+                {%- if block.settings.label != blank -%}
+                  <p class="hp-sci-feature-{{ section.id }}__compare-label">{{ block.settings.label }}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="hp-sci-feature-{{ section.id }}__compare-text">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <div class="hp-sci-feature-{{ section.id }}__compare-row">
+            <p class="hp-sci-feature-{{ section.id }}__compare-label">ANTI-AGEING</p>
+            <p class="hp-sci-feature-{{ section.id }}__compare-text">Reacts to visible signs. Temporary result.</p>
+          </div>
+          <div class="hp-sci-feature-{{ section.id }}__compare-row">
+            <p class="hp-sci-feature-{{ section.id }}__compare-label">REGENERATIVE</p>
+            <p class="hp-sci-feature-{{ section.id }}__compare-text">Restores biological function. Result compounds. Skin maintains independently.</p>
+          </div>
+        {%- endif -%}
       </div>
+    </div>
 
-      <div class="hp-sci-feature-{{ section.id }}__media">
-        {% render 'hp-science-media',
-          image: section.settings.image,
-          video: section.settings.video,
-          animation_url: section.settings.animation_url,
-          show_placeholder: section.settings.show_media_placeholder,
-          placeholder_label: section.settings.placeholder_label,
-          min_height: section.settings.media_min_height_desktop | default: 520,
-          aspect_ratio: '',
-          light_placeholder: true
-        %}
-      </div>
+    <div class="hp-sci-feature-{{ section.id }}__media">
+      {% render 'hp-science-media',
+        image: section.settings.image,
+        video: section.settings.video,
+        animation_url: section.settings.animation_url,
+        show_placeholder: section.settings.show_media_placeholder,
+        placeholder_label: section.settings.placeholder_label,
+        min_height: section.settings.media_min_height_desktop | default: 520,
+        aspect_ratio: '',
+        light_placeholder: true
+      %}
     </div>
   </div>
 </section>
