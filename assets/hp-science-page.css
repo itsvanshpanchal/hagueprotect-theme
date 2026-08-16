@@ -44,10 +44,10 @@
 }
 
 .hp-sci__inner {
-  max-width: none;
+  max-width: var(--hp-sci-max);
   margin: 0 auto;
-  padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
-  padding-right: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+  padding-left: var(--hp-sci-gutter);
+  padding-right: var(--hp-sci-gutter);
   box-sizing: border-box;
 }
 
@@ -118,11 +118,6 @@
 }
 
 @media screen and (max-width: 989px) {
-  .hp-sci__inner {
-    padding-left: clamp(28px, 4vw, 56px);
-    padding-right: clamp(28px, 4vw, 56px);
-  }
-
   .hp-sci__title {
     font-size: 24px;
   }

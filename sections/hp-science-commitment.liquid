@@ -141,6 +141,21 @@
     }
   }
 
+  .hp-sci-commit-{{ section.id }} .hp-sci__inner-fluid {
+    max-width: none;
+    margin: 0 auto;
+    padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    padding-right: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    box-sizing: border-box;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-commit-{{ section.id }} .hp-sci__inner-fluid {
+      padding-left: clamp(28px, 4vw, 56px);
+      padding-right: clamp(28px, 4vw, 56px);
+    }
+  }
+
   #shopify-section-{{ section.id }} .hp-sci .hp-sci-commit-{{ section.id }}__heading {
     font-size: {{ section.settings.heading_size_desktop | default: 52 }}px !important;
   }
@@ -153,7 +168,7 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-commit-{{ section.id }}">
-  <div class="hp-sci__inner">
+  <div class="hp-sci__inner-fluid">
     <div class="hp-sci-commit-{{ section.id }}__intro hp-sci-commit-{{ section.id }}__text-position">
       {%- if section.settings.heading != blank -%}
         <h2 class="hp-sci-commit-{{ section.id }}__heading">{{ section.settings.heading }}</h2>
@@ -216,7 +231,7 @@
 
   {%- if section.settings.show_graph_section -%}
     <div class="hp-sci-commit-{{ section.id }}__graph-wrap">
-      <div class="hp-sci__inner">
+      <div class="hp-sci__inner-fluid">
         {%- if section.settings.graph_heading != blank -%}
           <h3 class="hp-sci-commit-{{ section.id }}__graph-title">{{ section.settings.graph_heading }}</h3>
         {%- endif -%}

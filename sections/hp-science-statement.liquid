@@ -92,6 +92,21 @@
     {%- endif -%}
 }
 
+  .hp-sci-statement-{{ section.id }} .hp-sci__inner-fluid {
+    max-width: none;
+    margin: 0 auto;
+    padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    padding-right: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    box-sizing: border-box;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-statement-{{ section.id }} .hp-sci__inner-fluid {
+      padding-left: clamp(28px, 4vw, 56px);
+      padding-right: clamp(28px, 4vw, 56px);
+    }
+  }
+
   #shopify-section-{{ section.id }} .hp-sci .hp-sci-statement-{{ section.id }}__title {
     font-size: {{ section.settings.heading_size_desktop | default: 52 }}px !important;
   }
@@ -104,7 +119,7 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-statement-{{ section.id }}">
-  <div class="hp-sci__inner">
+  <div class="hp-sci__inner-fluid">
     <div class="hp-sci-statement-{{ section.id }}__grid hp-sci-statement-{{ section.id }}__text-position">
       <div class="hp-sci-statement-{{ section.id }}__headline">
         {%- if section.settings.heading_line_1 != blank or section.settings.heading_accent != blank -%}
