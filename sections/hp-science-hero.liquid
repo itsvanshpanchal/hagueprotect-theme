@@ -7,8 +7,8 @@
   }
 
   .hp-sci-hero-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-top: 0;
+    padding-bottom: 0;
     background: {{ section.settings.background_color }};
     color: {{ section.settings.text_color }};
   }
@@ -16,6 +16,8 @@
   .hp-sci-hero-{{ section.id }}__copy {
     text-align: {{ section.settings.text_alignment | default: 'left' }};
     padding-left: calc(var(--hp-sci-rail-w, 18px) + clamp(28px, 4vw, 56px));
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
   .hp-sci-hero-{{ section.id }}__grid {
@@ -53,6 +55,14 @@
 
   .hp-sci-hero-{{ section.id }}__media {
     width: 100%;
+    height: 100%;
+  }
+
+  .hp-sci-hero-{{ section.id }}__media .hp-sci-media,
+  .hp-sci-hero-{{ section.id }}__media .hp-sci-media__img,
+  .hp-sci-hero-{{ section.id }}__media .hp-sci-media__video,
+  .hp-sci-hero-{{ section.id }}__media .hp-sci-media__placeholder {
+    height: 100%;
   }
   {%- if section.settings.text_offset_x_desktop != 0 or section.settings.text_offset_y_desktop != 0 -%}
 
@@ -72,7 +82,8 @@
 
     .hp-sci-hero-{{ section.id }}__copy {
       order: 1;
-      padding-left: 0;
+      padding-left: clamp(28px, 4vw, 56px);
+      padding-right: clamp(28px, 4vw, 56px);
     }
     {%- if section.settings.text_offset_x_mobile != 0 or section.settings.text_offset_y_mobile != 0 -%}
 
@@ -98,42 +109,40 @@
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-hero-{{ section.id }}">
-  <div class="hp-sci__inner">
-    <div class="hp-sci-hero-{{ section.id }}__grid">
-      <div class="hp-sci-hero-{{ section.id }}__copy hp-sci-hero-{{ section.id }}__text-position">
-        <div class="hp-sci-hero-{{ section.id }}__copy-inner">
-          {%- if section.settings.eyebrow != blank -%}
-            <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
-          {%- endif -%}
-          {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank or section.settings.heading_line_4 != blank -%}
-            <h1 class="hp-sci__title hp-sci-hero-{{ section.id }}__title">
-              {%- if section.settings.heading_line_1 != blank -%}
-                <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_1 }}</span>
-              {%- endif -%}
-              {%- if section.settings.heading_line_2 != blank -%}
-                <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_2 }}</span>
-              {%- endif -%}
-              {%- if section.settings.heading_line_3 != blank -%}
-                <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_3 }}</span>
-              {%- endif -%}
-              {%- if section.settings.heading_line_4 != blank -%}
-                <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_4 }}</span>
-              {%- endif -%}
-            </h1>
-          {%- endif -%}
-        </div>
+  <div class="hp-sci-hero-{{ section.id }}__grid">
+    <div class="hp-sci-hero-{{ section.id }}__copy hp-sci-hero-{{ section.id }}__text-position">
+      <div class="hp-sci-hero-{{ section.id }}__copy-inner">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hp-sci__eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank or section.settings.heading_line_3 != blank or section.settings.heading_line_4 != blank -%}
+          <h1 class="hp-sci__title hp-sci-hero-{{ section.id }}__title">
+            {%- if section.settings.heading_line_1 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_1 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_2 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line">{{ section.settings.heading_line_2 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_3 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_3 }}</span>
+            {%- endif -%}
+            {%- if section.settings.heading_line_4 != blank -%}
+              <span class="hp-sci-hero-{{ section.id }}__title-line hp-sci-hero-{{ section.id }}__title-line--muted">{{ section.settings.heading_line_4 }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
       </div>
-      <div class="hp-sci-hero-{{ section.id }}__media">
-        {% render 'hp-science-media',
-          image: section.settings.image,
-          video: section.settings.video,
-          animation_url: section.settings.animation_url,
-          show_placeholder: section.settings.show_media_placeholder,
-          placeholder_label: section.settings.placeholder_label,
-          min_height: 0,
-          aspect_ratio: '1 / 1'
-        %}
-      </div>
+    </div>
+    <div class="hp-sci-hero-{{ section.id }}__media">
+      {% render 'hp-science-media',
+        image: section.settings.image,
+        video: section.settings.video,
+        animation_url: section.settings.animation_url,
+        show_placeholder: section.settings.show_media_placeholder,
+        placeholder_label: section.settings.placeholder_label,
+        min_height: 0,
+        aspect_ratio: '1 / 1'
+      %}
     </div>
   </div>
 </section>
