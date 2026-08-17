@@ -110,15 +110,15 @@
 {{ sec }} .hp-sci [class*="__formula-eyebrow"],
 {{ sec }} .hp-sci [class*="__compare-label"],
 {{ sec }} .hp-sci [class*="__day"] {
-  font-family: {{ dg_stack }} !important;
-  font-size: var(--hp-sci-sec-eyebrow-size) !important;
-  font-weight: 600 !important;
-  font-style: normal !important;
+  font-family: var(--font-family-eyebrow) !important;
+  font-size: var(--section-label-size) !important;
+  font-weight: var(--font-weight-eyebrow) !important;
+  font-style: var(--font-style-eyebrow) !important;
   line-height: 1.35 !important;
-  letter-spacing: 0.12em !important;
+  letter-spacing: var(--letter-spacing-eyebrow, 0.1em) !important;
   text-transform: uppercase !important;
   text-align: inherit;
-  margin-bottom: 12px !important;
+  margin-bottom: var(--section-label-margin-bottom, 12px) !important;
   {%- if typo_eyebrow_color != blank -%}
   color: var(--hp-sci-sec-eyebrow-color) !important;
   {%- endif -%}
@@ -265,8 +265,8 @@
   {{ sec }} .hp-sci [class*="__formula-eyebrow"],
   {{ sec }} .hp-sci [class*="__compare-label"],
   {{ sec }} .hp-sci [class*="__day"] {
-    font-size: var(--hp-sci-sec-eyebrow-size) !important;
-    margin-bottom: 10px !important;
+    font-size: var(--section-label-size) !important;
+    margin-bottom: var(--section-label-margin-bottom, 10px) !important;
   {%- if typo_eyebrow_color != blank -%}
   color: var(--hp-sci-sec-eyebrow-color) !important;
   {%- endif -%}
