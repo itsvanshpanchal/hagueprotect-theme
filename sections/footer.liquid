@@ -8,6 +8,8 @@
     padding-top: clamp(48px, 6vw, 96px);
     padding-bottom: clamp(32px, 4vw, 64px);
     border-top: 1px solid #1a1a1a;
+    position: relative;
+    overflow: hidden;
   }
 
   .footer-grid {
@@ -440,9 +442,47 @@
     border-color: var(--color-primary);
     transform: translateY(-2px);
   }
+
+  @keyframes rotate-flower-footer {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .footer__decorative-flower {
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 450px;
+    height: 450px;
+    pointer-events: none;
+    z-index: 0;
+    color: rgba(255, 255, 255, 0.04);
+    animation: rotate-flower-footer 40s linear infinite;
+  }
+
+  @media screen and (max-width: 989px) {
+    .footer__decorative-flower {
+      width: 300px;
+      height: 300px;
+      bottom: -100px;
+      right: -100px;
+    }
+  }
+
+  .footer-wrapper .container {
+    position: relative;
+    z-index: 1;
+  }
 {%- endstyle -%}
 
 <footer class="footer-wrapper" role="contentinfo">
+  <svg class="footer__decorative-flower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+    <circle cx="28" cy="50" r="25" />
+    <circle cx="72" cy="50" r="25" />
+    <circle cx="50" cy="28" r="25" />
+    <circle cx="50" cy="72" r="25" />
+    <circle cx="50" cy="50" r="25" />
+  </svg>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col-info">
