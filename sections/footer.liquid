@@ -12,9 +12,10 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr minmax(350px, auto);
     gap: 40px;
     margin-bottom: 60px;
+    align-items: center;
   }
 
   @media screen and (max-width: 991px) {
@@ -155,6 +156,60 @@
     box-shadow: 0 4px 12px rgba(255, 43, 43, 0.2);
   }
 
+  .footer-col-newsletter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .footer__newsletter-diamond {
+    width: 320px;
+    height: 320px;
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .footer__newsletter-diamond-content {
+    transform: rotate(-45deg);
+    width: 300px;
+    padding: 0 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__newsletter-diamond-content .footer__title {
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .footer__newsletter-diamond-content .footer__newsletter-desc {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .footer__form--vertical {
+    flex-direction: column;
+    width: 100%;
+    max-width: 260px;
+    gap: 12px;
+    margin: 0 auto;
+  }
+
+  .footer__form--vertical .footer__input,
+  .footer__form--vertical .footer__form-btn {
+    width: 100%;
+    flex: none;
+  }
+
   .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -263,6 +318,28 @@
     .footer__newsletter {
       align-items: flex-start;
       max-width: 100%;
+    }
+
+    .footer__newsletter-diamond {
+      transform: none;
+      width: 100%;
+      height: auto;
+      border: 1px solid #333333;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-top: 24px;
+    }
+
+    .footer__newsletter-diamond-content {
+      transform: none;
+      width: 100%;
+      text-align: center;
+    }
+
+    .footer__newsletter-diamond-content .footer__title,
+    .footer__newsletter-diamond-content .footer__newsletter-desc {
+      text-align: center;
     }
 
     .footer__newsletter-desc {
@@ -497,17 +574,21 @@
       </div>
 
       <div class="footer-col-newsletter">
-        <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
-        <div class="footer__newsletter">
-          <p class="footer__newsletter-desc">Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.</p>
-          <form class="footer__form" action="/contact#contact_form" method="post">
-            <input type="hidden" name="form_type" value="customer">
-            <input type="hidden" name="utf8" value="&#10003;">
-            <input type="email" name="contact[email]" class="footer__input" placeholder="Enter your email address" required aria-label="Email address">
-            <button type="submit" class="footer__form-btn" aria-label="Subscribe">
-              Subscribe
-            </button>
-          </form>
+        <div class="footer__newsletter-diamond">
+          <div class="footer__newsletter-diamond-content">
+            <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
+            <div class="footer__newsletter">
+              <p class="footer__newsletter-desc">Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.</p>
+              <form class="footer__form footer__form--vertical" action="/contact#contact_form" method="post">
+                <input type="hidden" name="form_type" value="customer">
+                <input type="hidden" name="utf8" value="&#10003;">
+                <input type="email" name="contact[email]" class="footer__input" placeholder="Enter your email address" required aria-label="Email address">
+                <button type="submit" class="footer__form-btn" aria-label="Subscribe">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
