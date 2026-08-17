@@ -164,21 +164,21 @@
   }
 
   @keyframes rotate-diamond {
-    0% { transform: rotate(45deg); }
-    100% { transform: rotate(405deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   @keyframes rotate-content {
-    0% { transform: rotate(-45deg); }
-    100% { transform: rotate(-405deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
   }
 
   .footer__newsletter-diamond {
-    width: 320px;
-    height: 320px;
+    width: 350px;
+    height: 350px;
     background: linear-gradient(135deg, #2a2a2a, #121212);
     border: 1px solid #3a3a3a;
-    transform: rotate(45deg);
+    border-radius: 43% 57% 33% 67% / 54% 28% 72% 46%; /* Organic blob shape */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +191,6 @@
   }
 
   .footer__newsletter-diamond-content {
-    transform: rotate(-45deg);
     width: 300px;
     padding: 0 16px;
     text-align: center;
