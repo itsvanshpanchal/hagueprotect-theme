@@ -100,59 +100,90 @@
     transform: translateX(4px);
   }
 
-  .footer__newsletter {
+  .footer-col-newsletter {
+    position: relative;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    justify-content: flex-end;
   }
 
-  .footer__newsletter-desc {
+  .footer__newsletter-card {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 40px 32px;
+    border-radius: 2px;
+    text-align: center;
+    transform: rotate(-3deg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    max-width: 360px;
+    margin-top: -30px;
+  }
+
+  .footer__newsletter-card .footer__title {
+    color: #333333 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: none;
+  }
+
+  .footer__newsletter-card .footer__newsletter-desc {
+    color: #555555 !important;
     font-family: var(--font-family-sans) !important;
     font-size: var(--body-font-size, 14px) !important;
     font-weight: var(--font-weight-sans, 400) !important;
-    color: #cccccc !important;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    margin-top: 0;
   }
 
-  .footer__form {
+  .footer__newsletter-card .footer__form {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 12px;
     position: relative;
   }
 
-  .footer__input {
-    flex: 1;
+  .footer__newsletter-card .footer__input {
+    width: 100%;
     font-family: var(--font-family-sans);
     font-size: var(--body-font-size, 14px);
     font-weight: var(--font-weight-sans, 400);
-    border: 1px solid #333333;
-    background-color: #1a1a1a;
-    color: #ffffff !important;
-    border-radius: var(--border-radius-xl);
-    padding: 14px 20px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    color: #333333 !important;
+    border-radius: 0;
+    padding: 14px;
     outline: none;
     transition: var(--transition-fast);
   }
 
-  .footer__input:focus {
-    border-color: var(--color-primary);
+  .footer__newsletter-card .footer__input::placeholder {
+    color: #888888;
   }
 
-  .footer__form-btn {
+  .footer__newsletter-card .footer__input:focus {
+    border-color: #333333;
+  }
+
+  .footer__newsletter-card .footer__form-btn {
+    width: 100%;
     padding: 14px 24px;
-    background-color: var(--color-primary);
+    background-color: #2a2a2a;
     color: #ffffff;
-    border-radius: var(--border-radius-xl);
+    border-radius: 0;
     border: none;
     cursor: pointer;
     font-family: var(--font-family-sans);
-    font-weight: var(--font-weight-sans, 600);
+    font-weight: var(--font-weight-sans, 700);
     font-size: var(--body-font-size, 14px);
     transition: var(--transition-smooth);
+    text-transform: none;
   }
 
-  .footer__form-btn:hover {
-    background-color: #e21c1c;
-    box-shadow: 0 4px 12px rgba(255, 43, 43, 0.2);
+  .footer__newsletter-card .footer__form-btn:hover {
+    background-color: #000000;
   }
 
   .footer-bottom {
@@ -260,35 +291,45 @@
       transform: none;
     }
 
-    .footer__newsletter {
-      align-items: flex-start;
-      max-width: 100%;
+    .footer-col-newsletter {
+      justify-content: center;
+      margin-top: 16px;
     }
 
-    .footer__newsletter-desc {
+    .footer__newsletter-card {
+      margin-top: 0;
+      width: 100%;
+      max-width: 400px;
+      padding: 32px 24px;
+    }
+
+    .footer__newsletter-card .footer__title {
+      font-size: var(--body-font-size, 18px) !important;
+      text-align: center;
+    }
+
+    .footer__newsletter-card .footer__newsletter-desc {
       font-size: var(--body-font-size, 13px) !important;
       line-height: 1.55;
       max-width: 100%;
-      margin: 0;
-      text-align: left;
+      text-align: center;
     }
 
-    .footer__form {
+    .footer__newsletter-card .footer__form {
       flex-direction: column;
       width: 100%;
-      max-width: 100%;
       margin: 0;
       gap: 12px;
     }
 
-    .footer__input {
+    .footer__newsletter-card .footer__input {
       width: 100%;
       min-height: 48px;
       padding: 14px 18px;
       font-size: var(--body-font-size, 16px);
     }
 
-    .footer__form-btn {
+    .footer__newsletter-card .footer__form-btn {
       width: 100%;
       min-height: 48px;
       padding: 14px 20px;
@@ -497,15 +538,15 @@
       </div>
 
       <div class="footer-col-newsletter">
-        <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Newsletter' }}</h3>
-        <div class="footer__newsletter">
-          <p class="footer__newsletter-desc">Subscribe to unlock premium sneaker care tips, drops, and elite offers.</p>
+        <div class="footer__newsletter-card">
+          <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
+          <p class="footer__newsletter-desc">Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.</p>
           <form class="footer__form" action="/contact#contact_form" method="post">
             <input type="hidden" name="form_type" value="customer">
             <input type="hidden" name="utf8" value="&#10003;">
-            <input type="email" name="contact[email]" class="footer__input" placeholder="Enter your email" required aria-label="Email address">
+            <input type="email" name="contact[email]" class="footer__input" placeholder="Enter your email address" required aria-label="Email address">
             <button type="submit" class="footer__form-btn" aria-label="Subscribe">
-              Submit
+              Subscribe
             </button>
           </form>
         </div>
