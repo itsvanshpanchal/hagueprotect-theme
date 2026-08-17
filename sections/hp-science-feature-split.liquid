@@ -55,9 +55,6 @@
     margin: 0 0 clamp(36px, 5vw, 52px);
     max-width: 38ch;
     color: {{ section.settings.body_color }};
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
-    font-size: 21px;
   }
 
   .hp-sci-feature-{{ section.id }}__compare {
@@ -175,7 +172,7 @@
         <h2 class="hp-sci-feature-{{ section.id }}__title">{{ section.settings.heading }}</h2>
       {%- endif -%}
       {%- if section.settings.text != blank -%}
-        <p class="hp-sci-feature-{{ section.id }}__text">{{ section.settings.text }}</p>
+        <p class="hp-sci-feature-{{ section.id }}__text hp-sci__body">{{ section.settings.text }}</p>
       {%- endif -%}
 
       <div class="hp-sci-feature-{{ section.id }}__compare">
