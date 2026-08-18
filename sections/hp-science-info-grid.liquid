@@ -117,15 +117,32 @@
 
   /* HIGH-SPECIFICITY eyebrow override — needs 2 IDs (#MainContent + #shopify-section-xxx) to beat typography snippet */
   body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
+  body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__rail-text"],
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__rail-text"],
+  body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__category"],
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__category"],
+  body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__compare-label"],
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__compare-label"],
+  body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__day"],
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__day"] {
     font-size: 24px !important;
   }
   @media screen and (max-width: 989px) {
     body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
+    body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__rail-text"],
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__rail-text"],
+    body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__category"],
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__category"],
+    body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__compare-label"],
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__compare-label"],
+    body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__day"],
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__day"] {
       font-size: 20px !important;
     }
   }
+
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-grid-{{ section.id }}">
