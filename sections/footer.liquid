@@ -27,7 +27,7 @@
       margin-bottom: 48px;
     }
 
-    .footer-col-newsletter {
+    .footer-col-form {
       grid-column: 1 / -1;
       margin-right: 0;
     }
@@ -161,13 +161,11 @@
     background-color: #000000;
   }
 
-  .footer-col-newsletter {
+  .footer-col-diamond {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: -120px;
-    margin-left: -240px; /* Pull it left to center over Customer Care */
     z-index: 10;
   }
 
@@ -181,7 +179,7 @@
     100% { transform: rotate(-405deg); }
   }
 
-  .footer__newsletter-diamond {
+  .footer__diamond {
     width: 310px;
     height: 310px;
     background: #ffffff;
@@ -197,7 +195,7 @@
     animation: rotate-diamond 25s linear infinite;
   }
 
-  .footer__newsletter-diamond-content {
+  .footer__diamond-content {
     width: 230px;
     padding: 0 16px;
     text-align: center;
@@ -208,16 +206,31 @@
     animation: rotate-content 25s linear infinite;
   }
 
-  .footer__newsletter-diamond-content .footer__title {
+  .footer__diamond-content .footer__title {
     margin-bottom: 12px;
     text-align: center;
     color: #111111 !important;
   }
 
-  .footer__newsletter-diamond-content .footer__newsletter-desc {
-    text-align: center;
-    margin-bottom: 20px;
+  .footer__diamond-content .footer__menu {
+    align-items: center;
+  }
+
+  .footer__diamond-content .footer__link {
     color: #555555 !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .footer__diamond-content .footer__link:hover {
+    color: #111111 !important;
+    transform: translateY(-2px);
+  }
+
+  .footer-col-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .footer__form--vertical {
@@ -225,7 +238,7 @@
     width: 100%;
     max-width: 230px;
     gap: 12px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .footer__form--vertical .footer__input,
@@ -266,7 +279,8 @@
 
     .footer-col-info,
     .footer-col-menu,
-    .footer-col-newsletter {
+    .footer-col-diamond,
+    .footer-col-form {
       text-align: left;
     }
 
@@ -344,7 +358,7 @@
       max-width: 100%;
     }
 
-    .footer__newsletter-diamond {
+    .footer__diamond {
       transform: none;
       width: 100%;
       height: auto;
@@ -353,16 +367,25 @@
       margin-top: 24px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       border-radius: 0;
+      animation: none;
     }
 
-    .footer__newsletter-diamond-content {
+    .footer__diamond-content {
       transform: none;
       width: 100%;
       text-align: center;
+      animation: none;
     }
 
-    .footer__newsletter-diamond-content .footer__title,
-    .footer__newsletter-diamond-content .footer__newsletter-desc {
+    .footer__diamond-content .footer__title {
+      text-align: center;
+    }
+
+    .footer__diamond-content .footer__menu {
+      align-items: center;
+    }
+
+    .footer__diamond-content .footer__link {
       text-align: center;
     }
 
@@ -565,94 +588,94 @@
         </nav>
       </div>
 
-      <div class="footer-col-menu">
-        <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
-        <nav class="footer__menu">
-          {%- liquid
-            if section.settings.privacy_policy_page != blank
-              assign privacy_href = section.settings.privacy_policy_page.url
-            elsif section.settings.privacy_policy_url != blank
-              assign privacy_href = section.settings.privacy_policy_url
-            elsif pages['privacy-policy'] != blank
-              assign privacy_href = pages['privacy-policy'].url
-            elsif shop.privacy_policy != blank
-              assign privacy_href = shop.privacy_policy.url
-            else
-              assign privacy_href = '/search?view=policies&tab=privacy'
-            endif
+      <div class="footer-col-diamond">
+        <div class="footer__diamond">
+          <div class="footer__diamond-content">
+            <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
+            <nav class="footer__menu">
+              {%- liquid
+                if section.settings.privacy_policy_page != blank
+                  assign privacy_href = section.settings.privacy_policy_page.url
+                elsif section.settings.privacy_policy_url != blank
+                  assign privacy_href = section.settings.privacy_policy_url
+                elsif pages['privacy-policy'] != blank
+                  assign privacy_href = pages['privacy-policy'].url
+                elsif shop.privacy_policy != blank
+                  assign privacy_href = shop.privacy_policy.url
+                else
+                  assign privacy_href = '/search?view=policies&tab=privacy'
+                endif
 
-            if section.settings.terms_policy_page != blank
-              assign terms_href = section.settings.terms_policy_page.url
-            elsif section.settings.terms_of_service_url != blank
-              assign terms_href = section.settings.terms_of_service_url
-            elsif pages['terms-of-service'] != blank
-              assign terms_href = pages['terms-of-service'].url
-            elsif shop.terms_of_service != blank
-              assign terms_href = shop.terms_of_service.url
-            else
-              assign terms_href = '/search?view=policies&tab=terms'
-            endif
+                if section.settings.terms_policy_page != blank
+                  assign terms_href = section.settings.terms_policy_page.url
+                elsif section.settings.terms_of_service_url != blank
+                  assign terms_href = section.settings.terms_of_service_url
+                elsif pages['terms-of-service'] != blank
+                  assign terms_href = pages['terms-of-service'].url
+                elsif shop.terms_of_service != blank
+                  assign terms_href = shop.terms_of_service.url
+                else
+                  assign terms_href = '/search?view=policies&tab=terms'
+                endif
 
-            if section.settings.refund_policy_page != blank
-              assign refund_href = section.settings.refund_policy_page.url
-            elsif section.settings.refund_policy_url != blank
-              assign refund_href = section.settings.refund_policy_url
-            elsif pages['refund-policy'] != blank
-              assign refund_href = pages['refund-policy'].url
-            elsif pages['return-policy'] != blank
-              assign refund_href = pages['return-policy'].url
-            elsif shop.refund_policy != blank
-              assign refund_href = shop.refund_policy.url
-            else
-              assign refund_href = '/search?view=policies&tab=refunds'
-            endif
+                if section.settings.refund_policy_page != blank
+                  assign refund_href = section.settings.refund_policy_page.url
+                elsif section.settings.refund_policy_url != blank
+                  assign refund_href = section.settings.refund_policy_url
+                elsif pages['refund-policy'] != blank
+                  assign refund_href = pages['refund-policy'].url
+                elsif pages['return-policy'] != blank
+                  assign refund_href = pages['return-policy'].url
+                elsif shop.refund_policy != blank
+                  assign refund_href = shop.refund_policy.url
+                else
+                  assign refund_href = '/search?view=policies&tab=refunds'
+                endif
 
-            if section.settings.shipping_policy_page != blank
-              assign shipping_href = section.settings.shipping_policy_page.url
-            elsif section.settings.shipping_policy_url != blank
-              assign shipping_href = section.settings.shipping_policy_url
-            elsif pages['shipping-policy'] != blank
-              assign shipping_href = pages['shipping-policy'].url
-            elsif pages['shipping'] != blank
-              assign shipping_href = pages['shipping'].url
-            elsif shop.shipping_policy != blank
-              assign shipping_href = shop.shipping_policy.url
-            else
-              assign shipping_href = '/search?view=policies&tab=shipping'
-            endif
+                if section.settings.shipping_policy_page != blank
+                  assign shipping_href = section.settings.shipping_policy_page.url
+                elsif section.settings.shipping_policy_url != blank
+                  assign shipping_href = section.settings.shipping_policy_url
+                elsif pages['shipping-policy'] != blank
+                  assign shipping_href = pages['shipping-policy'].url
+                elsif pages['shipping'] != blank
+                  assign shipping_href = pages['shipping'].url
+                elsif shop.shipping_policy != blank
+                  assign shipping_href = shop.shipping_policy.url
+                else
+                  assign shipping_href = '/search?view=policies&tab=shipping'
+                endif
 
-            if pages['saferchoice'] != blank
-              assign safer_href = pages['saferchoice'].url
-            elsif pages['safer-choice'] != blank
-              assign safer_href = pages['safer-choice'].url
-            else
-              assign safer_href = '/search?view=policies&tab=saferchoice'
-            endif
-          -%}
-          <a href="{{ privacy_href }}" class="footer__link">Privacy Policy</a>
-          <a href="{{ terms_href }}" class="footer__link">Terms of Service</a>
-          <a href="{{ refund_href }}" class="footer__link">Refund Policy</a>
-          <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
-          <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
-        </nav>
+                if pages['saferchoice'] != blank
+                  assign safer_href = pages['saferchoice'].url
+                elsif pages['safer-choice'] != blank
+                  assign safer_href = pages['safer-choice'].url
+                else
+                  assign safer_href = '/search?view=policies&tab=saferchoice'
+                endif
+              -%}
+              <a href="{{ privacy_href }}" class="footer__link">Privacy Policy</a>
+              <a href="{{ terms_href }}" class="footer__link">Terms of Service</a>
+              <a href="{{ refund_href }}" class="footer__link">Refund Policy</a>
+              <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
+              <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
+            </nav>
+          </div>
+        </div>
       </div>
 
-      <div class="footer-col-newsletter">
-        <div class="footer__newsletter-diamond">
-          <div class="footer__newsletter-diamond-content">
-            <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
-            <div class="footer__newsletter">
-              <p class="footer__newsletter-desc">{{ section.settings.newsletter_desc | default: 'Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.' }}</p>
-              <form class="footer__form footer__form--vertical" action="/contact#contact_form" method="post">
-                <input type="hidden" name="form_type" value="customer">
-                <input type="hidden" name="utf8" value="&#10003;">
-                <input type="email" name="contact[email]" class="footer__input" placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email address' }}" required aria-label="Email address">
-                <button type="submit" class="footer__form-btn" aria-label="Subscribe">
-                  {{ section.settings.newsletter_btn_text | default: 'Subscribe' }}
-                </button>
-              </form>
-            </div>
-          </div>
+      <div class="footer-col-form">
+        <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
+        <div class="footer__newsletter">
+          <p class="footer__newsletter-desc">{{ section.settings.newsletter_desc | default: 'Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.' }}</p>
+          <form class="footer__form footer__form--vertical" action="/contact#contact_form" method="post">
+            <input type="hidden" name="form_type" value="customer">
+            <input type="hidden" name="utf8" value="&#10003;">
+            <input type="email" name="contact[email]" class="footer__input" placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email address' }}" required aria-label="Email address">
+            <button type="submit" class="footer__form-btn" aria-label="Subscribe">
+              {{ section.settings.newsletter_btn_text | default: 'Subscribe' }}
+            </button>
+          </form>
         </div>
       </div>
     </div>
