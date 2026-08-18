@@ -154,6 +154,18 @@
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 
+  /* Direct eyebrow size override — wins over all cascade */
+  #shopify-section-{{ section.id }} .hp-sci .hp-sci-feature-{{ section.id }}__eyebrow,
+  #shopify-section-{{ section.id }} [class*="__eyebrow"] {
+    font-size: 24px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .hp-sci .hp-sci-feature-{{ section.id }}__eyebrow,
+    #shopify-section-{{ section.id }} [class*="__eyebrow"] {
+      font-size: 20px !important;
+    }
+  }
+
   /* Preserve this section's own padding settings — prevent external override */
   #shopify-section-{{ section.id }} {
     padding-top: 0 !important;

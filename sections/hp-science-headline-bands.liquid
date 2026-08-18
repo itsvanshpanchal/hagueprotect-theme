@@ -159,13 +159,25 @@
     margin-bottom: 0 !important;
   }
 
-  /* Ensure formula eyebrow can be sized independently */
+  /* Direct eyebrow size override — wins over all cascade (THE SYSTEM eyebrow) */
+  #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__eyebrow,
+  #shopify-section-{{ section.id }} [class*="hp-sci-headlines-"][class*="__eyebrow"] {
+    font-size: 24px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__eyebrow,
+    #shopify-section-{{ section.id }} [class*="hp-sci-headlines-"][class*="__eyebrow"] {
+      font-size: 20px !important;
+    }
+  }
+
+  /* Direct formula eyebrow size override (THE FORMULA eyebrow) */
   #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
-    font-size: {{ section.settings.formula_eyebrow_size | default: 13 }}px !important;
+    font-size: 24px !important;
   }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
-      font-size: {{ section.settings.formula_eyebrow_size_mobile | default: section.settings.formula_eyebrow_size | default: 13 }}px !important;
+      font-size: 20px !important;
     }
   }
 {%- endstyle -%}
