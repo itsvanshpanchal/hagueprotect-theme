@@ -165,15 +165,13 @@
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 
-  /* HIGH-SPECIFICITY eyebrow override — matches typography snippet's 2 IDs (#MainContent + #shopify-section-xxx) and is placed later to win */
-  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-  #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__formula-eyebrow"] {
-    font-size: 21px !important;
+  /* Clean CSS variable override for eyebrow size */
+  #shopify-section-{{ section.id }} {
+    --hp-sci-sec-eyebrow-size: 21px !important;
   }
   @media screen and (max-width: 989px) {
-    #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-    #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__formula-eyebrow"] {
-      font-size: 20px !important;
+    #shopify-section-{{ section.id }} {
+      --hp-sci-sec-eyebrow-size: 20px !important;
     }
   }
 {%- endstyle -%}
