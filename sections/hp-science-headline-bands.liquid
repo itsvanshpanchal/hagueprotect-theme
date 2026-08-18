@@ -158,6 +158,16 @@
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
   }
+
+  /* Ensure formula eyebrow can be sized independently */
+  #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
+    font-size: {{ section.settings.formula_eyebrow_size | default: 13 }}px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .hp-sci .hp-sci-headlines-{{ section.id }}__formula-eyebrow {
+      font-size: {{ section.settings.formula_eyebrow_size_mobile | default: section.settings.formula_eyebrow_size | default: 13 }}px !important;
+    }
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-headlines-{{ section.id }}">
@@ -464,10 +474,10 @@
       "id": "eyebrow_size",
       "label": "Eyebrow size",
       "min": 10,
-      "max": 16,
+      "max": 40,
       "step": 1,
       "unit": "px",
-      "default": 12
+      "default": 18
     },
     {
       "type": "range",
@@ -554,10 +564,10 @@
       "id": "formula_eyebrow_size",
       "label": "Formula eyebrow size",
       "min": 10,
-      "max": 16,
+      "max": 40,
       "step": 1,
       "unit": "px",
-      "default": 13
+      "default": 18
     },
     {
       "type": "range",
