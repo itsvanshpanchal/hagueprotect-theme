@@ -167,6 +167,7 @@
     align-items: center;
     position: relative;
     margin-top: -120px;
+    margin-left: -240px; /* Pull it left to center over Customer Care */
     z-index: 10;
   }
 
@@ -564,25 +565,6 @@
         </nav>
       </div>
 
-      <div class="footer-col-newsletter">
-        <div class="footer__newsletter-diamond">
-          <div class="footer__newsletter-diamond-content">
-            <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
-            <div class="footer__newsletter">
-              <p class="footer__newsletter-desc">{{ section.settings.newsletter_desc | default: 'Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.' }}</p>
-              <form class="footer__form footer__form--vertical" action="/contact#contact_form" method="post">
-                <input type="hidden" name="form_type" value="customer">
-                <input type="hidden" name="utf8" value="&#10003;">
-                <input type="email" name="contact[email]" class="footer__input" placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email address' }}" required aria-label="Email address">
-                <button type="submit" class="footer__form-btn" aria-label="Subscribe">
-                  {{ section.settings.newsletter_btn_text | default: 'Subscribe' }}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="footer-col-menu">
         <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
         <nav class="footer__menu">
@@ -653,6 +635,25 @@
           <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
           <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
         </nav>
+      </div>
+
+      <div class="footer-col-newsletter">
+        <div class="footer__newsletter-diamond">
+          <div class="footer__newsletter-diamond-content">
+            <h3 class="footer__title">{{ section.settings.newsletter_title | default: 'Subscribe' }}</h3>
+            <div class="footer__newsletter">
+              <p class="footer__newsletter-desc">{{ section.settings.newsletter_desc | default: 'Bio curious? Sign up to learn more about our science and receive an occasional promo code in your inbox.' }}</p>
+              <form class="footer__form footer__form--vertical" action="/contact#contact_form" method="post">
+                <input type="hidden" name="form_type" value="customer">
+                <input type="hidden" name="utf8" value="&#10003;">
+                <input type="email" name="contact[email]" class="footer__input" placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email address' }}" required aria-label="Email address">
+                <button type="submit" class="footer__form-btn" aria-label="Subscribe">
+                  {{ section.settings.newsletter_btn_text | default: 'Subscribe' }}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
