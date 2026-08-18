@@ -1,0 +1,516 @@
+{% doc %}
+  @prompt
+    Create a new full-width Shopify section — "Formula Intro" — matching this EXACT design. Do not modify, remove, or shift any other existing section on the page. This is a standalone addition only.
+    
+    SECTION CONTAINER:
+    
+    Full browser width, background: solid 
+    #141414
+    Vertical padding: 110px top, 110px bottom (desktop) / 60px top, 60px bottom (mobile)
+    All content wrapped in an inner container, max-width: 640px, margin: 0 auto, text-align: center
+    Content is vertically stacked, horizontally centered — no left/right misalignment, everything on same center axis
+    
+    EXACT COPY (use word-for-word, do not paraphrase):
+    
+    Line 1 (eyebrow):
+    
+    THE FORMULA
+    
+    Line 2 (heading, 2 lines):
+    
+    Skin Longevity
+    System5
+    
+    Line 3 (subtext, 2 lines):
+    
+    Five biological processes, supported at once. This is what
+    holds the result after the bottle is empty.
+    
+    ELEMENT-BY-ELEMENT SPEC:
+    
+    Eyebrow — "THE FORMULA"
+    Position: top of stack, centered
+    Font-size: 14px, font-weight: 600
+    Letter-spacing: 4px (wide tracking, uppercase)
+    Color: 
+    #B08D57 (muted gold)
+    Margin-bottom: 24px
+    Heading — "Skin Longevity System5"
+    Two separate lines using <br> or block display, NOT wrapped by browser — force the line break exactly where shown ("Skin Longevity" / "System5")
+    Font-size: 60px desktop / 38px mobile
+    Font-weight: 400 (light-medium, not bold)
+    Line-height: 1.15
+    Color: 
+    #FFFFFF for all text
+    EXCEPTION: the digit "5" at the end of "System5" must be a separate <span> colored 
+    #B08D57 (same gold as eyebrow) — rest of "System" stays white, no space between "System" and "5"
+    Margin-bottom: 44px
+    Text-align: center, font-family: sans-serif (Inter/Poppins/General Sans style)
+    Subtext
+    Font-size: 18px, font-weight: 400
+    Color: 
+    #9E9E9E
+    Line-height: 1.6
+    Max-width: 560px, centered (margin: 0 auto)
+    Two lines exactly as shown — keep natural wrap at these widths, center-aligned text-align
+    
+    ALIGNMENT RULES (critical):
+    
+    Every element (eyebrow, heading, subtext) shares the same center vertical axis — no offset
+    No bullet points, no icons, no buttons, no images — pure centered text block
+    Equal breathing room above eyebrow and below subtext (symmetrical section padding)
+    Section must be self-contained; wrap it in its own <section> so it doesn't inherit spacing from adjacent sections
+    
+    RESPONSIVE:
+    
+    Mobile: heading 38px, subtext 16px, padding reduces to 60px top/bottom, container padding 24px left/right so text doesn't touch screen edges
+    
+    Make it a Shopify section with schema settings (eyebrow text, heading text, subtext, gold color picker) so it's editable from the theme customizer. Do not touch any other section, block, or existing code on the page., Full detailed prompt — combines build + fix, paste this once to AI coding tool:
+    
+    PROMPT:
+    
+    Update the existing "Formula Intro" dark section on this Shopify product page (the section with "THE FORMULA" label). Do not touch, restructure, or affect any other section/element on the page — apply changes strictly inside this section's file/block only.
+    
+    1. SECTION CONTAINER
+    
+    Full-width section, background: solid 
+    #141414
+    Padding: 110px top / 110px bottom on desktop, 60px top / 60px bottom on mobile
+    Inner content wrapper: max-width 640px, margin: 0 auto, text-align: center
+    Wrap this section in its own isolated <section> tag so no external CSS/classes bleed in
+    
+    2. EXACT COPY (word-for-word, do not change)
+    
+    Eyebrow:
+    
+    THE FORMULA
+    
+    Heading (must render as 2 separate lines, not 1):
+    
+    Skin Longevity
+    System5
+    
+    Subtext (2 lines):
+    
+    Five biological processes, supported at once. This is what
+    holds the result after the bottle is empty.
+    
+    3. EYEBROW STYLING
+    
+    Font-size: 14px, font-weight: 600
+    Letter-spacing: 4px, uppercase
+    Color: 
+    #B08D57 (muted gold)
+    Margin-bottom: 24px
+    Centered
+    
+    4. HEADING STYLING
+    
+    Force hard line break between "Skin Longevity" and "System5" using <br> or two block spans — never allow natural text-wrap to decide the break
+    Font-size: 60px desktop / 38px mobile
+    Font-weight: 400
+    Line-height: 1.15
+    Color: 
+    #FFFFFF for all text
+    The digit "5" in "System5" must be inside its own <span> with color 
+    #B08D57 (gold) — no space between "System" and "5", rest of word stays white
+    Margin-bottom: 44px
+    Centered, sans-serif font (Inter/Poppins/General Sans style)
+    
+    5. SUBTEXT STYLING
+    
+    Font-size: 18px, font-weight: 400
+    Color: 
+    #9E9E9E
+    Line-height: 1.6
+    Max-width: 560px, centered
+    Two lines as shown, centered text-align
+    
+    6. REMOVE BROKEN/STRAY ELEMENTS
+    
+    Delete any partial circle/shape elements currently appearing at the top-right corner of this section — locate the pseudo-element, icon, or leftover decorative shape causing this and remove it from this section only, without affecting shared classes used elsewhere
+    Delete the stray blue horizontal bar appearing above this section, only if it originates from this section's code; if it's a shared/global element used on other pages, leave it untouched
+    
+    7. ALIGNMENT RULES
+    
+    Eyebrow, heading, and subtext must all sit on the same centered vertical axis
+    No icons, buttons, images, borders, or bullets — pure centered typography block
+    Symmetrical spacing above eyebrow and below subtext
+    
+    8. RESPONSIVE
+    
+    Mobile: heading 38px, subtext 16px, section padding 60px top/bottom, container side padding 24px so text doesn't touch screen edges
+    
+    9. SHOPIFY SCHEMA
+    
+    Keep/add schema settings so eyebrow text, heading text, subtext, and gold color are all editable via theme customizer
+    Preserve any existing schema settings already in place — only extend, don't remove
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-formula-intro-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top_desktop }}px 24px {{ block.settings.padding_bottom_desktop }}px;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .ai-formula-intro__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_max_width }}px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ai-formula-intro__eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_size_desktop }}px;
+    font-weight: {{ block.settings.eyebrow_weight }};
+    letter-spacing: {{ block.settings.eyebrow_letter_spacing }}px;
+    color: {{ block.settings.eyebrow_color }};
+    text-transform: uppercase;
+    margin-bottom: {{ block.settings.eyebrow_margin_bottom }}px;
+    line-height: 1.2;
+  }
+
+  .ai-formula-intro__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size_desktop }}px;
+    font-weight: {{ block.settings.heading_weight }};
+    line-height: 1.15;
+    color: {{ block.settings.heading_color }};
+    margin-bottom: {{ block.settings.heading_margin_bottom }}px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin-top: 0;
+  }
+
+  .ai-formula-intro__heading-accent-{{ ai_gen_id }} {
+    color: {{ block.settings.accent_color }};
+  }
+
+  .ai-formula-intro__subtext-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtext_size_desktop }}px;
+    font-weight: {{ block.settings.subtext_weight }};
+    line-height: 1.6;
+    color: {{ block.settings.subtext_color }};
+    max-width: {{ block.settings.subtext_max_width }}px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-formula-intro-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top_mobile }}px 24px {{ block.settings.padding_bottom_mobile }}px;
+    }
+
+    .ai-formula-intro__eyebrow-{{ ai_gen_id }} {
+      font-size: {{ block.settings.eyebrow_size_mobile }}px;
+    }
+
+    .ai-formula-intro__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+    }
+
+    .ai-formula-intro__subtext-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtext_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<section class="ai-formula-intro-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-formula-intro__container-{{ ai_gen_id }}">
+    {% if block.settings.eyebrow_text != blank %}
+      <div class="ai-formula-intro__eyebrow-{{ ai_gen_id }}">
+        {{ block.settings.eyebrow_text }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.heading_line1 != blank or block.settings.heading_line2_part1 != blank %}
+      <h2 class="ai-formula-intro__heading-{{ ai_gen_id }}">
+        {% if block.settings.heading_line1 != blank %}
+          {{ block.settings.heading_line1 }}<br>
+        {% endif %}
+        {% if block.settings.heading_line2_part1 != blank %}
+          {{ block.settings.heading_line2_part1 }}{% if block.settings.heading_line2_part2 != blank %}<span class="ai-formula-intro__heading-accent-{{ ai_gen_id }}">{{ block.settings.heading_line2_part2 }}</span>{% endif %}
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if block.settings.subtext != blank %}
+      <div class="ai-formula-intro__subtext-{{ ai_gen_id }}">
+        {{ block.settings.subtext }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formula intro",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "THE FORMULA"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#B08D57"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_desktop",
+      "label": "Eyebrow size on computer",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size_mobile",
+      "label": "Eyebrow size on phone",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_weight",
+      "label": "Eyebrow weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_letter_spacing",
+      "label": "Eyebrow letter spacing",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_margin_bottom",
+      "label": "Eyebrow bottom spacing",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Skin Longevity"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2_part1",
+      "label": "Heading line 2 (before accent)",
+      "default": "System"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2_part2",
+      "label": "Heading line 2 (accent part)",
+      "default": "5",
+      "info": "This part will be colored with the accent color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#B08D57",
+      "info": "Color for the accent part of line 2"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size on computer",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size on phone",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading bottom spacing",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Five biological processes, supported at once. This is what holds the result after the bottle is empty."
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#9E9E9E"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_desktop",
+      "label": "Subtext size on computer",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtext_size_mobile",
+      "label": "Subtext size on phone",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "subtext_weight",
+      "label": "Subtext weight",
+      "min": 300,
+      "max": 600,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "subtext_max_width",
+      "label": "Subtext max width",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "label": "Container max width",
+      "min": 480,
+      "max": 960,
+      "step": 20,
+      "unit": "px",
+      "default": 640
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Top padding on computer",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "default": 110
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding on computer",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "default": 110
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding on phone",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding on phone",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Formula intro"
+    }
+  ]
+}
+{% endschema %}
