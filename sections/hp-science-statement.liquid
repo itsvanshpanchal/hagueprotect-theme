@@ -117,14 +117,14 @@
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 
-  /* HIGH-SPECIFICITY eyebrow override — matches asset CSS specificity (0,1,3,1) but is LATER in document so wins */
-  body.template-page-hague #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-  body.template-search-hague #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
+  /* HIGH-SPECIFICITY eyebrow override — needs 2 IDs (#MainContent + #shopify-section-xxx) to beat typography snippet */
+  body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
+  body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
     font-size: 32px !important;
   }
   @media screen and (max-width: 989px) {
-    body.template-page-hague #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
-    body.template-search-hague #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
+    body.template-page-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"],
+    body.template-search-hague #MainContent #shopify-section-{{ section.id }} .hp-sci [class*="__eyebrow"] {
       font-size: 24px !important;
     }
   }
