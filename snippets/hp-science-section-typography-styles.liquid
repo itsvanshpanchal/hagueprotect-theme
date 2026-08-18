@@ -110,12 +110,12 @@
 {{ sec }} .hp-sci [class*="__formula-eyebrow"],
 {{ sec }} .hp-sci [class*="__compare-label"],
 {{ sec }} .hp-sci [class*="__day"] {
-  font-family: var(--font-family-eyebrow) !important;
-  font-size: var(--section-label-size) !important;
-  font-weight: var(--font-weight-eyebrow) !important;
-  font-style: var(--font-style-eyebrow) !important;
+  font-family: var(--hp-sci-sec-eyebrow-font) !important;
+  font-size: var(--hp-sci-sec-eyebrow-size) !important;
+  font-weight: var(--hp-sci-sec-eyebrow-weight) !important;
+  font-style: normal !important;
   line-height: 1.35 !important;
-  letter-spacing: var(--letter-spacing-eyebrow, 0.1em) !important;
+  letter-spacing: var(--hp-sci-sec-eyebrow-letter-spacing) !important;
   text-transform: uppercase !important;
   text-align: inherit;
   margin-bottom: var(--section-label-margin-bottom, 12px) !important;
@@ -265,7 +265,7 @@
   {{ sec }} .hp-sci [class*="__formula-eyebrow"],
   {{ sec }} .hp-sci [class*="__compare-label"],
   {{ sec }} .hp-sci [class*="__day"] {
-    font-size: var(--section-label-size) !important;
+    font-size: var(--hp-sci-sec-eyebrow-size) !important;
     margin-bottom: var(--section-label-margin-bottom, 10px) !important;
   {%- if typo_eyebrow_color != blank -%}
   color: var(--hp-sci-sec-eyebrow-color) !important;

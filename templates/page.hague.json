@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "typography": {
+      "type": "hp-science-typography",
+      "settings": {
+        "eyebrow_size_desktop": 24,
+        "eyebrow_size_mobile": 18
+      }
+    },
     "hero": {
       "type": "hp-science-hero",
       "settings": {
@@ -526,6 +533,7 @@
     }
   },
   "order": [
+    "typography",
     "hero",
     "info_grid",
     "media_banner",
