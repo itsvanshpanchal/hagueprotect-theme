@@ -145,7 +145,7 @@
           <p class="hp-sci-cta-{{ section.id }}__body">{{ section.settings.body }}</p>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a class="hp-sci-cta-{{ section.id }}__btn" href="{{ cta_link }}">{{ section.settings.button_label }}</a>
+          <a class="hp-sci-cta-{{ section.id }}__btn" href="{{ cta_link }}" style="color: {{ section.settings.button_text_color }} !important;">{{ section.settings.button_label }}</a>
         {%- endif -%}
         {%- if section.settings.secondary_label != blank -%}
           <a class="hp-sci-cta-{{ section.id }}__secondary" href="{{ secondary_link }}">{{ section.settings.secondary_label }}</a>
