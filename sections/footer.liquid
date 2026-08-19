@@ -171,7 +171,17 @@
 
 
 
-
+  .footer__bg-octagon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    z-index: 0;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.03);
+  }
 
   .footer__newsletter-diamond {
     width: 100%;
@@ -541,9 +551,13 @@
         </nav>
       </div>
 
-      <div class="footer-col-menu">
-        <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
-        <nav class="footer__menu">
+      <div class="footer-col-menu" style="position: relative;">
+        <svg class="footer__bg-octagon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <polygon points="30,0 70,0 100,30 100,70 70,100 30,100 0,70 0,30" />
+        </svg>
+        <div style="position: relative; z-index: 1;">
+          <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
+          <nav class="footer__menu">
           {%- liquid
             if section.settings.privacy_policy_page != blank
               assign privacy_href = section.settings.privacy_policy_page.url
@@ -611,6 +625,7 @@
           <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
           <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
         </nav>
+        </div>
       </div>
 
       <div class="footer-col-newsletter">
