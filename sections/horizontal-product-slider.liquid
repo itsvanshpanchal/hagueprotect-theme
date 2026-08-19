@@ -14,6 +14,8 @@
   assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 19
   assign glass_link_sz = section.settings.glass_link_size | default: 16
   assign glass_eyebrow_color = section.settings.glass_eyebrow_color | default: '#a8894a'
+  assign glass_title_spacing_d = section.settings.glass_title_spacing_desktop | default: 28
+  assign glass_title_spacing_m = section.settings.glass_title_spacing_mobile | default: 10
 -%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
@@ -31,6 +33,7 @@
     --hp-glass-eyebrow-size: {{ glass_eyebrow_sz }}px;
     --hp-glass-link-size: {{ glass_link_sz }}px;
     --hp-glass-eyebrow-color: {{ glass_eyebrow_color }};
+    --hp-glass-title-spacing: {{ glass_title_spacing_d }}px;
   }
 
   /* Match Tell Your Story: exact heading + accent sizes */
@@ -372,7 +375,7 @@
   }
 
   .hp-fam-sec__glass-title {
-    margin: 0 0 28px !important;
+    margin: 0 0 var(--hp-glass-title-spacing, 28px) !important;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--hp-glass-title-size, 15px) !important;
     font-weight: 400 !important;
@@ -443,7 +446,7 @@
 
     .hp-fam-sec__glass-title {
       font-size: var(--hp-glass-title-size-mobile, 12px) !important;
-      margin-bottom: 10px !important;
+      margin-bottom: {{ glass_title_spacing_m }}px !important;
     }
 
     .hp-fam-sec__glass-para {
@@ -1932,6 +1935,26 @@
       "step": 1,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "range",
+      "id": "glass_title_spacing_desktop",
+      "label": "Heading → Paragraph spacing — desktop",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "glass_title_spacing_mobile",
+      "label": "Heading → Paragraph spacing — mobile",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
     },
     {
       "type": "range",
