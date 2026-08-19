@@ -9,8 +9,8 @@
   assign glass_pad = section.settings.glass_panel_padding | default: 40
   assign glass_title_d = section.settings.glass_title_size_desktop | default: 21
   assign glass_title_m = section.settings.glass_title_size_mobile | default: 20
-  assign glass_para_d = section.settings.glass_para_size_desktop | default: 14
-  assign glass_para_m = section.settings.glass_para_size_mobile | default: 13
+  assign glass_para_d = section.settings.glass_para_size_desktop | default: 21
+  assign glass_para_m = section.settings.glass_para_size_mobile | default: 20
   assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 14
   assign glass_link_sz = section.settings.glass_link_size | default: 16
   assign glass_eyebrow_color = section.settings.glass_eyebrow_color | default: '#a8894a'
@@ -377,7 +377,7 @@
     font-size: var(--hp-glass-title-size, 21px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    line-height: 1.5 !important;
+    line-height: 1.3 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #ffffff !important;
@@ -386,10 +386,10 @@
   .hp-fam-sec__glass-para {
     margin: 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--hp-glass-para-size, 14px) !important;
-    font-weight: 600 !important;
+    font-size: var(--hp-glass-para-size, 21px) !important;
+    font-weight: 400 !important;
     font-style: normal !important;
-    line-height: 1.7 !important;
+    line-height: 1.3 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #ffffff !important;
