@@ -551,14 +551,13 @@
         </nav>
       </div>
 
-      <div class="footer-col-menu">
-        <div style="display: inline-block; position: relative; width: max-content;">
+      <div class="footer-col-menu" style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;">
         <svg class="footer__bg-octagon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
           <polygon points="30,0 70,0 100,30 100,70 70,100 30,100 0,70 0,30" />
         </svg>
         <div style="position: relative; z-index: 1;">
           <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
-          <nav class="footer__menu">
+          <nav class="footer__menu" style="align-items: center;">
           {%- liquid
             if section.settings.privacy_policy_page != blank
               assign privacy_href = section.settings.privacy_policy_page.url
@@ -626,7 +625,6 @@
           <a href="{{ shipping_href }}" class="footer__link">Shipping Policy</a>
           <a href="{{ safer_href }}" class="footer__link">Safer Choice</a>
         </nav>
-        </div>
         </div>
       </div>
 
