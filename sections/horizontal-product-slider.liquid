@@ -7,10 +7,10 @@
   assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
   assign glass_max_w = section.settings.glass_panel_max_width | default: 1100
   assign glass_pad = section.settings.glass_panel_padding | default: 40
-  assign glass_title_d = section.settings.glass_title_size_desktop | default: 22
-  assign glass_title_m = section.settings.glass_title_size_mobile | default: 18
-  assign glass_para_d = section.settings.glass_para_size_desktop | default: 16
-  assign glass_para_m = section.settings.glass_para_size_mobile | default: 14
+  assign glass_title_d = section.settings.glass_title_size_desktop | default: 18
+  assign glass_title_m = section.settings.glass_title_size_mobile | default: 16
+  assign glass_para_d = section.settings.glass_para_size_desktop | default: 14
+  assign glass_para_m = section.settings.glass_para_size_mobile | default: 13
   assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 14
   assign glass_link_sz = section.settings.glass_link_size | default: 16
   assign glass_eyebrow_color = section.settings.glass_eyebrow_color | default: '#a8894a'
@@ -191,7 +191,7 @@
     font-style: var(--font-style-h2, normal) !important;
     text-transform: none !important;
     color: #f3f2f2;
-    margin: 0 0 12px 0;
+    margin: 0 0 4px 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
     max-width: 700px;
@@ -374,10 +374,10 @@
   .hp-fam-sec__glass-title {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: var(--hp-glass-title-size, 22px) !important;
+    font-size: var(--hp-glass-title-size, 18px) !important;
     font-weight: 600 !important;
     font-style: normal !important;
-    line-height: 1.28 !important;
+    line-height: 1.5 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #ffffff !important;
@@ -386,10 +386,10 @@
   .hp-fam-sec__glass-para {
     margin: 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--hp-glass-para-size, 16px) !important;
+    font-size: var(--hp-glass-para-size, 14px) !important;
     font-weight: 600 !important;
     font-style: normal !important;
-    line-height: 1.5 !important;
+    line-height: 1.7 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
     color: #ffffff !important;
@@ -399,7 +399,7 @@
     display: block;
     width: 100%;
     height: 0;
-    margin: 12px 0;
+    margin: 6px 0;
     padding: 0;
     border: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -411,7 +411,7 @@
 
   .hp-fam-sec__glass-link {
     display: inline-block;
-    margin: -12px 0 0;
+    margin: -16px 0 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
     font-size: var(--hp-glass-link-size, 16px) !important;
     font-weight: 700 !important;
