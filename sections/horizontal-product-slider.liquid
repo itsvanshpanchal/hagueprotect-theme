@@ -7,8 +7,8 @@
   assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
   assign glass_max_w = section.settings.glass_panel_max_width | default: 1100
   assign glass_pad = section.settings.glass_panel_padding | default: 40
-  assign glass_title_d = section.settings.glass_title_size_desktop | default: 21
-  assign glass_title_m = section.settings.glass_title_size_mobile | default: 20
+  assign glass_title_d = section.settings.glass_title_size_desktop | default: 15
+  assign glass_title_m = section.settings.glass_title_size_mobile | default: 12
   assign glass_para_d = section.settings.glass_para_size_desktop | default: 15
   assign glass_para_m = section.settings.glass_para_size_mobile | default: 12
   assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 14
@@ -374,7 +374,7 @@
   .hp-fam-sec__glass-title {
     margin: 0;
     font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--hp-glass-title-size, 21px) !important;
+    font-size: var(--hp-glass-title-size, 15px) !important;
     font-weight: 400 !important;
     font-style: normal !important;
     line-height: 1.3 !important;
@@ -442,7 +442,7 @@
     }
 
     .hp-fam-sec__glass-title {
-      font-size: var(--hp-glass-title-size-mobile, 26px) !important;
+      font-size: var(--hp-glass-title-size-mobile, 12px) !important;
     }
 
     .hp-fam-sec__glass-para {
