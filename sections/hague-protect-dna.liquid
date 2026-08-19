@@ -140,10 +140,26 @@
     position: relative;
     z-index: 2;
     display: block;
+    /* Sharper upscaling on all browsers */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+    /* GPU compositing for smoother animation */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Boost perceived quality with subtle sharpening filter */
+    filter: contrast(1.08) saturate(1.12) brightness(1.04);
+    /* Prevent blurring from anti-aliasing */
+    -webkit-font-smoothing: antialiased;
   }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-custom--gif {
     pointer-events: none;
+    /* Ensure GIFs render at native pixel boundaries for sharpness */
+    will-change: contents;
+    transform: translateZ(0) scale(1.0);
+    filter: contrast(1.1) saturate(1.15) brightness(1.05);
   }
 
   {%- if section.settings.enable_hover -%}
