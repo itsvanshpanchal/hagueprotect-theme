@@ -7,8 +7,8 @@
   assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
   assign glass_max_w = section.settings.glass_panel_max_width | default: 1100
   assign glass_pad = section.settings.glass_panel_padding | default: 40
-  assign glass_title_d = section.settings.glass_title_size_desktop | default: 32
-  assign glass_title_m = section.settings.glass_title_size_mobile | default: 26
+  assign glass_title_d = section.settings.glass_title_size_desktop | default: 22
+  assign glass_title_m = section.settings.glass_title_size_mobile | default: 18
   assign glass_para_d = section.settings.glass_para_size_desktop | default: 16
   assign glass_para_m = section.settings.glass_para_size_mobile | default: 14
   assign glass_eyebrow_sz = section.settings.glass_eyebrow_size | default: 14
@@ -191,7 +191,7 @@
     font-style: var(--font-style-h2, normal) !important;
     text-transform: none !important;
     color: #f3f2f2;
-    margin: 0 0 32px 0;
+    margin: 0 0 12px 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
     max-width: 700px;
@@ -374,7 +374,7 @@
   .hp-fam-sec__glass-title {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-size: var(--hp-glass-title-size, 32px) !important;
+    font-size: var(--hp-glass-title-size, 22px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
     line-height: 1.28 !important;
