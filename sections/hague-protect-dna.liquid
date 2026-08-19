@@ -133,6 +133,7 @@
   .hp-dna-{{ section.id }} .hp-dna__item:nth-child(4) .hp-dna__svg-accent { animation-delay: 1.8s; }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-badge img,
+  .hp-dna-{{ section.id }} .hp-dna__icon-badge video,
   .hp-dna-{{ section.id }} .hp-dna__icon-custom {
     width: 100%;
     height: 100%;
@@ -472,16 +473,18 @@
                 aria-hidden="true"
               >
                 <span class="hp-dna__icon-float">
-                  {%- if block.settings.icon != blank -%}
+                  {%- if block.settings.custom_video != blank -%}
+                    {{ block.settings.custom_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hp-dna__icon-custom hp-dna__icon-custom--video' }}
+                  {%- elsif block.settings.icon != blank -%}
                     {%- liquid
                       assign custom_icon = block.settings.icon
-                      assign icon_src = custom_icon.src | default: ''
-                      assign icon_is_gif = false
-                      if icon_src contains '.gif'
-                        assign icon_is_gif = true
+                      assign icon_src = custom_icon.src | default: '' | downcase
+                      assign is_raw_format = false
+                      if icon_src contains '.gif' or icon_src contains '.webp'
+                        assign is_raw_format = true
                       endif
                     -%}
-                    {%- if icon_is_gif -%}
+                    {%- if is_raw_format -%}
                       <img
                         src="{{ custom_icon | image_url }}"
                         class="hp-dna__icon-custom hp-dna__icon-custom--gif"
@@ -1463,8 +1466,14 @@
         {
           "type": "image_picker",
           "id": "icon",
-          "label": "Custom animated icon (GIF)",
-          "info": "Upload an animated GIF or static PNG/JPG. GIFs play in full animation. Overrides the default icon when uploaded."
+          "label": "Custom icon (Image)",
+          "info": "Upload an animated GIF, WEBP, or static PNG/JPG."
+        },
+        {
+          "type": "video",
+          "id": "custom_video",
+          "label": "Custom icon (Video)",
+          "info": "Overrides the image icon if provided. MP4 or WebM. Plays on loop."
         },
         {
           "type": "text",
