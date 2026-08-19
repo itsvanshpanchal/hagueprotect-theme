@@ -156,10 +156,21 @@
 
   .hp-dna-{{ section.id }} .hp-dna__icon-custom--gif {
     pointer-events: none;
-    /* Ensure GIFs render at native pixel boundaries for sharpness */
-    will-change: contents;
-    transform: translateZ(0) scale(1.0);
-    filter: contrast(1.1) saturate(1.15) brightness(1.05);
+    /* Display GIF at its native pixel dimensions — no upscaling */
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: none !important;
+    /* Center it inside the badge */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0);
+    /* Crisp pixel rendering - never blur */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    filter: contrast(1.12) saturate(1.18) brightness(1.06);
   }
 
   {%- if section.settings.enable_hover -%}
@@ -497,7 +508,8 @@
                       <img
                         src="{{ custom_icon | image_url }}"
                         class="hp-dna__icon-custom hp-dna__icon-custom--gif"
-                        loading="lazy"
+                        loading="eager"
+                        decoding="async"
                         alt=""
                         width="{{ custom_icon.width }}"
                         height="{{ custom_icon.height }}"
