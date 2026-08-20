@@ -47,11 +47,15 @@
     font-weight: var(--font-weight-h2, 300) !important;
     font-style: var(--font-style-h2, normal) !important;
     font-size: {{ hp_heading_desktop }}px !important;
-    letter-spacing: -0.02em !important;
     line-height: 1.05 !important;
-    color: #f3f2f2 !important;
+    color: #ffffff !important;
     text-transform: none !important;
     margin-bottom: {{ section.settings.heading_subheading_spacing_desktop | default: 22 }}px !important;
+  }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1,
+  #shopify-section-{{ section.id }} .hp-fam-sec__heading > .hp-heading-line--1 {
+    display: inline !important;
   }
 
   #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent,
@@ -75,7 +79,6 @@
     #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair,
     #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair--stack {
       display: inline !important;
-      flex-direction: row !important;
       white-space: nowrap !important;
     }
 
