@@ -133,7 +133,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, 75%);
+    transform: translate(-50%, 75%) rotate(var(--scroll-rotate, 0deg));
     width: 80vw;
     max-width: 800px;
     aspect-ratio: 1 / 1;
@@ -145,19 +145,21 @@
       radial-gradient(circle, rgba(0,0,0,0.25) 1px, transparent 1px) 3px 3px / 6px 6px,
       radial-gradient(circle at 50% 100%, #000000 0%, rgba(0,0,0,0.9) 35%, transparent 70%),
       radial-gradient(circle at 50% 15%, #ff6b52 0%, #cc4632 25%, #6b1f18 50%, #200a08 75%, #000000 100%);
+    will-change: transform;
   }
   
   .split-cta--redesign__sphere-img {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, 75%);
+    transform: translate(-50%, 75%) rotate(var(--scroll-rotate, 0deg));
     width: 80vw;
     max-width: 800px;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     z-index: 1;
     object-fit: cover;
+    will-change: transform;
   }
   
   /* Animation Classes */
@@ -265,6 +267,11 @@
     }, { threshold: 0.1 });
     
     observer.observe(section);
+
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY || window.pageYOffset;
+      section.style.setProperty('--scroll-rotate', (scrollY * 0.1) + 'deg');
+    }, { passive: true });
   });
 </script>
 
