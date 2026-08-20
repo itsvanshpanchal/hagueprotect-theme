@@ -147,12 +147,12 @@
     font-weight: var(--font-weight-sans, 400) !important;
     font-style: var(--font-style-sans, normal) !important;
     line-height: 1.15 !important;
-    color: #c8c8c8 !important;
-    -webkit-text-fill-color: #c8c8c8 !important;
+    color: {{ section.settings.paragraph_color }} !important;
+    -webkit-text-fill-color: {{ section.settings.paragraph_color }} !important;
   }
 
   .comm-badge-desc {
-    color: #c8c8c8 !important;
+    color: {{ section.settings.paragraph_color }} !important;
   }
 
   .comm-reviews-badge {
@@ -623,7 +623,7 @@
           </h2>
         </div>
         {%- if section.settings.description != blank -%}
-          <p class="comm-desc hp-body-para" style="color: #c8c8c8;">{{ section.settings.description }}</p>
+          <p class="comm-desc hp-body-para" style="color: {{ section.settings.paragraph_color }};">{{ section.settings.description }}</p>
         {%- endif -%}
       </div>
       <div class="comm-top-right">
@@ -891,6 +891,12 @@
       "label": "Text color",
       "default": "#111111",
       "info": "Headline and description color. Use white on a dark background."
+    },
+    {
+      "type": "color",
+      "id": "paragraph_color",
+      "label": "Paragraph color",
+      "default": "#c8c8c8"
     },
     {
       "type": "text",
