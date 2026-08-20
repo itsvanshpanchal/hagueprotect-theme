@@ -283,11 +283,11 @@
       overflow-x: auto;
       overflow-y: visible;
       scroll-snap-type: x mandatory;
-      scroll-padding-left: var(--homepage-section-gutter, 16px);
+      scroll-padding-left: calc(50vw - (min(78vw, 300px) / 2));
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-x: contain;
-      padding: 4px var(--homepage-section-gutter, 16px) 12px;
-      margin: 0;
+      padding: 4px calc(50vw - (min(78vw, 300px) / 2)) 12px;
+      margin-left: calc(-1 * var(--homepage-section-gutter, 16px));
       scrollbar-width: none;
       -ms-overflow-style: none;
       grid-template-columns: none;
@@ -302,7 +302,7 @@
       flex: 0 0 min(78vw, 300px);
       width: min(78vw, 300px);
       max-width: min(78vw, 300px);
-      scroll-snap-align: start;
+      scroll-snap-align: center;
       scroll-snap-stop: always;
       box-sizing: border-box;
       display: flex;
