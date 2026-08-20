@@ -43,10 +43,10 @@
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
   #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    font-size: 52px !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-weight: var(--font-weight-h2, 300) !important;
+    font-style: var(--font-style-h2, normal) !important;
+    font-size: {{ hp_heading_desktop }}px !important;
     letter-spacing: -0.02em !important;
     line-height: 1.05 !important;
     color: #f3f2f2 !important;
@@ -94,7 +94,7 @@
     #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
     #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
     #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line {
-      font-size: 34px !important;
+      font-size: {{ hp_heading_mobile }}px !important;
       margin-bottom: {{ section.settings.heading_subheading_spacing_mobile | default: 10 }}px !important;
     }
 
@@ -206,9 +206,9 @@
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line,
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-pair .hp-heading-line,
   #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-typewriter-text {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
+    font-family: var(--font-family-h2, var(--font-family-heading)) !important;
+    font-weight: var(--font-weight-h2, 300) !important;
+    font-style: var(--font-style-h2, normal) !important;
     font-size: inherit !important;
   }
 
