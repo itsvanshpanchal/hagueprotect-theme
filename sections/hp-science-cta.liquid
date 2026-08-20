@@ -126,6 +126,12 @@
     }
   }
   {% render 'hp-science-section-typography-styles', section: section %}
+
+  /* Force override body size and color for this specific section */
+  #shopify-section-{{ section.id }} {
+    --hp-sci-sec-body-size: 20px !important;
+    --hp-sci-sec-body-color: #c8c8c8 !important;
+  }
 {%- endstyle -%}
 
 <section class="hp-sci hp-sci-cta-{{ section.id }}">
