@@ -139,9 +139,11 @@
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     z-index: 1;
+    box-shadow: inset 0 -40px 100px rgba(0,0,0,1), inset 0 10px 40px rgba(255,255,255,0.3);
     background: 
-      repeating-radial-gradient(circle at 50% 15%, transparent 0, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px),
-      radial-gradient(circle at 50% 100%, #000000 0%, rgba(0,0,0,0.85) 30%, transparent 65%),
+      radial-gradient(circle, rgba(0,0,0,0.25) 1px, transparent 1px) 0 0 / 6px 6px,
+      radial-gradient(circle, rgba(0,0,0,0.25) 1px, transparent 1px) 3px 3px / 6px 6px,
+      radial-gradient(circle at 50% 100%, #000000 0%, rgba(0,0,0,0.9) 35%, transparent 70%),
       radial-gradient(circle at 50% 15%, #ff6b52 0%, #cc4632 25%, #6b1f18 50%, #200a08 75%, #000000 100%);
   }
   
