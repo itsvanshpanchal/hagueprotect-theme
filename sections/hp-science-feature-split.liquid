@@ -38,9 +38,6 @@
   }
 
   .hp-sci-feature-{{ section.id }}__eyebrow {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 21px !important;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color }};
     margin: 0 0 clamp(20px, 3vw, 28px);
@@ -48,7 +45,6 @@
 
   @media screen and (max-width: 989px) {
     .hp-sci-feature-{{ section.id }}__eyebrow {
-      font-size: 20px !important;
     }
   }
 
@@ -170,6 +166,12 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     margin: 0 !important;
+    --hp-sci-sec-eyebrow-size: 21px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} {
+      --hp-sci-sec-eyebrow-size: 20px !important;
+    }
   }
 {%- endstyle -%}
 
