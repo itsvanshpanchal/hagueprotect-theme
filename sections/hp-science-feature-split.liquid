@@ -38,9 +38,18 @@
   }
 
   .hp-sci-feature-{{ section.id }}__eyebrow {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
     text-transform: uppercase;
     color: {{ section.settings.eyebrow_color }};
     margin: 0 0 clamp(20px, 3vw, 28px);
+  }
+
+  @media screen and (max-width: 989px) {
+    .hp-sci-feature-{{ section.id }}__eyebrow {
+      font-size: 16px !important;
+    }
   }
 
   .hp-sci-feature-{{ section.id }}__title {
@@ -154,15 +163,7 @@
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 
-  /* Clean CSS variable override for eyebrow size */
-  #shopify-section-{{ section.id }} {
-    --hp-sci-sec-eyebrow-size: 21px !important;
-  }
-  @media screen and (max-width: 989px) {
-    #shopify-section-{{ section.id }} {
-      --hp-sci-sec-eyebrow-size: 20px !important;
-    }
-  }
+
 
   /* Preserve this section's own padding settings — prevent external override */
   #shopify-section-{{ section.id }} {
