@@ -1,68 +1,18 @@
 {%- liquid
-  assign cta_heading = section.settings.heading | default: 'Ready to play the long game?'
-  assign cta_text = section.settings.text | default: 'The protocol starts with one kit. Tell us your concern and we will point you to the right one.'
-  assign cta_label = section.settings.button_label | default: 'Find my kit'
-  assign cta_link = section.settings.button_link
-  if cta_link == blank
-    assign cta_link = routes.all_products_collection_url
-  endif
-
-  assign heading_family = section.settings.h2_font_family | default: 'inter_light'
-  assign text_family = section.settings.paragraph_font_family | default: 'inter'
-  assign button_family = section.settings.button_font_family | default: 'inter_semibold'
-
-  assign heading_weight = section.settings.h2_font_weight | default: '300'
-  assign text_weight = section.settings.paragraph_font_weight | default: '400'
-  assign button_weight = section.settings.button_font_weight | default: '600'
-
-  assign heading_style = section.settings.h2_font_style | default: 'normal'
-  assign text_style = section.settings.paragraph_font_style | default: 'normal'
-  assign button_style = section.settings.button_font_style | default: 'normal'
-
-  assign heading_size_desktop = section.settings.h2_font_size_desktop | default: 48
-  assign heading_size_mobile = section.settings.h2_font_size_mobile | default: 32
-  assign text_size_desktop = section.settings.paragraph_font_size_desktop | default: 16
-  assign text_size_mobile = section.settings.paragraph_font_size_mobile | default: 15
-  assign button_size = section.settings.button_font_size | default: 12
+  assign bg_color = section.settings.background_color | default: '#000000'
+  assign text_color = section.settings.text_color | default: '#FFFFFF'
+  
+  assign heading_family = section.settings.heading_font_family | default: 'inter'
+  assign text_family = section.settings.text_font_family | default: 'inter'
+  assign heading_size_desktop = section.settings.heading_size_desktop | default: 48
+  assign heading_size_mobile = section.settings.heading_size_mobile | default: 32
 -%}
-{%- capture heading_implied -%}{% render 'hp-font-weight', font_key: heading_family %}{%- endcapture -%}
-{%- capture text_implied -%}{% render 'hp-font-weight', font_key: text_family %}{%- endcapture -%}
-{%- capture button_implied -%}{% render 'hp-font-weight', font_key: button_family %}{%- endcapture -%}
-{%- capture heading_named -%}{% render 'hp-font-is-named-face', font_key: heading_family %}{%- endcapture -%}
-{%- capture text_named -%}{% render 'hp-font-is-named-face', font_key: text_family %}{%- endcapture -%}
-{%- capture button_named -%}{% render 'hp-font-is-named-face', font_key: button_family %}{%- endcapture -%}
-{%- liquid
-  assign heading_implied = heading_implied | strip
-  assign text_implied = text_implied | strip
-  assign button_implied = button_implied | strip
-  assign heading_named = heading_named | strip
-  assign text_named = text_named | strip
-  assign button_named = button_named | strip
 
-  comment
-    Honor Theme Editor Weight / Style. Do not overwrite with implied
-    font-key weights (inter_light used to force 300 and ignore settings).
-  endcomment
-  if heading_named != blank
-    assign heading_style = 'normal'
-  endif
-  if heading_family == 'inter_light'
-    assign heading_weight = '300'
-  endif
-  if text_named != blank
-    assign text_style = 'normal'
-  endif
-  if button_named != blank
-    assign button_style = 'normal'
-  endif
--%}
 {%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
 {%- capture text_stack -%}{% render 'hp-font-stack', font_key: text_family %}{%- endcapture -%}
-{%- capture button_stack -%}{% render 'hp-font-stack', font_key: button_family %}{%- endcapture -%}
 {%- liquid
   assign heading_stack = heading_stack | strip
   assign text_stack = text_stack | strip
-  assign button_stack = button_stack | strip
 -%}
 
 {%- style -%}
@@ -74,351 +24,161 @@
   }
 
   .split-cta-{{ section.id }} {
-    --split-cta-bg: {{ section.settings.background_color | default: '#FDFCF7' }};
-    --split-cta-heading: {{ section.settings.heading_color | default: '#111111' }};
-    --split-cta-text: {{ section.settings.text_color | default: '#707070' }};
-    --split-cta-btn-bg: {{ section.settings.button_background | default: '#111111' }};
-    --split-cta-btn-text: {{ section.settings.button_text_color | default: '#FFFFFF' }};
-    background: var(--split-cta-bg);
-    border-top: none;
-    border-bottom: none;
-    /* Match other homepage sections: same left edge gutter on laptop + monitors */
-    padding: {{ section.settings.padding_top | default: 56 }}px var(--homepage-section-gutter, 28px) {{ section.settings.padding_bottom | default: 56 }}px var(--homepage-section-gutter, 28px);
+    background-color: {{ bg_color }};
+    color: {{ text_color }};
     width: 100%;
-    max-width: none;
-    margin: 0;
-    box-sizing: border-box;
-    min-height: 0 !important;
-    height: auto !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    min-height: {{ section.settings.min_height }}vh;
   }
 
   .split-cta-{{ section.id }}__inner {
-    max-width: var(--site-max-width, 1440px);
+    max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    padding: 0 24px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: clamp(24px, 4vw, 72px);
+    z-index: 2;
   }
 
-  .split-cta-{{ section.id }}__copy {
-    flex: 0 1 auto;
-    min-width: 0;
-    max-width: min(680px, 52vw);
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    transform: none !important;
+  .split-cta-{{ section.id }}__logo {
+    margin-bottom: 40px;
+  }
+
+  .split-cta-{{ section.id }}__logo img {
+    max-width: {{ section.settings.logo_max_width }}px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   .split-cta-{{ section.id }}__heading {
-    margin: 0 0 16px;
-    color: var(--split-cta-heading);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-family: {{ heading_stack }} !important;
     font-size: {{ heading_size_desktop }}px !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.03em !important;
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    color: {{ text_color }};
+    margin: 0 0 24px 0;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   .split-cta-{{ section.id }}__text {
-    margin: 0;
-    color: var(--split-cta-text);
     font-family: {{ text_stack }} !important;
-    font-size: {{ text_size_desktop }}px !important;
-    font-weight: {{ text_weight }} !important;
-    font-style: {{ text_style }} !important;
-    line-height: 1.55;
-    max-width: 520px;
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    font-size: 18px;
+    color: {{ text_color }};
+    opacity: 0.9;
+    margin: 0 0 24px 0;
+    line-height: 1.6;
   }
 
-  .split-cta-{{ section.id }}__actions {
-    flex: 0 0 auto;
-    align-self: center;
-    margin-left: auto;
-    margin-right: 0;
+  .split-cta-{{ section.id }}__hashtag {
+    font-family: {{ text_stack }} !important;
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    color: {{ text_color }};
+    margin: 0;
   }
-
-  .split-cta-{{ section.id }}__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 18px 32px;
-    background: var(--split-cta-btn-bg);
-    color: var(--split-cta-btn-text) !important;
-    text-decoration: none !important;
-    border: none;
-    border-radius: 0;
-    font-family: {{ button_stack }} !important;
-    font-size: {{ button_size }}px !important;
-    font-weight: {{ button_weight }} !important;
-    font-style: {{ button_style }} !important;
-    letter-spacing: 0.14em;
-    text-transform: none;
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
-  }
-
-  .split-cta-{{ section.id }}__button:hover {
-    background: {{ section.settings.button_hover_background | default: '#333333' }};
-    color: var(--split-cta-btn-text) !important;
-  }
-
+  
   .split-cta-{{ section.id }}__arrow {
-    display: inline-block;
-    font-size: 1.08em;
-    line-height: 1;
-    transition: transform 0.2s ease;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    z-index: 2;
+  }
+  
+  .split-cta-{{ section.id }}__arrow svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: {{ text_color }};
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  .split-cta-{{ section.id }}__button:hover .split-cta-{{ section.id }}__arrow {
-    transform: translateX(4px);
+  .split-cta-{{ section.id }}__bottom-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: auto;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .split-cta-{{ section.id }}__bottom-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
   }
 
-  /* Laptop + monitors: text left, button right */
-  @media screen and (min-width: 750px) {
+  @media screen and (max-width: 768px) {
     .split-cta-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top | default: 56 }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom | default: 56 }}px !important;
-      padding-left: var(--homepage-section-gutter, 32px) !important;
-      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 32px)) !important;
-      min-height: 0 !important;
-      height: auto !important;
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
-
-    .split-cta-{{ section.id }}__inner {
-      max-width: var(--site-max-width, 1440px) !important;
-      width: 100% !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      gap: clamp(24px, 4vw, 80px) !important;
-    }
-
-    .split-cta-{{ section.id }}__copy {
-      text-align: left !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      transform: none !important;
-      flex: 0 1 auto !important;
-      max-width: min(680px, 52vw) !important;
-    }
-
-    .split-cta-{{ section.id }}__heading,
-    .split-cta-{{ section.id }}__text {
-      text-align: left !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-
+    
     .split-cta-{{ section.id }}__heading {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-      font-size: {{ heading_size_desktop }}px !important;
-      font-weight: 300 !important;
-      font-style: normal !important;
-      font-synthesis: none !important;
-      -webkit-font-smoothing: antialiased !important;
-      -moz-osx-font-smoothing: grayscale !important;
-      line-height: 1.1 !important;
-      letter-spacing: -0.03em !important;
-    }
-
-    .split-cta-{{ section.id }}__actions {
-      flex: 0 0 auto !important;
-      margin-left: auto !important;
-      margin-right: 0 !important;
-      align-self: center !important;
-    }
-  }
-
-  @media screen and (min-width: 1200px) {
-    .split-cta-{{ section.id }}__copy {
-      max-width: 640px;
-    }
-
-    .split-cta-{{ section.id }}__text {
-      max-width: 520px;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }},
-    body .split-cta-{{ section.id }},
-    body #MainContent .split-cta-{{ section.id }},
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile | default: 32 }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom_mobile | default: 32 }}px !important;
-      padding-left: var(--homepage-section-gutter, 28px) !important;
-      padding-right: var(--homepage-section-gutter-right, var(--homepage-section-gutter, 28px)) !important;
-      border-top: none !important;
-      border-bottom: none !important;
-      min-height: 0 !important;
-      height: auto !important;
-      max-height: none !important;
-      display: block !important;
-      background: var(--split-cta-bg) !important;
-    }
-
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__inner,
-    body .split-cta-{{ section.id }}__inner,
-    body #MainContent .split-cta-{{ section.id }}__inner,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__inner {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: stretch !important;
-      justify-content: flex-start !important;
-      gap: 24px !important;
-      row-gap: 24px !important;
-      max-width: 100% !important;
-      height: auto !important;
-      min-height: 0 !important;
-    }
-
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__copy,
-    body .split-cta-{{ section.id }}__copy,
-    body #MainContent .split-cta-{{ section.id }}__copy,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__copy {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: var(--section-subheading-spacing-top, 10px) !important;
-      row-gap: var(--section-subheading-spacing-top, 10px) !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      height: auto !important;
-      min-height: 0 !important;
-      flex: 0 0 auto !important;
-    }
-
-    #shopify-section-{{ section.id }} h2.split-cta-{{ section.id }}__heading,
-    body.template-index #MainContent .split-cta-{{ section.id }}__heading,
-    body .split-cta-{{ section.id }}__heading,
-    body #MainContent .split-cta-{{ section.id }}__heading,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__heading {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
       font-size: {{ heading_size_mobile }}px !important;
-      font-weight: 300 !important;
-      font-style: normal !important;
-      line-height: 1.1 !important;
-      letter-spacing: -0.03em !important;
-      color: var(--split-cta-heading) !important;
-      margin: 0 !important;
-      text-align: left !important;
-      font-synthesis: none !important;
-      -webkit-font-smoothing: antialiased !important;
-      -moz-osx-font-smoothing: grayscale !important;
     }
-
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__text,
-    body.template-index #MainContent .split-cta-{{ section.id }}__text,
-    body .split-cta-{{ section.id }}__text,
-    body #MainContent .split-cta-{{ section.id }}__text,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__text,
-    body.template-index #MainContent .shopify-section[id] [class*="split-cta-"][class*="__text"] {
-      color: var(--split-cta-text) !important;
-      max-width: 100% !important;
-      margin: 0 !important;
-      text-align: left !important;
-    }
-
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__actions,
-    body .split-cta-{{ section.id }}__actions,
-    body #MainContent .split-cta-{{ section.id }}__actions,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__actions {
-      margin: 0 !important;
-      width: 100% !important;
-      height: auto !important;
-      min-height: 0 !important;
-      flex: 0 0 auto !important;
-      align-self: stretch !important;
-    }
-
-    #shopify-section-{{ section.id }} .split-cta-{{ section.id }}__button,
-    body.template-index #MainContent .split-cta-{{ section.id }}__button,
-    body .split-cta-{{ section.id }}__button,
-    body #MainContent .split-cta-{{ section.id }}__button,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__button {
-      width: 100% !important;
-      height: 52px !important;
-      min-height: 52px !important;
-      max-height: 52px !important;
-      padding: 0 20px !important;
-      display: flex !important;
-      flex-direction: row !important;
-      flex-wrap: nowrap !important;
-      align-items: center !important;
-      justify-content: center !important;
-      white-space: nowrap !important;
-      gap: 10px !important;
-      box-sizing: border-box !important;
-      background: var(--split-cta-btn-bg) !important;
-      color: var(--split-cta-btn-text) !important;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.14em !important;
-      text-transform: uppercase !important;
-      border-radius: 0 !important;
-      flex: 0 0 auto !important;
-      align-self: stretch !important;
-    }
-
-    body .split-cta-{{ section.id }}__arrow,
-    body #MainContent .split-cta-{{ section.id }}__arrow,
-    body.hp-float-mobile .hp-float-stack .split-cta-{{ section.id }}__arrow {
-      display: inline-block !important;
-      font-size: 1.05em !important;
-      line-height: 1 !important;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
+    
     .split-cta-{{ section.id }}__text {
-      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: 21px !important;
-      font-weight: 400 !important;
-      font-style: normal !important;
-      line-height: 1.38 !important;
-      letter-spacing: 0 !important;
+      font-size: 16px;
     }
-  }
-
-  @media screen and (min-width: 1200px) {
-    .split-cta-{{ section.id }}__text {
-      font-size: 22px !important;
-      line-height: 1.42 !important;
+    
+    .split-cta-{{ section.id }}__hashtag {
+      font-size: 18px;
+    }
+    
+    .split-cta-{{ section.id }}__logo img {
+      max-width: min({{ section.settings.logo_max_width }}px, 150px);
     }
   }
 {%- endstyle -%}
 
-<section class="split-cta-{{ section.id }}" aria-label="{{ cta_heading | escape }}" data-no-typewriter>
+<section class="split-cta-{{ section.id }}">
   <div class="split-cta-{{ section.id }}__inner">
-    <div class="split-cta-{{ section.id }}__copy">
-      <h2 class="split-cta-{{ section.id }}__heading">{{ cta_heading | escape | newline_to_br }}</h2>
-      <p class="split-cta-{{ section.id }}__text hp-body-para">{{ cta_text | escape }}</p>
-    </div>
+    {%- if section.settings.logo != blank -%}
+      <div class="split-cta-{{ section.id }}__logo">
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ section.settings.logo.alt | escape }}" loading="lazy" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
+      </div>
+    {%- endif -%}
 
-    <div class="split-cta-{{ section.id }}__actions">
-      <a href="{{ cta_link }}" class="split-cta-{{ section.id }}__button">
-        <span>{{ cta_label | escape }}</span>
-        <span class="split-cta-{{ section.id }}__arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
+    {%- if section.settings.heading != blank -%}
+      <h2 class="split-cta-{{ section.id }}__heading">{{ section.settings.heading | escape | newline_to_br }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div class="split-cta-{{ section.id }}__text">{{ section.settings.text | escape | newline_to_br }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.hashtag != blank -%}
+      <div class="split-cta-{{ section.id }}__hashtag">{{ section.settings.hashtag | escape }}</div>
+    {%- endif -%}
   </div>
+
+  {%- if section.settings.show_arrow -%}
+    <div class="split-cta-{{ section.id }}__arrow">
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.bottom_image != blank -%}
+    <div class="split-cta-{{ section.id }}__bottom-image">
+      <img src="{{ section.settings.bottom_image | image_url: width: 1200 }}" alt="{{ section.settings.bottom_image.alt | escape }}" loading="lazy" width="{{ section.settings.bottom_image.width }}" height="{{ section.settings.bottom_image.height }}">
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -428,197 +188,86 @@
   "class": "section-split-cta",
   "settings": [
     {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum Height (vh)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo Max Width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
       "type": "textarea",
       "id": "heading",
       "label": "Heading",
-      "default": "Ready to play the long game?"
+      "default": "The best part of your day is still waiting outside."
     },
     {
       "type": "textarea",
       "id": "text",
-      "label": "Supporting text",
-      "default": "The protocol starts with one kit. Tell us your concern and we will point you to the right one."
+      "label": "Text",
+      "default": "We believe play isn't behind us, it's still the best part of our day.\nLife never stops. Play shouldn't either."
     },
     {
       "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Find my kit"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "Text position (laptop)"
-    },
-    {
-      "type": "range",
-      "id": "text_offset_x_desktop",
-      "label": "Horizontal",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text left (-) or right (+)."
-    },
-    {
-      "type": "range",
-      "id": "text_offset_y_desktop",
-      "label": "Vertical",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text up (-) or down (+)."
-    },
-    {
-      "type": "select",
-      "id": "text_align_desktop",
-      "label": "Text alignment",
-      "options": [
-        { "value": "theme_default", "label": "Use theme default" },
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "theme_default",
-      "info": "Aligns titles, eyebrows, and descriptions on laptop/desktop."
-    },
-    {
-      "type": "header",
-      "content": "Text position (mobile)"
-    },
-    {
-      "type": "range",
-      "id": "text_offset_x_mobile",
-      "label": "Horizontal",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text left (-) or right (+)."
-    },
-    {
-      "type": "range",
-      "id": "text_offset_y_mobile",
-      "label": "Vertical",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text up (-) or down (+)."
-    },
-    {
-      "type": "select",
-      "id": "text_align_mobile",
-      "label": "Text alignment",
-      "options": [
-        { "value": "theme_default", "label": "Use theme default" },
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "theme_default",
-      "info": "Aligns titles, eyebrows, and descriptions on phones."
+      "id": "hashtag",
+      "label": "Hashtag",
+      "default": "#NeverStopPlaying"
     },
     {
       "type": "header",
       "content": "Typography"
     },
     {
-      "type": "paragraph",
-      "content": "Fonts for THIS section only. Brand fonts (Bahnschrift, Inter Light, etc.) are at the top of each list."
-    },
-    {
-      "type": "header",
-      "content": "1. Heading"
-    },
-    {
       "type": "select",
-      "id": "h2_font_family",
-      "label": "Font",
+      "id": "heading_font_family",
+      "label": "Heading Font",
       "options": [
-        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
-        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
-        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
-        { "value": "calisto_mt", "label": "Calisto MT Regular" },
-        { "value": "calisto_mt_bold", "label": "Calisto MT Bold" },
-        { "value": "calisto_mt_italic", "label": "Calisto MT Italic" },
-        { "value": "calisto_mt_bold_italic", "label": "Calisto MT Bold Italic" },
-        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
-        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
-        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
-        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro Book" },
-        { "value": "darker_grotesque_light", "label": "Darker Grotesque Light" },
-        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
-        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
-        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
-        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
-        { "value": "darker_grotesque_extrabold", "label": "Darker Grotesque Extra Bold" },
-        { "value": "darker_grotesque_black", "label": "Darker Grotesque Black" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald Regular" },
-        { "value": "oswald_light", "label": "Oswald Light" },
-        { "value": "oswald_medium", "label": "Oswald Medium" },
-        { "value": "oswald_semibold", "label": "Oswald Semibold" },
-        { "value": "oswald_bold", "label": "Oswald Bold" },
-        { "value": "inter", "label": "Inter Regular" },
-        { "value": "inter_light", "label": "Inter Light" },
-        { "value": "inter_medium", "label": "Inter Medium" },
-        { "value": "inter_semibold", "label": "Inter Semibold" },
-        { "value": "inter_bold", "label": "Inter Bold" },
-        { "value": "inter_extrabold", "label": "Inter Extra Bold" },
-        { "value": "inter_black", "label": "Inter Black" },
-        { "value": "montserrat", "label": "Montserrat Regular" },
-        { "value": "montserrat_light", "label": "Montserrat Light" },
-        { "value": "montserrat_medium", "label": "Montserrat Medium" },
-        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
-        { "value": "montserrat_bold", "label": "Montserrat Bold" }
+        { "value": "inter", "label": "Inter" },
+        { "value": "bahnschrift", "label": "Bahnschrift" }
       ],
-      "default": "inter_light"
-    },
-    {
-      "type": "select",
-      "id": "h2_font_weight",
-      "label": "Weight",
-      "info": "Ignored when the font already includes a weight (e.g. Inter Light).",
-      "options": [
-        { "value": "300", "label": "Light (300)" },
-        { "value": "400", "label": "Regular (400)" },
-        { "value": "500", "label": "Medium (500)" },
-        { "value": "600", "label": "Semibold (600)" },
-        { "value": "700", "label": "Bold (700)" },
-        { "value": "800", "label": "Extra Bold (800)" }
-      ],
-      "default": "300"
-    },
-    {
-      "type": "select",
-      "id": "h2_font_style",
-      "label": "Style",
-      "options": [
-        { "value": "normal", "label": "Normal" },
-        { "value": "italic", "label": "Italic" }
-      ],
-      "default": "normal"
+      "default": "inter"
     },
     {
       "type": "range",
-      "id": "h2_font_size_desktop",
-      "label": "Size on computer",
-      "min": 20,
+      "id": "heading_size_desktop",
+      "label": "Heading Size (Desktop)",
+      "min": 24,
       "max": 72,
       "step": 2,
       "unit": "px",
@@ -626,8 +275,8 @@
     },
     {
       "type": "range",
-      "id": "h2_font_size_mobile",
-      "label": "Size on phone",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
       "min": 18,
       "max": 48,
       "step": 2,
@@ -635,207 +284,29 @@
       "default": 32
     },
     {
-      "type": "header",
-      "content": "2. Supporting text"
-    },
-    {
       "type": "select",
-      "id": "paragraph_font_family",
-      "label": "Font",
+      "id": "text_font_family",
+      "label": "Text Font",
       "options": [
-        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
-        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
-        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
-        { "value": "calisto_mt", "label": "Calisto MT Regular" },
-        { "value": "calisto_mt_bold", "label": "Calisto MT Bold" },
-        { "value": "calisto_mt_italic", "label": "Calisto MT Italic" },
-        { "value": "calisto_mt_bold_italic", "label": "Calisto MT Bold Italic" },
-        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
-        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
-        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
-        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
-        { "value": "jacques_gilles", "label": "Jacques Gilles" },
-        { "value": "luthon_southard_script", "label": "Luthon Southard Script" },
-        { "value": "luthon_southard_serif", "label": "Luthon Southard Serif" },
-        { "value": "freight_text_pro", "label": "FreightText Pro Book" },
-        { "value": "darker_grotesque_light", "label": "Darker Grotesque Light" },
-        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
-        { "value": "darker_grotesque_medium", "label": "Darker Grotesque Medium" },
-        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
-        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
-        { "value": "darker_grotesque_extrabold", "label": "Darker Grotesque Extra Bold" },
-        { "value": "darker_grotesque_black", "label": "Darker Grotesque Black" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "anton", "label": "Anton" },
-        { "value": "oswald", "label": "Oswald Regular" },
-        { "value": "oswald_light", "label": "Oswald Light" },
-        { "value": "oswald_medium", "label": "Oswald Medium" },
-        { "value": "oswald_semibold", "label": "Oswald Semibold" },
-        { "value": "oswald_bold", "label": "Oswald Bold" },
-        { "value": "inter", "label": "Inter Regular" },
-        { "value": "inter_light", "label": "Inter Light" },
-        { "value": "inter_medium", "label": "Inter Medium" },
-        { "value": "inter_semibold", "label": "Inter Semibold" },
-        { "value": "inter_bold", "label": "Inter Bold" },
-        { "value": "inter_extrabold", "label": "Inter Extra Bold" },
-        { "value": "inter_black", "label": "Inter Black" },
-        { "value": "montserrat", "label": "Montserrat Regular" },
-        { "value": "montserrat_light", "label": "Montserrat Light" },
-        { "value": "montserrat_medium", "label": "Montserrat Medium" },
-        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
-        { "value": "montserrat_bold", "label": "Montserrat Bold" }
+        { "value": "inter", "label": "Inter" },
+        { "value": "bahnschrift", "label": "Bahnschrift" }
       ],
       "default": "inter"
     },
     {
-      "type": "select",
-      "id": "paragraph_font_weight",
-      "label": "Weight",
-      "options": [
-        { "value": "300", "label": "Light (300)" },
-        { "value": "400", "label": "Regular (400)" },
-        { "value": "500", "label": "Medium (500)" },
-        { "value": "600", "label": "Semibold (600)" },
-        { "value": "700", "label": "Bold (700)" }
-      ],
-      "default": "400"
-    },
-    {
-      "type": "select",
-      "id": "paragraph_font_style",
-      "label": "Style",
-      "options": [
-        { "value": "normal", "label": "Normal" },
-        { "value": "italic", "label": "Italic" }
-      ],
-      "default": "normal"
-    },
-    {
-      "type": "range",
-      "id": "paragraph_font_size_desktop",
-      "label": "Size on computer",
-      "min": 12,
-      "max": 28,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "paragraph_font_size_mobile",
-      "label": "Size on phone",
-      "min": 12,
-      "max": 22,
-      "step": 1,
-      "unit": "px",
-      "default": 15
-    },
-    {
       "type": "header",
-      "content": "3. Button"
+      "content": "Bottom Elements"
     },
     {
-      "type": "select",
-      "id": "button_font_family",
-      "label": "Font",
-      "options": [
-        { "value": "bahnschrift", "label": "Bahnschrift Regular" },
-        { "value": "bahnschrift_semibold", "label": "Bahnschrift Semibold" },
-        { "value": "bahnschrift_bold", "label": "Bahnschrift Bold" },
-        { "value": "inter_18pt", "label": "Inter 18pt Regular" },
-        { "value": "inter_18pt_medium", "label": "Inter 18pt Medium" },
-        { "value": "inter_18pt_semibold", "label": "Inter 18pt Semibold" },
-        { "value": "inter_18pt_bold", "label": "Inter 18pt Bold" },
-        { "value": "darker_grotesque", "label": "Darker Grotesque Regular" },
-        { "value": "darker_grotesque_semibold", "label": "Darker Grotesque Semibold" },
-        { "value": "darker_grotesque_bold", "label": "Darker Grotesque Bold" },
-        { "value": "bebas_neue", "label": "Bebas Neue" },
-        { "value": "oswald", "label": "Oswald Regular" },
-        { "value": "oswald_semibold", "label": "Oswald Semibold" },
-        { "value": "oswald_bold", "label": "Oswald Bold" },
-        { "value": "inter", "label": "Inter Regular" },
-        { "value": "inter_light", "label": "Inter Light" },
-        { "value": "inter_medium", "label": "Inter Medium" },
-        { "value": "inter_semibold", "label": "Inter Semibold" },
-        { "value": "inter_bold", "label": "Inter Bold" },
-        { "value": "montserrat", "label": "Montserrat Regular" },
-        { "value": "montserrat_semibold", "label": "Montserrat Semibold" },
-        { "value": "montserrat_bold", "label": "Montserrat Bold" }
-      ],
-      "default": "inter_semibold"
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show Down Arrow",
+      "default": true
     },
     {
-      "type": "select",
-      "id": "button_font_weight",
-      "label": "Weight",
-      "options": [
-        { "value": "400", "label": "Regular (400)" },
-        { "value": "500", "label": "Medium (500)" },
-        { "value": "600", "label": "Semibold (600)" },
-        { "value": "700", "label": "Bold (700)" },
-        { "value": "800", "label": "Extra Bold (800)" }
-      ],
-      "default": "600"
-    },
-    {
-      "type": "select",
-      "id": "button_font_style",
-      "label": "Style",
-      "options": [
-        { "value": "normal", "label": "Normal" },
-        { "value": "italic", "label": "Italic" }
-      ],
-      "default": "normal"
-    },
-    {
-      "type": "range",
-      "id": "button_font_size",
-      "label": "Size",
-      "min": 10,
-      "max": 18,
-      "step": 1,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background",
-      "default": "#FDFCF7"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading",
-      "default": "#111111"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Body text",
-      "default": "#707070"
-    },
-    {
-      "type": "color",
-      "id": "button_background",
-      "label": "Button background",
-      "default": "#111111"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_background",
-      "label": "Button hover background",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button text",
-      "default": "#FFFFFF"
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom Image"
     },
     {
       "type": "header",
@@ -844,73 +315,48 @@
     {
       "type": "range",
       "id": "padding_top",
-      "label": "Padding top",
-      "min": 40,
-      "max": 160,
-      "step": 4,
+      "label": "Padding Top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
       "unit": "px",
-      "default": 88
+      "default": 80
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 40,
-      "max": 160,
-      "step": 4,
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
       "unit": "px",
-      "default": 88
+      "default": 0
     },
     {
       "type": "range",
       "id": "padding_top_mobile",
-      "label": "Padding top (mobile)",
-      "min": 16,
-      "max": 96,
-      "step": 4,
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
       "unit": "px",
-      "default": 36
+      "default": 40
     },
     {
       "type": "range",
       "id": "padding_bottom_mobile",
-      "label": "Padding bottom (mobile)",
-      "min": 16,
-      "max": 96,
-      "step": 4,
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
       "unit": "px",
-      "default": 36
+      "default": 0
     }
   ],
   "presets": [
     {
       "name": "Split CTA",
-      "settings": {
-        "heading": "Ready to play the long game?",
-        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
-        "button_label": "Find my kit",
-        "h2_font_family": "inter_light",
-        "h2_font_weight": "300",
-        "h2_font_size_desktop": 48,
-        "h2_font_size_mobile": 32,
-        "paragraph_font_family": "inter",
-        "paragraph_font_weight": "400",
-        "paragraph_font_size_desktop": 16,
-        "paragraph_font_size_mobile": 15,
-        "button_font_family": "inter_semibold",
-        "button_font_weight": "600",
-        "button_font_size": 12,
-        "background_color": "#FDFCF7",
-        "heading_color": "#111111",
-        "text_color": "#707070",
-        "button_background": "#111111",
-        "button_hover_background": "#333333",
-        "button_text_color": "#FFFFFF",
-        "padding_top": 88,
-        "padding_bottom": 88,
-        "padding_top_mobile": 36,
-        "padding_bottom_mobile": 36
-      }
+      "settings": {}
     }
   ]
 }
