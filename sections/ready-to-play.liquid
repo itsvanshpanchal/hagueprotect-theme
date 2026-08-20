@@ -1,0 +1,363 @@
+{%- liquid
+  assign bg_color = section.settings.background_color | default: '#000000'
+  assign text_color = section.settings.text_color | default: '#FFFFFF'
+  
+  assign heading_family = section.settings.heading_font_family | default: 'inter'
+  assign text_family = section.settings.text_font_family | default: 'inter'
+  assign heading_size_desktop = section.settings.heading_size_desktop | default: 48
+  assign heading_size_mobile = section.settings.heading_size_mobile | default: 32
+-%}
+
+{%- capture heading_stack -%}{% render 'hp-font-stack', font_key: heading_family %}{%- endcapture -%}
+{%- capture text_stack -%}{% render 'hp-font-stack', font_key: text_family %}{%- endcapture -%}
+{%- liquid
+  assign heading_stack = heading_stack | strip
+  assign text_stack = text_stack | strip
+-%}
+
+{%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .ready-to-play-{{ section.id }} {
+    background-color: {{ bg_color }};
+    color: {{ text_color }};
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    min-height: {{ section.settings.min_height }}vh;
+  }
+
+  .ready-to-play-{{ section.id }}__inner {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .ready-to-play-{{ section.id }}__logo {
+    margin-bottom: 40px;
+  }
+
+  .ready-to-play-{{ section.id }}__logo img {
+    max-width: {{ section.settings.logo_max_width }}px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .ready-to-play-{{ section.id }}__heading {
+    font-family: {{ heading_stack }} !important;
+    font-size: {{ heading_size_desktop }}px !important;
+    color: {{ text_color }};
+    margin: 0 0 24px 0;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .ready-to-play-{{ section.id }}__text {
+    font-family: {{ text_stack }} !important;
+    font-size: 18px;
+    color: {{ text_color }};
+    opacity: 0.9;
+    margin: 0 0 24px 0;
+    line-height: 1.6;
+  }
+
+  .ready-to-play-{{ section.id }}__hashtag {
+    font-family: {{ text_stack }} !important;
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    color: {{ text_color }};
+    margin: 0;
+  }
+  
+  .ready-to-play-{{ section.id }}__arrow {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    z-index: 2;
+  }
+  
+  .ready-to-play-{{ section.id }}__arrow svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: {{ text_color }};
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ready-to-play-{{ section.id }}__bottom-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: auto;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ready-to-play-{{ section.id }}__bottom-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ready-to-play-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    
+    .ready-to-play-{{ section.id }}__heading {
+      font-size: {{ heading_size_mobile }}px !important;
+    }
+    
+    .ready-to-play-{{ section.id }}__text {
+      font-size: 16px;
+    }
+    
+    .ready-to-play-{{ section.id }}__hashtag {
+      font-size: 18px;
+    }
+    
+    .ready-to-play-{{ section.id }}__logo img {
+      max-width: min({{ section.settings.logo_max_width }}px, 150px);
+    }
+  }
+{%- endstyle -%}
+
+<section class="ready-to-play-{{ section.id }}">
+  <div class="ready-to-play-{{ section.id }}__inner">
+    {%- if section.settings.logo != blank -%}
+      <div class="ready-to-play-{{ section.id }}__logo">
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ section.settings.logo.alt | escape }}" loading="lazy" width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}">
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ready-to-play-{{ section.id }}__heading">{{ section.settings.heading | escape | newline_to_br }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div class="ready-to-play-{{ section.id }}__text">{{ section.settings.text | escape | newline_to_br }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.hashtag != blank -%}
+      <div class="ready-to-play-{{ section.id }}__hashtag">{{ section.settings.hashtag | escape }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_arrow -%}
+    <div class="ready-to-play-{{ section.id }}__arrow">
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.bottom_image != blank -%}
+    <div class="ready-to-play-{{ section.id }}__bottom-image">
+      <img src="{{ section.settings.bottom_image | image_url: width: 1200 }}" alt="{{ section.settings.bottom_image.alt | escape }}" loading="lazy" width="{{ section.settings.bottom_image.width }}" height="{{ section.settings.bottom_image.height }}">
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Ready to Play",
+  "tag": "section",
+  "class": "section-ready-to-play",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum Height (vh)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo Max Width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The best part of your day is still waiting outside."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "We believe play isn't behind us, it's still the best part of our day.\nLife never stops. Play shouldn't either."
+    },
+    {
+      "type": "text",
+      "id": "hashtag",
+      "label": "Hashtag",
+      "default": "#NeverStopPlaying"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading Font",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "bahnschrift", "label": "Bahnschrift" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading Size (Desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Text Font",
+      "options": [
+        { "value": "inter", "label": "Inter" },
+        { "value": "bahnschrift", "label": "Bahnschrift" }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Elements"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show Down Arrow",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom Image"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ready to Play",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
