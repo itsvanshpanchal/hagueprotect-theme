@@ -25,6 +25,30 @@
   box-sizing: border-box;
 }
 
+/* Global Paragraph Typography for PDP */
+.template-product p,
+.template-product .d2c-subtitle-text,
+.template-product .d2c-pdp-badge-text,
+.template-product .d2c-trust-text,
+.template-product .d2c-accordion-content-inner p,
+.template-product .d2c-product-info p {
+  font-family: {% render 'hp-font-stack', font_key: 'darker_grotesque' %} !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 21px !important;
+  line-height: 1.4 !important;
+}
+@media screen and (max-width: 991px) {
+  .template-product p,
+  .template-product .d2c-subtitle-text,
+  .template-product .d2c-pdp-badge-text,
+  .template-product .d2c-trust-text,
+  .template-product .d2c-accordion-content-inner p,
+  .template-product .d2c-product-info p {
+    font-size: 20px !important;
+  }
+}
+
 .d2c-pdp-grid {
   display: grid;
   grid-template-columns: calc(60% - 16px) calc(40% - 16px);
