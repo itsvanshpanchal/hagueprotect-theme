@@ -20,14 +20,20 @@
   .split-cta--redesign {
     background-color: #000000;
     width: 100%;
-    min-height: 150vh;
+    height: 250vh;
     position: relative;
+  }
+
+  .split-cta--redesign__sticky-wrap {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
-    padding-bottom: 450px;
     box-sizing: border-box;
   }
 
@@ -217,6 +223,7 @@
 {%- endstyle -%}
 
 <section class="split-cta--redesign" id="split-cta-{{ section.id }}">
+  <div class="split-cta--redesign__sticky-wrap">
   <div class="split-cta--redesign__content">
     {%- if section.settings.logo_image != blank -%}
       <div class="split-cta--redesign__logo">
@@ -250,6 +257,7 @@
   {%- else -%}
     <div class="split-cta--redesign__sphere"></div>
   {%- endif -%}
+  </div>
 </section>
 
 <script>
@@ -269,8 +277,19 @@
     observer.observe(section);
 
     window.addEventListener('scroll', function() {
-      var scrollY = window.scrollY || window.pageYOffset;
-      section.style.setProperty('--scroll-rotate', (scrollY * 0.1) + 'deg');
+      var rect = section.getBoundingClientRect();
+      var scrollDistance = window.innerHeight * 1.5;
+      var progress = 0;
+      
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+        progress = Math.abs(rect.top) / scrollDistance;
+      } else if (rect.top > 0) {
+        progress = 0;
+      } else if (rect.bottom < window.innerHeight) {
+        progress = 1;
+      }
+      
+      section.style.setProperty('--scroll-rotate', (progress * 360) + 'deg');
     }, { passive: true });
   });
 </script>
