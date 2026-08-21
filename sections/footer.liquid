@@ -466,15 +466,9 @@
   .footer-earth-block {
     background-color: transparent;
     text-align: center;
-    padding: 0 20px 40px;
+    padding: 80px 20px 40px;
     width: 100%;
-    margin-top: -100px;
     position: relative;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .footer-earth-block * {
-    pointer-events: auto;
   }
   .footer-earth-block__top-heading {
     color: #ffffff;
@@ -482,14 +476,9 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 14px;
-    margin-bottom: 0;
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: -80px;
+    position: relative;
     z-index: 10;
-    width: 100%;
-    text-align: center;
   }
   .footer-earth-block__image {
     max-width: 900px;
@@ -511,7 +500,8 @@
     margin-top: 12px;
   }
   @media (max-width: 749px) {
-    .footer-earth-block { padding: 0 20px 30px; margin-top: -40px; }
+    .footer-earth-block { padding: 50px 20px 30px; }
+    .footer-earth-block__top-heading { margin-bottom: -40px; }
     .footer-earth-block__image { max-width: 90%; }
     .footer-earth-block__bottom-heading { font-size: 18px; }
   }
@@ -519,10 +509,6 @@
 {%- endstyle -%}
 
 <footer class="footer-wrapper" role="contentinfo">
-
-  {%- if section.settings.earth_top_heading != blank -%}
-    <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
-  {%- endif -%}
 
   <div class="container">
     <div class="footer-grid">
@@ -694,6 +680,9 @@
     </div>
 
     <div class="footer-earth-block">
+      {%- if section.settings.earth_top_heading != blank -%}
+        <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
+      {%- endif -%}
 
       {%- if section.settings.earth_video != blank -%}
         {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'footer-earth-block__image' }}
