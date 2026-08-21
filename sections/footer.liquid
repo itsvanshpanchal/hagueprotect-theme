@@ -464,10 +464,17 @@
   }
   /* ── Earth Block ────────────────────────────────── */
   .footer-earth-block {
-    background-color: #000000;
+    background-color: transparent;
     text-align: center;
     padding: 0 20px 40px;
     width: 100%;
+    margin-top: -100px;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .footer-earth-block * {
+    pointer-events: auto;
   }
   .footer-earth-block__top-heading {
     color: #ffffff;
@@ -497,7 +504,7 @@
     margin-top: 12px;
   }
   @media (max-width: 749px) {
-    .footer-earth-block { padding: 0 20px 30px; }
+    .footer-earth-block { padding: 0 20px 30px; margin-top: -40px; }
     .footer-earth-block__image { max-width: 90%; }
     .footer-earth-block__bottom-heading { font-size: 18px; }
   }
