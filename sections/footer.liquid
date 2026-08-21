@@ -170,22 +170,6 @@
   }
 
 
-  @keyframes rotate-octagon {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  .footer__bg-octagon {
-    position: absolute;
-    top: 50%;
-    left: 65px;
-    width: 320px;
-    height: 320px;
-    z-index: 0;
-    pointer-events: none;
-    animation: rotate-octagon 40s linear infinite;
-    filter: drop-shadow(0px 8px 16px rgba(255, 255, 255, 0.15)) drop-shadow(0px 2px 4px rgba(255, 255, 255, 0.3));
-  }
 
   .footer__newsletter-diamond {
     width: 100%;
@@ -410,10 +394,6 @@
       text-align: left;
     }
 
-    .footer__bg-octagon {
-      left: 50%;
-      top: 50%;
-    }
   }
 
   @media screen and (max-width: 480px) {
@@ -562,9 +542,6 @@
       </div>
 
       <div class="footer-col-menu" style="position: relative;">
-        <svg class="footer__bg-octagon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="30,0 70,0 100,30 100,70 70,100 30,100 0,70 0,30" fill="rgba(255, 255, 255, 0.02)" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round" />
-        </svg>
         <div style="position: relative; z-index: 1;">
           <h3 class="footer__title">{{ section.settings.menu_title_2 | default: 'Customer Care' }}</h3>
           <nav class="footer__menu">
