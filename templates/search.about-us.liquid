@@ -1,646 +1,870 @@
 <!-- ═══════════════════════════════════════════════════════════════
-     HAGUE PROTECT — ABOUT US  ·  Cinematic Scroll Experience
+     HAGUE PROTECT — ABOUT US  ·  Cinematic Scroll Experience v2
      Libraries: GSAP + ScrollTrigger (CDN), Lenis Smooth Scroll
      All scripts load ONLY on this page (not globally).
      ═══════════════════════════════════════════════════════════════ -->
 
-<!-- ─── STYLES ────────────────────────────────────────────────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 /* ═══════════════════════════════════════
-   0. RESET & BASE
+   0. RESET & TOKENS
    ═══════════════════════════════════════ */
-.hp-about { --accent: #FF2B2B; --bg-dark: #0a0a0a; --bg-darker: #060606; --text-primary: #ffffff; --text-muted: rgba(255,255,255,0.45); --text-dim: rgba(255,255,255,0.12); --font-heading: var(--font-family-heading, 'Inter', sans-serif); --font-sans: var(--font-family-sans, 'Inter', sans-serif); --font-eyebrow: var(--font-family-eyebrow, var(--font-family-sans, 'Inter', sans-serif)); margin: 0; padding: 0; background: var(--bg-dark); color: var(--text-primary); overflow-x: hidden; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.hp-about {
+  --accent: #FF2B2B;
+  --accent-glow: rgba(255,43,43,0.15);
+  --accent-soft: rgba(255,43,43,0.08);
+  --bg-black: #050505;
+  --bg-charcoal: #0c0c0c;
+  --bg-elevated: #111111;
+  --bg-card: rgba(255,255,255,0.03);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-accent: rgba(255,43,43,0.25);
+  --white: #ffffff;
+  --white-95: rgba(255,255,255,0.95);
+  --white-80: rgba(255,255,255,0.80);
+  --white-60: rgba(255,255,255,0.60);
+  --white-40: rgba(255,255,255,0.40);
+  --white-20: rgba(255,255,255,0.20);
+  --white-08: rgba(255,255,255,0.08);
+  --font-display: 'Outfit', var(--font-family-heading, 'Inter', sans-serif);
+  --font-body: var(--font-family-sans, 'Inter', sans-serif);
+  --font-label: var(--font-family-eyebrow, var(--font-family-sans, 'Inter', sans-serif));
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  margin: 0; padding: 0;
+  background: var(--bg-black);
+  color: var(--white);
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
 .hp-about *, .hp-about *::before, .hp-about *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.hp-about em { font-style: italic; color: var(--accent); }
 
-/* Scroll progress bar */
-.hp-about__progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--accent); z-index: 9999; will-change: width; transition: none; }
+/* ── Scroll Progress ── */
+.hp-about__progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--accent), #ff6b6b); z-index: 9999; will-change: width; pointer-events: none; }
 
-/* Custom cursor — desktop only */
-.hp-about__cursor { display: none; }
-.hp-about__cursor-ring { display: none; }
+/* ── Custom Cursor (desktop only) ── */
+.hp-about__cursor, .hp-about__cursor-ring { display: none; }
 @media (pointer: fine) and (min-width: 1025px) {
-  .hp-about__cursor { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 99999; will-change: transform; mix-blend-mode: difference; display: block; }
-  .hp-about__cursor-ring { position: fixed; top: 0; left: 0; width: 40px; height: 40px; border: 1.5px solid rgba(255,43,43,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; will-change: transform; display: block; }
+  .hp-about__cursor { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--white); border-radius: 50%; pointer-events: none; z-index: 99999; mix-blend-mode: difference; display: block; }
+  .hp-about__cursor-ring { position: fixed; top: 0; left: 0; width: 44px; height: 44px; border: 1.5px solid var(--white-40); border-radius: 50%; pointer-events: none; z-index: 99998; display: block; }
 }
 
 /* ═══════════════════════════════════════
-   1. HERO SECTION (100vh)
+   1. HERO (100vh full-screen)
    ═══════════════════════════════════════ */
-.hp-about__hero { position: relative; width: 100%; height: 100vh; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--bg-darker); }
-.hp-about__hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,43,43,0.06) 0%, transparent 70%); z-index: 0; }
-.hp-about__hero-grain { position: absolute; inset: 0; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); z-index: 1; pointer-events: none; }
-.hp-about__hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 1100px; }
-.hp-about__hero-eyebrow { font-family: var(--font-eyebrow); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 32px; opacity: 0; transform: translateY(20px); }
-.hp-about__hero-headline { font-family: var(--font-heading); font-size: clamp(42px, 8vw, 120px); font-weight: 800; line-height: 0.95; letter-spacing: -0.04em; color: var(--text-primary); text-transform: uppercase; }
-.hp-about__hero-headline .word { display: inline-block; opacity: 0; transform: translateY(60px); filter: blur(8px); }
-.hp-about__hero-sub { font-size: clamp(15px, 1.8vw, 19px); color: var(--text-muted); max-width: 560px; margin: 36px auto 0; line-height: 1.6; font-weight: 400; opacity: 0; transform: translateY(30px); }
-.hp-about__scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.hp-about__scroll-indicator span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); font-weight: 600; }
-.hp-about__scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--accent), transparent); animation: hp-about-scroll-bounce 2s ease-in-out infinite; }
-@keyframes hp-about-scroll-bounce { 0%, 100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.4; transform: scaleY(0.5); } }
+.hp-about__hero {
+  position: relative; width: 100%; height: 100vh; min-height: 640px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; background: var(--bg-black);
+}
+.hp-about__hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 30%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(255,43,43,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(100,100,255,0.02) 0%, transparent 40%);
+}
+/* Animated grain overlay */
+.hp-about__hero-grain {
+  position: absolute; inset: -50%; width: 200%; height: 200%;
+  opacity: 0.025; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: hp-grain-shift 8s steps(10) infinite;
+}
+@keyframes hp-grain-shift { 0% { transform: translate(0,0); } 100% { transform: translate(-10%,-10%); } }
+
+.hp-about__hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 1200px; }
+.hp-about__hero-eyebrow {
+  font-family: var(--font-label); font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent);
+  margin-bottom: 36px; opacity: 0; transform: translateY(24px);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.hp-about__hero-eyebrow::before, .hp-about__hero-eyebrow::after {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
+}
+.hp-about__hero-headline {
+  font-family: var(--font-display); font-size: clamp(48px, 9vw, 140px);
+  font-weight: 900; line-height: 0.92; letter-spacing: -0.04em;
+  color: var(--white); text-transform: uppercase;
+}
+.hp-about__hero-headline .word {
+  display: inline-block; opacity: 0; transform: translateY(80px) rotateX(15deg);
+  filter: blur(10px); transform-origin: center bottom;
+}
+.hp-about__hero-sub {
+  font-family: var(--font-body); font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--white-80); max-width: 600px; margin: 40px auto 0;
+  line-height: 1.7; font-weight: 400; opacity: 0; transform: translateY(30px);
+}
+.hp-about__hero-stats {
+  display: flex; justify-content: center; gap: clamp(32px, 6vw, 80px);
+  margin-top: 56px; opacity: 0; transform: translateY(30px);
+}
+.hp-about__hero-stat { text-align: center; }
+.hp-about__hero-stat-num {
+  font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800; color: var(--white); line-height: 1;
+  background: linear-gradient(135deg, var(--white) 60%, var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hp-about__hero-stat-label {
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.15em; color: var(--white-60); margin-top: 8px;
+}
+/* Scroll indicator */
+.hp-about__scroll-cue {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.hp-about__scroll-cue span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--white-40); font-weight: 600; }
+.hp-about__scroll-cue-line { width: 1px; height: 52px; position: relative; overflow: hidden; }
+.hp-about__scroll-cue-line::after {
+  content: ''; position: absolute; top: -100%; left: 0; width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--accent));
+  animation: hp-scroll-cue 2s ease-in-out infinite;
+}
+@keyframes hp-scroll-cue { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
 
 /* ═══════════════════════════════════════
-   2. ORIGIN STORY (pinned scroll narrative)
+   2. ORIGIN STORY (pinned)
    ═══════════════════════════════════════ */
-.hp-about__origin { position: relative; min-height: 300vh; background: var(--bg-dark); }
-.hp-about__origin-pin { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.hp-about__origin-bg { position: absolute; inset: 0; transition: background 0.8s ease; }
-.hp-about__origin-content { position: relative; z-index: 1; max-width: 900px; padding: 0 32px; text-align: center; }
-.hp-about__origin-line { font-family: var(--font-heading); font-size: clamp(26px, 4vw, 52px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--text-dim); transition: color 0.6s ease, filter 0.6s ease; margin-bottom: 24px; }
-.hp-about__origin-line.is-active { color: var(--text-primary); filter: none; }
-.hp-about__origin-counter { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 2; }
-.hp-about__origin-dot { width: 3px; height: 28px; background: var(--text-dim); border-radius: 2px; transition: background 0.4s, height 0.4s; }
-.hp-about__origin-dot.is-active { background: var(--accent); height: 48px; }
+.hp-about__origin { position: relative; min-height: 300vh; background: var(--bg-charcoal); }
+.hp-about__origin-pin {
+  position: relative; width: 100%; height: 100vh;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.hp-about__origin-ambient {
+  position: absolute; inset: 0; z-index: 0; opacity: 0;
+  transition: opacity 1s ease;
+}
+.hp-about__origin-content {
+  position: relative; z-index: 1; max-width: 960px; padding: 0 40px; text-align: center;
+}
+.hp-about__origin-label {
+  font-family: var(--font-label); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+  margin-bottom: 48px;
+}
+.hp-about__origin-line {
+  font-family: var(--font-display); font-size: clamp(22px, 3.5vw, 44px);
+  font-weight: 600; line-height: 1.4; letter-spacing: -0.01em;
+  color: var(--white-20); transition: color 0.7s var(--ease-out-expo), opacity 0.7s;
+  margin-bottom: 20px;
+}
+.hp-about__origin-line.is-active { color: var(--white-95); }
+.hp-about__origin-line em { color: var(--accent); font-style: italic; }
+/* Progress bar on side */
+.hp-about__origin-progress {
+  position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px; z-index: 2;
+}
+.hp-about__origin-pip {
+  width: 3px; height: 24px; border-radius: 2px;
+  background: var(--white-08); transition: background 0.5s, height 0.5s;
+}
+.hp-about__origin-pip.is-active { background: var(--accent); height: 44px; }
+@media (max-width: 768px) {
+  .hp-about__origin { min-height: auto; padding: 100px 0; }
+  .hp-about__origin-pin { height: auto; }
+  .hp-about__origin-progress { display: none; }
+  .hp-about__origin-line { font-size: clamp(18px, 5vw, 26px); margin-bottom: 32px; }
+}
 
 /* ═══════════════════════════════════════
    3. PHILOSOPHY — HORIZONTAL SCROLL
    ═══════════════════════════════════════ */
-.hp-about__philosophy { position: relative; overflow: hidden; background: var(--bg-darker); }
-.hp-about__philosophy-track { display: flex; width: max-content; padding: 0 10vw; gap: 60px; align-items: center; height: 100vh; }
-.hp-about__philosophy-card { flex: 0 0 clamp(280px, 30vw, 420px); height: 480px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 36px; text-align: center; transition: border-color 0.4s, transform 0.4s; }
-.hp-about__philosophy-card:hover { border-color: rgba(255,43,43,0.3); transform: translateY(-6px); }
-.hp-about__philosophy-icon { width: 64px; height: 64px; margin-bottom: 32px; color: var(--accent); }
+.hp-about__philosophy { position: relative; overflow: hidden; background: var(--bg-black); }
+.hp-about__philosophy-header {
+  text-align: center; padding: 100px 24px 0;
+}
+.hp-about__philosophy-eyebrow {
+  font-family: var(--font-label); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px;
+}
+.hp-about__philosophy-heading {
+  font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px);
+  font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: -0.02em;
+}
+.hp-about__philosophy-track {
+  display: flex; width: max-content; padding: 60px 10vw 80px;
+  gap: 40px; align-items: stretch; height: 100vh;
+}
+.hp-about__philosophy-card {
+  flex: 0 0 clamp(300px, 28vw, 400px); border-radius: 24px;
+  border: 1px solid var(--border-subtle); background: var(--bg-card);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  display: flex; flex-direction: column; align-items: flex-start;
+  justify-content: center; padding: 48px 40px; text-align: left;
+  transition: border-color 0.5s, transform 0.5s var(--ease-out-expo), box-shadow 0.5s;
+  position: relative; overflow: hidden;
+}
+.hp-about__philosophy-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.5s;
+}
+.hp-about__philosophy-card:hover { border-color: var(--border-accent); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(255,43,43,0.06); }
+.hp-about__philosophy-card:hover::before { opacity: 1; }
+.hp-about__philosophy-num {
+  font-family: var(--font-display); font-size: 80px; font-weight: 900;
+  color: var(--white-08); line-height: 1; margin-bottom: 24px;
+  background: linear-gradient(180deg, var(--white-20) 0%, transparent 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hp-about__philosophy-icon {
+  width: 52px; height: 52px; margin-bottom: 28px; color: var(--accent);
+  padding: 12px; border-radius: 14px; background: rgba(255,43,43,0.08);
+  display: flex; align-items: center; justify-content: center;
+}
 .hp-about__philosophy-icon svg { width: 100%; height: 100%; }
-.hp-about__philosophy-icon path, .hp-about__philosophy-icon circle, .hp-about__philosophy-icon line, .hp-about__philosophy-icon polyline, .hp-about__philosophy-icon rect { stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 1.2s ease; }
+.hp-about__philosophy-icon path, .hp-about__philosophy-icon circle,
+.hp-about__philosophy-icon line, .hp-about__philosophy-icon polyline {
+  stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 1.5s var(--ease-out-expo);
+}
 .hp-about__philosophy-card.is-visible .hp-about__philosophy-icon path,
 .hp-about__philosophy-card.is-visible .hp-about__philosophy-icon circle,
 .hp-about__philosophy-card.is-visible .hp-about__philosophy-icon line,
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon polyline,
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon rect { stroke-dashoffset: 0; }
-.hp-about__philosophy-title { font-family: var(--font-heading); font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 16px; }
-.hp-about__philosophy-desc { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
+.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon polyline { stroke-dashoffset: 0; }
+.hp-about__philosophy-title {
+  font-family: var(--font-display); font-size: 26px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 14px; color: var(--white);
+}
+.hp-about__philosophy-desc { font-size: 15px; color: var(--white-60); line-height: 1.7; }
 
-/* Mobile: Stack vertically */
 @media (max-width: 768px) {
   .hp-about__philosophy { overflow: visible; }
-  .hp-about__philosophy-track { flex-direction: column; width: 100%; height: auto; padding: 80px 24px; gap: 32px; }
-  .hp-about__philosophy-card { flex: none; width: 100%; height: auto; min-height: 320px; }
+  .hp-about__philosophy-track { flex-direction: column; width: 100%; height: auto; padding: 40px 20px 80px; gap: 24px; }
+  .hp-about__philosophy-card { flex: none; width: 100%; }
+  .hp-about__philosophy-num { font-size: 56px; }
 }
 
 /* ═══════════════════════════════════════
    4. TEAM SPOTLIGHT
    ═══════════════════════════════════════ */
-.hp-about__team { position: relative; background: var(--bg-dark); }
-.hp-about__team-slide { position: relative; width: 100%; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+.hp-about__team { position: relative; background: var(--bg-charcoal); }
+.hp-about__team-header {
+  text-align: center; padding: 120px 24px 60px;
+}
+.hp-about__team-eyebrow {
+  font-family: var(--font-label); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px;
+}
+.hp-about__team-heading {
+  font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800; color: var(--white); text-transform: uppercase;
+}
+
+.hp-about__team-slide {
+  position: relative; width: 100%; min-height: 100vh;
+  display: flex; align-items: center; overflow: hidden;
+}
 .hp-about__team-portrait { position: absolute; inset: 0; z-index: 0; }
-.hp-about__team-portrait-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(100%) brightness(0.35); transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.05); will-change: transform, filter; }
-.hp-about__team-slide.is-active .hp-about__team-portrait-img { filter: grayscale(0%) brightness(0.45); }
-.hp-about__team-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%); z-index: 1; }
-.hp-about__team-info { position: relative; z-index: 2; max-width: 680px; padding: 0 clamp(32px, 6vw, 100px); }
-.hp-about__team-member-count { font-family: var(--font-eyebrow); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 20px; opacity: 0; }
-.hp-about__team-name { font-family: var(--font-heading); font-size: clamp(48px, 7vw, 96px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 8px; }
-.hp-about__team-name .char { display: inline-block; opacity: 0; transform: translateY(40px) scale(0.9); }
-.hp-about__team-role { font-family: var(--font-eyebrow); font-size: clamp(13px, 1.4vw, 16px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); position: relative; display: inline-block; padding-bottom: 6px; margin-bottom: 28px; opacity: 0; }
-.hp-about__team-role::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--accent); transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s; }
+.hp-about__team-portrait-placeholder {
+  width: 100%; height: 100%; transition: filter 1.4s var(--ease-out-expo);
+  filter: grayscale(100%) brightness(0.25); transform: scale(1.08); will-change: transform, filter;
+}
+.hp-about__team-slide.is-active .hp-about__team-portrait-placeholder {
+  filter: grayscale(30%) brightness(0.35);
+}
+/* Dark overlay for text readability */
+.hp-about__team-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(5,5,5,0.92) 0%,
+    rgba(5,5,5,0.75) 40%,
+    rgba(5,5,5,0.50) 70%,
+    rgba(5,5,5,0.35) 100%
+  );
+}
+.hp-about__team-info {
+  position: relative; z-index: 2; max-width: 720px;
+  padding: 60px clamp(32px, 8vw, 120px);
+}
+.hp-about__team-counter {
+  font-family: var(--font-label); font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+  margin-bottom: 24px; opacity: 0; transform: translateY(16px);
+  display: flex; align-items: center; gap: 12px;
+}
+.hp-about__team-counter::after {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
+}
+.hp-about__team-name {
+  font-family: var(--font-display); font-size: clamp(52px, 8vw, 110px);
+  font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em;
+  line-height: 0.92; margin-bottom: 12px; color: var(--white);
+}
+.hp-about__team-name .char {
+  display: inline-block; opacity: 0;
+  transform: translateY(50px) scale(0.85); filter: blur(6px);
+}
+.hp-about__team-role {
+  font-family: var(--font-label); font-size: clamp(13px, 1.3vw, 15px);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--white-80); position: relative; display: inline-block;
+  padding-bottom: 8px; margin-bottom: 32px; opacity: 0;
+}
+.hp-about__team-role::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
+  background: var(--accent); transition: width 1s var(--ease-out-expo) 0.5s;
+}
 .hp-about__team-slide.is-active .hp-about__team-role::after { width: 100%; }
-.hp-about__team-quote { font-size: clamp(17px, 2vw, 22px); font-weight: 400; color: rgba(255,255,255,0.8); line-height: 1.6; font-style: italic; letter-spacing: 0.01em; min-height: 60px; }
-.hp-about__team-quote .typewriter-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent); margin-left: 2px; animation: hp-about-blink 0.8s step-end infinite; vertical-align: text-bottom; }
-@keyframes hp-about-blink { 50% { opacity: 0; } }
+.hp-about__team-quote {
+  font-family: var(--font-body); font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 400; color: var(--white-80); line-height: 1.6;
+  font-style: italic; letter-spacing: 0.01em; min-height: 64px; max-width: 540px;
+}
+.hp-about__team-quote .tw-cursor {
+  display: inline-block; width: 2px; height: 1.1em;
+  background: var(--accent); margin-left: 3px;
+  animation: hp-blink 0.7s step-end infinite; vertical-align: text-bottom;
+}
+@keyframes hp-blink { 50% { opacity: 0; } }
+/* Bio line below quote */
+.hp-about__team-bio {
+  margin-top: 28px; font-size: 14px; color: var(--white-60);
+  line-height: 1.7; max-width: 480px; opacity: 0; transform: translateY(16px);
+  border-left: 2px solid var(--accent); padding-left: 16px;
+}
 
 /* Team progress dots */
-.hp-about__team-progress { position: fixed; right: 32px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 16px; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
-.hp-about__team-progress.is-visible { opacity: 1; pointer-events: auto; }
-.hp-about__team-progress-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.3); background: transparent; cursor: pointer; transition: all 0.3s; }
-.hp-about__team-progress-dot.is-active { border-color: var(--accent); background: var(--accent); transform: scale(1.3); }
+.hp-about__team-dots {
+  position: fixed; right: 36px; top: 50%; transform: translateY(-50%);
+  z-index: 100; display: flex; flex-direction: column; gap: 14px;
+  opacity: 0; pointer-events: none; transition: opacity 0.5s;
+}
+.hp-about__team-dots.is-visible { opacity: 1; pointer-events: auto; }
+.hp-about__team-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--white-20); background: transparent;
+  cursor: pointer; transition: all 0.4s var(--ease-out-expo); position: relative;
+}
+.hp-about__team-dot.is-active { border-color: var(--accent); background: var(--accent); transform: scale(1.25); box-shadow: 0 0 12px var(--accent-glow); }
 
 @media (max-width: 768px) {
-  .hp-about__team-slide { height: auto; min-height: 100vh; padding: 80px 0; }
-  .hp-about__team-progress { display: none; }
+  .hp-about__team-slide { min-height: 100vh; padding: 60px 0; }
+  .hp-about__team-dots { display: none; }
+  .hp-about__team-overlay { background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.7) 50%, rgba(5,5,5,0.85) 100%); }
 }
 
 /* ═══════════════════════════════════════
    5. VALUES MARQUEE
    ═══════════════════════════════════════ */
-.hp-about__marquee { padding: 56px 0; background: var(--bg-dark); overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
-.hp-about__marquee-track { display: flex; width: max-content; animation: hp-about-marquee 30s linear infinite; }
-.hp-about__marquee-item { flex-shrink: 0; font-family: var(--font-heading); font-size: clamp(18px, 2.5vw, 32px); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); white-space: nowrap; padding: 0 clamp(20px, 3vw, 48px); }
+.hp-about__marquee {
+  padding: 64px 0; background: var(--bg-black); overflow: hidden;
+  border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+}
+.hp-about__marquee-track { display: flex; width: max-content; animation: hp-marquee 35s linear infinite; }
+.hp-about__marquee-item {
+  flex-shrink: 0; font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 36px); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--white-20); white-space: nowrap; padding: 0 clamp(24px, 3vw, 48px);
+  transition: color 0.3s;
+}
 .hp-about__marquee-item.is-accent { color: var(--accent); }
-.hp-about__marquee-sep { flex-shrink: 0; font-size: clamp(18px, 2.5vw, 32px); color: var(--text-dim); padding: 0; }
-@keyframes hp-about-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.hp-about__marquee-sep { flex-shrink: 0; font-size: clamp(20px, 3vw, 36px); color: var(--white-08); padding: 0; }
+@keyframes hp-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ═══════════════════════════════════════
    6. CLOSING CTA
    ═══════════════════════════════════════ */
-.hp-about__cta { position: relative; width: 100%; min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 24px; overflow: hidden; background: var(--bg-darker); }
-.hp-about__cta-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,43,43,0.07) 0%, transparent 70%); z-index: 0; animation: hp-about-glow-drift 8s ease-in-out infinite alternate; }
-@keyframes hp-about-glow-drift { 0% { background-position: 30% 60%; } 100% { background-position: 70% 40%; } }
-.hp-about__cta-content { position: relative; z-index: 1; max-width: 800px; }
-.hp-about__cta-heading { font-family: var(--font-heading); font-size: clamp(32px, 5.5vw, 72px); font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 24px; opacity: 0; transform: translateY(40px); }
-.hp-about__cta-sub { font-size: clamp(15px, 1.6vw, 18px); color: var(--text-muted); line-height: 1.6; margin-bottom: 48px; opacity: 0; transform: translateY(30px); }
-.hp-about__cta-btn { display: inline-block; padding: 18px 52px; font-family: var(--font-heading); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; background: var(--accent); border: none; border-radius: 60px; text-decoration: none; cursor: pointer; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s; opacity: 0; transform: translateY(20px); }
-.hp-about__cta-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 12px 40px rgba(255,43,43,0.3); }
+.hp-about__cta {
+  position: relative; width: 100%; min-height: 85vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px; overflow: hidden; background: var(--bg-black);
+}
+.hp-about__cta-glow {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 60%, var(--accent-glow) 0%, transparent 70%),
+    radial-gradient(circle at 30% 30%, rgba(255,43,43,0.04) 0%, transparent 50%);
+  animation: hp-glow-drift 10s ease-in-out infinite alternate;
+}
+@keyframes hp-glow-drift { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+.hp-about__cta-content { position: relative; z-index: 1; max-width: 860px; }
+.hp-about__cta-eyebrow {
+  font-family: var(--font-label); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+  margin-bottom: 24px;
+}
+.hp-about__cta-heading {
+  font-family: var(--font-display); font-size: clamp(36px, 6vw, 80px);
+  font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em;
+  line-height: 1.0; margin-bottom: 28px; color: var(--white);
+}
+.hp-about__cta-sub {
+  font-size: clamp(16px, 1.6vw, 19px); color: var(--white-60);
+  line-height: 1.7; margin-bottom: 52px; max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.hp-about__cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 20px 56px; font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--white); background: var(--accent); border: none;
+  border-radius: 60px; text-decoration: none; cursor: pointer;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
+  position: relative; overflow: hidden;
+}
+.hp-about__cta-btn::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.hp-about__cta-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 48px rgba(255,43,43,0.35); }
+.hp-about__cta-btn:hover::after { opacity: 1; }
+.hp-about__cta-btn svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.hp-about__cta-btn:hover svg { transform: translateX(4px); }
 
 /* ═══════════════════════════════════════
-   SHARED: Fade-up reveal utility
+   UTILITY: Fade-up reveal
    ═══════════════════════════════════════ */
-.hp-about__reveal { opacity: 0; transform: translateY(40px); filter: blur(4px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.hp-about__reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+.hp-about__reveal {
+  opacity: 0; transform: translateY(44px); filter: blur(4px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo), filter 0.9s var(--ease-out-expo);
+}
+.hp-about__reveal.is-vis { opacity: 1; transform: translateY(0); filter: blur(0); }
+.hp-about__reveal[data-delay="1"] { transition-delay: 0.1s; }
+.hp-about__reveal[data-delay="2"] { transition-delay: 0.2s; }
+.hp-about__reveal[data-delay="3"] { transition-delay: 0.3s; }
 
-/* Reduced motion */
+/* ═══════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
-  .hp-about__hero-headline .word, .hp-about__team-name .char, .hp-about__reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+  .hp-about__hero-headline .word, .hp-about__team-name .char, .hp-about__reveal,
+  .hp-about__hero-eyebrow, .hp-about__hero-sub, .hp-about__hero-stats,
+  .hp-about__team-counter, .hp-about__team-role, .hp-about__team-bio {
+    opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important;
+  }
   .hp-about__marquee-track { animation: none !important; }
-  .hp-about__scroll-line { animation: none !important; }
+  .hp-about__scroll-cue-line::after { animation: none !important; }
+  .hp-about__hero-grain { animation: none !important; }
 }
 </style>
 
-<!-- ─── HTML STRUCTURE ────────────────────────────────────────── -->
+<!-- ─── HTML ──────────────────────────────────────────────────── -->
 <div class="hp-about" id="HpAbout">
 
-  <!-- Scroll progress bar -->
   <div class="hp-about__progress" id="HpAboutProgress"></div>
+  <div class="hp-about__cursor" id="HpCursor"></div>
+  <div class="hp-about__cursor-ring" id="HpCursorRing"></div>
 
-  <!-- Custom cursor -->
-  <div class="hp-about__cursor" id="HpAboutCursor"></div>
-  <div class="hp-about__cursor-ring" id="HpAboutCursorRing"></div>
-
-  <!-- ════════════════════════
-       SECTION 1 — HERO
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 1 — HERO ═══════ -->
   <section class="hp-about__hero" id="HpAboutHero">
     <div class="hp-about__hero-bg"></div>
     <div class="hp-about__hero-grain"></div>
     <div class="hp-about__hero-content">
-      <div class="hp-about__hero-eyebrow" id="HpHeroEyebrow">THE Story Behind The Standard</div>
+      <div class="hp-about__hero-eyebrow" id="HpHeroEyebrow">The Story Behind The Standard</div>
       <h1 class="hp-about__hero-headline" id="HpHeroHeadline">
         <span class="word">PROTECTION</span> <span class="word">IS</span> <span class="word">A</span> <span class="word">PROMISE.</span>
       </h1>
       <p class="hp-about__hero-sub" id="HpHeroSub">We don't sell products. We deliver trust — a commitment to preserving the art and soul of every sneaker, every material, every story.</p>
+      <div class="hp-about__hero-stats" id="HpHeroStats">
+        <div class="hp-about__hero-stat">
+          <div class="hp-about__hero-stat-num">50K+</div>
+          <div class="hp-about__hero-stat-label">Happy Customers</div>
+        </div>
+        <div class="hp-about__hero-stat">
+          <div class="hp-about__hero-stat-num">40+</div>
+          <div class="hp-about__hero-stat-label">Cities Served</div>
+        </div>
+        <div class="hp-about__hero-stat">
+          <div class="hp-about__hero-stat-num">99%</div>
+          <div class="hp-about__hero-stat-label">Satisfaction Rate</div>
+        </div>
+      </div>
     </div>
-    <div class="hp-about__scroll-indicator">
-      <span>Scroll</span>
-      <div class="hp-about__scroll-line"></div>
+    <div class="hp-about__scroll-cue">
+      <span>Scroll to explore</span>
+      <div class="hp-about__scroll-cue-line"></div>
     </div>
   </section>
 
-  <!-- ════════════════════════
-       SECTION 2 — ORIGIN STORY (pinned)
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 2 — ORIGIN STORY ═══════ -->
   <section class="hp-about__origin" id="HpAboutOrigin">
     <div class="hp-about__origin-pin" id="HpOriginPin">
-      <div class="hp-about__origin-bg" id="HpOriginBg"></div>
+      <div class="hp-about__origin-ambient" id="HpOriginAmbient"
+           style="background: radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.05) 0%, transparent 60%);"></div>
       <div class="hp-about__origin-content">
-        <p class="hp-about__origin-line" data-line="0">It started with a ruined pair of Jordans and a question: <em>why doesn't anything actually work?</em></p>
-        <p class="hp-about__origin-line" data-line="1">We spent 2 years in labs, testing every formulation — until we built something that didn't just clean, but <em>preserved.</em></p>
-        <p class="hp-about__origin-line" data-line="2">Today, we're trusted by 50,000+ collectors, athletes, and sneakerheads across 40+ cities.</p>
-        <p class="hp-about__origin-line" data-line="3">Because sneakers aren't just shoes. <em>They're identity.</em></p>
+        <div class="hp-about__origin-label hp-about__reveal">Our Origin</div>
+        <p class="hp-about__origin-line" data-line="0">It started with a ruined pair of Jordans and one relentless question: <em>why doesn't anything actually work?</em></p>
+        <p class="hp-about__origin-line" data-line="1">We spent 2 years in labs, testing every formulation — until we built something that didn't just clean, but truly <em>preserved.</em></p>
+        <p class="hp-about__origin-line" data-line="2">Today, we're trusted by <em>50,000+</em> collectors, athletes, and sneakerheads across <em>40+ cities.</em></p>
+        <p class="hp-about__origin-line" data-line="3">Because sneakers aren't just shoes. They're <em>identity.</em> And identity deserves protection.</p>
       </div>
-      <div class="hp-about__origin-counter" id="HpOriginCounter">
-        <div class="hp-about__origin-dot" data-dot="0"></div>
-        <div class="hp-about__origin-dot" data-dot="1"></div>
-        <div class="hp-about__origin-dot" data-dot="2"></div>
-        <div class="hp-about__origin-dot" data-dot="3"></div>
+      <div class="hp-about__origin-progress" id="HpOriginProgress">
+        <div class="hp-about__origin-pip" data-pip="0"></div>
+        <div class="hp-about__origin-pip" data-pip="1"></div>
+        <div class="hp-about__origin-pip" data-pip="2"></div>
+        <div class="hp-about__origin-pip" data-pip="3"></div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════════
-       SECTION 3 — PHILOSOPHY (horizontal scroll)
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 3 — PHILOSOPHY ═══════ -->
   <section class="hp-about__philosophy" id="HpAboutPhilosophy">
-    <div class="hp-about__philosophy-track" id="HpPhilosophyTrack">
-
-      <!-- Pillar 1 -->
+    <div class="hp-about__philosophy-header hp-about__reveal">
+      <div class="hp-about__philosophy-eyebrow">Our Philosophy</div>
+      <h2 class="hp-about__philosophy-heading">Four Pillars. One Standard.</h2>
+    </div>
+    <div class="hp-about__philosophy-track" id="HpPhiloTrack">
       <div class="hp-about__philosophy-card" data-pillar>
+        <div class="hp-about__philosophy-num">01</div>
         <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="32" cy="32" r="28"/>
-            <path d="M32 16v16l12 8"/>
-          </svg>
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="12"/><path d="M14 6v8l6 4"/></svg>
         </div>
         <h3 class="hp-about__philosophy-title">Cleanse</h3>
-        <p class="hp-about__philosophy-desc">Bioenzyme-powered formulations that lift dirt at the molecular level — no harsh chemicals, no material damage.</p>
+        <p class="hp-about__philosophy-desc">Bioenzyme-powered formulations that lift dirt at the molecular level — no harsh chemicals, no material damage. Ever.</p>
       </div>
-
-      <!-- Pillar 2 -->
       <div class="hp-about__philosophy-card" data-pillar>
+        <div class="hp-about__philosophy-num">02</div>
         <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M32 4L4 20v24l28 16 28-16V20L32 4z"/>
-            <path d="M4 20l28 16m0 0l28-16M32 36v24"/>
-          </svg>
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2L2 9v10l12 7 12-7V9L14 2z"/><path d="M2 9l12 7m0 0l12-7M14 16v10"/></svg>
         </div>
         <h3 class="hp-about__philosophy-title">Protect</h3>
-        <p class="hp-about__philosophy-desc">Nano-coating shields that repel water, salt, UV, and environmental aggression — invisible armor for every material.</p>
+        <p class="hp-about__philosophy-desc">Nano-coating shields that repel water, salt, UV, and environmental aggression — invisible armor for every material type.</p>
       </div>
-
-      <!-- Pillar 3 -->
       <div class="hp-about__philosophy-card" data-pillar>
+        <div class="hp-about__philosophy-num">03</div>
         <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 56l16-24 12 16 8-12 12 20"/>
-            <circle cx="48" cy="16" r="8"/>
-          </svg>
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24l8-12 6 8 4-6 4 10"/><circle cx="22" cy="6" r="4"/></svg>
         </div>
         <h3 class="hp-about__philosophy-title">Restore</h3>
         <p class="hp-about__philosophy-desc">Condition, revive, and bring materials back to their original character. Not new — better than new.</p>
       </div>
-
-      <!-- Pillar 4 -->
       <div class="hp-about__philosophy-card" data-pillar>
+        <div class="hp-about__philosophy-num">04</div>
         <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M32 4c16 12 24 28 24 40a24 24 0 01-48 0C8 32 16 16 32 4z"/>
-            <path d="M32 44c4 0 8-4 8-8s-8-16-8-16-8 12-8 16 4 8 8 8z"/>
-          </svg>
+          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2C22 8 26 16 26 22a12 12 0 01-24 0C2 16 6 8 14 2z"/><path d="M14 20c2 0 4-2 4-4s-4-8-4-8-4 6-4 8 2 4 4 4z"/></svg>
         </div>
         <h3 class="hp-about__philosophy-title">Preserve</h3>
         <p class="hp-about__philosophy-desc">Long-term material longevity. We don't just fix shoes — we extend their life, their story, their legacy.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- ════════════════════════
-       SECTION 4 — TEAM SPOTLIGHT
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 4 — TEAM ═══════ -->
   <section class="hp-about__team" id="HpAboutTeam">
 
-    <!-- Team Progress Dots (fixed on right) -->
-    <div class="hp-about__team-progress" id="HpTeamProgress">
-      <div class="hp-about__team-progress-dot" data-member="0"></div>
-      <div class="hp-about__team-progress-dot" data-member="1"></div>
-      <div class="hp-about__team-progress-dot" data-member="2"></div>
+    <div class="hp-about__team-header">
+      <div class="hp-about__team-eyebrow hp-about__reveal">The People</div>
+      <h2 class="hp-about__team-heading hp-about__reveal" data-delay="1">Meet The Minds Behind The Mission</h2>
     </div>
 
-    <!-- REPLACE: Member 1 — real name, role, quote, photo -->
+    <div class="hp-about__team-dots" id="HpTeamDots">
+      <div class="hp-about__team-dot" data-dot="0"></div>
+      <div class="hp-about__team-dot" data-dot="1"></div>
+      <div class="hp-about__team-dot" data-dot="2"></div>
+    </div>
+
+    <!-- REPLACE: Member 1 — real name, role, quote, bio, photo -->
     <div class="hp-about__team-slide" data-member-slide="0">
       <div class="hp-about__team-portrait">
-        <!-- REPLACE: src with real portrait photo URL -->
-        <div class="hp-about__team-portrait-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); width:100%; height:100%;"></div>
+        <!-- REPLACE: Use a real <img> tag with src for the portrait photo -->
+        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #0d1117 0%, #161b22 30%, #0d1117 60%, #1a1f2e 100%);"></div>
       </div>
       <div class="hp-about__team-overlay"></div>
       <div class="hp-about__team-info">
-        <div class="hp-about__team-member-count">01 / 03</div>
-        <!-- REPLACE: real name below -->
+        <div class="hp-about__team-counter">01 / 03</div>
+        <!-- REPLACE: real name -->
         <h2 class="hp-about__team-name" data-split-name>MEMBER ONE</h2>
-        <!-- REPLACE: real role below -->
+        <!-- REPLACE: real role -->
         <div class="hp-about__team-role">Founder & CEO</div>
-        <!-- REPLACE: real quote below -->
+        <!-- REPLACE: real quote -->
         <div class="hp-about__team-quote" data-typewriter="I don't build products. I build trust — one pair at a time."></div>
+        <!-- REPLACE: real bio -->
+        <div class="hp-about__team-bio">A sneaker obsessive turned entrepreneur. After watching his prized collection deteriorate from off-the-shelf solutions, he set out to build something that actually works — and never stops working.</div>
       </div>
     </div>
 
-    <!-- REPLACE: Member 2 — real name, role, quote, photo -->
+    <!-- REPLACE: Member 2 — real name, role, quote, bio, photo -->
     <div class="hp-about__team-slide" data-member-slide="1">
       <div class="hp-about__team-portrait">
-        <div class="hp-about__team-portrait-img" style="background: linear-gradient(135deg, #2d1b3d 0%, #3d1c5c 50%, #1a0a2e 100%); width:100%; height:100%;"></div>
+        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 30%, #1a0a2e 60%, #3d1c6e 100%);"></div>
       </div>
       <div class="hp-about__team-overlay"></div>
       <div class="hp-about__team-info">
-        <div class="hp-about__team-member-count">02 / 03</div>
+        <div class="hp-about__team-counter">02 / 03</div>
         <h2 class="hp-about__team-name" data-split-name>MEMBER TWO</h2>
         <div class="hp-about__team-role">Chief Technology Officer</div>
         <div class="hp-about__team-quote" data-typewriter="Science should feel invisible — until you see the result."></div>
+        <div class="hp-about__team-bio">A materials scientist with a decade of formulation experience. She leads R&D at Hague Protect, developing bioenzyme-powered solutions that redefine what sneaker care can achieve.</div>
       </div>
     </div>
 
-    <!-- REPLACE: Member 3 — real name, role, quote, photo -->
+    <!-- REPLACE: Member 3 — real name, role, quote, bio, photo -->
     <div class="hp-about__team-slide" data-member-slide="2">
       <div class="hp-about__team-portrait">
-        <div class="hp-about__team-portrait-img" style="background: linear-gradient(135deg, #1b2d1a 0%, #2d4a1c 50%, #0a2e10 100%); width:100%; height:100%;"></div>
+        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #0a1e0a 0%, #1b3a1b 30%, #0a1e0a 60%, #2a4c2a 100%);"></div>
       </div>
       <div class="hp-about__team-overlay"></div>
       <div class="hp-about__team-info">
-        <div class="hp-about__team-member-count">03 / 03</div>
+        <div class="hp-about__team-counter">03 / 03</div>
         <h2 class="hp-about__team-name" data-split-name>MEMBER THREE</h2>
         <div class="hp-about__team-role">Chief Marketing Officer</div>
         <div class="hp-about__team-quote" data-typewriter="A brand isn't what you sell. It's what people feel when they hear your name."></div>
+        <div class="hp-about__team-bio">The architect of Hague Protect's identity. From sneaker culture to global commerce, he connects product truth with community trust through every campaign and touchpoint.</div>
       </div>
     </div>
-
   </section>
 
-  <!-- ════════════════════════
-       SECTION 5 — VALUES MARQUEE
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 5 — MARQUEE ═══════ -->
   <section class="hp-about__marquee">
     <div class="hp-about__marquee-track">
-      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep"> • </span>
-      <!-- Duplicate for seamless loop -->
-      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep"> • </span>
-      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep"> • </span>
+      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep">✦</span>
+      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep">✦</span>
     </div>
   </section>
 
-  <!-- ════════════════════════
-       SECTION 6 — CLOSING CTA
-       ════════════════════════ -->
+  <!-- ═══════ SECTION 6 — CTA ═══════ -->
   <section class="hp-about__cta" id="HpAboutCta">
     <div class="hp-about__cta-glow"></div>
     <div class="hp-about__cta-content">
-      <h2 class="hp-about__cta-heading hp-about__reveal">Every Sneaker Has a Story. We Help You Keep It Alive.</h2>
-      <p class="hp-about__cta-sub hp-about__reveal">Explore premium, lab-tested sneaker care solutions trusted by 50,000+ enthusiasts worldwide.</p>
-      <a href="/collections/all" class="hp-about__cta-btn hp-about__reveal" id="HpCtaBtn">Explore Products</a>
+      <div class="hp-about__cta-eyebrow hp-about__reveal">Join The Movement</div>
+      <h2 class="hp-about__cta-heading hp-about__reveal" data-delay="1">Every Sneaker Has a Story.<br>We Help You Keep It Alive.</h2>
+      <p class="hp-about__cta-sub hp-about__reveal" data-delay="2">Explore premium, lab-tested sneaker care solutions trusted by 50,000+ enthusiasts worldwide.</p>
+      <a href="/collections/all" class="hp-about__cta-btn hp-about__reveal" data-delay="3" id="HpCtaBtn">
+        Explore Products
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
     </div>
   </section>
 
 </div>
 
-<!-- ─── SCRIPTS (loaded ONLY on this page) ───────────────────── -->
+<!-- ─── SCRIPTS ───────────────────────────────────────────────── -->
 <script>
 (function(){
-  /* Lazy-load GSAP + ScrollTrigger + Lenis only on this page */
-  const loadScript = (src) => new Promise((resolve, reject) => {
+  const isMobile = window.innerWidth <= 768;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const loadJS = (src) => new Promise((res, rej) => {
     const s = document.createElement('script');
-    s.src = src; s.async = true; s.onload = resolve; s.onerror = reject;
+    s.src = src; s.async = true; s.onload = res; s.onerror = rej;
     document.head.appendChild(s);
   });
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.innerWidth <= 768;
-
   Promise.all([
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'),
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js')
+    loadJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'),
+    loadJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js')
   ]).then(() => {
-    /* Optional: Lenis for desktop smooth scroll */
     if (!isMobile && !prefersReduced) {
-      loadScript('https://unpkg.com/lenis@1.1.13/dist/lenis.min.js').then(() => {
-        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), orientation: 'vertical', smoothWheel: true });
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => lenis.raf(time * 1000));
-        gsap.ticker.lagSmoothing(0);
-      }).catch(() => {}); /* Lenis is optional; page works without it */
+      loadJS('https://unpkg.com/lenis@1.1.13/dist/lenis.min.js').then(() => {
+        try {
+          const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+          lenis.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add(time => lenis.raf(time * 1000));
+          gsap.ticker.lagSmoothing(0);
+        } catch(e) {}
+      }).catch(() => {});
     }
-
     gsap.registerPlugin(ScrollTrigger);
-    initAnimations();
+    if (prefersReduced) { showAll(); return; }
+    boot();
   });
 
-  function initAnimations() {
-    if (prefersReduced) { showAllImmediately(); return; }
+  function boot() {
+    /* ── Progress bar ── */
+    const bar = document.getElementById('HpAboutProgress');
+    if (bar) window.addEventListener('scroll', () => {
+      bar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+    }, { passive: true });
 
-    /* ── SCROLL PROGRESS BAR ── */
-    const progressBar = document.getElementById('HpAboutProgress');
-    if (progressBar) {
-      window.addEventListener('scroll', () => {
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        progressBar.style.width = (window.scrollY / h * 100) + '%';
-      }, { passive: true });
-    }
-
-    /* ── CUSTOM CURSOR (desktop only) ── */
-    if (!isMobile && window.matchMedia('(pointer: fine)').matches) {
-      const dot = document.getElementById('HpAboutCursor');
-      const ring = document.getElementById('HpAboutCursorRing');
+    /* ── Custom cursor ── */
+    if (!isMobile && window.matchMedia('(pointer:fine)').matches) {
+      const dot = document.getElementById('HpCursor'), ring = document.getElementById('HpCursorRing');
       if (dot && ring) {
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
-        (function moveCursor() {
-          rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
-          dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
-          ring.style.transform = 'translate(' + (rx - 20) + 'px,' + (ry - 20) + 'px)';
-          requestAnimationFrame(moveCursor);
+        let mx=0,my=0,rx=0,ry=0;
+        document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; }, {passive:true});
+        (function loop(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14;
+          dot.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)';
+          ring.style.transform='translate('+(rx-22)+'px,'+(ry-22)+'px)';
+          requestAnimationFrame(loop);
         })();
       }
     }
 
-    /* ── 1. HERO ANIMATIONS ── */
-    const words = document.querySelectorAll('#HpHeroHeadline .word');
+    /* ═══ 1. HERO ═══ */
     const eyebrow = document.getElementById('HpHeroEyebrow');
-    const heroSub = document.getElementById('HpHeroSub');
+    const words = document.querySelectorAll('#HpHeroHeadline .word');
+    const sub = document.getElementById('HpHeroSub');
+    const stats = document.getElementById('HpHeroStats');
 
-    gsap.to(eyebrow, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: 'power3.out' });
-    words.forEach((w, i) => {
-      gsap.to(w, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, delay: 0.5 + i * 0.12, ease: 'power3.out' });
+    gsap.to(eyebrow, { opacity:1, y:0, duration:0.9, delay:0.2, ease:'power3.out' });
+    words.forEach((w,i) => gsap.to(w, { opacity:1, y:0, rotateX:0, filter:'blur(0px)', duration:1, delay:0.4+i*0.1, ease:'power3.out' }));
+    gsap.to(sub, { opacity:1, y:0, duration:0.9, delay:1, ease:'power3.out' });
+    gsap.to(stats, { opacity:1, y:0, duration:0.9, delay:1.3, ease:'power3.out' });
+
+    gsap.to('.hp-about__hero-content', {
+      scrollTrigger: { trigger:'.hp-about__hero', start:'top top', end:'bottom top', scrub:true },
+      y:-100, opacity:0.2, scale:0.96
     });
-    gsap.to(heroSub, { opacity: 1, y: 0, duration: 0.8, delay: 1.2, ease: 'power3.out' });
 
-    /* Hero parallax on scroll */
-    gsap.to('#HpHeroHeadline', {
-      scrollTrigger: { trigger: '.hp-about__hero', start: 'top top', end: 'bottom top', scrub: true },
-      y: -80, opacity: 0.3, scale: 0.95
-    });
-
-    /* ── 2. ORIGIN STORY (pinned) ── */
-    const originLines = document.querySelectorAll('.hp-about__origin-line');
-    const originDots = document.querySelectorAll('.hp-about__origin-dot');
-    const originBg = document.getElementById('HpOriginBg');
-    const bgColors = [
-      'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.04) 0%, transparent 70%)',
-      'radial-gradient(ellipse at 30% 60%, rgba(255,43,43,0.06) 0%, transparent 70%)',
-      'radial-gradient(ellipse at 70% 40%, rgba(255,43,43,0.08) 0%, transparent 70%)',
-      'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.1) 0%, transparent 70%)'
-    ];
+    /* ═══ 2. ORIGIN (pinned) ═══ */
+    const oLines = document.querySelectorAll('.hp-about__origin-line');
+    const oPips = document.querySelectorAll('.hp-about__origin-pip');
+    const oAmbient = document.getElementById('HpOriginAmbient');
 
     if (!isMobile) {
-      const originTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#HpAboutOrigin',
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: '#HpOriginPin',
-          scrub: 0.8
-        }
-      });
-
-      originLines.forEach((line, i) => {
-        const startPct = i / originLines.length;
-        const endPct = (i + 1) / originLines.length;
-        originTl.call(() => {
-          originLines.forEach((l, j) => { l.classList.toggle('is-active', j === i); });
-          originDots.forEach((d, j) => { d.classList.toggle('is-active', j === i); });
-          if (originBg) originBg.style.background = bgColors[i] || bgColors[0];
-        }, null, startPct);
+      const oTl = gsap.timeline({ scrollTrigger: { trigger:'#HpAboutOrigin', start:'top top', end:'bottom bottom', pin:'#HpOriginPin', scrub:0.6 }});
+      const gradients = [
+        'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.05) 0%, transparent 60%)',
+        'radial-gradient(ellipse at 30% 60%, rgba(255,43,43,0.08) 0%, transparent 60%)',
+        'radial-gradient(ellipse at 70% 40%, rgba(255,43,43,0.10) 0%, transparent 60%)',
+        'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.12) 0%, transparent 60%)'
+      ];
+      oLines.forEach((l,i) => {
+        oTl.call(() => {
+          oLines.forEach((x,j) => x.classList.toggle('is-active', j===i));
+          oPips.forEach((p,j) => p.classList.toggle('is-active', j===i));
+          if (oAmbient) { oAmbient.style.background = gradients[i]; oAmbient.style.opacity = '1'; }
+        }, null, i / oLines.length);
       });
     } else {
-      /* Mobile: simple reveal */
-      originLines.forEach((line) => {
-        gsap.to(line, {
-          scrollTrigger: { trigger: line, start: 'top 80%', toggleActions: 'play none none reverse' },
-          color: '#ffffff', duration: 0.5
-        });
+      oLines.forEach(l => {
+        gsap.to(l, { scrollTrigger: { trigger:l, start:'top 80%', toggleActions:'play none none reverse' }, color:'rgba(255,255,255,0.95)', duration:0.5 });
       });
     }
 
-    /* ── 3. PHILOSOPHY — HORIZONTAL SCROLL (desktop) ── */
+    /* ═══ 3. PHILOSOPHY (horizontal scroll on desktop) ═══ */
     if (!isMobile) {
-      const track = document.getElementById('HpPhilosophyTrack');
-      const section = document.getElementById('HpAboutPhilosophy');
-      if (track && section) {
-        const totalScroll = track.scrollWidth - window.innerWidth;
-        gsap.to(track, {
-          x: -totalScroll,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top top',
-            end: () => '+=' + totalScroll,
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true
-          }
-        });
+      const track = document.getElementById('HpPhiloTrack');
+      const sec = document.getElementById('HpAboutPhilosophy');
+      if (track && sec) {
+        const dist = track.scrollWidth - window.innerWidth;
+        gsap.to(track, { x: -dist, ease:'none', scrollTrigger: { trigger:sec, start:'top top', end:()=>'+=' + dist, pin:true, scrub:1, invalidateOnRefresh:true }});
       }
     }
-
-    /* Philosophy card SVG line-draw on visibility */
-    const cards = document.querySelectorAll('[data-pillar]');
-    cards.forEach((card) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: isMobile ? 'top 85%' : 'left 80%',
-        onEnter: () => card.classList.add('is-visible'),
-        containerAnimation: isMobile ? undefined : gsap.getById && gsap.getById('philoScrub')
-      });
-      /* Fallback observer for mobile */
-      if (isMobile) {
-        const obs = new IntersectionObserver((entries) => {
-          entries.forEach(e => { if (e.isIntersecting) card.classList.add('is-visible'); });
-        }, { threshold: 0.3 });
-        obs.observe(card);
-      }
+    /* Card SVG draw */
+    document.querySelectorAll('[data-pillar]').forEach(card => {
+      const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) card.classList.add('is-visible'); }); }, {threshold:0.3});
+      obs.observe(card);
     });
 
-    /* ── 4. TEAM SPOTLIGHT ── */
-    const teamSlides = document.querySelectorAll('.hp-about__team-slide');
-    const teamProgress = document.getElementById('HpTeamProgress');
-    const progressDots = document.querySelectorAll('.hp-about__team-progress-dot');
+    /* ═══ 4. TEAM ═══ */
+    const slides = document.querySelectorAll('.hp-about__team-slide');
+    const dots = document.querySelectorAll('.hp-about__team-dot');
+    const dotsWrap = document.getElementById('HpTeamDots');
 
-    teamSlides.forEach((slide, i) => {
-      ScrollTrigger.create({
-        trigger: slide,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        onEnter: () => activateTeamSlide(i),
-        onEnterBack: () => activateTeamSlide(i),
-        onLeave: () => {},
-        onLeaveBack: () => {}
+    slides.forEach((sl,i) => {
+      ScrollTrigger.create({ trigger:sl, start:'top 55%', end:'bottom 45%',
+        onEnter: () => activateMember(i),
+        onEnterBack: () => activateMember(i)
       });
     });
 
-    function activateTeamSlide(idx) {
-      teamSlides.forEach((s, i) => {
-        s.classList.toggle('is-active', i === idx);
-      });
-      progressDots.forEach((d, i) => {
-        d.classList.toggle('is-active', i === idx);
-      });
+    function activateMember(idx) {
+      slides.forEach((s,i) => s.classList.toggle('is-active', i===idx));
+      dots.forEach((d,i) => d.classList.toggle('is-active', i===idx));
 
-      const activeSlide = teamSlides[idx];
-      if (!activeSlide) return;
+      const sl = slides[idx]; if (!sl) return;
 
-      /* Animate member count */
-      const count = activeSlide.querySelector('.hp-about__team-member-count');
-      if (count) gsap.to(count, { opacity: 1, duration: 0.5, delay: 0.1 });
+      /* counter */
+      const cnt = sl.querySelector('.hp-about__team-counter');
+      if (cnt) gsap.to(cnt, { opacity:1, y:0, duration:0.6, delay:0.05 });
 
-      /* Animate name chars */
-      const nameEl = activeSlide.querySelector('[data-split-name]');
+      /* name split */
+      const nameEl = sl.querySelector('[data-split-name]');
       if (nameEl && !nameEl.dataset.split) {
-        const text = nameEl.textContent;
-        nameEl.innerHTML = text.split('').map(c => c === ' ' ? ' ' : '<span class="char">' + c + '</span>').join('');
-        nameEl.dataset.split = '1';
+        nameEl.innerHTML = nameEl.textContent.split('').map(c => c===' '?' ':'<span class="char">'+c+'</span>').join('');
+        nameEl.dataset.split='1';
       }
-      const chars = activeSlide.querySelectorAll('.char');
-      chars.forEach((c, ci) => {
-        gsap.to(c, { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: 0.15 + ci * 0.03, ease: 'power3.out' });
-      });
+      sl.querySelectorAll('.char').forEach((c,ci) => gsap.to(c, { opacity:1, y:0, scale:1, filter:'blur(0px)', duration:0.55, delay:0.12+ci*0.025, ease:'power3.out' }));
 
-      /* Animate role */
-      const role = activeSlide.querySelector('.hp-about__team-role');
-      if (role) gsap.to(role, { opacity: 1, duration: 0.5, delay: 0.5 });
+      /* role */
+      const role = sl.querySelector('.hp-about__team-role');
+      if (role) gsap.to(role, { opacity:1, duration:0.5, delay:0.45 });
 
-      /* Typewriter quote */
-      const quoteEl = activeSlide.querySelector('[data-typewriter]');
-      if (quoteEl && !quoteEl.dataset.typed) {
-        quoteEl.dataset.typed = '1';
-        const fullText = quoteEl.getAttribute('data-typewriter');
-        quoteEl.innerHTML = '<span class="typewriter-cursor"></span>';
-        let ci = 0;
-        const typeInterval = setInterval(() => {
-          if (ci < fullText.length) {
-            quoteEl.innerHTML = '"' + fullText.substring(0, ci + 1) + '"<span class="typewriter-cursor"></span>';
-            ci++;
-          } else {
-            clearInterval(typeInterval);
-            setTimeout(() => {
-              const cursor = quoteEl.querySelector('.typewriter-cursor');
-              if (cursor) cursor.style.display = 'none';
-            }, 2000);
-          }
-        }, 40);
+      /* bio */
+      const bio = sl.querySelector('.hp-about__team-bio');
+      if (bio) gsap.to(bio, { opacity:1, y:0, duration:0.6, delay:0.7 });
+
+      /* typewriter */
+      const qEl = sl.querySelector('[data-typewriter]');
+      if (qEl && !qEl.dataset.typed) {
+        qEl.dataset.typed='1';
+        const txt = qEl.getAttribute('data-typewriter');
+        qEl.innerHTML = '<span class="tw-cursor"></span>';
+        let ci=0;
+        const iv = setInterval(()=>{
+          if (ci<txt.length) { qEl.innerHTML = '\u201C'+txt.substring(0,ci+1)+'\u201D<span class="tw-cursor"></span>'; ci++; }
+          else { clearInterval(iv); setTimeout(()=>{ const cur=qEl.querySelector('.tw-cursor'); if(cur) cur.style.display='none'; },2500); }
+        }, 35);
       }
 
-      /* Mouse-follow parallax on portrait (desktop only) */
+      /* mouse parallax (desktop) */
       if (!isMobile) {
-        const portrait = activeSlide.querySelector('.hp-about__team-portrait-img');
-        if (portrait && !activeSlide.dataset.parallaxBound) {
-          activeSlide.dataset.parallaxBound = '1';
-          activeSlide.addEventListener('mousemove', (e) => {
-            const rect = activeSlide.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            gsap.to(portrait, { x: x * 20, y: y * 20, duration: 0.6, ease: 'power2.out' });
+        const portrait = sl.querySelector('.hp-about__team-portrait-placeholder');
+        if (portrait && !sl.dataset.pxBound) {
+          sl.dataset.pxBound='1';
+          sl.addEventListener('mousemove', e => {
+            const r=sl.getBoundingClientRect();
+            const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+            gsap.to(portrait, { x:x*24, y:y*16, duration:0.8, ease:'power2.out' });
           });
         }
       }
     }
 
-    /* Show/hide team progress when in team section */
-    if (teamProgress) {
-      ScrollTrigger.create({
-        trigger: '#HpAboutTeam',
-        start: 'top 50%',
-        end: 'bottom 50%',
-        onEnter: () => teamProgress.classList.add('is-visible'),
-        onLeave: () => teamProgress.classList.remove('is-visible'),
-        onEnterBack: () => teamProgress.classList.add('is-visible'),
-        onLeaveBack: () => teamProgress.classList.remove('is-visible')
+    /* Team dots visibility */
+    if (dotsWrap) {
+      ScrollTrigger.create({ trigger:'#HpAboutTeam', start:'top 40%', end:'bottom 40%',
+        onEnter:()=>dotsWrap.classList.add('is-visible'),
+        onLeave:()=>dotsWrap.classList.remove('is-visible'),
+        onEnterBack:()=>dotsWrap.classList.add('is-visible'),
+        onLeaveBack:()=>dotsWrap.classList.remove('is-visible')
       });
     }
 
-    /* ── 5. VALUES MARQUEE — pure CSS, no JS needed ── */
-
-    /* ── 6. CTA SECTION — fade reveals ── */
-    document.querySelectorAll('.hp-about__reveal').forEach((el) => {
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        onEnter: () => el.classList.add('is-visible')
-      });
+    /* ═══ 6. REVEAL UTILITY ═══ */
+    document.querySelectorAll('.hp-about__reveal').forEach(el => {
+      ScrollTrigger.create({ trigger:el, start:'top 88%', onEnter:()=>el.classList.add('is-vis') });
     });
 
-    /* Magnetic CTA button (desktop) */
+    /* Magnetic CTA (desktop) */
     if (!isMobile) {
-      const ctaBtn = document.getElementById('HpCtaBtn');
-      if (ctaBtn) {
-        ctaBtn.addEventListener('mousemove', (e) => {
-          const rect = ctaBtn.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width / 2;
-          const y = e.clientY - rect.top - rect.height / 2;
-          gsap.to(ctaBtn, { x: x * 0.25, y: y * 0.35, duration: 0.3, ease: 'power2.out' });
+      const btn = document.getElementById('HpCtaBtn');
+      if (btn) {
+        btn.addEventListener('mousemove', e => {
+          const r=btn.getBoundingClientRect();
+          gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*0.2, y:(e.clientY-r.top-r.height/2)*0.3, duration:0.3, ease:'power2.out' });
         });
-        ctaBtn.addEventListener('mouseleave', () => {
-          gsap.to(ctaBtn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
-        });
+        btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:0.6, ease:'elastic.out(1,0.4)' }));
       }
     }
   }
 
-  /* Fallback: show everything immediately if reduced-motion is preferred */
-  function showAllImmediately() {
-    document.querySelectorAll('.word, .char, .hp-about__reveal, .hp-about__hero-eyebrow, .hp-about__hero-sub, .hp-about__team-member-count, .hp-about__team-role').forEach(el => {
-      el.style.opacity = '1'; el.style.transform = 'none'; el.style.filter = 'none';
-    });
-    document.querySelectorAll('.hp-about__origin-line').forEach(l => l.classList.add('is-active'));
-    document.querySelectorAll('[data-pillar]').forEach(c => c.classList.add('is-visible'));
-    document.querySelectorAll('[data-typewriter]').forEach(q => {
-      q.textContent = '"' + q.getAttribute('data-typewriter') + '"';
-    });
+  function showAll() {
+    document.querySelectorAll('.word,.char,.hp-about__reveal,.hp-about__hero-eyebrow,.hp-about__hero-sub,.hp-about__hero-stats,.hp-about__team-counter,.hp-about__team-role,.hp-about__team-bio')
+      .forEach(el => { el.style.opacity='1'; el.style.transform='none'; el.style.filter='none'; });
+    document.querySelectorAll('.hp-about__origin-line').forEach(l=>l.classList.add('is-active'));
+    document.querySelectorAll('[data-pillar]').forEach(c=>c.classList.add('is-visible'));
+    document.querySelectorAll('[data-typewriter]').forEach(q=>{ q.textContent='\u201C'+q.getAttribute('data-typewriter')+'\u201D'; });
   }
 })();
 </script>
