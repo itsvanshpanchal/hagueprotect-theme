@@ -9,27 +9,7 @@
     padding-bottom: clamp(32px, 4vw, 64px);
     border-top: 1px solid #1a1a1a;
     position: relative;
-    overflow: hidden;
-  }
-
-  .footer__world-animation {
-    position: absolute;
-    bottom: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    max-width: 100%;
-    height: auto;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.8;
-  }
-
-  @media screen and (max-width: 768px) {
-    .footer__world-animation {
-      width: 500px;
-      bottom: -100px;
-    }
+    overflow-x: clip;
   }
 
   .footer-grid {
@@ -485,9 +465,6 @@
 {%- endstyle -%}
 
 <footer class="footer-wrapper" role="contentinfo">
-  <video autoplay loop muted playsinline class="footer__world-animation">
-    <source src="{{ '700_F_414745561_45lFsXNeGsWZrwxGXoeHeP5Bt76L5fX0_ST_202607062218.mp4' | asset_url }}" type="video/mp4">
-  </video>
 
   <div class="container">
     <div class="footer-grid">
