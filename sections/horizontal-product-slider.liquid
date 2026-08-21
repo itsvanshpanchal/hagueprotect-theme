@@ -1,7 +1,7 @@
 {%- liquid
   assign hp_heading_desktop = section.settings.h2_font_size_desktop | default: 52
   assign hp_heading_mobile = section.settings.h2_font_size_mobile | default: 24
-  assign hp_accent_desktop = section.settings.heading_accent_font_size_desktop | default: 62
+  assign hp_accent_desktop = section.settings.heading_accent_font_size_desktop | default: 52
   assign hp_accent_mobile = section.settings.heading_accent_font_size_mobile | default: 40
   assign hp_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
   assign hp_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
@@ -1805,7 +1805,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 62
+      "default": 52
     },
     {
       "type": "range",
