@@ -1,870 +1,769 @@
 <!-- ═══════════════════════════════════════════════════════════════
-     HAGUE PROTECT — ABOUT US  ·  Cinematic Scroll Experience v2
-     Libraries: GSAP + ScrollTrigger (CDN), Lenis Smooth Scroll
-     All scripts load ONLY on this page (not globally).
+     HAGUE PROTECT — ABOUT US v3 — NEXT LEVEL CINEMATIC EXPERIENCE
      ═══════════════════════════════════════════════════════════════ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* ═══════════════════════════════════════
-   0. RESET & TOKENS
-   ═══════════════════════════════════════ */
-.hp-about {
-  --accent: #FF2B2B;
-  --accent-glow: rgba(255,43,43,0.15);
-  --accent-soft: rgba(255,43,43,0.08);
-  --bg-black: #050505;
-  --bg-charcoal: #0c0c0c;
-  --bg-elevated: #111111;
-  --bg-card: rgba(255,255,255,0.03);
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-accent: rgba(255,43,43,0.25);
-  --white: #ffffff;
-  --white-95: rgba(255,255,255,0.95);
-  --white-80: rgba(255,255,255,0.80);
-  --white-60: rgba(255,255,255,0.60);
-  --white-40: rgba(255,255,255,0.40);
-  --white-20: rgba(255,255,255,0.20);
-  --white-08: rgba(255,255,255,0.08);
-  --font-display: 'Outfit', var(--font-family-heading, 'Inter', sans-serif);
-  --font-body: var(--font-family-sans, 'Inter', sans-serif);
-  --font-label: var(--font-family-eyebrow, var(--font-family-sans, 'Inter', sans-serif));
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  margin: 0; padding: 0;
-  background: var(--bg-black);
-  color: var(--white);
-  overflow-x: hidden;
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
-}
-.hp-about *, .hp-about *::before, .hp-about *::after { box-sizing: border-box; margin: 0; padding: 0; }
-.hp-about em { font-style: italic; color: var(--accent); }
-
-/* ── Scroll Progress ── */
-.hp-about__progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, var(--accent), #ff6b6b); z-index: 9999; will-change: width; pointer-events: none; }
-
-/* ── Custom Cursor (desktop only) ── */
-.hp-about__cursor, .hp-about__cursor-ring { display: none; }
-@media (pointer: fine) and (min-width: 1025px) {
-  .hp-about__cursor { position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--white); border-radius: 50%; pointer-events: none; z-index: 99999; mix-blend-mode: difference; display: block; }
-  .hp-about__cursor-ring { position: fixed; top: 0; left: 0; width: 44px; height: 44px; border: 1.5px solid var(--white-40); border-radius: 50%; pointer-events: none; z-index: 99998; display: block; }
+/* ══════════════════════════════════════════════════════
+   ROOT TOKENS
+══════════════════════════════════════════════════════ */
+:root {
+  --hp-red: #FF2B2B;
+  --hp-red-glow: rgba(255,43,43,0.18);
+  --hp-red-soft: rgba(255,43,43,0.07);
+  --hp-black: #030303;
+  --hp-dark: #0a0a0a;
+  --hp-card: rgba(255,255,255,0.032);
+  --hp-border: rgba(255,255,255,0.055);
+  --hp-border-red: rgba(255,43,43,0.22);
+  --hp-w100: #ffffff;
+  --hp-w85: rgba(255,255,255,0.85);
+  --hp-w65: rgba(255,255,255,0.65);
+  --hp-w40: rgba(255,255,255,0.40);
+  --hp-w15: rgba(255,255,255,0.15);
+  --hp-w06: rgba(255,255,255,0.06);
+  --f-display: 'Bebas Neue', 'Outfit', var(--font-family-heading, sans-serif);
+  --f-body: 'Outfit', var(--font-family-sans, sans-serif);
+  --f-label: 'Outfit', var(--font-family-eyebrow, sans-serif);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ═══════════════════════════════════════
-   1. HERO (100vh full-screen)
-   ═══════════════════════════════════════ */
-.hp-about__hero {
-  position: relative; width: 100%; height: 100vh; min-height: 640px;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; background: var(--bg-black);
+/* ══════════════════════════════════════════════════════
+   BASE
+══════════════════════════════════════════════════════ */
+#hpa { all:initial; display:block; background: var(--hp-black); color: var(--hp-w100); overflow-x: hidden; -webkit-font-smoothing: antialiased; font-family: var(--f-body); }
+#hpa *, #hpa *::before, #hpa *::after { box-sizing: border-box; margin: 0; padding: 0; }
+#hpa a { color: inherit; text-decoration: none; }
+#hpa em { font-style: normal; color: var(--hp-red); }
+#hpa strong { color: var(--hp-w100); font-weight: 700; }
+
+/* Scroll progress */
+.hpa-bar { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, #FF2B2B, #ff7070, #FF2B2B); background-size: 200%; z-index: 9999; animation: hpa-bar-shimmer 2s linear infinite; pointer-events: none; }
+@keyframes hpa-bar-shimmer { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+
+/* Custom cursor */
+.hpa-dot, .hpa-ring { display: none; position: fixed; pointer-events: none; border-radius: 50%; top: 0; left: 0; }
+@media (pointer:fine) and (min-width:1025px) {
+  .hpa-dot { display: block; width: 6px; height: 6px; background: #fff; z-index: 99999; mix-blend-mode: difference; }
+  .hpa-ring { display: block; width: 48px; height: 48px; border: 1px solid rgba(255,43,43,0.5); z-index: 99998; }
 }
-.hp-about__hero-bg {
-  position: absolute; inset: 0; z-index: 0;
+
+/* ══════════════════════════════════════════════════════
+   §1 — HERO: FULL-BLEED TYPOGRAPHIC STATEMENT
+══════════════════════════════════════════════════════ */
+.hpa-hero {
+  position: relative; width: 100%; height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden; background: var(--hp-black);
+  padding: 0 clamp(24px, 6vw, 100px) clamp(40px, 6vh, 80px);
+}
+/* Ambient light */
+.hpa-hero__glow {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 100% 80% at 50% 30%, var(--accent-soft) 0%, transparent 60%),
-    radial-gradient(circle at 20% 80%, rgba(255,43,43,0.03) 0%, transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(100,100,255,0.02) 0%, transparent 40%);
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(255,43,43,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(80,80,255,0.025) 0%, transparent 50%);
 }
-/* Animated grain overlay */
-.hp-about__hero-grain {
-  position: absolute; inset: -50%; width: 200%; height: 200%;
-  opacity: 0.025; z-index: 1; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: hp-grain-shift 8s steps(10) infinite;
-}
-@keyframes hp-grain-shift { 0% { transform: translate(0,0); } 100% { transform: translate(-10%,-10%); } }
-
-.hp-about__hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 1200px; }
-.hp-about__hero-eyebrow {
-  font-family: var(--font-label); font-size: 13px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent);
-  margin-bottom: 36px; opacity: 0; transform: translateY(24px);
-  display: inline-flex; align-items: center; gap: 12px;
-}
-.hp-about__hero-eyebrow::before, .hp-about__hero-eyebrow::after {
-  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
-}
-.hp-about__hero-headline {
-  font-family: var(--font-display); font-size: clamp(48px, 9vw, 140px);
-  font-weight: 900; line-height: 0.92; letter-spacing: -0.04em;
-  color: var(--white); text-transform: uppercase;
-}
-.hp-about__hero-headline .word {
-  display: inline-block; opacity: 0; transform: translateY(80px) rotateX(15deg);
-  filter: blur(10px); transform-origin: center bottom;
-}
-.hp-about__hero-sub {
-  font-family: var(--font-body); font-size: clamp(16px, 1.8vw, 20px);
-  color: var(--white-80); max-width: 600px; margin: 40px auto 0;
-  line-height: 1.7; font-weight: 400; opacity: 0; transform: translateY(30px);
-}
-.hp-about__hero-stats {
-  display: flex; justify-content: center; gap: clamp(32px, 6vw, 80px);
-  margin-top: 56px; opacity: 0; transform: translateY(30px);
-}
-.hp-about__hero-stat { text-align: center; }
-.hp-about__hero-stat-num {
-  font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px);
-  font-weight: 800; color: var(--white); line-height: 1;
-  background: linear-gradient(135deg, var(--white) 60%, var(--accent));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hp-about__hero-stat-label {
-  font-size: 12px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.15em; color: var(--white-60); margin-top: 8px;
-}
-/* Scroll indicator */
-.hp-about__scroll-cue {
-  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px;
-}
-.hp-about__scroll-cue span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--white-40); font-weight: 600; }
-.hp-about__scroll-cue-line { width: 1px; height: 52px; position: relative; overflow: hidden; }
-.hp-about__scroll-cue-line::after {
-  content: ''; position: absolute; top: -100%; left: 0; width: 1px; height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--accent));
-  animation: hp-scroll-cue 2s ease-in-out infinite;
-}
-@keyframes hp-scroll-cue { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
-
-/* ═══════════════════════════════════════
-   2. ORIGIN STORY (pinned)
-   ═══════════════════════════════════════ */
-.hp-about__origin { position: relative; min-height: 300vh; background: var(--bg-charcoal); }
-.hp-about__origin-pin {
-  position: relative; width: 100%; height: 100vh;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.hp-about__origin-ambient {
-  position: absolute; inset: 0; z-index: 0; opacity: 0;
-  transition: opacity 1s ease;
-}
-.hp-about__origin-content {
-  position: relative; z-index: 1; max-width: 960px; padding: 0 40px; text-align: center;
-}
-.hp-about__origin-label {
-  font-family: var(--font-label); font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
-  margin-bottom: 48px;
-}
-.hp-about__origin-line {
-  font-family: var(--font-display); font-size: clamp(22px, 3.5vw, 44px);
-  font-weight: 600; line-height: 1.4; letter-spacing: -0.01em;
-  color: var(--white-20); transition: color 0.7s var(--ease-out-expo), opacity 0.7s;
-  margin-bottom: 20px;
-}
-.hp-about__origin-line.is-active { color: var(--white-95); }
-.hp-about__origin-line em { color: var(--accent); font-style: italic; }
-/* Progress bar on side */
-.hp-about__origin-progress {
-  position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 10px; z-index: 2;
-}
-.hp-about__origin-pip {
-  width: 3px; height: 24px; border-radius: 2px;
-  background: var(--white-08); transition: background 0.5s, height 0.5s;
-}
-.hp-about__origin-pip.is-active { background: var(--accent); height: 44px; }
-@media (max-width: 768px) {
-  .hp-about__origin { min-height: auto; padding: 100px 0; }
-  .hp-about__origin-pin { height: auto; }
-  .hp-about__origin-progress { display: none; }
-  .hp-about__origin-line { font-size: clamp(18px, 5vw, 26px); margin-bottom: 32px; }
-}
-
-/* ═══════════════════════════════════════
-   3. PHILOSOPHY — HORIZONTAL SCROLL
-   ═══════════════════════════════════════ */
-.hp-about__philosophy { position: relative; overflow: hidden; background: var(--bg-black); }
-.hp-about__philosophy-header {
-  text-align: center; padding: 100px 24px 0;
-}
-.hp-about__philosophy-eyebrow {
-  font-family: var(--font-label); font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px;
-}
-.hp-about__philosophy-heading {
-  font-family: var(--font-display); font-size: clamp(32px, 5vw, 60px);
-  font-weight: 800; color: var(--white); text-transform: uppercase; letter-spacing: -0.02em;
-}
-.hp-about__philosophy-track {
-  display: flex; width: max-content; padding: 60px 10vw 80px;
-  gap: 40px; align-items: stretch; height: 100vh;
-}
-.hp-about__philosophy-card {
-  flex: 0 0 clamp(300px, 28vw, 400px); border-radius: 24px;
-  border: 1px solid var(--border-subtle); background: var(--bg-card);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  display: flex; flex-direction: column; align-items: flex-start;
-  justify-content: center; padding: 48px 40px; text-align: left;
-  transition: border-color 0.5s, transform 0.5s var(--ease-out-expo), box-shadow 0.5s;
-  position: relative; overflow: hidden;
-}
-.hp-about__philosophy-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0; transition: opacity 0.5s;
-}
-.hp-about__philosophy-card:hover { border-color: var(--border-accent); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(255,43,43,0.06); }
-.hp-about__philosophy-card:hover::before { opacity: 1; }
-.hp-about__philosophy-num {
-  font-family: var(--font-display); font-size: 80px; font-weight: 900;
-  color: var(--white-08); line-height: 1; margin-bottom: 24px;
-  background: linear-gradient(180deg, var(--white-20) 0%, transparent 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hp-about__philosophy-icon {
-  width: 52px; height: 52px; margin-bottom: 28px; color: var(--accent);
-  padding: 12px; border-radius: 14px; background: rgba(255,43,43,0.08);
-  display: flex; align-items: center; justify-content: center;
-}
-.hp-about__philosophy-icon svg { width: 100%; height: 100%; }
-.hp-about__philosophy-icon path, .hp-about__philosophy-icon circle,
-.hp-about__philosophy-icon line, .hp-about__philosophy-icon polyline {
-  stroke-dasharray: 200; stroke-dashoffset: 200; transition: stroke-dashoffset 1.5s var(--ease-out-expo);
-}
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon path,
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon circle,
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon line,
-.hp-about__philosophy-card.is-visible .hp-about__philosophy-icon polyline { stroke-dashoffset: 0; }
-.hp-about__philosophy-title {
-  font-family: var(--font-display); font-size: 26px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 14px; color: var(--white);
-}
-.hp-about__philosophy-desc { font-size: 15px; color: var(--white-60); line-height: 1.7; }
-
-@media (max-width: 768px) {
-  .hp-about__philosophy { overflow: visible; }
-  .hp-about__philosophy-track { flex-direction: column; width: 100%; height: auto; padding: 40px 20px 80px; gap: 24px; }
-  .hp-about__philosophy-card { flex: none; width: 100%; }
-  .hp-about__philosophy-num { font-size: 56px; }
-}
-
-/* ═══════════════════════════════════════
-   4. TEAM SPOTLIGHT
-   ═══════════════════════════════════════ */
-.hp-about__team { position: relative; background: var(--bg-charcoal); }
-.hp-about__team-header {
-  text-align: center; padding: 120px 24px 60px;
-}
-.hp-about__team-eyebrow {
-  font-family: var(--font-label); font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px;
-}
-.hp-about__team-heading {
-  font-family: var(--font-display); font-size: clamp(32px, 5vw, 56px);
-  font-weight: 800; color: var(--white); text-transform: uppercase;
-}
-
-.hp-about__team-slide {
-  position: relative; width: 100%; min-height: 100vh;
-  display: flex; align-items: center; overflow: hidden;
-}
-.hp-about__team-portrait { position: absolute; inset: 0; z-index: 0; }
-.hp-about__team-portrait-placeholder {
-  width: 100%; height: 100%; transition: filter 1.4s var(--ease-out-expo);
-  filter: grayscale(100%) brightness(0.25); transform: scale(1.08); will-change: transform, filter;
-}
-.hp-about__team-slide.is-active .hp-about__team-portrait-placeholder {
-  filter: grayscale(30%) brightness(0.35);
-}
-/* Dark overlay for text readability */
-.hp-about__team-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(
-    90deg,
-    rgba(5,5,5,0.92) 0%,
-    rgba(5,5,5,0.75) 40%,
-    rgba(5,5,5,0.50) 70%,
-    rgba(5,5,5,0.35) 100%
-  );
-}
-.hp-about__team-info {
-  position: relative; z-index: 2; max-width: 720px;
-  padding: 60px clamp(32px, 8vw, 120px);
-}
-.hp-about__team-counter {
-  font-family: var(--font-label); font-size: 13px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
-  margin-bottom: 24px; opacity: 0; transform: translateY(16px);
-  display: flex; align-items: center; gap: 12px;
-}
-.hp-about__team-counter::after {
-  content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
-}
-.hp-about__team-name {
-  font-family: var(--font-display); font-size: clamp(52px, 8vw, 110px);
-  font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em;
-  line-height: 0.92; margin-bottom: 12px; color: var(--white);
-}
-.hp-about__team-name .char {
-  display: inline-block; opacity: 0;
-  transform: translateY(50px) scale(0.85); filter: blur(6px);
-}
-.hp-about__team-role {
-  font-family: var(--font-label); font-size: clamp(13px, 1.3vw, 15px);
-  font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--white-80); position: relative; display: inline-block;
-  padding-bottom: 8px; margin-bottom: 32px; opacity: 0;
-}
-.hp-about__team-role::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
-  background: var(--accent); transition: width 1s var(--ease-out-expo) 0.5s;
-}
-.hp-about__team-slide.is-active .hp-about__team-role::after { width: 100%; }
-.hp-about__team-quote {
-  font-family: var(--font-body); font-size: clamp(18px, 2.2vw, 24px);
-  font-weight: 400; color: var(--white-80); line-height: 1.6;
-  font-style: italic; letter-spacing: 0.01em; min-height: 64px; max-width: 540px;
-}
-.hp-about__team-quote .tw-cursor {
-  display: inline-block; width: 2px; height: 1.1em;
-  background: var(--accent); margin-left: 3px;
-  animation: hp-blink 0.7s step-end infinite; vertical-align: text-bottom;
-}
-@keyframes hp-blink { 50% { opacity: 0; } }
-/* Bio line below quote */
-.hp-about__team-bio {
-  margin-top: 28px; font-size: 14px; color: var(--white-60);
-  line-height: 1.7; max-width: 480px; opacity: 0; transform: translateY(16px);
-  border-left: 2px solid var(--accent); padding-left: 16px;
-}
-
-/* Team progress dots */
-.hp-about__team-dots {
-  position: fixed; right: 36px; top: 50%; transform: translateY(-50%);
-  z-index: 100; display: flex; flex-direction: column; gap: 14px;
-  opacity: 0; pointer-events: none; transition: opacity 0.5s;
-}
-.hp-about__team-dots.is-visible { opacity: 1; pointer-events: auto; }
-.hp-about__team-dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  border: 2px solid var(--white-20); background: transparent;
-  cursor: pointer; transition: all 0.4s var(--ease-out-expo); position: relative;
-}
-.hp-about__team-dot.is-active { border-color: var(--accent); background: var(--accent); transform: scale(1.25); box-shadow: 0 0 12px var(--accent-glow); }
-
-@media (max-width: 768px) {
-  .hp-about__team-slide { min-height: 100vh; padding: 60px 0; }
-  .hp-about__team-dots { display: none; }
-  .hp-about__team-overlay { background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.7) 50%, rgba(5,5,5,0.85) 100%); }
-}
-
-/* ═══════════════════════════════════════
-   5. VALUES MARQUEE
-   ═══════════════════════════════════════ */
-.hp-about__marquee {
-  padding: 64px 0; background: var(--bg-black); overflow: hidden;
-  border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
-}
-.hp-about__marquee-track { display: flex; width: max-content; animation: hp-marquee 35s linear infinite; }
-.hp-about__marquee-item {
-  flex-shrink: 0; font-family: var(--font-display);
-  font-size: clamp(20px, 3vw, 36px); font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.05em;
-  color: var(--white-20); white-space: nowrap; padding: 0 clamp(24px, 3vw, 48px);
-  transition: color 0.3s;
-}
-.hp-about__marquee-item.is-accent { color: var(--accent); }
-.hp-about__marquee-sep { flex-shrink: 0; font-size: clamp(20px, 3vw, 36px); color: var(--white-08); padding: 0; }
-@keyframes hp-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-/* ═══════════════════════════════════════
-   6. CLOSING CTA
-   ═══════════════════════════════════════ */
-.hp-about__cta {
-  position: relative; width: 100%; min-height: 85vh;
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 120px 24px; overflow: hidden; background: var(--bg-black);
-}
-.hp-about__cta-glow {
+/* Animated grid lines — luxury feel */
+.hpa-hero__grid {
   position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 50% 40% at 50% 60%, var(--accent-glow) 0%, transparent 70%),
-    radial-gradient(circle at 30% 30%, rgba(255,43,43,0.04) 0%, transparent 50%);
-  animation: hp-glow-drift 10s ease-in-out infinite alternate;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 75%);
 }
-@keyframes hp-glow-drift { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-.hp-about__cta-content { position: relative; z-index: 1; max-width: 860px; }
-.hp-about__cta-eyebrow {
-  font-family: var(--font-label); font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
-  margin-bottom: 24px;
+/* Floating number accent */
+.hpa-hero__bg-num {
+  position: absolute; right: clamp(20px, 5vw, 80px); top: 50%; transform: translateY(-50%);
+  font-family: var(--f-display); font-size: clamp(200px, 28vw, 420px); font-weight: 400;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  z-index: 0; line-height: 1; user-select: none; pointer-events: none;
+  letter-spacing: -0.05em;
 }
-.hp-about__cta-heading {
-  font-family: var(--font-display); font-size: clamp(36px, 6vw, 80px);
-  font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em;
-  line-height: 1.0; margin-bottom: 28px; color: var(--white);
+.hpa-hero__content { position: relative; z-index: 2; }
+.hpa-hero__label {
+  font-family: var(--f-label); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.28em; color: var(--hp-red);
+  display: inline-flex; align-items: center; gap: 14px; margin-bottom: clamp(20px, 3vh, 36px);
+  opacity: 0;
 }
-.hp-about__cta-sub {
-  font-size: clamp(16px, 1.6vw, 19px); color: var(--white-60);
-  line-height: 1.7; margin-bottom: 52px; max-width: 560px; margin-left: auto; margin-right: auto;
+.hpa-hero__label::before {
+  content: ''; display: block; width: 36px; height: 1px; background: var(--hp-red);
 }
-.hp-about__cta-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 20px 56px; font-family: var(--font-display);
-  font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
-  color: var(--white); background: var(--accent); border: none;
-  border-radius: 60px; text-decoration: none; cursor: pointer;
-  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
+.hpa-hero__h1 {
+  font-family: var(--f-display); font-size: clamp(64px, 13vw, 200px);
+  font-weight: 400; letter-spacing: -0.01em; line-height: 0.88;
+  text-transform: uppercase; color: var(--hp-w100);
+  margin-bottom: clamp(24px, 4vh, 48px);
+}
+.hpa-hero__h1 .w { display: inline-block; opacity: 0; transform: translateY(120%) rotateX(20deg); filter: blur(12px); transform-origin: 50% 100%; }
+.hpa-hero__h1 .w--red { color: var(--hp-red); }
+.hpa-hero__sub {
+  font-family: var(--f-body); font-size: clamp(15px, 1.6vw, 19px);
+  font-weight: 400; color: var(--hp-w65); line-height: 1.7;
+  max-width: clamp(280px, 45vw, 580px); opacity: 0; transform: translateY(24px);
+}
+/* Stats row — bottom bar */
+.hpa-hero__stats {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; border-top: 1px solid var(--hp-border);
+  z-index: 2;
+}
+.hpa-hero__stat {
+  flex: 1; padding: clamp(20px, 3vh, 32px) clamp(24px, 3vw, 48px);
+  border-right: 1px solid var(--hp-border);
+  opacity: 0; transform: translateY(20px);
+  transition: background 0.3s;
+}
+.hpa-hero__stat:last-child { border-right: none; }
+.hpa-hero__stat:hover { background: var(--hp-card); }
+.hpa-hero__stat-n {
+  font-family: var(--f-display); font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400; color: var(--hp-w100); line-height: 1; display: block;
+}
+.hpa-hero__stat-n span { color: var(--hp-red); }
+.hpa-hero__stat-l {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.16em; color: var(--hp-w40); margin-top: 6px; display: block;
+}
+/* Scroll line */
+.hpa-hero__scrollcue {
+  position: absolute; right: clamp(24px, 4vw, 60px); bottom: 120px;
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.hpa-hero__scrollcue span { font-size: 9px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--hp-w40); writing-mode: vertical-rl; }
+.hpa-hero__scrollcue-line { width: 1px; height: 64px; overflow: hidden; }
+.hpa-hero__scrollcue-line::after { content: ''; display: block; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, var(--hp-red)); animation: hpa-scrollcue 2.2s ease-in-out infinite; }
+@keyframes hpa-scrollcue { 0%{transform:translateY(-100%)} 50%,100%{transform:translateY(200%)} }
+@media (max-width:768px) {
+  .hpa-hero { padding-bottom: 90px; }
+  .hpa-hero__stats { position: relative; flex-wrap: wrap; }
+  .hpa-hero__stat { flex: 1 1 50%; border-bottom: 1px solid var(--hp-border); }
+  .hpa-hero__bg-num { display: none; }
+  .hpa-hero__scrollcue { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════
+   §2 — MANIFESTO: Full-width bold text reveal
+══════════════════════════════════════════════════════ */
+.hpa-manifesto {
+  padding: clamp(80px, 12vh, 140px) clamp(24px, 6vw, 100px);
+  background: var(--hp-dark);
+  border-top: 1px solid var(--hp-border);
+}
+.hpa-manifesto__eyebrow {
+  font-family: var(--f-label); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.28em; color: var(--hp-red);
+  margin-bottom: 56px; display: flex; align-items: center; gap: 16px;
+}
+.hpa-manifesto__eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--hp-red); }
+.hpa-manifesto__lines { display: flex; flex-direction: column; gap: 0; }
+.hpa-manifesto__line {
+  font-family: var(--f-display); font-size: clamp(32px, 6vw, 88px);
+  font-weight: 400; line-height: 1.05; text-transform: uppercase;
+  color: var(--hp-w15); padding: clamp(12px, 2vh, 20px) 0;
+  border-bottom: 1px solid var(--hp-border); transition: color 0.5s var(--ease-expo);
+  cursor: default; display: flex; align-items: center; gap: 24px;
+}
+.hpa-manifesto__line .hpa-manifesto__line-num {
+  font-family: var(--f-label); font-size: 12px; font-weight: 700;
+  color: var(--hp-w15); letter-spacing: 0.1em; min-width: 32px;
+  transition: color 0.5s;
+}
+.hpa-manifesto__line.is-lit { color: var(--hp-w100); }
+.hpa-manifesto__line.is-lit .hpa-manifesto__line-num { color: var(--hp-red); }
+.hpa-manifesto__line em { color: var(--hp-red); font-style: normal; }
+@media (max-width:768px) {
+  .hpa-manifesto__line { font-size: clamp(26px, 7vw, 44px); }
+}
+
+/* ══════════════════════════════════════════════════════
+   §3 — PRINCIPLES: Asymmetric bento cards
+══════════════════════════════════════════════════════ */
+.hpa-principles {
+  padding: clamp(80px, 10vh, 140px) clamp(24px, 5vw, 80px);
+  background: var(--hp-black);
+}
+.hpa-principles__top {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 64px; gap: 40px; flex-wrap: wrap;
+}
+.hpa-principles__eyebrow { font-family: var(--f-label); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; color: var(--hp-red); margin-bottom: 16px; }
+.hpa-principles__heading { font-family: var(--f-display); font-size: clamp(40px, 6vw, 80px); font-weight: 400; text-transform: uppercase; line-height: 0.95; color: var(--hp-w100); }
+.hpa-principles__sub { font-size: 15px; color: var(--hp-w65); line-height: 1.7; max-width: 340px; align-self: flex-end; }
+
+.hpa-principles__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+
+/* Card base */
+.hpa-pc {
+  border-radius: 20px; border: 1px solid var(--hp-border);
+  background: var(--hp-card); padding: clamp(28px, 4vw, 48px);
   position: relative; overflow: hidden;
+  transition: border-color 0.4s, transform 0.5s var(--ease-expo), box-shadow 0.4s;
+  opacity: 0; transform: translateY(48px); filter: blur(6px);
 }
-.hp-about__cta-btn::after {
+.hpa-pc.is-in { opacity: 1; transform: translateY(0); filter: blur(0); }
+.hpa-pc::before {
   content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
-  opacity: 0; transition: opacity 0.3s;
+  background: linear-gradient(135deg, rgba(255,43,43,0.05) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
 }
-.hp-about__cta-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 48px rgba(255,43,43,0.35); }
-.hp-about__cta-btn:hover::after { opacity: 1; }
-.hp-about__cta-btn svg { width: 16px; height: 16px; transition: transform 0.3s; }
-.hp-about__cta-btn:hover svg { transform: translateX(4px); }
+.hpa-pc:hover { border-color: var(--hp-border-red); box-shadow: 0 20px 60px rgba(255,43,43,0.07); }
+.hpa-pc:hover::before { opacity: 1; }
 
-/* ═══════════════════════════════════════
-   UTILITY: Fade-up reveal
-   ═══════════════════════════════════════ */
-.hp-about__reveal {
-  opacity: 0; transform: translateY(44px); filter: blur(4px);
-  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo), filter 0.9s var(--ease-out-expo);
+/* Grid placement */
+.hpa-pc--1 { grid-column: span 5; }
+.hpa-pc--2 { grid-column: span 7; display: flex; align-items: center; }
+.hpa-pc--3 { grid-column: span 4; }
+.hpa-pc--4 { grid-column: span 4; }
+.hpa-pc--5 { grid-column: span 4; background: var(--hp-red); border-color: transparent; }
+.hpa-pc--5::before { background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%); }
+.hpa-pc--5:hover { border-color: transparent; box-shadow: 0 20px 60px rgba(255,43,43,0.4); }
+
+@media (max-width:1024px) {
+  .hpa-pc--1, .hpa-pc--2 { grid-column: span 12; }
+  .hpa-pc--3, .hpa-pc--4, .hpa-pc--5 { grid-column: span 12; }
+  .hpa-pc--2 { flex-direction: column; align-items: flex-start; }
 }
-.hp-about__reveal.is-vis { opacity: 1; transform: translateY(0); filter: blur(0); }
-.hp-about__reveal[data-delay="1"] { transition-delay: 0.1s; }
-.hp-about__reveal[data-delay="2"] { transition-delay: 0.2s; }
-.hp-about__reveal[data-delay="3"] { transition-delay: 0.3s; }
+@media (max-width:768px) {
+  .hpa-principles__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hpa-pc--1, .hpa-pc--2 { grid-column: span 2; }
+  .hpa-pc--3, .hpa-pc--4, .hpa-pc--5 { grid-column: span 2; }
+}
 
-/* ═══════════════════════════════════════
-   ACCESSIBILITY
-   ═══════════════════════════════════════ */
+.hpa-pc__num {
+  font-family: var(--f-display); font-size: clamp(64px, 9vw, 120px);
+  font-weight: 400; color: var(--hp-w06); line-height: 1; margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.hpa-pc--5 .hpa-pc__num { color: rgba(255,255,255,0.15); }
+.hpa-pc__icon { width: 48px; height: 48px; margin-bottom: 24px; color: var(--hp-red); }
+.hpa-pc--5 .hpa-pc__icon { color: var(--hp-w100); }
+.hpa-pc__title {
+  font-family: var(--f-display); font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400; text-transform: uppercase; color: var(--hp-w100); margin-bottom: 12px;
+}
+.hpa-pc--5 .hpa-pc__title { color: var(--hp-w100); }
+.hpa-pc__desc { font-size: 14px; color: var(--hp-w65); line-height: 1.75; max-width: 320px; }
+.hpa-pc--5 .hpa-pc__desc { color: rgba(255,255,255,0.85); }
+
+/* Wide card (pc-2) special layout */
+.hpa-pc--2 .hpa-pc__inner { max-width: 480px; }
+.hpa-pc--2 .hpa-pc__visual {
+  flex: 1; display: flex; align-items: center; justify-content: center; min-height: 160px;
+}
+.hpa-pc--2 .hpa-pc__visual-text {
+  font-family: var(--f-display); font-size: clamp(80px, 12vw, 160px); font-weight: 400;
+  text-transform: uppercase; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+  line-height: 1; letter-spacing: -0.03em; white-space: nowrap;
+  animation: hpa-float 6s ease-in-out infinite;
+}
+@keyframes hpa-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+/* ══════════════════════════════════════════════════════
+   §4 — TEAM: Full-screen editorial slides
+══════════════════════════════════════════════════════ */
+.hpa-team { background: var(--hp-dark); }
+.hpa-team__intro {
+  padding: clamp(80px, 10vh, 120px) clamp(24px, 6vw, 100px) clamp(40px, 6vh, 72px);
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--hp-border);
+}
+.hpa-team__eyebrow { font-family: var(--f-label); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; color: var(--hp-red); margin-bottom: 16px; }
+.hpa-team__heading { font-family: var(--f-display); font-size: clamp(40px, 7vw, 96px); font-weight: 400; text-transform: uppercase; line-height: 0.93; color: var(--hp-w100); }
+.hpa-team__intro-sub { font-size: 15px; color: var(--hp-w65); line-height: 1.7; max-width: 320px; align-self: flex-end; }
+
+/* Individual team slides */
+.hpa-team__slide {
+  position: relative; width: 100%; min-height: 85vh; overflow: hidden;
+  display: flex; align-items: stretch; border-bottom: 1px solid var(--hp-border);
+}
+.hpa-team__slide-bg {
+  position: absolute; inset: 0; z-index: 0;
+  transition: filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(100%) brightness(0.2); transform: scale(1.06); will-change: filter, transform;
+}
+.hpa-team__slide.in-view .hpa-team__slide-bg { filter: grayscale(40%) brightness(0.30); }
+
+/* Left content panel */
+.hpa-team__panel-left {
+  position: relative; z-index: 2; flex: 0 0 55%;
+  padding: clamp(48px, 8vh, 100px) clamp(32px, 6vw, 100px);
+  background: linear-gradient(90deg, rgba(3,3,3,0.96) 0%, rgba(3,3,3,0.85) 60%, rgba(3,3,3,0.4) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hpa-team__idx {
+  font-family: var(--f-label); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.25em; color: var(--hp-red);
+  margin-bottom: 24px; display: flex; align-items: center; gap: 12px; opacity: 0;
+}
+.hpa-team__idx::after { content: ''; display: block; height: 1px; width: 40px; background: var(--hp-red); }
+.hpa-team__name {
+  font-family: var(--f-display); font-size: clamp(64px, 9vw, 130px);
+  font-weight: 400; text-transform: uppercase; letter-spacing: -0.02em;
+  line-height: 0.88; color: var(--hp-w100); margin-bottom: 12px;
+  overflow: hidden;
+}
+.hpa-team__name-inner { display: block; transform: translateY(110%); opacity: 0; }
+.hpa-team__role {
+  font-family: var(--f-label); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--hp-w65);
+  margin-bottom: 36px; opacity: 0; position: relative; display: inline-block; padding-bottom: 6px;
+}
+.hpa-team__role::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1.5px;
+  background: var(--hp-red); transition: width 1.2s var(--ease-expo) 0.6s;
+}
+.hpa-team__slide.in-view .hpa-team__role::after { width: 100%; }
+.hpa-team__quote {
+  font-family: var(--f-body); font-size: clamp(18px, 2vw, 24px);
+  font-weight: 300; color: var(--hp-w85); line-height: 1.65; font-style: italic;
+  max-width: 480px; min-height: 80px; margin-bottom: 32px;
+}
+.hpa-team__quote .tw { display: inline-block; width: 2px; height: 1em; background: var(--hp-red); margin-left: 2px; animation: hpa-blink 0.75s step-end infinite; vertical-align: text-bottom; }
+@keyframes hpa-blink { 50%{opacity:0} }
+.hpa-team__bio {
+  font-size: 14px; color: var(--hp-w40); line-height: 1.8; max-width: 420px;
+  border-left: 2px solid var(--hp-border-red); padding-left: 20px;
+  opacity: 0; transform: translateY(20px);
+}
+
+/* Right number panel */
+.hpa-team__panel-right {
+  position: relative; z-index: 2; flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, transparent 0%, rgba(3,3,3,0.4) 100%);
+}
+.hpa-team__big-num {
+  font-family: var(--f-display); font-size: clamp(160px, 28vw, 400px);
+  font-weight: 400; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+  line-height: 1; user-select: none;
+}
+
+/* Team nav dots */
+.hpa-team__nav { display: flex; justify-content: center; gap: 20px; padding: 32px; border-bottom: 1px solid var(--hp-border); }
+.hpa-team__nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hp-w15); border: none; cursor: pointer; transition: all 0.3s; }
+.hpa-team__nav-dot.on { background: var(--hp-red); transform: scale(1.5); box-shadow: 0 0 14px var(--hp-red-glow); }
+
+@media (max-width:768px) {
+  .hpa-team__slide { flex-direction: column; min-height: 100vh; }
+  .hpa-team__panel-left { flex: 1; background: linear-gradient(180deg, rgba(3,3,3,0.6) 0%, rgba(3,3,3,0.96) 60%); }
+  .hpa-team__panel-right { display: none; }
+  .hpa-team__name { font-size: clamp(52px, 14vw, 80px); }
+}
+
+/* ══════════════════════════════════════════════════════
+   §5 — MARQUEE
+══════════════════════════════════════════════════════ */
+.hpa-marquee {
+  padding: 48px 0; background: var(--hp-black);
+  border-top: 1px solid var(--hp-border); overflow: hidden;
+}
+.hpa-marquee__row { display: flex; width: max-content; gap: 0; }
+.hpa-marquee__row--rev { animation: hpa-mq-rev 40s linear infinite; }
+.hpa-marquee__row--fwd { animation: hpa-mq 32s linear infinite; }
+@keyframes hpa-mq { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes hpa-mq-rev { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)} }
+.hpa-marquee__item {
+  flex-shrink: 0; font-family: var(--f-display); font-size: clamp(20px, 3vw, 40px);
+  font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--hp-w15); padding: 0 clamp(24px, 3vw, 48px); white-space: nowrap; line-height: 1.2;
+}
+.hpa-marquee__item.r { color: var(--hp-red); }
+.hpa-marquee__sep { flex-shrink: 0; font-size: clamp(20px, 3vw, 40px); color: var(--hp-border); padding: 0; line-height: 1.2; }
+
+/* ══════════════════════════════════════════════════════
+   §6 — CLOSING CTA
+══════════════════════════════════════════════════════ */
+.hpa-cta {
+  position: relative; min-height: 80vh; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+  padding: clamp(80px, 14vh, 160px) clamp(24px, 6vw, 80px);
+  background: var(--hp-black); overflow: hidden;
+}
+.hpa-cta__glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 50% 65%, rgba(255,43,43,0.10) 0%, transparent 65%);
+  animation: hpa-cta-pulse 7s ease-in-out infinite alternate;
+}
+@keyframes hpa-cta-pulse { 0%{opacity:0.5; transform:scale(0.95)} 100%{opacity:1; transform:scale(1.05)} }
+/* Full-width text behind */
+.hpa-cta__bg-text {
+  position: absolute; bottom: -0.1em; left: 50%; transform: translateX(-50%);
+  font-family: var(--f-display); font-size: clamp(80px, 18vw, 280px);
+  font-weight: 400; text-transform: uppercase; color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03); white-space: nowrap;
+  pointer-events: none; user-select: none; letter-spacing: -0.04em;
+}
+.hpa-cta__content { position: relative; z-index: 1; max-width: 820px; }
+.hpa-cta__eyebrow { font-family: var(--f-label); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; color: var(--hp-red); margin-bottom: 28px; }
+.hpa-cta__h { font-family: var(--f-display); font-size: clamp(40px, 8vw, 110px); font-weight: 400; text-transform: uppercase; line-height: 0.93; color: var(--hp-w100); margin-bottom: 28px; }
+.hpa-cta__sub { font-size: clamp(15px, 1.5vw, 18px); color: var(--hp-w65); line-height: 1.7; margin-bottom: 56px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.hpa-cta__btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 20px 60px; font-family: var(--f-display); font-size: 20px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--hp-w100); background: var(--hp-red);
+  border-radius: 4px; cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.4s var(--ease-expo), box-shadow 0.4s;
+}
+.hpa-cta__btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.6s;
+}
+.hpa-cta__btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 20px 60px rgba(255,43,43,0.40); }
+.hpa-cta__btn:hover::before { left: 100%; }
+.hpa-cta__btn svg { width: 20px; height: 20px; transition: transform 0.3s; }
+.hpa-cta__btn:hover svg { transform: translateX(6px); }
+
+/* ══════════════════════════════════════════════════════
+   UTILITY ANIMATIONS
+══════════════════════════════════════════════════════ */
+.hpa-up { opacity: 0; transform: translateY(48px); filter: blur(4px); transition: opacity 0.9s var(--ease-expo), transform 0.9s var(--ease-expo), filter 0.7s var(--ease-expo); }
+.hpa-up.in { opacity:1; transform:translateY(0); filter:blur(0); }
+.hpa-up[data-d="1"] { transition-delay: 0.12s; }
+.hpa-up[data-d="2"] { transition-delay: 0.22s; }
+.hpa-up[data-d="3"] { transition-delay: 0.34s; }
+.hpa-up[data-d="4"] { transition-delay: 0.46s; }
+
 @media (prefers-reduced-motion: reduce) {
-  .hp-about__hero-headline .word, .hp-about__team-name .char, .hp-about__reveal,
-  .hp-about__hero-eyebrow, .hp-about__hero-sub, .hp-about__hero-stats,
-  .hp-about__team-counter, .hp-about__team-role, .hp-about__team-bio {
-    opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important;
-  }
-  .hp-about__marquee-track { animation: none !important; }
-  .hp-about__scroll-cue-line::after { animation: none !important; }
-  .hp-about__hero-grain { animation: none !important; }
+  .hpa-up, .hpa-hero__h1 .w, .hpa-hero__label, .hpa-hero__sub, .hpa-hero__stat,
+  .hpa-team__idx, .hpa-team__name-inner, .hpa-team__role, .hpa-team__bio,
+  .hpa-pc { opacity:1!important; transform:none!important; filter:none!important; transition:none!important; }
+  .hpa-marquee__row--fwd, .hpa-marquee__row--rev, .hpa-cta__glow { animation:none!important; }
+  .hpa-hero__scrollcue-line::after { animation:none!important; }
 }
 </style>
 
-<!-- ─── HTML ──────────────────────────────────────────────────── -->
-<div class="hp-about" id="HpAbout">
+<!-- ═══════ HTML ═══════ -->
+<div id="hpa">
+  <div class="hpa-bar" id="hpaBar"></div>
+  <div class="hpa-dot" id="hpaDot"></div>
+  <div class="hpa-ring" id="hpaRing"></div>
 
-  <div class="hp-about__progress" id="HpAboutProgress"></div>
-  <div class="hp-about__cursor" id="HpCursor"></div>
-  <div class="hp-about__cursor-ring" id="HpCursorRing"></div>
-
-  <!-- ═══════ SECTION 1 — HERO ═══════ -->
-  <section class="hp-about__hero" id="HpAboutHero">
-    <div class="hp-about__hero-bg"></div>
-    <div class="hp-about__hero-grain"></div>
-    <div class="hp-about__hero-content">
-      <div class="hp-about__hero-eyebrow" id="HpHeroEyebrow">The Story Behind The Standard</div>
-      <h1 class="hp-about__hero-headline" id="HpHeroHeadline">
-        <span class="word">PROTECTION</span> <span class="word">IS</span> <span class="word">A</span> <span class="word">PROMISE.</span>
+  <!-- ══ §1 HERO ══ -->
+  <section class="hpa-hero" id="hpaHero">
+    <div class="hpa-hero__glow"></div>
+    <div class="hpa-hero__grid"></div>
+    <div class="hpa-hero__bg-num" aria-hidden="true">HP</div>
+    <div class="hpa-hero__scrollcue" aria-hidden="true">
+      <div class="hpa-hero__scrollcue-line"></div>
+      <span>Scroll</span>
+    </div>
+    <div class="hpa-hero__content">
+      <div class="hpa-hero__label" id="hpaHeroLabel">Hague Protect · Est. 2021 · Amsterdam</div>
+      <h1 class="hpa-hero__h1" id="hpaH1">
+        <span class="w">WE</span><br>
+        <span class="w">GUARD</span><br>
+        <span class="w w--red">THE</span><br>
+        <span class="w">CULTURE.</span>
       </h1>
-      <p class="hp-about__hero-sub" id="HpHeroSub">We don't sell products. We deliver trust — a commitment to preserving the art and soul of every sneaker, every material, every story.</p>
-      <div class="hp-about__hero-stats" id="HpHeroStats">
-        <div class="hp-about__hero-stat">
-          <div class="hp-about__hero-stat-num">50K+</div>
-          <div class="hp-about__hero-stat-label">Happy Customers</div>
-        </div>
-        <div class="hp-about__hero-stat">
-          <div class="hp-about__hero-stat-num">40+</div>
-          <div class="hp-about__hero-stat-label">Cities Served</div>
-        </div>
-        <div class="hp-about__hero-stat">
-          <div class="hp-about__hero-stat-num">99%</div>
-          <div class="hp-about__hero-stat-label">Satisfaction Rate</div>
-        </div>
-      </div>
+      <p class="hpa-hero__sub" id="hpaHeroSub">Not just sneaker care — a global commitment to the art, identity, and culture that footwear carries. Every pair deserves to endure.</p>
     </div>
-    <div class="hp-about__scroll-cue">
-      <span>Scroll to explore</span>
-      <div class="hp-about__scroll-cue-line"></div>
+    <div class="hpa-hero__stats" id="hpaHeroStats">
+      <div class="hpa-hero__stat"><span class="hpa-hero__stat-n">50<span>K</span></span><span class="hpa-hero__stat-l">Trusted Customers</span></div>
+      <div class="hpa-hero__stat"><span class="hpa-hero__stat-n">40<span>+</span></span><span class="hpa-hero__stat-l">Cities Served</span></div>
+      <div class="hpa-hero__stat"><span class="hpa-hero__stat-n">99<span>%</span></span><span class="hpa-hero__stat-l">Satisfaction Rate</span></div>
+      <div class="hpa-hero__stat"><span class="hpa-hero__stat-n">02<span>+</span></span><span class="hpa-hero__stat-l">Years in Labs</span></div>
     </div>
   </section>
 
-  <!-- ═══════ SECTION 2 — ORIGIN STORY ═══════ -->
-  <section class="hp-about__origin" id="HpAboutOrigin">
-    <div class="hp-about__origin-pin" id="HpOriginPin">
-      <div class="hp-about__origin-ambient" id="HpOriginAmbient"
-           style="background: radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.05) 0%, transparent 60%);"></div>
-      <div class="hp-about__origin-content">
-        <div class="hp-about__origin-label hp-about__reveal">Our Origin</div>
-        <p class="hp-about__origin-line" data-line="0">It started with a ruined pair of Jordans and one relentless question: <em>why doesn't anything actually work?</em></p>
-        <p class="hp-about__origin-line" data-line="1">We spent 2 years in labs, testing every formulation — until we built something that didn't just clean, but truly <em>preserved.</em></p>
-        <p class="hp-about__origin-line" data-line="2">Today, we're trusted by <em>50,000+</em> collectors, athletes, and sneakerheads across <em>40+ cities.</em></p>
-        <p class="hp-about__origin-line" data-line="3">Because sneakers aren't just shoes. They're <em>identity.</em> And identity deserves protection.</p>
-      </div>
-      <div class="hp-about__origin-progress" id="HpOriginProgress">
-        <div class="hp-about__origin-pip" data-pip="0"></div>
-        <div class="hp-about__origin-pip" data-pip="1"></div>
-        <div class="hp-about__origin-pip" data-pip="2"></div>
-        <div class="hp-about__origin-pip" data-pip="3"></div>
-      </div>
+  <!-- ══ §2 MANIFESTO ══ -->
+  <section class="hpa-manifesto" id="hpaManifesto">
+    <div class="hpa-manifesto__eyebrow">Our Manifesto</div>
+    <div class="hpa-manifesto__lines" id="hpaManifestoLines">
+      <div class="hpa-manifesto__line hpa-up"><span class="hpa-manifesto__line-num">01</span>It started with a ruined pair of Jordans.</div>
+      <div class="hpa-manifesto__line hpa-up" data-d="1"><span class="hpa-manifesto__line-num">02</span>And the question nobody could answer: <em>Why doesn't anything work?</em></div>
+      <div class="hpa-manifesto__line hpa-up" data-d="2"><span class="hpa-manifesto__line-num">03</span>2 years. 300+ formulations. One standard.</div>
+      <div class="hpa-manifesto__line hpa-up" data-d="3"><span class="hpa-manifesto__line-num">04</span>Sneakers are <em>identity.</em> And identity deserves <em>protection.</em></div>
     </div>
   </section>
 
-  <!-- ═══════ SECTION 3 — PHILOSOPHY ═══════ -->
-  <section class="hp-about__philosophy" id="HpAboutPhilosophy">
-    <div class="hp-about__philosophy-header hp-about__reveal">
-      <div class="hp-about__philosophy-eyebrow">Our Philosophy</div>
-      <h2 class="hp-about__philosophy-heading">Four Pillars. One Standard.</h2>
+  <!-- ══ §3 PRINCIPLES ══ -->
+  <section class="hpa-principles" id="hpaPrinciples">
+    <div class="hpa-principles__top">
+      <div>
+        <div class="hpa-principles__eyebrow">How We Work</div>
+        <h2 class="hpa-principles__heading hpa-up">Four Pillars.<br>One Obsession.</h2>
+      </div>
+      <p class="hpa-principles__sub hpa-up" data-d="1">Every product, every formula, every drop is built on these four non-negotiables. No shortcuts. No compromises.</p>
     </div>
-    <div class="hp-about__philosophy-track" id="HpPhiloTrack">
-      <div class="hp-about__philosophy-card" data-pillar>
-        <div class="hp-about__philosophy-num">01</div>
-        <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="12"/><path d="M14 6v8l6 4"/></svg>
-        </div>
-        <h3 class="hp-about__philosophy-title">Cleanse</h3>
-        <p class="hp-about__philosophy-desc">Bioenzyme-powered formulations that lift dirt at the molecular level — no harsh chemicals, no material damage. Ever.</p>
+    <div class="hpa-principles__grid">
+      <div class="hpa-pc hpa-pc--1">
+        <div class="hpa-pc__num">01</div>
+        <div class="hpa-pc__icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M12 16s1.5 3 4 3 4-3 4-3"/><circle cx="12" cy="13" r="1.5" fill="currentColor"/><circle cx="20" cy="13" r="1.5" fill="currentColor"/></svg></div>
+        <h3 class="hpa-pc__title">Cleanse</h3>
+        <p class="hpa-pc__desc">Bioenzyme formulations that lift contamination at the molecular level. No harsh acids. No bleach. No damage — ever.</p>
       </div>
-      <div class="hp-about__philosophy-card" data-pillar>
-        <div class="hp-about__philosophy-num">02</div>
-        <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2L2 9v10l12 7 12-7V9L14 2z"/><path d="M2 9l12 7m0 0l12-7M14 16v10"/></svg>
+      <div class="hpa-pc hpa-pc--2">
+        <div class="hpa-pc__inner">
+          <div class="hpa-pc__num">02</div>
+          <div class="hpa-pc__icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3L3 10v12l13 7 13-7V10L16 3z"/><path d="M3 10l13 7m0 0l13-7M16 17v12"/></svg></div>
+          <h3 class="hpa-pc__title">Protect</h3>
+          <p class="hpa-pc__desc">Nano-shield barrier technology that repels water, salt, UV rays, and environmental damage without altering material feel.</p>
         </div>
-        <h3 class="hp-about__philosophy-title">Protect</h3>
-        <p class="hp-about__philosophy-desc">Nano-coating shields that repel water, salt, UV, and environmental aggression — invisible armor for every material type.</p>
+        <div class="hpa-pc__visual"><div class="hpa-pc__visual-text" aria-hidden="true">PROTECT</div></div>
       </div>
-      <div class="hp-about__philosophy-card" data-pillar>
-        <div class="hp-about__philosophy-num">03</div>
-        <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24l8-12 6 8 4-6 4 10"/><circle cx="22" cy="6" r="4"/></svg>
-        </div>
-        <h3 class="hp-about__philosophy-title">Restore</h3>
-        <p class="hp-about__philosophy-desc">Condition, revive, and bring materials back to their original character. Not new — better than new.</p>
+      <div class="hpa-pc hpa-pc--3">
+        <div class="hpa-pc__num">03</div>
+        <div class="hpa-pc__icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26l8-11 6 7 4-5 6 9"/><circle cx="24" cy="8" r="5"/><line x1="24" y1="3" x2="24" y2="2"/></svg></div>
+        <h3 class="hpa-pc__title">Restore</h3>
+        <p class="hpa-pc__desc">Condition, revive, nourish. Bring materials back — not just to how they looked, but how they felt on day one.</p>
       </div>
-      <div class="hp-about__philosophy-card" data-pillar>
-        <div class="hp-about__philosophy-num">04</div>
-        <div class="hp-about__philosophy-icon">
-          <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2C22 8 26 16 26 22a12 12 0 01-24 0C2 16 6 8 14 2z"/><path d="M14 20c2 0 4-2 4-4s-4-8-4-8-4 6-4 8 2 4 4 4z"/></svg>
-        </div>
-        <h3 class="hp-about__philosophy-title">Preserve</h3>
-        <p class="hp-about__philosophy-desc">Long-term material longevity. We don't just fix shoes — we extend their life, their story, their legacy.</p>
+      <div class="hpa-pc hpa-pc--4">
+        <div class="hpa-pc__num">04</div>
+        <div class="hpa-pc__icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2C24 9 28 18 28 24a12 12 0 01-24 0C4 18 8 9 16 2z"/><path d="M16 22c3 0 5-2.5 5-5s-5-9-5-9-5 6-5 9 2 5 5 5z"/></svg></div>
+        <h3 class="hpa-pc__title">Preserve</h3>
+        <p class="hpa-pc__desc">Long-term longevity. We don't just fix shoes — we extend their life, their story, their legacy beyond what's expected.</p>
+      </div>
+      <div class="hpa-pc hpa-pc--5">
+        <div class="hpa-pc__num">HP</div>
+        <h3 class="hpa-pc__title">Zero<br>Compromise.</h3>
+        <p class="hpa-pc__desc">Every formula is lab-tested against 40+ material types before it reaches your hands. We don't release until it's perfect.</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══════ SECTION 4 — TEAM ═══════ -->
-  <section class="hp-about__team" id="HpAboutTeam">
-
-    <div class="hp-about__team-header">
-      <div class="hp-about__team-eyebrow hp-about__reveal">The People</div>
-      <h2 class="hp-about__team-heading hp-about__reveal" data-delay="1">Meet The Minds Behind The Mission</h2>
+  <!-- ══ §4 TEAM ══ -->
+  <section class="hpa-team" id="hpaTeam">
+    <div class="hpa-team__intro">
+      <div>
+        <div class="hpa-team__eyebrow">The People</div>
+        <h2 class="hpa-team__heading hpa-up">The Minds<br>Behind The<br>Mission.</h2>
+      </div>
+      <p class="hpa-team__intro-sub hpa-up" data-d="1">Three people. One obsession. Relentless pursuit of a standard nobody else was willing to set.</p>
     </div>
 
-    <div class="hp-about__team-dots" id="HpTeamDots">
-      <div class="hp-about__team-dot" data-dot="0"></div>
-      <div class="hp-about__team-dot" data-dot="1"></div>
-      <div class="hp-about__team-dot" data-dot="2"></div>
+    <!-- REPLACE: Member 1 — replace placeholder bg with real portrait img, name, role, quote, bio -->
+    <div class="hpa-team__slide" data-slide="0" id="hpaSlide0">
+      <div class="hpa-team__slide-bg" style="background: linear-gradient(135deg, #0d1117 0%, #1a2332 40%, #0d1117 100%);"></div>
+      <!-- ↑ REPLACE: Remove the div above, add: <img class="hpa-team__slide-bg" src="YOUR_PHOTO_URL" alt="Member Name" style="object-fit:cover;width:100%;height:100%;"> -->
+      <div class="hpa-team__panel-left">
+        <div class="hpa-team__idx" id="hpaIdx0">01 / 03</div>
+        <div class="hpa-team__name"><span class="hpa-team__name-inner" id="hpaName0">MEMBER<br>ONE</span></div><!-- REPLACE: real name -->
+        <div class="hpa-team__role" id="hpaRole0">Founder & CEO</div><!-- REPLACE: real role -->
+        <div class="hpa-team__quote" id="hpaQuote0" data-tw="I don't build products. I build trust — one pair at a time."></div><!-- REPLACE: real quote in data-tw -->
+        <div class="hpa-team__bio" id="hpaBio0">A sneaker obsessive turned founder. After watching prized collection deteriorate from off-the-shelf solutions, he spent two years in labs building what others said was impossible.</div><!-- REPLACE: real bio -->
+      </div>
+      <div class="hpa-team__panel-right"><div class="hpa-team__big-num" aria-hidden="true">01</div></div>
     </div>
 
-    <!-- REPLACE: Member 1 — real name, role, quote, bio, photo -->
-    <div class="hp-about__team-slide" data-member-slide="0">
-      <div class="hp-about__team-portrait">
-        <!-- REPLACE: Use a real <img> tag with src for the portrait photo -->
-        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #0d1117 0%, #161b22 30%, #0d1117 60%, #1a1f2e 100%);"></div>
+    <!-- REPLACE: Member 2 — replace placeholder bg with real portrait img, name, role, quote, bio -->
+    <div class="hpa-team__slide" data-slide="1" id="hpaSlide1">
+      <div class="hpa-team__slide-bg" style="background: linear-gradient(135deg, #170a2e 0%, #2d1a4e 40%, #170a2e 100%);"></div>
+      <div class="hpa-team__panel-left">
+        <div class="hpa-team__idx" id="hpaIdx1">02 / 03</div>
+        <div class="hpa-team__name"><span class="hpa-team__name-inner" id="hpaName1">MEMBER<br>TWO</span></div><!-- REPLACE: real name -->
+        <div class="hpa-team__role" id="hpaRole1">Chief Technology Officer</div><!-- REPLACE: real role -->
+        <div class="hpa-team__quote" id="hpaQuote1" data-tw="Science should feel invisible — until you see the result."></div><!-- REPLACE: real quote in data-tw -->
+        <div class="hpa-team__bio" id="hpaBio1">A materials scientist with 10+ years of formulation experience. She leads R&D at Hague Protect, developing bioenzyme-powered solutions that redefined what sneaker care can achieve.</div><!-- REPLACE: real bio -->
       </div>
-      <div class="hp-about__team-overlay"></div>
-      <div class="hp-about__team-info">
-        <div class="hp-about__team-counter">01 / 03</div>
-        <!-- REPLACE: real name -->
-        <h2 class="hp-about__team-name" data-split-name>MEMBER ONE</h2>
-        <!-- REPLACE: real role -->
-        <div class="hp-about__team-role">Founder & CEO</div>
-        <!-- REPLACE: real quote -->
-        <div class="hp-about__team-quote" data-typewriter="I don't build products. I build trust — one pair at a time."></div>
-        <!-- REPLACE: real bio -->
-        <div class="hp-about__team-bio">A sneaker obsessive turned entrepreneur. After watching his prized collection deteriorate from off-the-shelf solutions, he set out to build something that actually works — and never stops working.</div>
-      </div>
+      <div class="hpa-team__panel-right"><div class="hpa-team__big-num" aria-hidden="true">02</div></div>
     </div>
 
-    <!-- REPLACE: Member 2 — real name, role, quote, bio, photo -->
-    <div class="hp-about__team-slide" data-member-slide="1">
-      <div class="hp-about__team-portrait">
-        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 30%, #1a0a2e 60%, #3d1c6e 100%);"></div>
+    <!-- REPLACE: Member 3 — replace placeholder bg with real portrait img, name, role, quote, bio -->
+    <div class="hpa-team__slide" data-slide="2" id="hpaSlide2">
+      <div class="hpa-team__slide-bg" style="background: linear-gradient(135deg, #0a1a0a 0%, #1a3a1a 40%, #0a1a0a 100%);"></div>
+      <div class="hpa-team__panel-left">
+        <div class="hpa-team__idx" id="hpaIdx2">03 / 03</div>
+        <div class="hpa-team__name"><span class="hpa-team__name-inner" id="hpaName2">MEMBER<br>THREE</span></div><!-- REPLACE: real name -->
+        <div class="hpa-team__role" id="hpaRole2">Chief Marketing Officer</div><!-- REPLACE: real role -->
+        <div class="hpa-team__quote" id="hpaQuote2" data-tw="A brand isn't what you sell. It's what people feel when they hear your name."></div><!-- REPLACE: real quote in data-tw -->
+        <div class="hpa-team__bio" id="hpaBio2">The architect of Hague Protect's cultural identity. From sneaker culture to global commerce — connecting product truth with community trust through every campaign and touchpoint.</div><!-- REPLACE: real bio -->
       </div>
-      <div class="hp-about__team-overlay"></div>
-      <div class="hp-about__team-info">
-        <div class="hp-about__team-counter">02 / 03</div>
-        <h2 class="hp-about__team-name" data-split-name>MEMBER TWO</h2>
-        <div class="hp-about__team-role">Chief Technology Officer</div>
-        <div class="hp-about__team-quote" data-typewriter="Science should feel invisible — until you see the result."></div>
-        <div class="hp-about__team-bio">A materials scientist with a decade of formulation experience. She leads R&D at Hague Protect, developing bioenzyme-powered solutions that redefine what sneaker care can achieve.</div>
-      </div>
+      <div class="hpa-team__panel-right"><div class="hpa-team__big-num" aria-hidden="true">03</div></div>
     </div>
 
-    <!-- REPLACE: Member 3 — real name, role, quote, bio, photo -->
-    <div class="hp-about__team-slide" data-member-slide="2">
-      <div class="hp-about__team-portrait">
-        <div class="hp-about__team-portrait-placeholder" style="background: linear-gradient(135deg, #0a1e0a 0%, #1b3a1b 30%, #0a1e0a 60%, #2a4c2a 100%);"></div>
-      </div>
-      <div class="hp-about__team-overlay"></div>
-      <div class="hp-about__team-info">
-        <div class="hp-about__team-counter">03 / 03</div>
-        <h2 class="hp-about__team-name" data-split-name>MEMBER THREE</h2>
-        <div class="hp-about__team-role">Chief Marketing Officer</div>
-        <div class="hp-about__team-quote" data-typewriter="A brand isn't what you sell. It's what people feel when they hear your name."></div>
-        <div class="hp-about__team-bio">The architect of Hague Protect's identity. From sneaker culture to global commerce, he connects product truth with community trust through every campaign and touchpoint.</div>
-      </div>
+    <div class="hpa-team__nav" id="hpaTeamNav">
+      <button class="hpa-team__nav-dot on" data-nav="0" aria-label="Member 1"></button>
+      <button class="hpa-team__nav-dot" data-nav="1" aria-label="Member 2"></button>
+      <button class="hpa-team__nav-dot" data-nav="2" aria-label="Member 3"></button>
     </div>
   </section>
 
-  <!-- ═══════ SECTION 5 — MARQUEE ═══════ -->
-  <section class="hp-about__marquee">
-    <div class="hp-about__marquee-track">
-      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Safer Choice</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Premium Care</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Global Protection</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Skin Longevity</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Bioenzyme Powered</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Lab Tested</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item">Material First</span><span class="hp-about__marquee-sep">✦</span>
-      <span class="hp-about__marquee-item is-accent">Zero Compromise</span><span class="hp-about__marquee-sep">✦</span>
+  <!-- ══ §5 MARQUEE ══ -->
+  <section class="hpa-marquee" aria-hidden="true">
+    <div class="hpa-marquee__row hpa-marquee__row--fwd">
+      <span class="hpa-marquee__item">Safer Choice</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Premium Care</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Global Protection</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Skin Longevity</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Bioenzyme Science</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Lab Tested</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Zero Compromise</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Material First</span><span class="hpa-marquee__sep">✦</span>
+      <span class="hpa-marquee__item">Safer Choice</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Premium Care</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Global Protection</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Skin Longevity</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Bioenzyme Science</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Lab Tested</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item">Zero Compromise</span><span class="hpa-marquee__sep">✦</span><span class="hpa-marquee__item r">Material First</span><span class="hpa-marquee__sep">✦</span>
     </div>
   </section>
 
-  <!-- ═══════ SECTION 6 — CTA ═══════ -->
-  <section class="hp-about__cta" id="HpAboutCta">
-    <div class="hp-about__cta-glow"></div>
-    <div class="hp-about__cta-content">
-      <div class="hp-about__cta-eyebrow hp-about__reveal">Join The Movement</div>
-      <h2 class="hp-about__cta-heading hp-about__reveal" data-delay="1">Every Sneaker Has a Story.<br>We Help You Keep It Alive.</h2>
-      <p class="hp-about__cta-sub hp-about__reveal" data-delay="2">Explore premium, lab-tested sneaker care solutions trusted by 50,000+ enthusiasts worldwide.</p>
-      <a href="/collections/all" class="hp-about__cta-btn hp-about__reveal" data-delay="3" id="HpCtaBtn">
-        Explore Products
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  <!-- ══ §6 CTA ══ -->
+  <section class="hpa-cta" id="hpaCta">
+    <div class="hpa-cta__glow"></div>
+    <div class="hpa-cta__bg-text" aria-hidden="true">HAGUE</div>
+    <div class="hpa-cta__content">
+      <div class="hpa-cta__eyebrow hpa-up">Join The Movement</div>
+      <h2 class="hpa-cta__h hpa-up" data-d="1">Every Sneaker<br>Has a Story.</h2>
+      <p class="hpa-cta__sub hpa-up" data-d="2">Explore premium, lab-tested sneaker care solutions trusted by 50,000+ enthusiasts worldwide. Zero compromise. Always.</p>
+      <a href="/collections/all" class="hpa-cta__btn hpa-up" data-d="3" id="hpaCtaBtn">
+        Explore All Products
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
       </a>
     </div>
   </section>
-
 </div>
 
-<!-- ─── SCRIPTS ───────────────────────────────────────────────── -->
 <script>
 (function(){
-  const isMobile = window.innerWidth <= 768;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMob = window.innerWidth <= 768;
+  const noMotion = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  const loadJS = (src) => new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = src; s.async = true; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  });
+  function ldJS(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.async=true; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 
   Promise.all([
-    loadJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'),
-    loadJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js')
-  ]).then(() => {
-    if (!isMobile && !prefersReduced) {
-      loadJS('https://unpkg.com/lenis@1.1.13/dist/lenis.min.js').then(() => {
+    ldJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'),
+    ldJS('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js')
+  ]).then(()=>{
+    if(!isMob && !noMotion){
+      ldJS('https://unpkg.com/lenis@1.1.13/dist/lenis.min.js').then(()=>{
         try {
-          const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
-          lenis.on('scroll', ScrollTrigger.update);
-          gsap.ticker.add(time => lenis.raf(time * 1000));
+          const l = new Lenis({duration:1.0, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)), smoothWheel:true});
+          l.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add(t=>l.raf(t*1000));
           gsap.ticker.lagSmoothing(0);
-        } catch(e) {}
-      }).catch(() => {});
+        } catch(e){}
+      }).catch(()=>{});
     }
     gsap.registerPlugin(ScrollTrigger);
-    if (prefersReduced) { showAll(); return; }
-    boot();
+    noMotion ? showAll() : boot();
   });
 
-  function boot() {
-    /* ── Progress bar ── */
-    const bar = document.getElementById('HpAboutProgress');
-    if (bar) window.addEventListener('scroll', () => {
-      bar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
-    }, { passive: true });
+  function boot(){
+    /* ─ Progress bar ─ */
+    const bar = document.getElementById('hpaBar');
+    if(bar) window.addEventListener('scroll',()=>{ bar.style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%'; },{passive:true});
 
-    /* ── Custom cursor ── */
-    if (!isMobile && window.matchMedia('(pointer:fine)').matches) {
-      const dot = document.getElementById('HpCursor'), ring = document.getElementById('HpCursorRing');
-      if (dot && ring) {
-        let mx=0,my=0,rx=0,ry=0;
-        document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; }, {passive:true});
-        (function loop(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14;
-          dot.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)';
-          ring.style.transform='translate('+(rx-22)+'px,'+(ry-22)+'px)';
-          requestAnimationFrame(loop);
-        })();
+    /* ─ Cursor ─ */
+    if(!isMob && window.matchMedia('(pointer:fine)').matches){
+      const dot=document.getElementById('hpaDot'), ring=document.getElementById('hpaRing');
+      if(dot&&ring){ let mx=0,my=0,rx=0,ry=0;
+        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;},{passive:true});
+        (function loop(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13;
+          dot.style.transform='translate('+(mx-3)+'px,'+(my-3)+'px)';
+          ring.style.transform='translate('+(rx-24)+'px,'+(ry-24)+'px)';
+          requestAnimationFrame(loop); })();
       }
     }
 
-    /* ═══ 1. HERO ═══ */
-    const eyebrow = document.getElementById('HpHeroEyebrow');
-    const words = document.querySelectorAll('#HpHeroHeadline .word');
-    const sub = document.getElementById('HpHeroSub');
-    const stats = document.getElementById('HpHeroStats');
+    /* ─ §1 Hero ─ */
+    const label = document.getElementById('hpaHeroLabel');
+    const words = document.querySelectorAll('#hpaH1 .w');
+    const sub   = document.getElementById('hpaHeroSub');
+    const stats = document.querySelectorAll('.hpa-hero__stat');
+    if(label) gsap.to(label,{opacity:1,duration:1,delay:0.1,ease:'power3.out'});
+    words.forEach((w,i)=> gsap.to(w,{opacity:1,y:0,rotateX:0,filter:'blur(0px)',duration:1.1,delay:0.25+i*0.12,ease:'power4.out'}));
+    if(sub) gsap.to(sub,{opacity:1,y:0,duration:1,delay:0.9,ease:'power3.out'});
+    stats.forEach((s,i)=> gsap.to(s,{opacity:1,y:0,duration:0.8,delay:1.2+i*0.08,ease:'power3.out'}));
 
-    gsap.to(eyebrow, { opacity:1, y:0, duration:0.9, delay:0.2, ease:'power3.out' });
-    words.forEach((w,i) => gsap.to(w, { opacity:1, y:0, rotateX:0, filter:'blur(0px)', duration:1, delay:0.4+i*0.1, ease:'power3.out' }));
-    gsap.to(sub, { opacity:1, y:0, duration:0.9, delay:1, ease:'power3.out' });
-    gsap.to(stats, { opacity:1, y:0, duration:0.9, delay:1.3, ease:'power3.out' });
+    /* Hero parallax */
+    gsap.to('#hpaHero .hpa-hero__content',{ scrollTrigger:{trigger:'#hpaHero',start:'top top',end:'bottom top',scrub:true}, y:-80, opacity:0.15, scale:0.97 });
 
-    gsap.to('.hp-about__hero-content', {
-      scrollTrigger: { trigger:'.hp-about__hero', start:'top top', end:'bottom top', scrub:true },
-      y:-100, opacity:0.2, scale:0.96
-    });
-
-    /* ═══ 2. ORIGIN (pinned) ═══ */
-    const oLines = document.querySelectorAll('.hp-about__origin-line');
-    const oPips = document.querySelectorAll('.hp-about__origin-pip');
-    const oAmbient = document.getElementById('HpOriginAmbient');
-
-    if (!isMobile) {
-      const oTl = gsap.timeline({ scrollTrigger: { trigger:'#HpAboutOrigin', start:'top top', end:'bottom bottom', pin:'#HpOriginPin', scrub:0.6 }});
-      const gradients = [
-        'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.05) 0%, transparent 60%)',
-        'radial-gradient(ellipse at 30% 60%, rgba(255,43,43,0.08) 0%, transparent 60%)',
-        'radial-gradient(ellipse at 70% 40%, rgba(255,43,43,0.10) 0%, transparent 60%)',
-        'radial-gradient(ellipse at 50% 50%, rgba(255,43,43,0.12) 0%, transparent 60%)'
-      ];
-      oLines.forEach((l,i) => {
-        oTl.call(() => {
-          oLines.forEach((x,j) => x.classList.toggle('is-active', j===i));
-          oPips.forEach((p,j) => p.classList.toggle('is-active', j===i));
-          if (oAmbient) { oAmbient.style.background = gradients[i]; oAmbient.style.opacity = '1'; }
-        }, null, i / oLines.length);
-      });
-    } else {
-      oLines.forEach(l => {
-        gsap.to(l, { scrollTrigger: { trigger:l, start:'top 80%', toggleActions:'play none none reverse' }, color:'rgba(255,255,255,0.95)', duration:0.5 });
+    /* ─ §2 Manifesto hover-light (also intersection light on mobile) ─ */
+    const mLines = document.querySelectorAll('.hpa-manifesto__line');
+    if(!isMob){
+      mLines.forEach(l=>{
+        l.addEventListener('mouseenter',()=>{ mLines.forEach(x=>x.classList.remove('is-lit')); l.classList.add('is-lit'); });
+        l.addEventListener('mouseleave',()=>l.classList.remove('is-lit'));
       });
     }
-
-    /* ═══ 3. PHILOSOPHY (horizontal scroll on desktop) ═══ */
-    if (!isMobile) {
-      const track = document.getElementById('HpPhiloTrack');
-      const sec = document.getElementById('HpAboutPhilosophy');
-      if (track && sec) {
-        const dist = track.scrollWidth - window.innerWidth;
-        gsap.to(track, { x: -dist, ease:'none', scrollTrigger: { trigger:sec, start:'top top', end:()=>'+=' + dist, pin:true, scrub:1, invalidateOnRefresh:true }});
-      }
-    }
-    /* Card SVG draw */
-    document.querySelectorAll('[data-pillar]').forEach(card => {
-      const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) card.classList.add('is-visible'); }); }, {threshold:0.3});
-      obs.observe(card);
+    /* Scroll-reveal on manifesto lines */
+    mLines.forEach(l=>{
+      ScrollTrigger.create({trigger:l,start:'top 85%',onEnter:()=>{ l.classList.add('in'); if(isMob) l.classList.add('is-lit'); }});
     });
 
-    /* ═══ 4. TEAM ═══ */
-    const slides = document.querySelectorAll('.hp-about__team-slide');
-    const dots = document.querySelectorAll('.hp-about__team-dot');
-    const dotsWrap = document.getElementById('HpTeamDots');
-
-    slides.forEach((sl,i) => {
-      ScrollTrigger.create({ trigger:sl, start:'top 55%', end:'bottom 45%',
-        onEnter: () => activateMember(i),
-        onEnterBack: () => activateMember(i)
+    /* ─ §3 Principles bento cards ─ */
+    document.querySelectorAll('.hpa-pc').forEach((c,i)=>{
+      ScrollTrigger.create({trigger:c,start:'top 88%',
+        onEnter:()=>{ setTimeout(()=>c.classList.add('is-in'), i%3 * 80); }
       });
     });
 
-    function activateMember(idx) {
-      slides.forEach((s,i) => s.classList.toggle('is-active', i===idx));
-      dots.forEach((d,i) => d.classList.toggle('is-active', i===idx));
+    /* ─ §4 Team ─ */
+    const slides = document.querySelectorAll('.hpa-team__slide');
+    const navDots = document.querySelectorAll('.hpa-team__nav-dot');
+    const typedSlides = new Set();
 
-      const sl = slides[idx]; if (!sl) return;
+    slides.forEach((sl,i)=>{
+      ScrollTrigger.create({trigger:sl,start:'top 60%',
+        onEnter:()=>activateSlide(i),
+        onEnterBack:()=>activateSlide(i)
+      });
+    });
 
-      /* counter */
-      const cnt = sl.querySelector('.hp-about__team-counter');
-      if (cnt) gsap.to(cnt, { opacity:1, y:0, duration:0.6, delay:0.05 });
+    navDots.forEach(d=>d.addEventListener('click',()=>{ const idx=+d.dataset.nav; const sl=slides[idx]; if(sl) sl.scrollIntoView({behavior:'smooth',block:'start'}); }));
 
-      /* name split */
-      const nameEl = sl.querySelector('[data-split-name]');
-      if (nameEl && !nameEl.dataset.split) {
-        nameEl.innerHTML = nameEl.textContent.split('').map(c => c===' '?' ':'<span class="char">'+c+'</span>').join('');
-        nameEl.dataset.split='1';
-      }
-      sl.querySelectorAll('.char').forEach((c,ci) => gsap.to(c, { opacity:1, y:0, scale:1, filter:'blur(0px)', duration:0.55, delay:0.12+ci*0.025, ease:'power3.out' }));
+    function activateSlide(idx){
+      slides.forEach((s,i)=>s.classList.toggle('in-view',i===idx));
+      navDots.forEach((d,i)=>d.classList.toggle('on',i===idx));
 
-      /* role */
-      const role = sl.querySelector('.hp-about__team-role');
-      if (role) gsap.to(role, { opacity:1, duration:0.5, delay:0.45 });
+      const sl = slides[idx]; if(!sl) return;
+      const idxEl=sl.querySelector('.hpa-team__idx');
+      const nameEl=sl.querySelector('.hpa-team__name-inner');
+      const roleEl=sl.querySelector('.hpa-team__role');
+      const bioEl=sl.querySelector('.hpa-team__bio');
+      const quoteEl=sl.querySelector('.hpa-team__quote');
 
-      /* bio */
-      const bio = sl.querySelector('.hp-about__team-bio');
-      if (bio) gsap.to(bio, { opacity:1, y:0, duration:0.6, delay:0.7 });
+      if(idxEl) gsap.to(idxEl,{opacity:1,duration:0.5,delay:0.05,ease:'power2.out'});
+      if(nameEl) gsap.to(nameEl,{opacity:1,y:'0%',duration:0.8,delay:0.1,ease:'power4.out'});
+      if(roleEl) gsap.to(roleEl,{opacity:1,duration:0.5,delay:0.4,ease:'power2.out'});
+      if(bioEl)  gsap.to(bioEl, {opacity:1,y:0,duration:0.7,delay:0.7,ease:'power3.out'});
 
-      /* typewriter */
-      const qEl = sl.querySelector('[data-typewriter]');
-      if (qEl && !qEl.dataset.typed) {
-        qEl.dataset.typed='1';
-        const txt = qEl.getAttribute('data-typewriter');
-        qEl.innerHTML = '<span class="tw-cursor"></span>';
+      if(quoteEl && !typedSlides.has(idx)){
+        typedSlides.add(idx);
+        const txt = quoteEl.getAttribute('data-tw') || '';
+        quoteEl.innerHTML='<span class="tw"></span>';
         let ci=0;
-        const iv = setInterval(()=>{
-          if (ci<txt.length) { qEl.innerHTML = '\u201C'+txt.substring(0,ci+1)+'\u201D<span class="tw-cursor"></span>'; ci++; }
-          else { clearInterval(iv); setTimeout(()=>{ const cur=qEl.querySelector('.tw-cursor'); if(cur) cur.style.display='none'; },2500); }
-        }, 35);
+        const iv=setInterval(()=>{
+          if(ci<txt.length){ quoteEl.innerHTML='\u201C'+txt.slice(0,++ci)+'\u201D<span class="tw"></span>'; }
+          else { clearInterval(iv); setTimeout(()=>{ const c=quoteEl.querySelector('.tw'); if(c)c.style.display='none'; },2500); }
+        },36);
       }
 
-      /* mouse parallax (desktop) */
-      if (!isMobile) {
-        const portrait = sl.querySelector('.hp-about__team-portrait-placeholder');
-        if (portrait && !sl.dataset.pxBound) {
-          sl.dataset.pxBound='1';
-          sl.addEventListener('mousemove', e => {
-            const r=sl.getBoundingClientRect();
-            const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
-            gsap.to(portrait, { x:x*24, y:y*16, duration:0.8, ease:'power2.out' });
+      /* Mouse parallax on portrait bg */
+      if(!isMob){
+        const bg=sl.querySelector('.hpa-team__slide-bg');
+        if(bg && !sl.dataset.pxb){ sl.dataset.pxb='1';
+          sl.addEventListener('mousemove',e=>{
+            const r=sl.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+            gsap.to(bg,{x:x*30,y:y*20,duration:1,ease:'power2.out'});
           });
         }
       }
     }
+    /* Auto-activate first slide */
+    activateSlide(0);
 
-    /* Team dots visibility */
-    if (dotsWrap) {
-      ScrollTrigger.create({ trigger:'#HpAboutTeam', start:'top 40%', end:'bottom 40%',
-        onEnter:()=>dotsWrap.classList.add('is-visible'),
-        onLeave:()=>dotsWrap.classList.remove('is-visible'),
-        onEnterBack:()=>dotsWrap.classList.add('is-visible'),
-        onLeaveBack:()=>dotsWrap.classList.remove('is-visible')
-      });
-    }
+    /* ─ §5 Marquee — pure CSS, nothing to do ─ */
 
-    /* ═══ 6. REVEAL UTILITY ═══ */
-    document.querySelectorAll('.hp-about__reveal').forEach(el => {
-      ScrollTrigger.create({ trigger:el, start:'top 88%', onEnter:()=>el.classList.add('is-vis') });
+    /* ─ §6 CTA ─ */
+    document.querySelectorAll('.hpa-up').forEach(el=>{
+      ScrollTrigger.create({trigger:el,start:'top 88%',onEnter:()=>el.classList.add('in')});
     });
 
-    /* Magnetic CTA (desktop) */
-    if (!isMobile) {
-      const btn = document.getElementById('HpCtaBtn');
-      if (btn) {
-        btn.addEventListener('mousemove', e => {
-          const r=btn.getBoundingClientRect();
-          gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*0.2, y:(e.clientY-r.top-r.height/2)*0.3, duration:0.3, ease:'power2.out' });
-        });
-        btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:0.6, ease:'elastic.out(1,0.4)' }));
+    /* Magnetic CTA btn */
+    if(!isMob){ const btn=document.getElementById('hpaCtaBtn');
+      if(btn){
+        btn.addEventListener('mousemove',e=>{ const r=btn.getBoundingClientRect();
+          gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*0.18, y:(e.clientY-r.top-r.height/2)*0.26, duration:0.3, ease:'power2.out'}); });
+        btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:0.7,ease:'elastic.out(1,0.3)'}));
       }
     }
   }
 
-  function showAll() {
-    document.querySelectorAll('.word,.char,.hp-about__reveal,.hp-about__hero-eyebrow,.hp-about__hero-sub,.hp-about__hero-stats,.hp-about__team-counter,.hp-about__team-role,.hp-about__team-bio')
-      .forEach(el => { el.style.opacity='1'; el.style.transform='none'; el.style.filter='none'; });
-    document.querySelectorAll('.hp-about__origin-line').forEach(l=>l.classList.add('is-active'));
-    document.querySelectorAll('[data-pillar]').forEach(c=>c.classList.add('is-visible'));
-    document.querySelectorAll('[data-typewriter]').forEach(q=>{ q.textContent='\u201C'+q.getAttribute('data-typewriter')+'\u201D'; });
+  function showAll(){
+    document.querySelectorAll('.hpa-up,.hpa-hero__h1 .w,.hpa-hero__label,.hpa-hero__sub,.hpa-hero__stat,.hpa-team__idx,.hpa-team__name-inner,.hpa-team__role,.hpa-team__bio,.hpa-pc')
+      .forEach(el=>{el.style.opacity='1';el.style.transform='none';el.style.filter='none';});
+    document.querySelectorAll('.hpa-manifesto__line').forEach(l=>l.classList.add('is-lit','in'));
+    document.querySelectorAll('.hpa-team__slide').forEach((s,i)=>{ if(i===0)s.classList.add('in-view'); });
+    document.querySelectorAll('.hpa-team__quote').forEach(q=>{ q.textContent='\u201C'+(q.getAttribute('data-tw')||'')+'\u201D'; });
   }
 })();
 </script>
