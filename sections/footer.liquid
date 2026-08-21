@@ -680,7 +680,9 @@
         <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
       {%- endif -%}
 
-      {%- if section.settings.earth_image != blank -%}
+      {%- if section.settings.earth_video != blank -%}
+        {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'footer-earth-block__image' }}
+      {%- elsif section.settings.earth_image != blank -%}
         <img
           src="{{ section.settings.earth_image | image_url: width: 1200 }}"
           alt="{{ section.settings.earth_image.alt | escape }}"
@@ -1067,6 +1069,12 @@
     {
       "type": "header",
       "content": "Earth Block"
+    },
+    {
+      "type": "video",
+      "id": "earth_video",
+      "label": "Earth Video",
+      "info": "Overrides the image if selected."
     },
     {
       "type": "image_picker",
