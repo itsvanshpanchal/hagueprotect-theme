@@ -458,6 +458,10 @@
     }
   }
 
+  .footer-wrapper {
+    position: relative;
+    overflow: hidden; /* Optional: keeps the globe from overflowing the footer if it's too big, though maybe not needed. I will leave overflow default to not break things, but position: relative is key */
+  }
   .footer-wrapper .container {
     position: relative;
     z-index: 1;
@@ -466,9 +470,14 @@
   .footer-earth-block {
     background-color: transparent;
     text-align: center;
-    padding: 80px 20px 40px;
+    padding: 0;
     width: 100%;
-    position: relative;
+    position: absolute;
+    top: 150px; /* Adjust this value to control how much it overlaps the columns */
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
   }
   .footer-earth-block__top-heading {
     color: #ffffff;
@@ -505,9 +514,9 @@
     margin-top: 12px;
   }
   @media (max-width: 749px) {
-    .footer-earth-block { padding: 50px 20px 30px; }
+    .footer-earth-block { top: 250px; padding: 0; }
     .footer-earth-block__top-heading { top: 40px; }
-    .footer-earth-block__image { max-width: 90%; }
+    .footer-earth-block__image { max-width: 100%; }
     .footer-earth-block__bottom-heading { font-size: 18px; }
   }
   /* ── /Earth Block ───────────────────────────────── */
