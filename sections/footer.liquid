@@ -482,7 +482,7 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
     position: absolute;
     top: 40px;
     left: 50%;
@@ -519,6 +519,10 @@
 {%- endstyle -%}
 
 <footer class="footer-wrapper" role="contentinfo">
+
+  {%- if section.settings.earth_top_heading != blank -%}
+    <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
+  {%- endif -%}
 
   <div class="container">
     <div class="footer-grid">
@@ -690,9 +694,6 @@
     </div>
 
     <div class="footer-earth-block">
-      {%- if section.settings.earth_top_heading != blank -%}
-        <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
-      {%- endif -%}
 
       {%- if section.settings.earth_video != blank -%}
         {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'footer-earth-block__image' }}
