@@ -1,0 +1,123 @@
+<div class="hpa-section">
+  <!-- ══ §4 TEAM ══ -->
+  <section class="hpa-team" id="hpaTeam">
+    <div class="hpa-team__intro">
+      <div>
+        <div class="hpa-team__eyebrow">{{ section.settings.team_eyebrow }}</div>
+        <h2 class="hpa-team__heading hpa-up">{{ section.settings.team_heading }}</h2>
+      </div>
+      <p class="hpa-team__intro-sub hpa-up" data-d="1">{{ section.settings.team_sub }}</p>
+    </div>
+
+    {% assign team_count = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == 'team_member' %}
+        <div class="hpa-team__slide" data-slide="{{ team_count }}" id="hpaSlide{{ team_count }}" {{ block.shopify_attributes }}>
+          <div class="hpa-team__slide-bg">
+            {% if block.settings.image %}
+              {{ block.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy' }}
+            {% else %}
+               <!-- Placeholder gradient if no image -->
+               <div style="width:100%; height:100%; background: linear-gradient(135deg, #0d1117 0%, #1a2332 40%, #0d1117 100%);"></div>
+            {% endif %}
+          </div>
+          
+          <div class="hpa-team__panel-left">
+            <div class="hpa-team__idx">0{{ team_count | plus: 1 }}</div>
+            <div class="hpa-team__name"><span class="hpa-team__name-inner">{{ block.settings.name }}</span></div>
+            <div class="hpa-team__role">{{ block.settings.role }}</div>
+            <div class="hpa-team__quote" data-tw="{{ block.settings.quote | escape }}"></div>
+            <div class="hpa-team__bio">{{ block.settings.bio }}</div>
+          </div>
+          <div class="hpa-team__panel-right">
+            <div class="hpa-team__big-num" aria-hidden="true">0{{ team_count | plus: 1 }}</div>
+          </div>
+        </div>
+        {% assign team_count = team_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+
+    {% if team_count > 0 %}
+      <div class="hpa-team__nav" id="hpaTeamNav">
+        {% for i in (1..team_count) %}
+          <button class="hpa-team__nav-dot {% if forloop.first %}on{% endif %}" data-nav="{{ forloop.index0 }}" aria-label="Team Member {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "About Us Team",
+  "templates": ["page", "search"],
+  "settings": [
+    {
+      "type": "text",
+      "id": "team_eyebrow",
+      "label": "Team Eyebrow",
+      "default": "The People"
+    },
+    {
+      "type": "textarea",
+      "id": "team_heading",
+      "label": "Team Heading",
+      "default": "The Minds<br>Behind The<br>Mission."
+    },
+    {
+      "type": "textarea",
+      "id": "team_sub",
+      "label": "Team Subtext",
+      "default": "Three people. One obsession. Relentless pursuit of a standard nobody else was willing to set."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team Member",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Portrait Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "MEMBER<br>NAME"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Chief Technology Officer"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote (Typewriter)",
+          "default": "Science should feel invisible — until you see the result."
+        },
+        {
+          "type": "textarea",
+          "id": "bio",
+          "label": "Bio",
+          "default": "A materials scientist with 10+ years of formulation experience."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us Team",
+      "blocks": [
+        { "type": "team_member" },
+        { "type": "team_member" },
+        { "type": "team_member" }
+      ]
+    }
+  ]
+}
+{% endschema %}
