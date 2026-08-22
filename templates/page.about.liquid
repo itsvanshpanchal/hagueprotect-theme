@@ -112,3 +112,49 @@
     .agp-globe-wrap { width:90vw; margin-bottom:36px; }
   }
 </style>
+
+{% comment %} ═══ SECTION 4: Beliefs ═══ {% endcomment %}
+<div class="ab-beliefs-section">
+  <div class="ab-beliefs-inner">
+    <h2 class="ab-beliefs-headline">
+      Three things we<br>believe about<br>beauty.<br>
+      <span class="ab-beliefs-headline-sub">Everything else<br>follows.</span>
+    </h2>
+
+    <div class="ab-beliefs-list">
+      <div class="ab-belief-item">
+        <div class="ab-belief-title">Regenerative science.<br>Not trend science.</div>
+        <div class="ab-belief-desc">Longevity is the one true purpose of beauty. The science of how skin renews, repairs, and rebuilds is the only science worth building on.</div>
+      </div>
+      <div class="ab-belief-item">
+        <div class="ab-belief-title">India is the future<br>of beauty.</div>
+        <div class="ab-belief-desc">We are an Indian brand that holds itself to a global standard. More money spent on raw materials than on packaging. A limited portfolio built around one system, not a shelf of launches. No trend-chasing, no magic wand claims. The Indian consumer deserves world-class products made here, not world-class products imported and resold. We intend to prove it is possible.</div>
+      </div>
+      <div class="ab-belief-item">
+        <div class="ab-belief-title">Difficult choices over<br>popular ones.</div>
+        <div class="ab-belief-desc">We chose the 75 day protocol when 7 days would have been easier to sell. We publish what we put in the formula when opacity would have been easier to defend. We show quantitative clinical data when before/after photography would have been easier to produce. Every difficult choice is a decision about what kind of brand this is.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ab-beliefs-section { background:#161616; width:100%; padding:100px 24px; display:flex; justify-content:center; }
+  .ab-beliefs-inner { max-width:1200px; width:100%; display:flex; flex-direction:column; gap:60px; }
+  
+  .ab-beliefs-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(40px, 6vw, 85px); font-weight:700; color:#fff; line-height:1.05; margin:0; letter-spacing:-0.03em; }
+  .ab-beliefs-headline-sub { font-style:italic; font-weight:400; color:rgba(255,255,255,0.6); display:block; }
+  
+  .ab-beliefs-list { display:flex; flex-direction:column; border-top:1px solid rgba(255,255,255,0.15); margin-top:20px; }
+  .ab-belief-item { display:flex; padding:40px 0; border-bottom:1px solid rgba(255,255,255,0.15); gap:40px; }
+  
+  .ab-belief-title { flex:0 0 35%; font-family:'Inter',sans-serif; font-size:clamp(16px, 1.4vw, 20px); color:#fff; font-weight:500; line-height:1.4; }
+  .ab-belief-desc { flex:1; font-family:'Inter',sans-serif; font-size:clamp(14px, 1vw, 15px); color:rgba(255,255,255,0.7); line-height:1.8; }
+  
+  @media(max-width:768px) {
+    .ab-beliefs-section { padding:60px 20px; }
+    .ab-beliefs-inner { gap:40px; }
+    .ab-belief-item { flex-direction:column; gap:16px; padding:32px 0; }
+    .ab-belief-title { flex:none; }
+  }
+</style>
