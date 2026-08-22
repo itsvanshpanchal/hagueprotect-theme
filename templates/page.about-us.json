@@ -1,5 +1,9 @@
 {
   "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
     "about-us-hero": {
       "type": "about-us-hero",
       "settings": {}
@@ -26,6 +30,7 @@
     }
   },
   "order": [
+    "main",
     "about-us-hero",
     "about-us-manifesto",
     "about-us-principles",
