@@ -1,24 +1,35 @@
 {
   "sections": {
-    "main": {
-      "type": "hero",
-      "settings": {}
-    },
     "split_cta": {
       "type": "split-cta",
-      "settings": {}
+      "settings": {
+        "heading": "Ready to play the long game?",
+        "subtext": "<p>We believe play isn't behind us, it's still the best part of our day.<\/p><p>Life never stops. Play shouldn't either.<\/p>",
+        "tagline": "#NeverStopPlaying"
+      }
     },
     "number_banner": {
       "type": "about-us-number-banner",
-      "settings": {}
+      "settings": {
+        "number": "10",
+        "headline": "10 years. A million soles protected. And we're just getting started.",
+        "subtext": "Built in India, trusted worldwide. Hague Protect has spent a decade crafting science-backed formulas that honour every sneaker — from track courts to collector shelves.",
+        "btn_label": "SHOP NOW",
+        "btn_url": "/collections/all"
+      }
     },
     "global_pedigree": {
       "type": "about-global-pedigree",
-      "settings": {}
+      "settings": {
+        "eyebrow": "Hague Protect",
+        "hashtag": "#NeverStopPlaying",
+        "headline": "Precision Crafted. Globally Trusted.",
+        "bottom_headline": "GLOBAL PEDIGREE. FOR HOME GAMES.",
+        "subtext": "Indian innovation. German-grade precision. Trusted by sneaker enthusiasts from Mumbai, Delhi and beyond. And the finest raw materials sourced globally — for India's most discerning collectors."
+      }
     }
   },
   "order": [
-    "main",
     "split_cta",
     "number_banner",
     "global_pedigree"
