@@ -213,9 +213,9 @@
   {%- if template.name == 'index' -%}
   @media screen and (max-width: 768px) {
     .split-cta--redesign {
-      min-height: 100vh;
-      padding-top: 80px;
-      padding-bottom: 250px; /* Guarantee enough space so content never overlaps bottom elements */
+      min-height: 150vh;
+      padding-top: 60px;
+      padding-bottom: 300px;
       justify-content: flex-start;
     }
     .split-cta--redesign__heading {
@@ -226,21 +226,22 @@
       font-size: 16px;
     }
     .split-cta--redesign__spacer {
-      display: none;
+      display: block;
+      height: 400px; /* Big space between text and red circle, just like desktop */
     }
     .split-cta--redesign__content {
       padding-top: 0;
     }
     .split-cta--redesign__chevron {
       top: auto;
-      bottom: 120px; /* Sits right at the top of the sphere */
+      bottom: 35vh;
       z-index: 3;
     }
     .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
-      width: 140vw;
+      width: 150vw;
       top: auto;
       bottom: 0;
-      transform: translate(-50%, 75%); /* Sphere peeks out 25% */
+      transform: translate(-50%, 75%);
     }
   }
   {%- endif -%}
