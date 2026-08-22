@@ -1,9 +1,11 @@
 {% section 'split-cta' %}
 
-<div class="anb-section">
+<div class="anb-section" id="anb-section">
   <div class="anb-inner">
-    <!-- Giant number at the TOP -->
-    <div class="anb-number" aria-hidden="true">10</div>
+    <!-- Split "1" and "0" into separate spans for independent animation -->
+    <div class="anb-number" aria-hidden="true">
+      <span class="anb-digit anb-digit--1">1</span><span class="anb-digit anb-digit--0">0</span>
+    </div>
     <!-- Text content BELOW the number, fully separate -->
     <div class="anb-content">
       <h2 class="anb-headline">
@@ -25,7 +27,6 @@
     margin: 0;
   }
 
-  /* Simple flex column — number on top, text below, NO overlap */
   .anb-inner {
     display: flex;
     flex-direction: column;
@@ -34,8 +35,17 @@
     overflow: hidden;
   }
 
-  /* 10 at the TOP */
+  /* Wrapper for the two digits side by side */
   .anb-number {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    padding-top: 48px;
+    overflow: hidden; /* clips the digits as they travel in */
+  }
+
+  .anb-digit {
     font-size: clamp(180px, 32vw, 520px);
     font-weight: 900;
     line-height: 0.9;
@@ -44,13 +54,37 @@
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-    text-align: center;
-    padding-top: 48px;
-    width: 100%;
-    display: block;
+    display: inline-block;
+    /* Start hidden — animated via JS adding .anb-animate class */
+    opacity: 0;
   }
 
-  /* Text BELOW the number */
+  /* "1" slides in FROM THE TOP */
+  @keyframes anb-slideFromTop {
+    0%   { transform: translateY(-120%); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(0);    opacity: 1; }
+  }
+
+  /* "0" slides in FROM THE BOTTOM */
+  @keyframes anb-slideFromBottom {
+    0%   { transform: translateY(120%); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(0);   opacity: 1; }
+  }
+
+  /* Triggered by JS when section enters viewport */
+  .anb-section.anb-animate .anb-digit--1 {
+    animation: anb-slideFromTop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.1s;
+  }
+
+  .anb-section.anb-animate .anb-digit--0 {
+    animation: anb-slideFromBottom 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.15s;
+  }
+
+  /* Text sits BELOW the number */
   .anb-content {
     display: flex;
     flex-direction: column;
@@ -108,8 +142,10 @@
 
   @media screen and (max-width: 768px) {
     .anb-number {
-      font-size: clamp(100px, 42vw, 180px);
       padding-top: 28px;
+    }
+    .anb-digit {
+      font-size: clamp(100px, 42vw, 180px);
     }
     .anb-content {
       padding: 28px 20px 60px;
@@ -119,3 +155,34 @@
     }
   }
 </style>
+
+<script>
+  (function () {
+    var section = document.getElementById('anb-section');
+    if (!section) return;
+
+    var triggered = false;
+
+    function trigger() {
+      if (triggered) return;
+      triggered = true;
+      section.classList.add('anb-animate');
+    }
+
+    // Use IntersectionObserver so it fires when the section scrolls into view
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            trigger();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(section);
+    } else {
+      // Fallback: fire immediately
+      trigger();
+    }
+  })();
+</script>
