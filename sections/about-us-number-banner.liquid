@@ -1,119 +1,184 @@
+{%- liquid
+  assign number = section.settings.number | default: '10'
+  assign headline = section.settings.headline | default: '10 years. A million soles protected. And we\'re just getting started.'
+  assign subtext = section.settings.subtext | default: 'Built in India, trusted worldwide. Hague Protect has spent a decade crafting science-backed formulas that honour every sneaker — from track courts to collector shelves.'
+  assign btn_label = section.settings.btn_label | default: 'SHOP NOW'
+  assign btn_url = section.settings.btn_url | default: '/collections/all'
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+
 {%- style -%}
-  .about-num-banner {
-    background-color: #000;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-    padding: 80px 24px 100px;
-    text-align: center;
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+
+  .anb-section-{{ section.id }} {
+    background: #000;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .anb-inner-{{ section.id }} {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 60vh;
+    width: 100%;
+    overflow: hidden;
   }
 
-  /* Giant background number */
-  .about-num-banner__bg-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(260px, 35vw, 480px);
+  .anb-number-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    padding-top: 48px;
+    overflow: hidden;
+  }
+
+  .anb-digit-{{ section.id }} {
+    font-size: clamp(180px, 32vw, 520px);
+    font-family: 'Inter', 'Arial Black', 'Helvetica Neue', sans-serif;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.08);
-    letter-spacing: -0.06em;
-    line-height: 1;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: #8a8a8a;
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-    z-index: 0;
+    display: inline-block;
+    opacity: 0;
   }
 
-  .about-num-banner__content {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
+  @keyframes anb-slideFromTop-{{ section.id }} {
+    0%   { transform: translateY(-120%); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(0);    opacity: 1; }
+  }
+
+  @keyframes anb-slideFromBottom-{{ section.id }} {
+    0%   { transform: translateY(120%); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: translateY(0);   opacity: 1; }
+  }
+
+  .anb-section-{{ section.id }}.anb-animate .anb-digit-1-{{ section.id }} {
+    animation: anb-slideFromTop-{{ section.id }} 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.1s;
+  }
+
+  .anb-section-{{ section.id }}.anb-animate .anb-digit-0-{{ section.id }} {
+    animation: anb-slideFromBottom-{{ section.id }} 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.15s;
+  }
+
+  .anb-content-{{ section.id }} {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 20px;
+    padding: 48px 24px 80px;
+    max-width: 760px;
+    width: 100%;
   }
 
-  .about-num-banner__headline {
+  .anb-headline-{{ section.id }} {
     font-family: 'Inter', 'Darker Grotesque', sans-serif;
-    font-size: clamp(22px, 3.5vw, 38px);
+    font-size: clamp(24px, 3.8vw, 42px);
     font-weight: 700;
     color: #ffffff;
     line-height: 1.25;
     margin: 0;
   }
 
-  .about-num-banner__subtext {
+  .anb-subtext-{{ section.id }} {
     font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(14px, 1.6vw, 17px);
+    font-size: clamp(15px, 1.6vw, 18px);
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
-    max-width: 560px;
+    max-width: 540px;
     margin: 0;
   }
 
-  .about-num-banner__subtext strong {
-    color: rgba(255, 255, 255, 0.9);
-  }
+  .anb-subtext-{{ section.id }} strong { color: #fff; }
 
-  .about-num-banner__btn {
+  .anb-btn-{{ section.id }} {
     display: inline-block;
-    margin-top: 12px;
-    padding: 14px 36px;
-    border: 2px solid #ffffff;
+    margin-top: 8px;
+    padding: 14px 40px;
+    border: 2px solid #fff;
     border-radius: 50px;
     background: transparent;
-    color: #ffffff;
+    color: #fff;
     font-family: 'Darker Grotesque', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
     transition: background 0.25s ease, color 0.25s ease;
   }
 
-  .about-num-banner__btn:hover {
-    background: #ffffff;
-    color: #000000;
-  }
+  .anb-btn-{{ section.id }}:hover { background: #fff; color: #000; }
 
   @media screen and (max-width: 768px) {
-    .about-num-banner {
-      padding: 60px 20px 80px;
-      min-height: 50vh;
-    }
-    .about-num-banner__bg-number {
-      font-size: clamp(160px, 50vw, 280px);
-    }
+    .anb-digit-{{ section.id }} { font-size: clamp(100px, 42vw, 180px); }
+    .anb-content-{{ section.id }} { padding: 28px 20px 60px; }
+    .anb-headline-{{ section.id }} { font-size: clamp(20px, 6vw, 30px); }
   }
 {%- endstyle -%}
 
-<div class="about-num-banner">
-  <span class="about-num-banner__bg-number" aria-hidden="true">
-    {{ section.settings.number | default: '10' }}
-  </span>
-
-  <div class="about-num-banner__content">
-    <h2 class="about-num-banner__headline">
-      {{ section.settings.headline | default: '10 years. A million soles protected. And we\'re just getting started.' }}
-    </h2>
-    <p class="about-num-banner__subtext">
-      {{ section.settings.subtext | default: 'Built in India, trusted worldwide. <strong>Hague Protect</strong> has spent a decade crafting science-backed formulas that honour every sneaker — from track courts to collector shelves.' }}
-    </p>
-    {%- if section.settings.btn_label != blank -%}
-      <a class="about-num-banner__btn" href="{{ section.settings.btn_url | default: '#' }}">
-        {{ section.settings.btn_label }}
-      </a>
-    {%- endif -%}
+<div class="anb-section-{{ section.id }}" id="anb-{{ section.id }}">
+  <div class="anb-inner-{{ section.id }}">
+    <div class="anb-number-{{ section.id }}" aria-hidden="true">
+      {%- assign digits = number | split: '' -%}
+      {%- assign digit_classes = '1,0,1,0,1,0,1,0,1,0' | split: ',' -%}
+      {%- for digit in digits -%}
+        {%- if forloop.first -%}
+          <span class="anb-digit-{{ section.id }} anb-digit-1-{{ section.id }}">{{ digit }}</span>
+        {%- else -%}
+          <span class="anb-digit-{{ section.id }} anb-digit-0-{{ section.id }}">{{ digit }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="anb-content-{{ section.id }}">
+      <h2 class="anb-headline-{{ section.id }}">{{ headline }}</h2>
+      <p class="anb-subtext-{{ section.id }}">{{ subtext }}</p>
+      {%- if btn_label != blank -%}
+        <a class="anb-btn-{{ section.id }}" href="{{ btn_url }}">{{ btn_label }}</a>
+      {%- endif -%}
+    </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    var section = document.getElementById('anb-{{ section.id }}');
+    if (!section) return;
+    var triggered = false;
+    function trigger() {
+      if (triggered) return;
+      triggered = true;
+      section.classList.add('anb-animate');
+    }
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { trigger(); observer.disconnect(); }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(section);
+    } else {
+      trigger();
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -122,8 +187,9 @@
     {
       "type": "text",
       "id": "number",
-      "label": "Background Number",
-      "default": "10"
+      "label": "Number",
+      "default": "10",
+      "info": "First digit slides from top, second from bottom"
     },
     {
       "type": "text",
@@ -141,7 +207,7 @@
       "type": "text",
       "id": "btn_label",
       "label": "Button Label",
-      "default": "MEET OUR TEAM"
+      "default": "SHOP NOW"
     },
     {
       "type": "url",
