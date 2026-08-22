@@ -215,12 +215,12 @@
     .split-cta--redesign {
       min-height: 100vh;
       padding-top: 80px;
-      padding-bottom: 120px;
+      padding-bottom: 250px; /* Guarantee enough space so content never overlaps bottom elements */
       justify-content: flex-start;
     }
     .split-cta--redesign__heading {
-      font-size: 36px;
-      margin-bottom: 24px;
+      font-size: 34px;
+      margin-bottom: 20px;
     }
     .split-cta--redesign__subtext {
       font-size: 16px;
@@ -233,14 +233,14 @@
     }
     .split-cta--redesign__chevron {
       top: auto;
-      bottom: 200px;
+      bottom: 120px; /* Sits right at the top of the sphere */
       z-index: 3;
     }
     .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
-      width: 120vw;
+      width: 140vw;
       top: auto;
       bottom: 0;
-      transform: translate(-50%, 75%);
+      transform: translate(-50%, 75%); /* Sphere peeks out 25% */
     }
   }
   {%- endif -%}
