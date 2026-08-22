@@ -72,17 +72,12 @@
   <h2 class="agp-headline">Precision Crafted. Globally Trusted.</h2>
 
   <div class="agp-globe-wrap">
-    {% comment %}
-      ══════════════════════════════════════════════
-      VIDEO: Upload your video in Shopify Admin →
-      Content → Files, then replace the src below.
-      ══════════════════════════════════════════════
-    {% endcomment %}
-    <video class="agp-video" src="" autoplay loop muted playsinline></video>
-    <div class="agp-placeholder">
-      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <p>Your video will appear here.<br>Upload via Shopify Admin → Files &amp; paste URL in the src attribute.</p>
-    </div>
+    <img
+      class="agp-video"
+      src="{{ 'about-globe.gif' | asset_url }}"
+      alt="Hague Protect — Globally trusted sneaker care"
+      loading="lazy"
+    >
   </div>
 
   <div class="agp-bottom">
