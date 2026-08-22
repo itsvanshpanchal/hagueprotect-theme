@@ -1,0 +1,253 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow | default: 'Hague Protect'
+  assign hashtag = section.settings.hashtag | default: '#NeverStopPlaying'
+  assign headline = section.settings.headline | default: 'Precision Crafted. Globally Trusted.'
+  assign bottom_headline = section.settings.bottom_headline | default: 'GLOBAL PEDIGREE. FOR HOME GAMES.'
+  assign subtext = section.settings.subtext | default: 'Indian innovation. German-grade precision. Trusted by sneaker enthusiasts from Mumbai, Delhi and beyond. And the finest raw materials sourced globally — for India's most discerning collectors.'
+-%}
+
+{%- style -%}
+  /* ─── Section wrapper ─── */
+  #shopify-section-{{ section.id }} {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+
+  .agp-section {
+    background: #000;
+    width: 100%;
+    padding: 72px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  /* ─── Top bar ─── */
+  .agp-topbar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .agp-eyebrow {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agp-eyebrow__pipe {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .agp-hashtag {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ─── Top headline ─── */
+  .agp-headline {
+    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-size: clamp(22px, 3.2vw, 40px);
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 56px;
+    line-height: 1.2;
+  }
+
+  /* ─── Globe / Video ─── */
+  .agp-globe-wrap {
+    position: relative;
+    width: clamp(280px, 55vw, 700px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #0a0a0a;
+    margin-bottom: 56px;
+    box-shadow:
+      0 0 80px rgba(255,255,255,0.04),
+      inset 0 -60px 120px rgba(0,0,0,0.8);
+  }
+
+  .agp-globe-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* Placeholder shown when no video set */
+  .agp-globe-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: rgba(255,255,255,0.35);
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  /* ─── Bottom copy ─── */
+  .agp-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-width: 680px;
+  }
+
+  .agp-bottom__headline {
+    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-size: clamp(18px, 2.4vw, 28px);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .agp-bottom__subtext {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ─── Mobile ─── */
+  @media screen and (max-width: 768px) {
+    .agp-section { padding: 48px 20px 60px; }
+    .agp-topbar {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .agp-headline { margin-bottom: 36px; }
+    .agp-globe-wrap {
+      width: 90vw;
+      margin-bottom: 36px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="agp-section">
+
+  <!-- Top bar -->
+  <div class="agp-topbar">
+    <p class="agp-eyebrow">
+      <span class="agp-eyebrow__pipe">|</span>
+      {{ eyebrow }}
+      <span class="agp-eyebrow__pipe">|</span>
+    </p>
+    <p class="agp-hashtag">{{ hashtag }}</p>
+  </div>
+
+  <!-- Headline -->
+  <h2 class="agp-headline">{{ headline }}</h2>
+
+  <!-- Globe / Video container -->
+  <div class="agp-globe-wrap">
+
+    {%- if section.settings.globe_video != blank -%}
+      {{- section.settings.globe_video | video_tag:
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          controls: false,
+          class: 'agp-globe-video'
+      -}}
+    {%- else -%}
+      <div class="agp-globe-placeholder">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <p>Upload your video via the theme editor settings panel.</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+
+  <!-- Bottom copy -->
+  <div class="agp-bottom">
+    <h3 class="agp-bottom__headline">{{ bottom_headline }}</h3>
+    <p class="agp-bottom__subtext">{{ subtext }}</p>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "About — Global Pedigree",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Hague Protect"
+    },
+    {
+      "type": "text",
+      "id": "hashtag",
+      "label": "Hashtag (top right)",
+      "default": "#NeverStopPlaying"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Top Headline",
+      "default": "Precision Crafted. Globally Trusted."
+    },
+    {
+      "type": "video",
+      "id": "globe_video",
+      "label": "Globe Video",
+      "info": "Upload your video here. It will display inside the circular globe frame."
+    },
+    {
+      "type": "text",
+      "id": "bottom_headline",
+      "label": "Bottom Headline",
+      "default": "GLOBAL PEDIGREE. FOR HOME GAMES."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Description",
+      "default": "Indian innovation. German-grade precision. Trusted by sneaker enthusiasts from Mumbai, Delhi and beyond. And the finest raw materials sourced globally — for India's most discerning collectors."
+    }
+  ],
+  "presets": [
+    {
+      "name": "About — Global Pedigree"
+    }
+  ]
+}
+{% endschema %}
