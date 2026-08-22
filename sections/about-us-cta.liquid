@@ -1,0 +1,58 @@
+<div class="hpa-section">
+  <!-- ══ §6 CTA ══ -->
+  <section class="hpa-cta" id="hpaCta">
+    <div class="hpa-cta__glow"></div>
+    <div class="hpa-cta__bg-text" aria-hidden="true">HAGUE</div>
+    <div class="hpa-cta__content">
+      <div class="hpa-cta__eyebrow hpa-up">{{ section.settings.cta_eyebrow }}</div>
+      <h2 class="hpa-cta__h hpa-up" data-d="1">{{ section.settings.cta_heading }}</h2>
+      <p class="hpa-cta__sub hpa-up" data-d="2">{{ section.settings.cta_sub }}</p>
+      <a href="{{ section.settings.cta_btn_link | default: '/collections/all' }}" class="hpa-cta__btn hpa-up" data-d="3" id="hpaCtaBtn">
+        {{ section.settings.cta_btn_text }}
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M12 5l5 5-5 5"/></svg>
+      </a>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "About Us CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "CTA Eyebrow",
+      "default": "Join The Movement"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_heading",
+      "label": "CTA Heading",
+      "default": "Every Sneaker<br>Has a Story."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_sub",
+      "label": "CTA Subtext",
+      "default": "Explore premium, lab-tested sneaker care solutions trusted by 50,000+ enthusiasts worldwide. Zero compromise. Always."
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text",
+      "label": "Button Text",
+      "default": "Explore All Products"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us CTA"
+    }
+  ]
+}
+{% endschema %}
