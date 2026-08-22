@@ -213,6 +213,23 @@
       transform: translate(-50%, 50%);
     }
   }
+  {%- if page.handle == 'about-us' or template.suffix == 'about' or template.suffix == 'about-us' -%}
+    #shopify-section-{{ section.id }} .split-cta--redesign__spacer {
+      height: 200px;
+    }
+    #shopify-section-{{ section.id }} .split-cta--redesign {
+      min-height: auto;
+      padding-bottom: 250px;
+    }
+    @media screen and (max-width: 768px) {
+      #shopify-section-{{ section.id }} .split-cta--redesign__spacer {
+        height: 80px;
+      }
+      #shopify-section-{{ section.id }} .split-cta--redesign {
+        padding-bottom: 150px;
+      }
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <section class="split-cta--redesign" id="split-cta-{{ section.id }}">
