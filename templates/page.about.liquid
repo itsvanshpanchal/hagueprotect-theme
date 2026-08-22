@@ -1,6 +1,115 @@
-{% comment %}
-  About Us page template — sections controlled via Shopify theme editor
-{% endcomment %}
 {% section 'split-cta' %}
-{% section 'about-us-number-banner' %}
-{% section 'about-global-pedigree' %}
+
+{% comment %} ═══ SECTION 2: Number Banner ═══ {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+
+<div class="anb-section" id="anb-section">
+  <div class="anb-inner">
+    <div class="anb-number" aria-hidden="true">
+      <span class="anb-digit anb-digit--1">1</span><span class="anb-digit anb-digit--0">0</span>
+    </div>
+    <div class="anb-content">
+      <h2 class="anb-headline">10 years. A million soles protected.<br>And we&rsquo;re just getting started.</h2>
+      <p class="anb-subtext">Built in India, trusted worldwide. <strong>Hague Protect</strong> has spent a decade crafting science-backed formulas that honour every sneaker &mdash; from track courts to collector shelves.</p>
+      <a class="anb-btn" href="/collections/all">SHOP NOW</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .anb-section { background:#000; width:100%; padding:0; margin:0; }
+  .anb-inner { display:flex; flex-direction:column; align-items:center; width:100%; overflow:hidden; }
+  .anb-number { display:flex; justify-content:center; align-items:flex-end; width:100%; padding-top:48px; overflow:hidden; }
+  .anb-digit {
+    font-size: clamp(180px, 32vw, 520px);
+    font-family: 'Inter', 'Arial Black', sans-serif;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: #8a8a8a;
+    user-select: none;
+    pointer-events: none;
+    display: inline-block;
+    opacity: 0;
+  }
+  @keyframes anb-from-top    { 0%{transform:translateY(-120%);opacity:0} 60%{opacity:1} 100%{transform:translateY(0);opacity:1} }
+  @keyframes anb-from-bottom { 0%{transform:translateY(120%);opacity:0}  60%{opacity:1} 100%{transform:translateY(0);opacity:1} }
+  .anb-section.anb-animate .anb-digit--1 { animation: anb-from-top    0.9s cubic-bezier(0.22,1,0.36,1) 0.10s forwards; }
+  .anb-section.anb-animate .anb-digit--0 { animation: anb-from-bottom 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+  .anb-content { display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px; padding:48px 24px 80px; max-width:760px; width:100%; }
+  .anb-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(24px,3.8vw,42px); font-weight:700; color:#fff; line-height:1.25; margin:0; }
+  .anb-subtext  { font-family:'Darker Grotesque',sans-serif; font-size:clamp(15px,1.6vw,18px); color:rgba(255,255,255,0.65); line-height:1.7; max-width:540px; margin:0; }
+  .anb-subtext strong { color:#fff; }
+  .anb-btn { display:inline-block; margin-top:8px; padding:14px 40px; border:2px solid #fff; border-radius:50px; background:transparent; color:#fff; font-family:'Darker Grotesque',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.25s ease,color 0.25s ease; }
+  .anb-btn:hover { background:#fff; color:#000; }
+  @media(max-width:768px) {
+    .anb-digit   { font-size:clamp(100px,42vw,180px); }
+    .anb-content { padding:28px 20px 60px; }
+    .anb-headline{ font-size:clamp(20px,6vw,30px); }
+  }
+</style>
+<script>
+  (function(){
+    var s=document.getElementById('anb-section');
+    if(!s)return;
+    var done=false;
+    function run(){if(done)return;done=true;s.classList.add('anb-animate');}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){run();io.disconnect();}});},{threshold:0.2});
+      io.observe(s);
+    } else { run(); }
+  })();
+</script>
+
+{% comment %} ═══ SECTION 3: Global Pedigree / Video Globe ═══ {% endcomment %}
+<div class="agp-section">
+  <div class="agp-topbar">
+    <p class="agp-eyebrow"><span class="agp-pipe">|</span> HAGUE PROTECT <span class="agp-pipe">|</span></p>
+    <p class="agp-hashtag">#NeverStopPlaying</p>
+  </div>
+  <h2 class="agp-headline">Precision Crafted. Globally Trusted.</h2>
+
+  <div class="agp-globe-wrap">
+    {% comment %}
+      ══════════════════════════════════════════════
+      VIDEO: Upload your video in Shopify Admin →
+      Content → Files, then replace the src below.
+      ══════════════════════════════════════════════
+    {% endcomment %}
+    <video class="agp-video" src="" autoplay loop muted playsinline></video>
+    <div class="agp-placeholder">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <p>Your video will appear here.<br>Upload via Shopify Admin → Files &amp; paste URL in the src attribute.</p>
+    </div>
+  </div>
+
+  <div class="agp-bottom">
+    <h3 class="agp-bottom-headline">GLOBAL PEDIGREE. FOR HOME GAMES.</h3>
+    <p class="agp-bottom-text"><em><strong>Indian</strong></em> innovation. <em><strong>German</strong></em>-grade precision. Trusted by sneaker enthusiasts from <em><strong>Mumbai</strong></em>, <em><strong>Delhi</strong></em> and beyond &mdash; for India&rsquo;s most discerning collectors.</p>
+  </div>
+</div>
+
+<style>
+  .agp-section { background:#000; width:100%; padding:72px 24px 80px; display:flex; flex-direction:column; align-items:center; box-sizing:border-box; }
+  .agp-topbar  { width:100%; max-width:1200px; display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+  .agp-eyebrow { font-family:'Darker Grotesque',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin:0; display:flex; align-items:center; gap:10px; }
+  .agp-pipe    { color:rgba(255,255,255,0.3); }
+  .agp-hashtag { font-family:'Darker Grotesque',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; color:rgba(255,255,255,0.55); margin:0; font-style:italic; }
+  .agp-headline{ font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(22px,3.2vw,40px); font-weight:700; color:#fff; text-align:center; margin:0 0 56px; line-height:1.2; }
+  .agp-globe-wrap { position:relative; width:clamp(280px,55vw,700px); aspect-ratio:1/1; border-radius:50%; overflow:hidden; background:#0a0a0a; margin-bottom:56px; box-shadow:0 0 80px rgba(255,255,255,0.04),inset 0 -60px 120px rgba(0,0,0,0.8); }
+  .agp-video   { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .agp-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:rgba(255,255,255,0.3); font-family:'Darker Grotesque',sans-serif; font-size:13px; text-align:center; padding:40px; }
+  .agp-video[src]:not([src=""]) ~ .agp-placeholder { display:none; }
+  .agp-bottom  { display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; max-width:680px; }
+  .agp-bottom-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(18px,2.4vw,28px); font-weight:800; color:#fff; letter-spacing:0.04em; text-transform:uppercase; margin:0; }
+  .agp-bottom-text { font-family:'Darker Grotesque',sans-serif; font-size:clamp(14px,1.5vw,17px); color:rgba(255,255,255,0.6); line-height:1.75; margin:0; }
+  .agp-bottom-text strong { color:rgba(255,255,255,0.9); font-style:italic; }
+  @media(max-width:768px) {
+    .agp-section { padding:48px 20px 60px; }
+    .agp-topbar  { flex-direction:column; align-items:center; gap:8px; margin-bottom:16px; }
+    .agp-headline{ margin-bottom:36px; }
+    .agp-globe-wrap { width:90vw; margin-bottom:36px; }
+  }
+</style>
