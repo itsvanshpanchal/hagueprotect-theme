@@ -217,17 +217,9 @@
       position: relative !important;
       z-index: 10 !important;
     }
-    /* Push chevron down after tagline */
+    /* Hide chevron on mobile */
     .split-cta--redesign__chevron {
-      position: relative !important;
-      bottom: auto !important;
-      top: auto !important;
-      left: auto !important;
-      transform: none !important;
-      margin: 40px auto 0 !important;
-      display: flex !important;
-      justify-content: center !important;
-      animation: none !important;
+      display: none !important;
     }
     /* Keep sphere at the very bottom peeking just a little */
     .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
@@ -313,10 +305,13 @@
     
     observer.observe(section);
 
-    window.addEventListener('scroll', function() {
+    function updateSphereRotation() {
       var scrollY = window.scrollY || window.pageYOffset;
       section.style.setProperty('--scroll-rotate', (scrollY * 0.6) + 'deg');
-    }, { passive: true });
+    }
+    window.addEventListener('scroll', updateSphereRotation, { passive: true });
+    // Also fire on touch move for mobile devices
+    window.addEventListener('touchmove', updateSphereRotation, { passive: true });
   });
 </script>
 
