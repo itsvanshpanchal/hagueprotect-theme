@@ -191,3 +191,221 @@
     }
   })();
 </script>
+
+<!-- ═══════════════════════════════════════════════
+     THIRD SECTION — Global Pedigree / Video Globe
+     ═══════════════════════════════════════════════ -->
+<div class="agp-section">
+
+  <!-- Top bar: eyebrow left + hashtag right -->
+  <div class="agp-topbar">
+    <p class="agp-eyebrow">
+      <span class="agp-eyebrow__pipe">|</span>
+      HAGUE PROTECT
+      <span class="agp-eyebrow__pipe">|</span>
+    </p>
+    <p class="agp-hashtag">#NeverStopPlaying</p>
+  </div>
+
+  <!-- Headline -->
+  <h2 class="agp-headline">Precision Crafted. Globally Trusted.</h2>
+
+  <!-- Globe / Video container -->
+  <div class="agp-globe-wrap">
+    <!--
+      ══════════════════════════════════════
+      VIDEO PLACEHOLDER — Upload your video:
+      Replace YOUR_VIDEO_URL_HERE with the
+      Shopify-hosted video URL after upload.
+      ══════════════════════════════════════
+    -->
+    <video
+      class="agp-globe-video"
+      src="YOUR_VIDEO_URL_HERE"
+      autoplay
+      loop
+      muted
+      playsinline
+    ></video>
+
+    <!-- Shown only until video is replaced -->
+    <div class="agp-globe-placeholder">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      <p>Upload your video in Shopify Files &amp; paste the URL in <code>page.about.liquid</code></p>
+    </div>
+  </div>
+
+  <!-- Bottom copy -->
+  <div class="agp-bottom">
+    <h3 class="agp-bottom__headline">GLOBAL PEDIGREE. FOR HOME GAMES.</h3>
+    <p class="agp-bottom__subtext">
+      <em><strong>Indian</strong></em> innovation. <em><strong>German</strong></em>-grade precision.
+      Trusted by sneaker enthusiasts from <em><strong>Mumbai</strong></em>, <em><strong>Delhi</strong></em> and beyond.
+      And the finest raw materials sourced globally — for India&rsquo;s most discerning collectors.
+    </p>
+  </div>
+
+</div>
+
+<style>
+  /* ─── Section wrapper ─── */
+  .agp-section {
+    background: #000;
+    width: 100%;
+    padding: 72px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    box-sizing: border-box;
+  }
+
+  /* ─── Top bar ─── */
+  .agp-topbar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .agp-eyebrow {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .agp-eyebrow__pipe {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .agp-hashtag {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ─── Top headline ─── */
+  .agp-headline {
+    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-size: clamp(22px, 3.2vw, 40px);
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 56px;
+    line-height: 1.2;
+  }
+
+  /* ─── Globe / Video ─── */
+  .agp-globe-wrap {
+    position: relative;
+    width: clamp(280px, 55vw, 700px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #0a0a0a;
+    margin-bottom: 56px;
+    box-shadow:
+      0 0 80px rgba(255,255,255,0.04),
+      inset 0 -60px 120px rgba(0,0,0,0.8);
+  }
+
+  .agp-globe-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* Placeholder shown until video URL is replaced */
+  .agp-globe-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: rgba(255,255,255,0.35);
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 40px;
+  }
+
+  /* Hide placeholder when video has a real src */
+  .agp-globe-video[src]:not([src="YOUR_VIDEO_URL_HERE"]) ~ .agp-globe-placeholder {
+    display: none;
+  }
+
+  /* ─── Bottom copy ─── */
+  .agp-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-width: 680px;
+  }
+
+  .agp-bottom__headline {
+    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-size: clamp(18px, 2.4vw, 28px);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .agp-bottom__subtext {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .agp-bottom__subtext strong {
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+  }
+
+  /* ─── Mobile ─── */
+  @media screen and (max-width: 768px) {
+    .agp-section {
+      padding: 48px 20px 60px;
+    }
+    .agp-topbar {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .agp-headline {
+      margin-bottom: 36px;
+    }
+    .agp-globe-wrap {
+      width: 90vw;
+      margin-bottom: 36px;
+    }
+  }
+</style>
+
