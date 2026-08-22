@@ -1,2 +1,102 @@
 {% section 'split-cta' %}
-{% section 'about-us-number-banner' %}
+
+<div class="about-num-banner">
+  <span class="about-num-banner__bg-number" aria-hidden="true">10</span>
+  <div class="about-num-banner__content">
+    <h2 class="about-num-banner__headline">
+      10 years. A million soles protected. And we&rsquo;re just getting started.
+    </h2>
+    <p class="about-num-banner__subtext">
+      Built in India, trusted worldwide. <strong>Hague Protect</strong> has spent a decade crafting science-backed formulas that honour every sneaker &mdash; from track courts to collector shelves.
+    </p>
+    <a class="about-num-banner__btn" href="/collections/all">SHOP NOW</a>
+  </div>
+</div>
+
+<style>
+  .about-num-banner {
+    background-color: #000;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 24px 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  .about-num-banner__bg-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(260px, 35vw, 480px);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.08);
+    letter-spacing: -0.06em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 0;
+  }
+  .about-num-banner__content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .about-num-banner__headline {
+    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-size: clamp(22px, 3.5vw, 38px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .about-num-banner__subtext {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0;
+  }
+  .about-num-banner__subtext strong {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .about-num-banner__btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 14px 36px;
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    background: transparent;
+    color: #ffffff;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .about-num-banner__btn:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+  @media screen and (max-width: 768px) {
+    .about-num-banner {
+      padding: 60px 20px 80px;
+      min-height: 50vh;
+    }
+    .about-num-banner__bg-number {
+      font-size: clamp(140px, 50vw, 260px);
+    }
+  }
+</style>
