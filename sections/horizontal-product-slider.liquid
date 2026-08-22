@@ -1258,7 +1258,7 @@
           {%- endif -%}
           <span class="hp-fam-sec__glass-rule" aria-hidden="true"></span>
           {%- if section.settings.glass_eyebrow_right != blank -%}
-            <p class="hp-fam-sec__glass-eyebrow">{{ section.settings.glass_eyebrow_right }}</p>
+            <p class="hp-fam-sec__glass-eyebrow" style="color: #2ecc71 !important;">{{ section.settings.glass_eyebrow_right }}</p>
           {%- endif -%}
           {%- if section.settings.glass_para_bottom != blank -%}
             <p class="hp-fam-sec__glass-para">{{ section.settings.glass_para_bottom }}</p>
@@ -1268,6 +1268,7 @@
             <a
               class="hp-fam-sec__glass-link"
               href="{{ section.settings.glass_link_url | default: '#' }}"
+              style="color: #2ecc71 !important;"
             >
               {{ section.settings.glass_link_label }}
             </a>
