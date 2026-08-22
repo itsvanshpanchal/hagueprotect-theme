@@ -2,8 +2,9 @@
 
 <div class="anb-section">
   <div class="anb-inner">
-    <!-- Giant number sits in the same grid cell as the content, behind it -->
+    <!-- Giant number at the TOP -->
     <div class="anb-number" aria-hidden="true">10</div>
+    <!-- Text content BELOW the number, fully separate -->
     <div class="anb-content">
       <h2 class="anb-headline">
         10 years. A million soles protected.<br>And we&rsquo;re just getting started.
@@ -24,42 +25,41 @@
     margin: 0;
   }
 
-  /* The inner wrapper uses CSS grid with a single cell
-     so both .anb-number and .anb-content stack in the same cell */
+  /* Simple flex column — number on top, text below, NO overlap */
   .anb-inner {
-    display: grid;
-    grid-template-areas: "stack";
-    place-items: center;
-    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     overflow: hidden;
   }
 
+  /* 10 at the TOP */
   .anb-number {
-    grid-area: stack;
-    font-size: clamp(220px, 38vw, 560px);
+    font-size: clamp(180px, 32vw, 520px);
     font-weight: 900;
-    line-height: 0.85;
+    line-height: 0.9;
     letter-spacing: -0.05em;
-    color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.15);
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-    /* Do NOT use position:absolute — let grid stack it */
+    text-align: center;
+    padding-top: 48px;
+    width: 100%;
+    display: block;
   }
 
+  /* Text BELOW the number */
   .anb-content {
-    grid-area: stack;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 20px;
-    padding: 40px 24px;
+    padding: 48px 24px 80px;
     max-width: 760px;
     width: 100%;
-    position: relative; /* just ensures z-index works */
-    z-index: 1;
   }
 
   .anb-headline {
@@ -107,15 +107,15 @@
   }
 
   @media screen and (max-width: 768px) {
-    .anb-inner {
-      min-height: 55vh;
-    }
     .anb-number {
-      font-size: clamp(140px, 55vw, 260px);
+      font-size: clamp(100px, 42vw, 180px);
+      padding-top: 28px;
+    }
+    .anb-content {
+      padding: 28px 20px 60px;
     }
     .anb-headline {
-      font-size: clamp(22px, 6vw, 32px);
+      font-size: clamp(20px, 6vw, 30px);
     }
   }
 </style>
-
