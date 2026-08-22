@@ -1,102 +1,121 @@
 {% section 'split-cta' %}
 
-<div class="about-num-banner">
-  <span class="about-num-banner__bg-number" aria-hidden="true">10</span>
-  <div class="about-num-banner__content">
-    <h2 class="about-num-banner__headline">
-      10 years. A million soles protected. And we&rsquo;re just getting started.
-    </h2>
-    <p class="about-num-banner__subtext">
-      Built in India, trusted worldwide. <strong>Hague Protect</strong> has spent a decade crafting science-backed formulas that honour every sneaker &mdash; from track courts to collector shelves.
-    </p>
-    <a class="about-num-banner__btn" href="/collections/all">SHOP NOW</a>
+<div class="anb-section">
+  <div class="anb-inner">
+    <!-- Giant number sits in the same grid cell as the content, behind it -->
+    <div class="anb-number" aria-hidden="true">10</div>
+    <div class="anb-content">
+      <h2 class="anb-headline">
+        10 years. A million soles protected.<br>And we&rsquo;re just getting started.
+      </h2>
+      <p class="anb-subtext">
+        Built in India, trusted worldwide. <strong>Hague Protect</strong> has spent a decade crafting science-backed formulas that honour every sneaker &mdash; from track courts to collector shelves.
+      </p>
+      <a class="anb-btn" href="/collections/all">SHOP NOW</a>
+    </div>
   </div>
 </div>
 
 <style>
-  .about-num-banner {
-    background-color: #000;
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-    padding: 80px 24px 100px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
+  .anb-section {
+    background: #000;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
-  .about-num-banner__bg-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(260px, 35vw, 480px);
+
+  /* The inner wrapper uses CSS grid with a single cell
+     so both .anb-number and .anb-content stack in the same cell */
+  .anb-inner {
+    display: grid;
+    grid-template-areas: "stack";
+    place-items: center;
+    min-height: 70vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .anb-number {
+    grid-area: stack;
+    font-size: clamp(220px, 38vw, 560px);
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.08);
-    letter-spacing: -0.06em;
-    line-height: 1;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: rgba(255, 255, 255, 0.12);
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-    z-index: 0;
+    /* Do NOT use position:absolute — let grid stack it */
   }
-  .about-num-banner__content {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
+
+  .anb-content {
+    grid-area: stack;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 20px;
+    padding: 40px 24px;
+    max-width: 760px;
+    width: 100%;
+    position: relative; /* just ensures z-index works */
+    z-index: 1;
   }
-  .about-num-banner__headline {
+
+  .anb-headline {
     font-family: 'Inter', 'Darker Grotesque', sans-serif;
-    font-size: clamp(22px, 3.5vw, 38px);
+    font-size: clamp(24px, 3.8vw, 42px);
     font-weight: 700;
     color: #ffffff;
     line-height: 1.25;
     margin: 0;
   }
-  .about-num-banner__subtext {
+
+  .anb-subtext {
     font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(14px, 1.6vw, 17px);
+    font-size: clamp(15px, 1.6vw, 18px);
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
-    max-width: 560px;
+    max-width: 540px;
     margin: 0;
   }
-  .about-num-banner__subtext strong {
-    color: rgba(255, 255, 255, 0.9);
+
+  .anb-subtext strong {
+    color: #fff;
   }
-  .about-num-banner__btn {
+
+  .anb-btn {
     display: inline-block;
-    margin-top: 12px;
-    padding: 14px 36px;
-    border: 2px solid #ffffff;
+    margin-top: 8px;
+    padding: 14px 40px;
+    border: 2px solid #fff;
     border-radius: 50px;
     background: transparent;
-    color: #ffffff;
+    color: #fff;
     font-family: 'Darker Grotesque', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
     transition: background 0.25s ease, color 0.25s ease;
   }
-  .about-num-banner__btn:hover {
-    background: #ffffff;
-    color: #000000;
+
+  .anb-btn:hover {
+    background: #fff;
+    color: #000;
   }
+
   @media screen and (max-width: 768px) {
-    .about-num-banner {
-      padding: 60px 20px 80px;
-      min-height: 50vh;
+    .anb-inner {
+      min-height: 55vh;
     }
-    .about-num-banner__bg-number {
-      font-size: clamp(140px, 50vw, 260px);
+    .anb-number {
+      font-size: clamp(140px, 55vw, 260px);
+    }
+    .anb-headline {
+      font-size: clamp(22px, 6vw, 32px);
     }
   }
 </style>
+
