@@ -191,60 +191,38 @@
   }
 
   @media screen and (max-width: 768px) {
-    .split-cta--redesign__heading {
-      font-size: 30px;
-    }
-    .split-cta--redesign__subtext {
-      font-size: 15px;
-    }
-    .split-cta--redesign__spacer {
-      height: 135px;
-    }
-    .split-cta--redesign__chevron {
-      bottom: 35vh;
-    }
-    .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
-      width: 150vw;
-      bottom: 0;
-      transform: translate(-50%, 50%);
-    }
-  }
-
-  {%- if template.name == 'index' -%}
-  @media screen and (max-width: 768px) {
     .split-cta--redesign {
-      min-height: 150vh;
-      padding-top: 60px;
-      padding-bottom: 300px;
-      justify-content: flex-start;
+      min-height: 120vh !important;
+      padding-top: 60px !important;
+      padding-bottom: 200px !important;
+      justify-content: flex-start !important;
     }
     .split-cta--redesign__heading {
-      font-size: 34px;
-      margin-bottom: 20px;
+      font-size: 34px !important;
+      margin-bottom: 20px !important;
     }
     .split-cta--redesign__subtext {
-      font-size: 16px;
+      font-size: 16px !important;
     }
     .split-cta--redesign__spacer {
-      display: block;
-      height: 400px; /* Big space between text and red circle, just like desktop */
+      display: block !important;
+      height: 400px !important; 
     }
     .split-cta--redesign__content {
-      padding-top: 0;
+      padding-top: 0 !important;
     }
     .split-cta--redesign__chevron {
-      top: auto;
-      bottom: 35vh;
-      z-index: 3;
+      top: auto !important;
+      bottom: 150px !important;
+      z-index: 3 !important;
     }
     .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
-      width: 150vw;
-      top: auto;
-      bottom: 0;
-      transform: translate(-50%, 75%);
+      width: 150vw !important;
+      top: auto !important;
+      bottom: 0 !important;
+      transform: translate(-50%, 75%) !important;
     }
   }
-  {%- endif -%}
   {%- if page.handle == 'about-us' or template.suffix == 'about' or template.suffix == 'about-us' -%}
     #shopify-section-{{ section.id }} .split-cta--redesign__spacer {
       height: 200px;
