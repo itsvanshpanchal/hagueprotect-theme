@@ -194,25 +194,56 @@
     .split-cta--redesign__heading {
       font-size: 30px;
     }
-    
     .split-cta--redesign__subtext {
       font-size: 15px;
     }
-    
     .split-cta--redesign__spacer {
       height: 135px;
     }
-    
     .split-cta--redesign__chevron {
       bottom: 35vh;
     }
-    
     .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
       width: 150vw;
       bottom: 0;
       transform: translate(-50%, 50%);
     }
   }
+
+  {%- if template.name == 'index' -%}
+  @media screen and (max-width: 768px) {
+    .split-cta--redesign {
+      min-height: 100vh;
+      padding-top: 0;
+      padding-bottom: 60px;
+      justify-content: flex-start;
+    }
+    .split-cta--redesign__heading {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .split-cta--redesign__subtext {
+      font-size: 16px;
+    }
+    .split-cta--redesign__spacer {
+      display: none;
+    }
+    .split-cta--redesign__content {
+      padding-top: 140px;
+    }
+    .split-cta--redesign__chevron {
+      top: 60px;
+      bottom: auto;
+      z-index: 3;
+    }
+    .split-cta--redesign__sphere, .split-cta--redesign__sphere-img {
+      width: 180vw;
+      top: 100px;
+      bottom: auto;
+      transform: translateX(-50%);
+    }
+  }
+  {%- endif -%}
   {%- if page.handle == 'about-us' or template.suffix == 'about' or template.suffix == 'about-us' -%}
     #shopify-section-{{ section.id }} .split-cta--redesign__spacer {
       height: 200px;
