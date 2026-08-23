@@ -1607,7 +1607,7 @@
   <!-- Bottom tier: centered navigation -->
   <div class="header-nav-bar">
     <div class="header-nav-bar__inner">
-      <div class="header__shop-all-wrapper" style="position: absolute; left: var(--site-padding, 16px); top: 50%; transform: translateY(-50%); z-index: 10; display: flex; align-items: center; gap: 12px;">
+      <div class="header__shop-all-wrapper" id="ShopAllTrigger" style="position: absolute; left: var(--site-padding, 16px); top: 50%; transform: translateY(-50%); z-index: 10; display: flex; align-items: center; gap: 12px;">
         <div style="display: flex; align-items: center; cursor: pointer;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -1935,13 +1935,22 @@
       });
       panel.addEventListener('mouseleave', closePanel);
 
-      /* Logo hover → open that brand's Shop All (Hague / Vanrosector / Science of Raw) */
+      /* Shop All button hover → open current brand's Shop All */
+      const shopAllTrigger = document.getElementById('ShopAllTrigger');
+      if (shopAllTrigger) {
+        shopAllTrigger.addEventListener('mouseenter', () => openPanel(currentBrand));
+        shopAllTrigger.addEventListener('mouseleave', closePanel);
+      }
+
+      /* Optional: if you want hovering logos to just switch the active menu without opening it
+         you could do showBrandMenu(brand) here, but typically page context handles the default. */
       document.querySelectorAll('[data-mega-brand]').forEach((logo) => {
         const brand = logo.getAttribute('data-mega-brand');
         if (brand !== 'hague' && brand !== 'vanrosector' && brand !== 'science-of-raw') return;
-
-        logo.addEventListener('mouseenter', () => openPanel(brand));
-        logo.addEventListener('mouseleave', closePanel);
+        
+        logo.addEventListener('mouseenter', () => {
+          showBrandMenu(brand);
+        });
       });
 
       showBrandMenu(defaultBrand);
