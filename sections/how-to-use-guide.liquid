@@ -854,7 +854,7 @@
                 {%- endif -%}
               </div>
               <div class="htu-v2__chapter-copy">
-                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} Ã¢â‚¬â€ {{ block.settings.badge | default: 'Guide' }}</p>
+                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} — {{ block.settings.badge | default: 'Guide' }}</p>
                 <h3 class="htu-v2__chapter-name {% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</h3>
                 <p class="htu-v2__chapter-desc">{{ block.settings.description }}</p>
                 <div class="htu-v2__tips">
