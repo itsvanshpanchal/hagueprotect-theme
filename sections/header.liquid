@@ -1922,16 +1922,16 @@
   <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% elsif active_brand == 'science-of-raw' %} megamenu-panel--science-of-raw{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% elsif active_brand == 'science-of-raw' %}science-of-raw{% else %}hague{% endif %}">
     <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
     <!-- Hague Mega Menu - nuuk-style layout -->
-    <div style="display: grid; grid-template-columns: 140px 1fr auto; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; align-items: start; box-sizing: border-box;">
+    <div style="display: flex; align-items: flex-start; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; box-sizing: border-box;">
 
       <!-- LEFT: section label -->
-      <div style="padding-right: 24px; padding-top: 2px;">
+      <div style="flex: 0 0 130px; width: 130px; padding-right: 20px; padding-top: 2px;">
         <p style="font-family: var(--font-family-sans); font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px 0;">Shop by Category</p>
         <a href="/collections/all" style="font-family: var(--font-family-sans); font-size: 12px; font-weight: 500; color: #FF2B2B; text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em;">View All</a>
       </div>
 
       <!-- CENTER: category list with + buttons -->
-      <div style="padding-right: 40px; border-right: 1px solid #f0f0f0;">
+      <div style="flex: 0 0 360px; width: 360px; padding-right: 32px; border-right: 1px solid #f0f0f0;">
 
         <!-- Sneaker Care Kits -->
         <div class="hp-megamenu-cat-row">
@@ -2034,7 +2034,7 @@
       </div>
 
       <!-- RIGHT: featured images -->
-      <div style="padding-left: 40px; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="flex: 1; padding-left: 32px; display: flex; gap: 20px; align-items: flex-start;">
 
         {% if section.settings.mega_feat_img_1 %}
           <a href="{{ section.settings.mega_feat_link_1 | default: '/collections/sneaker-care-kits' }}" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
