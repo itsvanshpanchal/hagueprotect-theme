@@ -258,15 +258,18 @@
     max-width: var(--site-max-width);
     margin: 0 auto;
     padding: clamp(56px, 7vw, 80px) max(20px, var(--site-padding, 24px));
-    display: grid;
-    grid-template-columns: 200px 1fr;
+    display: flex;
+    flex-direction: column;
     gap: clamp(32px, 5vw, 64px);
-    align-items: start;
+    align-items: stretch;
   }
 
   .htu-v2__nav {
     position: sticky;
     top: calc(var(--header-height, 80px) + 24px);
+    background: #ffffff;
+    z-index: 10;
+    padding-bottom: 16px;
   }
 
   .htu-v2__nav-title {
@@ -285,8 +288,14 @@
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    flex-direction: row;
+    gap: 32px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .htu-v2__nav-list::-webkit-scrollbar {
+    display: none;
   }
 
   .htu-v2__nav-link {
@@ -295,10 +304,9 @@
     font-size: 20px;
     color: #bbb;
     text-decoration: none;
-    border-left: 2px solid transparent;
-    padding-left: 14px;
-    margin-left: -14px;
+    border-bottom: 2px solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
   }
 
   .htu-v2__nav-link:not(.mat-font) {
@@ -319,7 +327,7 @@
   .htu-v2__nav-link.is-active,
   .htu-v2__nav-link:hover {
     color: var(--ink);
-    border-left-color: var(--red);
+    border-bottom-color: var(--red);
   }
 
   .htu-v2__chapters {
@@ -675,7 +683,8 @@
     }
 
     .htu-v2__journal {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
     }
 
     .htu-v2__nav {
