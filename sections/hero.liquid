@@ -1,9 +1,6 @@
 {%- liquid
-  assign hero_title_desktop = 60
-  assign hero_title_mobile = 40
   assign hero_label_desktop = section.settings.eyebrow_font_size_desktop | default: settings.font_eyebrow_size_desktop | default: 18
   assign hero_label_mobile = section.settings.eyebrow_font_size_mobile | default: settings.font_eyebrow_size_mobile | default: 17
-  assign hero_label_weight = section.settings.eyebrow_font_weight | default: settings.font_eyebrow_weight | default: '400'
 -%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
