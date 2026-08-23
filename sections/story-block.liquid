@@ -669,7 +669,7 @@
                 {%- if story_use_split_markup and story_accent_text != blank -%}
                   <span class="hp-heading-line hp-heading-line--1">{{ story_line1 }}</span>
                   <span class="hp-heading-pair hp-heading-pair--stack">
-                    <span class="hp-heading-accent" style="font-family:'Luthon Southard Script','Brush Script MT',cursive;color:{{ story_accent_color }};text-transform:none !important;-webkit-text-fill-color:{{ story_accent_color }};">{{ story_accent_text }}</span>
+                    <span class="hp-heading-line hp-heading-line--2" style="font-style: italic !important; color: #b0b0b0 !important; -webkit-text-fill-color: #b0b0b0 !important;">{{ story_accent_text }}</span>
                   </span>
                 {%- else -%}
                   {% render 'section-heading-text', text: story_line1, line2: '', line2_color: section.settings.heading_line2_color, accent_last_word: true, accent_last_count: story_accent_count, accent_color: story_accent_color %}
