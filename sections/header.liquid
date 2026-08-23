@@ -462,6 +462,28 @@
     color: #ffffff !important;
   }
 
+  .shop-all-btn {
+    background-color: #111111;
+    color: #ffffff !important;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: var(--font-family-sans) !important;
+    font-size: 13px;
+    font-weight: var(--font-weight-sans, 800) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .shop-all-btn:hover {
+    background-color: #333333;
+    transform: translateY(-1px);
+    color: #ffffff !important;
+  }
+
   .menu-link {
     font-family: var(--font-family-sans) !important;
     font-size: 15px;
@@ -1586,7 +1608,14 @@
   <div class="header-nav-bar">
     <div class="header-nav-bar__inner">
       <div class="header__shop-all-wrapper" style="position: absolute; left: var(--site-padding, 16px); top: 50%; transform: translateY(-50%); z-index: 10;">
-        <a href="/collections/all" class="menu-pill" style="margin:0;">SHOP ALL</a>
+        <a href="/collections/all" class="shop-all-btn" style="margin:0;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          SHOP ALL
+        </a>
       </div>
       <nav class="header__navigation" role="navigation">
         <div class="nav-item">
