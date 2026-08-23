@@ -505,20 +505,83 @@
 
   /* Full Width Mega Menu Dropdown Panel */
   .megamenu-panel {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #ffffff !important;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border: none;
     display: none;
-    z-index: 1001;
+    z-index: 99999;
     padding: 0;
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.25s ease, transform 0.25s ease;
+    overflow-y: auto;
+  }
+
+  .megamenu-panel.is-active {
+    display: block;
+  }
+
+  .megamenu-panel.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hp-overlay-header {
+    display: flex;
+    align-items: center;
+    padding: 32px 40px;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hp-overlay-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+  }
+
+  .hp-overlay-nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .hp-overlay-nav a {
+    font-family: var(--font-family-sans) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #111 !important;
+    text-transform: uppercase !important;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .hp-overlay-nav a.is-active {
+    color: #FF2B2B !important;
+  }
+
+  .hp-overlay-nav a.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #FF2B2B;
   }
 
   /* Full-width mega menu - nuuk-style layout */
@@ -1920,18 +1983,31 @@
 
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU — both brand menus live here; logos/Shop All switch which is shown -->
   <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% elsif active_brand == 'science-of-raw' %} megamenu-panel--science-of-raw{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% elsif active_brand == 'science-of-raw' %}science-of-raw{% else %}hague{% endif %}">
+    
+    <div class="hp-overlay-header">
+      <button type="button" class="hp-overlay-close" aria-label="Close menu" id="OverlayCloseBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <nav class="hp-overlay-nav">
+        <a href="/pages/how-to-use">HOW TO USE</a>
+        <a href="/collections/all" class="is-active">SHOP</a>
+        <a href="/pages/corporate-gifting">CORPORATE GIFTING</a>
+        <a href="/pages/business">BUSINESS</a>
+        <a href="#">BRAND</a>
+      </nav>
+    </div>
+
     <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
     <!-- Hague Mega Menu - nuuk-style layout -->
-    <div style="display: flex; align-items: flex-start; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; box-sizing: border-box;">
+    <div style="display: grid; grid-template-columns: 140px 360px 1fr; gap: 40px 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; box-sizing: border-box; align-items: start;">
 
-      <!-- LEFT: section label -->
-      <div style="flex: 0 0 130px; width: 130px; padding-right: 20px; padding-top: 2px;">
+      <!-- SECTION 1: SHOP BY CATEGORY -->
+      <div style="padding-right: 20px; padding-top: 2px;">
         <p style="font-family: var(--font-family-sans); font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px 0;">Shop by Category</p>
         <a href="/collections/all" style="font-family: var(--font-family-sans); font-size: 12px; font-weight: 500; color: #FF2B2B; text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em;">View All</a>
       </div>
 
-      <!-- CENTER: category list with + buttons -->
-      <div style="flex: 0 0 360px; width: 360px; padding-right: 32px; border-right: 1px solid #f0f0f0;">
+      <div style="padding-right: 32px;">
 
         <!-- Sneaker Care Kits -->
         <div class="hp-megamenu-cat-row">
@@ -1981,60 +2057,9 @@
             <a href="/products/leather-ultra-clean">Leather Ultra Clean</a>
             <a href="/products/leather-cream">Leather Cream</a>
           </div>
-        </div>
-
-        <!-- Shop by Use -->
-        <div class="hp-megamenu-cat-row">
-          <div class="hp-megamenu-cat-header">
-            <a href="/collections/shop-by-use" class="hp-megamenu-cat-name">Shop by Use</a>
-            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Shop by Use">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
-            </button>
-          </div>
-          <div class="hp-megamenu-cat-sub">
-            <a href="/collections/delicate-clean">Delicate Clean</a>
-            <a href="/collections/deep-clean">Deep Clean</a>
-            <a href="/collections/on-the-go-clean">On the Go Clean</a>
-            <a href="/collections/deodorizers">Deodorizer</a>
-          </div>
-        </div>
-
-        <!-- Accessories -->
-        <div class="hp-megamenu-cat-row">
-          <div class="hp-megamenu-cat-header">
-            <a href="/collections/accessories" class="hp-megamenu-cat-name">Shop Accessories</a>
-            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Accessories">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
-            </button>
-          </div>
-          <div class="hp-megamenu-cat-sub">
-            <a href="/products/microfiber-towel">Microfiber Towel</a>
-            <a href="/products/shoe-tree">Shoe Tree</a>
-            <a href="/products/crease-defender">Crease Defender</a>
-            <a href="/products/shoe-cleaning-brush">Shoe Cleaning Brush</a>
-          </div>
-        </div>
-
-        <!-- Super Savers -->
-        <div class="hp-megamenu-cat-row">
-          <div class="hp-megamenu-cat-header">
-            <a href="/collections/super-savers" class="hp-megamenu-cat-name">Shop Super Savers</a>
-            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Super Savers">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
-            </button>
-          </div>
-          <div class="hp-megamenu-cat-sub">
-            <a href="/products/signature-suede-bundle">Signature Kit + Suede Care Kit</a>
-            <a href="/products/essential-leather-shaper-bundle">Essential Kit + Leather Care Kit</a>
-            <a href="/products/indepth-suede-dye-bundle">Indepth Kit + Suede Dye Kit</a>
-            <a href="/products/refill-module">Refill Module</a>
-          </div>
-        </div>
-
       </div>
 
-      <!-- RIGHT: featured images -->
-      <div style="flex: 1; padding-left: 32px; display: flex; gap: 20px; align-items: flex-start;">
+      <div style="padding-left: 32px; display: flex; gap: 20px; align-items: flex-start; grid-row: span 3;">
 
         {% if section.settings.mega_feat_img_1 %}
           <a href="{{ section.settings.mega_feat_link_1 | default: '/collections/sneaker-care-kits' }}" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
@@ -2079,6 +2104,38 @@
         {% endif %}
 
       </div>
+
+      <!-- SECTION 2: TRENDS -->
+      <div style="padding-right: 20px; padding-top: 2px;">
+        <p style="font-family: var(--font-family-sans); font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.12em; margin: 0;">Trends</p>
+      </div>
+
+      <div style="padding-right: 32px;">
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/shop-by-use" class="hp-megamenu-cat-name">Shop by Use</a>
+          </div>
+        </div>
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/accessories" class="hp-megamenu-cat-name">Shop Accessories</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: WEB EXCLUSIVES -->
+      <div style="padding-right: 20px; padding-top: 2px;">
+        <p style="font-family: var(--font-family-sans); font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.12em; margin: 0;">Web Exclusives</p>
+      </div>
+
+      <div style="padding-right: 32px;">
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/super-savers" class="hp-megamenu-cat-name">Shop Super Savers</a>
+          </div>
+        </div>
+      </div>
+
     </div>
     </div>
     <div class="megamenu-brand-panel megamenu-panel--vanrosector" data-brand-menu="vanrosector"{% unless active_brand == 'vanrosector' %} hidden{% endunless %}>
@@ -2194,6 +2251,7 @@
         clearTimeout(timeoutId);
         showBrandMenu(brand || defaultBrand);
         panel.style.display = 'block';
+        document.body.style.overflow = 'hidden';
         setTimeout(() => {
           panel.style.opacity = '1';
           panel.style.transform = 'translateY(0)';
@@ -2207,22 +2265,27 @@
           setTimeout(() => {
             if (panel.style.opacity === '0') {
               panel.style.display = 'none';
+              document.body.style.overflow = '';
             }
           }, 300);
         }, 120);
       };
 
-      panel.addEventListener('mouseenter', () => {
-        clearTimeout(timeoutId);
-        openPanel(currentBrand);
-      });
-      panel.addEventListener('mouseleave', closePanel);
-
-      /* Shop All button hover → open current brand's Shop All */
+      /* Shop All button click → open current brand's overlay */
       const shopAllTrigger = document.getElementById('ShopAllTrigger');
       if (shopAllTrigger) {
-        shopAllTrigger.addEventListener('mouseenter', () => openPanel(currentBrand));
-        shopAllTrigger.addEventListener('mouseleave', closePanel);
+        shopAllTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          openPanel(currentBrand);
+        });
+      }
+      
+      const overlayCloseBtn = document.getElementById('OverlayCloseBtn');
+      if (overlayCloseBtn) {
+        overlayCloseBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          closePanel();
+        });
       }
       
       const mobileShopAllTrigger = document.getElementById('MobileShopAllTrigger');
