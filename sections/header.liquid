@@ -63,6 +63,7 @@
     justify-content: center;
     padding-top: 0;
     padding-bottom: 0;
+    position: relative;
   }
 
   .header__search {
@@ -1584,6 +1585,9 @@
   <!-- Bottom tier: centered navigation -->
   <div class="header-nav-bar">
     <div class="header-nav-bar__inner">
+      <div class="header__shop-all-wrapper" style="position: absolute; left: var(--site-padding, 16px); top: 50%; transform: translateY(-50%); z-index: 10;">
+        <a href="/collections/all" class="menu-pill" style="margin:0;">SHOP ALL</a>
+      </div>
       <nav class="header__navigation" role="navigation">
         <div class="nav-item">
           <a href="/pages/about-us" class="menu-link">ABOUT US</a>
