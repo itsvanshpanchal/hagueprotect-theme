@@ -1942,17 +1942,8 @@
         shopAllTrigger.addEventListener('mouseleave', closePanel);
       }
 
-      /* Optional: if you want hovering logos to just switch the active menu without opening it
-         you could do showBrandMenu(brand) here, but typically page context handles the default. */
-      document.querySelectorAll('[data-mega-brand]').forEach((logo) => {
-        const brand = logo.getAttribute('data-mega-brand');
-        if (brand !== 'hague' && brand !== 'vanrosector' && brand !== 'science-of-raw') return;
-        
-        logo.addEventListener('mouseenter', () => {
-          showBrandMenu(brand);
-        });
-      });
-
+      /* The active brand is determined by the Liquid variable active_brand which sets data-default-brand.
+         We no longer switch the brand menu on logo hover, keeping it strictly tied to the current page context. */
       showBrandMenu(defaultBrand);
     }
 
