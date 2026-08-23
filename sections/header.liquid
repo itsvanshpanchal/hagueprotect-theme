@@ -935,7 +935,24 @@
       padding-top: 0;
       padding-bottom: 0;
     }
+  }
 
+  @media screen and (max-width: 768px) {
+    .megamenu-grid,
+    .megamenu-grid--vanrosector,
+    .megamenu-grid--science-of-raw {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+    
+    .megamenu-panel {
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      padding-bottom: 40px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
     .header-top {
       border-bottom: none;
     }
