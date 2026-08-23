@@ -48,7 +48,38 @@
         "eyebrow_font_style": "normal",
         "eyebrow_font_size_desktop": 19,
         "eyebrow_font_size_mobile": 15
-      }
+      },
+      "blocks": {
+        "tile_1": {
+          "type": "product_tile",
+          "settings": {
+            "title": "Acne, Blemish Control",
+            "title_color": "#2eb82e",
+            "subtitle": "For skin that won't stay clear."
+          }
+        },
+        "tile_2": {
+          "type": "product_tile",
+          "settings": {
+            "title": "Dark Spots, Pore Control",
+            "title_color": "#d96600",
+            "subtitle": "For skin that won't stop spotting."
+          }
+        },
+        "tile_3": {
+          "type": "product_tile",
+          "settings": {
+            "title": "Deep Hydration, Glow",
+            "title_color": "#009973",
+            "subtitle": "For skin that won't hold moisture."
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3"
+      ]
     },
     "featured-brands": {
       "type": "featured-brands",
