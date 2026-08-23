@@ -512,13 +512,13 @@
     background-color: #ffffff !important;
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     display: none;
     z-index: 1001;
-    padding: 48px 0;
+    padding: 0;
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
   /* Full-width mega menu - nuuk-style layout */
@@ -702,7 +702,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 11px 0;
+    padding: 8px 0;
     cursor: pointer;
   }
 
@@ -1922,7 +1922,7 @@
   <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% elsif active_brand == 'science-of-raw' %} megamenu-panel--science-of-raw{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% elsif active_brand == 'science-of-raw' %}science-of-raw{% else %}hague{% endif %}">
     <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
     <!-- Hague Mega Menu - nuuk-style layout -->
-    <div style="display: grid; grid-template-columns: 160px 1fr auto; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 40px 48px; width: 100%; align-items: start; box-sizing: border-box;">
+    <div style="display: grid; grid-template-columns: 140px 1fr auto; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; align-items: start; box-sizing: border-box;">
 
       <!-- LEFT: section label -->
       <div style="padding-right: 24px; padding-top: 2px;">
