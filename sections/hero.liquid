@@ -8,7 +8,7 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
-  /* Biggest title sizes — literal px from Typography (high specificity beats global CSS) */
+  /* Hero heading — Poppins Light, tight lines, large — matches inspiration */
   #MainContent #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
   #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
@@ -19,7 +19,13 @@
   #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
   #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
   #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line {
-    font-size: 108px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(52px, 8vw, 108px) !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    line-height: 0.92 !important;
+    letter-spacing: -0.02em !important;
+    color: #ffffff !important;
   }
 
   /* Tagline (FROM BEAT TO HEAT) — Darker Grotesque Regular; stroke on mobile only */
@@ -43,6 +49,7 @@
   }
 
   @media screen and (max-width: 989px) {
+    /* Mobile hero heading */
     #MainContent #shopify-section-{{ section.id }} h1.hero-fullscreen__heading,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading,
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
@@ -53,7 +60,13 @@
     #shopify-section-{{ section.id }} .hero-fullscreen__heading .hp-typewriter-text,
     #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
     #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line {
-      font-size: 52px !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: clamp(40px, 11vw, 52px) !important;
+      font-weight: 300 !important;
+      font-style: normal !important;
+      line-height: 0.92 !important;
+      letter-spacing: -0.02em !important;
+      color: #ffffff !important;
     }
 
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
@@ -131,7 +144,7 @@
     top: var(--hero-content-y, 18%);
     transform: translate(var(--hero-content-tx, 0), 0);
     width: max-content;
-    max-width: min(800px, 55vw);
+    max-width: min(900px, 60vw);
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -147,11 +160,11 @@
   }
 
   .hero-fullscreen__heading {
-    font-family: 'Century Gothic', Poppins, Futura, sans-serif !important;
-    font-size: 108px !important;
-    font-weight: 400 !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(52px, 8vw, 108px) !important;
+    font-weight: 300 !important;
     font-style: normal !important;
-    line-height: 1.15 !important;
+    line-height: 0.92 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
     margin: 0;
@@ -183,9 +196,9 @@
   }
 
   .hero-fullscreen__heading .hero-heading-line--3 {
-    color: {{ section.settings.heading_line3_color | default: '#c8c8c8' }} !important;
+    color: #b0b0b0 !important;
     font-style: italic !important;
-    font-weight: 400 !important;
+    font-weight: 300 !important;
     text-indent: 0;
   }
 
@@ -334,11 +347,11 @@
     }
 
     .hero-fullscreen__heading {
-      font-family: 'Century Gothic', Poppins, Futura, sans-serif !important;
-      font-size: 52px !important;
-      font-weight: 400 !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: clamp(40px, 11vw, 52px) !important;
+      font-weight: 300 !important;
       font-style: normal !important;
-      line-height: 1.15 !important;
+      line-height: 0.92 !important;
       letter-spacing: -0.02em !important;
       text-transform: none !important;
       padding: 0;
