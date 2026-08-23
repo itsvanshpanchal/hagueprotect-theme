@@ -255,9 +255,9 @@
 
   /* Ã¢â€â‚¬Ã¢â€â‚¬ Materials journal Ã¢â€â‚¬Ã¢â€â‚¬ */
   .htu-v2__journal {
-    max-width: var(--site-max-width);
-    margin: 0 auto;
-    padding: clamp(56px, 7vw, 80px) max(20px, var(--site-padding, 24px));
+    max-width: 100%;
+    margin: 0;
+    padding: clamp(56px, 7vw, 80px) 0;
     display: flex;
     flex-direction: column;
     gap: clamp(32px, 5vw, 64px);
@@ -269,7 +269,10 @@
     top: calc(var(--header-height, 80px) + 24px);
     background: #ffffff;
     z-index: 10;
-    padding-bottom: 16px;
+    padding: 0 max(20px, var(--site-padding, 24px)) 16px;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    width: 100%;
   }
 
   .htu-v2__nav-title {
@@ -644,7 +647,7 @@
     display: none;
     overflow-x: auto;
     gap: 8px;
-    padding-bottom: 24px;
+    padding: 0 max(20px, var(--site-padding, 24px)) 24px;
     margin-bottom: 8px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
