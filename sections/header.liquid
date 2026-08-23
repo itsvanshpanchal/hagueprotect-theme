@@ -858,7 +858,9 @@
   }
 
   @media screen and (min-width: 1025px) {
-    .header__search-btn {
+    .header__search-btn,
+    .header__mobile-toggle,
+    .header__mobile-shop-all {
       display: none;
     }
   }
@@ -1540,6 +1542,9 @@
       </div>
 
     <div class="header__actions">
+      <div class="header__mobile-shop-all" id="MobileShopAllTrigger" style="display: flex; align-items: center; margin-right: 12px;">
+        <a href="/collections/all" class="shop-all-btn" style="margin:0; font-size: 11px; padding: 4px 10px;">SHOP ALL</a>
+      </div>
       <button type="button" class="header__mobile-toggle" onclick="openMobileMenu()" aria-label="Open navigation menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1986,6 +1991,18 @@
       if (shopAllTrigger) {
         shopAllTrigger.addEventListener('mouseenter', () => openPanel(currentBrand));
         shopAllTrigger.addEventListener('mouseleave', closePanel);
+      }
+      
+      const mobileShopAllTrigger = document.getElementById('MobileShopAllTrigger');
+      if (mobileShopAllTrigger) {
+        mobileShopAllTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (panel.style.display === 'block') {
+            closePanel();
+          } else {
+            openPanel(currentBrand);
+          }
+        });
       }
 
       /* The active brand is determined by the Liquid variable active_brand which sets data-default-brand.
