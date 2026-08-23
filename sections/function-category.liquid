@@ -538,7 +538,8 @@
       {%- if section.settings.subtitle != blank -%}
         <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
-      <h2 class="fc-heading">{% render 'section-heading-text', text: section.settings.heading | default: 'Shop by Function and Category', line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
+      {%- assign fc_heading_text = section.settings.heading | default: 'Shop by Function and Category' -%}
+      <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
     </div>
 
     <div class="fc-slider-wrapper">
