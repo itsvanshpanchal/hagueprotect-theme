@@ -15,7 +15,13 @@
     <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
   </h4>
 {%- else -%}
-  <h3 class="megamenu-heading megamenu-heading--sor megamenu-heading-link">
+  <h3 class="megamenu-heading megamenu-heading--sor megamenu-heading-link" style="display: flex; align-items: center; justify-content: space-between;">
     <a href="{{ heading_href }}" class="megamenu-heading-link__a">{{ label }}</a>
+    <button type="button" class="megamenu-toggle-btn" aria-expanded="false" aria-label="Toggle {{ label }}" style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; color: currentColor;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-plus"/>
+        <path d="M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-minus" style="display:none;"/>
+      </svg>
+    </button>
   </h3>
 {%- endif -%}
