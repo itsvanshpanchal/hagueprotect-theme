@@ -20,12 +20,20 @@
   #shopify-section-{{ section.id }} .hero-fullscreen__heading > span[aria-hidden="true"],
   #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line {
     font-family: 'Poppins', sans-serif !important;
-    font-size: clamp(52px, 8vw, 108px) !important;
+    font-size: clamp(64px, 9vw, 120px) !important;
     font-weight: 300 !important;
     font-style: normal !important;
-    line-height: 0.92 !important;
+    line-height: 0.93 !important;
     letter-spacing: -0.02em !important;
     color: #ffffff !important;
+  }
+
+  /* Line 3 override — italic + grey, must come after the rule above */
+  #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line--3,
+  #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line--3 {
+    font-style: italic !important;
+    color: #b0b0b0 !important;
+    font-weight: 300 !important;
   }
 
   /* Tagline (FROM BEAT TO HEAT) — Darker Grotesque Regular; stroke on mobile only */
@@ -64,9 +72,17 @@
       font-size: clamp(40px, 11vw, 52px) !important;
       font-weight: 300 !important;
       font-style: normal !important;
-      line-height: 0.92 !important;
+      line-height: 0.93 !important;
       letter-spacing: -0.02em !important;
       color: #ffffff !important;
+    }
+
+    /* Mobile line 3 override */
+    #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line--3,
+    #shopify-section-{{ section.id }} .hero-fullscreen__heading .hero-heading-line--3 {
+      font-style: italic !important;
+      color: #b0b0b0 !important;
+      font-weight: 300 !important;
     }
 
     #MainContent #shopify-section-{{ section.id }} .hero-fullscreen__subheading,
