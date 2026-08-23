@@ -521,15 +521,260 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
+  /* Full-width mega menu - nuuk-style layout */
   .megamenu-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 32px;
+    grid-template-columns: 180px 1fr auto;
+    gap: 0;
     max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 40px 48px;
     width: 100%;
     align-items: start;
+  }
+
+  /* Left label column */
+  .megamenu-label-col {
+    padding-top: 2px;
+    padding-right: 24px;
+  }
+
+  .megamenu-section-label {
+    font-family: var(--font-family-sans) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #999999 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .megamenu-view-all {
+    font-family: var(--font-family-sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #FF2B2B !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .megamenu-view-all:hover {
+    color: #cc2222 !important;
+  }
+
+  /* Center category list */
+  .megamenu-cat-col {
+    padding: 0 40px 0 0;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .megamenu-cat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+    cursor: pointer;
+  }
+
+  .megamenu-cat-item:first-child {
+    border-top: 1px solid #f5f5f5;
+  }
+
+  .megamenu-cat-item__name {
+    font-family: var(--font-family-sans) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #111111 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.10em !important;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .megamenu-cat-item__name:hover {
+    color: #FF2B2B !important;
+  }
+
+  .megamenu-cat-item__plus {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #111111;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .megamenu-cat-item__plus:hover {
+    color: #FF2B2B;
+  }
+
+  .megamenu-cat-item__plus svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .megamenu-cat-sublinks {
+    display: none;
+    padding: 8px 0 8px 12px;
+    border-bottom: 1px solid #f5f5f5;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .megamenu-cat-sublinks.is-open {
+    display: flex;
+  }
+
+  .megamenu-cat-sublinks a {
+    font-family: var(--font-family-sans) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #555555 !important;
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .megamenu-cat-sublinks a:hover {
+    color: #FF2B2B !important;
+  }
+
+  /* Right featured images */
+  .megamenu-featured-col {
+    padding-left: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .megamenu-featured-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 130px;
+    flex-shrink: 0;
+  }
+
+  .megamenu-featured-img {
+    width: 130px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+    background: #f5f5f5;
+  }
+
+  .megamenu-featured-caption {
+    font-family: var(--font-family-sans) !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #111111 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.10em !important;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .megamenu-featured-caption:hover {
+    color: #FF2B2B !important;
+  }
+
+  /* Nuuk-style category rows */
+  .hp-megamenu-cat-row {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .hp-megamenu-cat-row:first-child {
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .hp-megamenu-cat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 0;
+    cursor: pointer;
+  }
+
+  .hp-megamenu-cat-name {
+    font-family: var(--font-family-sans) !important;
+    font-size: 11.5px !important;
+    font-weight: 500 !important;
+    color: #111111 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.10em !important;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hp-megamenu-cat-name:hover {
+    color: #FF2B2B !important;
+  }
+
+  .hp-megamenu-cat-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: color 0.2s;
+  }
+
+  .hp-megamenu-cat-toggle:hover {
+    color: #FF2B2B;
+  }
+
+  .hp-megamenu-cat-toggle.is-open .icon-plus {
+    display: none;
+  }
+
+  .hp-megamenu-cat-toggle .icon-minus {
+    display: none;
+  }
+
+  .hp-megamenu-cat-toggle.is-open .icon-minus {
+    display: block;
+  }
+
+  .hp-megamenu-cat-sub {
+    display: none;
+    flex-direction: column;
+    gap: 7px;
+    padding: 0 0 12px 0;
+  }
+
+  .hp-megamenu-cat-sub.is-open {
+    display: flex;
+  }
+
+  .hp-megamenu-cat-sub a {
+    font-family: var(--font-family-sans) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #666666 !important;
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .hp-megamenu-cat-sub a:hover {
+    color: #FF2B2B !important;
   }
 
   .megamenu-col {
@@ -1676,194 +1921,166 @@
   <!-- UNCONSTRAINED FULL-WIDTH MEGA MENU — both brand menus live here; logos/Shop All switch which is shown -->
   <div class="megamenu-panel{% if active_brand == 'vanrosector' %} megamenu-panel--vanrosector{% elsif active_brand == 'science-of-raw' %} megamenu-panel--science-of-raw{% endif %}" id="MegaMenuPanel" data-default-brand="{% if active_brand == 'vanrosector' %}vanrosector{% elsif active_brand == 'science-of-raw' %}science-of-raw{% else %}hague{% endif %}">
     <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
-    <div class="megamenu-grid" style="grid-template-columns: repeat(5, 1fr); gap: 40px;">
-      
-      <!-- Column 1: Kits & Solutions -->
-      <div class="megamenu-col">
-        {% render 'header-menu-heading', menu_collection: section.settings.col_sneaker_care_kits, handle: 'sneaker-care-kits', search: 'Sneaker Care Kit', label: 'Shop Sneaker Care Kits', accent: true %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'signature-kit', search: 'Signature Kit', label: 'Signature Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'refresh-kit', search: 'Refresh Kit', label: 'Refresh Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'indepth-kit', search: 'Indepth Kit', label: 'Indepth Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'supreme-kit', search: 'Supreme Kit', label: 'Supreme Kit' %}</li>
-          </ul>
-        </div>
+    <!-- Hague Mega Menu - nuuk-style layout -->
+    <div style="display: grid; grid-template-columns: 160px 1fr auto; gap: 0; max-width: var(--site-max-width); margin: 0 auto; padding: 40px 48px; width: 100%; align-items: start; box-sizing: border-box;">
 
-        {% render 'header-menu-heading', menu_collection: section.settings.col_material_care_kits, handle: 'material-care-kits', search: 'Material Care Kit', label: 'Shop Material Care Kits', accent: true %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'fabric-care-kit', search: 'Fabric Care Kit', label: 'Fabric Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Soles Care Kit' %}</li>
-          </ul>
-
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'Leather Suede Care Kit', label: 'Leather & Suede Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-dye-kit', search: 'Suede Dye Kit', label: 'Suede Dye Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'proteonnxt-performance-kit', search: 'Proteonnxt Performance Kit', label: 'Proteonnxt Performance Kit' %}</li>
-          </ul>
-        </div>
-
-        {% render 'header-menu-heading', menu_collection: section.settings.col_cleaning_solutions, handle: 'cleaning-solutions', search: 'cleaning solution', label: 'Shop Cleaning Solutions', accent: true %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'power-cleaner', search: 'power cleaner', label: 'Power Cleaner' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-cleaner', search: 'suede cleaner', label: 'Suede Cleaner' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'stain-treater-mesh', search: 'stain treater', label: 'Stain Treater for Mesh' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-ultra-clean', search: 'leather clean', label: 'Leather Ultra Clean' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-cream', search: 'leather cream', label: 'Leather Cream' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-ink-remover', search: 'leather ink', label: 'Leather Ink Remover' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'midsole-reviver', search: 'midsole reviver', label: 'Midsole Reviver' %}</li>
-          </ul>
-        </div>
+      <!-- LEFT: section label -->
+      <div style="padding-right: 24px; padding-top: 2px;">
+        <p style="font-family: var(--font-family-sans); font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 10px 0;">Shop by Category</p>
+        <a href="/collections/all" style="font-family: var(--font-family-sans); font-size: 12px; font-weight: 500; color: #FF2B2B; text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em;">View All</a>
       </div>
 
-      <!-- Column 2: Shop by Use & More -->
-      <div class="megamenu-col">
-        {% render 'header-menu-heading', menu_collection: section.settings.col_shop_by_use, handle: 'shop-by-use', search: 'shop by use', label: 'Shop by Use' %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'delicate-clean', search: 'delicate clean', label: '1. Delicate Clean' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'deep-clean', search: 'deep clean', label: '2. Deep Clean' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'on-the-go-clean', search: 'on the go', label: '3. On the Go Clean' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'mess-free-clean', search: 'mess free', label: '4. Mess free Clean' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shop-by-deodorizer', search: 'deodorizer', label: '5. Deodorizer' %}</li>
-          </ul>
+      <!-- CENTER: category list with + buttons -->
+      <div style="padding-right: 40px; border-right: 1px solid #f0f0f0;">
+
+        <!-- Sneaker Care Kits -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/sneaker-care-kits" class="hp-megamenu-cat-name">Shop Sneaker Care Kits</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Sneaker Care Kits">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/products/signature-kit">Signature Kit</a>
+            <a href="/products/refresh-kit">Refresh Kit</a>
+            <a href="/products/indepth-kit">Indepth Kit</a>
+            <a href="/products/supreme-kit">Supreme Kit</a>
+          </div>
         </div>
 
-        <h3 class="megamenu-heading megamenu-heading-link" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-          <a href="#" class="megamenu-heading-link__a">Shop Specialty Care</a>
-          <button type="button" class="megamenu-toggle-btn" aria-expanded="false" aria-label="Toggle Shop Specialty Care" style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; color: currentColor;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-plus"/>
-              <path d="M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-minus" style="display:none;"/>
-            </svg>
-          </button>
-        </h3>
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'edge-on-custom-pen', search: 'Edge on Custom Pen', label: 'Edge on Custom Pen' %}</li>
-          </ul>
+        <!-- Material Care Kits -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/material-care-kits" class="hp-megamenu-cat-name">Shop Material Care Kits</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Material Care Kits">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/products/leather-care-kit">Leather Care Kit</a>
+            <a href="/products/suede-care-kit">Suede Care Kit</a>
+            <a href="/products/nubuck-care-kit">Nubuck Care Kit</a>
+            <a href="/products/fabric-care-kit">Fabric Care Kit</a>
+            <a href="/products/soles-care-kit">Soles Care Kit</a>
+          </div>
         </div>
 
-        <h3 class="megamenu-heading megamenu-heading-link" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-          <a href="#" class="megamenu-heading-link__a">Conditioner</a>
-          <button type="button" class="megamenu-toggle-btn" aria-expanded="false" aria-label="Toggle Conditioner" style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; color: currentColor;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-plus"/>
-              <path d="M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-minus" style="display:none;"/>
-            </svg>
-          </button>
-        </h3>
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-conditioner', search: 'Leather Conditioner', label: 'Leather Conditioner' %}</li>
-          </ul>
+        <!-- Cleaning Solutions -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/cleaning-solutions" class="hp-megamenu-cat-name">Shop Cleaning Solutions</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Cleaning Solutions">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/products/power-cleaner">Power Cleaner</a>
+            <a href="/products/suede-cleaner">Suede Cleaner</a>
+            <a href="/products/stain-treater-mesh">Stain Treater for Mesh</a>
+            <a href="/products/leather-ultra-clean">Leather Ultra Clean</a>
+            <a href="/products/leather-cream">Leather Cream</a>
+          </div>
         </div>
 
-        <h3 class="megamenu-heading megamenu-heading-link" style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-          <a href="#" class="megamenu-heading-link__a">Refill Pack</a>
-          <button type="button" class="megamenu-toggle-btn" aria-expanded="false" aria-label="Toggle Refill Pack" style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; color: currentColor;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-plus"/>
-              <path d="M5 12h14" stroke-linecap="round" stroke-linejoin="round" class="icon-minus" style="display:none;"/>
-            </svg>
-          </button>
-        </h3>
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'sneaker-cleaner-refill', search: 'Sneaker Cleaner Refill', label: 'Sneaker Cleaner Refill' %}</li>
-          </ul>
+        <!-- Shop by Use -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/shop-by-use" class="hp-megamenu-cat-name">Shop by Use</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Shop by Use">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/collections/delicate-clean">Delicate Clean</a>
+            <a href="/collections/deep-clean">Deep Clean</a>
+            <a href="/collections/on-the-go-clean">On the Go Clean</a>
+            <a href="/collections/deodorizers">Deodorizer</a>
+          </div>
         </div>
+
+        <!-- Accessories -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/accessories" class="hp-megamenu-cat-name">Shop Accessories</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Accessories">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/products/microfiber-towel">Microfiber Towel</a>
+            <a href="/products/shoe-tree">Shoe Tree</a>
+            <a href="/products/crease-defender">Crease Defender</a>
+            <a href="/products/shoe-cleaning-brush">Shoe Cleaning Brush</a>
+          </div>
+        </div>
+
+        <!-- Super Savers -->
+        <div class="hp-megamenu-cat-row">
+          <div class="hp-megamenu-cat-header">
+            <a href="/collections/super-savers" class="hp-megamenu-cat-name">Shop Super Savers</a>
+            <button class="hp-megamenu-cat-toggle" aria-expanded="false" aria-label="Toggle Super Savers">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" class="icon-plus"/><path d="M5 12h14" class="icon-minus" style="display:none;"/></svg>
+            </button>
+          </div>
+          <div class="hp-megamenu-cat-sub">
+            <a href="/products/signature-suede-bundle">Signature Kit + Suede Care Kit</a>
+            <a href="/products/essential-leather-shaper-bundle">Essential Kit + Leather Care Kit</a>
+            <a href="/products/indepth-suede-dye-bundle">Indepth Kit + Suede Dye Kit</a>
+            <a href="/products/refill-module">Refill Module</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: featured images -->
+      <div style="padding-left: 40px; display: flex; gap: 20px; align-items: flex-start;">
+
+        {% if section.settings.mega_feat_img_1 %}
+          <a href="{{ section.settings.mega_feat_link_1 | default: '/collections/sneaker-care-kits' }}" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            {{ section.settings.mega_feat_img_1 | image_url: width: 260 | image_tag: style: 'width:130px;height:100px;object-fit:cover;display:block;', alt: section.settings.mega_feat_label_1 }}
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">{{ section.settings.mega_feat_label_1 | default: 'Sneaker Care' }}</span>
+          </a>
+        {% else %}
+          <a href="/collections/sneaker-care-kits" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            <div style="width:130px;height:100px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;">
+              <svg width="32" height="32" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">Sneaker Care Kits</span>
+          </a>
+        {% endif %}
+
+        {% if section.settings.mega_feat_img_2 %}
+          <a href="{{ section.settings.mega_feat_link_2 | default: '/collections/material-care-kits' }}" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            {{ section.settings.mega_feat_img_2 | image_url: width: 260 | image_tag: style: 'width:130px;height:100px;object-fit:cover;display:block;', alt: section.settings.mega_feat_label_2 }}
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">{{ section.settings.mega_feat_label_2 | default: 'Material Care' }}</span>
+          </a>
+        {% else %}
+          <a href="/collections/material-care-kits" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            <div style="width:130px;height:100px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;">
+              <svg width="32" height="32" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">Material Care Kits</span>
+          </a>
+        {% endif %}
+
+        {% if section.settings.mega_feat_img_3 %}
+          <a href="{{ section.settings.mega_feat_link_3 | default: '/collections/super-savers' }}" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            {{ section.settings.mega_feat_img_3 | image_url: width: 260 | image_tag: style: 'width:130px;height:100px;object-fit:cover;display:block;', alt: section.settings.mega_feat_label_3 }}
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">{{ section.settings.mega_feat_label_3 | default: 'Super Savers' }}</span>
+          </a>
+        {% else %}
+          <a href="/collections/super-savers" style="display: flex; flex-direction: column; gap: 8px; width: 130px; flex-shrink: 0; text-decoration: none;">
+            <div style="width:130px;height:100px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;">
+              <svg width="32" height="32" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <span style="font-family: var(--font-family-sans); font-size: 10px; font-weight: 500; color: #111; text-transform: uppercase; letter-spacing: 0.10em;">Super Savers</span>
+          </a>
+        {% endif %}
+
+      </div>
     </div>
-
-      <!-- Column 3: Care by Fabric -->
-          <div class="megamenu-col">
-        {% render 'header-menu-heading', menu_collection: section.settings.col_care_by_fabric, handle: 'care-by-fabric', search: 'care by fabric', label: 'Shop Care by Fabric' %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links">
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">1. Leather</span>
-              {% render 'header-menu-link', handle: 'leather-care-kit', search: 'Leather Care Kit', label: 'Leather Care', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">2. Suede</span>
-              {% render 'header-menu-link', handle: 'suede-care-kit', search: 'Suede Care Kit', label: 'Suede Care Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">3. Canvas</span>
-              {% render 'header-menu-link', handle: 'canvas-care', search: 'Signature Kit', label: 'Signature Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">4. Mesh</span>
-              {% render 'header-menu-link', handle: 'mesh-care', search: 'Refresh Kit', label: 'Refresh Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">5. Knit</span>
-              {% render 'header-menu-link', handle: 'knit-care', search: 'Indepth Kit', label: 'Indepth Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">6. Nubuck</span>
-              {% render 'header-menu-link', handle: 'nubuck-care-kit', search: 'Nubuck Care Kit', label: 'Nubuck Care Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">7. Rubber</span>
-              {% render 'header-menu-link', handle: 'rubber-care', search: 'Essential Kit', label: 'Essential Kit', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">8. Midsole & Sole</span>
-              {% render 'header-menu-link', handle: 'soles-care-kit', search: 'Sole Cleaner', label: 'Sole Cleaner', style: 'font-size: 13px;' %}
-            </li>
-            <li class="megamenu-link-item">
-              <span style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; display: block; margin-top: 5px;">9. Mixed Material</span>
-              {% render 'header-menu-link', handle: 'mixed-material-care', search: 'Supreme Kit', label: 'Supreme Kit', style: 'font-size: 13px;' %}
-            </li>
-          </ul>
-        </div>
     </div>
-
-      <!-- Column 4: Deodorizers & Accessories -->
-              <div class="megamenu-col">
-        {% render 'header-menu-heading', menu_collection: section.settings.col_deodorizers, handle: 'deodorizers', search: 'deodorizer', label: 'Shop Deodorizers' %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links" style="margin-bottom: 24px;">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'citrus-shoe-deodorizer', search: 'citrus deodorizer', label: 'Citrus - Shoe Deodorizer' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'lavender-bliss-shoe-deodorizer', search: 'lavender deodorizer', label: 'Lavender Bliss - Shoe Deodorizer' %}</li>
-          </ul>
-        </div>
-
-        {% render 'header-menu-heading', menu_collection: section.settings.col_accessories, handle: 'accessories', search: 'accessories', label: 'Shop Accessories' %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'microfiber-towel', search: 'microfiber towel', label: 'Microfiber Towel - Pack of 4' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-tree', search: 'shoe tree', label: 'Shoe Tree - Pack of 2' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'crease-defender', search: 'crease defender', label: 'Crease Defender - Pack of 2' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'shoe-cleaning-brush', search: 'shoe cleaning brush', label: 'Shoe Cleaning Brush - Pack of 4' %}</li>
-          </ul>
-        </div>
-    </div>
-
-      <!-- Column 5: Super Savers -->
-              <div class="megamenu-col">
-        {% render 'header-menu-heading', menu_collection: section.settings.col_super_savers, handle: 'super-savers', search: 'super saver', label: 'Shop Super Savers', accent: true %}
-        <div class="megamenu-accordion-content" style="display: none;">
-          <ul class="megamenu-links">
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'signature-suede-bundle', search: 'signature suede kit', label: 'Signature Kit + Suede Care Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'essential-leather-shaper-bundle', search: 'essential leather shaper', label: 'Essential Kit + Leather Care Kit + Shoe Shaper' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'indepth-suede-dye-bundle', search: 'indepth suede dye', label: 'Indepth Kit + Suede Dye Kit' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'refill-module', search: 'refill module', label: 'Refill Module' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'proteonnxt-suede-bundle', search: 'proteonnxt suede', label: 'Proteonnxt Performance Kit + Suede Care' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'leather-suede-care-kit', search: 'leather suede care', label: 'Leather & Suede Care' %}</li>
-            <li class="megamenu-link-item">{% render 'header-menu-link', handle: 'suede-dye-care-bundle', search: 'suede dye kit', label: 'Suede Dye + Suede Care Kit' %}</li>
-          </ul>
-        </div>
-              </div>
-
-        </div>
-        </div>
     <div class="megamenu-brand-panel megamenu-panel--vanrosector" data-brand-menu="vanrosector"{% unless active_brand == 'vanrosector' %} hidden{% endunless %}>
       {% render 'vanrosector-shop-all-menu', variant: 'desktop' %}
     </div>
@@ -2043,6 +2260,22 @@
             if (iconPlus) iconPlus.style.display = isHidden ? 'none' : 'block';
             if (iconMinus) iconMinus.style.display = isHidden ? 'block' : 'none';
           }
+        });
+      });
+
+      /* Nuuk-style category row + button toggles */
+      document.querySelectorAll('.hp-megamenu-cat-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const row = btn.closest('.hp-megamenu-cat-row');
+          if (!row) return;
+          const sub = row.querySelector('.hp-megamenu-cat-sub');
+          if (!sub) return;
+          const isOpen = sub.classList.contains('is-open');
+          sub.classList.toggle('is-open', !isOpen);
+          btn.classList.toggle('is-open', !isOpen);
+          btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
         });
       });
     }
