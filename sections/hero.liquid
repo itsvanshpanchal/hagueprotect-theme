@@ -183,7 +183,7 @@
   }
 
   .hero-fullscreen__heading .hero-heading-line--3 {
-    color: #ffffff !important;
+    color: {{ section.settings.heading_line3_color | default: '#c8c8c8' }} !important;
     font-style: italic !important;
     font-weight: 400 !important;
     text-indent: 0;
