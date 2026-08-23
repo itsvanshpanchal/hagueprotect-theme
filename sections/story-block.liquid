@@ -1,5 +1,5 @@
 {%- liquid
-  assign story_heading_mobile = 20
+  assign story_heading_mobile = 24
   assign story_accent_mobile = section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
   assign story_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
   assign story_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
@@ -121,7 +121,7 @@
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair,
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-typewriter-text {
       font-family: var(--font-family-heading) !important;
-      font-size: calc(var(--heading-size-xl) * 0.8) !important;
+      font-size: var(--heading-size-xl) !important;
       font-weight: var(--font-weight-heading, 400) !important;
       font-style: var(--font-style-heading, normal) !important;
       line-height: 1.2 !important;
@@ -141,7 +141,7 @@
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-pair--stack .hp-heading-line--1,
     .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-typewriter-text {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-      font-size: 20px !important;
+      font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
       font-weight: 300 !important;
       font-style: normal !important;
       font-synthesis: none !important;
