@@ -646,7 +646,7 @@
             {%- liquid
               assign target_product = block.settings.product
               assign final_image = block.settings.image | default: target_product.featured_image
-              assign final_title = block.settings.title | default: target_product.title | default: 'Example Title'
+              assign final_title = block.settings.custom_title | default: target_product.title | default: 'Select a product'
               assign final_link = block.settings.link | default: target_product.url | default: '#'
             -%}
             <div class="hero-bottom-tile" {{ block.shopify_attributes }}>
@@ -1732,7 +1732,7 @@
         },
         {
           "type": "text",
-          "id": "title",
+          "id": "custom_title",
           "label": "Custom Title (Overrides Product Title)"
         },
         {
