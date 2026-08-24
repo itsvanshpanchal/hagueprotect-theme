@@ -30,6 +30,14 @@
     50% { opacity: calc(var(--hp-dna-glow) * 0.9); transform: scale(1.04); }
   }
 
+  .hp-dna__heading .hp-heading-line--2 {
+    font-style: italic !important;
+    font-synthesis: style !important;
+    transform: skewX(-12deg);
+    display: inline-block;
+    padding-right: 5px; /* prevent clipping */
+  }
+
   .hp-dna-{{ section.id }} .hp-dna__container {
     max-width: {{ section.settings.container_width | default: settings.site_max_width | default: 1440 }}px;
     margin: 0 auto;
