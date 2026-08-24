@@ -68,6 +68,50 @@
         "border_radius": 0
       }
     },
+    "blocks_4kmeDn": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2aed7aa_3pwLXa": {
+          "type": "ai_gen_block_2aed7aa",
+          "settings": {
+            "eyebrow_text": "THE FORMULA",
+            "eyebrow_color": "#B08D57",
+            "eyebrow_size_desktop": 14,
+            "eyebrow_size_mobile": 12,
+            "eyebrow_weight": 600,
+            "eyebrow_letter_spacing": 4,
+            "eyebrow_margin_bottom": 24,
+            "heading_line1": "Skin Longevity",
+            "heading_line2_part1": "System",
+            "heading_line2_part2": "5",
+            "heading_color": "#FFFFFF",
+            "accent_color": "#B08D57",
+            "heading_size_desktop": 60,
+            "heading_size_mobile": 38,
+            "heading_weight": 400,
+            "heading_margin_bottom": 44,
+            "subtext": "Five biological processes, supported at once. This is what holds the result after the bottle is empty.",
+            "subtext_color": "#9E9E9E",
+            "subtext_size_desktop": 18,
+            "subtext_size_mobile": 16,
+            "subtext_weight": 400,
+            "subtext_max_width": 560,
+            "background_color": "#141414",
+            "container_max_width": 640,
+            "padding_top_desktop": 110,
+            "padding_bottom_desktop": 110,
+            "padding_top_mobile": 60,
+            "padding_bottom_mobile": 60
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2aed7aa_3pwLXa"
+      ],
+      "name": "Formula intro",
+      "settings": {}
+    },
     "products": {
       "type": "care-kit-collection",
       "settings": {
@@ -192,6 +236,7 @@
   },
   "order": [
     "story_banner_1",
+    "blocks_4kmeDn",
     "products",
     "faq"
   ]
