@@ -263,8 +263,8 @@
 
     {%- if heading != blank -%}
       {%- assign heading_escaped = heading | escape | newline_to_br -%}
-      {%- assign styled_text = '<span style="color: #808080; font-style: italic; font-weight: 400;">waiting outside.</span>' -%}
-      {%- assign final_heading = heading_escaped | replace: 'waiting outside.', styled_text -%}
+      {%- assign styled_text = '<span style="display: block; color: #808080; font-style: italic; font-weight: 400; text-align: center; width: 100%;">waiting outside.</span>' -%}
+      {%- assign final_heading = heading_escaped | replace: 'waiting outside.', styled_text | replace: '<br /><span', '<span' | replace: '<br><span', '<span' -%}
       <h2 class="split-cta--redesign__heading">{{ final_heading }}</h2>
     {%- endif -%}
 
