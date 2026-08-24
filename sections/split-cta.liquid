@@ -262,7 +262,16 @@
     {%- endif -%}
 
     {%- if heading != blank -%}
-      <h2 class="split-cta--redesign__heading">{{ heading | escape | newline_to_br }}</h2>
+      {%- assign heading_br = heading | escape | newline_to_br -%}
+      {%- if heading_br contains '<br />' -%}
+        {%- assign heading_parts = heading_br | split: '<br />' -%}
+        <h2 class="split-cta--redesign__heading">
+          {{ heading_parts[0] }}<br />
+          <span style="color: #808080; font-style: italic; font-weight: 400;">{{ heading_parts[1] }}</span>
+        </h2>
+      {%- else -%}
+        <h2 class="split-cta--redesign__heading">{{ heading_br }}</h2>
+      {%- endif -%}
     {%- endif -%}
 
     {%- if subtext != blank -%}
