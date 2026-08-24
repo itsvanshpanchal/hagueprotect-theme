@@ -67,8 +67,10 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 11px;
-    font-weight: 700;
+    font-family: var(--font-family-eyebrow, sans-serif);
+    font-size: var(--section-label-size, 14px);
+    font-weight: var(--font-weight-eyebrow, 700);
+    font-style: var(--font-style-eyebrow, normal);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--corp-accent);
@@ -83,13 +85,14 @@
   }
 
   .corp-hero__title {
-    font-family: var(--font-family-heading);
-    font-size: clamp(56px, 8vw, 104px);
-    font-weight: 400;
+    font-family: var(--font-family-h1, var(--font-family-heading));
+    font-size: var(--heading-size-hero, 72px);
+    font-weight: var(--font-weight-h1, 400);
+    font-style: var(--font-style-h1, normal);
     line-height: 0.9;
     letter-spacing: 0.02em;
     margin: 0 0 22px;
-    text-transform: uppercase;
+    text-transform: none;
     color: #ffffff !important;
   }
 
@@ -100,7 +103,10 @@
   }
 
   .corp-hero__sub {
-    font-size: clamp(15px, 1.7vw, 18px);
+    font-family: var(--font-family-paragraph, var(--font-family-sans, sans-serif));
+    font-size: var(--section-subheading-size, 18px);
+    font-weight: var(--font-weight-paragraph, 400);
+    font-style: var(--font-style-paragraph, normal);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.75);
     margin: 0 0 32px;
