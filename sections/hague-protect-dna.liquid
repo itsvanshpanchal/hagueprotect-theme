@@ -67,8 +67,10 @@
   }
 
   .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
+    color: #808080 !important;
+    -webkit-text-fill-color: #808080 !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
   }
 
   .hp-dna-{{ section.id }} .hp-dna__icon-wrap {
@@ -266,12 +268,12 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
       font-size: 24px !important;
       font-weight: 300 !important;
-      font-style: normal !important;
+      font-style: italic !important;
       font-synthesis: none !important;
       line-height: 1.05 !important;
       letter-spacing: 0.03em !important;
-      color: #ffffff !important;
-      -webkit-text-fill-color: #ffffff !important;
+      color: #808080 !important;
+      -webkit-text-fill-color: #808080 !important;
       margin-top: 4px !important;
     }
 
@@ -459,15 +461,7 @@
   <div class="hp-dna__container">
     {%- if section.settings.heading != blank -%}
       <h2 class="hp-dna__heading">
-        {%- if section.settings.heading contains ':' -%}
-          {%- assign heading_parts = section.settings.heading | split: ':' -%}
-          {%- assign part1 = heading_parts[0] -%}
-          {%- assign part2 = section.settings.heading | remove_first: part1 | remove_first: ':' | strip -%}
-          {%- assign custom_heading = part1 | append: ': <span style="color: #a3a3a3; font-style: italic; font-weight: 400;">' | append: part2 | append: '</span>' -%}
-        {%- else -%}
-          {%- assign custom_heading = section.settings.heading -%}
-        {%- endif -%}
-        {% render 'section-heading-text', text: custom_heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}
+        {% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}
       </h2>
     {%- endif -%}
 
