@@ -2441,11 +2441,11 @@
       });
 
       /* Nuuk-style category row + button toggles */
-      document.querySelectorAll('.hp-megamenu-cat-header').forEach(header => {
-        header.addEventListener('click', (e) => {
+      document.querySelectorAll('.hp-megamenu-cat-toggle').forEach(toggleBtn => {
+        toggleBtn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const row = header.closest('.hp-megamenu-cat-row');
+          const row = toggleBtn.closest('.hp-megamenu-cat-row');
           if (!row) return;
           const sub = row.querySelector('.hp-megamenu-cat-sub');
           const btn = row.querySelector('.hp-megamenu-cat-toggle');
