@@ -1,18 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "story_banner_1": {
+      "type": "story-block",
+      "settings": {
+        "assigned_product": "",
+        "image": "shopify://shop_images/ChatGPT_Image_Apr_30_2026_11_26_32_PM.png",
+        "eyebrow": "",
+        "heading": "",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_word_count": 2,
+        "heading_accent_color": "#c9a227",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_font_weight": "400",
+        "subheading": "",
+        "paragraph": "",
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align": "left",
+        "text_vertical_position": "center",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "left",
+        "text_vertical_position_mobile": "center",
+        "text_max_width": 720,
+        "show_text_shadow": false,
+        "eyebrow_color": "#2563eb",
+        "heading_color": "#111111",
+        "subheading_color": "#111111",
+        "paragraph_color": "#444444",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "h1_font_family": "bebas_neue",
+        "h1_font_weight": "400",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 64,
+        "h1_font_size_mobile": 40,
+        "h2_font_family": "bebas_neue",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15,
+        "eyebrow_font_family": "inter",
+        "eyebrow_font_weight": "700",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 12,
+        "eyebrow_font_size_mobile": 12,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "border_radius": 0
+      }
+    },
+    "blocks_4kmeDn": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2aed7aa_3pwLXa": {
+          "type": "ai_gen_block_2aed7aa",
+          "settings": {
+            "eyebrow_text": "THE FORMULA",
+            "eyebrow_color": "#B08D57",
+            "eyebrow_size_desktop": 14,
+            "eyebrow_size_mobile": 12,
+            "eyebrow_weight": 600,
+            "eyebrow_letter_spacing": 4,
+            "eyebrow_margin_bottom": 24,
+            "heading_line1": "Skin Longevity",
+            "heading_line2_part1": "System",
+            "heading_line2_part2": "5",
+            "heading_color": "#FFFFFF",
+            "accent_color": "#B08D57",
+            "heading_size_desktop": 60,
+            "heading_size_mobile": 38,
+            "heading_weight": 400,
+            "heading_margin_bottom": 44,
+            "subtext": "Five biological processes, supported at once. This is what holds the result after the bottle is empty.",
+            "subtext_color": "#9E9E9E",
+            "subtext_size_desktop": 18,
+            "subtext_size_mobile": 16,
+            "subtext_weight": 400,
+            "subtext_max_width": 560,
+            "background_color": "#141414",
+            "container_max_width": 640,
+            "padding_top_desktop": 110,
+            "padding_bottom_desktop": 110,
+            "padding_top_mobile": 60,
+            "padding_bottom_mobile": 60
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2aed7aa_3pwLXa"
+      ],
+      "name": "Formula intro",
+      "settings": {}
+    },
     "products": {
       "type": "care-kit-collection",
       "settings": {
-        "enable_filters": false,
-        "eyebrow": "",
+        "enable_filters": true,
+        "eyebrow": "SHOP THE RANGE",
         "heading": "",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
         "description": "",
         "section_id": "care-kit-products",
         "collection": "",
         "products_limit": 24,
         "rating_value": "4.9",
         "rating_count": "4.8",
-        "bg_color": "#ffffff"
+        "bg_color": "#ffffff",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h1_font_family": "bebas_neue",
+        "h1_font_weight": "400",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 64,
+        "h1_font_size_mobile": 40,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15
       }
     },
     "faq": {
@@ -22,35 +156,35 @@
           "type": "faq_item",
           "settings": {
             "question": "What makes Hague Protect safe for premium sneakers?",
-            "answer": "Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas."
+            "answer": "<p>Our solution is 100% pH-balanced, completely non-toxic, and safe for all premium materials including suede, nubuck, mesh, leather, and canvas.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
             "question": "Does the formula alter the color or texture of my shoes?",
-            "answer": "No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials."
+            "answer": "<p>No, our premium sneaker care solutions are formulated to clean, protect, and restore original vibrance without fading, bleeding, or drying out materials.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
             "question": "Is the invisible barrier durable against liquids and stains?",
-            "answer": "Yes! It creates a highly durable, nano-tech invisible barrier that repels water, mud, dirt, and stains for up to 4 weeks."
+            "answer": "<p>Yes! It creates a highly durable, nano-tech invisible barrier that repels water, mud, dirt, and stains for up to 4 weeks.</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
             "question": "How many times can I clean my shoes with one complete kit?",
-            "answer": "One complete Hague Protect kit allows more than 65 full cleaning and protective applications for your sneakers."
+            "answer": "<p>One complete Hague Protect kit allows more than 65 full cleaning and protective applications for your sneakers.</p>"
           }
         },
         "faq_5": {
           "type": "faq_item",
           "settings": {
             "question": "Are the cleaning brushes safe to use on delicate suede?",
-            "answer": "Yes! Use our Premium Soft-Hog Brush gently for delicate materials like suede and premium mesh to clean effectively without causing fraying."
+            "answer": "<p>Yes! Use our Premium Soft-Hog Brush gently for delicate materials like suede and premium mesh to clean effectively without causing fraying.</p>"
           }
         }
       },
@@ -62,11 +196,47 @@
         "faq_5"
       ],
       "settings": {
-        "heading": "Things people often wonder"
+        "layout_style": "compact",
+        "bg_color": "#f7f7f8",
+        "accent_color": "#ff2b2b",
+        "eyebrow": "Hague Protect Support",
+        "page_title": "Frequently Asked Questions",
+        "page_description": "Answers about our formulas, materials, shipping across India, and how to care for your sneakers the Hague Protect way.",
+        "show_cta": true,
+        "cta_title": "Still need help?",
+        "cta_text": "Message our team for product advice, order help, or care tips for leather, suede, and sneakers.",
+        "cta_whatsapp": "917009205008",
+        "cta_link": "",
+        "cta_link_label": "Contact support",
+        "heading": "Things people often wonder",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h1_font_family": "bebas_neue",
+        "h1_font_weight": "400",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 64,
+        "h1_font_size_mobile": 40,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15
       }
     }
   },
   "order": [
+    "story_banner_1",
+    "blocks_4kmeDn",
     "products",
     "faq"
   ]
