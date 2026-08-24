@@ -459,7 +459,15 @@
   <div class="hp-dna__container">
     {%- if section.settings.heading != blank -%}
       <h2 class="hp-dna__heading">
-        {% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}
+        {%- if section.settings.heading contains ':' -%}
+          {%- assign heading_parts = section.settings.heading | split: ':' -%}
+          {%- assign part1 = heading_parts[0] -%}
+          {%- assign part2 = section.settings.heading | remove_first: part1 | remove_first: ':' | strip -%}
+          {%- assign custom_heading = part1 | append: ': <span style="color: #a3a3a3; font-style: italic; font-weight: 400;">' | append: part2 | append: '</span>' -%}
+        {%- else -%}
+          {%- assign custom_heading = section.settings.heading -%}
+        {%- endif -%}
+        {% render 'section-heading-text', text: custom_heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}
       </h2>
     {%- endif -%}
 
