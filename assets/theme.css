@@ -2956,12 +2956,12 @@ body.template-product [class*="story-banner-wrapper"] .story-banner__image {
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
+}
 
-  body.template-product [class*="ai-story-banner-story-overlay-"] {
-    padding: 14px 12px !important;
-  }
-
-  body.template-product [class*="ai-story-banner-dots-"] {
-    margin-top: 14px !important;
-  }
+body.template-index #MainContent .hp-dna__heading .hp-heading-line--2,
+body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-line,
+body.template-index #MainContent .hp-dna__heading .hp-heading-accent,
+body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-accent {
+  font-style: oblique 15deg !important;
+  font-synthesis: style !important;
 }
