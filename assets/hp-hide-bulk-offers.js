@@ -30,22 +30,45 @@
   }
 
   function sweep() {
-    var sections = document.querySelectorAll('.shopify-section, .shopify-block, [class*="shopify-app-block"]');
-    for (var i = 0; i < sections.length; i++) {
-      var sec = sections[i];
-      /* Only hide compact offer blocks — avoid wiping the whole product page */
-      var text = sec.textContent || '';
-      if (text.length > 800) continue;
-      if (matches(text)) hideNode(sec);
+    // Many apps don't use shopify-app-block classes, so we search all divs.
+    var els = document.querySelectorAll('div');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var text = el.textContent || '';
+      // Only hide small compact widget wrappers to avoid hiding the main product page
+      if (text.length > 300) continue;
+      
+      if (matches(text)) {
+        hideNode(el);
+      }
     }
   }
 
+  function initObserver() {
+    var observer = new MutationObserver(function(mutations) {
+      var shouldSweep = false;
+      for (var i = 0; i < mutations.length; i++) {
+        if (mutations[i].addedNodes.length > 0) {
+          shouldSweep = true;
+          break;
+        }
+      }
+      if (shouldSweep) sweep();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', sweep);
+    document.addEventListener('DOMContentLoaded', function() {
+      sweep();
+      initObserver();
+    });
   } else {
     sweep();
+    initObserver();
   }
-  /* Apps often inject late */
+  
+  /* Fallback timeouts for apps that inject extremely late */
   setTimeout(sweep, 600);
   setTimeout(sweep, 1800);
   setTimeout(sweep, 3500);
