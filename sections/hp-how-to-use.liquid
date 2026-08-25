@@ -1,0 +1,207 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .hp-htu-section {
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    padding: 80px 24px;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-header {
+    max-width: 750px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-eyebrow {
+    color: #888888;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: clamp(48px, 6vw, 68px);
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.05;
+    margin: 0 0 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-image-wrapper img, 
+  #shopify-section-{{ section.id }} .hp-htu-image-wrapper svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-card-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: 28px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-htu-card-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555555;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 991px) {
+    #shopify-section-{{ section.id }} .hp-htu-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    #shopify-section-{{ section.id }} .hp-htu-section {
+      padding: 50px 20px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-htu-section">
+  <div class="hp-htu-container">
+    <div class="hp-htu-header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="hp-htu-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="hp-htu-title">{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+
+    <div class="hp-htu-grid">
+      {% for block in section.blocks %}
+        <div class="hp-htu-card" {{ block.shopify_attributes }}>
+          <div class="hp-htu-image-wrapper">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+          <h3 class="hp-htu-card-title">{{ block.settings.title }}</h3>
+          <p class="hp-htu-card-text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP How To Use",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HOW TO USE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "THE SHOOZAS METHOD."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "STEP TITLE"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Describe the step in detail here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HP How To Use",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "SHAKE",
+            "text": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "SPRAY",
+            "text": "Spray evenly to cover every area. Avoid soaking the fabric."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "DRY",
+            "text": "Let the shoes dry for 24 hours. Use a towel to dab only if there is excess product. Apply a second coat — essential for best results."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

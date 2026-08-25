@@ -52,11 +52,44 @@
         "block_2",
         "block_3"
       ]
+    },
+    "hp-how-to-use": {
+      "blocks": {
+        "htu_3": {
+          "settings": {
+            "title": "DRY",
+            "text": "Let the shoes dry for 24 hours. Use a towel to dab only if there is excess product. Apply a second coat — essential for best results."
+          },
+          "type": "step"
+        },
+        "htu_2": {
+          "settings": {
+            "title": "SPRAY",
+            "text": "Spray evenly to cover every area. Avoid soaking the fabric."
+          },
+          "type": "step"
+        },
+        "htu_1": {
+          "settings": {
+            "title": "SHAKE",
+            "text": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
+          },
+          "type": "step"
+        }
+      },
+      "settings": {},
+      "type": "hp-how-to-use",
+      "block_order": [
+        "htu_1",
+        "htu_2",
+        "htu_3"
+      ]
     }
   },
   "order": [
     "main",
     "hp-problem-statement",
+    "hp-how-to-use",
     "features",
     "category"
   ]
