@@ -9,541 +9,1360 @@
  */
 {
   "sections": {
-    "typography": {
-      "type": "hp-science-typography",
-      "settings": {
-        "eyebrow_size_desktop": 24,
-        "eyebrow_size_mobile": 18
-      }
-    },
     "hero": {
-      "type": "hp-science-hero",
-      "settings": {
-        "desktop_layout": "image_first",
-        "text_alignment": "center",
-        "eyebrow": "THE SCIENCE",
-        "heading_line_1": "Your skin knows",
-        "heading_line_2": "how to fix itself.",
-        "heading_line_3": "Most products",
-        "heading_line_4": "interrupt it.",
-        "show_media_placeholder": true,
-        "placeholder_label": "Upload hero animation or image",
-        "media_min_height_desktop": 480,
-        "media_min_height_mobile": 280,
-        "background_color": "#0a0a0a",
-        "text_color": "#ffffff",
-        "eyebrow_color": "#ffffff",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "info_grid": {
-      "type": "hp-science-info-grid",
+      "type": "hero",
       "blocks": {
-        "col_1": {
-          "type": "column",
+        "tile_1": {
+          "type": "product_tile",
           "settings": {
-            "number": "01",
-            "title": "Cell renewal slows",
-            "text": "At 25, skin renews itself every 28 days. By 40, that cycle has stretched to 45–60 days. The same biology is there. It just needs fewer interruptions and more support to keep pace."
+            "product": "essential-indepth-shoe-sneaker-cleaning-kit",
+            "title": "Acne, Blemish Control",
+            "title_color": "#2eb82e",
+            "subtitle": "For skin that won't stay clear.",
+            "link": ""
           }
         },
-        "col_2": {
-          "type": "column",
+        "tile_2": {
+          "type": "product_tile",
           "settings": {
-            "number": "02",
-            "title": "Collagen production drops",
-            "text": "After 25, collagen production falls by roughly 1% per year. The structural protein that keeps skin firm isn't disappearing. Your body is producing less of it. That's a signal problem, not a structural one."
+            "product": "leathercarekit",
+            "title": "Dark Spots, Pore Control",
+            "title_color": "#d96600",
+            "subtitle": "For skin that won't stop spotting.",
+            "link": ""
           }
         },
-        "col_3": {
-          "type": "column",
+        "tile_3": {
+          "type": "product_tile",
           "settings": {
-            "number": "03",
-            "title": "The barrier weakens",
-            "text": "Your skin barrier is a lipid matrix: ceramides, fatty acids, cholesterol in specific ratios. When that matrix is disrupted by over-actives, the skin loses water faster than it produces it. Most actives make this worse."
-          }
-        },
-        "col_4": {
-          "type": "column",
-          "settings": {
-            "number": "04",
-            "title": "Chronic inflammation builds",
-            "text": "Low-grade, invisible inflammation is the root of almost every visible skin concern: spots, uneven tone, sensitivity, premature ageing. The industry addresses the symptoms. Longevity science addresses the source."
+            "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits",
+            "title": "Deep Hydration, Glow",
+            "title_color": "#009973",
+            "subtitle": "For skin that won't hold moisture.",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "col_1",
-        "col_2",
-        "col_3",
-        "col_4"
+        "tile_1",
+        "tile_2",
+        "tile_3"
       ],
       "settings": {
-        "sidebar_label": "HOW SKIN AGES",
-        "heading_line_1": "Skin doesn't fail.",
-        "heading_line_2": "The routine ",
-        "heading_accent": "does.",
-        "background_color": "#ffffff",
-        "text_color": "#111111",
-        "body_color": "#111111",
-        "rail_color": "#111111",
-        "rail_size": 11,
-        "number_size": 48,
-        "column_title_size": 24,
-        "column_text_size": 17,
-        "padding_top": 96,
-        "padding_bottom": 96
+        "eyebrow": "",
+        "heading": "Dirty kicks?",
+        "heading_line2": "we make",
+        "heading_line3": "'Em Heat.",
+        "heading_line3_color": "#c8c8c8",
+        "subheading": "FROM BEAT TO HEAT",
+        "cta_text": "Shop Now",
+        "cta_link": "",
+        "content_position_x": 18,
+        "content_position_y": 17,
+        "content_align": "left",
+        "content_position_x_mobile": 5,
+        "content_position_y_mobile": 10,
+        "content_align_mobile": "left",
+        "image": "shopify://shop_images/1920x1080-Shopify-main-banner.png",
+        "desktop_image_position": "65% center",
+        "image_mobile": "shopify://shop_images/1080X1920-SIZE.jpg",
+        "heading_subheading_spacing_desktop": 28,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 46,
+        "eyebrow_title_spacing_mobile": 8,
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 60,
+        "h1_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15,
+        "bottom_tiles_heading": "THREE SERUMS. ONE SYSTEM."
       }
     },
-    "media_banner": {
-      "type": "hp-science-media-banner",
+    "featured-brands": {
+      "type": "featured-brands",
+      "disabled": true,
       "settings": {
-        "show_media_placeholder": true,
-        "placeholder_label": "Upload full-width transition image or animation",
-        "min_height": 480,
-        "light_placeholder": false,
-        "background_color": "#0a0a0a"
+        "eyebrow": "OUR FAMILY OF BRANDS",
+        "heading": "Explore the Ecosystem",
+        "subheading": "",
+        "cta_label": "Explore",
+        "bg_color": "#ffffff",
+        "vanrosector_image": "shopify://shop_images/VNR_5c2676ec-cf47-4ad2-b451-d823992ea0b5.jpg",
+        "vanrosector_svg": "",
+        "vanrosector_name": "",
+        "vanrosector_tagline": "",
+        "vanrosector_link": "/collections/all?view=vanrosector",
+        "science_of_raw_image": "shopify://shop_images/sor_7dc79d5b-aa84-4190-8abf-39ec4ad1fb84.jpg",
+        "science_of_raw_svg": "",
+        "science_of_raw_name": "",
+        "science_of_raw_tagline": "",
+        "science_of_raw_link": "/collections/all?view=science-of-raw",
+        "hagueprotect_image": "shopify://shop_images/SHOPIFY-CATEGORY.png",
+        "hagueprotect_svg": "",
+        "hagueprotect_name": "",
+        "hagueprotect_tagline": "",
+        "hagueprotect_link": "",
+        "padding_top": 48,
+        "padding_bottom": 40,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": -46,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 21,
+        "eyebrow_font_size_mobile": 12
       }
     },
-    "statement": {
-      "type": "hp-science-statement",
+    "bestsellers": {
+      "type": "bestsellers",
       "settings": {
-        "heading_line_1": "The industry has been treating the symptom,",
-        "heading_accent": "never the real problem.",
-        "eyebrow": "WHY THE CATEGORY KEEPS FAILING",
-        "paragraph_1": "A spot treatment clears the breakout before the barrier rebuilds. A hydration serum deposits moisture without activating the skin's own production. A brightening product suppresses melanin without addressing why it's being overproduced. Each product solves for the visible sign. None of them address the underlying biology that produced it.",
-        "paragraph_2": "The result is a maintenance loop. The products work while you use them. The moment you stop, the original condition returns. Not because your skin is broken. Because nothing was ever rebuilt.",
-        "show_rule": true,
-        "closing_paragraph": "The real problem was never the spot or the dryness. It was the skin's own ability to repair itself, and nobody was rebuilding that.",
-        "background_color": "#0a0a0a",
-        "text_color": "#ffffff",
-        "eyebrow_color": "#ffffff",
-        "body_color": "#ffffff",
-        "closing_color": "#ffffff",
-        "rule_color": "#ffffff",
-        "eyebrow_size": 12,
-        "body_size": 17,
-        "body_opacity": 88,
-        "closing_opacity": 100,
-        "rule_opacity": 35,
-        "padding_top": 96,
-        "padding_bottom": 96
+        "collection": "all",
+        "products_limit": 8,
+        "eyebrow": "BEST  SELLERS",
+        "heading": "Bestselling Sneaker Care",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "view_all_label": "View All",
+        "view_all_link": "",
+        "badge_text": "Bestseller",
+        "cta_text": "Shop Now",
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#000000",
+        "accent_color": "#ffffff",
+        "autoplay": true,
+        "autoplay_speed": 3,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
       }
     },
-    "feature_split": {
-      "type": "hp-science-feature-split",
+    "materials-showcase": {
+      "type": "materials-showcase",
       "blocks": {
-        "compare_1": {
-          "type": "compare_row",
+        "item_1": {
+          "type": "material_item",
           "settings": {
-            "label": "ANTI-AGEING",
-            "text": "Reacts to visible signs. Temporary result."
+            "title": "Suede",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_6.jpg",
+            "collection": "suede-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
           }
         },
-        "compare_2": {
-          "type": "compare_row",
+        "item_2": {
+          "type": "material_item",
           "settings": {
-            "label": "REGENERATIVE",
-            "text": "Restores biological function. Result compounds. Skin maintains independently."
+            "title": "Leather",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM.jpg",
+            "collection": "leather-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_3": {
+          "type": "material_item",
+          "settings": {
+            "title": "Mesh",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_4.jpg",
+            "collection": "nubuck-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_4": {
+          "type": "material_item",
+          "settings": {
+            "title": "Fabrics",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_3.jpg",
+            "collection": "fabric-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "material_item_YKmVTn": {
+          "type": "material_item",
+          "settings": {
+            "title": "Deodrizer",
+            "collection": "",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_5": {
+          "type": "material_item",
+          "settings": {
+            "title": "Soles",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_1.jpg",
+            "collection": "soles-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "material_item_mAF6Te": {
+          "type": "material_item",
+          "settings": {
+            "title": "Denim",
+            "collection": "",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
           }
         }
       },
       "block_order": [
-        "compare_1",
-        "compare_2"
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "material_item_YKmVTn",
+        "item_5",
+        "material_item_mAF6Te"
       ],
       "settings": {
-        "eyebrow": "OUR APPROACH",
-        "heading": "We use regenerative science in beauty.",
-        "text": "Most beauty reacts to what you can see. We work a layer beneath, restoring the conditions under which skin repairs itself.",
-        "reverse_layout": false,
-        "show_media_placeholder": true,
-        "placeholder_label": "Upload approach image or animation",
-        "media_min_height_desktop": 620,
-        "media_min_height_mobile": 360,
-        "background_color": "#ffffff",
-        "card_background": "#ffffff",
-        "text_color": "#111111",
-        "body_color": "#111111",
-        "eyebrow_color": "#ffffff",
-        "compare_label_color": "#9a9a9a",
-        "text_size": 18,
-        "eyebrow_size": 12,
-        "compare_label_size": 11,
-        "compare_text_size": 16,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "headline_bands": {
-      "type": "hp-science-headline-bands",
-      "settings": {
-        "eyebrow": "THE SYSTEM",
-        "show_rule": true,
-        "heading_line_1": "We didn't build another",
-        "heading_line_2": "product.",
-        "heading_line_3": "We built a skin longevity",
-        "heading_line_4": "formula.",
-        "subtext": "Most skincare treats one concern at a time. This works on the biology underneath all of them, at the same time.",
-        "show_formula_band": true,
-        "formula_eyebrow": "THE FORMULA",
-        "formula_title_line_1": "Skin Longevity",
-        "formula_title_line_2": "System ",
-        "formula_title_accent": "5",
-        "formula_subtext": "Five biological processes, supported at once. This is what holds the result after the bottle is empty.",
-        "background_color": "#1a1a1a",
-        "heading_color": "#ffffff",
-        "eyebrow_color": "#ffffff",
-        "rule_color": "#ffffff",
-        "subtext_color": "#d1d1d1",
-        "formula_bg": "#121212",
-        "formula_heading_color": "#ffffff",
-        "formula_eyebrow_color": "#ffffff",
-        "formula_accent_color": "#a8894a",
-        "formula_subtext_color": "#e8e8e8",
-        "content_max_width": 720,
-        "eyebrow_size": 12,
-        "subtext_size": 18,
-        "rule_height": 44,
-        "rule_opacity": 100,
-        "subtext_opacity": 100,
-        "padding_top": 96,
+        "bg_color": "#f7f7f7",
+        "eyebrow": "MATERIALS",
+        "heading": "For Every MATERIAL",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "description": "Leather, suede, nubuck, fabric, soles. Every material deserves specific care. Find yours.",
+        "active_color": "#d60000",
+        "inactive_color": "#000000",
+        "menu_font_size": 52,
+        "image_radius": 20,
+        "animation_speed": 400,
+        "padding_top": 45,
         "padding_bottom": 80,
-        "formula_content_max_width": 760,
-        "formula_title_size": 68,
-        "formula_eyebrow_size": 13,
-        "formula_subtext_size": 19,
-        "formula_subtext_opacity": 92,
-        "formula_padding_top": 112,
-        "formula_padding_bottom": 112
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
       }
     },
-    "results_grid": {
-      "type": "hp-science-results-grid",
+    "blocks_KyFWkm": {
+      "type": "_blocks",
+      "name": "Banner",
+      "settings": {}
+    },
+    "function-category": {
+      "type": "function-category",
       "blocks": {
-        "pillar_1": {
-          "type": "pillar",
+        "category_card_3PEYXw": {
+          "type": "category_card",
           "settings": {
-            "pillar_number": "Pillar 01",
-            "title": "Vitality",
-            "paragraph_1": "Cell renewal. The foundation of everything else. Without consistent renewal, nothing that's applied to the surface reaches the cells that need it.",
-            "show_divider": true,
-            "paragraph_2": "Sun-safe bio-retinoids accelerate the renewal cycle without stripping the barrier. Active day and night, no sun restriction.",
-            "stat_value": "+38%*",
-            "stat_label": "Cell Proliferation · At 48 Hours",
-            "footnote": "* In Vitro Study Conducted to Test Effect of Bio-Retinoids on Human Dermal Fibroblasts.",
-            "accent_color": "#008667",
-            "reverse_layout": false,
-            "equal_columns": true,
-            "show_media_placeholder": true,
-            "placeholder_label": "Vitality image / animation"
+            "title": "Mesh",
+            "product_count": "6 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"60\" cy=\"45\" r=\"30\" stroke=\"#111111\" stroke-width=\"2\"></circle><circle cx=\"60\" cy=\"45\" r=\"3\" fill=\"#111111\"></circle><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"25\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M60 45 Q 40 20 40 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 80 70 80 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 35 60 60 60\" stroke=\"#111111\"></path><path d=\"M60 45 Q 85 30 60 30\" stroke=\"#111111\"></path><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"140\" stroke=\"#111111\" stroke-width=\"3\"></line><ellipse cx=\"60\" cy=\"140\" rx=\"30\" ry=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></ellipse></svg>",
+            "image": "shopify://shop_images/3_266daa02-0dbf-4775-a71e-24d9d20cedd7.png"
           }
         },
-        "pillar_2": {
-          "type": "pillar",
+        "fans": {
+          "type": "category_card",
           "settings": {
-            "pillar_number": "Pillar 02",
-            "title": "Recovery",
-            "paragraph_1": "Skin is always healing something. A breakout, a barrier stripped by actives, the small daily damage you never notice. Recovery is how fast skin closes those gaps and repairs itself before they show.",
-            "show_divider": true,
-            "paragraph_2": "The serum speeds up how quickly cells move in to close a wound. Faster migration means less time spent visibly healing, and damage that resolves before it leaves a mark.",
-            "stat_value": "+74.7%*",
-            "stat_label": "Cell Migration · In 24 Hours",
-            "footnote": "* Wound Healing in Normal Human Dermal Fibroblast using Scratch Assay for SKIN LONGEVITY SYSTEM 5.",
-            "accent_color": "#ffffff",
-            "panel_style": "dark",
-            "panel_background": "#0a0a0a",
-            "reverse_layout": true,
-            "show_media_placeholder": true,
-            "placeholder_label": "Recovery scratch assay image / animation"
+            "title": "KNITS",
+            "product_count": "6 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"60\" cy=\"45\" r=\"30\" stroke=\"#111111\" stroke-width=\"2\"></circle><circle cx=\"60\" cy=\"45\" r=\"3\" fill=\"#111111\"></circle><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"25\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M60 45 Q 40 20 40 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 80 70 80 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 35 60 60 60\" stroke=\"#111111\"></path><path d=\"M60 45 Q 85 30 60 30\" stroke=\"#111111\"></path><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"140\" stroke=\"#111111\" stroke-width=\"3\"></line><ellipse cx=\"60\" cy=\"140\" rx=\"30\" ry=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></ellipse></svg>",
+            "image": "shopify://shop_images/2_9d1c0b34-6321-4b41-a1a0-29b562749de5.png"
           }
         },
-        "pillar_3": {
-          "type": "pillar",
+        "kitchen": {
+          "type": "category_card",
           "settings": {
-            "pillar_number": "Pillar 03",
-            "title": "Structure",
-            "paragraph_1": "Collagen. The protein that makes skin bounce back. Production declines from 25 onwards. A peptide complex signals the biology to support what's slowing.",
-            "show_divider": true,
-            "paragraph_2": "Each peptide targets a specific biological function: synthesis, repair, inflammation control, moisture signalling. Simultaneously. Because the signals are interconnected.",
-            "stat_value": "+132.4%*",
-            "stat_label": "Collagen Production",
-            "footnote": "* Increase in Collagen 1 Levels in NHDF Cells Treated with SKIN LONGEVITY SYSTEM 3.",
-            "accent_color": "#a8724a",
-            "panel_style": "light",
-            "reverse_layout": true,
-            "equal_columns": true,
-            "show_media_placeholder": true,
-            "placeholder_label": "Structure / collagen image / animation"
+            "title": "SUEDE",
+            "product_count": "4 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"25\" width=\"70\" height=\"80\" rx=\"20\" fill=\"#fcfcfc\" stroke=\"#E62C2C\" stroke-width=\"3\"></rect><rect x=\"35\" y=\"65\" width=\"50\" height=\"30\" rx=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></rect><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"85\" stroke=\"#E62C2C\" stroke-width=\"3\"></line><circle cx=\"60\" cy=\"45\" r=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></circle></svg>",
+            "image": "shopify://shop_images/1_6e2c5ae6-a4c7-4c0a-800b-fdaf1fe626d9.png"
           }
         },
-        "pillar_4": {
-          "type": "pillar",
+        "vacuums": {
+          "type": "category_card",
           "settings": {
-            "pillar_number": "Pillar 04",
-            "title": "Hydration",
-            "paragraph_1": "Not topical hydration. Biological hydration. The difference between skin that holds moisture because it's producing its own hyaluronic acid, and skin that's borrowing moisture from the air.",
-            "show_divider": true,
-            "paragraph_2": "High and low molecular weight HA working together. High MW seals the surface. Low MW penetrates deep to signal production. The serum teaches the skin to do what the serum is doing.",
-            "stat_value": "+254%*",
-            "stat_label": "Hyaluronic Acid Production",
-            "footnote": "* Hyaluronan Synthase - 2 Promotion in NHDF Cells After 48-Hour Exposure to SKIN LONGEVITY SYSTEM S.",
-            "accent_color": "#c07a38",
-            "panel_style": "light",
-            "reverse_layout": false,
-            "equal_columns": true,
-            "show_media_placeholder": true,
-            "placeholder_label": "Hydration / HA cells image / animation"
+            "title": "SOLE",
+            "product_count": "3 products",
+            "link": "/collections/nubuck-care-kit",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"50\" y=\"20\" width=\"20\" height=\"30\" rx=\"6\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"50\" x2=\"60\" y2=\"135\" stroke=\"#111111\" stroke-width=\"3\"></line><path d=\"M40 135 L80 135 L70 145 L50 145 Z\" fill=\"#111111\"></path><rect x=\"45\" y=\"25\" width=\"6\" height=\"15\" rx=\"3\" fill=\"#FF2B2B\"></rect></svg>",
+            "image": "shopify://shop_images/5_aaf431b1-e6f2-41f4-961e-fd7f592bcf03.png"
           }
         },
-        "pillar_5": {
-          "type": "pillar",
+        "garment": {
+          "type": "category_card",
           "settings": {
-            "pillar_number": "Pillar 05",
-            "title": "Texture",
-            "paragraph_1": "Surface texture is the last signal skin sends — and the first thing people read. Roughness, uneven tone, and fine lines trace deeper dysfunction.",
-            "show_divider": true,
-            "paragraph_2": "Controlled exfoliation paired with renewal actives refines the stratum corneum without the irritation that triggers rebound damage.",
-            "stat_value": "+32%*",
-            "stat_label": "Surface Smoothness · At 30 Days",
-            "footnote": "* Profilometry assessment of skin roughness index during controlled use study.",
-            "accent_color": "#008667",
-            "reverse_layout": false,
-            "equal_columns": true,
-            "show_media_placeholder": true,
-            "placeholder_label": "Texture / molecular animation"
+            "title": "LEATHER",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"45\" y=\"110\" width=\"30\" height=\"35\" rx=\"10\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"35\" x2=\"60\" y2=\"110\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M40 35 L80 35 L60 25 Z\" fill=\"#111111\"></path><path d=\"M60 70 C 80 70 80 115 60 115\" stroke=\"#111111\" stroke-width=\"2\" fill=\"none\"></path></svg>",
+            "image": "shopify://shop_images/4.png"
+          }
+        },
+        "purifiers": {
+          "type": "category_card",
+          "settings": {
+            "title": "MESH CARE",
+            "product_count": "5 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"35\" y=\"25\" width=\"50\" height=\"110\" rx=\"12\" fill=\"#fcfcfc\" stroke=\"#111111\" stroke-width=\"2\"></rect><line x1=\"45\" y1=\"45\" x2=\"75\" y2=\"45\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"55\" x2=\"75\" y2=\"55\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"65\" x2=\"75\" y2=\"65\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"75\" x2=\"75\" y2=\"75\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"85\" x2=\"75\" y2=\"85\" stroke=\"#111111\" stroke-width=\"1.5\"></line><circle cx=\"60\" cy=\"115\" r=\"10\" stroke=\"#111111\" stroke-width=\"1.5\"></circle></svg>",
+            "image": "shopify://shop_images/1000X1400-mESH.png"
+          }
+        },
+        "heaters": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAT CARE",
+            "product_count": "2 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"35\" width=\"70\" height=\"55\" rx=\"8\" fill=\"#fcfcfc\" stroke=\"#FF8A00\" stroke-width=\"2\"></rect><line x1=\"40\" y1=\"45\" x2=\"80\" y2=\"45\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"55\" x2=\"80\" y2=\"55\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"65\" x2=\"80\" y2=\"65\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><circle cx=\"45\" cy=\"78\" r=\"3\" fill=\"#FF8A00\"></circle><line x1=\"40\" y1=\"90\" x2=\"50\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"80\" y1=\"90\" x2=\"70\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line></svg>",
+            "image": "shopify://shop_images/HAT.png"
+          }
+        },
+        "accessories": {
+          "type": "category_card",
+          "settings": {
+            "title": "DEODRIZER",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"25\" width=\"70\" height=\"70\" rx=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#fdfeff\"></rect><circle cx=\"60\" cy=\"60\" r=\"15\" stroke=\"#111111\" stroke-width=\"2\"></circle></svg>"
           }
         }
       },
       "block_order": [
-        "pillar_1",
-        "pillar_2",
-        "pillar_3",
-        "pillar_4",
-        "pillar_5"
+        "category_card_3PEYXw",
+        "fans",
+        "kitchen",
+        "vacuums",
+        "garment",
+        "purifiers",
+        "heaters",
+        "accessories"
       ],
       "settings": {
-        "background_color": "#242424",
-        "panel_background": "#fcfaf2",
-        "panel_text_color": "#333333",
-        "pillar_num_color": "#ffffff",
-        "divider_color": "#111111",
-        "footnote_color": "#888888",
-        "pillar_body_size": 17,
-        "stat_size": 56,
-        "media_min_height_desktop": 520,
-        "media_min_height_mobile": 320,
+        "heading": "Every Material Deserves",
+        "heading_line2": "the Right Care",
+        "heading_line2_color": "#b0b0b0",
+        "accent_line2": false,
+        "subtitle": "Explore our top product categories",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "bahnschrift_semibold",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 38,
+        "h2_font_size_mobile": 26,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 18,
+        "eyebrow_font_size_mobile": 12
+      }
+    },
+    "1783254662e4d37d15": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a9c1cbe_a9xhbp": {
+          "type": "ai_gen_block_a9c1cbe",
+          "settings": {
+            "enable_sticky_scroll": true,
+            "desktop_width_percent": 100,
+            "background_image": "shopify://shop_images/1920x1080-Final-Exported-in-Low-jpeg.jpg",
+            "mobile_image": "shopify://shop_images/1080x1920-Final-Export-in-Low-jpeg.jpg",
+            "image_opacity": 1,
+            "background_color": "#f5f5f5",
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_max_width": 650,
+            "content_padding": 20,
+            "content_offset_left": 20,
+            "content_offset_top": 40,
+            "content_align": "left",
+            "content_offset_left_mobile": 16,
+            "content_offset_top_mobile": 24,
+            "content_max_width_mobile": 360,
+            "content_align_mobile": "left",
+            "subheading": "SHARE YOUR BRAND JOURNEY",
+            "subheading_size": 18,
+            "subheading_color": "#ffffff",
+            "subheading_spacing": 15,
+            "heading": "Tell Your Story",
+            "heading_line2": "",
+            "heading_line2_color": "#6b6b6b",
+            "heading_accent_font_family": "theme_default",
+            "heading_accent_font_weight": "400",
+            "heading_accent_font_style": "normal",
+            "heading_accent_font_size_desktop": 62,
+            "heading_accent_font_size_mobile": 40,
+            "heading_accent_word_count": 1,
+            "heading_accent_color": "#c9a227",
+            "heading_size": 52,
+            "heading_color": "#f3f2f2",
+            "heading_spacing": 20,
+            "text": "<p>Craft a compelling narrative that connects with your audience and showcases what makes your brand unique.</p>",
+            "text_size": 20,
+            "text_color": "#fcfcfc",
+            "heading_font_family": "inter_light",
+            "heading_font_weight": "300",
+            "heading_font_style": "normal",
+            "subheading_font_family": "darker_grotesque",
+            "subheading_font_weight": "600",
+            "subheading_font_style": "normal",
+            "text_font_family": "darker_grotesque",
+            "text_font_weight": "400",
+            "text_font_style": "normal",
+            "button_font_family": "inter",
+            "button_font_weight": "600",
+            "button_text": "",
+            "hide_button_mobile": false,
+            "button_link": "",
+            "button_spacing": 25,
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 30,
+            "button_border_radius": 20,
+            "button_background_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a9c1cbe_a9xhbp"
+      ],
+      "name": "Story banner",
+      "settings": {}
+    },
+    "corporate_gifting_marquee_pCHxwt": {
+      "type": "corporate-gifting-marquee",
+      "blocks": {
+        "marquee_top_empwelcome": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Employee Welcome Kits",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_client": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Client Appreciation",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_festival": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Festival Hampers",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_conference": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Conference Swag",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_ceo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "CEO Gifts",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_team": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Team Milestones",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_mid_retail": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Retail Partners",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_custom": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Custom Inserts",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_logo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Logo Embossing",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_gift": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Gift Wrapping",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_delivery": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Pan-India Delivery",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_invoice": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Invoice & GST",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_bot_cobrand": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Co-Branded Packaging",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_bulk": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Bulk Pricing",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_manager": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Dedicated Manager",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_sample": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Sample Kits",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_volume": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Volume Discounts",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_onboard": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Onboarding Packs",
+            "row": "bottom",
+            "accent": false
+          }
+        }
+      },
+      "block_order": [
+        "marquee_top_empwelcome",
+        "marquee_top_client",
+        "marquee_top_festival",
+        "marquee_top_conference",
+        "marquee_top_ceo",
+        "marquee_top_team",
+        "marquee_mid_retail",
+        "marquee_mid_custom",
+        "marquee_mid_logo",
+        "marquee_mid_gift",
+        "marquee_mid_delivery",
+        "marquee_mid_invoice",
+        "marquee_bot_cobrand",
+        "marquee_bot_bulk",
+        "marquee_bot_manager",
+        "marquee_bot_sample",
+        "marquee_bot_volume",
+        "marquee_bot_onboard"
+      ],
+      "name": "Corporate Marquee",
+      "settings": {
+        "label": "Trusted for every shoe — built to last"
+      }
+    },
+    "horizontal-product-slider": {
+      "type": "horizontal-product-slider",
+      "blocks": {
+        "custom_images_WRVxPd": {
+          "type": "custom_images",
+          "settings": {
+            "title": "",
+            "url_1": "",
+            "url_2": "",
+            "url_3": "",
+            "url_4": "",
+            "url_5": "",
+            "url_6": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_images_WRVxPd"
+      ],
+      "settings": {
+        "heading": "Powered by Bioenzyme™",
+        "heading_line2": "Cleaning",
+        "heading_accent_word": "Technology",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "show_glass_panel": true,
+        "glass_eyebrow_left": "",
+        "glass_title": "",
+        "glass_para_top": "Our advanced BioEnzyme™ smart-cleaning technology precision targets tough stains, odors, spots, spills and dirt",
+        "glass_eyebrow_right": "POWERFUL CLEAN. CONSCIOUSLY FORMULATED",
+        "glass_para_bottom": "Consciously formulated with natural, hypoallergenic ingredients, our BioEnzyme™ Cleaners are readily biodegradable, gentle on materials, and free from dyes, sulfates, parabens, and California Prop. 65 chemicals.",
+        "glass_link_label": "THE SCIENCE BEHIND THE CLEAN",
+        "glass_link_url": "https://hagueprotect.com/search?view=hague",
+        "glass_eyebrow_color": "#ffffff",
+        "glass_panel_max_width": 1100,
+        "glass_panel_padding": 40,
+        "glass_title_size_desktop": 21,
+        "glass_title_size_mobile": 20,
+        "glass_para_size_desktop": 21,
+        "glass_para_size_mobile": 20,
+        "glass_title_spacing_desktop": 28,
+        "glass_title_spacing_mobile": 10,
+        "glass_eyebrow_size": 18,
+        "glass_link_size": 18,
+        "bg_color": "#e7e5e5",
+        "bg_color_bottom": "#000000",
+        "products_to_show": 8,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "image_offset": 0,
+        "enable_video_bg": true,
+        "video_bg_filename": "animate_background_premium_202607071757.mp4",
+        "video_opacity": 100,
+        "overlay_opacity": 35,
+        "rail_collection": "all",
+        "heading_subheading_spacing_desktop": 24,
+        "heading_subheading_spacing_mobile": 16,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 52,
+        "h1_font_size_mobile": 24,
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque_semibold",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20
+      }
+    },
+    "story_block_8WTbcQ": {
+      "type": "story-block",
+      "name": "Story Banner",
+      "settings": {
+        "assigned_product": "",
+        "image": "shopify://shop_images/1440X560_946692a4-1a74-4e91-b9f1-71080519a600.png",
+        "image_mobile": "shopify://shop_images/1080x1080.png",
+        "eyebrow": "",
+        "heading": "What Are You",
+        "heading_line2": "Cleaning Today",
+        "heading_line2_color": "#000000",
+        "heading_accent_word_count": 2,
+        "heading_accent_color": "#c9a227",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 30,
+        "heading_accent_font_weight": "700",
+        "subheading": "",
+        "paragraph": "",
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align": "left",
+        "text_vertical_position": "flex-start",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "left",
+        "text_vertical_position_mobile": "flex-start",
+        "text_max_width": 600,
+        "show_text_shadow": false,
+        "eyebrow_color": "#2563eb",
+        "heading_color": "#111111",
+        "subheading_color": "#111111",
+        "paragraph_color": "#222222",
+        "heading_subheading_spacing_desktop": 6,
+        "heading_subheading_spacing_mobile": 6,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 52,
+        "h1_font_size_mobile": 28,
+        "h2_font_family": "darker_grotesque_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "400",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "border_radius": 0
       }
     },
-    "commitment": {
-      "type": "hp-science-commitment",
+    "community-testimonials": {
+      "type": "community-testimonials",
       "blocks": {
-        "phase_1": {
-          "type": "phase",
+        "testimonial_1": {
+          "type": "testimonial",
           "settings": {
-            "day_range": "Day 1 – 14",
-            "title": "Calibration",
-            "text": "<p>Your skin is adjusting, and you start to feel a surface-level softness. The least any serum should do is make skin soft. We treat this as the starting line, not the finish.</p>"
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Great product!",
+            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "customer_name": "Priya K.",
+            "review_date": "Today",
+            "customer_city": "Denver",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Wholesale",
+            "product_badge_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg"
           }
         },
-        "phase_2": {
-          "type": "phase",
+        "testimonial_2": {
+          "type": "testimonial",
           "settings": {
-            "day_range": "Day 14 – 28",
-            "title": "First signals",
-            "text": "<p>Texture begins to change. <strong>Hydration</strong> holds longer and skin starts to look plumper, the foundation of glass skin. The people around you may notice before you do.</p>"
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Does what it says",
+            "text": "Does what it says. I use it weekly on white leather. No complaints.",
+            "customer_name": "Jordan A.",
+            "review_date": "2 days ago",
+            "customer_city": "Seattle",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Signature Kit"
           }
         },
-        "phase_3": {
-          "type": "phase",
+        "testimonial_3": {
+          "type": "testimonial",
           "settings": {
-            "day_range": "Day 28 – 60",
-            "title": "The shift",
-            "text": "<p>Pigmentation lifts. Breakout frequency reduces. Barrier resilience improves. The change is happening below the surface, in the <strong>structure</strong> itself.</p>"
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Road trip saver",
+            "text": "My white sneakers took a beating on a road trip. Mud, grass, the whole thing. The In-Depth kit brought them back.",
+            "customer_name": "Eli R.",
+            "review_date": "3 days ago",
+            "customer_city": "Nashville",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "In-Depth Kit"
           }
         },
-        "phase_4": {
-          "type": "phase",
+        "testimonial_4": {
+          "type": "testimonial",
           "settings": {
-            "day_range": "Day 60 – 75",
-            "title": "Longevity",
-            "text": "<p>This is not the end. It's the baseline. Skin that functions as designed, maintaining from a structurally different starting point. The goal of regenerative science: a result that holds.</p>"
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Always in my bag",
+            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
+            "customer_name": "Hannah W.",
+            "review_date": "1 week ago",
+            "customer_city": "Boston",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Signature Kit"
+          }
+        },
+        "testimonial_5": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Suede looks new again",
+            "text": "Used the suede kit on my boots before a wedding. Color came back clean without looking wet or stiff.",
+            "customer_name": "Maya S.",
+            "review_date": "4 days ago",
+            "customer_city": "Austin",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Suede Care Kit"
+          }
+        },
+        "testimonial_6": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Worth every rupee",
+            "text": "Ordered for my collection. Easy steps, strong results, and the protection spray holds up in monsoon weather.",
+            "customer_name": "Arjun M.",
+            "review_date": "5 days ago",
+            "customer_city": "Mumbai",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Shield Guard"
+          }
+        },
+        "testimonial_7": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Kids shoes finally clean",
+            "text": "School-week dirt used to ruin everything. Hague Protect wipes the mess without fading the colors.",
+            "customer_name": "Neha P.",
+            "review_date": "6 days ago",
+            "customer_city": "Delhi",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Everyday Kit"
+          }
+        },
+        "testimonial_8": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Pro results at home",
+            "text": "I run a small studio and recommend this to clients. Consistent clean, no damage to premium leather.",
+            "customer_name": "Chris T.",
+            "review_date": "2 weeks ago",
+            "customer_city": "Chicago",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Leather Care Kit"
           }
         }
       },
       "block_order": [
-        "phase_1",
-        "phase_2",
-        "phase_3",
-        "phase_4"
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4",
+        "testimonial_5",
+        "testimonial_6",
+        "testimonial_7",
+        "testimonial_8"
       ],
       "settings": {
-        "heading": "75 days is the commitment we ask for.",
-        "subtext": "It is the time the biology needs for the change to become structural instead of temporary. Not a round marketing number, the point at which results start to hold on their own. Here is what happens along the way.",
-        "background_color": "#242424",
+        "bg_color": "#000000",
         "text_color": "#ffffff",
-        "subtext_color": "#ffffff",
-        "card_background": "#333333",
-        "card_text_color": "#ffffff",
-        "card_body_color": "#ffffff",
-        "day_label_color": "#ffffff",
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "show_graph_section": false
+        "paragraph_color": "#c8c8c8",
+        "eyebrow": "COMMUNITY",
+        "headline_count": "+100,000",
+        "headline_brand": "Hagueprotect",
+        "description": "Customers and counting. Sneakerheads, athletes, parents, and collectors trust HagueProtect with the pairs they love.",
+        "rating_text": "5",
+        "badge_star_rating": 5,
+        "review_count_text": "10,000 Reviews",
+        "review_description": "Includes reviews from customers in the India, U.S, Mexico, Canada, Australia, and Japan.",
+        "padding_top": 45,
+        "padding_bottom": 80,
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
       }
     },
-    "protocol": {
-      "type": "hp-science-protocol",
-      "settings": {
-        "eyebrow": "THE 75-DAY PROTOCOL",
-        "title_line_1": "Slow start.",
-        "title_line_2": "Permanent finish.",
-        "body": "Three renewal cycles. Each builds on the last. By day 75 the change is structural, and it holds.",
-        "stat_1_value": "28",
-        "stat_1_label": "Days per skin cycle",
-        "stat_2_value": "3",
-        "stat_2_label": "Full cycles in 75 days",
-        "button_label": "Start the protocol →",
-        "button_link": "shopify://collections/all",
-        "primary_line_label": "Structural change",
-        "secondary_line_label": "Typical serum",
-        "primary_legend": "LNGVTY",
-        "secondary_legend": "Typical serum",
-        "background_color": "#1a1a1a",
-        "text_color": "#ffffff",
-        "eyebrow_color": "#ffffff",
-        "title_accent_color": "#888888",
-        "accent_color": "#e8842c",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
-    },
-    "ingredients": {
-      "type": "hp-science-ingredients",
+    "trending-social": {
+      "type": "trending-social",
       "blocks": {
-        "cat_1": {
-          "type": "category",
+        "social_post_CLaeNz": {
+          "type": "social_post",
           "settings": {
-            "title": "THE BREAKTHROUGHS"
+            "image": "shopify://shop_images/1080REPELNANO3.jpg",
+            "video": "shopify://files/videos/reelup_o76dtu62tq1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "essential-indepth-shoe-sneaker-cleaning-kit",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
           }
         },
-        "ing_1": {
-          "type": "ingredient",
+        "social_post_qpgMUa": {
+          "type": "social_post",
           "settings": {
-            "name": "Peptides",
-            "role": "Short amino acid chains that tell your skin cells to renew, repair, and protect. More collagen built, less destroyed."
+            "video": "shopify://files/videos/reelup_5exvjtgoheq1766054859395_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
           }
         },
-        "ing_2": {
-          "type": "ingredient",
+        "social_post_93FhAp": {
+          "type": "social_post",
           "settings": {
-            "name": "Stem Cell Conditioned Media",
-            "role": "Captures the exosomes and growth factors stem cells produce and delivers them to your skin. Korean clinic-grade."
+            "video": "shopify://files/videos/960 540 amazon.mp4 1.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "signature-shoe-sneaker-cleaning-kit",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
           }
         },
-        "ing_3": {
-          "type": "ingredient",
+        "social_post_HmncLJ": {
+          "type": "social_post",
           "settings": {
-            "name": "Sun-safe Bio-Retinoids",
-            "role": "The same cell renewal as retinol. AM and PM, no sun sensitivity, no irritation. A better ingredient."
+            "video": "shopify://files/videos/reelup_tz9l1y4wp0h1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "sneaker-shoe-cleaner-refill-pack",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
           }
         },
-        "cat_2": {
-          "type": "category",
+        "social_post_WDnFMf": {
+          "type": "social_post",
           "settings": {
-            "title": "THE FOUNDATION"
-          }
-        },
-        "ing_4": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Niacinamide",
-            "role": "The most studied skin ingredient. Pores, brightness, barrier. Earns its place every time."
-          }
-        },
-        "ing_5": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Ceramides",
-            "role": "Five types, the exact ratio in healthy skin. The mortar between bricks. Without them, everything leaks."
-          }
-        },
-        "ing_6": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Cica",
-            "role": "If you have reactive skin, you already know. We didn't explain it. We just put it in."
-          }
-        },
-        "ing_7": {
-          "type": "ingredient",
-          "settings": {
-            "name": "Xylitol",
-            "role": "Feeds the good bacteria on your skin. The ingredient most formulas forget to include."
+            "video": "shopify://files/videos/reelup_hi9kghh754m1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "advanced-sneaker-sole-cleaner-refill-pack",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
           }
         }
       },
       "block_order": [
-        "cat_1",
-        "ing_1",
-        "ing_2",
-        "ing_3",
-        "cat_2",
-        "ing_4",
-        "ing_5",
-        "ing_6",
-        "ing_7"
+        "social_post_CLaeNz",
+        "social_post_qpgMUa",
+        "social_post_93FhAp",
+        "social_post_HmncLJ",
+        "social_post_WDnFMf"
       ],
       "settings": {
-        "heading_line_1": "Smarter skincare.",
-        "heading_line_2": "Named on pack,",
-        "heading_line_3": "not hidden in a",
-        "heading_accent": "blend.",
-        "footer_text": "Legacy heroes. New science. One system. Every active is named on the pack, not buried in a 'proprietary blend.' That's the smarter choice.",
-        "background_color": "#fdfcf5",
-        "text_color": "#111111",
-        "body_color": "#333333",
-        "category_color": "#a8894a",
-        "divider_color": "#d8d2c8",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "eyebrow": "SOCIAL PROOF",
+        "heading": "Trending on Social Media",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "card_spacing": 20,
+        "bg_color": "#ffffff",
+        "primary_color": "#ff2b2b",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": -12,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
       }
     },
-    "cta": {
-      "type": "hp-science-cta",
+    "blocks_dbdLjg": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a9c1cbe_xtLrq7": {
+          "type": "ai_gen_block_a9c1cbe",
+          "settings": {
+            "enable_sticky_scroll": false,
+            "desktop_width_percent": 100,
+            "background_image": "shopify://shop_images/525252.png",
+            "mobile_image": "shopify://shop_images/1080x1920.png",
+            "image_opacity": 1,
+            "background_color": "#f5f5f5",
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_max_width": 600,
+            "content_padding": 60,
+            "content_offset_left": 0,
+            "content_offset_top": 0,
+            "content_align": "left",
+            "content_offset_left_mobile": 16,
+            "content_offset_top_mobile": 24,
+            "content_max_width_mobile": 200,
+            "content_align_mobile": "left",
+            "subheading": "",
+            "subheading_size": 22,
+            "subheading_color": "#000000",
+            "subheading_spacing": 15,
+            "heading": "",
+            "heading_line2": "",
+            "heading_line2_color": "#000000",
+            "heading_accent_font_family": "theme_default",
+            "heading_accent_font_weight": "400",
+            "heading_accent_font_style": "normal",
+            "heading_accent_font_size_desktop": 62,
+            "heading_accent_font_size_mobile": 40,
+            "heading_accent_word_count": 1,
+            "heading_accent_color": "#c9a227",
+            "heading_size": 50,
+            "heading_color": "#000000",
+            "heading_spacing": 20,
+            "text": "",
+            "text_size": 17,
+            "text_color": "#111010",
+            "heading_font_family": "inter_light",
+            "heading_font_weight": "300",
+            "heading_font_style": "normal",
+            "subheading_font_family": "darker_grotesque",
+            "subheading_font_weight": "500",
+            "subheading_font_style": "normal",
+            "text_font_family": "inter_18pt_bold",
+            "text_font_weight": "700",
+            "text_font_style": "normal",
+            "button_font_family": "inter",
+            "button_font_weight": "600",
+            "button_text": "",
+            "hide_button_mobile": false,
+            "button_link": "",
+            "button_spacing": 25,
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 30,
+            "button_border_radius": 20,
+            "button_background_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a9c1cbe_xtLrq7"
+      ],
+      "name": "Story banner",
+      "settings": {}
+    },
+    "17776122420bbcf27b": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "17776085399dc5249c": {
+      "type": "apps",
+      "settings": {}
+    },
+    "split_cta_home": {
+      "type": "split-cta",
+      "name": "Split CTA",
       "settings": {
-        "heading_line_1": "The science earns the timeline.",
-        "heading_line_2": "75 days is enough.",
-        "body": "You've read the argument. The biology is not complicated. Your skin knows how to do this. It just needs the right live signals, at clinically meaningful concentrations, for long enough to matter.",
-        "button_label": "FIND MY SERUM",
+        "heading": "The best part of your day is still waiting outside.",
+        "subtext": "<p>We believe play isn't behind us, it's still the best part of our day.</p><p>Life never stops. Play shouldn't either.</p>",
+        "tagline": "#NeverStopPlaying",
+        "button_label": "Find my kit",
         "button_link": "shopify://collections/all",
-        "secondary_label": "See the three serums",
-        "secondary_link": "shopify://collections/all",
-        "background_color": "#0a0a0a",
-        "text_color": "#ffffff",
-        "body_color": "#888888",
-        "button_background": "#a8894a",
+        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
+        "background_color": "#fdfcf7",
+        "text_color": "#707070",
+        "heading_color": "#111111",
+        "button_background": "#111111",
+        "button_hover_background": "#333333",
         "button_text_color": "#ffffff",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "padding_top": 90,
+        "padding_bottom": 90
+      }
+    },
+    "hague-protect-dna": {
+      "type": "hague-protect-dna",
+      "blocks": {
+        "dna_feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "shoecare",
+            "icon": "shopify://shop_images/shoe_352cdb45-f6d7-4e1d-a95a-148d98e2d951.gif",
+            "title": "SPECIALISED SHOECARE",
+            "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+          }
+        },
+        "dna_feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "streets",
+            "icon": "shopify://shop_images/weather_10b73169-8eb5-498b-a545-d90285e8cf61.gif",
+            "title": "INDIAN STREETS TESTED",
+            "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
+          }
+        },
+        "dna_feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "quality",
+            "icon": "shopify://shop_images/quality_d4bd5052-e6a8-4d66-b95e-0a5d0b4f693b_3.webp",
+            "title": "QUALITY OBSESSED",
+            "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
+          }
+        },
+        "dna_feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "innovating",
+            "icon": "shopify://shop_images/Innovation.webp",
+            "title": "ALWAYS INNOVATING",
+            "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
+          }
+        }
+      },
+      "block_order": [
+        "dna_feature_1",
+        "dna_feature_2",
+        "dna_feature_3",
+        "dna_feature_4"
+      ],
+      "settings": {
+        "heading": "HAGUEPROTECT DNA:",
+        "heading_line2": "Culture, Care, and Craft.",
+        "heading_line2_color": "#ffffff",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "accent_color": "#ff2b2b",
+        "icon_badge_size": 128,
+        "glow_intensity": 70,
+        "container_width": 1320,
+        "padding_top": 64,
+        "padding_bottom": 80,
+        "enable_float": true,
+        "enable_hover": true,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 30,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "right",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20
       }
     }
   },
   "order": [
-    "typography",
     "hero",
-    "info_grid",
-    "media_banner",
-    "statement",
-    "feature_split",
-    "headline_bands",
-    "results_grid",
-    "commitment",
-    "protocol",
-    "ingredients",
-    "cta"
+    "featured-brands",
+    "bestsellers",
+    "materials-showcase",
+    "blocks_KyFWkm",
+    "function-category",
+    "1783254662e4d37d15",
+    "corporate_gifting_marquee_pCHxwt",
+    "horizontal-product-slider",
+    "story_block_8WTbcQ",
+    "community-testimonials",
+    "trending-social",
+    "blocks_dbdLjg",
+    "17776122420bbcf27b",
+    "17776085399dc5249c",
+    "split_cta_home",
+    "hague-protect-dna"
   ]
 }
