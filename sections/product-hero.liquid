@@ -1081,44 +1081,59 @@
 .d2c-accordions {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .d2c-accordion-item {
-  border-bottom: 1px solid #EEEEEE;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.d2c-accordion-item.active {
+  background: #f9f9f9;
 }
 
 .d2c-accordion-toggle {
   width: 100%;
-  height: 50px;
+  min-height: 56px;
   background: none;
   border: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--d2c-primary);
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
   cursor: pointer;
-  padding: 0;
-  transition: color 0.15s ease;
+  padding: 16px 20px;
+  transition: background 0.15s ease;
 }
 
 .d2c-accordion-toggle:hover {
-  color: var(--d2c-secondary);
+  background: #f0f0f0;
+}
+
+.d2c-accordion-icon {
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .d2c-accordion-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
-  font-size: 14px;
-  color: var(--d2c-secondary);
+  font-size: 15px;
+  color: #333333;
   line-height: 1.6;
 }
 
 .d2c-accordion-content-inner {
-  padding-bottom: 16px;
+  padding: 0 20px 20px 20px;
 }
 
 /* FLOATING STICKY Add to Cart Bar */
