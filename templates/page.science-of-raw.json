@@ -1,31 +1,1368 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "brand-page",
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "tile_1": {
+          "type": "product_tile",
+          "settings": {
+            "product": "essential-indepth-shoe-sneaker-cleaning-kit",
+            "title": "Acne, Blemish Control",
+            "title_color": "#2eb82e",
+            "subtitle": "For skin that won't stay clear.",
+            "link": ""
+          }
+        },
+        "tile_2": {
+          "type": "product_tile",
+          "settings": {
+            "product": "leathercarekit",
+            "title": "Dark Spots, Pore Control",
+            "title_color": "#d96600",
+            "subtitle": "For skin that won't stop spotting.",
+            "link": ""
+          }
+        },
+        "tile_3": {
+          "type": "product_tile",
+          "settings": {
+            "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits",
+            "title": "Deep Hydration, Glow",
+            "title_color": "#009973",
+            "subtitle": "For skin that won't hold moisture.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3"
+      ],
       "settings": {
-        "logo_asset": "logo-science-of-raw.svg",
-        "heading": "Pure, Raw, and Precisely Refined",
-        "subheading": "Science of Raw blends nature and precision — formulations built on clean, honest ingredients and backed by a relentless pursuit of quality.",
-        "button_label": "Discover the Collection",
-        "button_link": "/collections/science-of-raw",
-        "accent": "#27355f",
-        "banner_bg_from": "#f6f8fc",
-        "banner_bg_to": "#dde5f3",
-        "show_bestsellers": true,
-        "bestseller_collection": "science-of-raw",
-        "bs_eyebrow": "Bestsellers",
-        "bs_heading": "Science of Raw bestsellers",
-        "products_count": 4,
-        "bs_button_label": "Shop all",
-        "show_back_band": true,
-        "back_text": "Part of the family alongside Hague Protect & Vanrosector.",
-        "back_label": "Back to Hague Protect",
-        "back_link": "/",
-        "back_bg": "#1a2440"
+        "eyebrow": "",
+        "heading": "Dirty kicks?",
+        "heading_line2": "we make",
+        "heading_line3": "'Em Heat.",
+        "heading_line3_color": "#c8c8c8",
+        "subheading": "FROM BEAT TO HEAT",
+        "cta_text": "Shop Now",
+        "cta_link": "",
+        "content_position_x": 18,
+        "content_position_y": 17,
+        "content_align": "left",
+        "content_position_x_mobile": 5,
+        "content_position_y_mobile": 10,
+        "content_align_mobile": "left",
+        "image": "shopify://shop_images/1920x1080-Shopify-main-banner.png",
+        "desktop_image_position": "65% center",
+        "image_mobile": "shopify://shop_images/1080X1920-SIZE.jpg",
+        "heading_subheading_spacing_desktop": 28,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 46,
+        "eyebrow_title_spacing_mobile": 8,
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 60,
+        "h1_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15,
+        "bottom_tiles_heading": "THREE SERUMS. ONE SYSTEM."
+      }
+    },
+    "featured-brands": {
+      "type": "featured-brands",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "OUR FAMILY OF BRANDS",
+        "heading": "Explore the Ecosystem",
+        "subheading": "",
+        "cta_label": "Explore",
+        "bg_color": "#ffffff",
+        "vanrosector_image": "shopify://shop_images/VNR_5c2676ec-cf47-4ad2-b451-d823992ea0b5.jpg",
+        "vanrosector_svg": "",
+        "vanrosector_name": "",
+        "vanrosector_tagline": "",
+        "vanrosector_link": "/collections/all?view=vanrosector",
+        "science_of_raw_image": "shopify://shop_images/sor_7dc79d5b-aa84-4190-8abf-39ec4ad1fb84.jpg",
+        "science_of_raw_svg": "",
+        "science_of_raw_name": "",
+        "science_of_raw_tagline": "",
+        "science_of_raw_link": "/collections/all?view=science-of-raw",
+        "hagueprotect_image": "shopify://shop_images/SHOPIFY-CATEGORY.png",
+        "hagueprotect_svg": "",
+        "hagueprotect_name": "",
+        "hagueprotect_tagline": "",
+        "hagueprotect_link": "",
+        "padding_top": 48,
+        "padding_bottom": 40,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": -46,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 21,
+        "eyebrow_font_size_mobile": 12
+      }
+    },
+    "bestsellers": {
+      "type": "bestsellers",
+      "settings": {
+        "collection": "all",
+        "products_limit": 8,
+        "eyebrow": "BEST  SELLERS",
+        "heading": "Bestselling Sneaker Care",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "view_all_label": "View All",
+        "view_all_link": "",
+        "badge_text": "Bestseller",
+        "cta_text": "Shop Now",
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "bg_color": "#000000",
+        "accent_color": "#ffffff",
+        "autoplay": true,
+        "autoplay_speed": 3,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
+      }
+    },
+    "materials-showcase": {
+      "type": "materials-showcase",
+      "blocks": {
+        "item_1": {
+          "type": "material_item",
+          "settings": {
+            "title": "Suede",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_6.jpg",
+            "collection": "suede-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_2": {
+          "type": "material_item",
+          "settings": {
+            "title": "Leather",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM.jpg",
+            "collection": "leather-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_3": {
+          "type": "material_item",
+          "settings": {
+            "title": "Mesh",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_4.jpg",
+            "collection": "nubuck-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_4": {
+          "type": "material_item",
+          "settings": {
+            "title": "Fabrics",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_3.jpg",
+            "collection": "fabric-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "material_item_YKmVTn": {
+          "type": "material_item",
+          "settings": {
+            "title": "Deodrizer",
+            "collection": "",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "item_5": {
+          "type": "material_item",
+          "settings": {
+            "title": "Soles",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-06-08_at_5.58.09_PM_1.jpg",
+            "collection": "soles-care-kit",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        },
+        "material_item_mAF6Te": {
+          "type": "material_item",
+          "settings": {
+            "title": "Denim",
+            "collection": "",
+            "product": "",
+            "page": "",
+            "url": "",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "material_item_YKmVTn",
+        "item_5",
+        "material_item_mAF6Te"
+      ],
+      "settings": {
+        "bg_color": "#f7f7f7",
+        "eyebrow": "MATERIALS",
+        "heading": "For Every MATERIAL",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "description": "Leather, suede, nubuck, fabric, soles. Every material deserves specific care. Find yours.",
+        "active_color": "#d60000",
+        "inactive_color": "#000000",
+        "menu_font_size": 52,
+        "image_radius": 20,
+        "animation_speed": 400,
+        "padding_top": 45,
+        "padding_bottom": 80,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
+      }
+    },
+    "blocks_KyFWkm": {
+      "type": "_blocks",
+      "name": "Banner",
+      "settings": {}
+    },
+    "function-category": {
+      "type": "function-category",
+      "blocks": {
+        "category_card_3PEYXw": {
+          "type": "category_card",
+          "settings": {
+            "title": "Mesh",
+            "product_count": "6 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"60\" cy=\"45\" r=\"30\" stroke=\"#111111\" stroke-width=\"2\"></circle><circle cx=\"60\" cy=\"45\" r=\"3\" fill=\"#111111\"></circle><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"25\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M60 45 Q 40 20 40 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 80 70 80 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 35 60 60 60\" stroke=\"#111111\"></path><path d=\"M60 45 Q 85 30 60 30\" stroke=\"#111111\"></path><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"140\" stroke=\"#111111\" stroke-width=\"3\"></line><ellipse cx=\"60\" cy=\"140\" rx=\"30\" ry=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></ellipse></svg>",
+            "image": "shopify://shop_images/3_266daa02-0dbf-4775-a71e-24d9d20cedd7.png"
+          }
+        },
+        "fans": {
+          "type": "category_card",
+          "settings": {
+            "title": "KNITS",
+            "product_count": "6 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"60\" cy=\"45\" r=\"30\" stroke=\"#111111\" stroke-width=\"2\"></circle><circle cx=\"60\" cy=\"45\" r=\"3\" fill=\"#111111\"></circle><line x1=\"60\" y1=\"45\" x2=\"60\" y2=\"25\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M60 45 Q 40 20 40 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 80 70 80 45\" stroke=\"#111111\"></path><path d=\"M60 45 Q 35 60 60 60\" stroke=\"#111111\"></path><path d=\"M60 45 Q 85 30 60 30\" stroke=\"#111111\"></path><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"140\" stroke=\"#111111\" stroke-width=\"3\"></line><ellipse cx=\"60\" cy=\"140\" rx=\"30\" ry=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></ellipse></svg>",
+            "image": "shopify://shop_images/2_9d1c0b34-6321-4b41-a1a0-29b562749de5.png"
+          }
+        },
+        "kitchen": {
+          "type": "category_card",
+          "settings": {
+            "title": "SUEDE",
+            "product_count": "4 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"25\" width=\"70\" height=\"80\" rx=\"20\" fill=\"#fcfcfc\" stroke=\"#E62C2C\" stroke-width=\"3\"></rect><rect x=\"35\" y=\"65\" width=\"50\" height=\"30\" rx=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></rect><line x1=\"60\" y1=\"75\" x2=\"60\" y2=\"85\" stroke=\"#E62C2C\" stroke-width=\"3\"></line><circle cx=\"60\" cy=\"45\" r=\"8\" stroke=\"#E62C2C\" stroke-width=\"2\"></circle></svg>",
+            "image": "shopify://shop_images/1_6e2c5ae6-a4c7-4c0a-800b-fdaf1fe626d9.png"
+          }
+        },
+        "vacuums": {
+          "type": "category_card",
+          "settings": {
+            "title": "SOLE",
+            "product_count": "3 products",
+            "link": "/collections/nubuck-care-kit",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"50\" y=\"20\" width=\"20\" height=\"30\" rx=\"6\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"50\" x2=\"60\" y2=\"135\" stroke=\"#111111\" stroke-width=\"3\"></line><path d=\"M40 135 L80 135 L70 145 L50 145 Z\" fill=\"#111111\"></path><rect x=\"45\" y=\"25\" width=\"6\" height=\"15\" rx=\"3\" fill=\"#FF2B2B\"></rect></svg>",
+            "image": "shopify://shop_images/5_aaf431b1-e6f2-41f4-961e-fd7f592bcf03.png"
+          }
+        },
+        "garment": {
+          "type": "category_card",
+          "settings": {
+            "title": "LEATHER",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"45\" y=\"110\" width=\"30\" height=\"35\" rx=\"10\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#f5f5f7\"></rect><line x1=\"60\" y1=\"35\" x2=\"60\" y2=\"110\" stroke=\"#111111\" stroke-width=\"2\"></line><path d=\"M40 35 L80 35 L60 25 Z\" fill=\"#111111\"></path><path d=\"M60 70 C 80 70 80 115 60 115\" stroke=\"#111111\" stroke-width=\"2\" fill=\"none\"></path></svg>",
+            "image": "shopify://shop_images/4.png"
+          }
+        },
+        "purifiers": {
+          "type": "category_card",
+          "settings": {
+            "title": "MESH CARE",
+            "product_count": "5 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 160\" width=\"80\" height=\"110\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"35\" y=\"25\" width=\"50\" height=\"110\" rx=\"12\" fill=\"#fcfcfc\" stroke=\"#111111\" stroke-width=\"2\"></rect><line x1=\"45\" y1=\"45\" x2=\"75\" y2=\"45\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"55\" x2=\"75\" y2=\"55\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"65\" x2=\"75\" y2=\"65\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"75\" x2=\"75\" y2=\"75\" stroke=\"#111111\" stroke-width=\"1.5\"></line><line x1=\"45\" y1=\"85\" x2=\"75\" y2=\"85\" stroke=\"#111111\" stroke-width=\"1.5\"></line><circle cx=\"60\" cy=\"115\" r=\"10\" stroke=\"#111111\" stroke-width=\"1.5\"></circle></svg>",
+            "image": "shopify://shop_images/1000X1400-mESH.png"
+          }
+        },
+        "heaters": {
+          "type": "category_card",
+          "settings": {
+            "title": "HAT CARE",
+            "product_count": "2 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"35\" width=\"70\" height=\"55\" rx=\"8\" fill=\"#fcfcfc\" stroke=\"#FF8A00\" stroke-width=\"2\"></rect><line x1=\"40\" y1=\"45\" x2=\"80\" y2=\"45\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"55\" x2=\"80\" y2=\"55\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"65\" x2=\"80\" y2=\"65\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><circle cx=\"45\" cy=\"78\" r=\"3\" fill=\"#FF8A00\"></circle><line x1=\"40\" y1=\"90\" x2=\"50\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line><line x1=\"80\" y1=\"90\" x2=\"70\" y2=\"100\" stroke=\"#FF8A00\" stroke-width=\"2\"></line></svg>",
+            "image": "shopify://shop_images/HAT.png"
+          }
+        },
+        "accessories": {
+          "type": "category_card",
+          "settings": {
+            "title": "DEODRIZER",
+            "product_count": "3 products",
+            "link": "",
+            "svg_code": "<svg viewbox=\"0 0 120 120\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"25\" y=\"25\" width=\"70\" height=\"70\" rx=\"8\" stroke=\"#111111\" stroke-width=\"2\" fill=\"#fdfeff\"></rect><circle cx=\"60\" cy=\"60\" r=\"15\" stroke=\"#111111\" stroke-width=\"2\"></circle></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "category_card_3PEYXw",
+        "fans",
+        "kitchen",
+        "vacuums",
+        "garment",
+        "purifiers",
+        "heaters",
+        "accessories"
+      ],
+      "settings": {
+        "heading": "Every Material Deserves",
+        "heading_line2": "the Right Care",
+        "heading_line2_color": "#b0b0b0",
+        "accent_line2": false,
+        "subtitle": "Explore our top product categories",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "bahnschrift_semibold",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 38,
+        "h2_font_size_mobile": 26,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 18,
+        "eyebrow_font_size_mobile": 12
+      }
+    },
+    "1783254662e4d37d15": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a9c1cbe_a9xhbp": {
+          "type": "ai_gen_block_a9c1cbe",
+          "settings": {
+            "enable_sticky_scroll": true,
+            "desktop_width_percent": 100,
+            "background_image": "shopify://shop_images/1920x1080-Final-Exported-in-Low-jpeg.jpg",
+            "mobile_image": "shopify://shop_images/1080x1920-Final-Export-in-Low-jpeg.jpg",
+            "image_opacity": 1,
+            "background_color": "#f5f5f5",
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_max_width": 650,
+            "content_padding": 20,
+            "content_offset_left": 20,
+            "content_offset_top": 40,
+            "content_align": "left",
+            "content_offset_left_mobile": 16,
+            "content_offset_top_mobile": 24,
+            "content_max_width_mobile": 360,
+            "content_align_mobile": "left",
+            "subheading": "SHARE YOUR BRAND JOURNEY",
+            "subheading_size": 18,
+            "subheading_color": "#ffffff",
+            "subheading_spacing": 15,
+            "heading": "Tell Your Story",
+            "heading_line2": "",
+            "heading_line2_color": "#6b6b6b",
+            "heading_accent_font_family": "theme_default",
+            "heading_accent_font_weight": "400",
+            "heading_accent_font_style": "normal",
+            "heading_accent_font_size_desktop": 62,
+            "heading_accent_font_size_mobile": 40,
+            "heading_accent_word_count": 1,
+            "heading_accent_color": "#c9a227",
+            "heading_size": 52,
+            "heading_color": "#f3f2f2",
+            "heading_spacing": 20,
+            "text": "<p>Craft a compelling narrative that connects with your audience and showcases what makes your brand unique.</p>",
+            "text_size": 20,
+            "text_color": "#fcfcfc",
+            "heading_font_family": "inter_light",
+            "heading_font_weight": "300",
+            "heading_font_style": "normal",
+            "subheading_font_family": "darker_grotesque",
+            "subheading_font_weight": "600",
+            "subheading_font_style": "normal",
+            "text_font_family": "darker_grotesque",
+            "text_font_weight": "400",
+            "text_font_style": "normal",
+            "button_font_family": "inter",
+            "button_font_weight": "600",
+            "button_text": "",
+            "hide_button_mobile": false,
+            "button_link": "",
+            "button_spacing": 25,
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 30,
+            "button_border_radius": 20,
+            "button_background_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a9c1cbe_a9xhbp"
+      ],
+      "name": "Story banner",
+      "settings": {}
+    },
+    "corporate_gifting_marquee_pCHxwt": {
+      "type": "corporate-gifting-marquee",
+      "blocks": {
+        "marquee_top_empwelcome": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Employee Welcome Kits",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_client": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Client Appreciation",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_festival": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Festival Hampers",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_conference": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Conference Swag",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_ceo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "CEO Gifts",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_top_team": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Team Milestones",
+            "row": "top",
+            "accent": false
+          }
+        },
+        "marquee_mid_retail": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Retail Partners",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_custom": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Custom Inserts",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_logo": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Logo Embossing",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_gift": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Gift Wrapping",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_delivery": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Pan-India Delivery",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_mid_invoice": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Invoice & GST",
+            "row": "middle",
+            "accent": false
+          }
+        },
+        "marquee_bot_cobrand": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Co-Branded Packaging",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_bulk": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Bulk Pricing",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_manager": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Dedicated Manager",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_sample": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Sample Kits",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_volume": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Volume Discounts",
+            "row": "bottom",
+            "accent": false
+          }
+        },
+        "marquee_bot_onboard": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Onboarding Packs",
+            "row": "bottom",
+            "accent": false
+          }
+        }
+      },
+      "block_order": [
+        "marquee_top_empwelcome",
+        "marquee_top_client",
+        "marquee_top_festival",
+        "marquee_top_conference",
+        "marquee_top_ceo",
+        "marquee_top_team",
+        "marquee_mid_retail",
+        "marquee_mid_custom",
+        "marquee_mid_logo",
+        "marquee_mid_gift",
+        "marquee_mid_delivery",
+        "marquee_mid_invoice",
+        "marquee_bot_cobrand",
+        "marquee_bot_bulk",
+        "marquee_bot_manager",
+        "marquee_bot_sample",
+        "marquee_bot_volume",
+        "marquee_bot_onboard"
+      ],
+      "name": "Corporate Marquee",
+      "settings": {
+        "label": "Trusted for every shoe — built to last"
+      }
+    },
+    "horizontal-product-slider": {
+      "type": "horizontal-product-slider",
+      "blocks": {
+        "custom_images_WRVxPd": {
+          "type": "custom_images",
+          "settings": {
+            "title": "",
+            "url_1": "",
+            "url_2": "",
+            "url_3": "",
+            "url_4": "",
+            "url_5": "",
+            "url_6": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_images_WRVxPd"
+      ],
+      "settings": {
+        "heading": "Powered by Bioenzyme™",
+        "heading_line2": "Cleaning",
+        "heading_accent_word": "Technology",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "show_glass_panel": true,
+        "glass_eyebrow_left": "",
+        "glass_title": "",
+        "glass_para_top": "Our advanced BioEnzyme™ smart-cleaning technology precision targets tough stains, odors, spots, spills and dirt",
+        "glass_eyebrow_right": "POWERFUL CLEAN. CONSCIOUSLY FORMULATED",
+        "glass_para_bottom": "Consciously formulated with natural, hypoallergenic ingredients, our BioEnzyme™ Cleaners are readily biodegradable, gentle on materials, and free from dyes, sulfates, parabens, and California Prop. 65 chemicals.",
+        "glass_link_label": "THE SCIENCE BEHIND THE CLEAN",
+        "glass_link_url": "https://hagueprotect.com/search?view=hague",
+        "glass_eyebrow_color": "#ffffff",
+        "glass_panel_max_width": 1100,
+        "glass_panel_padding": 40,
+        "glass_title_size_desktop": 21,
+        "glass_title_size_mobile": 20,
+        "glass_para_size_desktop": 21,
+        "glass_para_size_mobile": 20,
+        "glass_title_spacing_desktop": 28,
+        "glass_title_spacing_mobile": 10,
+        "glass_eyebrow_size": 18,
+        "glass_link_size": 18,
+        "bg_color": "#e7e5e5",
+        "bg_color_bottom": "#000000",
+        "products_to_show": 8,
+        "rating_value": "4.9",
+        "rating_count": "4.8",
+        "image_offset": 0,
+        "enable_video_bg": true,
+        "video_bg_filename": "animate_background_premium_202607071757.mp4",
+        "video_opacity": 100,
+        "overlay_opacity": 35,
+        "rail_collection": "all",
+        "heading_subheading_spacing_desktop": 24,
+        "heading_subheading_spacing_mobile": 16,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 52,
+        "h1_font_size_mobile": 24,
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque_semibold",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20
+      }
+    },
+    "story_block_8WTbcQ": {
+      "type": "story-block",
+      "name": "Story Banner",
+      "settings": {
+        "assigned_product": "",
+        "image": "shopify://shop_images/1440X560_946692a4-1a74-4e91-b9f1-71080519a600.png",
+        "image_mobile": "shopify://shop_images/1080x1080.png",
+        "eyebrow": "",
+        "heading": "What Are You",
+        "heading_line2": "Cleaning Today",
+        "heading_line2_color": "#000000",
+        "heading_accent_word_count": 2,
+        "heading_accent_color": "#c9a227",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 30,
+        "heading_accent_font_weight": "700",
+        "subheading": "",
+        "paragraph": "",
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align": "left",
+        "text_vertical_position": "flex-start",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "left",
+        "text_vertical_position_mobile": "flex-start",
+        "text_max_width": 600,
+        "show_text_shadow": false,
+        "eyebrow_color": "#2563eb",
+        "heading_color": "#111111",
+        "subheading_color": "#111111",
+        "paragraph_color": "#222222",
+        "heading_subheading_spacing_desktop": 6,
+        "heading_subheading_spacing_mobile": 6,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "h1_font_family": "inter_light",
+        "h1_font_weight": "300",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 52,
+        "h1_font_size_mobile": 28,
+        "h2_font_family": "darker_grotesque_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "400",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "border_radius": 0
+      }
+    },
+    "community-testimonials": {
+      "type": "community-testimonials",
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Great product!",
+            "text": "We carry the line at our store. Customers come back for refills, which says a lot.",
+            "customer_name": "Priya K.",
+            "review_date": "Today",
+            "customer_city": "Denver",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Wholesale",
+            "product_badge_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Does what it says",
+            "text": "Does what it says. I use it weekly on white leather. No complaints.",
+            "customer_name": "Jordan A.",
+            "review_date": "2 days ago",
+            "customer_city": "Seattle",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Signature Kit"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Road trip saver",
+            "text": "My white sneakers took a beating on a road trip. Mud, grass, the whole thing. The In-Depth kit brought them back.",
+            "customer_name": "Eli R.",
+            "review_date": "3 days ago",
+            "customer_city": "Nashville",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "In-Depth Kit"
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Always in my bag",
+            "text": "Keep a pack in my bag. Use them on the train when I see scuffs. They work.",
+            "customer_name": "Hannah W.",
+            "review_date": "1 week ago",
+            "customer_city": "Boston",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Signature Kit"
+          }
+        },
+        "testimonial_5": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Suede looks new again",
+            "text": "Used the suede kit on my boots before a wedding. Color came back clean without looking wet or stiff.",
+            "customer_name": "Maya S.",
+            "review_date": "4 days ago",
+            "customer_city": "Austin",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Suede Care Kit"
+          }
+        },
+        "testimonial_6": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Worth every rupee",
+            "text": "Ordered for my collection. Easy steps, strong results, and the protection spray holds up in monsoon weather.",
+            "customer_name": "Arjun M.",
+            "review_date": "5 days ago",
+            "customer_city": "Mumbai",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Shield Guard"
+          }
+        },
+        "testimonial_7": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Kids shoes finally clean",
+            "text": "School-week dirt used to ruin everything. Hague Protect wipes the mess without fading the colors.",
+            "customer_name": "Neha P.",
+            "review_date": "6 days ago",
+            "customer_city": "Delhi",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Everyday Kit"
+          }
+        },
+        "testimonial_8": {
+          "type": "testimonial",
+          "settings": {
+            "review_image": "shopify://shop_images/6a5facf9f1d2ba4aea844303.jpg",
+            "rating": 5,
+            "review_title": "Pro results at home",
+            "text": "I run a small studio and recommend this to clients. Consistent clean, no damage to premium leather.",
+            "customer_name": "Chris T.",
+            "review_date": "2 weeks ago",
+            "customer_city": "Chicago",
+            "hide_verified": false,
+            "product": "",
+            "product_badge_text": "Leather Care Kit"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4",
+        "testimonial_5",
+        "testimonial_6",
+        "testimonial_7",
+        "testimonial_8"
+      ],
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "paragraph_color": "#c8c8c8",
+        "eyebrow": "COMMUNITY",
+        "headline_count": "+100,000",
+        "headline_brand": "Hagueprotect",
+        "description": "Customers and counting. Sneakerheads, athletes, parents, and collectors trust HagueProtect with the pairs they love.",
+        "rating_text": "5",
+        "badge_star_rating": 5,
+        "review_count_text": "10,000 Reviews",
+        "review_description": "Includes reviews from customers in the India, U.S, Mexico, Canada, Australia, and Japan.",
+        "padding_top": 45,
+        "padding_bottom": 80,
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
+      }
+    },
+    "trending-social": {
+      "type": "trending-social",
+      "blocks": {
+        "social_post_CLaeNz": {
+          "type": "social_post",
+          "settings": {
+            "image": "shopify://shop_images/1080REPELNANO3.jpg",
+            "video": "shopify://files/videos/reelup_o76dtu62tq1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "essential-indepth-shoe-sneaker-cleaning-kit",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
+          }
+        },
+        "social_post_qpgMUa": {
+          "type": "social_post",
+          "settings": {
+            "video": "shopify://files/videos/reelup_5exvjtgoheq1766054859395_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "hague-protect-quick-shoe-sneaker-cleaning-kit-shoes-care-kits",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
+          }
+        },
+        "social_post_93FhAp": {
+          "type": "social_post",
+          "settings": {
+            "video": "shopify://files/videos/960 540 amazon.mp4 1.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "signature-shoe-sneaker-cleaning-kit",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
+          }
+        },
+        "social_post_HmncLJ": {
+          "type": "social_post",
+          "settings": {
+            "video": "shopify://files/videos/reelup_tz9l1y4wp0h1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "sneaker-shoe-cleaner-refill-pack",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
+          }
+        },
+        "social_post_WDnFMf": {
+          "type": "social_post",
+          "settings": {
+            "video": "shopify://files/videos/reelup_hi9kghh754m1766054859396_original.mp4",
+            "video_url": "",
+            "mp4_url": "",
+            "caption": "Elite care that brings out the finest character in all sneakers.",
+            "handle": "@hagueprotect",
+            "product": "advanced-sneaker-sole-cleaner-refill-pack",
+            "custom_title": "Sneaker Care Kit",
+            "custom_price": "Rs. 10,999",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "social_post_CLaeNz",
+        "social_post_qpgMUa",
+        "social_post_93FhAp",
+        "social_post_HmncLJ",
+        "social_post_WDnFMf"
+      ],
+      "settings": {
+        "eyebrow": "SOCIAL PROOF",
+        "heading": "Trending on Social Media",
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "heading_accent_font_family": "theme_default",
+        "heading_accent_font_weight": "400",
+        "heading_accent_font_style": "normal",
+        "heading_accent_font_size_desktop": 62,
+        "heading_accent_font_size_mobile": 40,
+        "heading_accent_color": "#c9a227",
+        "card_spacing": 20,
+        "bg_color": "#ffffff",
+        "primary_color": "#ff2b2b",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": -12,
+        "text_align_mobile": "theme_default",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "eyebrow_font_family": "darker_grotesque",
+        "eyebrow_font_weight": "600",
+        "eyebrow_font_style": "normal",
+        "eyebrow_font_size_desktop": 19,
+        "eyebrow_font_size_mobile": 15
+      }
+    },
+    "blocks_dbdLjg": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a9c1cbe_xtLrq7": {
+          "type": "ai_gen_block_a9c1cbe",
+          "settings": {
+            "enable_sticky_scroll": false,
+            "desktop_width_percent": 100,
+            "background_image": "shopify://shop_images/525252.png",
+            "mobile_image": "shopify://shop_images/1080x1920.png",
+            "image_opacity": 1,
+            "background_color": "#f5f5f5",
+            "show_overlay": false,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.3,
+            "content_max_width": 600,
+            "content_padding": 60,
+            "content_offset_left": 0,
+            "content_offset_top": 0,
+            "content_align": "left",
+            "content_offset_left_mobile": 16,
+            "content_offset_top_mobile": 24,
+            "content_max_width_mobile": 200,
+            "content_align_mobile": "left",
+            "subheading": "",
+            "subheading_size": 22,
+            "subheading_color": "#000000",
+            "subheading_spacing": 15,
+            "heading": "",
+            "heading_line2": "",
+            "heading_line2_color": "#000000",
+            "heading_accent_font_family": "theme_default",
+            "heading_accent_font_weight": "400",
+            "heading_accent_font_style": "normal",
+            "heading_accent_font_size_desktop": 62,
+            "heading_accent_font_size_mobile": 40,
+            "heading_accent_word_count": 1,
+            "heading_accent_color": "#c9a227",
+            "heading_size": 50,
+            "heading_color": "#000000",
+            "heading_spacing": 20,
+            "text": "",
+            "text_size": 17,
+            "text_color": "#111010",
+            "heading_font_family": "inter_light",
+            "heading_font_weight": "300",
+            "heading_font_style": "normal",
+            "subheading_font_family": "darker_grotesque",
+            "subheading_font_weight": "500",
+            "subheading_font_style": "normal",
+            "text_font_family": "inter_18pt_bold",
+            "text_font_weight": "700",
+            "text_font_style": "normal",
+            "button_font_family": "inter",
+            "button_font_weight": "600",
+            "button_text": "",
+            "hide_button_mobile": false,
+            "button_link": "",
+            "button_spacing": 25,
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 30,
+            "button_border_radius": 20,
+            "button_background_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#333333",
+            "button_hover_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a9c1cbe_xtLrq7"
+      ],
+      "name": "Story banner",
+      "settings": {}
+    },
+    "17776122420bbcf27b": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "17776085399dc5249c": {
+      "type": "apps",
+      "settings": {}
+    },
+    "split_cta_home": {
+      "type": "split-cta",
+      "name": "Split CTA",
+      "settings": {
+        "heading": "The best part of your day is still waiting outside.",
+        "subtext": "<p>We believe play isn't behind us, it's still the best part of our day.</p><p>Life never stops. Play shouldn't either.</p>",
+        "tagline": "#NeverStopPlaying",
+        "button_label": "Find my kit",
+        "button_link": "shopify://collections/all",
+        "text": "The protocol starts with one kit. Tell us your concern and we will point you to the right one.",
+        "background_color": "#fdfcf7",
+        "text_color": "#707070",
+        "heading_color": "#111111",
+        "button_background": "#111111",
+        "button_hover_background": "#333333",
+        "button_text_color": "#ffffff",
+        "padding_top": 90,
+        "padding_bottom": 90
+      }
+    },
+    "hague-protect-dna": {
+      "type": "hague-protect-dna",
+      "blocks": {
+        "dna_feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "shoecare",
+            "icon": "shopify://shop_images/shoe_352cdb45-f6d7-4e1d-a95a-148d98e2d951.gif",
+            "title": "SPECIALISED SHOECARE",
+            "description": "From suede to mesh to leather, precision-engineered formulas crafted to clean, protect, and revive every kind of shoes."
+          }
+        },
+        "dna_feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "streets",
+            "icon": "shopify://shop_images/weather_10b73169-8eb5-498b-a545-d90285e8cf61.gif",
+            "title": "INDIAN STREETS TESTED",
+            "description": "Built for Indian dust, rain & chaos: engineered to perform through every hustle, season, and sneaker drop."
+          }
+        },
+        "dna_feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "quality",
+            "icon": "shopify://shop_images/quality_d4bd5052-e6a8-4d66-b95e-0a5d0b4f693b_3.webp",
+            "title": "QUALITY OBSESSED",
+            "description": "No shortcuts. Just high-performance care, premium formulations, and obsessive attention to detail, every time."
+          }
+        },
+        "dna_feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon_preset": "innovating",
+            "icon": "shopify://shop_images/Innovation.webp",
+            "title": "ALWAYS INNOVATING",
+            "description": "From packaging to formulas, we never stand still, we build sneaker care that evolves as fast as the culture does."
+          }
+        }
+      },
+      "block_order": [
+        "dna_feature_1",
+        "dna_feature_2",
+        "dna_feature_3",
+        "dna_feature_4"
+      ],
+      "settings": {
+        "heading": "HAGUEPROTECT DNA:",
+        "heading_line2": "Culture, Care, and Craft.",
+        "heading_line2_color": "#ffffff",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "accent_color": "#ff2b2b",
+        "icon_badge_size": 128,
+        "glow_intensity": 70,
+        "container_width": 1320,
+        "padding_top": 64,
+        "padding_bottom": 80,
+        "enable_float": true,
+        "enable_hover": true,
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 30,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "right",
+        "h2_font_family": "inter_light",
+        "h2_font_weight": "300",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 24,
+        "paragraph_font_family": "darker_grotesque",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 21,
+        "paragraph_font_size_mobile": 20
       }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "featured-brands",
+    "bestsellers",
+    "materials-showcase",
+    "blocks_KyFWkm",
+    "function-category",
+    "1783254662e4d37d15",
+    "corporate_gifting_marquee_pCHxwt",
+    "horizontal-product-slider",
+    "story_block_8WTbcQ",
+    "community-testimonials",
+    "trending-social",
+    "blocks_dbdLjg",
+    "17776122420bbcf27b",
+    "17776085399dc5249c",
+    "split_cta_home",
+    "hague-protect-dna"
   ]
 }
