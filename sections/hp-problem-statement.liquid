@@ -1,0 +1,182 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} .hp-problem-section {
+    background-color: {{ section.settings.bg_color | default: '#F4F3EE' }};
+    padding: 80px 24px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-header {
+    max-width: 800px;
+    margin-bottom: 48px;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-eyebrow {
+    color: #C24F33;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 400;
+    color: #000000;
+    line-height: 1;
+    margin: 0 0 24px 0;
+    text-transform: uppercase;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-card {
+    background-color: #FFFFFF;
+    padding: 32px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-card-title {
+    font-family: 'Bebas Neue', 'Anton', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.02em;
+  }
+  
+  #shopify-section-{{ section.id }} .hp-problem-card-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444444;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 991px) {
+    #shopify-section-{{ section.id }} .hp-problem-grid {
+      grid-template-columns: 1fr;
+    }
+    #shopify-section-{{ section.id }} .hp-problem-section {
+      padding: 60px 16px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="hp-problem-section">
+  <div class="hp-problem-container">
+    <div class="hp-problem-header">
+      <div class="hp-problem-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="hp-problem-title">{{ section.settings.heading }}</h2>
+      <p class="hp-problem-subtitle">{{ section.settings.subheading }}</p>
+    </div>
+    
+    <div class="hp-problem-grid">
+      {% for block in section.blocks %}
+        <div class="hp-problem-card" {{ block.shopify_attributes }}>
+          <h3 class="hp-problem-card-title">{{ block.settings.title }}</h3>
+          <p class="hp-problem-card-text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Problem Statement",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F4F3EE"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE PROBLEM"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "YOUR SNEAKERS COST TOO MUCH TO LOOK LIKE THAT."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "You dropped $200+ on a new pair. Two weeks in, they're scuffed, they are starting to look grimy, and the midsoles are turning a different color. Every shoe store wants to sell you new ones. We'd rather save the ones you already love."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Problem Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Card Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem Statement",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "DIY BACKFIRES",
+            "text": "Toothpaste, household cleaners, magic erasers... all of these can damage materials, strip color, soften the glue, or ruin the sneaker totally."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "WRONG SOLUTION",
+            "text": "Household cleaners are not made for shoe materials. Suede, nubuck, leather, knit, mesh, are not your counter top or dishes. The wrong product will permanently damage your sneakers."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "REPLACING IS EXPENSIVE",
+            "text": "That $200 purchase will quickly cost you $400 if you don't use the right system to properly clean your shoes. You don't need to buy a new pair, you need to clean the pair you already own."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
