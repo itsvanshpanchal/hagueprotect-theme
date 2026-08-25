@@ -62,6 +62,34 @@
     },
     "hp-problem-statement": {
       "type": "hp-problem-statement",
+      "blocks": {
+        "block_1": {
+          "type": "card",
+          "settings": {
+            "title": "DIY BACKFIRES",
+            "text": "Toothpaste, household cleaners, magic erasers... all of these can damage materials, strip color, soften the glue, or ruin the sneaker totally."
+          }
+        },
+        "block_2": {
+          "type": "card",
+          "settings": {
+            "title": "WRONG SOLUTION",
+            "text": "Household cleaners are not made for shoe materials. Suede, nubuck, leather, knit, mesh, are not your counter top or dishes. The wrong product will permanently damage your sneakers."
+          }
+        },
+        "block_3": {
+          "type": "card",
+          "settings": {
+            "title": "REPLACING IS EXPENSIVE",
+            "text": "That $200 purchase will quickly cost you $400 if you don't use the right system to properly clean your shoes. You don't need to buy a new pair, you need to clean the pair you already own."
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3"
+      ],
       "settings": {}
     },
     "product-recommendations": {
