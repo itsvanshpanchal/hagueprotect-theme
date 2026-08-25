@@ -59,7 +59,11 @@
           }
         }
       },
-      "block_order": ["feature_sor_1", "feature_sor_2", "feature_sor_3"],
+      "block_order": [
+        "feature_sor_1",
+        "feature_sor_2",
+        "feature_sor_3"
+      ],
       "settings": {
         "eyebrow": "THE SCIENCE",
         "heading": "What Makes Science of Raw Different"
@@ -105,7 +109,11 @@
           }
         }
       },
-      "block_order": ["review_sor_1", "review_sor_2", "review_sor_3"],
+      "block_order": [
+        "review_sor_1",
+        "review_sor_2",
+        "review_sor_3"
+      ],
       "settings": {
         "heading": "Trusted by Science Believers",
         "total_reviews": "94 Reviews"
@@ -123,10 +131,15 @@
       "settings": {
         "heading": "Science. Answered."
       }
+    },
+    "hp-problem-statement": {
+      "type": "hp-problem-statement",
+      "settings": {}
     }
   },
   "order": [
     "sor-product-hero",
+    "hp-problem-statement",
     "product-banner-sor",
     "feature-grid-sor",
     "reviews-grid-sor",

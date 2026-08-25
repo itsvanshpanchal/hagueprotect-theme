@@ -52,7 +52,11 @@
           }
         }
       },
-      "block_order": ["feature_vr_1", "feature_vr_2", "feature_vr_3"],
+      "block_order": [
+        "feature_vr_1",
+        "feature_vr_2",
+        "feature_vr_3"
+      ],
       "settings": {
         "eyebrow": "WHY VANROSECTOR",
         "heading": "The Vanrosector Difference"
@@ -98,7 +102,11 @@
           }
         }
       },
-      "block_order": ["review_vr_1", "review_vr_2", "review_vr_3"],
+      "block_order": [
+        "review_vr_1",
+        "review_vr_2",
+        "review_vr_3"
+      ],
       "settings": {
         "heading": "People Love Vanrosector",
         "total_reviews": "128 Reviews"
@@ -116,10 +124,15 @@
       "settings": {
         "heading": "Frequently Asked Questions"
       }
+    },
+    "hp-problem-statement": {
+      "type": "hp-problem-statement",
+      "settings": {}
     }
   },
   "order": [
     "vanrosector-product-hero",
+    "hp-problem-statement",
     "product-banner-vr",
     "feature-grid-vr",
     "reviews-grid-vr",
