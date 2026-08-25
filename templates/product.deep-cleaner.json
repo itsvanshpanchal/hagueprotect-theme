@@ -1,11 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "product-hero",
       "settings": {
-        "brand_text": "ADVANCED CLEANING TECHNOLOGY",
-        "awards_text": "Professional Formula",
-        "rating_text": "4.9/5 Expert Rated"
+        "brand_text": "ADVANCED CLEANING TECHNOLOGY"
       }
     },
     "features": {
@@ -16,68 +23,68 @@
       }
     },
     "hp-problem-statement": {
-      "settings": {},
+      "type": "hp-problem-statement",
       "blocks": {
         "block_1": {
+          "type": "card",
           "settings": {
             "title": "DIY BACKFIRES",
             "text": "Toothpaste, household cleaners, magic erasers... all of these can damage materials, strip color, soften the glue, or ruin the sneaker totally."
-          },
-          "type": "card"
+          }
         },
         "block_3": {
+          "type": "card",
           "settings": {
             "title": "REPLACING IS EXPENSIVE",
             "text": "That $200 purchase will quickly cost you $400 if you don't use the right system to properly clean your shoes. You don't need to buy a new pair, you need to clean the pair you already own."
-          },
-          "type": "card"
+          }
         },
         "block_2": {
+          "type": "card",
           "settings": {
             "title": "WRONG SOLUTION",
             "text": "Household cleaners are not made for shoe materials. Suede, nubuck, leather, knit, mesh, are not your counter top or dishes. The wrong product will permanently damage your sneakers."
-          },
-          "type": "card"
+          }
         }
       },
-      "type": "hp-problem-statement",
       "block_order": [
         "block_1",
         "block_2",
         "block_3"
-      ]
+      ],
+      "settings": {}
     },
     "hp-how-to-use": {
+      "type": "hp-how-to-use",
       "blocks": {
         "htu_3": {
+          "type": "step",
           "settings": {
             "title": "DRY",
             "text": "Let the shoes dry for 24 hours. Use a towel to dab only if there is excess product. Apply a second coat — essential for best results."
-          },
-          "type": "step"
+          }
         },
         "htu_2": {
+          "type": "step",
           "settings": {
             "title": "SPRAY",
             "text": "Spray evenly to cover every area. Avoid soaking the fabric."
-          },
-          "type": "step"
+          }
         },
         "htu_1": {
+          "type": "step",
           "settings": {
             "title": "SHAKE",
             "text": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
-          },
-          "type": "step"
+          }
         }
       },
-      "settings": {},
-      "type": "hp-how-to-use",
       "block_order": [
         "htu_1",
         "htu_2",
         "htu_3"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [
