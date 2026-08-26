@@ -67,6 +67,10 @@
   display: block !important;
 }
 
+.header__logo-link[data-mega-brand="hague"] .header__logo-img {
+  max-width: min(var(--logo-primary-max, 200px), 200px) !important;
+}
+
 /* Legacy wrapper — flat row via display:contents */
 .header__logo-partners {
   display: contents !important;
