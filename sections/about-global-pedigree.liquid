@@ -36,7 +36,7 @@
 
   .agp-eyebrow {
     font-family: 'Inter', sans-serif;
-    font-size: 19px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -53,7 +53,7 @@
 
   .agp-hashtag {
     font-family: 'Inter', sans-serif;
-    font-size: 19px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.1em;
     color: rgba(255,255,255,0.55);
@@ -64,7 +64,7 @@
   /* ─── Top headline ─── */
   .agp-headline {
     font-family: 'Inter', sans-serif;
-    font-size: 52px;
+    font-size: clamp(22px, 3.2vw, 40px);
     font-weight: 300;
     color: #ffffff;
     text-align: center;
@@ -123,7 +123,7 @@
 
   .agp-bottom__headline {
     font-family: 'Inter', sans-serif;
-    font-size: 52px;
+    font-size: clamp(18px, 2.4vw, 28px);
     font-weight: 300;
     color: #ffffff;
     letter-spacing: 0.04em;
@@ -133,7 +133,7 @@
 
   .agp-bottom__subtext {
     font-family: 'Inter', sans-serif;
-    font-size: 21px;
+    font-size: clamp(14px, 1.5vw, 17px);
     font-weight: 400;
     color: rgba(255,255,255,0.6);
     line-height: 1.75;
@@ -142,18 +142,18 @@
 
   /* ─── Mobile ─── */
   @media screen and (max-width: 768px) {
-    .agp-section { padding: 48px 20px 60px; }
+    .agp-section {
+      padding: 48px 20px 60px;
+    }
     .agp-topbar {
       flex-direction: column;
       align-items: center;
       gap: 8px;
       margin-bottom: 16px;
     }
-    .agp-eyebrow { font-size: 15px; }
-    .agp-hashtag { font-size: 15px; }
-    .agp-headline { margin-bottom: 36px; font-size: 24px; }
-    .agp-bottom__headline { font-size: 24px; }
-    .agp-bottom__subtext { font-size: 20px; }
+    .agp-headline {
+      margin-bottom: 36px;
+    }
     .agp-globe-wrap {
       width: 90vw;
       margin-bottom: 36px;

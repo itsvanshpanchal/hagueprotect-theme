@@ -90,7 +90,7 @@
 
   .anb-headline-{{ section.id }} {
     font-family: 'Inter', sans-serif;
-    font-size: 52px;
+    font-size: clamp(24px, 3.8vw, 42px);
     font-weight: 300;
     color: #ffffff;
     line-height: 1.25;
@@ -99,7 +99,7 @@
 
   .anb-subtext-{{ section.id }} {
     font-family: 'Inter', sans-serif;
-    font-size: 21px;
+    font-size: clamp(15px, 1.6vw, 18px);
     font-weight: 400;
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
@@ -129,10 +129,15 @@
   .anb-btn-{{ section.id }}:hover { background: #fff; color: #000; }
 
   @media screen and (max-width: 768px) {
-    .anb-digit-{{ section.id }} { font-size: clamp(100px, 42vw, 180px); }
-    .anb-content-{{ section.id }} { padding: 28px 20px 60px; }
-    .anb-headline-{{ section.id }} { font-size: 24px; }
-    .anb-subtext-{{ section.id }} { font-size: 20px; }
+    .anb-digit-{{ section.id }} {
+      font-size: clamp(100px, 42vw, 180px);
+    }
+    .anb-inner-{{ section.id }} {
+      padding-top: 48px;
+    }
+    .anb-headline-{{ section.id }} {
+      font-size: clamp(20px, 6vw, 30px);
+    }
   }
 {%- endstyle -%}
 
