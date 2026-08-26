@@ -35,9 +35,9 @@
   }
 
   .agp-eyebrow {
-    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 19px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.7);
@@ -52,9 +52,9 @@
   }
 
   .agp-hashtag {
-    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 19px;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.1em;
     color: rgba(255,255,255,0.55);
     margin: 0;
@@ -63,9 +63,9 @@
 
   /* ─── Top headline ─── */
   .agp-headline {
-    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 52px;
-    font-weight: 700;
+    font-weight: 300;
     color: #ffffff;
     text-align: center;
     margin: 0 0 56px;
@@ -122,9 +122,9 @@
   }
 
   .agp-bottom__headline {
-    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 52px;
-    font-weight: 800;
+    font-weight: 300;
     color: #ffffff;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -132,8 +132,9 @@
   }
 
   .agp-bottom__subtext {
-    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 21px;
+    font-weight: 400;
     color: rgba(255,255,255,0.6);
     line-height: 1.75;
     margin: 0;
@@ -172,8 +173,7 @@
     <p class="agp-hashtag">{{ hashtag }}</p>
   </div>
 
-  <!-- Headline -->
-  <h2 class="agp-headline">{{ headline }}</h2>
+  <h2 class="agp-headline" data-no-typewriter="true">{{ headline }}</h2>
 
   <!-- Globe / Video container -->
   <div class="agp-globe-wrap">
@@ -199,9 +199,8 @@
 
   </div>
 
-  <!-- Bottom copy -->
   <div class="agp-bottom">
-    <h3 class="agp-bottom__headline">{{ bottom_headline }}</h3>
+    <h3 class="agp-bottom__headline" data-no-typewriter="true">{{ bottom_headline }}</h3>
     <p class="agp-bottom__subtext">{{ subtext }}</p>
   </div>
 

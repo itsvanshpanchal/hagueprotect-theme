@@ -89,17 +89,18 @@
   }
 
   .anb-headline-{{ section.id }} {
-    font-family: 'Inter', 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 52px;
-    font-weight: 700;
+    font-weight: 300;
     color: #ffffff;
     line-height: 1.25;
     margin: 0;
   }
 
   .anb-subtext-{{ section.id }} {
-    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 21px;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
     max-width: 540px;
@@ -116,9 +117,9 @@
     border-radius: 50px;
     background: transparent;
     color: #fff;
-    font-family: 'Darker Grotesque', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     text-decoration: none;
@@ -149,7 +150,7 @@
       {%- endfor -%}
     </div>
     <div class="anb-content-{{ section.id }}">
-      <h2 class="anb-headline-{{ section.id }}">{{ headline }}</h2>
+      <h2 class="anb-headline-{{ section.id }}" data-no-typewriter="true">{{ headline }}</h2>
       <p class="anb-subtext-{{ section.id }}">{{ subtext }}</p>
       {%- if btn_label != blank -%}
         <a class="anb-btn-{{ section.id }}" href="{{ btn_url }}">{{ btn_label }}</a>
