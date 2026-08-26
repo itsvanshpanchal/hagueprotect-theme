@@ -90,7 +90,7 @@
 
   .anb-headline-{{ section.id }} {
     font-family: 'Inter', 'Darker Grotesque', sans-serif;
-    font-size: clamp(24px, 3.8vw, 42px);
+    font-size: 52px;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.25;
@@ -99,7 +99,7 @@
 
   .anb-subtext-{{ section.id }} {
     font-family: 'Darker Grotesque', sans-serif;
-    font-size: clamp(15px, 1.6vw, 18px);
+    font-size: 21px;
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
     max-width: 540px;
@@ -130,7 +130,8 @@
   @media screen and (max-width: 768px) {
     .anb-digit-{{ section.id }} { font-size: clamp(100px, 42vw, 180px); }
     .anb-content-{{ section.id }} { padding: 28px 20px 60px; }
-    .anb-headline-{{ section.id }} { font-size: clamp(20px, 6vw, 30px); }
+    .anb-headline-{{ section.id }} { font-size: 24px; }
+    .anb-subtext-{{ section.id }} { font-size: 20px; }
   }
 {%- endstyle -%}
 
