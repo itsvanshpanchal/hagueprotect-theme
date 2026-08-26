@@ -238,7 +238,7 @@
     {% endif %}
 
     {% if block.settings.heading_line1 != blank or block.settings.heading_line2_part1 != blank %}
-      <h2 class="ai-formula-intro__heading-{{ ai_gen_id }}">
+      <h2 class="ai-formula-intro__heading-{{ ai_gen_id }}" data-no-typewriter="true">
         {% if block.settings.heading_line1 != blank %}
           {{ block.settings.heading_line1 }}<br>
         {% endif %}
