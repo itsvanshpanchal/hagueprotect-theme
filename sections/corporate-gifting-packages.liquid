@@ -23,10 +23,10 @@
   }
 
   .corp-packages__eyebrow {
-    font-family: var(--font-family-eyebrow, sans-serif);
+    font-family: 'Inter', sans-serif !important;
     font-size: var(--section-label-size, 14px);
-    font-weight: var(--font-weight-eyebrow, 700);
-    font-style: var(--font-style-eyebrow, normal);
+    font-weight: 500 !important;
+    font-style: normal;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #ff2b2b;
@@ -34,10 +34,10 @@
   }
 
   .corp-packages__title {
-    font-family: var(--font-family-h2, var(--font-family-heading));
+    font-family: 'Inter', sans-serif !important;
     font-size: var(--section-heading-size, 52px);
-    font-weight: var(--font-weight-h2, 400);
-    font-style: var(--font-style-h2, normal);
+    font-weight: 300 !important;
+    font-style: normal;
     letter-spacing: 0.02em;
     text-transform: none;
     margin: 0 0 16px;
@@ -46,10 +46,10 @@
   }
 
   .corp-packages__desc {
-    font-family: var(--font-family-paragraph, var(--font-family-sans, sans-serif));
+    font-family: 'Inter', sans-serif !important;
     font-size: var(--section-subheading-size, 16px);
-    font-weight: var(--font-weight-paragraph, 400);
-    font-style: var(--font-style-paragraph, normal);
+    font-weight: 400 !important;
+    font-style: normal;
     line-height: 1.65;
     color: rgba(255, 255, 255, 0.6);
     margin: 0;
@@ -129,7 +129,8 @@
   }
 
   .corp-packages__name {
-    font-family: var(--font-family-heading);
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 300 !important;
     font-size: 32px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -139,6 +140,8 @@
   }
 
   .corp-packages__qty {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400 !important;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 24px;
@@ -155,6 +158,8 @@
   }
 
   .corp-packages__list li {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400 !important;
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -214,7 +219,7 @@
   }
 {%- endstyle -%}
 
-<section class="corp-packages" data-no-typewriter>
+<section class="corp-packages" data-no-typewriter="true">
   <div class="corp-packages__container">
     <div class="corp-packages__header">
       <p class="corp-packages__eyebrow">{{ section.settings.eyebrow | default: 'Gift Tiers' }}</p>
