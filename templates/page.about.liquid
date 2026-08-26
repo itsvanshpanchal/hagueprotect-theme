@@ -3,7 +3,7 @@
 {% comment %} ═══ SECTION 2: Number Banner ═══ {% endcomment %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <div class="anb-section" id="anb-section">
   <div class="anb-inner">
@@ -24,7 +24,7 @@
   .anb-number { display:flex; justify-content:center; align-items:flex-end; width:100%; padding-top:48px; overflow:hidden; }
   .anb-digit {
     font-size: clamp(180px, 32vw, 520px);
-    font-family: 'Inter', 'Arial Black', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 900;
     line-height: 0.9;
     letter-spacing: -0.05em;
@@ -39,10 +39,10 @@
   .anb-section.anb-animate .anb-digit--1 { animation: anb-from-top    0.9s cubic-bezier(0.22,1,0.36,1) 0.10s forwards; }
   .anb-section.anb-animate .anb-digit--0 { animation: anb-from-bottom 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
   .anb-content { display:flex; flex-direction:column; align-items:center; text-align:center; gap:20px; padding:48px 24px 80px; max-width:760px; width:100%; }
-  .anb-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(24px,3.8vw,42px); font-weight:700; color:#fff; line-height:1.25; margin:0; }
-  .anb-subtext  { font-family:'Darker Grotesque',sans-serif; font-size:clamp(15px,1.6vw,18px); color:rgba(255,255,255,0.65); line-height:1.7; max-width:540px; margin:0; }
+  .anb-headline { font-family:'Inter',sans-serif; font-size:clamp(24px,3.8vw,42px); font-weight:600; color:#fff; line-height:1.25; margin:0; }
+  .anb-subtext  { font-family:'Inter',sans-serif; font-size:clamp(15px,1.6vw,18px); font-weight:400; color:rgba(255,255,255,0.65); line-height:1.7; max-width:540px; margin:0; }
   .anb-subtext strong { color:#fff; }
-  .anb-btn { display:inline-block; margin-top:8px; padding:14px 40px; border:2px solid #fff; border-radius:50px; background:transparent; color:#fff; font-family:'Darker Grotesque',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.25s ease,color 0.25s ease; }
+  .anb-btn { display:inline-block; margin-top:8px; padding:14px 40px; border:2px solid #fff; border-radius:50px; background:transparent; color:#fff; font-family:'Inter',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:background 0.25s ease,color 0.25s ease; }
   .anb-btn:hover { background:#fff; color:#000; }
   @media(max-width:768px) {
     .anb-digit   { font-size:clamp(100px,42vw,180px); }
@@ -93,18 +93,18 @@
 <style>
   .agp-section { background:#000; width:100%; padding:72px 24px 80px; display:flex; flex-direction:column; align-items:center; box-sizing:border-box; }
   .agp-topbar  { width:100%; max-width:1200px; display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-  .agp-eyebrow { font-family:'Darker Grotesque',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin:0; display:flex; align-items:center; gap:10px; }
+  .agp-eyebrow { font-family:'Inter',sans-serif; font-size:13px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin:0; display:flex; align-items:center; gap:10px; }
   .agp-pipe    { color:rgba(255,255,255,0.3); }
-  .agp-hashtag { font-family:'Darker Grotesque',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; color:rgba(255,255,255,0.55); margin:0; font-style:italic; }
-  .agp-headline{ font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(22px,3.2vw,40px); font-weight:700; color:#fff; text-align:center; margin:0 0 56px; line-height:1.2; }
+  .agp-hashtag { font-family:'Inter',sans-serif; font-size:13px; font-weight:500; letter-spacing:0.1em; color:rgba(255,255,255,0.55); margin:0; font-style:italic; }
+  .agp-headline{ font-family:'Inter',sans-serif; font-size:clamp(22px,3.2vw,40px); font-weight:600; color:#fff; text-align:center; margin:0 0 56px; line-height:1.2; }
   .agp-globe-wrap { position:relative; width:clamp(250px,40vw,400px); aspect-ratio:1/1; border-radius:50%; overflow:hidden; background:#000; margin-bottom:56px; box-shadow:inset 0 -60px 120px rgba(0,0,0,0.8); }
   .agp-video   { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; border-radius:50%; }
-  .agp-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:rgba(255,255,255,0.3); font-family:'Darker Grotesque',sans-serif; font-size:13px; text-align:center; padding:40px; }
+  .agp-placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:rgba(255,255,255,0.3); font-family:'Inter',sans-serif; font-weight:400; font-size:13px; text-align:center; padding:40px; }
   .agp-video[src]:not([src=""]) ~ .agp-placeholder { display:none; }
   .agp-bottom  { display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; max-width:680px; }
-  .agp-bottom-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(18px,2.4vw,28px); font-weight:800; color:#fff; letter-spacing:0.04em; text-transform:uppercase; margin:0; }
-  .agp-bottom-text { font-family:'Darker Grotesque',sans-serif; font-size:clamp(14px,1.5vw,17px); color:rgba(255,255,255,0.6); line-height:1.75; margin:0; }
-  .agp-bottom-text strong { color:rgba(255,255,255,0.9); font-style:italic; }
+  .agp-bottom-headline { font-family:'Inter',sans-serif; font-size:clamp(18px,2.4vw,28px); font-weight:600; color:#fff; letter-spacing:0.04em; text-transform:uppercase; margin:0; }
+  .agp-bottom-text { font-family:'Inter',sans-serif; font-size:clamp(14px,1.5vw,17px); font-weight:400; color:rgba(255,255,255,0.6); line-height:1.75; margin:0; }
+  .agp-bottom-text strong { color:rgba(255,255,255,0.9); font-style:italic; font-weight:600; }
   @media(max-width:768px) {
     .agp-section { padding:48px 20px 60px; }
     .agp-topbar  { flex-direction:column; align-items:center; gap:8px; margin-bottom:16px; }
@@ -142,14 +142,14 @@
   .ab-beliefs-section { background:#161616; width:100%; padding:100px 48px; display:flex; justify-content:center; }
   .ab-beliefs-inner { max-width:1600px; width:100%; display:flex; flex-direction:column; gap:60px; }
   
-  .ab-beliefs-headline { font-family:'Inter','Darker Grotesque',sans-serif; font-size:clamp(40px, 6vw, 85px); font-weight:700; color:#fff; line-height:1.05; margin:0; letter-spacing:-0.03em; }
-  .ab-beliefs-headline-sub { font-style:italic; font-weight:400; color:rgba(255,255,255,0.6); display:block; }
+  .ab-beliefs-headline { font-family:'Inter',sans-serif; font-size:clamp(40px, 6vw, 85px); font-weight:600; color:#fff; line-height:1.05; margin:0; letter-spacing:-0.03em; }
+  .ab-beliefs-headline-sub { font-style:italic; font-weight:600; color:rgba(255,255,255,0.6); display:block; }
   
   .ab-beliefs-list { display:flex; flex-direction:column; border-top:1px solid rgba(255,255,255,0.15); margin-top:20px; }
   .ab-belief-item { display:flex; padding:40px 0; border-bottom:1px solid rgba(255,255,255,0.15); gap:40px; }
   
-  .ab-belief-title { flex:0 0 25%; font-family:'Inter',sans-serif; font-size:clamp(16px, 1.4vw, 20px); color:#fff; font-weight:500; line-height:1.4; }
-  .ab-belief-desc { flex:1; font-family:'Inter',sans-serif; font-size:clamp(14px, 1vw, 15px); color:rgba(255,255,255,0.7); line-height:1.8; }
+  .ab-belief-title { flex:0 0 25%; font-family:'Inter',sans-serif; font-size:clamp(16px, 1.4vw, 20px); color:#fff; font-weight:600; line-height:1.4; }
+  .ab-belief-desc { flex:1; font-family:'Inter',sans-serif; font-size:clamp(14px, 1vw, 15px); color:rgba(255,255,255,0.7); font-weight:400; line-height:1.8; }
   
   @media(max-width:768px) {
     .ab-beliefs-section { padding:60px 20px; }
@@ -196,10 +196,10 @@
   .ab-profile-image img { width:100%; height:100%; object-fit:cover; display:block; min-height:500px; }
   .ab-profile-text { width:50%; display:flex; flex-direction:column; justify-content:center; padding:80px 8%; box-sizing:border-box; background:#fcfbf6; }
   
-  .ab-profile-name { font-family:'Inter',sans-serif; font-size:clamp(40px, 4vw, 60px); font-weight:300; color:#111; line-height:1; margin:0 0 30px; letter-spacing:-0.03em; }
-  .ab-profile-lastname { font-style:italic; color:#888; display:block; }
+  .ab-profile-name { font-family:'Inter',sans-serif; font-size:clamp(40px, 4vw, 60px); font-weight:600; color:#111; line-height:1; margin:0 0 30px; letter-spacing:-0.03em; }
+  .ab-profile-lastname { font-style:italic; font-weight:600; color:#888; display:block; }
   
-  .ab-profile-quote { font-family:'Inter',sans-serif; font-size:clamp(16px, 1.4vw, 19px); color:#8d7966; font-weight:400; line-height:1.6; margin:0 0 30px; }
+  .ab-profile-quote { font-family:'Inter',sans-serif; font-size:clamp(16px, 1.4vw, 19px); color:#8d7966; font-weight:500; line-height:1.6; margin:0 0 30px; }
   .ab-profile-body { font-family:'Inter',sans-serif; font-size:clamp(13px, 1vw, 15px); color:#555; font-weight:400; line-height:1.8; margin:0; }
   
   @media(max-width:768px) {
