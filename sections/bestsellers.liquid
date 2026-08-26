@@ -1500,6 +1500,10 @@ text-shadow: none !important;
         media.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
         
         media.addEventListener('mouseenter', function() {
+          var inner = media.closest('.bs-coverflow-card__inner');
+          if (inner) inner.style.overflow = 'visible';
+          media.style.position = 'relative';
+          media.style.zIndex = '10';
           media.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
         });
 
@@ -1512,19 +1516,26 @@ text-shadow: none !important;
           var deltaX = (x - centerX) / centerX;
           var deltaY = (y - centerY) / centerY;
           
-          var maxTilt = 15;
+          var maxTilt = 18;
           var rotateY = deltaX * maxTilt * 2;
           var rotateX = -deltaY * maxTilt * 2;
           
           // Use a fast transition during mousemove for smooth tilting
           media.style.transition = 'transform 0.1s ease-out';
-          media.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.08, 1.08, 1.08)';
+          media.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.18, 1.18, 1.18)';
         });
         
         media.addEventListener('mouseleave', function() {
+          var inner = media.closest('.bs-coverflow-card__inner');
+          
           // Revert to original state smoothly
           media.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
           media.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          
+          setTimeout(function() {
+            if (inner) inner.style.overflow = '';
+            media.style.zIndex = '';
+          }, 600);
         });
       });
     }
