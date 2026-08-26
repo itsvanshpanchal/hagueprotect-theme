@@ -1487,6 +1487,42 @@ text-shadow: none !important;
         restartAutoplay();
       }
     });
+
+    function initBSTilt() {
+      if (isMobile() || reducedMotion) return;
+      var cardsMedia = track.querySelectorAll('.bs-coverflow-card__media');
+      cardsMedia.forEach(function(media) {
+        if (media.dataset.bsTiltInit === 'true') return;
+        media.dataset.bsTiltInit = 'true';
+        
+        media.style.transformStyle = 'preserve-3d';
+        media.style.perspective = '1200px';
+        
+        media.addEventListener('mousemove', function(e) {
+          var rect = media.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          var centerX = rect.width / 2;
+          var centerY = rect.height / 2;
+          var deltaX = (x - centerX) / centerX;
+          var deltaY = (y - centerY) / centerY;
+          
+          var maxTilt = 12;
+          var rotateY = deltaX * maxTilt * 2;
+          var rotateX = -deltaY * maxTilt * 2;
+          
+          media.style.transition = 'none';
+          media.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
+        });
+        
+        media.addEventListener('mouseleave', function() {
+          media.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+          media.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+    }
+    
+    initBSTilt();
   })();
 </script>
 
