@@ -580,13 +580,22 @@
       background: rgba(0,0,0,0.5);
     }
   }
+
+  .premium-htu-{{ section.id }} p,
+  .premium-htu-{{ section.id }} .premium-htu__card-desc,
+  .premium-htu-{{ section.id }} .premium-htu__modal-info-desc,
+  .premium-htu-{{ section.id }} .premium-htu__timeline-desc,
+  .premium-htu-{{ section.id }} .premium-htu__accordion-inner {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400 !important;
+  }
 {%- endstyle -%}
 
 <div class="premium-htu premium-htu-{{ section.id }}">
   <div class="premium-htu__container">
     {%- if section.settings.heading != blank -%}
       <div class="premium-htu__header">
-        <h2 class="premium-htu__title">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
+        <h2 class="premium-htu__title" data-no-typewriter="true">{% render 'section-heading-text', text: section.settings.heading, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color %}</h2>
       </div>
     {%- endif -%}
 
