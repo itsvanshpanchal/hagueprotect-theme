@@ -187,6 +187,16 @@
     margin-top: 0;
   }
 
+  /* Force typewriter text to inherit the correct weight during animation */
+  .ai-formula-intro__heading-{{ ai_gen_id }} .hp-typewriter-text,
+  .ai-formula-intro__heading-{{ ai_gen_id }} .hp-heading-line,
+  .ai-formula-intro__heading-{{ ai_gen_id }} .hp-typewriter-live,
+  .ai-formula-intro__heading-{{ ai_gen_id }} .hp-typewriter-sizer,
+  .ai-formula-intro__heading-{{ ai_gen_id }} .hp-heading-accent,
+  .ai-formula-intro__heading-{{ ai_gen_id }} [class*="hp-typewriter"] {
+    font-weight: {{ block.settings.heading_weight }} !important;
+  }
+
   .ai-formula-intro__heading-accent-{{ ai_gen_id }} {
     color: {{ block.settings.accent_color }};
   }
