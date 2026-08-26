@@ -1490,7 +1490,7 @@ text-shadow: none !important;
 
     function initBSTilt() {
       if (isMobile() || reducedMotion) return;
-      var cardsMedia = track.querySelectorAll('.bs-coverflow-card__media');
+      var cardsMedia = section.querySelectorAll('.bs-coverflow-card__media');
       cardsMedia.forEach(function(media) {
         if (media.dataset.bsTiltInit === 'true') return;
         media.dataset.bsTiltInit = 'true';
