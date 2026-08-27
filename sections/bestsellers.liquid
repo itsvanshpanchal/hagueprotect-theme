@@ -1489,7 +1489,7 @@ text-shadow: none !important;
     });
 
     function initBSTilt() {
-      if (isMobile() || reducedMotion) return;
+      if (reducedMotion) return;
       var cardsMedia = section.querySelectorAll('.bs-coverflow-card__media');
       cardsMedia.forEach(function(media) {
         if (media.dataset.bsTiltInit === 'true') return;
@@ -1499,18 +1499,28 @@ text-shadow: none !important;
         media.style.perspective = '1200px';
         media.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
         
-        media.addEventListener('mouseenter', function() {
+        function handleStart() {
           var inner = media.closest('.bs-coverflow-card__inner');
           if (inner) inner.style.overflow = 'visible';
           media.style.position = 'relative';
           media.style.zIndex = '10';
           media.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
-        });
+        }
 
-        media.addEventListener('mousemove', function(e) {
+        function handleMove(e) {
+          var clientX = e.clientX;
+          var clientY = e.clientY;
+          
+          if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          }
+          
+          if (clientX === undefined || clientY === undefined) return;
+          
           var rect = media.getBoundingClientRect();
-          var x = e.clientX - rect.left;
-          var y = e.clientY - rect.top;
+          var x = clientX - rect.left;
+          var y = clientY - rect.top;
           var centerX = rect.width / 2;
           var centerY = rect.height / 2;
           var deltaX = (x - centerX) / centerX;
@@ -1523,9 +1533,9 @@ text-shadow: none !important;
           // Use a fast transition during mousemove for smooth tilting
           media.style.transition = 'transform 0.1s ease-out';
           media.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.18, 1.18, 1.18)';
-        });
+        }
         
-        media.addEventListener('mouseleave', function() {
+        function handleEnd() {
           var inner = media.closest('.bs-coverflow-card__inner');
           
           // Revert to original state smoothly
@@ -1536,7 +1546,16 @@ text-shadow: none !important;
             if (inner) inner.style.overflow = '';
             media.style.zIndex = '';
           }, 600);
-        });
+        }
+
+        media.addEventListener('mouseenter', handleStart);
+        media.addEventListener('mousemove', handleMove);
+        media.addEventListener('mouseleave', handleEnd);
+        
+        media.addEventListener('touchstart', handleStart, {passive: true});
+        media.addEventListener('touchmove', handleMove, {passive: true});
+        media.addEventListener('touchend', handleEnd);
+        media.addEventListener('touchcancel', handleEnd);
       });
     }
     
