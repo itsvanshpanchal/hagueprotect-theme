@@ -488,7 +488,7 @@
               >
                 <span class="hp-dna__icon-float">
                   {%- if block.settings.custom_video != blank -%}
-                    {{ block.settings.custom_video | video_tag: preload: 'none', autoplay: true, loop: true, muted: true, playsinline: true, class: 'hp-dna__icon-custom hp-dna__icon-custom--video' }}
+                    {{ block.settings.custom_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hp-dna__icon-custom hp-dna__icon-custom--video' }}
                   {%- elsif block.settings.icon != blank -%}
                     {%- liquid
                       assign custom_icon = block.settings.icon
