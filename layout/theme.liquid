@@ -7,21 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    {%- if template.name == 'index' -%}
     <script>
       (function () {
-        /* Multi-Brand Alias Domain Redirect */
-        if (window.location.pathname === '/' || window.location.pathname === '') {
-          var host = window.location.hostname;
-          if (host.indexOf('vanrosector') !== -1 || host.indexOf('vanrosnector') !== -1) {
-            window.location.replace('/collections/all?view=vanrosector');
-            return;
-          } else if (host.indexOf('scienceofraw') !== -1) {
-            window.location.replace('/collections/science-of-raw');
-            return;
-          }
-        }
-
         var lock = false;
         function setMobileVh(force) {
           if (lock && !force) return;
@@ -556,25 +543,13 @@
     {% section 'cart-drawer' %}
     {% section 'announcement-bar' %}
 
-    {% if request.host contains 'vanrosnector' or request.host contains 'vanrosector' %}
-      {% section 'header-vanrosector' %}
-    {% elsif request.host contains 'scienceofraw' %}
-      {% section 'header-scienceofraw' %}
-    {% else %}
-      {% section 'header' %}
-    {% endif %}
+    {% section 'header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
-    {% if request.host contains 'vanrosnector' or request.host contains 'vanrosector' %}
-      {% section 'footer-vanrosector' %}
-    {% elsif request.host contains 'scienceofraw' %}
-      {% section 'footer-scienceofraw' %}
-    {% else %}
-      {% section 'footer' %}
-    {% endif %}
+    {% section 'footer' %}
 
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'heading-typewriter.js' | asset_url }}" defer="defer"></script>
