@@ -488,7 +488,11 @@
               >
                 <span class="hp-dna__icon-float">
                   {%- if block.settings.custom_video != blank -%}
-                    {{ block.settings.custom_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'hp-dna__icon-custom hp-dna__icon-custom--video' }}
+                    <video autoplay loop muted playsinline poster="{{ block.settings.custom_video.preview_image | image_url: width: 300 }}" class="hp-dna__icon-custom hp-dna__icon-custom--video lazy-video">
+                      {% for source in block.settings.custom_video.sources %}
+                        <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {% endfor %}
+                    </video>
                   {%- elsif block.settings.icon != blank -%}
                     {%- liquid
                       assign custom_icon = block.settings.icon

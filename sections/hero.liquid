@@ -587,10 +587,22 @@
   <div class="hero-fullscreen__bg">
     {%- if section.settings.video_background != blank -%}
       {%- if section.settings.video_background_mobile != blank -%}
-        {{ section.settings.video_background | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 'hero-fullscreen__bg-video desktop-video' }}
-        {{ section.settings.video_background_mobile | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 'hero-fullscreen__bg-video mobile-video' }}
+        <video autoplay loop muted playsinline poster="{{ section.settings.video_background.preview_image | image_url: width: 1200 }}" class="hero-fullscreen__bg-video desktop-video">
+          {% for source in section.settings.video_background.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
+        <video autoplay loop muted playsinline poster="{{ section.settings.video_background_mobile.preview_image | image_url: width: 800 }}" class="hero-fullscreen__bg-video mobile-video">
+          {% for source in section.settings.video_background_mobile.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
       {%- else -%}
-        {{ section.settings.video_background | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 'hero-fullscreen__bg-video' }}
+        <video autoplay loop muted playsinline poster="{{ section.settings.video_background.preview_image | image_url: width: 1200 }}" class="hero-fullscreen__bg-video">
+          {% for source in section.settings.video_background.sources %}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
       {%- endif -%}
     {%- elsif desktop_banner != blank -%}
       <picture>

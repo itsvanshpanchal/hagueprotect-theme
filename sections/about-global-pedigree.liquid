@@ -179,14 +179,11 @@
   <div class="agp-globe-wrap">
 
     {%- if section.settings.globe_video != blank -%}
-      {{- section.settings.globe_video | video_tag:
-          autoplay: true,
-          loop: true,
-          muted: true,
-          playsinline: true,
-          controls: false,
-          class: 'agp-globe-video'
-      -}}
+      <video autoplay loop muted playsinline poster="{{ section.settings.globe_video.preview_image | image_url: width: 600 }}" class="agp-globe-video lazy-video">
+        {% for source in section.settings.globe_video.sources %}
+          <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+        {% endfor %}
+      </video>
     {%- else -%}
       <div class="agp-globe-placeholder">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.2">
