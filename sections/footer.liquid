@@ -14,8 +14,8 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr minmax(350px, 1.5fr);
-    gap: 40px;
+    grid-template-columns: 1fr auto auto 1fr;
+    gap: clamp(40px, 5vw, 80px);
     margin-bottom: 60px;
     align-items: start;
     position: relative;
