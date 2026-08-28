@@ -52,7 +52,19 @@
       }
     }
 
-    requestAnimationFrame(tick);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            requestAnimationFrame(tick);
+            io.unobserve(entry.target);
+          }
+        });
+      });
+      io.observe(el);
+    } else {
+      requestAnimationFrame(tick);
+    }
   }
 
   function initCounters(root) {

@@ -748,7 +748,7 @@
     <div class="footer-earth-block">
 
       {%- if section.settings.earth_video != blank -%}
-        {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'footer-earth-block__image' }}
+        {{ section.settings.earth_video | video_tag: preload: 'none', autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'footer-earth-block__image' }}
       {%- elsif section.settings.earth_image != blank -%}
         <img
           src="{{ section.settings.earth_image | image_url: width: 1200 }}"
