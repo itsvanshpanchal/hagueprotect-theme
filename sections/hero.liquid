@@ -649,70 +649,9 @@
   </div>
   <div class="hero-fullscreen__overlay"></div>
 
-  <div class="hero-fullscreen__content">
-    {%- if section.settings.eyebrow != blank -%}
-      <span class="hero-fullscreen__eyebrow">{{ section.settings.eyebrow }}</span>
-    {%- endif -%}
-    {%- liquid
-      assign hero_line2 = section.settings.heading_line2
-      assign hero_line3 = section.settings.heading_line3
-      comment
-        Older saved settings still hold "WE MAKE 'EM HEAT." on one line —
-        split it so 'EM HEAT always lands on its own third line.
-      endcomment
-      if hero_line3 == blank and hero_line2 contains "'EM "
-        assign hero_parts = hero_line2 | split: "'EM "
-        assign hero_line3 = "'EM " | append: hero_parts[1]
-        assign hero_line2 = hero_parts[0] | strip
-      endif
-    -%}
-    <h1 class="hero-fullscreen__heading" data-no-typewriter>
-      <span class="hero-heading-line hero-heading-line--1">{{ section.settings.heading | default: 'Bring Your Sneakers Back to Life' }}</span>
-      {%- if hero_line2 != blank -%}
-        <span class="hero-heading-line hero-heading-line--2">{{ hero_line2 }}</span>
-      {%- endif -%}
-      {%- if hero_line3 != blank -%}
-        <span class="hero-heading-line hero-heading-line--3">{{ hero_line3 }}</span>
-      {%- endif -%}
-    </h1>
-    {%- if section.settings.subheading != blank -%}
-      <span class="hero-fullscreen__subheading">{{ section.settings.subheading }}</span>
-    {%- endif -%}
 
-  </div>
   
-  {%- if section.settings.bottom_tiles_heading != blank or section.blocks.size > 0 -%}
-    <div class="hero-bottom-tiles-wrapper">
-      {%- if section.settings.bottom_tiles_heading != blank -%}
-        <h4 class="hero-bottom-tiles-heading">{{ section.settings.bottom_tiles_heading }}</h4>
-      {%- endif -%}
-      <div class="hero-bottom-tiles-grid">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'product_tile' -%}
-            {%- liquid
-              assign target_product = block.settings.product
-              assign final_image = block.settings.image | default: target_product.featured_image
-              assign final_title = block.settings.title | default: target_product.title | default: 'Example Title'
-              assign final_link = block.settings.link | default: target_product.url | default: '#'
-            -%}
-            <div class="hero-bottom-tile" {{ block.shopify_attributes }}>
-              <div class="hero-bottom-tile__image-wrapper">
-                {%- if final_image != blank -%}
-                  {{ final_image | image_url: width: 240 | image_tag: style: 'width:100%;height:100%;object-fit:cover;' }}
-                {%- else -%}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                {%- endif -%}
-              </div>
-              <div class="hero-bottom-tile__content">
-                <a href="{{ final_link }}" class="hero-bottom-tile__title" style="color: {{ block.settings.title_color | default: '#fff' }};">{{ final_title }}</a>
-                <p class="hero-bottom-tile__subtitle">{{ block.settings.subtitle }}</p>
-              </div>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </div>
-  {%- endif -%}
+
 </section>
 
 <script>
