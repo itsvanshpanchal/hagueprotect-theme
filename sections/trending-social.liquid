@@ -3,7 +3,7 @@
 
 
   .trending-social-section {
-    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    background-color: #050505; /* Cinematic dark background */
     position: relative;
     padding: 24px 0 0;
   }
@@ -202,10 +202,9 @@
   }
 
   .trending-social__slide-inner {
-    background-color: #ffffff;
-    border-radius: var(--homepage-corner, 20px);
+    background-color: transparent;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -228,7 +227,7 @@
   }
 
   .trending-social__slide-inner:hover {
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.05);
+    /* removed shadow for pure cinematic look */
   }
 
   .trending-social__media {
@@ -236,7 +235,7 @@
     aspect-ratio: 9 / 16;
     position: relative;
     overflow: hidden;
-    background-color: #f9f9fb;
+    background-color: #111;
   }
 
   .trending-social__overlay {
@@ -630,9 +629,13 @@
             ratio = Math.max(-1, Math.min(1, ratio));
             
             const rotateY = ratio * 55;
-            const scale = 1 + (Math.abs(ratio) * 0.15);
             
-            inner.style.transform = `perspective(1200px) rotateY(${rotateY}deg) scale(${scale})`;
+            // For a dramatic 3D cylinder, we push the center away slightly
+            // and pull the edges extremely close to the camera.
+            const translateZ = Math.abs(ratio) * 500 - 100;
+            
+            // Apply translation first (move in global Z), then rotate in place
+            inner.style.transform = `perspective(1200px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
           });
         } else {
           // Reset on mobile
