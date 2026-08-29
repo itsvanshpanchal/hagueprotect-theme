@@ -2,8 +2,6 @@
   Custom 404.
   Shopify serves this template for any URL with no matching resource.
   Brand homes still render here when no Admin page exists:
-    /pages/vanrosector      -> snippets/brand-vanrosector
-    /pages/science-of-raw   -> snippets/brand-science-of-raw
   Missing Admin pages redirect to search alternate templates:
     /pages/faq|faqs              -> /search?view=faq
     /pages/contact|contact-us    -> /search?view=business
@@ -76,13 +74,7 @@
 {%- capture req -%}{{ request.path }} {{ canonical_url }} {{ request.path | default: '' }}{%- endcapture -%}
 {%- assign req = req | downcase -%}
 
-{%- if req contains 'vanrosector' -%}
-  {%- render 'brand-vanrosector' -%}
-
-{%- elsif req contains 'science-of-raw' -%}
-  {%- render 'brand-science-of-raw' -%}
-
-{%- elsif req contains 'hague' or req contains 'science-and-longevity' or req contains 'science-longevity' or req contains 'skin-longevity' -%}
+{%- if req contains 'hague' or req contains 'science-and-longevity' or req contains 'science-longevity' or req contains 'skin-longevity' -%}
   {%- assign science_redirect = '/search?view=hague' -%}
   <meta http-equiv="refresh" content="0;url={{ science_redirect }}">
   <script>window.location.replace({{ science_redirect | json }});</script>
