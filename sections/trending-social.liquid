@@ -230,8 +230,8 @@
     /* Each slide is absolutely positioned in the 3D scene */
     .trending-social__slide {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 0;
+      left: 0;
       /* width of one card */
       width: 220px;
       height: 390px;
@@ -678,14 +678,18 @@
           const slideAngle = getSlideAngle(i) - angle;
           const rad        = slideAngle * Math.PI / 180;
           const x          = RADIUS * Math.sin(rad);
-          const z          = RADIUS * (Math.cos(rad) - 1); // 0 at front, negative behind
 
-          // Scale: cards far to the sides appear slightly smaller
-          const cosA  = Math.cos(rad);
-          const scale = 0.55 + 0.45 * cosA;   // 1.0 at front, ~0.55 behind
+          // Scale: cards at front are full size, far sides slightly smaller
+          const cosA   = Math.cos(rad);
+          const scale  = 0.55 + 0.45 * cosA;   // 1.0 at front, ~0.55 behind
           const opacity = Math.max(0, 0.35 + 0.65 * cosA);
 
-          slide.style.transform  = `translateX(calc(${sceneW/2}px + ${x}px - 50%)) translateY(-50%) perspective(${PERSPECTIVE}px) rotateY(${-slideAngle}deg) scale(${scale})`;
+          // Absolute pixel position: centre of scene + arc offset, then shift back by half card
+          const CARD_H  = 390;
+          const cx = sceneW / 2 + x - (CARD_W / 2);  // left edge of card
+          const cy = 520 / 2 - CARD_H / 2;             // vertically centred
+
+          slide.style.transform  = `translate(${cx}px, ${cy}px) perspective(${PERSPECTIVE}px) rotateY(${-slideAngle}deg) scale(${scale})`;
           slide.style.zIndex     = Math.round(cosA * 100);
           slide.style.opacity    = opacity;
           slide.classList.add('ts-3d-ready');
