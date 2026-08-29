@@ -3,14 +3,14 @@
 
 
   .trending-social-section {
-    background-color: #050505; /* Cinematic dark background */
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    overflow: hidden;
     position: relative;
     padding: 24px 0 0;
   }
 
   .trending-social-section .container {
-    max-width: 95% !important;
-    margin: 0 auto;
+    max-width: 100% !important;
     padding-left: var(--homepage-section-gutter, 8px) !important;
     padding-right: var(--homepage-section-gutter, 8px) !important;
   }
@@ -184,7 +184,8 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 12px;
+    padding-bottom: 16px;
+    padding-top: 4px;
   }
 
   .trending-social__slider-container::-webkit-scrollbar {
@@ -195,22 +196,14 @@
   .trending-social__slide {
     flex: 0 0 calc(25% - 18px);
     scroll-snap-align: start;
+    background-color: #ffffff;
+    border-radius: var(--homepage-corner, 20px);
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 60px 0;
-  }
-
-  .trending-social__slide-inner {
-    background-color: transparent;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transform-origin: center center;
-    will-change: transform;
-    transition: box-shadow 0.3s ease;
   }
 
   @media screen and (max-width: 1199px) {
@@ -226,8 +219,10 @@
     }
   }
 
-  .trending-social__slide-inner:hover {
-    /* removed shadow for pure cinematic look */
+  .trending-social__slide:hover {
+    border-color: transparent;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
   }
 
   .trending-social__media {
@@ -235,7 +230,7 @@
     aspect-ratio: 9 / 16;
     position: relative;
     overflow: hidden;
-    background-color: #111;
+    background-color: #f9f9fb;
   }
 
   .trending-social__overlay {
@@ -346,7 +341,7 @@
     transition: transform 0.3s ease;
   }
 
-  .trending-social__slide-inner:hover .trending-social__media img {
+  .trending-social__slide:hover .trending-social__media img {
     transform: scale(1.04);
   }
 
@@ -441,52 +436,91 @@
       <div class="trending-social__slider-container" id="trending-social-slider-{{ section.id }}">
         {%- for block in section.blocks -%}
           <div class="trending-social__slide" {{ block.shopify_attributes }}>
-            <div class="trending-social__slide-inner">
-              <div class="trending-social__media">
-                {%- if block.settings.video != blank -%}
-                  {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
-                {%- elsif block.settings.mp4_url != blank -%}
-                  <video autoplay muted loop playsinline poster="{{ block.settings.image | image_url: width: 600 }}">
-                    <source src="{{ block.settings.mp4_url }}" type="video/mp4">
-                  </video>
-                {%- elsif block.settings.video_url != blank -%}
-                  {%- if block.settings.video_url.type == 'youtube' -%}
-                    <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&playsinline=1" frameborder="0" allowfullscreen></iframe>
-                  {%- elsif block.settings.video_url.type == 'vimeo' -%}
-                    <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?autoplay=1&muted=1&loop=1" frameborder="0" allowfullscreen></iframe>
-                  {%- endif -%}
-                {%- elsif block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.caption | escape }}" loading="lazy">
-                {%- else -%}
-                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            <div class="trending-social__media">
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
+              {%- elsif block.settings.mp4_url != blank -%}
+                <video autoplay muted loop playsinline poster="{{ block.settings.image | image_url: width: 600 }}">
+                  <source src="{{ block.settings.mp4_url }}" type="video/mp4">
+                </video>
+              {%- elsif block.settings.video_url != blank -%}
+                {%- if block.settings.video_url.type == 'youtube' -%}
+                  <iframe src="https://www.youtube.com/embed/{{ block.settings.video_url.id }}?autoplay=1&mute=1&loop=1&playlist={{ block.settings.video_url.id }}&playsinline=1" frameborder="0" allowfullscreen></iframe>
+                {%- elsif block.settings.video_url.type == 'vimeo' -%}
+                  <iframe src="https://player.vimeo.com/video/{{ block.settings.video_url.id }}?autoplay=1&muted=1&loop=1" frameborder="0" allowfullscreen></iframe>
                 {%- endif -%}
+              {%- elsif block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.caption | escape }}" loading="lazy">
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
 
-                <!-- Video bottom overlay Reels-style text/pricing/CTA -->
+              <!-- Video bottom overlay Reels-style text/pricing/CTA -->
+              <div class="trending-social__overlay">
+                <div class="trending-social__product-info">
+                  <div class="trending-social__product-left">
+                    <div class="trending-social__product-img-wrapper">
+                      {%- if block.settings.product != blank and block.settings.product.featured_image != blank -%}
+                        <img src="{{ block.settings.product.featured_image | image_url: width: 80 }}" class="trending-social__product-thumb" alt="{{ block.settings.product.title }}" loading="lazy">
+                      {%- else -%}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8Z" stroke="#111111" stroke-width="2"/>
+                          <path d="M7.5 11.5L10.5 14.5L16.5 8.5" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {%- endif -%}
+                    </div>
+                    <div class="trending-social__product-text">
+                      {%- if block.settings.product != blank -%}
+                        <p class="trending-social__product-title">{{ block.settings.product.title }}</p>
+                        <p class="trending-social__product-price">{{ block.settings.product.price | money }}</p>
+                      {%- else -%}
+                        <p class="trending-social__product-title">{{ block.settings.custom_title | default: 'Sneaker Care Kit' }}</p>
+                        <p class="trending-social__product-price">{{ block.settings.custom_price | default: 'Rs. 10,999' }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                  {%- assign btn_link = block.settings.custom_link | default: block.settings.product.url | default: '#' -%}
+                  <a href="{{ btn_link }}" class="trending-social__product-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span>Buy</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        {%- else -%}
+          <!-- Elite Static Fallbacks for the customizer -->
+          {%- for i in (1..4) -%}
+            <div class="trending-social__slide">
+              <div class="trending-social__media">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" class="placeholder-svg">
+                  <rect width="400" height="500" fill="#f4f5f7"/>
+                  <circle cx="200" cy="220" r="80" fill="#ffffff"/>
+                  <path d="M160 210c0 40 80 40 80 0" stroke="#FF2B2B" stroke-width="6" stroke-linecap="round" fill="none"/>
+                  <text x="200" y="340" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#111111" opacity="0.3" text-anchor="middle" letter-spacing="2">@HAGUEPROTECT</text>
+                  <text x="200" y="365" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#FF2B2B" text-anchor="middle">Elite Sneaker Care</text>
+                </svg>
+
                 <div class="trending-social__overlay">
                   <div class="trending-social__product-info">
                     <div class="trending-social__product-left">
                       <div class="trending-social__product-img-wrapper">
-                        {%- if block.settings.product != blank and block.settings.product.featured_image != blank -%}
-                          <img src="{{ block.settings.product.featured_image | image_url: width: 80 }}" class="trending-social__product-thumb" alt="{{ block.settings.product.title }}" loading="lazy">
-                        {%- else -%}
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8Z" stroke="#111111" stroke-width="2"/>
-                            <path d="M7.5 11.5L10.5 14.5L16.5 8.5" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        {%- endif -%}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8Z" stroke="#111111" stroke-width="2"/>
+                          <path d="M7.5 11.5L10.5 14.5L16.5 8.5" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                       </div>
                       <div class="trending-social__product-text">
-                        {%- if block.settings.product != blank -%}
-                          <p class="trending-social__product-title">{{ block.settings.product.title }}</p>
-                          <p class="trending-social__product-price">{{ block.settings.product.price | money }}</p>
-                        {%- else -%}
-                          <p class="trending-social__product-title">{{ block.settings.custom_title | default: 'Sneaker Care Kit' }}</p>
-                          <p class="trending-social__product-price">{{ block.settings.custom_price | default: 'Rs. 10,999' }}</p>
-                        {%- endif -%}
+                        <p class="trending-social__product-title">Sneaker Care Kit</p>
+                        <p class="trending-social__product-price">Rs. 10,999</p>
                       </div>
                     </div>
-                    {%- assign btn_link = block.settings.custom_link | default: block.settings.product.url | default: '#' -%}
-                    <a href="{{ btn_link }}" class="trending-social__product-btn">
+                    <a href="#" class="trending-social__product-btn">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -494,48 +528,6 @@
                       </svg>
                       <span>Buy</span>
                     </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        {%- else -%}
-          <!-- Elite Static Fallbacks for the customizer -->
-          {%- for i in (1..4) -%}
-            <div class="trending-social__slide">
-              <div class="trending-social__slide-inner">
-                <div class="trending-social__media">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" class="placeholder-svg">
-                    <rect width="400" height="500" fill="#f4f5f7"/>
-                    <circle cx="200" cy="220" r="80" fill="#ffffff"/>
-                    <path d="M160 210c0 40 80 40 80 0" stroke="#FF2B2B" stroke-width="6" stroke-linecap="round" fill="none"/>
-                    <text x="200" y="340" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#111111" opacity="0.3" text-anchor="middle" letter-spacing="2">@HAGUEPROTECT</text>
-                    <text x="200" y="365" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#FF2B2B" text-anchor="middle">Elite Sneaker Care</text>
-                  </svg>
-
-                  <div class="trending-social__overlay">
-                    <div class="trending-social__product-info">
-                      <div class="trending-social__product-left">
-                        <div class="trending-social__product-img-wrapper">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8Z" stroke="#111111" stroke-width="2"/>
-                            <path d="M7.5 11.5L10.5 14.5L16.5 8.5" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                        <div class="trending-social__product-text">
-                          <p class="trending-social__product-title">Sneaker Care Kit</p>
-                          <p class="trending-social__product-price">Rs. 10,999</p>
-                        </div>
-                      </div>
-                      <a href="#" class="trending-social__product-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                          <line x1="3" y1="6" x2="21" y2="6"></line>
-                          <path d="M16 10a4 4 0 0 1-8 0"></path>
-                        </svg>
-                        <span>Buy</span>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -610,42 +602,6 @@
             slider.scrollLeft = 0;
           }
         }
-
-        // --- 3D Carousel Transform Logic ---
-        if (window.innerWidth >= 750) {
-          const sliderRect = slider.getBoundingClientRect();
-          const containerCenter = sliderRect.left + slider.clientWidth / 2;
-          const slides = slider.querySelectorAll('.trending-social__slide');
-          
-          slides.forEach(slide => {
-            const inner = slide.querySelector('.trending-social__slide-inner');
-            if (!inner) return;
-            
-            const rect = slide.getBoundingClientRect();
-            const slideCenter = rect.left + rect.width / 2;
-            
-            // Distance from center (-0.5 to 0.5 usually)
-            let ratio = (slideCenter - containerCenter) / slider.clientWidth;
-            ratio = Math.max(-1, Math.min(1, ratio));
-            
-            const rotateY = ratio * 55;
-            
-            // For a dramatic 3D cylinder, we push the center away slightly
-            // and pull the edges extremely close to the camera.
-            const translateZ = Math.abs(ratio) * 500 - 100;
-            
-            // Apply translation first (move in global Z), then rotate in place
-            inner.style.transform = `perspective(1200px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
-          });
-        } else {
-          // Reset on mobile
-          const slides = slider.querySelectorAll('.trending-social__slide');
-          slides.forEach(slide => {
-            const inner = slide.querySelector('.trending-social__slide-inner');
-            if (inner) inner.style.transform = 'none';
-          });
-        }
-
         requestAnimationFrame(smoothScroll);
       }
 
