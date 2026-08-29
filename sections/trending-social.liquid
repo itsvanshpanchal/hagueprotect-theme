@@ -206,53 +206,22 @@
     flex-direction: column;
   }
 
-  /* ── Desktop 3D Cylinder ─────────────────────────── */
+
+  /* ── Desktop 3D Curve: cards shown in normal flex row,
+     JS applies per-card perspective()+rotateY() based on scroll offset ── */
   @media screen and (min-width: 750px) {
     .trending-social-section {
-      overflow: visible !important;
+      overflow: hidden;
     }
-
-    .trending-social__slider-wrapper {
-      overflow: visible;
-    }
-
-    /* The scrollable container becomes the 3D scene */
     .trending-social__slider-container {
-      /* hide the scrollbar, keep scrollability for JS reads */
-      overflow: hidden !important;
-      display: block;
-      position: relative;
-      height: 520px; /* fixed scene height */
-      padding: 0 !important;
-      gap: 0 !important;
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
-
-    /* Each slide is absolutely positioned in the 3D scene */
     .trending-social__slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      /* width of one card */
-      width: 220px;
-      height: 390px;
-      margin: 0;
-      transform-style: preserve-3d;
-      transform-origin: center center;
-      will-change: transform;
-      /* start hidden — JS will un-hide after positioning */
-      opacity: 0;
-      transition: box-shadow 0.4s ease;
-      flex: none;
-      scroll-snap-align: none;
+      transition: box-shadow 0.3s ease;
     }
-
-    .trending-social__slide.ts-3d-ready {
-      opacity: 1;
-      transition: box-shadow 0.4s ease;
-    }
-
     .trending-social__slide:hover {
-      transform: none !important; /* override hover lift — JS controls transform */
+      transform: none !important;
       box-shadow: 0 20px 60px rgba(0,0,0,0.22);
     }
   }
@@ -644,186 +613,106 @@
         }
       }
 
-      // ── 3D Cylinder on desktop ──────────────────────────────────────────
+      // ── 3D Curved tilt: read each card's scroll position, apply rotateY ──
       function is3D() { return window.innerWidth >= 750; }
 
-      const slides = Array.from(slider.querySelectorAll('.trending-social__slide'));
-      const CARD_W      = 220;   // px — must match CSS width
-      const PERSPECTIVE = 1100;  // px
-      const GAP_DEG     = 28;    // degrees between adjacent cards
-      const RADIUS      = CARD_W / (2 * Math.tan((GAP_DEG / 2) * Math.PI / 180));
-
-      let currentAngle = 0;  // in degrees — which card is centred
-      let targetAngle  = 0;
-      let rafId        = null;
-      let autoTimer    = null;
-
-      function getSlideAngle(i) {
-        return i * GAP_DEG;
-      }
-
-      function positionSlides(angle) {
+      function apply3DTilts() {
         if (!is3D()) {
-          slides.forEach(s => {
+          slider.querySelectorAll('.trending-social__slide').forEach(s => {
             s.style.transform = '';
-            s.style.zIndex    = '';
-            s.style.opacity   = '';
-            s.classList.remove('ts-3d-ready');
           });
           return;
         }
+        const containerRect = slider.getBoundingClientRect();
+        const containerCx   = containerRect.left + containerRect.width / 2;
 
-        const sceneW = slider.offsetWidth;
-        slides.forEach((slide, i) => {
-          const slideAngle = getSlideAngle(i) - angle;
-          const rad        = slideAngle * Math.PI / 180;
-          const x          = RADIUS * Math.sin(rad);
+        slider.querySelectorAll('.trending-social__slide').forEach(slide => {
+          const rect   = slide.getBoundingClientRect();
+          const cardCx = rect.left + rect.width / 2;
 
-          // Scale: cards at front are full size, far sides slightly smaller
-          const cosA   = Math.cos(rad);
-          const scale  = 0.55 + 0.45 * cosA;   // 1.0 at front, ~0.55 behind
-          const opacity = Math.max(0, 0.35 + 0.65 * cosA);
+          // ratio: -1 (far left) … 0 (centre) … +1 (far right)
+          const ratio  = Math.max(-1, Math.min(1, (cardCx - containerCx) / (containerRect.width / 2)));
 
-          // Absolute pixel position: centre of scene + arc offset, then shift back by half card
-          const CARD_H  = 390;
-          const cx = sceneW / 2 + x - (CARD_W / 2);  // left edge of card
-          const cy = 520 / 2 - CARD_H / 2;             // vertically centred
+          const rotateY = ratio * 42;           // max tilt ±42°
+          const scale   = 1 - Math.abs(ratio) * 0.18;  // shrink edges slightly
 
-          slide.style.transform  = `translate(${cx}px, ${cy}px) perspective(${PERSPECTIVE}px) rotateY(${-slideAngle}deg) scale(${scale})`;
-          slide.style.zIndex     = Math.round(cosA * 100);
-          slide.style.opacity    = opacity;
-          slide.classList.add('ts-3d-ready');
+          slide.style.transform = `perspective(1100px) rotateY(${rotateY}deg) scale(${scale})`;
         });
       }
 
-      function animate() {
-        currentAngle += (targetAngle - currentAngle) * 0.08;
-        positionSlides(currentAngle);
-        rafId = requestAnimationFrame(animate);
-      }
-
-      function advanceTo(i) {
-        targetAngle = getSlideAngle(((i % slides.length) + slides.length) % slides.length);
-      }
-
-      let activeIndex = 0;
-
-      function autoAdvance() {
-        activeIndex = (activeIndex + 1) % slides.length;
-        advanceTo(activeIndex);
-      }
-
-      function startAuto() {
-        if (autoTimer) clearInterval(autoTimer);
-        if (is3D()) autoTimer = setInterval(autoAdvance, 3000);
-      }
-
-      function stopAuto() {
-        if (autoTimer) clearInterval(autoTimer);
-        autoTimer = null;
-      }
-
-      if (is3D()) {
-        positionSlides(0);
-        rafId = requestAnimationFrame(animate);
-        startAuto();
-      }
-
-      // Restart on resize
-      window.addEventListener('resize', () => {
-        if (is3D()) {
-          positionSlides(currentAngle);
-          if (!rafId) rafId = requestAnimationFrame(animate);
-          startAuto();
-        } else {
-          stopAuto();
-          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-          positionSlides(currentAngle); // resets transforms
-        }
-      });
-
-      // Pause auto on hover
-      slider.addEventListener('mouseenter', () => { isHovered = true;  stopAuto(); });
-      slider.addEventListener('mouseleave', () => { isHovered = false; if (is3D()) startAuto(); });
-
-      // Click a card to bring it to front
-      slides.forEach((slide, i) => {
-        slide.addEventListener('click', (e) => {
-          if (!is3D()) return;
-          if (i !== activeIndex) {
-            e.preventDefault();
-            activeIndex = i;
-            advanceTo(activeIndex);
+      // Auto-rotate: shift slider by one card width every 3 s
+      let autoInterval = null;
+      function startAutoRotate() {
+        if (!is3D()) return;
+        autoInterval = setInterval(() => {
+          const firstSlide = slider.querySelector('.trending-social__slide');
+          if (!firstSlide) return;
+          const step = firstSlide.getBoundingClientRect().width +
+                       parseFloat(getComputedStyle(slider).gap || 24);
+          slider.scrollLeft += step;
+          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 2) {
+            slider.scrollLeft = 0;
           }
-        });
-      });
+        }, 3000);
+      }
+      function stopAutoRotate() {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
 
-      // ── Smooth continuous scrolling ticker (mobile only) ────────────────
-      function smoothScroll() {
+      // Main RAF loop — runs always, drives both tilt and mobile scroll ticker
+      function rafLoop() {
+        apply3DTilts();
+
+        // Mobile auto-scroll ticker
         if (!is3D() && !isHovered && !isDragging) {
           slider.scrollLeft += 1;
           if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
             slider.scrollLeft = 0;
           }
         }
-        if (!is3D()) requestAnimationFrame(smoothScroll);
+        requestAnimationFrame(rafLoop);
       }
+      requestAnimationFrame(rafLoop);
 
-      if (!is3D()) {
-        requestAnimationFrame(smoothScroll);
-      }
+      if (is3D()) startAutoRotate();
 
-      // Handle dragging (mobile)
+      slider.addEventListener('mouseenter', () => { isHovered = true;  stopAutoRotate(); });
+      slider.addEventListener('mouseleave', () => { isHovered = false; if (is3D()) startAutoRotate(); });
+
+      window.addEventListener('resize', () => {
+        if (is3D()) { startAutoRotate(); } else { stopAutoRotate(); }
+      });
+
+      // Handle dragging (desktop: drag scroll; mobile: same)
       slider.addEventListener('mousedown', (e) => {
-        if (is3D()) return;
         isDragging = true;
         slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
+        stopAutoRotate();
       });
-
-      slider.addEventListener('mouseleave', () => {
-        isDragging = false;
-        slider.classList.remove('active');
-      });
-
-      slider.addEventListener('mouseup', () => {
-        isDragging = false;
-        slider.classList.remove('active');
-      });
-
+      slider.addEventListener('mouseleave', () => { isDragging = false; slider.classList.remove('active'); });
+      slider.addEventListener('mouseup',    () => { isDragging = false; slider.classList.remove('active'); if (is3D()) startAutoRotate(); });
       slider.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 2;
-        slider.scrollLeft = scrollLeft - walk;
+        slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 2;
       });
 
-      // Prev / Next buttons — work for both modes
+      // Prev / Next buttons
       if (sectionRoot) {
         const prevBtn = sectionRoot.querySelector('[data-trending-prev]');
         const nextBtn = sectionRoot.querySelector('[data-trending-next]');
-        if (prevBtn) {
-          prevBtn.addEventListener('click', function () {
-            if (is3D()) {
-              activeIndex = ((activeIndex - 1) + slides.length) % slides.length;
-              advanceTo(activeIndex);
-            } else {
-              slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
-            }
-          });
+        function stepSlider(dir) {
+          const firstSlide = slider.querySelector('.trending-social__slide');
+          const step = firstSlide
+            ? firstSlide.getBoundingClientRect().width + parseFloat(getComputedStyle(slider).gap || 24)
+            : slider.clientWidth;
+          slider.scrollBy({ left: dir * step, behavior: 'smooth' });
         }
-        if (nextBtn) {
-          nextBtn.addEventListener('click', function () {
-            if (is3D()) {
-              activeIndex = (activeIndex + 1) % slides.length;
-              advanceTo(activeIndex);
-            } else {
-              slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
-            }
-          });
-        }
+        if (prevBtn) prevBtn.addEventListener('click', () => stepSlider(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => stepSlider(1));
       }
 
     const allVideos = document.querySelectorAll('.trending-social__media video');
