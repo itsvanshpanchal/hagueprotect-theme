@@ -184,8 +184,7 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 60px;
-    padding-top: 60px;
+    padding-bottom: 12px;
   }
 
   .trending-social__slider-container::-webkit-scrollbar {
@@ -199,6 +198,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 60px 0;
   }
 
   .trending-social__slide-inner {
@@ -629,7 +629,7 @@
             let ratio = (slideCenter - containerCenter) / slider.clientWidth;
             ratio = Math.max(-1, Math.min(1, ratio));
             
-            const rotateY = ratio * -45;
+            const rotateY = ratio * 55;
             const scale = 1 + (Math.abs(ratio) * 0.15);
             
             inner.style.transform = `perspective(1200px) rotateY(${rotateY}deg) scale(${scale})`;
