@@ -206,26 +206,6 @@
     flex-direction: column;
   }
 
-
-  /* ── Desktop 3D Curve: cards shown in normal flex row,
-     JS applies per-card perspective()+rotateY() based on scroll offset ── */
-  @media screen and (min-width: 750px) {
-    .trending-social-section {
-      overflow: hidden;
-    }
-    .trending-social__slider-container {
-      padding-top: 48px;
-      padding-bottom: 48px;
-    }
-    .trending-social__slide {
-      transition: box-shadow 0.3s ease;
-    }
-    .trending-social__slide:hover {
-      transform: none !important;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-    }
-  }
-
   @media screen and (max-width: 1199px) {
     .trending-social__slide {
       flex: 0 0 calc(33.333% - 16px);
@@ -613,107 +593,51 @@
         }
       }
 
-      // ── 3D Curved tilt: read each card's scroll position, apply rotateY ──
-      function is3D() { return window.innerWidth >= 750; }
-
-      function apply3DTilts() {
-        if (!is3D()) {
-          slider.querySelectorAll('.trending-social__slide').forEach(s => {
-            s.style.transform = '';
-          });
-          return;
-        }
-        const containerRect = slider.getBoundingClientRect();
-        const containerCx   = containerRect.left + containerRect.width / 2;
-
-        slider.querySelectorAll('.trending-social__slide').forEach(slide => {
-          const rect   = slide.getBoundingClientRect();
-          const cardCx = rect.left + rect.width / 2;
-
-          // ratio: -1 (far left) … 0 (centre) … +1 (far right)
-          const ratio  = Math.max(-1, Math.min(1, (cardCx - containerCx) / (containerRect.width / 2)));
-
-          const rotateY = ratio * 42;           // max tilt ±42°
-          const scale   = 1 - Math.abs(ratio) * 0.18;  // shrink edges slightly
-
-          slide.style.transform = `perspective(1100px) rotateY(${rotateY}deg) scale(${scale})`;
-        });
-      }
-
-      // Auto-rotate: shift slider by one card width every 3 s
-      let autoInterval = null;
-      function startAutoRotate() {
-        if (!is3D()) return;
-        autoInterval = setInterval(() => {
-          const firstSlide = slider.querySelector('.trending-social__slide');
-          if (!firstSlide) return;
-          const step = firstSlide.getBoundingClientRect().width +
-                       parseFloat(getComputedStyle(slider).gap || 24);
-          slider.scrollLeft += step;
-          if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 2) {
-            slider.scrollLeft = 0;
-          }
-        }, 3000);
-      }
-      function stopAutoRotate() {
-        clearInterval(autoInterval);
-        autoInterval = null;
-      }
-
-      // Main RAF loop — runs always, drives both tilt and mobile scroll ticker
-      function rafLoop() {
-        apply3DTilts();
-
-        // Mobile auto-scroll ticker
-        if (!is3D() && !isHovered && !isDragging) {
+      // Smooth continuous scrolling ticker function
+      function smoothScroll() {
+        // Disable auto-scroll on mobile for better touch UX
+        if (window.innerWidth >= 750 && !isHovered && !isDragging) {
           slider.scrollLeft += 1;
           if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
             slider.scrollLeft = 0;
           }
         }
-        requestAnimationFrame(rafLoop);
+        requestAnimationFrame(smoothScroll);
       }
-      requestAnimationFrame(rafLoop);
 
-      if (is3D()) startAutoRotate();
+      // Start continuous scrolling
+      requestAnimationFrame(smoothScroll);
 
-      slider.addEventListener('mouseenter', () => { isHovered = true;  stopAutoRotate(); });
-      slider.addEventListener('mouseleave', () => { isHovered = false; if (is3D()) startAutoRotate(); });
+      // Handle pause on hover
+      slider.addEventListener('mouseenter', () => { isHovered = true; });
+      slider.addEventListener('mouseleave', () => { isHovered = false; });
 
-      window.addEventListener('resize', () => {
-        if (is3D()) { startAutoRotate(); } else { stopAutoRotate(); }
-      });
-
-      // Handle dragging (desktop: drag scroll; mobile: same)
+      // Handle dragging
       slider.addEventListener('mousedown', (e) => {
         isDragging = true;
         slider.classList.add('active');
         startX = e.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
-        stopAutoRotate();
       });
-      slider.addEventListener('mouseleave', () => { isDragging = false; slider.classList.remove('active'); });
-      slider.addEventListener('mouseup',    () => { isDragging = false; slider.classList.remove('active'); if (is3D()) startAutoRotate(); });
+
+      slider.addEventListener('mouseleave', () => {
+        isDragging = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDragging = false;
+        slider.classList.remove('active');
+      });
+
       slider.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         e.preventDefault();
-        slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 2;
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // scroll-fast
+        slider.scrollLeft = scrollLeft - walk;
       });
-
-      // Prev / Next buttons
-      if (sectionRoot) {
-        const prevBtn = sectionRoot.querySelector('[data-trending-prev]');
-        const nextBtn = sectionRoot.querySelector('[data-trending-next]');
-        function stepSlider(dir) {
-          const firstSlide = slider.querySelector('.trending-social__slide');
-          const step = firstSlide
-            ? firstSlide.getBoundingClientRect().width + parseFloat(getComputedStyle(slider).gap || 24)
-            : slider.clientWidth;
-          slider.scrollBy({ left: dir * step, behavior: 'smooth' });
-        }
-        if (prevBtn) prevBtn.addEventListener('click', () => stepSlider(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => stepSlider(1));
-      }
+    }
 
     const allVideos = document.querySelectorAll('.trending-social__media video');
     allVideos.forEach(v => {
