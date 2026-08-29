@@ -543,7 +543,8 @@
     {% section 'cart-drawer' %}
     
     <style>
-      .template-index #hp-header-group {
+      .template-index #hp-header-group,
+      .template-collection-vanrosector #hp-header-group {
         position: fixed;
         top: 0;
         left: 0;
@@ -552,10 +553,12 @@
         transform: translateY(-100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .template-index.is-scrolled #hp-header-group {
+      .template-index.is-scrolled #hp-header-group,
+      .template-collection-vanrosector.is-scrolled #hp-header-group {
         transform: translateY(0);
       }
-      .template-index #hp-header-group .header-wrapper {
+      .template-index #hp-header-group .header-wrapper,
+      .template-collection-vanrosector #hp-header-group .header-wrapper {
         position: relative !important;
       }
     </style>
@@ -671,7 +674,7 @@
     {% render 'floating-contact' %}
     <script>
       (function() {
-        if (document.body.classList.contains('template-index')) {
+        if (document.body.classList.contains('template-index') || document.body.classList.contains('template-collection-vanrosector')) {
           var onScroll = function() {
             if (window.scrollY > window.innerHeight * 0.75) {
               document.body.classList.add('is-scrolled');
