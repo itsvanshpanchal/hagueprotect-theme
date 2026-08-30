@@ -121,11 +121,14 @@
     padding: 0 var(--homepage-section-gutter, 32px);
   }
 
-  /* The scattered canvas — fixed height on desktop */
+  /* The scattered canvas — fixed height on desktop.
+     Must be tall enough to hold two stacked 230px cards + gaps + parallax start offsets.
+     Cards: top row at ~20px, bottom row at ~278px, each 230px tall → need ~580px
+     Extra 30px for the parallax startY offset (cards begin 120px lower). */
   .fc-scatter {
     position: relative;
     width: 100%;
-    height: 480px;
+    height: 560px;
     overflow: visible;
   }
 
@@ -138,9 +141,10 @@
     text-decoration: none;
     display: block;
     will-change: transform;
-    transition:
-      transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-      box-shadow 0.4s ease;
+    /* NOTE: NO transition on transform — the scroll-parallax rAF loop
+       drives transform directly. A CSS transition here would fight the
+       requestAnimationFrame updates and make cards appear frozen. */
+    transition: box-shadow 0.4s ease; /* only shadow, not transform */
     transform: translateY(var(--fc-parallax-y, 0px));
   }
 
@@ -203,30 +207,32 @@
     display: block;
   }
 
-  /* ── CARD 1: Large portrait, top-left ────────────────────────────── */
+  /* ── CARD 1: top-left ────────────────────────────────────────────── */
+  /* Uniform size for all cards: 25% wide × 230px tall.                 */
+  /* Only the top/left/right position differs between cards.            */
   .fc-scard--1 {
     left: 0;
-    top: 28px;
-    width: 28%;
-    height: 260px;
+    top: 20px;
+    width: 25%;
+    height: 230px;
   }
 
-  /* ── CARD 2: Small landscape, bottom-left, offset right ─────────── */
+  /* ── CARD 2: bottom-left, offset right ──────────────────────────── */
   .fc-scard--2 {
-    left: 4%;
-    top: 306px;
-    width: 21%;
-    height: 148px;
+    left: 6%;
+    top: 278px;
+    width: 25%;
+    height: 230px;
   }
 
   /* ── Heading text block — floats free in the centre ─────────────── */
   .fc-scatter-text {
     position: absolute;
-    left: 30%;
+    left: 31%;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-    width: 28%;
+    width: 26%;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -252,21 +258,21 @@
   body.template-index .fc-scatter-text .fc-heading { color: #fff; }
   body.template-index .fc-scatter-text .fc-subtitle { color: rgba(255,255,255,0.45); }
 
-  /* ── CARD 3: Small dark card, top-right ─────────────────────────── */
+  /* ── CARD 3: top-right ───────────────────────────────────────────── */
   .fc-scard--3 {
-    right: 0;
+    right: 1%;
     top: 20px;
-    width: 22%;
-    height: 155px;
+    width: 25%;
+    height: 230px;
     background-color: #111;
   }
 
-  /* ── CARD 4: Large landscape, bottom-right ───────────────────────── */
+  /* ── CARD 4: bottom-right ────────────────────────────────────────── */
   .fc-scard--4 {
-    right: 0;
-    top: 192px;
-    width: 36%;
-    height: 260px;
+    right: 1%;
+    top: 278px;
+    width: 25%;
+    height: 230px;
   }
 
   /* ── MOBILE: single column stack ─────────────────────────────────── */
