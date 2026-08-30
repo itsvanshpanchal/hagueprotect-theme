@@ -778,32 +778,60 @@
         const slides = section.querySelectorAll('.fc-slide');
         if (slides.length === 0) return;
 
-        const onScroll = () => {
+        let isIntersecting = false;
+        let animationFrameId;
+
+        const updateParallax = () => {
+          if (!isIntersecting) return;
+
           const rect = section.getBoundingClientRect();
           const windowHeight = window.innerHeight;
+          // Start when the top of the section enters the bottom of the viewport
           const start = windowHeight;
-          const end = windowHeight * 0.4; // finishes when section top is 40% from top
+          // Finish when the top of the section is 20% from the top of the viewport
+          const end = windowHeight * 0.2; 
           
           let progress = (windowHeight - rect.top) / (start - end);
           if (progress < 0) progress = 0;
           if (progress > 1) progress = 1;
           
           slides.forEach((slide, i) => {
-            const finishAt = 0.55 + (i * 0.15); // Stagger finish points
+            // Stagger finish points: Card 1 (Knits) finishes at progress 0.55, Card 4 at 1.0
+            const finishAt = 0.55 + (i * 0.15); 
             let slideProgress = progress / finishAt;
             if (slideProgress > 1) slideProgress = 1;
+            if (slideProgress < 0) slideProgress = 0;
             
+            // Cubic ease-out
             const easeOut = 1 - Math.pow(1 - slideProgress, 3);
-            const maxOffset = 120 + (i * 40); // 120, 160, 200, 240...
+            
+            // Stagger initial offsets: Card 1 moves 100px, Card 4 moves 220px
+            const maxOffset = 100 + (i * 40); 
             const currentY = maxOffset * (1 - easeOut);
             
             slide.style.setProperty('--fc-parallax-y', currentY + 'px');
           });
+
+          animationFrameId = requestAnimationFrame(updateParallax);
         };
-        
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-        onScroll();
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              isIntersecting = true;
+              animationFrameId = requestAnimationFrame(updateParallax);
+            } else {
+              isIntersecting = false;
+              if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0,
+          rootMargin: "50px 0px 50px 0px"
+        });
+
+        observer.observe(section);
       });
     }
 
