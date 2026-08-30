@@ -191,12 +191,12 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;     /* tops aligned; outer cards drop DOWN to form U arc */
-      gap: 10px;                    /* positive gap — no physical card overlap ever */
+      gap: 24px;                    /* clear breathing room — no cards ever touch */
       overflow: visible;
       overflow-x: visible;
       scroll-snap-type: none;
       transform-style: preserve-3d;
-      padding-bottom: 48px;         /* room for the fan's bottom shadow */
+      padding-bottom: 80px;         /* extra room for the deeper U-arc drop */
       padding-top: 32px;
     }
 
@@ -212,8 +212,8 @@
       --fan-transY: 0px;
       --fan-transZ: 0px;
 
-      flex: 0 0 clamp(150px, 14vw, 200px);
-      width:        clamp(150px, 14vw, 200px);
+      flex: 0 0 clamp(185px, 17vw, 250px);
+      width:        clamp(185px, 17vw, 250px);  /* ~25% larger than before */
       /* No negative margin — every card is fully readable, zero physical overlap */
       margin-left: 0;
       margin-right: 0;
@@ -606,18 +606,30 @@
   (function () {
     /* ── 3-D Fan Layout for Trending Social ── */
 
-    /* Per-card fan values indexed by distance-bucket from center (0 = center).
-       User spec: outermost ~20-25 deg + large drop, mid ~10-12 deg + medium drop */
-    var FAN_ANGLES = [0,   12,   22,   27,   30,   32,   34]; // deg rotateY
-    var FAN_DROP   = [0,   22,   45,   62,   74,   82,   88]; // px translateY DOWN
-    var FAN_DEPTH  = [0,   18,   34,   46,   55,   62,   67]; // px translateZ (outer closer)
-    /* No lateral shift needed — gap handles spacing cleanly */
+    /*
+     * LINEAR INTERPOLATION FAN — replaces the old bucket/Math.round() approach.
+     *
+     * Each card gets t = absDist / maxDist, where:
+     *   t = 0  → center card  (no rotation, no drop)
+     *   t = 1  → outermost card (full rotation, full drop)
+     *
+     * Because t is computed from the RAW distance (not rounded into buckets),
+     * symmetric cards at equal distance from center always get exactly equal
+     * t values — guaranteeing a smooth, symmetric U-curve for any card count.
+     *
+     * Outermost card targets (t=1):
+     *   rotY  = 25 deg  (inward-cup concave direction)
+     *   transY = 60 px  (drop down)
+     *   transZ = 40 px  (closer to viewer)
+     */
+    var MAX_ROT_Y  = 25;  // deg at outermost card
+    var MAX_DROP_Y = 60;  // px translateY at outermost card
+    var MAX_DEPTH  = 40;  // px translateZ at outermost card
 
     function applyFanTransforms(slider) {
       if (window.innerWidth < 750) {
-        /* Mobile: clear any desktop styles so scroll-snap works cleanly */
-        var mobileSlides = Array.from(slider.querySelectorAll('.trending-social__slide'));
-        mobileSlides.forEach(function (s) {
+        /* Mobile: clear any desktop inline styles so scroll-snap works cleanly */
+        Array.from(slider.querySelectorAll('.trending-social__slide')).forEach(function (s) {
           s.style.removeProperty('--fan-rotY');
           s.style.removeProperty('--fan-transX');
           s.style.removeProperty('--fan-transY');
@@ -627,35 +639,43 @@
         return;
       }
 
-      var slides = Array.from(slider.querySelectorAll('.trending-social__slide'));
-      var total  = slides.length;
-      if (total === 0) return;
+      var slides  = Array.from(slider.querySelectorAll('.trending-social__slide'));
+      var total   = slides.length;
+      if (total < 2) return;
 
-      var center = (total - 1) / 2; // fractional center index
+      var center  = (total - 1) / 2;  // e.g. 2.0 for 5 cards, 2.5 for 6 cards
+      var maxDist = center;            // maximum possible absDist
 
       slides.forEach(function (slide, i) {
-        var dist     = i - center;   // negative = left of center
-        var absDist  = Math.abs(dist);
-        var bucket   = Math.min(Math.round(absDist), FAN_ANGLES.length - 1);
-        var side     = dist >= 0 ? 1 : -1; // +1 = right side, -1 = left side
+        var dist    = i - center;              // raw signed distance from center
+        var absDist = Math.abs(dist);          // always non-negative
+        var side    = dist >= 0 ? 1 : -1;     // +1 = right of center, -1 = left
 
-        /* CONCAVE U-smile math:
-           rotY OPPOSITE sign to side → outer edge of each card tilts toward viewer (cupped)
-           transY positive           → outer cards drop down, tops stay aligned = U arc
-           transZ positive           → outer cards closer to viewer, reinforcing the cup
-           transX zero               → gap alone handles spacing, no lateral push needed */
-        var rotY   = -side * FAN_ANGLES[bucket];
-        var transX = 0;
-        var transY = FAN_DROP[bucket];
-        var transZ = FAN_DEPTH[bucket];
+        /*
+         * t: normalized position, 0 at center → 1 at outermost.
+         * Cards at equal |dist| from center get identical t values —
+         * no rounding, no bucket asymmetry, guaranteed smooth arc.
+         */
+        var t = absDist / maxDist;
 
-        /* Center card highest z-index; outer cards step down clearly */
-        slide.style.zIndex = String(50 - Math.round(absDist * 10));
+        /*
+         * Concave U-cup direction:
+         *   right-side cards (side=+1) get NEGATIVE rotY so their RIGHT
+         *   (outer) edge comes toward the viewer.
+         *   left-side cards  (side=-1) get POSITIVE rotY so their LEFT
+         *   (outer) edge comes toward the viewer.
+         */
+        var rotY   = -side * MAX_ROT_Y  * t;
+        var transY =         MAX_DROP_Y * t;   /* positive = downward, forms U */
+        var transZ =         MAX_DEPTH  * t;   /* positive = closer to viewer  */
 
-        slide.style.setProperty('--fan-rotY',   rotY   + 'deg');
-        slide.style.setProperty('--fan-transX', transX + 'px');
-        slide.style.setProperty('--fan-transY', transY + 'px');
-        slide.style.setProperty('--fan-transZ', transZ + 'px');
+        /* z-index: center on top (value 50), outermost at 30 */
+        slide.style.zIndex = String(Math.round(50 - 20 * t));
+
+        slide.style.setProperty('--fan-rotY',   rotY.toFixed(2)   + 'deg');
+        slide.style.setProperty('--fan-transX', '0px');
+        slide.style.setProperty('--fan-transY', transY.toFixed(2) + 'px');
+        slide.style.setProperty('--fan-transZ', transZ.toFixed(2) + 'px');
       });
     }
 
