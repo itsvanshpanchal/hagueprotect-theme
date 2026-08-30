@@ -103,131 +103,112 @@
     }
   }
 
-  .fc-slider-wrapper {
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .fc-slider-container {
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-    padding-bottom: 8px;
-    /* Hide scrollbar */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .fc-slider-container::-webkit-scrollbar {
-    display: none;
-  }
-
-  .fc-slider-track {
-    display: flex;
+  /* ─── DESKTOP MOSAIC ─────────────────────────────────────────────── */
+  .fc-mosaic-layout {
+    display: grid;
+    /* 4 equal columns */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
     gap: 20px;
-    box-sizing: border-box;
-    /* Width set by JS so scroll works correctly */
+    align-items: start;
+    padding: 50px 0 60px;
+    position: relative;
   }
 
-  .fc-slide {
-    flex: 0 0 calc(25% - 15px);
-    box-sizing: border-box;
-    min-width: calc(25% - 15px);
-    aspect-ratio: 1 / 1;
-    background-color: #fdfeff !important;
-    border: 1px solid var(--fc-border);
-    border-radius: var(--homepage-corner, 20px);
-    padding: 0;
+  /* Card sizes & positions — reference: two cards left, text centre, two cards right */
+  /* Card 1 — top-left, taller */
+  .fc-mosaic-card:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / 2;
+    aspect-ratio: 4 / 5;
+    margin-top: 0;
+    will-change: transform;
+    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
+    --fc-stagger: 0px;
+  }
+
+  /* Card 2 — bottom-left, wider */
+  .fc-mosaic-card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1 / 2;
+    aspect-ratio: 4 / 5;
+    will-change: transform;
+    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
+    --fc-stagger: 60px;
+  }
+
+  /* Heading text block — centre */
+  .fc-mosaic-text {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 12px;
+    gap: 8px;
+    align-self: center;
+  }
+
+  /* Card 3 — top-right */
+  .fc-mosaic-card:nth-child(3) {
+    grid-column: 4;
+    grid-row: 1;
+    aspect-ratio: 4 / 3.2;
+    will-change: transform;
+    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
+    --fc-stagger: -20px;
+  }
+
+  /* Card 4 — bottom-right — spans below card 3 */
+  .fc-mosaic-card:nth-child(4) {
+    grid-column: 4;
+    grid-row: 2;
+    aspect-ratio: 4 / 3.2;
+    will-change: transform;
+    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
+    --fc-stagger: 10px;
+  }
+
+  /* Adjust: when we have 4 cards but only 4 columns, make col 3 the text,
+     and put card 3+4 in col 4 stacked. Col 2 spans 1 row tall. */
+  /* Re-set row spans */
+  .fc-mosaic-card:nth-child(1) { grid-row: 1 / 3; }
+  .fc-mosaic-card:nth-child(2) { grid-row: 1 / 3; }
+  .fc-mosaic-text                { grid-row: 1 / 3; align-self: center; }
+
+  /* ── Shared card styles ────────────────────────────────────────── */
+  .fc-mosaic-card {
     position: relative;
+    border-radius: var(--homepage-corner, 20px);
     overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
-    cursor: pointer;
-    text-decoration: none;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    will-change: transform;
-    /* --fc-stagger: permanent baked-in mosaic offset (desktop only) */
-    /* --fc-parallax-y: scroll-driven motion offset */
-    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
+    background-color: #1a1a1a;
+    transition:
+      transform 0.30s cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 0.35s ease;
   }
 
-  @media (min-width: 768px) {
-    .fc-slider-track {
-      padding: 44px 0 44px; /* Extra padding to give stagger room */
-    }
-
-    .fc-slide {
-      overflow: visible;
-      perspective: 1200px;
-      transform-style: preserve-3d;
-    }
-
-    /* ── PART 1: Staggered mosaic offsets ─────────────────────── */
-    /* Card 1 (Mesh): baseline */
-    .fc-slide:nth-child(1) { --fc-stagger: 0px; }
-    /* Card 2 (Knits): shifted down 28px */
-    .fc-slide:nth-child(2) { --fc-stagger: 28px; }
-    /* Card 3 (Suede): shifted up 18px */
-    .fc-slide:nth-child(3) { --fc-stagger: -18px; }
-    /* Card 4 (Sole): shifted down 12px */
-    .fc-slide:nth-child(4) { --fc-stagger: 12px; }
-
-    .fc-slide.fc-slide--hover {
-      z-index: 8;
-      transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px) - 8px));
-      box-shadow: 0 28px 52px rgba(17, 17, 17, 0.14);
-      border-color: var(--fc-border-hover);
-    }
+  .fc-mosaic-card:hover {
+    box-shadow: 0 28px 60px rgba(0,0,0,0.22);
   }
 
-  .fc-slide:hover {
-    background-color: #fdfeff !important;
-    border-color: var(--fc-border-hover);
-  }
-
-  .fc-category-name {
-    font-size: var(--section-subheading-size, 15px) !important;
-    font-weight: var(--font-weight-sans, 700) !important;
-    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif) !important;
-    font-style: var(--font-style-sans, normal) !important;
-    text-transform: none !important;
-    letter-spacing: 0.02em !important;
-    line-height: 1.3 !important;
-    color: #ffffff !important;
-    margin: 0 0 4px 0;
-    max-width: 100%;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
-  }
-
-  .fc-product-count {
-    font-size: 12px;
-    font-weight: 700;
-    color: #ffffff !important;
-    margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-  }
-
-  .fc-category-info {
-    position: relative;
+  .fc-mosaic-card .fc-category-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     z-index: 3;
-    max-width: 70%;
-    pointer-events: auto;
-    padding: 20px;
+    padding: 16px 18px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .fc-illustration {
+  .fc-mosaic-card .fc-illustration {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -236,285 +217,120 @@
     align-items: stretch;
     justify-content: stretch;
     pointer-events: none;
-    transition: filter 0.45s ease;
-    transform-style: preserve-3d;
-    will-change: transform;
     z-index: 1;
-    color: var(--fc-text);
     overflow: hidden;
     border-radius: inherit;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  @media (min-width: 768px) {
-    .fc-illustration {
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), filter 0.45s ease;
-    }
-
-    .fc-slide.fc-slide--hover .fc-illustration {
-      transition: transform 0.1s ease-out, filter 0.45s ease;
-    }
+  .fc-mosaic-card:hover .fc-illustration {
+    transform: scale(1.04);
   }
 
-  .fc-illustration img,
-  .fc-illustration svg {
+  .fc-mosaic-card .fc-illustration img,
+  .fc-mosaic-card .fc-illustration svg {
     width: 100% !important;
     height: 100% !important;
     max-width: none;
     max-height: none;
     object-fit: cover;
     object-position: center center;
-    transition: filter 0.45s ease;
-    transform: translateZ(0);
     display: block;
   }
 
-  .fc-illustration svg {
-    object-fit: contain;
-    padding: 18%;
-    box-sizing: border-box;
+  /* Heading overlaid in mosaic text cell */
+  .fc-mosaic-text .fc-subtitle {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin: 0;
   }
 
-  @media (min-width: 768px) {
-    .fc-slide.fc-slide--hover .fc-illustration img,
-    .fc-slide.fc-slide--hover .fc-illustration svg {
-      filter: drop-shadow(0 22px 28px rgba(17, 17, 17, 0.28));
-    }
+  .fc-mosaic-text .fc-heading {
+    margin: 0;
+    color: var(--fc-text, #111);
   }
 
-  /* Navigation arrows */
+  body.template-index .fc-mosaic-text .fc-heading {
+    color: #ffffff;
+  }
+
+  body.template-index .fc-mosaic-text .fc-subtitle {
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── Navigation arrow (only shows when cards overflow) ─────────── */
   .fc-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    left: -20px;
-    right: -20px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 10;
+    display: none; /* hidden in mosaic mode */
   }
-
-  .fc-arrow {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #FFFFFF;
-    border: 1px solid var(--fc-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    pointer-events: auto;
-    transition: all 0.2s ease;
-    color: #111111;
-  }
-
-  .fc-arrow:hover {
-    border-color: var(--fc-border-hover);
-    background-color: #FAFAFB;
-    transform: scale(1.05);
-  }
-
-  .fc-arrow:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .fc-arrow svg {
-    width: 14px;
-    height: 14px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.5;
-  }
-
-  /* Progress bar */
   .fc-progress-container {
-    width: 140px;
-    height: 3px;
-    background-color: var(--fc-border);
-    margin: 30px auto 0 auto;
-    border-radius: 1.5px;
-    position: relative;
-    overflow: hidden;
+    display: none;
   }
 
-  .fc-progress-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 33.333%;
-    background-color: var(--fc-primary);
-    border-radius: 1.5px;
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  @media (max-width: 991px) {
-    .fc-slide {
-      flex: 0 0 calc(33.333% - 14px);
-      min-width: calc(33.333% - 14px);
-    }
-    .fc-progress-container {
-      width: 100px;
-    }
-  }
-  @media (min-width: 768px) {
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack,
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-line,
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
-      display: inline !important;
-    }
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
-      margin-left: 0.15em !important;
-      white-space: nowrap !important;
-    }
-  }
-
+  /* ── MOBILE: 2-column grid ──────────────────────────────────────── */
   @media (max-width: 767px) {
     .fc-section {
       padding: 28px 0 24px;
-      margin-bottom: 0;
       background-color: #ffffff;
+    }
+
+    body.template-index .fc-section {
+      background-color: #0a0a0a;
     }
 
     .fc-container {
       padding: 0 var(--homepage-section-gutter, 6px);
     }
 
-    .fc-heading {
-      line-height: 1.05;
-      padding: 0;
-      text-align: var(--section-heading-align, left);
-    }
-    
-    #shopify-section-{{ section.id }} .hp-mobile-break {
-      display: none;
-    }
-    
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack {
-      display: inline !important;
-      white-space: nowrap !important;
-    }
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-line {
-      display: inline !important;
-      white-space: normal !important;
-    }
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-last-word,
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
-      display: inline-block !important;
-      white-space: nowrap !important;
-      margin-top: 4px !important;
-      margin-left: 0.1em !important;
-    }
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-mobile-break {
-      display: block !important;
-    }
-    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-mobile-nbsp {
-      display: inline !important;
-    }
-
-    .fc-slider-wrapper {
-      overflow: hidden;
-    }
-
-    .fc-slider-container {
-      overflow: hidden;
-      scroll-snap-type: none;
-      padding-bottom: 0;
-    }
-
-    .fc-slider-track {
+    .fc-mosaic-layout {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
       column-gap: 14px;
       row-gap: 16px;
-      width: 100% !important;
+      padding: 16px 0 0;
     }
 
-    .fc-slide {
-      flex: none;
-      min-width: 0;
-      width: 100%;
+    /* Flatten all mosaic overrides for mobile */
+    .fc-mosaic-card:nth-child(1),
+    .fc-mosaic-card:nth-child(2),
+    .fc-mosaic-card:nth-child(3),
+    .fc-mosaic-card:nth-child(4) {
+      grid-column: auto;
+      grid-row: auto;
       aspect-ratio: 1 / 1;
-      min-height: 0;
-      background: #f2f2f4 !important;
-      border: none;
-      border-radius: var(--homepage-corner, 20px);
+      transform: none !important;
+      --fc-stagger: 0px;
+      --fc-parallax-y: 0px;
+      margin-top: 0;
+    }
+
+    /* Text block becomes a full-width header row */
+    .fc-mosaic-text {
+      grid-column: 1 / -1;
+      grid-row: auto;
       padding: 0;
-      overflow: hidden;
-      box-shadow: none;
-      scroll-snap-align: unset;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 0;
-      position: relative;
+      align-items: flex-start;
     }
 
-    .fc-slide:hover {
-      background: #f2f2f4 !important;
-      border-color: transparent;
+    .fc-mosaic-text .fc-subtitle {
+      font-size: 12px;
     }
 
-    .fc-slide:hover .fc-illustration {
-      transform: none;
-    }
-
-    .fc-category-info {
-      max-width: 100%;
-      flex: 0 0 auto;
-      padding: 12px;
-      z-index: 3;
+    .fc-mosaic-text .fc-heading {
+      font-size: clamp(22px, 6vw, 30px) !important;
+      line-height: 1.1;
     }
 
     .fc-category-name {
       font-size: 14px;
-      font-weight: 700;
-      line-height: 1.25;
-      max-width: 100%;
-      -webkit-line-clamp: 2;
     }
 
     .fc-product-count {
       font-size: 12px;
-      font-weight: 500;
-      color: #ffffff !important;
-    }
-
-    .fc-illustration {
-      position: absolute;
-      inset: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      flex: none;
-      width: 100%;
-      height: 100%;
-      max-height: none;
-      min-height: 0;
-      margin-top: 0;
-      align-items: stretch;
-      justify-content: stretch;
-      overflow: hidden;
-    }
-
-    .fc-illustration img,
-    .fc-illustration svg {
-      width: 100% !important;
-      height: 100% !important;
-      max-width: none;
-      max-height: none;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    .fc-illustration svg {
-      object-fit: contain;
-      padding: 18%;
-      box-sizing: border-box;
     }
 
     .fc-nav,
@@ -524,362 +340,155 @@
   }
 
   @media (max-width: 380px) {
-    .fc-slider-track {
+    .fc-mosaic-layout {
       column-gap: 12px;
       row-gap: 14px;
     }
-
-    .fc-slide {
-      min-height: 0;
-      padding: 0;
-    }
-
     .fc-category-name {
       font-size: 13px;
     }
-
-    .fc-category-info {
+    .fc-mosaic-card .fc-category-info {
       padding: 10px;
-    }
-
-    .fc-illustration {
-      height: 100%;
-      max-height: none;
-      min-height: 0;
-    }
-
-    .fc-illustration img,
-    .fc-illustration svg {
-      max-width: none;
     }
   }
 {%- endstyle -%}
 
-<section class="fc-section" aria-label="Shop by Function and Category">
+<section class="fc-section" aria-label="Every Material Deserves the Right Care">
   <div class="fc-container">
-    <div class="fc-header animate-fade-in section-heading-stack">
-      {%- if section.settings.subtitle != blank -%}
-        <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
-      {%- endif -%}
-      {%- assign fc_heading_text = section.settings.heading | default: 'Shop by Function and Category' -%}
-      <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
-    </div>
 
-    <div class="fc-slider-wrapper">
-      <div class="fc-slider-container" id="fc-slider-{{ section.id }}">
-        <div class="fc-slider-track" id="fc-track-{{ section.id }}">
-          {%- for block in section.blocks -%}
-            {%- assign link = block.settings.link | default: '#' -%}
-            <a href="{{ link }}" class="fc-slide" {{ block.shopify_attributes }}>
-              <div class="fc-category-info">
-                <h3 class="fc-category-name">{{ block.settings.title }}</h3>
-                <p class="fc-product-count">{{ block.settings.product_count | default: '0 products' }}</p>
-              </div>
-              <div class="fc-illustration">
-                {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title }}" loading="lazy" width="900" height="900">
-                {%- elsif block.settings.svg_code != blank -%}
-                  {{ block.settings.svg_code }}
-                {%- else -%}
-                  <!-- fallback graphic icon -->
-                  <svg viewBox="0 0 120 120" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="25" y="25" width="70" height="70" rx="12" stroke="currentColor" stroke-width="2"/>
-                    <circle cx="60" cy="60" r="15" stroke="currentColor" stroke-width="2"/>
-                  </svg>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endfor -%}
+    {%- assign fc_heading_text = section.settings.heading | default: 'Every Material Deserves the Right Care' -%}
+
+    <div class="fc-mosaic-layout" id="fc-mosaic-{{ section.id }}">
+
+      {%- for block in section.blocks -%}
+        {%- if forloop.index == 3 -%}
+          {{- '<!-- text node injected between card 2 and 3 -->' -}}
+          <div class="fc-mosaic-text">
+            {%- if section.settings.subtitle != blank -%}
+              <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
+            {%- endif -%}
+            <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
+          </div>
+        {%- endif -%}
+
+        {%- assign link = block.settings.link | default: '#' -%}
+        <a href="{{ link }}" class="fc-mosaic-card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="fc-category-info">
+            <h3 class="fc-category-name">{{ block.settings.title }}</h3>
+            <p class="fc-product-count">{{ block.settings.product_count | default: '0 products' }}</p>
+          </div>
+          <div class="fc-illustration">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title }}" loading="lazy" width="900" height="900">
+            {%- elsif block.settings.svg_code != blank -%}
+              {{ block.settings.svg_code }}
+            {%- else -%}
+              <svg viewBox="0 0 120 120" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="25" y="25" width="70" height="70" rx="12" stroke="currentColor" stroke-width="2"/>
+                <circle cx="60" cy="60" r="15" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+
+      {%- comment -%} Fallback: if fewer than 3 blocks, text was never injected — put it after {%- endcomment -%}
+      {%- if section.blocks.size < 3 -%}
+        <div class="fc-mosaic-text">
+          {%- if section.settings.subtitle != blank -%}
+            <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+          <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
         </div>
-      </div>
+      {%- endif -%}
 
-      <div class="fc-nav">
-        <button class="fc-arrow fc-arrow--prev" id="fc-prev-{{ section.id }}" aria-label="Previous categories" disabled>
-          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="fc-arrow fc-arrow--next" id="fc-next-{{ section.id }}" aria-label="Next categories">
-          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
+    </div><!-- /.fc-mosaic-layout -->
 
-    <div class="fc-progress-container">
-      <div class="fc-progress-fill" id="fc-fill-{{ section.id }}"></div>
-    </div>
   </div>
 </section>
 
 <script>
   (function() {
-    function initFc3DTilt(trackEl) {
-      if (!trackEl || window.innerWidth <= 767 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      const slides = trackEl.querySelectorAll('.fc-slide');
-      const maxTilt = 14;
-      const maxLift = 56;
-      const maxScale = 1.22;
-
-      slides.forEach(function(slide) {
-        const illustration = slide.querySelector('.fc-illustration');
-        if (!illustration || slide.dataset.fcTiltInit === 'true') return;
-        slide.dataset.fcTiltInit = 'true';
-
-        function resetIllustration() {
-          illustration.style.transform = '';
-          slide.classList.remove('fc-slide--hover');
-        }
-
-        slide.addEventListener('mouseenter', function() {
-          slide.classList.add('fc-slide--hover');
-        });
-
-        slide.addEventListener('mousemove', function(e) {
-          const rect = slide.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotateY = x * maxTilt * 2;
-          const rotateX = -y * maxTilt * 2;
-
-          illustration.style.transform =
-            'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(' + maxScale + ') translateZ(' + maxLift + 'px)';
-        });
-
-        slide.addEventListener('mouseleave', resetIllustration);
-      });
-    }
-
-    function initFunctionCategorySlider() {
-      const slider = document.getElementById('fc-slider-{{ section.id }}');
-      const track = document.getElementById('fc-track-{{ section.id }}');
-      const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
-      const nextBtn = document.getElementById('fc-next-{{ section.id }}');
-      const fill = document.getElementById('fc-fill-{{ section.id }}');
-      
-      if (!slider || !track || !prevBtn || !nextBtn || !fill) return;
-
-      function isMobileGrid() {
-        return window.innerWidth <= 767;
-      }
-
-      if (isMobileGrid()) {
-        track.style.width = '';
-        return;
-      }
-
-      let currentIndex = 0;
-      let autoplayInterval = null;
-
-      function getVisibleCardsCount() {
-        if (window.innerWidth <= 767) return 2;
-        if (window.innerWidth <= 991) return 3;
-        return 4;
-      }
-
-      function getSlideWidth() {
-        const slides = track.querySelectorAll('.fc-slide');
-        if (slides.length === 0) return 0;
-        return slides[0].offsetWidth + 20; // width + gap
-      }
-
-      function updateSlider() {
-        const slides = track.querySelectorAll('.fc-slide');
-        const visible = getVisibleCardsCount();
-        const maxSteps = Math.max(0, slides.length - visible);
-        
-        if (currentIndex < 0) currentIndex = 0;
-        if (currentIndex > maxSteps) currentIndex = maxSteps;
-
-        const offset = currentIndex * getSlideWidth();
-        slider.scrollTo({ left: offset, behavior: 'smooth' });
-      }
-
-      function syncUI() {
-        const slides = track.querySelectorAll('.fc-slide');
-        if (slides.length === 0) return;
-        
-        const visible = getVisibleCardsCount();
-        const maxSteps = Math.max(0, slides.length - visible);
-        const slideWidth = getSlideWidth();
-        
-        // Calculate current index from scroll position
-        const scrollIndex = Math.round(slider.scrollLeft / slideWidth);
-        currentIndex = scrollIndex;
-
-        // Update arrow states
-        prevBtn.disabled = (currentIndex === 0);
-        nextBtn.disabled = (currentIndex >= maxSteps);
-
-        // Update progress bar
-        const totalSteps = maxSteps + 1;
-        const fillWidth = 100 / totalSteps;
-        fill.style.width = `${fillWidth}%`;
-        fill.style.transform = `translateX(${currentIndex * 100}%)`;
-      }
-
-      function startAutoplay() {
-        if (autoplayInterval) clearInterval(autoplayInterval);
-        autoplayInterval = setInterval(() => {
-          const slides = track.querySelectorAll('.fc-slide');
-          const visible = getVisibleCardsCount();
-          const maxSteps = Math.max(0, slides.length - visible);
-          if (currentIndex >= maxSteps) {
-            currentIndex = 0;
-          } else {
-            currentIndex++;
-          }
-          updateSlider();
-        }, 5000);
-      }
-
-      function stopAutoplay() {
-        if (autoplayInterval) clearInterval(autoplayInterval);
-      }
-
-      slider.addEventListener('mouseenter', stopAutoplay);
-      slider.addEventListener('mouseleave', startAutoplay);
-      slider.addEventListener('touchstart', stopAutoplay, { passive: true });
-
-      prevBtn.addEventListener('click', () => {
-        currentIndex--;
-        updateSlider();
-        startAutoplay();
-      });
-
-      nextBtn.addEventListener('click', () => {
-        currentIndex++;
-        updateSlider();
-        startAutoplay();
-      });
-
-      // Sync UI on scroll (for native swipes)
-      let scrollTimeout;
-      slider.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(syncUI, 50);
-      }, { passive: true });
-
-      window.addEventListener('resize', function() {
-        if (isMobileGrid()) {
-          stopAutoplay();
-          track.style.width = '';
-          track.querySelectorAll('.fc-slide').forEach(function(slide) {
-            slide.classList.remove('fc-slide--hover');
-            const illustration = slide.querySelector('.fc-illustration');
-            if (illustration) illustration.style.transform = '';
-          });
-          return;
-        }
-        updateSlider();
-        syncUI();
-        initFc3DTilt(track);
-      });
-
-      // Initial sync
-      setTimeout(function() {
-        syncUI();
-        startAutoplay();
-        initFc3DTilt(track);
-      }, 100);
-    }
-
-    }
-
-    function initFcParallaxGlobal() {
-      // Skip on mobile — stagger and parallax are desktop-only
+    function initFcParallaxMosaic() {
       if (window.innerWidth <= 767) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      const sections = document.querySelectorAll('.fc-section');
-      sections.forEach(section => {
-        const slides = section.querySelectorAll('.fc-slide');
-        if (slides.length === 0) return;
+      const mosaic = document.getElementById('fc-mosaic-{{ section.id }}');
+      if (!mosaic) return;
 
-        // ── PART 2: Scroll-driven reveal ──────────────────────────────
-        // Each card starts far below (80px + stagger increment) and rises
-        // into its Part 1 staggered resting position (--fc-parallax-y → 0).
-        // Different multipliers mean each card arrives at a different time.
-        // Resting position = --fc-parallax-y: 0  (stagger is in --fc-stagger)
+      const cards = mosaic.querySelectorAll('.fc-mosaic-card');
+      if (cards.length === 0) return;
 
-        let isIntersecting = false;
-        let animationFrameId;
+      // Per-card config: how far below they start, how fast they settle
+      const cardConfig = [
+        { startY: 80,  finishAt: 0.50 },  // Card 1 — fastest
+        { startY: 110, finishAt: 0.65 },  // Card 2
+        { startY: 95,  finishAt: 0.80 },  // Card 3
+        { startY: 130, finishAt: 1.00 },  // Card 4 — slowest
+      ];
 
-        // Per-card tuning: [startOffset(px), finishAtProgress]
-        // Lower finishAt = card settles earlier in the scroll = faster arrival
-        const cardConfig = [
-          { startY: 80,  finishAt: 0.50 },  // Card 1 (Mesh)  — fastest
-          { startY: 110, finishAt: 0.65 },  // Card 2 (Knits) — slightly slower
-          { startY: 95,  finishAt: 0.80 },  // Card 3 (Suede) — slower still
-          { startY: 130, finishAt: 1.00 },  // Card 4 (Sole)  — slowest
-        ];
+      // Initialise cards below their resting position
+      cards.forEach((card, i) => {
+        const cfg = cardConfig[i] || cardConfig[cardConfig.length - 1];
+        card.style.setProperty('--fc-parallax-y', cfg.startY + 'px');
+      });
 
-        const updateParallax = () => {
-          if (!isIntersecting) return;
+      let isIntersecting = false;
+      let rafId;
 
-          const rect = section.getBoundingClientRect();
-          const windowH = window.innerHeight;
-          // Progress 0 = section top just enters viewport bottom
-          // Progress 1 = section top reaches 25% from top of viewport
-          let progress = (windowH - rect.top) / (windowH * 0.75);
-          if (progress < 0) progress = 0;
-          if (progress > 1) progress = 1;
+      const update = () => {
+        if (!isIntersecting) return;
+        const rect = mosaic.getBoundingClientRect();
+        const wh = window.innerHeight;
+        let progress = (wh - rect.top) / (wh * 0.75);
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
 
-          slides.forEach((slide, i) => {
-            const cfg = cardConfig[i] || cardConfig[cardConfig.length - 1];
-            let sp = progress / cfg.finishAt;
-            if (sp > 1) sp = 1;
-            if (sp < 0) sp = 0;
-
-            // Cubic ease-out — decelerates as it approaches rest
-            const easeOut = 1 - Math.pow(1 - sp, 3);
-            // Moves from startY → 0 (its permanent stagger offset in CSS)
-            const currentY = cfg.startY * (1 - easeOut);
-
-            slide.style.setProperty('--fc-parallax-y', currentY + 'px');
-          });
-
-          animationFrameId = requestAnimationFrame(updateParallax);
-        };
-
-        // Set cards to their max start offset immediately so they appear
-        // off-position on first paint (before scrolling into view)
-        slides.forEach((slide, i) => {
+        cards.forEach((card, i) => {
           const cfg = cardConfig[i] || cardConfig[cardConfig.length - 1];
-          slide.style.setProperty('--fc-parallax-y', cfg.startY + 'px');
+          let sp = progress / cfg.finishAt;
+          if (sp > 1) sp = 1;
+          if (sp < 0) sp = 0;
+          const easeOut = 1 - Math.pow(1 - sp, 3);
+          card.style.setProperty('--fc-parallax-y', (cfg.startY * (1 - easeOut)) + 'px');
         });
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              isIntersecting = true;
-              animationFrameId = requestAnimationFrame(updateParallax);
-            } else {
-              isIntersecting = false;
-              if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            }
-          });
-        }, {
-          root: null,
-          threshold: 0,
-          rootMargin: '100px 0px 0px 0px'
-        });
+        rafId = requestAnimationFrame(update);
+      };
 
-        observer.observe(section);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            isIntersecting = true;
+            rafId = requestAnimationFrame(update);
+          } else {
+            isIntersecting = false;
+            if (rafId) cancelAnimationFrame(rafId);
+          }
+        });
+      }, { root: null, threshold: 0, rootMargin: '100px 0px 0px 0px' });
+
+      io.observe(mosaic);
+
+      // Hover zoom on image (subtle)
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.zIndex = '4';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.zIndex = '';
+        });
       });
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        initFunctionCategorySlider();
-        initFcParallaxGlobal();
-      });
+      document.addEventListener('DOMContentLoaded', initFcParallaxMosaic);
     } else {
-      initFunctionCategorySlider();
-      initFcParallaxGlobal();
+      initFcParallaxMosaic();
     }
-    document.addEventListener('shopify:section:load', () => {
-      initFunctionCategorySlider();
-      initFcParallaxGlobal();
-    });
+    document.addEventListener('shopify:section:load', initFcParallaxMosaic);
+
   })();
 </script>
 
