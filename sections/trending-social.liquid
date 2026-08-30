@@ -88,11 +88,11 @@
 
     #shopify-section-{{ section.id }} .trending-social__slider-container {
       display: flex;
-      gap: 0 !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      padding-bottom: 12px;
-      scroll-padding-inline: 0;
+      gap: 16px !important;
+      padding-left: max(16px, var(--homepage-section-gutter, 16px)) !important;
+      padding-right: max(16px, var(--homepage-section-gutter, 16px)) !important;
+      padding-bottom: 40px;
+      scroll-padding-inline: max(16px, var(--homepage-section-gutter, 16px));
       scroll-snap-type: x mandatory;
       overflow-x: auto;
       overflow-y: hidden;
@@ -101,12 +101,12 @@
     }
 
     #shopify-section-{{ section.id }} .trending-social__slide {
-      flex: 0 0 100% !important;
-      width: 100% !important;
-      min-width: 100% !important;
-      max-width: 100% !important;
-      padding-left: max(16px, var(--homepage-section-gutter, 16px));
-      padding-right: max(16px, var(--homepage-section-gutter, 16px));
+      flex: 0 0 75% !important;
+      width: 75% !important;
+      min-width: 75% !important;
+      max-width: 75% !important;
+      padding-left: 0;
+      padding-right: 0;
       box-sizing: border-box;
       scroll-snap-align: center;
       scroll-snap-stop: always;
@@ -185,8 +185,8 @@
       perspective: 1200px;
       perspective-origin: 50% 45%;
       overflow: visible;
-      padding-left: 48px;
-      padding-right: 48px;
+      padding-left: 8vw;
+      padding-right: 8vw;
     }
 
     /* Row: centred, non-scrolling, preserve-3d so child transforms stack */
@@ -199,8 +199,8 @@
       overflow-x: visible;
       scroll-snap-type: none;
       transform-style: preserve-3d;
-      padding-bottom: 80px;         /* extra room for the deeper U-arc drop */
-      padding-top: 32px;
+      padding-bottom: 120px;         /* extra room for the deeper U-arc drop */
+      padding-top: 48px;
     }
 
     #shopify-section-{{ section.id }} .trending-social__slider-container::-webkit-scrollbar {
@@ -215,8 +215,8 @@
       --fan-transY: 0px;
       --fan-transZ: 0px;
 
-      flex: 0 0 clamp(218px, 20vw, 295px);
-      width:        clamp(218px, 20vw, 295px);  /* ~17% wider than previous */
+      flex: 0 0 clamp(185px, 17vw, 250px);
+      width:        clamp(185px, 17vw, 250px);
       /* No negative margin — every card is fully readable, zero physical overlap */
       margin-left: 0;
       margin-right: 0;
