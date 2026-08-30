@@ -45,10 +45,10 @@
     }
 
     /* Mobile: "Media" on its own line under "Trending on Social" */
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading,
-    #shopify-section-{{ section.id }} .trending-social__heading,
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair,
-    #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair {
+    #MainContent .trending-social-section .trending-social__heading,
+    .trending-social-section .trending-social__heading,
+    #MainContent .trending-social-section .trending-social__heading .hp-heading-pair,
+    .trending-social-section .trending-social__heading .hp-heading-pair {
       display: flex !important;
       flex-direction: column !important;
       flex-wrap: nowrap !important;
@@ -59,18 +59,18 @@
       max-width: 100% !important;
     }
 
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-line,
-    #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-line,
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair .hp-heading-line,
-    #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair .hp-heading-line {
+    #MainContent .trending-social-section .trending-social__heading .hp-heading-line,
+    .trending-social-section .trending-social__heading .hp-heading-line,
+    #MainContent .trending-social-section .trending-social__heading .hp-heading-pair .hp-heading-line,
+    .trending-social-section .trending-social__heading .hp-heading-pair .hp-heading-line {
       display: block !important;
       white-space: nowrap !important;
     }
 
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-accent,
-    #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-accent,
-    #MainContent #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair .hp-heading-accent,
-    #shopify-section-{{ section.id }} .trending-social__heading .hp-heading-pair .hp-heading-accent {
+    #MainContent .trending-social-section .trending-social__heading .hp-heading-accent,
+    .trending-social-section .trending-social__heading .hp-heading-accent,
+    #MainContent .trending-social-section .trending-social__heading .hp-heading-pair .hp-heading-accent,
+    .trending-social-section .trending-social__heading .hp-heading-pair .hp-heading-accent {
       display: block !important;
       white-space: nowrap !important;
       margin-left: 0 !important;
@@ -80,13 +80,13 @@
     }
 
     /* One full video card per swipe — padding on slides, not the track */
-    #shopify-section-{{ section.id }} .trending-social__slider-wrapper {
+    .trending-social-section .trending-social__slider-wrapper {
       overflow: hidden;
       width: 100%;
       position: relative;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-container {
+    .trending-social-section .trending-social__slider-container {
       display: flex;
       gap: 16px !important;
       padding-left: max(16px, var(--homepage-section-gutter, 16px)) !important;
@@ -100,7 +100,7 @@
       scrollbar-width: none;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slide {
+    .trending-social-section .trending-social__slide {
       flex: 0 0 75% !important;
       width: 75% !important;
       min-width: 75% !important;
@@ -112,19 +112,19 @@
       scroll-snap-stop: always;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__media {
+    .trending-social-section .trending-social__media {
       width: 100%;
       max-height: min(58dvh, 500px);
       aspect-ratio: 9 / 16;
       margin: 0 auto;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-nav {
+    .trending-social-section .trending-social__slider-nav {
       display: block;
       pointer-events: none;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow {
+    .trending-social-section .trending-social__slider-nav .trending-social__arrow {
       pointer-events: auto;
       position: absolute;
       top: 50%;
@@ -134,11 +134,11 @@
       height: 36px;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow--prev {
+    .trending-social-section .trending-social__slider-nav .trending-social__arrow--prev {
       left: max(4px, var(--homepage-section-gutter, 4px));
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-nav .trending-social__arrow--next {
+    .trending-social-section .trending-social__slider-nav .trending-social__arrow--next {
       right: max(4px, var(--homepage-section-gutter, 4px));
     }
   }
@@ -151,8 +151,8 @@
   }
 
   @media screen and (max-width: 989px) {
-    #MainContent #shopify-section-{{ section.id }} .trending-social__eyebrow,
-    #shopify-section-{{ section.id }} .trending-social__eyebrow {
+    #MainContent .trending-social-section .trending-social__eyebrow,
+    .trending-social-section .trending-social__eyebrow {
       font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
       font-size: var(--section-label-size, 14px) !important;
       font-weight: 400 !important;
@@ -181,7 +181,7 @@
   @media screen and (min-width: 750px) {
     /* Perspective lives on the wrapper so rotateY reads as true depth.
        Horizontal padding physically indents the fan row from both screen edges. */
-    #shopify-section-{{ section.id }} .trending-social__slider-wrapper {
+    .trending-social-section .trending-social__slider-wrapper {
       perspective: 1200px;
       perspective-origin: 50% 45%;
       overflow: visible;
@@ -190,7 +190,7 @@
     }
 
     /* Row: centred, non-scrolling, preserve-3d so child transforms stack */
-    #shopify-section-{{ section.id }} .trending-social__slider-container {
+    .trending-social-section .trending-social__slider-container {
       display: flex;
       justify-content: center;
       align-items: flex-start;     /* tops aligned; outer cards drop DOWN to form U arc */
@@ -203,12 +203,12 @@
       padding-top: 48px;
     }
 
-    #shopify-section-{{ section.id }} .trending-social__slider-container::-webkit-scrollbar {
+    .trending-social-section .trending-social__slider-container::-webkit-scrollbar {
       display: none;
     }
 
     /* Each card */
-    #shopify-section-{{ section.id }} .trending-social__slide {
+    .trending-social-section .trending-social__slide {
       /* Fan variables — set by JS per card, default to flat center */
       --fan-rotY:   0deg;
       --fan-transX: 0px;   /* inward pull so outer cards converge toward center */
@@ -246,7 +246,7 @@
     }
 
     /* Hovered card: straighten toward camera and pop forward */
-    #shopify-section-{{ section.id }} .trending-social__slide:hover {
+    .trending-social-section .trending-social__slide:hover {
       --fan-rotY:   0deg   !important;
       --fan-transX: 0px    !important;
       --fan-transY: -14px  !important;
@@ -256,7 +256,7 @@
     }
 
     /* Neighbouring cards dim slightly when a sibling is hovered */
-    #shopify-section-{{ section.id }} .trending-social__slider-container:has(.trending-social__slide:hover)
+    .trending-social-section .trending-social__slider-container:has(.trending-social__slide:hover)
     .trending-social__slide:not(:hover) {
       filter: brightness(0.82);
       transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -268,10 +268,10 @@
   /* Flat mobile fallback (scroll-snap as before) */
   @media screen and (max-width: 749px) {
     /* mobile-specific overrides already exist above; just ensure no 3D bleed */
-    #shopify-section-{{ section.id }} .trending-social__slider-wrapper {
+    .trending-social-section .trending-social__slider-wrapper {
       perspective: none;
     }
-    #shopify-section-{{ section.id }} .trending-social__slider-container {
+    .trending-social-section .trending-social__slider-container {
       transform-style: flat;
     }
   }
@@ -729,7 +729,7 @@
 
       /* Ensure all videos autoplay */
       var allVideos = document.querySelectorAll(
-        '#shopify-section-{{ section.id }} .trending-social__media video'
+        '.trending-social-section .trending-social__media video'
       );
       allVideos.forEach(function (v) {
         v.muted = true;
