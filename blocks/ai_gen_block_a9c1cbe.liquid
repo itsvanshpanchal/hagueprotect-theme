@@ -108,7 +108,13 @@
         {% if mobile_bg != blank %}data-mobile-bg="{{ mobile_bg | escape }}"{% endif %}
         {% if desk_bg != blank %}data-desktop-bg="{{ desk_bg | escape }}"{% endif %}
       >
-        {% if block.settings.background_image or block.settings.mobile_image %}
+        {% if block.settings.background_video != blank %}
+          {% assign video_style = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:1;display:block;opacity:" | append: block.settings.image_opacity %}
+          {% unless story_sticky %}
+            {% assign video_style = "position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;object-fit:cover;object-position:center center;z-index:1;display:block;opacity:" | append: block.settings.image_opacity %}
+          {% endunless %}
+          {{ block.settings.background_video | video_tag: class: 'ai-story-banner-video ai-story-banner-cover', autoplay: true, loop: true, muted: true, controls: false, style: video_style }}
+        {% elsif block.settings.background_image or block.settings.mobile_image %}
           <picture
             class="ai-story-banner-picture ai-story-banner-picture-{{ ai_gen_id }}"
             style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;{% endif %}display:block;z-index:1;margin:0;padding:0;"
@@ -272,6 +278,12 @@
     {
       "type": "header",
       "content": "Background"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Upload a video to use as the background. Overrides image."
     },
     {
       "type": "image_picker",
