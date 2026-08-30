@@ -208,46 +208,54 @@
     #shopify-section-{{ section.id }} .trending-social__slide {
       /* Fan variables — set by JS per card, default to flat center */
       --fan-rotY:   0deg;
+      --fan-transX: 0px;   /* inward pull so outer cards converge toward center */
       --fan-transY: 0px;
       --fan-transZ: 0px;
 
-      flex: 0 0 clamp(140px, 14vw, 200px);
-      width:        clamp(140px, 14vw, 200px);
-      margin-left: -18px;           /* cards overlap ~18 px on each side */
-      margin-right: -18px;
+      flex: 0 0 clamp(155px, 15.5vw, 215px);
+      width:        clamp(155px, 15.5vw, 215px);
+      /* Minimal physical overlap — only the blank card edge, never the content */
+      margin-left: -6px;
+      margin-right: -6px;
       scroll-snap-align: none;
       background-color: #ffffff;
       border-radius: var(--homepage-corner, 20px);
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      /* overflow: visible so the 3-D transform reads correctly;
+         clipping is handled on .trending-social__media instead */
+      overflow: visible;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
       transform-style: preserve-3d;
+      /* Pivot from the bottom so the fan spreads from a shared base */
       transform-origin: bottom center;
       transform:
         rotateY(var(--fan-rotY))
+        translateX(var(--fan-transX))
         translateY(var(--fan-transY))
         translateZ(var(--fan-transZ));
       transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  box-shadow 0.45s ease,
-                  z-index 0s;
+                  box-shadow 0.45s ease;
       position: relative;
       display: flex;
       flex-direction: column;
       will-change: transform;
+      /* Clip the card's visual shape without clipping the 3-D transform */
+      clip-path: inset(0 round var(--homepage-corner, 20px));
     }
 
-    /* Hovered card: flatten toward camera */
+    /* Hovered card: straighten toward camera and pop forward */
     #shopify-section-{{ section.id }} .trending-social__slide:hover {
-      --fan-rotY:   0deg !important;
-      --fan-transY: -12px !important;
-      --fan-transZ: 80px  !important;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.22);
-      z-index: 10;
+      --fan-rotY:   0deg   !important;
+      --fan-transX: 0px    !important;
+      --fan-transY: -14px  !important;
+      --fan-transZ: 90px   !important;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.28);
+      z-index: 100 !important;
     }
 
-    /* Neighbouring cards ease back slightly when a sibling is hovered */
+    /* Neighbouring cards dim slightly when a sibling is hovered */
     #shopify-section-{{ section.id }} .trending-social__slider-container:has(.trending-social__slide:hover)
     .trending-social__slide:not(:hover) {
-      filter: brightness(0.88);
+      filter: brightness(0.82);
       transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                   box-shadow 0.45s ease,
                   filter 0.3s ease;
@@ -598,14 +606,31 @@
   (function () {
     /* ── 3-D Fan Layout for Trending Social ── */
 
-    /* Per-card fan angles (rotateY in deg) by distance from center.
-       Index 0 = center card. Values are absolute; sign is applied per side. */
-    var FAN_ANGLES  = [0, 10, 20, 28, 34, 38, 40]; // deg rotateY
-    var FAN_DROP    = [0,  6, 14, 22, 30, 36, 40]; // px translateY (cards sit lower)
-    var FAN_DEPTH   = [30, 10, -10, -30, -50, -65, -80]; // px translateZ
+    /* Per-card fan values by distance-bucket from center.
+       Index 0 = center, index 1 = ±1 from center, etc.
+       ─ rotY:    rotateY angle in deg (stronger = more tilt)
+       ─ dropY:   translateY in px (outer cards sit lower)
+       ─ depthZ:  translateZ in px (center closest, outer recede)
+       ─ shiftX:  translateX in px TOWARD center (pulls fan inward
+                  so only the blank card edge overlaps the neighbour) */
+    var FAN_ANGLES = [0,  18,  30,  40,  47,  52,  55]; // deg rotateY
+    var FAN_DROP   = [0,   8,  18,  28,  36,  42,  46]; // px translateY
+    var FAN_DEPTH  = [50,  20, -10, -40, -65, -85, -100]; // px translateZ
+    var FAN_SHIFTX = [0,   28,  50,  66,  78,  87,  93]; // px toward center
 
     function applyFanTransforms(slider) {
-      if (window.innerWidth < 750) return; // mobile uses scroll-snap
+      if (window.innerWidth < 750) {
+        /* Mobile: clear any desktop styles so scroll-snap works cleanly */
+        var mobileSlides = Array.from(slider.querySelectorAll('.trending-social__slide'));
+        mobileSlides.forEach(function (s) {
+          s.style.removeProperty('--fan-rotY');
+          s.style.removeProperty('--fan-transX');
+          s.style.removeProperty('--fan-transY');
+          s.style.removeProperty('--fan-transZ');
+          s.style.removeProperty('z-index');
+        });
+        return;
+      }
 
       var slides = Array.from(slider.querySelectorAll('.trending-social__slide'));
       var total  = slides.length;
@@ -614,18 +639,21 @@
       var center = (total - 1) / 2; // fractional center index
 
       slides.forEach(function (slide, i) {
-        var dist  = i - center;          // negative = left of center, positive = right
-        var absDist = Math.abs(dist);
-        var bucketIdx = Math.min(Math.round(absDist), FAN_ANGLES.length - 1);
+        var dist     = i - center;   // negative = left of center
+        var absDist  = Math.abs(dist);
+        var bucket   = Math.min(Math.round(absDist), FAN_ANGLES.length - 1);
+        var side     = dist >= 0 ? 1 : -1; // +1 = right side, -1 = left side
 
-        var rotY   = (dist >= 0 ? 1 : -1) * FAN_ANGLES[bucketIdx];
-        var transY = FAN_DROP[bucketIdx];
-        var transZ = FAN_DEPTH[bucketIdx];
+        var rotY   = side * FAN_ANGLES[bucket];  // right cards tilt right, left tilt left
+        var transX = -side * FAN_SHIFTX[bucket]; // pull TOWARD center (opposite to side)
+        var transY = FAN_DROP[bucket];
+        var transZ = FAN_DEPTH[bucket];
 
-        /* z-index: center card on top, outer cards behind */
-        slide.style.zIndex = String(Math.round(20 - absDist * 3));
+        /* Center card highest z-index; outer cards step down clearly */
+        slide.style.zIndex = String(50 - Math.round(absDist * 10));
 
         slide.style.setProperty('--fan-rotY',   rotY   + 'deg');
+        slide.style.setProperty('--fan-transX', transX + 'px');
         slide.style.setProperty('--fan-transY', transY + 'px');
         slide.style.setProperty('--fan-transZ', transZ + 'px');
       });
