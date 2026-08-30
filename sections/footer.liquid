@@ -514,12 +514,9 @@
     text-align: center;
     padding: 0;
     width: 100%;
-    position: absolute;
-    top: 150px; /* Adjust this value to control how much it overlaps the columns */
-    left: 0;
-    right: 0;
-    z-index: 0;
-    pointer-events: none;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
   }
   .footer-earth-block__top-heading {
     font-family: 'Inter', sans-serif !important;
@@ -754,35 +751,36 @@
         </nav>
         </div>
       </div>
-      <div class="footer-spacer"></div>
-    </div>
+      
+      <div class="footer-spacer">
+        <div class="footer-earth-block">
+          {%- if section.settings.earth_video != blank -%}
+            <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image lazy-video">
+              {% for source in section.settings.earth_video.sources %}
+                <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+              {% endfor %}
+            </video>
+          {%- elsif section.settings.earth_image != blank -%}
+            <img
+              src="{{ section.settings.earth_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.earth_image.alt | escape }}"
+              class="footer-earth-block__image"
+              loading="lazy"
+              width="{{ section.settings.earth_image.width }}"
+              height="{{ section.settings.earth_image.height }}"
+            >
+          {%- endif -%}
 
-    <div class="footer-earth-block">
+          {%- if section.settings.earth_bottom_heading != blank -%}
+            <h3 class="footer-earth-block__bottom-heading">{{ section.settings.earth_bottom_heading }}</h3>
+          {%- endif -%}
 
-      {%- if section.settings.earth_video != blank -%}
-        <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image lazy-video">
-          {% for source in section.settings.earth_video.sources %}
-            <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
-          {% endfor %}
-        </video>
-      {%- elsif section.settings.earth_image != blank -%}
-        <img
-          src="{{ section.settings.earth_image | image_url: width: 1200 }}"
-          alt="{{ section.settings.earth_image.alt | escape }}"
-          class="footer-earth-block__image"
-          loading="lazy"
-          width="{{ section.settings.earth_image.width }}"
-          height="{{ section.settings.earth_image.height }}"
-        >
-      {%- endif -%}
+          {%- if section.settings.earth_bottom_subtext != blank -%}
+            <div class="footer-earth-block__subtext">{{ section.settings.earth_bottom_subtext }}</div>
+          {%- endif -%}
+        </div>
+      </div>
 
-      {%- if section.settings.earth_bottom_heading != blank -%}
-        <h3 class="footer-earth-block__bottom-heading">{{ section.settings.earth_bottom_heading }}</h3>
-      {%- endif -%}
-
-      {%- if section.settings.earth_bottom_subtext != blank -%}
-        <div class="footer-earth-block__subtext">{{ section.settings.earth_bottom_subtext }}</div>
-      {%- endif -%}
     </div>
 
     <div class="footer__socials footer__socials-main">
