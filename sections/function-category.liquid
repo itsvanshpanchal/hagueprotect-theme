@@ -154,12 +154,14 @@
     scroll-snap-align: start;
     scroll-snap-stop: always;
     will-change: transform;
-    transform: translateY(var(--fc-parallax-y, 0px));
+    /* --fc-stagger: permanent baked-in mosaic offset (desktop only) */
+    /* --fc-parallax-y: scroll-driven motion offset */
+    transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px)));
   }
 
   @media (min-width: 768px) {
     .fc-slider-track {
-      padding: 28px 0;
+      padding: 44px 0 44px; /* Extra padding to give stagger room */
     }
 
     .fc-slide {
@@ -168,9 +170,19 @@
       transform-style: preserve-3d;
     }
 
+    /* ── PART 1: Staggered mosaic offsets ─────────────────────── */
+    /* Card 1 (Mesh): baseline */
+    .fc-slide:nth-child(1) { --fc-stagger: 0px; }
+    /* Card 2 (Knits): shifted down 28px */
+    .fc-slide:nth-child(2) { --fc-stagger: 28px; }
+    /* Card 3 (Suede): shifted up 18px */
+    .fc-slide:nth-child(3) { --fc-stagger: -18px; }
+    /* Card 4 (Sole): shifted down 12px */
+    .fc-slide:nth-child(4) { --fc-stagger: 12px; }
+
     .fc-slide.fc-slide--hover {
       z-index: 8;
-      transform: translateY(calc(var(--fc-parallax-y, 0px) - 8px));
+      transform: translateY(calc(var(--fc-stagger, 0px) + var(--fc-parallax-y, 0px) - 8px));
       box-shadow: 0 28px 52px rgba(17, 17, 17, 0.14);
       border-color: var(--fc-border-hover);
     }
@@ -773,47 +785,67 @@
     }
 
     function initFcParallaxGlobal() {
+      // Skip on mobile — stagger and parallax are desktop-only
+      if (window.innerWidth <= 767) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       const sections = document.querySelectorAll('.fc-section');
       sections.forEach(section => {
         const slides = section.querySelectorAll('.fc-slide');
         if (slides.length === 0) return;
 
+        // ── PART 2: Scroll-driven reveal ──────────────────────────────
+        // Each card starts far below (80px + stagger increment) and rises
+        // into its Part 1 staggered resting position (--fc-parallax-y → 0).
+        // Different multipliers mean each card arrives at a different time.
+        // Resting position = --fc-parallax-y: 0  (stagger is in --fc-stagger)
+
         let isIntersecting = false;
         let animationFrameId;
+
+        // Per-card tuning: [startOffset(px), finishAtProgress]
+        // Lower finishAt = card settles earlier in the scroll = faster arrival
+        const cardConfig = [
+          { startY: 80,  finishAt: 0.50 },  // Card 1 (Mesh)  — fastest
+          { startY: 110, finishAt: 0.65 },  // Card 2 (Knits) — slightly slower
+          { startY: 95,  finishAt: 0.80 },  // Card 3 (Suede) — slower still
+          { startY: 130, finishAt: 1.00 },  // Card 4 (Sole)  — slowest
+        ];
 
         const updateParallax = () => {
           if (!isIntersecting) return;
 
           const rect = section.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          // Start when the top of the section enters the bottom of the viewport
-          const start = windowHeight;
-          // Finish when the top of the section is 20% from the top of the viewport
-          const end = windowHeight * 0.2; 
-          
-          let progress = (windowHeight - rect.top) / (start - end);
+          const windowH = window.innerHeight;
+          // Progress 0 = section top just enters viewport bottom
+          // Progress 1 = section top reaches 25% from top of viewport
+          let progress = (windowH - rect.top) / (windowH * 0.75);
           if (progress < 0) progress = 0;
           if (progress > 1) progress = 1;
-          
+
           slides.forEach((slide, i) => {
-            // Stagger finish points: Card 1 (Knits) finishes at progress 0.55, Card 4 at 1.0
-            const finishAt = 0.55 + (i * 0.15); 
-            let slideProgress = progress / finishAt;
-            if (slideProgress > 1) slideProgress = 1;
-            if (slideProgress < 0) slideProgress = 0;
-            
-            // Cubic ease-out
-            const easeOut = 1 - Math.pow(1 - slideProgress, 3);
-            
-            // Stagger initial offsets: Card 1 moves 100px, Card 4 moves 220px
-            const maxOffset = 100 + (i * 40); 
-            const currentY = maxOffset * (1 - easeOut);
-            
+            const cfg = cardConfig[i] || cardConfig[cardConfig.length - 1];
+            let sp = progress / cfg.finishAt;
+            if (sp > 1) sp = 1;
+            if (sp < 0) sp = 0;
+
+            // Cubic ease-out — decelerates as it approaches rest
+            const easeOut = 1 - Math.pow(1 - sp, 3);
+            // Moves from startY → 0 (its permanent stagger offset in CSS)
+            const currentY = cfg.startY * (1 - easeOut);
+
             slide.style.setProperty('--fc-parallax-y', currentY + 'px');
           });
 
           animationFrameId = requestAnimationFrame(updateParallax);
         };
+
+        // Set cards to their max start offset immediately so they appear
+        // off-position on first paint (before scrolling into view)
+        slides.forEach((slide, i) => {
+          const cfg = cardConfig[i] || cardConfig[cardConfig.length - 1];
+          slide.style.setProperty('--fc-parallax-y', cfg.startY + 'px');
+        });
 
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
@@ -828,7 +860,7 @@
         }, {
           root: null,
           threshold: 0,
-          rootMargin: "50px 0px 50px 0px"
+          rootMargin: '100px 0px 0px 0px'
         });
 
         observer.observe(section);
