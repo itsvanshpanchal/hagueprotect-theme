@@ -6,7 +6,9 @@
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     overflow: hidden;
     position: relative;
-    padding: 24px 0 0;
+    /* Horizontal breathing room: responsive 4vw, floored at 32px so it
+       never goes flush on any desktop viewport. Bottom clears below the fan. */
+    padding: 24px max(32px, 4vw) 80px;
   }
 
   .trending-social-section .container {
@@ -27,7 +29,9 @@
 
   @media screen and (max-width: 749px) {
     .trending-social-section {
-      padding: 24px 0 0;
+      /* Mobile: keep sides at 0 so scroll-snap cards use full width;
+         add bottom clearance below the section */
+      padding: 24px 0 48px;
     }
     .trending-social-section .container {
       padding-left: var(--homepage-section-gutter, 6px) !important;
