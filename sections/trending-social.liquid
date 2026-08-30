@@ -6,7 +6,7 @@
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     overflow: hidden;
     position: relative;
-    padding: 24px 0 100px;
+    padding: 24px 0 60px; /* Base padding, container padding adds the rest */
   }
 
   .trending-social-section .container {
@@ -199,7 +199,7 @@
       overflow-x: visible;
       scroll-snap-type: none;
       transform-style: preserve-3d;
-      padding-bottom: 120px;         /* extra room for the deeper U-arc drop */
+      padding-bottom: 200px;         /* huge room for 3D projection, U-arc drop and 70px hover shadow */
       padding-top: 48px;
     }
 
