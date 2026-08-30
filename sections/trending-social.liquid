@@ -191,7 +191,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;     /* tops aligned; outer cards drop DOWN to form U arc */
-      gap: 0;                       /* overlap handled by negative margin on cards */
+      gap: 10px;                    /* positive gap — no physical card overlap ever */
       overflow: visible;
       overflow-x: visible;
       scroll-snap-type: none;
@@ -212,11 +212,11 @@
       --fan-transY: 0px;
       --fan-transZ: 0px;
 
-      flex: 0 0 clamp(155px, 15.5vw, 215px);
-      width:        clamp(155px, 15.5vw, 215px);
-      /* Minimal physical overlap — only the blank card edge, never the content */
-      margin-left: -6px;
-      margin-right: -6px;
+      flex: 0 0 clamp(150px, 14vw, 200px);
+      width:        clamp(150px, 14vw, 200px);
+      /* No negative margin — every card is fully readable, zero physical overlap */
+      margin-left: 0;
+      margin-right: 0;
       scroll-snap-align: none;
       background-color: #ffffff;
       border-radius: var(--homepage-corner, 20px);
@@ -606,17 +606,12 @@
   (function () {
     /* ── 3-D Fan Layout for Trending Social ── */
 
-    /* Per-card fan values by distance-bucket from center.
-       Index 0 = center, index 1 = ±1 from center, etc.
-       ─ rotY:    rotateY angle in deg (stronger = more tilt)
-       ─ dropY:   translateY in px (outer cards sit lower)
-       ─ depthZ:  translateZ in px (center closest, outer recede)
-       ─ shiftX:  translateX in px TOWARD center (pulls fan inward
-                  so only the blank card edge overlaps the neighbour) */
-    var FAN_ANGLES = [0,  16,  26,  34,  40,  44,  47]; // deg rotateY (inward tilt)
-    var FAN_DROP   = [0,   8,  18,  28,  36,  42,  46]; // px translateY DOWN (U arc)
-    var FAN_DEPTH  = [0,  20,  38,  52,  62,  70,  75]; // px translateZ (outer = closer)
-    var FAN_SHIFTX = [0,   8,  14,  18,  22,  25,  27]; // px push outward for breathing room
+    /* Per-card fan values indexed by distance-bucket from center (0 = center).
+       User spec: outermost ~20-25 deg + large drop, mid ~10-12 deg + medium drop */
+    var FAN_ANGLES = [0,   12,   22,   27,   30,   32,   34]; // deg rotateY
+    var FAN_DROP   = [0,   22,   45,   62,   74,   82,   88]; // px translateY DOWN
+    var FAN_DEPTH  = [0,   18,   34,   46,   55,   62,   67]; // px translateZ (outer closer)
+    /* No lateral shift needed — gap handles spacing cleanly */
 
     function applyFanTransforms(slider) {
       if (window.innerWidth < 750) {
@@ -644,21 +639,15 @@
         var bucket   = Math.min(Math.round(absDist), FAN_ANGLES.length - 1);
         var side     = dist >= 0 ? 1 : -1; // +1 = right side, -1 = left side
 
-        /* ── CONCAVE / U-smile / cupped-hand math ──
-
-           rotY sign is OPPOSITE to side:
-             right-side cards (>0) get NEGATIVE rotY → right/outer edge tilts TOWARD viewer
-             left-side cards  (<0) get POSITIVE rotY → left/outer edge tilts TOWARD viewer
-           This creates the inward "cup" where outer card faces open toward you.
-
-           transZ: outer cards CLOSER to viewer (positive) → reinforces the cup.
-           transY: outer cards pushed DOWN (positive) → U-arc with tops aligned.
-           transX: pull outer cards slightly OUTWARD (away from center) to counter
-                   the visual foreshortening of the inward tilt. */
-        var rotY   = -side * FAN_ANGLES[bucket]; // negative of side = inward cup
-        var transX =  side * FAN_SHIFTX[bucket]; // push slightly OUTWARD for spacing
-        var transY = FAN_DROP[bucket];            // positive = down, forms U arc
-        var transZ = FAN_DEPTH[bucket];           // outer cards closer to viewer
+        /* CONCAVE U-smile math:
+           rotY OPPOSITE sign to side → outer edge of each card tilts toward viewer (cupped)
+           transY positive           → outer cards drop down, tops stay aligned = U arc
+           transZ positive           → outer cards closer to viewer, reinforcing the cup
+           transX zero               → gap alone handles spacing, no lateral push needed */
+        var rotY   = -side * FAN_ANGLES[bucket];
+        var transX = 0;
+        var transY = FAN_DROP[bucket];
+        var transZ = FAN_DEPTH[bucket];
 
         /* Center card highest z-index; outer cards step down clearly */
         slide.style.zIndex = String(50 - Math.round(absDist * 10));
