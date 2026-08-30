@@ -48,7 +48,7 @@
     font-style: var(--font-style-h2, normal) !important;
     font-size: {{ hp_heading_desktop }}px !important;
     line-height: 1.05 !important;
-    color: #ffffff !important;
+    color: #000000 !important;
     text-transform: none !important;
     margin-bottom: {{ section.settings.heading_subheading_spacing_desktop | default: 22 }}px !important;
   }
@@ -203,7 +203,7 @@
     font-weight: var(--font-weight-h2, 300) !important;
     font-style: var(--font-style-h2, normal) !important;
     text-transform: none !important;
-    color: #f3f2f2;
+    color: #000000;
     margin: 0 0 {{ section.settings.heading_subheading_spacing_desktop | default: 22 }}px 0 !important;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -312,7 +312,7 @@
     border: none;
     padding: 10px 20px;
     border-radius: 100px;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(0, 0, 0, 0.85);
     font-family: var(--font-family-sans);
     font-size: var(--section-label-size, 13px);
     font-weight: var(--font-weight-sans, 700);
@@ -327,13 +327,13 @@
   }
 
   .hp-fam-sec__tab:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
+    color: #000000;
+    background: rgba(0, 0, 0, 0.1);
   }
 
   .hp-fam-sec__tab.is-active {
     background: #000000;
-    color: #ffffff;
+    color: #000000;
   }
 
   /* Intro panel — transparent, no card box */
@@ -397,7 +397,7 @@
     line-height: 1.3 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-    color: #ffffff !important;
+    color: #000000 !important;
   }
 
   .hp-fam-sec__glass-para {
@@ -409,7 +409,7 @@
     line-height: 1.3 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-    color: #ffffff !important;
+    color: #000000 !important;
   }
 
   .hp-fam-sec__glass-rule {
@@ -419,7 +419,7 @@
     margin: 19px 0;
     padding: 0;
     border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
   }
 
   .hp-fam-sec__glass-col--detail .hp-fam-sec__glass-eyebrow {
@@ -450,7 +450,7 @@
 
   .hp-fam-sec__glass-link:hover {
     background-color: #2ecc71;
-    color: #ffffff !important;
+    color: #000000 !important;
   }
 
   @media screen and (max-width: 989px) {
@@ -827,7 +827,7 @@
     height: 40px;
     border-radius: 50%;
     border: none;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.95);
     color: #111;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     align-items: center;
@@ -3078,3 +3078,4 @@
   ]
 }
 {% endschema %}
+
