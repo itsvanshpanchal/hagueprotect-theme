@@ -6,9 +6,7 @@
     background-color: {{ section.settings.bg_color | default: '#ffffff' }};
     overflow: hidden;
     position: relative;
-    /* Horizontal breathing room: responsive 4vw, floored at 32px so it
-       never goes flush on any desktop viewport. Bottom clears below the fan. */
-    padding: 24px max(32px, 4vw) 80px;
+    padding: 24px 0 100px;
   }
 
   .trending-social-section .container {
@@ -29,9 +27,7 @@
 
   @media screen and (max-width: 749px) {
     .trending-social-section {
-      /* Mobile: keep sides at 0 so scroll-snap cards use full width;
-         add bottom clearance below the section */
-      padding: 24px 0 48px;
+      padding: 24px 0 56px;
     }
     .trending-social-section .container {
       padding-left: var(--homepage-section-gutter, 6px) !important;
@@ -183,11 +179,14 @@
 
   /* ── DESKTOP FAN LAYOUT (≥750 px) ── */
   @media screen and (min-width: 750px) {
-    /* Perspective lives on the wrapper so rotateY reads as true depth */
+    /* Perspective lives on the wrapper so rotateY reads as true depth.
+       Horizontal padding physically indents the fan row from both screen edges. */
     #shopify-section-{{ section.id }} .trending-social__slider-wrapper {
       perspective: 1200px;
       perspective-origin: 50% 45%;
       overflow: visible;
+      padding-left: 48px;
+      padding-right: 48px;
     }
 
     /* Row: centred, non-scrolling, preserve-3d so child transforms stack */
