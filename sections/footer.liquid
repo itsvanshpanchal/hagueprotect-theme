@@ -526,11 +526,7 @@
     color: #ffffff !important;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 0;
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: 24px;
     z-index: 10;
     width: 100%;
     text-align: center;
@@ -592,10 +588,6 @@
 {%- endstyle -%}
 
 <footer class="footer-wrapper" role="contentinfo">
-
-  {%- if section.settings.earth_top_heading != blank -%}
-    <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
-  {%- endif -%}
 
   <div class="container">
     <div class="footer-grid">
@@ -769,6 +761,10 @@
       
       <div class="footer-spacer">
         <div class="footer-earth-block">
+          {%- if section.settings.earth_top_heading != blank -%}
+            <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
+          {%- endif -%}
+
           {%- if section.settings.earth_video != blank -%}
             <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image lazy-video">
               {% for source in section.settings.earth_video.sources %}
