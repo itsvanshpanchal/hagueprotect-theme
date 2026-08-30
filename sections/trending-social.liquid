@@ -190,7 +190,7 @@
     #shopify-section-{{ section.id }} .trending-social__slider-container {
       display: flex;
       justify-content: center;
-      align-items: flex-end;       /* outer cards sit slightly lower */
+      align-items: flex-start;     /* tops aligned; outer cards drop DOWN to form U arc */
       gap: 0;                       /* overlap handled by negative margin on cards */
       overflow: visible;
       overflow-x: visible;
@@ -225,8 +225,8 @@
       overflow: visible;
       box-shadow: 0 8px 30px rgba(0,0,0,0.18);
       transform-style: preserve-3d;
-      /* Pivot from the bottom so the fan spreads from a shared base */
-      transform-origin: bottom center;
+      /* Center pivot — rotateY fans symmetrically without raising card tops */
+      transform-origin: center center;
       transform:
         rotateY(var(--fan-rotY))
         translateX(var(--fan-transX))
@@ -613,10 +613,10 @@
        ─ depthZ:  translateZ in px (center closest, outer recede)
        ─ shiftX:  translateX in px TOWARD center (pulls fan inward
                   so only the blank card edge overlaps the neighbour) */
-    var FAN_ANGLES = [0,  18,  30,  40,  47,  52,  55]; // deg rotateY
-    var FAN_DROP   = [0,   8,  18,  28,  36,  42,  46]; // px translateY
-    var FAN_DEPTH  = [50,  20, -10, -40, -65, -85, -100]; // px translateZ
-    var FAN_SHIFTX = [0,   28,  50,  66,  78,  87,  93]; // px toward center
+    var FAN_ANGLES = [0,  16,  26,  34,  40,  44,  47]; // deg rotateY (inward tilt)
+    var FAN_DROP   = [0,   8,  18,  28,  36,  42,  46]; // px translateY DOWN (U arc)
+    var FAN_DEPTH  = [0,  20,  38,  52,  62,  70,  75]; // px translateZ (outer = closer)
+    var FAN_SHIFTX = [0,   8,  14,  18,  22,  25,  27]; // px push outward for breathing room
 
     function applyFanTransforms(slider) {
       if (window.innerWidth < 750) {
@@ -644,10 +644,21 @@
         var bucket   = Math.min(Math.round(absDist), FAN_ANGLES.length - 1);
         var side     = dist >= 0 ? 1 : -1; // +1 = right side, -1 = left side
 
-        var rotY   = side * FAN_ANGLES[bucket];  // right cards tilt right, left tilt left
-        var transX = -side * FAN_SHIFTX[bucket]; // pull TOWARD center (opposite to side)
-        var transY = FAN_DROP[bucket];
-        var transZ = FAN_DEPTH[bucket];
+        /* ── CONCAVE / U-smile / cupped-hand math ──
+
+           rotY sign is OPPOSITE to side:
+             right-side cards (>0) get NEGATIVE rotY → right/outer edge tilts TOWARD viewer
+             left-side cards  (<0) get POSITIVE rotY → left/outer edge tilts TOWARD viewer
+           This creates the inward "cup" where outer card faces open toward you.
+
+           transZ: outer cards CLOSER to viewer (positive) → reinforces the cup.
+           transY: outer cards pushed DOWN (positive) → U-arc with tops aligned.
+           transX: pull outer cards slightly OUTWARD (away from center) to counter
+                   the visual foreshortening of the inward tilt. */
+        var rotY   = -side * FAN_ANGLES[bucket]; // negative of side = inward cup
+        var transX =  side * FAN_SHIFTX[bucket]; // push slightly OUTWARD for spacing
+        var transY = FAN_DROP[bucket];            // positive = down, forms U arc
+        var transZ = FAN_DEPTH[bucket];           // outer cards closer to viewer
 
         /* Center card highest z-index; outer cards step down clearly */
         slide.style.zIndex = String(50 - Math.round(absDist * 10));
