@@ -89,8 +89,8 @@
           {% else %}
           height:auto;
           min-height:0;
-          aspect-ratio:9/16;
-          max-height:85vh;
+          aspect-ratio:16/9;
+          max-height:100vh;
           {% endif %}
           overflow:hidden;
           background-color:#111111;
@@ -111,7 +111,7 @@
         {% if block.settings.background_video != blank or block.settings.mobile_video != blank %}
           {% assign video_style = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:1;opacity:" | append: block.settings.image_opacity %}
           {% unless story_sticky %}
-            {% assign video_style = "position:relative;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;object-fit:cover;object-position:center center;z-index:1;opacity:" | append: block.settings.image_opacity %}
+            {% assign video_style = "position:relative;width:100%;height:auto;aspect-ratio:16/9;max-height:100vh;object-fit:cover;object-position:center center;z-index:1;opacity:" | append: block.settings.image_opacity %}
           {% endunless %}
           
           <style>
@@ -141,7 +141,7 @@
         {% elsif block.settings.background_image or block.settings.mobile_image %}
           <picture
             class="ai-story-banner-picture ai-story-banner-picture-{{ ai_gen_id }}"
-            style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;{% endif %}display:block;z-index:1;margin:0;padding:0;"
+            style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:100vh;{% endif %}display:block;z-index:1;margin:0;padding:0;"
           >
             {% if mobile_bg != blank %}
               <source media="(max-width: 749px)" srcset="{{ mobile_bg }}">
@@ -157,7 +157,7 @@
               loading="eager"
               fetchpriority="high"
               decoding="async"
-              style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:85vh;object-fit:cover;object-position:center center;{% endif %}z-index:1;display:block;opacity:{{ block.settings.image_opacity | default: 1 }};"
+              style="{% if story_sticky %}position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;{% else %}position:relative;display:block;width:100%;height:auto;aspect-ratio:16/9;max-height:100vh;object-fit:cover;object-position:center center;{% endif %}z-index:1;display:block;opacity:{{ block.settings.image_opacity | default: 1 }};"
             >
           </picture>
         {% else %}
