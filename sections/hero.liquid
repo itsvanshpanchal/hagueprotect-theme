@@ -381,30 +381,24 @@
       padding: 0 !important;
     }
 
-    /*
-     * Mobile hero: size the section to the video's natural 16:9 shape
-     * so the landscape video never gets cropped.
-     * min-height keeps text content readable on very small screens.
-     */
     .hero-fullscreen {
       position: relative;
       width: 100%;
       max-width: 100vw;
-      height: auto;
-      aspect-ratio: 16 / 9;
-      min-height: 320px;
+      height: var(--hp-mobile-vh, 100svh);
+      min-height: var(--hp-mobile-vh, 100svh);
       max-height: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: #111111;
+      aspect-ratio: auto;
     }
 
     .hero-fullscreen--mobile-art {
-      height: auto;
-      aspect-ratio: 16 / 9;
-      min-height: 320px;
+      min-height: var(--hp-mobile-vh, 100svh);
       max-height: none;
+      aspect-ratio: auto;
       background: #111111;
     }
 
@@ -466,7 +460,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      object-position: center center;
+      object-position: center top;
       background: #111111;
     }
 
@@ -475,13 +469,13 @@
       display: none;
     }
     /*
-     * Portrait mobile video: use cover since it's already
-     * optimised for portrait screens.
+     * Portrait or dedicated mobile video: use contain to prevent ANY cutting.
      */
     .hero-fullscreen__bg-video.mobile-video {
       display: block;
-      object-fit: cover;
-      object-position: center center;
+      object-fit: contain;
+      object-position: center top;
+      background: #111111;
     }
 
     /* Cover for mobile-art (dedicated portrait image) */
