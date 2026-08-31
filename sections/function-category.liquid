@@ -1,59 +1,106 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+  .fc-heading .hp-heading-line--2,
+  body.template-index #MainContent .fc-heading .hp-heading-line--2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight: 300 !important;
+    font-style: oblique 15deg !important;
+    font-synthesis: style !important;
+  }
+
   :root {
-    --fc-bg: #F4F5F7;
-    --fc-card-bg: #FAFAFB;
-    --fc-border: #E6E7E8;
-    --fc-border-hover: #D1D2D4;
+    --fc-bg: #fdfeff;
+    --fc-card-bg: #fdfeff;
+    --fc-border: #D1D2D4;
+    --fc-border-hover: #B8B9BB;
     --fc-text: #111111;
     --fc-muted: #666668;
-    --fc-primary: #111111;
+    --fc-primary: #c6c2c2ff;
   }
 
   /* Dark mode variable updates if applicable */
   @media (prefers-color-scheme: dark) {
     :root {
-      --fc-bg: #1A1B1D;
-      --fc-card-bg: #222426;
-      --fc-border: #333639;
-      --fc-border-hover: #4A4D51;
-      --fc-text: #F4F5F7;
-      --fc-muted: #8E9196;
+      --fc-bg: #fdfeff;
+      --fc-card-bg: #fdfeff;
+      --fc-border: #D1D2D4;
+      --fc-border-hover: #B8B9BB;
+      --fc-text: #111111;
+      --fc-muted: #666668;
     }
   }
 
   .fc-section {
     padding: 60px 0;
-    background-color: transparent;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    background-color: #ffffff;
+    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
     overflow: hidden;
   }
 
+  /* Homepage-only dark theme */
+  body.template-index .fc-section {
+    background-color: #0a0a0a;
+    color: #ffffff;
+  }
+
+  body.template-index .fc-heading {
+    color: #ffffff;
+  }
+
+  body.template-index .fc-heading .hp-heading-pair--stack {
+    gap: 0.15em;
+  }
+
+  body.template-index .fc-subtitle {
+    color: #ffffff;
+  }
+
   .fc-container {
-    max-width: 1200px;
+    max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 var(--homepage-section-gutter, 8px);
     position: relative;
     box-sizing: border-box;
   }
 
   .fc-header {
-    text-align: center;
-    margin-bottom: 40px;
+    text-align: var(--section-heading-align, left);
   }
 
   .fc-heading {
-    font-size: 20px;
-    font-weight: 700;
     color: var(--fc-text);
-    margin: 0 0 6px 0;
-    letter-spacing: -0.02em;
+    margin: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.0;
+  }
+
+  .fc-heading .hp-heading-line {
+    display: inline !important;
   }
 
   .fc-subtitle {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--fc-muted);
     margin: 0;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .fc-subtitle,
+    #shopify-section-{{ section.id }} .fc-subtitle {
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      font-style: normal !important;
+      font-synthesis: none !important;
+      -webkit-text-stroke: 0.45px currentColor !important;
+      paint-order: stroke fill !important;
+      text-shadow: none !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
+    }
   }
 
   .fc-slider-wrapper {
@@ -63,81 +110,163 @@
   }
 
   .fc-slider-container {
-    overflow: hidden;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
     box-sizing: border-box;
     position: relative;
     padding-bottom: 8px;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .fc-slider-container::-webkit-scrollbar {
+    display: none;
   }
 
   .fc-slider-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     box-sizing: border-box;
+    /* Width set by JS so scroll works correctly */
   }
 
   .fc-slide {
     flex: 0 0 calc(25% - 15px);
     box-sizing: border-box;
     min-width: calc(25% - 15px);
-    height: 140px;
-    background-color: var(--fc-card-bg);
+    aspect-ratio: 1 / 1;
+    background-color: #fdfeff !important;
     border: 1px solid var(--fc-border);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: var(--homepage-corner, 20px);
+    padding: 0;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
     cursor: pointer;
     text-decoration: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    will-change: transform;
+    transform: translateY(var(--fc-parallax-y, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .fc-slider-track {
+      padding: 28px 0;
+    }
+
+    .fc-slide {
+      overflow: visible;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+    }
+
+    .fc-slide.fc-slide--hover {
+      z-index: 8;
+      transform: translateY(calc(var(--fc-parallax-y, 0px) - 8px));
+      box-shadow: 0 28px 52px rgba(17, 17, 17, 0.14);
+      border-color: var(--fc-border-hover);
+    }
   }
 
   .fc-slide:hover {
-    background-color: var(--fc-bg);
+    background-color: #fdfeff !important;
     border-color: var(--fc-border-hover);
   }
 
   .fc-category-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--fc-text);
+    font-size: var(--section-subheading-size, 15px) !important;
+    font-weight: var(--font-weight-sans, 700) !important;
+    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif) !important;
+    font-style: var(--font-style-sans, normal) !important;
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.3 !important;
+    color: #ffffff !important;
     margin: 0 0 4px 0;
-    line-height: 1.3;
-    max-width: calc(100% - 70px);
+    max-width: 100%;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
   }
 
   .fc-product-count {
     font-size: 12px;
-    font-weight: 500;
-    color: var(--fc-muted);
+    font-weight: 700;
+    color: #ffffff !important;
     margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .fc-category-info {
+    position: relative;
+    z-index: 3;
+    max-width: 70%;
+    pointer-events: auto;
+    padding: 20px;
   }
 
   .fc-illustration {
     position: absolute;
-    bottom: -15px;
-    right: -10px;
-    width: 90px;
-    height: 110px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: stretch;
+    justify-content: stretch;
     pointer-events: none;
-    transition: transform 0.3s ease;
-    z-index: 2;
+    transition: filter 0.45s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    z-index: 1;
     color: var(--fc-text);
+    overflow: hidden;
+    border-radius: inherit;
   }
 
-  .fc-slide:hover .fc-illustration {
-    transform: scale(1.04) rotate(-1deg);
+  @media (min-width: 768px) {
+    .fc-illustration {
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), filter 0.45s ease;
+    }
+
+    .fc-slide.fc-slide--hover .fc-illustration {
+      transition: transform 0.1s ease-out, filter 0.45s ease;
+    }
+  }
+
+  .fc-illustration img,
+  .fc-illustration svg {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: center center;
+    transition: filter 0.45s ease;
+    transform: translateZ(0);
+    display: block;
+  }
+
+  .fc-illustration svg {
+    object-fit: contain;
+    padding: 18%;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .fc-slide.fc-slide--hover .fc-illustration img,
+    .fc-slide.fc-slide--hover .fc-illustration svg {
+      filter: drop-shadow(0 22px 28px rgba(17, 17, 17, 0.28));
+    }
   }
 
   /* Navigation arrows */
@@ -220,37 +349,208 @@
       width: 100px;
     }
   }
-
-  @media (max-width: 767px) {
-    .fc-slide {
-      flex: 0 0 calc(50% - 10px);
-      min-width: calc(50% - 10px);
+  @media (min-width: 768px) {
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack,
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-line,
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
+      display: inline !important;
     }
-    .fc-nav {
-      left: -8px;
-      right: -8px;
-    }
-    .fc-arrow {
-      width: 28px;
-      height: 28px;
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
+      margin-left: 0.15em !important;
+      white-space: nowrap !important;
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 767px) {
+    .fc-section {
+      padding: 28px 0 24px;
+      margin-bottom: 0;
+      background-color: #ffffff;
+    }
+
+    .fc-container {
+      padding: 0 var(--homepage-section-gutter, 6px);
+    }
+
+    .fc-heading {
+      line-height: 1.05;
+      padding: 0;
+      text-align: var(--section-heading-align, left);
+    }
+    
+    #shopify-section-{{ section.id }} .hp-mobile-break {
+      display: none;
+    }
+    
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack {
+      display: inline !important;
+      white-space: nowrap !important;
+    }
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-line {
+      display: inline !important;
+      white-space: normal !important;
+    }
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-last-word,
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-heading-pair--stack .hp-heading-accent {
+      display: inline-block !important;
+      white-space: nowrap !important;
+      margin-top: 4px !important;
+      margin-left: 0.1em !important;
+    }
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-mobile-break {
+      display: block !important;
+    }
+    #MainContent #shopify-section-{{ section.id }} .fc-heading .hp-mobile-nbsp {
+      display: inline !important;
+    }
+
+    .fc-slider-wrapper {
+      overflow: hidden;
+    }
+
+    .fc-slider-container {
+      overflow: hidden;
+      scroll-snap-type: none;
+      padding-bottom: 0;
+    }
+
+    .fc-slider-track {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 14px;
+      row-gap: 16px;
+      width: 100% !important;
+    }
+
     .fc-slide {
-      flex: 0 0 100%;
-      min-width: 100%;
+      flex: none;
+      min-width: 0;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      background: #f2f2f4 !important;
+      border: none;
+      border-radius: var(--homepage-corner, 20px);
+      padding: 0;
+      overflow: hidden;
+      box-shadow: none;
+      scroll-snap-align: unset;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0;
+      position: relative;
+    }
+
+    .fc-slide:hover {
+      background: #f2f2f4 !important;
+      border-color: transparent;
+    }
+
+    .fc-slide:hover .fc-illustration {
+      transform: none;
+    }
+
+    .fc-category-info {
+      max-width: 100%;
+      flex: 0 0 auto;
+      padding: 12px;
+      z-index: 3;
+    }
+
+    .fc-category-name {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+      max-width: 100%;
+      -webkit-line-clamp: 2;
+    }
+
+    .fc-product-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #ffffff !important;
+    }
+
+    .fc-illustration {
+      position: absolute;
+      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      flex: none;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      margin-top: 0;
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: hidden;
+    }
+
+    .fc-illustration img,
+    .fc-illustration svg {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none;
+      max-height: none;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .fc-illustration svg {
+      object-fit: contain;
+      padding: 18%;
+      box-sizing: border-box;
+    }
+
+    .fc-nav,
+    .fc-progress-container {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .fc-slider-track {
+      column-gap: 12px;
+      row-gap: 14px;
+    }
+
+    .fc-slide {
+      min-height: 0;
+      padding: 0;
+    }
+
+    .fc-category-name {
+      font-size: 13px;
+    }
+
+    .fc-category-info {
+      padding: 10px;
+    }
+
+    .fc-illustration {
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+    }
+
+    .fc-illustration img,
+    .fc-illustration svg {
+      max-width: none;
     }
   }
 {%- endstyle -%}
 
 <section class="fc-section" aria-label="Shop by Function and Category">
   <div class="fc-container">
-    <div class="fc-header animate-fade-in">
-      <h2 class="fc-heading">{{ section.settings.heading | default: 'Shop by Function and Category' }}</h2>
+    <div class="fc-header animate-fade-in section-heading-stack">
       {%- if section.settings.subtitle != blank -%}
         <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
+      {%- assign fc_heading_text = section.settings.heading | default: 'Shop by Function and Category' -%}
+      <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
     </div>
 
     <div class="fc-slider-wrapper">
@@ -264,7 +564,9 @@
                 <p class="fc-product-count">{{ block.settings.product_count | default: '0 products' }}</p>
               </div>
               <div class="fc-illustration">
-                {%- if block.settings.svg_code != blank -%}
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title }}" loading="lazy" width="900" height="900">
+                {%- elsif block.settings.svg_code != blank -%}
                   {{ block.settings.svg_code }}
                 {%- else -%}
                   <!-- fallback graphic icon -->
@@ -296,72 +598,257 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    initFunctionCategorySlider();
-  });
+  (function() {
+    function initFc3DTilt(trackEl) {
+      if (!trackEl || window.innerWidth <= 767 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  document.addEventListener('shopify:section:load', function(e) {
-    if (e.target.id.includes('function-category') || e.target.querySelector('.fc-section')) {
+      const slides = trackEl.querySelectorAll('.fc-slide');
+      const maxTilt = 14;
+      const maxLift = 56;
+      const maxScale = 1.22;
+
+      slides.forEach(function(slide) {
+        const illustration = slide.querySelector('.fc-illustration');
+        if (!illustration || slide.dataset.fcTiltInit === 'true') return;
+        slide.dataset.fcTiltInit = 'true';
+
+        function resetIllustration() {
+          illustration.style.transform = '';
+          slide.classList.remove('fc-slide--hover');
+        }
+
+        slide.addEventListener('mouseenter', function() {
+          slide.classList.add('fc-slide--hover');
+        });
+
+        slide.addEventListener('mousemove', function(e) {
+          const rect = slide.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotateY = x * maxTilt * 2;
+          const rotateX = -y * maxTilt * 2;
+
+          illustration.style.transform =
+            'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(' + maxScale + ') translateZ(' + maxLift + 'px)';
+        });
+
+        slide.addEventListener('mouseleave', resetIllustration);
+      });
+    }
+
+    function initFunctionCategorySlider() {
+      const slider = document.getElementById('fc-slider-{{ section.id }}');
+      const track = document.getElementById('fc-track-{{ section.id }}');
+      const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
+      const nextBtn = document.getElementById('fc-next-{{ section.id }}');
+      const fill = document.getElementById('fc-fill-{{ section.id }}');
+      
+      if (!slider || !track || !prevBtn || !nextBtn || !fill) return;
+
+      function isMobileGrid() {
+        return window.innerWidth <= 767;
+      }
+
+      if (isMobileGrid()) {
+        track.style.width = '';
+        return;
+      }
+
+      let currentIndex = 0;
+      let autoplayInterval = null;
+
+      function getVisibleCardsCount() {
+        if (window.innerWidth <= 767) return 2;
+        if (window.innerWidth <= 991) return 3;
+        return 4;
+      }
+
+      function getSlideWidth() {
+        const slides = track.querySelectorAll('.fc-slide');
+        if (slides.length === 0) return 0;
+        return slides[0].offsetWidth + 20; // width + gap
+      }
+
+      function updateSlider() {
+        const slides = track.querySelectorAll('.fc-slide');
+        const visible = getVisibleCardsCount();
+        const maxSteps = Math.max(0, slides.length - visible);
+        
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex > maxSteps) currentIndex = maxSteps;
+
+        const offset = currentIndex * getSlideWidth();
+        slider.scrollTo({ left: offset, behavior: 'smooth' });
+      }
+
+      function syncUI() {
+        const slides = track.querySelectorAll('.fc-slide');
+        if (slides.length === 0) return;
+        
+        const visible = getVisibleCardsCount();
+        const maxSteps = Math.max(0, slides.length - visible);
+        const slideWidth = getSlideWidth();
+        
+        // Calculate current index from scroll position
+        const scrollIndex = Math.round(slider.scrollLeft / slideWidth);
+        currentIndex = scrollIndex;
+
+        // Update arrow states
+        prevBtn.disabled = (currentIndex === 0);
+        nextBtn.disabled = (currentIndex >= maxSteps);
+
+        // Update progress bar
+        const totalSteps = maxSteps + 1;
+        const fillWidth = 100 / totalSteps;
+        fill.style.width = `${fillWidth}%`;
+        fill.style.transform = `translateX(${currentIndex * 100}%)`;
+      }
+
+      function startAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(() => {
+          const slides = track.querySelectorAll('.fc-slide');
+          const visible = getVisibleCardsCount();
+          const maxSteps = Math.max(0, slides.length - visible);
+          if (currentIndex >= maxSteps) {
+            currentIndex = 0;
+          } else {
+            currentIndex++;
+          }
+          updateSlider();
+        }, 5000);
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+      }
+
+      slider.addEventListener('mouseenter', stopAutoplay);
+      slider.addEventListener('mouseleave', startAutoplay);
+      slider.addEventListener('touchstart', stopAutoplay, { passive: true });
+
+      prevBtn.addEventListener('click', () => {
+        currentIndex--;
+        updateSlider();
+        startAutoplay();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex++;
+        updateSlider();
+        startAutoplay();
+      });
+
+      // Sync UI on scroll (for native swipes)
+      let scrollTimeout;
+      slider.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(syncUI, 50);
+      }, { passive: true });
+
+      window.addEventListener('resize', function() {
+        if (isMobileGrid()) {
+          stopAutoplay();
+          track.style.width = '';
+          track.querySelectorAll('.fc-slide').forEach(function(slide) {
+            slide.classList.remove('fc-slide--hover');
+            const illustration = slide.querySelector('.fc-illustration');
+            if (illustration) illustration.style.transform = '';
+          });
+          return;
+        }
+        updateSlider();
+        syncUI();
+        initFc3DTilt(track);
+      });
+
+      // Initial sync
+      setTimeout(function() {
+        syncUI();
+        startAutoplay();
+        initFc3DTilt(track);
+      }, 100);
+    }
+
+    }
+
+    function initFcParallaxGlobal() {
+      const sections = document.querySelectorAll('.fc-section');
+      sections.forEach(section => {
+        const slides = section.querySelectorAll('.fc-slide');
+        if (slides.length === 0) return;
+
+        let isIntersecting = false;
+        let animationFrameId;
+
+        const updateParallax = () => {
+          if (!isIntersecting) return;
+
+          const rect = section.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          // Start when the top of the section enters the bottom of the viewport
+          const start = windowHeight;
+          // Finish when the top of the section is 20% from the top of the viewport
+          const end = windowHeight * 0.2; 
+          
+          let progress = (windowHeight - rect.top) / (start - end);
+          if (progress < 0) progress = 0;
+          if (progress > 1) progress = 1;
+          
+          slides.forEach((slide, i) => {
+            // Stagger finish points: Card 1 (Knits) finishes at progress 0.55, Card 4 at 1.0
+            const finishAt = 0.55 + (i * 0.15); 
+            let slideProgress = progress / finishAt;
+            if (slideProgress > 1) slideProgress = 1;
+            if (slideProgress < 0) slideProgress = 0;
+            
+            // Cubic ease-out
+            const easeOut = 1 - Math.pow(1 - slideProgress, 3);
+            
+            // Stagger initial offsets: Card 1 moves 100px, Card 4 moves 220px
+            const maxOffset = 100 + (i * 40); 
+            const currentY = maxOffset * (1 - easeOut);
+            
+            slide.style.setProperty('--fc-parallax-y', currentY + 'px');
+          });
+
+          animationFrameId = requestAnimationFrame(updateParallax);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              isIntersecting = true;
+              animationFrameId = requestAnimationFrame(updateParallax);
+            } else {
+              isIntersecting = false;
+              if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0,
+          rootMargin: "50px 0px 50px 0px"
+        });
+
+        observer.observe(section);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initFunctionCategorySlider();
+        initFcParallaxGlobal();
+      });
+    } else {
       initFunctionCategorySlider();
+      initFcParallaxGlobal();
     }
-  });
-
-  function initFunctionCategorySlider() {
-    const track = document.getElementById('fc-track-{{ section.id }}');
-    const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
-    const nextBtn = document.getElementById('fc-next-{{ section.id }}');
-    const fill = document.getElementById('fc-fill-{{ section.id }}');
-    if (!track || !prevBtn || !nextBtn || !fill) return;
-
-    let currentIndex = 0;
-
-    function getVisibleCardsCount() {
-      if (window.innerWidth <= 480) return 1;
-      if (window.innerWidth <= 767) return 2;
-      if (window.innerWidth <= 991) return 3;
-      return 4;
-    }
-
-    function updateSlider() {
-      const slides = track.querySelectorAll('.fc-slide');
-      if (slides.length === 0) return;
-
-      const visible = getVisibleCardsCount();
-      const maxSteps = Math.max(0, slides.length - visible);
-      if (currentIndex > maxSteps) currentIndex = maxSteps;
-      if (currentIndex < 0) currentIndex = 0;
-
-      // Update arrow states
-      prevBtn.disabled = (currentIndex === 0);
-      nextBtn.disabled = (currentIndex === maxSteps);
-
-      // Get individual slide width + gap dynamically
-      const slideWidth = slides[0].offsetWidth;
-      const gap = 20; // Exact defined track gap
-      const offset = currentIndex * (slideWidth + gap);
-
-      track.style.transform = `translateX(-${offset}px)`;
-
-      // Update progress fill width and transform
-      const totalSteps = maxSteps + 1;
-      const fillWidth = 100 / totalSteps;
-      fill.style.width = `${fillWidth}%`;
-      fill.style.transform = `translateX(${currentIndex * 100}%)`;
-    }
-
-    prevBtn.addEventListener('click', () => {
-      currentIndex--;
-      updateSlider();
+    document.addEventListener('shopify:section:load', () => {
+      initFunctionCategorySlider();
+      initFcParallaxGlobal();
     });
-
-    nextBtn.addEventListener('click', () => {
-      currentIndex++;
-      updateSlider();
-    });
-
-    window.addEventListener('resize', updateSlider);
-    updateSlider();
-  }
+  })();
 </script>
 
 {% schema %}
@@ -376,9 +863,909 @@
     },
     {
       "type": "text",
+      "id": "heading_line2",
+      "label": "Heading ΓÇö second line",
+      "info": "Optional. Shown under the main heading in a different color (sentence case)."
+    },
+    {
+      "type": "color",
+      "id": "heading_line2_color",
+      "label": "Heading second line color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "checkbox",
+      "id": "accent_line2",
+      "label": "Use handwriting font for second line",
+      "default": false
+    },
+    {
+      "type": "text",
       "id": "subtitle",
       "label": "Subtitle",
       "default": "Explore our top product categories"
+    },
+    {
+      "type": "header",
+      "content": "Text spacing"
+    },
+    {
+      "type": "paragraph",
+      "content": "Space between the main title and the description/subheading below it. Does not change fonts ΓÇö only the gap. Applies on every screen size for this section."
+    },
+    {
+      "type": "range",
+      "id": "heading_subheading_spacing_desktop",
+      "label": "Title to description ΓÇö computer",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "heading_subheading_spacing_mobile",
+      "label": "Title to description ΓÇö phone",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_title_spacing_desktop",
+      "label": "Eyebrow to title ΓÇö computer",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_title_spacing_mobile",
+      "label": "Eyebrow to title ΓÇö phone",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Text position (laptop)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_desktop",
+      "label": "Horizontal",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (-) or right (+)."
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_desktop",
+      "label": "Vertical",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (-) or down (+)."
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on laptop/desktop."
+    },
+    {
+      "type": "header",
+      "content": "Text position (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "text_offset_x_mobile",
+      "label": "Horizontal",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text left (-) or right (+)."
+    },
+    {
+      "type": "range",
+      "id": "text_offset_y_mobile",
+      "label": "Vertical",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Move text up (-) or down (+)."
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment",
+      "options": [
+        { "value": "theme_default", "label": "Use theme default" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "theme_default",
+      "info": "Aligns titles, eyebrows, and descriptions on phones."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Only fonts used in this section: 1. Section heading, 2. Normal text, 3. Tiny text above title. Brand fonts are at the top of each list."
+    },
+    {
+      "type": "header",
+      "content": "1. Section heading"
+    },
+    {
+      "type": "select",
+      "id": "h2_font_family",
+      "label": "Font",
+      "info": "Scroll the list ΓÇö custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "darker_grotesque_light",
+          "label": "Darker Grotesque Light"
+        },
+        {
+          "value": "darker_grotesque",
+          "label": "Darker Grotesque Regular"
+        },
+        {
+          "value": "darker_grotesque_medium",
+          "label": "Darker Grotesque Medium"
+        },
+        {
+          "value": "darker_grotesque_semibold",
+          "label": "Darker Grotesque Semibold"
+        },
+        {
+          "value": "darker_grotesque_bold",
+          "label": "Darker Grotesque Bold"
+        },
+        {
+          "value": "darker_grotesque_extrabold",
+          "label": "Darker Grotesque Extra Bold"
+        },
+        {
+          "value": "darker_grotesque_black",
+          "label": "Darker Grotesque Black"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "anton",
+          "label": "Anton"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        }
+      ],
+      "default": "bebas_neue"
+    },
+    {
+      "type": "select",
+      "id": "h2_font_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "400",
+      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for section titles."
+    },
+    {
+      "type": "select",
+      "id": "h2_font_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_desktop",
+      "label": "Size on computer",
+      "info": "Text size for the section title on desktop, e.g. Bestselling Sneaker Care.",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "h2_font_size_mobile",
+      "label": "Size on phone",
+      "info": "Text size for the section title on mobile.",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "header",
+      "content": "2. Normal text"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_family",
+      "label": "Font",
+      "info": "Scroll the list ΓÇö custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "darker_grotesque_light",
+          "label": "Darker Grotesque Light"
+        },
+        {
+          "value": "darker_grotesque",
+          "label": "Darker Grotesque Regular"
+        },
+        {
+          "value": "darker_grotesque_medium",
+          "label": "Darker Grotesque Medium"
+        },
+        {
+          "value": "darker_grotesque_semibold",
+          "label": "Darker Grotesque Semibold"
+        },
+        {
+          "value": "darker_grotesque_bold",
+          "label": "Darker Grotesque Bold"
+        },
+        {
+          "value": "darker_grotesque_extrabold",
+          "label": "Darker Grotesque Extra Bold"
+        },
+        {
+          "value": "darker_grotesque_black",
+          "label": "Darker Grotesque Black"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "400",
+      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for body text."
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_desktop",
+      "label": "Size on computer",
+      "info": "Text size for descriptions and body text on desktop.",
+      "min": 11,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "paragraph_font_size_mobile",
+      "label": "Size on phone",
+      "info": "Text size for descriptions and body text on mobile.",
+      "min": 11,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "3. Tiny text above title"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_family",
+      "label": "Font",
+      "info": "Scroll the list ΓÇö custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
+      "options": [
+        {
+          "value": "bahnschrift",
+          "label": "Bahnschrift Regular"
+        },
+        {
+          "value": "bahnschrift_semibold",
+          "label": "Bahnschrift Semibold"
+        },
+        {
+          "value": "bahnschrift_bold",
+          "label": "Bahnschrift Bold"
+        },
+        {
+          "value": "calisto_mt",
+          "label": "Calisto MT Regular"
+        },
+        {
+          "value": "calisto_mt_bold",
+          "label": "Calisto MT Bold"
+        },
+        {
+          "value": "calisto_mt_italic",
+          "label": "Calisto MT Italic"
+        },
+        {
+          "value": "calisto_mt_bold_italic",
+          "label": "Calisto MT Bold Italic"
+        },
+        {
+          "value": "inter_18pt",
+          "label": "Inter 18pt Regular"
+        },
+        {
+          "value": "inter_18pt_medium",
+          "label": "Inter 18pt Medium"
+        },
+        {
+          "value": "inter_18pt_semibold",
+          "label": "Inter 18pt Semibold"
+        },
+        {
+          "value": "inter_18pt_bold",
+          "label": "Inter 18pt Bold"
+        },
+        {
+          "value": "jacques_gilles",
+          "label": "Jacques Gilles"
+        },
+        {
+          "value": "luthon_southard_script",
+          "label": "Luthon Southard Script"
+        },
+        {
+          "value": "luthon_southard_serif",
+          "label": "Luthon Southard Serif"
+        },
+        {
+          "value": "freight_text_pro",
+          "label": "FreightText Pro Book"
+        },
+        {
+          "value": "darker_grotesque_light",
+          "label": "Darker Grotesque Light"
+        },
+        {
+          "value": "darker_grotesque",
+          "label": "Darker Grotesque Regular"
+        },
+        {
+          "value": "darker_grotesque_medium",
+          "label": "Darker Grotesque Medium"
+        },
+        {
+          "value": "darker_grotesque_semibold",
+          "label": "Darker Grotesque Semibold"
+        },
+        {
+          "value": "darker_grotesque_bold",
+          "label": "Darker Grotesque Bold"
+        },
+        {
+          "value": "darker_grotesque_extrabold",
+          "label": "Darker Grotesque Extra Bold"
+        },
+        {
+          "value": "darker_grotesque_black",
+          "label": "Darker Grotesque Black"
+        },
+        {
+          "value": "inter",
+          "label": "Inter Regular"
+        },
+        {
+          "value": "inter_light",
+          "label": "Inter Light"
+        },
+        {
+          "value": "inter_medium",
+          "label": "Inter Medium"
+        },
+        {
+          "value": "inter_semibold",
+          "label": "Inter Semibold"
+        },
+        {
+          "value": "inter_bold",
+          "label": "Inter Bold"
+        },
+        {
+          "value": "inter_extrabold",
+          "label": "Inter Extra Bold"
+        },
+        {
+          "value": "inter_black",
+          "label": "Inter Black"
+        },
+        {
+          "value": "montserrat",
+          "label": "Montserrat Regular"
+        },
+        {
+          "value": "montserrat_light",
+          "label": "Montserrat Light"
+        },
+        {
+          "value": "montserrat_medium",
+          "label": "Montserrat Medium"
+        },
+        {
+          "value": "montserrat_semibold",
+          "label": "Montserrat Semibold"
+        },
+        {
+          "value": "montserrat_bold",
+          "label": "Montserrat Bold"
+        },
+        {
+          "value": "bebas_neue",
+          "label": "Bebas Neue"
+        },
+        {
+          "value": "oswald",
+          "label": "Oswald Regular"
+        },
+        {
+          "value": "oswald_light",
+          "label": "Oswald Light"
+        },
+        {
+          "value": "oswald_medium",
+          "label": "Oswald Medium"
+        },
+        {
+          "value": "oswald_semibold",
+          "label": "Oswald Semibold"
+        },
+        {
+          "value": "oswald_bold",
+          "label": "Oswald Bold"
+        }
+      ],
+      "default": "inter"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_weight",
+      "label": "Weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light (300)"
+        },
+        {
+          "value": "400",
+          "label": "Regular (400)"
+        },
+        {
+          "value": "500",
+          "label": "Medium (500)"
+        },
+        {
+          "value": "600",
+          "label": "Semibold (600)"
+        },
+        {
+          "value": "700",
+          "label": "Bold (700)"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold (800)"
+        },
+        {
+          "value": "900",
+          "label": "Black (900)"
+        }
+      ],
+      "default": "700",
+      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for small labels."
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_font_style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_desktop",
+      "label": "Size on computer",
+      "info": "Text size for the small label above the title on desktop, e.g. BEST SELLERS.",
+      "min": 9,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size_mobile",
+      "label": "Size on phone",
+      "info": "Text size for the small label above the title on mobile.",
+      "min": 9,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
     }
   ],
   "blocks": [
@@ -408,6 +1795,12 @@
           "id": "svg_code",
           "label": "SVG Illustration Code",
           "info": "Paste custom product SVG code here."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image",
+          "info": "Optionally upload a transparent PNG image instead of using SVG code."
         }
       ]
     }
