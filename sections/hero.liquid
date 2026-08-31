@@ -385,20 +385,21 @@
       position: relative;
       width: 100%;
       max-width: 100vw;
-      height: var(--hp-mobile-vh, 100svh);
-      min-height: var(--hp-mobile-vh, 100svh);
+      height: auto;
+      min-height: 0;
       max-height: none;
+      aspect-ratio: 16 / 9;
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: #111111;
-      aspect-ratio: auto;
     }
 
     .hero-fullscreen--mobile-art {
-      min-height: var(--hp-mobile-vh, 100svh);
+      height: auto;
+      min-height: 0;
       max-height: none;
-      aspect-ratio: auto;
+      aspect-ratio: 9 / 16; /* Portrait ratio for mobile art/video */
       background: #111111;
     }
 
@@ -451,16 +452,15 @@
 
     /*
      * Desktop (landscape) video shown on mobile:
-     * Use object-fit: contain so the FULL video frame is visible — no cropping.
-     * The #111 background fills any letterbox areas.
+     * Fills the 16:9 container perfectly
      */
     .hero-fullscreen__bg-video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center top;
+      object-fit: cover;
+      object-position: center center;
       background: #111111;
     }
 
@@ -469,12 +469,12 @@
       display: none;
     }
     /*
-     * Portrait or dedicated mobile video: use contain to prevent ANY cutting.
+     * Portrait or dedicated mobile video
      */
     .hero-fullscreen__bg-video.mobile-video {
       display: block;
-      object-fit: contain;
-      object-position: center top;
+      object-fit: cover;
+      object-position: center center;
       background: #111111;
     }
 
