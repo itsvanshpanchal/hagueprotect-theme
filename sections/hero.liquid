@@ -388,7 +388,7 @@
       height: auto;
       min-height: 0;
       max-height: none;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: auto;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -399,7 +399,7 @@
       height: auto;
       min-height: 0;
       max-height: none;
-      aspect-ratio: 9 / 16; /* Portrait ratio for mobile art/video */
+      aspect-ratio: auto;
       background: #111111;
     }
 
@@ -422,27 +422,28 @@
     }
 
     .hero-fullscreen__bg {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      inset: auto;
       width: 100%;
-      height: 100%;
+      height: auto;
       line-height: 0;
       background: #111111;
+      display: flex; /* Ensures no tiny inline gaps at the bottom */
     }
 
     .hero-fullscreen__bg picture {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      inset: auto;
       width: 100%;
-      height: 100%;
+      height: auto;
       display: block;
     }
 
     .hero-fullscreen__bg-img {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      inset: auto;
       width: 100%;
-      height: 100%;
+      height: auto;
       min-width: 0;
       min-height: 0;
       object-fit: cover;
@@ -452,16 +453,17 @@
 
     /*
      * Desktop (landscape) video shown on mobile:
-     * Fills the 16:9 container perfectly
+     * Position relative + height auto allows natural aspect ratio
      */
     .hero-fullscreen__bg-video {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      inset: auto;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: cover; /* Fallback, but height:auto makes it natural */
       object-position: center center;
       background: #111111;
+      display: block;
     }
 
     /* When both desktop + mobile videos are uploaded: hide desktop, show mobile */
@@ -473,6 +475,10 @@
      */
     .hero-fullscreen__bg-video.mobile-video {
       display: block;
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: auto;
       object-fit: cover;
       object-position: center center;
       background: #111111;
