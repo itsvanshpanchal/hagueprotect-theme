@@ -456,6 +456,16 @@
       object-position: center 22%;
     }
 
+    /* Ensure all video variants fill the screen fully on mobile */
+    .hero-fullscreen__bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
     .hero-fullscreen__bg-video.desktop-video {
       display: none;
     }
