@@ -320,11 +320,14 @@
   function prepareHeroFullscreen(pin) {
     var fill = viewportFill(true);
     var vhPx = viewportH() + 'px';
+    var isMobile = window.innerWidth <= 749;
+    var heroHeight = isMobile ? 'auto' : fill;
+    var heroMinHeight = isMobile ? '0' : vhPx;
     var hero = pin.querySelector('.hero-fullscreen');
     if (!hero) return;
 
-    pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', vhPx, 'important');
+    pin.style.setProperty('height', heroHeight, 'important');
+    pin.style.setProperty('min-height', heroMinHeight, 'important');
     pin.style.setProperty('overflow', 'hidden', 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
@@ -336,8 +339,8 @@
     hero.style.setProperty('display', 'block', 'important');
     hero.style.setProperty('position', 'relative', 'important');
     hero.style.setProperty('width', '100%', 'important');
-    hero.style.setProperty('height', fill, 'important');
-    hero.style.setProperty('min-height', vhPx, 'important');
+    hero.style.setProperty('height', heroHeight, 'important');
+    hero.style.setProperty('min-height', heroMinHeight, 'important');
     hero.style.setProperty('max-height', 'none', 'important');
     hero.style.setProperty('aspect-ratio', 'auto', 'important');
     hero.style.setProperty('margin', '0', 'important');
@@ -352,10 +355,10 @@
 
     var bg = pin.querySelector('.hero-fullscreen__bg');
     if (bg) {
-      bg.style.setProperty('position', 'absolute', 'important');
-      bg.style.setProperty('inset', '0', 'important');
+      bg.style.setProperty('position', isMobile ? 'relative' : 'absolute', 'important');
+      bg.style.setProperty('inset', isMobile ? 'auto' : '0', 'important');
       bg.style.setProperty('width', '100%', 'important');
-      bg.style.setProperty('height', '100%', 'important');
+      bg.style.setProperty('height', isMobile ? 'auto' : '100%', 'important');
       bg.style.setProperty('opacity', '1', 'important');
       bg.style.setProperty('visibility', 'visible', 'important');
       bg.style.setProperty('z-index', '1', 'important');
