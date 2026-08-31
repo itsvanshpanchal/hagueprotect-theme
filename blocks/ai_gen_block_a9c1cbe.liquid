@@ -108,26 +108,6 @@
         {% if mobile_bg != blank %}data-mobile-bg="{{ mobile_bg | escape }}"{% endif %}
         {% if desk_bg != blank %}data-desktop-bg="{{ desk_bg | escape }}"{% endif %}
       >
-        <style>
-          @media (max-width: 749px) {
-            .ai-story-banner-wrapper-{{ ai_gen_id }} {
-              min-height: 0 !important;
-              height: auto !important;
-              aspect-ratio: 16 / 9 !important;
-              max-height: none !important;
-            }
-            .ai-story-banner-wrapper-{{ ai_gen_id }} .ai-story-banner-video,
-            .ai-story-banner-wrapper-{{ ai_gen_id }} .ai-story-banner-image,
-            .ai-story-banner-wrapper-{{ ai_gen_id }} .ai-story-banner-picture {
-              position: relative !important;
-              height: auto !important;
-              min-height: 0 !important;
-              aspect-ratio: 16 / 9 !important;
-              max-height: none !important;
-              object-fit: cover !important;
-            }
-          }
-        </style>
         {% if block.settings.background_video != blank or block.settings.mobile_video != blank %}
           {% assign video_style = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:1;opacity:" | append: block.settings.image_opacity %}
           {% unless story_sticky %}
