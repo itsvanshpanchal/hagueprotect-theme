@@ -1,509 +1,367 @@
 {%- style -%}
-  {% render 'section-typography-vars', section: section %}
-
-  .fc-heading .hp-heading-line--2,
-  body.template-index #MainContent .fc-heading .hp-heading-line--2 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-weight: 300 !important;
-    font-style: oblique 15deg !important;
-    font-synthesis: style !important;
-  }
-
   :root {
-    --fc-bg: #fdfeff;
-    --fc-card-bg: #fdfeff;
-    --fc-border: #D1D2D4;
-    --fc-border-hover: #B8B9BB;
+    --fc-bg: #F4F5F7;
+    --fc-card-bg: #FAFAFB;
+    --fc-border: #E6E7E8;
+    --fc-border-hover: #D1D2D4;
     --fc-text: #111111;
     --fc-muted: #666668;
-    --fc-primary: #c6c2c2ff;
+    --fc-primary: #111111;
   }
 
   /* Dark mode variable updates if applicable */
   @media (prefers-color-scheme: dark) {
     :root {
-      --fc-bg: #fdfeff;
-      --fc-card-bg: #fdfeff;
-      --fc-border: #D1D2D4;
-      --fc-border-hover: #B8B9BB;
-      --fc-text: #111111;
-      --fc-muted: #666668;
+      --fc-bg: #1A1B1D;
+      --fc-card-bg: #222426;
+      --fc-border: #333639;
+      --fc-border-hover: #4A4D51;
+      --fc-text: #F4F5F7;
+      --fc-muted: #8E9196;
     }
   }
 
   .fc-section {
     padding: 60px 0;
-    background-color: #ffffff;
-    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+    background-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     overflow: hidden;
   }
 
-  /* Homepage-only dark theme */
-  body.template-index .fc-section {
-    background-color: #0a0a0a;
-    color: #ffffff;
-  }
-
-  body.template-index .fc-heading {
-    color: #ffffff;
-  }
-
-  body.template-index .fc-heading .hp-heading-pair--stack {
-    gap: 0.15em;
-  }
-
-  body.template-index .fc-subtitle {
-    color: #ffffff;
-  }
-
   .fc-container {
-    max-width: var(--site-max-width);
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--homepage-section-gutter, 8px);
+    padding: 0 24px;
     position: relative;
     box-sizing: border-box;
   }
 
   .fc-header {
-    text-align: var(--section-heading-align, left);
+    text-align: center;
+    margin-bottom: 40px;
   }
 
   .fc-heading {
+    font-size: 20px;
+    font-weight: 700;
     color: var(--fc-text);
-    margin: 0;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    line-height: 1.0;
-  }
-
-  .fc-heading .hp-heading-line {
-    display: inline !important;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.02em;
   }
 
   .fc-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--fc-muted);
     margin: 0;
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 600;
-    font-size: 19px;
   }
 
-  @media screen and (max-width: 989px) {
-    #MainContent #shopify-section-{{ section.id }} .fc-subtitle,
-    #shopify-section-{{ section.id }} .fc-subtitle {
-      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 600 !important;
-      font-style: normal !important;
-      font-synthesis: none !important;
-      -webkit-text-stroke: 0.45px currentColor !important;
-      paint-order: stroke fill !important;
-      text-shadow: none !important;
-      letter-spacing: 0.14em !important;
-      text-transform: uppercase !important;
-    }
-  }
-
-  /* ─── SCATTERED MOSAIC — exact match to reference image ──────────────
-     Layout (desktop):
-       Card 1 (large portrait)   → top-left
-       Card 2 (small landscape)  → below Card 1, slightly right
-       Heading text              → centre, floating free
-       Card 3 (small dark card)  → top-right quadrant
-       Card 4 (large landscape)  → bottom-right
-  ─────────────────────────────────────────────────────────────────── */
-
-  .fc-section {
-    padding: 0;
-    overflow: visible;
-  }
-
-  .fc-container {
-    padding: 0 var(--homepage-section-gutter, 32px);
-  }
-
-  /* The scattered canvas — fixed height on desktop.
-     Must be tall enough to hold two stacked 230px cards + gaps + parallax start offsets.
-     Cards: top row at ~20px, bottom row at ~278px, each 230px tall → need ~580px
-     Extra 30px for the parallax startY offset (cards begin 120px lower). */
-  .fc-scatter {
+  .fc-slider-wrapper {
     position: relative;
     width: 100%;
-    height: 560px;
-    overflow: visible;
-  }
-
-  /* ── Shared card base ────────────────────────────────────────────── */
-  .fc-scard {
-    position: absolute;
-    border-radius: 18px;
-    overflow: hidden;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    will-change: transform;
-    /* NOTE: NO transition on transform — the scroll-parallax rAF loop
-       drives transform directly. A CSS transition here would fight the
-       requestAnimationFrame updates and make cards appear frozen. */
-    transition: box-shadow 0.4s ease; /* only shadow, not transform */
-    transform: translateY(var(--fc-parallax-y, 0px));
-  }
-
-  .fc-scard:hover {
-    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-    z-index: 10;
-  }
-
-  .fc-scard .fc-scard-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: hidden;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .fc-scard:hover .fc-scard-img {
-    transform: scale(1.05);
-  }
-
-  .fc-scard .fc-scard-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  /* Card label (title + count) pinned to bottom-left */
-  .fc-scard-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 3;
-    padding: 14px 16px;
-    background: linear-gradient(to top, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0) 100%);
     box-sizing: border-box;
   }
 
-  .fc-scard-name {
-    font-family: var(--font-family-sans, 'Inter', sans-serif);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #fff;
-    margin: 0 0 2px;
-    display: block;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  .fc-slider-container {
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 8px;
   }
 
-  .fc-scard-count {
-    font-size: 11px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    margin: 0;
-    display: block;
+  .fc-slider-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-sizing: border-box;
   }
 
-  /* ── CARD 1: top-left ────────────────────────────────────────────── */
-  /* Uniform size for all cards: 25% wide × 230px tall.                 */
-  /* Only the top/left/right position differs between cards.            */
-  .fc-scard--1 {
-    left: 0;
-    top: 20px;
-    width: 25%;
-    height: 230px;
-  }
-
-  /* ── CARD 2: bottom-left, offset right ──────────────────────────── */
-  .fc-scard--2 {
-    left: 6%;
-    top: 278px;
-    width: 25%;
-    height: 230px;
-  }
-
-  /* ── Heading text block — floats free in the centre ─────────────── */
-  .fc-scatter-text {
-    position: absolute;
-    left: 31%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    width: 26%;
+  .fc-slide {
+    flex: 0 0 calc(25% - 15px);
+    box-sizing: border-box;
+    min-width: calc(25% - 15px);
+    height: 140px;
+    background-color: var(--fc-card-bg);
+    border: 1px solid var(--fc-border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
+    justify-content: flex-start;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
   }
 
-  .fc-scatter-text .fc-subtitle {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 600;
+  .fc-slide:hover {
+    background-color: var(--fc-bg);
+    border-color: var(--fc-border-hover);
+  }
+
+  .fc-category-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fc-text);
+    margin: 0 0 4px 0;
+    line-height: 1.3;
+    max-width: calc(100% - 70px);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fc-product-count {
     font-size: 12px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #999;
+    font-weight: 500;
+    color: var(--fc-muted);
     margin: 0;
   }
 
-  .fc-scatter-text .fc-heading {
-    margin: 0;
-    line-height: 1.08;
-    color: #111;
+  .fc-illustration {
+    position: absolute;
+    bottom: -15px;
+    right: -10px;
+    width: 90px;
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+    z-index: 2;
+    color: var(--fc-text);
   }
 
-  /* Dark homepage variant */
-  body.template-index .fc-scatter-text .fc-heading { color: #fff; }
-  body.template-index .fc-scatter-text .fc-subtitle { color: rgba(255,255,255,0.45); }
-
-  /* ── CARD 3: top-right ───────────────────────────────────────────── */
-  .fc-scard--3 {
-    right: 1%;
-    top: 20px;
-    width: 25%;
-    height: 230px;
-    background-color: #111;
+  .fc-slide:hover .fc-illustration {
+    transform: scale(1.04) rotate(-1deg);
   }
 
-  /* ── CARD 4: bottom-right ────────────────────────────────────────── */
-  .fc-scard--4 {
-    right: 1%;
-    top: 278px;
-    width: 25%;
-    height: 230px;
+  /* Navigation arrows */
+  .fc-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    right: -20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
   }
 
-  /* ── MOBILE: single column stack ─────────────────────────────────── */
+  .fc-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid var(--fc-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.2s ease;
+    color: #111111;
+  }
+
+  .fc-arrow:hover {
+    border-color: var(--fc-border-hover);
+    background-color: #FAFAFB;
+    transform: scale(1.05);
+  }
+
+  .fc-arrow:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .fc-arrow svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+  }
+
+  /* Progress bar */
+  .fc-progress-container {
+    width: 140px;
+    height: 3px;
+    background-color: var(--fc-border);
+    margin: 30px auto 0 auto;
+    border-radius: 1.5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fc-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 33.333%;
+    background-color: var(--fc-primary);
+    border-radius: 1.5px;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  @media (max-width: 991px) {
+    .fc-slide {
+      flex: 0 0 calc(33.333% - 14px);
+      min-width: calc(33.333% - 14px);
+    }
+    .fc-progress-container {
+      width: 100px;
+    }
+  }
+
   @media (max-width: 767px) {
-    .fc-section {
-      padding: 28px 0 8px;
-      background-color: #fff;
+    .fc-slide {
+      flex: 0 0 calc(50% - 10px);
+      min-width: calc(50% - 10px);
     }
-
-    body.template-index .fc-section {
-      background-color: #0a0a0a;
+    .fc-nav {
+      left: -8px;
+      right: -8px;
     }
-
-    .fc-container {
-      padding: 0 var(--homepage-section-gutter, 16px);
-    }
-
-    /* On mobile, switch to a normal flow layout */
-    .fc-scatter {
-      position: static;
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    /* Heading sits at top */
-    .fc-scatter-text {
-      position: static;
-      transform: none;
-      width: 100%;
-      margin-bottom: 16px;
-    }
-
-    .fc-scatter-text .fc-heading {
-      font-size: clamp(22px, 6vw, 30px) !important;
-      line-height: 1.1;
-    }
-
-    /* Cards: 2-column grid */
-    .fc-mobile-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .fc-scard {
-      position: static;
-      width: 100% !important;
-      height: 0 !important;
-      padding-bottom: 100%;
-      transform: none !important;
-      border-radius: 14px;
-    }
-
-    .fc-scard--3 {
-      background-color: #111;
+    .fc-arrow {
+      width: 28px;
+      height: 28px;
     }
   }
 
-  @media (max-width: 380px) {
-    .fc-mobile-grid {
-      gap: 10px;
+  @media (max-width: 480px) {
+    .fc-slide {
+      flex: 0 0 100%;
+      min-width: 100%;
     }
   }
 {%- endstyle -%}
 
-{%- liquid
-  assign fc_heading_text = section.settings.heading | default: 'Every Material Deserves the Right Care'
-  assign block_1 = section.blocks[0]
-  assign block_2 = section.blocks[1]
-  assign block_3 = section.blocks[2]
-  assign block_4 = section.blocks[3]
--%}
-
-<section class="fc-section" aria-label="Every Material Deserves the Right Care">
+<section class="fc-section" aria-label="Shop by Function and Category">
   <div class="fc-container">
-
-    <!-- Desktop scattered layout -->
-    <div class="fc-scatter" id="fc-scatter-{{ section.id }}">
-
-      <!-- Card 1: Large portrait, top-left -->
-      {%- if block_1 -%}
-        {%- assign link1 = block_1.settings.link | default: '#' -%}
-        <a href="{{ link1 }}" class="fc-scard fc-scard--1" {{ block_1.shopify_attributes }}>
-          <div class="fc-scard-img">
-            {%- if block_1.settings.image != blank -%}
-              <img src="{{ block_1.settings.image | image_url: width: 800 }}" alt="{{ block_1.settings.title }}" loading="lazy">
-            {%- endif -%}
-          </div>
-          <div class="fc-scard-info">
-            <span class="fc-scard-name">{{ block_1.settings.title }}</span>
-            <span class="fc-scard-count">{{ block_1.settings.product_count | default: '0 products' }}</span>
-          </div>
-        </a>
+    <div class="fc-header animate-fade-in">
+      <h2 class="fc-heading">{{ section.settings.heading | default: 'Shop by Function and Category' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
       {%- endif -%}
+    </div>
 
-      <!-- Card 2: Small landscape, bottom-left -->
-      {%- if block_2 -%}
-        {%- assign link2 = block_2.settings.link | default: '#' -%}
-        <a href="{{ link2 }}" class="fc-scard fc-scard--2" {{ block_2.shopify_attributes }}>
-          <div class="fc-scard-img">
-            {%- if block_2.settings.image != blank -%}
-              <img src="{{ block_2.settings.image | image_url: width: 600 }}" alt="{{ block_2.settings.title }}" loading="lazy">
-            {%- endif -%}
-          </div>
-          <div class="fc-scard-info">
-            <span class="fc-scard-name">{{ block_2.settings.title }}</span>
-            <span class="fc-scard-count">{{ block_2.settings.product_count | default: '0 products' }}</span>
-          </div>
-        </a>
-      {%- endif -%}
-
-      <!-- Heading text — floats free in the centre -->
-      <div class="fc-scatter-text">
-        {%- if section.settings.subtitle != blank -%}
-          <p class="fc-subtitle">{{ section.settings.subtitle }}</p>
-        {%- endif -%}
-        <h2 class="fc-heading">{% render 'section-heading-text', text: fc_heading_text, line2: section.settings.heading_line2, line2_color: section.settings.heading_line2_color, accent_last_word: section.settings.accent_line2, accent_color: section.settings.heading_line2_color %}</h2>
+    <div class="fc-slider-wrapper">
+      <div class="fc-slider-container" id="fc-slider-{{ section.id }}">
+        <div class="fc-slider-track" id="fc-track-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- assign link = block.settings.link | default: '#' -%}
+            <a href="{{ link }}" class="fc-slide" {{ block.shopify_attributes }}>
+              <div class="fc-category-info">
+                <h3 class="fc-category-name">{{ block.settings.title }}</h3>
+                <p class="fc-product-count">{{ block.settings.product_count | default: '0 products' }}</p>
+              </div>
+              <div class="fc-illustration">
+                {%- if block.settings.svg_code != blank -%}
+                  {{ block.settings.svg_code }}
+                {%- else -%}
+                  <!-- fallback graphic icon -->
+                  <svg viewBox="0 0 120 120" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="25" y="25" width="70" height="70" rx="12" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="60" cy="60" r="15" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
       </div>
 
-      <!-- Card 3: Small dark card, top-right -->
-      {%- if block_3 -%}
-        {%- assign link3 = block_3.settings.link | default: '#' -%}
-        <a href="{{ link3 }}" class="fc-scard fc-scard--3" {{ block_3.shopify_attributes }}>
-          <div class="fc-scard-img">
-            {%- if block_3.settings.image != blank -%}
-              <img src="{{ block_3.settings.image | image_url: width: 600 }}" alt="{{ block_3.settings.title }}" loading="lazy">
-            {%- endif -%}
-          </div>
-          <div class="fc-scard-info">
-            <span class="fc-scard-name">{{ block_3.settings.title }}</span>
-            <span class="fc-scard-count">{{ block_3.settings.product_count | default: '0 products' }}</span>
-          </div>
-        </a>
-      {%- endif -%}
+      <div class="fc-nav">
+        <button class="fc-arrow fc-arrow--prev" id="fc-prev-{{ section.id }}" aria-label="Previous categories" disabled>
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="fc-arrow fc-arrow--next" id="fc-next-{{ section.id }}" aria-label="Next categories">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
 
-      <!-- Card 4: Large landscape, bottom-right -->
-      {%- if block_4 -%}
-        {%- assign link4 = block_4.settings.link | default: '#' -%}
-        <a href="{{ link4 }}" class="fc-scard fc-scard--4" {{ block_4.shopify_attributes }}>
-          <div class="fc-scard-img">
-            {%- if block_4.settings.image != blank -%}
-              <img src="{{ block_4.settings.image | image_url: width: 900 }}" alt="{{ block_4.settings.title }}" loading="lazy">
-            {%- endif -%}
-          </div>
-          <div class="fc-scard-info">
-            <span class="fc-scard-name">{{ block_4.settings.title }}</span>
-            <span class="fc-scard-count">{{ block_4.settings.product_count | default: '0 products' }}</span>
-          </div>
-        </a>
-      {%- endif -%}
-
-    </div><!-- /.fc-scatter -->
-
-    <!-- Mobile: heading + 2-column grid -->
-    <!-- (handled purely by CSS on .fc-scatter and .fc-scard) -->
-
+    <div class="fc-progress-container">
+      <div class="fc-progress-fill" id="fc-fill-{{ section.id }}"></div>
+    </div>
   </div>
 </section>
 
 <script>
-  (function() {
-    function initFcScatterParallax() {
-      if (window.innerWidth <= 767) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    initFunctionCategorySlider();
+  });
 
-      const scatter = document.getElementById('fc-scatter-{{ section.id }}');
-      if (!scatter) return;
+  document.addEventListener('shopify:section:load', function(e) {
+    if (e.target.id.includes('function-category') || e.target.querySelector('.fc-section')) {
+      initFunctionCategorySlider();
+    }
+  });
 
-      const cards = scatter.querySelectorAll('.fc-scard');
-      if (cards.length === 0) return;
+  function initFunctionCategorySlider() {
+    const track = document.getElementById('fc-track-{{ section.id }}');
+    const prevBtn = document.getElementById('fc-prev-{{ section.id }}');
+    const nextBtn = document.getElementById('fc-next-{{ section.id }}');
+    const fill = document.getElementById('fc-fill-{{ section.id }}');
+    if (!track || !prevBtn || !nextBtn || !fill) return;
 
-      // Each card: how far below its resting point it starts, and how fast it settles
-      const cfg = [
-        { startY: 70,  finishAt: 0.50 },  // Card 1 — large portrait, fastest
-        { startY: 100, finishAt: 0.68 },  // Card 2 — small landscape
-        { startY: 85,  finishAt: 0.82 },  // Card 3 — small dark card
-        { startY: 120, finishAt: 1.00 },  // Card 4 — large landscape, slowest
-      ];
+    let currentIndex = 0;
 
-      // Pre-set all cards to their starting Y offset
-      cards.forEach((card, i) => {
-        const c = cfg[i] || cfg[cfg.length - 1];
-        card.style.setProperty('--fc-parallax-y', c.startY + 'px');
-      });
-
-      let active = false;
-      let rafId;
-
-      const tick = () => {
-        if (!active) return;
-        const rect = scatter.getBoundingClientRect();
-        const wh = window.innerHeight;
-        let progress = (wh - rect.top) / (wh * 0.75);
-        if (progress < 0) progress = 0;
-        if (progress > 1) progress = 1;
-
-        cards.forEach((card, i) => {
-          const c = cfg[i] || cfg[cfg.length - 1];
-          let sp = progress / c.finishAt;
-          if (sp > 1) sp = 1;
-          const ease = 1 - Math.pow(1 - sp, 3); // cubic ease-out
-          card.style.setProperty('--fc-parallax-y', (c.startY * (1 - ease)) + 'px');
-        });
-
-        rafId = requestAnimationFrame(tick);
-      };
-
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            active = true;
-            rafId = requestAnimationFrame(tick);
-          } else {
-            active = false;
-            if (rafId) cancelAnimationFrame(rafId);
-          }
-        });
-      }, { root: null, threshold: 0, rootMargin: '120px 0px 0px 0px' }).observe(scatter);
+    function getVisibleCardsCount() {
+      if (window.innerWidth <= 480) return 1;
+      if (window.innerWidth <= 767) return 2;
+      if (window.innerWidth <= 991) return 3;
+      return 4;
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initFcScatterParallax);
-    } else {
-      initFcScatterParallax();
+    function updateSlider() {
+      const slides = track.querySelectorAll('.fc-slide');
+      if (slides.length === 0) return;
+
+      const visible = getVisibleCardsCount();
+      const maxSteps = Math.max(0, slides.length - visible);
+      if (currentIndex > maxSteps) currentIndex = maxSteps;
+      if (currentIndex < 0) currentIndex = 0;
+
+      // Update arrow states
+      prevBtn.disabled = (currentIndex === 0);
+      nextBtn.disabled = (currentIndex === maxSteps);
+
+      // Get individual slide width + gap dynamically
+      const slideWidth = slides[0].offsetWidth;
+      const gap = 20; // Exact defined track gap
+      const offset = currentIndex * (slideWidth + gap);
+
+      track.style.transform = `translateX(-${offset}px)`;
+
+      // Update progress fill width and transform
+      const totalSteps = maxSteps + 1;
+      const fillWidth = 100 / totalSteps;
+      fill.style.width = `${fillWidth}%`;
+      fill.style.transform = `translateX(${currentIndex * 100}%)`;
     }
-    document.addEventListener('shopify:section:load', initFcScatterParallax);
-  })();
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex--;
+      updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex++;
+      updateSlider();
+    });
+
+    window.addEventListener('resize', updateSlider);
+    updateSlider();
+  }
 </script>
 
 {% schema %}
@@ -518,909 +376,9 @@
     },
     {
       "type": "text",
-      "id": "heading_line2",
-      "label": "Heading — second line",
-      "info": "Optional. Shown under the main heading in a different color (sentence case)."
-    },
-    {
-      "type": "color",
-      "id": "heading_line2_color",
-      "label": "Heading second line color",
-      "default": "#6b6b6b"
-    },
-    {
-      "type": "checkbox",
-      "id": "accent_line2",
-      "label": "Use handwriting font for second line",
-      "default": false
-    },
-    {
-      "type": "text",
       "id": "subtitle",
       "label": "Subtitle",
       "default": "Explore our top product categories"
-    },
-    {
-      "type": "header",
-      "content": "Text spacing"
-    },
-    {
-      "type": "paragraph",
-      "content": "Space between the main title and the description/subheading below it. Does not change fonts — only the gap. Applies on every screen size for this section."
-    },
-    {
-      "type": "range",
-      "id": "heading_subheading_spacing_desktop",
-      "label": "Title to description — computer",
-      "min": 0,
-      "max": 64,
-      "step": 2,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "heading_subheading_spacing_mobile",
-      "label": "Title to description — phone",
-      "min": 0,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 10
-    },
-    {
-      "type": "range",
-      "id": "eyebrow_title_spacing_desktop",
-      "label": "Eyebrow to title — computer",
-      "min": 0,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "eyebrow_title_spacing_mobile",
-      "label": "Eyebrow to title — phone",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 10
-    },
-    {
-      "type": "header",
-      "content": "Text position (laptop)"
-    },
-    {
-      "type": "range",
-      "id": "text_offset_x_desktop",
-      "label": "Horizontal",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text left (-) or right (+)."
-    },
-    {
-      "type": "range",
-      "id": "text_offset_y_desktop",
-      "label": "Vertical",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text up (-) or down (+)."
-    },
-    {
-      "type": "select",
-      "id": "text_align_desktop",
-      "label": "Text alignment",
-      "options": [
-        { "value": "theme_default", "label": "Use theme default" },
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "theme_default",
-      "info": "Aligns titles, eyebrows, and descriptions on laptop/desktop."
-    },
-    {
-      "type": "header",
-      "content": "Text position (mobile)"
-    },
-    {
-      "type": "range",
-      "id": "text_offset_x_mobile",
-      "label": "Horizontal",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text left (-) or right (+)."
-    },
-    {
-      "type": "range",
-      "id": "text_offset_y_mobile",
-      "label": "Vertical",
-      "min": -100,
-      "max": 100,
-      "step": 2,
-      "unit": "px",
-      "default": 0,
-      "info": "Move text up (-) or down (+)."
-    },
-    {
-      "type": "select",
-      "id": "text_align_mobile",
-      "label": "Text alignment",
-      "options": [
-        { "value": "theme_default", "label": "Use theme default" },
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
-      ],
-      "default": "theme_default",
-      "info": "Aligns titles, eyebrows, and descriptions on phones."
-    },
-    {
-      "type": "header",
-      "content": "Typography"
-    },
-    {
-      "type": "paragraph",
-      "content": "Only fonts used in this section: 1. Section heading, 2. Normal text, 3. Tiny text above title. Brand fonts are at the top of each list."
-    },
-    {
-      "type": "header",
-      "content": "1. Section heading"
-    },
-    {
-      "type": "select",
-      "id": "h2_font_family",
-      "label": "Font",
-      "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
-      "options": [
-        {
-          "value": "bahnschrift",
-          "label": "Bahnschrift Regular"
-        },
-        {
-          "value": "bahnschrift_semibold",
-          "label": "Bahnschrift Semibold"
-        },
-        {
-          "value": "bahnschrift_bold",
-          "label": "Bahnschrift Bold"
-        },
-        {
-          "value": "calisto_mt",
-          "label": "Calisto MT Regular"
-        },
-        {
-          "value": "calisto_mt_bold",
-          "label": "Calisto MT Bold"
-        },
-        {
-          "value": "calisto_mt_italic",
-          "label": "Calisto MT Italic"
-        },
-        {
-          "value": "calisto_mt_bold_italic",
-          "label": "Calisto MT Bold Italic"
-        },
-        {
-          "value": "inter_18pt",
-          "label": "Inter 18pt Regular"
-        },
-        {
-          "value": "inter_18pt_medium",
-          "label": "Inter 18pt Medium"
-        },
-        {
-          "value": "inter_18pt_semibold",
-          "label": "Inter 18pt Semibold"
-        },
-        {
-          "value": "inter_18pt_bold",
-          "label": "Inter 18pt Bold"
-        },
-        {
-          "value": "jacques_gilles",
-          "label": "Jacques Gilles"
-        },
-        {
-          "value": "luthon_southard_script",
-          "label": "Luthon Southard Script"
-        },
-        {
-          "value": "luthon_southard_serif",
-          "label": "Luthon Southard Serif"
-        },
-        {
-          "value": "freight_text_pro",
-          "label": "FreightText Pro Book"
-        },
-        {
-          "value": "darker_grotesque_light",
-          "label": "Darker Grotesque Light"
-        },
-        {
-          "value": "darker_grotesque",
-          "label": "Darker Grotesque Regular"
-        },
-        {
-          "value": "darker_grotesque_medium",
-          "label": "Darker Grotesque Medium"
-        },
-        {
-          "value": "darker_grotesque_semibold",
-          "label": "Darker Grotesque Semibold"
-        },
-        {
-          "value": "darker_grotesque_bold",
-          "label": "Darker Grotesque Bold"
-        },
-        {
-          "value": "darker_grotesque_extrabold",
-          "label": "Darker Grotesque Extra Bold"
-        },
-        {
-          "value": "darker_grotesque_black",
-          "label": "Darker Grotesque Black"
-        },
-        {
-          "value": "bebas_neue",
-          "label": "Bebas Neue"
-        },
-        {
-          "value": "anton",
-          "label": "Anton"
-        },
-        {
-          "value": "oswald",
-          "label": "Oswald Regular"
-        },
-        {
-          "value": "oswald_light",
-          "label": "Oswald Light"
-        },
-        {
-          "value": "oswald_medium",
-          "label": "Oswald Medium"
-        },
-        {
-          "value": "oswald_semibold",
-          "label": "Oswald Semibold"
-        },
-        {
-          "value": "oswald_bold",
-          "label": "Oswald Bold"
-        },
-        {
-          "value": "inter",
-          "label": "Inter Regular"
-        },
-        {
-          "value": "inter_light",
-          "label": "Inter Light"
-        },
-        {
-          "value": "inter_medium",
-          "label": "Inter Medium"
-        },
-        {
-          "value": "inter_semibold",
-          "label": "Inter Semibold"
-        },
-        {
-          "value": "inter_bold",
-          "label": "Inter Bold"
-        },
-        {
-          "value": "inter_extrabold",
-          "label": "Inter Extra Bold"
-        },
-        {
-          "value": "inter_black",
-          "label": "Inter Black"
-        },
-        {
-          "value": "montserrat",
-          "label": "Montserrat Regular"
-        },
-        {
-          "value": "montserrat_light",
-          "label": "Montserrat Light"
-        },
-        {
-          "value": "montserrat_medium",
-          "label": "Montserrat Medium"
-        },
-        {
-          "value": "montserrat_semibold",
-          "label": "Montserrat Semibold"
-        },
-        {
-          "value": "montserrat_bold",
-          "label": "Montserrat Bold"
-        }
-      ],
-      "default": "bebas_neue"
-    },
-    {
-      "type": "select",
-      "id": "h2_font_weight",
-      "label": "Weight",
-      "options": [
-        {
-          "value": "300",
-          "label": "Light (300)"
-        },
-        {
-          "value": "400",
-          "label": "Regular (400)"
-        },
-        {
-          "value": "500",
-          "label": "Medium (500)"
-        },
-        {
-          "value": "600",
-          "label": "Semibold (600)"
-        },
-        {
-          "value": "700",
-          "label": "Bold (700)"
-        },
-        {
-          "value": "800",
-          "label": "Extra Bold (800)"
-        },
-        {
-          "value": "900",
-          "label": "Black (900)"
-        }
-      ],
-      "default": "400",
-      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for section titles."
-    },
-    {
-      "type": "select",
-      "id": "h2_font_style",
-      "label": "Style",
-      "options": [
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "italic",
-          "label": "Italic"
-        }
-      ],
-      "default": "normal"
-    },
-    {
-      "type": "range",
-      "id": "h2_font_size_desktop",
-      "label": "Size on computer",
-      "info": "Text size for the section title on desktop, e.g. Bestselling Sneaker Care.",
-      "min": 20,
-      "max": 96,
-      "step": 2,
-      "unit": "px",
-      "default": 52
-    },
-    {
-      "type": "range",
-      "id": "h2_font_size_mobile",
-      "label": "Size on phone",
-      "info": "Text size for the section title on mobile.",
-      "min": 16,
-      "max": 64,
-      "step": 2,
-      "unit": "px",
-      "default": 34
-    },
-    {
-      "type": "header",
-      "content": "2. Normal text"
-    },
-    {
-      "type": "select",
-      "id": "paragraph_font_family",
-      "label": "Font",
-      "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
-      "options": [
-        {
-          "value": "bahnschrift",
-          "label": "Bahnschrift Regular"
-        },
-        {
-          "value": "bahnschrift_semibold",
-          "label": "Bahnschrift Semibold"
-        },
-        {
-          "value": "bahnschrift_bold",
-          "label": "Bahnschrift Bold"
-        },
-        {
-          "value": "calisto_mt",
-          "label": "Calisto MT Regular"
-        },
-        {
-          "value": "calisto_mt_bold",
-          "label": "Calisto MT Bold"
-        },
-        {
-          "value": "calisto_mt_italic",
-          "label": "Calisto MT Italic"
-        },
-        {
-          "value": "calisto_mt_bold_italic",
-          "label": "Calisto MT Bold Italic"
-        },
-        {
-          "value": "inter_18pt",
-          "label": "Inter 18pt Regular"
-        },
-        {
-          "value": "inter_18pt_medium",
-          "label": "Inter 18pt Medium"
-        },
-        {
-          "value": "inter_18pt_semibold",
-          "label": "Inter 18pt Semibold"
-        },
-        {
-          "value": "inter_18pt_bold",
-          "label": "Inter 18pt Bold"
-        },
-        {
-          "value": "jacques_gilles",
-          "label": "Jacques Gilles"
-        },
-        {
-          "value": "luthon_southard_script",
-          "label": "Luthon Southard Script"
-        },
-        {
-          "value": "luthon_southard_serif",
-          "label": "Luthon Southard Serif"
-        },
-        {
-          "value": "freight_text_pro",
-          "label": "FreightText Pro Book"
-        },
-        {
-          "value": "darker_grotesque_light",
-          "label": "Darker Grotesque Light"
-        },
-        {
-          "value": "darker_grotesque",
-          "label": "Darker Grotesque Regular"
-        },
-        {
-          "value": "darker_grotesque_medium",
-          "label": "Darker Grotesque Medium"
-        },
-        {
-          "value": "darker_grotesque_semibold",
-          "label": "Darker Grotesque Semibold"
-        },
-        {
-          "value": "darker_grotesque_bold",
-          "label": "Darker Grotesque Bold"
-        },
-        {
-          "value": "darker_grotesque_extrabold",
-          "label": "Darker Grotesque Extra Bold"
-        },
-        {
-          "value": "darker_grotesque_black",
-          "label": "Darker Grotesque Black"
-        },
-        {
-          "value": "inter",
-          "label": "Inter Regular"
-        },
-        {
-          "value": "inter_light",
-          "label": "Inter Light"
-        },
-        {
-          "value": "inter_medium",
-          "label": "Inter Medium"
-        },
-        {
-          "value": "inter_semibold",
-          "label": "Inter Semibold"
-        },
-        {
-          "value": "inter_bold",
-          "label": "Inter Bold"
-        },
-        {
-          "value": "inter_extrabold",
-          "label": "Inter Extra Bold"
-        },
-        {
-          "value": "inter_black",
-          "label": "Inter Black"
-        },
-        {
-          "value": "montserrat",
-          "label": "Montserrat Regular"
-        },
-        {
-          "value": "montserrat_light",
-          "label": "Montserrat Light"
-        },
-        {
-          "value": "montserrat_medium",
-          "label": "Montserrat Medium"
-        },
-        {
-          "value": "montserrat_semibold",
-          "label": "Montserrat Semibold"
-        },
-        {
-          "value": "montserrat_bold",
-          "label": "Montserrat Bold"
-        },
-        {
-          "value": "bebas_neue",
-          "label": "Bebas Neue"
-        },
-        {
-          "value": "oswald",
-          "label": "Oswald Regular"
-        },
-        {
-          "value": "oswald_light",
-          "label": "Oswald Light"
-        },
-        {
-          "value": "oswald_medium",
-          "label": "Oswald Medium"
-        },
-        {
-          "value": "oswald_semibold",
-          "label": "Oswald Semibold"
-        },
-        {
-          "value": "oswald_bold",
-          "label": "Oswald Bold"
-        }
-      ],
-      "default": "inter"
-    },
-    {
-      "type": "select",
-      "id": "paragraph_font_weight",
-      "label": "Weight",
-      "options": [
-        {
-          "value": "300",
-          "label": "Light (300)"
-        },
-        {
-          "value": "400",
-          "label": "Regular (400)"
-        },
-        {
-          "value": "500",
-          "label": "Medium (500)"
-        },
-        {
-          "value": "600",
-          "label": "Semibold (600)"
-        },
-        {
-          "value": "700",
-          "label": "Bold (700)"
-        },
-        {
-          "value": "800",
-          "label": "Extra Bold (800)"
-        },
-        {
-          "value": "900",
-          "label": "Black (900)"
-        }
-      ],
-      "default": "400",
-      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for body text."
-    },
-    {
-      "type": "select",
-      "id": "paragraph_font_style",
-      "label": "Style",
-      "options": [
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "italic",
-          "label": "Italic"
-        }
-      ],
-      "default": "normal"
-    },
-    {
-      "type": "range",
-      "id": "paragraph_font_size_desktop",
-      "label": "Size on computer",
-      "info": "Text size for descriptions and body text on desktop.",
-      "min": 11,
-      "max": 32,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "paragraph_font_size_mobile",
-      "label": "Size on phone",
-      "info": "Text size for descriptions and body text on mobile.",
-      "min": 11,
-      "max": 28,
-      "step": 1,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "header",
-      "content": "3. Tiny text above title"
-    },
-    {
-      "type": "select",
-      "id": "eyebrow_font_family",
-      "label": "Font",
-      "info": "Scroll the list — custom brand fonts (Bahnschrift, Calisto MT, Inter 18pt, etc.) with Regular / Medium / Semibold / Bold are at the TOP.",
-      "options": [
-        {
-          "value": "bahnschrift",
-          "label": "Bahnschrift Regular"
-        },
-        {
-          "value": "bahnschrift_semibold",
-          "label": "Bahnschrift Semibold"
-        },
-        {
-          "value": "bahnschrift_bold",
-          "label": "Bahnschrift Bold"
-        },
-        {
-          "value": "calisto_mt",
-          "label": "Calisto MT Regular"
-        },
-        {
-          "value": "calisto_mt_bold",
-          "label": "Calisto MT Bold"
-        },
-        {
-          "value": "calisto_mt_italic",
-          "label": "Calisto MT Italic"
-        },
-        {
-          "value": "calisto_mt_bold_italic",
-          "label": "Calisto MT Bold Italic"
-        },
-        {
-          "value": "inter_18pt",
-          "label": "Inter 18pt Regular"
-        },
-        {
-          "value": "inter_18pt_medium",
-          "label": "Inter 18pt Medium"
-        },
-        {
-          "value": "inter_18pt_semibold",
-          "label": "Inter 18pt Semibold"
-        },
-        {
-          "value": "inter_18pt_bold",
-          "label": "Inter 18pt Bold"
-        },
-        {
-          "value": "jacques_gilles",
-          "label": "Jacques Gilles"
-        },
-        {
-          "value": "luthon_southard_script",
-          "label": "Luthon Southard Script"
-        },
-        {
-          "value": "luthon_southard_serif",
-          "label": "Luthon Southard Serif"
-        },
-        {
-          "value": "freight_text_pro",
-          "label": "FreightText Pro Book"
-        },
-        {
-          "value": "darker_grotesque_light",
-          "label": "Darker Grotesque Light"
-        },
-        {
-          "value": "darker_grotesque",
-          "label": "Darker Grotesque Regular"
-        },
-        {
-          "value": "darker_grotesque_medium",
-          "label": "Darker Grotesque Medium"
-        },
-        {
-          "value": "darker_grotesque_semibold",
-          "label": "Darker Grotesque Semibold"
-        },
-        {
-          "value": "darker_grotesque_bold",
-          "label": "Darker Grotesque Bold"
-        },
-        {
-          "value": "darker_grotesque_extrabold",
-          "label": "Darker Grotesque Extra Bold"
-        },
-        {
-          "value": "darker_grotesque_black",
-          "label": "Darker Grotesque Black"
-        },
-        {
-          "value": "inter",
-          "label": "Inter Regular"
-        },
-        {
-          "value": "inter_light",
-          "label": "Inter Light"
-        },
-        {
-          "value": "inter_medium",
-          "label": "Inter Medium"
-        },
-        {
-          "value": "inter_semibold",
-          "label": "Inter Semibold"
-        },
-        {
-          "value": "inter_bold",
-          "label": "Inter Bold"
-        },
-        {
-          "value": "inter_extrabold",
-          "label": "Inter Extra Bold"
-        },
-        {
-          "value": "inter_black",
-          "label": "Inter Black"
-        },
-        {
-          "value": "montserrat",
-          "label": "Montserrat Regular"
-        },
-        {
-          "value": "montserrat_light",
-          "label": "Montserrat Light"
-        },
-        {
-          "value": "montserrat_medium",
-          "label": "Montserrat Medium"
-        },
-        {
-          "value": "montserrat_semibold",
-          "label": "Montserrat Semibold"
-        },
-        {
-          "value": "montserrat_bold",
-          "label": "Montserrat Bold"
-        },
-        {
-          "value": "bebas_neue",
-          "label": "Bebas Neue"
-        },
-        {
-          "value": "oswald",
-          "label": "Oswald Regular"
-        },
-        {
-          "value": "oswald_light",
-          "label": "Oswald Light"
-        },
-        {
-          "value": "oswald_medium",
-          "label": "Oswald Medium"
-        },
-        {
-          "value": "oswald_semibold",
-          "label": "Oswald Semibold"
-        },
-        {
-          "value": "oswald_bold",
-          "label": "Oswald Bold"
-        }
-      ],
-      "default": "inter"
-    },
-    {
-      "type": "select",
-      "id": "eyebrow_font_weight",
-      "label": "Weight",
-      "options": [
-        {
-          "value": "300",
-          "label": "Light (300)"
-        },
-        {
-          "value": "400",
-          "label": "Regular (400)"
-        },
-        {
-          "value": "500",
-          "label": "Medium (500)"
-        },
-        {
-          "value": "600",
-          "label": "Semibold (600)"
-        },
-        {
-          "value": "700",
-          "label": "Bold (700)"
-        },
-        {
-          "value": "800",
-          "label": "Extra Bold (800)"
-        },
-        {
-          "value": "900",
-          "label": "Black (900)"
-        }
-      ],
-      "default": "700",
-      "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for small labels."
-    },
-    {
-      "type": "select",
-      "id": "eyebrow_font_style",
-      "label": "Style",
-      "options": [
-        {
-          "value": "normal",
-          "label": "Normal"
-        },
-        {
-          "value": "italic",
-          "label": "Italic"
-        }
-      ],
-      "default": "normal"
-    },
-    {
-      "type": "range",
-      "id": "eyebrow_font_size_desktop",
-      "label": "Size on computer",
-      "info": "Text size for the small label above the title on desktop, e.g. BEST SELLERS.",
-      "min": 9,
-      "max": 32,
-      "step": 1,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "eyebrow_font_size_mobile",
-      "label": "Size on phone",
-      "info": "Text size for the small label above the title on mobile.",
-      "min": 9,
-      "max": 32,
-      "step": 1,
-      "unit": "px",
-      "default": 12
     }
   ],
   "blocks": [
@@ -1450,12 +408,6 @@
           "id": "svg_code",
           "label": "SVG Illustration Code",
           "info": "Paste custom product SVG code here."
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Category Image",
-          "info": "Optionally upload a transparent PNG image instead of using SVG code."
         }
       ]
     }
