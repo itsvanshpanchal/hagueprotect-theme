@@ -764,8 +764,8 @@
     sec.style.setProperty('position', 'sticky', 'important');
     sec.style.setProperty('top', '0px', 'important');
     sec.style.setProperty('z-index', String(z), 'important');
-    sec.style.setProperty('height', fill, 'important');
-    sec.style.setProperty('min-height', vhPx, 'important');
+    sec.style.setProperty('height', 'auto', 'important');
+    sec.style.setProperty('min-height', '0', 'important');
     sec.style.setProperty('width', '100%', 'important');
     sec.style.setProperty('max-width', '100vw', 'important');
     sec.style.setProperty('margin-top', '0px', 'important');
@@ -779,13 +779,13 @@
     sec.style.setProperty('box-shadow', '0 -8px 24px rgba(0,0,0,0.12)', 'important');
     sec.style.setProperty('background-color', bg || '#111111', 'important');
     sec.style.setProperty('overflow', 'hidden', 'important');
-    sec.style.setProperty('max-height', fill, 'important');
+    sec.style.setProperty('max-height', 'none', 'important');
 
     pin.style.setProperty('position', 'relative', 'important');
     pin.style.setProperty('width', '100%', 'important');
-    pin.style.setProperty('height', fill, 'important');
-    pin.style.setProperty('min-height', vhPx, 'important');
-    pin.style.setProperty('max-height', fill, 'important');
+    pin.style.setProperty('height', 'auto', 'important');
+    pin.style.setProperty('min-height', '0', 'important');
+    pin.style.setProperty('max-height', 'none', 'important');
     pin.style.setProperty('opacity', '1', 'important');
     pin.style.setProperty('visibility', 'visible', 'important');
     pin.style.setProperty('overflow', 'hidden', 'important');
