@@ -11,13 +11,9 @@
   assign button_family = block.settings.button_font_family | default: 'inter'
 
   assign heading_weight = block.settings.heading_font_weight | default: '400'
-  assign subheading_weight = block.settings.subheading_font_weight | default: '400'
-  assign text_weight = block.settings.text_font_weight | default: '400'
   assign button_weight = block.settings.button_font_weight | default: '600'
 
   assign heading_style = block.settings.heading_font_style | default: 'normal'
-  assign subheading_style = block.settings.subheading_font_style | default: 'normal'
-  assign text_style = block.settings.text_font_style | default: 'normal'
 
   assign accent_family = block.settings.heading_accent_font_family | default: settings.font_heading_accent_family | default: 'luthon_southard_script'
   if accent_family == blank or accent_family == 'theme_default'
@@ -153,6 +149,8 @@
               alt="{% if block.settings.mobile_image %}{{ block.settings.mobile_image.alt | escape }}{% elsif block.settings.background_image %}{{ block.settings.background_image.alt | escape }}{% endif %}"
               class="ai-story-banner-image ai-story-banner-cover ai-story-banner-image-{{ ai_gen_id }}"
               data-hp-story-cover
+              width="{% if block.settings.mobile_image %}{{ block.settings.mobile_image.width }}{% elsif block.settings.background_image %}{{ block.settings.background_image.width }}{% else %}1200{% endif %}"
+              height="{% if block.settings.mobile_image %}{{ block.settings.mobile_image.height }}{% elsif block.settings.background_image %}{{ block.settings.background_image.height }}{% else %}1600{% endif %}"
               loading="eager"
               fetchpriority="high"
               decoding="async"
