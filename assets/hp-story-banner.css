@@ -110,6 +110,39 @@
   [class*='ai-story-banner-wrapper'] {
     background-position: 62% center !important;
   }
+
+  /* Flow (non-sticky) banner — cancel zoom/crop so the full video is visible */
+  .ai-story-sticky-track--flow .ai-story-banner-image,
+  .ai-story-sticky-track--flow .ai-story-banner-cover,
+  .ai-story-sticky-track--flow [data-hp-story-cover] {
+    transform: none !important;
+    transform-origin: center center !important;
+    object-position: center center !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    object-fit: cover !important;
+    max-height: none !important;
+  }
+
+  .ai-story-sticky-track--flow [data-hp-story-wrap],
+  .ai-story-sticky-track--flow [class*='ai-story-banner-wrapper'] {
+    background-position: center center !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .ai-story-sticky-track--flow .ai-story-banner-picture {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
 }
 
 .ai-story-banner-heading .hp-heading-accent {
