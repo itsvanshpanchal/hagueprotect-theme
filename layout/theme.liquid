@@ -589,7 +589,7 @@
           lockNativeScroll: {{ settings.mobile_float_lock_scroll | default: false | json }}
         };
       </script>
-      <script src="{{ 'hp-floating-cards.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'hp-floating-cards.js' | asset_url | append: '&v=2' }}" defer="defer"></script>
     {%- endif -%}
     {%- if template.name == 'product' -%}
       <script src="{{ 'hp-hide-bulk-offers.js' | asset_url }}" defer="defer"></script>
