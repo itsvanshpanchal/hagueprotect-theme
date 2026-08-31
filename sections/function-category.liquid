@@ -82,22 +82,24 @@
 
   .fc-subtitle {
     margin: 0;
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 600;
-    font-size: 19px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: var(--section-label-size, 13px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--section-label-color, #888);
+  }
+
+  body.template-index .fc-subtitle {
+    color: rgba(255, 255, 255, 0.65);
   }
 
   @media screen and (max-width: 989px) {
     #MainContent #shopify-section-{{ section.id }} .fc-subtitle,
     #shopify-section-{{ section.id }} .fc-subtitle {
-      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-      font-size: 15px !important;
-      font-weight: 600 !important;
-      font-style: normal !important;
-      font-synthesis: none !important;
-      -webkit-text-stroke: 0.45px currentColor !important;
-      paint-order: stroke fill !important;
-      text-shadow: none !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      font-size: var(--section-label-size, 12px) !important;
+      font-weight: 500 !important;
       letter-spacing: 0.14em !important;
       text-transform: uppercase !important;
     }
