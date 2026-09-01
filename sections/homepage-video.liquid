@@ -1,6 +1,6 @@
 <div class="homepage-video-wrapper">
   {% if section.settings.video != blank %}
-    {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, class: 'homepage-video-element' }}
+    {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'homepage-video-element' }}
   {% else %}
     <div class="placeholder-video">
       {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -44,6 +44,9 @@
       width: 100%;
       padding: 0;
       margin: 0;
+      display: block;
+      line-height: 0;
+      font-size: 0;
     }
     .homepage-video-element {
       width: 100vw;
@@ -60,15 +63,30 @@
     const video = document.querySelector('.homepage-video-wrapper .homepage-video-element');
     
     if (video) {
+      // Ensure playsinline is present for iOS autoplay
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
       // Create an intersection observer
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // When the video comes into view (at least 50% visible), turn audio ON
+            // When the video comes into view, try to turn audio ON
             video.muted = false;
+            
+            // Force play and catch if browser blocks unmuted autoplay
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(error => {
+                // If browser blocks unmuted autoplay, mute it and play so it doesn't freeze
+                video.muted = true;
+                video.play();
+              });
+            }
           } else {
-            // When it scrolls out of view, turn audio OFF
+            // When it scrolls out of view, turn audio OFF and pause
             video.muted = true;
+            video.pause();
           }
         });
       }, {
