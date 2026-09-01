@@ -39,6 +39,33 @@
   }
 </style>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Select the video element
+    const video = document.querySelector('.homepage-video-wrapper .homepage-video-element');
+    
+    if (video) {
+      // Create an intersection observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // When the video comes into view (at least 50% visible), turn audio ON
+            video.muted = false;
+          } else {
+            // When it scrolls out of view, turn audio OFF
+            video.muted = true;
+          }
+        });
+      }, {
+        threshold: 0.5 // Adjust this value to trigger earlier or later (0.5 means 50% visible)
+      });
+      
+      // Start observing the video element
+      observer.observe(video);
+    }
+  });
+</script>
+
 {% schema %}
 {
   "name": "Homepage Video",
