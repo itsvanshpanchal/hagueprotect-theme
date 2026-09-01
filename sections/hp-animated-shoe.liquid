@@ -66,17 +66,10 @@
     }
   }
 
-  {% if section.settings.animation_direction == 'rtl' %}
-  @keyframes slideShoe-{{ section.id }} {
-    0% { transform: translateX(100vw); }
-    100% { transform: translateX(-100vw); }
-  }
-  {% else %}
   @keyframes slideShoe-{{ section.id }} {
     0% { transform: translateX(-100vw); }
     100% { transform: translateX(100vw); }
   }
-  {% endif %}
 
   @media screen and (max-width: 749px) {
     .hp-animated-shoe-{{ section.id }} {
@@ -163,16 +156,6 @@
       "max": 20,
       "step": 1,
       "default": 10
-    },
-    {
-      "type": "select",
-      "id": "animation_direction",
-      "label": "Animation Direction",
-      "options": [
-        { "value": "rtl", "label": "Right to Left" },
-        { "value": "ltr", "label": "Left to Right" }
-      ],
-      "default": "ltr"
     },
     {
       "type": "range",
