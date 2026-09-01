@@ -37,6 +37,21 @@
     height: auto;
     max-height: 600px;
   }
+  
+  /* Mobile-specific optimizations */
+  @media screen and (max-width: 768px) {
+    .homepage-video-wrapper {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .homepage-video-element {
+      width: 100vw;
+      max-width: 100%;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+  }
 </style>
 
 <script>
