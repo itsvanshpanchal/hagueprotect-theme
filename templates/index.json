@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "homepage_video": {
+      "type": "homepage-video",
+      "settings": {}
+    },
     "hero": {
       "type": "hero",
       "blocks": {
@@ -1309,6 +1313,7 @@
     }
   },
   "order": [
+    "homepage_video",
     "hero",
     "featured-brands",
     "bestsellers",
