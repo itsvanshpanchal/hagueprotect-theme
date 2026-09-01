@@ -766,9 +766,9 @@
           {%- endif -%}
 
           {%- if section.settings.earth_video != blank -%}
-            <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image lazy-video">
+            <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image">
               {% for source in section.settings.earth_video.sources %}
-                <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
               {% endfor %}
             </video>
           {%- elsif section.settings.earth_image != blank -%}
