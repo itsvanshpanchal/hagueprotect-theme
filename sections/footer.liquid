@@ -759,18 +759,14 @@
         </div>
       </div>
       
-      <div class="footer-spacer">
+      <div class="footer-spacer" style="display: block !important; width: 100% !important;">
         <div class="footer-earth-block">
           {%- if section.settings.earth_top_heading != blank -%}
             <p class="footer-earth-block__top-heading">{{ section.settings.earth_top_heading }}</p>
           {%- endif -%}
 
           {%- if section.settings.earth_video != blank -%}
-            <video autoplay loop muted playsinline poster="{{ section.settings.earth_video.preview_image | image_url: width: 600 }}" class="footer-earth-block__image">
-              {% for source in section.settings.earth_video.sources %}
-                <source src="{{ source.url }}" type="{{ source.mime_type }}">
-              {% endfor %}
-            </video>
+            {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'footer-earth-block__image' }}
           {%- elsif section.settings.earth_image != blank -%}
             <img
               src="{{ section.settings.earth_image | image_url: width: 1200 }}"
