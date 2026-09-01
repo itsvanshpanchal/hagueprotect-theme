@@ -38,7 +38,8 @@
     position: relative;
     width: 100%;
     height: 100%;
-    animation: slideShoe-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+    display: flex;
+    justify-content: center;
   }
 
   .hp-animated-shoe__image {
@@ -66,17 +67,7 @@
     }
   }
 
-  {% if section.settings.animation_direction == 'rtl' %}
-  @keyframes slideShoe-{{ section.id }} {
-    0% { transform: translateX(100vw); }
-    100% { transform: translateX(-100vw); }
-  }
-  {% else %}
-  @keyframes slideShoe-{{ section.id }} {
-    0% { transform: translateX(-100vw); }
-    100% { transform: translateX(100vw); }
-  }
-  {% endif %}
+
 
   @media screen and (max-width: 749px) {
     .hp-animated-shoe-{{ section.id }} {
@@ -154,25 +145,6 @@
       "id": "line_color",
       "label": "Horizontal Line Color",
       "default": "#e0e0e0"
-    },
-    {
-      "type": "range",
-      "id": "animation_duration",
-      "label": "Animation Duration (seconds)",
-      "min": 2,
-      "max": 20,
-      "step": 1,
-      "default": 6
-    },
-    {
-      "type": "select",
-      "id": "animation_direction",
-      "label": "Animation Direction",
-      "options": [
-        { "value": "rtl", "label": "Right to Left" },
-        { "value": "ltr", "label": "Left to Right" }
-      ],
-      "default": "ltr"
     },
     {
       "type": "range",
