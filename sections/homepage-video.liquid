@@ -1,0 +1,59 @@
+<div class="homepage-video-wrapper">
+  {% if section.settings.video != blank %}
+    {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: true, class: 'homepage-video-element' }}
+  {% else %}
+    <div class="placeholder-video">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .homepage-video-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Optional: add background color if the video doesn't perfectly match the screen aspect ratio */
+    background-color: transparent; 
+  }
+
+  .homepage-video-element {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    /* object-fit: contain ensures the video scales to fit without cutting off any parts */
+    object-fit: contain; 
+    display: block;
+  }
+  
+  .placeholder-video {
+    width: 100%;
+    background: #f4f4f4;
+  }
+  
+  .placeholder-video svg {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Homepage Video",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Upload Video",
+      "info": "Upload a video directly to Shopify. It will cover the section without cropping."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Video"
+    }
+  ]
+}
+{% endschema %}
