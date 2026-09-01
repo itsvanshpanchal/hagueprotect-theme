@@ -1,0 +1,203 @@
+{%- style -%}
+  .hp-animated-shoe-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .hp-animated-shoe__line-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hp-animated-shoe__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: {{ section.settings.line_color }};
+    z-index: 1;
+    transform: translateY(-50%);
+  }
+
+  .hp-animated-shoe__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .hp-animated-shoe__image {
+    position: relative;
+    display: block;
+    height: auto;
+    width: {{ section.settings.image_width }}px;
+    max-width: 90vw;
+    animation: slideShoe-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+  }
+
+  {% if section.settings.animation_direction == 'rtl' %}
+  @keyframes slideShoe-{{ section.id }} {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100vw); }
+  }
+  {% else %}
+  @keyframes slideShoe-{{ section.id }} {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+  }
+  {% endif %}
+
+  @media screen and (max-width: 749px) {
+    .hp-animated-shoe-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .hp-animated-shoe__image {
+      width: {{ section.settings.image_width_mobile }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-animated-shoe hp-animated-shoe-{{ section.id }}">
+  <div class="hp-animated-shoe__line-container">
+    <div class="hp-animated-shoe__line"></div>
+    <div class="hp-animated-shoe__track">
+      {%- if section.settings.image != blank -%}
+        <img 
+          src="{{ section.settings.image | image_url: width: 1200 }}" 
+          alt="{{ section.settings.image.alt | escape }}" 
+          class="hp-animated-shoe__image"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="hp-animated-shoe__image" style="background: #ccc; height: 100px; display: flex; align-items: center; justify-content: center; opacity: 0.5;">
+          Upload Image
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Animated Shoe Track",
+  "tag": "section",
+  "class": "hp-animated-shoe-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Shoe Image",
+      "info": "Upload a PNG with transparent background. Include trailing dots if desired."
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image Width (Desktop)",
+      "min": 100,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "Image Width (Mobile)",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 250
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdfcf7"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Horizontal Line Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation Duration (seconds)",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "select",
+      "id": "animation_direction",
+      "label": "Animation Direction",
+      "options": [
+        { "value": "rtl", "label": "Right to Left" },
+        { "value": "ltr", "label": "Left to Right" }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom padding (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Animated Shoe Track"
+    }
+  ]
+}
+{% endschema %}
