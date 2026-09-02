@@ -47,13 +47,39 @@
   .hp-shoe-dot {
     position: absolute;
     bottom: 0;
-    transform: translate(-50%, 50%);
-    width: 14px;
-    height: 5px;
-    border-radius: 4px;
-    background-color: {{ section.settings.dot_color }};
+    transform: translate(-50%, -15px); /* Position slightly above the line, behind shoe */
+    width: 16px;
+    height: 24px;
+    background: transparent;
+    border-radius: 0;
     opacity: 0;
     transition: opacity 0.15s ease;
+  }
+  
+  /* Front of footprint */
+  .hp-shoe-dot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 15px;
+    background-color: {{ section.settings.dot_color }};
+    border-radius: 50% 50% 40% 40%;
+  }
+
+  /* Heel of footprint */
+  .hp-shoe-dot::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 7px;
+    background-color: {{ section.settings.dot_color }};
+    border-radius: 50%;
   }
 
   /* ─── SHOE SLIDER: outer handles horizontal slide only ───── */
@@ -178,12 +204,8 @@
     var d = document.createElement('div');
     d.className = 'hp-shoe-dot';
     
-    // Create uneven scatter effect for the sprinkles
-    var randomY = (Math.random() * 12) - 6; // -6px to +6px vertical offset
-    var randomRot = Math.random() * 360;    // Random rotation
-    
+    // Perfectly straight line spacing (as per screenshot)
     d.style.left = (i * DOT_SPACING) + 'px';
-    d.style.transform = 'translate(-50%, calc(50% + ' + randomY + 'px)) rotate(' + randomRot + 'deg)';
     
     trailEl.appendChild(d);
     dotEls.push(d);
