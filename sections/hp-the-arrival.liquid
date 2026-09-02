@@ -49,8 +49,6 @@
     pointer-events: none;
     white-space: nowrap;
     letter-spacing: -2vw;
-    /* Crops the bottom half of the text for the flat cut-off effect */
-    clip-path: inset(0 0 45% 0);
   }
 
   /* ─── CONCENTRIC CIRCLES ─── */
@@ -231,14 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         visualWrap.style.opacity = progress.toFixed(3);
         visualWrap.style.transform = 'scale(' + scale.toFixed(3) + ')';
-      }
-
-      // 2. Parallax effect for the "001" background text
-      if (watermark) {
-        var scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        // Calculate Y offset (moves from ~ +100px to -100px based on scroll)
-        var yOffset = (scrollProgress - 0.5) * -200; 
-        watermark.style.transform = 'translate(-50%, calc(-50% + ' + yOffset + 'px))';
       }
     }
   });
