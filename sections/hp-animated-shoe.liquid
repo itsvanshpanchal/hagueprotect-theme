@@ -59,18 +59,19 @@
     width: 100%;
     height: 1px;
     transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     z-index: 2;
-    padding: 0 10%; /* Keep trail within viewport edges a bit */
   }
 
   .hp-shoe-dot {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background-color: {{ section.settings.dot_color | default: '#2ecc71' }};
+    opacity: 0;
+  }};
     opacity: 0;
     transform: scale(0);
   }
@@ -120,6 +121,8 @@
 <!-- Load GSAP and ScrollTrigger if not already loaded -->
 <script>
   (function() {
+    let tl;
+
     function initShoeAnimation() {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
         setTimeout(initShoeAnimation, 100);
@@ -131,62 +134,93 @@
       const section = document.getElementById('hp-animated-shoe-{{ section.id }}');
       const slider = document.getElementById('hp-animated-shoe__slider-{{ section.id }}');
       const trailContainer = document.getElementById('hp-shoe-trail-{{ section.id }}');
-      
-      // Calculate how many dots we need based on container width
-      const containerWidth = section.offsetWidth;
-      const dotSpacing = 40; 
-      const numDots = Math.floor(containerWidth / dotSpacing);
-      
-      // Generate dots
-      for(let i=0; i<numDots; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'hp-shoe-dot';
-        trailContainer.appendChild(dot);
+      const image = slider.querySelector('img');
+
+      // Wait for image to load before measuring
+      if (image && !image.complete) {
+        image.addEventListener('load', buildAnimation);
+      } else {
+        buildAnimation();
       }
-      
-      const dots = trailContainer.querySelectorAll('.hp-shoe-dot');
 
-      // Create ScrollTrigger Timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "center center",
-          end: "+=150%", // Scroll duration
-          scrub: 1, // Smooth scrubbing
-          pin: true,
-          anticipatePin: 1
+      function buildAnimation() {
+        if (tl) {
+          tl.kill(); // Kill previous timeline if resizing
+          trailContainer.innerHTML = ''; // Clear dots
         }
-      });
 
-      // Move the shoe from left off-screen to right off-screen
-      // The distance to travel is viewport width + shoe width.
-      const shoeWidth = slider.offsetWidth || 250;
-      const totalDistance = window.innerWidth + shoeWidth + 100; // Extra buffer
-      
-      tl.to(slider, {
-        x: totalDistance,
-        ease: "none",
-        duration: 1
-      }, 0);
+        const containerWidth = section.offsetWidth;
+        // Use liquid setting as a reliable fallback for shoe width
+        let shoeWidth = slider.offsetWidth || {{ section.settings.image_width | default: 250 }};
+        if (window.innerWidth <= 749) {
+           shoeWidth = {{ section.settings.image_width_mobile | default: 150 }};
+        }
+        
+        const totalDistance = containerWidth + shoeWidth + 100; // Total X travel
 
-      // Fade/Scale in dots as the shoe passes them
-      // We'll distribute the dot animations across the timeline duration (0 to 1)
-      if (dots.length > 0) {
-        dots.forEach((dot, index) => {
-          // Delay based on dot index. Add a slight offset so it appears as shoe passes it
-          const progressPoint = (index / numDots) + 0.1;
+        // Dot settings
+        const dotSpacing = 35;
+        const startX = 0; // First dot position
+        const endX = containerWidth; // Last dot position
+        const numDots = Math.floor((endX - startX) / dotSpacing);
+
+        const dots = [];
+        for (let i = 0; i <= numDots; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'hp-shoe-dot';
+          const dotLeftPx = startX + (i * dotSpacing);
+          dot.style.left = dotLeftPx + 'px';
+          trailContainer.appendChild(dot);
+          dots.push({ el: dot, pos: dotLeftPx });
+        }
+
+        tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "center center",
+            end: "+=150%",
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1
+          }
+        });
+
+        // The shoe starts at translateX(-100%) which is -shoeWidth in absolute pixels
+        // It animates to x: totalDistance
+        tl.to(slider, {
+          x: totalDistance,
+          ease: "none",
+          duration: 1
+        }, 0);
+
+        dots.forEach((dotObj) => {
+          // Progress point is when the shoe reaches the dot
+          // Shoe X coordinate relative to container left is: (progress * totalDistance) - shoeWidth
+          // We want the dot to pop when the shoe is ~20px past it for a nice effect
+          let progressPoint = (dotObj.pos + shoeWidth + 20) / totalDistance;
           
-          tl.to(dot, {
+          // Clamp between 0 and 1
+          progressPoint = Math.max(0, Math.min(1, progressPoint));
+
+          tl.to(dotObj.el, {
             opacity: 1,
             scale: 1,
-            duration: 0.1, // Quick pop
+            duration: 0.1,
             ease: "back.out(2)"
           }, progressPoint);
         });
+        
+        ScrollTrigger.refresh();
       }
+
+      // Handle Resize
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildAnimation, 250);
+      });
     }
 
-    // Check for GSAP, dynamically load if needed
     if (typeof gsap === 'undefined') {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
@@ -306,3 +340,4 @@
   ]
 }
 {% endschema %}
+
