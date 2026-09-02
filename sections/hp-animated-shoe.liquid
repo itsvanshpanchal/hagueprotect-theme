@@ -48,24 +48,34 @@
     transition: opacity 0.15s ease;
   }
 
-  /* ─── SHOE SLIDER (sits on top of the line) ──────────────── */
+  /* ─── SHOE SLIDER: outer handles horizontal slide only ───── */
   .hp-animated-shoe__slider {
     position: absolute;
-    bottom: 30px; /* anchored to the line */
-    transform: translateX(-200px); /* start off-screen left */
+    bottom: 30px;
+    left: 0;
     z-index: 3;
     will-change: transform;
-    animation:
-      hpShoeSlide-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite,
-      hpShoeBob-{{ section.id }} 0.55s ease-in-out infinite;
+    animation: hpShoeSlide-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+  }
+
+  /* Inner wrapper: handles vertical bob only — no transform conflict */
+  .hp-animated-shoe__slider-inner {
+    display: block;
+    will-change: transform;
+    animation: hpShoeBob-{{ section.id }} 1.2s ease-in-out infinite;
+  }
+
+  @keyframes hpShoeSlide-{{ section.id }} {
+    0%   { transform: translateX(-200px); }
+    100% { transform: translateX(calc(100vw + 200px)); }
   }
 
   @keyframes hpShoeBob-{{ section.id }} {
-    0%   { margin-bottom: 0px; }
-    30%  { margin-bottom: 6px; }
-    60%  { margin-bottom: 0px; }
-    80%  { margin-bottom: 3px; }
-    100% { margin-bottom: 0px; }
+    0%   { transform: translateY(0px); }
+    25%  { transform: translateY(-10px); }
+    50%  { transform: translateY(0px); }
+    75%  { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
   }
 
   .hp-animated-shoe__image {
@@ -101,11 +111,11 @@
       100% { transform: translateX(calc(100vw + 140px)); }
     }
     @keyframes hpShoeBob-{{ section.id }} {
-      0%   { margin-bottom: 0px; }
-      30%  { margin-bottom: 4px; }
-      60%  { margin-bottom: 0px; }
-      80%  { margin-bottom: 2px; }
-      100% { margin-bottom: 0px; }
+      0%   { transform: translateY(0px); }
+      25%  { transform: translateY(-6px); }
+      50%  { transform: translateY(0px); }
+      75%  { transform: translateY(-3px); }
+      100% { transform: translateY(0px); }
     }
   }
 {%- endstyle -%}
@@ -120,19 +130,21 @@
     </div>
 
     <div class="hp-animated-shoe__slider" id="hp-animated-shoe__slider-{{ section.id }}">
-      {%- if section.settings.image != blank -%}
-        <img
-          src="{{ section.settings.image | image_url: width: 400 }}"
-          alt="{{ section.settings.image.alt | escape }}"
-          class="hp-animated-shoe__image"
-          loading="lazy"
-          draggable="false"
-        >
-      {%- else -%}
-        <div style="display:flex;align-items:center;justify-content:center;width:120px;height:64px;background:#e0e0e0;border-radius:4px;font-size:11px;color:#888;">
-          Upload Image
-        </div>
-      {%- endif -%}
+      <div class="hp-animated-shoe__slider-inner">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 400 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            class="hp-animated-shoe__image"
+            loading="lazy"
+            draggable="false"
+          >
+        {%- else -%}
+          <div style="display:flex;align-items:center;justify-content:center;width:120px;height:64px;background:#e0e0e0;border-radius:4px;font-size:11px;color:#888;">
+            Upload Image
+          </div>
+        {%- endif -%}
+      </div>
     </div>
 
   </div>
@@ -237,8 +249,8 @@
       "min": 8,
       "max": 60,
       "step": 1,
-      "default": 22,
-      "info": "Higher = slower shoe. 22s = medium pace."
+      "default": 28,
+      "info": "Higher = slower shoe. 28s = medium/slow pace."
     }
   ],
   "presets": [
