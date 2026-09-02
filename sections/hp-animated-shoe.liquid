@@ -1,241 +1,186 @@
 {%- style -%}
+  /* ─── SECTION WRAPPER ─────────────────────────────────────── */
   .hp-animated-shoe-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.bg_color }};
     overflow: hidden;
     position: relative;
     width: 100%;
   }
 
-  .hp-animated-shoe__line-container {
+  /* ─── INNER TRACK (fixed 102px ribbon) ───────────────────── */
+  .hp-animated-shoe__track-wrap {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 102px;
   }
 
+  /* ─── GROUND LINE ─────────────────────────────────────────── */
   .hp-animated-shoe__line {
     position: absolute;
-    top: 50%;
+    bottom: 30px; /* line sits near bottom of ribbon */
     left: 0;
     right: 0;
     height: 1px;
     background-color: {{ section.settings.line_color }};
     z-index: 1;
-    transform: translateY(-50%);
   }
 
-  .hp-animated-shoe__track {
-    position: relative;
-    width: 100%;
-    height: 100px; /* Base height to give it some room */
-    display: flex;
-    align-items: center;
-    z-index: 2;
-  }
-
-  .hp-animated-shoe__slider {
-    position: absolute;
-    left: 0; /* Start at left edge */
-    transform: translateX(-100%); /* Start completely off-screen left */
-    z-index: 3;
-    display: flex;
-    align-items: center;
-  }
-
-  .hp-animated-shoe__image {
-    display: block;
-    height: auto;
-    width: {{ section.settings.image_width }}px;
-    max-width: 90vw;
-  }
-
+  /* ─── DOT TRAIL ───────────────────────────────────────────── */
   .hp-shoe-trail {
     position: absolute;
-    top: 50%;
+    bottom: 30px; /* same Y as the ground line */
     left: 0;
     width: 100%;
     height: 1px;
-    transform: translateY(-50%);
     z-index: 2;
+    pointer-events: none;
   }
 
   .hp-shoe-dot {
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 8px;
-    height: 8px;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background-color: {{ section.settings.dot_color | default: '#2ecc71' }};
+    background-color: {{ section.settings.dot_color }};
     opacity: 0;
-  }};
-    opacity: 0;
-    transform: scale(0);
+    transition: opacity 0.15s ease;
+  }
+
+  /* ─── SHOE SLIDER (sits on top of the line) ──────────────── */
+  .hp-animated-shoe__slider {
+    position: absolute;
+    bottom: 30px; /* anchored to the line */
+    transform: translateX(-200px); /* start off-screen left */
+    z-index: 3;
+    will-change: transform;
+    animation: hpShoeSlide-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+  }
+
+  .hp-animated-shoe__image {
+    display: block;
+    height: 64px; /* fixed height ~63% of 102px ribbon */
+    width: auto;
+    transform: translateY(0); /* sits on the line: bottom of img aligns to line */
+    margin-bottom: 0;
+    object-fit: contain;
+  }
+
+  @keyframes hpShoeSlide-{{ section.id }} {
+    0%   { transform: translateX(-200px); }
+    100% { transform: translateX(calc(100vw + 200px)); }
   }
 
   @media screen and (max-width: 749px) {
-    .hp-animated-shoe-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    }
     .hp-animated-shoe__image {
-      width: {{ section.settings.image_width_mobile }}px;
+      height: 48px;
     }
-    .hp-shoe-dot {
-      width: 6px;
-      height: 6px;
+    .hp-animated-shoe__track-wrap {
+      height: 80px;
+    }
+    .hp-animated-shoe__line,
+    .hp-shoe-trail {
+      bottom: 18px;
+    }
+    .hp-animated-shoe__slider {
+      bottom: 18px;
+    }
+    @keyframes hpShoeSlide-{{ section.id }} {
+      0%   { transform: translateX(-140px); }
+      100% { transform: translateX(calc(100vw + 140px)); }
     }
   }
 {%- endstyle -%}
 
 <section class="hp-animated-shoe hp-animated-shoe-{{ section.id }}" id="hp-animated-shoe-{{ section.id }}">
-  <div class="hp-animated-shoe__line-container">
+  <div class="hp-animated-shoe__track-wrap">
+
     <div class="hp-animated-shoe__line"></div>
-    
+
     <div class="hp-shoe-trail" id="hp-shoe-trail-{{ section.id }}">
-      <!-- Dots will be injected via JS based on container width -->
+      <!-- dots injected by JS -->
     </div>
 
-    <div class="hp-animated-shoe__track">
-      <div class="hp-animated-shoe__slider" id="hp-animated-shoe__slider-{{ section.id }}">
-        {%- if section.settings.image != blank -%}
-          <img 
-            src="{{ section.settings.image | image_url: width: 1200 }}" 
-            alt="{{ section.settings.image.alt | escape }}" 
-            class="hp-animated-shoe__image"
-            loading="lazy"
-          >
-        {%- else -%}
-          <div class="hp-animated-shoe__image" style="background: #ccc; height: 100px; display: flex; align-items: center; justify-content: center; opacity: 0.5;">
-            Upload Image
-          </div>
-        {%- endif -%}
-      </div>
+    <div class="hp-animated-shoe__slider" id="hp-animated-shoe__slider-{{ section.id }}">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 400 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="hp-animated-shoe__image"
+          loading="lazy"
+          draggable="false"
+        >
+      {%- else -%}
+        <div style="display:flex;align-items:center;justify-content:center;width:120px;height:64px;background:#e0e0e0;border-radius:4px;font-size:11px;color:#888;">
+          Upload Image
+        </div>
+      {%- endif -%}
     </div>
+
   </div>
 </section>
 
-<!-- Load GSAP and ScrollTrigger if not already loaded -->
 <script>
-  (function() {
-    let tl;
+(function() {
+  var SECTION_ID = '{{ section.id }}';
+  var DOT_COLOR  = '{{ section.settings.dot_color }}';
+  var DOT_SPACING = 30; // px between dots
+  var DOT_TRAIL_COUNT = 5; // how many dots glow at once behind the shoe
+  var FADE_AFTER = 4; // dot index offset before the oldest fades
 
-    function initShoeAnimation() {
-      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        setTimeout(initShoeAnimation, 100);
-        return;
+  var slider        = document.getElementById('hp-animated-shoe__slider-' + SECTION_ID);
+  var trailEl       = document.getElementById('hp-shoe-trail-' + SECTION_ID);
+  var sectionEl     = document.getElementById('hp-animated-shoe-' + SECTION_ID);
+  if (!slider || !trailEl || !sectionEl) return;
+
+  // Build fixed dot pool
+  var POOL_SIZE = 60;
+  var dotEls = [];
+  for (var i = 0; i < POOL_SIZE; i++) {
+    var d = document.createElement('div');
+    d.className = 'hp-shoe-dot';
+    d.style.left = (i * DOT_SPACING) + 'px';
+    trailEl.appendChild(d);
+    dotEls.push(d);
+  }
+
+  var lastShoeX = -9999;
+
+  function tick() {
+    // Get current translateX of the slider
+    var mat = window.getComputedStyle(slider).transform;
+    var curX = 0;
+    if (mat && mat !== 'none') {
+      var parts = mat.match(/matrix.*\((.+)\)/);
+      if (parts) {
+        var vals = parts[1].split(', ');
+        curX = parseFloat(vals[4]) || 0;
       }
-      
-      gsap.registerPlugin(ScrollTrigger);
+    }
 
-      const section = document.getElementById('hp-animated-shoe-{{ section.id }}');
-      const slider = document.getElementById('hp-animated-shoe__slider-{{ section.id }}');
-      const trailContainer = document.getElementById('hp-shoe-trail-{{ section.id }}');
-      const image = slider.querySelector('img');
+    // The shoe's trailing edge (left side of shoe)
+    var shoeWidth = slider.offsetWidth || 100;
+    var heelX = curX; // left edge of shoe = heel position
 
-      // Wait for image to load before measuring
-      if (image && !image.complete) {
-        image.addEventListener('load', buildAnimation);
+    // Light up dots that are behind the heel, fade the rest
+    dotEls.forEach(function(dot, idx) {
+      var dotX = idx * DOT_SPACING;
+      var dist = heelX - dotX;
+      if (dist >= 0 && dist <= DOT_TRAIL_COUNT * DOT_SPACING) {
+        // Inside the glowing trail window
+        var intensity = 1 - (dist / (DOT_TRAIL_COUNT * DOT_SPACING));
+        dot.style.opacity = (0.3 + intensity * 0.7).toFixed(2);
       } else {
-        buildAnimation();
+        dot.style.opacity = '0';
       }
+    });
 
-      function buildAnimation() {
-        if (tl) {
-          tl.kill(); // Kill previous timeline if resizing
-          trailContainer.innerHTML = ''; // Clear dots
-        }
+    requestAnimationFrame(tick);
+  }
 
-        const containerWidth = section.offsetWidth;
-        // Use liquid setting as a reliable fallback for shoe width
-        let shoeWidth = slider.offsetWidth || {{ section.settings.image_width | default: 250 }};
-        if (window.innerWidth <= 749) {
-           shoeWidth = {{ section.settings.image_width_mobile | default: 150 }};
-        }
-        
-        const totalDistance = containerWidth + shoeWidth + 100; // Total X travel
-
-        // Dot settings
-        const dotSpacing = 35;
-        const startX = 0; // First dot position
-        const endX = containerWidth; // Last dot position
-        const numDots = Math.floor((endX - startX) / dotSpacing);
-
-        const dots = [];
-        for (let i = 0; i <= numDots; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'hp-shoe-dot';
-          const dotLeftPx = startX + (i * dotSpacing);
-          dot.style.left = dotLeftPx + 'px';
-          trailContainer.appendChild(dot);
-          dots.push({ el: dot, pos: dotLeftPx });
-        }
-
-        tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "center center",
-            end: "+=150%",
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1
-          }
-        });
-
-        // The shoe starts at translateX(-100%) which is -shoeWidth in absolute pixels
-        // It animates to x: totalDistance
-        tl.to(slider, {
-          x: totalDistance,
-          ease: "none",
-          duration: 1
-        }, 0);
-
-        dots.forEach((dotObj) => {
-          // Progress point is when the shoe reaches the dot
-          // Shoe X coordinate relative to container left is: (progress * totalDistance) - shoeWidth
-          // We want the dot to pop when the shoe is ~20px past it for a nice effect
-          let progressPoint = (dotObj.pos + shoeWidth + 20) / totalDistance;
-          
-          // Clamp between 0 and 1
-          progressPoint = Math.max(0, Math.min(1, progressPoint));
-
-          tl.to(dotObj.el, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.1,
-            ease: "back.out(2)"
-          }, progressPoint);
-        });
-        
-        ScrollTrigger.refresh();
-      }
-
-      // Handle Resize
-      let resizeTimer;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(buildAnimation, 250);
-      });
-    }
-
-    if (typeof gsap === 'undefined') {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
-      document.head.appendChild(script);
-      
-      script.onload = function() {
-        const stScript = document.createElement('script');
-        stScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js';
-        document.head.appendChild(stScript);
-        stScript.onload = initShoeAnimation;
-      }
-    } else {
-      initShoeAnimation();
-    }
-  })();
+  requestAnimationFrame(tick);
+})();
 </script>
 
 {% schema %}
@@ -248,39 +193,19 @@
       "type": "image_picker",
       "id": "image",
       "label": "Shoe Image",
-      "info": "Upload a PNG with transparent background."
-    },
-    {
-      "type": "range",
-      "id": "image_width",
-      "label": "Image Width (Desktop)",
-      "min": 100,
-      "max": 1000,
-      "step": 20,
-      "unit": "px",
-      "default": 250
-    },
-    {
-      "type": "range",
-      "id": "image_width_mobile",
-      "label": "Image Width (Mobile)",
-      "min": 50,
-      "max": 500,
-      "step": 10,
-      "unit": "px",
-      "default": 150
+      "info": "Upload a transparent-background PNG of the sneaker."
     },
     {
       "type": "color",
       "id": "bg_color",
       "label": "Background Color",
-      "default": "#fdfcf7"
+      "default": "#eae7e1"
     },
     {
       "type": "color",
       "id": "line_color",
-      "label": "Horizontal Line Color",
-      "default": "#e0e0e0"
+      "label": "Ground Line Color",
+      "default": "#cccccc"
     },
     {
       "type": "color",
@@ -289,48 +214,14 @@
       "default": "#2ecc71"
     },
     {
-      "type": "header",
-      "content": "Padding"
-    },
-    {
       "type": "range",
-      "id": "padding_top",
-      "label": "Top padding (Desktop)",
-      "min": 0,
-      "max": 200,
-      "step": 4,
-      "unit": "px",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding (Desktop)",
-      "min": 0,
-      "max": 200,
-      "step": 4,
-      "unit": "px",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "label": "Top padding (Mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "label": "Bottom padding (Mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 40
+      "id": "animation_duration",
+      "label": "Animation Duration (seconds)",
+      "min": 8,
+      "max": 60,
+      "step": 1,
+      "default": 34,
+      "info": "Higher = slower shoe. Reference video: ~34s."
     }
   ],
   "presets": [
@@ -340,4 +231,3 @@
   ]
 }
 {% endschema %}
-
