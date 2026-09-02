@@ -78,14 +78,10 @@
     z-index: 2;
     margin-bottom: 40px;
     margin-top: 40px;
-    /* Animation initial states */
+    /* Base styles (will be animated via JS scroll) */
     opacity: 0;
     transform: scale(0.8);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .hp-arrival__visual-wrap.is-visible {
-    opacity: 1;
-    transform: scale(1);
+    /* No transition here so it scrubs instantly with scroll */
   }
   .hp-arrival__glow {
     position: absolute;
@@ -212,30 +208,38 @@ document.addEventListener('DOMContentLoaded', function() {
   var visualWrap = section.querySelector('.hp-arrival__visual-wrap');
   var watermark = section.querySelector('.hp-arrival__watermark');
 
-  // 1. Fade in & scale up the main visual when scrolled into view
-  var observer = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting) {
-      visualWrap.classList.add('is-visible');
-    }
-  }, { threshold: 0.3 });
-  
-  if (visualWrap) {
-    observer.observe(section);
-  }
+  // Attach a single scroll listener to handle both effects scrubbed to scroll
+  window.addEventListener('scroll', function() {
+    var rect = section.getBoundingClientRect();
+    
+    // Only process if the section is somewhat in the viewport
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      
+      // 1. Scrubbed Fade & Scale for the Main Visual (Circle/Shoe)
+      if (visualWrap) {
+        // Start animation when section enters bottom of screen
+        var startScroll = window.innerHeight; 
+        // End animation when section is near the middle of the screen
+        var endScroll = window.innerHeight * 0.4; 
+        
+        var progress = (startScroll - rect.top) / (startScroll - endScroll);
+        progress = Math.max(0, Math.min(1, progress)); // clamp 0-1
+        
+        var scale = 0.8 + (progress * 0.2); // scales from 0.8 to 1.0
+        
+        visualWrap.style.opacity = progress.toFixed(3);
+        visualWrap.style.transform = 'scale(' + scale.toFixed(3) + ')';
+      }
 
-  // 2. Parallax effect for the "001" background text
-  if (watermark) {
-    window.addEventListener('scroll', function() {
-      var rect = section.getBoundingClientRect();
-      // Only animate if the section is currently in the viewport
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // 2. Parallax effect for the "001" background text
+      if (watermark) {
         var scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
         // Calculate Y offset (moves from ~ +100px to -100px based on scroll)
         var yOffset = (scrollProgress - 0.5) * -200; 
         watermark.style.transform = 'translate(-50%, calc(-50% + ' + yOffset + 'px))';
       }
-    });
-  }
+    }
+  });
 });
 </script>
 
