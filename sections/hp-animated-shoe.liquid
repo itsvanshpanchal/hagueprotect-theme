@@ -48,36 +48,34 @@
     position: absolute;
     bottom: 0;
     transform: translate(-50%, -15px); /* Position slightly above the line, behind shoe */
-    width: 16px;
-    height: 24px;
+    width: 24px;
+    height: 12px;
     background: transparent;
     border-radius: 0;
     opacity: 0;
     transition: opacity 0.15s ease;
   }
   
-  /* Front of footprint */
+  /* Front of footprint (Toe pad) */
   .hp-shoe-dot::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 16px;
-    height: 15px;
+    left: 0;
+    width: 14px;
+    height: 12px;
     background-color: {{ section.settings.dot_color }};
-    border-radius: 50% 50% 40% 40%;
+    border-radius: 40% 50% 50% 40%;
   }
 
   /* Heel of footprint */
   .hp-shoe-dot::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 7px;
+    top: 2px;
+    right: 0;
+    width: 8px;
+    height: 8px;
     background-color: {{ section.settings.dot_color }};
     border-radius: 50%;
   }
@@ -234,9 +232,9 @@
       var dotX = idx * DOT_SPACING;
       var dist = heelX - dotX;
       if (dist >= 0 && dist <= DOT_TRAIL_COUNT * DOT_SPACING) {
-        // Inside the glowing trail window
+        // Inside the glowing trail window (made much lighter for realism)
         var intensity = 1 - (dist / (DOT_TRAIL_COUNT * DOT_SPACING));
-        dot.style.opacity = (0.3 + intensity * 0.7).toFixed(2);
+        dot.style.opacity = (intensity * 0.4).toFixed(2); // Max opacity 0.4, fades smoothly to 0
       } else {
         dot.style.opacity = '0';
       }
