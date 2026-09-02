@@ -55,7 +55,17 @@
     transform: translateX(-200px); /* start off-screen left */
     z-index: 3;
     will-change: transform;
-    animation: hpShoeSlide-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+    animation:
+      hpShoeSlide-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite,
+      hpShoeBob-{{ section.id }} 0.55s ease-in-out infinite;
+  }
+
+  @keyframes hpShoeBob-{{ section.id }} {
+    0%   { margin-bottom: 0px; }
+    30%  { margin-bottom: 6px; }
+    60%  { margin-bottom: 0px; }
+    80%  { margin-bottom: 3px; }
+    100% { margin-bottom: 0px; }
   }
 
   .hp-animated-shoe__image {
@@ -89,6 +99,13 @@
     @keyframes hpShoeSlide-{{ section.id }} {
       0%   { transform: translateX(-140px); }
       100% { transform: translateX(calc(100vw + 140px)); }
+    }
+    @keyframes hpShoeBob-{{ section.id }} {
+      0%   { margin-bottom: 0px; }
+      30%  { margin-bottom: 4px; }
+      60%  { margin-bottom: 0px; }
+      80%  { margin-bottom: 2px; }
+      100% { margin-bottom: 0px; }
     }
   }
 {%- endstyle -%}
@@ -220,8 +237,8 @@
       "min": 8,
       "max": 60,
       "step": 1,
-      "default": 34,
-      "info": "Higher = slower shoe. Reference video: ~34s."
+      "default": 22,
+      "info": "Higher = slower shoe. 22s = medium pace."
     }
   ],
   "presets": [
