@@ -1,0 +1,337 @@
+{%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+  #shopify-section-{{ section.id }} .hp-composition-section {
+    background-color: {{ section.settings.bg_color | default: '#F2EFE8' }};
+    padding: 120px 20px;
+    position: relative;
+    overflow: hidden;
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+  }
+
+  .hp-composition-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    height: 600px; /* Fixed height for absolute positioning on desktop */
+  }
+
+  .hp-composition-eyebrow {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    z-index: 10;
+  }
+
+  .hp-composition-eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    background-color: {{ section.settings.accent_color | default: '#d2fa3c' }};
+    border-radius: 50%;
+  }
+
+  .hp-composition-heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin: 0;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: clamp(32px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #8c8b89;
+    z-index: 1;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .hp-comp-card {
+    position: absolute;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+    z-index: 5;
+  }
+
+  .hp-comp-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+  }
+
+  .hp-comp-card--image {
+    padding: 0;
+  }
+
+  .hp-comp-card--image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hp-comp-card--text {
+    padding: 40px;
+    align-items: flex-start;
+  }
+
+  .hp-comp-card-title {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: clamp(24px, 3vw, 42px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .hp-comp-card-line {
+    width: 30px;
+    height: 4px;
+    background-color: currentColor;
+    margin-bottom: auto;
+  }
+
+  /* Desktop Fixed Positions - Hardcoded to match screenshot */
+  /* Top Left Image */
+  .hp-comp-card-0 {
+    top: 0;
+    left: 5%;
+    width: 340px;
+    height: 280px;
+  }
+  
+  /* Bottom Left Text */
+  .hp-comp-card-1 {
+    bottom: -40px;
+    left: 15%;
+    width: 280px;
+    height: 220px;
+  }
+  
+  /* Top Right Text */
+  .hp-comp-card-2 {
+    top: 40px;
+    right: 15%;
+    width: 320px;
+    height: 240px;
+  }
+  
+  /* Bottom Right Image */
+  .hp-comp-card-3 {
+    bottom: -60px;
+    right: 0%;
+    width: 360px;
+    height: 280px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .hp-composition-section {
+      padding: 80px 20px;
+      min-height: auto;
+    }
+    
+    .hp-composition-container {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hp-composition-eyebrow {
+      position: relative;
+      top: 0;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .hp-composition-heading {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+      margin-bottom: 40px;
+    }
+
+    .hp-comp-card {
+      position: relative;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      max-width: 400px;
+      height: auto !important;
+      aspect-ratio: 4/3;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hp-composition-section">
+  <div class="hp-composition-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="hp-composition-eyebrow">
+        <div class="hp-composition-eyebrow-dot"></div>
+        {{ section.settings.eyebrow }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-composition-heading">
+        {{ section.settings.heading | replace: '\n', '<br>' }}
+      </h2>
+    {%- endif -%}
+
+    {%- for block in section.blocks limit: 4 -%}
+      {%- assign card_class = 'hp-comp-card hp-comp-card-' | append: forloop.index0 -%}
+      
+      <div class="{{ card_class }} {% if block.settings.image != blank %}hp-comp-card--image{% else %}hp-comp-card--text{% endif %}" 
+           style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};" 
+           {{ block.shopify_attributes }}>
+        
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url: width: 800 }}" 
+               alt="{{ block.settings.image.alt | default: 'Composition detail' }}" 
+               loading="lazy" width="800" height="600">
+        {%- else -%}
+          {%- if block.settings.show_line -%}
+            <div class="hp-comp-card-line"></div>
+          {%- endif -%}
+          <div class="hp-comp-card-title" style="margin-top: {% if block.settings.show_line %}20px{% else %}auto{% endif %}; margin-bottom: {% if block.settings.show_line %}0{% else %}auto{% endif %};">
+            {{ block.settings.title | replace: '\n', '<br>' }}
+          </div>
+        {%- endif -%}
+        
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Composition Scattered",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F2EFE8"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Dot Color",
+      "default": "#d2fa3c"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "09 — THE COMPOSITION"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "EVERY PART,\nCONSIDERED.",
+      "info": "Use \\n for line breaks"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Card Background",
+          "default": "#d2fa3c"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#111111"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "If an image is uploaded, text settings below will be ignored."
+        },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Text",
+          "default": "CUT\nONCE.",
+          "info": "Use \\n for line breaks"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_line",
+          "label": "Show top line accent",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Composition Scattered",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "image": ""
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "text_color": "#111111",
+            "title": "EDITION\n001–300",
+            "show_line": true
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "bg_color": "#111111",
+            "text_color": "#ffffff",
+            "title": "CUT\nONCE.",
+            "show_line": false
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "image": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
