@@ -1,14 +1,6 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
-  .fc-heading .hp-heading-line--2,
-  body.template-index #MainContent .fc-heading .hp-heading-line--2 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-    font-weight: 300 !important;
-    font-style: oblique 15deg !important;
-    font-synthesis: style !important;
-  }
-
   :root {
     --fc-bg: #fdfeff;
     --fc-card-bg: #fdfeff;
@@ -82,9 +74,9 @@
 
   .fc-subtitle {
     margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-weight: 500;
-    font-size: var(--section-label-size, 13px);
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-size: var(--section-label-size, 18px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--section-label-color, #888);
@@ -97,9 +89,9 @@
   @media screen and (max-width: 989px) {
     #MainContent #shopify-section-{{ section.id }} .fc-subtitle,
     #shopify-section-{{ section.id }} .fc-subtitle {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-      font-size: var(--section-label-size, 12px) !important;
-      font-weight: 500 !important;
+      font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+      font-size: var(--section-label-size, 14px) !important;
+      font-weight: 400 !important;
       letter-spacing: 0.14em !important;
       text-transform: uppercase !important;
     }
