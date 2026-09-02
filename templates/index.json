@@ -804,6 +804,59 @@
         "paragraph_font_size_mobile": 20
       }
     },
+    "hp_composition": {
+      "type": "hp-composition",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "text_color": "#111111",
+            "title": "CUT\nONCE.",
+            "show_line": false
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "text_color": "#111111",
+            "title": "EDITION\n001–300",
+            "show_line": true
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#111111",
+            "text_color": "#ffffff",
+            "title": "CUT\nONCE.",
+            "show_line": false
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#d2fa3c",
+            "text_color": "#111111",
+            "title": "CUT\nONCE.",
+            "show_line": false
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "bg_color": "#f2efe8",
+        "accent_color": "#d2fa3c",
+        "eyebrow": "09 — THE COMPOSITION",
+        "heading": "EVERY PART,\nCONSIDERED."
+      }
+    },
     "hp_the_arrival": {
       "type": "hp-the-arrival",
       "settings": {
@@ -1262,21 +1315,10 @@
         "dot_color": "#2ecc71",
         "animation_duration": 34
       }
-    },
-    "hp_composition": {
-      "type": "hp-composition",
-      "blocks": {
-        "card_1": { "type": "card", "settings": { "bg_color": "#d2fa3c" } },
-        "card_2": { "type": "card", "settings": { "bg_color": "#d2fa3c", "text_color": "#111111", "title": "EDITION\n001–300", "show_line": true } },
-        "card_3": { "type": "card", "settings": { "bg_color": "#111111", "text_color": "#ffffff", "title": "CUT\nONCE.", "show_line": false } },
-        "card_4": { "type": "card", "settings": { "bg_color": "#d2fa3c" } }
-      },
-      "block_order": ["card_1", "card_2", "card_3", "card_4"]
     }
   },
   "order": [
     "hero",
-    "hp_composition",
     "featured-brands",
     "bestsellers",
     "materials-showcase",
@@ -1285,6 +1327,7 @@
     "1783254662e4d37d15",
     "corporate_gifting_marquee_pCHxwt",
     "horizontal-product-slider",
+    "hp_composition",
     "hp_the_arrival",
     "story_block_8WTbcQ",
     "community-testimonials",
