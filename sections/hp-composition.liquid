@@ -318,12 +318,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // Lerp formula
       currentProgress += (targetProgress - currentProgress) * 0.08;
 
-      // Parallax effect for the scattered cards.
-      // Each card moves vertically at a slightly different speed based on its index.
-      if (cards[0]) cards[0].style.transform = 'translateY(' + (-currentProgress * 200) + 'px)';
-      if (cards[1]) cards[1].style.transform = 'translateY(' + (-currentProgress * 400) + 'px)';
-      if (cards[2]) cards[2].style.transform = 'translateY(' + (-currentProgress * 250) + 'px)';
-      if (cards[3]) cards[3].style.transform = 'translateY(' + (-currentProgress * 350) + 'px)';
+      // Cards slide INWARDS towards the center text as you scroll down.
+      // currentProgress goes from 0 to 1.
+      if (cards[0]) cards[0].style.transform = 'translate(' + (currentProgress * 250) + 'px, ' + (currentProgress * 200) + 'px)'; // Top Left -> Moves Right/Down
+      if (cards[1]) cards[1].style.transform = 'translate(' + (currentProgress * 200) + 'px, ' + (-currentProgress * 150) + 'px)'; // Bottom Left -> Moves Right/Up
+      if (cards[2]) cards[2].style.transform = 'translate(' + (-currentProgress * 250) + 'px, ' + (currentProgress * 200) + 'px)'; // Top Right -> Moves Left/Down
+      if (cards[3]) cards[3].style.transform = 'translate(' + (-currentProgress * 250) + 'px, ' + (-currentProgress * 200) + 'px)'; // Bottom Right -> Moves Left/Up
     }
 
     // Loop forever
