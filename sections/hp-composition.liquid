@@ -318,12 +318,17 @@ document.addEventListener('DOMContentLoaded', function() {
       // Lerp formula
       currentProgress += (targetProgress - currentProgress) * 0.08;
 
-      // Cards slide INWARDS towards the center text as you scroll down.
-      // currentProgress goes from 0 to 1.
-      if (cards[0]) cards[0].style.transform = 'translate(' + (currentProgress * 250) + 'px, ' + (currentProgress * 200) + 'px)'; // Top Left -> Moves Right/Down
-      if (cards[1]) cards[1].style.transform = 'translate(' + (currentProgress * 200) + 'px, ' + (-currentProgress * 150) + 'px)'; // Bottom Left -> Moves Right/Up
-      if (cards[2]) cards[2].style.transform = 'translate(' + (-currentProgress * 250) + 'px, ' + (currentProgress * 200) + 'px)'; // Top Right -> Moves Left/Down
-      if (cards[3]) cards[3].style.transform = 'translate(' + (-currentProgress * 250) + 'px, ' + (-currentProgress * 200) + 'px)'; // Bottom Right -> Moves Left/Up
+      // Cards start OUTWARD and slide IN to their CSS places as you scroll down.
+      // currentProgress goes from 0 (top) to 1 (bottom).
+      // outProgress is 1 at the top, and 0 at the bottom.
+      var outProgress = 1 - currentProgress;
+
+      // When outProgress is 1 (top), they are pushed off-screen/outward.
+      // When outProgress is 0 (bottom), they rest exactly at translate(0,0) - their CSS positions!
+      if (cards[0]) cards[0].style.transform = 'translate(' + (-outProgress * 400) + 'px, ' + (-outProgress * 300) + 'px)'; // Top Left -> starts Up/Left
+      if (cards[1]) cards[1].style.transform = 'translate(' + (-outProgress * 350) + 'px, ' + (outProgress * 300) + 'px)';  // Bottom Left -> starts Down/Left
+      if (cards[2]) cards[2].style.transform = 'translate(' + (outProgress * 400) + 'px, ' + (-outProgress * 300) + 'px)';  // Top Right -> starts Up/Right
+      if (cards[3]) cards[3].style.transform = 'translate(' + (outProgress * 450) + 'px, ' + (outProgress * 350) + 'px)';  // Bottom Right -> starts Down/Right
     }
 
     // Loop forever
