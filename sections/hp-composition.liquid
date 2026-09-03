@@ -318,17 +318,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // Lerp formula - decreased to 0.04 for maximum buttery smoothness and inertia
       currentProgress += (targetProgress - currentProgress) * 0.04;
 
-      // Cards start OUTWARD and slide IN to their CSS places as you scroll down.
-      // currentProgress goes from 0 (top) to 1 (bottom).
-      // outProgress is 1 at the top, and 0 at the bottom.
-      var outProgress = 1 - currentProgress;
-
-      // When outProgress is 1 (top), they are pushed off-screen/outward.
-      // When outProgress is 0 (bottom), they rest exactly at translate(0,0) - their CSS positions!
-      if (cards[0]) cards[0].style.transform = 'translate(' + (-outProgress * 400) + 'px, ' + (-outProgress * 300) + 'px)'; // Top Left -> starts Up/Left
-      if (cards[1]) cards[1].style.transform = 'translate(' + (-outProgress * 350) + 'px, ' + (outProgress * 300) + 'px)';  // Bottom Left -> starts Down/Left
-      if (cards[2]) cards[2].style.transform = 'translate(' + (outProgress * 400) + 'px, ' + (-outProgress * 300) + 'px)';  // Top Right -> starts Up/Right
-      if (cards[3]) cards[3].style.transform = 'translate(' + (outProgress * 450) + 'px, ' + (outProgress * 350) + 'px)';  // Bottom Right -> starts Down/Right
+      // Cards start in their exact CSS positions (when we reach the section)
+      // As you scroll down (currentProgress approaches 1), they scatter OUTWARDS to clear the screen
+      if (cards[0]) cards[0].style.transform = 'translate(' + (-currentProgress * 400) + 'px, ' + (-currentProgress * 300) + 'px)'; // Top Left -> moves Up/Left
+      if (cards[1]) cards[1].style.transform = 'translate(' + (-currentProgress * 350) + 'px, ' + (currentProgress * 300) + 'px)';  // Bottom Left -> moves Down/Left
+      if (cards[2]) cards[2].style.transform = 'translate(' + (currentProgress * 400) + 'px, ' + (-currentProgress * 300) + 'px)';  // Top Right -> moves Up/Right
+      if (cards[3]) cards[3].style.transform = 'translate(' + (currentProgress * 450) + 'px, ' + (currentProgress * 350) + 'px)';  // Bottom Right -> moves Down/Right
     }
 
     // Loop forever
