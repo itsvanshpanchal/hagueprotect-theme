@@ -58,15 +58,7 @@
     letter-spacing: -2vw;
   }
 
-  /* ─── CONCENTRIC CIRCLES ─── */
-  .hp-arrival__circles {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-    pointer-events: none;
-  }
+
   .hp-arrival__circle {
     position: absolute;
     top: 50%;
@@ -174,9 +166,7 @@
   <div class="hp-arrival__sticky">
     <!-- Watermark and Circles -->
     <div class="hp-arrival__watermark">001</div>
-    <div class="hp-arrival__circles">
-      <div class="hp-arrival__circle hp-arrival__circle--1"></div>
-    </div>
+
 
     <!-- Top Left Indicator -->
     <div class="hp-arrival__indicator">
@@ -186,6 +176,7 @@
 
     <!-- Main Visual -->
     <div class="hp-arrival__visual-wrap">
+      <div class="hp-arrival__circle hp-arrival__circle--1"></div>
       <div class="hp-arrival__glow"></div>
       <div class="hp-arrival__image-mask">
         {%- if section.settings.image -%}
