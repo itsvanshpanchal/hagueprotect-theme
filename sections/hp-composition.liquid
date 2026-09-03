@@ -3,14 +3,22 @@
 
   #shopify-section-{{ section.id }} .hp-composition-section {
     background-color: {{ section.settings.bg_color | default: '#F2EFE8' }};
-    padding: 120px 20px;
     position: relative;
+    height: 200vh;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+  }
+
+  .hp-comp__sticky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
-    min-height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    z-index: 1;
   }
 
   .hp-composition-container {
@@ -59,6 +67,7 @@
     z-index: 1;
     width: 100%;
     max-width: 800px;
+    will-change: transform;
   }
 
   .hp-comp-card {
@@ -69,13 +78,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
     z-index: 5;
-  }
-
-  .hp-comp-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+    will-change: transform;
   }
 
   .hp-comp-card--image {
@@ -144,10 +148,19 @@
 
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .hp-composition-section {
+      height: auto;
       padding: 80px 20px;
-      min-height: auto;
     }
     
+    .hp-comp__sticky {
+      position: relative !important;
+      height: auto !important;
+      overflow: visible;
+      padding: 0;
+      top: auto !important;
+      bottom: auto !important;
+    }
+
     .hp-composition-container {
       height: auto;
       display: flex;
@@ -167,7 +180,7 @@
       position: relative;
       top: 0;
       left: 0;
-      transform: none;
+      transform: none !important;
       margin-bottom: 40px;
     }
 
@@ -181,49 +194,151 @@
       max-width: 400px;
       height: auto !important;
       aspect-ratio: 4/3;
+      transform: none !important;
     }
   }
 {%- endstyle -%}
 
-<section class="hp-composition-section">
-  <div class="hp-composition-container">
-    {%- if section.settings.eyebrow != blank -%}
-      <div class="hp-composition-eyebrow">
-        <div class="hp-composition-eyebrow-dot"></div>
-        {{ section.settings.eyebrow }}
-      </div>
-    {%- endif -%}
+<section class="hp-composition-section hp-composition-{{ section.id }}">
+  <div class="hp-comp__sticky">
+    <div class="hp-composition-container">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="hp-composition-eyebrow">
+          <div class="hp-composition-eyebrow-dot"></div>
+          {{ section.settings.eyebrow }}
+        </div>
+      {%- endif -%}
 
-    {%- if section.settings.heading != blank -%}
-      <h2 class="hp-composition-heading">
-        {{ section.settings.heading | replace: '\n', '<br>' }}
-      </h2>
-    {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hp-composition-heading" data-no-typewriter>
+          {{ section.settings.heading | replace: '\n', '<br>' }}
+        </h2>
+      {%- endif -%}
 
-    {%- for block in section.blocks limit: 4 -%}
-      {%- assign card_class = 'hp-comp-card hp-comp-card-' | append: forloop.index0 -%}
-      
-      <div class="{{ card_class }} {% if block.settings.image != blank %}hp-comp-card--image{% else %}hp-comp-card--text{% endif %}" 
-           style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};" 
-           {{ block.shopify_attributes }}>
+      {%- for block in section.blocks limit: 4 -%}
+        {%- assign card_class = 'hp-comp-card hp-comp-card-' | append: forloop.index0 -%}
         
-        {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url: width: 800 }}" 
-               alt="{{ block.settings.image.alt | default: 'Composition detail' }}" 
-               loading="lazy" width="800" height="600">
-        {%- else -%}
-          {%- if block.settings.show_line -%}
-            <div class="hp-comp-card-line"></div>
+        <div class="{{ card_class }} {% if block.settings.image != blank %}hp-comp-card--image{% else %}hp-comp-card--text{% endif %}" 
+             style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};" 
+             {{ block.shopify_attributes }}>
+          
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 800 }}" 
+                 alt="{{ block.settings.image.alt | default: 'Composition detail' }}" 
+                 loading="lazy" width="800" height="600">
+          {%- else -%}
+            {%- if block.settings.show_line -%}
+              <div class="hp-comp-card-line"></div>
+            {%- endif -%}
+            <div class="hp-comp-card-title" style="margin-top: {% if block.settings.show_line %}20px{% else %}auto{% endif %}; margin-bottom: {% if block.settings.show_line %}0{% else %}auto{% endif %};">
+              {{ block.settings.title | replace: '\n', '<br>' }}
+            </div>
           {%- endif -%}
-          <div class="hp-comp-card-title" style="margin-top: {% if block.settings.show_line %}20px{% else %}auto{% endif %}; margin-bottom: {% if block.settings.show_line %}0{% else %}auto{% endif %};">
-            {{ block.settings.title | replace: '\n', '<br>' }}
-          </div>
-        {%- endif -%}
-        
-      </div>
-    {%- endfor -%}
+          
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var section = document.querySelector('.hp-composition-{{ section.id }}');
+  if (!section) return;
+  var stickyEl = section.querySelector('.hp-comp__sticky');
+  
+  // Select all 4 scattered cards
+  var cards = [];
+  for (var i = 0; i < 4; i++) {
+    var el = section.querySelector('.hp-comp-card-' + i);
+    if (el) cards.push(el);
+  }
+
+  // We will lerp (smooth) the progress value
+  var targetProgress = 0;
+  var currentProgress = 0;
+  var isPinned = false;
+  var hasScrolledPast = false;
+
+  function updateTargetProgress() {
+    if (window.innerWidth <= 989) {
+      if (isPinned || hasScrolledPast) {
+        stickyEl.style.position = '';
+        stickyEl.style.top = '';
+        stickyEl.style.bottom = '';
+        stickyEl.style.zIndex = '';
+        isPinned = false;
+        hasScrolledPast = false;
+      }
+      return; // No JS pinning on mobile for this section
+    }
+
+    var rect = section.getBoundingClientRect();
+    var maxScroll = rect.height - window.innerHeight;
+    
+    // Check pinning state for layout
+    if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+      if (!isPinned) {
+        stickyEl.style.position = 'fixed';
+        stickyEl.style.top = '0px';
+        stickyEl.style.bottom = 'auto';
+        stickyEl.style.zIndex = '9';
+        isPinned = true;
+      }
+      hasScrolledPast = false;
+      // Target progress is based on actual scroll position
+      targetProgress = Math.abs(rect.top) / maxScroll;
+      targetProgress = Math.max(0, Math.min(1, targetProgress));
+
+    } else if (rect.top > 0) {
+      if (isPinned || hasScrolledPast) {
+        stickyEl.style.position = 'absolute';
+        stickyEl.style.top = '0px';
+        stickyEl.style.bottom = 'auto';
+        stickyEl.style.zIndex = '2';
+        isPinned = false;
+        hasScrolledPast = false;
+      }
+      targetProgress = 0; // Above section
+    } else if (rect.bottom < window.innerHeight) {
+      if (isPinned || !hasScrolledPast) {
+        stickyEl.style.position = 'absolute';
+        stickyEl.style.top = 'auto';
+        stickyEl.style.bottom = '0px';
+        stickyEl.style.zIndex = '2';
+        isPinned = false;
+        hasScrolledPast = true;
+      }
+      targetProgress = 1; // Below section
+    }
+  }
+
+  function renderLoop() {
+    if (window.innerWidth > 989) {
+      // Lerp formula
+      currentProgress += (targetProgress - currentProgress) * 0.08;
+
+      // Parallax effect for the scattered cards.
+      // Each card moves vertically at a slightly different speed based on its index.
+      if (cards[0]) cards[0].style.transform = 'translateY(' + (-currentProgress * 200) + 'px)';
+      if (cards[1]) cards[1].style.transform = 'translateY(' + (-currentProgress * 400) + 'px)';
+      if (cards[2]) cards[2].style.transform = 'translateY(' + (-currentProgress * 250) + 'px)';
+      if (cards[3]) cards[3].style.transform = 'translateY(' + (-currentProgress * 350) + 'px)';
+    }
+
+    // Loop forever
+    window.requestAnimationFrame(renderLoop);
+  }
+
+  // Update target on scroll and resize
+  window.addEventListener('scroll', updateTargetProgress, { passive: true });
+  window.addEventListener('resize', updateTargetProgress, { passive: true });
+  
+  // Kickoff
+  updateTargetProgress();
+  window.requestAnimationFrame(renderLoop);
+});
+</script>
 
 {% schema %}
 {
