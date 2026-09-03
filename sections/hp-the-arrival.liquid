@@ -207,31 +207,70 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!section) return;
   var visualWrap = section.querySelector('.hp-arrival__visual-wrap');
   var watermark = section.querySelector('.hp-arrival__watermark');
+  var textContent = section.querySelector('.hp-arrival__text-content');
 
-  // Attach a single scroll listener to handle both effects scrubbed to scroll
-  window.addEventListener('scroll', function() {
+  // Initial state setup to prevent jumping before scroll event fires
+  if (visualWrap) visualWrap.style.transform = 'scale(1.6)';
+  if (textContent) {
+    textContent.style.opacity = '0';
+    textContent.style.transform = 'translateY(40px)';
+  }
+
+  var ticking = false;
+
+  function onScroll() {
     var rect = section.getBoundingClientRect();
     
-    // Only process if the section is somewhat in the viewport
+    // Only process if the section is in the viewport
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       
-      // 1. Scrubbed Fade & Scale for the Main Visual (Circle/Shoe)
+      // Calculate progress based on the section's position relative to the window
+      // Start when the top of the section enters the bottom of the viewport
+      var startScroll = window.innerHeight; 
+      // End when the center of the section reaches the center of the viewport
+      var endScroll = (window.innerHeight - rect.height) / 2;
+      
+      var progress = (startScroll - rect.top) / (startScroll - endScroll);
+      progress = Math.max(0, Math.min(1, progress)); // clamp 0-1
+      
+      // 1. Shoebox scales DOWN from 1.6 to 1.0
       if (visualWrap) {
-        // Start animation when section enters bottom of screen
-        var startScroll = window.innerHeight; 
-        // End animation when section is near the middle of the screen
-        var endScroll = window.innerHeight * 0.4; 
-        
-        var progress = (startScroll - rect.top) / (startScroll - endScroll);
-        progress = Math.max(0, Math.min(1, progress)); // clamp 0-1
-        
-        var scale = 0.8 + (progress * 0.2); // scales from 0.8 to 1.0
-        
-        visualWrap.style.opacity = progress.toFixed(3);
+        var scale = 1.6 - (progress * 0.6);
         visualWrap.style.transform = 'scale(' + scale.toFixed(3) + ')';
+        // Force opacity to 1 (it was 0 in original CSS)
+        visualWrap.style.opacity = '1';
+      }
+
+      // 2. Text fades in and slides up
+      if (textContent) {
+        var textOpacity = progress;
+        var textTranslate = 40 - (progress * 40);
+        textContent.style.opacity = textOpacity.toFixed(3);
+        textContent.style.transform = 'translateY(' + textTranslate.toFixed(1) + 'px)';
+      }
+      
+      // 3. Parallax for Watermark '001'
+      if (watermark) {
+        // As we scroll through the section, move the watermark up
+        // When progress is 0, it's lower. When progress is 1, it's higher.
+        // Let's use a wider progress range for parallax so it continues moving
+        var parallaxProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        var yOffset = -20 - (parallaxProgress * 60); // from -20% to -80%
+        watermark.style.transform = 'translate(-50%, ' + yOffset.toFixed(1) + '%)';
       }
     }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
   });
+  
+  // Trigger once on load
+  onScroll();
 });
 </script>
 
