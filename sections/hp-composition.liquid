@@ -315,8 +315,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function renderLoop() {
     if (window.innerWidth > 989) {
-      // Lerp formula
-      currentProgress += (targetProgress - currentProgress) * 0.08;
+      // Lerp formula - decreased to 0.04 for maximum buttery smoothness and inertia
+      currentProgress += (targetProgress - currentProgress) * 0.04;
 
       // Cards start OUTWARD and slide IN to their CSS places as you scroll down.
       // currentProgress goes from 0 (top) to 1 (bottom).
