@@ -76,8 +76,7 @@
     display: flex;
     flex-direction: column;
     z-index: 10;
-    opacity: 0;
-    will-change: transform, opacity;
+    will-change: transform;
   }
   
   .hp-comp-card-line {
@@ -294,25 +293,19 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderLoop() {
     if (window.innerWidth > 989) {
       currentProgress += (targetProgress - currentProgress) * 0.05;
-
-      var introProgress = Math.min(1, currentProgress * 2);
       
       cards.forEach(function(card, idx) {
         if (!card) return;
         
-        var scatterY = 0;
-        if (currentProgress > 0.5) {
-            var scatterProgress = (currentProgress - 0.5) * 2;
-            var xDir = (idx < 3) ? -1 : 1;
-            var yDir = (idx % 3 === 0) ? -1 : (idx % 3 === 2) ? 1 : 0;
-            
-            card.style.transform = 'translate(' + (xDir * scatterProgress * 300) + 'px, ' + (yDir * scatterProgress * 200) + 'px)';
-        } else {
-             var yOffset = 40 - (introProgress * 40);
-             card.style.transform = 'translateY(' + yOffset + 'px)';
-        }
+        var scatterProgress = Math.max(0, 1 - (currentProgress / 0.7));
         
-        card.style.opacity = introProgress;
+        var xDir = (idx < 3) ? -1 : 1;
+        var yDir = (idx % 3 === 0) ? -1 : (idx % 3 === 2) ? 1 : 0;
+        
+        var xDist = xDir * scatterProgress * 600;
+        var yDist = yDir * scatterProgress * 300;
+        
+        card.style.transform = 'translate(' + xDist + 'px, ' + yDist + 'px)';
       });
     }
 
