@@ -131,7 +131,7 @@
   }
   .hp-arrival__heading {
     font-family: 'Inter', sans-serif;
-    font-size: 42px;
+    font-size: clamp(32px, 5vw, 54px);
     font-weight: 300;
     margin: 0 0 12px 0;
     color: #fff;
@@ -157,9 +157,6 @@
     .hp-arrival__glow, .hp-arrival__image-mask {
       width: 280px;
       height: 280px;
-    }
-    .hp-arrival__heading {
-      font-size: 28px;
     }
   }
 {%- endstyle -%}
