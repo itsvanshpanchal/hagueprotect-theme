@@ -66,19 +66,50 @@
     object-fit: contain;
   }
 
-  .hp-comp-card {
+  .hp-comp-card-wrapper {
     position: absolute;
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
     width: 280px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
+    height: 130px;
     z-index: 10;
+    perspective: 1000px;
     will-change: transform;
   }
   
+  .hp-comp-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  
+  .hp-comp-card-wrapper:hover .hp-comp-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .hp-comp-card-front, .hp-comp-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background: #fff;
+  }
+  
+  .hp-comp-card-back {
+    transform: rotateY(180deg);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
   .hp-comp-card-line {
     width: 20px;
     height: 3px;
@@ -91,7 +122,7 @@
     font-size: 24px;
     font-weight: 400;
     letter-spacing: -0.01em;
-    color: #111;
+    color: inherit;
     margin-bottom: 8px;
     text-transform: uppercase;
   }
@@ -157,7 +188,7 @@
       transform: none;
       margin-bottom: 40px;
     }
-    .hp-comp-card {
+    .hp-comp-card-wrapper {
       position: relative;
       top: auto !important;
       left: auto !important;
@@ -165,7 +196,6 @@
       bottom: auto !important;
       width: 100%;
       max-width: 400px;
-      opacity: 1 !important;
       transform: none !important;
     }
   }
@@ -192,30 +222,38 @@
       {%- endif -%}
 
       {%- for block in section.blocks limit: 6 -%}
-        {%- assign card_class = 'hp-comp-card hp-comp-card-' | append: forloop.index0 -%}
+        {%- assign card_class = 'hp-comp-card-wrapper hp-comp-card-' | append: forloop.index0 -%}
         
-        <div class="{{ card_class }}" 
-             style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};" 
-             {{ block.shopify_attributes }}>
-          
-          {%- if block.settings.show_line -%}
-            <div class="hp-comp-card-line" {% if block.settings.bg_color == section.settings.accent_color %}style="background-color: #111;"{% endif %}></div>
-          {%- endif -%}
-          
-          <div class="hp-comp-card-title">
-            {{ block.settings.title | replace: '\n', '<br>' }}
-          </div>
-          
-          {%- if block.settings.subtitle != blank -%}
-            <div class="hp-comp-card-subtitle" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #444;"{% endif %}>
-              {{ block.settings.subtitle }}
+        <div class="{{ card_class }}" {{ block.shopify_attributes }}>
+          <div class="hp-comp-card-inner">
+            <div class="hp-comp-card-front" style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};">
+              {%- if block.settings.show_line -%}
+                <div class="hp-comp-card-line" {% if block.settings.bg_color == section.settings.accent_color %}style="background-color: #111;"{% endif %}></div>
+              {%- endif -%}
+              
+              <div class="hp-comp-card-title">
+                {{ block.settings.title | replace: '\n', '<br>' }}
+              </div>
+              
+              {%- if block.settings.subtitle != blank -%}
+                <div class="hp-comp-card-subtitle" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #444;"{% endif %}>
+                  {{ block.settings.subtitle }}
+                </div>
+              {%- endif -%}
+              
+              <div class="hp-comp-hover-text" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #666;"{% endif %}>
+                HOVER ⟳
+              </div>
             </div>
-          {%- endif -%}
-          
-          <div class="hp-comp-hover-text" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #666;"{% endif %}>
-            HOVER ⟳
+            
+            <div class="hp-comp-card-back" style="background-color: {{ block.settings.text_color }}; color: {{ block.settings.bg_color }};">
+              {%- if block.settings.back_text != blank -%}
+                <div class="hp-comp-card-title" style="margin: auto; font-size: 16px; text-transform: none; line-height: 1.4;">{{ block.settings.back_text | replace: '\n', '<br>' }}</div>
+              {%- else -%}
+                <div class="hp-comp-card-title" style="margin: auto; font-size: 18px;">{{ block.settings.title }}</div>
+              {%- endif -%}
+            </div>
           </div>
-          
         </div>
       {%- endfor -%}
     </div>
@@ -378,6 +416,12 @@ document.addEventListener('DOMContentLoaded', function() {
           "default": "Dual-density 34% rebound"
         },
         {
+          "type": "textarea",
+          "id": "back_text",
+          "label": "Back of Card Text",
+          "info": "Text to show when hovered. Leave blank to show Title."
+        },
+        {
           "type": "checkbox",
           "id": "show_line",
           "label": "Show top line accent",
@@ -388,52 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ],
   "presets": [
     {
-      "name": "Composition Scattered",
-      "blocks": [
-        {
-          "type": "card",
-          "settings": {
-            "title": "SR-FOAM™",
-            "subtitle": "Dual-density · 34% rebound"
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "title": "FULL-GRAIN",
-            "subtitle": "Suede over abrasion knit"
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "bg_color": "#d2fa3c",
-            "title": "300 PAIRS",
-            "subtitle": "Numbered. Then never again."
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "title": "312 G",
-            "subtitle": "Featherweight at a US 9"
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "title": "8 MM DROP",
-            "subtitle": "Tuned for all-day wear"
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "title": "WAXED LACES",
-            "subtitle": "Volt dip finish"
-          }
-        }
-      ]
+      "name": "Composition Scattered"
     }
   ]
 }
