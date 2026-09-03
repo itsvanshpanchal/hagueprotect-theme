@@ -4,7 +4,7 @@
   #shopify-section-{{ section.id }} .hp-composition-section {
     background-color: {{ section.settings.bg_color | default: '#F2EFE8' }};
     position: relative;
-    height: 200vh;
+    height: 150vh;
     font-family: var(--font-family-sans, 'Inter', sans-serif);
   }
 
@@ -26,174 +26,147 @@
     width: 100%;
     margin: 0 auto;
     position: relative;
-    height: 600px; /* Fixed height for absolute positioning on desktop */
-  }
-
-  .hp-composition-eyebrow {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #6a6a6a;
-    z-index: 10;
-  }
-
-  .hp-composition-eyebrow-dot {
-    width: 8px;
-    height: 8px;
-    background-color: {{ section.settings.accent_color | default: '#d2fa3c' }};
-    border-radius: 50%;
+    height: 800px;
   }
 
   .hp-composition-heading {
     position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: #111;
+    z-index: 10;
+    margin: 0;
+  }
+  
+  .hp-composition-heading .highlight {
+    background-color: {{ section.settings.accent_color | default: '#d2fa3c' }};
+    padding: 0 10px;
+    display: inline-block;
+  }
+
+  .hp-comp-center-img {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: left;
-    margin: 0;
-    font-family: var(--font-family-sans, 'Inter', sans-serif);
-    font-size: clamp(32px, 5vw, 68px);
-    font-weight: 400;
-    line-height: 1.1;
-    color: #8c8b89;
-    z-index: 1;
+    width: 500px;
+    max-width: 80vw;
+    z-index: 5;
+  }
+  
+  .hp-comp-center-img img {
     width: 100%;
-    max-width: 800px;
-    will-change: transform;
+    height: auto;
+    object-fit: contain;
   }
 
   .hp-comp-card {
     position: absolute;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    width: 280px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    z-index: 5;
-    will-change: transform;
+    z-index: 10;
+    opacity: 0;
+    will-change: transform, opacity;
   }
-
-  .hp-comp-card--image {
-    padding: 0;
-  }
-
-  .hp-comp-card--image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .hp-comp-card--text {
-    padding: 40px;
-    align-items: flex-start;
+  
+  .hp-comp-card-line {
+    width: 20px;
+    height: 3px;
+    background-color: {{ section.settings.accent_color | default: '#d2fa3c' }};
+    margin-bottom: 16px;
   }
 
   .hp-comp-card-title {
-    font-family: var(--font-family-sans, 'Inter', sans-serif);
-    font-size: clamp(24px, 3vw, 42px);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
     font-weight: 400;
-    line-height: 1.1;
-    margin: 0;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  
+  .hp-comp-card-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #6a6a6a;
+    line-height: 1.4;
   }
 
-  .hp-comp-card-line {
-    width: 30px;
-    height: 4px;
-    background-color: currentColor;
-    margin-bottom: auto;
+  .hp-comp-hover-text {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #999;
+    text-transform: uppercase;
   }
 
-  /* Desktop Fixed Positions - Hardcoded to match screenshot */
-  /* Top Left Image */
-  .hp-comp-card-0 {
-    top: 0;
-    left: 5%;
-    width: 340px;
-    height: 280px;
-  }
-  
-  /* Bottom Left Text */
-  .hp-comp-card-1 {
-    bottom: -40px;
-    left: 15%;
-    width: 280px;
-    height: 220px;
-  }
-  
-  /* Top Right Text */
-  .hp-comp-card-2 {
-    top: 40px;
-    right: 15%;
-    width: 320px;
-    height: 240px;
-  }
-  
-  /* Bottom Right Image */
-  .hp-comp-card-3 {
-    bottom: -60px;
-    right: 0%;
-    width: 360px;
-    height: 280px;
-  }
+  /* Fixed Positions - Desktop */
+  /* Top Left */
+  .hp-comp-card-0 { top: 100px; left: 80px; }
+  /* Mid Left */
+  .hp-comp-card-1 { top: 350px; left: 40px; }
+  /* Bottom Left */
+  .hp-comp-card-2 { bottom: 100px; left: 100px; }
+  /* Top Right */
+  .hp-comp-card-3 { top: 120px; right: 80px; }
+  /* Mid Right */
+  .hp-comp-card-4 { top: 400px; right: 40px; }
+  /* Bottom Right */
+  .hp-comp-card-5 { bottom: 80px; right: 120px; }
 
   @media screen and (max-width: 989px) {
-    #shopify-section-{{ section.id }} .hp-composition-section {
+    .hp-composition-section {
       height: auto;
-      padding: 80px 20px;
+      padding: 100px 20px;
     }
-    
     .hp-comp__sticky {
       position: relative !important;
-      height: auto !important;
-      overflow: visible;
-      padding: 0;
-      top: auto !important;
-      bottom: auto !important;
+      height: auto;
     }
-
     .hp-composition-container {
       height: auto;
       display: flex;
       flex-direction: column;
-      gap: 30px;
       align-items: center;
+      gap: 30px;
     }
-
-    .hp-composition-eyebrow {
-      position: relative;
-      top: 0;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
     .hp-composition-heading {
       position: relative;
       top: 0;
-      left: 0;
-      transform: none !important;
       margin-bottom: 40px;
     }
-
+    .hp-comp-center-img {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+      margin-bottom: 40px;
+    }
     .hp-comp-card {
       position: relative;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: 100% !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      width: 100%;
       max-width: 400px;
-      height: auto !important;
-      aspect-ratio: 4/3;
+      opacity: 1 !important;
       transform: none !important;
     }
   }
@@ -202,38 +175,47 @@
 <section class="hp-composition-section hp-composition-{{ section.id }}">
   <div class="hp-comp__sticky">
     <div class="hp-composition-container">
-      {%- if section.settings.eyebrow != blank -%}
-        <div class="hp-composition-eyebrow">
-          <div class="hp-composition-eyebrow-dot"></div>
-          {{ section.settings.eyebrow }}
-        </div>
-      {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
         <h2 class="hp-composition-heading" data-no-typewriter>
-          {{ section.settings.heading | replace: '\n', '<br>' }}
+          {{ section.settings.heading }}
         </h2>
       {%- endif -%}
+      
+      {%- if section.settings.center_image != blank -%}
+        <div class="hp-comp-center-img">
+          <img src="{{ section.settings.center_image | image_url: width: 1000 }}" alt="Composition" loading="lazy">
+        </div>
+      {%- else -%}
+        <div class="hp-comp-center-img" style="display:flex;align-items:center;justify-content:center;background:#e5e5e5;border-radius:24px;aspect-ratio:1;color:#666;">
+          UPLOAD SHOE IMAGE
+        </div>
+      {%- endif -%}
 
-      {%- for block in section.blocks limit: 4 -%}
+      {%- for block in section.blocks limit: 6 -%}
         {%- assign card_class = 'hp-comp-card hp-comp-card-' | append: forloop.index0 -%}
         
-        <div class="{{ card_class }} {% if block.settings.image != blank %}hp-comp-card--image{% else %}hp-comp-card--text{% endif %}" 
+        <div class="{{ card_class }}" 
              style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};" 
              {{ block.shopify_attributes }}>
           
-          {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 800 }}" 
-                 alt="{{ block.settings.image.alt | default: 'Composition detail' }}" 
-                 loading="lazy" width="800" height="600">
-          {%- else -%}
-            {%- if block.settings.show_line -%}
-              <div class="hp-comp-card-line"></div>
-            {%- endif -%}
-            <div class="hp-comp-card-title" style="margin-top: {% if block.settings.show_line %}20px{% else %}auto{% endif %}; margin-bottom: {% if block.settings.show_line %}0{% else %}auto{% endif %};">
-              {{ block.settings.title | replace: '\n', '<br>' }}
+          {%- if block.settings.show_line -%}
+            <div class="hp-comp-card-line" {% if block.settings.bg_color == section.settings.accent_color %}style="background-color: #111;"{% endif %}></div>
+          {%- endif -%}
+          
+          <div class="hp-comp-card-title">
+            {{ block.settings.title | replace: '\n', '<br>' }}
+          </div>
+          
+          {%- if block.settings.subtitle != blank -%}
+            <div class="hp-comp-card-subtitle" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #444;"{% endif %}>
+              {{ block.settings.subtitle }}
             </div>
           {%- endif -%}
+          
+          <div class="hp-comp-hover-text" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #666;"{% endif %}>
+            HOVER ⟳
+          </div>
           
         </div>
       {%- endfor -%}
@@ -247,14 +229,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (!section) return;
   var stickyEl = section.querySelector('.hp-comp__sticky');
   
-  // Select all 4 scattered cards
   var cards = [];
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 6; i++) {
     var el = section.querySelector('.hp-comp-card-' + i);
     if (el) cards.push(el);
   }
 
-  // We will lerp (smooth) the progress value
   var targetProgress = 0;
   var currentProgress = 0;
   var isPinned = false;
@@ -270,13 +250,12 @@ document.addEventListener('DOMContentLoaded', function() {
         isPinned = false;
         hasScrolledPast = false;
       }
-      return; // No JS pinning on mobile for this section
+      return; 
     }
 
     var rect = section.getBoundingClientRect();
     var maxScroll = rect.height - window.innerHeight;
     
-    // Check pinning state for layout
     if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
       if (!isPinned) {
         stickyEl.style.position = 'fixed';
@@ -286,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
         isPinned = true;
       }
       hasScrolledPast = false;
-      // Target progress is based on actual scroll position
       targetProgress = Math.abs(rect.top) / maxScroll;
       targetProgress = Math.max(0, Math.min(1, targetProgress));
 
@@ -299,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isPinned = false;
         hasScrolledPast = false;
       }
-      targetProgress = 0; // Above section
+      targetProgress = 0; 
     } else if (rect.bottom < window.innerHeight) {
       if (isPinned || !hasScrolledPast) {
         stickyEl.style.position = 'absolute';
@@ -309,32 +287,41 @@ document.addEventListener('DOMContentLoaded', function() {
         isPinned = false;
         hasScrolledPast = true;
       }
-      targetProgress = 1; // Below section
+      targetProgress = 1; 
     }
   }
 
   function renderLoop() {
     if (window.innerWidth > 989) {
-      // Lerp formula - decreased to 0.04 for maximum buttery smoothness and inertia
-      currentProgress += (targetProgress - currentProgress) * 0.04;
+      currentProgress += (targetProgress - currentProgress) * 0.05;
 
-      // Cards start in their exact CSS positions (when we reach the section)
-      // As you scroll down (currentProgress approaches 1), they scatter OUTWARDS to clear the screen
-      if (cards[0]) cards[0].style.transform = 'translate(' + (-currentProgress * 400) + 'px, ' + (-currentProgress * 300) + 'px)'; // Top Left -> moves Up/Left
-      if (cards[1]) cards[1].style.transform = 'translate(' + (-currentProgress * 350) + 'px, ' + (currentProgress * 300) + 'px)';  // Bottom Left -> moves Down/Left
-      if (cards[2]) cards[2].style.transform = 'translate(' + (currentProgress * 400) + 'px, ' + (-currentProgress * 300) + 'px)';  // Top Right -> moves Up/Right
-      if (cards[3]) cards[3].style.transform = 'translate(' + (currentProgress * 450) + 'px, ' + (currentProgress * 350) + 'px)';  // Bottom Right -> moves Down/Right
+      var introProgress = Math.min(1, currentProgress * 2);
+      
+      cards.forEach(function(card, idx) {
+        if (!card) return;
+        
+        var scatterY = 0;
+        if (currentProgress > 0.5) {
+            var scatterProgress = (currentProgress - 0.5) * 2;
+            var xDir = (idx < 3) ? -1 : 1;
+            var yDir = (idx % 3 === 0) ? -1 : (idx % 3 === 2) ? 1 : 0;
+            
+            card.style.transform = 'translate(' + (xDir * scatterProgress * 300) + 'px, ' + (yDir * scatterProgress * 200) + 'px)';
+        } else {
+             var yOffset = 40 - (introProgress * 40);
+             card.style.transform = 'translateY(' + yOffset + 'px)';
+        }
+        
+        card.style.opacity = introProgress;
+      });
     }
 
-    // Loop forever
     window.requestAnimationFrame(renderLoop);
   }
 
-  // Update target on scroll and resize
   window.addEventListener('scroll', updateTargetProgress, { passive: true });
   window.addEventListener('resize', updateTargetProgress, { passive: true });
   
-  // Kickoff
   updateTargetProgress();
   window.requestAnimationFrame(renderLoop);
 });
@@ -353,21 +340,19 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       "type": "color",
       "id": "accent_color",
-      "label": "Accent Dot Color",
+      "label": "Accent Color",
       "default": "#d2fa3c"
     },
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow Text",
-      "default": "09 — THE COMPOSITION"
-    },
-    {
-      "type": "textarea",
+      "type": "html",
       "id": "heading",
       "label": "Heading",
-      "default": "EVERY PART,\nCONSIDERED.",
-      "info": "Use \\n for line breaks"
+      "default": "ONE SHOE. ONE DROP. <span class='highlight'>NO RESTOCK.</span>"
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center Image"
     }
   ],
   "blocks": [
@@ -379,7 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
           "type": "color",
           "id": "bg_color",
           "label": "Card Background",
-          "default": "#d2fa3c"
+          "default": "#ffffff"
         },
         {
           "type": "color",
@@ -388,23 +373,22 @@ document.addEventListener('DOMContentLoaded', function() {
           "default": "#111111"
         },
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image",
-          "info": "If an image is uploaded, text settings below will be ignored."
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "SR-FOAM™"
         },
         {
-          "type": "textarea",
-          "id": "title",
-          "label": "Text",
-          "default": "CUT\nONCE.",
-          "info": "Use \\n for line breaks"
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Dual-density 34% rebound"
         },
         {
           "type": "checkbox",
           "id": "show_line",
           "label": "Show top line accent",
-          "default": false
+          "default": true
         }
       ]
     }
@@ -416,33 +400,44 @@ document.addEventListener('DOMContentLoaded', function() {
         {
           "type": "card",
           "settings": {
-            "bg_color": "#d2fa3c",
-            "image": ""
+            "title": "SR-FOAM™",
+            "subtitle": "Dual-density · 34% rebound"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "FULL-GRAIN",
+            "subtitle": "Suede over abrasion knit"
           }
         },
         {
           "type": "card",
           "settings": {
             "bg_color": "#d2fa3c",
-            "text_color": "#111111",
-            "title": "EDITION\n001–300",
-            "show_line": true
+            "title": "300 PAIRS",
+            "subtitle": "Numbered. Then never again."
           }
         },
         {
           "type": "card",
           "settings": {
-            "bg_color": "#111111",
-            "text_color": "#ffffff",
-            "title": "CUT\nONCE.",
-            "show_line": false
+            "title": "312 G",
+            "subtitle": "Featherweight at a US 9"
           }
         },
         {
           "type": "card",
           "settings": {
-            "bg_color": "#d2fa3c",
-            "image": ""
+            "title": "8 MM DROP",
+            "subtitle": "Tuned for all-day wear"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "WAXED LACES",
+            "subtitle": "Volt dip finish"
           }
         }
       ]

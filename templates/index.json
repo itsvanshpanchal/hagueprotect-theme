@@ -820,41 +820,70 @@
     },
     "hp_composition": {
       "type": "hp-composition",
+      "settings": {
+        "bg_color": "#F2EFE8",
+        "accent_color": "#d2fa3c",
+        "heading": "ONE SHOE. ONE DROP. <span class=\"highlight\">NO RESTOCK.</span>"
+      },
       "blocks": {
         "card_1": {
           "type": "card",
           "settings": {
-            "bg_color": "#d2fa3c",
+            "bg_color": "#ffffff",
             "text_color": "#111111",
-            "title": "CUT\nONCE.",
-            "show_line": false
+            "title": "SR-FOAM™",
+            "subtitle": "Dual-density 34% rebound",
+            "show_line": true
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "bg_color": "#d2fa3c",
+            "bg_color": "#ffffff",
             "text_color": "#111111",
-            "title": "EDITION\n001–300",
+            "title": "FULL-GRAIN",
+            "subtitle": "Suede over abrasion knit",
             "show_line": true
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "bg_color": "#111111",
-            "text_color": "#ffffff",
-            "title": "CUT\nONCE.",
-            "show_line": false
+            "bg_color": "#d2fa3c",
+            "text_color": "#111111",
+            "title": "300 PAIRS",
+            "subtitle": "Numbered. Then never again.",
+            "show_line": true
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
-            "bg_color": "#d2fa3c",
+            "bg_color": "#ffffff",
             "text_color": "#111111",
-            "title": "CUT\nONCE.",
-            "show_line": false
+            "title": "312 G",
+            "subtitle": "Featherweight at a US 9",
+            "show_line": true
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#111111",
+            "title": "8 MM DROP",
+            "subtitle": "Tuned for all-day wear",
+            "show_line": true
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#111111",
+            "title": "WAXED LACES",
+            "subtitle": "Volt dip finish",
+            "show_line": true
           }
         }
       },
@@ -862,14 +891,10 @@
         "card_1",
         "card_2",
         "card_3",
-        "card_4"
-      ],
-      "settings": {
-        "bg_color": "#f2efe8",
-        "accent_color": "#d2fa3c",
-        "eyebrow": "09 — THE COMPOSITION",
-        "heading": "EVERY PART,\nCONSIDERED."
-      }
+        "card_4",
+        "card_5",
+        "card_6"
+      ]
     },
     "hp_the_arrival": {
       "type": "hp-the-arrival",
@@ -1333,6 +1358,7 @@
   },
   "order": [
     "hero",
+    "hp_composition",
     "featured-brands",
     "bestsellers",
     "materials-showcase",
@@ -1341,7 +1367,6 @@
     "1783254662e4d37d15",
     "corporate_gifting_marquee_pCHxwt",
     "horizontal-product-slider",
-    "hp_composition",
     "hp_the_arrival",
     "story_block_8WTbcQ",
     "community-testimonials",
