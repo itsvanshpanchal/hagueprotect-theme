@@ -330,18 +330,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function renderLoop() {
     if (window.innerWidth > 989) {
-      currentProgress += (targetProgress - currentProgress) * 0.05;
+      currentProgress += (targetProgress - currentProgress) * 0.02;
       
       cards.forEach(function(card, idx) {
         if (!card) return;
         
-        var scatterProgress = Math.max(0, 1 - (currentProgress / 0.7));
+        var p = Math.min(1, currentProgress / 0.7);
+        var easeOut = 1 - Math.pow(1 - p, 3); // Cubic ease out
+        var scatterProgress = Math.max(0, 1 - easeOut);
         
         var xDir = (idx < 3) ? -1 : 1;
         var yDir = (idx % 3 === 0) ? -1 : (idx % 3 === 2) ? 1 : 0;
         
-        var xDist = xDir * scatterProgress * 600;
-        var yDist = yDir * scatterProgress * 300;
+        var xDist = xDir * scatterProgress * 800; // start slightly further out for a grander entrance
+        var yDist = yDir * scatterProgress * 400;
         
         card.style.transform = 'translate(' + xDist + 'px, ' + yDist + 'px)';
       });
