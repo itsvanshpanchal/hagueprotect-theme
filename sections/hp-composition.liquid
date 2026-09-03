@@ -55,15 +55,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 800px;
+    width: 650px;
     max-width: 90vw;
     z-index: 5;
+  }
+  
+  @keyframes floatShoe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
   
   .hp-comp-center-img img {
     width: 100%;
     height: auto;
     object-fit: contain;
+  }
+  
+  .hp-comp-center-img:hover img {
+    animation: floatShoe 2s ease-in-out infinite;
   }
 
   .hp-comp-card-wrapper {
