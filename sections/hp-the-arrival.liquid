@@ -86,9 +86,9 @@
     margin-bottom: 40px;
     margin-top: 40px;
     /* Base styles (will be animated via JS scroll) */
-    opacity: 1;
+    opacity: 0; /* Starts completely disappeared */
     transform: scale(2.0);
-    will-change: transform;
+    will-change: transform, opacity;
   }
   .hp-arrival__glow {
     position: absolute;
@@ -269,14 +269,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // 0.08 provides a very buttery smooth trailing effect
     currentProgress += (targetProgress - currentProgress) * 0.08;
 
-    // Optional: Stop updating DOM if we are perfectly matching (saves CPU)
-    // But for simplicity, we'll just constantly update the transforms.
-    // Floating point precision means they rarely exactly match anyway.
-
-    // 1. Shoebox scales DOWN from 2.0 to 1.0 smoothly
+    // 1. Shoebox scales DOWN from 2.0 to 1.0 smoothly, and fades in from 0
     if (visualWrap) {
       var scale = 2.0 - (currentProgress * 1.0);
       visualWrap.style.transform = 'scale(' + scale.toFixed(4) + ')';
+      
+      // Fade in quickly in the first 25% of scroll, so if scrolled up to 0, it completely disappears
+      var visualOpacity = Math.min(1, currentProgress * 4); 
+      visualWrap.style.opacity = visualOpacity.toFixed(3);
     }
 
     // 2. Text fades in and slides up (finishing early at ~40% scroll)
