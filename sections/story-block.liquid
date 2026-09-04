@@ -164,6 +164,14 @@
     font-weight: 300 !important;
   }
 
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading b,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading strong,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line b,
+  .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line strong {
+    font-weight: 300 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  }
+
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line::first-letter,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line::first-letter {
     text-transform: none !important;
@@ -289,7 +297,9 @@
       white-space: nowrap !important;
       margin: 0 !important;
       padding: 0 !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
       font-size: {{ story_heading_mobile }}px !important;
+      font-weight: 300 !important;
     }
 
     #MainContent #shopify-section-{{ section.id }} .story-banner__heading > .hp-heading-accent,
