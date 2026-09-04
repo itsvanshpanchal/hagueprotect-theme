@@ -324,6 +324,17 @@
     object-fit: cover !important;
     object-position: center center !important;
   }
+  .mat-image-mobile {
+    display: none !important;
+  }
+  @media screen and (max-width: 768px) {
+    .mat-image-desktop:not(.mat-image-both) {
+      display: none !important;
+    }
+    .mat-image-mobile {
+      display: block !important;
+    }
+  }
 
   .mat-bg-stage .mat-image-fallback {
     display: flex !important;
@@ -601,13 +612,23 @@
     <div class="mat-image-container">
       {%- for block in section.blocks -%}
         {%- if block.type == 'material_item' -%}
-          {%- if block.settings.image != blank -%}
-            <img class="mat-image-layer{% if forloop.first %} active{% endif %}"
-                 style="object-fit: {{ block.settings.image_fit | default: 'cover' }} !important; object-position: {{ block.settings.image_position | default: 'center center' }} !important;"
-                 src="{{ block.settings.image | image_url: width: 2400 }}"
-                 alt=""
-                 data-index="{{ forloop.index0 }}"
-                 loading="lazy">
+          {%- if block.settings.image != blank or block.settings.image_mobile != blank -%}
+            {%- if block.settings.image != blank -%}
+              <img class="mat-image-layer mat-image-desktop{% if forloop.first %} active{% endif %}{% if block.settings.image_mobile == blank %} mat-image-both{% endif %}"
+                   style="object-fit: {{ block.settings.image_fit | default: 'cover' }} !important; object-position: {{ block.settings.image_position | default: 'center center' }} !important;"
+                   src="{{ block.settings.image | image_url: width: 2400 }}"
+                   alt=""
+                   data-index="{{ forloop.index0 }}"
+                   loading="lazy">
+            {%- endif -%}
+            {%- if block.settings.image_mobile != blank -%}
+              <img class="mat-image-layer mat-image-mobile{% if forloop.first %} active{% endif %}{% if block.settings.image == blank %} mat-image-both{% endif %}"
+                   style="object-fit: {{ block.settings.image_fit | default: 'cover' }} !important; object-position: {{ block.settings.image_position | default: 'center center' }} !important;"
+                   src="{{ block.settings.image_mobile | image_url: width: 1200 }}"
+                   alt=""
+                   data-index="{{ forloop.index0 }}"
+                   loading="lazy">
+            {%- endif -%}
           {%- else -%}
             <div class="mat-image-fallback{% if forloop.first %} active{% endif %}"
                  data-index="{{ forloop.index0 }}">
@@ -1897,7 +1918,12 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Material Image"
+          "label": "Material Image (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Material Image (Mobile)"
         },
         {
           "type": "select",
