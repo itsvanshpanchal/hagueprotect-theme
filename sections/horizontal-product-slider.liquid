@@ -1180,6 +1180,14 @@
     pointer-events: none;
     opacity: calc({{ section.settings.overlay_opacity | default: 100 }} / 100);
   }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-line--2,
+  #MainContent #shopify-section-{{ section.id }} .hp-fam-sec__heading .hp-heading-accent {
+    font-style: italic !important;
+    display: inline-block !important;
+    transform: skewX(-12deg) !important;
+    padding-right: 0.1em;
+  }
 {%- endstyle -%}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
