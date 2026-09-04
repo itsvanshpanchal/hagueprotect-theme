@@ -786,7 +786,11 @@
           {%- endif -%}
 
           {%- if section.settings.earth_video != blank -%}
-            {{ section.settings.earth_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'footer-earth-block__image' }}
+            <video class="footer-earth-block__image lazy-video" autoplay loop muted playsinline>
+              {%- for source in section.settings.earth_video.sources -%}
+                <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
           {%- elsif section.settings.earth_image != blank -%}
             <img
               src="{{ section.settings.earth_image | image_url: width: 1200 }}"
