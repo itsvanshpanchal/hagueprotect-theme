@@ -1,7 +1,6 @@
 {%- liquid
   assign story_heading_mobile = 24
   assign story_accent_mobile = section.settings.heading_accent_font_size_mobile | default: settings.font_heading_accent_size_mobile | default: 40
-  assign story_accent_weight = section.settings.heading_accent_font_weight | default: settings.font_heading_accent_weight | default: '400'
   assign story_accent_color = section.settings.heading_accent_color | default: settings.heading_accent_color | default: '#c9a227'
 -%}
 {%- style -%}
@@ -626,6 +625,8 @@
           sizes="100vw"
           alt="{{ banner_img.alt | default: banner_heading | default: product.title | default: shop.name | escape }} story banner"
           class="story-banner__image" 
+          width="{{ banner_img.width }}"
+          height="{{ banner_img.height }}"
           loading="eager"
           fetchpriority="high"
         >
@@ -653,7 +654,6 @@
                   assign story_use_split_markup = true
                   assign story_accent_text = story_line2
                 else
-                  assign story_heading_full = story_line1
                   assign story_words = story_line1 | split: ' '
                   if story_words.size > story_accent_count
                     assign story_main_count = story_words.size | minus: story_accent_count
