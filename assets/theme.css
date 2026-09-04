@@ -2981,3 +2981,15 @@ body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-a
   }
 }
 
+/* Show the earth video on all screen sizes */
+.footer-spacer {
+    display: block !important;
+}
+
+/* Optional: Adjust mobile styling if the video appears too large */
+@media screen and (max-width: 991px) {
+    .footer-spacer {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
