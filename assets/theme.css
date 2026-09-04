@@ -2965,3 +2965,18 @@ body.template-index #MainContent .hp-dna__heading .hp-heading-pair .hp-heading-a
   font-style: oblique 15deg !important;
   font-synthesis: style !important;
 }
+
+@media screen and (min-width: 990px) {
+  body.template-index h1,
+  body.template-index h2,
+  body.template-index h3,
+  body.template-index .h1,
+  body.template-index .h2,
+  body.template-index .h3,
+  body.template-index .hp-arrival__heading,
+  body.template-index .hp-fam-sec__heading,
+  body.template-index .story-banner__heading {
+    font-weight: 400 !important;
+  }
+}
+
