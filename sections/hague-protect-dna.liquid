@@ -465,6 +465,15 @@
       scroll-behavior: auto;
     }
   }
+
+  #MainContent #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-pair--stack,
+  #MainContent #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-line--2,
+  #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
+    transform: skewX(-12deg) !important;
+    display: inline-block !important;
+    padding-right: 0.2em !important;
+    transform-origin: bottom left;
+  }
 {%- endstyle -%}
 
 <section
