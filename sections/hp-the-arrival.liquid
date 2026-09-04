@@ -1,9 +1,11 @@
 {%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
   .hp-the-arrival-{{ section.id }} {
     position: relative;
     background-color: {{ section.settings.bg_color }};
     height: 250vh; /* Creates scrollable space for the animation */
-    font-family: 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-family: var(--font-family-sans);
   }
 
   .hp-arrival__sticky {
@@ -130,17 +132,17 @@
     will-change: transform, opacity;
   }
   .hp-the-arrival-{{ section.id }} .hp-arrival__heading {
-    font-family: 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-family-heading) !important;
     font-size: clamp(48px, 5vw, 56px) !important;
-    font-weight: 600 !important;
+    font-weight: 300 !important;
     margin: 0 0 12px 0 !important;
     color: #fff !important;
     letter-spacing: normal !important;
   }
   .hp-the-arrival-{{ section.id }} .hp-arrival__subheading {
-    font-family: 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-family: var(--font-family-sans) !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     letter-spacing: 0.15em;
     color: #ffffff;
     text-transform: uppercase;
