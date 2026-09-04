@@ -2980,7 +2980,22 @@ body.template-index .h5,
 body.template-index .h6,
 body.template-index [class*="__heading"],
 body.template-index [class*="__title"],
-body.template-index [class*="-heading"] {
+body.template-index [class*="-heading"],
+body.template-index h1 *,
+body.template-index h2 *,
+body.template-index h3 *,
+body.template-index h4 *,
+body.template-index h5 *,
+body.template-index h6 *,
+body.template-index .h1 *,
+body.template-index .h2 *,
+body.template-index .h3 *,
+body.template-index .h4 *,
+body.template-index .h5 *,
+body.template-index .h6 *,
+body.template-index [class*="__heading"] *,
+body.template-index [class*="__title"] *,
+body.template-index [class*="-heading"] * {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-weight: 300 !important;
 }
