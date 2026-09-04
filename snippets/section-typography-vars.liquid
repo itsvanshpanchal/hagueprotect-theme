@@ -223,3 +223,15 @@
     --section-text-offset-y: {{ text_offset_y_mobile }}px;
   }
 }
+{%- if template.name == 'index' -%}
+@media screen and (min-width: 990px) {
+  #shopify-section-{{ section.id }} {
+    --font-family-heading: 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    --font-family-h2: 'Inter 18pt', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    --font-weight-heading: 400 !important;
+    --heading-weight: 400 !important;
+    --subheading-weight: 400 !important;
+    --font-weight-h2: 400 !important;
+  }
+}
+{%- endif -%}
