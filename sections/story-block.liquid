@@ -180,6 +180,9 @@
   .story-banner-wrapper-{{ section.id }} .story-banner__heading .hp-heading-line--2,
   .story-banner-wrapper-{{ section.id }} .story-banner__subheading .hp-heading-line--2 {
     color: {{ section.settings.heading_line2_color | default: settings.heading_line2_color | default: '#6b6b6b' }} !important;
+    font-style: italic !important;
+    transform: translateX(-4px) !important;
+    display: inline-block !important;
   }
 
   @media screen and (min-width: 750px) {
