@@ -54,7 +54,7 @@
 {{ sec }} {
   --hp-sci-sec-heading-size: var(--hp-sci-lead-heading-size);
   --hp-sci-sec-subheading-size: var(--hp-sci-subheading-size);
-  --hp-sci-sec-body-size: {{ section.settings.paragraph_size_desktop | default: 21 }}px;
+  --hp-sci-sec-body-size: {{ section.settings.paragraph_size_desktop | default: 24 }}px;
   {%- assign local_eyebrow = section.settings.eyebrow_size | default: 18 -%}
   --hp-sci-sec-eyebrow-size: {{ local_eyebrow }}px;
   --hp-sci-sec-heading-weight: var(--hp-sci-heading-weight);
@@ -246,7 +246,7 @@
   {{ sec }} {
     --hp-sci-sec-heading-size: var(--hp-sci-lead-heading-size);
     --hp-sci-sec-subheading-size: var(--hp-sci-subheading-size);
-    --hp-sci-sec-body-size: {{ section.settings.paragraph_size_mobile | default: 20 }}px;
+    --hp-sci-sec-body-size: {{ section.settings.paragraph_size_mobile | default: 24 }}px;
     {%- assign local_eyebrow_mob = section.settings.eyebrow_size_mobile | default: section.settings.eyebrow_size | default: 16 -%}
     --hp-sci-sec-eyebrow-size: {{ local_eyebrow_mob }}px;
   }
