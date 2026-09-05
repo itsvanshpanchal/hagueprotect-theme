@@ -1,10 +1,10 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
-  /* Force paragraph to 21/20 — overrides saved 16/15 customizer values */
+  /* Force paragraph to 24/20 — overrides saved 16/15 customizer values */
   #shopify-section-{{ section.id }} {
-    --section-subheading-size: 21px !important;
-    --body-font-size: 21px !important;
+    --section-subheading-size: 24px !important;
+    --body-font-size: 24px !important;
   }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
@@ -122,7 +122,7 @@
   #shopify-section-{{ section.id }} .mat-desc,
   .mat-section .mat-desc {
     color: rgba(255, 255, 255, 0.88) !important;
-    font-size: 21px !important;
+    font-size: 24px !important;
     line-height: 1.05 !important;
     margin-top: 20px !important;
     margin-bottom: 0 !important;
@@ -622,7 +622,7 @@
   /* Final override — must stay last so global CSS cannot win */
   #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
   #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
-    font-size: 21px !important;
+    font-size: 24px !important;
     line-height: 1.38 !important;
   }
   @media screen and (max-width: 989px) {
@@ -756,7 +756,7 @@
   /* Bulletproof paragraph size — renders in body, after all head CSS */
   #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
   #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
-    font-size: 21px !important;
+    font-size: 24px !important;
   }
   @media screen and (max-width: 989px) {
     #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
