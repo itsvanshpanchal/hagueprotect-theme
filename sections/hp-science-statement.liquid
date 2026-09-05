@@ -117,9 +117,10 @@
   }
   {% render 'hp-science-section-typography-styles', section: section %}
 
-  /* Clean CSS variable override for eyebrow size */
+  /* Clean CSS variable override */
   #shopify-section-{{ section.id }} {
     --hp-sci-sec-eyebrow-size: 21px !important;
+    --hp-sci-sec-body-size: {{ section.settings.body_size | default: 21 }}px !important;
   }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
@@ -348,10 +349,10 @@
       "id": "body_size",
       "label": "Body size",
       "min": 14,
-      "max": 20,
+      "max": 30,
       "step": 1,
       "unit": "px",
-      "default": 17
+      "default": 21
     },
     {
       "type": "range",
