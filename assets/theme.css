@@ -2530,7 +2530,7 @@ body.template-index {
 /* Homepage laptop + desktop — unified paragraph typography (mobile unchanged above) */
 @media screen and (min-width: 768px) {
   body.template-index {
-    --hp-home-desktop-para-size: 21px;
+    --hp-home-desktop-para-size: 24px;
     --hp-home-desktop-para-weight: 400;
     --hp-home-desktop-para-lh: 1.38;
   }
@@ -2608,7 +2608,7 @@ body.template-index {
 
 @media screen and (min-width: 1200px) {
   body.template-index {
-    --hp-home-desktop-para-size: 22px;
+    --hp-home-desktop-para-size: 24px;
     --hp-home-desktop-para-lh: 1.42;
   }
 }
@@ -3019,3 +3019,4 @@ body.template-index .hp-heading-last-word {
         margin-top: 20px;
     }
 }
+
