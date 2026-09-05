@@ -752,6 +752,20 @@
   </div>
 </section>
 
+<style>
+  /* Bulletproof paragraph size — renders in body, after all head CSS */
+  #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
+  #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
+    font-size: 21px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
+    #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
+      font-size: 20px !important;
+    }
+  }
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const matSection = document.querySelector('[data-mat-section]');
