@@ -1,6 +1,18 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
+  /* Force paragraph to 21/20 — overrides saved 16/15 customizer values */
+  #shopify-section-{{ section.id }} {
+    --section-subheading-size: 21px !important;
+    --body-font-size: 21px !important;
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} {
+      --section-subheading-size: 20px !important;
+      --body-font-size: 20px !important;
+    }
+  }
+
 
   .mat-section {
     box-sizing: border-box !important;
@@ -604,6 +616,20 @@
 
     .mat-menu-arrow {
       margin-left: 6px !important;
+    }
+  }
+
+  /* Final override — must stay last so global CSS cannot win */
+  #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
+  #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
+    font-size: 21px !important;
+    line-height: 1.38 !important;
+  }
+  @media screen and (max-width: 989px) {
+    #MainContent #shopify-section-{{ section.id }} .mat-section .mat-desc,
+    #MainContent #shopify-section-{{ section.id }} .mat-section p.mat-desc.hp-body-para {
+      font-size: 20px !important;
+      line-height: 1.38 !important;
     }
   }
 
