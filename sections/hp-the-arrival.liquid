@@ -4,6 +4,12 @@
   .hp-the-arrival-{{ section.id }} {
     position: relative;
     background-color: {{ section.settings.bg_color }};
+    {% if section.settings.bg_image_desktop %}
+    background-image: url('{{ section.settings.bg_image_desktop | image_url: width: 2000 }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    {% endif %}
     height: 250vh; /* Creates scrollable space for the animation */
     font-family: var(--font-family-sans);
   }
@@ -150,6 +156,11 @@
   }
 
   @media (max-width: 768px) {
+    {% if section.settings.bg_image_mobile %}
+    .hp-the-arrival-{{ section.id }} {
+      background-image: url('{{ section.settings.bg_image_mobile | image_url: width: 1000 }}');
+    }
+    {% endif %}
     .hp-arrival__indicator {
       top: 20px;
       left: 20px;
@@ -306,6 +317,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "bg_color",
       "label": "Background Color",
       "default": "#F5F3ED"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_desktop",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)"
     },
     {
       "type": "color",
