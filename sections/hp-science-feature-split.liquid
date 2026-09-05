@@ -216,13 +216,14 @@
     </div>
 
     <div class="hp-sci-feature-{{ section.id }}__media">
+      {% assign min_height_desktop = section.settings.media_min_height_desktop | default: 520 %}
       {% render 'hp-science-media',
         image: section.settings.image,
         video: section.settings.video,
         animation_url: section.settings.animation_url,
         show_placeholder: section.settings.show_media_placeholder,
         placeholder_label: section.settings.placeholder_label,
-        min_height: section.settings.media_min_height_desktop | default: 520,
+        min_height: min_height_desktop,
         aspect_ratio: '',
         light_placeholder: true
       %}
