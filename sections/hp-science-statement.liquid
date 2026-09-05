@@ -120,7 +120,7 @@
   /* Clean CSS variable override */
   #shopify-section-{{ section.id }} {
     --hp-sci-sec-eyebrow-size: 21px !important;
-    --hp-sci-sec-body-size: {{ section.settings.body_size | default: 21 }}px !important;
+    --hp-sci-sec-body-size: {{ section.settings.body_size | default: 24 }}px !important;
   }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} {
@@ -352,7 +352,7 @@
       "max": 30,
       "step": 1,
       "unit": "px",
-      "default": 21
+      "default": 24
     },
     {
       "type": "range",
