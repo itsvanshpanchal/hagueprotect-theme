@@ -44,6 +44,7 @@
     color: {{ section.settings.body_color }};
     opacity: {{ section.settings.body_opacity | default: 88 | times: 0.01 }};
     margin: 0 0 18px;
+    font-size: 24px !important;
   }
 
   .hp-sci-statement-{{ section.id }}__para:last-child {
@@ -65,6 +66,7 @@
     color: {{ section.settings.closing_color }};
     opacity: {{ section.settings.closing_opacity | default: 100 | times: 0.01 }};
     margin: 0;
+    font-size: 24px !important;
   }
   {%- if section.settings.text_offset_x_desktop != 0 or section.settings.text_offset_y_desktop != 0 -%}
 
