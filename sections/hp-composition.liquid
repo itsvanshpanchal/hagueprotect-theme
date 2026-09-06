@@ -271,7 +271,7 @@
           <div class="hp-comp-card-inner">
             <div class="hp-comp-card-front" style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};">
               {%- if block.settings.show_line -%}
-                <div class="hp-comp-card-line" {% if block.settings.bg_color == section.settings.accent_color %}style="background-color: #111;"{% endif %}></div>
+                <div class="hp-comp-card-line" {% if block.settings.bg_color == section.settings.accent_color %}style="background-color: {{ block.settings.text_color }};"{% endif %}></div>
               {%- endif -%}
               
               <div class="hp-comp-card-title">
@@ -279,12 +279,12 @@
               </div>
               
               {%- if block.settings.subtitle != blank -%}
-                <div class="hp-comp-card-subtitle" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #444;"{% endif %}>
+                <div class="hp-comp-card-subtitle" {% if block.settings.bg_color == section.settings.accent_color %}style="color: {{ block.settings.text_color }}; opacity: 0.8;"{% endif %}>
                   {{ block.settings.subtitle }}
                 </div>
               {%- endif -%}
               
-              <div class="hp-comp-hover-text" {% if block.settings.bg_color == section.settings.accent_color %}style="color: #666;"{% endif %}>
+              <div class="hp-comp-hover-text" {% if block.settings.bg_color == section.settings.accent_color %}style="color: {{ block.settings.text_color }}; opacity: 0.6;"{% endif %}>
                 HOVER ⟳
               </div>
             </div>
