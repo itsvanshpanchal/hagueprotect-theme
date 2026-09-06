@@ -85,10 +85,10 @@
   }
 
   .corp-hero__title {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 52px !important;
-    font-weight: 300 !important;
-    font-style: normal;
+    font-family: var(--font-family-heading) !important;
+    font-size: var(--heading-size-xl) !important;
+    font-weight: var(--font-weight-heading) !important;
+    font-style: var(--font-style-heading) !important;
     line-height: 0.9;
     letter-spacing: 0.02em;
     margin: 0 0 22px;
@@ -103,10 +103,10 @@
   }
 
   .corp-hero__sub {
-    font-family: 'Darker Grotesque', sans-serif !important;
-    font-size: 24px !important;
-    font-weight: 400 !important;
-    font-style: normal;
+    font-family: var(--font-family-sans) !important;
+    font-size: var(--section-subheading-size) !important;
+    font-weight: var(--font-weight-sans) !important;
+    font-style: var(--font-style-sans) !important;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.75);
     margin: 0 0 32px;
@@ -1314,7 +1314,7 @@
           "label": "Montserrat Bold"
         }
       ],
-      "default": "bebas_neue"
+      "default": "inter"
     },
     {
       "type": "select",
@@ -1350,7 +1350,7 @@
           "label": "Black (900)"
         }
       ],
-      "default": "400",
+      "default": "300",
       "info": "Choose Light, Regular, Medium, Semibold, Bold, Extra Bold, or Black for the big headline."
     },
     {
@@ -1379,7 +1379,7 @@
       "max": 120,
       "step": 2,
       "unit": "px",
-      "default": 64
+      "default": 52
     },
     {
       "type": "range",
@@ -1563,7 +1563,7 @@
           "label": "Oswald Bold"
         }
       ],
-      "default": "inter"
+      "default": "darker_grotesque"
     },
     {
       "type": "select",
@@ -1627,7 +1627,7 @@
       "max": 32,
       "step": 1,
       "unit": "px",
-      "default": 16
+      "default": 24
     },
     {
       "type": "range",
