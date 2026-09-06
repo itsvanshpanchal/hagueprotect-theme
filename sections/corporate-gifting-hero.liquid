@@ -84,11 +84,12 @@
     background: var(--corp-accent);
   }
 
-  .corp-hero__title {
-    font-family: var(--font-family-heading) !important;
-    font-size: var(--heading-size-xl) !important;
-    font-weight: var(--font-weight-heading) !important;
-    font-style: var(--font-style-heading) !important;
+  #MainContent #shopify-section-{{ section.id }} .corp-hero__title,
+  html body #shopify-section-{{ section.id }} .corp-hero__title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
     line-height: 0.9;
     letter-spacing: 0.02em;
     margin: 0 0 22px;
@@ -102,11 +103,12 @@
     display: block;
   }
 
-  .corp-hero__sub {
-    font-family: var(--font-family-sans) !important;
-    font-size: var(--section-subheading-size) !important;
-    font-weight: var(--font-weight-sans) !important;
-    font-style: var(--font-style-sans) !important;
+  #MainContent #shopify-section-{{ section.id }} .corp-hero__sub,
+  html body #shopify-section-{{ section.id }} .corp-hero__sub {
+    font-family: 'Darker Grotesque', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.75);
     margin: 0 0 32px;
