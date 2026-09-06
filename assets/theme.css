@@ -2074,7 +2074,7 @@ body.template-index {
   body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
   body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
   body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif) !important;
     font-size: var(--hp-home-mobile-para-size) !important;
     font-weight: var(--hp-home-mobile-para-weight) !important;
     font-style: normal !important;
@@ -2591,7 +2591,7 @@ body.template-index {
   body.template-index #MainContent .shopify-section[id] .hp-dna__item-text,
   body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"],
   body.template-index #MainContent .shopify-section[id] [class*="ai-story-banner-text"] p {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-family: var(--font-family-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif) !important;
     font-size: var(--hp-home-desktop-para-size) !important;
     font-weight: var(--hp-home-desktop-para-weight) !important;
     font-style: normal !important;
