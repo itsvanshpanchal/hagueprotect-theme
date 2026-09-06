@@ -31,9 +31,9 @@
   }
 
   .hp-dna__heading .hp-heading-line--2 {
-    font-style: italic !important;
-    font-synthesis: style !important;
-    transform: skewX(-12deg);
+    font-style: normal !important;
+    font-synthesis: none !important;
+    transform: none;
     display: inline-block;
     padding-right: 5px; /* prevent clipping */
   }
@@ -284,7 +284,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
       font-size: 24px !important;
       font-weight: 300 !important;
-      font-style: italic !important;
+      font-style: normal !important;
       font-synthesis: none !important;
       line-height: 1.05 !important;
       letter-spacing: 0.03em !important;
@@ -470,7 +470,8 @@
   #MainContent #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-pair--stack,
   #MainContent #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-line--2,
   #shopify-section-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
-    transform: skewX(-12deg) !important;
+    transform: none !important;
+    font-style: normal !important;
     display: inline-block !important;
     padding-right: 0.2em !important;
     transform-origin: bottom left;
