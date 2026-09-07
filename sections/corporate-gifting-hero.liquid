@@ -84,18 +84,8 @@
     background: var(--corp-accent);
   }
 
-  #MainContent #shopify-section-{{ section.id }} .corp-hero__title,
-  html body #shopify-section-{{ section.id }} .corp-hero__title,
-  #shopify-section-{{ section.id }} .corp-hero__title,
   .corp-hero__title {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 52px !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    line-height: 0.9 !important;
-    letter-spacing: 0.02em !important;
     margin: 0 0 22px !important;
-    text-transform: none !important;
     color: #ffffff !important;
   }
 
@@ -105,15 +95,7 @@
     display: block !important;
   }
 
-  #MainContent #shopify-section-{{ section.id }} .corp-hero__sub,
-  html body #shopify-section-{{ section.id }} .corp-hero__sub,
-  #shopify-section-{{ section.id }} .corp-hero__sub,
   .corp-hero__sub {
-    font-family: 'Darker Grotesque', sans-serif !important;
-    font-size: 24px !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    line-height: 1.7 !important;
     color: rgba(255, 255, 255, 0.75) !important;
     margin: 0 0 32px !important;
     max-width: 500px !important;
@@ -506,11 +488,11 @@
   <div class="corp-hero__container">
     <div class="corp-hero__copy">
       <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
-      <h1 class="corp-hero__title" style="font-family: 'Inter', sans-serif !important; font-size: 52px !important; font-weight: 300 !important; font-style: normal !important; line-height: 0.9 !important; letter-spacing: 0.02em !important; color: #ffffff !important; text-transform: none !important;">
+      <h1 class="corp-hero__title">
         {{ section.settings.heading_line1 | default: 'Corporate' }}
         <em style="font-style: normal !important; color: #ff2b2b !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
-      <p class="corp-hero__sub" style="font-family: 'Darker Grotesque', sans-serif !important; font-size: 24px !important; font-weight: 400 !important; font-style: normal !important; line-height: 1.7 !important; color: rgba(255, 255, 255, 0.75) !important; margin: 0 0 32px !important; max-width: 500px !important;">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
+      <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
 
       <div class="corp-hero__actions">
         <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary">
