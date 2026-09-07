@@ -610,20 +610,22 @@
 }
 
 /* ==========================================================================
-   Corporate Gifting — use same typography system as homepage
-   Matches homepage: Eyebrow (Darker Grotesque 18px/14px), H2 (Inter 52px/34px 300),
-   Paragraph (Inter 16px/15px 400), H1 (Inter var 300).
+   Corporate Gifting Page — Exact Typography
+   Heading : Inter Light 300 — 52px desktop / 32px mobile
+   Eyebrow : Darker Grotesque Light 300 — 18px desktop / 14px mobile
+   Paragraph: Darker Grotesque Light 300 — 24px desktop / 18px mobile
+   High-specificity rules win over every scoped section style.
    ========================================================================== */
 
-/* --- Eyebrow / label text (Darker Grotesque, uppercase, 0.14em spacing) --- */
-#MainContent .shopify-section .corp-hero__eyebrow,
-#MainContent .shopify-section .corp-features__eyebrow,
-#MainContent .shopify-section .corp-process__eyebrow,
-#MainContent .shopify-section .corp-packages__eyebrow,
-#MainContent .shopify-section .corp-form__visual-eyebrow {
+/* ── EYEBROW — Darker Grotesque Light 18px desktop ── */
+body #MainContent .shopify-section .corp-hero__eyebrow,
+body #MainContent .shopify-section .corp-features__eyebrow,
+body #MainContent .shopify-section .corp-process__eyebrow,
+body #MainContent .shopify-section .corp-packages__eyebrow,
+body #MainContent .shopify-section .corp-form__visual-eyebrow {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-  font-size: var(--section-label-size, 18px) !important;
-  font-weight: 400 !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
   font-style: normal !important;
   font-synthesis: none !important;
   -webkit-text-stroke: 0 !important;
@@ -632,128 +634,160 @@
   -moz-osx-font-smoothing: grayscale !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
+  line-height: 1.3 !important;
 }
 
-/* --- H1 / Hero title (Inter, var heading-size-xl, weight 300) --- */
-#MainContent .shopify-section .corp-hero__title,
-#MainContent .shopify-section h1.corp-hero__title {
-  font-family: var(--font-family-heading) !important;
-  font-size: var(--heading-size-xl) !important;
-  font-weight: var(--font-weight-heading, 300) !important;
-  font-style: var(--font-style-heading, normal) !important;
-  line-height: 0.95 !important;
-  letter-spacing: -0.02em !important;
-  text-transform: none !important;
-}
-
-/* --- H2 / Section heading (Inter, var section-heading-size, weight 300) --- */
-#MainContent .shopify-section .corp-features__heading,
-#MainContent .shopify-section .corp-process__title,
-#MainContent .shopify-section .corp-packages__title,
-#MainContent .shopify-section .corp-form__visual-title,
-#MainContent .shopify-section .corp-form__title {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-size: var(--section-heading-size) !important;
-  font-weight: var(--font-weight-h2, 300) !important;
-  font-style: var(--font-style-h2, normal) !important;
+/* ── H1 HERO TITLE — Inter Light 300, 52px desktop ── */
+body #MainContent .shopify-section .corp-hero__title,
+body #MainContent .shopify-section h1.corp-hero__title,
+body .shopify-section .corp-hero__title,
+body .shopify-section h1.corp-hero__title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
   line-height: 1 !important;
   letter-spacing: -0.02em !important;
   text-transform: none !important;
 }
 
-/* --- Paragraph / subtitle (Inter, var section-subheading-size, weight 400) --- */
-#MainContent .shopify-section .corp-hero__sub,
-#MainContent .shopify-section .corp-features__sub,
-#MainContent .shopify-section .corp-process__desc,
-#MainContent .shopify-section .corp-packages__desc,
-#MainContent .shopify-section .corp-form__visual-text,
-#MainContent .shopify-section .corp-form__subtitle {
-  font-family: var(--font-family-sans) !important;
-  font-size: var(--section-subheading-size, var(--body-font-size)) !important;
-  font-weight: var(--font-weight-sans, 400) !important;
-  font-style: var(--font-style-sans, normal) !important;
+/* ── H2 SECTION HEADINGS — Inter Light 300, 52px desktop ── */
+body #MainContent .shopify-section .corp-features__heading,
+body #MainContent .shopify-section .corp-process__title,
+body #MainContent .shopify-section .corp-packages__title,
+body #MainContent .shopify-section .corp-form__visual-title,
+body #MainContent .shopify-section .corp-form__title,
+body .shopify-section .corp-features__heading,
+body .shopify-section .corp-process__title,
+body .shopify-section .corp-packages__title,
+body .shopify-section .corp-form__visual-title,
+body .shopify-section .corp-form__title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+}
+
+/* ── PARAGRAPH / SUBTITLE — Darker Grotesque Light 300, 24px desktop ── */
+body #MainContent .shopify-section .corp-hero__sub,
+body #MainContent .shopify-section .corp-features__sub,
+body #MainContent .shopify-section .corp-process__desc,
+body #MainContent .shopify-section .corp-packages__desc,
+body #MainContent .shopify-section .corp-form__visual-text,
+body #MainContent .shopify-section .corp-form__subtitle,
+body .shopify-section .corp-hero__sub,
+body .shopify-section .corp-features__sub,
+body .shopify-section .corp-process__desc,
+body .shopify-section .corp-packages__desc,
+body .shopify-section .corp-form__visual-text,
+body .shopify-section .corp-form__subtitle {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
   text-transform: none !important;
   letter-spacing: normal !important;
   line-height: 1.55 !important;
 }
 
-/* --- Bento card title (matches homepage h3 style — Inter, smaller heading) --- */
-#MainContent .shopify-section .corp-bento__title,
-#MainContent .shopify-section .corp-packages__name {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 300) !important;
-  font-style: var(--font-style-h2, normal) !important;
+/* ── BENTO / CARD TITLES — Inter Light 300 ── */
+body #MainContent .shopify-section .corp-bento__title,
+body #MainContent .shopify-section .corp-packages__name,
+body .shopify-section .corp-bento__title,
+body .shopify-section .corp-packages__name {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
-/* --- Bento card body / process step text / package list (Inter, body weight) --- */
-#MainContent .shopify-section .corp-bento__text,
-#MainContent .shopify-section .corp-process__step-text,
-#MainContent .shopify-section .corp-packages__list li,
-#MainContent .shopify-section .corp-packages__qty {
-  font-family: var(--font-family-sans) !important;
-  font-weight: var(--font-weight-sans, 400) !important;
-  font-style: var(--font-style-sans, normal) !important;
+/* ── BENTO BODY / STEP TEXT / PACKAGE LIST — Darker Grotesque Light 300 ── */
+body #MainContent .shopify-section .corp-bento__text,
+body #MainContent .shopify-section .corp-process__step-text,
+body #MainContent .shopify-section .corp-packages__list li,
+body #MainContent .shopify-section .corp-packages__qty,
+body #MainContent .shopify-section .corp-process__step-title,
+body .shopify-section .corp-bento__text,
+body .shopify-section .corp-process__step-text,
+body .shopify-section .corp-packages__list li,
+body .shopify-section .corp-packages__qty,
+body .shopify-section .corp-process__step-title {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
-/* --- Process step title (Inter, weight 300, uppercase) --- */
-#MainContent .shopify-section .corp-process__step-title {
-  font-family: var(--font-family-h2, var(--font-family-heading)) !important;
-  font-weight: var(--font-weight-h2, 300) !important;
-  font-style: var(--font-style-h2, normal) !important;
-}
-
-/* --- Corporate Gifting Mobile (≤ 989px) — mirror homepage mobile sizes --- */
+/* ── MOBILE ≤ 989px ── */
 @media screen and (max-width: 989px) {
-  #MainContent .shopify-section .corp-hero__eyebrow,
-  #MainContent .shopify-section .corp-features__eyebrow,
-  #MainContent .shopify-section .corp-process__eyebrow,
-  #MainContent .shopify-section .corp-packages__eyebrow,
-  #MainContent .shopify-section .corp-form__visual-eyebrow {
-    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
-    font-size: var(--section-label-size, 14px) !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
-    -webkit-text-stroke: 0.45px currentColor !important;
-    paint-order: stroke fill !important;
-    text-shadow: none !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
+  /* Eyebrow — 14px mobile */
+  body #MainContent .shopify-section .corp-hero__eyebrow,
+  body #MainContent .shopify-section .corp-features__eyebrow,
+  body #MainContent .shopify-section .corp-process__eyebrow,
+  body #MainContent .shopify-section .corp-packages__eyebrow,
+  body #MainContent .shopify-section .corp-form__visual-eyebrow,
+  body .shopify-section .corp-hero__eyebrow,
+  body .shopify-section .corp-features__eyebrow,
+  body .shopify-section .corp-process__eyebrow,
+  body .shopify-section .corp-packages__eyebrow,
+  body .shopify-section .corp-form__visual-eyebrow {
+    font-size: 14px !important;
     letter-spacing: 0.14em !important;
-    text-transform: uppercase !important;
   }
 
-  #MainContent .shopify-section .corp-hero__title,
-  #MainContent .shopify-section h1.corp-hero__title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-    font-size: var(--heading-size-xl) !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
+  /* H1 Hero title — 32px mobile */
+  body #MainContent .shopify-section .corp-hero__title,
+  body #MainContent .shopify-section h1.corp-hero__title,
+  body .shopify-section .corp-hero__title,
+  body .shopify-section h1.corp-hero__title {
+    font-size: 32px !important;
     line-height: 1.05 !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: -0.01em !important;
   }
 
-  #MainContent .shopify-section .corp-features__heading,
-  #MainContent .shopify-section .corp-process__title,
-  #MainContent .shopify-section .corp-packages__title,
-  #MainContent .shopify-section .corp-form__visual-title,
-  #MainContent .shopify-section .corp-form__title {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-    font-size: var(--hp-bs-mobile-heading-size, 24px) !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    font-synthesis: none !important;
+  /* H2 Section headings — 32px mobile */
+  body #MainContent .shopify-section .corp-features__heading,
+  body #MainContent .shopify-section .corp-process__title,
+  body #MainContent .shopify-section .corp-packages__title,
+  body #MainContent .shopify-section .corp-form__visual-title,
+  body #MainContent .shopify-section .corp-form__title,
+  body .shopify-section .corp-features__heading,
+  body .shopify-section .corp-process__title,
+  body .shopify-section .corp-packages__title,
+  body .shopify-section .corp-form__visual-title,
+  body .shopify-section .corp-form__title {
+    font-size: 32px !important;
     line-height: 1.05 !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: -0.01em !important;
   }
 
-  #MainContent .shopify-section .corp-hero__sub,
-  #MainContent .shopify-section .corp-features__sub,
-  #MainContent .shopify-section .corp-process__desc,
-  #MainContent .shopify-section .corp-packages__desc,
-  #MainContent .shopify-section .corp-form__visual-text,
-  #MainContent .shopify-section .corp-form__subtitle {
-    font-size: var(--section-subheading-size, var(--body-font-size)) !important;
+  /* Paragraph — 18px mobile */
+  body #MainContent .shopify-section .corp-hero__sub,
+  body #MainContent .shopify-section .corp-features__sub,
+  body #MainContent .shopify-section .corp-process__desc,
+  body #MainContent .shopify-section .corp-packages__desc,
+  body #MainContent .shopify-section .corp-form__visual-text,
+  body #MainContent .shopify-section .corp-form__subtitle,
+  body .shopify-section .corp-hero__sub,
+  body .shopify-section .corp-features__sub,
+  body .shopify-section .corp-process__desc,
+  body .shopify-section .corp-packages__desc,
+  body .shopify-section .corp-form__visual-text,
+  body .shopify-section .corp-form__subtitle {
+    font-size: 18px !important;
   }
 }
+
+
+
