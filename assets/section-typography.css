@@ -820,8 +820,7 @@ body .shopify-section .corp-process__step-title {
 
 /* ── ABOUT US EYEBROWS ── */
 body #MainContent .shopify-section .agp-eyebrow,
-body #MainContent .shopify-section .agp-hashtag,
-body #MainContent .shopify-section .ab-profile-quote {
+body #MainContent .shopify-section .agp-hashtag {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: 18px !important;
   font-weight: 400 !important;
@@ -859,10 +858,12 @@ body #MainContent .shopify-section .ab-profile-name {
 
 /* ── ABOUT US PARAGRAPHS — Darker Grotesque Regular 400, 24px ── */
 body #MainContent .shopify-section .agp-bottom__subtext,
+body #MainContent .shopify-section .agp-bottom-text,
 body #MainContent .shopify-section .split-cta--redesign__subtext,
 body #MainContent .shopify-section .split-cta--redesign__subtext p,
 body #MainContent .shopify-section [class*="anb-subtext"],
 body #MainContent .shopify-section .ab-belief-desc,
+body #MainContent .shopify-section .ab-profile-quote,
 body #MainContent .shopify-section .ab-profile-body {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: 24px !important;
@@ -878,8 +879,7 @@ body #MainContent .shopify-section .ab-profile-body {
 /* ── ABOUT US MOBILE ≤ 989px ── */
 @media screen and (max-width: 989px) {
   body #MainContent .shopify-section .agp-eyebrow,
-  body #MainContent .shopify-section .agp-hashtag,
-  body #MainContent .shopify-section .ab-profile-quote {
+  body #MainContent .shopify-section .agp-hashtag {
     font-size: 14px !important;
   }
 
@@ -902,10 +902,12 @@ body #MainContent .shopify-section .ab-profile-body {
   }
 
   body #MainContent .shopify-section .agp-bottom__subtext,
+  body #MainContent .shopify-section .agp-bottom-text,
   body #MainContent .shopify-section .split-cta--redesign__subtext,
   body #MainContent .shopify-section .split-cta--redesign__subtext p,
   body #MainContent .shopify-section [class*="anb-subtext"],
   body #MainContent .shopify-section .ab-belief-desc,
+  body #MainContent .shopify-section .ab-profile-quote,
   body #MainContent .shopify-section .ab-profile-body {
     font-size: 24px !important;
   }
