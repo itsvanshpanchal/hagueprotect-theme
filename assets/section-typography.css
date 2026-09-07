@@ -711,7 +711,7 @@ body .shopify-section .corp-packages__name {
   -webkit-font-smoothing: antialiased !important;
 }
 
-/* ── BENTO BODY / STEP TEXT / PACKAGE LIST — Darker Grotesque Regular 400 ── */
+/* ── BENTO BODY / STEP TEXT / PACKAGE LIST — Darker Grotesque Regular 400, 24px ── */
 body #MainContent .shopify-section .corp-bento__text,
 body #MainContent .shopify-section .corp-process__step-text,
 body #MainContent .shopify-section .corp-packages__list li,
@@ -723,10 +723,12 @@ body .shopify-section .corp-packages__list li,
 body .shopify-section .corp-packages__qty,
 body .shopify-section .corp-process__step-title {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
   font-weight: 400 !important;
   font-style: normal !important;
   font-synthesis: none !important;
   -webkit-font-smoothing: antialiased !important;
+  line-height: 1.45 !important;
 }
 
 /* ── MOBILE ≤ 989px ── */
