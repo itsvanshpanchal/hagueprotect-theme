@@ -811,3 +811,90 @@ body .shopify-section .corp-process__step-title {
 
 
 
+/* ==========================================================================
+   About Us Page — Exact Typography
+   Heading  : Inter Light 300 — 52px desktop / 32px mobile
+   Eyebrow  : Darker Grotesque Regular 400 — 18px desktop / 14px mobile
+   Paragraph: Darker Grotesque Regular 400 — 24px desktop / 18px mobile
+   ========================================================================== */
+
+/* ── ABOUT US EYEBROWS ── */
+body #MainContent .shopify-section .agp-eyebrow,
+body #MainContent .shopify-section .agp-hashtag {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+
+/* ── ABOUT US HEADINGS — Inter Light 300, 52px ── */
+body #MainContent .shopify-section .agp-headline,
+body #MainContent .shopify-section h2.agp-headline,
+body #MainContent .shopify-section .agp-bottom__headline,
+body #MainContent .shopify-section h3.agp-bottom__headline,
+body #MainContent .shopify-section .split-cta--redesign__heading,
+body #MainContent .shopify-section h1.split-cta--redesign__heading,
+body #MainContent .shopify-section h2.split-cta--redesign__heading,
+body #MainContent .shopify-section [class*="anb-headline"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+}
+
+/* ── ABOUT US PARAGRAPHS — Darker Grotesque Regular 400, 24px ── */
+body #MainContent .shopify-section .agp-bottom__subtext,
+body #MainContent .shopify-section .split-cta--redesign__subtext,
+body #MainContent .shopify-section .split-cta--redesign__subtext p,
+body #MainContent .shopify-section [class*="anb-subtext"] {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1.5 !important;
+}
+
+/* ── ABOUT US MOBILE ≤ 989px ── */
+@media screen and (max-width: 989px) {
+  body #MainContent .shopify-section .agp-eyebrow,
+  body #MainContent .shopify-section .agp-hashtag {
+    font-size: 14px !important;
+  }
+
+  body #MainContent .shopify-section .agp-headline,
+  body #MainContent .shopify-section h2.agp-headline,
+  body #MainContent .shopify-section .agp-bottom__headline,
+  body #MainContent .shopify-section h3.agp-bottom__headline,
+  body #MainContent .shopify-section .split-cta--redesign__heading,
+  body #MainContent .shopify-section h1.split-cta--redesign__heading,
+  body #MainContent .shopify-section h2.split-cta--redesign__heading,
+  body #MainContent .shopify-section [class*="anb-headline"] {
+    font-size: 32px !important;
+    letter-spacing: -0.01em !important;
+    font-weight: 300 !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+  }
+
+  body #MainContent .shopify-section .agp-bottom__subtext,
+  body #MainContent .shopify-section .split-cta--redesign__subtext,
+  body #MainContent .shopify-section .split-cta--redesign__subtext p,
+  body #MainContent .shopify-section [class*="anb-subtext"] {
+    font-size: 24px !important;
+  }
+}
