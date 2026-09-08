@@ -66,6 +66,35 @@
   font-style: var(--font-style-h2, normal) !important;
 }
 
+/* ── H2 SECTION HEADINGS — Inter Light 300, 52px desktop ── */
+body body #MainContent .shopify-section h2.corp-features__heading,
+body body #MainContent .shopify-section h2.corp-process__title,
+body body #MainContent .shopify-section h2.corp-packages__title,
+body body #MainContent .shopify-section h2.corp-form__visual-title,
+body body #MainContent .shopify-section h2.corp-form__title,
+body body .shopify-section h2.corp-features__heading,
+body body .shopify-section h2.corp-process__title,
+body body .shopify-section h2.corp-packages__title,
+body body .shopify-section h2.corp-form__visual-title,
+body body .shopify-section h2.corp-form__title,
+body body #MainContent .shopify-section .corp-features__heading,
+body body #MainContent .shopify-section .corp-process__title,
+body body #MainContent .shopify-section .corp-packages__title,
+body body #MainContent .shopify-section .corp-form__visual-title,
+body body #MainContent .shopify-section .corp-form__title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+}
+
 /* Split CTA — Inter Light on every breakpoint (section uses its own font-size settings) */
 #MainContent .shopify-section [class*="split-cta-"][class*="__heading"] {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
@@ -655,34 +684,7 @@ body .shopify-section h1.corp-hero__title {
   text-transform: none !important;
 }
 
-/* ── H2 SECTION HEADINGS — Inter Light 300, 52px desktop ── */
-body #MainContent .shopify-section h2.corp-features__heading,
-body #MainContent .shopify-section h2.corp-process__title,
-body #MainContent .shopify-section h2.corp-packages__title,
-body #MainContent .shopify-section h2.corp-form__visual-title,
-body #MainContent .shopify-section h2.corp-form__title,
-body .shopify-section h2.corp-features__heading,
-body .shopify-section h2.corp-process__title,
-body .shopify-section h2.corp-packages__title,
-body .shopify-section h2.corp-form__visual-title,
-body .shopify-section h2.corp-form__title,
-body #MainContent .shopify-section .corp-features__heading,
-body #MainContent .shopify-section .corp-process__title,
-body #MainContent .shopify-section .corp-packages__title,
-body #MainContent .shopify-section .corp-form__visual-title,
-body #MainContent .shopify-section .corp-form__title {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-  font-size: 52px !important;
-  font-weight: 300 !important;
-  font-style: normal !important;
-  font-synthesis: none !important;
-  -webkit-font-smoothing: antialiased !important;
-  -webkit-text-stroke: 0 !important;
-  text-shadow: none !important;
-  line-height: 1 !important;
-  letter-spacing: -0.02em !important;
-  text-transform: none !important;
-}
+
 
 /* ── PARAGRAPH / SUBTITLE — Darker Grotesque Regular 400, 24px desktop ── */
 body #MainContent .shopify-section .corp-hero__sub,
@@ -768,21 +770,21 @@ body .shopify-section .corp-process__step-title {
   }
 
   /* H2 Section headings — 32px mobile */
-  body #MainContent .shopify-section h2.corp-features__heading,
-  body #MainContent .shopify-section h2.corp-process__title,
-  body #MainContent .shopify-section h2.corp-packages__title,
-  body #MainContent .shopify-section h2.corp-form__visual-title,
-  body #MainContent .shopify-section h2.corp-form__title,
-  body .shopify-section h2.corp-features__heading,
-  body .shopify-section h2.corp-process__title,
-  body .shopify-section h2.corp-packages__title,
-  body .shopify-section h2.corp-form__visual-title,
-  body .shopify-section h2.corp-form__title,
-  body #MainContent .shopify-section .corp-features__heading,
-  body #MainContent .shopify-section .corp-process__title,
-  body #MainContent .shopify-section .corp-packages__title,
-  body #MainContent .shopify-section .corp-form__visual-title,
-  body #MainContent .shopify-section .corp-form__title {
+  body body #MainContent .shopify-section h2.corp-features__heading,
+  body body #MainContent .shopify-section h2.corp-process__title,
+  body body #MainContent .shopify-section h2.corp-packages__title,
+  body body #MainContent .shopify-section h2.corp-form__visual-title,
+  body body #MainContent .shopify-section h2.corp-form__title,
+  body body .shopify-section h2.corp-features__heading,
+  body body .shopify-section h2.corp-process__title,
+  body body .shopify-section h2.corp-packages__title,
+  body body .shopify-section h2.corp-form__visual-title,
+  body body .shopify-section h2.corp-form__title,
+  body body #MainContent .shopify-section .corp-features__heading,
+  body body #MainContent .shopify-section .corp-process__title,
+  body body #MainContent .shopify-section .corp-packages__title,
+  body body #MainContent .shopify-section .corp-form__visual-title,
+  body body #MainContent .shopify-section .corp-form__title {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
     font-size: 32px !important;
     line-height: 1.05 !important;
