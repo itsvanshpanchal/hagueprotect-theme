@@ -26,9 +26,9 @@
   }
   
   .how-to-use-statement-{{ section.id }} .statement-title {
-    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-family: 'Inter', sans-serif !important;
     font-size: clamp(32px, 4vw, 44px);
-    font-weight: 300;
+    font-weight: 300 !important;
     color: {{ section.settings.title_color | default: '#ffffff' }};
     line-height: 1.2;
     margin: 0;
