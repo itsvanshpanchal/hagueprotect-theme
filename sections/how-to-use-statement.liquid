@@ -1,0 +1,117 @@
+{%- style -%}
+  .how-to-use-statement-{{ section.id }} {
+    background-color: {{ section.settings.bg_color | default: '#1a1a1a' }};
+    padding: clamp(60px, 8vw, 100px) 20px;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .how-to-use-statement-{{ section.id }} .statement-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .how-to-use-statement-{{ section.id }} .statement-eyebrow {
+    color: {{ section.settings.eyebrow_color | default: '#C28A5E' }};
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin: 0;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+  }
+  
+  .how-to-use-statement-{{ section.id }} .statement-title {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 300;
+    color: {{ section.settings.title_color | default: '#ffffff' }};
+    line-height: 1.2;
+    margin: 0;
+  }
+  
+  .how-to-use-statement-{{ section.id }} .statement-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-weight: 300;
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.6;
+    color: {{ section.settings.text_color | default: '#a0a0a0' }};
+    margin: 0;
+    max-width: 600px;
+  }
+{%- endstyle -%}
+
+<section class="how-to-use-statement-{{ section.id }}">
+  <div class="statement-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="statement-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+    
+    {%- if section.settings.title != blank -%}
+      <h2 class="statement-title">{{ section.settings.title | newline_to_br }}</h2>
+    {%- endif -%}
+    
+    {%- if section.settings.text != blank -%}
+      <div class="statement-text">{{ section.settings.text | newline_to_br }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Centered Statement",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE SYSTEM"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#C28A5E"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Heading",
+      "default": "We didn't build another product.\nWe built a skin longevity formula."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Most skincare treats one concern at a time. This\nworks on the biology underneath all of them, at\nthe same time."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#a0a0a0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Centered Statement"
+    }
+  ]
+}
+{% endschema %}
