@@ -994,6 +994,7 @@ body #MainContent .shopify-section .htu-v2__chapter-name,
 body #MainContent .shopify-section .htu-v2__rules-title,
 body #MainContent .shopify-section .htu-v2__cta-title,
 body #MainContent .shopify-section .htu-v2__nav-title,
+body #MainContent .shopify-section .htu-v2__grid-main-title,
 body .shopify-section .how-to-banner__title,
 body .shopify-section .premium-htu__title,
 body .shopify-section .htu-v2__opener-title,
@@ -1001,7 +1002,8 @@ body .shopify-section .htu-v2__rail-title,
 body .shopify-section .htu-v2__chapter-name,
 body .shopify-section .htu-v2__rules-title,
 body .shopify-section .htu-v2__cta-title,
-body .shopify-section .htu-v2__nav-title {
+body .shopify-section .htu-v2__nav-title,
+body .shopify-section .htu-v2__grid-main-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-size: 52px !important;
   font-weight: 300 !important;
@@ -1017,10 +1019,12 @@ body .shopify-section .htu-v2__nav-title {
 
 /* All other heading sizes for How To Use that should just inherit the font but not the size */
 body #MainContent .shopify-section .htu-v2__rail-step,
+body #MainContent .shopify-section .htu-v2__grid-title,
 body #MainContent .shopify-section .premium-htu__card-title,
 body #MainContent .shopify-section .premium-htu__modal-info-title,
 body #MainContent .shopify-section .premium-htu__timeline-title,
 body .shopify-section .htu-v2__rail-step,
+body .shopify-section .htu-v2__grid-title,
 body .shopify-section .premium-htu__card-title,
 body .shopify-section .premium-htu__modal-info-title,
 body .shopify-section .premium-htu__timeline-title {
@@ -1080,6 +1084,7 @@ body .shopify-section .htu-v2 li {
   body #MainContent .shopify-section .htu-v2__rules-title,
   body #MainContent .shopify-section .htu-v2__cta-title,
   body #MainContent .shopify-section .htu-v2__nav-title,
+  body #MainContent .shopify-section .htu-v2__grid-main-title,
   body .shopify-section .how-to-banner__title,
   body .shopify-section .premium-htu__title,
   body .shopify-section .htu-v2__opener-title,
@@ -1087,7 +1092,8 @@ body .shopify-section .htu-v2 li {
   body .shopify-section .htu-v2__chapter-name,
   body .shopify-section .htu-v2__rules-title,
   body .shopify-section .htu-v2__cta-title,
-  body .shopify-section .htu-v2__nav-title {
+  body .shopify-section .htu-v2__nav-title,
+  body .shopify-section .htu-v2__grid-main-title {
     font-size: 32px !important;
     line-height: 1.05 !important;
     letter-spacing: -0.01em !important;
