@@ -133,13 +133,15 @@
         .htu-v2__rules, .htu-v2__cta {
           display: none !important;
         }
-        .htu-v2__nav-title, p.htu-v2__nav-title {
-          font-family: 'Inter', sans-serif !important;
+        #MainContent .shopify-section .htu-v2__nav-title,
+        body #MainContent .shopify-section p.htu-v2__nav-title {
+          font-family: 'Inter', -apple-system, sans-serif !important;
           font-size: 52px !important;
           font-weight: 300 !important;
           text-transform: none !important;
           letter-spacing: -0.02em !important;
           line-height: 1.1 !important;
+          color: #000 !important;
         }
       `;
       document.head.appendChild(style);
