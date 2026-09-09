@@ -7,21 +7,28 @@
     const reveals = section.querySelectorAll('[data-htu-reveal]');
     const rail = section.querySelector('[data-htu-rail]');
 
-    /* Scroll-spy: highlight material nav */
-    if (chapters.length && navLinks.length) {
-      const spy = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const id = entry.target.id;
-            navLinks.forEach((link) => {
-              link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
-            });
-          });
-        },
-        { rootMargin: '-40% 0px -45% 0px', threshold: 0 }
-      );
-      chapters.forEach((ch) => spy.observe(ch));
+    /* Tab switching logic for materials */
+    function switchTab(targetId) {
+      // Update nav links to show active state
+      navLinks.forEach((link) => {
+        link.classList.toggle('is-active', link.getAttribute('href') === targetId);
+      });
+      // Show only the target chapter and hide others
+      chapters.forEach((ch) => {
+        if ('#' + ch.id === targetId) {
+          ch.style.display = 'block';
+          // Ensure animation triggers
+          setTimeout(() => ch.classList.add('is-in'), 50);
+        } else {
+          ch.style.display = 'none';
+          ch.classList.remove('is-in');
+        }
+      });
+    }
+
+    // Initialize first tab as active
+    if (chapters.length > 0) {
+      switchTab('#' + chapters[0].id);
     }
 
     navLinks.forEach((link) => {
@@ -31,7 +38,7 @@
         const target = section.querySelector(href);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          switchTab(href);
         }
       });
     });
