@@ -112,14 +112,25 @@
               <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
             {%- endif -%}
           </div>
+          {%- assign default_title = 'APPLY' -%}
+          {%- assign default_text = 'Place dirty shoes on the Shoozas cleaning mat. Shake well and pump the foam cleaner directly onto soiled areas. Always test on a small area first.' -%}
           
-          {%- if block.settings.title != blank -%}
-            <h3 class="htu-card-title">{{ block.settings.title }}</h3>
+          {%- if forloop.index == 2 -%}
+            {%- assign default_title = 'SCRUB' -%}
+            {%- assign default_text = 'Scrub the shoes in circular motions with the all-purpose brush. Start with the upper and work your way down to the soles.' -%}
+          {%- elsif forloop.index == 3 -%}
+            {%- assign default_title = 'DRY' -%}
+            {%- assign default_text = 'Wipe away excess foam with the microfiber towel and let the shoes air dry indoors. Rinse the brush and cleaning mat with water before storing.' -%}
           {%- endif -%}
+
+          {%- assign actual_title = block.settings.title | default: default_title -%}
+          {%- if actual_title == blank -%}{%- assign actual_title = default_title -%}{%- endif -%}
           
-          {%- if block.settings.text != blank -%}
-            <p class="htu-card-text">{{ block.settings.text }}</p>
-          {%- endif -%}
+          {%- assign actual_text = block.settings.text | default: default_text -%}
+          {%- if actual_text == blank -%}{%- assign actual_text = default_text -%}{%- endif -%}
+
+          <h3 class="htu-card-title">{{ actual_title }}</h3>
+          <p class="htu-card-text">{{ actual_text }}</p>
         </div>
       {%- endfor -%}
     </div>
