@@ -970,10 +970,8 @@ body #MainContent .ab-profile-body {
 /* ── HOW TO USE EYEBROWS — Darker Grotesque Light 300, 18px ── */
 body #MainContent .shopify-section .htu-v2__opener-label,
 body #MainContent .shopify-section .htu-v2__chapter-index,
-body #MainContent .shopify-section .htu-v2__nav-title,
 body .shopify-section .htu-v2__opener-label,
-body .shopify-section .htu-v2__chapter-index,
-body .shopify-section .htu-v2__nav-title {
+body .shopify-section .htu-v2__chapter-index {
   font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
   font-size: 18px !important;
   font-weight: 300 !important;
@@ -995,13 +993,15 @@ body #MainContent .shopify-section .htu-v2__rail-title,
 body #MainContent .shopify-section .htu-v2__chapter-name,
 body #MainContent .shopify-section .htu-v2__rules-title,
 body #MainContent .shopify-section .htu-v2__cta-title,
+body #MainContent .shopify-section .htu-v2__nav-title,
 body .shopify-section .how-to-banner__title,
 body .shopify-section .premium-htu__title,
 body .shopify-section .htu-v2__opener-title,
 body .shopify-section .htu-v2__rail-title,
 body .shopify-section .htu-v2__chapter-name,
 body .shopify-section .htu-v2__rules-title,
-body .shopify-section .htu-v2__cta-title {
+body .shopify-section .htu-v2__cta-title,
+body .shopify-section .htu-v2__nav-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-size: 52px !important;
   font-weight: 300 !important;
@@ -1067,10 +1067,8 @@ body .shopify-section .htu-v2 li {
 @media screen and (max-width: 989px) {
   body #MainContent .shopify-section .htu-v2__opener-label,
   body #MainContent .shopify-section .htu-v2__chapter-index,
-  body #MainContent .shopify-section .htu-v2__nav-title,
   body .shopify-section .htu-v2__opener-label,
-  body .shopify-section .htu-v2__chapter-index,
-  body .shopify-section .htu-v2__nav-title {
+  body .shopify-section .htu-v2__chapter-index {
     font-size: 14px !important;
   }
 
@@ -1081,13 +1079,15 @@ body .shopify-section .htu-v2 li {
   body #MainContent .shopify-section .htu-v2__chapter-name,
   body #MainContent .shopify-section .htu-v2__rules-title,
   body #MainContent .shopify-section .htu-v2__cta-title,
+  body #MainContent .shopify-section .htu-v2__nav-title,
   body .shopify-section .how-to-banner__title,
   body .shopify-section .premium-htu__title,
   body .shopify-section .htu-v2__opener-title,
   body .shopify-section .htu-v2__rail-title,
   body .shopify-section .htu-v2__chapter-name,
   body .shopify-section .htu-v2__rules-title,
-  body .shopify-section .htu-v2__cta-title {
+  body .shopify-section .htu-v2__cta-title,
+  body .shopify-section .htu-v2__nav-title {
     font-size: 32px !important;
     line-height: 1.05 !important;
     letter-spacing: -0.01em !important;
