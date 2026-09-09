@@ -105,6 +105,27 @@
   }
 
   function boot() {
+    /* Force CSS update via JS to bypass Shopify .liquid caching delays */
+    if (!document.getElementById('htu-v2-forced-styles')) {
+      const style = document.createElement('style');
+      style.id = 'htu-v2-forced-styles';
+      style.textContent = `
+        .htu-v2__grid-header {
+          width: 100% !important;
+          max-width: var(--site-max-width, 1200px) !important;
+          margin: 0 auto 48px auto !important;
+          padding: 0 24px !important;
+          text-align: left !important;
+        }
+        .htu-v2__grid {
+          width: 100% !important;
+          max-width: var(--site-max-width, 1200px) !important;
+          margin: 0 auto !important;
+          padding: 0 24px clamp(56px, 7vw, 80px) !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
     document.querySelectorAll('[data-htu-guide]').forEach(initHowToGuide);
   }
 
