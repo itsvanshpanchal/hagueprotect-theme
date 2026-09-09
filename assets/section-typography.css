@@ -956,3 +956,162 @@ body #MainContent .ab-profile-body {
     font-size: 24px !important;
   }
 }
+
+/* ==========================================================================
+   How To Use Page — Exact Typography
+   Heading  : Inter Light 300 — 52px desktop / 32px mobile
+   Eyebrow  : Darker Grotesque Light 300 — 18px desktop / 14px mobile
+   Paragraph: Darker Grotesque Light 300 — 24px desktop / 18px mobile
+   ========================================================================== */
+
+/* ── HOW TO USE EYEBROWS — Darker Grotesque Light 300, 18px ── */
+body #MainContent .shopify-section .htu-v2__opener-label,
+body #MainContent .shopify-section .htu-v2__chapter-index,
+body #MainContent .shopify-section .htu-v2__nav-title,
+body .shopify-section .htu-v2__opener-label,
+body .shopify-section .htu-v2__chapter-index,
+body .shopify-section .htu-v2__nav-title {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── HOW TO USE HEADINGS — Inter Light 300, 52px ── */
+body #MainContent .shopify-section .how-to-banner__title,
+body #MainContent .shopify-section .premium-htu__title,
+body #MainContent .shopify-section .htu-v2__opener-title,
+body #MainContent .shopify-section .htu-v2__rail-title,
+body #MainContent .shopify-section .htu-v2__chapter-name,
+body #MainContent .shopify-section .htu-v2__rules-title,
+body #MainContent .shopify-section .htu-v2__cta-title,
+body .shopify-section .how-to-banner__title,
+body .shopify-section .premium-htu__title,
+body .shopify-section .htu-v2__opener-title,
+body .shopify-section .htu-v2__rail-title,
+body .shopify-section .htu-v2__chapter-name,
+body .shopify-section .htu-v2__rules-title,
+body .shopify-section .htu-v2__cta-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+}
+
+/* All other heading sizes for How To Use that should just inherit the font but not the size */
+body #MainContent .shopify-section .htu-v2__rail-step,
+body #MainContent .shopify-section .premium-htu__card-title,
+body #MainContent .shopify-section .premium-htu__modal-info-title,
+body #MainContent .shopify-section .premium-htu__timeline-title,
+body .shopify-section .htu-v2__rail-step,
+body .shopify-section .premium-htu__card-title,
+body .shopify-section .premium-htu__modal-info-title,
+body .shopify-section .premium-htu__timeline-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+}
+
+/* ── HOW TO USE PARAGRAPHS — Darker Grotesque Light 300, 24px ── */
+body #MainContent .shopify-section .how-to-banner__subtitle,
+body #MainContent .shopify-section .premium-htu__card-desc,
+body #MainContent .shopify-section .premium-htu__modal-info-desc,
+body #MainContent .shopify-section .premium-htu__timeline-desc,
+body #MainContent .shopify-section .premium-htu__accordion-inner,
+body #MainContent .shopify-section .htu-v2__opener-text,
+body #MainContent .shopify-section .htu-v2__rail-text,
+body #MainContent .shopify-section .htu-v2__chapter-desc,
+body #MainContent .shopify-section .htu-v2__cta-sub,
+body #MainContent .shopify-section .htu-v2 p,
+body #MainContent .shopify-section .htu-v2 li,
+body .shopify-section .how-to-banner__subtitle,
+body .shopify-section .premium-htu__card-desc,
+body .shopify-section .premium-htu__modal-info-desc,
+body .shopify-section .premium-htu__timeline-desc,
+body .shopify-section .premium-htu__accordion-inner,
+body .shopify-section .htu-v2__opener-text,
+body .shopify-section .htu-v2__rail-text,
+body .shopify-section .htu-v2__chapter-desc,
+body .shopify-section .htu-v2__cta-sub,
+body .shopify-section .htu-v2 p,
+body .shopify-section .htu-v2 li {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1.5 !important;
+}
+
+/* ── HOW TO USE MOBILE ≤ 989px ── */
+@media screen and (max-width: 989px) {
+  body #MainContent .shopify-section .htu-v2__opener-label,
+  body #MainContent .shopify-section .htu-v2__chapter-index,
+  body #MainContent .shopify-section .htu-v2__nav-title,
+  body .shopify-section .htu-v2__opener-label,
+  body .shopify-section .htu-v2__chapter-index,
+  body .shopify-section .htu-v2__nav-title {
+    font-size: 14px !important;
+  }
+
+  body #MainContent .shopify-section .how-to-banner__title,
+  body #MainContent .shopify-section .premium-htu__title,
+  body #MainContent .shopify-section .htu-v2__opener-title,
+  body #MainContent .shopify-section .htu-v2__rail-title,
+  body #MainContent .shopify-section .htu-v2__chapter-name,
+  body #MainContent .shopify-section .htu-v2__rules-title,
+  body #MainContent .shopify-section .htu-v2__cta-title,
+  body .shopify-section .how-to-banner__title,
+  body .shopify-section .premium-htu__title,
+  body .shopify-section .htu-v2__opener-title,
+  body .shopify-section .htu-v2__rail-title,
+  body .shopify-section .htu-v2__chapter-name,
+  body .shopify-section .htu-v2__rules-title,
+  body .shopify-section .htu-v2__cta-title {
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  body #MainContent .shopify-section .how-to-banner__subtitle,
+  body #MainContent .shopify-section .premium-htu__card-desc,
+  body #MainContent .shopify-section .premium-htu__modal-info-desc,
+  body #MainContent .shopify-section .premium-htu__timeline-desc,
+  body #MainContent .shopify-section .premium-htu__accordion-inner,
+  body #MainContent .shopify-section .htu-v2__opener-text,
+  body #MainContent .shopify-section .htu-v2__rail-text,
+  body #MainContent .shopify-section .htu-v2__chapter-desc,
+  body #MainContent .shopify-section .htu-v2__cta-sub,
+  body #MainContent .shopify-section .htu-v2 p,
+  body #MainContent .shopify-section .htu-v2 li,
+  body .shopify-section .how-to-banner__subtitle,
+  body .shopify-section .premium-htu__card-desc,
+  body .shopify-section .premium-htu__modal-info-desc,
+  body .shopify-section .premium-htu__timeline-desc,
+  body .shopify-section .premium-htu__accordion-inner,
+  body .shopify-section .htu-v2__opener-text,
+  body .shopify-section .htu-v2__rail-text,
+  body .shopify-section .htu-v2__chapter-desc,
+  body .shopify-section .htu-v2__cta-sub,
+  body .shopify-section .htu-v2 p,
+  body .shopify-section .htu-v2 li {
+    font-size: 18px !important;
+  }
+}
