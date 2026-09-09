@@ -17,7 +17,7 @@
   
   .how-to-use-statement-{{ section.id }} .statement-eyebrow {
     color: {{ section.settings.eyebrow_color | default: '#C28A5E' }};
-    font-size: 13px;
+    font-size: 18px !important;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -37,7 +37,7 @@
   .how-to-use-statement-{{ section.id }} .statement-text {
     font-family: var(--font-family-sans, 'Inter', sans-serif);
     font-weight: 300;
-    font-size: clamp(16px, 2vw, 18px);
+    font-size: 24px !important;
     line-height: 1.6;
     color: {{ section.settings.text_color | default: '#a0a0a0' }};
     margin: 0;
