@@ -52,11 +52,11 @@
     {%- endif -%}
     
     {%- if section.settings.title != blank -%}
-      <h2 class="statement-title">{{ section.settings.title | newline_to_br }}</h2>
+      <h2 class="statement-title" data-no-typewriter="true">{{ section.settings.title | newline_to_br }}</h2>
     {%- endif -%}
     
     {%- if section.settings.text != blank -%}
-      <div class="statement-text">{{ section.settings.text | newline_to_br }}</div>
+      <div class="statement-text" data-no-typewriter="true">{{ section.settings.text | newline_to_br }}</div>
     {%- endif -%}
   </div>
 </section>
