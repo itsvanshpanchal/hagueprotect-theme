@@ -995,6 +995,7 @@ body #MainContent .shopify-section .htu-v2__rules-title,
 body #MainContent .shopify-section .htu-v2__cta-title,
 body #MainContent .shopify-section .htu-v2__nav-title,
 body #MainContent .shopify-section .htu-v2__grid-main-title,
+body #MainContent .shopify-section h2.htu-v2__grid-main-title,
 body .shopify-section .how-to-banner__title,
 body .shopify-section .premium-htu__title,
 body .shopify-section .htu-v2__opener-title,
@@ -1003,18 +1004,20 @@ body .shopify-section .htu-v2__chapter-name,
 body .shopify-section .htu-v2__rules-title,
 body .shopify-section .htu-v2__cta-title,
 body .shopify-section .htu-v2__nav-title,
-body .shopify-section .htu-v2__grid-main-title {
+body .shopify-section .htu-v2__grid-main-title,
+body .shopify-section h2.htu-v2__grid-main-title {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-size: 52px !important;
   font-weight: 300 !important;
   font-style: normal !important;
   font-synthesis: none !important;
   -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   -webkit-text-stroke: 0 !important;
   text-shadow: none !important;
   line-height: 1 !important;
   letter-spacing: -0.02em !important;
-  text-transform: none !important;
+  text-transform: uppercase !important;
 }
 
 /* All other heading sizes for How To Use that should just inherit the font but not the size */

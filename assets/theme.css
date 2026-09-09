@@ -1134,6 +1134,32 @@ body.template-search-how-to-use .faq-custom h2.faq-custom__heading {
   }
 }
 
+body.template-search-how-to-use .htu-v2__grid-main-title,
+body.template-search-how-to-use .htu-v2 h2.htu-v2__grid-main-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+}
+
+@media screen and (max-width: 989px) {
+  body.template-search-how-to-use .htu-v2__grid-main-title,
+  body.template-search-how-to-use .htu-v2 h2.htu-v2__grid-main-title {
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+    font-weight: 300 !important;
+  }
+}
+
 .faq-custom .faq-custom__question,
 .faq-custom h3.faq-custom__question {
   font-family: var(--font-family-sans) !important;
