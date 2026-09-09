@@ -130,6 +130,9 @@
           margin: 0 auto !important;
           padding: 0 24px clamp(56px, 7vw, 80px) !important;
         }
+        .htu-v2__rules, .htu-v2__cta {
+          display: none !important;
+        }
       `;
       document.head.appendChild(style);
     }
