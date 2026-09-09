@@ -1,6 +1,14 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
+  #shopify-section-{{ section.id }} {
+    --font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-family-h2: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-weight-heading: 300;
+    --font-weight-h2: 300;
+    --heading-weight: 300;
+    --subheading-weight: 300;
+  }
 
   .htu-v2 {
     --red: #ff2b2b;
@@ -1056,7 +1064,7 @@
                     <div class="htu-v2__grid-eyebrow">{{ block.settings.eyebrow }}</div>
                   {%- endif -%}
                   {%- if block.settings.heading != blank -%}
-                    <h2 class="htu-v2__grid-main-title">{{ block.settings.heading }}</h2>
+                    <h2 class="htu-v2__grid-main-title hp-inter-light-heading">{{ block.settings.heading }}</h2>
                   {%- endif -%}
                 </div>
               {%- endif -%}

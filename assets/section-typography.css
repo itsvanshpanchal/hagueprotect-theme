@@ -28,7 +28,7 @@
 }
 
 /* ========== H2 / Section heading ========== */
-#MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]),
+#MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]):not(.htu-v2__grid-main-title):not(.htu-v2__grid-title):not(.faq-custom__heading),
 #MainContent .shopify-section .skincare-builder__title,
 #MainContent .shopify-section .skincare-concerns__title,
 #MainContent .shopify-section .skincare-explanation__title,
@@ -348,7 +348,7 @@
     font-size: var(--heading-size-hero) !important;
   }
 
-  #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]),
+  #MainContent .shopify-section h2:not([class*="ai-story-banner-heading"]):not([class*="split-cta-"][class*="__heading"]):not(.htu-v2__grid-main-title):not(.htu-v2__grid-title):not(.faq-custom__heading),
   #MainContent .shopify-section .bestsellers__heading-dtc,
   #MainContent .shopify-section .bundle-title,
   #MainContent .shopify-section .fb__title,
@@ -1173,5 +1173,32 @@ body.template-search-how-to-use #MainContent .shopify-section .faq-custom__quest
 
   body.template-search-how-to-use #MainContent .shopify-section .faq-custom__question {
     font-size: 18px !important;
+  }
+}
+
+/* How To Use — final lock for Shoozas Method title (beats generic h2 Bebas rule) */
+body.template-search-how-to-use #MainContent .shopify-section h2.htu-v2__grid-main-title,
+body.template-search-how-to-use #MainContent .shopify-section h2.hp-inter-light-heading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  color: #000000 !important;
+}
+
+@media screen and (max-width: 989px) {
+  body.template-search-how-to-use #MainContent .shopify-section h2.htu-v2__grid-main-title,
+  body.template-search-how-to-use #MainContent .shopify-section h2.hp-inter-light-heading {
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+    font-weight: 300 !important;
   }
 }

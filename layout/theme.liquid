@@ -687,5 +687,37 @@
         }
       })();
     </script>
+
+    {%- if template == 'search.how-to-use' -%}
+      <style id="hp-how-to-use-typography-fix">
+        body.template-search-how-to-use #MainContent .shopify-section h2.htu-v2__grid-main-title,
+        body.template-search-how-to-use #MainContent .shopify-section h2.hp-inter-light-heading,
+        body.template-search-how-to-use #MainContent .shopify-section .htu-v2__grid-main-title {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+          font-size: 52px !important;
+          font-weight: 300 !important;
+          font-style: normal !important;
+          font-synthesis: none !important;
+          -webkit-font-smoothing: antialiased !important;
+          -moz-osx-font-smoothing: grayscale !important;
+          -webkit-text-stroke: 0 !important;
+          text-shadow: none !important;
+          letter-spacing: -0.02em !important;
+          line-height: 1 !important;
+          text-transform: uppercase !important;
+          color: #000000 !important;
+        }
+
+        @media screen and (max-width: 989px) {
+          body.template-search-how-to-use #MainContent .shopify-section h2.htu-v2__grid-main-title,
+          body.template-search-how-to-use #MainContent .shopify-section h2.hp-inter-light-heading,
+          body.template-search-how-to-use #MainContent .shopify-section .htu-v2__grid-main-title {
+            font-size: 32px !important;
+            line-height: 1.05 !important;
+            font-weight: 300 !important;
+          }
+        }
+      </style>
+    {%- endif -%}
   </body>
 </html>
