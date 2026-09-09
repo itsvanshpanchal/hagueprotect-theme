@@ -1052,48 +1052,6 @@
     </div>
   </div>
 
-  <!-- Rules -->
-  <div class="htu-v2__rules" data-htu-reveal>
-    <div class="htu-v2__rules-inner">
-      <div class="htu-v2__rules-head">
-        <h3 class="htu-v2__rules-title">{{ section.settings.wisdom_heading | default: 'Golden Rules' }}</h3>
-      </div>
-      <div class="htu-v2__rules-cols">
-        <div class="htu-v2__rules-col htu-v2__rules-col--yes">
-          <h4>Always</h4>
-          <ul>
-            {%- assign do_items = section.settings.do_list | newline_to_br | split: '<br />' -%}
-            {%- for item in do_items -%}
-              {%- if item != blank -%}<li>{{ item | strip }}</li>{%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </div>
-        <div class="htu-v2__rules-col htu-v2__rules-col--no">
-          <h4>Never</h4>
-          <ul>
-            {%- assign dont_items = section.settings.dont_list | newline_to_br | split: '<br />' -%}
-            {%- for item in dont_items -%}
-              {%- if item != blank -%}<li>{{ item | strip }}</li>{%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="htu-v2__cta">
-    <div class="htu-v2__cta-inner" data-htu-reveal>
-      <div>
-        <h3 class="htu-v2__cta-title">{{ section.settings.cta_title | default: 'Get the Complete Kit' }}</h3>
-        <p class="htu-v2__cta-sub">{{ section.settings.cta_text | default: 'Every brush, solution, and protector Ã¢â‚¬â€ curated in one box.' }}</p>
-      </div>
-      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="htu-v2__cta-btn">
-        {{ section.settings.cta_label | default: 'Shop Now' }}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
 </section>
 
 <script src="{{ 'how-to-use-guide.js' | asset_url }}" defer="defer"></script>
