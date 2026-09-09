@@ -1118,3 +1118,12 @@ body .shopify-section .htu-v2 li {
     font-size: 18px !important;
   }
 }
+
+/* Forced Eyebrow override */
+body #MainContent .shopify-section .htu-v2__grid-eyebrow,
+body #MainContent .shopify-section [class*='htu-steps'] .htu-eyebrow,
+body #MainContent .shopify-section .hp-htu-eyebrow {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
+}
