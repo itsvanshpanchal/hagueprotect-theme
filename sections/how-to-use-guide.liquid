@@ -84,6 +84,64 @@
     }
   }
 
+  /* ─── Grid ─── */
+  .htu-v2__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: clamp(56px, 7vw, 80px) 0;
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+  }
+
+  .htu-v2__grid-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .htu-v2__grid-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .htu-v2__grid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .htu-v2__grid-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif) !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    margin: 0 0 12px 0 !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .htu-v2__grid-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .htu-v2__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
   /* ─── Opener ─── */
   .htu-v2__opener {
     padding: clamp(56px, 8vw, 88px) max(20px, var(--site-padding, 24px)) clamp(40px, 5vw, 56px);
@@ -870,40 +928,97 @@
     </div>
   </div>
 
-  <!-- Material Grid -->
-  <div class="htu-v2__grid" data-no-typewriter="true">
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'material' -%}
-        <div class="htu-v2__grid-card" {{ block.shopify_attributes }}>
-          <div class="htu-v2__grid-image-wrapper">
-            {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" class="htu-v2__grid-image" loading="lazy">
-            {%- else -%}
-              <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image for {{ block.settings.title }}</div>
-            {%- endif -%}
-          </div>
-          
-          {%- if block.settings.title != blank -%}
-            <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.title }}</h3>
+  <!-- Material journal -->
+  <div class="htu-v2__journal">
+    <nav class="htu-v2__nav" aria-label="Materials">
+      <p class="htu-v2__nav-title">{{ section.settings.materials_heading | default: 'By Material' }}</p>
+      <ul class="htu-v2__nav-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'material' -%}
+            <li>
+              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>
+                {{ block.settings.title }}
+              </a>
+            </li>
           {%- endif -%}
-          
-          {%- if block.settings.description != blank -%}
-            <p class="htu-v2__grid-text">{{ block.settings.description }}</p>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="htu-v2__chapters">
+      <div class="htu-v2__mob-nav" aria-label="Materials">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'material' -%}
+            <a href="#htu-mat-{{ block.id }}" class="{% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>{{ block.settings.title }}</a>
           {%- endif -%}
-          
-          {%- if block.settings.tips != blank -%}
-            {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
-            <ul class="htu-v2__grid-tips">
-              {%- for tip in tips -%}
-                {%- if tip != blank -%}
-                  <li>{{ tip | strip }}</li>
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'material' -%}
+          <article
+            id="htu-mat-{{ block.id }}"
+            class="htu-v2__chapter"
+            data-htu-chapter
+            data-htu-reveal
+            {{ block.shopify_attributes }}
+          >
+            <div class="htu-v2__grid" data-no-typewriter="true">
+              <!-- Step 1 -->
+              <div class="htu-v2__grid-card">
+                <div class="htu-v2__grid-image-wrapper">
+                  {%- if block.settings.step1_image != blank -%}
+                    <img src="{{ block.settings.step1_image | image_url: width: 600 }}" alt="{{ block.settings.step1_title | escape }}" class="htu-v2__grid-image" loading="lazy">
+                  {%- else -%}
+                    <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.step1_title != blank -%}
+                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step1_title }}</h3>
                 {%- endif -%}
-              {%- endfor -%}
-            </ul>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
+                {%- if block.settings.step1_text != blank -%}
+                  <p class="htu-v2__grid-text">{{ block.settings.step1_text }}</p>
+                {%- endif -%}
+              </div>
+
+              <!-- Step 2 -->
+              <div class="htu-v2__grid-card">
+                <div class="htu-v2__grid-image-wrapper">
+                  {%- if block.settings.step2_image != blank -%}
+                    <img src="{{ block.settings.step2_image | image_url: width: 600 }}" alt="{{ block.settings.step2_title | escape }}" class="htu-v2__grid-image" loading="lazy">
+                  {%- else -%}
+                    <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.step2_title != blank -%}
+                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step2_title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.step2_text != blank -%}
+                  <p class="htu-v2__grid-text">{{ block.settings.step2_text }}</p>
+                {%- endif -%}
+              </div>
+
+              <!-- Step 3 -->
+              <div class="htu-v2__grid-card">
+                <div class="htu-v2__grid-image-wrapper">
+                  {%- if block.settings.step3_image != blank -%}
+                    <img src="{{ block.settings.step3_image | image_url: width: 600 }}" alt="{{ block.settings.step3_title | escape }}" class="htu-v2__grid-image" loading="lazy">
+                  {%- else -%}
+                    <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.step3_title != blank -%}
+                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step3_title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.step3_text != blank -%}
+                  <p class="htu-v2__grid-text">{{ block.settings.step3_text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
   </div>
 
   <!-- Rules -->
