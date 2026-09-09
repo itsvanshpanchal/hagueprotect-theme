@@ -572,6 +572,12 @@
     letter-spacing: 0.05em;
     position: relative;
     padding-bottom: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .hp-overlay-nav a:hover,
+  .hp-overlay-header > div:first-child a:hover {
+    color: #0000FF !important;
   }
 
   .hp-overlay-nav a.is-active {
@@ -1964,7 +1970,7 @@
 
     <div class="hp-overlay-header" style="display: grid; grid-template-columns: 140px 360px 1fr; gap: 40px 0; padding: 48px 40px 48px; align-items: center;">
       <div style="padding-right: 20px;">
-        <a href="/search?view=how-to-use" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #000000; text-transform: uppercase; text-decoration: none; letter-spacing: 0.05em;">HOW TO USE</a>
+        <a href="/search?view=how-to-use" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #000000; text-transform: uppercase; text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s ease;">HOW TO USE</a>
       </div>
       <div class="hp-overlay-nav" style="padding-right: 32px;">
         <a href="/collections/all" class="is-active">SHOP</a>
