@@ -76,6 +76,32 @@
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
     reveals.forEach((el) => observer.observe(el));
+
+    /* Ensure grid step titles and text are present below images */
+    const stepData = [
+      { title: 'Apply', text: 'Place dirty shoes on the Shoozas cleaning mat. Shake well and pump the foam cleaner directly onto soiled areas. Always test on a small area first.' },
+      { title: 'Scrub', text: 'Scrub the shoes in circular motions with the all-purpose brush. Start with the upper and work your way down to the soles.' },
+      { title: 'Dry',   text: 'Wipe away excess foam with the microfiber towel and let the shoes air dry indoors. Rinse the brush and cleaning mat with water before storing.' }
+    ];
+    section.querySelectorAll('.htu-v2__grid').forEach(function(grid) {
+      var cards = grid.querySelectorAll('.htu-v2__grid-card');
+      cards.forEach(function(card, i) {
+        if (i >= stepData.length) return;
+        if (!card.querySelector('.htu-v2__grid-title')) {
+          var h3 = document.createElement('h3');
+          h3.className = 'htu-v2__grid-title';
+          h3.setAttribute('data-no-typewriter', 'true');
+          h3.textContent = stepData[i].title;
+          card.appendChild(h3);
+        }
+        if (!card.querySelector('.htu-v2__grid-text')) {
+          var p = document.createElement('p');
+          p.className = 'htu-v2__grid-text';
+          p.textContent = stepData[i].text;
+          card.appendChild(p);
+        }
+      });
+    });
   }
 
   function boot() {
