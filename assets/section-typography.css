@@ -1135,11 +1135,15 @@ body #MainContent .shopify-section .hp-htu-eyebrow {
 }
 
 /* How To Use page — FAQ accordion typography */
-body.template-search-how-to-use #MainContent .shopify-section .faq-custom__heading {
+body.template-search-how-to-use #MainContent .shopify-section .faq-custom__heading,
+body.template-search-how-to-use #MainContent .shopify-section h2.faq-custom__heading {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
   font-size: 52px !important;
   font-weight: 300 !important;
   font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   color: #000000 !important;
   letter-spacing: -0.02em !important;
   line-height: 1 !important;
@@ -1157,9 +1161,11 @@ body.template-search-how-to-use #MainContent .shopify-section .faq-custom__quest
 }
 
 @media screen and (max-width: 989px) {
-  body.template-search-how-to-use #MainContent .shopify-section .faq-custom__heading {
+  body.template-search-how-to-use #MainContent .shopify-section .faq-custom__heading,
+  body.template-search-how-to-use #MainContent .shopify-section h2.faq-custom__heading {
     font-size: 32px !important;
     line-height: 1.05 !important;
+    font-weight: 300 !important;
   }
 
   body.template-search-how-to-use #MainContent .shopify-section .faq-custom__question {
