@@ -575,13 +575,14 @@
     transition: color 0.2s ease;
   }
 
-  .hp-overlay-nav a:hover,
-  .hp-overlay-header > div:first-child a:hover {
-    color: #0000FF !important;
-  }
-
   .hp-overlay-nav a.is-active {
     color: #000000 !important;
+  }
+
+  .hp-overlay-nav a:hover,
+  .hp-overlay-header > div:first-child a:hover,
+  .hp-overlay-nav a.is-active:hover {
+    color: #0000FF !important;
   }
 
   .hp-overlay-nav a.is-active::after {
