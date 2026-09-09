@@ -86,8 +86,10 @@
 
   /* ─── Grid ─── */
   .htu-v2__grid-header {
-    max-width: var(--site-max-width);
+    width: 100%;
+    max-width: var(--site-max-width, 1200px);
     margin: 0 auto 48px auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
     text-align: left;
   }
 
@@ -116,9 +118,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
-    padding: 0 0 clamp(56px, 7vw, 80px) 0;
-    max-width: var(--site-max-width);
+    width: 100%;
+    max-width: var(--site-max-width, 1200px);
     margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px)) clamp(56px, 7vw, 80px);
   }
 
   .htu-v2__grid-card {
