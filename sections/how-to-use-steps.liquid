@@ -1,0 +1,207 @@
+{%- style -%}
+  .htu-steps-{{ section.id }} {
+    padding: clamp(60px, 8vw, 100px) 20px;
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+  }
+
+  .htu-steps-{{ section.id }} .htu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .htu-steps-{{ section.id }} .htu-header {
+    margin-bottom: 48px;
+    text-align: left;
+  }
+
+  .htu-steps-{{ section.id }} .htu-eyebrow {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 16px;
+  }
+
+  .htu-steps-{{ section.id }} .htu-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #000000;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .htu-steps-{{ section.id }} .htu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .htu-steps-{{ section.id }} .htu-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .htu-steps-{{ section.id }} .htu-card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .htu-steps-{{ section.id }} .htu-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .htu-steps-{{ section.id }} .htu-card-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.03em;
+  }
+
+  .htu-steps-{{ section.id }} .htu-card-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 989px) {
+    .htu-steps-{{ section.id }} .htu-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="htu-steps-{{ section.id }}" data-no-typewriter="true">
+  <div class="htu-container">
+    <div class="htu-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="htu-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      
+      {%- if section.settings.title != blank -%}
+        <h2 class="htu-title" data-no-typewriter="true">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="htu-grid">
+      {%- for block in section.blocks -%}
+        <div class="htu-card" {{ block.shopify_attributes }}>
+          <div class="htu-card-image-wrapper">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title | escape }}" class="htu-card-image" loading="lazy">
+            {%- else -%}
+              <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
+            {%- endif -%}
+          </div>
+          
+          {%- if block.settings.title != blank -%}
+            <h3 class="htu-card-title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          
+          {%- if block.settings.text != blank -%}
+            <p class="htu-card-text">{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How to Use Steps",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HOW TO USE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "THE SHOOZAS METHOD."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "SHAKE"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How to Use Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "SHAKE",
+            "text": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "SPRAY",
+            "text": "Spray evenly to cover every area. Avoid soaking the fabric."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "DRY",
+            "text": "Let the shoes dry for 24 hours. Use a towel to dab only if there is excess product. Apply a second coat \u2014 essential for best results."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

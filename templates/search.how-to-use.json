@@ -18,81 +18,41 @@
         "text_color": "#ffffff"
       }
     },
-    "guide": {
-      "type": "how-to-use-guide",
+    "steps": {
+      "type": "how-to-use-steps",
+      "settings": {
+        "bg_color": "#ffffff",
+        "eyebrow": "HOW TO USE",
+        "title": "THE SHOOZAS METHOD."
+      },
       "blocks": {
-        "mat_suede": {
-          "type": "material",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "title": "Suede",
-            "badge": "Delicate Care",
-            "description": "Suede needs gentle, dry-first cleaning to preserve its napped texture.",
-            "tips": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying",
-            "collection": "suede-care-kit"
+            "title": "SHAKE",
+            "text": "Clean and dry the shoes before applying. Shake well and hold the bottle about 8 inches from the shoes."
           }
         },
-        "mat_leather": {
-          "type": "material",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "title": "Leather",
-            "badge": "Smooth Finish",
-            "description": "Smooth leather responds best to pH-balanced cleaner and light conditioning.",
-            "tips": "Wipe with a damp microfiber cloth first\nApply cleaner in small circular motions\nBuff with a clean dry cloth for shine\nCondition monthly to prevent cracking",
-            "collection": "leather-care-kit"
+            "title": "SPRAY",
+            "text": "Spray evenly to cover every area. Avoid soaking the fabric."
           }
         },
-        "mat_nubuck": {
-          "type": "material",
+        "step_3": {
+          "type": "step",
           "settings": {
-            "title": "Nubuck",
-            "badge": "Soft Nap",
-            "description": "Nubuck is finer than suede — treat it with extra care and minimal water.",
-            "tips": "Always brush dry before any wet cleaning\nUse the softest brush in your kit\nPat dry — never rub aggressively\nApply protector to maintain water resistance",
-            "collection": "nubuck-care-kit"
-          }
-        },
-        "mat_fabric": {
-          "type": "material",
-          "settings": {
-            "title": "Mesh & Fabric",
-            "badge": "Breathable",
-            "description": "Knit, mesh, and canvas uppers need targeted cleaning without overwetting.",
-            "tips": "Remove insoles and laces before cleaning\nUse the medium brush on mesh panels\nAvoid soaking — foam cleaner works best\nAir dry stuffed with paper towels",
-            "collection": "fabric-care-kit"
-          }
-        },
-        "mat_soles": {
-          "type": "material",
-          "settings": {
-            "title": "Soles",
-            "badge": "Deep Clean",
-            "description": "Midsoles and outsoles can handle more aggressive cleaning for icy-white results.",
-            "tips": "Use the stiff brush on rubber soles\nApply sole-specific cleaner for yellowing\nScrub midsoles in back-and-forth strokes\nWipe clean and protect from future yellowing",
-            "collection": "soles-care-kit"
+            "title": "DRY",
+            "text": "Let the shoes dry for 24 hours. Use a towel to dab only if there is excess product. Apply a second coat — essential for best results."
           }
         }
       },
       "block_order": [
-        "mat_suede",
-        "mat_leather",
-        "mat_nubuck",
-        "mat_fabric",
-        "mat_soles"
-      ],
-      "settings": {
-        "intro_eyebrow": "Care Manual",
-        "intro_title": "The Right Way to Clean Sneakers",
-        "intro_text": "No washing machines. No shortcuts. Just a proven three-step system and material-specific techniques that protect what you wear.",
-        "protocol_heading": "The Protocol",
-        "do_list": "Brush dry dirt off before wet cleaning\nUse the soft brush on suede and nubuck\nLet shoes air dry — never use a heater\nApply protector on fully dry shoes\nTest cleaner on a hidden spot first",
-        "dont_list": "Never put sneakers in a washing machine\nDon't use harsh bleach or alcohol-based cleaners\nAvoid scrubbing suede with stiff bristles\nDon't wear shoes before they're completely dry\nNever skip the protection step",
-        "materials_heading": "By Material",
-        "wisdom_heading": "Golden Rules",
-        "cta_title": "Get the Complete Kit",
-        "cta_text": "Every brush, solution, and protector — curated in one box.",
-        "cta_label": "Shop Now",
-        "cta_url": "/collections/all"
-      }
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
     },
     "statement": {
       "type": "how-to-use-statement",
@@ -110,7 +70,7 @@
   "order": [
     "banner",
     "statement",
-    "guide"
+    "steps"
   ]
 }
 
