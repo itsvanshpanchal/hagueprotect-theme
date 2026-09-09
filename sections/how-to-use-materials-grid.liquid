@@ -1,0 +1,229 @@
+{%- style -%}
+  .htu-materials-grid-{{ section.id }} {
+    padding: clamp(60px, 8vw, 100px) 20px;
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-header {
+    margin-bottom: 48px;
+    text-align: left;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-eyebrow {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888888;
+    margin-bottom: 16px;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #000000;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif);
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.03em;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0 0 16px 0;
+  }
+  
+  .htu-materials-grid-{{ section.id }} .htu-card-tips {
+    margin: 0;
+    padding-left: 16px;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333333;
+  }
+
+  .htu-materials-grid-{{ section.id }} .htu-card-tips li {
+    margin-bottom: 8px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .htu-materials-grid-{{ section.id }} .htu-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="htu-materials-grid-{{ section.id }}" data-no-typewriter="true">
+  <div class="htu-container">
+    <div class="htu-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="htu-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      
+      {%- if section.settings.title != blank -%}
+        <h2 class="htu-title" data-no-typewriter="true">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="htu-grid">
+      {%- for block in section.blocks -%}
+        <div class="htu-card" {{ block.shopify_attributes }}>
+          <div class="htu-card-image-wrapper">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" class="htu-card-image" loading="lazy">
+            {%- else -%}
+              <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image for {{ block.settings.title }}</div>
+            {%- endif -%}
+          </div>
+          
+          {%- if block.settings.title != blank -%}
+            <h3 class="htu-card-title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          
+          {%- if block.settings.description != blank -%}
+            <p class="htu-card-text">{{ block.settings.description }}</p>
+          {%- endif -%}
+          
+          {%- if block.settings.tips != blank -%}
+            {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
+            <ul class="htu-card-tips">
+              {%- for tip in tips -%}
+                {%- if tip != blank -%}
+                  <li>{{ tip | strip }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Materials Grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "BY MATERIAL"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "THE RIGHT WAY TO CLEAN SNEAKERS."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "material",
+      "name": "Material",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Suede"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "Delicate Care"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Suede needs gentle, dry-first cleaning to preserve its napped texture."
+        },
+        {
+          "type": "textarea",
+          "id": "tips",
+          "label": "Tips (one per line)",
+          "default": "Use the soft-hog brush only — never a stiff brush\nBrush in one direction to lift dirt from the nap\nUse minimal moisture — damp, never soaking\nRestore nap with a suede eraser after drying"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Shop Link"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Materials Grid"
+    }
+  ]
+}
+{% endschema %}

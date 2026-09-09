@@ -13,7 +13,78 @@
     color: var(--ink);
   }
 
-  /* Ã¢â€â‚¬Ã¢â€â‚¬ Opener Ã¢â€â‚¬Ã¢â€â‚¬ */
+  /* ─── Grid ─── */
+  .htu-v2__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: clamp(56px, 7vw, 80px) max(20px, var(--site-padding, 24px));
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+  }
+
+  .htu-v2__grid-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .htu-v2__grid-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .htu-v2__grid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .htu-v2__grid-title {
+    font-family: "Anton", "Bebas Neue", var(--font-family-heading, sans-serif) !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    margin: 0 0 12px 0 !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .htu-v2__grid-text {
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0 0 16px 0;
+  }
+
+  .htu-v2__grid-tips {
+    margin: 0;
+    padding-left: 16px;
+    font-family: var(--font-family-sans, 'Inter', sans-serif);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333333;
+  }
+
+  .htu-v2__grid-tips li {
+    margin-bottom: 8px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .htu-v2__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  /* ─── Opener ─── */
   .htu-v2__opener {
     padding: clamp(56px, 8vw, 88px) max(20px, var(--site-padding, 24px)) clamp(40px, 5vw, 56px);
     max-width: var(--site-max-width);
@@ -799,84 +870,40 @@
     </div>
   </div>
 
-  <!-- Material journal -->
-  <div class="htu-v2__journal">
-    <nav class="htu-v2__nav" aria-label="Materials">
-      <p class="htu-v2__nav-title">{{ section.settings.materials_heading | default: 'By Material' }}</p>
-      <ul class="htu-v2__nav-list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'material' -%}
-            <li>
-              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>
-                {{ block.settings.title }}
-              </a>
-            </li>
+  <!-- Material Grid -->
+  <div class="htu-v2__grid" data-no-typewriter="true">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'material' -%}
+        <div class="htu-v2__grid-card" {{ block.shopify_attributes }}>
+          <div class="htu-v2__grid-image-wrapper">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" class="htu-v2__grid-image" loading="lazy">
+            {%- else -%}
+              <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image for {{ block.settings.title }}</div>
+            {%- endif -%}
+          </div>
+          
+          {%- if block.settings.title != blank -%}
+            <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.title }}</h3>
           {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </nav>
-
-    <div class="htu-v2__chapters">
-      <div class="htu-v2__mob-nav" aria-label="Materials">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'material' -%}
-            <a href="#htu-mat-{{ block.id }}" class="{% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>{{ block.settings.title }}</a>
+          
+          {%- if block.settings.description != blank -%}
+            <p class="htu-v2__grid-text">{{ block.settings.description }}</p>
           {%- endif -%}
-        {%- endfor -%}
-      </div>
-
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'material' -%}
-          {%- liquid
-            assign mat_link = block.settings.link
-            if mat_link == blank and block.settings.collection != blank
-              assign mat_link = block.settings.collection.url
-            endif
-          -%}
-          <article
-            id="htu-mat-{{ block.id }}"
-            class="htu-v2__chapter"
-            data-htu-chapter
-            data-htu-reveal
-            {{ block.shopify_attributes }}
-          >
-            <div class="htu-v2__chapter-grid">
-              <div class="htu-v2__chapter-visual">
-                {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
-                {%- else -%}
-                  <div class="htu-v2__chapter-placeholder" aria-hidden="true">
-                    <span class="{% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</span>
-                  </div>
+          
+          {%- if block.settings.tips != blank -%}
+            {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
+            <ul class="htu-v2__grid-tips">
+              {%- for tip in tips -%}
+                {%- if tip != blank -%}
+                  <li>{{ tip | strip }}</li>
                 {%- endif -%}
-              </div>
-              <div class="htu-v2__chapter-copy">
-                <p class="htu-v2__chapter-index">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} — {{ block.settings.badge | default: 'Guide' }}</p>
-                <h3 class="htu-v2__chapter-name {% render 'material-font-class', source: block.settings.title %}">{{ block.settings.title }}</h3>
-                <p class="htu-v2__chapter-desc">{{ block.settings.description }}</p>
-                <div class="htu-v2__tips">
-                  {%- assign tips = block.settings.tips | newline_to_br | split: '<br />' -%}
-                  {%- for tip in tips -%}
-                    {%- if tip != blank -%}
-                      <div class="htu-v2__tip">
-                        <span class="htu-v2__tip-n">{{ forloop.index }}</span>
-                        <span>{{ tip | strip }}</span>
-                      </div>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </div>
-                {%- if mat_link != blank -%}
-                  <a href="{{ mat_link }}" class="htu-v2__chapter-link">
-                    Shop {{ block.settings.title }}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
-          </article>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
   </div>
 
   <!-- Rules -->
