@@ -1010,12 +1010,8 @@
                     <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
                   {%- endif -%}
                 </div>
-                {%- if block.settings.step1_title != blank -%}
-                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step1_title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.step1_text != blank -%}
-                  <p class="htu-v2__grid-text">{{ block.settings.step1_text }}</p>
-                {%- endif -%}
+                <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step1_title | default: 'Apply' }}</h3>
+                <p class="htu-v2__grid-text">{{ block.settings.step1_text | default: 'Place dirty shoes on the Shoozas cleaning mat. Shake well and pump the foam cleaner directly onto soiled areas. Always test on a small area first.' }}</p>
               </div>
 
               <!-- Step 2 -->
@@ -1027,12 +1023,8 @@
                     <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
                   {%- endif -%}
                 </div>
-                {%- if block.settings.step2_title != blank -%}
-                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step2_title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.step2_text != blank -%}
-                  <p class="htu-v2__grid-text">{{ block.settings.step2_text }}</p>
-                {%- endif -%}
+                <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step2_title | default: 'Scrub' }}</h3>
+                <p class="htu-v2__grid-text">{{ block.settings.step2_text | default: 'Scrub the shoes in circular motions with the all-purpose brush. Start with the upper and work your way down to the soles.' }}</p>
               </div>
 
               <!-- Step 3 -->
@@ -1044,12 +1036,8 @@
                     <div style="padding: 20px; color: #ccc; text-align: center;">Upload Image</div>
                   {%- endif -%}
                 </div>
-                {%- if block.settings.step3_title != blank -%}
-                  <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step3_title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.step3_text != blank -%}
-                  <p class="htu-v2__grid-text">{{ block.settings.step3_text }}</p>
-                {%- endif -%}
+                <h3 class="htu-v2__grid-title" data-no-typewriter="true">{{ block.settings.step3_title | default: 'Dry' }}</h3>
+                <p class="htu-v2__grid-text">{{ block.settings.step3_text | default: 'Wipe away excess foam with the microfiber towel and let the shoes air dry indoors. Rinse the brush and cleaning mat with water before storing.' }}</p>
               </div>
             </div>
             </div>
