@@ -3,7 +3,7 @@
    Always prefer CSS variables; never hardcode px sizes for editable text. */
 
 /* ========== H1 / Biggest title ========== */
-#MainContent .shopify-section h1:not(.hero-fullscreen__heading),
+#MainContent .shopify-section h1:not(.hero-fullscreen__heading):not(.faq-custom__page-title),
 #MainContent .shopify-section .hp-display-heading,
 #MainContent .shopify-section .corp-hero__title,
 #MainContent .shopify-section .biz-hero__title,
@@ -331,7 +331,7 @@
 
 /* ========== Mobile / tablet (matches Shopify editor + phones) ========== */
 @media screen and (max-width: 989px) {
-  #MainContent .shopify-section h1:not(.hero-fullscreen__heading),
+  #MainContent .shopify-section h1:not(.hero-fullscreen__heading):not(.faq-custom__page-title),
   #MainContent .shopify-section .hp-display-heading,
   #MainContent .shopify-section .corp-hero__title,
   #MainContent .shopify-section .biz-hero__title,
@@ -1200,5 +1200,48 @@ body.template-search-how-to-use #MainContent .shopify-section h2.hp-inter-light-
     font-size: 32px !important;
     line-height: 1.05 !important;
     font-weight: 300 !important;
+  }
+}
+
+/* FAQ page layout — title + intro paragraph */
+body #MainContent .shopify-section .faq-custom--page .faq-custom__eyebrow {
+  color: #2563eb !important;
+}
+
+body #MainContent .shopify-section h1.faq-custom__page-title,
+body #MainContent .shopify-section .faq-custom__page-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 52px !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+  color: #000000 !important;
+}
+
+body #MainContent .shopify-section .faq-custom--page .faq-custom__page-description {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.5 !important;
+}
+
+@media screen and (max-width: 989px) {
+  body #MainContent .shopify-section h1.faq-custom__page-title,
+  body #MainContent .shopify-section .faq-custom__page-title {
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+    font-weight: 300 !important;
+  }
+
+  body #MainContent .shopify-section .faq-custom--page .faq-custom__page-description {
+    font-size: 18px !important;
   }
 }
