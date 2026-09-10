@@ -2,7 +2,7 @@
   'use strict';
 
   var EXCLUDE_ANCESTORS =
-    '.template-product, .cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, .faq-custom, .corp-hero, .corp-process, .corp-features, .corp-packages, .corp-form, .corp-marquee, .corp-occasions, .biz-hero, .biz-solutions, .biz-advantages, .biz-process, .biz-form, .biz-marquee, .comm-section, .comm-headline, .bs-coverflow-card, .bs-coverflow-card__title, [data-no-typewriter]';
+    '.template-product, .cart-drawer, #cart-drawer, .header, header, footer, .rail-card, .prod-card-dtc, .theme-login-overlay, .theme-dashboard-overlay, .faq-custom, .corp-hero, .corp-process, .corp-features, .corp-packages, .corp-form, .corp-marquee, .corp-occasions, .corp-coverflow, .biz-hero, .biz-solutions, .biz-advantages, .biz-process, .biz-form, .biz-marquee, .comm-section, .comm-headline, .bs-coverflow-card, .bs-coverflow-card__title, [data-no-typewriter]';
 
   var MOBILE_MQ = window.matchMedia('(max-width: 749px)');
 

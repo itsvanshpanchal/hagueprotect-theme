@@ -1,0 +1,676 @@
+{%- liquid
+  assign coverflow_id = 'corp-coverflow-' | append: section.id
+  assign card_size = section.settings.card_size | default: 'medium'
+  case card_size
+    when 'small'
+      assign card_width = 180
+    when 'large'
+      assign card_width = 300
+    else
+      assign card_width = 240
+  endcase
+  assign card_spacing = section.settings.card_spacing | default: 200
+  assign card_radius = section.settings.card_radius | default: 24
+  assign aspect_ratio = section.settings.aspect_ratio | default: '3 / 4'
+-%}
+
+{%- style -%}
+  #{{ coverflow_id }}.corp-coverflow {
+    --corp-cf-card-w: {{ card_width }}px;
+    --corp-cf-spacing: {{ card_spacing }}px;
+    --corp-cf-radius: {{ card_radius }}px;
+    --corp-cf-aspect: {{ aspect_ratio }};
+    --corp-cf-perspective: 1200px;
+    --corp-cf-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --corp-cf-duration: 0.75s;
+    --corp-cf-badge-bg: {{ section.settings.badge_background | default: 'rgba(180, 28, 28, 0.82)' }};
+    position: relative;
+    z-index: 2;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: clamp(64px, 8vw, 96px) 0;
+    background: {{ section.settings.section_background | default: '#ffffff' }};
+    overflow: hidden;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__container {
+    max-width: var(--site-max-width, 1280px);
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__heading {
+    margin: 0 0 clamp(36px, 5vw, 56px);
+    text-align: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: {{ section.settings.heading_color | default: '#111111' }} !important;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__stage {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__viewport {
+    position: relative;
+    height: clamp(380px, 52vw, 520px);
+    perspective: var(--corp-cf-perspective);
+    perspective-origin: 50% 50%;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--corp-cf-card-w);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform var(--corp-cf-duration) var(--corp-cf-ease),
+      opacity calc(var(--corp-cf-duration) * 0.85) ease;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    outline: none;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__card:focus-visible .corp-coverflow__inner {
+    outline: 2px solid #2563eb;
+    outline-offset: 4px;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--corp-cf-aspect);
+    border-radius: var(--corp-cf-radius);
+    overflow: hidden;
+    background: #f2f2f2;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.45s var(--corp-cf-ease), transform 0.45s var(--corp-cf-ease);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__card.is-active .corp-coverflow__inner {
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.18);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__card:hover .corp-coverflow__inner {
+    transform: translateY(-4px);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(17, 17, 17, 0.28);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    max-width: calc(100% - 28px);
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--corp-cf-badge-bg);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    background: #ffffff;
+    color: #666666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s var(--corp-cf-ease), background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__nav:hover {
+    transform: translateY(-50%) scale(1.06);
+    background: #ffffff;
+    color: #111111;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__nav:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__nav--prev {
+    left: clamp(0px, 2vw, 12px);
+  }
+
+  #{{ coverflow_id }} .corp-coverflow__nav--next {
+    right: clamp(0px, 2vw, 12px);
+  }
+
+  @media screen and (max-width: 767px) {
+    #{{ coverflow_id }}.corp-coverflow {
+      --corp-cf-card-w: min(72vw, {{ card_width }}px);
+      --corp-cf-perspective: none;
+      --corp-cf-duration: 0.42s;
+      padding: clamp(48px, 10vw, 72px) 0;
+    }
+
+    #{{ coverflow_id }} .corp-coverflow__heading {
+      font-size: clamp(32px, 8vw, 42px) !important;
+      margin-bottom: clamp(28px, 6vw, 40px);
+    }
+
+    #{{ coverflow_id }} .corp-coverflow__viewport {
+      height: clamp(340px, 92vw, 440px);
+    }
+
+    #{{ coverflow_id }} .corp-coverflow__nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    #{{ coverflow_id }} .corp-coverflow__nav--prev {
+      left: 4px;
+    }
+
+    #{{ coverflow_id }} .corp-coverflow__nav--next {
+      right: 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ coverflow_id }} .corp-coverflow__card,
+    #{{ coverflow_id }} .corp-coverflow__nav {
+      transition-duration: 0.01ms !important;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  id="{{ coverflow_id }}"
+  class="corp-coverflow"
+  data-corp-coverflow-section="true"
+  data-no-typewriter="true"
+  data-corp-coverflow
+  data-spacing="{{ card_spacing }}"
+  aria-label="{{ section.settings.heading | default: 'Gift showcase' | escape }}"
+>
+  <div class="corp-coverflow__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="corp-coverflow__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="corp-coverflow__stage">
+      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="corp-coverflow__viewport" data-corp-cf-viewport>
+        <div class="corp-coverflow__track" data-corp-cf-track>
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <button
+                type="button"
+                class="corp-coverflow__card"
+                data-corp-cf-card
+                data-index="{{ forloop.index0 }}"
+                {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %}
+                aria-label="{{ block.settings.badge | default: 'Slide' | escape }} {{ forloop.index }}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="corp-coverflow__inner">
+                  {%- if block.settings.badge != blank -%}
+                    <span class="corp-coverflow__badge">{{ block.settings.badge | escape }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 720 }}"
+                      srcset="{{ block.settings.image | image_url: width: 360 }} 360w, {{ block.settings.image | image_url: width: 540 }} 540w, {{ block.settings.image | image_url: width: 720 }} 720w"
+                      sizes="(max-width: 767px) 72vw, {{ card_width }}px"
+                      alt="{{ block.settings.image.alt | default: block.settings.badge | escape }}"
+                      class="corp-coverflow__image"
+                      loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+                      decoding="async"
+                      width="{{ card_width }}"
+                      height="{{ card_width | times: 4 | divided_by: 3 }}"
+                    >
+                  {%- else -%}
+                    <div class="corp-coverflow__placeholder" aria-hidden="true">Upload image</div>
+                  {%- endif -%}
+                </div>
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..5) -%}
+              <button
+                type="button"
+                class="corp-coverflow__card"
+                data-corp-cf-card
+                data-index="{{ forloop.index0 }}"
+                aria-label="Slide {{ forloop.index }}"
+              >
+                <div class="corp-coverflow__inner">
+                  <span class="corp-coverflow__badge">@ Gift Set {{ forloop.index }}</span>
+                  <div class="corp-coverflow__placeholder" aria-hidden="true">Upload image</div>
+                </div>
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('{{ coverflow_id }}');
+    if (!root || root.dataset.corpCfReady === 'true') return;
+    root.dataset.corpCfReady = 'true';
+
+    var viewport = root.querySelector('[data-corp-cf-viewport]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-corp-cf-card]'));
+    var prevBtn = root.querySelector('[data-corp-cf-prev]');
+    var nextBtn = root.querySelector('[data-corp-cf-next]');
+    if (!cards.length) return;
+
+    var index = 0;
+    var transitioning = false;
+    var transitionTimer = null;
+    var autoplayTimer = null;
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchActive = false;
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var autoplay = {{ section.settings.autoplay | default: true | json }} && !reducedMotion;
+    var autoplayMs = {{ section.settings.autoplay_speed | default: 5 | times: 1000 }};
+
+    function isMobile() {
+      return window.innerWidth <= 767;
+    }
+
+    function spacing() {
+      if (!isMobile()) {
+        return parseFloat(root.dataset.spacing || '200');
+      }
+      return Math.max(0, window.innerWidth * 0.08);
+    }
+
+    function layoutConfig() {
+      if (!isMobile()) {
+        return {
+          rotateStep: 38,
+          zDepth: 120,
+          minScale: 0.72,
+          maxVisible: 2,
+          swipeThreshold: 40,
+          duration: 750
+        };
+      }
+      return {
+        rotateStep: 0,
+        zDepth: 0,
+        minScale: 1,
+        maxVisible: 0,
+        swipeThreshold: 28,
+        duration: 420
+      };
+    }
+
+    function wrapOffset(offset, total) {
+      if (offset > total / 2) return offset - total;
+      if (offset < -total / 2) return offset + total;
+      return offset;
+    }
+
+    function setTransitioning(active) {
+      transitioning = active;
+      if (transitionTimer) window.clearTimeout(transitionTimer);
+      if (active) {
+        var cfg = layoutConfig();
+        transitionTimer = window.setTimeout(function () {
+          transitioning = false;
+        }, reducedMotion ? 0 : cfg.duration);
+      }
+    }
+
+    function layout() {
+      var space = spacing();
+      var total = cards.length;
+      var cfg = layoutConfig();
+      var mobile = isMobile();
+
+      cards.forEach(function (card, i) {
+        var offset = wrapOffset(i - index, total);
+        var abs = Math.abs(offset);
+        var isActive = offset === 0;
+
+        if (mobile) {
+          if (!isActive) {
+            card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.94)';
+            card.style.opacity = '0';
+            card.style.visibility = 'hidden';
+            card.style.pointerEvents = 'none';
+            card.classList.remove('is-active');
+            card.setAttribute('aria-hidden', 'true');
+            card.tabIndex = -1;
+            return;
+          }
+
+          card.classList.add('is-active');
+          card.style.visibility = 'visible';
+          card.style.opacity = '1';
+          card.style.zIndex = '100';
+          card.style.pointerEvents = 'auto';
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(1)';
+          card.setAttribute('aria-hidden', 'false');
+          card.tabIndex = 0;
+          return;
+        }
+
+        if (abs > cfg.maxVisible + 1) {
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.8)';
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.classList.remove('is-active');
+          card.setAttribute('aria-hidden', 'true');
+          card.tabIndex = -1;
+          return;
+        }
+
+        var rotateY = offset * -cfg.rotateStep;
+        var translateX = offset * space;
+        var translateZ = -abs * cfg.zDepth;
+        var scale = isActive ? 1 : Math.max(cfg.minScale, 1 - abs * 0.14);
+        var opacity = abs > 2 ? 0 : (isActive ? 1 : Math.max(0.35, 1 - abs * 0.22));
+
+        card.style.transform = 'translate3d(calc(-50% + ' + translateX + 'px), -50%, ' + translateZ + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
+        card.style.opacity = opacity;
+        card.style.visibility = 'visible';
+        card.style.zIndex = String(100 - abs);
+        card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-hidden', abs > 1 ? 'true' : 'false');
+        card.tabIndex = isActive ? 0 : -1;
+      });
+    }
+
+    function goTo(nextIndex) {
+      if (!cards.length) return;
+      var next = (nextIndex + cards.length) % cards.length;
+      if (next === index) return;
+      index = next;
+      setTransitioning(true);
+      layout();
+      restartAutoplay();
+    }
+
+    function step(dir) {
+      goTo(index + dir);
+    }
+
+    function restartAutoplay() {
+      if (!autoplay || cards.length < 2) return;
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+      autoplayTimer = window.setInterval(function () { step(1); }, autoplayMs);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function () {
+        if (i === index) {
+          var url = card.getAttribute('data-url');
+          if (url) window.location.href = url;
+        } else {
+          goTo(i);
+        }
+      });
+    });
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
+
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', restartAutoplay);
+    root.addEventListener('focusin', stopAutoplay);
+    root.addEventListener('focusout', restartAutoplay);
+
+    if (viewport) {
+      viewport.addEventListener('touchstart', function (e) {
+        if (!e.touches || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchActive = true;
+        stopAutoplay();
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', function (e) {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        var cfg = layoutConfig();
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > cfg.swipeThreshold) {
+          step(dx > 0 ? -1 : 1);
+        }
+        touchActive = false;
+        restartAutoplay();
+      }, { passive: true });
+    }
+
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(layout, 120);
+    });
+
+    layout();
+    restartAutoplay();
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.target && e.target.contains(root)) {
+        layout();
+        restartAutoplay();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Corporate Coverflow",
+  "enabled_on": {
+    "templates": [
+      "search.corporate-gifting",
+      "page.corporate"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gifts that outlast the occasion"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "card_size",
+      "label": "Image size",
+      "options": [
+        { "value": "small", "label": "Small (180px)" },
+        { "value": "medium", "label": "Medium (240px)" },
+        { "value": "large", "label": "Large (300px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Spacing between slides",
+      "min": 120,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Corner radius",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "2 / 3", "label": "Portrait 2:3" },
+        { "value": "9 / 16", "label": "Tall 9:16" },
+        { "value": "4 / 5", "label": "Portrait 4:5" }
+      ],
+      "default": "3 / 4"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#b41c1cd1"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay carousel",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge label",
+          "default": "@ Gift Set",
+          "info": "Shown in the top-left corner (e.g. @ Dhurandhar 2 Set)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional. Opens when the active slide is clicked."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Coverflow",
+      "blocks": [
+        { "type": "slide", "settings": { "badge": "@ Gift Set 1" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 2" } },
+        { "type": "slide", "settings": { "badge": "@ Dhurandhar 2 Set" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 4" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
