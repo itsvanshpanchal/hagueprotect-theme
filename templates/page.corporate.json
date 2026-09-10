@@ -231,6 +231,46 @@
         "label": "Trusted for every occasion"
       }
     },
+    "occasions": {
+      "type": "corporate-gifting-occasions",
+      "blocks": {
+        "card_corporate": {
+          "type": "occasion",
+          "settings": {
+            "title": "Corporate"
+          }
+        },
+        "card_weddings": {
+          "type": "occasion",
+          "settings": {
+            "title": "Weddings"
+          }
+        },
+        "card_celebrations": {
+          "type": "occasion",
+          "settings": {
+            "title": "Celebrations",
+            "caption": "(Birthday, Housewarming, Anniversary)"
+          }
+        },
+        "card_collaborations": {
+          "type": "occasion",
+          "settings": {
+            "title": "Collaborations"
+          }
+        }
+      },
+      "block_order": [
+        "card_corporate",
+        "card_weddings",
+        "card_celebrations",
+        "card_collaborations"
+      ],
+      "settings": {
+        "heading_line1": "Gifts people keep.",
+        "heading_line2": "Not re-gift."
+      }
+    },
     "process": {
       "type": "corporate-gifting-process",
       "blocks": {
@@ -270,8 +310,6 @@
         "step_4"
       ],
       "settings": {
-        "occasions_heading_line1": "Gifts people keep.",
-        "occasions_heading_line2": "Not re-gift.",
         "eyebrow": "How It Works",
         "heading": "From Brief to Doorstep",
         "description": "A seamless four-step process designed for busy teams. We handle everything — you take the credit."
@@ -398,6 +436,7 @@
   "order": [
     "hero",
     "marquee",
+    "occasions",
     "process",
     "features",
     "packages",
