@@ -3,7 +3,8 @@
 
 
   .corp-hero {
-    --corp-accent: #ff2b2b;
+    --corp-accent: #2563eb;
+    --corp-accent-rgb: 37, 99, 235;
     --corp-dark: #0a0a0a;
     position: relative;
     min-height: min(100vh, 900px);
@@ -36,9 +37,9 @@
     inset: 0;
     z-index: 1;
     background:
-      radial-gradient(ellipse 70% 55% at 78% 42%, rgba(255, 43, 43, 0.32) 0%, transparent 58%),
-      radial-gradient(ellipse 45% 35% at 12% 18%, rgba(255, 43, 43, 0.14) 0%, transparent 50%),
-      linear-gradient(160deg, #080808 0%, #101010 50%, #140808 100%);
+      radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
+      radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.14) 0%, transparent 50%),
+      linear-gradient(160deg, #080808 0%, #101010 50%, #080e1a 100%);
   }
 
   .corp-hero__grain {
@@ -100,8 +101,23 @@
   }
 
   #shopify-section-{{ section.id }} .corp-hero__title-line1,
-  .corp-hero__title-line1,
-  .corp-hero__title em,
+  .corp-hero__title-line1 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    color: #ffffff !important;
+    display: block !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero__title em,
   .corp-hero__title-line2 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
     font-style: normal !important;
@@ -148,12 +164,12 @@
   .corp-hero__btn--primary {
     background: var(--corp-accent);
     color: #ffffff !important;
-    box-shadow: 0 10px 36px rgba(255, 43, 43, 0.45);
+    box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45);
   }
 
   .corp-hero__btn--primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 44px rgba(255, 43, 43, 0.55);
+    box-shadow: 0 16px 44px rgba(37, 99, 235, 0.55);
   }
 
   .corp-hero__btn--ghost {
@@ -513,7 +529,7 @@
       <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
       <h1 class="corp-hero__title">
         <span class="corp-hero__title-line1" style="font-family: Inter, sans-serif !important; font-weight: 300 !important; font-size: inherit !important; line-height: inherit !important; letter-spacing: inherit !important;">{{ section.settings.heading_line1 | default: 'Corporate' }}</span>
-        <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #ff2b2b !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
+        <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #2563eb !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
       <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
 
@@ -645,7 +661,7 @@
             {%- if section.settings.card_image_1 != blank -%}
               <img src="{{ section.settings.card_image_1 | image_url: width: 900 }}" alt="Premium Kit">
             {%- else -%}
-              <div class="corp-hero__frame-placeholder" style="background:linear-gradient(145deg,#ff2b2b,#8b0000);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add main image</div>
+              <div class="corp-hero__frame-placeholder" style="background:linear-gradient(145deg,#2563eb,#1e40af);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>Add main image</div>
             {%- endif -%}
             <div class="corp-hero__frame-overlay"></div>
             <div class="corp-hero__frame-caption corp-hero__frame-caption--align-left" style="{% render 'hero-caption-position', x: 0, y: 75, align: 'left' %}">
