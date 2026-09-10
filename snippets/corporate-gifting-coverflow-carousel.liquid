@@ -10,8 +10,8 @@
 
 <style>
   #{{ cid }} {
-    --corp-cf-card-w: clamp({{ cf_card_w }}px, 20vw, 450px);
-    --corp-cf-spacing: clamp({{ cf_spacing }}px, 20vw, 450px);
+    --corp-cf-card-w: max({{ cf_card_w }}px, 20vw);
+    --corp-cf-spacing: max({{ cf_spacing }}px, 20vw);
     --corp-cf-radius: 16px;
     --corp-cf-aspect: 9 / 16;
     --corp-cf-perspective: 1500px;
