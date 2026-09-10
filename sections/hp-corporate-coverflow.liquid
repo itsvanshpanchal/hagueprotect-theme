@@ -1,0 +1,418 @@
+{%- liquid
+  assign section_id = 'hp-coverflow-' | append: section.id
+  assign cf_heading = section.settings.heading | default: 'The Gifts that outlast the occasion'
+  assign cf_spacing = section.settings.card_spacing | default: 200
+  assign cf_autoplay = section.settings.autoplay | default: false
+  assign cf_start = section.blocks.size | divided_by: 2
+-%}
+
+<style>
+  #{{ section_id }} {
+    --corp-cf-card-w: 200px;
+    --corp-cf-spacing: {{ cf_spacing }}px;
+    --corp-cf-radius: 16px;
+    --corp-cf-aspect: 9 / 16;
+    --corp-cf-perspective: 1500px;
+    --corp-cf-duration: 0.8s;
+    --corp-cf-badge-bg: rgba(155, 18, 18, 0.88);
+    position: relative;
+    z-index: 2;
+    display: block !important;
+    padding: 48px 0 64px;
+    background: #ffffff;
+    overflow: hidden; /* Prevent horizontal scroll on mobile */
+  }
+
+  #{{ section_id }} .corp-coverflow__container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #{{ section_id }} .corp-coverflow__heading {
+    margin: 0 0 36px;
+    text-align: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: clamp(26px, 3.4vw, 40px) !important;
+    font-weight: 700 !important;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: #111111 !important;
+  }
+
+  #{{ section_id }} .corp-coverflow__stage {
+    position: relative;
+    width: min(1000px, 100%);
+    margin: 0 auto;
+    display: block;
+  }
+
+  #{{ section_id }} .corp-coverflow__viewport {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    perspective: var(--corp-cf-perspective);
+    perspective-origin: 50% 50%;
+    overflow: visible;
+  }
+
+  #{{ section_id }} .corp-coverflow__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  #{{ section_id }} .corp-coverflow__card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--corp-cf-card-w);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: transform var(--corp-cf-duration) cubic-bezier(0.23, 1, 0.32, 1), opacity 0.65s ease;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    outline: none;
+  }
+
+  #{{ section_id }} .corp-coverflow__inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--corp-cf-aspect);
+    border-radius: var(--corp-cf-radius);
+    overflow: hidden;
+    background: #222;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  #{{ section_id }} .corp-coverflow__card.is-active .corp-coverflow__inner {
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
+  }
+
+  #{{ section_id }} .corp-coverflow__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #{{ section_id }} .corp-coverflow__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #444 0%, #222 50%, #333 100%);
+  }
+
+  #{{ section_id }} .corp-coverflow__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    max-width: calc(100% - 20px);
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--corp-cf-badge-bg);
+    color: #fff;
+    font-family: Inter, sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+
+  #{{ section_id }} .corp-coverflow__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #111;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+    z-index: 10;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  #{{ section_id }} .corp-coverflow__nav--prev {
+    left: 40px;
+  }
+
+  #{{ section_id }} .corp-coverflow__nav--next {
+    right: 40px;
+  }
+
+  #{{ section_id }} .corp-coverflow__nav:hover {
+    color: #333;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  }
+
+  @media (max-width: 767px) {
+    #{{ section_id }} { --corp-cf-card-w: min(56vw, 200px); padding: 36px 0 48px; }
+    #{{ section_id }} .corp-coverflow__viewport { height: 320px; }
+    #{{ section_id }} .corp-coverflow__nav { width: 36px; height: 36px; }
+    #{{ section_id }} .corp-coverflow__nav--prev { left: 10px; }
+    #{{ section_id }} .corp-coverflow__nav--next { right: 10px; }
+  }
+</style>
+
+<section
+  id="{{ section_id }}"
+  class="corp-coverflow"
+  data-corp-cf-root
+  data-spacing="{{ cf_spacing }}"
+  aria-label="{{ cf_heading | escape }}"
+>
+  <div class="corp-coverflow__container">
+    {% if cf_heading != blank %}
+      <h2 class="corp-coverflow__heading">{{ cf_heading | escape }}</h2>
+    {% endif %}
+
+    <div class="corp-coverflow__stage">
+      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="corp-coverflow__viewport" data-corp-cf-viewport>
+        <div class="corp-coverflow__track" data-corp-cf-track>
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="{{ forloop.index0 }}" {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %} aria-label="{{ block.settings.badge | default: 'Slide' | escape }}" {{ block.shopify_attributes }}>
+                <div class="corp-coverflow__inner">
+                  {%- if block.settings.badge != blank -%}<span class="corp-coverflow__badge">{{ block.settings.badge | escape }}</span>{%- endif -%}
+                  {%- if block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | default: block.settings.badge | escape }}" class="corp-coverflow__image" loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}" width="200" height="356">
+                  {%- else -%}
+                    <div class="corp-coverflow__placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                </div>
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign default_badges = '@ Gift Set 1|@ Gift Set 2|@ Dhurandhar 2 Set|@ Gift Set 4|@ Gift Set 5' | split: '|' -%}
+            {%- for badge in default_badges -%}
+              <button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="{{ forloop.index0 }}" aria-label="{{ badge | escape }}">
+                <div class="corp-coverflow__inner">
+                  <span class="corp-coverflow__badge">{{ badge }}</span>
+                  <div class="corp-coverflow__placeholder" aria-hidden="true"></div>
+                </div>
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var root = document.getElementById('{{ section_id }}');
+  if (!root || root.dataset.cfInit === '1') return;
+  root.dataset.cfInit = '1';
+
+  var cards = Array.prototype.slice.call(root.querySelectorAll('[data-corp-cf-card]'));
+  if (!cards.length) return;
+
+  var index = {{ cf_start }};
+  if (index >= cards.length) index = Math.floor(cards.length / 2);
+  var autoplay = {{ cf_autoplay | json }};
+  var autoplayMs = 5000;
+  var autoplayTimer = null;
+  var touchX = 0;
+
+  function mobile() { return window.innerWidth <= 767; }
+
+  function space() {
+    return mobile() ? Math.max(120, window.innerWidth * 0.34) : parseFloat(root.dataset.spacing || '{{ cf_spacing }}');
+  }
+
+  function cfg() {
+    return mobile()
+      ? { rotate: 0, depth: 0, minScale: 1, maxVis: 0, swipe: 28 }
+      : { rotate: 42, depth: 150, minScale: 0.7, maxVis: 3, swipe: 40 };
+  }
+
+  function wrap(off, total) {
+    if (off > total / 2) return off - total;
+    if (off < -total / 2) return off + total;
+    return off;
+  }
+
+  function layout() {
+    var s = space();
+    var c = cfg();
+    var total = cards.length;
+    var mob = mobile();
+
+    cards.forEach(function (card, i) {
+      var off = wrap(i - index, total);
+      var abs = Math.abs(off);
+      var active = off === 0;
+
+      if (mob) {
+        if (!active) {
+          card.style.cssText = 'opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(-50%,-50%,0) scale(.96);';
+          card.classList.remove('is-active');
+          return;
+        }
+        card.style.cssText = 'opacity:1;visibility:visible;z-index:100;pointer-events:auto;transform:translate3d(-50%,-50%,0) scale(1);';
+        card.classList.add('is-active');
+        return;
+      }
+
+      if (abs > c.maxVis + 1) {
+        card.style.cssText = 'opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(-50%,-50%,0) scale(.7);';
+        card.classList.remove('is-active');
+        return;
+      }
+
+      var rot = off * -c.rotate;
+      var tx = off * s;
+      var tz = -abs * c.depth;
+      var sc = active ? 1 : Math.max(c.minScale, 1 - abs * 0.13);
+      var op = active ? 1 : Math.max(0.4, 1 - abs * 0.2);
+
+      card.style.transform = 'translate3d(calc(-50% + ' + tx + 'px), -50%, ' + tz + 'px) rotateY(' + rot + 'deg) scale(' + sc + ')';
+      card.style.opacity = op;
+      card.style.visibility = 'visible';
+      card.style.zIndex = String(100 - abs);
+      card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+      card.classList.toggle('is-active', active);
+    });
+  }
+
+  function go(n) {
+    index = (n + cards.length) % cards.length;
+    layout();
+    restart();
+  }
+
+  function step(d) { go(index + d); }
+
+  function restart() {
+    if (!autoplay) return;
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(function () { step(1); }, autoplayMs);
+  }
+
+  cards.forEach(function (card, i) {
+    card.addEventListener('click', function () {
+      if (i === index) {
+        var url = card.getAttribute('data-url');
+        if (url) location.href = url;
+      } else go(i);
+    });
+  });
+
+  var prev = root.querySelector('[data-corp-cf-prev]');
+  var next = root.querySelector('[data-corp-cf-next]');
+  if (prev) prev.addEventListener('click', function () { step(-1); });
+  if (next) next.addEventListener('click', function () { step(1); });
+
+  var vp = root.querySelector('[data-corp-cf-viewport]');
+  if (vp) {
+    vp.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    vp.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > cfg().swipe) step(dx > 0 ? -1 : 1);
+    }, { passive: true });
+  }
+
+  window.addEventListener('resize', function () { layout(); });
+  layout();
+  window.addEventListener('load', function () { layout(); setTimeout(layout, 200); });
+  restart();
+});
+</script>
+
+{% schema %}
+{
+  "name": "HP Corporate Coverflow",
+  "enabled_on": {
+    "groups": ["custom.all", "header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gifts that outlast the occasion"
+    },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "label": "Spacing between slides",
+      "min": 140,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay carousel",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge label",
+          "default": "@ Gift Set",
+          "info": "e.g. @ Dhurandhar 2 Set"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HP Corporate Coverflow",
+      "blocks": [
+        { "type": "slide", "settings": { "badge": "@ Gift Set 1" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 2" } },
+        { "type": "slide", "settings": { "badge": "@ Dhurandhar 2 Set" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 4" } },
+        { "type": "slide", "settings": { "badge": "@ Gift Set 5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
