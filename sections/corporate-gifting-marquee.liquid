@@ -229,6 +229,17 @@
   </div>
 </section>
 
+{%- if section.settings.show_occasions_grid -%}
+  {%- liquid
+    assign occasions_section_id = 'corp-occasions-' | append: section.id
+  -%}
+  {%- render 'corporate-gifting-occasions-grid',
+    heading_line1: section.settings.occasions_heading_line1,
+    heading_line2: section.settings.occasions_heading_line2,
+    section_id: occasions_section_id
+  -%}
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Corporate Marquee",
@@ -241,6 +252,32 @@
     ]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Occasions grid (Corporate Gifting page)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_occasions_grid",
+      "label": "Show \"Gifts people keep\" occasions grid below marquee",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "occasions_heading_line1",
+      "label": "Occasions heading line 1",
+      "default": "Gifts people keep."
+    },
+    {
+      "type": "text",
+      "id": "occasions_heading_line2",
+      "label": "Occasions heading line 2",
+      "default": "Not re-gift."
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
     {
       "type": "text",
       "id": "label",

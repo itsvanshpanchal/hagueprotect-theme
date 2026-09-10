@@ -228,47 +228,10 @@
         "bottom_10"
       ],
       "settings": {
-        "label": "Trusted for every occasion"
-      }
-    },
-    "occasions": {
-      "type": "corporate-gifting-occasions",
-      "blocks": {
-        "occasion_1": {
-          "type": "occasion",
-          "settings": {
-            "title": "Corporate"
-          }
-        },
-        "occasion_2": {
-          "type": "occasion",
-          "settings": {
-            "title": "Weddings"
-          }
-        },
-        "occasion_3": {
-          "type": "occasion",
-          "settings": {
-            "title": "Celebrations",
-            "caption": "(Birthday, Housewarming, Anniversary)"
-          }
-        },
-        "occasion_4": {
-          "type": "occasion",
-          "settings": {
-            "title": "Collaborations"
-          }
-        }
-      },
-      "block_order": [
-        "occasion_1",
-        "occasion_2",
-        "occasion_3",
-        "occasion_4"
-      ],
-      "settings": {
-        "heading_line1": "Gifts people keep.",
-        "heading_line2": "Not re-gift."
+        "label": "Trusted for every occasion",
+        "show_occasions_grid": true,
+        "occasions_heading_line1": "Gifts people keep.",
+        "occasions_heading_line2": "Not re-gift."
       }
     },
     "process": {
@@ -436,7 +399,6 @@
   "order": [
     "hero",
     "marquee",
-    "occasions",
     "process",
     "features",
     "packages",
