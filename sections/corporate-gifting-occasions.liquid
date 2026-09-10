@@ -1,0 +1,296 @@
+{%- style -%}
+  {% render 'section-typography-vars', section: section %}
+
+  .corp-occasions {
+    --corp-occasions-accent: #2563eb;
+    padding: clamp(72px, 9vw, 110px) 0;
+    background: #ffffff;
+    font-family: var(--font-family-sans);
+  }
+
+  .corp-occasions__container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  .corp-occasions__header {
+    max-width: 720px;
+    margin: 0 0 clamp(40px, 5vw, 56px);
+  }
+
+  .corp-occasions__title {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #111111;
+  }
+
+  .corp-occasions__title-line1 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: clamp(34px, 4.8vw, 56px);
+    font-weight: 700 !important;
+    font-style: normal !important;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111111 !important;
+  }
+
+  .corp-occasions__title-line2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: clamp(24px, 3.2vw, 40px);
+    font-weight: 300 !important;
+    font-style: normal !important;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #111111 !important;
+  }
+
+  .corp-occasions__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 2.2vw, 28px);
+  }
+
+  .corp-occasions__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .corp-occasions__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #f3f3f3, #e8e8e8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  .corp-occasions__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  .corp-occasions__card:hover .corp-occasions__media img {
+    transform: scale(1.03);
+  }
+
+  .corp-occasions__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(17, 17, 17, 0.28);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .corp-occasions__label {
+    margin: 18px 0 0;
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700 !important;
+    letter-spacing: -0.01em;
+    color: #111111 !important;
+    line-height: 1.2;
+  }
+
+  .corp-occasions__caption {
+    margin: 8px 0 0;
+    font-family: var(--font-family-heading-accent, 'Luthon Southard Script', cursive);
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.35;
+    color: var(--corp-occasions-accent) !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .corp-occasions__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 20px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .corp-occasions__grid {
+      grid-template-columns: 1fr;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .corp-occasions__header {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+{%- endstyle -%}
+
+<section class="corp-occasions" data-no-typewriter="true">
+  <div class="corp-occasions__container">
+    <header class="corp-occasions__header">
+      <h2 class="corp-occasions__title">
+        <span class="corp-occasions__title-line1">{{ section.settings.heading_line1 | default: 'Gifts people keep.' }}</span>
+        <span class="corp-occasions__title-line2">{{ section.settings.heading_line2 | default: 'Not re-gift.' }}</span>
+      </h2>
+    </header>
+
+    <div class="corp-occasions__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_tag = 'div'
+            if block.settings.link != blank
+              assign card_tag = 'a'
+            endif
+          -%}
+          <{{ card_tag }}
+            class="corp-occasions__card"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <div class="corp-occasions__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600, 750, 900',
+                    sizes: '(min-width: 1024px) 22vw, (min-width: 560px) 42vw, 88vw',
+                    alt: block.settings.title | escape
+                }}
+              {%- else -%}
+                <div class="corp-occasions__placeholder" aria-hidden="true">Add image</div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <p class="corp-occasions__label">{{ block.settings.title }}</p>
+            {%- endif -%}
+            {%- if block.settings.caption != blank -%}
+              <p class="corp-occasions__caption">{{ block.settings.caption }}</p>
+            {%- endif -%}
+          </{{ card_tag }}>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="corp-occasions__card">
+          <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Corporate</div></div>
+          <p class="corp-occasions__label">Corporate</p>
+        </div>
+        <div class="corp-occasions__card">
+          <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Weddings</div></div>
+          <p class="corp-occasions__label">Weddings</p>
+        </div>
+        <div class="corp-occasions__card">
+          <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Celebrations</div></div>
+          <p class="corp-occasions__label">Celebrations</p>
+          <p class="corp-occasions__caption">(Birthday, Housewarming, Anniversary)</p>
+        </div>
+        <div class="corp-occasions__card">
+          <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Collaborations</div></div>
+          <p class="corp-occasions__label">Collaborations</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Corporate Occasions",
+  "enabled_on": {
+    "templates": [
+      "search.corporate-gifting",
+      "page.corporate"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Gifts people keep."
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2",
+      "default": "Not re-gift."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "occasion",
+      "name": "Occasion card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Occasion"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "info": "Optional. Shown below the title (e.g. celebration types)."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Occasions",
+      "blocks": [
+        {
+          "type": "occasion",
+          "settings": {
+            "title": "Corporate"
+          }
+        },
+        {
+          "type": "occasion",
+          "settings": {
+            "title": "Weddings"
+          }
+        },
+        {
+          "type": "occasion",
+          "settings": {
+            "title": "Celebrations",
+            "caption": "(Birthday, Housewarming, Anniversary)"
+          }
+        },
+        {
+          "type": "occasion",
+          "settings": {
+            "title": "Collaborations"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
