@@ -26,7 +26,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
-    padding-bottom: 450px;
+    padding-bottom: 320px;
     box-sizing: border-box;
   }
 
@@ -114,6 +114,7 @@
   .split-cta--redesign__tagline {
     font-family: 'Inter', sans-serif;
     margin-top: 28px;
+    margin-bottom: 0;
     font-size: 19px;
     font-weight: 500;
     font-style: italic;
@@ -122,18 +123,21 @@
     transform: translateY(20px);
   }
   
-  /* Negative Space */
+  /* Space before sphere */
   .split-cta--redesign__spacer {
-    height: 600px;
+    height: 120px;
     width: 100%;
   }
 
   /* Chevron */
   .split-cta--redesign__chevron {
-    position: absolute;
-    bottom: 45vh;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    left: auto;
+    bottom: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto 0;
     z-index: 2;
     animation: splitCtaBounce 1.8s ease-in-out infinite;
     cursor: pointer;
@@ -151,8 +155,8 @@
   }
 
   @keyframes splitCtaBounce {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, 8px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
   }
 
   /* Glowing Sphere */
@@ -240,7 +244,11 @@
     }
     /* Hide the big empty spacer block on mobile */
     .split-cta--redesign__spacer {
-      height: 80px !important;
+      height: 48px !important;
+    }
+
+    .split-cta--redesign__chevron {
+      margin-top: 16px !important;
     }
     .split-cta--redesign__content {
       padding-top: 0 !important;
@@ -305,15 +313,15 @@
     {%- if tagline != blank -%}
       <div class="split-cta--redesign__tagline">{{ tagline | escape }}</div>
     {%- endif -%}
+
+    <a class="split-cta--redesign__chevron" href="#next-section" aria-label="Scroll down">
+      <svg viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </a>
   </div>
 
   <div class="split-cta--redesign__spacer"></div>
-
-  <a class="split-cta--redesign__chevron" href="#next-section" aria-label="Scroll down">
-    <svg viewBox="0 0 24 24">
-      <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-  </a>
 
   {%- if section.settings.sphere_image != blank -%}
     <img class="split-cta--redesign__sphere-img" src="{{ section.settings.sphere_image | image_url: width: 2000 }}" alt="{{ section.settings.sphere_image.alt | default: 'Sphere' | escape }}" loading="lazy" width="{{ section.settings.sphere_image.width }}" height="{{ section.settings.sphere_image.height }}">
