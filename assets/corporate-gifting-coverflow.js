@@ -38,26 +38,45 @@
     var touchStartX = 0;
     var touchStartY = 0;
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var autoplay = root.dataset.autoplay !== 'false' && !reducedMotion;
+    var autoplay = root.dataset.autoplay === 'true' && !reducedMotion;
     var autoplayMs = parseInt(root.dataset.autoplaySpeed || '5000', 10);
 
     function isMobile() {
       return window.innerWidth <= 767;
     }
 
+    function cardWidth() {
+      var first = cards[0];
+      if (!first) return 204;
+      return first.getBoundingClientRect().width || parseFloat(getComputedStyle(root).getPropertyValue('--corp-cf-card-w')) || 204;
+    }
+
     function spacing() {
-      if (!isMobile()) {
-        return parseFloat(root.dataset.spacing || root.style.getPropertyValue('--corp-cf-spacing') || '168');
-      }
+      if (isMobile()) return 0;
+      var custom = parseFloat(root.dataset.spacing || '');
+      if (!isNaN(custom) && custom > 0) return custom;
+      return Math.round(cardWidth() * 0.63);
+    }
+
+    function scaleForOffset(abs) {
+      if (abs === 0) return 1;
+      if (abs === 1) return 0.86;
+      if (abs === 2) return 0.72;
+      return 0.62;
+    }
+
+    function opacityForOffset(abs) {
+      if (abs === 0) return 1;
+      if (abs === 1) return 0.92;
+      if (abs === 2) return 0.78;
       return 0;
     }
 
     function layoutConfig() {
       if (!isMobile()) {
         return {
-          rotateStep: 42,
-          zDepth: 140,
-          minScale: 0.76,
+          rotateStep: 54,
+          zDepth: 180,
           maxVisible: 2,
           swipeThreshold: 40
         };
@@ -65,7 +84,6 @@
       return {
         rotateStep: 0,
         zDepth: 0,
-        minScale: 1,
         maxVisible: 0,
         swipeThreshold: 28
       };
@@ -111,8 +129,8 @@
           return;
         }
 
-        if (abs > cfg.maxVisible + 1) {
-          card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.72)';
+        if (abs > cfg.maxVisible) {
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.6)';
           card.style.opacity = '0';
           card.style.visibility = 'hidden';
           card.style.pointerEvents = 'none';
@@ -125,14 +143,14 @@
         var rotateY = offset * -cfg.rotateStep;
         var translateX = offset * space;
         var translateZ = -abs * cfg.zDepth;
-        var scale = isActive ? 1 : Math.max(cfg.minScale, 1 - abs * 0.12);
-        var opacity = isActive ? 1 : Math.max(0.45, 1 - abs * 0.18);
+        var scale = scaleForOffset(abs);
+        var opacity = opacityForOffset(abs);
 
         card.style.transform = 'translate3d(calc(-50% + ' + translateX + 'px), -50%, ' + translateZ + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
         card.style.opacity = String(opacity);
         card.style.visibility = 'visible';
-        card.style.zIndex = String(100 - abs);
-        card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+        card.style.zIndex = String(120 - abs);
+        card.style.pointerEvents = 'auto';
         card.classList.toggle('is-active', isActive);
         card.setAttribute('aria-hidden', abs > 1 ? 'true' : 'false');
         card.tabIndex = isActive ? 0 : -1;
@@ -180,8 +198,6 @@
 
     root.addEventListener('mouseenter', stopAutoplay);
     root.addEventListener('mouseleave', restartAutoplay);
-    root.addEventListener('focusin', stopAutoplay);
-    root.addEventListener('focusout', restartAutoplay);
 
     if (viewport) {
       viewport.addEventListener('touchstart', function (e) {
@@ -214,8 +230,7 @@
       resizeTimer = window.setTimeout(layout, 100);
     });
 
-    var instance = { root: root, layout: layout, restart: restartAutoplay };
-    instances.push(instance);
+    instances.push({ root: root, layout: layout, restart: restartAutoplay });
     root.dataset.corpCfReady = 'true';
 
     function bootWhenVisible(attempts) {
@@ -223,13 +238,12 @@
         layout();
         restartAutoplay();
         window.requestAnimationFrame(layout);
-        window.setTimeout(layout, 120);
-        window.setTimeout(layout, 320);
+        window.setTimeout(layout, 100);
+        window.setTimeout(layout, 300);
         return;
       }
       if (attempts > 60) {
         layout();
-        restartAutoplay();
         return;
       }
       window.setTimeout(function () { bootWhenVisible(attempts + 1); }, 50);

@@ -131,7 +131,7 @@
       return '<button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="' + i + '" aria-label="' + badge + '">' +
         '<div class="corp-coverflow__inner">' +
         '<span class="corp-coverflow__badge">' + badge + '</span>' +
-        '<div class="corp-coverflow__placeholder" aria-hidden="true">Upload image</div>' +
+        '<div class="corp-coverflow__placeholder" aria-hidden="true"></div>' +
         '</div></button>';
     }).join('');
 
@@ -140,17 +140,17 @@
     wrap.className = 'corp-coverflow-fallback-root';
     wrap.setAttribute('data-corp-coverflow-fallback', 'true');
     wrap.innerHTML = [
-      '<section class="corp-coverflow" data-corp-coverflow data-no-typewriter="true" data-spacing="168" data-start-index="2" data-autoplay="true" data-autoplay-speed="5000">',
+      '<section class="corp-coverflow" data-corp-coverflow data-no-typewriter="true" data-spacing="128" data-start-index="2" data-autoplay="false">',
       '<div class="corp-coverflow__container">',
       '<h2 class="corp-coverflow__heading">The Gifts that outlast the occasion</h2>',
       '<div class="corp-coverflow__stage">',
+      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>',
       '<div class="corp-coverflow__viewport" data-corp-cf-viewport>',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>',
       '<div class="corp-coverflow__track" data-corp-cf-track>',
       slides,
-      '</div>',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>',
-      '</div></div></div></section>'
+      '</div></div>',
+      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>',
+      '</div></div></section>'
     ].join('');
 
     occasionsSection.insertAdjacentElement('afterend', wrap);
