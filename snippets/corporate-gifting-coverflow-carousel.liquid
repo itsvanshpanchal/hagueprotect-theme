@@ -10,8 +10,8 @@
 
 <style>
   #{{ cid }} {
-    --corp-cf-card-w: {{ cf_card_w }}px;
-    --corp-cf-spacing: {{ cf_spacing }}px;
+    --corp-cf-card-w: clamp({{ cf_card_w }}px, 20vw, 450px);
+    --corp-cf-spacing: clamp({{ cf_spacing }}px, 20vw, 450px);
     --corp-cf-radius: 16px;
     --corp-cf-aspect: 9 / 16;
     --corp-cf-perspective: 1500px;
@@ -246,7 +246,8 @@
   function mobile() { return window.innerWidth <= 767; }
 
   function space() {
-    return mobile() ? Math.max(120, window.innerWidth * 0.34) : parseFloat(root.dataset.spacing || '{{ cf_spacing }}');
+    var baseSpacing = parseFloat(root.dataset.spacing || '{{ cf_spacing }}');
+    return mobile() ? Math.max(120, window.innerWidth * 0.34) : Math.max(baseSpacing, window.innerWidth * 0.2);
   }
 
   function cfg() {
