@@ -2025,6 +2025,14 @@ body.template-index {
   --section-label-color: #2563eb;
 }
 
+/* Corporate Gifting — blue accent instead of global red */
+body.template-search-corporate-gifting,
+body.template-page-corporate {
+  --section-label-color: #2563eb;
+  --color-primary: #2563eb;
+  --color-primary-rgb: 37, 99, 235;
+}
+
 /* Homepage mobile — unified heading column gutter (matches theme-layout-css.liquid) */
 @media screen and (max-width: 767px) {
   body.template-index .bs-coverflow__container,

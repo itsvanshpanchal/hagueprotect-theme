@@ -1523,4 +1523,30 @@ body.template-page-corporate #MainContent .corp-hero .corp-hero__btn--primary:ho
   background-color: #2563eb !important;
   border-color: #2563eb !important;
   color: #ffffff !important;
+  box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45) !important;
+}
+
+body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__btn--primary:hover,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__btn--primary:hover {
+  box-shadow: 0 16px 44px rgba(37, 99, 235, 0.55) !important;
+}
+
+body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__mesh,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__mesh {
+  background:
+    radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
+    radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.14) 0%, transparent 50%),
+    linear-gradient(160deg, #080808 0%, #101010 50%, #080e1a 100%) !important;
+}
+
+body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__showcase::before,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__showcase::before {
+  background: radial-gradient(ellipse 72% 58% at 50% 46%, rgba(37, 99, 235, 0.38) 0%, transparent 68%) !important;
+}
+
+body.template-search-corporate-gifting,
+body.template-page-corporate {
+  --section-label-color: #2563eb;
+  --color-primary: #2563eb;
+  --color-primary-rgb: 37, 99, 235;
 }

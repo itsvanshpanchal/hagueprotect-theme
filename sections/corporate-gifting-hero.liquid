@@ -5,6 +5,9 @@
   .corp-hero {
     --corp-accent: #2563eb;
     --corp-accent-rgb: 37, 99, 235;
+    --section-label-color: #2563eb;
+    --color-primary: #2563eb;
+    --color-primary-rgb: 37, 99, 235;
     --corp-dark: #0a0a0a;
     position: relative;
     min-height: min(100vh, 900px);
@@ -242,6 +245,15 @@
     margin-left: auto;
     width: 100%;
     overflow: visible;
+  }
+
+  .corp-hero__showcase::before {
+    content: '';
+    position: absolute;
+    inset: -18% -12%;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 72% 58% at 50% 46%, rgba(37, 99, 235, 0.38) 0%, transparent 68%);
   }
 
   .corp-hero__showcase--single {
@@ -534,6 +546,25 @@
     background-color: #2563eb !important;
     border-color: #2563eb !important;
     color: #ffffff !important;
+    box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45) !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__btn--primary:hover {
+    box-shadow: 0 16px 44px rgba(37, 99, 235, 0.55) !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero__mesh {
+    background:
+      radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
+      radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.14) 0%, transparent 50%),
+      linear-gradient(160deg, #080808 0%, #101010 50%, #080e1a 100%) !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
+  #shopify-section-{{ section.id }} .corp-hero [data-corp-hero-counter-suffix] {
+    color: #2563eb !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
   }
 {%- endstyle -%}
 
@@ -563,7 +594,7 @@
       <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
 
       <div class="corp-hero__actions">
-        <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary" style="background-color: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;">
+        <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary" style="background-color: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important; box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45) !important;">
           {{ section.settings.btn_label | default: 'Start Your Order' }}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
