@@ -3,6 +3,7 @@
 
 
   .corp-process {
+    --corp-process-accent: #2563eb;
     padding: clamp(80px, 10vw, 120px) 0;
     background: #fafafa;
     font-family: var(--font-family-sans);
@@ -58,7 +59,7 @@
     left: 12.5%;
     right: 12.5%;
     height: 2px;
-    background: linear-gradient(90deg, #ff2b2b 0%, #ff2b2b 50%, #ececec 50%, #ececec 100%);
+    background: linear-gradient(90deg, #2563eb 0%, #2563eb 50%, #ececec 50%, #ececec 100%);
     background-size: 200% 100%;
     z-index: 0;
   }
@@ -146,6 +147,10 @@
       grid-template-columns: 1fr;
       gap: 32px;
     }
+  }
+
+  #shopify-section-{{ section.id }} .corp-process__grid::before {
+    background: linear-gradient(90deg, #2563eb 0%, #2563eb 50%, #ececec 50%, #ececec 100%) !important;
   }
 {%- endstyle -%}
 

@@ -1557,3 +1557,8 @@ body.template-page-corporate {
   --color-primary: #2563eb;
   --color-primary-rgb: 37, 99, 235;
 }
+
+body.template-search-corporate-gifting #MainContent .corp-process__grid::before,
+body.template-page-corporate #MainContent .corp-process__grid::before {
+  background: linear-gradient(90deg, #2563eb 0%, #2563eb 50%, #ececec 50%, #ececec 100%) !important;
+}
