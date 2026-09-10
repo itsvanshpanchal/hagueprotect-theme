@@ -224,9 +224,14 @@
         restartAutoplay();
         window.requestAnimationFrame(layout);
         window.setTimeout(layout, 120);
+        window.setTimeout(layout, 320);
         return;
       }
-      if (attempts > 40) return;
+      if (attempts > 60) {
+        layout();
+        restartAutoplay();
+        return;
+      }
       window.setTimeout(function () { bootWhenVisible(attempts + 1); }, 50);
     }
 

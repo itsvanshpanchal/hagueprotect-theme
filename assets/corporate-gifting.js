@@ -119,7 +119,7 @@
     var fallback = document.querySelector('[data-corp-coverflow-fallback="true"]');
     if (fallback) {
       fallback.hidden = false;
-      if (window.initCorpCoverflow) window.initCorpCoverflow(fallback);
+      if (window.initCorpCoverflow) window.initCorpCoverflow(fallback, true);
       return;
     }
 
@@ -129,9 +129,9 @@
     var badges = ['@ Gift Set 1', '@ Gift Set 2', '@ Dhurandhar 2 Set', '@ Gift Set 4', '@ Gift Set 5'];
     var slides = badges.map(function (badge, i) {
       return '<button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="' + i + '" aria-label="' + badge + '">' +
-        '<div class="corp-coverflow__inner" style="position:relative;width:100%;aspect-ratio:3/4;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#f3f3f3,#e8e8e8);box-shadow:0 16px 40px rgba(0,0,0,.12)">' +
-        '<span class="corp-coverflow__badge" style="position:absolute;top:14px;left:14px;z-index:2;padding:6px 12px;border-radius:999px;background:rgba(180,28,28,.82);color:#fff;font-size:11px;font-weight:600">' + badge + '</span>' +
-        '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(17,17,17,.28);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Upload image</div>' +
+        '<div class="corp-coverflow__inner">' +
+        '<span class="corp-coverflow__badge">' + badge + '</span>' +
+        '<div class="corp-coverflow__placeholder" aria-hidden="true">Upload image</div>' +
         '</div></button>';
     }).join('');
 
@@ -140,21 +140,21 @@
     wrap.className = 'corp-coverflow-fallback-root';
     wrap.setAttribute('data-corp-coverflow-fallback', 'true');
     wrap.innerHTML = [
-      '<section class="corp-coverflow" data-corp-coverflow data-no-typewriter="true" data-spacing="200" data-autoplay="true" data-autoplay-speed="5000" style="padding:clamp(64px,8vw,96px) 0;background:#fff;overflow:hidden">',
-      '<div style="max-width:var(--site-max-width,1280px);margin:0 auto;padding:0 max(20px,var(--site-padding,24px))">',
-      '<h2 style="margin:0 0 clamp(36px,5vw,56px);text-align:center;font-family:Inter,sans-serif;font-size:52px;font-weight:300;line-height:1.1;letter-spacing:-.02em;color:#111">The Gifts that outlast the occasion</h2>',
-      '<div style="position:relative;max-width:1100px;margin:0 auto">',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide" style="position:absolute;top:50%;left:12px;transform:translateY(-50%);z-index:30;width:48px;height:48px;border-radius:50%;border:1px solid rgba(17,17,17,.08);background:#fff;color:#666;box-shadow:0 8px 24px rgba(0,0,0,.1);cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>',
-      '<div data-corp-cf-viewport style="position:relative;height:clamp(380px,52vw,520px);perspective:1200px">',
-      '<div data-corp-cf-track style="position:relative;width:100%;height:100%;transform-style:preserve-3d">',
+      '<section class="corp-coverflow" data-corp-coverflow data-no-typewriter="true" data-spacing="168" data-start-index="2" data-autoplay="true" data-autoplay-speed="5000">',
+      '<div class="corp-coverflow__container">',
+      '<h2 class="corp-coverflow__heading">The Gifts that outlast the occasion</h2>',
+      '<div class="corp-coverflow__stage">',
+      '<div class="corp-coverflow__viewport" data-corp-cf-viewport>',
+      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>',
+      '<div class="corp-coverflow__track" data-corp-cf-track>',
       slides,
-      '</div></div>',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide" style="position:absolute;top:50%;right:12px;transform:translateY(-50%);z-index:30;width:48px;height:48px;border-radius:50%;border:1px solid rgba(17,17,17,.08);background:#fff;color:#666;box-shadow:0 8px 24px rgba(0,0,0,.1);cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>',
-      '</div></div></section>'
+      '</div>',
+      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>',
+      '</div></div></div></section>'
     ].join('');
 
     occasionsSection.insertAdjacentElement('afterend', wrap);
-    if (window.initCorpCoverflow) window.initCorpCoverflow(wrap);
+    if (window.initCorpCoverflow) window.initCorpCoverflow(wrap, true);
   }
 
   function revealTrustedByFallback() {
