@@ -183,6 +183,9 @@
 
     <!-- CSS -->
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
+      {{ 'corporate-gifting-coverflow.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     {{ 'header-brand-logos.css' | asset_url | stylesheet_tag }}
     {{ 'hp-story-banner.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'index' -%}

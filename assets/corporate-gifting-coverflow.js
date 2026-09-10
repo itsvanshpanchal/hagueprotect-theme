@@ -1,8 +1,28 @@
 (function () {
   'use strict';
 
-  function initCoverflow(root) {
-    if (!root || root.dataset.corpCfReady === 'true') return;
+  var instances = [];
+
+  function isRenderable(root) {
+    if (!root) return false;
+    var node = root;
+    while (node && node !== document.documentElement) {
+      if (node.hidden) return false;
+      var style = window.getComputedStyle(node);
+      if (style.display === 'none' || style.visibility === 'hidden') return false;
+      node = node.parentElement;
+    }
+    return true;
+  }
+
+  function initCoverflow(root, force) {
+    if (!root) return;
+
+    if (root.dataset.corpCfReady === 'true') {
+      var existing = instances.find(function (item) { return item.root === root; });
+      if (existing && existing.layout) existing.layout();
+      return;
+    }
 
     var viewport = root.querySelector('[data-corp-cf-viewport]');
     var cards = Array.prototype.slice.call(root.querySelectorAll('[data-corp-cf-card]'));
@@ -10,10 +30,10 @@
     var nextBtn = root.querySelector('[data-corp-cf-next]');
     if (!cards.length) return;
 
-    root.dataset.corpCfReady = 'true';
+    var startIndex = parseInt(root.dataset.startIndex || '', 10);
+    if (isNaN(startIndex)) startIndex = Math.floor(cards.length / 2);
 
-    var index = 0;
-    var transitionTimer = null;
+    var index = Math.max(0, Math.min(startIndex, cards.length - 1));
     var autoplayTimer = null;
     var touchStartX = 0;
     var touchStartY = 0;
@@ -27,20 +47,19 @@
 
     function spacing() {
       if (!isMobile()) {
-        return parseFloat(root.dataset.spacing || '200');
+        return parseFloat(root.dataset.spacing || root.style.getPropertyValue('--corp-cf-spacing') || '168');
       }
-      return Math.max(0, window.innerWidth * 0.08);
+      return 0;
     }
 
     function layoutConfig() {
       if (!isMobile()) {
         return {
-          rotateStep: 38,
-          zDepth: 120,
-          minScale: 0.72,
+          rotateStep: 42,
+          zDepth: 140,
+          minScale: 0.76,
           maxVisible: 2,
-          swipeThreshold: 40,
-          duration: 750
+          swipeThreshold: 40
         };
       }
       return {
@@ -48,8 +67,7 @@
         zDepth: 0,
         minScale: 1,
         maxVisible: 0,
-        swipeThreshold: 28,
-        duration: 420
+        swipeThreshold: 28
       };
     }
 
@@ -57,14 +75,6 @@
       if (offset > total / 2) return offset - total;
       if (offset < -total / 2) return offset + total;
       return offset;
-    }
-
-    function setTransitioning(active) {
-      if (transitionTimer) window.clearTimeout(transitionTimer);
-      if (active) {
-        var cfg = layoutConfig();
-        transitionTimer = window.setTimeout(function () {}, reducedMotion ? 0 : cfg.duration);
-      }
     }
 
     function layout() {
@@ -80,7 +90,7 @@
 
         if (mobile) {
           if (!isActive) {
-            card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.94)';
+            card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.96)';
             card.style.opacity = '0';
             card.style.visibility = 'hidden';
             card.style.pointerEvents = 'none';
@@ -102,8 +112,9 @@
         }
 
         if (abs > cfg.maxVisible + 1) {
-          card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.8)';
+          card.style.transform = 'translate3d(-50%, -50%, 0) scale(0.72)';
           card.style.opacity = '0';
+          card.style.visibility = 'hidden';
           card.style.pointerEvents = 'none';
           card.classList.remove('is-active');
           card.setAttribute('aria-hidden', 'true');
@@ -114,11 +125,11 @@
         var rotateY = offset * -cfg.rotateStep;
         var translateX = offset * space;
         var translateZ = -abs * cfg.zDepth;
-        var scale = isActive ? 1 : Math.max(cfg.minScale, 1 - abs * 0.14);
-        var opacity = abs > 2 ? 0 : (isActive ? 1 : Math.max(0.35, 1 - abs * 0.22));
+        var scale = isActive ? 1 : Math.max(cfg.minScale, 1 - abs * 0.12);
+        var opacity = isActive ? 1 : Math.max(0.45, 1 - abs * 0.18);
 
         card.style.transform = 'translate3d(calc(-50% + ' + translateX + 'px), -50%, ' + translateZ + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
-        card.style.opacity = opacity;
+        card.style.opacity = String(opacity);
         card.style.visibility = 'visible';
         card.style.zIndex = String(100 - abs);
         card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
@@ -129,11 +140,9 @@
     }
 
     function goTo(nextIndex) {
-      if (!cards.length) return;
       var next = (nextIndex + cards.length) % cards.length;
       if (next === index) return;
       index = next;
-      setTransitioning(true);
       layout();
       restartAutoplay();
     }
@@ -166,8 +175,8 @@
       });
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
+    if (prevBtn) prevBtn.addEventListener('click', function (e) { e.preventDefault(); step(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function (e) { e.preventDefault(); step(1); });
 
     root.addEventListener('mouseenter', stopAutoplay);
     root.addEventListener('mouseleave', restartAutoplay);
@@ -202,17 +211,36 @@
     var resizeTimer;
     window.addEventListener('resize', function () {
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(layout, 120);
+      resizeTimer = window.setTimeout(layout, 100);
     });
 
-    layout();
-    restartAutoplay();
+    var instance = { root: root, layout: layout, restart: restartAutoplay };
+    instances.push(instance);
+    root.dataset.corpCfReady = 'true';
+
+    function bootWhenVisible(attempts) {
+      if (isRenderable(root) || force) {
+        layout();
+        restartAutoplay();
+        window.requestAnimationFrame(layout);
+        window.setTimeout(layout, 120);
+        return;
+      }
+      if (attempts > 40) return;
+      window.setTimeout(function () { bootWhenVisible(attempts + 1); }, 50);
+    }
+
+    bootWhenVisible(0);
   }
 
-  function boot(scope) {
+  function boot(scope, force) {
     var context = scope && scope.querySelectorAll ? scope : document;
-    context.querySelectorAll('[data-corp-coverflow]').forEach(initCoverflow);
+    context.querySelectorAll('[data-corp-coverflow]').forEach(function (root) {
+      initCoverflow(root, force);
+    });
   }
+
+  window.initCorpCoverflow = boot;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { boot(); });
@@ -220,9 +248,11 @@
     boot();
   }
 
-  document.addEventListener('shopify:section:load', function (event) {
-    boot(event.target);
+  window.addEventListener('load', function () {
+    boot(document, true);
   });
 
-  window.initCorpCoverflow = boot;
+  document.addEventListener('shopify:section:load', function (event) {
+    boot(event.target, true);
+  });
 })();

@@ -20,6 +20,10 @@
         return;
       }
       root.hidden = false;
+      function kick() {
+        if (window.initCorpCoverflow) window.initCorpCoverflow(root, true);
+      }
+      requestAnimationFrame(function () { requestAnimationFrame(kick); });
     })();
   </script>
 {%- endif -%}

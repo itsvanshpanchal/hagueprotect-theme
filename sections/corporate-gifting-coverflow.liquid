@@ -1,17 +1,18 @@
 {%- liquid
   assign coverflow_id = 'corp-coverflow-' | append: section.id
-  assign card_size = section.settings.card_size | default: 'medium'
+  assign card_size = section.settings.card_size | default: 'large'
   case card_size
     when 'small'
-      assign card_width = 180
-    when 'large'
-      assign card_width = 300
+      assign card_width = 220
+    when 'medium'
+      assign card_width = 260
     else
-      assign card_width = 240
+      assign card_width = 280
   endcase
-  assign card_spacing = section.settings.card_spacing | default: 200
+  assign card_spacing = section.settings.card_spacing | default: 168
   assign card_radius = section.settings.card_radius | default: 24
   assign aspect_ratio = section.settings.aspect_ratio | default: '3 / 4'
+  assign start_index = section.blocks.size | divided_by: 2
 -%}
 
 {%- style -%}
@@ -20,219 +21,12 @@
     --corp-cf-spacing: {{ card_spacing }}px;
     --corp-cf-radius: {{ card_radius }}px;
     --corp-cf-aspect: {{ aspect_ratio }};
-    --corp-cf-perspective: 1200px;
-    --corp-cf-ease: cubic-bezier(0.23, 1, 0.32, 1);
-    --corp-cf-duration: 0.75s;
-    --corp-cf-badge-bg: {{ section.settings.badge_background | default: 'rgba(180, 28, 28, 0.82)' }};
-    position: relative;
-    z-index: 2;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: clamp(64px, 8vw, 96px) 0;
+    --corp-cf-badge-bg: {{ section.settings.badge_background | default: 'rgba(37, 99, 235, 0.9)' }};
     background: {{ section.settings.section_background | default: '#ffffff' }};
-    overflow: hidden;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__container {
-    max-width: var(--site-max-width, 1280px);
-    margin: 0 auto;
-    padding: 0 max(20px, var(--site-padding, 24px));
   }
 
   #{{ coverflow_id }} .corp-coverflow__heading {
-    margin: 0 0 clamp(36px, 5vw, 56px);
-    text-align: center;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-    font-size: 52px !important;
-    font-weight: 300 !important;
-    font-style: normal !important;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
     color: {{ section.settings.heading_color | default: '#111111' }} !important;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__stage {
-    position: relative;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__viewport {
-    position: relative;
-    height: clamp(380px, 52vw, 520px);
-    perspective: var(--corp-cf-perspective);
-    perspective-origin: 50% 50%;
-    touch-action: pan-y pinch-zoom;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__card {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: var(--corp-cf-card-w);
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    -webkit-tap-highlight-color: transparent;
-    transition:
-      transform var(--corp-cf-duration) var(--corp-cf-ease),
-      opacity calc(var(--corp-cf-duration) * 0.85) ease;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    outline: none;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__card:focus-visible .corp-coverflow__inner {
-    outline: 2px solid #2563eb;
-    outline-offset: 4px;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__inner {
-    position: relative;
-    width: 100%;
-    aspect-ratio: var(--corp-cf-aspect);
-    border-radius: var(--corp-cf-radius);
-    overflow: hidden;
-    background: #f2f2f2;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-    transition: box-shadow 0.45s var(--corp-cf-ease), transform 0.45s var(--corp-cf-ease);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__card.is-active .corp-coverflow__inner {
-    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.18);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__card:hover .corp-coverflow__inner {
-    transform: translateY(-4px);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(17, 17, 17, 0.28);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__badge {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    z-index: 2;
-    max-width: calc(100% - 28px);
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--corp-cf-badge-bg);
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 30;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid rgba(17, 17, 17, 0.08);
-    background: #ffffff;
-    color: #666666;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    transition: transform 0.25s var(--corp-cf-ease), background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__nav:hover {
-    transform: translateY(-50%) scale(1.06);
-    background: #ffffff;
-    color: #111111;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__nav:active {
-    transform: translateY(-50%) scale(0.96);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__nav--prev {
-    left: clamp(0px, 2vw, 12px);
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__nav--next {
-    right: clamp(0px, 2vw, 12px);
-  }
-
-  @media screen and (max-width: 767px) {
-    #{{ coverflow_id }}.corp-coverflow {
-      --corp-cf-card-w: min(72vw, {{ card_width }}px);
-      --corp-cf-perspective: none;
-      --corp-cf-duration: 0.42s;
-      padding: clamp(48px, 10vw, 72px) 0;
-    }
-
-    #{{ coverflow_id }} .corp-coverflow__heading {
-      font-size: clamp(32px, 8vw, 42px) !important;
-      margin-bottom: clamp(28px, 6vw, 40px);
-    }
-
-    #{{ coverflow_id }} .corp-coverflow__viewport {
-      height: clamp(340px, 92vw, 440px);
-    }
-
-    #{{ coverflow_id }} .corp-coverflow__nav {
-      width: 40px;
-      height: 40px;
-    }
-
-    #{{ coverflow_id }} .corp-coverflow__nav--prev {
-      left: 4px;
-    }
-
-    #{{ coverflow_id }} .corp-coverflow__nav--next {
-      right: 4px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #{{ coverflow_id }} .corp-coverflow__card,
-    #{{ coverflow_id }} .corp-coverflow__nav {
-      transition-duration: 0.01ms !important;
-    }
   }
 {%- endstyle -%}
 
@@ -243,6 +37,7 @@
   data-no-typewriter="true"
   data-corp-coverflow
   data-spacing="{{ card_spacing }}"
+  data-start-index="{{ start_index }}"
   data-autoplay="{% if section.settings.autoplay %}true{% else %}false{% endif %}"
   data-autoplay-speed="{{ section.settings.autoplay_speed | default: 5 | times: 1000 }}"
   aria-label="{{ section.settings.heading | default: 'Gift showcase' | escape }}"
@@ -253,11 +48,11 @@
     {%- endif -%}
 
     <div class="corp-coverflow__stage">
-      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-
       <div class="corp-coverflow__viewport" data-corp-cf-viewport>
+        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
         <div class="corp-coverflow__track" data-corp-cf-track>
           {%- if section.blocks.size > 0 -%}
             {%- for block in section.blocks -%}
@@ -276,9 +71,9 @@
                   {%- endif -%}
                   {%- if block.settings.image != blank -%}
                     <img
-                      src="{{ block.settings.image | image_url: width: 720 }}"
-                      srcset="{{ block.settings.image | image_url: width: 360 }} 360w, {{ block.settings.image | image_url: width: 540 }} 540w, {{ block.settings.image | image_url: width: 720 }} 720w"
-                      sizes="(max-width: 767px) 72vw, {{ card_width }}px"
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      srcset="{{ block.settings.image | image_url: width: 400 }} 400w, {{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 800 }} 800w"
+                      sizes="(max-width: 767px) 74vw, {{ card_width }}px"
                       alt="{{ block.settings.image.alt | default: block.settings.badge | escape }}"
                       class="corp-coverflow__image"
                       loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
@@ -309,11 +104,11 @@
             {%- endfor -%}
           {%- endif -%}
         </div>
-      </div>
 
-      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
+        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -351,21 +146,21 @@
       "id": "card_size",
       "label": "Image size",
       "options": [
-        { "value": "small", "label": "Small (180px)" },
-        { "value": "medium", "label": "Medium (240px)" },
-        { "value": "large", "label": "Large (300px)" }
+        { "value": "small", "label": "Small (220px)" },
+        { "value": "medium", "label": "Medium (260px)" },
+        { "value": "large", "label": "Large (280px)" }
       ],
-      "default": "medium"
+      "default": "large"
     },
     {
       "type": "range",
       "id": "card_spacing",
       "label": "Spacing between slides",
       "min": 120,
-      "max": 320,
-      "step": 10,
+      "max": 280,
+      "step": 8,
       "unit": "px",
-      "default": 200
+      "default": 168
     },
     {
       "type": "range",
@@ -393,7 +188,7 @@
       "type": "color",
       "id": "badge_background",
       "label": "Badge background",
-      "default": "#b41c1cd1"
+      "default": "#2563ebe6"
     },
     {
       "type": "checkbox",
