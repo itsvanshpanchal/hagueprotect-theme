@@ -1172,6 +1172,12 @@ body.template-search-how-to-use #MainContent .shopify-section .faq-custom__quest
   letter-spacing: normal !important;
 }
 
+/* How To Use page — centered statement paragraph */
+body.template-search-how-to-use #MainContent .shopify-section .statement-text,
+body.template-search-how-to-use #MainContent .shopify-section [class*="how-to-use-statement"] .statement-text {
+  color: #D1D1D1 !important;
+}
+
 /* How To Use page — material nav links */
 body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link {
   color: #000000 !important;
