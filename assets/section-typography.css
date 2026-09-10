@@ -1172,6 +1172,29 @@ body.template-search-how-to-use #MainContent .shopify-section .faq-custom__quest
   letter-spacing: normal !important;
 }
 
+/* How To Use page — material nav links */
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link {
+  color: #000000 !important;
+}
+
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link.is-active {
+  color: #000000 !important;
+}
+
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link:hover {
+  color: #2563eb !important;
+  border-bottom-color: #2563eb !important;
+}
+
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__mob-nav a {
+  color: #000000 !important;
+}
+
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__mob-nav a:hover {
+  color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
 @media screen and (max-width: 989px) {
   body.template-search-how-to-use #MainContent .shopify-section .faq-custom__heading,
   body.template-search-how-to-use #MainContent .shopify-section h2.faq-custom__heading {

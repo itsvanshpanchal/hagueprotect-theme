@@ -13,6 +13,7 @@
   .htu-v2 {
     --red: #ff2b2b;
     --ink: #111111;
+    --htu-nav-hover: #2563eb;
     --muted: #6b6b6b;
     --cream: #f6f4f1;
     --line: #e6e2dc;
@@ -475,7 +476,7 @@
     display: block;
     padding: 10px 0;
     font-size: 24px !important;
-    color: #bbb;
+    color: #000000 !important;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease;
@@ -497,10 +498,14 @@
     text-transform: none !important;
   }
 
-  .htu-v2__nav-link.is-active,
-  .htu-v2__nav-link:hover {
-    color: var(--ink);
+  .htu-v2__nav-link.is-active {
+    color: #000000 !important;
     border-bottom-color: var(--red);
+  }
+
+  .htu-v2__nav-link:hover {
+    color: var(--htu-nav-hover, #2563eb) !important;
+    border-bottom-color: var(--htu-nav-hover, #2563eb);
   }
 
   .htu-v2__chapters {
@@ -831,7 +836,7 @@
     border: 1px solid var(--line);
     font-size: 24px !important;
     text-decoration: none;
-    color: var(--muted);
+    color: #000000 !important;
     transition: border-color 0.2s, color 0.2s, background 0.2s;
   }
 
@@ -850,10 +855,15 @@
     text-transform: none !important;
   }
 
-  .htu-v2__mob-nav a.is-active,
+  .htu-v2__mob-nav a.is-active {
+    border-color: #000000;
+    color: #000000 !important;
+    background: var(--cream);
+  }
+
   .htu-v2__mob-nav a:hover {
-    border-color: var(--ink);
-    color: var(--ink);
+    border-color: var(--htu-nav-hover, #2563eb);
+    color: var(--htu-nav-hover, #2563eb) !important;
     background: var(--cream);
   }
 
