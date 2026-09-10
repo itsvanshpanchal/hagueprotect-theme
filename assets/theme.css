@@ -2045,6 +2045,32 @@ body.template-page-corporate #MainContent .corp-hero [data-corp-hero-counter-suf
   -webkit-text-fill-color: #2563eb !important;
 }
 
+/* Corporate Gifting — ensure new sections stay visible */
+body.template-search-corporate-gifting #MainContent .corp-occasions,
+body.template-page-corporate #MainContent .corp-occasions,
+body.template-search-corporate-gifting #MainContent .corp-trusted,
+body.template-page-corporate #MainContent .corp-trusted,
+body.template-search-corporate-gifting #MainContent .corp-trusted-fallback-root,
+body.template-page-corporate #MainContent .corp-trusted-fallback-root {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+}
+
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-occasions),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-occasions),
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted),
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted-fallback-root),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted-fallback-root) {
+  display: block !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
 /* Homepage mobile — unified heading column gutter (matches theme-layout-css.liquid) */
 @media screen and (max-width: 767px) {
   body.template-index .bs-coverflow__container,

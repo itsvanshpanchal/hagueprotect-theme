@@ -1,0 +1,111 @@
+{%- liquid
+  assign trusted_id = fallback_id | default: 'corp-trusted-fallback'
+  assign logo_max_width = 140
+  assign logo_max_height = 48
+-%}
+
+<style>
+  #{{ trusted_id }} .corp-trusted {
+    padding: clamp(64px, 8vw, 96px) 0;
+    background: #ffffff;
+  }
+
+  #{{ trusted_id }} .corp-trusted__container {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  #{{ trusted_id }} .corp-trusted__heading {
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    text-align: center;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111111 !important;
+  }
+
+  #{{ trusted_id }} .corp-trusted__panel {
+    background: #f0f0f0;
+    border-radius: 24px;
+    padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 48px) clamp(28px, 4vw, 40px);
+  }
+
+  #{{ trusted_id }} .corp-trusted__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 32px);
+    align-items: center;
+    justify-items: center;
+  }
+
+  #{{ trusted_id }} .corp-trusted__logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 64px;
+    padding: 8px;
+  }
+
+  #{{ trusted_id }} .corp-trusted__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, {{ logo_max_width }}px);
+    min-height: {{ logo_max_height }}px;
+    border: 1px dashed rgba(17, 17, 17, 0.18);
+    border-radius: 8px;
+    color: rgba(17, 17, 17, 0.35);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+  }
+
+  #{{ trusted_id }} .corp-trusted__footer {
+    margin: clamp(28px, 4vw, 40px) 0 0;
+    text-align: center;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    line-height: 1.2;
+    color: #9a9a9a !important;
+  }
+
+  @media screen and (max-width: 900px) {
+    #{{ trusted_id }} .corp-trusted__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    #{{ trusted_id }} .corp-trusted__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div id="{{ trusted_id }}" class="corp-trusted-fallback-root" data-corp-trusted-fallback="true" hidden>
+  <section class="corp-trusted" data-no-typewriter="true">
+    <div class="corp-trusted__container">
+      <h2 class="corp-trusted__heading">TRUSTED BY TEAMS WITH TASTE</h2>
+      <div class="corp-trusted__panel">
+        <div class="corp-trusted__grid">
+          {%- for i in (1..9) -%}
+            <div class="corp-trusted__logo-wrap">
+              <div class="corp-trusted__placeholder">Logo {{ i }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <p class="corp-trusted__footer">and more...</p>
+      </div>
+    </div>
+  </section>
+</div>

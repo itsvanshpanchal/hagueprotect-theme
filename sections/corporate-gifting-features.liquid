@@ -385,6 +385,22 @@
   </div>
 </section>
 
+{%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
+  {%- assign trusted_fallback_id = 'corp-trusted-fallback-' | append: section.id -%}
+  {%- render 'corporate-gifting-trusted-by-fallback', fallback_id: trusted_fallback_id -%}
+  <script>
+    (function () {
+      var root = document.getElementById('{{ trusted_fallback_id }}');
+      if (!root) return;
+      if (document.querySelector('[data-corp-trusted-section="true"]')) {
+        root.remove();
+        return;
+      }
+      root.hidden = false;
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Corporate Features",
