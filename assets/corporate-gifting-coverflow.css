@@ -1,6 +1,5 @@
-/* Corporate Gifting — Coverflow carousel (match reference design) */
-body.template-search-corporate-gifting .corp-coverflow,
-body.template-page-corporate .corp-coverflow {
+/* Corporate Gifting — Coverflow carousel */
+.corp-coverflow {
   --corp-cf-card-w: 204px;
   --corp-cf-spacing: 128px;
   --corp-cf-radius: 16px;
@@ -17,18 +16,23 @@ body.template-page-corporate .corp-coverflow {
   padding: 48px 0 64px;
   background: #ffffff;
   overflow: visible;
+  box-sizing: border-box;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__container,
-body.template-page-corporate .corp-coverflow__container {
+.corp-coverflow *,
+.corp-coverflow *::before,
+.corp-coverflow *::after {
+  box-sizing: border-box;
+}
+
+.corp-coverflow__container {
   max-width: 100%;
   margin: 0 auto;
   padding: 0 24px;
   overflow: visible;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__heading,
-body.template-page-corporate .corp-coverflow__heading {
+.corp-coverflow__heading {
   margin: 0 0 40px;
   text-align: center;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
@@ -40,18 +44,15 @@ body.template-page-corporate .corp-coverflow__heading {
   color: #111111 !important;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__stage,
-body.template-page-corporate .corp-coverflow__stage {
+.corp-coverflow__stage {
   position: relative;
   width: min(920px, 100%);
   margin: 0 auto;
   padding: 0 52px;
   overflow: visible;
-  box-sizing: border-box;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__viewport,
-body.template-page-corporate .corp-coverflow__viewport {
+.corp-coverflow__viewport {
   position: relative;
   width: 100%;
   height: 364px;
@@ -62,37 +63,39 @@ body.template-page-corporate .corp-coverflow__viewport {
   touch-action: pan-y pinch-zoom;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__track,
-body.template-page-corporate .corp-coverflow__track {
+.corp-coverflow__track {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__card,
-body.template-page-corporate .corp-coverflow__card {
-  position: absolute;
+.corp-coverflow__card {
+  position: absolute !important;
   left: 50%;
   top: 50%;
   width: var(--corp-cf-card-w);
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
   cursor: pointer;
   transform-style: preserve-3d;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
   transition:
     transform var(--corp-cf-duration) var(--corp-cf-ease),
     opacity calc(var(--corp-cf-duration) * 0.9) ease;
   will-change: transform, opacity;
   backface-visibility: hidden;
   outline: none;
+  display: block !important;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__inner,
-body.template-page-corporate .corp-coverflow__inner {
+.corp-coverflow__inner {
   position: relative;
   width: 100%;
   aspect-ratio: var(--corp-cf-aspect);
@@ -103,29 +106,25 @@ body.template-page-corporate .corp-coverflow__inner {
   transition: box-shadow var(--corp-cf-duration) var(--corp-cf-ease);
 }
 
-body.template-search-corporate-gifting .corp-coverflow__card.is-active .corp-coverflow__inner,
-body.template-page-corporate .corp-coverflow__card.is-active .corp-coverflow__inner {
+.corp-coverflow__card.is-active .corp-coverflow__inner {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
-body.template-search-corporate-gifting .corp-coverflow__image,
-body.template-page-corporate .corp-coverflow__image {
+.corp-coverflow__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__placeholder,
-body.template-page-corporate .corp-coverflow__placeholder {
+.corp-coverflow__placeholder {
   width: 100%;
   height: 100%;
   display: block;
   background: linear-gradient(180deg, #3a3a3a 0%, #1f1f1f 55%, #2b2b2b 100%);
 }
 
-body.template-search-corporate-gifting .corp-coverflow__badge,
-body.template-page-corporate .corp-coverflow__badge {
+.corp-coverflow__badge {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -134,19 +133,18 @@ body.template-page-corporate .corp-coverflow__badge {
   padding: 5px 10px;
   border-radius: 999px;
   background: var(--corp-cf-badge-bg);
-  color: #ffffff;
+  color: #ffffff !important;
   font-family: 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__nav,
-body.template-page-corporate .corp-coverflow__nav {
+.corp-coverflow__nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -154,79 +152,49 @@ body.template-page-corporate .corp-coverflow__nav {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: none;
-  background: #ffffff;
-  color: #888888;
-  display: inline-flex;
+  border: none !important;
+  background: #ffffff !important;
+  color: #888888 !important;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__nav:hover,
-body.template-page-corporate .corp-coverflow__nav:hover {
+.corp-coverflow__nav:hover {
   transform: translateY(-50%) scale(1.04);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
-  color: #555555;
+  color: #555555 !important;
 }
 
-body.template-search-corporate-gifting .corp-coverflow__nav--prev,
-body.template-page-corporate .corp-coverflow__nav--prev {
-  left: 0;
-}
+.corp-coverflow__nav--prev { left: 0; }
+.corp-coverflow__nav--next { right: 0; }
 
-body.template-search-corporate-gifting .corp-coverflow__nav--next,
-body.template-page-corporate .corp-coverflow__nav--next {
-  right: 0;
+.corp-coverflow-fallback-root {
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 @media screen and (min-width: 900px) {
-  body.template-search-corporate-gifting .corp-coverflow__viewport,
-  body.template-page-corporate .corp-coverflow__viewport {
-    height: 384px;
-  }
+  .corp-coverflow__viewport { height: 384px; }
 }
 
 @media screen and (max-width: 767px) {
-  body.template-search-corporate-gifting .corp-coverflow,
-  body.template-page-corporate .corp-coverflow {
+  .corp-coverflow {
     --corp-cf-card-w: min(58vw, 204px);
     --corp-cf-perspective: none;
     --corp-cf-duration: 0.4s;
     padding: 36px 0 48px;
   }
 
-  body.template-search-corporate-gifting .corp-coverflow__stage,
-  body.template-page-corporate .corp-coverflow__stage {
-    padding: 0 44px;
-  }
-
-  body.template-search-corporate-gifting .corp-coverflow__heading,
-  body.template-page-corporate .corp-coverflow__heading {
-    margin-bottom: 28px;
-    font-size: clamp(24px, 6.5vw, 32px) !important;
-  }
-
-  body.template-search-corporate-gifting .corp-coverflow__viewport,
-  body.template-page-corporate .corp-coverflow__viewport {
-    height: clamp(320px, 92vw, 380px);
-  }
-
-  body.template-search-corporate-gifting .corp-coverflow__nav,
-  body.template-page-corporate .corp-coverflow__nav {
-    width: 38px;
-    height: 38px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body.template-search-corporate-gifting .corp-coverflow__card,
-  body.template-page-corporate .corp-coverflow__card,
-  body.template-search-corporate-gifting .corp-coverflow__nav,
-  body.template-page-corporate .corp-coverflow__nav {
-    transition-duration: 0.01ms !important;
-  }
+  .corp-coverflow__stage { padding: 0 44px; }
+  .corp-coverflow__heading { margin-bottom: 28px; font-size: clamp(24px, 6.5vw, 32px) !important; }
+  .corp-coverflow__viewport { height: clamp(320px, 92vw, 380px); }
+  .corp-coverflow__nav { width: 38px; height: 38px; }
 }

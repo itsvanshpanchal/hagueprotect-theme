@@ -9,6 +9,7 @@
 -%}
 
 {%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
+  {%- render 'corporate-gifting-coverflow-styles' -%}
   {%- assign coverflow_fallback_id = 'corp-coverflow-fallback-' | append: section.id -%}
   {%- render 'corporate-gifting-coverflow-fallback', fallback_id: coverflow_fallback_id -%}
   <script>
