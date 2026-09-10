@@ -2052,6 +2052,8 @@ body.template-search-corporate-gifting #MainContent .corp-coverflow,
 body.template-page-corporate #MainContent .corp-coverflow,
 body.template-search-corporate-gifting #MainContent .corp-trusted,
 body.template-page-corporate #MainContent .corp-trusted,
+body.template-search-corporate-gifting #MainContent .corp-coverflow-fallback-root,
+body.template-page-corporate #MainContent .corp-coverflow-fallback-root,
 body.template-search-corporate-gifting #MainContent .corp-trusted-fallback-root,
 body.template-page-corporate #MainContent .corp-trusted-fallback-root {
   display: block !important;
@@ -2066,6 +2068,8 @@ body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-o
 body.template-page-corporate #MainContent .shopify-section:has(.corp-occasions),
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow),
 body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow),
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow-fallback-root),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow-fallback-root),
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted),
 body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted),
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted-fallback-root),
@@ -2073,6 +2077,25 @@ body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted-fal
   display: block !important;
   visibility: visible !important;
   overflow: visible !important;
+}
+
+/* Corporate Coverflow — shared card layout (standalone, liquid fallback, JS fallback) */
+body.template-search-corporate-gifting #MainContent .corp-coverflow .corp-coverflow__card,
+body.template-page-corporate #MainContent .corp-coverflow .corp-coverflow__card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--corp-cf-card-w, 240px);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.64s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  outline: none;
 }
 
 /* Homepage mobile — unified heading column gutter (matches theme-layout-css.liquid) */

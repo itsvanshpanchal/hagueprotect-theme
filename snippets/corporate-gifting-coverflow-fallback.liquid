@@ -1,0 +1,218 @@
+{%- liquid
+  assign cf_id = fallback_id | default: 'corp-coverflow-fallback'
+  assign cf_inner_id = cf_id | append: '-inner'
+-%}
+
+<style>
+  #{{ cf_id }}.corp-coverflow-fallback-root {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #{{ cf_inner_id }}.corp-coverflow {
+    --corp-cf-card-w: 240px;
+    --corp-cf-spacing: 200px;
+    --corp-cf-radius: 24px;
+    --corp-cf-aspect: 3 / 4;
+    --corp-cf-perspective: 1200px;
+    --corp-cf-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --corp-cf-duration: 0.75s;
+    --corp-cf-badge-bg: rgba(180, 28, 28, 0.82);
+    position: relative;
+    z-index: 2;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: clamp(64px, 8vw, 96px) 0;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__container {
+    max-width: var(--site-max-width, 1280px);
+    margin: 0 auto;
+    padding: 0 max(20px, var(--site-padding, 24px));
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__heading {
+    margin: 0 0 clamp(36px, 5vw, 56px);
+    text-align: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #111111 !important;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__stage {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__viewport {
+    position: relative;
+    height: clamp(380px, 52vw, 520px);
+    perspective: var(--corp-cf-perspective);
+    perspective-origin: 50% 50%;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--corp-cf-card-w);
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform var(--corp-cf-duration) var(--corp-cf-ease), opacity calc(var(--corp-cf-duration) * 0.85) ease;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    outline: none;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--corp-cf-aspect);
+    border-radius: var(--corp-cf-radius);
+    overflow: hidden;
+    background: linear-gradient(145deg, #f3f3f3, #e8e8e8);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.45s var(--corp-cf-ease), transform 0.45s var(--corp-cf-ease);
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__card.is-active .corp-coverflow__inner {
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.18);
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(17, 17, 17, 0.28);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    max-width: calc(100% - 28px);
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--corp-cf-badge-bg);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    background: #ffffff;
+    color: #666666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  #{{ cf_inner_id }} .corp-coverflow__nav--prev { left: clamp(0px, 2vw, 12px); }
+  #{{ cf_inner_id }} .corp-coverflow__nav--next { right: clamp(0px, 2vw, 12px); }
+
+  @media screen and (max-width: 767px) {
+    #{{ cf_inner_id }}.corp-coverflow {
+      --corp-cf-card-w: min(72vw, 240px);
+      --corp-cf-perspective: none;
+      --corp-cf-duration: 0.42s;
+      padding: clamp(48px, 10vw, 72px) 0;
+    }
+
+    #{{ cf_inner_id }} .corp-coverflow__heading {
+      font-size: clamp(32px, 8vw, 42px) !important;
+    }
+
+    #{{ cf_inner_id }} .corp-coverflow__viewport {
+      height: clamp(340px, 92vw, 440px);
+    }
+
+    #{{ cf_inner_id }} .corp-coverflow__nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
+
+<div id="{{ cf_id }}" class="corp-coverflow-fallback-root" data-corp-coverflow-fallback="true" hidden>
+  <section
+    id="{{ cf_inner_id }}"
+    class="corp-coverflow"
+    data-corp-coverflow
+    data-no-typewriter="true"
+    data-spacing="200"
+    data-autoplay="true"
+    data-autoplay-speed="5000"
+    aria-label="The Gifts that outlast the occasion"
+  >
+    <div class="corp-coverflow__container">
+      <h2 class="corp-coverflow__heading">The Gifts that outlast the occasion</h2>
+
+      <div class="corp-coverflow__stage">
+        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="corp-coverflow__viewport" data-corp-cf-viewport>
+          <div class="corp-coverflow__track" data-corp-cf-track>
+            {%- assign fallback_badges = '@ Gift Set 1|@ Gift Set 2|@ Dhurandhar 2 Set|@ Gift Set 4|@ Gift Set 5' | split: '|' -%}
+            {%- for badge in fallback_badges -%}
+              <button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="{{ forloop.index0 }}" aria-label="{{ badge | escape }}">
+                <div class="corp-coverflow__inner">
+                  <span class="corp-coverflow__badge">{{ badge }}</span>
+                  <div class="corp-coverflow__placeholder" aria-hidden="true">Upload image</div>
+                </div>
+              </button>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

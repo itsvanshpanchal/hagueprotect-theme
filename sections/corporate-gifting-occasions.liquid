@@ -8,6 +8,22 @@
   section_id: occasions_section_id
 -%}
 
+{%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
+  {%- assign coverflow_fallback_id = 'corp-coverflow-fallback-' | append: section.id -%}
+  {%- render 'corporate-gifting-coverflow-fallback', fallback_id: coverflow_fallback_id -%}
+  <script>
+    (function () {
+      var root = document.getElementById('{{ coverflow_fallback_id }}');
+      if (!root) return;
+      if (document.querySelector('[data-corp-coverflow-section="true"]')) {
+        root.remove();
+        return;
+      }
+      root.hidden = false;
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Corporate Occasions",
