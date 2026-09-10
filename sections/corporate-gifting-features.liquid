@@ -317,7 +317,7 @@
           >
             {%- if block.settings.image != blank -%}
               <div class="corp-bento__media">
-                <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+                {{ block.settings.image | image_url: width: 1200 | image_tag: alt: block.settings.title, loading: 'lazy' }}
               </div>
             {%- elsif theme == 'media' -%}
               <div class="corp-bento__media" aria-hidden="true">
