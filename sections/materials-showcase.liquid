@@ -337,6 +337,11 @@
     object-fit: cover !important;
     object-position: center center !important;
   }
+
+  /* Deodorizer banner — keep spray / hands visible (only this slide) */
+  .mat-bg-stage .mat-image-layer.mat-image-layer--deodrizer {
+    object-position: center 30% !important;
+  }
   .mat-image-mobile {
     display: none !important;
   }
@@ -455,6 +460,10 @@
       object-position: center center !important;
       transition: opacity 650ms cubic-bezier(0.25, 1, 0.5, 1),
                   transform 850ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+
+    .mat-bg-stage .mat-image-layer.mat-image-layer--deodrizer {
+      object-position: center 35% !important;
     }
 
     .mat-bg-stage .mat-image-layer.active,
@@ -640,18 +649,27 @@
     <div class="mat-image-container">
       {%- for block in section.blocks -%}
         {%- if block.type == 'material_item' -%}
+          {%- liquid
+            assign mat_title_lc = block.settings.title | downcase
+            assign mat_image_position = block.settings.image_position | default: 'center center'
+            assign mat_image_class = ''
+            if mat_title_lc contains 'deod'
+              assign mat_image_position = 'center 30%'
+              assign mat_image_class = ' mat-image-layer--deodrizer'
+            endif
+          -%}
           {%- if block.settings.image != blank or block.settings.image_mobile != blank -%}
             {%- if block.settings.image != blank -%}
-              <img class="mat-image-layer mat-image-desktop{% if forloop.first %} active{% endif %}{% if block.settings.image_mobile == blank %} mat-image-both{% endif %}"
-                   style="object-fit: {{ block.settings.image_fit | default: 'cover' }} !important; object-position: {{ block.settings.image_position | default: 'center center' }} !important;"
+              <img class="mat-image-layer mat-image-desktop{% if forloop.first %} active{% endif %}{% if block.settings.image_mobile == blank %} mat-image-both{% endif %}{{ mat_image_class }}"
+                   style="object-fit: {{ block.settings.image_fit | default: 'cover' }} !important; object-position: {{ mat_image_position }} !important;"
                    src="{{ block.settings.image | image_url: width: 2400 }}"
                    alt=""
                    data-index="{{ forloop.index0 }}"
                    loading="lazy">
             {%- endif -%}
             {%- if block.settings.image_mobile != blank -%}
-              <img class="mat-image-layer mat-image-mobile{% if forloop.first %} active{% endif %}{% if block.settings.image == blank %} mat-image-both{% endif %}"
-                   style="object-fit: {{ block.settings.image_fit_mobile | default: block.settings.image_fit | default: 'cover' }} !important; object-position: {{ block.settings.image_position | default: 'center center' }} !important;"
+              <img class="mat-image-layer mat-image-mobile{% if forloop.first %} active{% endif %}{% if block.settings.image == blank %} mat-image-both{% endif %}{{ mat_image_class }}"
+                   style="object-fit: {{ block.settings.image_fit_mobile | default: block.settings.image_fit | default: 'cover' }} !important; object-position: {{ mat_image_position }} !important;"
                    src="{{ block.settings.image_mobile | image_url: width: 1200 }}"
                    alt=""
                    data-index="{{ forloop.index0 }}"
