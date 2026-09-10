@@ -328,21 +328,47 @@
     max-width: 420px;
   }
 
-  #shopify-section-{{ section.id }} .faq-custom__cta-title {
+  #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__cta-title,
+  #shopify-section-{{ section.id }} .faq-custom--page h2.faq-custom__cta-title {
     margin: 0;
-    font-family: 'Bahnschrift', var(--font-family-heading), sans-serif;
-    font-size: clamp(22px, 3vw, 28px);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    color: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: 52px !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+    color: #ffffff !important;
   }
 
-  #shopify-section-{{ section.id }} .faq-custom__cta-text {
+  #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__cta-text {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.72);
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__cta-title,
+    #shopify-section-{{ section.id }} .faq-custom--page h2.faq-custom__cta-title {
+      font-size: 32px !important;
+      line-height: 1.05 !important;
+      font-weight: 300 !important;
+    }
+
+    #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__cta-text {
+      font-size: 18px !important;
+    }
   }
 
   #shopify-section-{{ section.id }} .faq-custom__cta-actions {
