@@ -1,15 +1,3 @@
-{%- liquid
-  assign occasions_grid_id = 'corp-occasions-' | append: section.id
-  assign occasions_heading_line1 = section.settings.occasions_heading_line1 | default: 'Gifts people keep.'
-  assign occasions_heading_line2 = section.settings.occasions_heading_line2 | default: 'Not re-gift.'
--%}
-
-{%- render 'corporate-gifting-occasions-grid',
-  heading_line1: occasions_heading_line1,
-  heading_line2: occasions_heading_line2,
-  section_id: occasions_grid_id
--%}
-
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
@@ -240,26 +228,6 @@
     ]
   },
   "settings": [
-    {
-      "type": "header",
-      "content": "Occasions grid"
-    },
-    {
-      "type": "text",
-      "id": "occasions_heading_line1",
-      "label": "Occasions heading line 1",
-      "default": "Gifts people keep."
-    },
-    {
-      "type": "text",
-      "id": "occasions_heading_line2",
-      "label": "Occasions heading line 2",
-      "default": "Not re-gift."
-    },
-    {
-      "type": "header",
-      "content": "Process section"
-    },
     {
       "type": "text",
       "id": "eyebrow",
