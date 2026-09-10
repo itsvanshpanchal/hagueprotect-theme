@@ -6,6 +6,24 @@
     const navLinks = section.querySelectorAll('[data-htu-nav]');
     const reveals = section.querySelectorAll('[data-htu-reveal]');
     const rail = section.querySelector('[data-htu-rail]');
+    const navList = section.querySelector('[data-htu-nav-list]');
+    const navTrack = section.querySelector('.htu-v2__nav-track');
+    const navIndicator = section.querySelector('[data-htu-nav-indicator]');
+
+    function updateNavIndicator() {
+      if (!navList || !navTrack || !navIndicator) return;
+
+      const activeLink = navList.querySelector('.htu-v2__nav-link.is-active');
+      if (!activeLink) {
+        navIndicator.style.width = '0';
+        return;
+      }
+
+      const trackRect = navTrack.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      navIndicator.style.width = linkRect.width + 'px';
+      navIndicator.style.left = (linkRect.left - trackRect.left) + 'px';
+    }
 
     /* Tab switching logic for materials */
     function switchTab(targetId) {
@@ -24,12 +42,22 @@
           ch.classList.remove('is-in');
         }
       });
+      requestAnimationFrame(updateNavIndicator);
     }
 
     // Initialize first tab as active
     if (chapters.length > 0) {
       switchTab('#' + chapters[0].id);
+    } else {
+      updateNavIndicator();
     }
+
+    if (navList) {
+      navList.addEventListener('scroll', updateNavIndicator, { passive: true });
+    }
+    window.addEventListener('resize', updateNavIndicator);
+    window.addEventListener('load', updateNavIndicator);
+    setTimeout(updateNavIndicator, 100);
 
     navLinks.forEach((link) => {
       link.addEventListener('click', (e) => {

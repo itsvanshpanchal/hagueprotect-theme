@@ -457,6 +457,10 @@
     border-bottom: 1px solid var(--line);
   }
 
+  .htu-v2__nav-track {
+    position: relative;
+  }
+
   .htu-v2__nav-list {
     list-style: none;
     margin: 0;
@@ -466,6 +470,21 @@
     gap: 32px;
     overflow-x: auto;
     scrollbar-width: none;
+    position: relative;
+  }
+
+  .htu-v2__nav-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--htu-nav-hover, #2563eb);
+    border-radius: 1px;
+    pointer-events: none;
+    z-index: 1;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: left, width;
   }
 
   .htu-v2__nav-list::-webkit-scrollbar {
@@ -478,8 +497,8 @@
     font-size: 24px !important;
     color: #000000 !important;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    border-bottom: none;
+    transition: color 0.2s ease;
     white-space: nowrap;
   }
 
@@ -500,12 +519,10 @@
 
   .htu-v2__nav-link.is-active {
     color: #000000 !important;
-    border-bottom-color: var(--red);
   }
 
   .htu-v2__nav-link:hover {
     color: var(--htu-nav-hover, #2563eb) !important;
-    border-bottom-color: var(--htu-nav-hover, #2563eb);
   }
 
   .htu-v2__chapters {
@@ -1036,17 +1053,20 @@
   <div class="htu-v2__journal">
     <nav class="htu-v2__nav" aria-label="Materials">
       <p class="htu-v2__nav-title">{{ section.settings.materials_heading | default: 'By Material' }}</p>
-      <ul class="htu-v2__nav-list">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'material' -%}
-            <li>
-              <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>
-                {{ block.settings.title }}
-              </a>
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
+      <div class="htu-v2__nav-track">
+        <ul class="htu-v2__nav-list" data-htu-nav-list>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'material' -%}
+              <li>
+                <a href="#htu-mat-{{ block.id }}" class="htu-v2__nav-link {% render 'material-font-class', source: block.settings.title %}{% if forloop.first %} is-active{% endif %}" data-htu-nav>
+                  {{ block.settings.title }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        <span class="htu-v2__nav-indicator" data-htu-nav-indicator aria-hidden="true"></span>
+      </div>
     </nav>
 
     <div class="htu-v2__chapters">
