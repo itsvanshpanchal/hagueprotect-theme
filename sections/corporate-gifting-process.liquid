@@ -1,3 +1,137 @@
+{%- assign corp_occasions_id = 'corp-occasions-' | append: section.id -%}
+<style>
+  #{{ corp_occasions_id }}.corp-occasions {
+    position: relative;
+    z-index: 2;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__title-line1 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: clamp(34px, 4.8vw, 56px);
+    font-weight: 700 !important;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #111111 !important;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__title-line2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: clamp(24px, 3.2vw, 40px);
+    font-weight: 300 !important;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #111111 !important;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 2.2vw, 28px);
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: inherit;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #f3f3f3, #e8e8e8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(17, 17, 17, 0.28);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__label {
+    margin: 18px 0 0;
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 700 !important;
+    color: #111111 !important;
+    line-height: 1.2;
+  }
+
+  #{{ corp_occasions_id }} .corp-occasions__caption {
+    margin: 8px 0 0;
+    font-family: var(--font-family-heading-accent, 'Luthon Southard Script', cursive);
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.35;
+    color: #2563eb !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    #{{ corp_occasions_id }} .corp-occasions__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 20px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    #{{ corp_occasions_id }} .corp-occasions__grid {
+      grid-template-columns: 1fr;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    #{{ corp_occasions_id }} .corp-occasions__header {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+</style>
+
+<section class="corp-occasions" id="{{ corp_occasions_id }}" data-no-typewriter="true" data-corp-occasions="true">
+  <div class="corp-occasions__container" style="max-width: var(--site-max-width); margin: 0 auto; padding: clamp(72px, 9vw, 110px) max(20px, var(--site-padding, 24px)); background: #ffffff;">
+    <header class="corp-occasions__header" style="max-width: 720px; margin: 0 0 clamp(40px, 5vw, 56px);">
+      <h2 class="corp-occasions__title" style="margin: 0; display: flex; flex-direction: column; gap: 4px;">
+        <span class="corp-occasions__title-line1">{{ section.settings.occasions_heading_line1 | default: 'Gifts people keep.' }}</span>
+        <span class="corp-occasions__title-line2">{{ section.settings.occasions_heading_line2 | default: 'Not re-gift.' }}</span>
+      </h2>
+    </header>
+
+    <div class="corp-occasions__grid">
+      <div class="corp-occasions__card">
+        <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Corporate</div></div>
+        <p class="corp-occasions__label">Corporate</p>
+      </div>
+      <div class="corp-occasions__card">
+        <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Weddings</div></div>
+        <p class="corp-occasions__label">Weddings</p>
+      </div>
+      <div class="corp-occasions__card">
+        <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Celebrations</div></div>
+        <p class="corp-occasions__label">Celebrations</p>
+        <p class="corp-occasions__caption">(Birthday, Housewarming, Anniversary)</p>
+      </div>
+      <div class="corp-occasions__card">
+        <div class="corp-occasions__media"><div class="corp-occasions__placeholder">Collaborations</div></div>
+        <p class="corp-occasions__label">Collaborations</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
@@ -228,6 +362,26 @@
     ]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Occasions grid"
+    },
+    {
+      "type": "text",
+      "id": "occasions_heading_line1",
+      "label": "Occasions heading line 1",
+      "default": "Gifts people keep."
+    },
+    {
+      "type": "text",
+      "id": "occasions_heading_line2",
+      "label": "Occasions heading line 2",
+      "default": "Not re-gift."
+    },
+    {
+      "type": "header",
+      "content": "Process section"
+    },
     {
       "type": "text",
       "id": "eyebrow",
