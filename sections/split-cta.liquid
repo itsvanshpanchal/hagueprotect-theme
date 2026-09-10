@@ -63,6 +63,19 @@
     transform: translateY(20px);
   }
 
+  .split-cta--redesign__heading-line2 {
+    display: block;
+    color: #9A9A9A !important;
+    -webkit-text-fill-color: #9A9A9A !important;
+    transform: none !important;
+    transform-origin: bottom center;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
   .split-cta--redesign__subtext {
     color: #ffffff;
     margin: 0 0 24px 0;
@@ -261,7 +274,7 @@
 
     {%- if heading != blank -%}
       {%- assign heading_escaped = heading | escape | newline_to_br -%}
-      {%- assign styled_text = '<span style="display: block; color: #808080; transform: none !important; transform-origin: bottom center; font-style: normal !important; font-weight: 400; text-align: center; width: 100%; margin-top: 10px;">waiting outside.</span>' -%}
+      {%- assign styled_text = '<span class="split-cta--redesign__heading-line2">waiting outside.</span>' -%}
       {%- assign final_heading = heading_escaped | replace: 'waiting outside.', styled_text | replace: '<br /><span', '<span' | replace: '<br><span', '<span' -%}
       <h2 class="split-cta--redesign__heading" data-no-typewriter="true">{{ final_heading }}</h2>
     {%- endif -%}

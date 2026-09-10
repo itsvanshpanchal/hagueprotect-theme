@@ -874,6 +874,15 @@ body #MainContent .ab-profile-name {
   text-transform: none !important;
 }
 
+/* Split CTA — accent heading line */
+body #MainContent .shopify-section .split-cta--redesign__heading .split-cta--redesign__heading-line2,
+body #MainContent .split-cta--redesign__heading .split-cta--redesign__heading-line2 {
+  color: #9A9A9A !important;
+  -webkit-text-fill-color: #9A9A9A !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
 /* ── ABOUT US PARAGRAPHS — Darker Grotesque Regular 400, 24px ── */
 body #MainContent .shopify-section .agp-bottom__subtext,
 body #MainContent .shopify-section .agp-bottom-text,
