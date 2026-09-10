@@ -182,6 +182,19 @@
           border-bottom: none !important;
           box-shadow: none !important;
         }
+        .htu-v2__grid-title,
+        h3.htu-v2__grid-title {
+          font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+          font-size: 24px !important;
+          font-weight: 400 !important;
+          font-style: normal !important;
+          font-synthesis: none !important;
+          -webkit-font-smoothing: antialiased !important;
+          -webkit-text-stroke: 0 !important;
+          text-shadow: none !important;
+          letter-spacing: normal !important;
+          color: #000000 !important;
+        }
       `;
       document.head.appendChild(style);
     }
