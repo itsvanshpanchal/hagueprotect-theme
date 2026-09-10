@@ -371,57 +371,6 @@
         "subheading": "Every detail — from co-branded packaging to bulk logistics — designed to make your gift unforgettable."
       }
     },
-    "packages": {
-      "type": "corporate-gifting-packages",
-      "blocks": {
-        "package_1": {
-          "type": "package",
-          "settings": {
-            "tier_label": "Starter",
-            "title": "Essential Kit",
-            "quantity_hint": "25 – 100 units",
-            "perks": "Quick-clean solution + microfiber cloth\nStandard branded sleeve\nVolume pricing from 25 units\n7-day production lead time",
-            "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry",
-            "featured": false
-          }
-        },
-        "package_2": {
-          "type": "package",
-          "settings": {
-            "tier_label": "Executive",
-            "title": "Signature Box",
-            "quantity_hint": "50 – 500 units",
-            "perks": "Full cleaning kit with premium brushes\nCo-branded rigid gift box\nCustom thank-you card insert\nDedicated account manager",
-            "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry",
-            "featured": true
-          }
-        },
-        "package_3": {
-          "type": "package",
-          "settings": {
-            "tier_label": "Enterprise",
-            "title": "Bespoke Program",
-            "quantity_hint": "500+ units",
-            "perks": "Fully custom kit curation\nLogo embossing & premium packaging\nMulti-location delivery\nPriority production & white-glove support",
-            "cta_label": "Get Quote",
-            "cta_link": "#corp-inquiry",
-            "featured": false
-          }
-        }
-      },
-      "block_order": [
-        "package_1",
-        "package_2",
-        "package_3"
-      ],
-      "settings": {
-        "eyebrow": "Gift Tiers",
-        "heading": "Pick Your Perfect Kit",
-        "description": "Flexible packages for every occasion — from startup swag to enterprise executive gifts."
-      }
-    },
     "form": {
       "type": "corporate-gifting-form",
       "settings": {
@@ -441,8 +390,6 @@
     "marquee",
     "process",
     "features",
-    "packages",
     "form"
   ]
 }
-
