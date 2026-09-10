@@ -104,6 +104,26 @@
     }
   }
 
+  #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__question,
+  #shopify-section-{{ section.id }} .faq-custom--page h3.faq-custom__question {
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #000000 !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .faq-custom--page .faq-custom__question,
+    #shopify-section-{{ section.id }} .faq-custom--page h3.faq-custom__question {
+      font-size: 18px !important;
+    }
+  }
+
   #shopify-section-{{ section.id }} .faq-custom__heading {
     font-family: var(--font-family-h2, var(--font-family-sans)) !important;
     font-size: {% if is_page_layout %}var(--section-heading-size){% else %}clamp(18px, 2.2vw, 22px){% endif %} !important;

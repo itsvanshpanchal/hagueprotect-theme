@@ -202,7 +202,7 @@
   display: inline !important;
 }
 
-#MainContent .shopify-section h3:not([class*="ai-story-banner"]),
+#MainContent .shopify-section h3:not([class*="ai-story-banner"]):not(.faq-custom__question),
 #MainContent .shopify-section h4,
 #MainContent .shopify-section h5,
 #MainContent .shopify-section h6 {
@@ -1242,6 +1242,25 @@ body #MainContent .shopify-section .faq-custom--page .faq-custom__page-descripti
   }
 
   body #MainContent .shopify-section .faq-custom--page .faq-custom__page-description {
+    font-size: 18px !important;
+  }
+}
+
+/* FAQ page layout — accordion questions */
+body #MainContent .shopify-section .faq-custom--page .faq-custom__question,
+body #MainContent .shopify-section .faq-custom--page h3.faq-custom__question {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: #000000 !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+}
+
+@media screen and (max-width: 989px) {
+  body #MainContent .shopify-section .faq-custom--page .faq-custom__question,
+  body #MainContent .shopify-section .faq-custom--page h3.faq-custom__question {
     font-size: 18px !important;
   }
 }

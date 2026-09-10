@@ -1178,6 +1178,24 @@ body.template-search-how-to-use .htu-v2 h2.htu-v2__grid-main-title {
   font-size: clamp(14px, 1.5vw, 16px) !important;
 }
 
+.faq-custom--page .faq-custom__question,
+.faq-custom--page h3.faq-custom__question {
+  font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: #000000 !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+}
+
+@media screen and (max-width: 989px) {
+  .faq-custom--page .faq-custom__question,
+  .faq-custom--page h3.faq-custom__question {
+    font-size: 18px !important;
+  }
+}
+
 /* Unified homepage section titles — equal size/weight; sentence case via .hp-heading-line */
 .bs-coverflow__heading,
 .fb__title,
