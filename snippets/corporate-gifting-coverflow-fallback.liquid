@@ -1,45 +1,16 @@
 {%- liquid
   assign cf_id = fallback_id | default: 'corp-coverflow-fallback'
-  assign cf_inner_id = cf_id | append: '-inner'
+  assign cf_carousel_id = cf_id | append: '-carousel'
 -%}
 
 <div id="{{ cf_id }}" class="corp-coverflow-fallback-root" data-corp-coverflow-fallback="true" hidden>
-  <section
-    id="{{ cf_inner_id }}"
-    class="corp-coverflow"
-    data-corp-coverflow
-    data-no-typewriter="true"
-    data-spacing="128"
-    data-start-index="2"
-    data-autoplay="false"
-    aria-label="The Gifts that outlast the occasion"
-  >
-    <div class="corp-coverflow__container">
-      <h2 class="corp-coverflow__heading">The Gifts that outlast the occasion</h2>
-
-      <div class="corp-coverflow__stage">
-        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-
-        <div class="corp-coverflow__viewport" data-corp-cf-viewport>
-          <div class="corp-coverflow__track" data-corp-cf-track>
-            {%- assign fallback_badges = '@ Gift Set 1|@ Gift Set 2|@ Dhurandhar 2 Set|@ Gift Set 4|@ Gift Set 5' | split: '|' -%}
-            {%- for badge in fallback_badges -%}
-              <button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="{{ forloop.index0 }}" aria-label="{{ badge | escape }}">
-                <div class="corp-coverflow__inner">
-                  <span class="corp-coverflow__badge">{{ badge }}</span>
-                  <div class="corp-coverflow__placeholder" aria-hidden="true"></div>
-                </div>
-              </button>
-            {%- endfor -%}
-          </div>
-        </div>
-
-        <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
+  {%- render 'corporate-gifting-coverflow-carousel',
+    carousel_id: cf_carousel_id,
+    heading: 'The Gifts that outlast the occasion',
+    spacing: 200,
+    start_index: 2,
+    autoplay: false,
+    card_width: 200,
+    is_standalone: false
+  -%}
 </div>

@@ -1,119 +1,18 @@
 {%- liquid
   assign coverflow_id = 'corp-coverflow-' | append: section.id
-  assign card_size = section.settings.card_size | default: 'reference'
-  case card_size
-    when 'small'
-      assign card_width = 180
-    when 'large'
-      assign card_width = 228
-    else
-      assign card_width = 204
-  endcase
-  assign card_spacing = section.settings.card_spacing | default: 128
-  assign card_radius = section.settings.card_radius | default: 16
-  assign aspect_ratio = section.settings.aspect_ratio | default: '9 / 16'
   assign start_index = section.blocks.size | divided_by: 2
 -%}
 
-{%- render 'corporate-gifting-coverflow-styles' -%}
-
-{%- style -%}
-  #{{ coverflow_id }}.corp-coverflow {
-    --corp-cf-card-w: {{ card_width }}px;
-    --corp-cf-spacing: {{ card_spacing }}px;
-    --corp-cf-radius: {{ card_radius }}px;
-    --corp-cf-aspect: {{ aspect_ratio }};
-    --corp-cf-badge-bg: {{ section.settings.badge_background | default: 'rgba(155, 18, 18, 0.88)' }};
-    background: {{ section.settings.section_background | default: '#ffffff' }};
-  }
-
-  #{{ coverflow_id }} .corp-coverflow__heading {
-    color: {{ section.settings.heading_color | default: '#111111' }} !important;
-  }
-{%- endstyle -%}
-
-<section
-  id="{{ coverflow_id }}"
-  class="corp-coverflow"
-  data-corp-coverflow-section="true"
-  data-no-typewriter="true"
-  data-corp-coverflow
-  data-spacing="{{ card_spacing }}"
-  data-start-index="{{ start_index }}"
-  data-autoplay="{% if section.settings.autoplay %}true{% else %}false{% endif %}"
-  data-autoplay-speed="{{ section.settings.autoplay_speed | default: 5 | times: 1000 }}"
-  aria-label="{{ section.settings.heading | default: 'Gift showcase' | escape }}"
->
-  <div class="corp-coverflow__container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="corp-coverflow__heading">{{ section.settings.heading | escape }}</h2>
-    {%- endif -%}
-
-    <div class="corp-coverflow__stage">
-      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-
-      <div class="corp-coverflow__viewport" data-corp-cf-viewport>
-        <div class="corp-coverflow__track" data-corp-cf-track>
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              <button
-                type="button"
-                class="corp-coverflow__card"
-                data-corp-cf-card
-                data-index="{{ forloop.index0 }}"
-                {% if block.settings.link != blank %}data-url="{{ block.settings.link }}"{% endif %}
-                aria-label="{{ block.settings.badge | default: 'Slide' | escape }} {{ forloop.index }}"
-                {{ block.shopify_attributes }}
-              >
-                <div class="corp-coverflow__inner">
-                  {%- if block.settings.badge != blank -%}
-                    <span class="corp-coverflow__badge">{{ block.settings.badge | escape }}</span>
-                  {%- endif -%}
-                  {%- if block.settings.image != blank -%}
-                    <img
-                      src="{{ block.settings.image | image_url: width: 600 }}"
-                      srcset="{{ block.settings.image | image_url: width: 300 }} 300w, {{ block.settings.image | image_url: width: 450 }} 450w, {{ block.settings.image | image_url: width: 600 }} 600w"
-                      sizes="(max-width: 767px) 58vw, {{ card_width }}px"
-                      alt="{{ block.settings.image.alt | default: block.settings.badge | escape }}"
-                      class="corp-coverflow__image"
-                      loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
-                      decoding="async"
-                      width="{{ card_width }}"
-                      height="{{ card_width | times: 16 | divided_by: 9 }}"
-                    >
-                  {%- else -%}
-                    <div class="corp-coverflow__placeholder" aria-hidden="true"></div>
-                  {%- endif -%}
-                </div>
-              </button>
-            {%- endfor -%}
-          {%- else -%}
-            {%- for i in (1..5) -%}
-              <button
-                type="button"
-                class="corp-coverflow__card"
-                data-corp-cf-card
-                data-index="{{ forloop.index0 }}"
-                aria-label="Slide {{ forloop.index }}"
-              >
-                <div class="corp-coverflow__inner">
-                  <span class="corp-coverflow__badge">@ Gift Set {{ forloop.index }}</span>
-                  <div class="corp-coverflow__placeholder" aria-hidden="true"></div>
-                </div>
-              </button>
-            {%- endfor -%}
-          {%- endif -%}
-        </div>
-      </div>
-
-      <button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-    </div>
-  </div>
-</section>
+{%- render 'corporate-gifting-coverflow-carousel',
+  carousel_id: coverflow_id,
+  heading: section.settings.heading,
+  blocks: section.blocks,
+  spacing: section.settings.card_spacing,
+  start_index: start_index,
+  autoplay: section.settings.autoplay,
+  card_width: 200,
+  is_standalone: true
+-%}
 
 {% schema %}
 {
@@ -132,80 +31,20 @@
       "default": "The Gifts that outlast the occasion"
     },
     {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color",
-      "default": "#111111"
-    },
-    {
-      "type": "color",
-      "id": "section_background",
-      "label": "Section background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "select",
-      "id": "card_size",
-      "label": "Image size",
-      "options": [
-        { "value": "reference", "label": "Reference (204px)" },
-        { "value": "small", "label": "Small (180px)" },
-        { "value": "large", "label": "Large (228px)" }
-      ],
-      "default": "reference"
-    },
-    {
       "type": "range",
       "id": "card_spacing",
       "label": "Spacing between slides",
-      "min": 96,
-      "max": 200,
-      "step": 4,
+      "min": 140,
+      "max": 260,
+      "step": 10,
       "unit": "px",
-      "default": 128
-    },
-    {
-      "type": "range",
-      "id": "card_radius",
-      "label": "Corner radius",
-      "min": 8,
-      "max": 28,
-      "step": 2,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Image aspect ratio",
-      "options": [
-        { "value": "9 / 16", "label": "Tall 9:16 (reference)" },
-        { "value": "3 / 4", "label": "Portrait 3:4" },
-        { "value": "2 / 3", "label": "Portrait 2:3" }
-      ],
-      "default": "9 / 16"
-    },
-    {
-      "type": "color",
-      "id": "badge_background",
-      "label": "Badge background",
-      "default": "#9b1212e0"
+      "default": 200
     },
     {
       "type": "checkbox",
       "id": "autoplay",
       "label": "Autoplay carousel",
       "default": false
-    },
-    {
-      "type": "range",
-      "id": "autoplay_speed",
-      "label": "Autoplay speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
-      "default": 5
     }
   ],
   "blocks": [
@@ -223,13 +62,12 @@
           "id": "badge",
           "label": "Badge label",
           "default": "@ Gift Set",
-          "info": "Shown in the top-left corner (e.g. @ Dhurandhar 2 Set)"
+          "info": "e.g. @ Dhurandhar 2 Set"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link",
-          "info": "Optional. Opens when the active slide is clicked."
+          "label": "Link"
         }
       ]
     }

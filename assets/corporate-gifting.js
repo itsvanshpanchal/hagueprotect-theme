@@ -112,58 +112,12 @@
       document.body.classList.contains('template-page-corporate');
   }
 
-  function ensureCoverflowStyles() {
-    if (document.getElementById('corp-coverflow-styles')) return;
-    var style = document.createElement('style');
-    style.id = 'corp-coverflow-styles';
-    style.textContent = '.corp-coverflow{--corp-cf-card-w:204px;--corp-cf-spacing:128px;--corp-cf-radius:16px;--corp-cf-aspect:9/16;--corp-cf-perspective:1600px;--corp-cf-duration:.72s;--corp-cf-badge-bg:rgba(155,18,18,.88);display:block!important;padding:48px 0 64px;background:#fff;overflow:visible}.corp-coverflow__heading{margin:0 0 40px;text-align:center;font-family:Inter,sans-serif;font-size:clamp(28px,3.6vw,42px);font-weight:700;color:#111}.corp-coverflow__stage{position:relative;width:min(920px,100%);margin:0 auto;padding:0 52px}.corp-coverflow__viewport{position:relative;width:100%;height:364px;perspective:var(--corp-cf-perspective);overflow:visible}.corp-coverflow__track{position:relative;width:100%;height:100%;transform-style:preserve-3d}.corp-coverflow__card{position:absolute!important;left:50%;top:50%;width:var(--corp-cf-card-w);margin:0!important;padding:0!important;border:none!important;background:transparent!important;display:block!important;cursor:pointer;transform-style:preserve-3d;transition:transform .72s ease,opacity .65s ease}.corp-coverflow__inner{position:relative;width:100%;aspect-ratio:var(--corp-cf-aspect);border-radius:var(--corp-cf-radius);overflow:hidden;background:#1a1a1a;box-shadow:0 10px 28px rgba(0,0,0,.14)}.corp-coverflow__placeholder{width:100%;height:100%;background:linear-gradient(180deg,#3a3a3a,#1f1f1f 55%,#2b2b2b)}.corp-coverflow__badge{position:absolute;top:10px;left:10px;z-index:2;padding:5px 10px;border-radius:999px;background:var(--corp-cf-badge-bg);color:#fff!important;font-size:10px;font-weight:600;pointer-events:none}.corp-coverflow__nav{position:absolute;top:50%;transform:translateY(-50%);z-index:50;width:44px;height:44px;border-radius:50%;border:none!important;background:#fff!important;color:#888!important;display:inline-flex!important;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.12)}.corp-coverflow__nav--prev{left:0}.corp-coverflow__nav--next{right:0}';
-    document.head.appendChild(style);
-  }
-
   function revealCoverflowFallback() {
     if (!isCorporateGiftingPage()) return;
-    ensureCoverflowStyles();
     if (document.querySelector('[data-corp-coverflow-section="true"]')) return;
 
     var fallback = document.querySelector('[data-corp-coverflow-fallback="true"]');
-    if (fallback) {
-      fallback.hidden = false;
-      if (window.initCorpCoverflow) window.initCorpCoverflow(fallback, true);
-      return;
-    }
-
-    var occasionsSection = document.querySelector('[data-corp-occasions-section="true"]')?.closest('.shopify-section');
-    if (!occasionsSection || document.getElementById('corp-coverflow-js-fallback')) return;
-
-    var badges = ['@ Gift Set 1', '@ Gift Set 2', '@ Dhurandhar 2 Set', '@ Gift Set 4', '@ Gift Set 5'];
-    var slides = badges.map(function (badge, i) {
-      return '<button type="button" class="corp-coverflow__card" data-corp-cf-card data-index="' + i + '" aria-label="' + badge + '">' +
-        '<div class="corp-coverflow__inner">' +
-        '<span class="corp-coverflow__badge">' + badge + '</span>' +
-        '<div class="corp-coverflow__placeholder" aria-hidden="true"></div>' +
-        '</div></button>';
-    }).join('');
-
-    var wrap = document.createElement('div');
-    wrap.id = 'corp-coverflow-js-fallback';
-    wrap.className = 'corp-coverflow-fallback-root';
-    wrap.setAttribute('data-corp-coverflow-fallback', 'true');
-    wrap.innerHTML = [
-      '<section class="corp-coverflow" data-corp-coverflow data-no-typewriter="true" data-spacing="128" data-start-index="2" data-autoplay="false">',
-      '<div class="corp-coverflow__container">',
-      '<h2 class="corp-coverflow__heading">The Gifts that outlast the occasion</h2>',
-      '<div class="corp-coverflow__stage">',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--prev" data-corp-cf-prev aria-label="Previous slide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>',
-      '<div class="corp-coverflow__viewport" data-corp-cf-viewport>',
-      '<div class="corp-coverflow__track" data-corp-cf-track>',
-      slides,
-      '</div></div>',
-      '<button type="button" class="corp-coverflow__nav corp-coverflow__nav--next" data-corp-cf-next aria-label="Next slide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>',
-      '</div></div></section>'
-    ].join('');
-
-    occasionsSection.insertAdjacentElement('afterend', wrap);
-    if (window.initCorpCoverflow) window.initCorpCoverflow(wrap, true);
+    if (fallback) fallback.hidden = false;
   }
 
   function revealTrustedByFallback() {
