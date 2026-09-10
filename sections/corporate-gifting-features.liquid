@@ -3,6 +3,9 @@
 
 
   .corp-features {
+    --corp-features-accent: #2563eb;
+    --corp-features-accent-dark: #1e40af;
+    --section-label-color: #2563eb;
     padding: clamp(80px, 10vw, 120px) 0;
     background: #ffffff;
     font-family: var(--font-family-sans);
@@ -27,7 +30,7 @@
     font-style: normal;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #e74c3c;
+    color: #2563eb !important;
     margin: 0 0 12px;
   }
 
@@ -107,8 +110,8 @@
   }
 
   .corp-bento__item--red {
-    background: linear-gradient(145deg, #ff2b2b 0%, #a00000 100%);
-    border-color: #ff2b2b;
+    background: linear-gradient(145deg, #2563eb 0%, #1e40af 100%);
+    border-color: #2563eb;
   }
 
   .corp-bento__media {
@@ -162,19 +165,19 @@
     width: 44px;
     height: 44px;
     margin-bottom: 20px;
-    color: #ff2b2b;
+    color: #2563eb;
     flex-shrink: 0;
   }
 
   .corp-bento__item--dark .corp-bento__icon {
-    color: #ff2b2b;
+    color: #2563eb;
   }
 
   .corp-bento__num {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.14em;
-    color: #ff2b2b;
+    color: #2563eb;
     margin: 0 0 10px;
   }
 
@@ -218,8 +221,9 @@
 
   .corp-bento__item--dark .corp-bento__num,
   .corp-bento__item--media .corp-bento__num,
-  .corp-bento__item--red .corp-bento__num {
-    color: #ff2b2b;
+  .corp-bento__item--red .corp-bento__num,
+  .corp-bento__item--light .corp-bento__num {
+    color: #2563eb !important;
   }
 
   .corp-bento__item--light .corp-bento__title,
@@ -250,6 +254,25 @@
     .corp-bento__item--pos-1 {
       min-height: 320px;
     }
+  }
+
+  #shopify-section-{{ section.id }} .corp-features__eyebrow {
+    color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-bento__item--red {
+    background: linear-gradient(145deg, #2563eb 0%, #1e40af 100%) !important;
+    border-color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-bento__icon,
+  #shopify-section-{{ section.id }} .corp-bento__item--dark .corp-bento__icon,
+  #shopify-section-{{ section.id }} .corp-bento__num,
+  #shopify-section-{{ section.id }} .corp-bento__item--dark .corp-bento__num,
+  #shopify-section-{{ section.id }} .corp-bento__item--media .corp-bento__num,
+  #shopify-section-{{ section.id }} .corp-bento__item--red .corp-bento__num,
+  #shopify-section-{{ section.id }} .corp-bento__item--light .corp-bento__num {
+    color: #2563eb !important;
   }
 {%- endstyle -%}
 
