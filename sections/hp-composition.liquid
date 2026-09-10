@@ -131,8 +131,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #9A9A9A !important;
-    color: #ffffff;
+    background: #C8C8C8 !important;
+    color: #111111 !important;
   }
 
   .hp-comp-card-line {
@@ -291,11 +291,11 @@
 
             </div>
             
-            <div class="hp-comp-card-back" style="background-color: #9A9A9A; color: #ffffff;">
+            <div class="hp-comp-card-back" style="background-color: #C8C8C8; color: #111111;">
               {%- if block.settings.back_text != blank -%}
-                <div class="hp-comp-card-title" style="margin: auto; font-size: 16px; text-transform: none; line-height: 1.4;">{{ block.settings.back_text | replace: '\n', '<br>' }}</div>
+                <div class="hp-comp-card-title" style="margin: auto; font-size: 16px; text-transform: none; line-height: 1.4; color: #111111 !important;">{{ block.settings.back_text | replace: '\n', '<br>' }}</div>
               {%- else -%}
-                <div class="hp-comp-card-title" style="margin: auto; font-size: 18px;">{{ block.settings.title }}</div>
+                <div class="hp-comp-card-title" style="margin: auto; font-size: 18px; color: #111111 !important;">{{ block.settings.title }}</div>
               {%- endif -%}
             </div>
           </div>
