@@ -74,7 +74,7 @@
     font-style: normal;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--corp-accent);
+    color: #2563eb !important;
     margin-bottom: 18px;
   }
 
@@ -82,7 +82,7 @@
     content: '';
     width: 24px;
     height: 2px;
-    background: var(--corp-accent);
+    background: #2563eb !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero__title,
@@ -130,7 +130,7 @@
     font-size: inherit !important;
     line-height: inherit !important;
     letter-spacing: inherit !important;
-    color: var(--corp-accent) !important;
+    color: #2563eb !important;
     display: block !important;
   }
 
@@ -162,14 +162,18 @@
   }
 
   .corp-hero__btn--primary {
-    background: var(--corp-accent);
+    background: #2563eb !important;
+    background-color: #2563eb !important;
     color: #ffffff !important;
-    box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45);
+    border-color: #2563eb !important;
+    box-shadow: 0 10px 36px rgba(37, 99, 235, 0.45) !important;
   }
 
   .corp-hero__btn--primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 44px rgba(37, 99, 235, 0.55);
+    background: #2563eb !important;
+    background-color: #2563eb !important;
+    box-shadow: 0 16px 44px rgba(37, 99, 235, 0.55) !important;
   }
 
   .corp-hero__btn--ghost {
@@ -213,8 +217,8 @@
     color: #ffffff !important;
   }
 
-  .corp-hero__stat-num span {
-    color: var(--corp-accent);
+  .corp-hero__stat-num__suffix {
+    color: #2563eb !important;
   }
 
   .corp-hero__stat-num__value {
@@ -406,7 +410,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--corp-accent);
+    color: #2563eb !important;
     margin: 0 0 4px;
   }
 
@@ -506,6 +510,31 @@
       margin-right: 20px;
     }
   }
+
+  /* Beat global red --section-label-color */
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__eyebrow {
+    color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__eyebrow::before {
+    background: #2563eb !important;
+    background-color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__title em,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__title-line2,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__frame-tag {
+    color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__btn--primary,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__btn--primary:hover {
+    background: #2563eb !important;
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+    color: #ffffff !important;
+  }
 {%- endstyle -%}
 
 <section class="corp-hero" id="corp-hero" data-no-typewriter="true">
@@ -526,7 +555,7 @@
 
   <div class="corp-hero__container">
     <div class="corp-hero__copy">
-      <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
+      <p class="corp-hero__eyebrow" style="color: #2563eb !important;">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
       <h1 class="corp-hero__title">
         <span class="corp-hero__title-line1" style="font-family: Inter, sans-serif !important; font-weight: 300 !important; font-size: inherit !important; line-height: inherit !important; letter-spacing: inherit !important;">{{ section.settings.heading_line1 | default: 'Corporate' }}</span>
         <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #2563eb !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
@@ -534,7 +563,7 @@
       <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
 
       <div class="corp-hero__actions">
-        <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary">
+        <a href="{{ section.settings.btn_link | default: '#corp-inquiry' }}" class="corp-hero__btn corp-hero__btn--primary" style="background-color: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;">
           {{ section.settings.btn_label | default: 'Start Your Order' }}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -560,19 +589,19 @@
       <div class="corp-hero__stats">
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat1_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>+</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat1_label | default: 'Brands Gifted' }}</span>
         </div>
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat2_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>K+</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">K+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat2_label | default: 'Kits Delivered' }}</span>
         </div>
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat3_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix>%</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">%</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
         </div>

@@ -688,6 +688,38 @@
       })();
     </script>
 
+    {%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
+      <style id="hp-corp-gifting-hero-blue-accent">
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__eyebrow,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__eyebrow {
+          color: #2563eb !important;
+        }
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__eyebrow::before,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__eyebrow::before {
+          background: #2563eb !important;
+        }
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__title em,
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__title-line2,
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num__suffix,
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__frame-tag,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__title em,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__title-line2,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num__suffix,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__frame-tag {
+          color: #2563eb !important;
+        }
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__btn--primary,
+        body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__btn--primary:hover,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__btn--primary,
+        body.template-page-corporate #MainContent .corp-hero .corp-hero__btn--primary:hover {
+          background: #2563eb !important;
+          background-color: #2563eb !important;
+          border-color: #2563eb !important;
+          color: #ffffff !important;
+        }
+      </style>
+    {%- endif -%}
+
     {%- if template == 'search.how-to-use' -%}
       <style id="hp-how-to-use-typography-fix">
         body.template-search-how-to-use #MainContent .shopify-section h2.htu-v2__grid-main-title,
