@@ -220,8 +220,12 @@
     color: #ffffff !important;
   }
 
-  .corp-hero__stat-num__suffix {
+  .corp-hero__stat-num__suffix,
+  .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
+  .corp-hero [data-corp-count] span,
+  .corp-hero [data-corp-hero-counter-suffix] {
     color: #2563eb !important;
+    -webkit-text-fill-color: #2563eb !important;
   }
 
   .corp-hero__stat-num__value {
@@ -536,8 +540,12 @@
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__title em,
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__title-line2,
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
+  #shopify-section-{{ section.id }} .corp-hero [data-corp-count] span,
+  #shopify-section-{{ section.id }} .corp-hero [data-corp-hero-counter-suffix],
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__frame-tag {
     color: #2563eb !important;
+    -webkit-text-fill-color: #2563eb !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__btn--primary,
@@ -561,8 +569,11 @@
   }
 
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
+  #shopify-section-{{ section.id }} .corp-hero [data-corp-count] span,
   #shopify-section-{{ section.id }} .corp-hero [data-corp-hero-counter-suffix] {
     color: #2563eb !important;
+    -webkit-text-fill-color: #2563eb !important;
     -webkit-text-stroke: 0 !important;
     text-shadow: none !important;
   }
@@ -620,19 +631,19 @@
       <div class="corp-hero__stats">
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat1_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">+</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat1_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important; -webkit-text-fill-color: #2563eb !important;">+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat1_label | default: 'Brands Gifted' }}</span>
         </div>
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat2_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">K+</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat2_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important; -webkit-text-fill-color: #2563eb !important;">K+</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat2_label | default: 'Kits Delivered' }}</span>
         </div>
         <div class="corp-hero__stat">
           <span class="corp-hero__stat-num" data-corp-hero-counter data-corp-hero-counter-value="{{ stat3_num | escape }}">
-            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important;">%</span>
+            <span class="corp-hero__stat-num__value" data-corp-hero-counter-number>{{ stat3_num }}</span><span class="corp-hero__stat-num__suffix" data-corp-hero-counter-suffix style="color: #2563eb !important; -webkit-text-fill-color: #2563eb !important;">%</span>
           </span>
           <span class="corp-hero__stat-label">{{ section.settings.stat3_label | default: 'Satisfaction' }}</span>
         </div>

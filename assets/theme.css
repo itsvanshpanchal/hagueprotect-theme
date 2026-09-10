@@ -2033,6 +2033,18 @@ body.template-page-corporate {
   --color-primary-rgb: 37, 99, 235;
 }
 
+body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num__suffix,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num__suffix,
+body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
+body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
+body.template-search-corporate-gifting #MainContent .corp-hero [data-corp-count] span,
+body.template-page-corporate #MainContent .corp-hero [data-corp-count] span,
+body.template-search-corporate-gifting #MainContent .corp-hero [data-corp-hero-counter-suffix],
+body.template-page-corporate #MainContent .corp-hero [data-corp-hero-counter-suffix] {
+  color: #2563eb !important;
+  -webkit-text-fill-color: #2563eb !important;
+}
+
 /* Homepage mobile — unified heading column gutter (matches theme-layout-css.liquid) */
 @media screen and (max-width: 767px) {
   body.template-index .bs-coverflow__container,
