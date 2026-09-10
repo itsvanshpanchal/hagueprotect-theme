@@ -1,9 +1,13 @@
+{%- liquid
+  assign dna_line2_color = section.settings.heading_line2_color | default: '#9A9A9A'
+-%}
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
 
   .hp-dna-{{ section.id }} {
     --hp-dna-accent: {{ section.settings.accent_color }};
+    --hp-dna-line2-color: {{ dna_line2_color }};
     --hp-dna-text: #ffffff;
     --hp-dna-badge: {{ section.settings.icon_badge_size }}px;
     --hp-dna-glow: {{ section.settings.glow_intensity | divided_by: 100.0 }};
@@ -76,8 +80,8 @@
   }
 
   .hp-dna-{{ section.id }} .hp-dna__heading .hp-heading-line--2 {
-    color: #808080 !important;
-    -webkit-text-fill-color: #808080 !important;
+    color: var(--hp-dna-line2-color, #9A9A9A) !important;
+    -webkit-text-fill-color: var(--hp-dna-line2-color, #9A9A9A) !important;
     font-style: normal !important;
     font-weight: 400 !important;
     transform: none !important;
@@ -289,8 +293,8 @@
       font-synthesis: none !important;
       line-height: 1.05 !important;
       letter-spacing: 0.03em !important;
-      color: #808080 !important;
-      -webkit-text-fill-color: #808080 !important;
+      color: var(--hp-dna-line2-color, #9A9A9A) !important;
+      -webkit-text-fill-color: var(--hp-dna-line2-color, #9A9A9A) !important;
       margin-top: -10px !important;
     }
 
@@ -746,7 +750,7 @@
       "type": "color",
       "id": "heading_line2_color",
       "label": "Heading second line color",
-      "default": "#6b6b6b"
+      "default": "#9A9A9A"
     },
     {
       "type": "color",
