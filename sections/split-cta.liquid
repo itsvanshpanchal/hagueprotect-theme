@@ -226,29 +226,39 @@
     .split-cta--redesign {
       min-height: auto !important;
       padding-top: 48px !important;
-      padding-bottom: 90px !important;
+      padding-bottom: 120px !important;
       overflow: hidden !important;
     }
     .split-cta--redesign__heading {
-      line-height: 1.1;
+      line-height: 1.15;
       margin-bottom: 20px;
     }
 
     .split-cta--redesign__subtext {
-      margin-bottom: 16px !important;
+      margin-bottom: 20px !important;
+      line-height: 1.45 !important;
+    }
+
+    .split-cta--redesign__subtext p {
+      line-height: 1.45 !important;
+    }
+
+    .split-cta--redesign__subtext p + p {
+      margin-top: 10px !important;
     }
     
     .split-cta--redesign__tagline {
       font-size: 20px !important;
-      margin-top: 12px !important;
+      margin-top: 16px !important;
+      margin-bottom: 0 !important;
       position: relative !important;
       z-index: 10 !important;
     }
 
     .split-cta--redesign__spacer {
-      height: 0 !important;
-      min-height: 0 !important;
-      overflow: hidden !important;
+      height: 28px !important;
+      min-height: 28px !important;
+      flex-shrink: 0;
     }
 
     .split-cta--redesign__chevron {
@@ -256,6 +266,7 @@
     }
     .split-cta--redesign__content {
       padding-top: 0 !important;
+      padding-bottom: 20px !important;
       position: relative !important;
       z-index: 10 !important;
     }
@@ -263,18 +274,20 @@
     .split-cta--redesign__chevron {
       display: none !important;
     }
-    /* Sphere anchored to bottom — no extra flow gap above it */
+    /* Sphere sits below text — pushed down so copy never overlaps */
     .split-cta--redesign__sphere,
     .split-cta--redesign__sphere-img {
       position: absolute !important;
       display: block !important;
-      width: 105vw !important;
+      width: 100vw !important;
       max-width: none !important;
       left: 50% !important;
       bottom: 0 !important;
       top: auto !important;
-      transform: translate(-50%, 68%) rotate(var(--scroll-rotate, 0deg)) !important;
+      transform: translate(-50%, 82%) rotate(var(--scroll-rotate, 0deg)) !important;
       margin-top: 0 !important;
+      z-index: 1 !important;
+      pointer-events: none;
     }
   }
   {%- if page.handle == 'about-us' or template.suffix == 'about' or template.suffix == 'about-us' -%}
@@ -287,10 +300,10 @@
     }
     @media screen and (max-width: 768px) {
       #shopify-section-{{ section.id }} .split-cta--redesign__spacer {
-        height: 0;
+        height: 28px;
       }
       #shopify-section-{{ section.id }} .split-cta--redesign {
-        padding-bottom: 90px;
+        padding-bottom: 120px;
       }
     }
   {%- endif -%}
