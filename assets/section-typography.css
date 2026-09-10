@@ -1401,3 +1401,28 @@ body #MainContent .shopify-section .faq-custom--page .faq-custom__cta-text {
     font-size: 18px !important;
   }
 }
+
+/* Footer newsletter subscribe button — blue accent */
+body .footer-wrapper .footer__form-btn,
+body .footer-wrapper #footer-subscribe-btn,
+body #footer-subscribe-btn.footer__form-btn {
+  background-color: #2563eb !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border-color: #2563eb !important;
+}
+
+body .footer-wrapper .footer__form-btn:hover,
+body .footer-wrapper .footer__form-btn:focus,
+body .footer-wrapper .footer__form-btn:active,
+body .footer-wrapper #footer-subscribe-btn:hover,
+body .footer-wrapper #footer-subscribe-btn:focus,
+body .footer-wrapper #footer-subscribe-btn:active,
+body #footer-subscribe-btn.footer__form-btn:hover,
+body #footer-subscribe-btn.footer__form-btn:focus,
+body #footer-subscribe-btn.footer__form-btn:active {
+  background-color: #1d4ed8 !important;
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+  color: #ffffff !important;
+}
