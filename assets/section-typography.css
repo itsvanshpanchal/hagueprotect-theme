@@ -1185,8 +1185,17 @@ body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link:
   color: #2563eb !important;
 }
 
-body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-indicator {
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-indicator,
+body.template-search-how-to-use #MainContent .shopify-section [data-htu-nav-indicator] {
   background: #2563eb !important;
+  background-color: #2563eb !important;
+}
+
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link,
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link.is-active,
+body.template-search-how-to-use #MainContent .shopify-section .htu-v2__nav-link:hover {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 body.template-search-how-to-use #MainContent .shopify-section .htu-v2__mob-nav a {

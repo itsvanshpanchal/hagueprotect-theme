@@ -479,10 +479,11 @@
     left: 0;
     height: 2px;
     width: 0;
-    background: var(--htu-nav-hover, #2563eb);
+    background: #2563eb !important;
+    background-color: #2563eb !important;
     border-radius: 1px;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
     transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: left, width;
   }
@@ -519,6 +520,8 @@
 
   .htu-v2__nav-link.is-active {
     color: #000000 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
 
   .htu-v2__nav-link:hover {
@@ -1000,6 +1003,19 @@
       font-size: 18px !important;
       font-weight: 300 !important;
     }
+  }
+
+  #shopify-section-{{ section.id }} .htu-v2__nav-indicator,
+  #shopify-section-{{ section.id }} [data-htu-nav-indicator] {
+    background: #2563eb !important;
+    background-color: #2563eb !important;
+  }
+
+  #shopify-section-{{ section.id }} .htu-v2__nav-link,
+  #shopify-section-{{ section.id }} .htu-v2__nav-link.is-active,
+  #shopify-section-{{ section.id }} .htu-v2__nav-link:hover {
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
   {%- endif -%}
 {%- endstyle -%}

@@ -171,6 +171,17 @@
           line-height: 1.1 !important;
           color: #000 !important;
         }
+        .htu-v2__nav-indicator,
+        [data-htu-nav-indicator] {
+          background: #2563eb !important;
+          background-color: #2563eb !important;
+        }
+        .htu-v2__nav-link,
+        .htu-v2__nav-link.is-active,
+        .htu-v2__nav-link:hover {
+          border-bottom: none !important;
+          box-shadow: none !important;
+        }
       `;
       document.head.appendChild(style);
     }
