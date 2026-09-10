@@ -3,9 +3,8 @@
    Always prefer CSS variables; never hardcode px sizes for editable text. */
 
 /* ========== H1 / Biggest title ========== */
-#MainContent .shopify-section h1:not(.hero-fullscreen__heading):not(.faq-custom__page-title),
+#MainContent .shopify-section h1:not(.hero-fullscreen__heading):not(.faq-custom__page-title):not(.corp-hero__title),
 #MainContent .shopify-section .hp-display-heading,
-#MainContent .shopify-section .corp-hero__title,
 #MainContent .shopify-section .biz-hero__title,
 #MainContent .shopify-section .how-to-banner__title,
 #MainContent .shopify-section .d2c-product-title,
@@ -687,9 +686,25 @@ body .shopify-section h1.corp-hero__title {
   text-transform: none !important;
 }
 
-/* Corporate Gifting hero — "Gifting" line matches Inter Light (same size as line 1) */
+/* Corporate Gifting hero — both title lines Inter Light (same size, weight 300) */
+body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title,
+body.template-search-corporate-gifting #MainContent .shopify-section h1.corp-hero__title,
+body.template-page-corporate #MainContent .shopify-section .corp-hero__title,
+body.template-page-corporate #MainContent .shopify-section h1.corp-hero__title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-weight: 300 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+
+body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title-line1,
 body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title em,
 body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title-line2,
+body.template-page-corporate #MainContent .shopify-section .corp-hero__title-line1,
 body.template-page-corporate #MainContent .shopify-section .corp-hero__title em,
 body.template-page-corporate #MainContent .shopify-section .corp-hero__title-line2 {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
@@ -698,6 +713,7 @@ body.template-page-corporate #MainContent .shopify-section .corp-hero__title-lin
   font-style: normal !important;
   font-synthesis: none !important;
   -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
   -webkit-text-stroke: 0 !important;
   text-shadow: none !important;
   line-height: inherit !important;
@@ -789,8 +805,17 @@ body .shopify-section .corp-process__step-title {
     letter-spacing: -0.01em !important;
   }
 
+  body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title,
+  body.template-search-corporate-gifting #MainContent .shopify-section h1.corp-hero__title,
+  body.template-page-corporate #MainContent .shopify-section .corp-hero__title,
+  body.template-page-corporate #MainContent .shopify-section h1.corp-hero__title {
+    font-weight: 300 !important;
+  }
+
+  body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title-line1,
   body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title em,
   body.template-search-corporate-gifting #MainContent .shopify-section .corp-hero__title-line2,
+  body.template-page-corporate #MainContent .shopify-section .corp-hero__title-line1,
   body.template-page-corporate #MainContent .shopify-section .corp-hero__title em,
   body.template-page-corporate #MainContent .shopify-section .corp-hero__title-line2 {
     font-size: inherit !important;

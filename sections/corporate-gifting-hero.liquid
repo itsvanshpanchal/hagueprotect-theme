@@ -84,12 +84,23 @@
     background: var(--corp-accent);
   }
 
+  #shopify-section-{{ section.id }} .corp-hero__title,
+  #shopify-section-{{ section.id }} h1.corp-hero__title,
   .corp-hero__title {
     margin: 0 0 22px !important;
     color: #ffffff !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
     font-weight: 300 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
   }
 
+  #shopify-section-{{ section.id }} .corp-hero__title-line1,
+  .corp-hero__title-line1,
   .corp-hero__title em,
   .corp-hero__title-line2 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
@@ -501,7 +512,7 @@
     <div class="corp-hero__copy">
       <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
       <h1 class="corp-hero__title">
-        {{ section.settings.heading_line1 | default: 'Corporate' }}
+        <span class="corp-hero__title-line1" style="font-family: Inter, sans-serif !important; font-weight: 300 !important; font-size: inherit !important; line-height: inherit !important; letter-spacing: inherit !important;">{{ section.settings.heading_line1 | default: 'Corporate' }}</span>
         <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #ff2b2b !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
       <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
