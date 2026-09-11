@@ -120,6 +120,13 @@
     if (fallback) fallback.hidden = false;
   }
 
+  function removeTrustedByFallbackDuplicates() {
+    if (!document.querySelector('[data-corp-trusted-section="true"]')) return;
+    document.querySelectorAll('.corp-trusted-fallback-root').forEach(function (el) {
+      el.remove();
+    });
+  }
+
   function updateCorpFormContacts() {
     if (!isCorporateGiftingPage()) return;
 
@@ -171,6 +178,7 @@
   function boot(root) {
     animateLegacyHeroCounters(root);
     revealCoverflowFallback();
+    removeTrustedByFallbackDuplicates();
     initReveal();
     updateCorpFormContacts();
     smoothScrollCTA();
