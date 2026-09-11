@@ -732,7 +732,8 @@ body.template-page-corporate #MainContent .shopify-section .corp-hero__title-lin
   text-shadow: none !important;
   line-height: inherit !important;
   letter-spacing: inherit !important;
-  color: #2563eb !important;
+  color: #C8C8C8 !important;
+  -webkit-text-fill-color: #C8C8C8 !important;
 }
 
 
@@ -1492,27 +1493,31 @@ body #footer-subscribe-btn.footer__form-btn:active {
   color: #ffffff !important;
 }
 
-/* Corporate Gifting hero — force blue accent over global red label color */
+/* Corporate Gifting hero — white eyebrow, grey title line 2 */
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__eyebrow,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__eyebrow {
-  color: #2563eb !important;
+  color: #ffffff !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__eyebrow::before,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__eyebrow::before {
-  background: #2563eb !important;
-  background-color: #2563eb !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__title em,
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__title-line2,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__title em,
+body.template-page-corporate #MainContent .corp-hero .corp-hero__title-line2 {
+  color: #C8C8C8 !important;
+  -webkit-text-fill-color: #C8C8C8 !important;
+}
+
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num__suffix,
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
 body.template-search-corporate-gifting #MainContent .corp-hero [data-corp-count] span,
 body.template-search-corporate-gifting #MainContent .corp-hero [data-corp-hero-counter-suffix],
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__frame-tag,
-body.template-page-corporate #MainContent .corp-hero .corp-hero__title em,
-body.template-page-corporate #MainContent .corp-hero .corp-hero__title-line2,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num__suffix,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
 body.template-page-corporate #MainContent .corp-hero [data-corp-count] span,
@@ -1540,15 +1545,22 @@ body.template-page-corporate #MainContent .corp-hero .corp-hero__btn--primary:ho
 
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__mesh,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__mesh {
-  background:
-    radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
-    radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.14) 0%, transparent 50%),
-    linear-gradient(160deg, #080808 0%, #101010 50%, #080e1a 100%) !important;
+  background: #000000 !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__showcase::before,
 body.template-page-corporate #MainContent .corp-hero .corp-hero__showcase::before {
-  background: radial-gradient(ellipse 72% 58% at 50% 46%, rgba(37, 99, 235, 0.38) 0%, transparent 68%) !important;
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+body.template-search-corporate-gifting #MainContent .corp-hero__container,
+body.template-page-corporate #MainContent .corp-hero__container {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 body.template-search-corporate-gifting,

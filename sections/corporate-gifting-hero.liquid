@@ -1,6 +1,11 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
+  #shopify-section-{{ section.id }} {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important;
+  }
 
   .corp-hero {
     --corp-accent: #2563eb;
@@ -39,10 +44,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background:
-      radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.16) 0%, transparent 58%),
-      radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.07) 0%, transparent 50%),
-      #000000;
+    background: #000000;
   }
 
   .corp-hero__grain {
@@ -57,14 +59,15 @@
   .corp-hero__container {
     position: relative;
     z-index: 5;
-    max-width: 100%;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     width: 100%;
-    padding: clamp(110px, 14vh, 150px) max(12px, 1vw) clamp(48px, 6vh, 72px);
+    padding: clamp(110px, 14vh, 150px) clamp(12px, 2vw, 24px) clamp(48px, 6vh, 72px);
     display: grid;
     grid-template-columns: 0.95fr 1.05fr;
-    gap: clamp(40px, 6vw, 72px);
+    gap: clamp(24px, 4vw, 48px);
     align-items: center;
+    box-sizing: border-box;
   }
 
   .corp-hero__eyebrow {
@@ -77,7 +80,7 @@
     font-style: normal;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #2563eb !important;
+    color: #ffffff !important;
     margin-bottom: 18px;
   }
 
@@ -85,7 +88,7 @@
     content: '';
     width: 24px;
     height: 2px;
-    background: #2563eb !important;
+    background: #ffffff !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero__title,
@@ -133,7 +136,7 @@
     font-size: inherit !important;
     line-height: inherit !important;
     letter-spacing: inherit !important;
-    color: #2563eb !important;
+    color: #C8C8C8 !important;
     display: block !important;
   }
 
@@ -244,20 +247,16 @@
   .corp-hero__showcase {
     position: relative;
     height: clamp(460px, 62vh, 640px);
-    max-width: 680px;
+    max-width: none;
     min-height: 420px;
-    margin-left: auto;
+    margin-left: 0;
     width: 100%;
     overflow: visible;
   }
 
   .corp-hero__showcase::before {
-    content: '';
-    position: absolute;
-    inset: -18% -12%;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse 72% 58% at 50% 46%, rgba(37, 99, 235, 0.38) 0%, transparent 68%);
+    content: none;
+    display: none;
   }
 
   .corp-hero__showcase--single {
@@ -529,16 +528,20 @@
 
   /* Beat global red --section-label-color */
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__eyebrow {
-    color: #2563eb !important;
+    color: #ffffff !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__eyebrow::before {
-    background: #2563eb !important;
-    background-color: #2563eb !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__title em,
-  #shopify-section-{{ section.id }} .corp-hero .corp-hero__title-line2,
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__title-line2 {
+    color: #C8C8C8 !important;
+    -webkit-text-fill-color: #C8C8C8 !important;
+  }
+
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num span:not(.corp-hero__stat-num__value),
   #shopify-section-{{ section.id }} .corp-hero [data-corp-count] span,
@@ -562,10 +565,13 @@
   }
 
   #shopify-section-{{ section.id }} .corp-hero__mesh {
-    background:
-      radial-gradient(ellipse 70% 55% at 78% 42%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
-      radial-gradient(ellipse 45% 35% at 12% 18%, rgba(37, 99, 235, 0.14) 0%, transparent 50%),
-      linear-gradient(160deg, #080808 0%, #101010 50%, #080e1a 100%) !important;
+    background: #000000 !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-hero .corp-hero__showcase::before {
+    content: none !important;
+    display: none !important;
+    background: none !important;
   }
 
   #shopify-section-{{ section.id }} .corp-hero .corp-hero__stat-num__suffix,
@@ -597,10 +603,10 @@
 
   <div class="corp-hero__container">
     <div class="corp-hero__copy">
-      <p class="corp-hero__eyebrow" style="color: #2563eb !important;">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
+      <p class="corp-hero__eyebrow">{{ section.settings.eyebrow | default: 'B2B Gifting Studio' }}</p>
       <h1 class="corp-hero__title">
         <span class="corp-hero__title-line1" style="font-family: Inter, sans-serif !important; font-weight: 300 !important; font-size: inherit !important; line-height: inherit !important; letter-spacing: inherit !important;">{{ section.settings.heading_line1 | default: 'Corporate' }}</span>
-        <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #2563eb !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
+        <em class="corp-hero__title-line2" style="font-family: Inter, sans-serif !important; font-style: normal !important; font-weight: 300 !important; font-size: inherit !important; color: #C8C8C8 !important; display: block !important;">{{ section.settings.heading_line2 | default: 'Gifting' }}</em>
       </h1>
       <p class="corp-hero__sub">{{ section.settings.subheading | default: 'Premium sneaker care kits, co-branded for your team, clients, and partners. From onboarding boxes to executive gifts &#8212; crafted to impress.' }}</p>
 
