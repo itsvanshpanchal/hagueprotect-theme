@@ -122,6 +122,7 @@
 
   function revealTrustedByFallback() {
     if (!isCorporateGiftingPage()) return;
+    if (window.Shopify && window.Shopify.designMode) return;
     if (document.querySelector('[data-corp-trusted-section="true"]')) return;
 
     var fallback = document.querySelector('[data-corp-trusted-fallback="true"]');

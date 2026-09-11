@@ -30,7 +30,7 @@
     margin: 0 0 clamp(28px, 4vw, 40px);
     text-align: left;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-    font-size: 52px !important;
+    font-size: {{ section.settings.heading_size | default: 52 }}px !important;
     font-weight: 300 !important;
     font-style: normal !important;
     line-height: 1.1;
@@ -111,6 +111,23 @@
       grid-template-columns: 1fr;
     }
   }
+
+  #shopify-section-{{ section.id }} .corp-trusted__editor-empty {
+    padding: 48px 24px;
+    border: 2px dashed rgba(17, 17, 17, 0.2);
+    border-radius: 16px;
+    text-align: center;
+    color: rgba(17, 17, 17, 0.55);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .corp-trusted__logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 {%- endstyle -%}
 
 <section class="corp-trusted" data-no-typewriter="true" data-corp-trusted-section="true">
@@ -123,44 +140,42 @@
       {%- if section.blocks.size > 0 -%}
         <div class="corp-trusted__grid">
           {%- for block in section.blocks -%}
+            {%- liquid
+              assign block_logo_width = block.settings.logo_width | default: logo_max_width
+              assign block_logo_height = block.settings.logo_height | default: logo_max_height
+              assign block_label = block.settings.label
+              if block_label == blank
+                assign block_label = 'Logo ' | append: forloop.index
+              endif
+            -%}
             <div class="corp-trusted__logo-wrap" {{ block.shopify_attributes }}>
-              {%- if block.settings.link != blank -%}
-                <a href="{{ block.settings.link }}" class="corp-trusted__logo-link" aria-label="{{ block.settings.image.alt | default: block.settings.label | default: 'Partner logo' | escape }}">
-              {%- endif -%}
-
               {%- if block.settings.image != blank -%}
-                {%- liquid
-                  assign block_logo_width = block.settings.logo_width | default: logo_max_width
-                  assign block_logo_height = block.settings.logo_height | default: logo_max_height
-                -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="corp-trusted__logo-link" aria-label="{{ block.settings.image.alt | default: block_label | escape }}">
+                {%- endif -%}
                 <img
                   class="corp-trusted__logo"
                   src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+                  alt="{{ block.settings.image.alt | default: block_label | escape }}"
                   width="{{ block.settings.image.width }}"
                   height="{{ block.settings.image.height }}"
                   loading="lazy"
                   style="max-width: {{ block_logo_width }}px; max-height: {{ block_logo_height }}px;"
                 >
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- endif -%}
               {%- else -%}
                 <div class="corp-trusted__placeholder">
-                  {{ block.settings.label | default: 'Upload logo' }}
+                  {{ block_label }}
                 </div>
-              {%- endif -%}
-
-              {%- if block.settings.link != blank -%}
-                </a>
               {%- endif -%}
             </div>
           {%- endfor -%}
         </div>
-      {%- else -%}
-        <div class="corp-trusted__grid">
-          {%- for i in (1..9) -%}
-            <div class="corp-trusted__logo-wrap">
-              <div class="corp-trusted__placeholder">Logo {{ i }}</div>
-            </div>
-          {%- endfor -%}
+      {%- elsif request.design_mode -%}
+        <div class="corp-trusted__editor-empty">
+          <p>Add logo blocks in the sidebar, then upload each partner image.</p>
         </div>
       {%- endif -%}
 
@@ -176,6 +191,13 @@
   "name": "Corporate Trusted By",
   "tag": "section",
   "class": "corp-trusted-section",
+  "max_blocks": 24,
+  "enabled_on": {
+    "templates": [
+      "search.corporate-gifting",
+      "page.corporate"
+    ]
+  },
   "settings": [
     {
       "type": "header",
@@ -191,8 +213,8 @@
       "type": "range",
       "id": "heading_size",
       "label": "Heading size",
-      "min": 14,
-      "max": 36,
+      "min": 24,
+      "max": 72,
       "step": 1,
       "unit": "px",
       "default": 52
@@ -293,13 +315,15 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo image"
+          "label": "Logo image",
+          "info": "Upload a partner or client logo. Recommended: PNG or SVG on a transparent background."
         },
         {
           "type": "text",
           "id": "label",
-          "label": "Placeholder label",
-          "info": "Shown in the editor when no image is uploaded."
+          "label": "Logo label",
+          "default": "Logo",
+          "info": "Used for accessibility and as placeholder text before an image is uploaded."
         },
         {
           "type": "url",
@@ -333,16 +357,20 @@
   "presets": [
     {
       "name": "Corporate Trusted By",
+      "settings": {
+        "heading": "TRUSTED BY TEAMS WITH TASTE",
+        "footer_text": "and more..."
+      },
       "blocks": [
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" }
+        { "type": "logo", "settings": { "label": "Logo 1" } },
+        { "type": "logo", "settings": { "label": "Logo 2" } },
+        { "type": "logo", "settings": { "label": "Logo 3" } },
+        { "type": "logo", "settings": { "label": "Logo 4" } },
+        { "type": "logo", "settings": { "label": "Logo 5" } },
+        { "type": "logo", "settings": { "label": "Logo 6" } },
+        { "type": "logo", "settings": { "label": "Logo 7" } },
+        { "type": "logo", "settings": { "label": "Logo 8" } },
+        { "type": "logo", "settings": { "label": "Logo 9" } }
       ]
     }
   ]
