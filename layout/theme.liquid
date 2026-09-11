@@ -692,6 +692,10 @@
 
     {%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
       <style id="hp-corp-gifting-hero-blue-accent">
+        body.template-search-corporate-gifting #MainContent,
+        body.template-page-corporate #MainContent {
+          --site-max-width: 100% !important;
+        }
         body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__eyebrow,
         body.template-page-corporate #MainContent .corp-hero .corp-hero__eyebrow {
           color: #2563eb !important;

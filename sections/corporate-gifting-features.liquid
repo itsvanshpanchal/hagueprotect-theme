@@ -9,22 +9,13 @@
     padding: clamp(80px, 10vw, 120px) 0;
     background: #ffffff;
     font-family: var(--font-family-sans);
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .corp-features__container {
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: var(--site-max-width) !important;
     margin: 0 auto;
-    padding: 0 20px !important;
-  }
-  @media screen and (min-width: 768px) {
-    .corp-features__container {
-      padding: 0 40px !important;
-    }
+    padding: 0 max(20px, 4vw) !important;
   }
 
   .corp-features__header {
