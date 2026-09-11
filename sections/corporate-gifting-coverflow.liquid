@@ -24,9 +24,9 @@
   }
 
   #{{ section_id }} .corp-coverflow__container {
-    max-width: 100%;
+    max-width: var(--site-max-width);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 max(20px, var(--site-padding, 24px));
   }
 
   #{{ section_id }} .corp-coverflow__heading {
