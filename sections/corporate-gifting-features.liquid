@@ -9,13 +9,19 @@
     padding: clamp(80px, 10vw, 120px) 0;
     background: #ffffff;
     font-family: var(--font-family-sans);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 
   .corp-features__container {
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 1600px !important; /* increased max-width for big screens */
     margin: 0 auto;
-    padding: 0 max(20px, 4vw) !important;
+    padding: 0 clamp(20px, 5vw, 80px) !important;
   }
 
   .corp-features__header {
