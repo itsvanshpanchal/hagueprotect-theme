@@ -120,47 +120,6 @@
     if (fallback) fallback.hidden = false;
   }
 
-  function revealTrustedByFallback() {
-    if (!isCorporateGiftingPage()) return;
-    if (window.Shopify && window.Shopify.designMode) return;
-    if (document.querySelector('[data-corp-trusted-section="true"]')) return;
-
-    var fallback = document.querySelector('[data-corp-trusted-fallback="true"]');
-    if (fallback) {
-      fallback.hidden = false;
-      return;
-    }
-
-    var featuresSection = document.querySelector('.corp-features')?.closest('.shopify-section');
-    if (!featuresSection || document.getElementById('corp-trusted-js-fallback')) return;
-
-    var wrap = document.createElement('div');
-    wrap.id = 'corp-trusted-js-fallback';
-    wrap.className = 'corp-trusted-fallback-root';
-    wrap.setAttribute('data-corp-trusted-fallback', 'true');
-    wrap.innerHTML = [
-      '<section class="corp-trusted" data-no-typewriter="true">',
-      '<div class="corp-trusted__container" style="max-width:var(--site-max-width);margin:0 auto;padding:0 max(20px,var(--site-padding,24px))">',
-      '<h2 class="corp-trusted__heading" style="margin:0 0 32px;text-align:center;font-family:Inter,sans-serif;font-size:52px;font-weight:300;line-height:1.1;letter-spacing:-.02em;color:#111">TRUSTED BY TEAMS WITH TASTE</h2>',
-      '<div class="corp-trusted__panel" style="background:#f0f0f0;border-radius:24px;padding:48px 32px 32px">',
-      '<div class="corp-trusted__grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 24px;align-items:center;justify-items:center">',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 1</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 2</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 3</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 4</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 5</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 6</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 7</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 8</div></div>',
-      '<div class="corp-trusted__logo-wrap"><div style="min-height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(17,17,17,.18);border-radius:8px;padding:12px;color:rgba(17,17,17,.35);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Logo 9</div></div>',
-      '</div>',
-      '<p style="margin:32px 0 0;text-align:center;font-family:\'Darker Grotesque\',sans-serif;font-size:18px;color:#9a9a9a">and more...</p>',
-      '</div></div></section>'
-    ].join('');
-
-    featuresSection.insertAdjacentElement('afterend', wrap);
-  }
-
   function updateCorpFormContacts() {
     if (!isCorporateGiftingPage()) return;
 
@@ -212,7 +171,6 @@
   function boot(root) {
     animateLegacyHeroCounters(root);
     revealCoverflowFallback();
-    revealTrustedByFallback();
     initReveal();
     updateCorpFormContacts();
     smoothScrollCTA();
