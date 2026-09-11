@@ -7,6 +7,10 @@
 -%}
 
 <style>
+  #shopify-section-{{ section.id }} {
+    background: #000000 !important;
+  }
+
   #{{ section_id }} {
     --corp-cf-card-w: 200px;
     --corp-cf-spacing: {{ cf_spacing }}px;
@@ -19,7 +23,7 @@
     z-index: 2;
     display: block !important;
     padding: 48px 0 64px;
-    background: #ffffff;
+    background: #000000;
     overflow: hidden; /* Prevent horizontal scroll on mobile */
   }
 
@@ -37,7 +41,7 @@
     font-weight: 700 !important;
     line-height: 1.15;
     letter-spacing: -0.015em;
-    color: #111111 !important;
+    color: #ffffff !important;
   }
 
   #{{ section_id }} .corp-coverflow__stage {

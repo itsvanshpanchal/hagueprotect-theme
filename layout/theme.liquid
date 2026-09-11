@@ -772,10 +772,33 @@
         body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted-fallback-root),
         body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted-fallback-root),
         body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-form),
-        body.template-page-corporate #MainContent .shopify-section:has(.corp-form) {
+        body.template-page-corporate #MainContent .shopify-section:has(.corp-form),
+        body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow),
+        body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow),
+        body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow-fallback-root),
+        body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow-fallback-root) {
           padding-left: 0 !important;
           padding-right: 0 !important;
           max-width: none !important;
+        }
+        body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow),
+        body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow),
+        body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-coverflow-fallback-root),
+        body.template-page-corporate #MainContent .shopify-section:has(.corp-coverflow-fallback-root) {
+          background: #000000 !important;
+        }
+        body.template-search-corporate-gifting #MainContent .corp-coverflow,
+        body.template-page-corporate #MainContent .corp-coverflow,
+        body.template-search-corporate-gifting #MainContent .corp-coverflow-fallback-root .corp-coverflow,
+        body.template-page-corporate #MainContent .corp-coverflow-fallback-root .corp-coverflow {
+          background: #000000 !important;
+        }
+        body.template-search-corporate-gifting #MainContent .corp-coverflow__heading,
+        body.template-page-corporate #MainContent .corp-coverflow__heading,
+        body.template-search-corporate-gifting #MainContent h2.corp-coverflow__heading,
+        body.template-page-corporate #MainContent h2.corp-coverflow__heading {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
         }
         body.template-search-corporate-gifting #MainContent .corp-hero .corp-hero__stat-num__suffix,
         body.template-page-corporate #MainContent .corp-hero .corp-hero__stat-num__suffix,
