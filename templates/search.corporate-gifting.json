@@ -255,51 +255,39 @@
         "label": "Trusted for every occasion"
       }
     },
-    "coverflow": {
-      "type": "corporate-gifting-coverflow",
-      "blocks": {
-        "slide_1": { "type": "slide", "settings": { "badge": "@ Gift Set 1" } },
-        "slide_2": { "type": "slide", "settings": { "badge": "@ Gift Set 2" } },
-        "slide_3": { "type": "slide", "settings": { "badge": "@ Dhurandhar 2 Set" } },
-        "slide_4": { "type": "slide", "settings": { "badge": "@ Gift Set 4" } },
-        "slide_5": { "type": "slide", "settings": { "badge": "@ Gift Set 5" } }
-      },
-      "block_order": ["slide_1", "slide_2", "slide_3", "slide_4", "slide_5"],
-      "settings": {
-        "heading": "The Gifts that outlast the occasion",
-        "card_size": "medium",
-        "card_spacing": 200,
-        "card_radius": 24,
-        "aspect_ratio": "3 / 4",
-        "autoplay": false
-      }
-    },
     "occasions": {
       "type": "corporate-gifting-occasions",
       "blocks": {
         "card_corporate": {
           "type": "occasion",
           "settings": {
-            "title": "Corporate"
+            "title": "Corporate",
+            "caption": "",
+            "link": ""
           }
         },
         "card_weddings": {
           "type": "occasion",
           "settings": {
-            "title": "Weddings"
+            "title": "Weddings",
+            "caption": "",
+            "link": ""
           }
         },
         "card_celebrations": {
           "type": "occasion",
           "settings": {
             "title": "Celebrations",
-            "caption": "(Birthday, Housewarming, Anniversary)"
+            "caption": "(Birthday, Housewarming, Anniversary)",
+            "link": ""
           }
         },
         "card_collaborations": {
           "type": "occasion",
           "settings": {
-            "title": "Collaborations"
+            "title": "Collaborations",
+            "caption": "",
+            "link": ""
           }
         }
       },
@@ -312,6 +300,58 @@
       "settings": {
         "heading_line1": "Gifts people keep.",
         "heading_line2": "Not re-gift."
+      }
+    },
+    "coverflow": {
+      "type": "corporate-gifting-coverflow",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "badge": "@ Gift Set 1",
+            "link": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "badge": "@ Gift Set 2",
+            "link": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "badge": "@ Dhurandhar 2 Set",
+            "link": ""
+          }
+        },
+        "slide_4": {
+          "type": "slide",
+          "settings": {
+            "badge": "@ Gift Set 4",
+            "link": ""
+          }
+        },
+        "slide_5": {
+          "type": "slide",
+          "settings": {
+            "badge": "@ Gift Set 5",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3",
+        "slide_4",
+        "slide_5"
+      ],
+      "settings": {
+        "heading": "The Gifts that outlast the occasion",
+        "card_spacing": 200,
+        "autoplay": false
       }
     },
     "process": {
@@ -424,20 +464,64 @@
         "feature_4",
         "feature_5"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "What's Possible",
         "heading": "Built for Brands That Care",
-        "subheading": "Every detail — from co-branded packaging to bulk logistics — designed to make your gift unforgettable."
+        "heading_line2": "",
+        "heading_line2_color": "#6b6b6b",
+        "subheading": "Every detail — from co-branded packaging to bulk logistics — designed to make your gift unforgettable.",
+        "heading_subheading_spacing_desktop": 12,
+        "heading_subheading_spacing_mobile": 10,
+        "eyebrow_title_spacing_desktop": 12,
+        "eyebrow_title_spacing_mobile": 10,
+        "text_offset_x_desktop": 0,
+        "text_offset_y_desktop": 0,
+        "text_align_desktop": "theme_default",
+        "text_offset_x_mobile": 0,
+        "text_offset_y_mobile": 0,
+        "text_align_mobile": "theme_default",
+        "h1_font_family": "bebas_neue",
+        "h1_font_weight": "400",
+        "h1_font_style": "normal",
+        "h1_font_size_desktop": 64,
+        "h1_font_size_mobile": 40,
+        "h2_font_family": "bebas_neue",
+        "h2_font_weight": "400",
+        "h2_font_style": "normal",
+        "h2_font_size_desktop": 52,
+        "h2_font_size_mobile": 34,
+        "paragraph_font_family": "inter",
+        "paragraph_font_weight": "400",
+        "paragraph_font_style": "normal",
+        "paragraph_font_size_desktop": 16,
+        "paragraph_font_size_mobile": 15
       }
     },
     "trusted_by": {
       "type": "corporate-gifting-trusted-by",
       "settings": {
         "heading": "TRUSTED BY TEAMS WITH TASTE",
-        "footer_text": "and more...",
+        "heading_size": 52,
+        "heading_color": "#111111",
+        "section_background": "#ffffff",
+        "container_background": "#f0f0f0",
+        "container_radius": 24,
+        "columns_desktop": 3,
         "logo_max_width": 140,
         "logo_max_height": 48,
-        "columns_desktop": 3
+        "logo_1_link": "",
+        "logo_2_link": "",
+        "logo_3_link": "",
+        "logo_4_link": "",
+        "logo_5_link": "",
+        "logo_6_link": "",
+        "logo_7_link": "",
+        "logo_8_link": "",
+        "logo_9_link": "",
+        "footer_text": "and more...",
+        "footer_size": 18,
+        "footer_color": "#9a9a9a"
       }
     },
     "form": {
