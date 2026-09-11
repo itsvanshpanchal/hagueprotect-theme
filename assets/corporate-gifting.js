@@ -160,6 +160,41 @@
     featuresSection.insertAdjacentElement('afterend', wrap);
   }
 
+  function updateCorpFormContacts() {
+    if (!isCorporateGiftingPage()) return;
+
+    var email = 'info@hagueprotect.com';
+    var phone = '8882683366';
+    var whatsapp = '918882683366';
+
+    document.querySelectorAll('[data-corp-contact-email]').forEach(function (el) {
+      el.setAttribute('href', 'mailto:' + email);
+    });
+    document.querySelectorAll('[data-corp-contact-email-text]').forEach(function (el) {
+      el.textContent = email;
+    });
+    document.querySelectorAll('[data-corp-contact-phone]').forEach(function (el) {
+      el.setAttribute('href', 'https://wa.me/' + whatsapp);
+    });
+    document.querySelectorAll('[data-corp-contact-phone-text]').forEach(function (el) {
+      el.textContent = phone;
+    });
+
+    var formSection = document.querySelector('.corp-form');
+    if (!formSection) return;
+
+    formSection.querySelectorAll('.corp-form__contact[href^="mailto:"]').forEach(function (el) {
+      el.setAttribute('href', 'mailto:' + email);
+      var value = el.querySelector('.corp-form__contact-value');
+      if (value) value.textContent = email;
+    });
+    formSection.querySelectorAll('.corp-form__contact[href*="wa.me"]').forEach(function (el) {
+      el.setAttribute('href', 'https://wa.me/' + whatsapp);
+      var value = el.querySelector('.corp-form__contact-value');
+      if (value) value.textContent = phone;
+    });
+  }
+
   function smoothScrollCTA() {
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a[href="#corp-inquiry"], a[href="#corp-hero"]');
@@ -178,6 +213,7 @@
     revealCoverflowFallback();
     revealTrustedByFallback();
     initReveal();
+    updateCorpFormContacts();
     smoothScrollCTA();
   }
 
