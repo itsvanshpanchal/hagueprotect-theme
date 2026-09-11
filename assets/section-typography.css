@@ -1611,8 +1611,11 @@ body.template-page-corporate #MainContent .corp-process__step:hover .corp-proces
 }
 
 body.template-search-corporate-gifting #MainContent .corp-features__eyebrow,
-body.template-page-corporate #MainContent .corp-features__eyebrow {
+body.template-page-corporate #MainContent .corp-features__eyebrow,
+body.template-search-corporate-gifting #MainContent .corp-process__eyebrow,
+body.template-page-corporate #MainContent .corp-process__eyebrow {
   color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-bento__item--red,
