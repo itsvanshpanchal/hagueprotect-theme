@@ -1,6 +1,11 @@
 {%- style -%}
   {% render 'section-typography-vars', section: section %}
 
+  #shopify-section-{{ section.id }} {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important;
+  }
 
   .corp-features {
     --corp-features-accent: #2563eb;
@@ -13,9 +18,10 @@
 
   .corp-features__container {
     width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto;
-    padding: 0 max(16px, 2vw) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 clamp(12px, 2vw, 24px) !important;
+    box-sizing: border-box;
   }
 
   .corp-features__header {
@@ -31,7 +37,7 @@
     font-style: normal;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #2563eb !important;
+    color: #ffffff !important;
     margin: 0 0 12px;
   }
 
@@ -258,7 +264,14 @@
   }
 
   #shopify-section-{{ section.id }} .corp-features__eyebrow {
-    color: #2563eb !important;
+    color: #ffffff !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-features__container {
+    max-width: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   #shopify-section-{{ section.id }} .corp-bento__item--red {
