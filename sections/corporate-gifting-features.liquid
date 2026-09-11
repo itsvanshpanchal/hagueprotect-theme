@@ -12,16 +12,19 @@
     width: 100vw;
     position: relative;
     left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    transform: translateX(-50%);
   }
 
   .corp-features__container {
     width: 100% !important;
-    max-width: 1600px !important; /* increased max-width for big screens */
+    max-width: 100% !important;
     margin: 0 auto;
-    padding: 0 clamp(20px, 5vw, 80px) !important;
+    padding: 0 20px !important;
+  }
+  @media screen and (min-width: 768px) {
+    .corp-features__container {
+      padding: 0 40px !important;
+    }
   }
 
   .corp-features__header {
