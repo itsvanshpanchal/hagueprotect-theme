@@ -4,6 +4,7 @@
   assign columns_desktop = section.settings.columns_desktop | default: 3
   assign container_radius = section.settings.container_radius | default: 24
   assign container_bg = section.settings.container_background | default: '#f0f0f0'
+  assign logo_count = 9
 -%}
 
 {%- style -%}
@@ -112,16 +113,6 @@
     }
   }
 
-  #shopify-section-{{ section.id }} .corp-trusted__editor-empty {
-    padding: 48px 24px;
-    border: 2px dashed rgba(17, 17, 17, 0.2);
-    border-radius: 16px;
-    text-align: center;
-    color: rgba(17, 17, 17, 0.55);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-  }
-
   #shopify-section-{{ section.id }} .corp-trusted__logo-link {
     display: flex;
     align-items: center;
@@ -137,47 +128,85 @@
     {%- endif -%}
 
     <div class="corp-trusted__panel">
-      {%- if section.blocks.size > 0 -%}
-        <div class="corp-trusted__grid">
-          {%- for block in section.blocks -%}
-            {%- liquid
-              assign block_logo_width = block.settings.logo_width | default: logo_max_width
-              assign block_logo_height = block.settings.logo_height | default: logo_max_height
-              assign block_label = block.settings.label
-              if block_label == blank
-                assign block_label = 'Logo ' | append: forloop.index
-              endif
-            -%}
-            <div class="corp-trusted__logo-wrap" {{ block.shopify_attributes }}>
-              {%- if block.settings.image != blank -%}
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}" class="corp-trusted__logo-link" aria-label="{{ block.settings.image.alt | default: block_label | escape }}">
-                {%- endif -%}
-                <img
-                  class="corp-trusted__logo"
-                  src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.image.alt | default: block_label | escape }}"
-                  width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                  loading="lazy"
-                  style="max-width: {{ block_logo_width }}px; max-height: {{ block_logo_height }}px;"
-                >
-                {%- if block.settings.link != blank -%}
-                  </a>
-                {%- endif -%}
-              {%- else -%}
-                <div class="corp-trusted__placeholder">
-                  {{ block_label }}
-                </div>
+      <div class="corp-trusted__grid">
+        {%- for i in (1..logo_count) -%}
+          {%- liquid
+            assign logo_image = blank
+            assign logo_link = blank
+            assign logo_label = 'Logo ' | append: i
+
+            case i
+              when 1
+                assign logo_image = section.settings.logo_1_image
+                assign logo_link = section.settings.logo_1_link
+              when 2
+                assign logo_image = section.settings.logo_2_image
+                assign logo_link = section.settings.logo_2_link
+              when 3
+                assign logo_image = section.settings.logo_3_image
+                assign logo_link = section.settings.logo_3_link
+              when 4
+                assign logo_image = section.settings.logo_4_image
+                assign logo_link = section.settings.logo_4_link
+              when 5
+                assign logo_image = section.settings.logo_5_image
+                assign logo_link = section.settings.logo_5_link
+              when 6
+                assign logo_image = section.settings.logo_6_image
+                assign logo_link = section.settings.logo_6_link
+              when 7
+                assign logo_image = section.settings.logo_7_image
+                assign logo_link = section.settings.logo_7_link
+              when 8
+                assign logo_image = section.settings.logo_8_image
+                assign logo_link = section.settings.logo_8_link
+              when 9
+                assign logo_image = section.settings.logo_9_image
+                assign logo_link = section.settings.logo_9_link
+            endcase
+
+            if section.blocks.size > 0
+              for block in section.blocks
+                if forloop.index == i
+                  if block.settings.image != blank
+                    assign logo_image = block.settings.image
+                  endif
+                  if block.settings.link != blank
+                    assign logo_link = block.settings.link
+                  endif
+                  if block.settings.label != blank
+                    assign logo_label = block.settings.label
+                  endif
+                endif
+              endfor
+            endif
+          -%}
+
+          <div class="corp-trusted__logo-wrap" id="corp-trusted-logo-{{ section.id }}-{{ i }}">
+            {%- if logo_image != blank -%}
+              {%- if logo_link != blank -%}
+                <a href="{{ logo_link }}" class="corp-trusted__logo-link" aria-label="{{ logo_image.alt | default: logo_label | escape }}">
               {%- endif -%}
-            </div>
-          {%- endfor -%}
-        </div>
-      {%- elsif request.design_mode -%}
-        <div class="corp-trusted__editor-empty">
-          <p>Add logo blocks in the sidebar, then upload each partner image.</p>
-        </div>
-      {%- endif -%}
+              <img
+                class="corp-trusted__logo"
+                src="{{ logo_image | image_url: width: 600 }}"
+                alt="{{ logo_image.alt | default: logo_label | escape }}"
+                width="{{ logo_image.width }}"
+                height="{{ logo_image.height }}"
+                loading="lazy"
+                style="max-width: {{ logo_max_width }}px; max-height: {{ logo_max_height }}px;"
+              >
+              {%- if logo_link != blank -%}
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              <div class="corp-trusted__placeholder">
+                {{ logo_label }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
 
       {%- if section.settings.footer_text != blank -%}
         <p class="corp-trusted__footer">{{ section.settings.footer_text | escape }}</p>
@@ -191,7 +220,6 @@
   "name": "Corporate Trusted By",
   "tag": "section",
   "class": "corp-trusted-section",
-  "max_blocks": 24,
   "settings": [
     {
       "type": "header",
@@ -276,6 +304,104 @@
     },
     {
       "type": "header",
+      "content": "Partner logos"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload each partner logo below. Scroll down in this panel to see Logo 1 through Logo 9."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1_image",
+      "label": "Logo 1 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_1_link",
+      "label": "Logo 1 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2_image",
+      "label": "Logo 2 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_2_link",
+      "label": "Logo 2 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3_image",
+      "label": "Logo 3 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_3_link",
+      "label": "Logo 3 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4_image",
+      "label": "Logo 4 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_4_link",
+      "label": "Logo 4 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5_image",
+      "label": "Logo 5 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_5_link",
+      "label": "Logo 5 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6_image",
+      "label": "Logo 6 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_6_link",
+      "label": "Logo 6 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7_image",
+      "label": "Logo 7 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_7_link",
+      "label": "Logo 7 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8_image",
+      "label": "Logo 8 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_8_link",
+      "label": "Logo 8 link (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_9_image",
+      "label": "Logo 9 image"
+    },
+    {
+      "type": "url",
+      "id": "logo_9_link",
+      "label": "Logo 9 link (optional)"
+    },
+    {
+      "type": "header",
       "content": "Footer"
     },
     {
@@ -304,46 +430,24 @@
   "blocks": [
     {
       "type": "logo",
-      "name": "Logo",
+      "name": "Logo (legacy)",
+      "limit": 9,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo image",
-          "info": "Upload a partner or client logo. Recommended: PNG or SVG on a transparent background."
+          "label": "Logo image"
         },
         {
           "type": "text",
           "id": "label",
           "label": "Logo label",
-          "default": "Logo",
-          "info": "Used for accessibility and as placeholder text before an image is uploaded."
+          "default": "Logo"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link",
-          "info": "Optional"
-        },
-        {
-          "type": "range",
-          "id": "logo_width",
-          "label": "Logo max width",
-          "min": 60,
-          "max": 280,
-          "step": 4,
-          "unit": "px",
-          "default": 140
-        },
-        {
-          "type": "range",
-          "id": "logo_height",
-          "label": "Logo max height",
-          "min": 20,
-          "max": 120,
-          "step": 2,
-          "unit": "px",
-          "default": 48
+          "label": "Link (optional)"
         }
       ]
     }
@@ -354,18 +458,7 @@
       "settings": {
         "heading": "TRUSTED BY TEAMS WITH TASTE",
         "footer_text": "and more..."
-      },
-      "blocks": [
-        { "type": "logo", "settings": { "label": "Logo 1" } },
-        { "type": "logo", "settings": { "label": "Logo 2" } },
-        { "type": "logo", "settings": { "label": "Logo 3" } },
-        { "type": "logo", "settings": { "label": "Logo 4" } },
-        { "type": "logo", "settings": { "label": "Logo 5" } },
-        { "type": "logo", "settings": { "label": "Logo 6" } },
-        { "type": "logo", "settings": { "label": "Logo 7" } },
-        { "type": "logo", "settings": { "label": "Logo 8" } },
-        { "type": "logo", "settings": { "label": "Logo 9" } }
-      ]
+      }
     }
   ]
 }

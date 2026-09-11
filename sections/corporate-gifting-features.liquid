@@ -399,6 +399,7 @@
   </div>
 </section>
 
+{%- unless request.design_mode -%}
 {%- if template == 'search.corporate-gifting' or template.suffix == 'corporate' or page.handle == 'corporate' -%}
   {%- assign trusted_fallback_id = 'corp-trusted-fallback-' | append: section.id -%}
   {%- render 'corporate-gifting-trusted-by-fallback', fallback_id: trusted_fallback_id -%}
@@ -414,6 +415,7 @@
     })();
   </script>
 {%- endif -%}
+{%- endunless -%}
 
 {% schema %}
 {
