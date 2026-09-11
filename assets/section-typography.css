@@ -1560,7 +1560,9 @@ body.template-page-corporate #MainContent .corp-hero__container,
 body.template-search-corporate-gifting #MainContent .corp-process__container,
 body.template-page-corporate #MainContent .corp-process__container,
 body.template-search-corporate-gifting #MainContent .corp-features__container,
-body.template-page-corporate #MainContent .corp-features__container {
+body.template-page-corporate #MainContent .corp-features__container,
+body.template-search-corporate-gifting #MainContent .corp-trusted__container,
+body.template-page-corporate #MainContent .corp-trusted__container {
   max-width: none !important;
   width: 100% !important;
   margin-left: 0 !important;
@@ -1570,7 +1572,11 @@ body.template-page-corporate #MainContent .corp-features__container {
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-process),
 body.template-page-corporate #MainContent .shopify-section:has(.corp-process),
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-features),
-body.template-page-corporate #MainContent .shopify-section:has(.corp-features) {
+body.template-page-corporate #MainContent .shopify-section:has(.corp-features),
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted),
+body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-trusted-fallback-root),
+body.template-page-corporate #MainContent .shopify-section:has(.corp-trusted-fallback-root) {
   padding-left: 0 !important;
   padding-right: 0 !important;
   max-width: none !important;

@@ -11,9 +11,11 @@
   }
 
   #{{ trusted_id }} .corp-trusted__container {
-    max-width: var(--site-max-width);
-    margin: 0 auto;
-    padding: 0 max(20px, var(--site-padding, 24px));
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 clamp(12px, 2vw, 24px) !important;
+    box-sizing: border-box;
   }
 
   #{{ trusted_id }} .corp-trusted__heading {
