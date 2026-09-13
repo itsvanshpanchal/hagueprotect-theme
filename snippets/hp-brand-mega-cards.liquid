@@ -9,6 +9,11 @@
       {%- liquid
         assign card_btn = block.settings.button_text | default: default_btn
         assign card_category = block.settings.category | default: block.settings.brand_name | default: 'Brand'
+        if card_category == 'Fragrance' or card_category == 'fragrance'
+          assign card_category = 'Scented Diffuser Oils'
+        elsif card_category == 'Wellness' or card_category == 'wellness'
+          assign card_category = 'Scented Essential Oils'
+        endif
         assign card_bg = block.settings.background | default: '#e8e8e8'
         assign card_link = block.settings.link | default: '#'
         assign card_alt = block.settings.brand_name | default: card_category
@@ -108,7 +113,10 @@
         assign hague_media = 'mega-menu-sneaker.jpg' | asset_url
       endif
 
-      assign vr_category = section.settings.brand_card_vr_category | default: 'Fragrance'
+      assign vr_category = section.settings.brand_card_vr_category | default: 'Scented Diffuser Oils'
+      if vr_category == 'Fragrance' or vr_category == 'fragrance'
+        assign vr_category = 'Scented Diffuser Oils'
+      endif
       assign vr_bg = section.settings.brand_card_vr_bg | default: '#f3e6ee'
       assign vr_dark = section.settings.brand_card_vr_dark
       if section.settings.brand_card_vr_image != blank
@@ -117,7 +125,10 @@
         assign vr_media = 'mega-menu-material.jpg' | asset_url
       endif
 
-      assign sor_category = section.settings.brand_card_sor_category | default: 'Wellness'
+      assign sor_category = section.settings.brand_card_sor_category | default: 'Scented Essential Oils'
+      if sor_category == 'Wellness' or sor_category == 'wellness'
+        assign sor_category = 'Scented Essential Oils'
+      endif
       assign sor_bg = section.settings.brand_card_sor_bg | default: '#2a2a2a'
       assign sor_dark = section.settings.brand_card_sor_dark | default: true
       if section.settings.brand_card_sor_image != blank
