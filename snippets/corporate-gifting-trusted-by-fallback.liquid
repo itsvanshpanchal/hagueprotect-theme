@@ -1,7 +1,7 @@
 {%- liquid
   assign trusted_id = fallback_id | default: 'corp-trusted-fallback'
-  assign logo_max_width = 140
-  assign logo_max_height = 48
+  assign logo_max_width = 220
+  assign logo_max_height = 80
 -%}
 
 <style>
@@ -50,8 +50,18 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 64px;
-    padding: 8px;
+    min-height: {{ logo_max_height | plus: 24 }}px;
+    padding: 4px 12px;
+  }
+
+  #{{ trusted_id }} .corp-trusted__logo {
+    display: block;
+    width: min(100%, {{ logo_max_width }}px);
+    height: {{ logo_max_height }}px;
+    max-width: {{ logo_max_width }}px;
+    max-height: {{ logo_max_height }}px;
+    object-fit: contain;
+    object-position: center;
   }
 
   #{{ trusted_id }} .corp-trusted__placeholder {
@@ -60,6 +70,7 @@
     justify-content: center;
     width: min(100%, {{ logo_max_width }}px);
     min-height: {{ logo_max_height }}px;
+    height: {{ logo_max_height }}px;
     border: 1px dashed rgba(17, 17, 17, 0.18);
     border-radius: 8px;
     color: rgba(17, 17, 17, 0.35);
