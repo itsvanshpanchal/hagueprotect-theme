@@ -1,6 +1,6 @@
 {%- liquid
-  assign logo_max_width = section.settings.logo_max_width | default: 220
-  assign logo_max_height = section.settings.logo_max_height | default: 80
+  assign logo_max_width = section.settings.logo_max_width | default: 320
+  assign logo_max_height = section.settings.logo_max_height | default: 110
   assign columns_desktop = section.settings.columns_desktop | default: 3
   assign container_radius = section.settings.container_radius | default: 24
   assign container_bg = section.settings.container_background | default: '#f0f0f0'
@@ -59,16 +59,34 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: {{ logo_max_height | plus: 24 }}px;
-    padding: 4px 12px;
+    min-height: {{ logo_max_height | plus: 32 }}px;
+    padding: 8px 12px;
+  }
+
+  #shopify-section-{{ section.id }} .corp-trusted__logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .corp-trusted__logo-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, {{ logo_max_width }}px);
+    height: {{ logo_max_height }}px;
+    margin: 0 auto;
   }
 
   #shopify-section-{{ section.id }} .corp-trusted__logo {
     display: block;
-    width: min(100%, {{ logo_max_width }}px);
-    height: {{ logo_max_height }}px;
-    max-width: {{ logo_max_width }}px;
-    max-height: {{ logo_max_height }}px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     object-position: center;
   }
@@ -107,11 +125,9 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #shopify-section-{{ section.id }} .corp-trusted__logo {
+    #shopify-section-{{ section.id }} .corp-trusted__logo-slot {
       width: min(100%, {{ logo_max_width | times: 0.9 | round }}px);
       height: {{ logo_max_height | times: 0.9 | round }}px;
-      max-width: {{ logo_max_width | times: 0.9 | round }}px;
-      max-height: {{ logo_max_height | times: 0.9 | round }}px;
     }
   }
 
@@ -120,19 +136,10 @@
       grid-template-columns: 1fr;
     }
 
-    #shopify-section-{{ section.id }} .corp-trusted__logo {
-      width: min(100%, {{ logo_max_width | times: 0.8 | round }}px);
-      height: {{ logo_max_height | times: 0.8 | round }}px;
-      max-width: {{ logo_max_width | times: 0.8 | round }}px;
-      max-height: {{ logo_max_height | times: 0.8 | round }}px;
+    #shopify-section-{{ section.id }} .corp-trusted__logo-slot {
+      width: min(100%, {{ logo_max_width | times: 0.85 | round }}px);
+      height: {{ logo_max_height | times: 0.85 | round }}px;
     }
-  }
-
-  #shopify-section-{{ section.id }} .corp-trusted__logo-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
   }
 {%- endstyle -%}
 
@@ -199,21 +206,22 @@
 
           <div class="corp-trusted__logo-wrap" id="corp-trusted-logo-{{ section.id }}-{{ i }}">
             {%- if logo_image != blank -%}
-              {%- if logo_link != blank -%}
-                <a href="{{ logo_link }}" class="corp-trusted__logo-link" aria-label="{{ logo_image.alt | default: logo_label | escape }}">
-              {%- endif -%}
-              <img
-                class="corp-trusted__logo"
-                src="{{ logo_image | image_url: width: 800 }}"
-                alt="{{ logo_image.alt | default: logo_label | escape }}"
-                width="{{ logo_image.width }}"
-                height="{{ logo_image.height }}"
-                loading="lazy"
-                style="width: min(100%, {{ logo_max_width }}px); height: {{ logo_max_height }}px; max-width: {{ logo_max_width }}px; max-height: {{ logo_max_height }}px; object-fit: contain;"
-              >
-              {%- if logo_link != blank -%}
-                </a>
-              {%- endif -%}
+              <div class="corp-trusted__logo-slot">
+                {%- if logo_link != blank -%}
+                  <a href="{{ logo_link }}" class="corp-trusted__logo-link" aria-label="{{ logo_image.alt | default: logo_label | escape }}">
+                {%- endif -%}
+                <img
+                  class="corp-trusted__logo"
+                  src="{{ logo_image | image_url: width: 1200 }}"
+                  alt="{{ logo_image.alt | default: logo_label | escape }}"
+                  width="{{ logo_max_width }}"
+                  height="{{ logo_max_height }}"
+                  loading="lazy"
+                >
+                {%- if logo_link != blank -%}
+                  </a>
+                {%- endif -%}
+              </div>
             {%- else -%}
               <div class="corp-trusted__placeholder">
                 {{ logo_label }}
@@ -300,22 +308,22 @@
     {
       "type": "range",
       "id": "logo_max_width",
-      "label": "Default logo max width",
-      "min": 60,
-      "max": 280,
+      "label": "Logo box width (all logos use same size)",
+      "min": 120,
+      "max": 400,
       "step": 4,
       "unit": "px",
-      "default": 220
+      "default": 320
     },
     {
       "type": "range",
       "id": "logo_max_height",
-      "label": "Default logo max height",
-      "min": 20,
-      "max": 120,
+      "label": "Logo box height (all logos use same size)",
+      "min": 40,
+      "max": 160,
       "step": 2,
       "unit": "px",
-      "default": 80
+      "default": 110
     },
     {
       "type": "header",
