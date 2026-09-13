@@ -5,6 +5,7 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
     max-width: none !important;
+    background: #000000 !important;
   }
 
   #shopify-section-{{ section.id }} .corp-process,
@@ -12,6 +13,7 @@
     --corp-process-accent: #2563eb;
     padding: clamp(80px, 10vw, 120px) 0;
     background: #000000 !important;
+    color: #ffffff !important;
     font-family: var(--font-family-sans);
   }
 
@@ -46,7 +48,8 @@
   .corp-process__title b,
   .corp-process__title strong {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
-    color: #ffffff;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     margin: 0 0 16px;
     font-weight: 300 !important;
     font-style: normal !important;
@@ -56,7 +59,7 @@
   }
 
   .corp-process__desc {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.75) !important;
     margin: 0;
   }
 
@@ -187,6 +190,23 @@
   #shopify-section-{{ section.id }} .corp-process__eyebrow {
     color: #c8c8c8 !important;
     -webkit-text-fill-color: #c8c8c8 !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-process__title,
+  #shopify-section-{{ section.id }} h2.corp-process__title {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-process__desc,
+  #shopify-section-{{ section.id }} .corp-process__step-title,
+  #shopify-section-{{ section.id }} .corp-process__step-text,
+  #shopify-section-{{ section.id }} .corp-process__num {
+    color: #ffffff !important;
+  }
+
+  #shopify-section-{{ section.id }} .corp-process__step-text {
+    color: rgba(255, 255, 255, 0.65) !important;
   }
 {%- endstyle -%}
 
