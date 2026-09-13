@@ -1673,6 +1673,14 @@ body.template-page-corporate #MainContent .corp-process__step:hover .corp-proces
   background: #2563eb !important;
   border-color: #2563eb !important;
   color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+body #MainContent .shopify-section .corp-process .corp-process__num,
+body #MainContent .corp-process__num,
+body .shopify-section .corp-process .corp-process__num {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-process__step:hover .corp-process__thumb,

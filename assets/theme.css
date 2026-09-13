@@ -1952,6 +1952,18 @@ h4.mobile-accordion-category-heading,
   color: rgba(255, 255, 255, 0.65) !important;
 }
 
+.corp-process__num,
+#MainContent .corp-process__num,
+#MainContent .shopify-section .corp-process .corp-process__num {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.corp-process__step:hover .corp-process__num {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 .corp-packages__tier,
 .corp-packages__qty,
 .corp-packages__list li {
