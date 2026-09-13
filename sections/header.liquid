@@ -959,6 +959,150 @@
     display: none !important;
   }
 
+  #MegaMenuShopView[hidden],
+  #MegaMenuBrandView[hidden] {
+    display: none !important;
+  }
+
+  .hp-brand-mega-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 24px);
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 8px 40px clamp(48px, 6vw, 72px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hp-brand-card {
+    display: grid;
+    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+    min-height: clamp(220px, 24vw, 300px);
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: #ffffff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hp-brand-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .hp-brand-card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: clamp(20px, 3vw, 32px) clamp(16px, 2vw, 24px);
+    background: var(--hp-brand-card-bg, #e8e8e8);
+    text-align: center;
+  }
+
+  .hp-brand-card__logo {
+    width: auto;
+    max-width: min(100%, 150px);
+    height: auto;
+    max-height: 52px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .hp-brand-card__logo--light {
+    filter: brightness(0) invert(1);
+  }
+
+  .hp-brand-card__category {
+    margin: 0;
+    font-family: 'Darker Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: clamp(13px, 1.2vw, 16px) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .hp-brand-card--dark .hp-brand-card__category {
+    color: #ffffff;
+  }
+
+  .hp-brand-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    padding: 10px 18px;
+    border: 1px solid #111111;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hp-brand-card:hover .hp-brand-card__btn {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .hp-brand-card--dark .hp-brand-card__btn {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  .hp-brand-card--dark:hover .hp-brand-card__btn {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .hp-brand-card__media {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+  }
+
+  .hp-brand-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .hp-brand-mega-cards {
+      grid-template-columns: 1fr;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .hp-brand-card {
+      grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+      min-height: 220px;
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .hp-brand-card {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hp-brand-card__media {
+      min-height: 200px;
+    }
+  }
+
   /* Vanrosector Shop All mega-menu */
   .megamenu-panel--vanrosector {
     --vr-accent: #8a6a3b;
@@ -1972,16 +2116,17 @@
         <a href="/search?view=how-to-use" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: #000000; text-transform: uppercase; text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s ease;">HOW TO USE</a>
       </div>
       <div class="hp-overlay-nav" style="padding-right: 32px;">
-        <a href="/collections/all" class="is-active">SHOP</a>
+        <a href="javascript:void(0)" data-megamenu-view="shop" class="is-active" id="MegaMenuNavShop">SHOP</a>
         <a href="/search?view=corporate-gifting">CORPORATE GIFTING</a>
         <a href="/search?view=business">BUSINESS</a>
-        <a href="javascript:void(0)" onclick="document.getElementById('BrandTrigger').click(); if(document.getElementById('OverlayCloseBtn')) document.getElementById('OverlayCloseBtn').click();">BRAND</a>
+        <a href="javascript:void(0)" data-megamenu-view="brand" id="MegaMenuNavBrand">BRAND</a>
         <a href="/pages/about-us">ABOUT US</a>
         <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">COMING SOON</a>
       </div>
       <div></div>
     </div>
 
+    <div id="MegaMenuShopView">
     <div class="megamenu-brand-panel" data-brand-menu="hague"{% if active_brand == 'vanrosector' or active_brand == 'science-of-raw' %} hidden{% endif %}>
     <!-- Hague Mega Menu - nuuk-style layout -->
     <div style="display: grid; grid-template-columns: 140px 360px 1fr; gap: 40px 0; max-width: var(--site-max-width); margin: 0 auto; padding: 24px 40px; width: 100%; box-sizing: border-box; align-items: start;">
@@ -2225,6 +2370,11 @@
     <div class="megamenu-brand-panel megamenu-panel--science-of-raw" data-brand-menu="science-of-raw"{% unless active_brand == 'science-of-raw' %} hidden{% endunless %}>
       {% render 'science-of-raw-shop-all-menu', variant: 'desktop' %}
     </div>
+    </div>
+
+    <div id="MegaMenuBrandView" hidden>
+      {% render 'hp-brand-mega-cards', section: section %}
+    </div>
   </div>
 
   <!-- Premium Full-Screen Search Overlay -->
@@ -2329,9 +2479,23 @@
         panel.classList.toggle('megamenu-panel--science-of-raw', key === 'science-of-raw');
       };
 
+      const shopView = document.getElementById('MegaMenuShopView');
+      const brandView = document.getElementById('MegaMenuBrandView');
+      const navShop = document.getElementById('MegaMenuNavShop');
+      const navBrand = document.getElementById('MegaMenuNavBrand');
+
+      const setMegaMenuView = (view) => {
+        const showBrand = view === 'brand';
+        if (shopView) shopView.hidden = showBrand;
+        if (brandView) brandView.hidden = !showBrand;
+        if (navShop) navShop.classList.toggle('is-active', !showBrand);
+        if (navBrand) navBrand.classList.toggle('is-active', showBrand);
+      };
+
       const openPanel = (brand) => {
         clearTimeout(timeoutId);
         showBrandMenu(brand || defaultBrand);
+        setMegaMenuView('shop');
         panel.style.display = 'block';
         document.body.style.overflow = 'hidden';
         setTimeout(() => {
@@ -2385,6 +2549,14 @@
       /* The active brand is determined by the Liquid variable active_brand which sets data-default-brand.
          We no longer switch the brand menu on logo hover, keeping it strictly tied to the current page context. */
       showBrandMenu(defaultBrand);
+      setMegaMenuView('shop');
+
+      panel.querySelectorAll('[data-megamenu-view]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          setMegaMenuView(link.getAttribute('data-megamenu-view') || 'shop');
+        });
+      });
 
       /* Desktop Megamenu Accordion Toggle */
       const toggleBtns = document.querySelectorAll('.megamenu-toggle-btn');
@@ -2758,6 +2930,63 @@
       "id": "brand_hague_link",
       "label": "Hague Protect link",
       "info": "Defaults to homepage when empty."
+    },
+    {
+      "type": "text",
+      "id": "brand_card_btn_label",
+      "label": "Brand card button text",
+      "default": "Explore Now"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_hague_image",
+      "label": "Hague Protect — card lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_hague_category",
+      "label": "Hague Protect — category label",
+      "default": "Sneaker Care"
+    },
+    {
+      "type": "color",
+      "id": "brand_card_hague_bg",
+      "label": "Hague Protect — card background",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_vr_image",
+      "label": "Vanrosector — card lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_vr_category",
+      "label": "Vanrosector — category label",
+      "default": "Fragrance"
+    },
+    {
+      "type": "color",
+      "id": "brand_card_vr_bg",
+      "label": "Vanrosector — card background",
+      "default": "#f3e6ee"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_sor_image",
+      "label": "Science of Raw — card lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_sor_category",
+      "label": "Science of Raw — category label",
+      "default": "Wellness"
+    },
+    {
+      "type": "color",
+      "id": "brand_card_sor_bg",
+      "label": "Science of Raw — card background",
+      "default": "#2a2a2a"
     },
     {
       "type": "header",
