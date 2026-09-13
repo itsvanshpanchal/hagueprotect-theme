@@ -1679,8 +1679,17 @@ body.template-page-corporate #MainContent .corp-process__step:hover .corp-proces
 body #MainContent .shopify-section .corp-process .corp-process__num,
 body #MainContent .corp-process__num,
 body .shopify-section .corp-process .corp-process__num {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 300 !important;
+  line-height: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 body.template-search-corporate-gifting #MainContent .corp-process__step:hover .corp-process__thumb,
