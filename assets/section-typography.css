@@ -1555,6 +1555,11 @@ body.template-page-corporate #MainContent .corp-hero .corp-hero__showcase::befor
   background: none !important;
 }
 
+body.template-search-corporate-gifting,
+body.template-page-corporate {
+  --corp-page-gutter: clamp(20px, 4vw, 48px);
+}
+
 body.template-search-corporate-gifting #MainContent .corp-hero__container,
 body.template-page-corporate #MainContent .corp-hero__container,
 body.template-search-corporate-gifting #MainContent .corp-process__container,
@@ -1564,11 +1569,20 @@ body.template-page-corporate #MainContent .corp-features__container,
 body.template-search-corporate-gifting #MainContent .corp-trusted__container,
 body.template-page-corporate #MainContent .corp-trusted__container,
 body.template-search-corporate-gifting #MainContent .corp-form__wrap,
-body.template-page-corporate #MainContent .corp-form__wrap {
+body.template-page-corporate #MainContent .corp-form__wrap,
+body.template-search-corporate-gifting #MainContent .corp-coverflow__container,
+body.template-page-corporate #MainContent .corp-coverflow__container,
+body.template-search-corporate-gifting #MainContent .corp-packages__container,
+body.template-page-corporate #MainContent .corp-packages__container,
+body.template-search-corporate-gifting #MainContent .corp-occasions__container,
+body.template-page-corporate #MainContent .corp-occasions__container {
   max-width: none !important;
   width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
+  padding-left: var(--corp-page-gutter) !important;
+  padding-right: var(--corp-page-gutter) !important;
+  box-sizing: border-box !important;
 }
 
 body.template-search-corporate-gifting #MainContent .shopify-section:has(.corp-process),
