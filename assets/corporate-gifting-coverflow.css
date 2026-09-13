@@ -28,7 +28,7 @@
 .corp-coverflow__container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(32px, 6vw, 80px);
   overflow: visible;
 }
 
