@@ -1,90 +1,163 @@
 {%- liquid
-  assign btn_label = section.settings.brand_card_btn_label | default: 'Explore Now'
-
-  assign hague_link = routes.root_url
-  if section.settings.brand_hague_link != blank
-    assign hague_link = section.settings.brand_hague_link
-  endif
-
-  assign vr_link = section.settings.vanrosector_link | default: '/collections/all?view=vanrosector'
-  assign sor_link = section.settings.sor_link | default: '/collections/all?view=science-of-raw'
-
-  if section.settings.logo_image != blank
-    assign hague_logo = section.settings.logo_image | image_url: width: 400
-  elsif section.settings.logo_text != blank and section.settings.logo_text contains '.'
-    assign hague_logo = section.settings.logo_text | asset_url
-  else
-    assign hague_logo = 'logo-hagueprotect.png' | asset_url
-  endif
-
-  if section.settings.logo_vr != blank
-    assign vr_logo = section.settings.logo_vr | image_url: width: 400
-  else
-    assign vr_logo = 'logo-vanrosector.svg' | asset_url
-  endif
-
-  if section.settings.logo_sor != blank
-    assign sor_logo = section.settings.logo_sor | image_url: width: 400
-  else
-    assign sor_logo = 'logo-science-of-raw.svg' | asset_url
-  endif
-
-  assign hague_category = section.settings.brand_card_hague_category | default: 'Sneaker Care'
-  assign hague_bg = section.settings.brand_card_hague_bg | default: '#e8e8e8'
-  if section.settings.brand_card_hague_image != blank
-    assign hague_media = section.settings.brand_card_hague_image | image_url: width: 800
-  else
-    assign hague_media = 'mega-menu-sneaker.jpg' | asset_url
-  endif
-
-  assign vr_category = section.settings.brand_card_vr_category | default: 'Fragrance'
-  assign vr_bg = section.settings.brand_card_vr_bg | default: '#f3e6ee'
-  if section.settings.brand_card_vr_image != blank
-    assign vr_media = section.settings.brand_card_vr_image | image_url: width: 800
-  else
-    assign vr_media = 'mega-menu-material.jpg' | asset_url
-  endif
-
-  assign sor_category = section.settings.brand_card_sor_category | default: 'Wellness'
-  assign sor_bg = section.settings.brand_card_sor_bg | default: '#2a2a2a'
-  if section.settings.brand_card_sor_image != blank
-    assign sor_media = section.settings.brand_card_sor_image | image_url: width: 800
-  else
-    assign sor_media = 'mega-menu-third.jpg' | asset_url
-  endif
+  assign default_btn = section.settings.brand_card_btn_label | default: 'Explore Now'
+  assign brand_blocks = section.blocks | where: 'type', 'brand_card'
 -%}
 
 <div class="hp-brand-mega-cards">
-  <a href="{{ hague_link }}" class="hp-brand-card" data-brand-card="hague">
-    <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ hague_bg }};">
-      <img src="{{ hague_logo }}" alt="Hague Protect" class="hp-brand-card__logo" width="160" height="48" loading="lazy">
-      <p class="hp-brand-card__category">{{ hague_category | escape }}</p>
-      <span class="hp-brand-card__btn">{{ btn_label | escape }}</span>
-    </div>
-    <div class="hp-brand-card__media">
-      <img src="{{ hague_media }}" alt="{{ hague_category | escape }}" width="400" height="500" loading="lazy">
-    </div>
-  </a>
+  {%- if brand_blocks.size > 0 -%}
+    {%- for block in brand_blocks -%}
+      {%- liquid
+        assign card_btn = block.settings.button_text | default: default_btn
+        assign card_category = block.settings.category | default: block.settings.brand_name | default: 'Brand'
+        assign card_bg = block.settings.background | default: '#e8e8e8'
+        assign card_link = block.settings.link | default: '#'
+        assign card_alt = block.settings.brand_name | default: card_category
+        assign card_dark = block.settings.dark_style
 
-  <a href="{{ vr_link }}" class="hp-brand-card" data-brand-card="vanrosector">
-    <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ vr_bg }};">
-      <img src="{{ vr_logo }}" alt="Vanrosector" class="hp-brand-card__logo" width="160" height="48" loading="lazy">
-      <p class="hp-brand-card__category">{{ vr_category | escape }}</p>
-      <span class="hp-brand-card__btn">{{ btn_label | escape }}</span>
-    </div>
-    <div class="hp-brand-card__media">
-      <img src="{{ vr_media }}" alt="{{ vr_category | escape }}" width="400" height="500" loading="lazy">
-    </div>
-  </a>
+        if block.settings.logo != blank
+          assign card_logo = block.settings.logo | image_url: width: 400
+        else
+          assign card_logo = ''
+        endif
 
-  <a href="{{ sor_link }}" class="hp-brand-card hp-brand-card--dark" data-brand-card="science-of-raw">
-    <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ sor_bg }};">
-      <img src="{{ sor_logo }}" alt="Science of Raw" class="hp-brand-card__logo hp-brand-card__logo--light" width="160" height="48" loading="lazy">
-      <p class="hp-brand-card__category">{{ sor_category | escape }}</p>
-      <span class="hp-brand-card__btn">{{ btn_label | escape }}</span>
-    </div>
-    <div class="hp-brand-card__media">
-      <img src="{{ sor_media }}" alt="{{ sor_category | escape }}" width="400" height="500" loading="lazy">
-    </div>
-  </a>
+        if block.settings.lifestyle_image != blank
+          assign card_media = block.settings.lifestyle_image | image_url: width: 900
+        else
+          assign card_media = ''
+        endif
+      -%}
+      <a
+        href="{{ card_link }}"
+        class="hp-brand-card{% if card_dark %} hp-brand-card--dark{% endif %}"
+        data-brand-card
+        {{ block.shopify_attributes }}
+      >
+        <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ card_bg }};">
+          {%- if card_logo != blank -%}
+            <img
+              src="{{ card_logo }}"
+              alt="{{ card_alt | escape }}"
+              class="hp-brand-card__logo{% if card_dark %} hp-brand-card__logo--light{% endif %}"
+              width="160"
+              height="48"
+              loading="lazy"
+            >
+          {%- elsif block.settings.brand_name != blank -%}
+            <span class="hp-brand-card__name">{{ block.settings.brand_name | escape }}</span>
+          {%- endif -%}
+          {%- if card_category != blank -%}
+            <p class="hp-brand-card__category">{{ card_category | escape }}</p>
+          {%- endif -%}
+          <span class="hp-brand-card__btn">{{ card_btn | escape }}</span>
+        </div>
+        <div class="hp-brand-card__media">
+          {%- if card_media != blank -%}
+            <img src="{{ card_media }}" alt="{{ card_category | escape }}" width="400" height="500" loading="lazy">
+          {%- else -%}
+            <div class="hp-brand-card__media-placeholder" aria-hidden="true"></div>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  {%- else -%}
+    {%- comment -%} Fallback: section settings (Brand 1–3) when no blocks are added {%- endcomment -%}
+    {%- liquid
+      assign hague_link = routes.root_url
+      if section.settings.brand_hague_link != blank
+        assign hague_link = section.settings.brand_hague_link
+      endif
+      assign vr_link = section.settings.vanrosector_link | default: '/collections/all?view=vanrosector'
+      assign sor_link = section.settings.sor_link | default: '/collections/all?view=science-of-raw'
+
+      assign hague_btn = section.settings.brand_card_hague_button | default: default_btn
+      assign vr_btn = section.settings.brand_card_vr_button | default: default_btn
+      assign sor_btn = section.settings.brand_card_sor_button | default: default_btn
+
+      if section.settings.brand_card_hague_logo != blank
+        assign hague_logo = section.settings.brand_card_hague_logo | image_url: width: 400
+      elsif section.settings.logo_image != blank
+        assign hague_logo = section.settings.logo_image | image_url: width: 400
+      elsif section.settings.logo_text != blank and section.settings.logo_text contains '.'
+        assign hague_logo = section.settings.logo_text | asset_url
+      else
+        assign hague_logo = 'logo-hagueprotect.png' | asset_url
+      endif
+
+      if section.settings.brand_card_vr_logo != blank
+        assign vr_logo = section.settings.brand_card_vr_logo | image_url: width: 400
+      elsif section.settings.logo_vr != blank
+        assign vr_logo = section.settings.logo_vr | image_url: width: 400
+      else
+        assign vr_logo = 'logo-vanrosector.svg' | asset_url
+      endif
+
+      if section.settings.brand_card_sor_logo != blank
+        assign sor_logo = section.settings.brand_card_sor_logo | image_url: width: 400
+      elsif section.settings.logo_sor != blank
+        assign sor_logo = section.settings.logo_sor | image_url: width: 400
+      else
+        assign sor_logo = 'logo-science-of-raw.svg' | asset_url
+      endif
+
+      assign hague_category = section.settings.brand_card_hague_category | default: 'Sneaker Care'
+      assign hague_bg = section.settings.brand_card_hague_bg | default: '#e8e8e8'
+      assign hague_dark = section.settings.brand_card_hague_dark
+      if section.settings.brand_card_hague_image != blank
+        assign hague_media = section.settings.brand_card_hague_image | image_url: width: 900
+      else
+        assign hague_media = 'mega-menu-sneaker.jpg' | asset_url
+      endif
+
+      assign vr_category = section.settings.brand_card_vr_category | default: 'Fragrance'
+      assign vr_bg = section.settings.brand_card_vr_bg | default: '#f3e6ee'
+      assign vr_dark = section.settings.brand_card_vr_dark
+      if section.settings.brand_card_vr_image != blank
+        assign vr_media = section.settings.brand_card_vr_image | image_url: width: 900
+      else
+        assign vr_media = 'mega-menu-material.jpg' | asset_url
+      endif
+
+      assign sor_category = section.settings.brand_card_sor_category | default: 'Wellness'
+      assign sor_bg = section.settings.brand_card_sor_bg | default: '#2a2a2a'
+      assign sor_dark = section.settings.brand_card_sor_dark | default: true
+      if section.settings.brand_card_sor_image != blank
+        assign sor_media = section.settings.brand_card_sor_image | image_url: width: 900
+      else
+        assign sor_media = 'mega-menu-third.jpg' | asset_url
+      endif
+    -%}
+
+    <a href="{{ hague_link }}" class="hp-brand-card{% if hague_dark %} hp-brand-card--dark{% endif %}" data-brand-card="hague">
+      <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ hague_bg }};">
+        <img src="{{ hague_logo }}" alt="Hague Protect" class="hp-brand-card__logo{% if hague_dark %} hp-brand-card__logo--light{% endif %}" width="160" height="48" loading="lazy">
+        <p class="hp-brand-card__category">{{ hague_category | escape }}</p>
+        <span class="hp-brand-card__btn">{{ hague_btn | escape }}</span>
+      </div>
+      <div class="hp-brand-card__media">
+        <img src="{{ hague_media }}" alt="{{ hague_category | escape }}" width="400" height="500" loading="lazy">
+      </div>
+    </a>
+
+    <a href="{{ vr_link }}" class="hp-brand-card{% if vr_dark %} hp-brand-card--dark{% endif %}" data-brand-card="vanrosector">
+      <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ vr_bg }};">
+        <img src="{{ vr_logo }}" alt="Vanrosector" class="hp-brand-card__logo{% if vr_dark %} hp-brand-card__logo--light{% endif %}" width="160" height="48" loading="lazy">
+        <p class="hp-brand-card__category">{{ vr_category | escape }}</p>
+        <span class="hp-brand-card__btn">{{ vr_btn | escape }}</span>
+      </div>
+      <div class="hp-brand-card__media">
+        <img src="{{ vr_media }}" alt="{{ vr_category | escape }}" width="400" height="500" loading="lazy">
+      </div>
+    </a>
+
+    <a href="{{ sor_link }}" class="hp-brand-card{% if sor_dark %} hp-brand-card--dark{% endif %}" data-brand-card="science-of-raw">
+      <div class="hp-brand-card__content" style="--hp-brand-card-bg: {{ sor_bg }};">
+        <img src="{{ sor_logo }}" alt="Science of Raw" class="hp-brand-card__logo hp-brand-card__logo--light" width="160" height="48" loading="lazy">
+        <p class="hp-brand-card__category">{{ sor_category | escape }}</p>
+        <span class="hp-brand-card__btn">{{ sor_btn | escape }}</span>
+      </div>
+      <div class="hp-brand-card__media">
+        <img src="{{ sor_media }}" alt="{{ sor_category | escape }}" width="400" height="500" loading="lazy">
+      </div>
+    </a>
+  {%- endif -%}
 </div>

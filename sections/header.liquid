@@ -1079,6 +1079,26 @@
     display: block;
   }
 
+  .hp-brand-card__media-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    background: linear-gradient(135deg, #dddddd 0%, #f5f5f5 100%);
+  }
+
+  .hp-brand-card__name {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .hp-brand-card--dark .hp-brand-card__name {
+    color: #ffffff;
+  }
+
   @media screen and (max-width: 1100px) {
     .hp-brand-mega-cards {
       grid-template-columns: 1fr;
@@ -2118,7 +2138,7 @@
       <div class="hp-overlay-nav" style="padding-right: 32px;">
         <a href="javascript:void(0)" data-megamenu-view="shop" class="is-active" id="MegaMenuNavShop">SHOP</a>
         <a href="/search?view=corporate-gifting">CORPORATE GIFTING</a>
-        <a href="javascript:void(0)" data-megamenu-view="brand" id="MegaMenuNavBrand">BRAND</a>
+        <a href="javascript:void(0)" data-megamenu-view="brand" id="MegaMenuNavBrand">{{ brand_menu_label | escape }}</a>
         <a href="/pages/about-us">ABOUT US</a>
         <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">COMING SOON</a>
       </div>
@@ -2919,73 +2939,149 @@
       "content": "Brand dropdown menu"
     },
     {
-      "type": "text",
-      "id": "brand_menu_label",
-      "label": "Brand menu label",
-      "default": "BRAND"
+      "type": "paragraph",
+      "content": "Shown when shoppers click BRAND in the menu overlay. Add up to 3 Brand card blocks below, or use the Brand card 1–3 settings if you prefer fixed fields."
     },
     {
-      "type": "url",
-      "id": "brand_hague_link",
-      "label": "Hague Protect link",
-      "info": "Defaults to homepage when empty."
+      "type": "text",
+      "id": "brand_menu_label",
+      "label": "BRAND nav button text",
+      "default": "BRAND"
     },
     {
       "type": "text",
       "id": "brand_card_btn_label",
-      "label": "Brand card button text",
+      "label": "Default button text on cards",
       "default": "Explore Now"
+    },
+    {
+      "type": "header",
+      "content": "Brand card 1 — Hague Protect"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_hague_logo",
+      "label": "Logo image"
     },
     {
       "type": "image_picker",
       "id": "brand_card_hague_image",
-      "label": "Hague Protect — card lifestyle image"
+      "label": "Lifestyle image (right side)"
     },
     {
       "type": "text",
       "id": "brand_card_hague_category",
-      "label": "Hague Protect — category label",
+      "label": "Category text",
       "default": "Sneaker Care"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_hague_button",
+      "label": "Button text",
+      "info": "Leave blank to use the default button text above."
+    },
+    {
+      "type": "url",
+      "id": "brand_hague_link",
+      "label": "Link URL",
+      "info": "Defaults to homepage when empty."
     },
     {
       "type": "color",
       "id": "brand_card_hague_bg",
-      "label": "Hague Protect — card background",
+      "label": "Card background color",
       "default": "#e8e8e8"
+    },
+    {
+      "type": "checkbox",
+      "id": "brand_card_hague_dark",
+      "label": "Dark card style",
+      "default": false,
+      "info": "White text and light logo on dark backgrounds."
+    },
+    {
+      "type": "header",
+      "content": "Brand card 2 — Vanrosector"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_vr_logo",
+      "label": "Logo image"
     },
     {
       "type": "image_picker",
       "id": "brand_card_vr_image",
-      "label": "Vanrosector — card lifestyle image"
+      "label": "Lifestyle image (right side)"
     },
     {
       "type": "text",
       "id": "brand_card_vr_category",
-      "label": "Vanrosector — category label",
+      "label": "Category text",
       "default": "Fragrance"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_vr_button",
+      "label": "Button text",
+      "info": "Leave blank to use the default button text above."
+    },
+    {
+      "type": "paragraph",
+      "content": "Link URL uses Vanrosector (VNR) link from Partner logos above."
     },
     {
       "type": "color",
       "id": "brand_card_vr_bg",
-      "label": "Vanrosector — card background",
+      "label": "Card background color",
       "default": "#f3e6ee"
+    },
+    {
+      "type": "checkbox",
+      "id": "brand_card_vr_dark",
+      "label": "Dark card style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Brand card 3 — Science of Raw"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_card_sor_logo",
+      "label": "Logo image"
     },
     {
       "type": "image_picker",
       "id": "brand_card_sor_image",
-      "label": "Science of Raw — card lifestyle image"
+      "label": "Lifestyle image (right side)"
     },
     {
       "type": "text",
       "id": "brand_card_sor_category",
-      "label": "Science of Raw — category label",
+      "label": "Category text",
       "default": "Wellness"
+    },
+    {
+      "type": "text",
+      "id": "brand_card_sor_button",
+      "label": "Button text",
+      "info": "Leave blank to use the default button text above."
+    },
+    {
+      "type": "paragraph",
+      "content": "Link URL uses Science of Raw (SOR) link from Partner logos above."
     },
     {
       "type": "color",
       "id": "brand_card_sor_bg",
-      "label": "Science of Raw — card background",
+      "label": "Card background color",
       "default": "#2a2a2a"
+    },
+    {
+      "type": "checkbox",
+      "id": "brand_card_sor_dark",
+      "label": "Dark card style",
+      "default": true
     },
     {
       "type": "header",
@@ -4102,6 +4198,61 @@
       "step": 1,
       "unit": "px",
       "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_card",
+      "name": "Brand card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand name",
+          "default": "Brand"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image",
+          "label": "Lifestyle image (right side)"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category text",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "info": "Leave blank to use the default button text in section settings."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Card background color",
+          "default": "#e8e8e8"
+        },
+        {
+          "type": "checkbox",
+          "id": "dark_style",
+          "label": "Dark card style",
+          "default": false,
+          "info": "White text and light logo for dark backgrounds."
+        }
+      ]
     }
   ]
 }
